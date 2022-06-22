@@ -49,7 +49,6 @@
     "jest-allure": "^0.1.3",
     "jest-circus": "^27.5.1",
     "jest-junit": "^13.2.0",
-    "jest-junit-reporter": "^1.1.0",
     "jest-puppeteer": "^6.1.0",
     "pending-xhr-puppeteer": "^2.3.3",
     "puppeteer-testing-library": "^0.6.0"
