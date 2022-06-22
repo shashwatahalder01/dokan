@@ -16,7 +16,6 @@
   "dependencies": {
     "@wordpress/hooks": "^2.12.3",
     "debounce": "^1.2.1",
-    "jest-junit": "^13.2.0",
     "jest-junit-reporter": "^1.1.0",
     "vue": "^2.6.14",
     "vue-chartjs": "^3.5.1",
