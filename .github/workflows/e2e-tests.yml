@@ -91,6 +91,19 @@ jobs:
                 max_attempts: 3
                 retry_on: error
                 command: cd tests/e2e && npm run test:admin
+            
+            - name: Test Report
+              uses: phoenix-actions/test-reporting@v8
+              id: test-report               # Set ID reference for step
+              if: success() || failure()    # run this step even if previous step failed
+              with:
+                name: e2e tests result            # Name of the check run which will be created
+                path: artifacts/reports/junit.xml    # Path to test results
+                reporter: jest-junit  
+
+            - name: Read output variables
+              run: |
+                echo "url is ${{ steps.test-report.outputs.runHtmlUrl }}"
 
             - name: Archive debug artifacts (screenshots, HTML snapshots)
               uses: actions/upload-artifact@e448a9b857ee2131e752b06002bf0e093c65e571 # v2.2.2
