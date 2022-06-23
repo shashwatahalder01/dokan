@@ -92,7 +92,7 @@ jobs:
                 retry_on: error
                 command: cd tests/e2e && npm run test:admin
                             
-            - name: Test Report
+            - name: Generate Test Report
               uses: phoenix-actions/test-reporting@v8
               id: test-report               # Set ID reference for step
               if: success() || failure()    # run this step even if previous step failed
@@ -102,7 +102,7 @@ jobs:
                    # Path to test results
                 reporter: jest-junit  
 
-            - name: Read output variables
+            - name: Test results
               run: |
                 echo "url is ${{ steps.test-report.outputs.runHtmlUrl }}"
 
