@@ -91,6 +91,11 @@ jobs:
                 max_attempts: 3
                 retry_on: error
                 command: cd tests/e2e && npm run test:admin
+                
+            - name: Activate storefront
+              run: |
+                  cd tests/e2e 
+                  ls
             
             - name: Test Report
               uses: phoenix-actions/test-reporting@v8
