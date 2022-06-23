@@ -6,7 +6,7 @@
     "WP_DEBUG_DISPLAY": "true",
   
     "plugins": [
-      "https://downloads.wordpress.org/plugin/woocommerce.6.5.1.zip",
+      "https://downloads.wordpress.org/plugin/woocommerce.6.6.1.zip",
       "../../",
       "../../plugins/dokan-pro",
       "http://qa.wowgiftmart.com/wp-content/uploads/2022/05/ws.zip",

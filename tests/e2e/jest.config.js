@@ -7,10 +7,9 @@ module.exports = {
   "testPathIgnorePatterns": ['/node_modules/'],
   "testMatch": ["**/tests/e2e/tests/**/*.spec.js"], // In testMatch we are only saying in which folder and for which files Jest should be looking for.
   "testSequencer": "./customSequencer.js", //  test run will follow custom order
-
-  // testTimeout:Number(process.env.TIME_OUT), // Timeout of a test in milliseconds.
+  "testTimeout":Number(process.env.TIME_OUT), // Timeout of a test in milliseconds.
   // maxWorkers: 1, // Specifies the maximum number of workers the worker-pool will spawn for running tests.
-  verbose: true, // Show details of tests, if false show only summary
+  "verbose": true, // Show details of tests, if false show only summary
 
   // Jest allure reporter
   // testRunner: "jest-jasmine2", // test runner for allure report . after jest 24> jest-circus is default test runner.
@@ -38,6 +37,21 @@ module.exports = {
   //   ]
   // ]
 
+  // Git Action reporter
+  "reporters": [ "default", [
+    "jest-junit", {
+      "suiteName": "e2e test results",
+      "outputDirectory": "artifacts/reports/",
+      "outputName": "junit.xml",
+      "uniqueOutputName": "false",
+      "suiteNameTemplate": "{filepath}",
+      "classNameTemplate": "{classname}",
+      "titleTemplate": "{title}",
+      "ancestorSeparator": " › ",
+      "usePathForSuiteName": "true"
+    }
+  ] ]
+
 
   // "projects": [
   //   {
@@ -54,19 +68,6 @@ module.exports = {
   //   }
   // ],
   // "testRegex": ["tests/e2e/tests/.*[^setup].spec.js$"],
-  "reporters": [ "default", [
 
-    "jest-junit", {
-      "suiteName": "e2e test results",
-      "outputDirectory": "artifacts/reports/",
-      "outputName": "junit.xml",
-      "uniqueOutputName": "false",
-      "suiteNameTemplate": "{filepath}",
-      "classNameTemplate": "{classname}",
-      "titleTemplate": "{title}",
-      "ancestorSeparator": " › ",
-      "usePathForSuiteName": "true"
-    }
-  ] ]
 
 }
