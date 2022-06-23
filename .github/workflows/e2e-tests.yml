@@ -98,7 +98,7 @@ jobs:
               if: success() || failure()    # run this step even if previous step failed
               with:
                 name: e2e tests result            # Name of the check run which will be created
-                path: junit.xml 
+                path: tests/e2e/artifacts/reports/junit.xml 
                    # Path to test results
                 reporter: jest-junit  
 

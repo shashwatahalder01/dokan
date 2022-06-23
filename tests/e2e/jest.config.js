@@ -58,7 +58,7 @@ module.exports = {
 
     "jest-junit", {
       "suiteName": "e2e test results",
-      "outputDirectory": ".",
+      "outputDirectory": "artifacts/reports/",
       "outputName": "junit.xml",
       "uniqueOutputName": "false",
       "suiteNameTemplate": "{filepath}",
