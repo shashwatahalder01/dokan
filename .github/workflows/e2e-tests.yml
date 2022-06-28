@@ -90,7 +90,7 @@ jobs:
                 timeout_seconds: 3000
                 max_attempts: 3
                 retry_on: error
-                command: cd tests/e2e && npm run test:admin
+                command: cd tests/e2e && npm run test:e2e
                             
             - name: Generate Test Report
               uses: phoenix-actions/test-reporting@v8

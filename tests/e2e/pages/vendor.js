@@ -1,5 +1,4 @@
 const base = require("../pages/base.js")
-const adminPage = require('../pages/admin.js')
 const customerPage = require('../pages/customer.js')
 const loginPage = require('../pages/login.js')
 const selector = require("../pages/selectors.js")
@@ -27,7 +26,7 @@ module.exports = {
         expect(url).toMatch('dashboard')
     },
 
-    //-------------------------------------------------- vendor logout ---------------------------------------------------//
+    //-------------------------------------------------- setup wizard ---------------------------------------------------//
 
 
     // vendor logout
@@ -37,6 +36,9 @@ module.exports = {
 
         let loggedInUser = await base.getCurrentUser()
         expect(loggedInUser).toBeUndefined()
+
+        // let homeIsVisible = await base.isVisible(selector.frontend.home)
+        // expect(homeIsVisible).toBe(true)
     },
 
 
@@ -48,33 +50,51 @@ module.exports = {
     async vendorRegisterIfNotExists(userEmail, password, firstName, lastName, shopName, companyName, companyId, vatNumber, bankName, bankIban, phone, setupWizardChoice, setupWizardData) {
         let UserExists = await loginPage.checkUserExists(userEmail, password)
         if (!UserExists) {
-            await this.vendorRegister(userEmail + '@gmail.com', password, firstName, lastName, shopName, companyName, companyId, vatNumber, bankName, bankIban, phone, setupWizardChoice, setupWizardData)
+            await this.vendorRegister(userEmail, password, firstName, lastName, shopName, companyName, companyId, vatNumber, bankName, bankIban, phone, setupWizardChoice, setupWizardData)
         }
     },
 
     //vendor registration
     async vendorRegister(userEmail, password, firstName, lastName, shopName, companyName, companyId, vatNumber, bankName, bankIban, phone, setupWizardChoice, setupWizardData) {
         await customerPage.goToMyAccount()
-
-        await page.type(selector.vendor.vRegistration.regEmail, userEmail)
-        await page.type(selector.vendor.vRegistration.regPassword, password)
-        await base.click(selector.vendor.vRegistration.regVendor)
-        await page.type(selector.vendor.vRegistration.firstName, firstName)
-        await page.type(selector.vendor.vRegistration.lastName, lastName)
-        await page.type(selector.vendor.vRegistration.shopName, shopName)
-        // await page.type(selector.vendor.shopUrl, shopUrl)
-        await page.click(selector.vendor.vRegistration.shopUrl)
-        await page.type(selector.vendor.vRegistration.companyName, companyName)
-        await page.type(selector.vendor.vRegistration.companyId, companyId)
-        await page.type(selector.vendor.vRegistration.vatNumber, vatNumber)
-        await page.type(selector.vendor.vRegistration.bankName, bankName)
-        await page.type(selector.vendor.vRegistration.bankIban, bankIban)
-        await page.type(selector.vendor.vRegistration.phone, phone)
-        let subscriptionPackIsVisible = await base.isVisible(selector.vendor.vWithdraw.subscriptionPack)
-        if (subscriptionPackIsVisible) {
-            await page.select(selector.vendor.vRegistration.subscriptionPack, "") //TODO:select subscription pack
+        let loginIsVisible = await base.isVisible(selector.customer.cRegistration.regEmail)
+        if (!loginIsVisible) {
+            await customerPage.customerLogout()
         }
+
+        await base.clearAndType(selector.vendor.vRegistration.regEmail, userEmail + '@gmail.com')
+        await base.clearAndType(selector.vendor.vRegistration.regPassword, password)
+        await base.click(selector.vendor.vRegistration.regVendor)
+        await base.clearAndType(selector.vendor.vRegistration.firstName, firstName)
+        await base.clearAndType(selector.vendor.vRegistration.lastName, lastName)
+        await base.clearAndType(selector.vendor.vRegistration.shopName, shopName)
+        // await base.clearAndType(selector.vendor.shopUrl, shopUrl)
+        await page.click(selector.vendor.vRegistration.shopUrl)
+        await base.clearAndType(selector.vendor.vRegistration.companyName, companyName)
+        await base.clearAndType(selector.vendor.vRegistration.companyId, companyId)
+        await base.clearAndType(selector.vendor.vRegistration.vatNumber, vatNumber)
+        await base.clearAndType(selector.vendor.vRegistration.bankName, bankName)
+        await base.clearAndType(selector.vendor.vRegistration.bankIban, bankIban)
+        await base.clearAndType(selector.vendor.vRegistration.phone, phone)
+        let termsAndConditionsIsVisible = await base.isVisible(selector.customer.cDashboard.termsAndConditions)
+        if (termsAndConditionsIsVisible) {
+            await base.check(selector.customer.cDashboard.termsAndConditions)
+        }
+
+        let subscriptionPackIsVisible = await base.isVisible(selector.vendor.vRegistration.subscriptionPack)
+        if (subscriptionPackIsVisible) {
+            await base.selectOptionByText(selector.vendor.vRegistration.subscriptionPack,selector.vendor.vRegistration.subscriptionPackOptions, "Dokan_subscription_Non_recurring")
+        }
+                
         await base.clickAndWait(selector.vendor.vRegistration.register)
+        let registrationErrorIsVisible = await base.isVisible(selector.customer.cWooSelector.wooCommerceError)
+        if (registrationErrorIsVisible) {
+            let errorMessage = await base.getElementText(selector.customer.cWooSelector.wooCommerceError)
+            if (errorMessage.includes('Error: An account is already registered with your email address. Please log in.')) {
+                return
+                //  await loginPage.login(userEmail, password)
+            }
+        }
 
         await this.vendorSetupWizardChoice(setupWizardChoice, setupWizardData)
     },
@@ -115,7 +135,7 @@ module.exports = {
         await base.clickAndWait(selector.vendor.vSetup.continueStoreSetup)
 
         await base.clearAndType(selector.vendor.vSetup.paypal, paypal)
-     
+
         await base.type(selector.vendor.vSetup.bankAccountName, bankAccountName)
         await base.select(selector.vendor.vSetup.bankAccountType, bankAccountType)
         await base.type(selector.vendor.vSetup.bankRoutingNumber, bankRoutingNumber)
@@ -441,6 +461,13 @@ module.exports = {
         await page.click(selector.vendor.vCoupon.applyForNewProducts)
         await page.click(selector.vendor.vCoupon.showOnStore)
         await base.clickAndWait(selector.vendor.vCoupon.createCoupon)
+        let couponError = await base.isVisible(selector.vendor.vCoupon.couponError)
+        if (couponError) {
+            let errorMessage = await base.getElementText(selector.vendor.vCoupon.couponError)
+            if (errorMessage.includes('Coupon title already exists')) {
+                return
+            }
+        }
 
         let createdCoupon = await base.getElementText(selector.vendor.vCoupon.createdCoupon)
         expect(createdCoupon.toLowerCase()).toBe(couponTitle.toLowerCase())
@@ -454,7 +481,7 @@ module.exports = {
 
     //vendor request withdraw 
     async requestWithdraw(withdrawMethod, withdrawAmount) {
-        await vendorPage.goToVendorDashboard()
+        await this.goToVendorDashboard()
 
         await base.clickAndWait(selector.vendor.vDashboard.withdraw)
 
@@ -472,10 +499,10 @@ module.exports = {
         }
 
         let minimumWithdrawAmount = await base.getElementText(selector.vendor.vWithdraw.minimumWithdrawAmount)
-        minimumWithdrawAmount = helper.price(minimumWithdrawAmount)
+        minimumWithdrawAmount = helpers.price(minimumWithdrawAmount)
         // console.log(minimumWithdrawAmount)
         let balance = await base.getElementText(selector.vendor.vWithdraw.balance)
-        balance = helper.price(balance)
+        balance = helpers.price(balance)
         // console.log(balance)
 
         if (balance > minimumWithdrawAmount) {
@@ -507,7 +534,7 @@ module.exports = {
     //vendor add auto withdraw disbursement schedule
     async addAutoWithdrawDisbursementSchedule(preferredPaymentMethod, preferredSchedule, minimumWithdrawAmount, reserveBalance) {
 
-        await vendorPage.goToVendorDashboard()
+        await this.goToVendorDashboard()
 
         await base.clickAndWait(selector.vendor.vDashboard.withdraw)
         await page.click(selector.vendor.vWithdraw.editSchedule)
@@ -521,7 +548,7 @@ module.exports = {
 
     // vendor add default withdraw payment methods
     async addDefaultWithdrawPaymentMethods(preferredSchedule) {
-        await vendorPage.goToVendorDashboard()
+        await this.goToVendorDashboard()
 
         await base.clickAndWait(selector.vendor.vDashboard.withdraw)
         let defaultMethod = base.isVisible(selector.vendor.vWithdraw.customMethodMakeDefault(preferredSchedule))
@@ -557,26 +584,72 @@ module.exports = {
         companyIdOrEuidNumber, vatOrTaxNumber, nameOfBank, bankIban, map, minimumOrderAmount, percentage, supportButtonText,
         minimumProductQuantityToPlaceAnOrder, maximumProductQuantityToPlaceAnOrder, minimumAmountToPlaceAnOrder, maximumAmountToPlaceAnOrder) {
 
+        await this.goToVendorDashboard()
         await base.clickAndWait(selector.vendor.vDashboard.settings)
 
+        await this.basicInfoSettings(storeName, storeProductsPerPage, phoneNo, street, street2, city, postOrZipCode, country, state, companyName, companyIdOrEuidNumber, vatOrTaxNumber, nameOfBank, bankIban)
+        await this.mapSettings(map)
+        await this.termsAndConditionsSettings()
+        await this.openingClosingTimeSettings()
+        await this.vacationSettings()
+        await this.discountSettings()
+        await this.biographySettings()
+        await this.storeSupportSettings()
+        await this.minMaxSettings(minimumProductQuantityToPlaceAnOrder, maximumProductQuantityToPlaceAnOrder, minimumAmountToPlaceAnOrder, maximumAmountToPlaceAnOrder)
+
+        //update settings
+        await page.click(selector.vendor.vStoreSettings.updateSettings)
+
+        let successMessage = await base.getElementText(selector.vendor.vSocialProfileSettings.updateSettingsSuccessMessage)
+        expect(successMessage).toMatch('Your information has been saved successfully')
+    },
+
+    //vendor set store address 
+    async setStoreAddress(street, street2, city, postOrZipCode, country, state) {
+
+        await this.goToVendorDashboard()
+        await base.clickAndWait(selector.vendor.vDashboard.settings)
+
+        await base.clearAndType(selector.vendor.vStoreSettings.street, street)
+        await base.clearAndType(selector.vendor.vStoreSettings.street2, street2)
+        await base.clearAndType(selector.vendor.vStoreSettings.city, city)
+        await base.clearAndType(selector.vendor.vStoreSettings.postOrZipCode, postOrZipCode)
+        await base.select(selector.vendor.vStoreSettings.country, country)
+        await base.select(selector.vendor.vStoreSettings.state, state)
+
+        //update settings
+        await page.click(selector.vendor.vStoreSettings.updateSettings)
+
+        let successMessage = await base.getElementText(selector.vendor.vSocialProfileSettings.updateSettingsSuccessMessage)
+        expect(successMessage).toMatch('Your information has been saved successfully')
+    },
+
+    //vendor set banner and profile picture settings
+    async bannerAndProfilePictureSettings() {
         //upload banner and profile picture  
-        // await base.removePreviousUploadedImage(selector.vendor.vStoreSettings.bannerImage, selector.vendor.vStoreSettings.removeBannerImage)
-        // await page.click(selector.vendor.vStoreSettings.banner)
-        // await base.wpUploadFile('tests/e2e/utils/sampleData/banner.png')
-        // await base.removePreviousUploadedImage(selector.vendor.vStoreSettings.profilePictureImage, selector.vendor.vStoreSettings.removeProfilePictureImage)
-        // await page.click(selector.vendor.vStoreSettings.profilePicture)
-        // await base.wpUploadFile('tests/e2e/utils/sampleData/avatar2.png')
+        await base.removePreviousUploadedImage(selector.vendor.vStoreSettings.bannerImage, selector.vendor.vStoreSettings.removeBannerImage)
+        await page.click(selector.vendor.vStoreSettings.banner)
+        await base.wpUploadFile('tests/e2e/utils/sampleData/banner.png')
+        await base.removePreviousUploadedImage(selector.vendor.vStoreSettings.profilePictureImage, selector.vendor.vStoreSettings.removeProfilePictureImage)
+        await page.click(selector.vendor.vStoreSettings.profilePicture)
+        await base.wpUploadFile('tests/e2e/utils/sampleData/avatar2.png')
+    },
+
+    //vendor set basic info settings
+    async basicInfoSettings() {
         // store basic info
         await base.clearAndType(selector.vendor.vStoreSettings.storeName, storeName)
         await base.clearAndType(selector.vendor.vStoreSettings.storeProductsPerPage, storeProductsPerPage)
         await base.clearAndType(selector.vendor.vStoreSettings.phoneNo, phoneNo)
-        //address
-        // await base.clearAndType(selector.vendor.vStoreSettings.street, street)
-        // await base.clearAndType(selector.vendor.vStoreSettings.street2, street2)
-        // await base.clearAndType(selector.vendor.vStoreSettings.city, city)
-        // await base.clearAndType(selector.vendor.vStoreSettings.postOrZipCode, postOrZipCode)
-        // await page.select(selector.vendor.vStoreSettings.country, country)
-        // await page.select(selector.vendor.vStoreSettings.state, state)
+
+        // address
+        await base.clearAndType(selector.vendor.vStoreSettings.street, street)
+        await base.clearAndType(selector.vendor.vStoreSettings.street2, street2)
+        await base.clearAndType(selector.vendor.vStoreSettings.city, city)
+        await base.clearAndType(selector.vendor.vStoreSettings.postOrZipCode, postOrZipCode)
+        await page.select(selector.vendor.vStoreSettings.country, country)
+        await page.select(selector.vendor.vStoreSettings.state, state)
+
         //company info
         await base.clearAndType(selector.vendor.vStoreSettings.companyName, companyName)
         await base.clearAndType(selector.vendor.vStoreSettings.companyIdOrEuidNumber, companyIdOrEuidNumber)
@@ -587,15 +660,27 @@ module.exports = {
         await base.check(selector.vendor.vStoreSettings.email)
         //show more products
         await base.check(selector.vendor.vStoreSettings.moreProducts)
+    },
+
+    //vendor set map settings
+    async mapSettings() {
         //map
         await base.clearAndType(selector.vendor.vStoreSettings.map, map)
         await base.wait(1)
         await page.keyboard.press('ArrowDown')
         await page.keyboard.press('Enter')
+    },
+
+    //vendor set terms and conditions settings
+    async termsAndConditionsSettings() {
         //terms and conditions
         await base.check(selector.vendor.vStoreSettings.termsAndConditions)
         let termsAndConditionsIframe = await base.switchToIframe(selector.vendor.vStoreSettings.termsAndConditionsIframe)
         await base.iframeClearAndType(termsAndConditionsIframe, selector.vendor.vStoreSettings.termsAndConditionsHtmlBody, 'Terms and Conditions Vendors')
+    },
+
+    //vendor set opening closing time settings
+    async openingClosingTimeSettings() {
         //store opening closing time
         await base.check(selector.vendor.vStoreSettings.storeOpeningClosingTime)
         await base.wait(1)
@@ -612,6 +697,10 @@ module.exports = {
             await base.clearAndType(selector.vendor.vStoreSettings.openingTime(day), '06:00 AM')
             await base.clearAndType(selector.vendor.vStoreSettings.closingTime(day), '11:30 PM')
         }
+    },
+
+    //vendor set vacation settings
+    async vacationSettings() {
         //vacation
         let noVacationIsSetIsVisible = await base.isVisible(selector.vendor.vStoreSettings.noVacationIsSet)
         if (!noVacationIsSetIsVisible) {
@@ -619,25 +708,41 @@ module.exports = {
             await page.click(selector.vendor.vStoreSettings.deleteSavedVacationSchedule)
             await page.click(selector.vendor.vStoreSettings.confirmDeleteSavedVacationSchedule)
         }
-        let vacationDayFrom = helper.addDays(helper.currentDate, helper.getRandomArbitraryInteger(31, 365))
-        let vacationDayTo = helper.addDays(vacationDayFrom, 31)
+        let vacationDayFrom = helpers.addDays(helpers.currentDate, helpers.getRandomArbitraryInteger(31, 365))
+        let vacationDayTo = helpers.addDays(vacationDayFrom, 31)
         await base.check(selector.vendor.vStoreSettings.goToVacation)
         await base.select(selector.vendor.vStoreSettings.closingStyle, 'datewise')
         await base.type(selector.vendor.vStoreSettings.vacationDateRangeFrom, vacationDayFrom)
         await base.type(selector.vendor.vStoreSettings.vacationDateRangeTo, vacationDayTo)
         await base.type(selector.vendor.vStoreSettings.setVacationMessage, 'We are currently out of order')
         await page.click(selector.vendor.vStoreSettings.saveVacationEdit)
+    },
+
+    //vendor set discount settings
+    async discountSettings(supportButtonText) {
         //discount
         await base.check(selector.vendor.vStoreSettings.enableStoreWideDiscount)
         await base.clearAndType(selector.vendor.vStoreSettings.minimumOrderAmount, minimumOrderAmount)
         await base.clearAndType(selector.vendor.vStoreSettings.percentage, percentage)
+    },
+
+    //vendor set biography settings
+    async biographySettings(supportButtonText) {
         //biography
         let biographyIframe = await base.switchToIframe(selector.vendor.vStoreSettings.biographyIframe)
         await base.iframeClearAndType(biographyIframe, selector.vendor.vStoreSettings.biographyHtmlBody, 'Vendor biography')
+    },
+
+    //vendor set store support settings
+    async storeSupportSettings(supportButtonText) {
         //store support
         await base.check(selector.vendor.vStoreSettings.showSupportButtonInStore)
         await base.check(selector.vendor.vStoreSettings.showSupportButtonInSingleProduct)
         await base.clearAndType(selector.vendor.vStoreSettings.supportButtonText, supportButtonText)
+    },
+
+    //vendor set minmax settings
+    async minMaxSettings(minimumProductQuantityToPlaceAnOrder, maximumProductQuantityToPlaceAnOrder, minimumAmountToPlaceAnOrder, maximumAmountToPlaceAnOrder) {
         //min-max
         await base.check(selector.vendor.vStoreSettings.enableMinMaxQuantities)
         await base.clearAndType(selector.vendor.vStoreSettings.minimumProductQuantityToPlaceAnOrder, minimumProductQuantityToPlaceAnOrder)
@@ -648,13 +753,6 @@ module.exports = {
         await page.click(selector.vendor.vStoreSettings.clear)
         await page.click(selector.vendor.vStoreSettings.selectAll)
         await base.selectOptionByText(selector.vendor.vStoreSettings.selectCategory, 'Uncategorized')
-
-        //update settings
-        await page.click(selector.vendor.vStoreSettings.updateSettings)
-
-        let successMessage = await base.getElementText(selector.vendor.vSocialProfileSettings.updateSettingsSuccessMessage)
-        expect(successMessage).toMatch('Your information has been saved successfully')
-
     },
 
 
@@ -665,7 +763,7 @@ module.exports = {
 
         //add addon
         await base.clickAndWait(selector.vendor.vAddonSettings.createNewAddon)
-        await base.clearAndType(selector.vendor.vAddonSettings.name, 'Add-ons Group #' + helper.randomNumber())
+        await base.clearAndType(selector.vendor.vAddonSettings.name, 'Add-ons Group #' + helpers.randomNumber())
         await base.clearAndType(selector.vendor.vAddonSettings.priority, '10')
         await page.click(selector.vendor.vAddonSettings.productCategories,)
         await page.type(selector.vendor.vAddonSettings.productCategories, 'Uncategorized')
@@ -695,7 +793,7 @@ module.exports = {
 
         //add addon
         await base.clickAndWait(selector.vendor.vAddonSettings.editAddon(addon))
-        await base.clearAndType(selector.vendor.vAddonSettings.name, 'Add-ons Group #' + helper.randomNumber())
+        await base.clearAndType(selector.vendor.vAddonSettings.name, 'Add-ons Group #' + helpers.randomNumber())
         await base.clearAndType(selector.vendor.vAddonSettings.priority, '10')
         await page.click(selector.vendor.vAddonSettings.productCategories,)
         await page.type(selector.vendor.vAddonSettings.productCategories, 'Uncategorized')
@@ -903,6 +1001,8 @@ module.exports = {
 
     //vendor send company verification request
     async sendCompanyVerificationRequest() {
+        await this.goToVendorDashboard()
+
         await base.clickAndWait(selector.vendor.vDashboard.settings)
         await base.clickAndWait(selector.vendor.vSettings.verification)
         await base.wait(2)
@@ -944,6 +1044,8 @@ module.exports = {
 
     //vendor set delivery settings
     async setDeliveryTimeSettings() {
+        await this.goToVendorDashboard()
+
         await base.clickAndWait(selector.vendor.vDashboard.settings)
         await base.clickAndWait(selector.vendor.vSettings.deliveryTime)
 
@@ -1004,6 +1106,8 @@ module.exports = {
 
     //vendor set shipping settings
     async setShippingSettings(shippingZone, shippingMethod, selectShippingMethod) {
+        await this.goToVendorDashboard()
+
         //TODO: admin need to enable shipping settings switch to admin & enable
         await base.clickAndWait(selector.vendor.vDashboard.settings)
         await base.clickAndWait(selector.vendor.vSettings.shipping)
@@ -1107,6 +1211,8 @@ module.exports = {
 
     //vendor set social profile settings
     async setSocialProfile(urls) {
+        await this.goToVendorDashboard()
+
         await base.clickAndWait(selector.vendor.vDashboard.settings)
         await base.clickAndWait(selector.vendor.vSettings.socialProfile)
 
@@ -1126,6 +1232,8 @@ module.exports = {
 
     //vendor set rma settings
     async setRmaSettings(label, type, length, lengthValue, lengthDuration) {
+        await this.goToVendorDashboard()
+
         //TODO: admin need to enable rma settings switch to admin & enable
         await base.clickAndWait(selector.vendor.vDashboard.settings)
         await base.clickAndWait(selector.vendor.vSettings.rma)
@@ -1138,7 +1246,7 @@ module.exports = {
 
         let refundReasonIsVisible = await base.isVisible(selector.vendor.vRmaSettings.refundReasons)
         if (refundReasonIsVisible) {
-            await base.clickAndWaitMultiple(selector.vendor.vRmaSettings.refundReasons)
+            await base.checkMultiple(selector.vendor.vRmaSettings.refundReasons)
         }
         let iframe = await base.switchToIframe(selector.vendor.vRmaSettings.refundPolicyIframe)
         await base.iframeClearAndType(iframe, selector.vendor.vRmaSettings.refundPolicyHtmlBody, 'Refund Policy Vendor')

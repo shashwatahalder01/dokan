@@ -131,7 +131,7 @@ dist
 
 
 # custom files
-.vscode
+.vscode/
 .Ds_store
 wp-content/
 artifacts/

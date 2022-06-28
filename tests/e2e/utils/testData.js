@@ -1,6 +1,7 @@
 require('dotenv').config()
 const { faker } = require('@faker-js/faker')
-const helper = require("../utils/helpers.js")
+const { isThemeInstalled } = require('@wordpress/e2e-test-utils')
+const helpers = require("./helpers.js")
 
 
 
@@ -8,7 +9,8 @@ module.exports = {
 
    //--------------------------------------------------- Fixed  test data ---------------------------------------------//
    // PluginSlugList: ['dokan-lite', 'dokan-pro', 'woocommerce', 'woocommerce-bookings', 'woocommerce-product-add-ons', 'woocommerce-simple-auction', 'woocommerce-subscriptions', 'elementor', 'elementor-pro',],
-   PluginSlugList: ['dokan-lite', 'dokan-pro', 'woocommerce', 'woocommerce-bookings', 'woocommerce-product-add-ons', 'woocommerce-simple-auction', 'woocommerce-subscriptions',],
+   // PluginSlugList: ['dokan-lite', 'dokan-pro', 'woocommerce', 'woocommerce-bookings', 'woocommerce-product-add-ons', 'woocommerce-simple-auction', 'woocommerce-subscriptions',],
+   PluginSlugList: ['dokan-lite', 'dokan-pro', 'woocommerce'],
 
 
    // wooCommerce
@@ -154,6 +156,7 @@ module.exports = {
       userEmail: faker.internet.email(),
       password: process.env.CUSTOMER_PASSWORD,
       password1: '02dokan02',
+      // firstName: faker.name.findName(),
       firstName: faker.name.firstName('male'),
       lastName: faker.name.lastName('male'),
       userEmail: faker.internet.email(),
@@ -261,7 +264,10 @@ module.exports = {
       // price: faker.commerce.price(100, 200, 2),
       // price: faker.datatype.number({min:1, max:200, precision: 0.01}),
       // price: faker.finance.amount(1, 200, 2), 
-      price: faker.finance.amount(100, 200, faker.helpers.arrayElement([0, 2])),
+      price_int: faker.finance.amount(100, 200, 0),
+      price: faker.finance.amount(100, 200, faker.helpers.arrayElement([0, 2])), // 0 = no decimals, 2 = 2 decimals
+      price_frac: faker.finance.amount(100, 200, faker.helpers.arrayElement([1, 2])),
+      price_frac_comma: (faker.finance.amount(100, 200, faker.helpers.arrayElement([1, 2]))).replace('.',','),
       auctionPrice: faker.commerce.price(10, 100, 0),
       category: 'Uncategorized',
       categories: faker.helpers.arrayElement(["Electronic Devices", "Electronic Accessories", "Men's Fashion", "Clothings", "Women's Fashion"]),
@@ -284,8 +290,8 @@ module.exports = {
          blockCost: '10',
       },
       auction: {
-         startDate: helper.currentDateTime.replace(/,/g, ''),
-         endDate: helper.addDays(helper.currentDateTime, 60).replace(/,/g, ''),
+         startDate: helpers.currentDateTime.replace(/,/g, ''),
+         endDate: helpers.addDays(helpers.currentDateTime, 60).replace(/,/g, ''),
       },
 
       //review
@@ -374,6 +380,8 @@ module.exports = {
    bookingProduct: ['p1_v1 (booking)'],
    saleProduct: ['p1_v1 (sale)'],
    couponCode: ['C1_v1'],
+
+   vendorStores:['vendorStore1','vendorStore2'],
 
 
 

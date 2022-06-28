@@ -1,5 +1,7 @@
 require('dotenv').config()
 const { PendingXHR } = require('pending-xhr-puppeteer');
+const p = require('puppeteer-extra-commands');
+
 
 // This page contains all necessary puppeteer automation methods 
 
@@ -120,6 +122,8 @@ module.exports = {
         await element.click()
     },
 
+
+
     //wait for element and then click
     async clickOnly(selector) {
         if (/^(\/\/|\(\/\/)/.test(selector)) {
@@ -205,6 +209,7 @@ module.exports = {
     //set value based on select options text
     async selectOptionByText(selectSelector, OptionSelector, textContent) {
         let elements = await page.$$(OptionSelector)
+
         for (let element of elements) {
             const text = await page.evaluate(element => element.textContent, element)
             if (textContent.toLowerCase() == (text.trim()).toLowerCase()) {
@@ -349,6 +354,39 @@ module.exports = {
     async getElementValue(selector) {
         let element = await this.getElement(selector)
         let value = await (await element.getProperty('value')).jsonValue()
+        // console.log(value)
+        return value
+    },
+
+    // get element property value: background color
+    async getElementBackgroundColor(selector) {
+        let element = await this.getElement(selector)
+        let value = await page.evaluate(element => window.getComputedStyle(element).getPropertyValue('background-color'), element)
+        // console.log(value)
+        return value
+    },
+
+    // get element property value CSS
+    async getElementValueCSS(selector, property) {
+        let element = await this.getElement(selector)
+        // let value = await page.$eval(element, el => window.getComputedStyle(el).getPropertyValue('background-color'))
+        let value = await page.evaluate((element, property) => window.getComputedStyle(element).getPropertyValue(property), element, property)
+        // console.log(value)
+        return value
+    },
+
+    // get element property CSS values
+    async getElementValueCSSAll(selector) {
+        let element = await this.getElement(selector)
+        let value = await page.evaluate(element => {
+            const stylesObject = window.getComputedStyle(element)
+            const styles = {}
+            for (let property in stylesObject) {
+                if (stylesObject.hasOwnProperty(property))
+                    styles[property] = stylesObject[property]
+            }
+            return styles
+        }, element)
         // console.log(value)
         return value
     },
@@ -576,7 +614,7 @@ module.exports = {
 
     //wait for navigation
     async waitForNavigation() {
-       await page.waitForNavigation({ waitUntil: 'networkidle2' })
+        await page.waitForNavigation({ waitUntil: 'networkidle2' })
     },
 
     //TODO: add function for grab console error
@@ -586,10 +624,27 @@ module.exports = {
 
     //---------------------------------------------- Dokan specific functions ------------------------------------//
 
+    //admin enable switcher , if enabled then skip : admin settings switcher
+    async enableSwitcher(selector) {
+        if (/^(\/\/|\(\/\/)/.test(selector)) {
+            selector = selector + '//span'
+        } else {
+            selector = selector + ' span'
+        }
+        let value = await this.getElementBackgroundColor(selector)
+        if (value.includes('rgb(0, 144, 255)')) {
+            await this.click(selector)
+            await this.click(selector)
+        } else {
+            await this.click(selector)
+        }
+    },
+
 
     //delete element if exist (only first will delete) dokan specific :rma,report abuse
     async deleteIfExists(selector) { //TODO: there may be alternative solution, this method might not needed
-        if (await page.$x(selector) !== null) {
+        let elementExists = await this.isVisible(selector)
+        if (elementExists) {
             let [element] = await page.$x(selector)
             await element.click()
         }
@@ -617,8 +672,8 @@ module.exports = {
         // let pageContent = pageContent.toLowerCase()  
         let pageContent = await page.content()
 
-        if ((pageContent.includes('Warning')) || (pageContent.includes('Fatal error')) || (pageContent.includes('Notice:'))) {
-            await page.screenshot({ path: 'tests/e2e/screenshot/phpError' + Date.now() + '.png', fullPage: true })
+        if ((pageContent.includes("PHP Warning:")) || (pageContent.includes("Fatal error:")) || (pageContent.includes("PHP Notice:"))) {
+            await page.screenshot({ path: 'artifacts/phpError' + Date.now() + '.png', fullPage: true })
             throw new Error("PHP Error!!")
         }
     },
