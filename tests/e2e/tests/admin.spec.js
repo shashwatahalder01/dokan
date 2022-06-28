@@ -251,7 +251,7 @@ describe('admin functionality test', () => {
         await adminPage.setDokanSpmvSettings()
     })
 
-    it('admin can set dokan vendor subscription settings', async () => {
+    it.skip('admin can set dokan vendor subscription settings', async () => {
         await loginPage.adminLogin(process.env.ADMIN, process.env.ADMIN_PASSWORD)
         await adminPage.goToDokanSettings()
         await adminPage.setDokanVendorSubscriptionSettings()

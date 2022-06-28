@@ -23,7 +23,7 @@ describe('Environment setup test', () => {
 
 
 
-    it.skip('admin check Active plugins ', async () => {
+    it('admin check Active plugins ', async () => {
         await loginPage.adminLogin(process.env.ADMIN, process.env.ADMIN_PASSWORD)
         // check plugin is installed
         await adminPage.checkActivePlugins(data.PluginSlugList)

@@ -24,6 +24,7 @@ module.exports = {
 
     const url = await page.url()
     expect(url).toMatch('wp-admin/admin.php?page=dokan#/settings')
+    await base.wait(0.3)
   },
 
   async goToWooCommerceSettings() {
@@ -292,7 +293,6 @@ module.exports = {
     await base.click(selector.admin.dokan.settings.storeSupport)
 
     //store support settings
-    await base.wait(0.5) //required
     await base.enableSwitcher(selector.admin.dokan.settings.displayOnOrderDetails)
     await base.select(selector.admin.dokan.settings.displayOnSingleProductPage, 'above_tab')
     await base.clearAndType(selector.admin.dokan.settings.supportButtonLabel, 'Get Support')
@@ -346,7 +346,6 @@ module.exports = {
     await base.click(selector.admin.dokan.settings.euComplianceFields)
 
     //eu compliance settings
-    await base.wait(0.5)
     await base.enableSwitcher(selector.admin.dokan.settings.vendorExtraFieldsCompanyName)
     await base.enableSwitcher(selector.admin.dokan.settings.vendorExtraFieldsCompanyIdOrEuidNumber)
     await base.enableSwitcher(selector.admin.dokan.settings.vendorExtraFieldsVatOrTaxNumber)
@@ -370,7 +369,6 @@ module.exports = {
     await base.click(selector.admin.dokan.settings.deliveryTime)
 
     //delivery time settings
-    await base.wait(0.5)
     await base.enableSwitcher(selector.admin.dokan.settings.allowVendorSettings)
     await base.clearAndType(selector.admin.dokan.settings.deliveryDateLabel, 'Delivery Date')
     await base.clearAndType(selector.admin.dokan.settings.deliveryBlockedBuffer, '0')
