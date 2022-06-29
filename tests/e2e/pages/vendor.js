@@ -944,7 +944,7 @@ module.exports = {
             await page.click(selector.vendor.vVerificationSettings.uploadedMedia)
             await base.wait(1)
         } else {
-            await base.uploadImage(selector.vendor.vVerificationSettings.selectFiles, 'tests/e2e/utils/sampleData/avatar.png')
+            await base.uploadImage(selector.vendor.vVerificationSettings.selectFiles, 'utils/sampleData/avatar.png')
         }
         await base.click(selector.vendor.vVerificationSettings.select)
         await page.click(selector.vendor.vVerificationSettings.submitId)
