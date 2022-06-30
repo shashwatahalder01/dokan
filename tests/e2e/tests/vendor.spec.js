@@ -52,7 +52,7 @@ describe('vendor functionality test', () => {
       await vendorPage.addExternalProduct(data.product.name.external, data.product.price_frac_comma, data.product.category)
    })
 
-   it('vendor can add auction product', async () => {
+   it.skip('vendor can add auction product', async () => {
       await loginPage.login(process.env.VENDOR, process.env.VENDOR_PASSWORD)
       await vendorPage.addAuctionProduct(data.product.name.auction, data.product.auctionPrice, data.product.auction.startDate, data.product.auction.endDate, data.product.category)
    })
