@@ -32,7 +32,7 @@ describe('vendor functionality test', () => {
       await vendorPage.addSimpleProduct(data.product.name.simple, data.product.price_frac_comma, data.product.category)
    })
 
-   it('vendor can add variable product', async () => {
+   it.skip('vendor can add variable product', async () => {
       await loginPage.login(process.env.VENDOR, process.env.VENDOR_PASSWORD)
       await vendorPage.addVariableProduct(data.product.name.variable, data.product.price_frac_comma, data.product.category, data.product.attribute, data.product.attributeTerms)
    })
@@ -129,7 +129,7 @@ describe('vendor functionality test', () => {
       await vendorPage.sendCompanyVerificationRequest()
    })
 
-   it('vendor can set delivery time settings ', async () => {
+   it.skip('vendor can set delivery time settings ', async () => {
       await loginPage.login(process.env.VENDOR, process.env.VENDOR_PASSWORD)
       await vendorPage.setDeliveryTimeSettings()
    })

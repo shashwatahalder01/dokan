@@ -141,6 +141,7 @@ module.exports = {
 
   //admin set dokan general settings
   async setDokanGeneralSettings() {
+    await base.click(selector.admin.dokan.settings.general)
 
     //site options
     await base.enableSwitcher(selector.admin.dokan.settings.adminAreaAccess)
