@@ -109,7 +109,7 @@ describe('customer functionality test', () => {
         await customerPage.followVendor(data.vendorStores[0])
     })
 
-    it('customer can review store', async () => {
+    it.skip('customer can review store', async () => {
         await loginPage.login(process.env.CUSTOMER, process.env.CUSTOMER_PASSWORD)
         await customerPage.reviewStore(data.vendorStores[0], data.store.rating, data.store.storeReviewTitle, data.store.storeReviewMessage)
     })
