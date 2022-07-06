@@ -9,8 +9,8 @@ module.exports = {
 
    //--------------------------------------------------- Fixed  test data ---------------------------------------------//
    // PluginSlugList: ['dokan-lite', 'dokan-pro', 'woocommerce', 'woocommerce-bookings', 'woocommerce-product-add-ons', 'woocommerce-simple-auction', 'woocommerce-subscriptions', 'elementor', 'elementor-pro',],
-   // PluginSlugList: ['dokan-lite', 'dokan-pro', 'woocommerce', 'woocommerce-bookings', 'woocommerce-product-add-ons', 'woocommerce-simple-auction', 'woocommerce-subscriptions',],
-   PluginSlugList: ['dokan-lite', 'dokan-pro', 'woocommerce'],
+   PluginSlugList: ['dokan-lite', 'dokan-pro', 'woocommerce', 'woocommerce-bookings', 'woocommerce-product-add-ons', 'woocommerce-simple-auction', 'woocommerce-subscriptions',],
+   // PluginSlugList: ['dokan-lite', 'dokan-pro', 'woocommerce'],
 
 
    // wooCommerce
@@ -267,7 +267,7 @@ module.exports = {
       price_int: faker.finance.amount(100, 200, 0),
       price: faker.finance.amount(100, 200, faker.helpers.arrayElement([0, 2])), // 0 = no decimals, 2 = 2 decimals
       price_frac: faker.finance.amount(100, 200, faker.helpers.arrayElement([1, 2])),
-      price_frac_comma: (faker.finance.amount(100, 200, faker.helpers.arrayElement([1, 2]))).replace('.',','),
+      price_frac_comma: (faker.finance.amount(100, 200, faker.helpers.arrayElement([1, 2]))).replace('.', ','),
       auctionPrice: faker.commerce.price(10, 100, 0),
       category: 'Uncategorized',
       categories: faker.helpers.arrayElement(["Electronic Devices", "Electronic Accessories", "Men's Fashion", "Clothings", "Women's Fashion"]),
@@ -381,7 +381,7 @@ module.exports = {
    saleProduct: ['p1_v1 (sale)'],
    couponCode: ['C1_v1'],
 
-   vendorStores:['vendorStore1','vendorStore2'],
+   vendorStores: ['vendorStore1', 'vendorStore2'],
 
 
 

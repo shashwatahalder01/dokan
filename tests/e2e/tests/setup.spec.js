@@ -4,7 +4,6 @@ const adminPage = require('../pages/admin.js')
 const vendorPage = require('../pages/vendor.js')
 const customerPage = require('../pages/customer.js')
 const data = require('../utils/testData.js')
-const timeout = process.env.TIME_OUT
 jest.retryTimes(process.env.RETRY_TIMES)
 
 describe('Environment setup test', () => {
@@ -23,7 +22,7 @@ describe('Environment setup test', () => {
 
 
 
-    it('admin check Active plugins ', async () => {
+    it.skip('admin check Active plugins ', async () => {
         await loginPage.adminLogin(process.env.ADMIN, process.env.ADMIN_PASSWORD)
         // check plugin is installed
         await adminPage.checkActivePlugins(data.PluginSlugList)
@@ -205,8 +204,6 @@ describe('Environment setup test', () => {
 
 
 
-
-
     //----------------------------------------- Vendor details -------------------------------------------//
 
 
@@ -290,6 +287,14 @@ describe('Environment setup test', () => {
     it.skip('add test vendor2 rma settings', async () => {
         await loginPage.login(process.env.VENDOR2, process.env.VENDOR_PASSWORD)
         await vendorPage.setRmaSettings('Warranty', 'included_warranty', 'limited', '1', 'weeks')
+    })
+
+    it('admin add test vendor products ', async () => {
+        await loginPage.adminLogin(process.env.ADMIN, process.env.ADMIN_PASSWORD)
+        await adminPage.addSimpleProduct(data.product.name.simple, data.product.price, data.product.category, data.vendorStores[0], 'publish', false)
+        await adminPage.addSimpleProduct(data.product.name.simple, data.product.price, data.product.category, data.vendorStores[0], 'draft', false)
+        await adminPage.addSimpleProduct(data.product.name.simple, data.product.price, data.product.category, data.vendorStores[0], 'pending', false)
+        await adminPage.addSimpleProduct(data.product.name.simple, data.product.price, data.product.category, data.vendorStores[0], 'publish', true)
     })
 
 

@@ -9,14 +9,15 @@ const p = require('puppeteer-extra-commands');
 module.exports = {
 
     //check whether element is ready or not
-    async isLocatorReady(selector, page) {
-        const isVisibleHandle = await page.evaluateHandle((e) => {
-            const style = window.getComputedStyle(e)
+    async isLocatorReady(selector) {
+        let element = await this.getElement(selector)
+        const isVisibleHandle = await page.evaluateHandle((element) => {
+            const style = window.getComputedStyle(element)
             return (style && style.display !== 'none' &&
                 style.visibility !== 'hidden' && style.opacity !== '0')
-        }, selector)
+        }, el)
         var visible = await isVisibleHandle.jsonValue()
-        const box = await selector.boxModel()
+        const box = await element.boxModel()
         if (visible && box) {
             return true
         }
@@ -83,7 +84,7 @@ module.exports = {
 
 
         // await this.waitTillHTMLRendered(page) // working
-        console.log("Clicked and waited for response")
+        // console.log("Clicked and waited for response")
     },
 
     // Wait for all xhr triggered by all the events of the page with promise.race
@@ -122,6 +123,11 @@ module.exports = {
         await element.click()
     },
 
+    //wait for element and then click by running the JavaScript HTMLElement.click() method
+    async clickJs(selector) {
+        let element = await this.getElement(selector)
+        await page.evaluate(el => el.click(), element);
+    },
 
 
     //wait for element and then click
@@ -200,7 +206,7 @@ module.exports = {
         }
     },
 
-    //wait for select element then set value based on options value
+    // wait for select element then set value based on options value
     async select(selector, value) {
         let element = await this.getElement(selector)
         await element.select(value)
@@ -391,6 +397,17 @@ module.exports = {
         return value
     },
 
+    //get pseudo element style
+    async getPseudoElementStyles(selector, pseudoElement, property) {
+        let element = await this.getElement(selector)
+        let value = await page.evaluate((element, pseudoElement, property) => {
+            let stylesObject = window.getComputedStyle(element, '::' + pseudoElement)
+            let style = stylesObject.getPropertyValue(property)
+            return style
+        }, element, pseudoElement, property)
+        return value
+    },
+
     // get element class value
     async getElementClassValue(selector) {
         let element = await this.getElement(selector)
@@ -510,7 +527,7 @@ module.exports = {
     //scroll element into view
     async scrollIntoView(selector) {  //TODO: doesn't work
         let element = await this.getElement(selector)
-        await page.evaluate((element) => { element.scrollIntoView() }, element)
+        await page.evaluate(element => element.scrollIntoView(), element)
     },
 
     // close single tab
@@ -582,7 +599,7 @@ module.exports = {
         })
     },
 
-    async alertWithValue(value) {//TODO: dont work fix this
+    async alertWithValue(value) {//TODO: don't work fix this
         page.on('dialog', async dialog => {
             // console.log(dialog.message())
             // await dialog.accept()
@@ -624,6 +641,59 @@ module.exports = {
 
     //---------------------------------------------- Dokan specific functions ------------------------------------//
 
+    // enable switch : dokan setup wizard
+    // async enableSwitcherSetupWizard(selector) {
+    //     let value = await this.getElementBackgroundColor(selector + '//span')
+    //     if (value == 'on') {
+    //         await this.click(selector)
+    //         await this.click(selector)
+    //     } else {
+    //         await this.click(selector)
+    //     }
+    // },
+
+    // enable switch or checkbox: dokan setup wizard
+    async enableSwitcherSetupWizard(selector) {
+        let IsVisible = await this.isVisible(selector)
+        if (IsVisible) {
+            let element = await this.getElement(selector)
+            await element.focus()
+            let value = await this.getPseudoElementStyles(selector, 'before', 'background-color')
+            // console.log('before', value)
+            // rgb(251, 203, 196) for switcher & rgb(242, 98, 77) for checkbox
+            if ((value.includes('rgb(251, 203, 196)')) || (value.includes('rgb(242, 98, 77)'))) {
+                // console.log('if:', selector)
+                await page.evaluate(el => el.click(), element)
+                await this.wait(0.3)
+                await page.evaluate(el => el.click(), element)
+            } else {
+                // console.log('else:', selector)
+                await page.evaluate(el => el.click(), element)
+            }
+        }
+    },
+
+    // enable switch or checkbox: dokan setup wizard
+    async disableSwitcherSetupWizard(selector) {
+        let IsVisible = await this.isVisible(selector)
+        if (IsVisible) {
+            let element = await this.getElement(selector)
+            await element.focus()
+            let value = await this.getPseudoElementStyles(selector, 'before', 'background-color')
+            // console.log('before', value)
+            // rgb(251, 203, 196) for switcher & rgb(242, 98, 77) for checkbox
+            if ((value.includes('rgb(251, 203, 196)')) || (value.includes('rgb(242, 98, 77)'))) {
+                // console.log('if:', selector)
+                await page.evaluate(el => el.click(), element)
+            } else {
+                // console.log('else:', selector)
+                await page.evaluate(el => el.click(), element)
+                await this.wait(0.3)
+                await page.evaluate(el => el.click(), element)
+            }
+        }
+    },
+
     //admin enable switcher , if enabled then skip : admin settings switcher
     async enableSwitcher(selector) {
         if (/^(\/\/|\(\/\/)/.test(selector)) {
@@ -636,6 +706,22 @@ module.exports = {
             await this.click(selector)
             await this.click(selector)
         } else {
+            await this.click(selector)
+        }
+    },
+
+    //admin disable switcher , if disabled then skip : admin settings switcher
+    async disableSwitcher(selector) {
+        if (/^(\/\/|\(\/\/)/.test(selector)) {
+            selector = selector + '//span'
+        } else {
+            selector = selector + ' span'
+        }
+        let value = await this.getElementBackgroundColor(selector)
+        if (value.includes('rgb(0, 144, 255)')) {
+            await this.click(selector)
+        } else {
+            await this.click(selector)
             await this.click(selector)
         }
     },
@@ -683,11 +769,8 @@ module.exports = {
         let pageContent = await page.content()
 
         if (pageContent.includes('Oops! That page can\'t be found.')) {
-            await page.screenshot({ path: 'tests/e2e/screenshot/pageNotExists' + Date.now() + '.png', fullPage: true })
+            await page.screenshot({ path: 'e2e/artifacts/screenshot/pageNotExists' + Date.now() + '.png', fullPage: true })
             //TODO: save permalink
-        }
-        else {
-            console.log('Page exists')
         }
     },
 
