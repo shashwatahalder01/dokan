@@ -21,6 +21,12 @@ describe('admin functionality test', () => {
         await adminPage.adminLogout()
     })
 
+    it('admin can set dokan setup wizard', async () => {
+        await loginPage.adminLogin(process.env.ADMIN, process.env.ADMIN_PASSWORD)
+        await adminPage.setDokanSetupWizard()
+    })
+
+
     it('admin can add vendor', async () => {
         await loginPage.adminLogin(process.env.ADMIN, process.env.ADMIN_PASSWORD)
         await adminPage.addVendor(data.vendorInfo.firstName, data.vendorInfo.lastName, data.vendorInfo.shopName, data.vendorInfo.phone, data.vendorInfo.userEmail
@@ -257,10 +263,6 @@ describe('admin functionality test', () => {
         await adminPage.setDokanVendorSubscriptionSettings()
     })
 
-    it('admin can set dokan setup wizard', async () => {
-        await loginPage.adminLogin(process.env.ADMIN, process.env.ADMIN_PASSWORD)
-        await adminPage.setDokanSetupWizard()
-    })
 
 
 
