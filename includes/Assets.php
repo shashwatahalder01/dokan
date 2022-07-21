@@ -569,7 +569,7 @@ class Assets {
 
         // Load category ui css in product add, edit and list page.
         global $wp;
-        if ( ( dokan_is_seller_dashboard() && isset( $wp->query_vars['products'] ) ) || ( isset( $wp->query_vars['products'], $_GET['product_id'] ) ) ) { // phpcs:ignore
+        if ( ( dokan_is_seller_dashboard() && isset( $wp->query_vars['products'] ) ) || ( isset( $wp->query_vars['products'], $_GET['product_id'] ) ) || ( dokan_is_seller_dashboard() && isset( $wp->query_vars['new-product'] ) ) ) { // phpcs:ignore
             wp_enqueue_style( 'dokan-product-category-ui-css' );
             wp_enqueue_script( 'product-category-ui' );
 
@@ -750,6 +750,7 @@ class Assets {
                 ( isset( $wp->query_vars['settings'] ) && in_array( $wp->query_vars['settings'], [ 'store', 'shipping' ], true ) )
             ) {
                 wp_enqueue_style( 'dokan-timepicker' );
+                wp_enqueue_style( 'dokan-date-range-picker' );
             }
         }
 
@@ -763,6 +764,7 @@ class Assets {
             wp_enqueue_script( 'jquery-ui-datepicker' );
             wp_enqueue_script( 'underscore' );
             wp_enqueue_script( 'post' );
+            wp_enqueue_script( 'dokan-date-range-picker' );
 
             wp_enqueue_script( 'dokan-tooltip' );
 
