@@ -1,4 +1,3 @@
-require('dotenv').config()
 const loginPage = require('../pages/login.js')
 const vendorPage = require('../pages/vendor.js')
 const data = require('../utils/testData.js')
@@ -32,7 +31,7 @@ describe('vendor functionality test', () => {
       await vendorPage.addSimpleProduct(data.product.name.simple, data.product.price_frac_comma, data.product.category)
    })
 
-   it.skip('vendor can add variable product', async () => {
+   it('vendor can add variable product', async () => {
       await loginPage.login(process.env.VENDOR, process.env.VENDOR_PASSWORD)
       await vendorPage.addVariableProduct(data.product.name.variable, data.product.price_frac_comma, data.product.category, data.product.attribute, data.product.attributeTerms)
    })
@@ -52,7 +51,7 @@ describe('vendor functionality test', () => {
       await vendorPage.addExternalProduct(data.product.name.external, data.product.price_frac_comma, data.product.category)
    })
 
-   it.skip('vendor can add auction product', async () => {
+   it('vendor can add auction product', async () => {
       await loginPage.login(process.env.VENDOR, process.env.VENDOR_PASSWORD)
       await vendorPage.addAuctionProduct(data.product.name.auction, data.product.auctionPrice, data.product.auction.startDate, data.product.auction.endDate, data.product.category)
    })
@@ -67,28 +66,28 @@ describe('vendor functionality test', () => {
       await vendorPage.addCoupon(data.coupon.title, data.coupon.amount)
    })
 
-   it.skip('vendor can request withdraw', async () => {
+   it('vendor can request withdraw', async () => {
       await loginPage.login(process.env.VENDOR, process.env.VENDOR_PASSWORD)
       await vendorPage.requestWithdraw('paypal')
    })
 
-   it.skip('vendor can cancel request withdraw', async () => {
-      await loginPage.login(process.env.VENDOR, process.env.VENDOR_PASSWORD)
-      await vendorPage.goToVendorDashboard()
-      await vendorPage.cancelRequestWithdraw()
-   })
+   // it.skip('vendor can cancel request withdraw', async () => {
+   //    await loginPage.login(process.env.VENDOR, process.env.VENDOR_PASSWORD)
+   //    await vendorPage.goToVendorDashboard()
+   //    await vendorPage.cancelRequestWithdraw()
+   // })
 
    it('vendor can add auto withdraw disbursement schedule', async () => {
       await loginPage.login(process.env.VENDOR, process.env.VENDOR_PASSWORD)
       await vendorPage.addAutoWithdrawDisbursementSchedule('dokan_custom', 'weekly', '5', '15')
    })
 
-   it.skip('vendor can add default withdraw payment methods ', async () => {
-      await loginPage.login(process.env.VENDOR, process.env.VENDOR_PASSWORD)
-      await vendorPage.addDefaultWithdrawPaymentMethods('Skrill')
-      // cleanup
-      await vendorPage.addDefaultWithdrawPaymentMethods('PayPal')
-   })
+   // it('vendor can add default withdraw payment methods ', async () => {
+   //    await loginPage.login(process.env.VENDOR, process.env.VENDOR_PASSWORD)
+   //    await vendorPage.addDefaultWithdrawPaymentMethods('Skrill')
+   //    // cleanup
+   //    await vendorPage.addDefaultWithdrawPaymentMethods('PayPal')
+   // })
 
    // vendor settings
 
@@ -118,21 +117,21 @@ describe('vendor functionality test', () => {
       await vendorPage.sendIdVerificationRequest()
    })
 
-   it.skip('vendor can send address verification request ', async () => {
-      await loginPage.login(process.env.VENDOR, process.env.VENDOR_PASSWORD)
-      await vendorPage.goToVendorDashboard()
-      await vendorPage.sendAddressVerificationRequest()
-   })
+   // it.skip('vendor can send address verification request ', async () => {
+   //    await loginPage.login(process.env.VENDOR, process.env.VENDOR_PASSWORD)
+   //    await vendorPage.goToVendorDashboard()
+   //    await vendorPage.sendAddressVerificationRequest()
+   // })
 
-   it('vendor can send company verification request ', async () => {
-      await loginPage.login(process.env.VENDOR, process.env.VENDOR_PASSWORD)
-      await vendorPage.sendCompanyVerificationRequest()
-   })
+   // it.skip('vendor can send company verification request ', async () => {
+   //    await loginPage.login(process.env.VENDOR, process.env.VENDOR_PASSWORD)
+   //    await vendorPage.sendCompanyVerificationRequest()
+   // })
 
-   it.skip('vendor can set delivery time settings ', async () => {
-      await loginPage.login(process.env.VENDOR, process.env.VENDOR_PASSWORD)
-      await vendorPage.setDeliveryTimeSettings()
-   })
+   // it.skip('vendor can set delivery time settings ', async () => {
+   //    await loginPage.login(process.env.VENDOR, process.env.VENDOR_PASSWORD)
+   //    await vendorPage.setDeliveryTimeSettings()
+   // })
 
    it('vendor can set flat rate shipping ', async () => {
       await loginPage.login(process.env.VENDOR, process.env.VENDOR_PASSWORD)

@@ -1,4 +1,3 @@
-require('dotenv').config()
 const { faker } = require('@faker-js/faker')
 const { isThemeInstalled } = require('@wordpress/e2e-test-utils')
 const helpers = require("./helpers.js")
@@ -37,6 +36,13 @@ module.exports = {
    stripeExpressButtonSize: ['default', 'medium', 'large'],
 
    //Dokan
+
+   //setup wizard
+   setupWizardShippingFeeRecipient: ['Vendor', 'Admin'],
+   setupWizardTaxFeeRecipient: ['Vendor', 'Admin'],
+   setupWizardMapApiSource: ['Google Maps', 'Mapbox'],
+   setupWizardSellingProductTypes: ['Physical','Digital','Both'],
+   setupWizardCommissionType: ['Flat', 'Percentage', 'Combine'],
 
    //admin
    //general settings
@@ -273,7 +279,7 @@ module.exports = {
       categories: faker.helpers.arrayElement(["Electronic Devices", "Electronic Accessories", "Men's Fashion", "Clothings", "Women's Fashion"]),
       attribute: 'size',
       attributeTerms: ['s', 'l', 'm'],
-      vendor: [process.env.ADMIN, process.env.VENDOR, process.env.VENDOR1],
+      vendor: [process.env.ADMIN,process.env.VENDOR, process.env.VENDOR1],
       booking: {
          productName: faker.commerce.productName() + (' (Booking)'),
          category: 'Uncategorized',

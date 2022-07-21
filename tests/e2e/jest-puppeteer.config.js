@@ -1,4 +1,3 @@
-require('dotenv').config()
 module.exports = {
   launch: {
     headless: process.env.HEADLESS !== 'false', // Enable non-headless mode
@@ -17,7 +16,5 @@ module.exports = {
     defaultViewport: process.env.HEADLESS == 'false' ? null : {width:1920,height:1080} , // choose viewpoint based on GUI/Non-GUI settings    
     // defaultViewport: null, //  Ignore default viewport size
     // defaultViewport: {width:1920,height:1080} // viewport for each page. Defaults to an 800x600 viewport.
-
-
   },
 };

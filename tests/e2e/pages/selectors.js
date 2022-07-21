@@ -158,6 +158,9 @@ module.exports = {
 
             //dashboard
             dashboard: {
+                //dashboard text
+                dashboardText: ".dokan-dashboard h1",
+
                 //divs
                 atAGlance: ".postbox.dokan-postbox.dokan-status",
                 overview: ".postbox.dokan-postbox.overview-chart",
@@ -189,7 +192,7 @@ module.exports = {
                 address: "//div[@class='tab-link']//a[contains(text(), 'Address')]",
                 paymentOptions: "//div[@class='tab-link']//a[contains(text(), 'Payment Options')]",
                 addNewVendorCloseModal: '.modal-close',
-                next: '.button.button-primary.button-hero',
+                next: '.button.button-primary',
 
                 //account info
                 addNewVendor: '.page-title-action',
@@ -428,7 +431,6 @@ module.exports = {
                 reBuild: "//a[contains(text(),'Re-build')]",
                 checkOrders: "//a[contains(text(),'Check Orders')]",
                 openSetupWizard: "//a[contains(text(),'Open Setup Wizard')]",
-
             },
             //verifications
             verifications: {
@@ -502,7 +504,7 @@ module.exports = {
                 singleProductMultiVendor: '//div[@class="nav-title" and contains(text(),"Single Product MultiVendor")]',
                 vendorSubscription: '//div[@class="nav-title" and contains(text(),"Vendor Subscription")]',
                 vendorAnalytics: '//div[@class="nav-title" and contains(text(),"Vendor Analytics")]',
-               
+
 
                 //general
                 //site options
@@ -511,7 +513,7 @@ module.exports = {
                 vendorStoreUrl: "#dokan_general\\[custom_store_url\\]",
                 vendorSetupWizardLogo: "#dokan_general\\[setup_wizard_logo_url\\]",
                 disableWelcomeWizard: "#dokan_general\\[disable_welcome_wizard\\]",
-                sellingProductTypes:(type) => `//label[@for='dokan_general[global_digital_mode][${type}]']`,
+                sellingProductTypes: (type) => `//label[@for='dokan_general[global_digital_mode][${type}]']`,
                 logShipStationApiRequest: "#dokan_general\\[enable_shipstation_logging\\]",
                 dataClear: "#dokan_general\\[data_clear_on_uninstall\\]",
                 confirmDataClear: ".swal2-confirm",
@@ -639,7 +641,7 @@ module.exports = {
                 displayOnOrderDetails: ".enabled_for_customer_order .switch",
                 displayOnSingleProductPage: "#dokan_store_support_setting\\[store_support_product_page\\]",
                 supportButtonLabel: "#dokan_store_support_setting\\[support_button_label\\]",
-                supportTicketEmailNotification:".dokan_admin_email_notification .switch",
+                supportTicketEmailNotification: ".dokan_admin_email_notification .switch",
                 storeSupportSaveChanges: "#submit",
 
                 //seller verification
@@ -756,7 +758,7 @@ module.exports = {
                 deliveryBlockedBuffer: "#dokan_delivery_time\\[preorder_date\\]",
                 deliveryBoxInfo: "#dokan_delivery_time\\[delivery_box_info\\]",
                 requireDeliveryDateAndTime: ".selection_required .switch",
-                deliveryDay: (day) =>`//div[contains(text(), '${day}')]//label[@class='switch tips']`,
+                deliveryDay: (day) => `//div[contains(text(), '${day}')]//label[@class='switch tips']`,
                 openingTime: "#dokan_delivery_time\\[opening_time\\]",
                 closingTime: "#dokan_delivery_time\\[closing_time\\]",
                 timeSlot: "#dokan_delivery_time\\[time_slot_minutes\\]",
@@ -825,6 +827,58 @@ module.exports = {
             //license
             license: {
                 activateLicense: "//button[contains(text(),'Activate License')]",
+            },
+
+            //dokan setup wizard
+            dokanSetupWizard: {
+                letsGo: '.button-primary',
+                notWrightNow: "//a[contains(text(),'Not right now')]",
+
+                //store
+                vendorStoreURL: "#custom_store_url",
+                shippingFeeRecipient: "#select2-shipping_fee_recipient-container",
+                shippingFeeRecipientValues: ".select2-results ul li",
+                taxFeeRecipient: "#select2-tax_fee_recipient-container",
+                taxFeeRecipientValues: ".select2-results ul li",
+                mapApiSource: "#select2-map_api_source-container",
+                mapApiSourceValues: ".select2-results ul li",
+                googleMapApiKey: "#gmap_api_key",
+                mapboxAccessToken: "#mapbox_access_token",
+                shareEssentialsOff: ".switch-label",
+                sellingProductTypes: "#select2-dokan_digital_product-container",
+                Values: ".select2-results ul li",
+                continue: "//input[@value='Continue']",
+                skipThisStep: "//a[contains(text(),'Skip this step')]",
+
+                //Selling
+                newVendorEnableSelling: "//label[@for='new_seller_enable_selling' and @class='switch-label']",
+                commissionType: "//label[@for='admin_percentage']//..//..//span[@class='select2-selection__rendered']",
+                commissionTypeValues: ".select2-results ul li",
+                adminCommission: "#admin_percentage",
+                orderStatusChange: "//label[@for='order_status_change' and @class='switch-label']",
+
+                //Withdraw
+                payPal: "//label[@for='withdraw_methods[paypal]' and @class='switch-label']",
+                bankTransfer: "//label[@for='withdraw_methods[bank]' and @class='switch-label']",
+                wirecard: "//label[@for='withdraw_methods[dokan-moip-connect]' and @class='switch-label']",
+                stripe: "//label[@for='withdraw_methods[dokan-stripe-connect]' and @class='switch-label']",
+                custom: "//label[@for='withdraw_methods[dokan_custom]' and @class='switch-label']",
+                skrill: "//label[@for='withdraw_methods[skrill]' and @class='switch-label']",
+                minimumWithdrawLimit: "#withdraw_limit",
+                orderStatusForWithdrawCompleted: "//label[@for='withdraw_order_status[wc-completed]']",
+                orderStatusForWithdrawProcessing: "//label[@for='withdraw_order_status[wc-processing]']",
+
+                //Recommended
+                wooCommerceConversionTracking: "//label[@for='dokan_recommended_wc_conversion_tracking']",
+                weMail: "//label[@for='dokan_recommended_wemail']",
+                texty: "//label[@for='dokan_recommended_texty']",
+                continueRecommended: ".button-primary",
+
+                //ready!
+                visitDokanDashboard: "//a[contains(text(),'Visit Dokan Dashboard')]",
+                moreSettings: "//a[contains(text(),'More Settings')]",
+                ReturnToTheWordPressDashboard: ".wc-return-to-dashboard",
+
             }
         },
 
@@ -1268,11 +1322,14 @@ module.exports = {
                 //tags
                 tagInput: '#new-tag-product_tag',
                 addTag: '.tagadd',
+                //status
+                editStatus:".edit-post-status.hide-if-no-js",
+                status:"#post-status-select #post_status",
                 //publish
                 saveDraft: '#save-post',
                 preview: '#post-preview',
                 publish: '#publish',
-                updatedSuccessMessage: ".updated.notice.notice-success",
+                updatedSuccessMessage: ".updated.notice.notice-success p",
             },
 
             // categories
@@ -2830,7 +2887,7 @@ module.exports = {
             postOrZipCode: "#dokan_address\\[zip\\]",
             country: "#dokan_address_country",
             state: "#dokan_address_state",
-            uploadResidenceProof: "#vendor-proof-url",
+            uploadResidenceProof: "#vendor-proof",
             previousUploadedResidenceProof: ".vendor_img_container img",
             removePreviousUploadedResidenceProof: ".dokan-close.dokan-remove-proof-image",
             submitAddress: "#dokan_v_address_submit",

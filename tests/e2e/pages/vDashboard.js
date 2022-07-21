@@ -1,4 +1,3 @@
-require('dotenv').config()
 const base = require("./base.js")
 const vDashboardLocators = require("./vDashboard-locators.js")
 

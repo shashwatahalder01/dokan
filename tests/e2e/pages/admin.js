@@ -1,7 +1,6 @@
-require('dotenv').config()
 const base = require("../pages/base.js")
 const selector = require("../pages/selectors.js")
-const helpers = require("../../e2e/utils/helpers.js")
+const helpers = require("../utils/helpers.js")
 const { faker } = require('@faker-js/faker')
 
 module.exports = {
@@ -77,6 +76,7 @@ module.exports = {
   // admin set wordpress site settings
   async setWpSettings() {
     await this.setWpGeneralSettings()
+    await base.goIfNotThere("wp-admin")
     await this.setPermalinkSettings()
 
   },
@@ -1122,7 +1122,7 @@ module.exports = {
       case 'pending':
         //pending
         await base.click(selector.admin.products.product.editStatus)
-        await base.select(selector.admin.products.product.status, 'draft')
+        await base.select(selector.admin.products.product.status, 'pending')
         await base.wait(1)
         await base.clickAndWait(selector.admin.products.product.saveDraft)
         let pendingProductCreateSuccessMessage = await base.getElementText(selector.admin.products.product.updatedSuccessMessage)

@@ -2,7 +2,7 @@ const base = require("../pages/base.js")
 const customerPage = require('../pages/customer.js')
 const loginPage = require('../pages/login.js')
 const selector = require("../pages/selectors.js")
-const helpers = require("../../e2e/utils/helpers.js")
+const helpers = require("../utils/helpers.js")
 const { faker } = require('@faker-js/faker')
 
 
@@ -134,8 +134,9 @@ module.exports = {
         await base.click(selector.vendor.vSetup.email)
         await base.clickAndWait(selector.vendor.vSetup.continueStoreSetup)
 
+        //paypal
         await base.clearAndType(selector.vendor.vSetup.paypal, paypal)
-
+        //bank transfer
         await base.type(selector.vendor.vSetup.bankAccountName, bankAccountName)
         await base.select(selector.vendor.vSetup.bankAccountType, bankAccountType)
         await base.type(selector.vendor.vSetup.bankRoutingNumber, bankRoutingNumber)
@@ -174,9 +175,9 @@ module.exports = {
         await page.click(selector.vendor.product.addNewProduct)
         await page.type(selector.vendor.product.productName, productName)
         await page.type(selector.vendor.product.productPrice, productPrice)
-        await page.click(selector.vendor.product.productCategory)
-        await page.type(selector.vendor.product.productCategoryInput, category)
-        await page.keyboard.press('Enter')
+        // await page.click(selector.vendor.product.productCategory)
+        // await page.type(selector.vendor.product.productCategoryInput, category)
+        // await page.keyboard.press('Enter')
         await base.clickAndWait(selector.vendor.product.createProduct)
 
         let createdProduct = await base.getElementValue(selector.vendor.product.title)
@@ -193,9 +194,9 @@ module.exports = {
         await page.click(selector.vendor.product.addNewProduct)
         await page.type(selector.vendor.product.productName, productName)
         await page.type(selector.vendor.product.productPrice, productPrice)
-        await page.click(selector.vendor.product.productCategory)
-        await page.type(selector.vendor.product.productCategoryInput, category)
-        await page.keyboard.press('Enter')
+        // await page.click(selector.vendor.product.productCategory)
+        // await page.type(selector.vendor.product.productCategoryInput, category)
+        // await page.keyboard.press('Enter')
         await base.clickAndWait(selector.vendor.product.createProduct)
 
         let createdProduct = await base.getElementValue(selector.vendor.product.title)
@@ -248,9 +249,9 @@ module.exports = {
         await page.click(selector.vendor.product.addNewProduct)
         await page.type(selector.vendor.product.productName, productName)
         await page.type(selector.vendor.product.productPrice, productPrice)
-        await page.click(selector.vendor.product.productCategory)
-        await page.type(selector.vendor.product.productCategoryInput, category)
-        await page.keyboard.press('Enter')
+        // await page.click(selector.vendor.product.productCategory)
+        // await page.type(selector.vendor.product.productCategoryInput, category)
+        // await page.keyboard.press('Enter')
         await base.clickAndWait(selector.vendor.product.createProduct)
 
         let createdProduct = await base.getElementValue(selector.vendor.product.title)
@@ -281,9 +282,9 @@ module.exports = {
         await page.click(selector.vendor.product.addNewProduct)
         await page.type(selector.vendor.product.productName, productName)
         await page.type(selector.vendor.product.productPrice, productPrice)
-        await page.click(selector.vendor.product.productCategory)
-        await page.type(selector.vendor.product.productCategoryInput, category)
-        await page.keyboard.press('Enter')
+        // await page.click(selector.vendor.product.productCategory)
+        // await page.type(selector.vendor.product.productCategoryInput, category)
+        // await page.keyboard.press('Enter')
         await base.clickAndWait(selector.vendor.product.createProduct)
 
         let createdProduct = await base.getElementValue(selector.vendor.product.title)
@@ -338,9 +339,9 @@ module.exports = {
         await page.click(selector.vendor.product.addNewProduct)
         await page.type(selector.vendor.product.productName, productName)
         await page.type(selector.vendor.product.productPrice, productPrice)
-        await page.click(selector.vendor.product.productCategory)
-        await page.type(selector.vendor.product.productCategoryInput, category)
-        await page.keyboard.press('Enter')
+        // await page.click(selector.vendor.product.productCategory)
+        // await page.type(selector.vendor.product.productCategoryInput, category)
+        // await page.keyboard.press('Enter')
         await base.clickAndWait(selector.vendor.product.createProduct)
 
         let createdProduct = await base.getElementValue(selector.vendor.product.title)
@@ -368,9 +369,10 @@ module.exports = {
         await base.clickAndWait(selector.vendor.vAuction.addNewActionProduct)
         await page.type(selector.vendor.vAuction.productName, faker.commerce.productName() + (' (Auction)'))
         // await page.type(selector.vendor.vAuction.productShortDescription, productShortDescription)
-        await page.click(selector.vendor.product.productCategory)
-        await page.type(selector.vendor.product.productCategoryInput, category)
-        await page.keyboard.press('Enter')
+
+        // await page.click(selector.vendor.product.productCategory)
+        // await page.type(selector.vendor.product.productCategoryInput, category)
+        // await page.keyboard.press('Enter')
 
         // await page.select(selector.vendor.vAuction.itemCondition, itemCondition)
         // await page.select(selector.vendor.vAuction.actionType, actionType)
@@ -378,15 +380,10 @@ module.exports = {
         await page.type(selector.vendor.vAuction.bidIncrement, '50')
         await page.type(selector.vendor.vAuction.reservedPrice, String(Number(productPrice) + 400))
         await page.type(selector.vendor.vAuction.buyItNowPrice, String(Number(productPrice) + 900))
-        // await base.setElementAttributeValue(selector.vendor.vAuction.auctionStartDate, 'readonly') 
-        // await base.type(selector.vendor.vAuction.auctionStartDate, '2022-04-05 10:15') 
-        // await base.wait(10)
-        // await base.setElementAttributeValue(selector.vendor.vAuction.auctionStartDate, '2022-04-05 15:15') 
-        // await base.setElementAttributeValue(selector.vendor.vAuction.auctionEndDate, '2022-04-05 15:15') 
-        await page.click(selector.vendor.vAuction.auctionStartDate, startDate) //TODO: handle date using datepicker or use core input filed 
-        await page.type(selector.vendor.vAuction.auctionStartDate, startDate) //TODO: handle date using datepicker or use core input filed 
-        await page.click(selector.vendor.vAuction.auctionEndDate, endDate)
-        await page.type(selector.vendor.vAuction.auctionEndDate, endDate)
+        await base.removeElementAttribute(selector.vendor.vAuction.auctionStartDate, 'readonly') 
+        await base.removeElementAttribute(selector.vendor.vAuction.auctionEndDate, 'readonly') 
+        await base.type(selector.vendor.vAuction.auctionStartDate, startDate) 
+        await base.type(selector.vendor.vAuction.auctionEndDate, endDate)
 
         await base.clickAndWait(selector.vendor.vAuction.addAuctionProduct)
 
@@ -516,7 +513,8 @@ module.exports = {
             expect(canRequestIsVisible).toBe(true)
         } else {
 
-            throw new Error("Vendor balance is less than minimum withdraw amount")
+            // throw new Error("Vendor balance is less than minimum withdraw amount")
+            console.log("Vendor balance is less than minimum withdraw amount")
         }
     },
 
@@ -551,7 +549,8 @@ module.exports = {
         await this.goToVendorDashboard()
 
         await base.clickAndWait(selector.vendor.vDashboard.withdraw)
-        let defaultMethod = base.isVisible(selector.vendor.vWithdraw.customMethodMakeDefault(preferredSchedule))
+        let defaultMethod = await base.isVisible(selector.vendor.vWithdraw.customMethodMakeDefault(preferredSchedule))
+        console.log(defaultMethod)
         if (defaultMethod) {
             await base.clickAndWait(selector.vendor.vWithdraw.customMethodMakeDefault(preferredSchedule))
 
@@ -632,7 +631,7 @@ module.exports = {
         await base.wpUploadFile('tests/e2e/utils/sampleData/banner.png')
         await base.removePreviousUploadedImage(selector.vendor.vStoreSettings.profilePictureImage, selector.vendor.vStoreSettings.removeProfilePictureImage)
         await page.click(selector.vendor.vStoreSettings.profilePicture)
-        await base.wpUploadFile('tests/e2e/utils/sampleData/avatar2.png')
+        await base.wpUploadFile('tests/e2e/utils/sampleData/avatar.png')
     },
 
     //vendor set basic info settings
@@ -944,7 +943,7 @@ module.exports = {
             await page.click(selector.vendor.vVerificationSettings.uploadedMedia)
             await base.wait(1)
         } else {
-            await base.uploadImage(selector.vendor.vVerificationSettings.selectFiles, 'utils/sampleData/avatar.png')
+            await base.uploadImage(selector.vendor.vVerificationSettings.selectFiles, 'tests/e2e/utils/sampleData/avatar.png')
         }
         await base.click(selector.vendor.vVerificationSettings.select)
         await page.click(selector.vendor.vVerificationSettings.submitId)
@@ -981,8 +980,8 @@ module.exports = {
         //     await page.click(selector.vendor.vVerificationSettings.removePreviousUploadedResidenceProof)
         //     await base.wait(4)
         // }
-        await base.waitForSelector(selector.vendor.vVerificationSettings.uploadResidenceProof)
-        await page.click(selector.vendor.vVerificationSettings.uploadResidenceProof)
+  
+        await base.click(selector.vendor.vVerificationSettings.uploadResidenceProof)
         await base.wait(2)
         let uploadedMediaIsVisible = await base.isVisible(selector.vendor.vVerificationSettings.uploadedMedia)
         if (uploadedMediaIsVisible) {
@@ -992,11 +991,13 @@ module.exports = {
             await base.uploadImage(selector.vendor.vVerificationSettings.selectFiles, 'tests/e2e/utils/sampleData/avatar.png')
         }
 
+        await base.click(selector.vendor.vVerificationSettings.select)
         await page.click(selector.vendor.vVerificationSettings.submitAddress)
         await base.wait(2)
 
-        // let successMessage = await base.getElementText(selector.vendor.vVerificationSettings.addressUpdateSuccessMessage)
-        // expect(successMessage).toMatch('Your Address verification request is Sent and Pending approval')
+
+        let successMessage = await base.getElementText(selector.vendor.vVerificationSettings.addressUpdateSuccessMessage)
+        expect(successMessage).toMatch('Your Address verification request is Sent and Pending approval')
     },
 
     //vendor send company verification request

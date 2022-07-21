@@ -12,16 +12,49 @@ module.exports = {
 
     //login from frontend
     async loginFrontend(username, password) {
-        await base.goIfNotThere("my-account")
-        let emailField = await base.isVisible(selector.frontend.username)
-        if (emailField) {
-            await base.clearAndType(selector.frontend.username, username)
-            await base.clearAndType(selector.frontend.userPassword, password)
-            await base.clickAndWait(selector.frontend.logIn)
+        // await base.goIfNotThere("my-account")
+        // let emailField = await base.isVisible(selector.frontend.username)
+        // if (emailField) {
+        //     await base.clearAndType(selector.frontend.username, username)
+        //     await base.clearAndType(selector.frontend.userPassword, password)
+        //     await base.clickAndWait(selector.frontend.logIn)
 
-            let loggedInUser = await base.getCurrentUser()
-            expect(loggedInUser).toBe(username)
+        //     let loggedInUser = await base.getCurrentUser()
+        //     expect(loggedInUser).toBe(username)
+        // }
+        // else {
+        //     let loggedInUser = await base.getCurrentUser()
+        //     if (username !== loggedInUser) {
+        //         await this.logoutFrontend()
+        //     }
+
+        // }
+
+        let currentUser = await base.getCurrentUser()
+
+        if (username === currentUser) {
+            return
+        } else if ((username !== currentUser) && (currentUser !== undefined)) {
+            await this.logoutFrontend()
         }
+        await base.goIfNotThere("my-account")
+        await base.clearAndType(selector.frontend.username, username)
+        await base.clearAndType(selector.frontend.userPassword, password)
+        await base.clickAndWait(selector.frontend.logIn)
+
+        let loggedInUser = await base.getCurrentUser()
+        expect(loggedInUser).toBe(username)
+    },
+
+    //logout from frontend
+    async logoutFrontend() {
+        await base.goIfNotThere("my-account")
+        await base.clickAndWait(selector.frontend.customerLogout)
+
+        let loggedInUser = await base.getCurrentUser()
+        expect(loggedInUser).toBeUndefined()
+        // let homeIsVisible = await base.isVisible( selector.frontend.home)
+        // expect(homeIsVisible).toBe(false)
     },
 
     //login user form WP login dashboard
@@ -51,6 +84,9 @@ module.exports = {
             expect(loggedInUser).toBe(username)
         }
     },
+
+
+
 
     //switcher user
     async switchUser(username, password) {

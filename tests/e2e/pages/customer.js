@@ -1,11 +1,8 @@
-
-require('dotenv').config()
 const loginPage = require('../pages/login.js')
 const adminPage = require('../pages/admin.js')
-const vendorPage = require('../pages/vendor.js')
 const base = require("../pages/base.js")
 const selector = require("../pages/selectors.js")
-const helpers = require("../../e2e/utils/helpers.js")
+const helpers = require("../utils/helpers.js")
 const { faker } = require('@faker-js/faker')
 
 module.exports = {
@@ -142,26 +139,26 @@ module.exports = {
     async customerBecomeVendor(firstName, lastName, shopName, address, phone, companyName, companyId, vatNumber, bankName, bankIban) {
         await base.clickAndWait(selector.customer.cDashboard.becomeVendor)
         // vendor registration form
-        await page.type(selector.customer.cDashboard.firstName, firstName)
-        await page.type(selector.customer.cDashboard.lastName, lastName)
-        await page.type(selector.customer.cDashboard.shopName, shopName)
-        await page.click(selector.customer.cDashboard.shopUrl)
-        await page.type(selector.customer.cDashboard.address, address)
-        await page.type(selector.customer.cDashboard.phone, phone)
-        await page.type(selector.customer.cDashboard.companyName, companyName)
-        await page.type(selector.customer.cDashboard.companyId, companyId)
-        await page.type(selector.customer.cDashboard.vatNumber, vatNumber)
-        await page.type(selector.customer.cDashboard.bankName, bankName)
-        await page.type(selector.customer.cDashboard.bankIban, bankIban)
+        await base.type(selector.customer.cDashboard.firstName, firstName)
+        await base.type(selector.customer.cDashboard.lastName, lastName)
+        await base.type(selector.customer.cDashboard.shopName, shopName)
+        await base.click(selector.customer.cDashboard.shopUrl)
+        await base.type(selector.customer.cDashboard.address, address)
+        await base.type(selector.customer.cDashboard.phone, phone)
+        await base.type(selector.customer.cDashboard.companyName, companyName)
+        await base.type(selector.customer.cDashboard.companyId, companyId)
+        await base.type(selector.customer.cDashboard.vatNumber, vatNumber)
+        await base.type(selector.customer.cDashboard.bankName, bankName)
+        await base.type(selector.customer.cDashboard.bankIban, bankIban)
         await base.clickIfVisible(selector.customer.cDashboard.termsAndConditions)
         let subscriptionPackIsVisible = await base.isVisible(selector.customer.cDashboard.subscriptionPack)
         console.log(subscriptionPackIsVisible)
         await base.click(selector.customer.cDashboard.becomeAVendor)
         await base.wait(4)
-        if (subscriptionPackIsVisible) {
-            console.log('subscription pack is visible')
-            await this.placeOrder('bank', false, false, true)//TODO: dont work: handle vendor subscription pack scenario
-        }
+        // if (subscriptionPackIsVisible) {
+        //     console.log('subscription pack is visible')
+        //     await this.placeOrder('bank', false, false, true)//TODO: don't work: handle vendor subscription pack scenario
+        // }
 
     },
 
@@ -172,7 +169,7 @@ module.exports = {
         await base.wait(4)
 
         let returnMessage = await base.getElementText(selector.customer.cDashboard.wholesaleRequestReturnMessage)
-        console.log(returnMessage)
+        // console.log(returnMessage)
         if (returnMessage != "Your wholesale customer request send to the admin. Please wait for approval") {
             let successMessage = await base.getElementText(selector.customer.cWooSelector.wooCommerceSuccessMessage)
             expect(successMessage).toMatch('You are succefully converted as a wholesale customer')
@@ -483,7 +480,7 @@ module.exports = {
     //customer search product
     async searchProduct(productName) {
         await this.goToShop()
-
+        
         await page.type(selector.customer.cShop.searchProduct, productName)
         await base.clickAndWait(selector.customer.cShop.search)
 
@@ -610,30 +607,28 @@ module.exports = {
     },
 
     //customer place order
-    async placeOrder(paymentMethod='bank', getOrderDetails = false, paymentDetails, billingDetails = false, shippingDetails = false) {
+    async placeOrder(paymentMethod = 'bank', getOrderDetails = false, paymentDetails, billingDetails = false, shippingDetails = false) {
         //TODO:handle billing address warning or shipping address warning
         if (billingDetails) await this.addBillingAddressInCheckout('customer1', 'c1', 'c1company', 'c1companyID', 'c1vat', 'c1bank', 'c1bankIBAN', 'United States (US)', 'abc street', 'xyz street2', 'New York', 'New York', '10006', '0123456789', 'customer1@gamil.com')
         if (shippingDetails) await this.addShippingAddressInCheckout('customer1', 'c1', 'c1company', 'United States (US)', 'abc street', 'xyz street2', 'New York', 'New York', '10006')
-        await base.wait(5)
+        await base.wait(6)
 
         switch (paymentMethod) {
             case 'bank':
-                await page.click(selector.customer.cCheckout.directBankTransfer)
+                await base.click(selector.customer.cCheckout.directBankTransfer)
+                await base.wait(2)
+                await base.clickAndWait(selector.customer.cCheckout.placeOrder)
 
-                await page.click(selector.customer.cCheckout.placeOrder)
-                await base.wait(5)
                 break
             case 'check':
-                await page.click(selector.customer.cCheckout.checkPayments)
-
-                await page.click(selector.customer.cCheckout.placeOrder)
-                await base.wait(5)
+                await base.click(selector.customer.cCheckout.checkPayments)
+                await base.wait(2)
+                await base.clickAndWait(selector.customer.cCheckout.placeOrder)
                 break
             case 'cod':
-                await page.click(selector.customer.cCheckout.cashOnDelivery)
-
-                await page.click(selector.customer.cCheckout.placeOrder)
-                await base.wait(5)
+                await base.click(selector.customer.cCheckout.cashOnDelivery)
+                await base.wait(2)
+                await base.clickAndWait(selector.customer.cCheckout.placeOrder)
                 break
             case 'stripe':
                 await this.payWithStripe()
@@ -684,7 +679,7 @@ module.exports = {
                     await base.iframeClearAndType(stripeExpressCardIframe, selector.customer.cPayWithStripeExpress.cardNumber, cardInfo.cardNumber)
                     await base.iframeClearAndType(stripeExpressCardIframe, selector.customer.cPayWithStripeExpress.expDate, cardInfo.cardExpiryDate)
                     await base.iframeClearAndType(stripeExpressCardIframe, selector.customer.cPayWithStripeExpress.cvc, cardInfo.cardCvc)
-                    await page.click(selector.customer.cPayWithStripeExpress.savePaymentInformation)
+                    await base.click(selector.customer.cPayWithStripeExpress.savePaymentInformation)
                     break
                 case 'gPay':
                     await base.iframeClick(stripeExpressCardIframe, selector.customer.cPayWithStripeExpress.gPay)
@@ -701,7 +696,7 @@ module.exports = {
         } else {
             await base.click(selector.customer.cPayWithStripeExpress.savedTestCard4242)
         }
-        await page.click(selector.customer.cCheckout.placeOrder)
+        await base.click(selector.customer.cCheckout.placeOrder)
         await base.wait(5)
     },
 
@@ -779,15 +774,15 @@ module.exports = {
         await base.clearAndType(selector.customer.cAddress.billingVatOrTaxNumber, billingVatOrTaxNumber)
         await base.clearAndType(selector.customer.cAddress.billingNameOfBank, billingNameOfBank)
         await base.clearAndType(selector.customer.cAddress.billingBankIban, billingBankIban)
-        await page.click(selector.customer.cAddress.billingCountryOrRegion)
-        await page.type(selector.customer.cAddress.billingCountryOrRegionInput, billingCountryOrRegion)
+        await base.click(selector.customer.cAddress.billingCountryOrRegion)
+        await base.type(selector.customer.cAddress.billingCountryOrRegionInput, billingCountryOrRegion)
         await page.keyboard.press('Enter')
         // await base.setDropdownOptionSpan(selector.customer.cAddress.bil–lingCountryOrRegionValues, billingCountryOrRegion)
         await base.clearAndType(selector.customer.cAddress.billingStreetAddress, billingStreetAddress)
         await base.clearAndType(selector.customer.cAddress.billingStreetAddress2, billingStreetAddress2)
         await base.clearAndType(selector.customer.cAddress.billingTownCity, billingTownCity)
-        await page.click(selector.customer.cAddress.billingState)
-        await page.type(selector.customer.cAddress.billingStateInput, billingState)
+        await base.click(selector.customer.cAddress.billingState)
+        await base.type(selector.customer.cAddress.billingStateInput, billingState)
         await page.keyboard.press('Enter')
         // await base.setDropdownOptionSpan(selector.customer.cAddress.billingStateValues, billingState)
         await base.clearAndType(selector.customer.cAddress.billingZipCode, billingZipCode)
@@ -798,20 +793,20 @@ module.exports = {
     //customer add shipping address in checkout
     async addShippingAddressInCheckout(shippingFirstName, shippingLastName, shippingCompanyName, shippingCountryOrRegion, shippingStreetAddress, shippingStreetAddress2, shippingTownCity, shippingState, shippingZipCode) {
 
-        await page.click(selector.customer.cCheckout.shipToADifferentAddress)
+        await base.click(selector.customer.cCheckout.shipToADifferentAddress)
         //shipping address
         await base.clearAndType(selector.customer.cAddress.shippingFirstName, shippingFirstName)
         await base.clearAndType(selector.customer.cAddress.shippingLastName, shippingLastName)
         await base.clearAndType(selector.customer.cAddress.shippingCompanyName, shippingCompanyName)
-        await page.click(selector.customer.cAddress.shippingCountryOrRegion)
-        await page.type(selector.customer.cAddress.shippingCountryOrRegionInput, shippingCountryOrRegion)
+        await base.click(selector.customer.cAddress.shippingCountryOrRegion)
+        await base.type(selector.customer.cAddress.shippingCountryOrRegionInput, shippingCountryOrRegion)
         await page.keyboard.press('Enter')
         // await base.setDropdownOptionSpan(selector.customer.cAddress.shippingCountryOrRegionValues, shippingCountryOrRegion)
         await base.clearAndType(selector.customer.cAddress.shippingStreetAddress, shippingStreetAddress)
         await base.clearAndType(selector.customer.cAddress.shippingStreetAddress2, shippingStreetAddress2)
         await base.clearAndType(selector.customer.cAddress.shippingTownCity, shippingTownCity)
-        await page.click(selector.customer.cAddress.shippingState)
-        await page.type(selector.customer.cAddress.shippingStateInput, shippingState)
+        await base.click(selector.customer.cAddress.shippingState)
+        await base.type(selector.customer.cAddress.shippingStateInput, shippingState)
         await page.keyboard.press('Enter')
         // await base.setDropdownOptionSpan(selector.customer.cAddress.shippingStateValues, shippingState)
         await base.clearAndType(selector.customer.cAddress.shippingZipCode, shippingZipCode)
@@ -827,9 +822,9 @@ module.exports = {
 
         await base.click(selector.customer.cOrders.warrantyRequestItemCheckbox(productName))
         // await page.type(selector.customer.cOrders.warrantyRequestItemQuantity(productName), itemQuantity)
-        await page.select(selector.customer.cOrders.warrantyRequestType, requestType)
+        await base.select(selector.customer.cOrders.warrantyRequestType, requestType)
         // await page.select(selector.customer.cOrders.warrantyRequestReason, requestReason)
-        await page.type(selector.customer.cOrders.warrantyRequestDetails, requestDetails)
+        await base.type(selector.customer.cOrders.warrantyRequestDetails, requestDetails)
         await base.clickAndWait(selector.customer.cOrders.warrantySubmitRequest)
         await base.wait(2)
 

@@ -1,4 +1,3 @@
-require('dotenv').config()
 const { PendingXHR } = require('pending-xhr-puppeteer');
 const p = require('puppeteer-extra-commands');
 
@@ -281,7 +280,7 @@ module.exports = {
         let element = await this.getElement(selector)
         const [fileChooser] = await Promise.all([page.waitForFileChooser(), element.click()])
         await fileChooser.accept([image])
-        await this.wait(3)
+        await this.wait(5)
     },
 
     // Navigation
@@ -434,12 +433,14 @@ module.exports = {
     // set element value
     async setElementValue(selector, value) {
         let element = await this.getElement(selector)
-        page.evaluate((element, value) => element.value = value, element, value)
+        await page.evaluate((element, value) => element.value = value, element, value)
     },
 
     // remove element attribute
     async removeElementAttribute(selector, attribute) { //TODO: need to test
-        await page.evaluate(document.getElementsById(selector).removeAttribute(attribute))
+        // await page.evaluate(document.getElementsById(selector).removeAttribute(attribute))
+        let element = await this.getElement(selector)
+        await page.evaluate((element, attribute) => element.removeAttribute(attribute), element, attribute)
     },
 
     // get element count

@@ -1,4 +1,9 @@
 require('dotenv').config()
+const dotenv = require('dotenv');
+const fs = require('fs');
+if (process.env.ENV ? process.env.ENV : 'git' === 'local') {
+    process.env = dotenv.parse(fs.readFileSync('.env.local'));
+}
 
 module.exports = {
   ...require('@wordpress/scripts/config/jest-e2e.config'),
