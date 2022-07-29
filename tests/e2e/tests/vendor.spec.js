@@ -31,30 +31,30 @@ describe('vendor functionality test', () => {
       await vendorPage.addSimpleProduct(data.product.name.simple, data.product.price_frac_comma, data.product.category)
    })
 
-   it('vendor can add variable product', async () => {
-      await loginPage.login(process.env.VENDOR, process.env.VENDOR_PASSWORD)
-      await vendorPage.addVariableProduct(data.product.name.variable, data.product.price_frac_comma, data.product.category, data.product.attribute, data.product.attributeTerms)
-   })
+   // it('vendor can add variable product', async () => {
+   //    await loginPage.login(process.env.VENDOR, process.env.VENDOR_PASSWORD)
+   //    await vendorPage.addVariableProduct(data.product.name.variable, data.product.price_frac_comma, data.product.category, data.product.attribute, data.product.attributeTerms)
+   // })
 
    it('vendor can add simple subscription product', async () => {
       await loginPage.login(process.env.VENDOR, process.env.VENDOR_PASSWORD)
       await vendorPage.addSimpleSubscription(data.product.name.simpleSubscription, data.product.price_frac_comma, data.product.category)
    })
 
-   it.skip('vendor can add variable subscription product', async () => {
-      await loginPage.login(process.env.VENDOR, process.env.VENDOR_PASSWORD)
-      await vendorPage.addVariableSubscription(data.product.name.variableSubscription, data.product.price_frac_comma, data.product.category, data.product.attribute, data.product.attributeTerms)
-   })
+   // it.skip('vendor can add variable subscription product', async () => {
+   //    await loginPage.login(process.env.VENDOR, process.env.VENDOR_PASSWORD)
+   //    await vendorPage.addVariableSubscription(data.product.name.variableSubscription, data.product.price_frac_comma, data.product.category, data.product.attribute, data.product.attributeTerms)
+   // })
 
    it('vendor can add external product', async () => {
       await loginPage.login(process.env.VENDOR, process.env.VENDOR_PASSWORD)
       await vendorPage.addExternalProduct(data.product.name.external, data.product.price_frac_comma, data.product.category)
    })
 
-   it('vendor can add auction product', async () => {
-      await loginPage.login(process.env.VENDOR, process.env.VENDOR_PASSWORD)
-      await vendorPage.addAuctionProduct(data.product.name.auction, data.product.auctionPrice, data.product.auction.startDate, data.product.auction.endDate, data.product.category)
-   })
+   // it('vendor can add auction product', async () => {
+   //    await loginPage.login(process.env.VENDOR, process.env.VENDOR_PASSWORD)
+   //    await vendorPage.addAuctionProduct(data.product.name.auction, data.product.auctionPrice, data.product.auction.startDate, data.product.auction.endDate, data.product.category)
+   // })
 
    it('vendor can add booking product', async () => {
       await loginPage.login(process.env.VENDOR, process.env.VENDOR_PASSWORD)
@@ -105,17 +105,17 @@ describe('vendor functionality test', () => {
       await vendorPage.addAddon()
    })
 
-   it.skip('vendor can edit addon request ', async () => {
-      await loginPage.login(process.env.VENDOR, process.env.VENDOR_PASSWORD)
-      await vendorPage.goToVendorDashboard()
-      await vendorPage.editAddon('Add-ons Group #370')
-   })
+   // it.skip('vendor can edit addon request ', async () => {
+   //    await loginPage.login(process.env.VENDOR, process.env.VENDOR_PASSWORD)
+   //    await vendorPage.goToVendorDashboard()
+   //    await vendorPage.editAddon('Add-ons Group #370')
+   // })
 
-   it('vendor can send id verification request ', async () => {
-      await loginPage.login(process.env.VENDOR, process.env.VENDOR_PASSWORD)
-      await vendorPage.goToVendorDashboard()
-      await vendorPage.sendIdVerificationRequest()
-   })
+   // it('vendor can send id verification request ', async () => {
+   //    await loginPage.login(process.env.VENDOR, process.env.VENDOR_PASSWORD)
+   //    await vendorPage.goToVendorDashboard()
+   //    await vendorPage.sendIdVerificationRequest()
+   // })
 
    // it.skip('vendor can send address verification request ', async () => {
    //    await loginPage.login(process.env.VENDOR, process.env.VENDOR_PASSWORD)
