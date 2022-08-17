@@ -1,18 +1,19 @@
 const base = require("./base.js")
 const vDashboardLocators = require("./vDashboard-locators.js")
-
+const vendorPage = require('../pages/vendor.js')
 
 module.exports = {
 
-    // ACTIONS ***->
-
-    /*
-    *DASHBOARD Page
-    */
+      //-[Checker FUNCTION]
+      async visibilityChecker(locator) {
+        var availableLocator = await base.isVisible(locator)
+        expect(availableLocator).toBe(true);
+    },
 
     //Dashboard Page Explore
     async vDashboardExplore() {
-        await base.goto('dashboard')
+
+        await vendorPage.goIfNotThereVendorDashboard()
 
         //Check Dashboard Page
         await this.visibilityChecker(vDashboardLocators.vDashboardPage.dashboardPageContent)
@@ -41,15 +42,9 @@ module.exports = {
         await this.visibilityChecker(vDashboardLocators.vDashboardPage.productsDetails)
     },
 
-
-
-    /*
-    *PRODUCTS Page
-    */
-
     //Product Page Explore
     async vProductExplore() {
-        await base.goto('dashboard/products')
+        await base.goIfNotThere('dashboard/products')
 
         //Check Dashboard Page
         await this.visibilityChecker(vDashboardLocators.vProductsPage.productsPageContent)
@@ -111,7 +106,7 @@ module.exports = {
 
     //Product Add Page Explore
     async vProductAddExplore() {
-        await base.goto('dashboard/products')
+        await base.goIfNotThere('dashboard/products')
         await base.click(vDashboardLocators.vProductsPage.addNewProductButton)
 
         //Check Product Add Pop-up
@@ -139,7 +134,7 @@ module.exports = {
     //Product Details Page Explore
     async vProductDetailsExplore() {
 
-        await base.goto('dashboard/products')
+        await base.goIfNotThere('dashboard/products')
 
         await base.clickAndWait(vDashboardLocators.vProductsPage.productsOnline)
 
@@ -251,14 +246,9 @@ module.exports = {
     },
 
 
-
-    /*
-    *ORDERS Page
-    */
-
     //Orders Page Explore
     async vOrdersExplore() {
-        await base.goto('dashboard/orders')
+        await base.goIfNotThere('dashboard/orders')
 
         //Check Dashboard Page
         await this.visibilityChecker(vDashboardLocators.vOrdersPage.ordersPageContent)
@@ -320,7 +310,7 @@ module.exports = {
 
     //Order Details Page Explore
     async vOrdersDetailsExplore() {
-        await base.goto('dashboard/orders')
+        await base.goIfNotThere('dashboard/orders')
 
         //Details Page
         await base.clickAndWait(vDashboardLocators.vOrdersDetailsPage.existingOrder)
@@ -358,12 +348,6 @@ module.exports = {
 
     },
 
-
-
-    /*
-    *USER SUBSCRIPTIONS Page
-    */
-
     //User Subscriptions Page Explore
     async vUserSubscriptionsPageExplore() {
 
@@ -374,40 +358,7 @@ module.exports = {
 
     },
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    /*
-    .
-    .
-    .
-    .
-    .
-    *Checker FUNCTION 
-    .
-    .
-    .
-    .
-    .
-    */
-
-    //-[Checker FUNCTION]
-    async visibilityChecker(locator) {
-        var availableLocator = await base.isVisible(locator)
-        expect(availableLocator).toBe(true);
-    }
-
+  
 
 
 }
