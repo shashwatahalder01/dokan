@@ -28,7 +28,7 @@ describe('vendor functionality test', () => {
 
    it('vendor can add simple product', async () => {
       await loginPage.login(process.env.VENDOR, process.env.VENDOR_PASSWORD)
-      await vendorPage.addSimpleProduct(data.product.name.simple, data.product.price_frac_comma, data.product.category)
+      await vendorPage.addSimpleProduct(data.product.name.simple(), data.product.price_frac_comma, data.product.category)
    })
 
    // it('vendor can add variable product', async () => {
