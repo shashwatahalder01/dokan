@@ -208,7 +208,7 @@ describe('Environment setup test', () => {
 
 
 
-it.only('add test vendor1', async () => {
+it('add test vendor1', async () => {
     // add vendor1
     await vendorPage.vendorRegister(process.env.VENDOR, process.env.VENDOR_PASSWORD, 'vendor1', 'v1', 'vendorStore1', data.vendorInfo.companyName, data.vendorInfo.companyId, data.vendorInfo.vatNumber, data.vendorInfo.bankName, data.vendorInfo.bankIban, data.vendorInfo.phone, false, data.vendorSetupWizard)
 })
