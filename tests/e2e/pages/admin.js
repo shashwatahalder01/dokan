@@ -144,6 +144,7 @@ module.exports = {
     await base.click(selector.admin.dokan.settings.general)
 
     //site options
+    await base.wait(0.5)
     await base.enableSwitcher(selector.admin.dokan.settings.adminAreaAccess)
     await base.clearAndType(selector.admin.dokan.settings.vendorStoreUrl, 'store')
     await base.click(selector.admin.dokan.settings.sellingProductTypes('sell_both'))
@@ -164,6 +165,7 @@ module.exports = {
     await base.click(selector.admin.dokan.settings.sellingOptions)
 
     //commission settings
+    await base.wait(0.5)
     await base.select(selector.admin.dokan.settings.commissionType, 'percentage')
     await base.clearAndType(selector.admin.dokan.settings.adminCommission, '10')
     await base.click(selector.admin.dokan.settings.shippingFeeRecipient('seller'))
@@ -199,6 +201,7 @@ module.exports = {
     await base.click(selector.admin.dokan.settings.withdrawOptions)
 
     //withdraw options
+    await base.wait(0.5)
     await base.enableSwitcher(selector.admin.dokan.settings.withdrawMethodsPaypal)
     await base.enableSwitcher(selector.admin.dokan.settings.withdrawMethodsBankTransfer)
     await base.enableSwitcher(selector.admin.dokan.settings.withdrawMethodsDokanCustom)
@@ -243,6 +246,7 @@ module.exports = {
     await base.click(selector.admin.dokan.settings.pageSettings)
 
     //base settings
+    await base.wait(0.5)
     await base.select(selector.admin.dokan.settings.termsAndConditionsPage, 'Sample Page')
     await base.click(selector.admin.dokan.settings.pageSaveChanges)
 
@@ -256,6 +260,7 @@ module.exports = {
     await base.click(selector.admin.dokan.settings.appearance)
 
     //appearance settings
+    await base.wait(0.5)
     await base.enableSwitcher(selector.admin.dokan.settings.showMapOnStorePage)
     await base.click(selector.admin.dokan.settings.mapApiSourceGoogleMaps)
     await base.clearAndType(selector.admin.dokan.settings.googleMapApiKey, process.env.GOOGLE_MAP_API_KEY)
@@ -276,6 +281,7 @@ module.exports = {
     await base.click(selector.admin.dokan.settings.privacyPolicy)
 
     //privacy policy settings
+    await base.wait(0.5)
     await base.enableSwitcher(selector.admin.dokan.settings.enablePrivacyPolicy)
     await base.select(selector.admin.dokan.settings.privacyPage, '2')
 
@@ -309,6 +315,7 @@ module.exports = {
     await base.click(selector.admin.dokan.settings.rma)
 
     //rma settings
+    await base.wait(0.5)
     await base.select(selector.admin.dokan.settings.orderStatus, 'wc-processing')
     await base.enableSwitcher(selector.admin.dokan.settings.enableRefundRequests)
     await base.enableSwitcher(selector.admin.dokan.settings.enableCouponRequests)
@@ -333,6 +340,7 @@ module.exports = {
     await base.click(selector.admin.dokan.settings.wholesale)
 
     //wholesale settings
+    await base.wait(0.5)
     await base.click(selector.admin.dokan.settings.whoCanSeeWholesalePrice('all_user'))
     await base.enableSwitcher(selector.admin.dokan.settings.showWholesalePriceOnShopArchive)
     await base.enableSwitcher(selector.admin.dokan.settings.needApprovalForCustomer)
@@ -347,7 +355,7 @@ module.exports = {
     await base.click(selector.admin.dokan.settings.euComplianceFields)
 
     //eu compliance settings
-    await base.wait(0.5)
+    await base.wait(1)
     await base.enableSwitcher(selector.admin.dokan.settings.vendorExtraFieldsCompanyName)
     await base.enableSwitcher(selector.admin.dokan.settings.vendorExtraFieldsCompanyIdOrEuidNumber)
     await base.enableSwitcher(selector.admin.dokan.settings.vendorExtraFieldsVatOrTaxNumber)
@@ -371,7 +379,7 @@ module.exports = {
     await base.click(selector.admin.dokan.settings.deliveryTime)
 
     //delivery time settings
-    await base.wait(0.5)
+    await base.wait(1)
     await base.enableSwitcher(selector.admin.dokan.settings.allowVendorSettings)
     await base.clearAndType(selector.admin.dokan.settings.deliveryDateLabel, 'Delivery Date')
     await base.clearAndType(selector.admin.dokan.settings.deliveryBlockedBuffer, '0')
@@ -399,6 +407,7 @@ module.exports = {
     await base.click(selector.admin.dokan.settings.productAdvertising)
 
     //product advertising settings
+    await base.wait(0.5)
     await base.clearAndType(selector.admin.dokan.settings.noOfAvailableSlot, '100')
     await base.clearAndType(selector.admin.dokan.settings.expireAfterDays, '10')
     await base.enableSwitcher(selector.admin.dokan.settings.vendorCanPurchaseAdvertisement)
@@ -418,6 +427,7 @@ module.exports = {
     await base.click(selector.admin.dokan.settings.geolocation)
 
     //geolocation settings
+    await base.wait(0.5)
     await base.click(selector.admin.dokan.settings.locationMapPosition('top'))
     await base.click(selector.admin.dokan.settings.showMap('all'))
     await base.enableSwitcher(selector.admin.dokan.settings.showFiltersBeforeLocationMap)
@@ -441,6 +451,7 @@ module.exports = {
     await base.click(selector.admin.dokan.settings.productReportAbuse)
 
     //product report abuse settings
+    await base.wait(0.5)
     await base.deleteIfExists(selector.admin.dokan.settings.reasonsForAbuseReportSingle('This product is fake'))
     await base.clearAndType(selector.admin.dokan.settings.reasonsForAbuseReportInput, 'This product is fake')
     await base.click(selector.admin.dokan.settings.reasonsForAbuseReportAdd)
@@ -453,8 +464,9 @@ module.exports = {
   //admin set dokan spmv settings
   async setDokanSpmvSettings() {
     await base.click(selector.admin.dokan.settings.singleProductMultiVendor)
-
-
+    
+    //spmv settings
+    await base.wait(0.5)
     await base.enableSwitcher(selector.admin.dokan.settings.enableSingleProductMultipleVendor)
     await base.clearAndType(selector.admin.dokan.settings.sellItemButtonText, 'Sell This Item')
     await base.clearAndType(selector.admin.dokan.settings.availableVendorDisplayAreaTitle, 'Other Available Vendor')
@@ -471,6 +483,7 @@ module.exports = {
     await base.click(selector.admin.dokan.settings.vendorSubscription)
 
     //vendor subscription settings
+    await base.wait(0.5)
     await base.select(selector.admin.dokan.settings.subscription, '2')
     await base.enableSwitcher(selector.admin.dokan.settings.enableProductSubscription)
     await base.enableSwitcher(selector.admin.dokan.settings.enableSubscriptionInRegistrationForm)

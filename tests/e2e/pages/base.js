@@ -1,5 +1,5 @@
 const { PendingXHR } = require('pending-xhr-puppeteer');
-const p = require('puppeteer-extra-commands');
+// const p = require('puppeteer-extra-commands');
 
 
 // This page contains all necessary puppeteer automation methods 

@@ -1,9 +1,6 @@
 module.exports = {
-
-    /**LOCATORS**/
-    /*
-    Dashboard Page Locators
-    */
+   
+    //Dashboard 
     vDashboardPage: {
         // dashboard Home
         dashboardPageContent: '//div[@class="dokan-dashboard-content"]',
@@ -19,10 +16,7 @@ module.exports = {
     },
 
 
-
-    /*
-    Products Page Locators
-    */
+    //Products
     vProductsPage: {
         productsPageContent: '//div[@class="dokan-dashboard-content dokan-product-listing"]',
 
@@ -30,15 +24,10 @@ module.exports = {
 
         productsAll: "//ul[contains(@class,'subsubsub')]//li//a[contains(text(),'All')]",
         productsOnline: "//ul[contains(@class,'subsubsub')]//li//a[contains(text(),'Online')]",
-        //productsOnlineStatus: '//tbody/tr[2]/td[3]/label[1]',
         productsDraft: "//ul[contains(@class,'subsubsub')]//li//a[contains(text(),'Draft')]",
-        //productsDraftStatus: '//label[normalize-space()="Draft"]',
         productsPendingReview: "//ul[contains(@class,'subsubsub')]//li//a[contains(text(),'Pending Review')]",
-        //productsPendingReviewStatus: '',
         productsInStock: "//ul[contains(@class,'subsubsub')]//li//a[contains(text(),'In stock')]",
-        //productsInStockStatus: '//tbody/tr[2]/td[6]',
         productsOutOfStock: "//ul[contains(@class,'subsubsub')]//li//a[contains(text(),'Out of stock')]",
-        //productsOutOfStockStatus: '//td[@data-title="Stock"]',
 
 
         addNewProductButton: '//a[@class="dokan-btn dokan-btn-theme dokan-add-new-product"]',
@@ -70,8 +59,8 @@ module.exports = {
         productDiscountedPrice: '//div[@class="dokan-input-group"]//input[@id="_sale_price"]',
         productGalleryImage: '//li[@class="add-image add-product-images tips"]',
 
-        selectCategory: '//div[@class="product-full-container"]//span[@id="select2-product_cat-container"]',
-        selectTags: '//input[@placeholder="Select product tags"]',
+        selectCategory: '#dokan-add-new-product-form #dokan-category-open-modal',
+        selectTags: '.select2-search__field',
         productDescription: '//textarea[@placeholder="Enter some short description about this product..."]',
 
         createProductButton: '//input[@id="dokan-create-new-product-btn"]',
@@ -92,16 +81,10 @@ module.exports = {
         productEditImageUploaded: '//div[@class="image-wrap"]',
         productEditGalleryImage: '//li[@class="add-image add-product-images tips"]',
 
-        productEditPermalink: '//span[@id="sample-permalink"]',
+        productEditPermalink: '#edit-slug-buttons',
         productEditEditButton: '//button[normalize-space()="Edit"]',
 
         productEditType: '//select[@id="product_type"]',
-        // productEditTypeItem1: '',
-        // productEditItem2: '',
-        // productEditItem3: '',
-        // productEditItem4: '',
-        // productEditItem5: '',
-        // productEditItem6: '',
 
         productEditDownloadableTick: '//div[@class="content-half-part downloadable-checkbox"]',
         productEditVirtualTick: '//div[@class="content-half-part virtual-checkbox"]',
@@ -109,8 +92,8 @@ module.exports = {
         productEditPrice: '//input[@id="_regular_price"]',
         productEditDiscountedPrice: '//input[@id="_sale_price"]',
 
-        productEditCategory: '//span[@id="select2-product_cat-container"]',
-        productEditTags: '//input[@placeholder="Select product tags"]',
+        productEditCategory: '#dokan-category-open-modal',
+        productEditTags: '.select2-search__field',
         productEditShortDescription: '//div[@class="dokan-product-short-description"]',
         productEditDescription: '//div[@class="dokan-product-description"]',
 

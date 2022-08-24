@@ -1750,6 +1750,7 @@ module.exports = {
             productScheduleFrom: ".dokan-start-date",
             productScheduleTo: ".dokan-end-date",
             productScheduleCancel: ".cancel_sale_schedule.dokan-hide",
+            productCategoryModal: "#dokan-add-new-product-form #dokan-category-open-modal",
             productCategory: "#select2-product_cat-container",
             productCategoryInput: ".select2-search--dropdown .select2-search__field",
             productCategoryValues: ".select2-results ul li",

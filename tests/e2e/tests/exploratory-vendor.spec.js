@@ -28,28 +28,28 @@ describe('Vendor Exploration test', () => {
     });
 
     //Product Add Page
-    it('Explore Vendor > Products add modal', async () => {
+    it('Explore Vendor Products add modal', async () => {
         await loginPage.login(process.env.VENDOR, process.env.VENDOR_PASSWORD)
         //Explore Products > Add
         await vDashboardPage.vProductAddExplore();
     });
 
     // Product Details Page
-    it('Explore Vendor > Products > DETAILS [Single Product]', async () => {
+    it('Explore Vendor Products DETAILS [Single Product]', async () => {
         await loginPage.login(process.env.VENDOR, process.env.VENDOR_PASSWORD)
         //Explore Products > Details
         await vDashboardPage.vProductDetailsExplore();
     });
 
     //Vendor > Dashboard > Orders Page
-    it('3.0: Explore Vendor > Orders Page', async () => {
+    it('Explore Vendor Orders Page', async () => {
         await loginPage.login(process.env.VENDOR, process.env.VENDOR_PASSWORD)
         //Explore Products
         await vDashboardPage.vOrdersExplore();
     });
 
     //Order Details
-    it('3.1: Explore Vendor > Orders > Details Page', async () => {
+    it('Explore Vendor Order Details Page', async () => {
         await loginPage.login(process.env.VENDOR, process.env.VENDOR_PASSWORD)
         //Explore Products
         await vDashboardPage.vOrdersDetailsExplore();

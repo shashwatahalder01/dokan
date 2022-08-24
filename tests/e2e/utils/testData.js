@@ -257,8 +257,8 @@ module.exports = {
 
    product: {
       name: {
-         simple: faker.commerce.productName() + (' (Simple)'),
-         variable: faker.commerce.productName() + (' (Variable)'),
+         simple: ()=> faker.commerce.productName() + (' (Simple)'),
+         variable:  faker.commerce.productName() + (' (Variable)'),
          external: faker.commerce.productName() + (' (External/Affiliate)'),
          grouped: faker.commerce.productName() + (' (Grouped)'),
          simpleSubscription: faker.commerce.productName() + (' (Simple Subscription)'),

@@ -83,9 +83,9 @@ module.exports = {
 
         let subscriptionPackIsVisible = await base.isVisible(selector.vendor.vRegistration.subscriptionPack)
         if (subscriptionPackIsVisible) {
-            await base.selectOptionByText(selector.vendor.vRegistration.subscriptionPack,selector.vendor.vRegistration.subscriptionPackOptions, "Dokan_subscription_Non_recurring")
+            await base.selectOptionByText(selector.vendor.vRegistration.subscriptionPack, selector.vendor.vRegistration.subscriptionPackOptions, "Dokan_subscription_Non_recurring")
         }
-                
+
         await base.clickAndWait(selector.vendor.vRegistration.register)
         let registrationErrorIsVisible = await base.isVisible(selector.customer.cWooSelector.wooCommerceError)
         if (registrationErrorIsVisible) {
@@ -380,9 +380,9 @@ module.exports = {
         await page.type(selector.vendor.vAuction.bidIncrement, '50')
         await page.type(selector.vendor.vAuction.reservedPrice, String(Number(productPrice) + 400))
         await page.type(selector.vendor.vAuction.buyItNowPrice, String(Number(productPrice) + 900))
-        await base.removeElementAttribute(selector.vendor.vAuction.auctionStartDate, 'readonly') 
-        await base.removeElementAttribute(selector.vendor.vAuction.auctionEndDate, 'readonly') 
-        await base.type(selector.vendor.vAuction.auctionStartDate, startDate) 
+        await base.removeElementAttribute(selector.vendor.vAuction.auctionStartDate, 'readonly')
+        await base.removeElementAttribute(selector.vendor.vAuction.auctionEndDate, 'readonly')
+        await base.type(selector.vendor.vAuction.auctionStartDate, startDate)
         await base.type(selector.vendor.vAuction.auctionEndDate, endDate)
 
         await base.clickAndWait(selector.vendor.vAuction.addAuctionProduct)
@@ -980,7 +980,7 @@ module.exports = {
         //     await page.click(selector.vendor.vVerificationSettings.removePreviousUploadedResidenceProof)
         //     await base.wait(4)
         // }
-  
+
         await base.click(selector.vendor.vVerificationSettings.uploadResidenceProof)
         await base.wait(2)
         let uploadedMediaIsVisible = await base.isVisible(selector.vendor.vVerificationSettings.uploadedMedia)

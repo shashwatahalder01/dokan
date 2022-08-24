@@ -92,17 +92,17 @@ describe('Environment setup test', () => {
         await adminPage.addAttributes(data.product.attribute, data.product.attributeTerms)
     })
 
-    // it.skip('admin add dokan subscription', async () => {
-    //     await loginPage.adminLogin(process.env.ADMIN, process.env.ADMIN_PASSWORD)
-    //     // add dokan subscriptions
-    //     await adminPage.addDokanSubscription('Dokan_subscription_Non_recurring', data.product.price, data.product.category, data.product.vendor[0])
-    // })
+    it.skip('admin add dokan subscription', async () => {
+        await loginPage.adminLogin(process.env.ADMIN, process.env.ADMIN_PASSWORD)
+        // add dokan subscriptions
+        await adminPage.addDokanSubscription('Dokan_subscription_Non_recurring', data.product.price, data.product.category, data.product.vendor[0])
+    })
 
-    // it.skip('admin set dokan  settings', async () => {
-    //     await loginPage.adminLogin(process.env.ADMIN, process.env.ADMIN_PASSWORD)
-    //     await adminPage.goToDokanSettings()
-    //     await adminPage.setDokanSettings()
-    // })
+    it.skip('admin set dokan  settings', async () => {
+        await loginPage.adminLogin(process.env.ADMIN, process.env.ADMIN_PASSWORD)
+        await adminPage.goToDokanSettings()
+        await adminPage.setDokanSettings()
+    })
 
     it('admin set dokan general settings', async () => {
         await loginPage.adminLogin(process.env.ADMIN, process.env.ADMIN_PASSWORD)
@@ -191,15 +191,15 @@ describe('Environment setup test', () => {
     it('admin set dokan spmv settings', async () => {
         await loginPage.adminLogin(process.env.ADMIN, process.env.ADMIN_PASSWORD)
         await adminPage.goToDokanSettings()
-
         await adminPage.setDokanSpmvSettings()
     })
 
-    // it.skip('admin set dokan vendor subscription settings', async () => {
-    //     await loginPage.adminLogin(process.env.ADMIN, process.env.ADMIN_PASSWORD)
-    //     await adminPage.goToDokanSettings()
-    //     await adminPage.setDokanVendorSubscriptionSettings()
-    // })
+    it.skip('admin set dokan vendor subscription settings', async () => {
+        await loginPage.adminLogin(process.env.ADMIN, process.env.ADMIN_PASSWORD)
+        await adminPage.goToDokanSettings()
+        await adminPage.setDokanVendorSubscriptionSettings()
+    })
+
 
 
 
@@ -208,29 +208,29 @@ describe('Environment setup test', () => {
 
 
 
-    it('add test vendor1', async () => {
-        // add vendor1
-        await vendorPage.vendorRegister(process.env.VENDOR, process.env.VENDOR_PASSWORD, 'vendor1', 'v1', 'vendorStore1', data.vendorInfo.companyName, data.vendorInfo.companyId, data.vendorInfo.vatNumber, data.vendorInfo.bankName, data.vendorInfo.bankIban, data.vendorInfo.phone, false, data.vendorSetupWizard)
-    })
+it.only('add test vendor1', async () => {
+    // add vendor1
+    await vendorPage.vendorRegister(process.env.VENDOR, process.env.VENDOR_PASSWORD, 'vendor1', 'v1', 'vendorStore1', data.vendorInfo.companyName, data.vendorInfo.companyId, data.vendorInfo.vatNumber, data.vendorInfo.bankName, data.vendorInfo.bankIban, data.vendorInfo.phone, false, data.vendorSetupWizard)
+})
 
-    it('add test vendor1 products', async () => {
-        await loginPage.login(process.env.VENDOR, process.env.VENDOR_PASSWORD)
-        //add products
-        await vendorPage.addSimpleProduct('p1_v1 (simple)', data.product.price_int, data.product.category)
-        // await vendorPage.addSimpleProduct('p2_v1 (simple)', data.product.price, data.product.category)
-        await vendorPage.addSimpleProduct('p1_F1_v1 (simple)', data.product.price_frac_comma, data.product.category)
-        // await vendorPage.addSimpleProduct('p2_F2_v1 (simple)', data.product.price, data.product.category)
-        // await vendorPage.addVariableProduct('p1_v1 (variable)', data.product.price, data.product.category, data.product.attribute, data.product.attributeTerms)
-        // await vendorPage.addSimpleSubscription('p1_v1 (simple subscription)', data.product.price, data.product.category)
-        // await vendorPage.addVariableSubscription('p1_v1 (variable subscription)', data.product.price, data.product.category, data.product.attribute, data.product.attributeTerms)
-        // await vendorPage.addExternalProduct('p1_v1 (external)', data.product.price, data.product.category)
-        // await vendorPage.addAuctionProduct('p1_v1 (auction)', data.product.auctionPrice, data.product.auction.startDate, data.product.auction.endDate, data.product.category)
-        // await vendorPage.addBookingProduct('p1_v1 (booking)', data.product.booking.category, data.product.booking.bookingDurationType, data.product.booking.bookingDuration, data.product.booking.bookingDurationUnit, data.product.booking.calenderDisplayMode, data.product.booking.maxBookingsPerBlock, data.product.booking.minimumBookingWindowIntoTheFutureDate, data.product.booking.minimumBookingWindowIntoTheFutureDateUnit, data.product.booking.maximumBookingWindowIntoTheFutureDate, data.product.booking.maximumBookingWindowIntoTheFutureDateUnit, data.product.booking.baseCost, data.product.booking.blockCost)
-        // //add discount product
-        // await vendorPage.addSimpleProduct('p1_v1 (sale)', data.product.price, data.product.category)
-        // //add minmax products
-        // await vendorPage.addSimpleProduct('p1_v1 (minmax)', data.product.price, data.product.category)
-    })
+it('add test vendor1 products', async () => {
+    await loginPage.login(process.env.VENDOR, process.env.VENDOR_PASSWORD)
+    //add products
+    await vendorPage.addSimpleProduct('p1_v1 (simple)', data.product.price_int, data.product.category)
+    // await vendorPage.addSimpleProduct('p2_v1 (simple)', data.product.price, data.product.category)
+    await vendorPage.addSimpleProduct('p1_F1_v1 (simple)', data.product.price_frac_comma, data.product.category)
+    // await vendorPage.addSimpleProduct('p2_F2_v1 (simple)', data.product.price, data.product.category)
+    // await vendorPage.addVariableProduct('p1_v1 (variable)', data.product.price, data.product.category, data.product.attribute, data.product.attributeTerms)
+    // await vendorPage.addSimpleSubscription('p1_v1 (simple subscription)', data.product.price, data.product.category)
+    // await vendorPage.addVariableSubscription('p1_v1 (variable subscription)', data.product.price, data.product.category, data.product.attribute, data.product.attributeTerms)
+    // await vendorPage.addExternalProduct('p1_v1 (external)', data.product.price, data.product.category)
+    // await vendorPage.addAuctionProduct('p1_v1 (auction)', data.product.auctionPrice, data.product.auction.startDate, data.product.auction.endDate, data.product.category)
+    // await vendorPage.addBookingProduct('p1_v1 (booking)', data.product.booking.category, data.product.booking.bookingDurationType, data.product.booking.bookingDuration, data.product.booking.bookingDurationUnit, data.product.booking.calenderDisplayMode, data.product.booking.maxBookingsPerBlock, data.product.booking.minimumBookingWindowIntoTheFutureDate, data.product.booking.minimumBookingWindowIntoTheFutureDateUnit, data.product.booking.maximumBookingWindowIntoTheFutureDate, data.product.booking.maximumBookingWindowIntoTheFutureDateUnit, data.product.booking.baseCost, data.product.booking.blockCost)
+    // //add discount product
+    // await vendorPage.addSimpleProduct('p1_v1 (sale)', data.product.price, data.product.category)
+    // //add minmax products
+    // await vendorPage.addSimpleProduct('p1_v1 (minmax)', data.product.price, data.product.category)
+})
 
     it('add test vendor1 coupons', async () => {
         await loginPage.login(process.env.VENDOR, process.env.VENDOR_PASSWORD)
@@ -243,58 +243,61 @@ describe('Environment setup test', () => {
         await vendorPage.setStoreAddress('abc street', 'xyz street', 'New York', '10006', 'US', 'NY')
     })
 
-    it('add test vendor1 rma settings', async () => {
-        await loginPage.login(process.env.VENDOR, process.env.VENDOR_PASSWORD)
-        await vendorPage.setRmaSettings('Warranty', 'included_warranty', 'limited', '1', 'weeks')
-    })
-
-    // it.skip('add test vendor2', async () => {
-    //     // add vendor1
-    //     await vendorPage.vendorRegister(process.env.VENDOR2, process.env.VENDOR_PASSWORD, 'vendor2', 'v2', 'vendorStore2', data.vendorInfo.companyName, data.vendorInfo.companyId, data.vendorInfo.vatNumber, data.vendorInfo.bankName, data.vendorInfo.bankIban, data.vendorInfo.phone, false, data.vendorSetupWizard)
-    // })
-
-    // it.skip('add test vendor2 products', async () => {
-    //     await loginPage.login(process.env.VENDOR2, process.env.VENDOR_PASSWORD)
-    //     //add products
-    //     await vendorPage.addSimpleProduct('p1_v2 (simple)', data.product.price_int, data.product.category)
-    //     // await vendorPage.addSimpleProduct('p2_v2 (simple)', data.product.price, data.product.category)
-    //     await vendorPage.addSimpleProduct('p1_F1_v2 (simple)', data.product.price_frac_comma, data.product.category)
-    //     // await vendorPage.addSimpleProduct('p2_F2_v2 (simple)', data.product.price, data.product.category)
-    //     // await vendorPage.addVariableProduct('p1_v2 (variable)', data.product.price, data.product.category, data.product.attribute, data.product.attributeTerms)
-    //     // await vendorPage.addSimpleSubscription('p1_v2 (simple subscription)', data.product.price, data.product.category)
-    //     // await vendorPage.addVariableSubscription('p1_v2 (variable subscription)', data.product.price, data.product.category, data.product.attribute, data.product.attributeTerms)
-    //     // await vendorPage.addExternalProduct('p1_v2 (external)', data.product.price, data.product.category)
-    //     // await vendorPage.addAuctionProduct('p1_v2 (auction)', data.product.auctionPrice, data.product.auction.startDate, data.product.auction.endDate, data.product.category)
-    //     // await vendorPage.addBookingProduct('p1_v2 (booking)', data.product.booking.category, data.product.booking.bookingDurationType, data.product.booking.bookingDuration, data.product.booking.bookingDurationUnit, data.product.booking.calenderDisplayMode, data.product.booking.maxBookingsPerBlock, data.product.booking.minimumBookingWindowIntoTheFutureDate, data.product.booking.minimumBookingWindowIntoTheFutureDateUnit, data.product.booking.maximumBookingWindowIntoTheFutureDate, data.product.booking.maximumBookingWindowIntoTheFutureDateUnit, data.product.booking.baseCost, data.product.booking.blockCost)
-    //     // //add discount product
-    //     // await vendorPage.addSimpleProduct('p1_v2 (sale)', data.product.price, data.product.category)
-    //     // //add minmax products
-    //     // await vendorPage.addSimpleProduct('p1_v2 (minmax)', data.product.price, data.product.category)
-    // })
-
-    // it.skip('add test vendor2 coupons', async () => {
+    // it('add test vendor1 rma settings', async () => {
     //     await loginPage.login(process.env.VENDOR, process.env.VENDOR_PASSWORD)
-    //     //add coupons
-    //     await vendorPage.addCoupon('C1_V2', data.coupon.amount)
-    // })
-
-    // it.skip('add test vendor2 address', async () => {
-    //     await loginPage.login(process.env.VENDOR2, process.env.VENDOR_PASSWORD)
-    //     await vendorPage.setStoreAddress('abc street', 'xyz street', 'New York', '10006', 'US', 'NY')
-    // })
-
-    // it.skip('add test vendor2 rma settings', async () => {
-    //     await loginPage.login(process.env.VENDOR2, process.env.VENDOR_PASSWORD)
     //     await vendorPage.setRmaSettings('Warranty', 'included_warranty', 'limited', '1', 'weeks')
     // })
 
-    it('admin add test vendor products ', async () => {
-        await loginPage.adminLogin(process.env.ADMIN, process.env.ADMIN_PASSWORD)
-        await adminPage.addSimpleProduct(data.product.name.simple, data.product.price, data.product.category, data.vendorStores[0], 'publish', false)
-        await adminPage.addSimpleProduct(data.product.name.simple, data.product.price, data.product.category, data.vendorStores[0], 'draft', false)
-        await adminPage.addSimpleProduct(data.product.name.simple, data.product.price, data.product.category, data.vendorStores[0], 'pending', false)
-        await adminPage.addSimpleProduct(data.product.name.simple, data.product.price, data.product.category, data.vendorStores[0], 'publish', true)
-    })
+    // // it.skip('add test vendor2', async () => {
+    // //     // add vendor1
+    // //     await vendorPage.vendorRegister(process.env.VENDOR2, process.env.VENDOR_PASSWORD, 'vendor2', 'v2', 'vendorStore2', data.vendorInfo.companyName, data.vendorInfo.companyId, data.vendorInfo.vatNumber, data.vendorInfo.bankName, data.vendorInfo.bankIban, data.vendorInfo.phone, false, data.vendorSetupWizard)
+    // // })
+
+    // // it.skip('add test vendor2 products', async () => {
+    // //     await loginPage.login(process.env.VENDOR2, process.env.VENDOR_PASSWORD)
+    // //     //add products
+    // //     await vendorPage.addSimpleProduct('p1_v2 (simple)', data.product.price_int, data.product.category)
+    // //     // await vendorPage.addSimpleProduct('p2_v2 (simple)', data.product.price, data.product.category)
+    // //     await vendorPage.addSimpleProduct('p1_F1_v2 (simple)', data.product.price_frac_comma, data.product.category)
+    // //     // await vendorPage.addSimpleProduct('p2_F2_v2 (simple)', data.product.price, data.product.category)
+    // //     // await vendorPage.addVariableProduct('p1_v2 (variable)', data.product.price, data.product.category, data.product.attribute, data.product.attributeTerms)
+    // //     // await vendorPage.addSimpleSubscription('p1_v2 (simple subscription)', data.product.price, data.product.category)
+    // //     // await vendorPage.addVariableSubscription('p1_v2 (variable subscription)', data.product.price, data.product.category, data.product.attribute, data.product.attributeTerms)
+    // //     // await vendorPage.addExternalProduct('p1_v2 (external)', data.product.price, data.product.category)
+    // //     // await vendorPage.addAuctionProduct('p1_v2 (auction)', data.product.auctionPrice, data.product.auction.startDate, data.product.auction.endDate, data.product.category)
+    // //     // await vendorPage.addBookingProduct('p1_v2 (booking)', data.product.booking.category, data.product.booking.bookingDurationType, data.product.booking.bookingDuration, data.product.booking.bookingDurationUnit, data.product.booking.calenderDisplayMode, data.product.booking.maxBookingsPerBlock, data.product.booking.minimumBookingWindowIntoTheFutureDate, data.product.booking.minimumBookingWindowIntoTheFutureDateUnit, data.product.booking.maximumBookingWindowIntoTheFutureDate, data.product.booking.maximumBookingWindowIntoTheFutureDateUnit, data.product.booking.baseCost, data.product.booking.blockCost)
+    // //     // //add discount product
+    // //     // await vendorPage.addSimpleProduct('p1_v2 (sale)', data.product.price, data.product.category)
+    // //     // //add minmax products
+    // //     // await vendorPage.addSimpleProduct('p1_v2 (minmax)', data.product.price, data.product.category)
+    // // })
+
+    // // it.skip('add test vendor2 coupons', async () => {
+    // //     await loginPage.login(process.env.VENDOR, process.env.VENDOR_PASSWORD)
+    // //     //add coupons
+    // //     await vendorPage.addCoupon('C1_V2', data.coupon.amount)
+    // // })
+
+    // // it.skip('add test vendor2 address', async () => {
+    // //     await loginPage.login(process.env.VENDOR2, process.env.VENDOR_PASSWORD)
+    // //     await vendorPage.setStoreAddress('abc street', 'xyz street', 'New York', '10006', 'US', 'NY')
+    // // })
+
+    // // it.skip('add test vendor2 rma settings', async () => {
+    // //     await loginPage.login(process.env.VENDOR2, process.env.VENDOR_PASSWORD)
+    // //     await vendorPage.setRmaSettings('Warranty', 'included_warranty', 'limited', '1', 'weeks')
+    // // })
+
+it('admin add test vendor products ', async () => {
+
+    await loginPage.adminLogin(process.env.ADMIN, process.env.ADMIN_PASSWORD)
+    await adminPage.addSimpleProduct(data.product.name.simple(), data.product.price, data.product.category, data.vendorStores[0], 'publish', false)
+    await adminPage.addSimpleProduct(data.product.name.simple(), data.product.price, data.product.category, data.vendorStores[0], 'draft', false)
+    await adminPage.addSimpleProduct(data.product.name.simple(), data.product.price, data.product.category, data.vendorStores[0], 'pending', false)
+    await adminPage.addSimpleProduct(data.product.name.simple(), data.product.price, data.product.category, data.vendorStores[0], 'publish', true)
+
+})
+
 
 
 
@@ -314,17 +317,15 @@ describe('Environment setup test', () => {
         await customerPage.customerLogout()
     })
 
-    // it.skip('add test customer2', async () => {
-    //     // add customer1
-    //     await customerPage.customerRegister(process.env.CUSTOMER2, process.env.CUSTOMER_PASSWORD)
-    // })
+    // // it.skip('add test customer2', async () => {
+    // //     // add customer1
+    // //     await customerPage.customerRegister(process.env.CUSTOMER2, process.env.CUSTOMER_PASSWORD)
+    // // })
 
-    // it.skip('add test customer2 addresses', async () => {
-    //     await loginPage.login(process.env.CUSTOMER2, process.env.CUSTOMER_PASSWORD)
-    //     await customerPage.addBillingAddress('customer2', 'c2', data.customerInfo.companyName, data.customerInfo.companyId, data.customerInfo.vatNumber, data.customerInfo.bankName, data.customerInfo.bankIban, data.customerInfo.country, data.customerInfo.street1, data.customerInfo.street2, data.customerInfo.city, data.customerInfo.city, data.customerInfo.zipCode, data.customerInfo.phone, data.customerInfo.userEmail)
-    //     await customerPage.addShippingAddress(data.customerInfo.firstName, data.customerInfo.lastName, data.customerInfo.companyName, data.customerInfo.country, data.customerInfo.street1, data.customerInfo.street2, data.customerInfo.city, data.customerInfo.city, data.customerInfo.zipCode)
-    //     await customerPage.customerLogout()
-    // })
-
-
+    // // it.skip('add test customer2 addresses', async () => {
+    // //     await loginPage.login(process.env.CUSTOMER2, process.env.CUSTOMER_PASSWORD)
+    // //     await customerPage.addBillingAddress('customer2', 'c2', data.customerInfo.companyName, data.customerInfo.companyId, data.customerInfo.vatNumber, data.customerInfo.bankName, data.customerInfo.bankIban, data.customerInfo.country, data.customerInfo.street1, data.customerInfo.street2, data.customerInfo.city, data.customerInfo.city, data.customerInfo.zipCode, data.customerInfo.phone, data.customerInfo.userEmail)
+    // //     await customerPage.addShippingAddress(data.customerInfo.firstName, data.customerInfo.lastName, data.customerInfo.companyName, data.customerInfo.country, data.customerInfo.street1, data.customerInfo.street2, data.customerInfo.city, data.customerInfo.city, data.customerInfo.zipCode)
+    // //     await customerPage.customerLogout()
+    
 })
