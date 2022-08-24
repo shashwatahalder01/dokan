@@ -36,7 +36,7 @@ describe('admin functionality test', () => {
 
     it('admin can add simple product', async () => {
         await loginPage.adminLogin(process.env.ADMIN, process.env.ADMIN_PASSWORD)
-        await adminPage.addSimpleProduct(data.product.name.simple, data.product.price, data.product.category, data.product.vendor[1])
+        await adminPage.addSimpleProduct(data.product.name.simple(), data.product.price, data.product.category, data.product.vendor[1])
     })
 
     // it.skip('admin can add variable product', async () => {

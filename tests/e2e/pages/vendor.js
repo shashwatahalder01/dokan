@@ -402,9 +402,9 @@ module.exports = {
 
         //add new booking product
         await page.type(selector.vendor.vBooking.productName, productName)
-        await page.click(selector.vendor.vBooking.productCategory)
-        await page.type(selector.vendor.vBooking.productCategoryInput, category)
-        await page.keyboard.press('Enter')
+        // await page.click(selector.vendor.vBooking.productCategory)
+        // await page.type(selector.vendor.vBooking.productCategoryInput, category)
+        // await page.keyboard.press('Enter')
 
         // general Booking options
         await page.select(selector.vendor.vBooking.bookingDurationType, bookingDurationType)
