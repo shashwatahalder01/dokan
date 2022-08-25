@@ -1,21 +1,21 @@
 {
-  "phpVersion": "7.4",
-  "WP_DEBUG": "true",
-  "SCRIPT_DEBUG": "true",
-  "WP_DEBUG_LOG": "true",
-  "WP_DEBUG_DISPLAY": "true",
-
-  "plugins": [
-    "https://downloads.wordpress.org/plugin/woocommerce.6.6.1.zip",
-    "../../",
-    "../../plugins/dokan-pro",
-    "http://qa.wowgiftmart.com/wp-content/uploads/2022/05/ws.zip",
-    "http://qa.wowgiftmart.com/wp-content/uploads/2022/05/wb.zip",
-    "http://qa.wowgiftmart.com/wp-content/uploads/2022/05/wpad.zip",
-    "http://qa.wowgiftmart.com/wp-content/uploads/2022/05/wsa.zip"
-  ],
-  "themes": [
-    "https://downloads.wordpress.org/theme/storefront.latest-stable.zip"
-  ]
- 
-}
+    "phpVersion": "7.4",
+    "WP_DEBUG": "true",
+    "SCRIPT_DEBUG": "true",
+    "WP_DEBUG_LOG": "true",
+    "WP_DEBUG_DISPLAY": "true",
+  
+    "plugins": [
+      "https://downloads.wordpress.org/plugin/woocommerce.6.6.1.zip",
+      "../../",
+      "../../plugins/dokan-pro",
+      "http://qa.wowgiftmart.com/wp-content/uploads/2022/05/ws.zip",
+      "http://qa.wowgiftmart.com/wp-content/uploads/2022/05/wb.zip",
+      "http://qa.wowgiftmart.com/wp-content/uploads/2022/05/wpad.zip",
+      "http://qa.wowgiftmart.com/wp-content/uploads/2022/05/wsa.zip"
+    ],
+    "themes": [
+      "https://downloads.wordpress.org/theme/storefront.latest-stable.zip"
+    ]
+   
+  }

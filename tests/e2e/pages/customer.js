@@ -152,7 +152,7 @@ module.exports = {
         await base.type(selector.customer.cDashboard.bankIban, bankIban)
         await base.clickIfVisible(selector.customer.cDashboard.termsAndConditions)
         let subscriptionPackIsVisible = await base.isVisible(selector.customer.cDashboard.subscriptionPack)
-        console.log(subscriptionPackIsVisible)
+        // console.log(subscriptionPackIsVisible)
         await base.click(selector.customer.cDashboard.becomeAVendor)
         await base.wait(4)
         // if (subscriptionPackIsVisible) {

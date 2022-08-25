@@ -39,12 +39,21 @@ module.exports = {
             await this.logoutFrontend()
         }
         await base.goIfNotThere("my-account")
-        await base.clearAndType(selector.frontend.username, username)
-        await base.clearAndType(selector.frontend.userPassword, password)
-        await base.clickAndWait(selector.frontend.logIn)
+        let emailField = await base.isVisible(selector.frontend.username)
+        if (emailField) {
+            await base.clearAndType(selector.frontend.username, username)
+            await base.clearAndType(selector.frontend.userPassword, password)
+            await base.clickAndWait(selector.frontend.logIn)
 
-        let loggedInUser = await base.getCurrentUser()
-        expect(loggedInUser).toBe(username)
+            let loggedInUser = await base.getCurrentUser()
+            expect(loggedInUser).toBe(username)
+        }
+        else {
+            let loggedInUser = await base.getCurrentUser()
+            if (username !== loggedInUser) {
+                await this.logoutFrontend()
+            }
+        }
     },
 
     //logout from frontend

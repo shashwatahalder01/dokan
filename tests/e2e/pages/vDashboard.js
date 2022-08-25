@@ -230,9 +230,9 @@ module.exports = {
         await this.visibilityChecker(vDashboardLocators.vProductsDetailsPage.productEditOtherOptionsEnableReviews)
 
         await this.visibilityChecker(vDashboardLocators.vProductsDetailsPage.productEditAdvertiseProductBlock)
-        await base.click(vDashboardLocators.vProductsDetailsPage.productEditAdvertiseEnable) //Click to Open Modal
-        await this.visibilityChecker(vDashboardLocators.vProductsDetailsPage.productEditAdvertiseEnablePopup)
-        await base.click(vDashboardLocators.vProductsDetailsPage.productEditAdvertiseEnablePopupCancel) //Click to Close Modal
+        // await base.click(vDashboardLocators.vProductsDetailsPage.productEditAdvertiseEnable) //Click to Open Modal
+        // await this.visibilityChecker(vDashboardLocators.vProductsDetailsPage.productEditAdvertiseEnablePopup)
+        // await base.click(vDashboardLocators.vProductsDetailsPage.productEditAdvertiseEnablePopupCancel) //Click to Close Modal
 
         await this.visibilityChecker(vDashboardLocators.vProductsDetailsPage.productEditSaveChangesButton)
     },
