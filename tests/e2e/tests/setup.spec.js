@@ -216,7 +216,7 @@ it('add test vendor1', async () => {
 it('add test vendor1 products', async () => {
     await loginPage.login(process.env.VENDOR, process.env.VENDOR_PASSWORD)
     //add products
-    await vendorPage.addSimpleProduct('p1_v1 (simple)', data.product.price_int, data.product.category)
+    await vendorPage.addSimpleProduct(data.simpleProduct[0], data.product.price_int, data.product.category)
     // await vendorPage.addSimpleProduct('p2_v1 (simple)', data.product.price, data.product.category)
     await vendorPage.addSimpleProduct('p1_F1_v1 (simple)', data.product.price_frac_comma, data.product.category)
     // await vendorPage.addSimpleProduct('p2_F2_v1 (simple)', data.product.price, data.product.category)
@@ -290,7 +290,7 @@ it('add test vendor1 products', async () => {
 
 it('admin add test vendor products ', async () => {
 
-    await loginPage.adminLogin(process.env.ADMIN, process.env.ADMIN_PASSWORD)
+    await loginPage.switchUser(process.env.ADMIN, process.env.ADMIN_PASSWORD)
     await adminPage.addSimpleProduct(data.product.name.simple(), data.product.price, data.product.category, data.vendorStores[0], 'publish', false)
     await adminPage.addSimpleProduct(data.product.name.simple(), data.product.price, data.product.category, data.vendorStores[0], 'draft', false)
     await adminPage.addSimpleProduct(data.product.name.simple(), data.product.price, data.product.category, data.vendorStores[0], 'pending', false)

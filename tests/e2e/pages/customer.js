@@ -319,9 +319,9 @@ module.exports = {
     async searchVendor(vendorName) {
         await this.goToStoreList()
 
-        await page.click(selector.customer.cStoreList.filter)
-        await page.type(selector.customer.cStoreList.searchVendors, vendorName)
-        await page.click(selector.customer.cStoreList.apply)
+        await base.click(selector.customer.cStoreList.filter)
+        await base.clearAndType(selector.customer.cStoreList.searchVendors, vendorName)
+        await base.click(selector.customer.cStoreList.apply)
 
         await base.waitForSelector(selector.customer.cStoreList.visitStore(vendorName))
         let cartIsVisible = await base.isVisible(selector.customer.cStoreList.visitStore(vendorName))
@@ -377,11 +377,11 @@ module.exports = {
 
         await base.clickAndWait(selector.customer.cStoreList.visitStore(vendorName))
 
-        await page.click(selector.customer.cSingleStore.getSupport)
+        await base.click(selector.customer.cSingleStore.getSupport)
         await base.wait(2)
-        await page.type(selector.customer.cSingleStore.subject, getSupportSubject)
-        await page.type(selector.customer.cSingleStore.message, getSupportMessage)
-        await page.click(selector.customer.cSingleStore.submitGetSupport)
+        await base.type(selector.customer.cSingleStore.subject, getSupportSubject)
+        await base.type(selector.customer.cSingleStore.message, getSupportMessage)
+        await base.click(selector.customer.cSingleStore.submitGetSupport)
         await base.wait(2)
 
         let successMessage = await base.getElementText(selector.customer.cDokanSelector.dokanAlertSuccessMessage)

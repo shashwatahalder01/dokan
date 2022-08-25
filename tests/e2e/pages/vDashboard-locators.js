@@ -30,9 +30,9 @@ module.exports = {
         productsOutOfStock: "//ul[contains(@class,'subsubsub')]//li//a[contains(text(),'Out of stock')]",
 
 
-        addNewProductButton: '//a[@class="dokan-btn dokan-btn-theme dokan-add-new-product"]',
-        productsImportButton: '//a[@class="dokan-btn"][normalize-space()="Import"]',
-        productsExportButton: '//a[normalize-space()="Export"]',
+        addNewProductButton: '.dokan-add-new-product',
+        productsImportButton: '//a[contains( @class, "dokan-btn") and normalize-space()="Import"]',
+        productsExportButton: '//a[contains( @class, "dokan-btn") and normalize-space()="Export"]',
 
         productsFilterDates: '//select[@id="filter-by-date"]',
         productsFilterCategory: '//form[@class="dokan-form-inline dokan-w8 dokan-product-date-filter"]//select[@id="product_cat"]',
@@ -214,10 +214,10 @@ module.exports = {
         ordersRefunded: "//ul[contains(@class,'order-statuses-filter')]//li//a[contains(text(),'Refunded')]" , 
         ordersFailed: "//ul[contains(@class,'order-statuses-filter')]//li//a[contains(text(),'Failed')]",
 
-        ordersFilterDate: '//input[@id="order_date_filter"]',
+        ordersFilterDateRange: '//input[@id="order_filter_date_range"]',
         ordersFilterCustomer: '//span[@class="select2-selection__placeholder"]',
         ordersFilterButton: '//span[@class="select2-selection__placeholder"]',
-        ordersExpandAllButton: '//input[@name="dokan_order_export_all"]',
+        ordersExportAllButton: '//input[@name="dokan_order_export_all"]',
         ordersExportFilteredButton: '//input[@name="dokan_order_export_filtered"]',
 
         ordersBulkAction: '//select[@id="bulk-order-action-selector"]',

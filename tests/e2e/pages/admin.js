@@ -1081,6 +1081,7 @@ module.exports = {
 
       // add new term
       for (let attributeTerm of attributeTerms) {
+        await base.wait(0.5)
         await base.type(selector.admin.products.attribute.attributeTerm, attributeTerm)
         await base.type(selector.admin.products.attribute.attributeTermSlug, attributeTerm)
         await base.click(selector.admin.products.attribute.addAttributeTerm)

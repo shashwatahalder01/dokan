@@ -31,6 +31,7 @@ module.exports = {
         // }
 
         let currentUser = await base.getCurrentUser()
+        console.log(currentUser)
 
         if (username === currentUser) {
             return

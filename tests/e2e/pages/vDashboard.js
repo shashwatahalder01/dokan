@@ -124,11 +124,11 @@ module.exports = {
     },
 
     //Product Details Page Explore
-    async vProductDetailsExplore() {
+    async vProductDetailsExplore(productName) {
+        
+        await vendorPage.searchProduct(productName)
 
-        await base.goto('dashboard/products')
-
-        await base.clickAndWait(vDashboardLocators.vProductsPage.productsOnline)
+        // await base.clickAndWait(vDashboardLocators.vProductsPage.productsOnline)
 
         await base.clickAndWait(vDashboardLocators.vProductsDetailsPage.existingProductDetails)
 
@@ -278,7 +278,7 @@ module.exports = {
         await this.visibilityChecker(vDashboardLocators.vOrdersPage.ordersFilterButton)
 
         //Filter
-        await this.visibilityChecker(vDashboardLocators.vOrdersPage.ordersExpandAllButton)
+        await this.visibilityChecker(vDashboardLocators.vOrdersPage.ordersExportAllButton)
         await this.visibilityChecker(vDashboardLocators.vOrdersPage.ordersExportFilteredButton)
 
         await this.visibilityChecker(vDashboardLocators.vOrdersPage.ordersBulkAction)
@@ -305,7 +305,7 @@ module.exports = {
         await this.visibilityChecker(vDashboardLocators.vOrdersDetailsPage.oderDetailsBody)
         await this.visibilityChecker(vDashboardLocators.vOrdersDetailsPage.orderDetailsBackButton)
 
-        await this.visibilityChecker(vDashboardLocators.vOrdersDetailsPage.orderDetailsRequestRefund)
+        // await this.visibilityChecker(vDashboardLocators.vOrdersDetailsPage.orderDetailsRequestRefund) //order must be processing or complete
         await base.click(vDashboardLocators.vOrdersDetailsPage.orderDetailsRequestRefund)
         await this.visibilityChecker(vDashboardLocators.vOrdersDetailsPage.orderDetailsRefundItems)
 
