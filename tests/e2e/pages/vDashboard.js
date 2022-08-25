@@ -168,7 +168,7 @@ module.exports = {
 
         await this.visibilityChecker(vDashboardLocators.vProductsDetailsPage.productEditGeolocationBlock)
         await this.visibilityChecker(vDashboardLocators.vProductsDetailsPage.productEditGeolocationTick1)
-        await this.visibilityChecker(vDashboardLocators.vProductsDetailsPage.productEditGeolocationStoreSettings)
+        // await this.visibilityChecker(vDashboardLocators.vProductsDetailsPage.productEditGeolocationStoreSettings)
 
 
         await this.visibilityChecker(vDashboardLocators.vProductsDetailsPage.productEditAddonsBlock)

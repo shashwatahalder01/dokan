@@ -35,7 +35,7 @@ describe('Vendor Exploration test', () => {
     });
 
     // Product Details Page
-    it.only('Explore Vendor Products DETAILS [Single Product]', async () => {
+    it('Explore Vendor Products DETAILS [Single Product]', async () => {
         await loginPage.login(process.env.VENDOR, process.env.VENDOR_PASSWORD)
         //Explore Products > Details
         await vDashboardPage.vProductDetailsExplore(data.simpleProduct[0]);
