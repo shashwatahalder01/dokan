@@ -273,7 +273,7 @@ module.exports = {
         // await base.clickAndWait(vDashboardLocators.vOrdersPage.ordersFailed)
         // await base.clickAndWait(vDashboardLocators.vOrdersPage.ordersAll) //Click to return to All
 
-        await this.visibilityChecker(vDashboardLocators.vOrdersPage.ordersFilterDate)
+        await this.visibilityChecker(vDashboardLocators.vOrdersPage.ordersFilterDateRange)
         await this.visibilityChecker(vDashboardLocators.vOrdersPage.ordersFilterCustomer)
         await this.visibilityChecker(vDashboardLocators.vOrdersPage.ordersFilterButton)
 
@@ -306,8 +306,8 @@ module.exports = {
         await this.visibilityChecker(vDashboardLocators.vOrdersDetailsPage.orderDetailsBackButton)
 
         // await this.visibilityChecker(vDashboardLocators.vOrdersDetailsPage.orderDetailsRequestRefund) //order must be processing or complete
-        await base.click(vDashboardLocators.vOrdersDetailsPage.orderDetailsRequestRefund)
-        await this.visibilityChecker(vDashboardLocators.vOrdersDetailsPage.orderDetailsRefundItems)
+        // await base.click(vDashboardLocators.vOrdersDetailsPage.orderDetailsRequestRefund)
+        // await this.visibilityChecker(vDashboardLocators.vOrdersDetailsPage.orderDetailsRefundItems)
 
         await this.visibilityChecker(vDashboardLocators.vOrdersDetailsPage.orderDetailsBillingAddress)
         await this.visibilityChecker(vDashboardLocators.vOrdersDetailsPage.orderDetailsShippingAddress)
