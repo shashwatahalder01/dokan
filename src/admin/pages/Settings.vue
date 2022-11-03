@@ -301,10 +301,10 @@
                     return Promise.resolve({value: false});
                 }
 
-                return this.$swal({
+                return Swal.fire({
                     title: this.__( 'Withdraw Method Changed', 'dokan-lite' ),
                     text: this.__( 'Do you want to send an announcement to vendors about the removal of currently active payment method?', 'dokan-lite' ),
-                    type: 'warning',
+                    icon: 'warning',
                     showCancelButton: true,
                     confirmButtonText: this.__('Save & send announcement', 'dokan-lite'),
                     cancelButtonText: this.__( 'Save only', 'dokan-lite' ),
