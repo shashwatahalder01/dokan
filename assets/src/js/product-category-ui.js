@@ -21,7 +21,7 @@
 
             $( 'body' ).on( 'keyup', '#dokan-single-cat-search-input', ProductCategory.debounce( this.typeToSearch, 500 ) );
 
-            $( '#dokan-single-categories' ).scroll( this.categoryScroll );
+            $( 'body' ).on ( 'scroll', '#dokan-single-categories', this.categoryScroll );
 
             $( 'body' ).on( 'click', '.dokan-single-categories-right-box', ProductCategory.indicatorScrollTo );
 
@@ -103,11 +103,15 @@
             ProductCategory.setCatId( selectedCatId, $( category_box ) );
             ProductCategory.hideCategoryModal();
 
+            // Any one can use this hook and do anything after any category is selected.
+            wp.hooks.doAction( 'dokan_selected_multistep_category', selectedCatId );
+
             $(category_box).attr('data-activate', 'no');
         },
 
         setCatUiBasedOnOneCat: function( catId, category ) {
-            ProductCategory.disableDoneBtn( category.children.length > 0 );
+            let disable = undefined !== category.children.length && category.children.length > 0
+            ProductCategory.disableDoneBtn( disable );
 
             let allUl = [ ...category.parents ];
             let selectedInUls = [ ...category.parents ];
@@ -187,6 +191,9 @@
                     returnableCategories.push( currentCategory );
                 }
             }
+
+            // sort categories by name
+            returnableCategories.sort((a,b) => (a.name.toLowerCase() > b.name.toLowerCase()) ? 1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0))
 
             return {
                 categories: returnableCategories,

@@ -184,7 +184,7 @@ export default {
             .fail( ( jqXHR ) => {
                 let message = window.dokan_handle_ajax_error( jqXHR );
                 if ( message ) {
-                    swal.fire( message, '', 'error' );
+                    Swal.fire( message, '', 'error' );
                 }
             });
         },
@@ -244,7 +244,7 @@ export default {
             .fail( ( jqXHR ) => {
                 let message = window.dokan_handle_ajax_error( jqXHR );
                 if ( message ) {
-                    swal.fire( message, '', 'error' );
+                    Swal.fire( message, '', 'error' );
                 }
             });
         },
@@ -350,7 +350,6 @@ export default {
                         toast: true,
                         icon: 'success',
                         title: response.message,
-                        animation: false,
                         position: 'bottom-right',
                         showConfirmButton: false,
                         timer: 3000,
@@ -366,7 +365,7 @@ export default {
                 .fail( ( jqXHR ) => {
                     let message = window.dokan_handle_ajax_error( jqXHR );
                     if ( message ) {
-                        swal.fire( message, '', 'error' );
+                        Swal.fire( message, '', 'error' );
                     }
                 });
             }
