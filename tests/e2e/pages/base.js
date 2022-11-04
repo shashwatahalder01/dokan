@@ -1,3 +1,4 @@
+// @ts-check
 const { PendingXHR } = require('pending-xhr-puppeteer');
 // const p = require('puppeteer-extra-commands');
 

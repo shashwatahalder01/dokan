@@ -205,32 +205,58 @@ describe('Environment setup test', () => {
 
     //----------------------------------------- Vendor details -------------------------------------------//
 
+    it.only('add test vendor1', async () => {
+        // add vendor1
+        for (let i=50; i<54; i++){
+        await vendorPage.vendorRegister(`vendor${i}`, process.env.VENDOR_PASSWORD, `vendor${i}`, `v${i}`, `vendorStore${i}`, data.vendorInfo.companyName, data.vendorInfo.companyId, data.vendorInfo.vatNumber, data.vendorInfo.bankName, data.vendorInfo.bankIban, data.vendorInfo.phone, false, data.vendorSetupWizard)
+        await vendorPage.setStoreAddress('abc street', 'xyz street', 'New York', '10006', 'US', 'NY')
+        console.log(`vendor${i}`)
+        }
+    })
+
+    it('add test customer1 addresses', async () => {
+        for (let i=50; i<67; i++){
+        await loginPage.login(`vendor${i}`, process.env.CUSTOMER_PASSWORD)
+        
+        await customerPage.addBillingAddress(`vendor${i}`, 'c1', data.customerInfo.companyName, data.customerInfo.companyId, data.customerInfo.vatNumber, data.customerInfo.bankName, data.customerInfo.bankIban, data.customerInfo.country, data.customerInfo.street1, data.customerInfo.street2, data.customerInfo.city, data.customerInfo.city, data.customerInfo.zipCode, data.customerInfo.phone, data.customerInfo.userEmail)
+        await customerPage.customerLogout()
+        console.log(`vendor${i}`)
+    }
+    })   
+    
+    it('add test customer1 addresses', async () => {
+        for (let i=50; i<67; i++){
+        await customerPage.customerRegister(`customer${i}`, process.env.CUSTOMER_PASSWORD)
+        await customerPage.addBillingAddress(`customer${i}`, 'c1', data.customerInfo.companyName, data.customerInfo.companyId, data.customerInfo.vatNumber, data.customerInfo.bankName, data.customerInfo.bankIban, data.customerInfo.country, data.customerInfo.street1, data.customerInfo.street2, data.customerInfo.city, data.customerInfo.city, data.customerInfo.zipCode, data.customerInfo.phone, data.customerInfo.userEmail)
+        await customerPage.customerLogout()
+        console.log(`customer${i}`)
+    }
+    })
 
 
+    it('add test vendor1', async () => {
+        // add vendor1
+        await vendorPage.vendorRegister(process.env.VENDOR, process.env.VENDOR_PASSWORD, 'vendor1', 'v1', 'vendorStore1', data.vendorInfo.companyName, data.vendorInfo.companyId, data.vendorInfo.vatNumber, data.vendorInfo.bankName, data.vendorInfo.bankIban, data.vendorInfo.phone, false, data.vendorSetupWizard)
+    })
 
-it('add test vendor1', async () => {
-    // add vendor1
-    await vendorPage.vendorRegister(process.env.VENDOR, process.env.VENDOR_PASSWORD, 'vendor1', 'v1', 'vendorStore1', data.vendorInfo.companyName, data.vendorInfo.companyId, data.vendorInfo.vatNumber, data.vendorInfo.bankName, data.vendorInfo.bankIban, data.vendorInfo.phone, false, data.vendorSetupWizard)
-})
-
-it('add test vendor1 products', async () => {
-    await loginPage.login(process.env.VENDOR, process.env.VENDOR_PASSWORD)
-    //add products
-    await vendorPage.addSimpleProduct(data.simpleProduct[0], data.product.price_int, data.product.category)
-    // await vendorPage.addSimpleProduct('p2_v1 (simple)', data.product.price, data.product.category)
-    await vendorPage.addSimpleProduct('p1_F1_v1 (simple)', data.product.price_frac_comma, data.product.category)
-    // await vendorPage.addSimpleProduct('p2_F2_v1 (simple)', data.product.price, data.product.category)
-    // await vendorPage.addVariableProduct('p1_v1 (variable)', data.product.price, data.product.category, data.product.attribute, data.product.attributeTerms)
-    // await vendorPage.addSimpleSubscription('p1_v1 (simple subscription)', data.product.price, data.product.category)
-    // await vendorPage.addVariableSubscription('p1_v1 (variable subscription)', data.product.price, data.product.category, data.product.attribute, data.product.attributeTerms)
-    // await vendorPage.addExternalProduct('p1_v1 (external)', data.product.price, data.product.category)
-    // await vendorPage.addAuctionProduct('p1_v1 (auction)', data.product.auctionPrice, data.product.auction.startDate, data.product.auction.endDate, data.product.category)
-    // await vendorPage.addBookingProduct('p1_v1 (booking)', data.product.booking.category, data.product.booking.bookingDurationType, data.product.booking.bookingDuration, data.product.booking.bookingDurationUnit, data.product.booking.calenderDisplayMode, data.product.booking.maxBookingsPerBlock, data.product.booking.minimumBookingWindowIntoTheFutureDate, data.product.booking.minimumBookingWindowIntoTheFutureDateUnit, data.product.booking.maximumBookingWindowIntoTheFutureDate, data.product.booking.maximumBookingWindowIntoTheFutureDateUnit, data.product.booking.baseCost, data.product.booking.blockCost)
-    // //add discount product
-    // await vendorPage.addSimpleProduct('p1_v1 (sale)', data.product.price, data.product.category)
-    // //add minmax products
-    // await vendorPage.addSimpleProduct('p1_v1 (minmax)', data.product.price, data.product.category)
-})
+    it('add test vendor1 products', async () => {
+        await loginPage.login(process.env.VENDOR, process.env.VENDOR_PASSWORD)
+        //add products
+        await vendorPage.addSimpleProduct(data.simpleProduct[0], data.product.price_int, data.product.category)
+        // await vendorPage.addSimpleProduct('p2_v1 (simple)', data.product.price, data.product.category)
+        await vendorPage.addSimpleProduct('p1_F1_v1 (simple)', data.product.price_frac_comma, data.product.category)
+        // await vendorPage.addSimpleProduct('p2_F2_v1 (simple)', data.product.price, data.product.category)
+        // await vendorPage.addVariableProduct('p1_v1 (variable)', data.product.price, data.product.category, data.product.attribute, data.product.attributeTerms)
+        // await vendorPage.addSimpleSubscription('p1_v1 (simple subscription)', data.product.price, data.product.category)
+        // await vendorPage.addVariableSubscription('p1_v1 (variable subscription)', data.product.price, data.product.category, data.product.attribute, data.product.attributeTerms)
+        // await vendorPage.addExternalProduct('p1_v1 (external)', data.product.price, data.product.category)
+        // await vendorPage.addAuctionProduct('p1_v1 (auction)', data.product.auctionPrice, data.product.auction.startDate, data.product.auction.endDate, data.product.category)
+        // await vendorPage.addBookingProduct('p1_v1 (booking)', data.product.booking.category, data.product.booking.bookingDurationType, data.product.booking.bookingDuration, data.product.booking.bookingDurationUnit, data.product.booking.calenderDisplayMode, data.product.booking.maxBookingsPerBlock, data.product.booking.minimumBookingWindowIntoTheFutureDate, data.product.booking.minimumBookingWindowIntoTheFutureDateUnit, data.product.booking.maximumBookingWindowIntoTheFutureDate, data.product.booking.maximumBookingWindowIntoTheFutureDateUnit, data.product.booking.baseCost, data.product.booking.blockCost)
+        // //add discount product
+        // await vendorPage.addSimpleProduct('p1_v1 (sale)', data.product.price, data.product.category)
+        // //add minmax products
+        // await vendorPage.addSimpleProduct('p1_v1 (minmax)', data.product.price, data.product.category)
+    })
 
     it('add test vendor1 coupons', async () => {
         await loginPage.login(process.env.VENDOR, process.env.VENDOR_PASSWORD)
@@ -288,15 +314,15 @@ it('add test vendor1 products', async () => {
     // //     await vendorPage.setRmaSettings('Warranty', 'included_warranty', 'limited', '1', 'weeks')
     // // })
 
-it('admin add test vendor products ', async () => {
+    it('admin add test vendor products ', async () => {
 
-    await loginPage.switchUser(process.env.ADMIN, process.env.ADMIN_PASSWORD)
-    await adminPage.addSimpleProduct(data.product.name.simple(), data.product.price, data.product.category, data.vendorStores[0], 'publish', false)
-    await adminPage.addSimpleProduct(data.product.name.simple(), data.product.price, data.product.category, data.vendorStores[0], 'draft', false)
-    await adminPage.addSimpleProduct(data.product.name.simple(), data.product.price, data.product.category, data.vendorStores[0], 'pending', false)
-    await adminPage.addSimpleProduct(data.product.name.simple(), data.product.price, data.product.category, data.vendorStores[0], 'publish', true)
+        await loginPage.switchUser(process.env.ADMIN, process.env.ADMIN_PASSWORD)
+        await adminPage.addSimpleProduct(data.product.name.simple(), data.product.price, data.product.category, data.vendorStores[0], 'publish', false)
+        await adminPage.addSimpleProduct(data.product.name.simple(), data.product.price, data.product.category, data.vendorStores[0], 'draft', false)
+        await adminPage.addSimpleProduct(data.product.name.simple(), data.product.price, data.product.category, data.vendorStores[0], 'pending', false)
+        await adminPage.addSimpleProduct(data.product.name.simple(), data.product.price, data.product.category, data.vendorStores[0], 'publish', true)
 
-})
+    })
 
 
 
@@ -327,5 +353,5 @@ it('admin add test vendor products ', async () => {
     // //     await customerPage.addBillingAddress('customer2', 'c2', data.customerInfo.companyName, data.customerInfo.companyId, data.customerInfo.vatNumber, data.customerInfo.bankName, data.customerInfo.bankIban, data.customerInfo.country, data.customerInfo.street1, data.customerInfo.street2, data.customerInfo.city, data.customerInfo.city, data.customerInfo.zipCode, data.customerInfo.phone, data.customerInfo.userEmail)
     // //     await customerPage.addShippingAddress(data.customerInfo.firstName, data.customerInfo.lastName, data.customerInfo.companyName, data.customerInfo.country, data.customerInfo.street1, data.customerInfo.street2, data.customerInfo.city, data.customerInfo.city, data.customerInfo.zipCode)
     // //     await customerPage.customerLogout()
-    
+
 })

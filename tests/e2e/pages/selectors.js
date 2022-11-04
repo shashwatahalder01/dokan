@@ -3,11 +3,11 @@ module.exports = {
 
 
 
-    //--------------------------------------------login---------------------------------------------//
+    // Login
 
 
 
-    // selectors
+    // Selectors
     frontend: {
         //fronted menus
         home: "//a[contains(text(),'Home')]",
@@ -58,7 +58,7 @@ module.exports = {
 
 
 
-    //--------------------------------------------admin---------------------------------------------//
+    //admin
 
 
 
@@ -1595,7 +1595,7 @@ module.exports = {
 
 
 
-    //--------------------------------------------vendor---------------------------------------------//
+    //vendor
 
 
 
@@ -3073,12 +3073,12 @@ module.exports = {
 
 
 
-    //--------------------------------------------customer---------------------------------------------//
+    // Customer
 
 
     customer: {
 
-        //customer registration
+        // Customer Registration
         cRegistration: {
             regEmail: "#reg_email",
             regPassword: "#reg_password",

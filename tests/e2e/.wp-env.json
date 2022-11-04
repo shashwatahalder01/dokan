@@ -7,8 +7,6 @@
   
     "plugins": [
       "https://downloads.wordpress.org/plugin/woocommerce.6.6.1.zip",
-      "../../",
-      "../../plugins/dokan-pro",
       "http://qa.wowgiftmart.com/wp-content/uploads/2022/05/ws.zip",
       "http://qa.wowgiftmart.com/wp-content/uploads/2022/05/wb.zip",
       "http://qa.wowgiftmart.com/wp-content/uploads/2022/05/wpad.zip",
