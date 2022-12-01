@@ -1,24 +1,70 @@
-<testsuites id="" name="" tests="5" failures="0" skipped="5" errors="0" time="0.014005000000004656">
-<testsuite name="admin.spec.ts" timestamp="1669872597789" hostname="" tests="5" failures="0" skipped="5" time="0" errors="0">
-<testcase name="Admin functionality test admin can login" classname="[chromium] › admin.spec.ts › Admin functionality test › admin can login" time="0">
-<skipped>
-</skipped>
+<testsuites id="" name="" tests="5" failures="2" skipped="0" errors="0" time="16.695812999999966">
+<testsuite name="admin.spec.ts" timestamp="1669873032095" hostname="" tests="5" failures="2" skipped="0" time="10.413" errors="0">
+<testcase name="Admin functionality test admin can login" classname="[chromium] › admin.spec.ts › Admin functionality test › admin can login" time="5.76">
 </testcase>
-<testcase name="Admin functionality test admin can logout" classname="[chromium] › admin.spec.ts › Admin functionality test › admin can logout" time="0">
-<skipped>
-</skipped>
+<testcase name="Admin functionality test admin can logout" classname="[chromium] › admin.spec.ts › Admin functionality test › admin can logout" time="4.057">
+<failure message="admin.spec.ts:22:5 admin can logout" type="FAILURE">
+<![CDATA[  [chromium] › admin.spec.ts:22:5 › Admin functionality test › admin can logout ====================
+
+    Error: expect(received).toBe(expected) // Object.is equality
+
+    Expected: "2"
+    Received: "1"
+
+      25 |         await loginPage.adminLogin(data.admin)
+      26 |         await loginPage.adminLogout()
+    > 27 |         expect('1').toBe('2')
+         |                     ^
+      28 |     })
+      29 |
+      30 |     test('admin can logout1', async ({ page }) => {
+
+        at /home/runner/work/dokan/dokan/tests/e2e/tests/admin.spec.ts:27:21
+
+    attachment #1: screenshot (image/png) ----------------------------------------------------------
+    test-results/admin-Admin-functionality-test-admin-can-logout-chromium/test-failed-1.png
+    ------------------------------------------------------------------------------------------------
+]]>
+</failure>
+<system-out>
+<![CDATA[
+[[ATTACHMENT|../test-results/admin-Admin-functionality-test-admin-can-logout-chromium/test-failed-1.png]]
+]]>
+</system-out>
 </testcase>
-<testcase name="Admin functionality test admin can logout" classname="[chromium] › admin.spec.ts › Admin functionality test › admin can logout" time="0">
-<skipped>
-</skipped>
+<testcase name="Admin functionality test admin can logout1" classname="[chromium] › admin.spec.ts › Admin functionality test › admin can logout1" time="0.238">
 </testcase>
-<testcase name="Admin functionality test admin can logout" classname="[chromium] › admin.spec.ts › Admin functionality test › admin can logout" time="0">
-<skipped>
-</skipped>
+<testcase name="Admin functionality test admin can logout2" classname="[chromium] › admin.spec.ts › Admin functionality test › admin can logout2" time="0.188">
 </testcase>
-<testcase name="Admin functionality test admin can logout" classname="[chromium] › admin.spec.ts › Admin functionality test › admin can logout" time="0">
-<skipped>
-</skipped>
+<testcase name="Admin functionality test admin can logout3" classname="[chromium] › admin.spec.ts › Admin functionality test › admin can logout3" time="0.17">
+<failure message="admin.spec.ts:36:5 admin can logout3" type="FAILURE">
+<![CDATA[  [chromium] › admin.spec.ts:36:5 › Admin functionality test › admin can logout3 ===================
+
+    Error: expect(received).toBe(expected) // Object.is equality
+
+    Expected: "3"
+    Received: "1"
+
+      35 |     })
+      36 |     test('admin can logout3', async ({ page }) => {
+    > 37 |         expect('1').toBe('3')
+         |                     ^
+      38 |     })
+      39 |
+      40 |     // test('admin can set dokan setup wizard',async ({page}) => { . //todo
+
+        at /home/runner/work/dokan/dokan/tests/e2e/tests/admin.spec.ts:37:21
+
+    attachment #1: screenshot (image/png) ----------------------------------------------------------
+    test-results/admin-Admin-functionality-test-admin-can-logout3-chromium/test-failed-1.png
+    ------------------------------------------------------------------------------------------------
+]]>
+</failure>
+<system-out>
+<![CDATA[
+[[ATTACHMENT|../test-results/admin-Admin-functionality-test-admin-can-logout3-chromium/test-failed-1.png]]
+]]>
+</system-out>
 </testcase>
 </testsuite>
 </testsuites>
