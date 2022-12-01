@@ -1,33 +1,38 @@
-<testsuites id="" name="" tests="4" failures="3" skipped="0" errors="0" time="5.882695999999997">
-<testsuite name="api/modules.spec.ts" timestamp="1669891259167" hostname="" tests="4" failures="3" skipped="0" time="0.215" errors="0">
-<testcase name="modules api test g_" classname="[chromium] › api/modules.spec.ts › modules api test › g_" time="0.014">
+<testsuites id="" name="" tests="4" failures="3" skipped="0" errors="0" time="6.823478000000002">
+<testsuite name="api/modules.spec.ts" timestamp="1669891943001" hostname="" tests="4" failures="3" skipped="0" time="0.218" errors="0">
+<testcase name="modules api test g_" classname="[chromium] › api/modules.spec.ts › modules api test › g_" time="0.018">
 <system-out>
 <![CDATA[endpoint is http://localhost:8889/wp-json/dokan/v1/admin/modules
 ]]>
 </system-out>
 </testcase>
-<testcase name="modules api test get all modules" classname="[chromium] › api/modules.spec.ts › modules api test › get all modules" time="0.024">
+<testcase name="modules api test get all modules" classname="[chromium] › api/modules.spec.ts › modules api test › get all modules" time="0.032">
 <failure message="modules.spec.ts:23:5 get all modules" type="FAILURE">
 <![CDATA[  [chromium] › api/modules.spec.ts:23:5 › modules api test › get all modules =======================
 
-    SyntaxError: Unexpected token < in JSON at position 0
+    Error: expect(received).toBeTruthy()
 
-      23 |     test('get all modules', async ({ request }) => {
-      24 |         let response = await request.get(endPoints.getAllModules)
-    > 25 |         let responseBody = await response.json()
-         |                            ^
-      26 |         // console.log(responseBody)
-      27 |
-      28 |         expect(response.ok()).toBeTruthy()
+    Received: false
 
-        at JSON.parse (<anonymous>)
-        at /home/runner/work/dokan/dokan/tests/e2e/tests/api/modules.spec.ts:25:28
+      27 |         console.log(response.status)
+      28 |
+    > 29 |         expect(response.ok()).toBeTruthy()
+         |                               ^
+      30 |         // expect(response.status()).toBe(200)
+      31 |     });
+      32 |
+
+        at /home/runner/work/dokan/dokan/tests/e2e/tests/api/modules.spec.ts:29:31
 ]]>
 </failure>
+<system-out>
+<![CDATA[[36m[Function: status][39m
+]]>
+</system-out>
 </testcase>
-<testcase name="modules api test deactivate a module" classname="[chromium] › api/modules.spec.ts › modules api test › deactivate a module" time="0.099">
-<failure message="modules.spec.ts:32:5 deactivate a module" type="FAILURE">
-<![CDATA[  [chromium] › api/modules.spec.ts:32:5 › modules api test › deactivate a module ===================
+<testcase name="modules api test deactivate a module" classname="[chromium] › api/modules.spec.ts › modules api test › deactivate a module" time="0.088">
+<failure message="modules.spec.ts:33:5 deactivate a module" type="FAILURE">
+<![CDATA[  [chromium] › api/modules.spec.ts:33:5 › modules api test › deactivate a module ===================
 
     SyntaxError: Unexpected token < in JSON at position 0
 
@@ -44,13 +49,13 @@
         at JSON.parse (<anonymous>)
         at ApiUtils.getAllModules (/home/runner/work/dokan/dokan/tests/e2e/utils/apiUtils.ts:445:28)
         at ApiUtils.getAllModuleIds (/home/runner/work/dokan/dokan/tests/e2e/utils/apiUtils.ts:452:29)
-        at /home/runner/work/dokan/dokan/tests/e2e/tests/api/modules.spec.ts:34:47
+        at /home/runner/work/dokan/dokan/tests/e2e/tests/api/modules.spec.ts:35:47
 ]]>
 </failure>
 </testcase>
-<testcase name="modules api test activate a module" classname="[chromium] › api/modules.spec.ts › modules api test › activate a module" time="0.078">
-<failure message="modules.spec.ts:48:5 activate a module" type="FAILURE">
-<![CDATA[  [chromium] › api/modules.spec.ts:48:5 › modules api test › activate a module =====================
+<testcase name="modules api test activate a module" classname="[chromium] › api/modules.spec.ts › modules api test › activate a module" time="0.08">
+<failure message="modules.spec.ts:49:5 activate a module" type="FAILURE">
+<![CDATA[  [chromium] › api/modules.spec.ts:49:5 › modules api test › activate a module =====================
 
     SyntaxError: Unexpected token < in JSON at position 0
 
@@ -67,7 +72,7 @@
         at JSON.parse (<anonymous>)
         at ApiUtils.getAllModules (/home/runner/work/dokan/dokan/tests/e2e/utils/apiUtils.ts:445:28)
         at ApiUtils.getAllModuleIds (/home/runner/work/dokan/dokan/tests/e2e/utils/apiUtils.ts:452:29)
-        at /home/runner/work/dokan/dokan/tests/e2e/tests/api/modules.spec.ts:50:47
+        at /home/runner/work/dokan/dokan/tests/e2e/tests/api/modules.spec.ts:51:47
 ]]>
 </failure>
 </testcase>
