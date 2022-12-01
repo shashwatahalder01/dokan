@@ -1,12 +1,12 @@
-<testsuites id="" name="" tests="4" failures="3" skipped="0" errors="0" time="6.823478000000002">
-<testsuite name="api/modules.spec.ts" timestamp="1669891943001" hostname="" tests="4" failures="3" skipped="0" time="0.218" errors="0">
-<testcase name="modules api test g_" classname="[chromium] › api/modules.spec.ts › modules api test › g_" time="0.018">
+<testsuites id="" name="" tests="4" failures="3" skipped="0" errors="0" time="4.496539999999979">
+<testsuite name="api/modules.spec.ts" timestamp="1669892387737" hostname="" tests="4" failures="3" skipped="0" time="0.142" errors="0">
+<testcase name="modules api test g_" classname="[chromium] › api/modules.spec.ts › modules api test › g_" time="0.012">
 <system-out>
 <![CDATA[endpoint is http://localhost:8889/wp-json/dokan/v1/admin/modules
 ]]>
 </system-out>
 </testcase>
-<testcase name="modules api test get all modules" classname="[chromium] › api/modules.spec.ts › modules api test › get all modules" time="0.032">
+<testcase name="modules api test get all modules" classname="[chromium] › api/modules.spec.ts › modules api test › get all modules" time="0.021">
 <failure message="modules.spec.ts:23:5 get all modules" type="FAILURE">
 <![CDATA[  [chromium] › api/modules.spec.ts:23:5 › modules api test › get all modules =======================
 
@@ -14,7 +14,7 @@
 
     Received: false
 
-      27 |         console.log(response.status)
+      27 |         console.log(await response.status)
       28 |
     > 29 |         expect(response.ok()).toBeTruthy()
          |                               ^
@@ -30,7 +30,7 @@
 ]]>
 </system-out>
 </testcase>
-<testcase name="modules api test deactivate a module" classname="[chromium] › api/modules.spec.ts › modules api test › deactivate a module" time="0.088">
+<testcase name="modules api test deactivate a module" classname="[chromium] › api/modules.spec.ts › modules api test › deactivate a module" time="0.056">
 <failure message="modules.spec.ts:33:5 deactivate a module" type="FAILURE">
 <![CDATA[  [chromium] › api/modules.spec.ts:33:5 › modules api test › deactivate a module ===================
 
@@ -53,7 +53,7 @@
 ]]>
 </failure>
 </testcase>
-<testcase name="modules api test activate a module" classname="[chromium] › api/modules.spec.ts › modules api test › activate a module" time="0.08">
+<testcase name="modules api test activate a module" classname="[chromium] › api/modules.spec.ts › modules api test › activate a module" time="0.053">
 <failure message="modules.spec.ts:49:5 activate a module" type="FAILURE">
 <![CDATA[  [chromium] › api/modules.spec.ts:49:5 › modules api test › activate a module =====================
 
