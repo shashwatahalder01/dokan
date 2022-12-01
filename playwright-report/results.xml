@@ -1,202 +1,73 @@
-<testsuites id="" name="" tests="11" failures="10" skipped="0" errors="0" time="14.092706000000005">
-<testsuite name="api/admins.spec.ts" timestamp="1669890427724" hostname="" tests="11" failures="10" skipped="0" time="0.283" errors="0">
-<testcase name="admin api test get admin report overviesw" classname="[chromium] › api/admins.spec.ts › admin api test › get admin report overviesw" time="0.012">
+<testsuites id="" name="" tests="4" failures="3" skipped="0" errors="0" time="5.882695999999997">
+<testsuite name="api/modules.spec.ts" timestamp="1669891259167" hostname="" tests="4" failures="3" skipped="0" time="0.215" errors="0">
+<testcase name="modules api test g_" classname="[chromium] › api/modules.spec.ts › modules api test › g_" time="0.014">
 <system-out>
-<![CDATA[http://localhost:8889/wp-json/dokan/v1/admin/report/overview
+<![CDATA[endpoint is http://localhost:8889/wp-json/dokan/v1/admin/modules
 ]]>
 </system-out>
 </testcase>
-<testcase name="admin api test get admin report overview" classname="[chromium] › api/admins.spec.ts › admin api test › get admin report overview" time="0.02">
-<failure message="admins.spec.ts:26:5 get admin report overview" type="FAILURE">
-<![CDATA[  [chromium] › api/admins.spec.ts:26:5 › admin api test › get admin report overview ================
+<testcase name="modules api test get all modules" classname="[chromium] › api/modules.spec.ts › modules api test › get all modules" time="0.024">
+<failure message="modules.spec.ts:23:5 get all modules" type="FAILURE">
+<![CDATA[  [chromium] › api/modules.spec.ts:23:5 › modules api test › get all modules =======================
 
     SyntaxError: Unexpected token < in JSON at position 0
 
-      27 |         console.log(endPoints.getAdminReportOverview)
-      28 |         let response = await request.get(endPoints.getAdminReportOverview)
-    > 29 |         let responseBody = await response.json()
+      23 |     test('get all modules', async ({ request }) => {
+      24 |         let response = await request.get(endPoints.getAllModules)
+    > 25 |         let responseBody = await response.json()
          |                            ^
-      30 |         // console.log(responseBody)
-      31 |
-      32 |         expect(response.ok()).toBeTruthy()
+      26 |         // console.log(responseBody)
+      27 |
+      28 |         expect(response.ok()).toBeTruthy()
 
         at JSON.parse (<anonymous>)
-        at /home/runner/work/dokan/dokan/tests/e2e/tests/api/admins.spec.ts:29:28
-]]>
-</failure>
-<system-out>
-<![CDATA[http://localhost:8889/wp-json/dokan/v1/admin/report/overview
-]]>
-</system-out>
-</testcase>
-<testcase name="admin api test get admin report summary" classname="[chromium] › api/admins.spec.ts › admin api test › get admin report summary" time="0.028">
-<failure message="admins.spec.ts:36:5 get admin report summary" type="FAILURE">
-<![CDATA[  [chromium] › api/admins.spec.ts:36:5 › admin api test › get admin report summary =================
-
-    SyntaxError: Unexpected token < in JSON at position 0
-
-      36 |     test('get admin report summary', async ({ request }) => {
-      37 |         let response = await request.get(endPoints.getAdminReportSummary)
-    > 38 |         let responseBody = await response.json()
-         |                            ^
-      39 |         // console.log(responseBody)
-      40 |
-      41 |         expect(response.ok()).toBeTruthy()
-
-        at JSON.parse (<anonymous>)
-        at /home/runner/work/dokan/dokan/tests/e2e/tests/api/admins.spec.ts:38:28
+        at /home/runner/work/dokan/dokan/tests/e2e/tests/api/modules.spec.ts:25:28
 ]]>
 </failure>
 </testcase>
-<testcase name="admin api test get getAdminDashboardFeed" classname="[chromium] › api/admins.spec.ts › admin api test › get getAdminDashboardFeed" time="0.028">
-<failure message="admins.spec.ts:45:5 get getAdminDashboardFeed" type="FAILURE">
-<![CDATA[  [chromium] › api/admins.spec.ts:45:5 › admin api test › get getAdminDashboardFeed ================
+<testcase name="modules api test deactivate a module" classname="[chromium] › api/modules.spec.ts › modules api test › deactivate a module" time="0.099">
+<failure message="modules.spec.ts:32:5 deactivate a module" type="FAILURE">
+<![CDATA[  [chromium] › api/modules.spec.ts:32:5 › modules api test › deactivate a module ===================
 
     SyntaxError: Unexpected token < in JSON at position 0
 
-      45 |     test('get getAdminDashboardFeed', async ({ request }) => {
-      46 |         let response = await request.get(endPoints.getAdminDashboardFeed)
-    > 47 |         let responseBody = await response.json()
-         |                            ^
-      48 |         // // console.log(responseBody)
-      49 |
-      50 |         expect(response.ok()).toBeTruthy()
+       at ../utils/apiUtils.ts:445
 
-        at JSON.parse (<anonymous>)
-        at /home/runner/work/dokan/dokan/tests/e2e/tests/api/admins.spec.ts:47:28
-]]>
-</failure>
-</testcase>
-<testcase name="admin api test get admin help" classname="[chromium] › api/admins.spec.ts › admin api test › get admin help" time="0.028">
-<failure message="admins.spec.ts:54:5 get admin help" type="FAILURE">
-<![CDATA[  [chromium] › api/admins.spec.ts:54:5 › admin api test › get admin help ===========================
-
-    SyntaxError: Unexpected token < in JSON at position 0
-
-      54 |     test('get admin help', async ({ request }) => {
-      55 |         let response = await request.get(endPoints.getAdminHelp)
-    > 56 |         let responseBody = await response.json()
-         |                            ^
-      57 |         // // console.log(responseBody)
-      58 |
-      59 |         expect(response.ok()).toBeTruthy()
-
-        at JSON.parse (<anonymous>)
-        at /home/runner/work/dokan/dokan/tests/e2e/tests/api/admins.spec.ts:56:28
-]]>
-</failure>
-</testcase>
-<testcase name="admin api test get changelog lite" classname="[chromium] › api/admins.spec.ts › admin api test › get changelog lite" time="0.028">
-<failure message="admins.spec.ts:63:5 get changelog lite" type="FAILURE">
-<![CDATA[  [chromium] › api/admins.spec.ts:63:5 › admin api test › get changelog lite =======================
-
-    SyntaxError: Unexpected token < in JSON at position 0
-
-      63 |     test('get changelog lite', async ({ request }) => {
-      64 |         let response = await request.get(endPoints.getAdminChangelogLite)
-    > 65 |         let responseBody = await response.json()
-         |                            ^
-      66 |         // // console.log(responseBody)
-      67 |
-      68 |         expect(response.ok()).toBeTruthy()
-
-        at JSON.parse (<anonymous>)
-        at /home/runner/work/dokan/dokan/tests/e2e/tests/api/admins.spec.ts:65:28
-]]>
-</failure>
-</testcase>
-<testcase name="admin api test get changelog pro" classname="[chromium] › api/admins.spec.ts › admin api test › get changelog pro" time="0.028">
-<failure message="admins.spec.ts:72:5 get changelog pro" type="FAILURE">
-<![CDATA[  [chromium] › api/admins.spec.ts:72:5 › admin api test › get changelog pro ========================
-
-    SyntaxError: Unexpected token < in JSON at position 0
-
-      72 |     test('get changelog pro', async ({ request }) => {
-      73 |         let response = await request.get(endPoints.getAdminChangelogPro)
-    > 74 |         let responseBody = await response.json()
-         |                            ^
-      75 |         // // console.log(responseBody)
-      76 |
-      77 |         expect(response.ok()).toBeTruthy()
-
-        at JSON.parse (<anonymous>)
-        at /home/runner/work/dokan/dokan/tests/e2e/tests/api/admins.spec.ts:74:28
-]]>
-</failure>
-</testcase>
-<testcase name="admin api test get getAdminNotices" classname="[chromium] › api/admins.spec.ts › admin api test › get getAdminNotices" time="0.028">
-<failure message="admins.spec.ts:81:5 get getAdminNotices" type="FAILURE">
-<![CDATA[  [chromium] › api/admins.spec.ts:81:5 › admin api test › get getAdminNotices ======================
-
-    SyntaxError: Unexpected token < in JSON at position 0
-
-      81 |     test('get getAdminNotices', async ({ request }) => {
-      82 |         let response = await request.get(endPoints.getAdminNotices)
-    > 83 |         let responseBody = await response.json()
-         |                            ^
-      84 |         // // console.log(responseBody)
-      85 |
-      86 |         expect(response.ok()).toBeTruthy()
-
-        at JSON.parse (<anonymous>)
-        at /home/runner/work/dokan/dokan/tests/e2e/tests/api/admins.spec.ts:83:28
-]]>
-</failure>
-</testcase>
-<testcase name="admin api test get admin promo notices " classname="[chromium] › api/admins.spec.ts › admin api test › get admin promo notices " time="0.027">
-<failure message="admins.spec.ts:90:5 get admin promo notices " type="FAILURE">
-<![CDATA[  [chromium] › api/admins.spec.ts:90:5 › admin api test › get admin promo notices  =================
-
-    SyntaxError: Unexpected token < in JSON at position 0
-
-      90 |     test('get admin promo notices ', async ({ request }) => {
-      91 |         let response = await request.get(endPoints.getAdminPromoNotices)
-    > 92 |         let responseBody = await response.json()
-         |                            ^
-      93 |         // // console.log(responseBody)
-      94 |
-      95 |         expect(response.ok()).toBeTruthy()
-
-        at JSON.parse (<anonymous>)
-        at /home/runner/work/dokan/dokan/tests/e2e/tests/api/admins.spec.ts:92:28
-]]>
-</failure>
-</testcase>
-<testcase name="admin api test get admin logs " classname="[chromium] › api/admins.spec.ts › admin api test › get admin logs " time="0.028">
-<failure message="admins.spec.ts:99:5 get admin logs " type="FAILURE">
-<![CDATA[  [chromium] › api/admins.spec.ts:99:5 › admin api test › get admin logs  ==========================
-
-    SyntaxError: Unexpected token < in JSON at position 0
-
-       99 |     test('get admin logs ', async ({ request }) => {
-      100 |         let response = await request.get(endPoints.getAdminLogs)
-    > 101 |         let responseBody = await response.json()
+      443 |     async getAllModules() {
+      444 |         let response = await this.request.get(endPoints.getAllModules)
+    > 445 |         let responseBody = await response.json()
           |                            ^
-      102 |         // // console.log(responseBody)
-      103 |
-      104 |         expect(response.ok()).toBeTruthy()
+      446 |         // console.log(responseBody)
+      447 |         return responseBody
+      448 |     }
 
         at JSON.parse (<anonymous>)
-        at /home/runner/work/dokan/dokan/tests/e2e/tests/api/admins.spec.ts:101:28
+        at ApiUtils.getAllModules (/home/runner/work/dokan/dokan/tests/e2e/utils/apiUtils.ts:445:28)
+        at ApiUtils.getAllModuleIds (/home/runner/work/dokan/dokan/tests/e2e/utils/apiUtils.ts:452:29)
+        at /home/runner/work/dokan/dokan/tests/e2e/tests/api/modules.spec.ts:34:47
 ]]>
 </failure>
 </testcase>
-<testcase name="admin api test get admin export logs " classname="[chromium] › api/admins.spec.ts › admin api test › get admin export logs " time="0.028">
-<failure message="admins.spec.ts:108:5 get admin export logs " type="FAILURE">
-<![CDATA[  [chromium] › api/admins.spec.ts:108:5 › admin api test › get admin export logs  ==================
+<testcase name="modules api test activate a module" classname="[chromium] › api/modules.spec.ts › modules api test › activate a module" time="0.078">
+<failure message="modules.spec.ts:48:5 activate a module" type="FAILURE">
+<![CDATA[  [chromium] › api/modules.spec.ts:48:5 › modules api test › activate a module =====================
 
     SyntaxError: Unexpected token < in JSON at position 0
 
-      108 |     test('get admin export logs ', async ({ request }) => {
-      109 |         let response = await request.get(endPoints.getAdminExportLogs)
-    > 110 |         let responseBody = await response.json()
+       at ../utils/apiUtils.ts:445
+
+      443 |     async getAllModules() {
+      444 |         let response = await this.request.get(endPoints.getAllModules)
+    > 445 |         let responseBody = await response.json()
           |                            ^
-      111 |         // // console.log(responseBody)
-      112 |
-      113 |         expect(response.ok()).toBeTruthy()
+      446 |         // console.log(responseBody)
+      447 |         return responseBody
+      448 |     }
 
         at JSON.parse (<anonymous>)
-        at /home/runner/work/dokan/dokan/tests/e2e/tests/api/admins.spec.ts:110:28
+        at ApiUtils.getAllModules (/home/runner/work/dokan/dokan/tests/e2e/utils/apiUtils.ts:445:28)
+        at ApiUtils.getAllModuleIds (/home/runner/work/dokan/dokan/tests/e2e/utils/apiUtils.ts:452:29)
+        at /home/runner/work/dokan/dokan/tests/e2e/tests/api/modules.spec.ts:50:47
 ]]>
 </failure>
 </testcase>
