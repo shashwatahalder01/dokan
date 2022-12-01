@@ -1,70 +1,23 @@
-<testsuites id="" name="" tests="5" failures="2" skipped="0" errors="0" time="12.990008000000032">
-<testsuite name="admin.spec.ts" timestamp="1669875553466" hostname="" tests="5" failures="2" skipped="0" time="8.614" errors="0">
-<testcase name="Admin functionality test admin can login" classname="[chromium] › admin.spec.ts › Admin functionality test › admin can login" time="4.031">
-</testcase>
-<testcase name="Admin functionality test admin can logout" classname="[chromium] › admin.spec.ts › Admin functionality test › admin can logout" time="4.13">
-<failure message="admin.spec.ts:22:5 admin can logout" type="FAILURE">
-<![CDATA[  [chromium] › admin.spec.ts:22:5 › Admin functionality test › admin can logout ====================
+<testsuites id="" name="" tests="1" failures="1" skipped="0" errors="0" time="1.451494000000006">
+<testsuite name="api/refunds.spec.ts" timestamp="1669886764611" hostname="" tests="1" failures="1" skipped="0" time="0.029" errors="0">
+<testcase name="refunds api test get all refunds by status" classname="[chromium] › api/refunds.spec.ts › refunds api test › get all refunds by status" time="0.029">
+<failure message="refunds.spec.ts:33:10 get all refunds by status" type="FAILURE">
+<![CDATA[  [chromium] › api/refunds.spec.ts:33:10 › refunds api test › get all refunds by status ============
 
-    Error: expect(received).toBe(expected) // Object.is equality
+    SyntaxError: Unexpected token < in JSON at position 0
 
-    Expected: "2"
-    Received: "1"
+      34 |         // let response = await request.get(endPoints.getAllRefundsByStatus('pending')) // pending, cancelled, completed
+      35 |         let response = await request.get(endPoints.getAllRefundsByStatus('completed')) // pending, cancelled, completed
+    > 36 |         let responseBody = await response.json()
+         |                            ^
+      37 |         console.log(responseBody)
+      38 |
+      39 |         expect(response.ok()).toBeTruthy()
 
-      25 |         await loginPage.adminLogin(data.admin)
-      26 |         await loginPage.adminLogout()
-    > 27 |         expect('1').toBe('2')
-         |                     ^
-      28 |     })
-      29 |
-      30 |     test('admin can logout1', async ({ page }) => {
-
-        at /home/runner/work/dokan/dokan/tests/e2e/tests/admin.spec.ts:27:21
-
-    attachment #1: screenshot (image/png) ----------------------------------------------------------
-    test-results/admin-Admin-functionality-test-admin-can-logout-chromium/test-failed-1.png
-    ------------------------------------------------------------------------------------------------
+        at JSON.parse (<anonymous>)
+        at /home/runner/work/dokan/dokan/tests/e2e/tests/api/refunds.spec.ts:36:28
 ]]>
 </failure>
-<system-out>
-<![CDATA[
-[[ATTACHMENT|../test-results/admin-Admin-functionality-test-admin-can-logout-chromium/test-failed-1.png]]
-]]>
-</system-out>
-</testcase>
-<testcase name="Admin functionality test admin can logout1" classname="[chromium] › admin.spec.ts › Admin functionality test › admin can logout1" time="0.178">
-</testcase>
-<testcase name="Admin functionality test admin can logout2" classname="[chromium] › admin.spec.ts › Admin functionality test › admin can logout2" time="0.143">
-</testcase>
-<testcase name="Admin functionality test admin can logout3" classname="[chromium] › admin.spec.ts › Admin functionality test › admin can logout3" time="0.132">
-<failure message="admin.spec.ts:36:5 admin can logout3" type="FAILURE">
-<![CDATA[  [chromium] › admin.spec.ts:36:5 › Admin functionality test › admin can logout3 ===================
-
-    Error: expect(received).toBe(expected) // Object.is equality
-
-    Expected: "3"
-    Received: "1"
-
-      35 |     })
-      36 |     test('admin can logout3', async ({ page }) => {
-    > 37 |         expect('1').toBe('3')
-         |                     ^
-      38 |     })
-      39 |
-      40 |     // test('admin can set dokan setup wizard',async ({page}) => { . //todo
-
-        at /home/runner/work/dokan/dokan/tests/e2e/tests/admin.spec.ts:37:21
-
-    attachment #1: screenshot (image/png) ----------------------------------------------------------
-    test-results/admin-Admin-functionality-test-admin-can-logout3-chromium/test-failed-1.png
-    ------------------------------------------------------------------------------------------------
-]]>
-</failure>
-<system-out>
-<![CDATA[
-[[ATTACHMENT|../test-results/admin-Admin-functionality-test-admin-can-logout3-chromium/test-failed-1.png]]
-]]>
-</system-out>
 </testcase>
 </testsuite>
 </testsuites>
