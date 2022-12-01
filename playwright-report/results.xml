@@ -1,8 +1,8 @@
-<testsuites id="" name="" tests="5" failures="2" skipped="0" errors="0" time="12.545700000000013">
-<testsuite name="admin.spec.ts" timestamp="1669873071602" hostname="" tests="5" failures="2" skipped="0" time="7.711" errors="0">
-<testcase name="Admin functionality test admin can login" classname="[chromium] › admin.spec.ts › Admin functionality test › admin can login" time="3.408">
+<testsuites id="" name="" tests="5" failures="2" skipped="0" errors="0" time="16.55027799999999">
+<testsuite name="admin.spec.ts" timestamp="1669873685936" hostname="" tests="5" failures="2" skipped="0" time="11.342" errors="0">
+<testcase name="Admin functionality test admin can login" classname="[chromium] › admin.spec.ts › Admin functionality test › admin can login" time="6.887">
 </testcase>
-<testcase name="Admin functionality test admin can logout" classname="[chromium] › admin.spec.ts › Admin functionality test › admin can logout" time="3.837">
+<testcase name="Admin functionality test admin can logout" classname="[chromium] › admin.spec.ts › Admin functionality test › admin can logout" time="3.878">
 <failure message="admin.spec.ts:22:5 admin can logout" type="FAILURE">
 <![CDATA[  [chromium] › admin.spec.ts:22:5 › Admin functionality test › admin can logout ====================
 
@@ -20,7 +20,6 @@
       30 |     test('admin can logout1', async ({ page }) => {
 
         at /home/runner/work/dokan/dokan/tests/e2e/tests/admin.spec.ts:27:21
-        at runMicrotasks (<anonymous>)
 
     attachment #1: screenshot (image/png) ----------------------------------------------------------
     test-results/admin-Admin-functionality-test-admin-can-logout-chromium/test-failed-1.png
@@ -33,11 +32,11 @@
 ]]>
 </system-out>
 </testcase>
-<testcase name="Admin functionality test admin can logout1" classname="[chromium] › admin.spec.ts › Admin functionality test › admin can logout1" time="0.173">
+<testcase name="Admin functionality test admin can logout1" classname="[chromium] › admin.spec.ts › Admin functionality test › admin can logout1" time="0.22">
 </testcase>
-<testcase name="Admin functionality test admin can logout2" classname="[chromium] › admin.spec.ts › Admin functionality test › admin can logout2" time="0.142">
+<testcase name="Admin functionality test admin can logout2" classname="[chromium] › admin.spec.ts › Admin functionality test › admin can logout2" time="0.176">
 </testcase>
-<testcase name="Admin functionality test admin can logout3" classname="[chromium] › admin.spec.ts › Admin functionality test › admin can logout3" time="0.151">
+<testcase name="Admin functionality test admin can logout3" classname="[chromium] › admin.spec.ts › Admin functionality test › admin can logout3" time="0.181">
 <failure message="admin.spec.ts:36:5 admin can logout3" type="FAILURE">
 <![CDATA[  [chromium] › admin.spec.ts:36:5 › Admin functionality test › admin can logout3 ===================
 
