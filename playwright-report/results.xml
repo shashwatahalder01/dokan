@@ -1,8 +1,8 @@
-<testsuites id="" name="" tests="5" failures="2" skipped="0" errors="0" time="16.55027799999999">
-<testsuite name="admin.spec.ts" timestamp="1669873685936" hostname="" tests="5" failures="2" skipped="0" time="11.342" errors="0">
-<testcase name="Admin functionality test admin can login" classname="[chromium] › admin.spec.ts › Admin functionality test › admin can login" time="6.887">
+<testsuites id="" name="" tests="5" failures="2" skipped="0" errors="0" time="12.990008000000032">
+<testsuite name="admin.spec.ts" timestamp="1669875553466" hostname="" tests="5" failures="2" skipped="0" time="8.614" errors="0">
+<testcase name="Admin functionality test admin can login" classname="[chromium] › admin.spec.ts › Admin functionality test › admin can login" time="4.031">
 </testcase>
-<testcase name="Admin functionality test admin can logout" classname="[chromium] › admin.spec.ts › Admin functionality test › admin can logout" time="3.878">
+<testcase name="Admin functionality test admin can logout" classname="[chromium] › admin.spec.ts › Admin functionality test › admin can logout" time="4.13">
 <failure message="admin.spec.ts:22:5 admin can logout" type="FAILURE">
 <![CDATA[  [chromium] › admin.spec.ts:22:5 › Admin functionality test › admin can logout ====================
 
@@ -32,11 +32,11 @@
 ]]>
 </system-out>
 </testcase>
-<testcase name="Admin functionality test admin can logout1" classname="[chromium] › admin.spec.ts › Admin functionality test › admin can logout1" time="0.22">
+<testcase name="Admin functionality test admin can logout1" classname="[chromium] › admin.spec.ts › Admin functionality test › admin can logout1" time="0.178">
 </testcase>
-<testcase name="Admin functionality test admin can logout2" classname="[chromium] › admin.spec.ts › Admin functionality test › admin can logout2" time="0.176">
+<testcase name="Admin functionality test admin can logout2" classname="[chromium] › admin.spec.ts › Admin functionality test › admin can logout2" time="0.143">
 </testcase>
-<testcase name="Admin functionality test admin can logout3" classname="[chromium] › admin.spec.ts › Admin functionality test › admin can logout3" time="0.181">
+<testcase name="Admin functionality test admin can logout3" classname="[chromium] › admin.spec.ts › Admin functionality test › admin can logout3" time="0.132">
 <failure message="admin.spec.ts:36:5 admin can logout3" type="FAILURE">
 <![CDATA[  [chromium] › admin.spec.ts:36:5 › Admin functionality test › admin can logout3 ===================
 
