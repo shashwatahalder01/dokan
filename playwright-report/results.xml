@@ -1,12 +1,12 @@
-<testsuites id="" name="" tests="4" failures="3" skipped="0" errors="0" time="4.496539999999979">
-<testsuite name="api/modules.spec.ts" timestamp="1669892387737" hostname="" tests="4" failures="3" skipped="0" time="0.142" errors="0">
-<testcase name="modules api test g_" classname="[chromium] › api/modules.spec.ts › modules api test › g_" time="0.012">
+<testsuites id="" name="" tests="2" failures="1" skipped="0" errors="0" time="2.1814710000000197">
+<testsuite name="api/modules.spec.ts" timestamp="1669892929686" hostname="" tests="2" failures="1" skipped="0" time="0.047" errors="0">
+<testcase name="modules api test g_" classname="[chromium] › api/modules.spec.ts › modules api test › g_" time="0.017">
 <system-out>
 <![CDATA[endpoint is http://localhost:8889/wp-json/dokan/v1/admin/modules
 ]]>
 </system-out>
 </testcase>
-<testcase name="modules api test get all modules" classname="[chromium] › api/modules.spec.ts › modules api test › get all modules" time="0.021">
+<testcase name="modules api test get all modules" classname="[chromium] › api/modules.spec.ts › modules api test › get all modules" time="0.03">
 <failure message="modules.spec.ts:23:5 get all modules" type="FAILURE">
 <![CDATA[  [chromium] › api/modules.spec.ts:23:5 › modules api test › get all modules =======================
 
@@ -14,67 +14,21 @@
 
     Received: false
 
-      27 |         console.log(await response.status)
+      27 |         console.log(await response.status())
       28 |
-    > 29 |         expect(response.ok()).toBeTruthy()
-         |                               ^
-      30 |         // expect(response.status()).toBe(200)
+    > 29 |         expect(await response.ok()).toBeTruthy()
+         |                                     ^
+      30 |         expect(await response.status()).toBe(200)
       31 |     });
       32 |
 
-        at /home/runner/work/dokan/dokan/tests/e2e/tests/api/modules.spec.ts:29:31
+        at /home/runner/work/dokan/dokan/tests/e2e/tests/api/modules.spec.ts:29:37
 ]]>
 </failure>
 <system-out>
-<![CDATA[[36m[Function: status][39m
+<![CDATA[[33m404[39m
 ]]>
 </system-out>
-</testcase>
-<testcase name="modules api test deactivate a module" classname="[chromium] › api/modules.spec.ts › modules api test › deactivate a module" time="0.056">
-<failure message="modules.spec.ts:33:5 deactivate a module" type="FAILURE">
-<![CDATA[  [chromium] › api/modules.spec.ts:33:5 › modules api test › deactivate a module ===================
-
-    SyntaxError: Unexpected token < in JSON at position 0
-
-       at ../utils/apiUtils.ts:445
-
-      443 |     async getAllModules() {
-      444 |         let response = await this.request.get(endPoints.getAllModules)
-    > 445 |         let responseBody = await response.json()
-          |                            ^
-      446 |         // console.log(responseBody)
-      447 |         return responseBody
-      448 |     }
-
-        at JSON.parse (<anonymous>)
-        at ApiUtils.getAllModules (/home/runner/work/dokan/dokan/tests/e2e/utils/apiUtils.ts:445:28)
-        at ApiUtils.getAllModuleIds (/home/runner/work/dokan/dokan/tests/e2e/utils/apiUtils.ts:452:29)
-        at /home/runner/work/dokan/dokan/tests/e2e/tests/api/modules.spec.ts:35:47
-]]>
-</failure>
-</testcase>
-<testcase name="modules api test activate a module" classname="[chromium] › api/modules.spec.ts › modules api test › activate a module" time="0.053">
-<failure message="modules.spec.ts:49:5 activate a module" type="FAILURE">
-<![CDATA[  [chromium] › api/modules.spec.ts:49:5 › modules api test › activate a module =====================
-
-    SyntaxError: Unexpected token < in JSON at position 0
-
-       at ../utils/apiUtils.ts:445
-
-      443 |     async getAllModules() {
-      444 |         let response = await this.request.get(endPoints.getAllModules)
-    > 445 |         let responseBody = await response.json()
-          |                            ^
-      446 |         // console.log(responseBody)
-      447 |         return responseBody
-      448 |     }
-
-        at JSON.parse (<anonymous>)
-        at ApiUtils.getAllModules (/home/runner/work/dokan/dokan/tests/e2e/utils/apiUtils.ts:445:28)
-        at ApiUtils.getAllModuleIds (/home/runner/work/dokan/dokan/tests/e2e/utils/apiUtils.ts:452:29)
-        at /home/runner/work/dokan/dokan/tests/e2e/tests/api/modules.spec.ts:51:47
-]]>
-</failure>
 </testcase>
 </testsuite>
 </testsuites>
