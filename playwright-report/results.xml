@@ -1,0 +1,24 @@
+<testsuites id="" name="" tests="5" failures="0" skipped="5" errors="0" time="0.018379000000015366">
+<testsuite name="admin.spec.ts" timestamp="1669871741748" hostname="" tests="5" failures="0" skipped="5" time="0" errors="0">
+<testcase name="Admin functionality test admin can login" classname="[chromium] › admin.spec.ts › Admin functionality test › admin can login" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Admin functionality test admin can logout" classname="[chromium] › admin.spec.ts › Admin functionality test › admin can logout" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Admin functionality test admin can logout" classname="[chromium] › admin.spec.ts › Admin functionality test › admin can logout" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Admin functionality test admin can logout" classname="[chromium] › admin.spec.ts › Admin functionality test › admin can logout" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Admin functionality test admin can logout" classname="[chromium] › admin.spec.ts › Admin functionality test › admin can logout" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+</testsuites>
