@@ -1,32 +1,6 @@
-<testsuites id="" name="" tests="2" failures="2" skipped="0" errors="0" time="4.753849999999977">
-<testsuite name="api/admins.spec.ts" timestamp="1669976605078" hostname="" tests="1" failures="1" skipped="0" time="0.052" errors="0">
-<testcase name="admin api test check wp api" classname="[chromium] › api/admins.spec.ts › admin api test › check wp api" time="0.052">
-<failure message="admins.spec.ts:17:10 check wp api" type="FAILURE">
-<![CDATA[  [chromium] › api/admins.spec.ts:17:10 › admin api test › check wp api ============================
-
-    Error: expect(received).toBeTruthy()
-
-    Received: false
-
-      22 |         let response = await request.get('http://localhost:8889/wp-json/wp/v2/settings')
-      23 |         console.log(response.status())
-    > 24 |         expect(response.ok()).toBeTruthy()
-         |                               ^
-      25 |
-      26 |
-      27 |     })
-
-        at /home/runner/work/dokan/dokan/tests/e2e/tests/api/admins.spec.ts:24:31
-]]>
-</failure>
-<system-out>
-<![CDATA[[33m404[39m
-]]>
-</system-out>
-</testcase>
-</testsuite>
-<testsuite name="api/refunds.spec.ts" timestamp="1669976605078" hostname="" tests="1" failures="1" skipped="0" time="0.046" errors="0">
-<testcase name="refunds api test get all refunds by status" classname="[chromium] › api/refunds.spec.ts › refunds api test › get all refunds by status" time="0.046">
+<testsuites id="" name="" tests="1" failures="1" skipped="0" errors="0" time="1.4164610000000102">
+<testsuite name="api/refunds.spec.ts" timestamp="1669977933313" hostname="" tests="1" failures="1" skipped="0" time="0.03" errors="0">
+<testcase name="refunds api test get all refunds by status" classname="[chromium] › api/refunds.spec.ts › refunds api test › get all refunds by status" time="0.03">
 <failure message="refunds.spec.ts:33:10 get all refunds by status" type="FAILURE">
 <![CDATA[  [chromium] › api/refunds.spec.ts:33:10 › refunds api test › get all refunds by status ============
 
