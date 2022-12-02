@@ -1,0 +1,49 @@
+{
+  "name": "wedevs/dokan",
+  "description": "An e-commerce marketplace plugin for WordPress.",
+  "type": "wordpress-plugin",
+  "license": "GPL2",
+  "authors": [
+    {
+      "name": "weDevs",
+      "email": "info@wedevs.com"
+    }
+  ],
+  "minimum-stability": "dev",
+  "require": {
+    "php": ">=7.0",
+    "appsero/client": "dev-develop",
+    "jakeasmith/http_build_url": "^1"
+  },
+  "require-dev": {
+    "wp-coding-standards/wpcs": "dev-develop",
+    "dealerdirect/phpcodesniffer-composer-installer": "^0.7.2",
+    "tareq1988/wp-php-cs-fixer": "dev-master",
+    "phpcompatibility/phpcompatibility-wp": "dev-master",
+    "phpunit/phpunit": ">=6.5.14"
+  },
+  "config": {
+    "platform": {
+      "php": "7.0"
+    },
+    "allow-plugins": {
+      "dealerdirect/phpcodesniffer-composer-installer": true
+    }
+  },
+  "autoload": {
+    "psr-4": {
+      "WeDevs\\Dokan\\": "includes/"
+    }
+  },
+  "scripts": {
+    "phpcs": [
+      "vendor/bin/phpcs -p -s"
+    ],
+    "phpcs:report": [
+      "vendor/bin/phpcs --report-file='phpcs-report.txt'"
+    ],
+    "phpcbf": [
+      "vendor/bin/phpcbf -p"
+    ]
+  }
+}

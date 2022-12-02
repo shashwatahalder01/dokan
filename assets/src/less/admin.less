@@ -1,0 +1,594 @@
+@import "mixins.less";
+@import "tooltip.less";
+
+.dokan-admin-header {
+    background: #fff;
+    padding: 15px 15px 15px 22px;
+    margin: 0 0 0 -20px;
+    box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .dokan-admin-header-logo {
+        display: flex;
+
+        img {
+            height: 25px;
+            width: auto;
+            margin-right: 12px;
+        }
+
+        span {
+            color: #F1634C;
+            background: #FFF4F2;
+            padding: 4px 12px;
+            font-size: 12px;
+            font-weight: 500;
+            font-family: "SF Pro Text", sans-serif;
+            border: 1px solid rgba(241, 99, 76, 0.2);
+            border-radius: 93px;
+        }
+    }
+
+    .dokan-admin-header-menu {
+        padding-right: 6px;
+        display: flex;
+
+        .menu-item {
+            margin-right: 12px;
+
+            &:last-child {
+                margin-right: 0;
+            }
+
+            .menu-icon {
+                position: relative;
+                background: #e4e6eb;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                width: 30px;
+                height: 30px;
+                box-sizing: border-box;
+                border-radius: 42px;
+                cursor: pointer;
+                transition: all .2s ease;
+
+                .notification-count {
+                    position: absolute;
+                    top: -5px;
+                    right: -5px;
+                    width: 15px;
+                    height: 15px;
+                    padding: 1px;
+                    background-color: #ff5a40;
+                    border-radius: 53px;
+                    color: #fff;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                }
+
+                .whats-new-pointer {
+                    position: absolute;
+                    top: 0;
+                    right: 0;
+                    width: 6px;
+                    height: 6px;
+                    background-color: #ff5a40;
+                    border-radius: 53px;
+                    border: 2px solid #fff;
+                }
+
+                &:hover {
+                    background: #0C5F9A;
+
+                    & > svg path {
+                        fill: #fff
+                    }
+
+                    .dropdown {
+                        opacity: 1;
+                        visibility: visible;
+                        top: 42px;
+                    }
+                }
+
+                .dropdown {
+                    position: absolute;
+                    cursor: context-menu;
+                    top: 80px;
+                    right: -10px;
+                    z-index: 1;
+                    background-color: #fff;
+                    padding: 20px;
+                    border-radius: 3px;
+                    border: 1px solid #e2e2e2;
+                    box-shadow: 0 6px 12px rgb(129 129 129 / 6%);
+                    min-width: 255px;
+                    max-width: 255px;
+                    opacity: 0;
+                    visibility: hidden;
+                    transition: all .2s ease;
+
+                    &:before,
+                    &:after {
+                        content: "";
+                        position: absolute;
+                        border-left: 10px solid transparent;
+                        border-right: 10px solid transparent;
+                        top: -10px;
+                        right: 14px;
+                    }
+
+                    &:before {
+                        border-bottom: 10px solid #e2e2e2;
+                        margin-top: -1px;
+                    }
+
+                    &:after {
+                        border-bottom: 10px solid white;
+                        margin-top: 0;
+                        z-index: 1;
+                    }
+
+                    h3 {
+                          margin: 0;
+                          font-weight: bold;
+                          font-size: 18px;
+                          font-family: "SF Pro Text", sans-serif;
+                    }
+
+                    .list-item {
+                        margin-top: 13px;
+
+                        a {
+                            display: flex;
+                            align-items: center;
+                            color: #000;
+                            font-size: 15px;
+                            font-weight: 600;
+                            font-family: "SF Pro Text", sans-serif;
+                            text-decoration: none;
+                            transition: all .2s ease;
+                            margin-bottom: 10px;
+
+                            &:last-child {
+                              margin-bottom: 0;
+                            }
+
+                            &.active {
+                                color: #dd452c;
+
+                                .dokan-icon {
+                                    background-color: rgba(221, 69, 44, 0.15);
+
+                                    svg path {
+                                        fill: #f1634c;
+                                    }
+                                }
+
+                                &:after {
+                                    content: "";
+                                    width: 6px;
+                                    height: 6px;
+                                    background-color: #dd452c;
+                                    border-radius: 53px;
+                                    margin-left: 10px;
+                                }
+                            }
+
+                            .dokan-icon {
+                                background: #e4e6eb;
+                                display: flex;
+                                align-items: center;
+                                justify-content: center;
+                                width: 38px;
+                                height: 38px;
+                                box-sizing: border-box;
+                                border-radius: 42px;
+                                margin-right: 11px;
+                            }
+
+                            &:hover {
+                                color: #dd452c;
+
+                                .dokan-icon {
+                                    background-color: rgba(221, 69, 44, 0.15);
+
+                                    svg path {
+                                        fill: #f1634c;
+                                    }
+                                }
+                            }
+
+                            &:focus {
+                                box-shadow: none;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+.dokan-dashboard {
+    .post-box-container {
+        width: 49%;
+        float: left;
+    }
+
+    .meta-box-sortables {
+        margin: 0 8px;
+        min-height: 100px;
+    }
+
+    .postbox {
+        .main {
+            padding: 0 12px 11px;
+            .clearfix;
+
+            a {
+                text-decoration: none;
+            }
+
+            p {
+                margin: 0;
+            }
+
+            h4 {
+                margin: 0 0 7px 0;
+                padding: 0 0 7px 0;
+                border-bottom: 1px solid #eee;
+            }
+        }
+
+        .inside {
+            margin: 10px 0 0 0;
+            padding: 0;
+        }
+
+        &.dokan-status {
+            .main {
+                padding: 0;
+            }
+            .inside {
+                margin: 0;
+            }
+            ul {
+                margin-top: -13px;
+                li {
+                    min-height: 50px;
+                    width: 50%;
+                    float: left;
+                    padding: 0;
+                    box-sizing: border-box;
+                    margin: 0;
+                    border-top: 1px solid #ececec;
+                    color: #aaa;
+                    a {
+                        display: block;
+                        color: #aaa;
+                        padding: 10px;
+                        -webkit-transition: all ease 0.5s;
+                        transition: all ease 0.5s;
+                        position: relative;
+                        font-size: 12px;
+                        .details {
+                            color: #aaa;
+                            span {
+                                margin-left: 10px;
+                                font-weight: bold;
+                            }
+                            span.up {
+                                color: green;
+                                &::before {
+                                    content: "+";
+                                }
+                                &::after {
+                                    content: "%";
+                                }
+                            }
+                            span.down {
+                                color: red;
+                                &::before {
+                                    content: "-";
+                                }
+                                &::after {
+                                    content: "%";
+                                }
+                            }
+                        }
+                        strong {
+                            font-size: 18px;
+                            line-height: 1.2em;
+                            font-weight: 400;
+                            display: block;
+                            color: #21759b;
+                        }
+                    }
+                    .dashicons {
+                        font-size: 2em;
+                        float: left;
+                        margin: 15px;
+                    }
+                    &:nth-child(1) {
+                        border-top: none;
+                    }
+                    &:nth-child(2) {
+                        border-top: none;
+                    }
+                    &:nth-child(odd) {
+                        border-right: 1px solid #ececec;
+                    }
+                }
+                li.sale {
+                    .dashicons {
+                        color: #307be1;
+                    }
+                }
+                li.commission {
+                    .dashicons {
+                        color: #6da754;
+                    }
+                }
+                li.vendor {
+                    .dashicons {
+                        color: #169c22;
+                    }
+                }
+                li.approval {
+                    .dashicons {
+                        color: #fd9728;
+                    }
+                }
+                li.product {
+                    .dashicons {
+                        &::before {
+                            font-family: WooCommerce;
+                            content: "\e006";
+                            color: #464646;
+                        }
+                    }
+                }
+                li.withdraw {
+                    .dashicons {
+                        &::before {
+                            font-family: WooCommerce;
+                            content: "\e01e";
+                            color: #cd2c2f;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .mark-red a {
+        color: red;
+    }
+
+    .mark-green a {
+        color: green;
+    }
+
+    .dokan-left {
+        float: left;
+        width: 45%;
+    }
+
+    .dokan-right {
+        float: right;
+        width: 45%;
+    }
+}
+
+.chosen-container-multi .chosen-choices li.search-field input[type="text"] {
+    height: 23px;
+}
+
+.dokan-settings-wrap {
+    display: flex;
+    border: 1px solid #c8d7e1;
+}
+
+.dokan-settings-wrap .dashicons {
+    padding-top: 2px;
+    margin-right: 5px;
+
+    &.dashicons-admin-generic {
+        color: #6c75ff;
+    }
+
+    &.dashicons-cart {
+        color: #00aeff;
+    }
+
+    &.dashicons-money {
+        color: #d35400;
+    }
+
+    &.dashicons-admin-page {
+        color: #8e44ad;
+    }
+
+    &.dashicons-admin-appearance {
+        color: #3498db;
+    }
+
+    &.dashicons-networking {
+        color: #1abc9c;
+    }
+}
+
+.dokan-settings-wrap h2.nav-tab-wrapper {
+    flex: 1;
+    border-bottom: none;
+    padding: 0;
+    background: #f1f1f1;
+    border-right: 1px solid #c8d7e1;
+}
+
+.dokan-settings-wrap h2.nav-tab-wrapper a {
+    float: none;
+    display: block;
+    margin: 0;
+    border: none;
+    padding: 13px 13px;
+    background: #f1f1f1;
+    font-weight: 500;
+    border-bottom: 1px solid #c8d7e1;
+}
+
+.dokan-settings-wrap h2.nav-tab-wrapper a.nav-tab-active {
+    background: #fff !important;
+    border-right: 1px solid #c8d7e1;
+    width: 99%;
+    color: #2e4453;
+}
+
+.dokan-settings-wrap .metabox-holder {
+    flex: 3;
+    padding-left: 3%;
+    padding-right: 10px;
+    background: #fff;
+}
+
+td.tooltips-data {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 4px;
+  padding-right: 0;
+}
+
+.tooltips-data span {
+  width: 20px;
+}
+
+ul.dokan-settings-repeatable-list {
+  margin: 0;
+}
+
+.form-table tr td.dokan_checkbox_up {
+  vertical-align: top;
+  margin-top: 0.45em !important;
+}
+
+td.combine-tips-style {
+  display: table-cell;
+  vertical-align: top;
+}
+
+.wc_error_tip {
+    max-width: 20em;
+    line-height: 1.8em;
+    position: absolute;
+    white-space: normal;
+    background: #d82223;
+    margin: 1.2em 1px 0 -1em;
+    z-index: 9999999;
+    color: #fff;
+    font-size: 12px;
+    padding: 8px;
+
+    &:after {
+        content: "";
+        display: block;
+        border: 8px solid #d82223;
+        border-right-color: transparent;
+        border-left-color: transparent;
+        border-top-color: transparent;
+        position: absolute;
+        top: -3px;
+        left: 50%;
+        margin: -1em 0 0 -3px;
+    }
+}
+
+.dokan-settings-radio-image {
+    display: block;
+    width: 50%;
+    background: #fff;
+    -webkit-box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.1);
+    box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.1);
+    margin: 0 0 15px;
+    position: relative;
+    line-height: 0;
+    border: 1px solid #ededed;
+    padding: 4px;
+
+    img {
+        max-width: 100%;
+        z-index: 1;
+    }
+
+    .current-option-indicator {
+        position: absolute;
+        top: 0;
+        right: 0;
+        background-color: #4caf50;
+        color: #fff;
+        padding: 4px;
+        z-index: 2;
+        line-height: 1.3;
+    }
+
+    .active-option {
+        opacity: 0;
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 3;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.45);
+        transition: opacity 0.4s ease;
+
+        button {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            margin-top: -23px;
+            margin-left: -58px;
+        }
+    }
+
+    &:hover {
+        .active-option {
+            opacity: 1;
+        }
+    }
+
+    &.active {
+        .active-option {
+            display: none;
+        }
+    }
+
+    &.not-active {
+        .current-option-indicator {
+            display: none;
+        }
+    }
+}
+
+.wp-pointer-buttons {
+    button.next {
+        margin-right: 5px;
+    }
+    a.dokan {
+        padding-left: 10px;
+    }
+    a.dokan:before {
+        content: unset;
+    }
+}
+
+.dokan-admin-notices {
+      a {
+          text-decoration: none;
+      }
+}
