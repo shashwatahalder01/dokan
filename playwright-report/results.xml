@@ -1,6 +1,6 @@
-<testsuites id="" name="" tests="10" failures="10" skipped="0" errors="0" time="18.97647099999996">
-<testsuite name="api/admins.spec.ts" timestamp="1669978436406" hostname="" tests="10" failures="10" skipped="0" time="0.366" errors="0">
-<testcase name="admin api test get admin report overview" classname="[chromium] › api/admins.spec.ts › admin api test › get admin report overview" time="0.038">
+<testsuites id="" name="" tests="10" failures="10" skipped="0" errors="0" time="18.684951">
+<testsuite name="api/admins.spec.ts" timestamp="1669978816140" hostname="" tests="10" failures="10" skipped="0" time="0.363" errors="0">
+<testcase name="admin api test get admin report overview" classname="[chromium] › api/admins.spec.ts › admin api test › get admin report overview" time="0.036">
 <failure message="admins.spec.ts:16:5 get admin report overview" type="FAILURE">
 <![CDATA[  [chromium] › api/admins.spec.ts:16:5 › admin api test › get admin report overview ================
 
@@ -45,7 +45,7 @@
 ]]>
 </failure>
 </testcase>
-<testcase name="admin api test get getAdminDashboardFeed" classname="[chromium] › api/admins.spec.ts › admin api test › get getAdminDashboardFeed" time="0.036">
+<testcase name="admin api test get getAdminDashboardFeed" classname="[chromium] › api/admins.spec.ts › admin api test › get getAdminDashboardFeed" time="0.035">
 <failure message="admins.spec.ts:38:5 get getAdminDashboardFeed" type="FAILURE">
 <![CDATA[  [chromium] › api/admins.spec.ts:38:5 › admin api test › get getAdminDashboardFeed ================
 
@@ -65,7 +65,7 @@
 ]]>
 </failure>
 </testcase>
-<testcase name="admin api test get admin help" classname="[chromium] › api/admins.spec.ts › admin api test › get admin help" time="0.037">
+<testcase name="admin api test get admin help" classname="[chromium] › api/admins.spec.ts › admin api test › get admin help" time="0.035">
 <failure message="admins.spec.ts:48:5 get admin help" type="FAILURE">
 <![CDATA[  [chromium] › api/admins.spec.ts:48:5 › admin api test › get admin help ===========================
 
@@ -85,7 +85,7 @@
 ]]>
 </failure>
 </testcase>
-<testcase name="admin api test get changelog lite" classname="[chromium] › api/admins.spec.ts › admin api test › get changelog lite" time="0.037">
+<testcase name="admin api test get changelog lite" classname="[chromium] › api/admins.spec.ts › admin api test › get changelog lite" time="0.035">
 <failure message="admins.spec.ts:57:5 get changelog lite" type="FAILURE">
 <![CDATA[  [chromium] › api/admins.spec.ts:57:5 › admin api test › get changelog lite =======================
 
@@ -105,7 +105,7 @@
 ]]>
 </failure>
 </testcase>
-<testcase name="admin api test get changelog pro" classname="[chromium] › api/admins.spec.ts › admin api test › get changelog pro" time="0.036">
+<testcase name="admin api test get changelog pro" classname="[chromium] › api/admins.spec.ts › admin api test › get changelog pro" time="0.04">
 <failure message="admins.spec.ts:66:5 get changelog pro" type="FAILURE">
 <![CDATA[  [chromium] › api/admins.spec.ts:66:5 › admin api test › get changelog pro ========================
 
@@ -125,7 +125,7 @@
 ]]>
 </failure>
 </testcase>
-<testcase name="admin api test get getAdminNotices" classname="[chromium] › api/admins.spec.ts › admin api test › get getAdminNotices" time="0.036">
+<testcase name="admin api test get getAdminNotices" classname="[chromium] › api/admins.spec.ts › admin api test › get getAdminNotices" time="0.038">
 <failure message="admins.spec.ts:75:5 get getAdminNotices" type="FAILURE">
 <![CDATA[  [chromium] › api/admins.spec.ts:75:5 › admin api test › get getAdminNotices ======================
 
@@ -185,7 +185,7 @@
 ]]>
 </failure>
 </testcase>
-<testcase name="admin api test get admin export logs " classname="[chromium] › api/admins.spec.ts › admin api test › get admin export logs " time="0.037">
+<testcase name="admin api test get admin export logs " classname="[chromium] › api/admins.spec.ts › admin api test › get admin export logs " time="0.035">
 <failure message="admins.spec.ts:102:5 get admin export logs " type="FAILURE">
 <![CDATA[  [chromium] › api/admins.spec.ts:102:5 › admin api test › get admin export logs  ==================
 
