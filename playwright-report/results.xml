@@ -1,24 +1,6 @@
-<testsuites id="" name="" tests="1" failures="1" skipped="0" errors="0" time="1.4164610000000102">
-<testsuite name="api/refunds.spec.ts" timestamp="1669977933313" hostname="" tests="1" failures="1" skipped="0" time="0.03" errors="0">
-<testcase name="refunds api test get all refunds by status" classname="[chromium] › api/refunds.spec.ts › refunds api test › get all refunds by status" time="0.03">
-<failure message="refunds.spec.ts:33:10 get all refunds by status" type="FAILURE">
-<![CDATA[  [chromium] › api/refunds.spec.ts:33:10 › refunds api test › get all refunds by status ============
-
-    Error: expect(received).toBeTruthy()
-
-    Received: false
-
-      34 |         // let response = await request.get(endPoints.getAllRefundsByStatus('pending')) // pending, cancelled, completed
-      35 |         let response = await request.get(endPoints.getAllRefundsByStatus('completed')) // pending, cancelled, completed
-    > 36 |         expect(response.ok()).toBeTruthy()
-         |                               ^
-      37 |         expect(response.status()).toBe(200)
-      38 |
-      39 |         let responseBody = await response.json()
-
-        at /home/runner/work/dokan/dokan/tests/e2e/tests/api/refunds.spec.ts:36:31
-]]>
-</failure>
+<testsuites id="" name="" tests="1" failures="0" skipped="0" errors="0" time="8.259917000000016">
+<testsuite name="api/aapiPermalink.spec.ts" timestamp="1669978447488" hostname="" tests="1" failures="0" skipped="0" time="5.486" errors="0">
+<testcase name=" api test permalink set " classname="[chromium] › api/aapiPermalink.spec.ts ›  api test › permalink set " time="5.486">
 </testcase>
 </testsuite>
 </testsuites>
