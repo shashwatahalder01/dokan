@@ -1,209 +1,46 @@
-<testsuites id="" name="" tests="10" failures="10" skipped="0" errors="0" time="18.684951">
-<testsuite name="api/admins.spec.ts" timestamp="1669978816140" hostname="" tests="10" failures="10" skipped="0" time="0.363" errors="0">
-<testcase name="admin api test get admin report overview" classname="[chromium] › api/admins.spec.ts › admin api test › get admin report overview" time="0.036">
-<failure message="admins.spec.ts:16:5 get admin report overview" type="FAILURE">
-<![CDATA[  [chromium] › api/admins.spec.ts:16:5 › admin api test › get admin report overview ================
+<testsuites id="" name="" tests="1" failures="1" skipped="0" errors="0" time="25.90792599999998">
+<testsuite name="api/aapiPermalink.spec.ts" timestamp="1669980023706" hostname="" tests="1" failures="1" skipped="0" time="23.687" errors="0">
+<testcase name=" api test permalink set " classname="[chromium] › api/aapiPermalink.spec.ts ›  api test › permalink set " time="23.687">
+<failure message="aapiPermalink.spec.ts:17:5 permalink set " type="FAILURE">
+<![CDATA[  [chromium] › api/aapiPermalink.spec.ts:17:5 ›  api test › permalink set  =========================
 
-    Error: expect(received).toBeTruthy()
+    page.hover: Timeout 20000ms exceeded.
+    =========================== logs ===========================
+    waiting for selector ".menu-icon-settings .wp-menu-name"
+    ============================================================
 
-    Received: false
+       at ../pages/basePage.ts:264
 
-      18 |         let response = await request.get(endPoints.getAdminReportOverview)
-      19 |         console.log(response.status())
-    > 20 |         expect(response.ok()).toBeTruthy()
-         |                               ^
-      21 |         expect(response.status()).toBe(200)
-      22 |
-      23 |         let responseBody = await response.json()
+      262 |     // hover on selector
+      263 |     async hover(selector: string): Promise<void> {
+    > 264 |         await this.page.hover(selector, { timeout: 20000 })
+          |                         ^
+      265 |         await this.wait(1)
+      266 |     }
+      267 |
 
-        at /home/runner/work/dokan/dokan/tests/e2e/tests/api/admins.spec.ts:20:31
+        at AdminPage.hover (/home/runner/work/dokan/dokan/tests/e2e/pages/basePage.ts:264:25)
+        at AdminPage.setPermalinkSettings (/home/runner/work/dokan/dokan/tests/e2e/pages/adminPage.ts:74:20)
+        at /home/runner/work/dokan/dokan/tests/e2e/tests/api/aapiPermalink.spec.ts:21:25
+        at /home/runner/work/dokan/dokan/tests/e2e/node_modules/@playwright/test/lib/workerRunner.js:426:9
+        at TestInfoImpl._runFn (/home/runner/work/dokan/dokan/tests/e2e/node_modules/@playwright/test/lib/testInfo.js:166:7)
+        at /home/runner/work/dokan/dokan/tests/e2e/node_modules/@playwright/test/lib/workerRunner.js:376:26
+        at TimeoutManager.runWithTimeout (/home/runner/work/dokan/dokan/tests/e2e/node_modules/@playwright/test/lib/timeoutManager.js:73:7)
+        at TestInfoImpl._runWithTimeout (/home/runner/work/dokan/dokan/tests/e2e/node_modules/@playwright/test/lib/testInfo.js:154:26)
+        at WorkerRunner._runTest (/home/runner/work/dokan/dokan/tests/e2e/node_modules/@playwright/test/lib/workerRunner.js:356:5)
+        at WorkerRunner.runTestGroup (/home/runner/work/dokan/dokan/tests/e2e/node_modules/@playwright/test/lib/workerRunner.js:218:11)
+        at process.<anonymous> (/home/runner/work/dokan/dokan/tests/e2e/node_modules/@playwright/test/lib/worker.js:88:5)
+
+    attachment #1: screenshot (image/png) ----------------------------------------------------------
+    test-results/api-aapiPermalink--api-test-permalink-set--chromium/test-failed-1.png
+    ------------------------------------------------------------------------------------------------
 ]]>
 </failure>
 <system-out>
-<![CDATA[http://localhost:8889/wp-json/dokan/v1/admin/report/overview
-[33m404[39m
+<![CDATA[
+[[ATTACHMENT|../test-results/api-aapiPermalink--api-test-permalink-set--chromium/test-failed-1.png]]
 ]]>
 </system-out>
-</testcase>
-<testcase name="admin api test get admin report summary" classname="[chromium] › api/admins.spec.ts › admin api test › get admin report summary" time="0.037">
-<failure message="admins.spec.ts:28:5 get admin report summary" type="FAILURE">
-<![CDATA[  [chromium] › api/admins.spec.ts:28:5 › admin api test › get admin report summary =================
-
-    Error: expect(received).toBeTruthy()
-
-    Received: false
-
-      28 |     test('get admin report summary', async ({ request }) => {
-      29 |         let response = await request.get(endPoints.getAdminReportSummary)
-    > 30 |         expect(response.ok()).toBeTruthy()
-         |                               ^
-      31 |         expect(response.status()).toBe(200)
-      32 |
-      33 |         let responseBody = await response.json()
-
-        at /home/runner/work/dokan/dokan/tests/e2e/tests/api/admins.spec.ts:30:31
-]]>
-</failure>
-</testcase>
-<testcase name="admin api test get getAdminDashboardFeed" classname="[chromium] › api/admins.spec.ts › admin api test › get getAdminDashboardFeed" time="0.035">
-<failure message="admins.spec.ts:38:5 get getAdminDashboardFeed" type="FAILURE">
-<![CDATA[  [chromium] › api/admins.spec.ts:38:5 › admin api test › get getAdminDashboardFeed ================
-
-    Error: expect(received).toBeTruthy()
-
-    Received: false
-
-      38 |     test('get getAdminDashboardFeed', async ({ request }) => {
-      39 |         let response = await request.get(endPoints.getAdminDashboardFeed)
-    > 40 |         expect(response.ok()).toBeTruthy()
-         |                               ^
-      41 |         expect(response.status()).toBe(200)
-      42 |
-      43 |         let responseBody = await response.json()
-
-        at /home/runner/work/dokan/dokan/tests/e2e/tests/api/admins.spec.ts:40:31
-]]>
-</failure>
-</testcase>
-<testcase name="admin api test get admin help" classname="[chromium] › api/admins.spec.ts › admin api test › get admin help" time="0.035">
-<failure message="admins.spec.ts:48:5 get admin help" type="FAILURE">
-<![CDATA[  [chromium] › api/admins.spec.ts:48:5 › admin api test › get admin help ===========================
-
-    Error: expect(received).toBeTruthy()
-
-    Received: false
-
-      48 |     test('get admin help', async ({ request }) => {
-      49 |         let response = await request.get(endPoints.getAdminHelp)
-    > 50 |         expect(response.ok()).toBeTruthy()
-         |                               ^
-      51 |         expect(response.status()).toBe(200)
-      52 |
-      53 |         let responseBody = await response.json()
-
-        at /home/runner/work/dokan/dokan/tests/e2e/tests/api/admins.spec.ts:50:31
-]]>
-</failure>
-</testcase>
-<testcase name="admin api test get changelog lite" classname="[chromium] › api/admins.spec.ts › admin api test › get changelog lite" time="0.035">
-<failure message="admins.spec.ts:57:5 get changelog lite" type="FAILURE">
-<![CDATA[  [chromium] › api/admins.spec.ts:57:5 › admin api test › get changelog lite =======================
-
-    Error: expect(received).toBeTruthy()
-
-    Received: false
-
-      57 |     test('get changelog lite', async ({ request }) => {
-      58 |         let response = await request.get(endPoints.getAdminChangelogLite)
-    > 59 |         expect(response.ok()).toBeTruthy()
-         |                               ^
-      60 |         expect(response.status()).toBe(200)
-      61 |
-      62 |         let responseBody = await response.json()
-
-        at /home/runner/work/dokan/dokan/tests/e2e/tests/api/admins.spec.ts:59:31
-]]>
-</failure>
-</testcase>
-<testcase name="admin api test get changelog pro" classname="[chromium] › api/admins.spec.ts › admin api test › get changelog pro" time="0.04">
-<failure message="admins.spec.ts:66:5 get changelog pro" type="FAILURE">
-<![CDATA[  [chromium] › api/admins.spec.ts:66:5 › admin api test › get changelog pro ========================
-
-    Error: expect(received).toBeTruthy()
-
-    Received: false
-
-      66 |     test('get changelog pro', async ({ request }) => {
-      67 |         let response = await request.get(endPoints.getAdminChangelogPro)
-    > 68 |         expect(response.ok()).toBeTruthy()
-         |                               ^
-      69 |         expect(response.status()).toBe(200)
-      70 |
-      71 |         let responseBody = await response.json()
-
-        at /home/runner/work/dokan/dokan/tests/e2e/tests/api/admins.spec.ts:68:31
-]]>
-</failure>
-</testcase>
-<testcase name="admin api test get getAdminNotices" classname="[chromium] › api/admins.spec.ts › admin api test › get getAdminNotices" time="0.038">
-<failure message="admins.spec.ts:75:5 get getAdminNotices" type="FAILURE">
-<![CDATA[  [chromium] › api/admins.spec.ts:75:5 › admin api test › get getAdminNotices ======================
-
-    Error: expect(received).toBeTruthy()
-
-    Received: false
-
-      75 |     test('get getAdminNotices', async ({ request }) => {
-      76 |         let response = await request.get(endPoints.getAdminNotices)
-    > 77 |         expect(response.ok()).toBeTruthy()
-         |                               ^
-      78 |         expect(response.status()).toBe(200)
-      79 |
-      80 |         let responseBody = await response.json()
-
-        at /home/runner/work/dokan/dokan/tests/e2e/tests/api/admins.spec.ts:77:31
-]]>
-</failure>
-</testcase>
-<testcase name="admin api test get admin promo notices " classname="[chromium] › api/admins.spec.ts › admin api test › get admin promo notices " time="0.036">
-<failure message="admins.spec.ts:84:5 get admin promo notices " type="FAILURE">
-<![CDATA[  [chromium] › api/admins.spec.ts:84:5 › admin api test › get admin promo notices  =================
-
-    Error: expect(received).toBeTruthy()
-
-    Received: false
-
-      84 |     test('get admin promo notices ', async ({ request }) => {
-      85 |         let response = await request.get(endPoints.getAdminPromoNotices)
-    > 86 |         expect(response.ok()).toBeTruthy()
-         |                               ^
-      87 |         expect(response.status()).toBe(200)
-      88 |
-      89 |         let responseBody = await response.json()
-
-        at /home/runner/work/dokan/dokan/tests/e2e/tests/api/admins.spec.ts:86:31
-]]>
-</failure>
-</testcase>
-<testcase name="admin api test get admin logs " classname="[chromium] › api/admins.spec.ts › admin api test › get admin logs " time="0.036">
-<failure message="admins.spec.ts:93:5 get admin logs " type="FAILURE">
-<![CDATA[  [chromium] › api/admins.spec.ts:93:5 › admin api test › get admin logs  ==========================
-
-    Error: expect(received).toBeTruthy()
-
-    Received: false
-
-      93 |     test('get admin logs ', async ({ request }) => {
-      94 |         let response = await request.get(endPoints.getAdminLogs)
-    > 95 |         expect(response.ok()).toBeTruthy()
-         |                               ^
-      96 |         expect(response.status()).toBe(200)
-      97 |
-      98 |         let responseBody = await response.json()
-
-        at /home/runner/work/dokan/dokan/tests/e2e/tests/api/admins.spec.ts:95:31
-]]>
-</failure>
-</testcase>
-<testcase name="admin api test get admin export logs " classname="[chromium] › api/admins.spec.ts › admin api test › get admin export logs " time="0.035">
-<failure message="admins.spec.ts:102:5 get admin export logs " type="FAILURE">
-<![CDATA[  [chromium] › api/admins.spec.ts:102:5 › admin api test › get admin export logs  ==================
-
-    Error: expect(received).toBeTruthy()
-
-    Received: false
-
-      102 |     test('get admin export logs ', async ({ request }) => {
-      103 |         let response = await request.get(endPoints.getAdminExportLogs)
-    > 104 |         expect(response.ok()).toBeTruthy()
-          |                               ^
-      105 |         expect(response.status()).toBe(200)
-      106 |
-      107 |         let responseBody = await response.json()
-
-        at /home/runner/work/dokan/dokan/tests/e2e/tests/api/admins.spec.ts:104:31
-]]>
-</failure>
 </testcase>
 </testsuite>
 </testsuites>
