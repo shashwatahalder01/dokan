@@ -565,12 +565,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/PHPCSStandards/PHPCSExtra.git",
-                "reference": "7d9629e373b8c50fa93729d2b585dd457e85b61e"
+                "reference": "fa4fe20661dea6b15dcb075e70782d2c440cba07"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/PHPCSStandards/PHPCSExtra/zipball/7d9629e373b8c50fa93729d2b585dd457e85b61e",
-                "reference": "7d9629e373b8c50fa93729d2b585dd457e85b61e",
+                "url": "https://api.github.com/repos/PHPCSStandards/PHPCSExtra/zipball/fa4fe20661dea6b15dcb075e70782d2c440cba07",
+                "reference": "fa4fe20661dea6b15dcb075e70782d2c440cba07",
                 "shasum": ""
             },
             "require": {
@@ -621,7 +621,7 @@
                 "issues": "https://github.com/PHPCSStandards/PHPCSExtra/issues",
                 "source": "https://github.com/PHPCSStandards/PHPCSExtra"
             },
-            "time": "2022-12-01T23:31:10+00:00"
+            "time": "2022-12-04T06:18:18+00:00"
         },
         {
             "name": "phpcsstandards/phpcsutils",
@@ -2262,12 +2262,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/WordPress/WordPress-Coding-Standards.git",
-                "reference": "80115b259fbd4d5a0c33b21288f3417da29a51eb"
+                "reference": "6132a3a67f7ab3ca0276ead37223b4d30a6a7d43"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/WordPress/WordPress-Coding-Standards/zipball/80115b259fbd4d5a0c33b21288f3417da29a51eb",
-                "reference": "80115b259fbd4d5a0c33b21288f3417da29a51eb",
+                "url": "https://api.github.com/repos/WordPress/WordPress-Coding-Standards/zipball/6132a3a67f7ab3ca0276ead37223b4d30a6a7d43",
+                "reference": "6132a3a67f7ab3ca0276ead37223b4d30a6a7d43",
                 "shasum": ""
             },
             "require": {
@@ -2307,7 +2307,7 @@
                 "source": "https://github.com/WordPress/WordPress-Coding-Standards",
                 "wiki": "https://github.com/WordPress/WordPress-Coding-Standards/wiki"
             },
-            "time": "2022-12-02T09:29:48+00:00"
+            "time": "2022-12-04T16:33:01+00:00"
         }
     ],
     "aliases": [],
