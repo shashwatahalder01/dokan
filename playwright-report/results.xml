@@ -1,6 +1,6 @@
-<testsuites id="" name="" tests="1" failures="1" skipped="0" errors="0" time="26.661041000000026">
-<testsuite name="api/aapiPermalink.spec.ts" timestamp="1670208233711" hostname="" tests="1" failures="1" skipped="0" time="23.724" errors="0">
-<testcase name=" api test permalink set " classname="[chromium] › api/aapiPermalink.spec.ts ›  api test › permalink set " time="23.724">
+<testsuites id="" name="" tests="1" failures="1" skipped="0" errors="0" time="27.245092000000003">
+<testsuite name="api/aapiPermalink.spec.ts" timestamp="1670209625899" hostname="" tests="1" failures="1" skipped="0" time="24.357" errors="0">
+<testcase name=" api test permalink set " classname="[chromium] › api/aapiPermalink.spec.ts ›  api test › permalink set " time="24.357">
 <failure message="aapiPermalink.spec.ts:17:5 permalink set " type="FAILURE">
 <![CDATA[  [chromium] › api/aapiPermalink.spec.ts:17:5 ›  api test › permalink set  =========================
 
