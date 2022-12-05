@@ -1,22 +1,3309 @@
-<testsuites id="" name="" tests="1" failures="1" skipped="0" errors="0" time="3.296771000000008">
-<testsuite name="api/refunds.spec.ts" timestamp="1670235676362" hostname="" tests="1" failures="1" skipped="0" time="1.892" errors="0">
-<testcase name="refunds api test get all refunds by status" classname="[chromium] › api/refunds.spec.ts › refunds api test › get all refunds by status" time="1.892">
-<failure message="refunds.spec.ts:33:10 get all refunds by status" type="FAILURE">
-<![CDATA[  [chromium] › api/refunds.spec.ts:33:10 › refunds api test › get all refunds by status ============
+<testsuites id="" name="" tests="142" failures="38" skipped="30" errors="0" time="111.60300500000001">
+<testsuite name="api/abuseReports.spec.ts" timestamp="1670236563189" hostname="" tests="3" failures="0" skipped="3" time="0.001" errors="0">
+<testcase name="abuse report api test get all abuse report reasons" classname="[chromium] › api/abuseReports.spec.ts › abuse report api test › get all abuse report reasons" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="abuse report api test get all abuse reports" classname="[chromium] › api/abuseReports.spec.ts › abuse report api test › get all abuse reports" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="abuse report api test delete a abuse report" classname="[chromium] › api/abuseReports.spec.ts › abuse report api test › delete a abuse report" time="0.001">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="api/admins.spec.ts" timestamp="1670236563189" hostname="" tests="10" failures="0" skipped="0" time="5.802" errors="0">
+<testcase name="admin api test get admin report overview" classname="[chromium] › api/admins.spec.ts › admin api test › get admin report overview" time="1.567">
+<system-out>
+<![CDATA[http://localhost:8889?rest_route=/dokan/v1/admin/report/overview
+[33m200[39m
+]]>
+</system-out>
+</testcase>
+<testcase name="admin api test get admin report summary" classname="[chromium] › api/admins.spec.ts › admin api test › get admin report summary" time="0.21">
+</testcase>
+<testcase name="admin api test get getAdminDashboardFeed" classname="[chromium] › api/admins.spec.ts › admin api test › get getAdminDashboardFeed" time="0.372">
+</testcase>
+<testcase name="admin api test get admin help" classname="[chromium] › api/admins.spec.ts › admin api test › get admin help" time="1.833">
+</testcase>
+<testcase name="admin api test get changelog lite" classname="[chromium] › api/admins.spec.ts › admin api test › get changelog lite" time="0.254">
+</testcase>
+<testcase name="admin api test get changelog pro" classname="[chromium] › api/admins.spec.ts › admin api test › get changelog pro" time="0.226">
+</testcase>
+<testcase name="admin api test get getAdminNotices" classname="[chromium] › api/admins.spec.ts › admin api test › get getAdminNotices" time="0.179">
+</testcase>
+<testcase name="admin api test get admin promo notices " classname="[chromium] › api/admins.spec.ts › admin api test › get admin promo notices " time="0.774">
+</testcase>
+<testcase name="admin api test get admin logs " classname="[chromium] › api/admins.spec.ts › admin api test › get admin logs " time="0.203">
+</testcase>
+<testcase name="admin api test get admin export logs " classname="[chromium] › api/admins.spec.ts › admin api test › get admin export logs " time="0.184">
+</testcase>
+</testsuite>
+<testsuite name="api/announcements.spec.ts" timestamp="1670236563189" hostname="" tests="6" failures="0" skipped="0" time="2.088" errors="0">
+<testcase name="announcements api test get all announcements" classname="[chromium] › api/announcements.spec.ts › announcements api test › get all announcements" time="0.18">
+</testcase>
+<testcase name="announcements api test get single announcement" classname="[chromium] › api/announcements.spec.ts › announcements api test › get single announcement" time="0.37">
+</testcase>
+<testcase name="announcements api test create a announcement" classname="[chromium] › api/announcements.spec.ts › announcements api test › create a announcement" time="0.191">
+</testcase>
+<testcase name="announcements api test update a announcement" classname="[chromium] › api/announcements.spec.ts › announcements api test › update a announcement" time="0.385">
+</testcase>
+<testcase name="announcements api test delete a announcement" classname="[chromium] › api/announcements.spec.ts › announcements api test › delete a announcement" time="0.373">
+</testcase>
+<testcase name="announcements api test update batch announcements" classname="[chromium] › api/announcements.spec.ts › announcements api test › update batch announcements" time="0.589">
+<system-out>
+<![CDATA[[ [33m16[39m, [33m17[39m, [33m18[39m, [33m15[39m ]
+]]>
+</system-out>
+</testcase>
+</testsuite>
+<testsuite name="api/coupons.spec.ts" timestamp="1670236563189" hostname="" tests="5" failures="4" skipped="0" time="2.034" errors="0">
+<testcase name="coupon api test get all coupons" classname="[chromium] › api/coupons.spec.ts › coupon api test › get all coupons" time="0.172">
+</testcase>
+<testcase name="coupon api test get single coupon" classname="[chromium] › api/coupons.spec.ts › coupon api test › get single coupon" time="0.493">
+<failure message="coupons.spec.ts:31:5 get single coupon" type="FAILURE">
+<![CDATA[  [chromium] › api/coupons.spec.ts:31:5 › coupon api test › get single coupon ======================
 
     Error: expect(received).toBeTruthy()
 
     Received: false
 
-      34 |         // let response = await request.get(endPoints.getAllRefundsByStatus('pending')) // pending, cancelled, completed
-      35 |         let response = await request.get(endPoints.getAllRefundsByStatus('completed')) // pending, cancelled, completed
+      34 |
+      35 |         let response = await request.get(endPoints.getSingleCoupon(couponId))
     > 36 |         expect(response.ok()).toBeTruthy()
          |                               ^
       37 |         expect(response.status()).toBe(200)
       38 |
       39 |         let responseBody = await response.json()
 
-        at /home/runner/work/dokan/dokan/tests/e2e/tests/api/refunds.spec.ts:36:31
+        at /home/runner/work/dokan/dokan/tests/e2e/tests/api/coupons.spec.ts:36:31
+]]>
+</failure>
+</testcase>
+<testcase name="coupon api test create a coupon" classname="[chromium] › api/coupons.spec.ts › coupon api test › create a coupon" time="0.345">
+<failure message="coupons.spec.ts:44:5 create a coupon" type="FAILURE">
+<![CDATA[  [chromium] › api/coupons.spec.ts:44:5 › coupon api test › create a coupon ========================
+
+    Error: expect(received).toBeTruthy()
+
+    Received: false
+
+      49 |
+      50 |         let response = await request.post(endPoints.createCoupon, { data: payloads.createCoupon() })
+    > 51 |         expect(response.ok()).toBeTruthy()
+         |                               ^
+      52 |         expect(response.status()).toBe(200)
+      53 |
+      54 |         let responseBody = await response.json()
+
+        at /home/runner/work/dokan/dokan/tests/e2e/tests/api/coupons.spec.ts:51:31
+]]>
+</failure>
+</testcase>
+<testcase name="coupon api test update a coupon" classname="[chromium] › api/coupons.spec.ts › coupon api test › update a coupon" time="0.504">
+<failure message="coupons.spec.ts:59:5 update a coupon" type="FAILURE">
+<![CDATA[  [chromium] › api/coupons.spec.ts:59:5 › coupon api test › update a coupon ========================
+
+    Error: expect(received).toBeTruthy()
+
+    Received: false
+
+      62 |
+      63 |         let response = await request.put(endPoints.updateCoupon(couponId), { data: payloads.updateCoupon() })
+    > 64 |         expect(response.ok()).toBeTruthy()
+         |                               ^
+      65 |         expect(response.status()).toBe(200)
+      66 |
+      67 |         let responseBody = await response.json()
+
+        at /home/runner/work/dokan/dokan/tests/e2e/tests/api/coupons.spec.ts:64:31
+]]>
+</failure>
+</testcase>
+<testcase name="coupon api test delete a coupon" classname="[chromium] › api/coupons.spec.ts › coupon api test › delete a coupon" time="0.52">
+<failure message="coupons.spec.ts:72:5 delete a coupon" type="FAILURE">
+<![CDATA[  [chromium] › api/coupons.spec.ts:72:5 › coupon api test › delete a coupon ========================
+
+    Error: expect(received).toBeTruthy()
+
+    Received: false
+
+      75 |
+      76 |         let response = await request.delete(endPoints.deleteCoupon(couponId))
+    > 77 |         expect(response.ok()).toBeTruthy()
+         |                               ^
+      78 |         expect(response.status()).toBe(200)
+      79 |
+      80 |         let responseBody = await response.json()
+
+        at /home/runner/work/dokan/dokan/tests/e2e/tests/api/coupons.spec.ts:77:31
+]]>
+</failure>
+</testcase>
+</testsuite>
+<testsuite name="api/customers.spec.ts" timestamp="1670236563189" hostname="" tests="5" failures="1" skipped="0" time="1.687" errors="0">
+<testcase name="customers api test get all customers" classname="[chromium] › api/customers.spec.ts › customers api test › get all customers" time="0.175">
+</testcase>
+<testcase name="customers api test get single customer" classname="[chromium] › api/customers.spec.ts › customers api test › get single customer" time="0.423">
+</testcase>
+<testcase name="customers api test create a customer" classname="[chromium] › api/customers.spec.ts › customers api test › create a customer" time="0.248">
+</testcase>
+<testcase name="customers api test update a customer" classname="[chromium] › api/customers.spec.ts › customers api test › update a customer" time="0.434">
+</testcase>
+<testcase name="customers api test delete a customer" classname="[chromium] › api/customers.spec.ts › customers api test › delete a customer" time="0.407">
+<failure message="customers.spec.ts:66:5 delete a customer" type="FAILURE">
+<![CDATA[  [chromium] › api/customers.spec.ts:66:5 › customers api test › delete a customer =================
+
+    Error: expect(received).toBeTruthy()
+
+    Received: false
+
+      69 |
+      70 |         let response = await request.delete(endPoints.deleteCustomer(customerId))
+    > 71 |         expect(response.ok()).toBeTruthy()
+         |                               ^
+      72 |         expect(response.status()).toBe(200)
+      73 |
+      74 |         let responseBody = await response.json()
+
+        at /home/runner/work/dokan/dokan/tests/e2e/tests/api/customers.spec.ts:71:31
+]]>
+</failure>
+</testcase>
+</testsuite>
+<testsuite name="api/dummyData.spec.ts" timestamp="1670236563189" hostname="" tests="2" failures="0" skipped="0" time="0.374" errors="0">
+<testcase name="dummy Data api test get dummy data status" classname="[chromium] › api/dummyData.spec.ts › dummy Data api test › get dummy data status" time="0.192">
+</testcase>
+<testcase name="dummy Data api test clear dummuy data" classname="[chromium] › api/dummyData.spec.ts › dummy Data api test › clear dummuy data" time="0.182">
+</testcase>
+</testsuite>
+<testsuite name="api/followStores.spec.ts" timestamp="1670236563189" hostname="" tests="2" failures="1" skipped="0" time="0.888" errors="0">
+<testcase name="follow store api test get store follow status" classname="[chromium] › api/followStores.spec.ts › follow store api test › get store follow status" time="0.427">
+<failure message="followStores.spec.ts:23:5 get store follow status" type="FAILURE">
+<![CDATA[  [chromium] › api/followStores.spec.ts:23:5 › follow store api test › get store follow status =====
+
+    Error: expect(received).toBeTruthy()
+
+    Received: false
+
+      26 |
+      27 |         let response = await request.get(endPoints.getStoreFollowStatus(sellerId))
+    > 28 |         expect(response.ok()).toBeTruthy()
+         |                               ^
+      29 |         expect(response.status()).toBe(200)
+      30 |
+      31 |         let responseBody = await response.json()
+
+        at /home/runner/work/dokan/dokan/tests/e2e/tests/api/followStores.spec.ts:28:31
+]]>
+</failure>
+<system-out>
+<![CDATA[{
+  id: [33m7[39m,
+  store_name: [32m'Aiyana'[39m,
+  first_name: [32m'Viva'[39m,
+  last_name: [32m'Friesen'[39m,
+  email: [32m'Eladio.Blanda52@gmail.com'[39m,
+  social: {
+    fb: [32m'http://dokan.test'[39m,
+    youtube: [32m'http://dokan.test'[39m,
+    twitter: [32m'http://dokan.test'[39m,
+    linkedin: [32m'http://dokan.test'[39m,
+    pinterest: [32m'http://dokan.test'[39m,
+    instagram: [32m'http://dokan.test'[39m,
+    flickr: [32m'http://dokan.test'[39m
+  },
+  phone: [32m'0123456789'[39m,
+  show_email: [33mfalse[39m,
+  address: {
+    street_1: [32m'abc street'[39m,
+    street_2: [32m'xyz street'[39m,
+    city: [32m'New York'[39m,
+    zip: [32m'10003'[39m,
+    state: [32m'NY'[39m,
+    country: [32m'US'[39m
+  },
+  location: [32m''[39m,
+  banner: [32m''[39m,
+  banner_id: [33m0[39m,
+  gravatar: [32m'http://1.gravatar.com/avatar/70802315c86d0875b6218841fbe0ae1e?s=96&d=mm&r=g'[39m,
+  gravatar_id: [33m0[39m,
+  shop_url: [32m'http://localhost:8889/store/johnathan3877fd33-4665-4639-b37e-3fd80ac60a06/'[39m,
+  products_per_page: [33m12[39m,
+  show_more_product_tab: [33mtrue[39m,
+  toc_enabled: [33mfalse[39m,
+  store_toc: [32m''[39m,
+  featured: [33mtrue[39m,
+  rating: { rating: [32m'No Ratings found yet'[39m, count: [33m0[39m },
+  enabled: [33mtrue[39m,
+  registered: [32m'2022-12-05 10:36:26'[39m,
+  payment: {
+    paypal: { [32m'0'[39m: [32m'email'[39m, email: [32m'paypal@g.c'[39m },
+    bank: {
+      ac_name: [32m'account name'[39m,
+      ac_type: [32m'personal'[39m,
+      ac_number: [32m'1234567'[39m,
+      bank_name: [32m'bank name'[39m,
+      bank_addr: [32m'bank address'[39m,
+      routing_number: [32m'123456'[39m,
+      iban: [32m'123456'[39m,
+      swift: [32m'12345'[39m
+    },
+    stripe: [33mfalse[39m
+  },
+  trusted: [33mtrue[39m,
+  store_open_close: {
+    enabled: [33mfalse[39m,
+    time: {
+      enabled: [33mfalse[39m,
+      time: [],
+      open_notice: [32m'Store is open'[39m,
+      close_notice: [32m'Store is closed'[39m
+    },
+    open_notice: [32m'Store is open'[39m,
+    close_notice: [32m'Store is closed'[39m
+  },
+  company_name: [32m''[39m,
+  vat_number: [32m''[39m,
+  company_id_number: [32m''[39m,
+  bank_name: [32m''[39m,
+  bank_iban: [32m''[39m,
+  admin_commission: [32m''[39m,
+  admin_additional_fee: [32m''[39m,
+  admin_commission_type: [32m''[39m,
+  _links: { self: [ [36m[Object][39m ], collection: [ [36m[Object][39m ] }
+}
+]]>
+</system-out>
+</testcase>
+<testcase name="follow store api test follow-unfollow a store" classname="[chromium] › api/followStores.spec.ts › follow store api test › follow-unfollow a store" time="0.461">
+<system-out>
+<![CDATA[{
+  id: [33m8[39m,
+  store_name: [32m'Lea'[39m,
+  first_name: [32m'Webster'[39m,
+  last_name: [32m'Schmitt'[39m,
+  email: [32m'Nick11@gmail.com'[39m,
+  social: {
+    fb: [32m'http://dokan.test'[39m,
+    youtube: [32m'http://dokan.test'[39m,
+    twitter: [32m'http://dokan.test'[39m,
+    linkedin: [32m'http://dokan.test'[39m,
+    pinterest: [32m'http://dokan.test'[39m,
+    instagram: [32m'http://dokan.test'[39m,
+    flickr: [32m'http://dokan.test'[39m
+  },
+  phone: [32m'0123456789'[39m,
+  show_email: [33mfalse[39m,
+  address: {
+    street_1: [32m'abc street'[39m,
+    street_2: [32m'xyz street'[39m,
+    city: [32m'New York'[39m,
+    zip: [32m'10003'[39m,
+    state: [32m'NY'[39m,
+    country: [32m'US'[39m
+  },
+  location: [32m''[39m,
+  banner: [32m''[39m,
+  banner_id: [33m0[39m,
+  gravatar: [32m'http://0.gravatar.com/avatar/f16b53398c928ccfc3f3db44690b5128?s=96&d=mm&r=g'[39m,
+  gravatar_id: [33m0[39m,
+  shop_url: [32m'http://localhost:8889/store/kariane170c5944-65b9-4fd7-b795-fe2ecd4302dd/'[39m,
+  products_per_page: [33m12[39m,
+  show_more_product_tab: [33mtrue[39m,
+  toc_enabled: [33mfalse[39m,
+  store_toc: [32m''[39m,
+  featured: [33mtrue[39m,
+  rating: { rating: [32m'No Ratings found yet'[39m, count: [33m0[39m },
+  enabled: [33mtrue[39m,
+  registered: [32m'2022-12-05 10:36:28'[39m,
+  payment: {
+    paypal: { [32m'0'[39m: [32m'email'[39m, email: [32m'paypal@g.c'[39m },
+    bank: {
+      ac_name: [32m'account name'[39m,
+      ac_type: [32m'personal'[39m,
+      ac_number: [32m'1234567'[39m,
+      bank_name: [32m'bank name'[39m,
+      bank_addr: [32m'bank address'[39m,
+      routing_number: [32m'123456'[39m,
+      iban: [32m'123456'[39m,
+      swift: [32m'12345'[39m
+    },
+    stripe: [33mfalse[39m
+  },
+  trusted: [33mtrue[39m,
+  store_open_close: {
+    enabled: [33mfalse[39m,
+    time: {
+      enabled: [33mfalse[39m,
+      time: [],
+      open_notice: [32m'Store is open'[39m,
+      close_notice: [32m'Store is closed'[39m
+    },
+    open_notice: [32m'Store is open'[39m,
+    close_notice: [32m'Store is closed'[39m
+  },
+  company_name: [32m''[39m,
+  vat_number: [32m''[39m,
+  company_id_number: [32m''[39m,
+  bank_name: [32m''[39m,
+  bank_iban: [32m''[39m,
+  admin_commission: [32m''[39m,
+  admin_additional_fee: [32m''[39m,
+  admin_commission_type: [32m''[39m,
+  _links: { self: [ [36m[Object][39m ], collection: [ [36m[Object][39m ] }
+}
+]]>
+</system-out>
+</testcase>
+</testsuite>
+<testsuite name="api/modules.spec.ts" timestamp="1670236563189" hostname="" tests="3" failures="0" skipped="0" time="1.069" errors="0">
+<testcase name="modules api test get all modules" classname="[chromium] › api/modules.spec.ts › modules api test › get all modules" time="0.172">
+</testcase>
+<testcase name="modules api test deactivate a module" classname="[chromium] › api/modules.spec.ts › modules api test › deactivate a module" time="0.53">
+<system-out>
+<![CDATA[shipstation
+[
+  {
+    id: [32m'booking'[39m,
+    name: [32m'WooCommerce Booking Integration'[39m,
+    description: [32m'Integrates WooCommerce Booking with Dokan.'[39m,
+    thumbnail: [32m'http://localhost:8889/wp-content/plugins/dokan-pro/assets/images/modules/booking.svg'[39m,
+    plan: [ [32m'business'[39m, [32m'enterprise'[39m ],
+    active: [33mtrue[39m,
+    available: [33mtrue[39m,
+    doc_id: [33m93500[39m,
+    doc_link: [32m'https://wedevs.com/docs/dokan/modules/dokan-bookings/'[39m,
+    mod_link: [32m'https://wedevs.com/dokan/extensions/woocommerce-booking-integration/'[39m,
+    pre_requisites: [32m'Requirements: WooCommerce Bookings plugin'[39m,
+    categories: [ [32m'Product Management'[39m, [32m'Integration'[39m ],
+    video_id: [32m'F5oofXmuUqo'[39m
+  },
+  {
+    id: [32m'color_scheme_customizer'[39m,
+    name: [32m'Color Scheme Customizer'[39m,
+    description: [32m'A Dokan plugin Add-on to Customize Colors of Dokan Dashboard'[39m,
+    thumbnail: [32m'http://localhost:8889/wp-content/plugins/dokan-pro/assets/images/modules/color-scheme-customizer.svg'[39m,
+    plan: [
+      [32m'starter'[39m,
+      [32m'liquidweb'[39m,
+      [32m'professional'[39m,
+      [32m'business'[39m,
+      [32m'enterprise'[39m
+    ],
+    active: [33mtrue[39m,
+    available: [33mtrue[39m,
+    doc_id: [33m102550[39m,
+    doc_link: [32m'https://wedevs.com/docs/dokan/modules/color-scheme/'[39m,
+    mod_link: [32m'https://wedevs.com/dokan/modules/color-scheme-customizer/'[39m,
+    pre_requisites: [1mnull[22m,
+    categories: [ [32m'UI & UX'[39m ],
+    video_id: [32m'EXaJGzeKWHg'[39m
+  },
+  {
+    id: [32m'delivery_time'[39m,
+    name: [32m'Delivery Time'[39m,
+    description: [32m'Let customer choose their order delivery date & time'[39m,
+    thumbnail: [32m'http://localhost:8889/wp-content/plugins/dokan-pro/assets/images/modules/delivery-time.svg'[39m,
+    plan: [
+      [32m'starter'[39m,
+      [32m'liquidweb'[39m,
+      [32m'professional'[39m,
+      [32m'business'[39m,
+      [32m'enterprise'[39m
+    ],
+    active: [33mtrue[39m,
+    available: [33mtrue[39m,
+    doc_id: [33m157825[39m,
+    doc_link: [32m'https://wedevs.com/docs/dokan/modules/dokan-delivery-time/'[39m,
+    mod_link: [32m'https://wedevs.com/dokan/modules/delivery-time'[39m,
+    pre_requisites: [1mnull[22m,
+    categories: [ [32m'Shipping'[39m ],
+    video_id: [1mnull[22m
+  },
+  {
+    id: [32m'elementor'[39m,
+    name: [32m'Elementor'[39m,
+    description: [32m'Elementor Page Builder widgets for Dokan'[39m,
+    thumbnail: [32m'http://localhost:8889/wp-content/plugins/dokan-pro/assets/images/modules/elementor.svg'[39m,
+    plan: [ [32m'professional'[39m, [32m'business'[39m, [32m'enterprise'[39m ],
+    active: [33mtrue[39m,
+    available: [33mtrue[39m,
+    doc_id: [33m181872[39m,
+    doc_link: [32m'https://wedevs.com/docs/dokan/modules/elementor-dokan/'[39m,
+    mod_link: [32m'https://wedevs.com/dokan/modules/elementor/'[39m,
+    pre_requisites: [32m'Requirements: Elementor Free and Elementor Pro'[39m,
+    categories: [ [32m'UI & UX'[39m, [32m'Integration'[39m ],
+    video_id: [1mnull[22m
+  },
+  {
+    id: [32m'export_import'[39m,
+    name: [32m'Vendor Product Importer and Exporter'[39m,
+    description: [32m'This is simple product import and export plugin for vendor'[39m,
+    thumbnail: [32m'http://localhost:8889/wp-content/plugins/dokan-pro/assets/images/modules/import-export.svg'[39m,
+    plan: [ [32m'business'[39m, [32m'enterprise'[39m ],
+    active: [33mtrue[39m,
+    available: [33mtrue[39m,
+    doc_id: [33m93320[39m,
+    doc_link: [32m'https://wedevs.com/docs/dokan/modules/how-to-install-and-use-dokan-exportimport-add/'[39m,
+    mod_link: [32m'https://wedevs.com/dokan/modules/export-import/'[39m,
+    pre_requisites: [1mnull[22m,
+    categories: [ [32m'Product Management'[39m ],
+    video_id: [1mnull[22m
+  },
+  {
+    id: [32m'follow_store'[39m,
+    name: [32m'Follow Store'[39m,
+    description: [32m'Send emails to customers when their favorite store updates.'[39m,
+    thumbnail: [32m'http://localhost:8889/wp-content/plugins/dokan-pro/assets/images/modules/follow-store.svg'[39m,
+    plan: [ [32m'professional'[39m, [32m'business'[39m, [32m'enterprise'[39m ],
+    active: [33mtrue[39m,
+    available: [33mtrue[39m,
+    doc_id: [33m152781[39m,
+    doc_link: [32m'https://wedevs.com/docs/dokan/modules/follow-store/'[39m,
+    mod_link: [32m'https://wedevs.com/dokan/modules/follow-store/'[39m,
+    pre_requisites: [1mnull[22m,
+    categories: [ [32m'Store Management'[39m ],
+    video_id: [32m'v76PnEN5ceQ'[39m
+  },
+  {
+    id: [32m'geolocation'[39m,
+    name: [32m'Geolocation'[39m,
+    description: [32m'Search Products and Vendors by geolocation.'[39m,
+    thumbnail: [32m'http://localhost:8889/wp-content/plugins/dokan-pro/assets/images/modules/geolocation.svg'[39m,
+    plan: [ [32m'business'[39m, [32m'enterprise'[39m ],
+    active: [33mtrue[39m,
+    available: [33mtrue[39m,
+    doc_id: [33m138048[39m,
+    doc_link: [32m'https://wedevs.com/docs/dokan/modules/dokan-geolocation/'[39m,
+    mod_link: [32m'https://wedevs.com/dokan/modules/geolocation/'[39m,
+    pre_requisites: [1mnull[22m,
+    categories: [ [32m'Store Management'[39m, [32m'Product Management'[39m ],
+    video_id: [1mnull[22m
+  },
+  {
+    id: [32m'germanized'[39m,
+    name: [32m'EU Compliance Fields'[39m,
+    description: [32m'EU Compliance Fields Support for Vendors.'[39m,
+    thumbnail: [32m'http://localhost:8889/wp-content/plugins/dokan-pro/assets/images/modules/germanized.svg'[39m,
+    plan: [
+      [32m'starter'[39m,
+      [32m'liquidweb'[39m,
+      [32m'professional'[39m,
+      [32m'business'[39m,
+      [32m'enterprise'[39m
+    ],
+    active: [33mtrue[39m,
+    available: [33mtrue[39m,
+    doc_id: [33m138048[39m,
+    doc_link: [32m'https://wedevs.com/docs/dokan/modules/eu-compliance-fields/'[39m,
+    mod_link: [32m'https://wedevs.com/dokan/modules/eu-compliance-fields'[39m,
+    pre_requisites: [1mnull[22m,
+    categories: [ [32m'Store Management'[39m ],
+    video_id: [1mnull[22m
+  },
+  {
+    id: [32m'live_chat'[39m,
+    name: [32m'Live Chat'[39m,
+    description: [32m'Live Chat Between Vendor & Customer.'[39m,
+    thumbnail: [32m'http://localhost:8889/wp-content/plugins/dokan-pro/assets/images/modules/live-chat.svg'[39m,
+    plan: [ [32m'business'[39m, [32m'enterprise'[39m ],
+    active: [33mtrue[39m,
+    available: [33mtrue[39m,
+    doc_id: [33m126767[39m,
+    doc_link: [32m'https://wedevs.com/docs/dokan/modules/dokan-live-chat/'[39m,
+    mod_link: [32m'https://wedevs.com/dokan/modules/live-chat/'[39m,
+    pre_requisites: [1mnull[22m,
+    categories: [ [32m'Store Management'[39m ],
+    video_id: [32m'BHuTLjY78cY'[39m
+  },
+  {
+    id: [32m'live_search'[39m,
+    name: [32m'Live Search'[39m,
+    description: [32m'Live product search for WooCommerce store.'[39m,
+    thumbnail: [32m'http://localhost:8889/wp-content/plugins/dokan-pro/assets/images/modules/ajax-live-search.svg'[39m,
+    plan: [ [32m'professional'[39m, [32m'business'[39m, [32m'enterprise'[39m ],
+    active: [33mtrue[39m,
+    available: [33mtrue[39m,
+    doc_id: [33m93303[39m,
+    doc_link: [32m'https://wedevs.com/docs/dokan/modules/how-to-install-configure-use-dokan-live-search/'[39m,
+    mod_link: [32m'https://wedevs.com/dokan/modules/ajax-live-search/'[39m,
+    pre_requisites: [1mnull[22m,
+    categories: [ [32m'Product Management'[39m ],
+    video_id: [32m'lvuR-QCJDIo'[39m
+  },
+  {
+    id: [32m'moip'[39m,
+    name: [32m'Wirecard'[39m,
+    description: [32m'Wirecard payment gateway for Dokan.'[39m,
+    thumbnail: [32m'http://localhost:8889/wp-content/plugins/dokan-pro/assets/images/modules/wirecard-connect.svg'[39m,
+    plan: [ [32m'professional'[39m, [32m'business'[39m, [32m'enterprise'[39m ],
+    active: [33mtrue[39m,
+    available: [33mtrue[39m,
+    doc_id: [33m138385[39m,
+    doc_link: [32m'https://wedevs.com/docs/dokan/modules/dokan-moip-connect/'[39m,
+    mod_link: [32m'https://wedevs.com/dokan/modules/moip/'[39m,
+    pre_requisites: [1mnull[22m,
+    categories: [ [32m'Payment'[39m ],
+    video_id: [1mnull[22m
+  },
+  {
+    id: [32m'dokan_paypal_ap'[39m,
+    name: [32m'PayPal Adaptive Payment'[39m,
+    description: [32m'Allows to send split payments to vendor via PayPal Adaptive Payment gateway.'[39m,
+    thumbnail: [32m'http://localhost:8889/wp-content/plugins/dokan-pro/assets/images/modules/paypal-adaptive.svg'[39m,
+    plan: [ [32m'professional'[39m, [32m'business'[39m, [32m'enterprise'[39m ],
+    active: [33mtrue[39m,
+    available: [33mtrue[39m,
+    doc_id: [1mnull[22m,
+    doc_link: [1mnull[22m,
+    mod_link: [1mnull[22m,
+    pre_requisites: [1mnull[22m,
+    categories: [ [32m'Payment'[39m ],
+    video_id: [1mnull[22m
+  },
+  {
+    id: [32m'paypal_marketplace'[39m,
+    name: [32m'PayPal Marketplace'[39m,
+    description: [32m'Enable Split payments, Multi-seller payments and all PayPal Commerce Platform (PCP) features.'[39m,
+    thumbnail: [32m'http://localhost:8889/wp-content/plugins/dokan-pro/assets/images/modules/paypal-marketplace.svg'[39m,
+    plan: [ [32m'business'[39m, [32m'enterprise'[39m ],
+    active: [33mtrue[39m,
+    available: [33mtrue[39m,
+    doc_id: [1mnull[22m,
+    doc_link: [32m'https://wedevs.com/docs/dokan/modules/paypal-marketplace/'[39m,
+    mod_link: [32m'https://wedevs.com/dokan/modules/dokan-paypal-marketplace'[39m,
+    pre_requisites: [1mnull[22m,
+    categories: [ [32m'Payment'[39m ],
+    video_id: [1mnull[22m
+  },
+  {
+    id: [32m'product_addon'[39m,
+    name: [32m'Product Addon'[39m,
+    description: [32m'WooCommerce Product Addon support'[39m,
+    thumbnail: [32m'http://localhost:8889/wp-content/plugins/dokan-pro/assets/images/modules/product-addon.svg'[39m,
+    plan: [ [32m'professional'[39m, [32m'business'[39m, [32m'enterprise'[39m ],
+    active: [33mtrue[39m,
+    available: [33mtrue[39m,
+    doc_id: [33m247645[39m,
+    doc_link: [32m'https://wedevs.com/docs/dokan/modules/product-addon/'[39m,
+    mod_link: [32m'https://wedevs.com/dokan/modules/product-addons/'[39m,
+    pre_requisites: [32m'Requirements: WooCommerce Product Addon extension'[39m,
+    categories: [ [32m'Product Management'[39m, [32m'Integration'[39m ],
+    video_id: [32m'goKBE5L-3cg'[39m
+  },
+  {
+    id: [32m'product_enquiry'[39m,
+    name: [32m'Product Enquiry'[39m,
+    description: [32m'Enquiry for a specific product to a seller.'[39m,
+    thumbnail: [32m'http://localhost:8889/wp-content/plugins/dokan-pro/assets/images/modules/product-enquiry.svg'[39m,
+    plan: [ [32m'business'[39m, [32m'enterprise'[39m ],
+    active: [33mtrue[39m,
+    available: [33mtrue[39m,
+    doc_id: [33m93453[39m,
+    doc_link: [32m'https://wedevs.com/docs/dokan/modules/how-to-install-configure-use-dokan-product-enquiry/'[39m,
+    mod_link: [32m'https://wedevs.com/dokan/modules/product-enquiry/'[39m,
+    pre_requisites: [1mnull[22m,
+    categories: [ [32m'Product Management'[39m ],
+    video_id: [32m'edRLlpmOf-E'[39m
+  },
+  {
+    id: [32m'report_abuse'[39m,
+    name: [32m'Report Abuse'[39m,
+    description: [32m'Let customers report fraudulent or fake products.'[39m,
+    thumbnail: [32m'http://localhost:8889/wp-content/plugins/dokan-pro/assets/images/modules/report-abuse.svg'[39m,
+    plan: [ [32m'professional'[39m, [32m'business'[39m, [32m'enterprise'[39m ],
+    active: [33mtrue[39m,
+    available: [33mtrue[39m,
+    doc_id: [33m176173[39m,
+    doc_link: [32m'https://wedevs.com/docs/dokan/modules/dokan-report-abuse/'[39m,
+    mod_link: [1mnull[22m,
+    pre_requisites: [1mnull[22m,
+    categories: [ [32m'Store Management'[39m ],
+    video_id: [1mnull[22m
+  },
+  {
+    id: [32m'rma'[39m,
+    name: [32m'Return and Warranty Request'[39m,
+    description: [32m'Manage return and warranty from vendor end.'[39m,
+    thumbnail: [32m'http://localhost:8889/wp-content/plugins/dokan-pro/assets/images/modules/rma.svg'[39m,
+    plan: [ [32m'professional'[39m, [32m'business'[39m, [32m'enterprise'[39m ],
+    active: [33mtrue[39m,
+    available: [33mtrue[39m,
+    doc_id: [33m157608[39m,
+    doc_link: [32m'https://wedevs.com/docs/dokan/modules/vendor-rma/'[39m,
+    mod_link: [32m'https://wedevs.com/dokan/modules/rma/'[39m,
+    pre_requisites: [1mnull[22m,
+    categories: [ [32m'Order Management'[39m ],
+    video_id: [32m'j0s8d8u6qYs'[39m
+  },
+  {
+    id: [32m'seller_vacation'[39m,
+    name: [32m'Seller Vacation'[39m,
+    description: [32m'Using this plugin seller can go to vacation by closing their stores.'[39m,
+    thumbnail: [32m'http://localhost:8889/wp-content/plugins/dokan-pro/assets/images/modules/seller-vacation.svg'[39m,
+    plan: [ [32m'business'[39m, [32m'enterprise'[39m ],
+    active: [33mtrue[39m,
+    available: [33mtrue[39m,
+    doc_id: [33m2880[39m,
+    doc_link: [32m'https://wedevs.com/docs/dokan/modules/dokan-vendor-vacation/'[39m,
+    mod_link: [32m'https://wedevs.com/dokan/modules/vendor-vacation/'[39m,
+    pre_requisites: [1mnull[22m,
+    categories: [ [32m'Store Management'[39m ],
+    video_id: [32m'6pd7_3ZPKH4'[39m
+  },
+  {
+    id: [32m'shipstation'[39m,
+    name: [32m'ShipStation Integration'[39m,
+    description: [32m'Adds ShipStation label printing support to Dokan. Requires server DomDocument support.'[39m,
+    thumbnail: [32m'http://localhost:8889/wp-content/plugins/dokan-pro/assets/images/modules/shipstation.svg'[39m,
+    plan: [ [32m'business'[39m, [32m'enterprise'[39m ],
+    active: [33mfalse[39m,
+    available: [33mtrue[39m,
+    doc_id: [33m152770[39m,
+    doc_link: [32m'https://wedevs.com/docs/dokan/modules/shipstation-dokan-wedevs/'[39m,
+    mod_link: [32m'https://wedevs.com/dokan/modules/shipstation/'[39m,
+    pre_requisites: [1mnull[22m,
+    categories: [ [32m'Shipping'[39m ],
+    video_id: [1mnull[22m
+  },
+  {
+    id: [32m'auction'[39m,
+    name: [32m'Auction Integration'[39m,
+    description: [32m'A plugin that combined WooCommerce simple auction and Dokan plugin.'[39m,
+    thumbnail: [32m'http://localhost:8889/wp-content/plugins/dokan-pro/assets/images/modules/auction.svg'[39m,
+    plan: [ [32m'business'[39m, [32m'enterprise'[39m ],
+    active: [33mtrue[39m,
+    available: [33mtrue[39m,
+    doc_id: [33m93366[39m,
+    doc_link: [32m'https://wedevs.com/docs/dokan/modules/woocommerce-auctions-frontend-multivendor-marketplace/'[39m,
+    mod_link: [32m'https://wedevs.com/dokan/modules/dokan-simple-auctions/'[39m,
+    pre_requisites: [32m'Requirements: WooCommerce Simple Auctions'[39m,
+    categories: [ [32m'Product Management'[39m, [32m'Integration'[39m ],
+    video_id: [32m'TvwSvMSu8Rg'[39m
+  },
+  {
+    id: [32m'spmv'[39m,
+    name: [32m'Single Product Multiple Vendor'[39m,
+    description: [32m'A module that offers multiple vendor to sell a single product.'[39m,
+    thumbnail: [32m'http://localhost:8889/wp-content/plugins/dokan-pro/assets/images/modules/single-product-multivendor.svg'[39m,
+    plan: [ [32m'professional'[39m, [32m'business'[39m, [32m'enterprise'[39m ],
+    active: [33mtrue[39m,
+    available: [33mtrue[39m,
+    doc_id: [33m106646[39m,
+    doc_link: [32m'https://wedevs.com/docs/dokan/modules/single-product-multiple-vendor/'[39m,
+    mod_link: [32m'https://wedevs.com/dokan/modules/single-product-multivendor/'[39m,
+    pre_requisites: [1mnull[22m,
+    categories: [ [32m'Product Management'[39m ],
+    video_id: [32m'ByiWWObvF0c'[39m
+  },
+  {
+    id: [32m'store_reviews'[39m,
+    name: [32m'Store Reviews'[39m,
+    description: [32m'A plugin that allows customers to rate the sellers.'[39m,
+    thumbnail: [32m'http://localhost:8889/wp-content/plugins/dokan-pro/assets/images/modules/vendor-review.svg'[39m,
+    plan: [ [32m'professional'[39m, [32m'business'[39m, [32m'enterprise'[39m ],
+    active: [33mtrue[39m,
+    available: [33mtrue[39m,
+    doc_id: [33m93511[39m,
+    doc_link: [32m'https://wedevs.com/docs/dokan/modules/vendor-review/'[39m,
+    mod_link: [32m'https://wedevs.com/dokan/modules/dokan-vendor-review/'[39m,
+    pre_requisites: [1mnull[22m,
+    categories: [ [32m'Store Management'[39m ],
+    video_id: [32m'rX7ZTGa3GzI'[39m
+  },
+  {
+    id: [32m'store_support'[39m,
+    name: [32m'Store Support'[39m,
+    description: [32m'Enable vendors to provide support to customers from store page.'[39m,
+    thumbnail: [32m'http://localhost:8889/wp-content/plugins/dokan-pro/assets/images/modules/store-support.svg'[39m,
+    plan: [ [32m'professional'[39m, [32m'business'[39m, [32m'enterprise'[39m ],
+    active: [33mtrue[39m,
+    available: [33mtrue[39m,
+    doc_id: [33m93425[39m,
+    doc_link: [32m'https://wedevs.com/docs/dokan/modules/how-to-install-and-use-store-support/'[39m,
+    mod_link: [32m'https://wedevs.com/dokan/modules/store-support/'[39m,
+    pre_requisites: [1mnull[22m,
+    categories: [ [32m'Store Management'[39m ],
+    video_id: [32m'YWnRWIhFlLM'[39m
+  },
+  {
+    id: [32m'stripe'[39m,
+    name: [32m'Stripe Connect'[39m,
+    description: [32m'Accept credit card payments and allow your sellers to get automatic split payment in Dokan via Stripe.'[39m,
+    thumbnail: [32m'http://localhost:8889/wp-content/plugins/dokan-pro/assets/images/modules/stripe.svg'[39m,
+    plan: [ [32m'liquidweb'[39m, [32m'professional'[39m, [32m'business'[39m, [32m'enterprise'[39m ],
+    active: [33mtrue[39m,
+    available: [33mtrue[39m,
+    doc_id: [33m93416[39m,
+    doc_link: [32m'https://wedevs.com/docs/dokan/modules/how-to-install-and-configure-dokan-stripe-connect/'[39m,
+    mod_link: [32m'https://wedevs.com/dokan/modules/stripe-connect/'[39m,
+    pre_requisites: [1mnull[22m,
+    categories: [ [32m'Payment'[39m ],
+    video_id: [32m'SVpRMSXMXtA'[39m
+  },
+  {
+    id: [32m'product_advertising'[39m,
+    name: [32m'Product Advertising'[39m,
+    description: [32m'Admin can earn more by allowing vendors to advertise their products and give them the right exposure.'[39m,
+    thumbnail: [32m'http://localhost:8889/wp-content/plugins/dokan-pro/assets/images/modules/product-adv.svg'[39m,
+    plan: [ [32m'business'[39m, [32m'enterprise'[39m ],
+    active: [33mtrue[39m,
+    available: [33mtrue[39m,
+    doc_id: [33m93321[39m,
+    doc_link: [32m'https://wedevs.com/docs/dokan/modules/product-advertising/'[39m,
+    mod_link: [32m'https://wedevs.com//dokan/modules/product-advertising'[39m,
+    pre_requisites: [1mnull[22m,
+    categories: [1mnull[22m,
+    video_id: [1mnull[22m
+  },
+  {
+    id: [32m'product_subscription'[39m,
+    name: [32m'Vendor Subscription'[39m,
+    description: [32m'Subscription pack add-on for Dokan vendors.'[39m,
+    thumbnail: [32m'http://localhost:8889/wp-content/plugins/dokan-pro/assets/images/modules/subscription.svg'[39m,
+    plan: [ [32m'professional'[39m, [32m'business'[39m, [32m'enterprise'[39m ],
+    active: [33mtrue[39m,
+    available: [33mtrue[39m,
+    doc_id: [33m93321[39m,
+    doc_link: [32m'https://wedevs.com/docs/dokan/modules/how-to-install-use-dokan-subscription/'[39m,
+    mod_link: [32m'https://wedevs.com/dokan/modules/subscription/'[39m,
+    pre_requisites: [1mnull[22m,
+    categories: [ [32m'Store Management'[39m ],
+    video_id: [1mnull[22m
+  },
+  {
+    id: [32m'vendor_analytics'[39m,
+    name: [32m'Vendor Analytics'[39m,
+    description: [32m'A plugin for store and product analytics for vendor.'[39m,
+    thumbnail: [32m'http://localhost:8889/wp-content/plugins/dokan-pro/assets/images/modules/analytics.svg'[39m,
+    plan: [ [32m'business'[39m, [32m'enterprise'[39m ],
+    active: [33mtrue[39m,
+    available: [33mtrue[39m,
+    doc_id: [1mnull[22m,
+    doc_link: [32m'https://wedevs.com/docs/dokan/modules/dokan-vendor-analytics/'[39m,
+    mod_link: [32m'https://wedevs.com/dokan/modules/vendor-analytics'[39m,
+    pre_requisites: [1mnull[22m,
+    categories: [1mnull[22m,
+    video_id: [32m'IegbUHYA8R4'[39m
+  },
+  {
+    id: [32m'vendor_staff'[39m,
+    name: [32m'Vendor Staff Manager'[39m,
+    description: [32m'A plugin for manage store via vendor staffs.'[39m,
+    thumbnail: [32m'http://localhost:8889/wp-content/plugins/dokan-pro/assets/images/modules/vendor-staff.svg'[39m,
+    plan: [ [32m'business'[39m, [32m'enterprise'[39m ],
+    active: [33mtrue[39m,
+    available: [33mtrue[39m,
+    doc_id: [33m111397[39m,
+    doc_link: [32m'https://wedevs.com/docs/dokan/modules/dokan-vendor-staff-manager/'[39m,
+    mod_link: [32m'https://wedevs.com/dokan/modules/vendor-staff-manager/'[39m,
+    pre_requisites: [1mnull[22m,
+    categories: [ [32m'Store Management'[39m ],
+    video_id: [32m'z4yinwCxabI'[39m
+  },
+  {
+    id: [32m'vsp'[39m,
+    name: [32m'Product Subscription'[39m,
+    description: [32m'WooCommerce Subscription integration for Dokan'[39m,
+    thumbnail: [32m'http://localhost:8889/wp-content/plugins/dokan-pro/assets/images/modules/vendor-subscription-product.svg'[39m,
+    plan: [ [32m'business'[39m, [32m'enterprise'[39m ],
+    active: [33mtrue[39m,
+    available: [33mtrue[39m,
+    doc_id: [33m294770[39m,
+    doc_link: [32m'https://wedevs.com/docs/dokan/modules/dokan-vendor-subscription-product/'[39m,
+    mod_link: [32m'https://wedevs.com/dokan/modules/vendor-subscription-product/'[39m,
+    pre_requisites: [32m'Requirements: WooCommerce Subscription Module'[39m,
+    categories: [ [32m'Product Management'[39m, [32m'Integration'[39m ],
+    video_id: [1mnull[22m
+  },
+  {
+    id: [32m'vendor_verification'[39m,
+    name: [32m'Vendor Verification'[39m,
+    description: [32m'Dokan add-on to verify sellers.'[39m,
+    thumbnail: [32m'http://localhost:8889/wp-content/plugins/dokan-pro/assets/images/modules/vendor-verification.svg'[39m,
+    plan: [ [32m'professional'[39m, [32m'business'[39m, [32m'enterprise'[39m ],
+    active: [33mtrue[39m,
+    available: [33mtrue[39m,
+    doc_id: [33m93421[39m,
+    doc_link: [32m'https://wedevs.com/docs/dokan/modules/dokan-seller-verification-admin-settings/'[39m,
+    mod_link: [32m'https://wedevs.com/dokan/modules/seller-verification/'[39m,
+    pre_requisites: [1mnull[22m,
+    categories: [1mnull[22m,
+    video_id: [1mnull[22m
+  },
+  {
+    id: [32m'wholesale'[39m,
+    name: [32m'Wholesale'[39m,
+    description: [32m'Offer any customer to buy product as a wholesale price from any vendors.'[39m,
+    thumbnail: [32m'http://localhost:8889/wp-content/plugins/dokan-pro/assets/images/modules/wholesale.svg'[39m,
+    plan: [ [32m'business'[39m, [32m'enterprise'[39m ],
+    active: [33mtrue[39m,
+    available: [33mtrue[39m,
+    doc_id: [33m157825[39m,
+    doc_link: [32m'https://wedevs.com/docs/dokan/modules/dokan-wholesale/'[39m,
+    mod_link: [32m'https://wedevs.com/dokan/modules/wholesale/'[39m,
+    pre_requisites: [1mnull[22m,
+    categories: [ [32m'Product Management'[39m ],
+    video_id: [1mnull[22m
+  },
+  {
+    id: [32m'rank_math'[39m,
+    name: [32m'Rank Math SEO'[39m,
+    description: [32m'Manage SEO for products with Rank Math'[39m,
+    thumbnail: [32m'http://localhost:8889/wp-content/plugins/dokan-pro/assets/images/modules/rank-math.svg'[39m,
+    plan: [ [32m'professional'[39m, [32m'business'[39m, [32m'enterprise'[39m ],
+    active: [33mtrue[39m,
+    available: [33mtrue[39m,
+    doc_id: [1mnull[22m,
+    doc_link: [32m'https://wedevs.com/docs/dokan/modules/rank-math-seo/'[39m,
+    mod_link: [32m'https://wedevs.com/dokan/modules/rank-math-seo/'[39m,
+    pre_requisites: [32m'Requirements: Rank Math SEO (v1.0.80 or Later)'[39m,
+    categories: [ [32m'Product Management'[39m, [32m'Integration'[39m ],
+    video_id: [32m'V7UcyAe7QAs'[39m
+  },
+  {
+    id: [32m'table_rate_shipping'[39m,
+    name: [32m'Table Rate Shipping'[39m,
+    description: [32m'Deliver Products at the Right Time, With the Right Pay.'[39m,
+    thumbnail: [32m'http://localhost:8889/wp-content/plugins/dokan-pro/assets/images/modules/table-rate-shipping.svg'[39m,
+    plan: [ [32m'professional'[39m, [32m'business'[39m, [32m'enterprise'[39m ],
+    active: [33mtrue[39m,
+    available: [33mtrue[39m,
+    doc_id: [33m1527799[39m,
+    doc_link: [32m'https://wedevs.com/docs/dokan/modules/dokan-table-rate-shipping/'[39m,
+    mod_link: [32m'https://wedevs.com/dokan/modules/table-rate-shipping/'[39m,
+    pre_requisites: [1mnull[22m,
+    categories: [ [32m'Shipping'[39m ],
+    video_id: [1mnull[22m
+  },
+  {
+    id: [32m'mangopay'[39m,
+    name: [32m'MangoPay'[39m,
+    description: [32m'Enable split payments, multi-seller payments, and other marketplace features given by MangoPay.'[39m,
+    thumbnail: [32m'http://localhost:8889/wp-content/plugins/dokan-pro/assets/images/modules/mangopay.svg'[39m,
+    plan: [ [32m'professional'[39m, [32m'business'[39m, [32m'enterprise'[39m ],
+    active: [33mtrue[39m,
+    available: [33mtrue[39m,
+    doc_id: [32m''[39m,
+    doc_link: [32m'https://wedevs.com/docs/dokan/modules/dokan-mangopay/'[39m,
+    mod_link: [32m'https://wedevs.com/dokan/modules/dokan-mangopay/'[39m,
+    pre_requisites: [1mnull[22m,
+    categories: [ [32m'Payment'[39m ],
+    video_id: [1mnull[22m
+  },
+  {
+    id: [32m'order_min_max'[39m,
+    name: [32m'Min Max Quantities'[39m,
+    description: [32m'Set a minimum or maximum purchase quantity or amount for the products of your marketplace. '[39m,
+    thumbnail: [32m'http://localhost:8889/wp-content/plugins/dokan-pro/assets/images/modules/order-min-max.svg'[39m,
+    plan: [ [32m'professional'[39m, [32m'business'[39m, [32m'enterprise'[39m ],
+    active: [33mtrue[39m,
+    available: [33mtrue[39m,
+    doc_id: [33m1527799[39m,
+    doc_link: [32m'https://wedevs.com/docs/dokan/modules/how-to-enable-minimum-maximum-order-amount-for-dokan/'[39m,
+    mod_link: [32m'https://wedevs.com/dokan/modules/minimum-maximum-order'[39m,
+    pre_requisites: [1mnull[22m,
+    categories: [ [32m'Product Management'[39m, [32m'Order Management'[39m ],
+    video_id: [1mnull[22m
+  },
+  {
+    id: [32m'razorpay'[39m,
+    name: [32m'Razorpay'[39m,
+    description: [32m'Accept credit card payments and allow your sellers to get automatic split payment in Dokan via Razorpay.'[39m,
+    thumbnail: [32m'http://localhost:8889/wp-content/plugins/dokan-pro/assets/images/modules/razorpay.svg'[39m,
+    plan: [ [32m'professional'[39m, [32m'business'[39m, [32m'enterprise'[39m ],
+    active: [33mtrue[39m,
+    available: [33mtrue[39m,
+    doc_id: [33m399718[39m,
+    doc_link: [32m'https://wedevs.com/docs/dokan/modules/dokan-razorpay/'[39m,
+    mod_link: [32m'https://wedevs.com/dokan/modules/dokan-razorpay/'[39m,
+    pre_requisites: [1mnull[22m,
+    categories: [ [32m'Payment'[39m ],
+    video_id: [1mnull[22m
+  },
+  {
+    id: [32m'stripe_express'[39m,
+    name: [32m'Stripe Express'[39m,
+    description: [32m'Enable split payments, multi-seller payments, Apple Pay, Google Pay, iDEAL and other marketplace features available in Stripe Express.'[39m,
+    thumbnail: [32m'http://localhost:8889/wp-content/plugins/dokan-pro/assets/images/modules/stripe-express.svg'[39m,
+    plan: [ [32m'professional'[39m, [32m'business'[39m, [32m'enterprise'[39m ],
+    active: [33mtrue[39m,
+    available: [33mtrue[39m,
+    doc_id: [32m''[39m,
+    doc_link: [32m'https://wedevs.com/docs/dokan/modules/dokan-stripe-express-module/'[39m,
+    mod_link: [32m'https://wedevs.com/dokan/modules/stripe-express/'[39m,
+    pre_requisites: [1mnull[22m,
+    categories: [ [32m'Payment'[39m ],
+    video_id: [1mnull[22m
+  },
+  {
+    id: [32m'request_for_quotation'[39m,
+    name: [32m'Request for Quotation'[39m,
+    description: [32m'Facilitate wholesale orders between merchants and customers with the option for quoted prices.'[39m,
+    thumbnail: [32m'http://localhost:8889/wp-content/plugins/dokan-pro/assets/images/modules/request-for-quotation.svg'[39m,
+    plan: [ [32m'business'[39m, [32m'enterprise'[39m ],
+    active: [33mtrue[39m,
+    available: [33mtrue[39m,
+    doc_id: [33m1527799[39m,
+    doc_link: [32m'https://wedevs.com/docs/dokan/modules/dokan-request-for-quotation-module/'[39m,
+    mod_link: [32m'https://wedevs.com/dokan/modules/dokan-request-for-quotation-module/'[39m,
+    pre_requisites: [1mnull[22m,
+    categories: [ [32m'Product Management'[39m ],
+    video_id: [1mnull[22m
+  }
+]
+]]>
+</system-out>
+</testcase>
+<testcase name="modules api test activate a module" classname="[chromium] › api/modules.spec.ts › modules api test › activate a module" time="0.367">
+<system-out>
+<![CDATA[geolocation
+[
+  {
+    id: [32m'booking'[39m,
+    name: [32m'WooCommerce Booking Integration'[39m,
+    description: [32m'Integrates WooCommerce Booking with Dokan.'[39m,
+    thumbnail: [32m'http://localhost:8889/wp-content/plugins/dokan-pro/assets/images/modules/booking.svg'[39m,
+    plan: [ [32m'business'[39m, [32m'enterprise'[39m ],
+    active: [33mtrue[39m,
+    available: [33mtrue[39m,
+    doc_id: [33m93500[39m,
+    doc_link: [32m'https://wedevs.com/docs/dokan/modules/dokan-bookings/'[39m,
+    mod_link: [32m'https://wedevs.com/dokan/extensions/woocommerce-booking-integration/'[39m,
+    pre_requisites: [32m'Requirements: WooCommerce Bookings plugin'[39m,
+    categories: [ [32m'Product Management'[39m, [32m'Integration'[39m ],
+    video_id: [32m'F5oofXmuUqo'[39m
+  },
+  {
+    id: [32m'color_scheme_customizer'[39m,
+    name: [32m'Color Scheme Customizer'[39m,
+    description: [32m'A Dokan plugin Add-on to Customize Colors of Dokan Dashboard'[39m,
+    thumbnail: [32m'http://localhost:8889/wp-content/plugins/dokan-pro/assets/images/modules/color-scheme-customizer.svg'[39m,
+    plan: [
+      [32m'starter'[39m,
+      [32m'liquidweb'[39m,
+      [32m'professional'[39m,
+      [32m'business'[39m,
+      [32m'enterprise'[39m
+    ],
+    active: [33mtrue[39m,
+    available: [33mtrue[39m,
+    doc_id: [33m102550[39m,
+    doc_link: [32m'https://wedevs.com/docs/dokan/modules/color-scheme/'[39m,
+    mod_link: [32m'https://wedevs.com/dokan/modules/color-scheme-customizer/'[39m,
+    pre_requisites: [1mnull[22m,
+    categories: [ [32m'UI & UX'[39m ],
+    video_id: [32m'EXaJGzeKWHg'[39m
+  },
+  {
+    id: [32m'delivery_time'[39m,
+    name: [32m'Delivery Time'[39m,
+    description: [32m'Let customer choose their order delivery date & time'[39m,
+    thumbnail: [32m'http://localhost:8889/wp-content/plugins/dokan-pro/assets/images/modules/delivery-time.svg'[39m,
+    plan: [
+      [32m'starter'[39m,
+      [32m'liquidweb'[39m,
+      [32m'professional'[39m,
+      [32m'business'[39m,
+      [32m'enterprise'[39m
+    ],
+    active: [33mtrue[39m,
+    available: [33mtrue[39m,
+    doc_id: [33m157825[39m,
+    doc_link: [32m'https://wedevs.com/docs/dokan/modules/dokan-delivery-time/'[39m,
+    mod_link: [32m'https://wedevs.com/dokan/modules/delivery-time'[39m,
+    pre_requisites: [1mnull[22m,
+    categories: [ [32m'Shipping'[39m ],
+    video_id: [1mnull[22m
+  },
+  {
+    id: [32m'elementor'[39m,
+    name: [32m'Elementor'[39m,
+    description: [32m'Elementor Page Builder widgets for Dokan'[39m,
+    thumbnail: [32m'http://localhost:8889/wp-content/plugins/dokan-pro/assets/images/modules/elementor.svg'[39m,
+    plan: [ [32m'professional'[39m, [32m'business'[39m, [32m'enterprise'[39m ],
+    active: [33mtrue[39m,
+    available: [33mtrue[39m,
+    doc_id: [33m181872[39m,
+    doc_link: [32m'https://wedevs.com/docs/dokan/modules/elementor-dokan/'[39m,
+    mod_link: [32m'https://wedevs.com/dokan/modules/elementor/'[39m,
+    pre_requisites: [32m'Requirements: Elementor Free and Elementor Pro'[39m,
+    categories: [ [32m'UI & UX'[39m, [32m'Integration'[39m ],
+    video_id: [1mnull[22m
+  },
+  {
+    id: [32m'export_import'[39m,
+    name: [32m'Vendor Product Importer and Exporter'[39m,
+    description: [32m'This is simple product import and export plugin for vendor'[39m,
+    thumbnail: [32m'http://localhost:8889/wp-content/plugins/dokan-pro/assets/images/modules/import-export.svg'[39m,
+    plan: [ [32m'business'[39m, [32m'enterprise'[39m ],
+    active: [33mtrue[39m,
+    available: [33mtrue[39m,
+    doc_id: [33m93320[39m,
+    doc_link: [32m'https://wedevs.com/docs/dokan/modules/how-to-install-and-use-dokan-exportimport-add/'[39m,
+    mod_link: [32m'https://wedevs.com/dokan/modules/export-import/'[39m,
+    pre_requisites: [1mnull[22m,
+    categories: [ [32m'Product Management'[39m ],
+    video_id: [1mnull[22m
+  },
+  {
+    id: [32m'follow_store'[39m,
+    name: [32m'Follow Store'[39m,
+    description: [32m'Send emails to customers when their favorite store updates.'[39m,
+    thumbnail: [32m'http://localhost:8889/wp-content/plugins/dokan-pro/assets/images/modules/follow-store.svg'[39m,
+    plan: [ [32m'professional'[39m, [32m'business'[39m, [32m'enterprise'[39m ],
+    active: [33mtrue[39m,
+    available: [33mtrue[39m,
+    doc_id: [33m152781[39m,
+    doc_link: [32m'https://wedevs.com/docs/dokan/modules/follow-store/'[39m,
+    mod_link: [32m'https://wedevs.com/dokan/modules/follow-store/'[39m,
+    pre_requisites: [1mnull[22m,
+    categories: [ [32m'Store Management'[39m ],
+    video_id: [32m'v76PnEN5ceQ'[39m
+  },
+  {
+    id: [32m'geolocation'[39m,
+    name: [32m'Geolocation'[39m,
+    description: [32m'Search Products and Vendors by geolocation.'[39m,
+    thumbnail: [32m'http://localhost:8889/wp-content/plugins/dokan-pro/assets/images/modules/geolocation.svg'[39m,
+    plan: [ [32m'business'[39m, [32m'enterprise'[39m ],
+    active: [33mtrue[39m,
+    available: [33mtrue[39m,
+    doc_id: [33m138048[39m,
+    doc_link: [32m'https://wedevs.com/docs/dokan/modules/dokan-geolocation/'[39m,
+    mod_link: [32m'https://wedevs.com/dokan/modules/geolocation/'[39m,
+    pre_requisites: [1mnull[22m,
+    categories: [ [32m'Store Management'[39m, [32m'Product Management'[39m ],
+    video_id: [1mnull[22m
+  },
+  {
+    id: [32m'germanized'[39m,
+    name: [32m'EU Compliance Fields'[39m,
+    description: [32m'EU Compliance Fields Support for Vendors.'[39m,
+    thumbnail: [32m'http://localhost:8889/wp-content/plugins/dokan-pro/assets/images/modules/germanized.svg'[39m,
+    plan: [
+      [32m'starter'[39m,
+      [32m'liquidweb'[39m,
+      [32m'professional'[39m,
+      [32m'business'[39m,
+      [32m'enterprise'[39m
+    ],
+    active: [33mtrue[39m,
+    available: [33mtrue[39m,
+    doc_id: [33m138048[39m,
+    doc_link: [32m'https://wedevs.com/docs/dokan/modules/eu-compliance-fields/'[39m,
+    mod_link: [32m'https://wedevs.com/dokan/modules/eu-compliance-fields'[39m,
+    pre_requisites: [1mnull[22m,
+    categories: [ [32m'Store Management'[39m ],
+    video_id: [1mnull[22m
+  },
+  {
+    id: [32m'live_chat'[39m,
+    name: [32m'Live Chat'[39m,
+    description: [32m'Live Chat Between Vendor & Customer.'[39m,
+    thumbnail: [32m'http://localhost:8889/wp-content/plugins/dokan-pro/assets/images/modules/live-chat.svg'[39m,
+    plan: [ [32m'business'[39m, [32m'enterprise'[39m ],
+    active: [33mtrue[39m,
+    available: [33mtrue[39m,
+    doc_id: [33m126767[39m,
+    doc_link: [32m'https://wedevs.com/docs/dokan/modules/dokan-live-chat/'[39m,
+    mod_link: [32m'https://wedevs.com/dokan/modules/live-chat/'[39m,
+    pre_requisites: [1mnull[22m,
+    categories: [ [32m'Store Management'[39m ],
+    video_id: [32m'BHuTLjY78cY'[39m
+  },
+  {
+    id: [32m'live_search'[39m,
+    name: [32m'Live Search'[39m,
+    description: [32m'Live product search for WooCommerce store.'[39m,
+    thumbnail: [32m'http://localhost:8889/wp-content/plugins/dokan-pro/assets/images/modules/ajax-live-search.svg'[39m,
+    plan: [ [32m'professional'[39m, [32m'business'[39m, [32m'enterprise'[39m ],
+    active: [33mtrue[39m,
+    available: [33mtrue[39m,
+    doc_id: [33m93303[39m,
+    doc_link: [32m'https://wedevs.com/docs/dokan/modules/how-to-install-configure-use-dokan-live-search/'[39m,
+    mod_link: [32m'https://wedevs.com/dokan/modules/ajax-live-search/'[39m,
+    pre_requisites: [1mnull[22m,
+    categories: [ [32m'Product Management'[39m ],
+    video_id: [32m'lvuR-QCJDIo'[39m
+  },
+  {
+    id: [32m'moip'[39m,
+    name: [32m'Wirecard'[39m,
+    description: [32m'Wirecard payment gateway for Dokan.'[39m,
+    thumbnail: [32m'http://localhost:8889/wp-content/plugins/dokan-pro/assets/images/modules/wirecard-connect.svg'[39m,
+    plan: [ [32m'professional'[39m, [32m'business'[39m, [32m'enterprise'[39m ],
+    active: [33mtrue[39m,
+    available: [33mtrue[39m,
+    doc_id: [33m138385[39m,
+    doc_link: [32m'https://wedevs.com/docs/dokan/modules/dokan-moip-connect/'[39m,
+    mod_link: [32m'https://wedevs.com/dokan/modules/moip/'[39m,
+    pre_requisites: [1mnull[22m,
+    categories: [ [32m'Payment'[39m ],
+    video_id: [1mnull[22m
+  },
+  {
+    id: [32m'dokan_paypal_ap'[39m,
+    name: [32m'PayPal Adaptive Payment'[39m,
+    description: [32m'Allows to send split payments to vendor via PayPal Adaptive Payment gateway.'[39m,
+    thumbnail: [32m'http://localhost:8889/wp-content/plugins/dokan-pro/assets/images/modules/paypal-adaptive.svg'[39m,
+    plan: [ [32m'professional'[39m, [32m'business'[39m, [32m'enterprise'[39m ],
+    active: [33mtrue[39m,
+    available: [33mtrue[39m,
+    doc_id: [1mnull[22m,
+    doc_link: [1mnull[22m,
+    mod_link: [1mnull[22m,
+    pre_requisites: [1mnull[22m,
+    categories: [ [32m'Payment'[39m ],
+    video_id: [1mnull[22m
+  },
+  {
+    id: [32m'paypal_marketplace'[39m,
+    name: [32m'PayPal Marketplace'[39m,
+    description: [32m'Enable Split payments, Multi-seller payments and all PayPal Commerce Platform (PCP) features.'[39m,
+    thumbnail: [32m'http://localhost:8889/wp-content/plugins/dokan-pro/assets/images/modules/paypal-marketplace.svg'[39m,
+    plan: [ [32m'business'[39m, [32m'enterprise'[39m ],
+    active: [33mtrue[39m,
+    available: [33mtrue[39m,
+    doc_id: [1mnull[22m,
+    doc_link: [32m'https://wedevs.com/docs/dokan/modules/paypal-marketplace/'[39m,
+    mod_link: [32m'https://wedevs.com/dokan/modules/dokan-paypal-marketplace'[39m,
+    pre_requisites: [1mnull[22m,
+    categories: [ [32m'Payment'[39m ],
+    video_id: [1mnull[22m
+  },
+  {
+    id: [32m'product_addon'[39m,
+    name: [32m'Product Addon'[39m,
+    description: [32m'WooCommerce Product Addon support'[39m,
+    thumbnail: [32m'http://localhost:8889/wp-content/plugins/dokan-pro/assets/images/modules/product-addon.svg'[39m,
+    plan: [ [32m'professional'[39m, [32m'business'[39m, [32m'enterprise'[39m ],
+    active: [33mtrue[39m,
+    available: [33mtrue[39m,
+    doc_id: [33m247645[39m,
+    doc_link: [32m'https://wedevs.com/docs/dokan/modules/product-addon/'[39m,
+    mod_link: [32m'https://wedevs.com/dokan/modules/product-addons/'[39m,
+    pre_requisites: [32m'Requirements: WooCommerce Product Addon extension'[39m,
+    categories: [ [32m'Product Management'[39m, [32m'Integration'[39m ],
+    video_id: [32m'goKBE5L-3cg'[39m
+  },
+  {
+    id: [32m'product_enquiry'[39m,
+    name: [32m'Product Enquiry'[39m,
+    description: [32m'Enquiry for a specific product to a seller.'[39m,
+    thumbnail: [32m'http://localhost:8889/wp-content/plugins/dokan-pro/assets/images/modules/product-enquiry.svg'[39m,
+    plan: [ [32m'business'[39m, [32m'enterprise'[39m ],
+    active: [33mtrue[39m,
+    available: [33mtrue[39m,
+    doc_id: [33m93453[39m,
+    doc_link: [32m'https://wedevs.com/docs/dokan/modules/how-to-install-configure-use-dokan-product-enquiry/'[39m,
+    mod_link: [32m'https://wedevs.com/dokan/modules/product-enquiry/'[39m,
+    pre_requisites: [1mnull[22m,
+    categories: [ [32m'Product Management'[39m ],
+    video_id: [32m'edRLlpmOf-E'[39m
+  },
+  {
+    id: [32m'report_abuse'[39m,
+    name: [32m'Report Abuse'[39m,
+    description: [32m'Let customers report fraudulent or fake products.'[39m,
+    thumbnail: [32m'http://localhost:8889/wp-content/plugins/dokan-pro/assets/images/modules/report-abuse.svg'[39m,
+    plan: [ [32m'professional'[39m, [32m'business'[39m, [32m'enterprise'[39m ],
+    active: [33mtrue[39m,
+    available: [33mtrue[39m,
+    doc_id: [33m176173[39m,
+    doc_link: [32m'https://wedevs.com/docs/dokan/modules/dokan-report-abuse/'[39m,
+    mod_link: [1mnull[22m,
+    pre_requisites: [1mnull[22m,
+    categories: [ [32m'Store Management'[39m ],
+    video_id: [1mnull[22m
+  },
+  {
+    id: [32m'rma'[39m,
+    name: [32m'Return and Warranty Request'[39m,
+    description: [32m'Manage return and warranty from vendor end.'[39m,
+    thumbnail: [32m'http://localhost:8889/wp-content/plugins/dokan-pro/assets/images/modules/rma.svg'[39m,
+    plan: [ [32m'professional'[39m, [32m'business'[39m, [32m'enterprise'[39m ],
+    active: [33mtrue[39m,
+    available: [33mtrue[39m,
+    doc_id: [33m157608[39m,
+    doc_link: [32m'https://wedevs.com/docs/dokan/modules/vendor-rma/'[39m,
+    mod_link: [32m'https://wedevs.com/dokan/modules/rma/'[39m,
+    pre_requisites: [1mnull[22m,
+    categories: [ [32m'Order Management'[39m ],
+    video_id: [32m'j0s8d8u6qYs'[39m
+  },
+  {
+    id: [32m'seller_vacation'[39m,
+    name: [32m'Seller Vacation'[39m,
+    description: [32m'Using this plugin seller can go to vacation by closing their stores.'[39m,
+    thumbnail: [32m'http://localhost:8889/wp-content/plugins/dokan-pro/assets/images/modules/seller-vacation.svg'[39m,
+    plan: [ [32m'business'[39m, [32m'enterprise'[39m ],
+    active: [33mtrue[39m,
+    available: [33mtrue[39m,
+    doc_id: [33m2880[39m,
+    doc_link: [32m'https://wedevs.com/docs/dokan/modules/dokan-vendor-vacation/'[39m,
+    mod_link: [32m'https://wedevs.com/dokan/modules/vendor-vacation/'[39m,
+    pre_requisites: [1mnull[22m,
+    categories: [ [32m'Store Management'[39m ],
+    video_id: [32m'6pd7_3ZPKH4'[39m
+  },
+  {
+    id: [32m'shipstation'[39m,
+    name: [32m'ShipStation Integration'[39m,
+    description: [32m'Adds ShipStation label printing support to Dokan. Requires server DomDocument support.'[39m,
+    thumbnail: [32m'http://localhost:8889/wp-content/plugins/dokan-pro/assets/images/modules/shipstation.svg'[39m,
+    plan: [ [32m'business'[39m, [32m'enterprise'[39m ],
+    active: [33mtrue[39m,
+    available: [33mtrue[39m,
+    doc_id: [33m152770[39m,
+    doc_link: [32m'https://wedevs.com/docs/dokan/modules/shipstation-dokan-wedevs/'[39m,
+    mod_link: [32m'https://wedevs.com/dokan/modules/shipstation/'[39m,
+    pre_requisites: [1mnull[22m,
+    categories: [ [32m'Shipping'[39m ],
+    video_id: [1mnull[22m
+  },
+  {
+    id: [32m'auction'[39m,
+    name: [32m'Auction Integration'[39m,
+    description: [32m'A plugin that combined WooCommerce simple auction and Dokan plugin.'[39m,
+    thumbnail: [32m'http://localhost:8889/wp-content/plugins/dokan-pro/assets/images/modules/auction.svg'[39m,
+    plan: [ [32m'business'[39m, [32m'enterprise'[39m ],
+    active: [33mtrue[39m,
+    available: [33mtrue[39m,
+    doc_id: [33m93366[39m,
+    doc_link: [32m'https://wedevs.com/docs/dokan/modules/woocommerce-auctions-frontend-multivendor-marketplace/'[39m,
+    mod_link: [32m'https://wedevs.com/dokan/modules/dokan-simple-auctions/'[39m,
+    pre_requisites: [32m'Requirements: WooCommerce Simple Auctions'[39m,
+    categories: [ [32m'Product Management'[39m, [32m'Integration'[39m ],
+    video_id: [32m'TvwSvMSu8Rg'[39m
+  },
+  {
+    id: [32m'spmv'[39m,
+    name: [32m'Single Product Multiple Vendor'[39m,
+    description: [32m'A module that offers multiple vendor to sell a single product.'[39m,
+    thumbnail: [32m'http://localhost:8889/wp-content/plugins/dokan-pro/assets/images/modules/single-product-multivendor.svg'[39m,
+    plan: [ [32m'professional'[39m, [32m'business'[39m, [32m'enterprise'[39m ],
+    active: [33mtrue[39m,
+    available: [33mtrue[39m,
+    doc_id: [33m106646[39m,
+    doc_link: [32m'https://wedevs.com/docs/dokan/modules/single-product-multiple-vendor/'[39m,
+    mod_link: [32m'https://wedevs.com/dokan/modules/single-product-multivendor/'[39m,
+    pre_requisites: [1mnull[22m,
+    categories: [ [32m'Product Management'[39m ],
+    video_id: [32m'ByiWWObvF0c'[39m
+  },
+  {
+    id: [32m'store_reviews'[39m,
+    name: [32m'Store Reviews'[39m,
+    description: [32m'A plugin that allows customers to rate the sellers.'[39m,
+    thumbnail: [32m'http://localhost:8889/wp-content/plugins/dokan-pro/assets/images/modules/vendor-review.svg'[39m,
+    plan: [ [32m'professional'[39m, [32m'business'[39m, [32m'enterprise'[39m ],
+    active: [33mtrue[39m,
+    available: [33mtrue[39m,
+    doc_id: [33m93511[39m,
+    doc_link: [32m'https://wedevs.com/docs/dokan/modules/vendor-review/'[39m,
+    mod_link: [32m'https://wedevs.com/dokan/modules/dokan-vendor-review/'[39m,
+    pre_requisites: [1mnull[22m,
+    categories: [ [32m'Store Management'[39m ],
+    video_id: [32m'rX7ZTGa3GzI'[39m
+  },
+  {
+    id: [32m'store_support'[39m,
+    name: [32m'Store Support'[39m,
+    description: [32m'Enable vendors to provide support to customers from store page.'[39m,
+    thumbnail: [32m'http://localhost:8889/wp-content/plugins/dokan-pro/assets/images/modules/store-support.svg'[39m,
+    plan: [ [32m'professional'[39m, [32m'business'[39m, [32m'enterprise'[39m ],
+    active: [33mtrue[39m,
+    available: [33mtrue[39m,
+    doc_id: [33m93425[39m,
+    doc_link: [32m'https://wedevs.com/docs/dokan/modules/how-to-install-and-use-store-support/'[39m,
+    mod_link: [32m'https://wedevs.com/dokan/modules/store-support/'[39m,
+    pre_requisites: [1mnull[22m,
+    categories: [ [32m'Store Management'[39m ],
+    video_id: [32m'YWnRWIhFlLM'[39m
+  },
+  {
+    id: [32m'stripe'[39m,
+    name: [32m'Stripe Connect'[39m,
+    description: [32m'Accept credit card payments and allow your sellers to get automatic split payment in Dokan via Stripe.'[39m,
+    thumbnail: [32m'http://localhost:8889/wp-content/plugins/dokan-pro/assets/images/modules/stripe.svg'[39m,
+    plan: [ [32m'liquidweb'[39m, [32m'professional'[39m, [32m'business'[39m, [32m'enterprise'[39m ],
+    active: [33mtrue[39m,
+    available: [33mtrue[39m,
+    doc_id: [33m93416[39m,
+    doc_link: [32m'https://wedevs.com/docs/dokan/modules/how-to-install-and-configure-dokan-stripe-connect/'[39m,
+    mod_link: [32m'https://wedevs.com/dokan/modules/stripe-connect/'[39m,
+    pre_requisites: [1mnull[22m,
+    categories: [ [32m'Payment'[39m ],
+    video_id: [32m'SVpRMSXMXtA'[39m
+  },
+  {
+    id: [32m'product_advertising'[39m,
+    name: [32m'Product Advertising'[39m,
+    description: [32m'Admin can earn more by allowing vendors to advertise their products and give them the right exposure.'[39m,
+    thumbnail: [32m'http://localhost:8889/wp-content/plugins/dokan-pro/assets/images/modules/product-adv.svg'[39m,
+    plan: [ [32m'business'[39m, [32m'enterprise'[39m ],
+    active: [33mtrue[39m,
+    available: [33mtrue[39m,
+    doc_id: [33m93321[39m,
+    doc_link: [32m'https://wedevs.com/docs/dokan/modules/product-advertising/'[39m,
+    mod_link: [32m'https://wedevs.com//dokan/modules/product-advertising'[39m,
+    pre_requisites: [1mnull[22m,
+    categories: [1mnull[22m,
+    video_id: [1mnull[22m
+  },
+  {
+    id: [32m'product_subscription'[39m,
+    name: [32m'Vendor Subscription'[39m,
+    description: [32m'Subscription pack add-on for Dokan vendors.'[39m,
+    thumbnail: [32m'http://localhost:8889/wp-content/plugins/dokan-pro/assets/images/modules/subscription.svg'[39m,
+    plan: [ [32m'professional'[39m, [32m'business'[39m, [32m'enterprise'[39m ],
+    active: [33mtrue[39m,
+    available: [33mtrue[39m,
+    doc_id: [33m93321[39m,
+    doc_link: [32m'https://wedevs.com/docs/dokan/modules/how-to-install-use-dokan-subscription/'[39m,
+    mod_link: [32m'https://wedevs.com/dokan/modules/subscription/'[39m,
+    pre_requisites: [1mnull[22m,
+    categories: [ [32m'Store Management'[39m ],
+    video_id: [1mnull[22m
+  },
+  {
+    id: [32m'vendor_analytics'[39m,
+    name: [32m'Vendor Analytics'[39m,
+    description: [32m'A plugin for store and product analytics for vendor.'[39m,
+    thumbnail: [32m'http://localhost:8889/wp-content/plugins/dokan-pro/assets/images/modules/analytics.svg'[39m,
+    plan: [ [32m'business'[39m, [32m'enterprise'[39m ],
+    active: [33mtrue[39m,
+    available: [33mtrue[39m,
+    doc_id: [1mnull[22m,
+    doc_link: [32m'https://wedevs.com/docs/dokan/modules/dokan-vendor-analytics/'[39m,
+    mod_link: [32m'https://wedevs.com/dokan/modules/vendor-analytics'[39m,
+    pre_requisites: [1mnull[22m,
+    categories: [1mnull[22m,
+    video_id: [32m'IegbUHYA8R4'[39m
+  },
+  {
+    id: [32m'vendor_staff'[39m,
+    name: [32m'Vendor Staff Manager'[39m,
+    description: [32m'A plugin for manage store via vendor staffs.'[39m,
+    thumbnail: [32m'http://localhost:8889/wp-content/plugins/dokan-pro/assets/images/modules/vendor-staff.svg'[39m,
+    plan: [ [32m'business'[39m, [32m'enterprise'[39m ],
+    active: [33mtrue[39m,
+    available: [33mtrue[39m,
+    doc_id: [33m111397[39m,
+    doc_link: [32m'https://wedevs.com/docs/dokan/modules/dokan-vendor-staff-manager/'[39m,
+    mod_link: [32m'https://wedevs.com/dokan/modules/vendor-staff-manager/'[39m,
+    pre_requisites: [1mnull[22m,
+    categories: [ [32m'Store Management'[39m ],
+    video_id: [32m'z4yinwCxabI'[39m
+  },
+  {
+    id: [32m'vsp'[39m,
+    name: [32m'Product Subscription'[39m,
+    description: [32m'WooCommerce Subscription integration for Dokan'[39m,
+    thumbnail: [32m'http://localhost:8889/wp-content/plugins/dokan-pro/assets/images/modules/vendor-subscription-product.svg'[39m,
+    plan: [ [32m'business'[39m, [32m'enterprise'[39m ],
+    active: [33mtrue[39m,
+    available: [33mtrue[39m,
+    doc_id: [33m294770[39m,
+    doc_link: [32m'https://wedevs.com/docs/dokan/modules/dokan-vendor-subscription-product/'[39m,
+    mod_link: [32m'https://wedevs.com/dokan/modules/vendor-subscription-product/'[39m,
+    pre_requisites: [32m'Requirements: WooCommerce Subscription Module'[39m,
+    categories: [ [32m'Product Management'[39m, [32m'Integration'[39m ],
+    video_id: [1mnull[22m
+  },
+  {
+    id: [32m'vendor_verification'[39m,
+    name: [32m'Vendor Verification'[39m,
+    description: [32m'Dokan add-on to verify sellers.'[39m,
+    thumbnail: [32m'http://localhost:8889/wp-content/plugins/dokan-pro/assets/images/modules/vendor-verification.svg'[39m,
+    plan: [ [32m'professional'[39m, [32m'business'[39m, [32m'enterprise'[39m ],
+    active: [33mtrue[39m,
+    available: [33mtrue[39m,
+    doc_id: [33m93421[39m,
+    doc_link: [32m'https://wedevs.com/docs/dokan/modules/dokan-seller-verification-admin-settings/'[39m,
+    mod_link: [32m'https://wedevs.com/dokan/modules/seller-verification/'[39m,
+    pre_requisites: [1mnull[22m,
+    categories: [1mnull[22m,
+    video_id: [1mnull[22m
+  },
+  {
+    id: [32m'wholesale'[39m,
+    name: [32m'Wholesale'[39m,
+    description: [32m'Offer any customer to buy product as a wholesale price from any vendors.'[39m,
+    thumbnail: [32m'http://localhost:8889/wp-content/plugins/dokan-pro/assets/images/modules/wholesale.svg'[39m,
+    plan: [ [32m'business'[39m, [32m'enterprise'[39m ],
+    active: [33mtrue[39m,
+    available: [33mtrue[39m,
+    doc_id: [33m157825[39m,
+    doc_link: [32m'https://wedevs.com/docs/dokan/modules/dokan-wholesale/'[39m,
+    mod_link: [32m'https://wedevs.com/dokan/modules/wholesale/'[39m,
+    pre_requisites: [1mnull[22m,
+    categories: [ [32m'Product Management'[39m ],
+    video_id: [1mnull[22m
+  },
+  {
+    id: [32m'rank_math'[39m,
+    name: [32m'Rank Math SEO'[39m,
+    description: [32m'Manage SEO for products with Rank Math'[39m,
+    thumbnail: [32m'http://localhost:8889/wp-content/plugins/dokan-pro/assets/images/modules/rank-math.svg'[39m,
+    plan: [ [32m'professional'[39m, [32m'business'[39m, [32m'enterprise'[39m ],
+    active: [33mtrue[39m,
+    available: [33mtrue[39m,
+    doc_id: [1mnull[22m,
+    doc_link: [32m'https://wedevs.com/docs/dokan/modules/rank-math-seo/'[39m,
+    mod_link: [32m'https://wedevs.com/dokan/modules/rank-math-seo/'[39m,
+    pre_requisites: [32m'Requirements: Rank Math SEO (v1.0.80 or Later)'[39m,
+    categories: [ [32m'Product Management'[39m, [32m'Integration'[39m ],
+    video_id: [32m'V7UcyAe7QAs'[39m
+  },
+  {
+    id: [32m'table_rate_shipping'[39m,
+    name: [32m'Table Rate Shipping'[39m,
+    description: [32m'Deliver Products at the Right Time, With the Right Pay.'[39m,
+    thumbnail: [32m'http://localhost:8889/wp-content/plugins/dokan-pro/assets/images/modules/table-rate-shipping.svg'[39m,
+    plan: [ [32m'professional'[39m, [32m'business'[39m, [32m'enterprise'[39m ],
+    active: [33mtrue[39m,
+    available: [33mtrue[39m,
+    doc_id: [33m1527799[39m,
+    doc_link: [32m'https://wedevs.com/docs/dokan/modules/dokan-table-rate-shipping/'[39m,
+    mod_link: [32m'https://wedevs.com/dokan/modules/table-rate-shipping/'[39m,
+    pre_requisites: [1mnull[22m,
+    categories: [ [32m'Shipping'[39m ],
+    video_id: [1mnull[22m
+  },
+  {
+    id: [32m'mangopay'[39m,
+    name: [32m'MangoPay'[39m,
+    description: [32m'Enable split payments, multi-seller payments, and other marketplace features given by MangoPay.'[39m,
+    thumbnail: [32m'http://localhost:8889/wp-content/plugins/dokan-pro/assets/images/modules/mangopay.svg'[39m,
+    plan: [ [32m'professional'[39m, [32m'business'[39m, [32m'enterprise'[39m ],
+    active: [33mtrue[39m,
+    available: [33mtrue[39m,
+    doc_id: [32m''[39m,
+    doc_link: [32m'https://wedevs.com/docs/dokan/modules/dokan-mangopay/'[39m,
+    mod_link: [32m'https://wedevs.com/dokan/modules/dokan-mangopay/'[39m,
+    pre_requisites: [1mnull[22m,
+    categories: [ [32m'Payment'[39m ],
+    video_id: [1mnull[22m
+  },
+  {
+    id: [32m'order_min_max'[39m,
+    name: [32m'Min Max Quantities'[39m,
+    description: [32m'Set a minimum or maximum purchase quantity or amount for the products of your marketplace. '[39m,
+    thumbnail: [32m'http://localhost:8889/wp-content/plugins/dokan-pro/assets/images/modules/order-min-max.svg'[39m,
+    plan: [ [32m'professional'[39m, [32m'business'[39m, [32m'enterprise'[39m ],
+    active: [33mtrue[39m,
+    available: [33mtrue[39m,
+    doc_id: [33m1527799[39m,
+    doc_link: [32m'https://wedevs.com/docs/dokan/modules/how-to-enable-minimum-maximum-order-amount-for-dokan/'[39m,
+    mod_link: [32m'https://wedevs.com/dokan/modules/minimum-maximum-order'[39m,
+    pre_requisites: [1mnull[22m,
+    categories: [ [32m'Product Management'[39m, [32m'Order Management'[39m ],
+    video_id: [1mnull[22m
+  },
+  {
+    id: [32m'razorpay'[39m,
+    name: [32m'Razorpay'[39m,
+    description: [32m'Accept credit card payments and allow your sellers to get automatic split payment in Dokan via Razorpay.'[39m,
+    thumbnail: [32m'http://localhost:8889/wp-content/plugins/dokan-pro/assets/images/modules/razorpay.svg'[39m,
+    plan: [ [32m'professional'[39m, [32m'business'[39m, [32m'enterprise'[39m ],
+    active: [33mtrue[39m,
+    available: [33mtrue[39m,
+    doc_id: [33m399718[39m,
+    doc_link: [32m'https://wedevs.com/docs/dokan/modules/dokan-razorpay/'[39m,
+    mod_link: [32m'https://wedevs.com/dokan/modules/dokan-razorpay/'[39m,
+    pre_requisites: [1mnull[22m,
+    categories: [ [32m'Payment'[39m ],
+    video_id: [1mnull[22m
+  },
+  {
+    id: [32m'stripe_express'[39m,
+    name: [32m'Stripe Express'[39m,
+    description: [32m'Enable split payments, multi-seller payments, Apple Pay, Google Pay, iDEAL and other marketplace features available in Stripe Express.'[39m,
+    thumbnail: [32m'http://localhost:8889/wp-content/plugins/dokan-pro/assets/images/modules/stripe-express.svg'[39m,
+    plan: [ [32m'professional'[39m, [32m'business'[39m, [32m'enterprise'[39m ],
+    active: [33mtrue[39m,
+    available: [33mtrue[39m,
+    doc_id: [32m''[39m,
+    doc_link: [32m'https://wedevs.com/docs/dokan/modules/dokan-stripe-express-module/'[39m,
+    mod_link: [32m'https://wedevs.com/dokan/modules/stripe-express/'[39m,
+    pre_requisites: [1mnull[22m,
+    categories: [ [32m'Payment'[39m ],
+    video_id: [1mnull[22m
+  },
+  {
+    id: [32m'request_for_quotation'[39m,
+    name: [32m'Request for Quotation'[39m,
+    description: [32m'Facilitate wholesale orders between merchants and customers with the option for quoted prices.'[39m,
+    thumbnail: [32m'http://localhost:8889/wp-content/plugins/dokan-pro/assets/images/modules/request-for-quotation.svg'[39m,
+    plan: [ [32m'business'[39m, [32m'enterprise'[39m ],
+    active: [33mtrue[39m,
+    available: [33mtrue[39m,
+    doc_id: [33m1527799[39m,
+    doc_link: [32m'https://wedevs.com/docs/dokan/modules/dokan-request-for-quotation-module/'[39m,
+    mod_link: [32m'https://wedevs.com/dokan/modules/dokan-request-for-quotation-module/'[39m,
+    pre_requisites: [1mnull[22m,
+    categories: [ [32m'Product Management'[39m ],
+    video_id: [1mnull[22m
+  }
+]
+]]>
+</system-out>
+</testcase>
+</testsuite>
+<testsuite name="api/orderNotes.spec.ts" timestamp="1670236563189" hostname="" tests="4" failures="4" skipped="0" time="2.368" errors="0">
+<testcase name="order note api test get all order notes" classname="[chromium] › api/orderNotes.spec.ts › order note api test › get all order notes" time="0.671">
+<failure message="orderNotes.spec.ts:16:5 get all order notes" type="FAILURE">
+<![CDATA[  [chromium] › api/orderNotes.spec.ts:16:5 › order note api test › get all order notes =============
+
+    Error: expect(received).toBeTruthy()
+
+    Received: false
+
+      19 |
+      20 |         let response = await request.get(endPoints.getAllOrderNotes(orderId))
+    > 21 |         expect(response.ok()).toBeTruthy()
+         |                               ^
+      22 |         expect(response.status()).toBe(200)
+      23 |
+      24 |         let responseBody = await response.json()
+
+        at /home/runner/work/dokan/dokan/tests/e2e/tests/api/orderNotes.spec.ts:21:31
+]]>
+</failure>
+</testcase>
+<testcase name="order note api test get single order note" classname="[chromium] › api/orderNotes.spec.ts › order note api test › get single order note" time="0.748">
+<failure message="orderNotes.spec.ts:28:5 get single order note" type="FAILURE">
+<![CDATA[  [chromium] › api/orderNotes.spec.ts:28:5 › order note api test › get single order note ===========
+
+    Error: expect(received).toBeTruthy()
+
+    Received: false
+
+      31 |
+      32 |         let response = await request.get(endPoints.getSingleOrderNote(orderId, orderNoteId))
+    > 33 |         expect(response.ok()).toBeTruthy()
+         |                               ^
+      34 |         expect(response.status()).toBe(200)
+      35 |
+      36 |         let responseBody = await response.json()
+
+        at /home/runner/work/dokan/dokan/tests/e2e/tests/api/orderNotes.spec.ts:33:31
+]]>
+</failure>
+</testcase>
+<testcase name="order note api test create an order note" classname="[chromium] › api/orderNotes.spec.ts › order note api test › create an order note" time="0.217">
+<failure message="orderNotes.spec.ts:41:5 create an order note" type="FAILURE">
+<![CDATA[  [chromium] › api/orderNotes.spec.ts:41:5 › order note api test › create an order note ============
+
+    TypeError: Cannot read property 'id' of undefined
+
+       at ../utils/apiUtils.ts:303
+
+      301 |     async getOrderId() {
+      302 |         let allOrders = await this.getAllOrders()  //TODO: replace with place an order and return that order id
+    > 303 |         let orderId = allOrders[0].id
+          |                                    ^
+      304 |         // console.log(orderId)
+      305 |         return orderId
+      306 |     }
+
+        at ApiUtils.getOrderId (/home/runner/work/dokan/dokan/tests/e2e/utils/apiUtils.ts:303:36)
+        at /home/runner/work/dokan/dokan/tests/e2e/tests/api/orderNotes.spec.ts:43:23
+]]>
+</failure>
+</testcase>
+<testcase name="order note api test delete an order note" classname="[chromium] › api/orderNotes.spec.ts › order note api test › delete an order note" time="0.732">
+<failure message="orderNotes.spec.ts:54:5 delete an order note" type="FAILURE">
+<![CDATA[  [chromium] › api/orderNotes.spec.ts:54:5 › order note api test › delete an order note ============
+
+    Error: expect(received).toBeTruthy()
+
+    Received: false
+
+      57 |
+      58 |         let response = await request.delete(endPoints.deleteOrderNote(orderId, orderNoteId))
+    > 59 |         expect(response.ok()).toBeTruthy()
+         |                               ^
+      60 |         expect(response.status()).toBe(200)
+      61 |
+      62 |         let responseBody = await response.json()
+
+        at /home/runner/work/dokan/dokan/tests/e2e/tests/api/orderNotes.spec.ts:59:31
+]]>
+</failure>
+</testcase>
+</testsuite>
+<testsuite name="api/orders.spec.ts" timestamp="1670236563189" hostname="" tests="4" failures="2" skipped="0" time="1.356" errors="0">
+<testcase name="order api test get all orders" classname="[chromium] › api/orders.spec.ts › order api test › get all orders" time="0.172">
+</testcase>
+<testcase name="order api test get orders summary" classname="[chromium] › api/orders.spec.ts › order api test › get orders summary" time="0.172">
+</testcase>
+<testcase name="order api test get single order" classname="[chromium] › api/orders.spec.ts › order api test › get single order" time="0.501">
+<failure message="orders.spec.ts:50:5 get single order" type="FAILURE">
+<![CDATA[  [chromium] › api/orders.spec.ts:50:5 › order api test › get single order =========================
+
+    Error: expect(received).toBeTruthy()
+
+    Received: false
+
+      53 |
+      54 |         let response = await request.get(endPoints.getSingleOrder(orderId))
+    > 55 |         expect(response.ok()).toBeTruthy()
+         |                               ^
+      56 |         expect(response.status()).toBe(200)
+      57 |
+      58 |         let responseBody = await response.json()
+
+        at /home/runner/work/dokan/dokan/tests/e2e/tests/api/orders.spec.ts:55:31
+]]>
+</failure>
+</testcase>
+<testcase name="order api test update an order" classname="[chromium] › api/orders.spec.ts › order api test › update an order" time="0.511">
+<failure message="orders.spec.ts:62:5 update an order" type="FAILURE">
+<![CDATA[  [chromium] › api/orders.spec.ts:62:5 › order api test › update an order ==========================
+
+    Error: expect(received).toBeTruthy()
+
+    Received: false
+
+      66 |
+      67 |         let response = await request.put(endPoints.updateOrder(orderId), { data: payloads.updateOrder })
+    > 68 |         expect(response.ok()).toBeTruthy()
+         |                               ^
+      69 |         expect(response.status()).toBe(200)
+      70 |
+      71 |         let responseBody = await response.json()
+
+        at /home/runner/work/dokan/dokan/tests/e2e/tests/api/orders.spec.ts:68:31
+]]>
+</failure>
+<system-out>
+<![CDATA[[90mundefined[39m
+]]>
+</system-out>
+</testcase>
+</testsuite>
+<testsuite name="api/productAdvertisements.spec.ts" timestamp="1670236563189" hostname="" tests="6" failures="1" skipped="5" time="0.003" errors="0">
+<testcase name="product advertisement api test get all advertised product stores" classname="[chromium] › api/productAdvertisements.spec.ts › product advertisement api test › get all advertised product stores" time="0.003">
+<failure message="productAdvertisements.spec.ts:19:5 get all advertised product stores" type="FAILURE">
+<![CDATA[  [chromium] › api/productAdvertisements.spec.ts:19:5 › product advertisement api test › get all advertised product stores 
+
+    TypeError: Cannot read property 'id' of undefined
+
+       at ../utils/apiUtils.ts:555
+
+      553 |         let [body, productId] = await this.createProduct(payloads.createProduct())
+      554 |         console.log(body)
+    > 555 |         let sellerId = body.store.id
+          |                                   ^
+      556 |
+      557 |         let response = await this.request.post(endPoints.createProductAdvertisement, { data: { vendor_id: sellerId, product_id: productId } })
+      558 |         let responseBody = await response.json()
+
+        at ApiUtils.createProductAdvertisement (/home/runner/work/dokan/dokan/tests/e2e/utils/apiUtils.ts:555:35)
+        at /home/runner/work/dokan/dokan/tests/e2e/tests/api/productAdvertisements.spec.ts:9:5
+]]>
+</failure>
+<system-out>
+<![CDATA[{
+  code: [32m'invalid_request'[39m,
+  message: [32m'Error! Your account is not enabled for selling, please contact the admin'[39m,
+  data: { status: [33m400[39m }
+}
+]]>
+</system-out>
+</testcase>
+<testcase name="product advertisement api test get all advertised product" classname="[chromium] › api/productAdvertisements.spec.ts › product advertisement api test › get all advertised product" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="product advertisement api test create a product advertisement" classname="[chromium] › api/productAdvertisements.spec.ts › product advertisement api test › create a product advertisement" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="product advertisement api test expire a product advertisement" classname="[chromium] › api/productAdvertisements.spec.ts › product advertisement api test › expire a product advertisement" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="product advertisement api test delete a product advertisement" classname="[chromium] › api/productAdvertisements.spec.ts › product advertisement api test › delete a product advertisement" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="product advertisement api test update batch product advertisements" classname="[chromium] › api/productAdvertisements.spec.ts › product advertisement api test › update batch product advertisements" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="api/productAttributes.spec.ts" timestamp="1670236563189" hostname="" tests="5" failures="0" skipped="0" time="1.394" errors="0">
+<testcase name="attribute api test get all attributes" classname="[chromium] › api/productAttributes.spec.ts › attribute api test › get all attributes" time="0.174">
+</testcase>
+<testcase name="attribute api test get single attribute" classname="[chromium] › api/productAttributes.spec.ts › attribute api test › get single attribute" time="0.349">
+</testcase>
+<testcase name="attribute api test create an attribute" classname="[chromium] › api/productAttributes.spec.ts › attribute api test › create an attribute" time="0.183">
+</testcase>
+<testcase name="attribute api test update an attribute" classname="[chromium] › api/productAttributes.spec.ts › attribute api test › update an attribute" time="0.347">
+</testcase>
+<testcase name="attribute api test delete an attribute" classname="[chromium] › api/productAttributes.spec.ts › attribute api test › delete an attribute" time="0.341">
+</testcase>
+</testsuite>
+<testsuite name="api/productAttributeTerms.spec.ts" timestamp="1670236563189" hostname="" tests="5" failures="1" skipped="0" time="2.662" errors="0">
+<testcase name="attribute term api test get all attribute terms" classname="[chromium] › api/productAttributeTerms.spec.ts › attribute term api test › get all attribute terms" time="0.516">
+</testcase>
+<testcase name="attribute term api test get single attribute term" classname="[chromium] › api/productAttributeTerms.spec.ts › attribute term api test › get single attribute term" time="0.517">
+</testcase>
+<testcase name="attribute term api test create an attribute term" classname="[chromium] › api/productAttributeTerms.spec.ts › attribute term api test › create an attribute term" time="0.534">
+<failure message="productAttributeTerms.spec.ts:40:1 create an attribute term" type="FAILURE">
+<![CDATA[  [chromium] › api/productAttributeTerms.spec.ts:40:1 › attribute term api test › create an attribute term 
+
+    Error: expect(received).toBe(expected) // Object.is equality
+
+    Expected: 200
+    Received: 201
+
+      44 |     let response = await request.post(endPoints.createAttributeTerm(attributeId), { data: payloads.createAttributeTerm() })
+      45 |     expect(response.ok()).toBeTruthy()
+    > 46 |     expect(response.status()).toBe(200)
+         |                               ^
+      47 |
+      48 |     let responseBody = await response.json()
+      49 |     // console.log(responseBody)
+
+        at /home/runner/work/dokan/dokan/tests/e2e/tests/api/productAttributeTerms.spec.ts:46:31
+]]>
+</failure>
+</testcase>
+<testcase name="attribute term api test update an attribute term " classname="[chromium] › api/productAttributeTerms.spec.ts › attribute term api test › update an attribute term " time="0.572">
+</testcase>
+<testcase name="attribute term api test delete an attribute term" classname="[chromium] › api/productAttributeTerms.spec.ts › attribute term api test › delete an attribute term" time="0.523">
+</testcase>
+</testsuite>
+<testsuite name="api/productReviews.spec.ts" timestamp="1670236563189" hostname="" tests="3" failures="1" skipped="0" time="0.835" errors="0">
+<testcase name="product review api test get all product reviews" classname="[chromium] › api/productReviews.spec.ts › product review api test › get all product reviews" time="0.169">
+</testcase>
+<testcase name="product review api test get product reviews summary" classname="[chromium] › api/productReviews.spec.ts › product review api test › get product reviews summary" time="0.17">
+</testcase>
+<testcase name="product review api test update a product review" classname="[chromium] › api/productReviews.spec.ts › product review api test › update a product review" time="0.496">
+<failure message="productReviews.spec.ts:37:5 update a product review" type="FAILURE">
+<![CDATA[  [chromium] › api/productReviews.spec.ts:37:5 › product review api test › update a product review =
+
+    Error: expect(received).toBeTruthy()
+
+    Received: false
+
+      40 |
+      41 |         let response = await request.put(endPoints.updateStoreReview(reviewId), { data: payloads.updateProductReview })
+    > 42 |         expect(response.ok()).toBeTruthy()
+         |                               ^
+      43 |         expect(response.status()).toBe(200)
+      44 |
+      45 |         let responseBody = await response.json()
+
+        at /home/runner/work/dokan/dokan/tests/e2e/tests/api/productReviews.spec.ts:42:31
+]]>
+</failure>
+</testcase>
+</testsuite>
+<testsuite name="api/products.spec.ts" timestamp="1670236563189" hostname="" tests="12" failures="5" skipped="0" time="2.749" errors="0">
+<testcase name="product api test get products summary" classname="[chromium] › api/products.spec.ts › product api test › get products summary" time="0.174">
+</testcase>
+<testcase name="product api test get top rated products" classname="[chromium] › api/products.spec.ts › product api test › get top rated products" time="0.194">
+</testcase>
+<testcase name="product api test get best selling products" classname="[chromium] › api/products.spec.ts › product api test › get best selling products" time="0.176">
+</testcase>
+<testcase name="product api test get featured products" classname="[chromium] › api/products.spec.ts › product api test › get featured products" time="0.168">
+</testcase>
+<testcase name="product api test get latest products" classname="[chromium] › api/products.spec.ts › product api test › get latest products" time="0.171">
+</testcase>
+<testcase name="product api test get all multistep categories" classname="[chromium] › api/products.spec.ts › product api test › get all multistep categories" time="0.178">
+</testcase>
+<testcase name="product api test get all products" classname="[chromium] › api/products.spec.ts › product api test › get all products" time="0.17">
+</testcase>
+<testcase name="product api test get single product" classname="[chromium] › api/products.spec.ts › product api test › get single product" time="0.332">
+<failure message="products.spec.ts:83:5 get single product" type="FAILURE">
+<![CDATA[  [chromium] › api/products.spec.ts:83:5 › product api test › get single product ===================
+
+    Error: expect(received).toBeTruthy()
+
+    Received: false
+
+      86 |
+      87 |         let response = await request.get(endPoints.getSingleProduct(productId))
+    > 88 |         expect(response.ok()).toBeTruthy()
+         |                               ^
+      89 |         expect(response.status()).toBe(200)
+      90 |
+      91 |         let responseBody = await response.json()
+
+        at /home/runner/work/dokan/dokan/tests/e2e/tests/api/products.spec.ts:88:31
+]]>
+</failure>
+</testcase>
+<testcase name="product api test get all related products" classname="[chromium] › api/products.spec.ts › product api test › get all related products" time="0.336">
+<failure message="products.spec.ts:95:5 get all related products" type="FAILURE">
+<![CDATA[  [chromium] › api/products.spec.ts:95:5 › product api test › get all related products =============
+
+    Error: expect(received).toBeTruthy()
+
+    Received: false
+
+       98 |
+       99 |         let response = await request.get(endPoints.getAllRelatedProducts(productId))
+    > 100 |         expect(response.ok()).toBeTruthy()
+          |                               ^
+      101 |         expect(response.status()).toBe(200)
+      102 |
+      103 |         let responseBody = await response.json()
+
+        at /home/runner/work/dokan/dokan/tests/e2e/tests/api/products.spec.ts:100:31
+]]>
+</failure>
+</testcase>
+<testcase name="product api test create a product" classname="[chromium] › api/products.spec.ts › product api test › create a product" time="0.173">
+<failure message="products.spec.ts:107:5 create a product" type="FAILURE">
+<![CDATA[  [chromium] › api/products.spec.ts:107:5 › product api test › create a product ====================
+
+    Error: expect(received).toBeTruthy()
+
+    Received: false
+
+      107 |     test('create a product', async ({ request }) => {
+      108 |         let response = await request.post(endPoints.createProduct, { data: payloads.createProduct() })
+    > 109 |         expect(response.ok()).toBeTruthy()
+          |                               ^
+      110 |         expect(response.status()).toBe(200)
+      111 |
+      112 |         let responseBody = await response.json()
+
+        at /home/runner/work/dokan/dokan/tests/e2e/tests/api/products.spec.ts:109:31
+]]>
+</failure>
+</testcase>
+<testcase name="product api test update a product" classname="[chromium] › api/products.spec.ts › product api test › update a product" time="0.337">
+<failure message="products.spec.ts:116:5 update a product" type="FAILURE">
+<![CDATA[  [chromium] › api/products.spec.ts:116:5 › product api test › update a product ====================
+
+    Error: expect(received).toBeTruthy()
+
+    Received: false
+
+      119 |
+      120 |         let response = await request.put(endPoints.updateProduct(productId), { data: payloads.updateProduct() })
+    > 121 |         expect(response.ok()).toBeTruthy()
+          |                               ^
+      122 |         expect(response.status()).toBe(200)
+      123 |
+      124 |         let responseBody = await response.json()
+
+        at /home/runner/work/dokan/dokan/tests/e2e/tests/api/products.spec.ts:121:31
+]]>
+</failure>
+</testcase>
+<testcase name="product api test delete a product" classname="[chromium] › api/products.spec.ts › product api test › delete a product" time="0.34">
+<failure message="products.spec.ts:128:5 delete a product" type="FAILURE">
+<![CDATA[  [chromium] › api/products.spec.ts:128:5 › product api test › delete a product ====================
+
+    Error: expect(received).toBeTruthy()
+
+    Received: false
+
+      131 |
+      132 |         let response = await request.delete(endPoints.deleteProduct(productId))
+    > 133 |         expect(response.ok()).toBeTruthy()
+          |                               ^
+      134 |         expect(response.status()).toBe(200)
+      135 |
+      136 |         let responseBody = await response.json()
+
+        at /home/runner/work/dokan/dokan/tests/e2e/tests/api/products.spec.ts:133:31
+]]>
+</failure>
+</testcase>
+</testsuite>
+<testsuite name="api/productVariations.spec.ts" timestamp="1670236563189" hostname="" tests="5" failures="5" skipped="0" time="4.016" errors="0">
+<testcase name="product variation api test get all product variations" classname="[chromium] › api/productVariations.spec.ts › product variation api test › get all product variations" time="0.903">
+<failure message="productVariations.spec.ts:17:5 get all product variations" type="FAILURE">
+<![CDATA[  [chromium] › api/productVariations.spec.ts:17:5 › product variation api test › get all product variations 
+
+    Error: expect(received).toBeTruthy()
+
+    Received: false
+
+      20 |
+      21 |         let response = await request.get(endPoints.getAllProductVariations(productId))
+    > 22 |         expect(response.ok()).toBeTruthy()
+         |                               ^
+      23 |         expect(response.status()).toBe(200)
+      24 |
+      25 |         let responseBody = await response.json()
+
+        at /home/runner/work/dokan/dokan/tests/e2e/tests/api/productVariations.spec.ts:22:31
+]]>
+</failure>
+</testcase>
+<testcase name="product variation api test get single product variation" classname="[chromium] › api/productVariations.spec.ts › product variation api test › get single product variation" time="0.9">
+<failure message="productVariations.spec.ts:30:5 get single product variation" type="FAILURE">
+<![CDATA[  [chromium] › api/productVariations.spec.ts:30:5 › product variation api test › get single product variation 
+
+    Error: expect(received).toBeTruthy()
+
+    Received: false
+
+      34 |
+      35 |         let response = await request.get(endPoints.getSingleProductVariation(productId, variationId))
+    > 36 |         expect(response.ok()).toBeTruthy()
+         |                               ^
+      37 |         expect(response.status()).toBe(200)
+      38 |
+      39 |         let responseBody = await response.json()
+
+        at /home/runner/work/dokan/dokan/tests/e2e/tests/api/productVariations.spec.ts:36:31
+]]>
+</failure>
+</testcase>
+<testcase name="product variation api test create a product variation" classname="[chromium] › api/productVariations.spec.ts › product variation api test › create a product variation" time="0.391">
+<failure message="productVariations.spec.ts:44:5 create a product variation" type="FAILURE">
+<![CDATA[  [chromium] › api/productVariations.spec.ts:44:5 › product variation api test › create a product variation 
+
+    Error: expect(received).toBeTruthy()
+
+    Received: false
+
+      47 |
+      48 |         let response = await request.post(endPoints.createProductVariation(productId), { data: payloads.createProductVariation })
+    > 49 |         expect(response.ok()).toBeTruthy()
+         |                               ^
+      50 |         expect(response.status()).toBe(200)
+      51 |
+      52 |         let responseBody = await response.json()
+
+        at /home/runner/work/dokan/dokan/tests/e2e/tests/api/productVariations.spec.ts:49:31
+]]>
+</failure>
+</testcase>
+<testcase name="product variation api test update a product variation" classname="[chromium] › api/productVariations.spec.ts › product variation api test › update a product variation" time="0.919">
+<failure message="productVariations.spec.ts:57:5 update a product variation" type="FAILURE">
+<![CDATA[  [chromium] › api/productVariations.spec.ts:57:5 › product variation api test › update a product variation 
+
+    Error: expect(received).toBeTruthy()
+
+    Received: false
+
+      64 |   
+      65 |
+    > 66 |         expect(response.ok()).toBeTruthy()
+         |                               ^
+      67 |         expect(response.status()).toBe(200)
+      68 |
+      69 |     });
+
+        at /home/runner/work/dokan/dokan/tests/e2e/tests/api/productVariations.spec.ts:66:31
+]]>
+</failure>
+</testcase>
+<testcase name="product variation api test delete a product variation" classname="[chromium] › api/productVariations.spec.ts › product variation api test › delete a product variation" time="0.903">
+<failure message="productVariations.spec.ts:72:5 delete a product variation" type="FAILURE">
+<![CDATA[  [chromium] › api/productVariations.spec.ts:72:5 › product variation api test › delete a product variation 
+
+    Error: expect(received).toBeTruthy()
+
+    Received: false
+
+      78 |         // console.log(responseBody)
+      79 |
+    > 80 |         expect(response.ok()).toBeTruthy()
+         |                               ^
+      81 |         expect(response.status()).toBe(200)
+      82 |     });
+      83 |
+
+        at /home/runner/work/dokan/dokan/tests/e2e/tests/api/productVariations.spec.ts:80:31
+]]>
+</failure>
+</testcase>
+</testsuite>
+<testsuite name="api/refunds.spec.ts" timestamp="1670236563189" hostname="" tests="5" failures="0" skipped="5" time="0.001" errors="0">
+<testcase name="refunds api test get all refunds" classname="[chromium] › api/refunds.spec.ts › refunds api test › get all refunds" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="refunds api test get all refunds by status" classname="[chromium] › api/refunds.spec.ts › refunds api test › get all refunds by status" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="refunds api test approve a refund" classname="[chromium] › api/refunds.spec.ts › refunds api test › approve a refund" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="refunds api test cancel a refund" classname="[chromium] › api/refunds.spec.ts › refunds api test › cancel a refund" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="refunds api test delete a refund" classname="[chromium] › api/refunds.spec.ts › refunds api test › delete a refund" time="0.001">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="api/reports.spec.ts" timestamp="1670236563189" hostname="" tests="4" failures="0" skipped="0" time="0.711" errors="0">
+<testcase name="report api test get sales overview report" classname="[chromium] › api/reports.spec.ts › report api test › get sales overview report" time="0.181">
+</testcase>
+<testcase name="report api test get summary report" classname="[chromium] › api/reports.spec.ts › report api test › get summary report" time="0.173">
+</testcase>
+<testcase name="report api test get top earners report" classname="[chromium] › api/reports.spec.ts › report api test › get top earners report" time="0.186">
+</testcase>
+<testcase name="report api test get top selling products report " classname="[chromium] › api/reports.spec.ts › report api test › get top selling products report " time="0.171">
+</testcase>
+</testsuite>
+<testsuite name="api/reverseWithdrawal.spec.ts" timestamp="1670236563189" hostname="" tests="4" failures="1" skipped="0" time="0.689" errors="0">
+<testcase name="reverse withdrawal api test get reverse withdrawal transaction types" classname="[chromium] › api/reverseWithdrawal.spec.ts › reverse withdrawal api test › get reverse withdrawal transaction types" time="0.168">
+</testcase>
+<testcase name="reverse withdrawal api test get all reverse withdrawal stores" classname="[chromium] › api/reverseWithdrawal.spec.ts › reverse withdrawal api test › get all reverse withdrawal stores" time="0.172">
+</testcase>
+<testcase name="reverse withdrawal api test get all reverse withdrawal store balance" classname="[chromium] › api/reverseWithdrawal.spec.ts › reverse withdrawal api test › get all reverse withdrawal store balance" time="0.179">
+</testcase>
+<testcase name="reverse withdrawal api test getAllReverseWithdrawalTransactions" classname="[chromium] › api/reverseWithdrawal.spec.ts › reverse withdrawal api test › getAllReverseWithdrawalTransactions" time="0.17">
+<failure message="reverseWithdrawal.spec.ts:48:5 getAllReverseWithdrawalTransactions" type="FAILURE">
+<![CDATA[  [chromium] › api/reverseWithdrawal.spec.ts:48:5 › reverse withdrawal api test › getAllReverseWithdrawalTransactions 
+
+    TypeError: Cannot read property 'id' of undefined
+
+       at ../utils/apiUtils.ts:432
+
+      430 |     async getReverseWithdrawalStoreId() {
+      431 |         let allReverseWithdrawalStores = await this.getAllReverseWithdrawalStores()
+    > 432 |         let reverseWithdrawalStoreId = allReverseWithdrawalStores[0].id
+          |                                                                      ^
+      433 |         console.log(reverseWithdrawalStoreId)
+      434 |         return reverseWithdrawalStoreId
+      435 |     }
+
+        at ApiUtils.getReverseWithdrawalStoreId (/home/runner/work/dokan/dokan/tests/e2e/utils/apiUtils.ts:432:70)
+        at /home/runner/work/dokan/dokan/tests/e2e/tests/api/reverseWithdrawal.spec.ts:50:22
+]]>
+</failure>
+</testcase>
+</testsuite>
+<testsuite name="api/roles.spec.ts" timestamp="1670236563189" hostname="" tests="1" failures="0" skipped="0" time="0.206" errors="0">
+<testcase name="roles api test get all user roles " classname="[chromium] › api/roles.spec.ts › roles api test › get all user roles " time="0.206">
+</testcase>
+</testsuite>
+<testsuite name="api/settings.spec.ts" timestamp="1670236563189" hostname="" tests="2" failures="0" skipped="1" time="0.176" errors="0">
+<testcase name="settings api test get settings" classname="[chromium] › api/settings.spec.ts › settings api test › get settings" time="0.176">
+</testcase>
+<testcase name="settings api test update settings" classname="[chromium] › api/settings.spec.ts › settings api test › update settings" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="api/storeCategories.spec.ts" timestamp="1670236563189" hostname="" tests="7" failures="7" skipped="0" time="2.066" errors="0">
+<testcase name="store categories api test get default store category" classname="[chromium] › api/storeCategories.spec.ts › store categories api test › get default store category" time="0.175">
+<failure message="storeCategories.spec.ts:22:5 get default store category" type="FAILURE">
+<![CDATA[  [chromium] › api/storeCategories.spec.ts:22:5 › store categories api test › get default store category 
+
+    Error: expect(received).toBeTruthy()
+
+    Received: false
+
+      22 |     test('get default store category', async ({ request }) => {
+      23 |         let response = await request.get(endPoints.getDefaultStoreCategory)
+    > 24 |         expect(response.ok()).toBeTruthy()
+         |                               ^
+      25 |         expect(response.status()).toBe(200)
+      26 |
+      27 |         let responseBody = await response.json()
+
+        at /home/runner/work/dokan/dokan/tests/e2e/tests/api/storeCategories.spec.ts:24:31
+]]>
+</failure>
+</testcase>
+<testcase name="store categories api test get all store categories" classname="[chromium] › api/storeCategories.spec.ts › store categories api test › get all store categories" time="0.173">
+<failure message="storeCategories.spec.ts:31:5 get all store categories" type="FAILURE">
+<![CDATA[  [chromium] › api/storeCategories.spec.ts:31:5 › store categories api test › get all store categories 
+
+    Error: expect(received).toBeTruthy()
+
+    Received: false
+
+      31 |     test('get all store categories', async ({ request }) => {
+      32 |         let response = await request.get(endPoints.getAllStoreCategories)
+    > 33 |         expect(response.ok()).toBeTruthy()
+         |                               ^
+      34 |         expect(response.status()).toBe(200)
+      35 |
+      36 |         let responseBody = await response.json()
+
+        at /home/runner/work/dokan/dokan/tests/e2e/tests/api/storeCategories.spec.ts:33:31
+]]>
+</failure>
+</testcase>
+<testcase name="store categories api test get single store category" classname="[chromium] › api/storeCategories.spec.ts › store categories api test › get single store category" time="0.344">
+<failure message="storeCategories.spec.ts:40:5 get single store category" type="FAILURE">
+<![CDATA[  [chromium] › api/storeCategories.spec.ts:40:5 › store categories api test › get single store category 
+
+    Error: expect(received).toBeTruthy()
+
+    Received: false
+
+      43 |
+      44 |         let response = await request.get(endPoints.getSingleStoreCategory(categoryId))
+    > 45 |         expect(response.ok()).toBeTruthy()
+         |                               ^
+      46 |         expect(response.status()).toBe(200)
+      47 |
+      48 |         let responseBody = await response.json()
+
+        at /home/runner/work/dokan/dokan/tests/e2e/tests/api/storeCategories.spec.ts:45:31
+]]>
+</failure>
+</testcase>
+<testcase name="store categories api test create a store category" classname="[chromium] › api/storeCategories.spec.ts › store categories api test › create a store category" time="0.175">
+<failure message="storeCategories.spec.ts:52:5 create a store category" type="FAILURE">
+<![CDATA[  [chromium] › api/storeCategories.spec.ts:52:5 › store categories api test › create a store category 
+
+    Error: expect(received).toBeTruthy()
+
+    Received: false
+
+      55 |         // console.log(responseBody)
+      56 |
+    > 57 |         expect(response.ok()).toBeTruthy()
+         |                               ^
+      58 |         expect(response.status()).toBe(201)
+      59 |     });
+      60 |
+
+        at /home/runner/work/dokan/dokan/tests/e2e/tests/api/storeCategories.spec.ts:57:31
+]]>
+</failure>
+</testcase>
+<testcase name="store categories api test update a store category" classname="[chromium] › api/storeCategories.spec.ts › store categories api test › update a store category" time="0.34">
+<failure message="storeCategories.spec.ts:62:5 update a store category" type="FAILURE">
+<![CDATA[  [chromium] › api/storeCategories.spec.ts:62:5 › store categories api test › update a store category 
+
+    Error: expect(received).toBeTruthy()
+
+    Received: false
+
+      65 |
+      66 |         let response = await request.put(endPoints.updateStoreCategory(categoryId), { data: payloads.updateStoreCategory() })
+    > 67 |         expect(response.ok()).toBeTruthy()
+         |                               ^
+      68 |         expect(response.status()).toBe(200)
+      69 |
+      70 |         let responseBody = await response.json()
+
+        at /home/runner/work/dokan/dokan/tests/e2e/tests/api/storeCategories.spec.ts:67:31
+]]>
+</failure>
+</testcase>
+<testcase name="store categories api test delete a store category" classname="[chromium] › api/storeCategories.spec.ts › store categories api test › delete a store category" time="0.348">
+<failure message="storeCategories.spec.ts:75:5 delete a store category" type="FAILURE">
+<![CDATA[  [chromium] › api/storeCategories.spec.ts:75:5 › store categories api test › delete a store category 
+
+    Error: expect(received).toBeTruthy()
+
+    Received: false
+
+      78 |
+      79 |         let response = await request.delete(endPoints.deleteStoreCategory(categoryId))
+    > 80 |         expect(response.ok()).toBeTruthy()
+         |                               ^
+      81 |         expect(response.status()).toBe(200)
+      82 |
+      83 |         let responseBody = await response.json()
+
+        at /home/runner/work/dokan/dokan/tests/e2e/tests/api/storeCategories.spec.ts:80:31
+]]>
+</failure>
+</testcase>
+<testcase name="store categories api test set default store category" classname="[chromium] › api/storeCategories.spec.ts › store categories api test › set default store category" time="0.511">
+<failure message="storeCategories.spec.ts:87:5 set default store category" type="FAILURE">
+<![CDATA[  [chromium] › api/storeCategories.spec.ts:87:5 › store categories api test › set default store category 
+
+    Error: expect(received).toBeTruthy()
+
+    Received: false
+
+      91 |
+      92 |         let response = await request.put(endPoints.setDefaultStoreCategory, { data: { id: categoryId } })
+    > 93 |         expect(response.ok()).toBeTruthy()
+         |                               ^
+      94 |         expect(response.status()).toBe(200)
+      95 |
+      96 |         let responseBody = await response.json()
+
+        at /home/runner/work/dokan/dokan/tests/e2e/tests/api/storeCategories.spec.ts:93:31
+]]>
+</failure>
+</testcase>
+</testsuite>
+<testsuite name="api/storeReviews.spec.ts" timestamp="1670236563189" hostname="" tests="6" failures="0" skipped="6" time="0.001" errors="0">
+<testcase name="store reviews api test get all store reviews" classname="[chromium] › api/storeReviews.spec.ts › store reviews api test › get all store reviews" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="store reviews api test get single store review" classname="[chromium] › api/storeReviews.spec.ts › store reviews api test › get single store review" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="store reviews api test update a store review" classname="[chromium] › api/storeReviews.spec.ts › store reviews api test › update a store review" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="store reviews api test delete a store review " classname="[chromium] › api/storeReviews.spec.ts › store reviews api test › delete a store review " time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="store reviews api test restore a deleted store review " classname="[chromium] › api/storeReviews.spec.ts › store reviews api test › restore a deleted store review " time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="store reviews api test update batch store review" classname="[chromium] › api/storeReviews.spec.ts › store reviews api test › update batch store review" time="0.001">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="api/stores.spec.ts" timestamp="1670236563189" hostname="" tests="15" failures="1" skipped="2" time="4.303" errors="0">
+<testcase name="stores api test get all stores check check_store_availability" classname="[chromium] › api/stores.spec.ts › stores api test › get all stores check check_store_availability" time="0.174">
+<system-out>
+<![CDATA[{
+  id: [33m9[39m,
+  store_name: [32m'Mortimer'[39m,
+  first_name: [32m'Jackie'[39m,
+  last_name: [32m'Douglas'[39m,
+  email: [32m'Karolann3@hotmail.com'[39m,
+  social: {
+    fb: [32m'http://dokan.test'[39m,
+    youtube: [32m'http://dokan.test'[39m,
+    twitter: [32m'http://dokan.test'[39m,
+    linkedin: [32m'http://dokan.test'[39m,
+    pinterest: [32m'http://dokan.test'[39m,
+    instagram: [32m'http://dokan.test'[39m,
+    flickr: [32m'http://dokan.test'[39m
+  },
+  phone: [32m'0123456789'[39m,
+  show_email: [33mfalse[39m,
+  address: {
+    street_1: [32m'abc street'[39m,
+    street_2: [32m'xyz street'[39m,
+    city: [32m'New York'[39m,
+    zip: [32m'10003'[39m,
+    state: [32m'NY'[39m,
+    country: [32m'US'[39m
+  },
+  location: [32m''[39m,
+  banner: [32m''[39m,
+  banner_id: [33m0[39m,
+  gravatar: [32m'http://2.gravatar.com/avatar/88167b17d9459c32f7ad01aff065eff9?s=96&d=mm&r=g'[39m,
+  gravatar_id: [33m0[39m,
+  shop_url: [32m'http://localhost:8889/store/marisac7b528e6-c036-46c3-8d04-9f4ed83c69fa/'[39m,
+  products_per_page: [33m12[39m,
+  show_more_product_tab: [33mtrue[39m,
+  toc_enabled: [33mfalse[39m,
+  store_toc: [32m''[39m,
+  featured: [33mtrue[39m,
+  rating: { rating: [32m'No Ratings found yet'[39m, count: [33m0[39m },
+  enabled: [33mtrue[39m,
+  registered: [32m'2022-12-05 10:37:37'[39m,
+  payment: {
+    paypal: { [32m'0'[39m: [32m'email'[39m, email: [32m'paypal@g.c'[39m },
+    bank: {
+      ac_name: [32m'account name'[39m,
+      ac_type: [32m'personal'[39m,
+      ac_number: [32m'1234567'[39m,
+      bank_name: [32m'bank name'[39m,
+      bank_addr: [32m'bank address'[39m,
+      routing_number: [32m'123456'[39m,
+      iban: [32m'123456'[39m,
+      swift: [32m'12345'[39m
+    },
+    stripe: [33mfalse[39m
+  },
+  trusted: [33mtrue[39m,
+  store_open_close: {
+    enabled: [33mfalse[39m,
+    time: {
+      enabled: [33mfalse[39m,
+      time: [],
+      open_notice: [32m'Store is open'[39m,
+      close_notice: [32m'Store is closed'[39m
+    },
+    open_notice: [32m'Store is open'[39m,
+    close_notice: [32m'Store is closed'[39m
+  },
+  company_name: [32m''[39m,
+  vat_number: [32m''[39m,
+  company_id_number: [32m''[39m,
+  bank_name: [32m''[39m,
+  bank_iban: [32m''[39m,
+  admin_commission: [32m''[39m,
+  admin_additional_fee: [32m''[39m,
+  admin_commission_type: [32m''[39m,
+  _links: { self: [ [36m[Object][39m ], collection: [ [36m[Object][39m ] }
+}
+]]>
+</system-out>
+</testcase>
+<testcase name="stores api test get all stores" classname="[chromium] › api/stores.spec.ts › stores api test › get all stores" time="0.18">
+</testcase>
+<testcase name="stores api test get single store" classname="[chromium] › api/stores.spec.ts › stores api test › get single store" time="0.389">
+<system-out>
+<![CDATA[{
+  id: [33m10[39m,
+  store_name: [32m'Lesley'[39m,
+  first_name: [32m'Litzy'[39m,
+  last_name: [32m'Wolf'[39m,
+  email: [32m'Jamey.Braun@hotmail.com'[39m,
+  social: {
+    fb: [32m'http://dokan.test'[39m,
+    youtube: [32m'http://dokan.test'[39m,
+    twitter: [32m'http://dokan.test'[39m,
+    linkedin: [32m'http://dokan.test'[39m,
+    pinterest: [32m'http://dokan.test'[39m,
+    instagram: [32m'http://dokan.test'[39m,
+    flickr: [32m'http://dokan.test'[39m
+  },
+  phone: [32m'0123456789'[39m,
+  show_email: [33mfalse[39m,
+  address: {
+    street_1: [32m'abc street'[39m,
+    street_2: [32m'xyz street'[39m,
+    city: [32m'New York'[39m,
+    zip: [32m'10003'[39m,
+    state: [32m'NY'[39m,
+    country: [32m'US'[39m
+  },
+  location: [32m''[39m,
+  banner: [32m''[39m,
+  banner_id: [33m0[39m,
+  gravatar: [32m'http://0.gravatar.com/avatar/0cbb48a6800361b07b6b086f89d180a5?s=96&d=mm&r=g'[39m,
+  gravatar_id: [33m0[39m,
+  shop_url: [32m'http://localhost:8889/store/lola9fb9f424-a11e-40a7-b2f4-f5255d4625fa/'[39m,
+  products_per_page: [33m12[39m,
+  show_more_product_tab: [33mtrue[39m,
+  toc_enabled: [33mfalse[39m,
+  store_toc: [32m''[39m,
+  featured: [33mtrue[39m,
+  rating: { rating: [32m'No Ratings found yet'[39m, count: [33m0[39m },
+  enabled: [33mtrue[39m,
+  registered: [32m'2022-12-05 10:37:38'[39m,
+  payment: {
+    paypal: { [32m'0'[39m: [32m'email'[39m, email: [32m'paypal@g.c'[39m },
+    bank: {
+      ac_name: [32m'account name'[39m,
+      ac_type: [32m'personal'[39m,
+      ac_number: [32m'1234567'[39m,
+      bank_name: [32m'bank name'[39m,
+      bank_addr: [32m'bank address'[39m,
+      routing_number: [32m'123456'[39m,
+      iban: [32m'123456'[39m,
+      swift: [32m'12345'[39m
+    },
+    stripe: [33mfalse[39m
+  },
+  trusted: [33mtrue[39m,
+  store_open_close: {
+    enabled: [33mfalse[39m,
+    time: {
+      enabled: [33mfalse[39m,
+      time: [],
+      open_notice: [32m'Store is open'[39m,
+      close_notice: [32m'Store is closed'[39m
+    },
+    open_notice: [32m'Store is open'[39m,
+    close_notice: [32m'Store is closed'[39m
+  },
+  company_name: [32m''[39m,
+  vat_number: [32m''[39m,
+  company_id_number: [32m''[39m,
+  bank_name: [32m''[39m,
+  bank_iban: [32m''[39m,
+  admin_commission: [32m''[39m,
+  admin_additional_fee: [32m''[39m,
+  admin_commission_type: [32m''[39m,
+  _links: { self: [ [36m[Object][39m ], collection: [ [36m[Object][39m ] }
+}
+]]>
+</system-out>
+</testcase>
+<testcase name="stores api test create a store" classname="[chromium] › api/stores.spec.ts › stores api test › create a store" time="0.21">
+</testcase>
+<testcase name="stores api test update a store" classname="[chromium] › api/stores.spec.ts › stores api test › update a store" time="0.401">
+<system-out>
+<![CDATA[{
+  id: [33m12[39m,
+  store_name: [32m'Carlo'[39m,
+  first_name: [32m'Raven'[39m,
+  last_name: [32m'Gislason'[39m,
+  email: [32m'Brigitte.Klocko@yahoo.com'[39m,
+  social: {
+    fb: [32m'http://dokan.test'[39m,
+    youtube: [32m'http://dokan.test'[39m,
+    twitter: [32m'http://dokan.test'[39m,
+    linkedin: [32m'http://dokan.test'[39m,
+    pinterest: [32m'http://dokan.test'[39m,
+    instagram: [32m'http://dokan.test'[39m,
+    flickr: [32m'http://dokan.test'[39m
+  },
+  phone: [32m'0123456789'[39m,
+  show_email: [33mfalse[39m,
+  address: {
+    street_1: [32m'abc street'[39m,
+    street_2: [32m'xyz street'[39m,
+    city: [32m'New York'[39m,
+    zip: [32m'10003'[39m,
+    state: [32m'NY'[39m,
+    country: [32m'US'[39m
+  },
+  location: [32m''[39m,
+  banner: [32m''[39m,
+  banner_id: [33m0[39m,
+  gravatar: [32m'http://1.gravatar.com/avatar/a034f3072efb574597d6e99c66478fc8?s=96&d=mm&r=g'[39m,
+  gravatar_id: [33m0[39m,
+  shop_url: [32m'http://localhost:8889/store/antoninacc147695-219e-4be0-a0ea-dd2281ca9274/'[39m,
+  products_per_page: [33m12[39m,
+  show_more_product_tab: [33mtrue[39m,
+  toc_enabled: [33mfalse[39m,
+  store_toc: [32m''[39m,
+  featured: [33mtrue[39m,
+  rating: { rating: [32m'No Ratings found yet'[39m, count: [33m0[39m },
+  enabled: [33mtrue[39m,
+  registered: [32m'2022-12-05 10:37:38'[39m,
+  payment: {
+    paypal: { [32m'0'[39m: [32m'email'[39m, email: [32m'paypal@g.c'[39m },
+    bank: {
+      ac_name: [32m'account name'[39m,
+      ac_type: [32m'personal'[39m,
+      ac_number: [32m'1234567'[39m,
+      bank_name: [32m'bank name'[39m,
+      bank_addr: [32m'bank address'[39m,
+      routing_number: [32m'123456'[39m,
+      iban: [32m'123456'[39m,
+      swift: [32m'12345'[39m
+    },
+    stripe: [33mfalse[39m
+  },
+  trusted: [33mtrue[39m,
+  store_open_close: {
+    enabled: [33mfalse[39m,
+    time: {
+      enabled: [33mfalse[39m,
+      time: [],
+      open_notice: [32m'Store is open'[39m,
+      close_notice: [32m'Store is closed'[39m
+    },
+    open_notice: [32m'Store is open'[39m,
+    close_notice: [32m'Store is closed'[39m
+  },
+  company_name: [32m''[39m,
+  vat_number: [32m''[39m,
+  company_id_number: [32m''[39m,
+  bank_name: [32m''[39m,
+  bank_iban: [32m''[39m,
+  admin_commission: [32m''[39m,
+  admin_additional_fee: [32m''[39m,
+  admin_commission_type: [32m''[39m,
+  _links: { self: [ [36m[Object][39m ], collection: [ [36m[Object][39m ] }
+}
+]]>
+</system-out>
+</testcase>
+<testcase name="stores api test delete a store" classname="[chromium] › api/stores.spec.ts › stores api test › delete a store" time="0.391">
+<failure message="stores.spec.ts:169:5 delete a store" type="FAILURE">
+<![CDATA[  [chromium] › api/stores.spec.ts:169:5 › stores api test › delete a store =========================
+
+    Error: expect(received).toBeTruthy()
+
+    Received: false
+
+      172 |
+      173 |         let response = await request.delete(endPoints.deleteStore(sellerId))
+    > 174 |         expect(response.ok()).toBeTruthy()
+          |                               ^
+      175 |         expect(response.status()).toBe(200)
+      176 |
+      177 |         let responseBody = await response.json()
+
+        at /home/runner/work/dokan/dokan/tests/e2e/tests/api/stores.spec.ts:174:31
+]]>
+</failure>
+<system-out>
+<![CDATA[{
+  id: [33m13[39m,
+  store_name: [32m'Gilda'[39m,
+  first_name: [32m'Daphne'[39m,
+  last_name: [32m'Turner'[39m,
+  email: [32m'Vidal.Zieme@gmail.com'[39m,
+  social: {
+    fb: [32m'http://dokan.test'[39m,
+    youtube: [32m'http://dokan.test'[39m,
+    twitter: [32m'http://dokan.test'[39m,
+    linkedin: [32m'http://dokan.test'[39m,
+    pinterest: [32m'http://dokan.test'[39m,
+    instagram: [32m'http://dokan.test'[39m,
+    flickr: [32m'http://dokan.test'[39m
+  },
+  phone: [32m'0123456789'[39m,
+  show_email: [33mfalse[39m,
+  address: {
+    street_1: [32m'abc street'[39m,
+    street_2: [32m'xyz street'[39m,
+    city: [32m'New York'[39m,
+    zip: [32m'10003'[39m,
+    state: [32m'NY'[39m,
+    country: [32m'US'[39m
+  },
+  location: [32m''[39m,
+  banner: [32m''[39m,
+  banner_id: [33m0[39m,
+  gravatar: [32m'http://1.gravatar.com/avatar/7a7f07e97ba53a6bf3de202262bb6059?s=96&d=mm&r=g'[39m,
+  gravatar_id: [33m0[39m,
+  shop_url: [32m'http://localhost:8889/store/louvenia5da36bb8-f983-4a52-89e1-4d62c2155ed2/'[39m,
+  products_per_page: [33m12[39m,
+  show_more_product_tab: [33mtrue[39m,
+  toc_enabled: [33mfalse[39m,
+  store_toc: [32m''[39m,
+  featured: [33mtrue[39m,
+  rating: { rating: [32m'No Ratings found yet'[39m, count: [33m0[39m },
+  enabled: [33mtrue[39m,
+  registered: [32m'2022-12-05 10:37:39'[39m,
+  payment: {
+    paypal: { [32m'0'[39m: [32m'email'[39m, email: [32m'paypal@g.c'[39m },
+    bank: {
+      ac_name: [32m'account name'[39m,
+      ac_type: [32m'personal'[39m,
+      ac_number: [32m'1234567'[39m,
+      bank_name: [32m'bank name'[39m,
+      bank_addr: [32m'bank address'[39m,
+      routing_number: [32m'123456'[39m,
+      iban: [32m'123456'[39m,
+      swift: [32m'12345'[39m
+    },
+    stripe: [33mfalse[39m
+  },
+  trusted: [33mtrue[39m,
+  store_open_close: {
+    enabled: [33mfalse[39m,
+    time: {
+      enabled: [33mfalse[39m,
+      time: [],
+      open_notice: [32m'Store is open'[39m,
+      close_notice: [32m'Store is closed'[39m
+    },
+    open_notice: [32m'Store is open'[39m,
+    close_notice: [32m'Store is closed'[39m
+  },
+  company_name: [32m''[39m,
+  vat_number: [32m''[39m,
+  company_id_number: [32m''[39m,
+  bank_name: [32m''[39m,
+  bank_iban: [32m''[39m,
+  admin_commission: [32m''[39m,
+  admin_additional_fee: [32m''[39m,
+  admin_commission_type: [32m''[39m,
+  _links: { self: [ [36m[Object][39m ], collection: [ [36m[Object][39m ] }
+}
+]]>
+</system-out>
+</testcase>
+<testcase name="stores api test get store current visitor" classname="[chromium] › api/stores.spec.ts › stores api test › get store current visitor" time="0.189">
+<system-out>
+<![CDATA[{
+  id: [33m14[39m,
+  store_name: [32m'Fausto'[39m,
+  first_name: [32m'Jess'[39m,
+  last_name: [32m'Mraz'[39m,
+  email: [32m'Ally_Volkman@gmail.com'[39m,
+  social: {
+    fb: [32m'http://dokan.test'[39m,
+    youtube: [32m'http://dokan.test'[39m,
+    twitter: [32m'http://dokan.test'[39m,
+    linkedin: [32m'http://dokan.test'[39m,
+    pinterest: [32m'http://dokan.test'[39m,
+    instagram: [32m'http://dokan.test'[39m,
+    flickr: [32m'http://dokan.test'[39m
+  },
+  phone: [32m'0123456789'[39m,
+  show_email: [33mfalse[39m,
+  address: {
+    street_1: [32m'abc street'[39m,
+    street_2: [32m'xyz street'[39m,
+    city: [32m'New York'[39m,
+    zip: [32m'10003'[39m,
+    state: [32m'NY'[39m,
+    country: [32m'US'[39m
+  },
+  location: [32m''[39m,
+  banner: [32m''[39m,
+  banner_id: [33m0[39m,
+  gravatar: [32m'http://0.gravatar.com/avatar/08edf6352eded0742b75475423fc0557?s=96&d=mm&r=g'[39m,
+  gravatar_id: [33m0[39m,
+  shop_url: [32m'http://localhost:8889/store/pamela1e450309-7260-4e19-aff3-abc5bdccb2e1/'[39m,
+  products_per_page: [33m12[39m,
+  show_more_product_tab: [33mtrue[39m,
+  toc_enabled: [33mfalse[39m,
+  store_toc: [32m''[39m,
+  featured: [33mtrue[39m,
+  rating: { rating: [32m'No Ratings found yet'[39m, count: [33m0[39m },
+  enabled: [33mtrue[39m,
+  registered: [32m'2022-12-05 10:37:41'[39m,
+  payment: {
+    paypal: { [32m'0'[39m: [32m'email'[39m, email: [32m'paypal@g.c'[39m },
+    bank: {
+      ac_name: [32m'account name'[39m,
+      ac_type: [32m'personal'[39m,
+      ac_number: [32m'1234567'[39m,
+      bank_name: [32m'bank name'[39m,
+      bank_addr: [32m'bank address'[39m,
+      routing_number: [32m'123456'[39m,
+      iban: [32m'123456'[39m,
+      swift: [32m'12345'[39m
+    },
+    stripe: [33mfalse[39m
+  },
+  trusted: [33mtrue[39m,
+  store_open_close: {
+    enabled: [33mfalse[39m,
+    time: {
+      enabled: [33mfalse[39m,
+      time: [],
+      open_notice: [32m'Store is open'[39m,
+      close_notice: [32m'Store is closed'[39m
+    },
+    open_notice: [32m'Store is open'[39m,
+    close_notice: [32m'Store is closed'[39m
+  },
+  company_name: [32m''[39m,
+  vat_number: [32m''[39m,
+  company_id_number: [32m''[39m,
+  bank_name: [32m''[39m,
+  bank_iban: [32m''[39m,
+  admin_commission: [32m''[39m,
+  admin_additional_fee: [32m''[39m,
+  admin_commission_type: [32m''[39m,
+  _links: { self: [ [36m[Object][39m ], collection: [ [36m[Object][39m ] }
+}
+]]>
+</system-out>
+</testcase>
+<testcase name="stores api test get store stats" classname="[chromium] › api/stores.spec.ts › stores api test › get store stats" time="0.391">
+<system-out>
+<![CDATA[{
+  id: [33m15[39m,
+  store_name: [32m'Madisyn'[39m,
+  first_name: [32m'Dwight'[39m,
+  last_name: [32m'Schuppe'[39m,
+  email: [32m'Berenice59@hotmail.com'[39m,
+  social: {
+    fb: [32m'http://dokan.test'[39m,
+    youtube: [32m'http://dokan.test'[39m,
+    twitter: [32m'http://dokan.test'[39m,
+    linkedin: [32m'http://dokan.test'[39m,
+    pinterest: [32m'http://dokan.test'[39m,
+    instagram: [32m'http://dokan.test'[39m,
+    flickr: [32m'http://dokan.test'[39m
+  },
+  phone: [32m'0123456789'[39m,
+  show_email: [33mfalse[39m,
+  address: {
+    street_1: [32m'abc street'[39m,
+    street_2: [32m'xyz street'[39m,
+    city: [32m'New York'[39m,
+    zip: [32m'10003'[39m,
+    state: [32m'NY'[39m,
+    country: [32m'US'[39m
+  },
+  location: [32m''[39m,
+  banner: [32m''[39m,
+  banner_id: [33m0[39m,
+  gravatar: [32m'http://0.gravatar.com/avatar/f6ce0f5162c9f2cc465cffa3352ea18e?s=96&d=mm&r=g'[39m,
+  gravatar_id: [33m0[39m,
+  shop_url: [32m'http://localhost:8889/store/lowell130d7c11-f5fb-42a3-b9fd-bb2b3c63fd0a/'[39m,
+  products_per_page: [33m12[39m,
+  show_more_product_tab: [33mtrue[39m,
+  toc_enabled: [33mfalse[39m,
+  store_toc: [32m''[39m,
+  featured: [33mtrue[39m,
+  rating: { rating: [32m'No Ratings found yet'[39m, count: [33m0[39m },
+  enabled: [33mtrue[39m,
+  registered: [32m'2022-12-05 10:37:41'[39m,
+  payment: {
+    paypal: { [32m'0'[39m: [32m'email'[39m, email: [32m'paypal@g.c'[39m },
+    bank: {
+      ac_name: [32m'account name'[39m,
+      ac_type: [32m'personal'[39m,
+      ac_number: [32m'1234567'[39m,
+      bank_name: [32m'bank name'[39m,
+      bank_addr: [32m'bank address'[39m,
+      routing_number: [32m'123456'[39m,
+      iban: [32m'123456'[39m,
+      swift: [32m'12345'[39m
+    },
+    stripe: [33mfalse[39m
+  },
+  trusted: [33mtrue[39m,
+  store_open_close: {
+    enabled: [33mfalse[39m,
+    time: {
+      enabled: [33mfalse[39m,
+      time: [],
+      open_notice: [32m'Store is open'[39m,
+      close_notice: [32m'Store is closed'[39m
+    },
+    open_notice: [32m'Store is open'[39m,
+    close_notice: [32m'Store is closed'[39m
+  },
+  company_name: [32m''[39m,
+  vat_number: [32m''[39m,
+  company_id_number: [32m''[39m,
+  bank_name: [32m''[39m,
+  bank_iban: [32m''[39m,
+  admin_commission: [32m''[39m,
+  admin_additional_fee: [32m''[39m,
+  admin_commission_type: [32m''[39m,
+  _links: { self: [ [36m[Object][39m ], collection: [ [36m[Object][39m ] }
+}
+]]>
+</system-out>
+</testcase>
+<testcase name="stores api test get store categories" classname="[chromium] › api/stores.spec.ts › stores api test › get store categories" time="0.387">
+<system-out>
+<![CDATA[{
+  id: [33m16[39m,
+  store_name: [32m'Ana'[39m,
+  first_name: [32m'Angelo'[39m,
+  last_name: [32m'Parker'[39m,
+  email: [32m'Chelsea45@hotmail.com'[39m,
+  social: {
+    fb: [32m'http://dokan.test'[39m,
+    youtube: [32m'http://dokan.test'[39m,
+    twitter: [32m'http://dokan.test'[39m,
+    linkedin: [32m'http://dokan.test'[39m,
+    pinterest: [32m'http://dokan.test'[39m,
+    instagram: [32m'http://dokan.test'[39m,
+    flickr: [32m'http://dokan.test'[39m
+  },
+  phone: [32m'0123456789'[39m,
+  show_email: [33mfalse[39m,
+  address: {
+    street_1: [32m'abc street'[39m,
+    street_2: [32m'xyz street'[39m,
+    city: [32m'New York'[39m,
+    zip: [32m'10003'[39m,
+    state: [32m'NY'[39m,
+    country: [32m'US'[39m
+  },
+  location: [32m''[39m,
+  banner: [32m''[39m,
+  banner_id: [33m0[39m,
+  gravatar: [32m'http://2.gravatar.com/avatar/ed1ca681e6dac74301a37caef534274a?s=96&d=mm&r=g'[39m,
+  gravatar_id: [33m0[39m,
+  shop_url: [32m'http://localhost:8889/store/maymie6a8d4f62-52fe-42ff-a108-600793ac09b8/'[39m,
+  products_per_page: [33m12[39m,
+  show_more_product_tab: [33mtrue[39m,
+  toc_enabled: [33mfalse[39m,
+  store_toc: [32m''[39m,
+  featured: [33mtrue[39m,
+  rating: { rating: [32m'No Ratings found yet'[39m, count: [33m0[39m },
+  enabled: [33mtrue[39m,
+  registered: [32m'2022-12-05 10:37:41'[39m,
+  payment: {
+    paypal: { [32m'0'[39m: [32m'email'[39m, email: [32m'paypal@g.c'[39m },
+    bank: {
+      ac_name: [32m'account name'[39m,
+      ac_type: [32m'personal'[39m,
+      ac_number: [32m'1234567'[39m,
+      bank_name: [32m'bank name'[39m,
+      bank_addr: [32m'bank address'[39m,
+      routing_number: [32m'123456'[39m,
+      iban: [32m'123456'[39m,
+      swift: [32m'12345'[39m
+    },
+    stripe: [33mfalse[39m
+  },
+  trusted: [33mtrue[39m,
+  store_open_close: {
+    enabled: [33mfalse[39m,
+    time: {
+      enabled: [33mfalse[39m,
+      time: [],
+      open_notice: [32m'Store is open'[39m,
+      close_notice: [32m'Store is closed'[39m
+    },
+    open_notice: [32m'Store is open'[39m,
+    close_notice: [32m'Store is closed'[39m
+  },
+  company_name: [32m''[39m,
+  vat_number: [32m''[39m,
+  company_id_number: [32m''[39m,
+  bank_name: [32m''[39m,
+  bank_iban: [32m''[39m,
+  admin_commission: [32m''[39m,
+  admin_additional_fee: [32m''[39m,
+  admin_commission_type: [32m''[39m,
+  _links: { self: [ [36m[Object][39m ], collection: [ [36m[Object][39m ] }
+}
+]]>
+</system-out>
+</testcase>
+<testcase name="stores api test get store products" classname="[chromium] › api/stores.spec.ts › stores api test › get store products" time="0.382">
+<system-out>
+<![CDATA[{
+  id: [33m17[39m,
+  store_name: [32m'Kristofer'[39m,
+  first_name: [32m'Lexus'[39m,
+  last_name: [32m'Wolf'[39m,
+  email: [32m'Tyreek73@yahoo.com'[39m,
+  social: {
+    fb: [32m'http://dokan.test'[39m,
+    youtube: [32m'http://dokan.test'[39m,
+    twitter: [32m'http://dokan.test'[39m,
+    linkedin: [32m'http://dokan.test'[39m,
+    pinterest: [32m'http://dokan.test'[39m,
+    instagram: [32m'http://dokan.test'[39m,
+    flickr: [32m'http://dokan.test'[39m
+  },
+  phone: [32m'0123456789'[39m,
+  show_email: [33mfalse[39m,
+  address: {
+    street_1: [32m'abc street'[39m,
+    street_2: [32m'xyz street'[39m,
+    city: [32m'New York'[39m,
+    zip: [32m'10003'[39m,
+    state: [32m'NY'[39m,
+    country: [32m'US'[39m
+  },
+  location: [32m''[39m,
+  banner: [32m''[39m,
+  banner_id: [33m0[39m,
+  gravatar: [32m'http://1.gravatar.com/avatar/76ea708d15731878d7077ae6989d64ac?s=96&d=mm&r=g'[39m,
+  gravatar_id: [33m0[39m,
+  shop_url: [32m'http://localhost:8889/store/kristya70cd5b1-85bd-4e2b-baae-73c27ddbe22f/'[39m,
+  products_per_page: [33m12[39m,
+  show_more_product_tab: [33mtrue[39m,
+  toc_enabled: [33mfalse[39m,
+  store_toc: [32m''[39m,
+  featured: [33mtrue[39m,
+  rating: { rating: [32m'No Ratings found yet'[39m, count: [33m0[39m },
+  enabled: [33mtrue[39m,
+  registered: [32m'2022-12-05 10:37:42'[39m,
+  payment: {
+    paypal: { [32m'0'[39m: [32m'email'[39m, email: [32m'paypal@g.c'[39m },
+    bank: {
+      ac_name: [32m'account name'[39m,
+      ac_type: [32m'personal'[39m,
+      ac_number: [32m'1234567'[39m,
+      bank_name: [32m'bank name'[39m,
+      bank_addr: [32m'bank address'[39m,
+      routing_number: [32m'123456'[39m,
+      iban: [32m'123456'[39m,
+      swift: [32m'12345'[39m
+    },
+    stripe: [33mfalse[39m
+  },
+  trusted: [33mtrue[39m,
+  store_open_close: {
+    enabled: [33mfalse[39m,
+    time: {
+      enabled: [33mfalse[39m,
+      time: [],
+      open_notice: [32m'Store is open'[39m,
+      close_notice: [32m'Store is closed'[39m
+    },
+    open_notice: [32m'Store is open'[39m,
+    close_notice: [32m'Store is closed'[39m
+  },
+  company_name: [32m''[39m,
+  vat_number: [32m''[39m,
+  company_id_number: [32m''[39m,
+  bank_name: [32m''[39m,
+  bank_iban: [32m''[39m,
+  admin_commission: [32m''[39m,
+  admin_additional_fee: [32m''[39m,
+  admin_commission_type: [32m''[39m,
+  _links: { self: [ [36m[Object][39m ], collection: [ [36m[Object][39m ] }
+}
+]]>
+</system-out>
+</testcase>
+<testcase name="stores api test get store reviews" classname="[chromium] › api/stores.spec.ts › stores api test › get store reviews" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="stores api test create a store review" classname="[chromium] › api/stores.spec.ts › stores api test › create a store review" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="stores api test update a store status" classname="[chromium] › api/stores.spec.ts › stores api test › update a store status" time="0.404">
+<system-out>
+<![CDATA[{
+  id: [33m18[39m,
+  store_name: [32m'Peyton'[39m,
+  first_name: [32m'Sedrick'[39m,
+  last_name: [32m'Watsica'[39m,
+  email: [32m'Roel.Gerlach0@hotmail.com'[39m,
+  social: {
+    fb: [32m'http://dokan.test'[39m,
+    youtube: [32m'http://dokan.test'[39m,
+    twitter: [32m'http://dokan.test'[39m,
+    linkedin: [32m'http://dokan.test'[39m,
+    pinterest: [32m'http://dokan.test'[39m,
+    instagram: [32m'http://dokan.test'[39m,
+    flickr: [32m'http://dokan.test'[39m
+  },
+  phone: [32m'0123456789'[39m,
+  show_email: [33mfalse[39m,
+  address: {
+    street_1: [32m'abc street'[39m,
+    street_2: [32m'xyz street'[39m,
+    city: [32m'New York'[39m,
+    zip: [32m'10003'[39m,
+    state: [32m'NY'[39m,
+    country: [32m'US'[39m
+  },
+  location: [32m''[39m,
+  banner: [32m''[39m,
+  banner_id: [33m0[39m,
+  gravatar: [32m'http://0.gravatar.com/avatar/ca596aeb3b27b11231b18545bb78e021?s=96&d=mm&r=g'[39m,
+  gravatar_id: [33m0[39m,
+  shop_url: [32m'http://localhost:8889/store/ardith9e7a308e-aa2c-4f1a-b0ae-3ce6e3785282/'[39m,
+  products_per_page: [33m12[39m,
+  show_more_product_tab: [33mtrue[39m,
+  toc_enabled: [33mfalse[39m,
+  store_toc: [32m''[39m,
+  featured: [33mtrue[39m,
+  rating: { rating: [32m'No Ratings found yet'[39m, count: [33m0[39m },
+  enabled: [33mtrue[39m,
+  registered: [32m'2022-12-05 10:37:42'[39m,
+  payment: {
+    paypal: { [32m'0'[39m: [32m'email'[39m, email: [32m'paypal@g.c'[39m },
+    bank: {
+      ac_name: [32m'account name'[39m,
+      ac_type: [32m'personal'[39m,
+      ac_number: [32m'1234567'[39m,
+      bank_name: [32m'bank name'[39m,
+      bank_addr: [32m'bank address'[39m,
+      routing_number: [32m'123456'[39m,
+      iban: [32m'123456'[39m,
+      swift: [32m'12345'[39m
+    },
+    stripe: [33mfalse[39m
+  },
+  trusted: [33mtrue[39m,
+  store_open_close: {
+    enabled: [33mfalse[39m,
+    time: {
+      enabled: [33mfalse[39m,
+      time: [],
+      open_notice: [32m'Store is open'[39m,
+      close_notice: [32m'Store is closed'[39m
+    },
+    open_notice: [32m'Store is open'[39m,
+    close_notice: [32m'Store is closed'[39m
+  },
+  company_name: [32m''[39m,
+  vat_number: [32m''[39m,
+  company_id_number: [32m''[39m,
+  bank_name: [32m''[39m,
+  bank_iban: [32m''[39m,
+  admin_commission: [32m''[39m,
+  admin_additional_fee: [32m''[39m,
+  admin_commission_type: [32m''[39m,
+  _links: { self: [ [36m[Object][39m ], collection: [ [36m[Object][39m ] }
+}
+]]>
+</system-out>
+</testcase>
+<testcase name="stores api test admin contact store" classname="[chromium] › api/stores.spec.ts › stores api test › admin contact store" time="0.403">
+<system-out>
+<![CDATA[{
+  id: [33m19[39m,
+  store_name: [32m'Terence'[39m,
+  first_name: [32m'Misty'[39m,
+  last_name: [32m'Graham'[39m,
+  email: [32m'Lois.Metz75@yahoo.com'[39m,
+  social: {
+    fb: [32m'http://dokan.test'[39m,
+    youtube: [32m'http://dokan.test'[39m,
+    twitter: [32m'http://dokan.test'[39m,
+    linkedin: [32m'http://dokan.test'[39m,
+    pinterest: [32m'http://dokan.test'[39m,
+    instagram: [32m'http://dokan.test'[39m,
+    flickr: [32m'http://dokan.test'[39m
+  },
+  phone: [32m'0123456789'[39m,
+  show_email: [33mfalse[39m,
+  address: {
+    street_1: [32m'abc street'[39m,
+    street_2: [32m'xyz street'[39m,
+    city: [32m'New York'[39m,
+    zip: [32m'10003'[39m,
+    state: [32m'NY'[39m,
+    country: [32m'US'[39m
+  },
+  location: [32m''[39m,
+  banner: [32m''[39m,
+  banner_id: [33m0[39m,
+  gravatar: [32m'http://1.gravatar.com/avatar/a12e4678eeabefacbbcf76a1f04cc2c3?s=96&d=mm&r=g'[39m,
+  gravatar_id: [33m0[39m,
+  shop_url: [32m'http://localhost:8889/store/kianna0a75eedc-49ae-4440-80d5-67d5a4886534/'[39m,
+  products_per_page: [33m12[39m,
+  show_more_product_tab: [33mtrue[39m,
+  toc_enabled: [33mfalse[39m,
+  store_toc: [32m''[39m,
+  featured: [33mtrue[39m,
+  rating: { rating: [32m'No Ratings found yet'[39m, count: [33m0[39m },
+  enabled: [33mtrue[39m,
+  registered: [32m'2022-12-05 10:37:43'[39m,
+  payment: {
+    paypal: { [32m'0'[39m: [32m'email'[39m, email: [32m'paypal@g.c'[39m },
+    bank: {
+      ac_name: [32m'account name'[39m,
+      ac_type: [32m'personal'[39m,
+      ac_number: [32m'1234567'[39m,
+      bank_name: [32m'bank name'[39m,
+      bank_addr: [32m'bank address'[39m,
+      routing_number: [32m'123456'[39m,
+      iban: [32m'123456'[39m,
+      swift: [32m'12345'[39m
+    },
+    stripe: [33mfalse[39m
+  },
+  trusted: [33mtrue[39m,
+  store_open_close: {
+    enabled: [33mfalse[39m,
+    time: {
+      enabled: [33mfalse[39m,
+      time: [],
+      open_notice: [32m'Store is open'[39m,
+      close_notice: [32m'Store is closed'[39m
+    },
+    open_notice: [32m'Store is open'[39m,
+    close_notice: [32m'Store is closed'[39m
+  },
+  company_name: [32m''[39m,
+  vat_number: [32m''[39m,
+  company_id_number: [32m''[39m,
+  bank_name: [32m''[39m,
+  bank_iban: [32m''[39m,
+  admin_commission: [32m''[39m,
+  admin_additional_fee: [32m''[39m,
+  admin_commission_type: [32m''[39m,
+  _links: { self: [ [36m[Object][39m ], collection: [ [36m[Object][39m ] }
+}
+]]>
+</system-out>
+</testcase>
+<testcase name="stores api test admitn email store" classname="[chromium] › api/stores.spec.ts › stores api test › admitn email store" time="0.402">
+<system-out>
+<![CDATA[{
+  id: [33m20[39m,
+  store_name: [32m'Dusty'[39m,
+  first_name: [32m'Genoveva'[39m,
+  last_name: [32m'Stehr'[39m,
+  email: [32m'Wilfrid_Dickens@gmail.com'[39m,
+  social: {
+    fb: [32m'http://dokan.test'[39m,
+    youtube: [32m'http://dokan.test'[39m,
+    twitter: [32m'http://dokan.test'[39m,
+    linkedin: [32m'http://dokan.test'[39m,
+    pinterest: [32m'http://dokan.test'[39m,
+    instagram: [32m'http://dokan.test'[39m,
+    flickr: [32m'http://dokan.test'[39m
+  },
+  phone: [32m'0123456789'[39m,
+  show_email: [33mfalse[39m,
+  address: {
+    street_1: [32m'abc street'[39m,
+    street_2: [32m'xyz street'[39m,
+    city: [32m'New York'[39m,
+    zip: [32m'10003'[39m,
+    state: [32m'NY'[39m,
+    country: [32m'US'[39m
+  },
+  location: [32m''[39m,
+  banner: [32m''[39m,
+  banner_id: [33m0[39m,
+  gravatar: [32m'http://1.gravatar.com/avatar/a799a5a555aeae1fbd325f0ae7cef902?s=96&d=mm&r=g'[39m,
+  gravatar_id: [33m0[39m,
+  shop_url: [32m'http://localhost:8889/store/jennifer4a704a4f-d8ff-4eff-8bf5-cd9046a24b0f/'[39m,
+  products_per_page: [33m12[39m,
+  show_more_product_tab: [33mtrue[39m,
+  toc_enabled: [33mfalse[39m,
+  store_toc: [32m''[39m,
+  featured: [33mtrue[39m,
+  rating: { rating: [32m'No Ratings found yet'[39m, count: [33m0[39m },
+  enabled: [33mtrue[39m,
+  registered: [32m'2022-12-05 10:37:43'[39m,
+  payment: {
+    paypal: { [32m'0'[39m: [32m'email'[39m, email: [32m'paypal@g.c'[39m },
+    bank: {
+      ac_name: [32m'account name'[39m,
+      ac_type: [32m'personal'[39m,
+      ac_number: [32m'1234567'[39m,
+      bank_name: [32m'bank name'[39m,
+      bank_addr: [32m'bank address'[39m,
+      routing_number: [32m'123456'[39m,
+      iban: [32m'123456'[39m,
+      swift: [32m'12345'[39m
+    },
+    stripe: [33mfalse[39m
+  },
+  trusted: [33mtrue[39m,
+  store_open_close: {
+    enabled: [33mfalse[39m,
+    time: {
+      enabled: [33mfalse[39m,
+      time: [],
+      open_notice: [32m'Store is open'[39m,
+      close_notice: [32m'Store is closed'[39m
+    },
+    open_notice: [32m'Store is open'[39m,
+    close_notice: [32m'Store is closed'[39m
+  },
+  company_name: [32m''[39m,
+  vat_number: [32m''[39m,
+  company_id_number: [32m''[39m,
+  bank_name: [32m''[39m,
+  bank_iban: [32m''[39m,
+  admin_commission: [32m''[39m,
+  admin_additional_fee: [32m''[39m,
+  admin_commission_type: [32m''[39m,
+  _links: { self: [ [36m[Object][39m ], collection: [ [36m[Object][39m ] }
+}
+]]>
+</system-out>
+</testcase>
+</testsuite>
+<testsuite name="api/supportTickets.spec.ts" timestamp="1670236563189" hostname="" tests="8" failures="0" skipped="8" time="0" errors="0">
+<testcase name="support ticket api test get all support ticket customers" classname="[chromium] › api/supportTickets.spec.ts › support ticket api test › get all support ticket customers" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="support ticket api test get all support tickets" classname="[chromium] › api/supportTickets.spec.ts › support ticket api test › get all support tickets" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="support ticket api test get single support ticket" classname="[chromium] › api/supportTickets.spec.ts › support ticket api test › get single support ticket" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="support ticket api test create a support ticket comment" classname="[chromium] › api/supportTickets.spec.ts › support ticket api test › create a support ticket comment" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="support ticket api test update support ticket status" classname="[chromium] › api/supportTickets.spec.ts › support ticket api test › update support ticket status" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="support ticket api test update a support ticket email notification" classname="[chromium] › api/supportTickets.spec.ts › support ticket api test › update a support ticket email notification" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="support ticket api test delete a support ticket comment" classname="[chromium] › api/supportTickets.spec.ts › support ticket api test › delete a support ticket comment" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="support ticket api test update batch support tickets" classname="[chromium] › api/supportTickets.spec.ts › support ticket api test › update batch support tickets" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="api/wholesaleCustomers.spec.ts" timestamp="1670236563189" hostname="" tests="4" failures="0" skipped="0" time="1.846" errors="0">
+<testcase name="wholesale customers api test get all wholesale customers" classname="[chromium] › api/wholesaleCustomers.spec.ts › wholesale customers api test › get all wholesale customers" time="0.172">
+</testcase>
+<testcase name="wholesale customers api test create a wholesale customer" classname="[chromium] › api/wholesaleCustomers.spec.ts › wholesale customers api test › create a wholesale customer" time="0.443">
+</testcase>
+<testcase name="wholesale customers api test update a wholesale customer" classname="[chromium] › api/wholesaleCustomers.spec.ts › wholesale customers api test › update a wholesale customer" time="0.609">
+</testcase>
+<testcase name="wholesale customers api test delete a wholesale customer" classname="[chromium] › api/wholesaleCustomers.spec.ts › wholesale customers api test › delete a wholesale customer" time="0.622">
+</testcase>
+</testsuite>
+<testsuite name="api/withdraws.spec.ts" timestamp="1670236563189" hostname="" tests="6" failures="4" skipped="0" time="1.561" errors="0">
+<testcase name="withdraw api test get balance details" classname="[chromium] › api/withdraws.spec.ts › withdraw api test › get balance details" time="0.178">
+</testcase>
+<testcase name="withdraw api test get all withdraws" classname="[chromium] › api/withdraws.spec.ts › withdraw api test › get all withdraws" time="0.178">
+</testcase>
+<testcase name="withdraw api test get single withdraw" classname="[chromium] › api/withdraws.spec.ts › withdraw api test › get single withdraw" time="0.344">
+<failure message="withdraws.spec.ts:46:5 get single withdraw" type="FAILURE">
+<![CDATA[  [chromium] › api/withdraws.spec.ts:46:5 › withdraw api test › get single withdraw ================
+
+    Error: expect(received).toBeTruthy()
+
+    Received: false
+
+      49 |
+      50 |         let response = await request.get(endPoints.getSingleWithdraw(withdrawId))
+    > 51 |         expect(response.ok()).toBeTruthy()
+         |                               ^
+      52 |         expect(response.status()).toBe(200)
+      53 |
+      54 |         let responseBody = await response.json()
+
+        at /home/runner/work/dokan/dokan/tests/e2e/tests/api/withdraws.spec.ts:51:31
+]]>
+</failure>
+</testcase>
+<testcase name="withdraw api test create a withdraw" classname="[chromium] › api/withdraws.spec.ts › withdraw api test › create a withdraw" time="0.175">
+<failure message="withdraws.spec.ts:58:5 create a withdraw" type="FAILURE">
+<![CDATA[  [chromium] › api/withdraws.spec.ts:58:5 › withdraw api test › create a withdraw ==================
+
+    Error: expect(received).toBeTruthy()
+
+    Received: false
+
+      61 |         // console.log(responseBody)
+      62 |
+    > 63 |         expect(response.ok()).toBeTruthy()
+         |                               ^
+      64 |         expect(response.status()).toBe(201)
+      65 |     });
+      66 |
+
+        at /home/runner/work/dokan/dokan/tests/e2e/tests/api/withdraws.spec.ts:63:31
+]]>
+</failure>
+</testcase>
+<testcase name="withdraw api test update a withdraw" classname="[chromium] › api/withdraws.spec.ts › withdraw api test › update a withdraw" time="0.34">
+<failure message="withdraws.spec.ts:67:5 update a withdraw" type="FAILURE">
+<![CDATA[  [chromium] › api/withdraws.spec.ts:67:5 › withdraw api test › update a withdraw ==================
+
+    Error: expect(received).toBeTruthy()
+
+    Received: false
+
+      70 |
+      71 |         let response = await request.put(endPoints.updateWithdraw(withdrawId), { data: payloads.updateWithdraw })
+    > 72 |         expect(response.ok()).toBeTruthy()
+         |                               ^
+      73 |         expect(response.status()).toBe(200)
+      74 |
+      75 |         let responseBody = await response.json()
+
+        at /home/runner/work/dokan/dokan/tests/e2e/tests/api/withdraws.spec.ts:72:31
+]]>
+</failure>
+</testcase>
+<testcase name="withdraw api test cancel a withdraw" classname="[chromium] › api/withdraws.spec.ts › withdraw api test › cancel a withdraw" time="0.346">
+<failure message="withdraws.spec.ts:79:5 cancel a withdraw" type="FAILURE">
+<![CDATA[  [chromium] › api/withdraws.spec.ts:79:5 › withdraw api test › cancel a withdraw ==================
+
+    Error: expect(received).toBeTruthy()
+
+    Received: false
+
+      82 |
+      83 |         let response = await request.delete(endPoints.cancelAWithdraw(withdrawId))
+    > 84 |         expect(response.ok()).toBeTruthy()
+         |                               ^
+      85 |         expect(response.status()).toBe(200)
+      86 |
+      87 |         let responseBody = await response.json()
+
+        at /home/runner/work/dokan/dokan/tests/e2e/tests/api/withdraws.spec.ts:84:31
 ]]>
 </failure>
 </testcase>

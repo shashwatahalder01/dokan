@@ -1,4 +1,0 @@
-
-
-
-npm init playwright@latest
