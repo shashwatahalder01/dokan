@@ -1,9 +1,9 @@
-<testsuites id="" name="" tests="143" failures="25" skipped="25" errors="0" time="89.907954">
-<testsuite name="api/aapitest.spec.ts" timestamp="1670258711274" hostname="" tests="1" failures="0" skipped="0" time="1.712" errors="0">
-<testcase name=" api test update settings" classname="[chromium] › api/aapitest.spec.ts ›  api test › update settings" time="1.712">
+<testsuites id="" name="" tests="143" failures="8" skipped="48" errors="0" time="59.90147099999996">
+<testsuite name="api/aapitest.spec.ts" timestamp="1670259765531" hostname="" tests="1" failures="0" skipped="0" time="2.019" errors="0">
+<testcase name=" api test update settings" classname="[chromium] › api/aapitest.spec.ts ›  api test › update settings" time="2.019">
 </testcase>
 </testsuite>
-<testsuite name="api/abuseReports.spec.ts" timestamp="1670258711274" hostname="" tests="3" failures="0" skipped="3" time="0" errors="0">
+<testsuite name="api/abuseReports.spec.ts" timestamp="1670259765531" hostname="" tests="3" failures="0" skipped="3" time="0" errors="0">
 <testcase name="abuse report api test get all abuse report reasons" classname="[chromium] › api/abuseReports.spec.ts › abuse report api test › get all abuse report reasons" time="0">
 <skipped>
 </skipped>
@@ -17,55 +17,55 @@
 </skipped>
 </testcase>
 </testsuite>
-<testsuite name="api/admins.spec.ts" timestamp="1670258711274" hostname="" tests="10" failures="0" skipped="0" time="3.378" errors="0">
-<testcase name="admin api test get admin report overview" classname="[chromium] › api/admins.spec.ts › admin api test › get admin report overview" time="0.197">
+<testsuite name="api/admins.spec.ts" timestamp="1670259765531" hostname="" tests="10" failures="0" skipped="0" time="3.615" errors="0">
+<testcase name="admin api test get admin report overview" classname="[chromium] › api/admins.spec.ts › admin api test › get admin report overview" time="0.221">
 <system-out>
 <![CDATA[http://localhost:8889?rest_route=/dokan/v1/admin/report/overview
 [33m200[39m
 ]]>
 </system-out>
 </testcase>
-<testcase name="admin api test get admin report summary" classname="[chromium] › api/admins.spec.ts › admin api test › get admin report summary" time="0.19">
+<testcase name="admin api test get admin report summary" classname="[chromium] › api/admins.spec.ts › admin api test › get admin report summary" time="0.217">
 </testcase>
-<testcase name="admin api test get getAdminDashboardFeed" classname="[chromium] › api/admins.spec.ts › admin api test › get getAdminDashboardFeed" time="0.428">
+<testcase name="admin api test get getAdminDashboardFeed" classname="[chromium] › api/admins.spec.ts › admin api test › get getAdminDashboardFeed" time="0.398">
 </testcase>
-<testcase name="admin api test get admin help" classname="[chromium] › api/admins.spec.ts › admin api test › get admin help" time="0.901">
+<testcase name="admin api test get admin help" classname="[chromium] › api/admins.spec.ts › admin api test › get admin help" time="0.916">
 </testcase>
-<testcase name="admin api test get changelog lite" classname="[chromium] › api/admins.spec.ts › admin api test › get changelog lite" time="0.191">
+<testcase name="admin api test get changelog lite" classname="[chromium] › api/admins.spec.ts › admin api test › get changelog lite" time="0.277">
 </testcase>
-<testcase name="admin api test get changelog pro" classname="[chromium] › api/admins.spec.ts › admin api test › get changelog pro" time="0.167">
+<testcase name="admin api test get changelog pro" classname="[chromium] › api/admins.spec.ts › admin api test › get changelog pro" time="0.186">
 </testcase>
-<testcase name="admin api test get getAdminNotices" classname="[chromium] › api/admins.spec.ts › admin api test › get getAdminNotices" time="0.165">
+<testcase name="admin api test get getAdminNotices" classname="[chromium] › api/admins.spec.ts › admin api test › get getAdminNotices" time="0.183">
 </testcase>
-<testcase name="admin api test get admin promo notices " classname="[chromium] › api/admins.spec.ts › admin api test › get admin promo notices " time="0.813">
+<testcase name="admin api test get admin promo notices " classname="[chromium] › api/admins.spec.ts › admin api test › get admin promo notices " time="0.847">
 </testcase>
-<testcase name="admin api test get admin logs " classname="[chromium] › api/admins.spec.ts › admin api test › get admin logs " time="0.164">
+<testcase name="admin api test get admin logs " classname="[chromium] › api/admins.spec.ts › admin api test › get admin logs " time="0.189">
 </testcase>
-<testcase name="admin api test get admin export logs " classname="[chromium] › api/admins.spec.ts › admin api test › get admin export logs " time="0.162">
+<testcase name="admin api test get admin export logs " classname="[chromium] › api/admins.spec.ts › admin api test › get admin export logs " time="0.181">
 </testcase>
 </testsuite>
-<testsuite name="api/announcements.spec.ts" timestamp="1670258711274" hostname="" tests="6" failures="0" skipped="0" time="1.871" errors="0">
-<testcase name="announcements api test get all announcements" classname="[chromium] › api/announcements.spec.ts › announcements api test › get all announcements" time="0.157">
+<testsuite name="api/announcements.spec.ts" timestamp="1670259765531" hostname="" tests="6" failures="0" skipped="0" time="2.054" errors="0">
+<testcase name="announcements api test get all announcements" classname="[chromium] › api/announcements.spec.ts › announcements api test › get all announcements" time="0.172">
 </testcase>
-<testcase name="announcements api test get single announcement" classname="[chromium] › api/announcements.spec.ts › announcements api test › get single announcement" time="0.338">
+<testcase name="announcements api test get single announcement" classname="[chromium] › api/announcements.spec.ts › announcements api test › get single announcement" time="0.367">
 </testcase>
-<testcase name="announcements api test create a announcement" classname="[chromium] › api/announcements.spec.ts › announcements api test › create a announcement" time="0.175">
+<testcase name="announcements api test create a announcement" classname="[chromium] › api/announcements.spec.ts › announcements api test › create a announcement" time="0.196">
 </testcase>
-<testcase name="announcements api test update a announcement" classname="[chromium] › api/announcements.spec.ts › announcements api test › update a announcement" time="0.334">
+<testcase name="announcements api test update a announcement" classname="[chromium] › api/announcements.spec.ts › announcements api test › update a announcement" time="0.367">
 </testcase>
-<testcase name="announcements api test delete a announcement" classname="[chromium] › api/announcements.spec.ts › announcements api test › delete a announcement" time="0.333">
+<testcase name="announcements api test delete a announcement" classname="[chromium] › api/announcements.spec.ts › announcements api test › delete a announcement" time="0.364">
 </testcase>
-<testcase name="announcements api test update batch announcements" classname="[chromium] › api/announcements.spec.ts › announcements api test › update batch announcements" time="0.534">
+<testcase name="announcements api test update batch announcements" classname="[chromium] › api/announcements.spec.ts › announcements api test › update batch announcements" time="0.588">
 <system-out>
 <![CDATA[[ [33m16[39m, [33m17[39m, [33m18[39m, [33m15[39m ]
 ]]>
 </system-out>
 </testcase>
 </testsuite>
-<testsuite name="api/coupons.spec.ts" timestamp="1670258711274" hostname="" tests="5" failures="4" skipped="0" time="2.202" errors="0">
-<testcase name="coupon api test get all coupons" classname="[chromium] › api/coupons.spec.ts › coupon api test › get all coupons" time="0.153">
+<testsuite name="api/coupons.spec.ts" timestamp="1670259765531" hostname="" tests="5" failures="4" skipped="0" time="2.43" errors="0">
+<testcase name="coupon api test get all coupons" classname="[chromium] › api/coupons.spec.ts › coupon api test › get all coupons" time="0.165">
 </testcase>
-<testcase name="coupon api test get single coupon" classname="[chromium] › api/coupons.spec.ts › coupon api test › get single coupon" time="0.541">
+<testcase name="coupon api test get single coupon" classname="[chromium] › api/coupons.spec.ts › coupon api test › get single coupon" time="0.611">
 <failure message="coupons.spec.ts:31:5 get single coupon" type="FAILURE">
 <![CDATA[  [chromium] › api/coupons.spec.ts:31:5 › coupon api test › get single coupon ======================
 
@@ -85,7 +85,7 @@
 ]]>
 </failure>
 </testcase>
-<testcase name="coupon api test create a coupon" classname="[chromium] › api/coupons.spec.ts › coupon api test › create a coupon" time="0.399">
+<testcase name="coupon api test create a coupon" classname="[chromium] › api/coupons.spec.ts › coupon api test › create a coupon" time="0.436">
 <failure message="coupons.spec.ts:44:5 create a coupon" type="FAILURE">
 <![CDATA[  [chromium] › api/coupons.spec.ts:44:5 › coupon api test › create a coupon ========================
 
@@ -105,7 +105,7 @@
 ]]>
 </failure>
 </testcase>
-<testcase name="coupon api test update a coupon" classname="[chromium] › api/coupons.spec.ts › coupon api test › update a coupon" time="0.561">
+<testcase name="coupon api test update a coupon" classname="[chromium] › api/coupons.spec.ts › coupon api test › update a coupon" time="0.601">
 <failure message="coupons.spec.ts:59:5 update a coupon" type="FAILURE">
 <![CDATA[  [chromium] › api/coupons.spec.ts:59:5 › coupon api test › update a coupon ========================
 
@@ -125,7 +125,7 @@
 ]]>
 </failure>
 </testcase>
-<testcase name="coupon api test delete a coupon" classname="[chromium] › api/coupons.spec.ts › coupon api test › delete a coupon" time="0.548">
+<testcase name="coupon api test delete a coupon" classname="[chromium] › api/coupons.spec.ts › coupon api test › delete a coupon" time="0.617">
 <failure message="coupons.spec.ts:72:5 delete a coupon" type="FAILURE">
 <![CDATA[  [chromium] › api/coupons.spec.ts:72:5 › coupon api test › delete a coupon ========================
 
@@ -146,16 +146,16 @@
 </failure>
 </testcase>
 </testsuite>
-<testsuite name="api/customers.spec.ts" timestamp="1670258711274" hostname="" tests="5" failures="1" skipped="0" time="1.507" errors="0">
-<testcase name="customers api test get all customers" classname="[chromium] › api/customers.spec.ts › customers api test › get all customers" time="0.165">
+<testsuite name="api/customers.spec.ts" timestamp="1670259765531" hostname="" tests="5" failures="1" skipped="0" time="1.694" errors="0">
+<testcase name="customers api test get all customers" classname="[chromium] › api/customers.spec.ts › customers api test › get all customers" time="0.183">
 </testcase>
-<testcase name="customers api test get single customer" classname="[chromium] › api/customers.spec.ts › customers api test › get single customer" time="0.373">
+<testcase name="customers api test get single customer" classname="[chromium] › api/customers.spec.ts › customers api test › get single customer" time="0.432">
 </testcase>
-<testcase name="customers api test create a customer" classname="[chromium] › api/customers.spec.ts › customers api test › create a customer" time="0.218">
+<testcase name="customers api test create a customer" classname="[chromium] › api/customers.spec.ts › customers api test › create a customer" time="0.245">
 </testcase>
-<testcase name="customers api test update a customer" classname="[chromium] › api/customers.spec.ts › customers api test › update a customer" time="0.386">
+<testcase name="customers api test update a customer" classname="[chromium] › api/customers.spec.ts › customers api test › update a customer" time="0.426">
 </testcase>
-<testcase name="customers api test delete a customer" classname="[chromium] › api/customers.spec.ts › customers api test › delete a customer" time="0.365">
+<testcase name="customers api test delete a customer" classname="[chromium] › api/customers.spec.ts › customers api test › delete a customer" time="0.408">
 <failure message="customers.spec.ts:66:5 delete a customer" type="FAILURE">
 <![CDATA[  [chromium] › api/customers.spec.ts:66:5 › customers api test › delete a customer =================
 
@@ -176,14 +176,14 @@
 </failure>
 </testcase>
 </testsuite>
-<testsuite name="api/dummyData.spec.ts" timestamp="1670258711274" hostname="" tests="2" failures="0" skipped="0" time="0.56" errors="0">
-<testcase name="dummy Data api test get dummy data status" classname="[chromium] › api/dummyData.spec.ts › dummy Data api test › get dummy data status" time="0.191">
+<testsuite name="api/dummyData.spec.ts" timestamp="1670259765531" hostname="" tests="2" failures="0" skipped="0" time="0.619" errors="0">
+<testcase name="dummy Data api test get dummy data status" classname="[chromium] › api/dummyData.spec.ts › dummy Data api test › get dummy data status" time="0.203">
 </testcase>
-<testcase name="dummy Data api test clear dummuy data" classname="[chromium] › api/dummyData.spec.ts › dummy Data api test › clear dummuy data" time="0.369">
+<testcase name="dummy Data api test clear dummuy data" classname="[chromium] › api/dummyData.spec.ts › dummy Data api test › clear dummuy data" time="0.416">
 </testcase>
 </testsuite>
-<testsuite name="api/followStores.spec.ts" timestamp="1670258711274" hostname="" tests="2" failures="1" skipped="0" time="0.824" errors="0">
-<testcase name="follow store api test get store follow status" classname="[chromium] › api/followStores.spec.ts › follow store api test › get store follow status" time="0.395">
+<testsuite name="api/followStores.spec.ts" timestamp="1670259765531" hostname="" tests="2" failures="1" skipped="0" time="0.832" errors="0">
+<testcase name="follow store api test get store follow status" classname="[chromium] › api/followStores.spec.ts › follow store api test › get store follow status" time="0.39">
 <failure message="followStores.spec.ts:23:5 get store follow status" type="FAILURE">
 <![CDATA[  [chromium] › api/followStores.spec.ts:23:5 › follow store api test › get store follow status =====
 
@@ -203,214 +203,135 @@
 ]]>
 </failure>
 </testcase>
-<testcase name="follow store api test follow-unfollow a store" classname="[chromium] › api/followStores.spec.ts › follow store api test › follow-unfollow a store" time="0.429">
+<testcase name="follow store api test follow-unfollow a store" classname="[chromium] › api/followStores.spec.ts › follow store api test › follow-unfollow a store" time="0.442">
 </testcase>
 </testsuite>
-<testsuite name="api/modules.spec.ts" timestamp="1670258711274" hostname="" tests="3" failures="0" skipped="0" time="0.94" errors="0">
-<testcase name="modules api test get all modules" classname="[chromium] › api/modules.spec.ts › modules api test › get all modules" time="0.159">
+<testsuite name="api/modules.spec.ts" timestamp="1670259765531" hostname="" tests="3" failures="0" skipped="0" time="1.032" errors="0">
+<testcase name="modules api test get all modules" classname="[chromium] › api/modules.spec.ts › modules api test › get all modules" time="0.184">
 </testcase>
-<testcase name="modules api test deactivate a module" classname="[chromium] › api/modules.spec.ts › modules api test › deactivate a module" time="0.471">
+<testcase name="modules api test deactivate a module" classname="[chromium] › api/modules.spec.ts › modules api test › deactivate a module" time="0.512">
 </testcase>
-<testcase name="modules api test activate a module" classname="[chromium] › api/modules.spec.ts › modules api test › activate a module" time="0.31">
-</testcase>
-</testsuite>
-<testsuite name="api/orderNotes.spec.ts" timestamp="1670258711274" hostname="" tests="4" failures="0" skipped="0" time="3.167" errors="0">
-<testcase name="order note api test get all order notes" classname="[chromium] › api/orderNotes.spec.ts › order note api test › get all order notes" time="0.916">
-</testcase>
-<testcase name="order note api test get single order note" classname="[chromium] › api/orderNotes.spec.ts › order note api test › get single order note" time="0.917">
-</testcase>
-<testcase name="order note api test create an order note" classname="[chromium] › api/orderNotes.spec.ts › order note api test › create an order note" time="0.438">
-</testcase>
-<testcase name="order note api test delete an order note" classname="[chromium] › api/orderNotes.spec.ts › order note api test › delete an order note" time="0.896">
+<testcase name="modules api test activate a module" classname="[chromium] › api/modules.spec.ts › modules api test › activate a module" time="0.336">
 </testcase>
 </testsuite>
-<testsuite name="api/orders.spec.ts" timestamp="1670258711274" hostname="" tests="4" failures="0" skipped="0" time="1.884" errors="0">
-<testcase name="order api test get all orders" classname="[chromium] › api/orders.spec.ts › order api test › get all orders" time="0.184">
+<testsuite name="api/orderNotes.spec.ts" timestamp="1670259765531" hostname="" tests="4" failures="0" skipped="0" time="3.379" errors="0">
+<testcase name="order note api test get all order notes" classname="[chromium] › api/orderNotes.spec.ts › order note api test › get all order notes" time="1.014">
 </testcase>
-<testcase name="order api test get orders summary" classname="[chromium] › api/orders.spec.ts › order api test › get orders summary" time="0.154">
+<testcase name="order note api test get single order note" classname="[chromium] › api/orderNotes.spec.ts › order note api test › get single order note" time="1.017">
 </testcase>
-<testcase name="order api test get single order" classname="[chromium] › api/orders.spec.ts › order api test › get single order" time="0.749">
+<testcase name="order note api test create an order note" classname="[chromium] › api/orderNotes.spec.ts › order note api test › create an order note" time="0.354">
 </testcase>
-<testcase name="order api test update an order" classname="[chromium] › api/orders.spec.ts › order api test › update an order" time="0.797">
+<testcase name="order note api test delete an order note" classname="[chromium] › api/orderNotes.spec.ts › order note api test › delete an order note" time="0.994">
+</testcase>
+</testsuite>
+<testsuite name="api/orders.spec.ts" timestamp="1670259765531" hostname="" tests="4" failures="0" skipped="0" time="2.068" errors="0">
+<testcase name="order api test get all orders" classname="[chromium] › api/orders.spec.ts › order api test › get all orders" time="0.207">
+</testcase>
+<testcase name="order api test get orders summary" classname="[chromium] › api/orders.spec.ts › order api test › get orders summary" time="0.167">
+</testcase>
+<testcase name="order api test get single order" classname="[chromium] › api/orders.spec.ts › order api test › get single order" time="0.845">
+</testcase>
+<testcase name="order api test update an order" classname="[chromium] › api/orders.spec.ts › order api test › update an order" time="0.849">
 <system-out>
 <![CDATA[[33m39[39m
 ]]>
 </system-out>
 </testcase>
 </testsuite>
-<testsuite name="api/productAdvertisements.spec.ts" timestamp="1670258711274" hostname="" tests="6" failures="4" skipped="0" time="2.183" errors="0">
-<testcase name="product advertisement api test get all advertised product stores" classname="[chromium] › api/productAdvertisements.spec.ts › product advertisement api test › get all advertised product stores" time="0.153">
+<testsuite name="api/productAdvertisements.spec.ts" timestamp="1670259765531" hostname="" tests="6" failures="0" skipped="6" time="0" errors="0">
+<testcase name="product advertisement api test get all advertised product stores" classname="[chromium] › api/productAdvertisements.spec.ts › product advertisement api test › get all advertised product stores" time="0">
+<skipped>
+</skipped>
 </testcase>
-<testcase name="product advertisement api test get all advertised product" classname="[chromium] › api/productAdvertisements.spec.ts › product advertisement api test › get all advertised product" time="0.153">
+<testcase name="product advertisement api test get all advertised product" classname="[chromium] › api/productAdvertisements.spec.ts › product advertisement api test › get all advertised product" time="0">
+<skipped>
+</skipped>
 </testcase>
-<testcase name="product advertisement api test create a product advertisement" classname="[chromium] › api/productAdvertisements.spec.ts › product advertisement api test › create a product advertisement" time="0.39">
-<failure message="productAdvertisements.spec.ts:37:5 create a product advertisement" type="FAILURE">
-<![CDATA[  [chromium] › api/productAdvertisements.spec.ts:37:5 › product advertisement api test › create a product advertisement 
-
-    Error: expect(received).toBeTruthy()
-
-    Received: false
-
-      41 |
-      42 |         let response = await request.post(endPoints.createProductAdvertisement, { data: { vendor_id: sellerId, product_id: productId } })
-    > 43 |         expect(response.ok()).toBeTruthy()
-         |                               ^
-      44 |         expect(response.status()).toBe(200)
-      45 |
-      46 |         let responseBody = await response.json()
-
-        at /home/runner/work/dokan/dokan/tests/e2e/tests/api/productAdvertisements.spec.ts:43:31
-]]>
-</failure>
+<testcase name="product advertisement api test create a product advertisement" classname="[chromium] › api/productAdvertisements.spec.ts › product advertisement api test › create a product advertisement" time="0">
+<skipped>
+</skipped>
 </testcase>
-<testcase name="product advertisement api test expire a product advertisement" classname="[chromium] › api/productAdvertisements.spec.ts › product advertisement api test › expire a product advertisement" time="0.599">
-<failure message="productAdvertisements.spec.ts:51:5 expire a product advertisement" type="FAILURE">
-<![CDATA[  [chromium] › api/productAdvertisements.spec.ts:51:5 › product advertisement api test › expire a product advertisement 
-
-    Error: expect(received).toBeTruthy()
-
-    Received: false
-
-      54 |
-      55 |         let response = await request.put(endPoints.expireProductAdvertisement(productAdvertisementId))
-    > 56 |         expect(response.ok()).toBeTruthy()
-         |                               ^
-      57 |         expect(response.status()).toBe(200)
-      58 |
-      59 |         let responseBody = await response.json()
-
-        at /home/runner/work/dokan/dokan/tests/e2e/tests/api/productAdvertisements.spec.ts:56:31
-]]>
-</failure>
+<testcase name="product advertisement api test expire a product advertisement" classname="[chromium] › api/productAdvertisements.spec.ts › product advertisement api test › expire a product advertisement" time="0">
+<skipped>
+</skipped>
 </testcase>
-<testcase name="product advertisement api test delete a product advertisement" classname="[chromium] › api/productAdvertisements.spec.ts › product advertisement api test › delete a product advertisement" time="0.57">
-<failure message="productAdvertisements.spec.ts:63:5 delete a product advertisement" type="FAILURE">
-<![CDATA[  [chromium] › api/productAdvertisements.spec.ts:63:5 › product advertisement api test › delete a product advertisement 
-
-    Error: expect(received).toBeTruthy()
-
-    Received: false
-
-      66 |
-      67 |         let response = await request.delete(endPoints.deleteProductAdvertisement(productAdvertisementId))
-    > 68 |         expect(response.ok()).toBeTruthy()
-         |                               ^
-      69 |         expect(response.status()).toBe(200)
-      70 |
-      71 |         let responseBody = await response.json()
-
-        at /home/runner/work/dokan/dokan/tests/e2e/tests/api/productAdvertisements.spec.ts:68:31
-]]>
-</failure>
+<testcase name="product advertisement api test delete a product advertisement" classname="[chromium] › api/productAdvertisements.spec.ts › product advertisement api test › delete a product advertisement" time="0">
+<skipped>
+</skipped>
 </testcase>
-<testcase name="product advertisement api test update batch product advertisements" classname="[chromium] › api/productAdvertisements.spec.ts › product advertisement api test › update batch product advertisements" time="0.318">
-<failure message="productAdvertisements.spec.ts:76:5 update batch product advertisements" type="FAILURE">
-<![CDATA[  [chromium] › api/productAdvertisements.spec.ts:76:5 › product advertisement api test › update batch product advertisements 
-
-    Error: expect(received).toBeTruthy()
-
-    Received: false
-
-      79 |
-      80 |         let response = await request.put(endPoints.updateBatchProductAdvertisements, { data: { ids: allproductAdvertisementIds, action: "delete" } })
-    > 81 |         expect(response.ok()).toBeTruthy()
-         |                               ^
-      82 |         expect(response.status()).toBe(200)
-      83 |
-      84 |         let responseBody = await response.json()
-
-        at /home/runner/work/dokan/dokan/tests/e2e/tests/api/productAdvertisements.spec.ts:81:31
-]]>
-</failure>
+<testcase name="product advertisement api test update batch product advertisements" classname="[chromium] › api/productAdvertisements.spec.ts › product advertisement api test › update batch product advertisements" time="0">
+<skipped>
+</skipped>
 </testcase>
 </testsuite>
-<testsuite name="api/productAttributes.spec.ts" timestamp="1670258711274" hostname="" tests="5" failures="0" skipped="0" time="1.277" errors="0">
-<testcase name="attribute api test get all attributes" classname="[chromium] › api/productAttributes.spec.ts › attribute api test › get all attributes" time="0.161">
+<testsuite name="api/productAttributes.spec.ts" timestamp="1670259765531" hostname="" tests="5" failures="0" skipped="0" time="1.382" errors="0">
+<testcase name="attribute api test get all attributes" classname="[chromium] › api/productAttributes.spec.ts › attribute api test › get all attributes" time="0.17">
 </testcase>
-<testcase name="attribute api test get single attribute" classname="[chromium] › api/productAttributes.spec.ts › attribute api test › get single attribute" time="0.314">
+<testcase name="attribute api test get single attribute" classname="[chromium] › api/productAttributes.spec.ts › attribute api test › get single attribute" time="0.343">
 </testcase>
-<testcase name="attribute api test create an attribute" classname="[chromium] › api/productAttributes.spec.ts › attribute api test › create an attribute" time="0.163">
+<testcase name="attribute api test create an attribute" classname="[chromium] › api/productAttributes.spec.ts › attribute api test › create an attribute" time="0.169">
 </testcase>
-<testcase name="attribute api test update an attribute" classname="[chromium] › api/productAttributes.spec.ts › attribute api test › update an attribute" time="0.321">
+<testcase name="attribute api test update an attribute" classname="[chromium] › api/productAttributes.spec.ts › attribute api test › update an attribute" time="0.344">
 </testcase>
-<testcase name="attribute api test delete an attribute" classname="[chromium] › api/productAttributes.spec.ts › attribute api test › delete an attribute" time="0.318">
-</testcase>
-</testsuite>
-<testsuite name="api/productAttributeTerms.spec.ts" timestamp="1670258711274" hostname="" tests="5" failures="1" skipped="0" time="2.434" errors="0">
-<testcase name="attribute term api test get all attribute terms" classname="[chromium] › api/productAttributeTerms.spec.ts › attribute term api test › get all attribute terms" time="0.474">
-</testcase>
-<testcase name="attribute term api test get single attribute term" classname="[chromium] › api/productAttributeTerms.spec.ts › attribute term api test › get single attribute term" time="0.476">
-</testcase>
-<testcase name="attribute term api test create an attribute term" classname="[chromium] › api/productAttributeTerms.spec.ts › attribute term api test › create an attribute term" time="0.474">
-<failure message="productAttributeTerms.spec.ts:40:1 create an attribute term" type="FAILURE">
-<![CDATA[  [chromium] › api/productAttributeTerms.spec.ts:40:1 › attribute term api test › create an attribute term 
-
-    Error: expect(received).toBe(expected) // Object.is equality
-
-    Expected: 200
-    Received: 201
-
-      44 |     let response = await request.post(endPoints.createAttributeTerm(attributeId), { data: payloads.createAttributeTerm() })
-      45 |     expect(response.ok()).toBeTruthy()
-    > 46 |     expect(response.status()).toBe(200)
-         |                               ^
-      47 |
-      48 |     let responseBody = await response.json()
-      49 |     // console.log(responseBody)
-
-        at /home/runner/work/dokan/dokan/tests/e2e/tests/api/productAttributeTerms.spec.ts:46:31
-]]>
-</failure>
-</testcase>
-<testcase name="attribute term api test update an attribute term " classname="[chromium] › api/productAttributeTerms.spec.ts › attribute term api test › update an attribute term " time="0.533">
-</testcase>
-<testcase name="attribute term api test delete an attribute term" classname="[chromium] › api/productAttributeTerms.spec.ts › attribute term api test › delete an attribute term" time="0.477">
+<testcase name="attribute api test delete an attribute" classname="[chromium] › api/productAttributes.spec.ts › attribute api test › delete an attribute" time="0.356">
 </testcase>
 </testsuite>
-<testsuite name="api/productReviews.spec.ts" timestamp="1670258711274" hostname="" tests="3" failures="0" skipped="0" time="0.91" errors="0">
-<testcase name="product review api test get all product reviews" classname="[chromium] › api/productReviews.spec.ts › product review api test › get all product reviews" time="0.154">
+<testsuite name="api/productAttributeTerms.spec.ts" timestamp="1670259765531" hostname="" tests="5" failures="0" skipped="0" time="2.624" errors="0">
+<testcase name="attribute term api test get all attribute terms" classname="[chromium] › api/productAttributeTerms.spec.ts › attribute term api test › get all attribute terms" time="0.525">
 </testcase>
-<testcase name="product review api test get product reviews summary" classname="[chromium] › api/productReviews.spec.ts › product review api test › get product reviews summary" time="0.157">
+<testcase name="attribute term api test get single attribute term" classname="[chromium] › api/productAttributeTerms.spec.ts › attribute term api test › get single attribute term" time="0.513">
 </testcase>
-<testcase name="product review api test update a product review" classname="[chromium] › api/productReviews.spec.ts › product review api test › update a product review" time="0.599">
+<testcase name="attribute term api test create an attribute term" classname="[chromium] › api/productAttributeTerms.spec.ts › attribute term api test › create an attribute term" time="0.516">
+</testcase>
+<testcase name="attribute term api test update an attribute term " classname="[chromium] › api/productAttributeTerms.spec.ts › attribute term api test › update an attribute term " time="0.528">
+</testcase>
+<testcase name="attribute term api test delete an attribute term" classname="[chromium] › api/productAttributeTerms.spec.ts › attribute term api test › delete an attribute term" time="0.542">
 </testcase>
 </testsuite>
-<testsuite name="api/products.spec.ts" timestamp="1670258711274" hostname="" tests="12" failures="0" skipped="0" time="3.179" errors="0">
-<testcase name="product api test get products summary" classname="[chromium] › api/products.spec.ts › product api test › get products summary" time="0.169">
+<testsuite name="api/productReviews.spec.ts" timestamp="1670259765531" hostname="" tests="3" failures="0" skipped="0" time="1.036" errors="0">
+<testcase name="product review api test get all product reviews" classname="[chromium] › api/productReviews.spec.ts › product review api test › get all product reviews" time="0.22">
 </testcase>
-<testcase name="product api test get top rated products" classname="[chromium] › api/products.spec.ts › product api test › get top rated products" time="0.169">
+<testcase name="product review api test get product reviews summary" classname="[chromium] › api/productReviews.spec.ts › product review api test › get product reviews summary" time="0.169">
 </testcase>
-<testcase name="product api test get best selling products" classname="[chromium] › api/products.spec.ts › product api test › get best selling products" time="0.192">
+<testcase name="product review api test update a product review" classname="[chromium] › api/productReviews.spec.ts › product review api test › update a product review" time="0.647">
 </testcase>
-<testcase name="product api test get featured products" classname="[chromium] › api/products.spec.ts › product api test › get featured products" time="0.159">
+</testsuite>
+<testsuite name="api/products.spec.ts" timestamp="1670259765531" hostname="" tests="12" failures="0" skipped="0" time="3.432" errors="0">
+<testcase name="product api test get products summary" classname="[chromium] › api/products.spec.ts › product api test › get products summary" time="0.171">
 </testcase>
-<testcase name="product api test get latest products" classname="[chromium] › api/products.spec.ts › product api test › get latest products" time="0.18">
+<testcase name="product api test get top rated products" classname="[chromium] › api/products.spec.ts › product api test › get top rated products" time="0.186">
+</testcase>
+<testcase name="product api test get best selling products" classname="[chromium] › api/products.spec.ts › product api test › get best selling products" time="0.206">
+</testcase>
+<testcase name="product api test get featured products" classname="[chromium] › api/products.spec.ts › product api test › get featured products" time="0.168">
+</testcase>
+<testcase name="product api test get latest products" classname="[chromium] › api/products.spec.ts › product api test › get latest products" time="0.2">
 </testcase>
 <testcase name="product api test get all multistep categories" classname="[chromium] › api/products.spec.ts › product api test › get all multistep categories" time="0.168">
 </testcase>
-<testcase name="product api test get all products" classname="[chromium] › api/products.spec.ts › product api test › get all products" time="0.179">
+<testcase name="product api test get all products" classname="[chromium] › api/products.spec.ts › product api test › get all products" time="0.199">
 </testcase>
-<testcase name="product api test get single product" classname="[chromium] › api/products.spec.ts › product api test › get single product" time="0.401">
+<testcase name="product api test get single product" classname="[chromium] › api/products.spec.ts › product api test › get single product" time="0.445">
 </testcase>
-<testcase name="product api test get all related products" classname="[chromium] › api/products.spec.ts › product api test › get all related products" time="0.438">
+<testcase name="product api test get all related products" classname="[chromium] › api/products.spec.ts › product api test › get all related products" time="0.488">
 </testcase>
-<testcase name="product api test create a product" classname="[chromium] › api/products.spec.ts › product api test › create a product" time="0.242">
+<testcase name="product api test create a product" classname="[chromium] › api/products.spec.ts › product api test › create a product" time="0.263">
 </testcase>
-<testcase name="product api test update a product" classname="[chromium] › api/products.spec.ts › product api test › update a product" time="0.424">
+<testcase name="product api test update a product" classname="[chromium] › api/products.spec.ts › product api test › update a product" time="0.469">
 </testcase>
-<testcase name="product api test delete a product" classname="[chromium] › api/products.spec.ts › product api test › delete a product" time="0.458">
+<testcase name="product api test delete a product" classname="[chromium] › api/products.spec.ts › product api test › delete a product" time="0.469">
 </testcase>
 </testsuite>
-<testsuite name="api/productVariations.spec.ts" timestamp="1670258711274" hostname="" tests="5" failures="1" skipped="0" time="4.36" errors="0">
-<testcase name="product variation api test get all product variations" classname="[chromium] › api/productVariations.spec.ts › product variation api test › get all product variations" time="0.946">
+<testsuite name="api/productVariations.spec.ts" timestamp="1670259765531" hostname="" tests="5" failures="1" skipped="0" time="4.727" errors="0">
+<testcase name="product variation api test get all product variations" classname="[chromium] › api/productVariations.spec.ts › product variation api test › get all product variations" time="1.052">
 </testcase>
-<testcase name="product variation api test get single product variation" classname="[chromium] › api/productVariations.spec.ts › product variation api test › get single product variation" time="1.02">
+<testcase name="product variation api test get single product variation" classname="[chromium] › api/productVariations.spec.ts › product variation api test › get single product variation" time="1.057">
 </testcase>
-<testcase name="product variation api test create a product variation" classname="[chromium] › api/productVariations.spec.ts › product variation api test › create a product variation" time="0.467">
+<testcase name="product variation api test create a product variation" classname="[chromium] › api/productVariations.spec.ts › product variation api test › create a product variation" time="0.51">
 </testcase>
-<testcase name="product variation api test update a product variation" classname="[chromium] › api/productVariations.spec.ts › product variation api test › update a product variation" time="0.989">
+<testcase name="product variation api test update a product variation" classname="[chromium] › api/productVariations.spec.ts › product variation api test › update a product variation" time="1.062">
 </testcase>
-<testcase name="product variation api test delete a product variation" classname="[chromium] › api/productVariations.spec.ts › product variation api test › delete a product variation" time="0.938">
+<testcase name="product variation api test delete a product variation" classname="[chromium] › api/productVariations.spec.ts › product variation api test › delete a product variation" time="1.046">
 <failure message="productVariations.spec.ts:72:5 delete a product variation" type="FAILURE">
 <![CDATA[  [chromium] › api/productVariations.spec.ts:72:5 › product variation api test › delete a product variation 
 
@@ -431,7 +352,7 @@
 </failure>
 </testcase>
 </testsuite>
-<testsuite name="api/refunds.spec.ts" timestamp="1670258711274" hostname="" tests="5" failures="0" skipped="5" time="0.001" errors="0">
+<testsuite name="api/refunds.spec.ts" timestamp="1670259765531" hostname="" tests="5" failures="0" skipped="5" time="0.001" errors="0">
 <testcase name="refunds api test get all refunds" classname="[chromium] › api/refunds.spec.ts › refunds api test › get all refunds" time="0">
 <skipped>
 </skipped>
@@ -453,200 +374,77 @@
 </skipped>
 </testcase>
 </testsuite>
-<testsuite name="api/reports.spec.ts" timestamp="1670258711274" hostname="" tests="4" failures="0" skipped="0" time="0.675" errors="0">
-<testcase name="report api test get sales overview report" classname="[chromium] › api/reports.spec.ts › report api test › get sales overview report" time="0.166">
+<testsuite name="api/reports.spec.ts" timestamp="1670259765531" hostname="" tests="4" failures="0" skipped="0" time="0.746" errors="0">
+<testcase name="report api test get sales overview report" classname="[chromium] › api/reports.spec.ts › report api test › get sales overview report" time="0.181">
 </testcase>
-<testcase name="report api test get summary report" classname="[chromium] › api/reports.spec.ts › report api test › get summary report" time="0.156">
+<testcase name="report api test get summary report" classname="[chromium] › api/reports.spec.ts › report api test › get summary report" time="0.179">
 </testcase>
-<testcase name="report api test get top earners report" classname="[chromium] › api/reports.spec.ts › report api test › get top earners report" time="0.178">
+<testcase name="report api test get top earners report" classname="[chromium] › api/reports.spec.ts › report api test › get top earners report" time="0.195">
 </testcase>
-<testcase name="report api test get top selling products report " classname="[chromium] › api/reports.spec.ts › report api test › get top selling products report " time="0.175">
-</testcase>
-</testsuite>
-<testsuite name="api/reverseWithdrawal.spec.ts" timestamp="1670258711274" hostname="" tests="4" failures="1" skipped="0" time="0.623" errors="0">
-<testcase name="reverse withdrawal api test get reverse withdrawal transaction types" classname="[chromium] › api/reverseWithdrawal.spec.ts › reverse withdrawal api test › get reverse withdrawal transaction types" time="0.153">
-</testcase>
-<testcase name="reverse withdrawal api test get all reverse withdrawal stores" classname="[chromium] › api/reverseWithdrawal.spec.ts › reverse withdrawal api test › get all reverse withdrawal stores" time="0.155">
-</testcase>
-<testcase name="reverse withdrawal api test get all reverse withdrawal store balance" classname="[chromium] › api/reverseWithdrawal.spec.ts › reverse withdrawal api test › get all reverse withdrawal store balance" time="0.16">
-</testcase>
-<testcase name="reverse withdrawal api test getAllReverseWithdrawalTransactions" classname="[chromium] › api/reverseWithdrawal.spec.ts › reverse withdrawal api test › getAllReverseWithdrawalTransactions" time="0.155">
-<failure message="reverseWithdrawal.spec.ts:48:5 getAllReverseWithdrawalTransactions" type="FAILURE">
-<![CDATA[  [chromium] › api/reverseWithdrawal.spec.ts:48:5 › reverse withdrawal api test › getAllReverseWithdrawalTransactions 
-
-    TypeError: Cannot read property 'id' of undefined
-
-       at ../utils/apiUtils.ts:433
-
-      431 |     async getReverseWithdrawalStoreId() {
-      432 |         let allReverseWithdrawalStores = await this.getAllReverseWithdrawalStores()
-    > 433 |         let reverseWithdrawalStoreId = allReverseWithdrawalStores[0].id
-          |                                                                      ^
-      434 |         // console.log(reverseWithdrawalStoreId)
-      435 |         return reverseWithdrawalStoreId
-      436 |     }
-
-        at ApiUtils.getReverseWithdrawalStoreId (/home/runner/work/dokan/dokan/tests/e2e/utils/apiUtils.ts:433:70)
-        at /home/runner/work/dokan/dokan/tests/e2e/tests/api/reverseWithdrawal.spec.ts:50:22
-]]>
-</failure>
+<testcase name="report api test get top selling products report " classname="[chromium] › api/reports.spec.ts › report api test › get top selling products report " time="0.191">
 </testcase>
 </testsuite>
-<testsuite name="api/roles.spec.ts" timestamp="1670258711274" hostname="" tests="1" failures="0" skipped="0" time="0.189" errors="0">
-<testcase name="roles api test get all user roles " classname="[chromium] › api/roles.spec.ts › roles api test › get all user roles " time="0.189">
+<testsuite name="api/reverseWithdrawal.spec.ts" timestamp="1670259765531" hostname="" tests="4" failures="0" skipped="4" time="0" errors="0">
+<testcase name="reverse withdrawal api test get reverse withdrawal transaction types" classname="[chromium] › api/reverseWithdrawal.spec.ts › reverse withdrawal api test › get reverse withdrawal transaction types" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="reverse withdrawal api test get all reverse withdrawal stores" classname="[chromium] › api/reverseWithdrawal.spec.ts › reverse withdrawal api test › get all reverse withdrawal stores" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="reverse withdrawal api test get all reverse withdrawal store balance" classname="[chromium] › api/reverseWithdrawal.spec.ts › reverse withdrawal api test › get all reverse withdrawal store balance" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="reverse withdrawal api test getAllReverseWithdrawalTransactions" classname="[chromium] › api/reverseWithdrawal.spec.ts › reverse withdrawal api test › getAllReverseWithdrawalTransactions" time="0">
+<skipped>
+</skipped>
 </testcase>
 </testsuite>
-<testsuite name="api/settings.spec.ts" timestamp="1670258711274" hostname="" tests="2" failures="0" skipped="1" time="0.166" errors="0">
-<testcase name="settings api test get settings" classname="[chromium] › api/settings.spec.ts › settings api test › get settings" time="0.166">
+<testsuite name="api/roles.spec.ts" timestamp="1670259765531" hostname="" tests="1" failures="0" skipped="0" time="0.166" errors="0">
+<testcase name="roles api test get all user roles " classname="[chromium] › api/roles.spec.ts › roles api test › get all user roles " time="0.166">
+</testcase>
+</testsuite>
+<testsuite name="api/settings.spec.ts" timestamp="1670259765531" hostname="" tests="2" failures="0" skipped="1" time="0.168" errors="0">
+<testcase name="settings api test get settings" classname="[chromium] › api/settings.spec.ts › settings api test › get settings" time="0.168">
 </testcase>
 <testcase name="settings api test update settings" classname="[chromium] › api/settings.spec.ts › settings api test › update settings" time="0">
 <skipped>
 </skipped>
 </testcase>
 </testsuite>
-<testsuite name="api/storeCategories.spec.ts" timestamp="1670258711274" hostname="" tests="7" failures="7" skipped="0" time="1.884" errors="0">
-<testcase name="store categories api test get default store category" classname="[chromium] › api/storeCategories.spec.ts › store categories api test › get default store category" time="0.155">
-<failure message="storeCategories.spec.ts:22:5 get default store category" type="FAILURE">
-<![CDATA[  [chromium] › api/storeCategories.spec.ts:22:5 › store categories api test › get default store category 
-
-    Error: expect(received).toBeTruthy()
-
-    Received: false
-
-      22 |     test('get default store category', async ({ request }) => {
-      23 |         let response = await request.get(endPoints.getDefaultStoreCategory)
-    > 24 |         expect(response.ok()).toBeTruthy()
-         |                               ^
-      25 |         expect(response.status()).toBe(200)
-      26 |
-      27 |         let responseBody = await response.json()
-
-        at /home/runner/work/dokan/dokan/tests/e2e/tests/api/storeCategories.spec.ts:24:31
-]]>
-</failure>
+<testsuite name="api/storeCategories.spec.ts" timestamp="1670259765531" hostname="" tests="7" failures="0" skipped="7" time="0" errors="0">
+<testcase name="store categories api test get default store category" classname="[chromium] › api/storeCategories.spec.ts › store categories api test › get default store category" time="0">
+<skipped>
+</skipped>
 </testcase>
-<testcase name="store categories api test get all store categories" classname="[chromium] › api/storeCategories.spec.ts › store categories api test › get all store categories" time="0.159">
-<failure message="storeCategories.spec.ts:31:5 get all store categories" type="FAILURE">
-<![CDATA[  [chromium] › api/storeCategories.spec.ts:31:5 › store categories api test › get all store categories 
-
-    Error: expect(received).toBeTruthy()
-
-    Received: false
-
-      31 |     test('get all store categories', async ({ request }) => {
-      32 |         let response = await request.get(endPoints.getAllStoreCategories)
-    > 33 |         expect(response.ok()).toBeTruthy()
-         |                               ^
-      34 |         expect(response.status()).toBe(200)
-      35 |
-      36 |         let responseBody = await response.json()
-
-        at /home/runner/work/dokan/dokan/tests/e2e/tests/api/storeCategories.spec.ts:33:31
-]]>
-</failure>
+<testcase name="store categories api test get all store categories" classname="[chromium] › api/storeCategories.spec.ts › store categories api test › get all store categories" time="0">
+<skipped>
+</skipped>
 </testcase>
-<testcase name="store categories api test get single store category" classname="[chromium] › api/storeCategories.spec.ts › store categories api test › get single store category" time="0.317">
-<failure message="storeCategories.spec.ts:40:5 get single store category" type="FAILURE">
-<![CDATA[  [chromium] › api/storeCategories.spec.ts:40:5 › store categories api test › get single store category 
-
-    Error: expect(received).toBeTruthy()
-
-    Received: false
-
-      43 |
-      44 |         let response = await request.get(endPoints.getSingleStoreCategory(categoryId))
-    > 45 |         expect(response.ok()).toBeTruthy()
-         |                               ^
-      46 |         expect(response.status()).toBe(200)
-      47 |
-      48 |         let responseBody = await response.json()
-
-        at /home/runner/work/dokan/dokan/tests/e2e/tests/api/storeCategories.spec.ts:45:31
-]]>
-</failure>
+<testcase name="store categories api test get single store category" classname="[chromium] › api/storeCategories.spec.ts › store categories api test › get single store category" time="0">
+<skipped>
+</skipped>
 </testcase>
-<testcase name="store categories api test create a store category" classname="[chromium] › api/storeCategories.spec.ts › store categories api test › create a store category" time="0.16">
-<failure message="storeCategories.spec.ts:52:5 create a store category" type="FAILURE">
-<![CDATA[  [chromium] › api/storeCategories.spec.ts:52:5 › store categories api test › create a store category 
-
-    Error: expect(received).toBeTruthy()
-
-    Received: false
-
-      55 |         // console.log(responseBody)
-      56 |
-    > 57 |         expect(response.ok()).toBeTruthy()
-         |                               ^
-      58 |         expect(response.status()).toBe(201)
-      59 |     });
-      60 |
-
-        at /home/runner/work/dokan/dokan/tests/e2e/tests/api/storeCategories.spec.ts:57:31
-]]>
-</failure>
+<testcase name="store categories api test create a store category" classname="[chromium] › api/storeCategories.spec.ts › store categories api test › create a store category" time="0">
+<skipped>
+</skipped>
 </testcase>
-<testcase name="store categories api test update a store category" classname="[chromium] › api/storeCategories.spec.ts › store categories api test › update a store category" time="0.311">
-<failure message="storeCategories.spec.ts:62:5 update a store category" type="FAILURE">
-<![CDATA[  [chromium] › api/storeCategories.spec.ts:62:5 › store categories api test › update a store category 
-
-    Error: expect(received).toBeTruthy()
-
-    Received: false
-
-      65 |
-      66 |         let response = await request.put(endPoints.updateStoreCategory(categoryId), { data: payloads.updateStoreCategory() })
-    > 67 |         expect(response.ok()).toBeTruthy()
-         |                               ^
-      68 |         expect(response.status()).toBe(200)
-      69 |
-      70 |         let responseBody = await response.json()
-
-        at /home/runner/work/dokan/dokan/tests/e2e/tests/api/storeCategories.spec.ts:67:31
-]]>
-</failure>
+<testcase name="store categories api test update a store category" classname="[chromium] › api/storeCategories.spec.ts › store categories api test › update a store category" time="0">
+<skipped>
+</skipped>
 </testcase>
-<testcase name="store categories api test delete a store category" classname="[chromium] › api/storeCategories.spec.ts › store categories api test › delete a store category" time="0.313">
-<failure message="storeCategories.spec.ts:75:5 delete a store category" type="FAILURE">
-<![CDATA[  [chromium] › api/storeCategories.spec.ts:75:5 › store categories api test › delete a store category 
-
-    Error: expect(received).toBeTruthy()
-
-    Received: false
-
-      78 |
-      79 |         let response = await request.delete(endPoints.deleteStoreCategory(categoryId))
-    > 80 |         expect(response.ok()).toBeTruthy()
-         |                               ^
-      81 |         expect(response.status()).toBe(200)
-      82 |
-      83 |         let responseBody = await response.json()
-
-        at /home/runner/work/dokan/dokan/tests/e2e/tests/api/storeCategories.spec.ts:80:31
-]]>
-</failure>
+<testcase name="store categories api test delete a store category" classname="[chromium] › api/storeCategories.spec.ts › store categories api test › delete a store category" time="0">
+<skipped>
+</skipped>
 </testcase>
-<testcase name="store categories api test set default store category" classname="[chromium] › api/storeCategories.spec.ts › store categories api test › set default store category" time="0.469">
-<failure message="storeCategories.spec.ts:87:5 set default store category" type="FAILURE">
-<![CDATA[  [chromium] › api/storeCategories.spec.ts:87:5 › store categories api test › set default store category 
-
-    Error: expect(received).toBeTruthy()
-
-    Received: false
-
-      91 |
-      92 |         let response = await request.put(endPoints.setDefaultStoreCategory, { data: { id: categoryId } })
-    > 93 |         expect(response.ok()).toBeTruthy()
-         |                               ^
-      94 |         expect(response.status()).toBe(200)
-      95 |
-      96 |         let responseBody = await response.json()
-
-        at /home/runner/work/dokan/dokan/tests/e2e/tests/api/storeCategories.spec.ts:93:31
-]]>
-</failure>
+<testcase name="store categories api test set default store category" classname="[chromium] › api/storeCategories.spec.ts › store categories api test › set default store category" time="0">
+<skipped>
+</skipped>
 </testcase>
 </testsuite>
-<testsuite name="api/storeReviews.spec.ts" timestamp="1670258711274" hostname="" tests="6" failures="0" skipped="6" time="0.001" errors="0">
+<testsuite name="api/storeReviews.spec.ts" timestamp="1670259765531" hostname="" tests="6" failures="0" skipped="6" time="0" errors="0">
 <testcase name="store reviews api test get all store reviews" classname="[chromium] › api/storeReviews.spec.ts › store reviews api test › get all store reviews" time="0">
 <skipped>
 </skipped>
@@ -667,23 +465,23 @@
 <skipped>
 </skipped>
 </testcase>
-<testcase name="store reviews api test update batch store review" classname="[chromium] › api/storeReviews.spec.ts › store reviews api test › update batch store review" time="0.001">
+<testcase name="store reviews api test update batch store review" classname="[chromium] › api/storeReviews.spec.ts › store reviews api test › update batch store review" time="0">
 <skipped>
 </skipped>
 </testcase>
 </testsuite>
-<testsuite name="api/stores.spec.ts" timestamp="1670258711274" hostname="" tests="15" failures="1" skipped="2" time="3.766" errors="0">
-<testcase name="stores api test get all stores check check_store_availability" classname="[chromium] › api/stores.spec.ts › stores api test › get all stores check check_store_availability" time="0.158">
+<testsuite name="api/stores.spec.ts" timestamp="1670259765531" hostname="" tests="15" failures="1" skipped="2" time="4.079" errors="0">
+<testcase name="stores api test get all stores check check_store_availability" classname="[chromium] › api/stores.spec.ts › stores api test › get all stores check check_store_availability" time="0.165">
 </testcase>
-<testcase name="stores api test get all stores" classname="[chromium] › api/stores.spec.ts › stores api test › get all stores" time="0.164">
+<testcase name="stores api test get all stores" classname="[chromium] › api/stores.spec.ts › stores api test › get all stores" time="0.173">
 </testcase>
-<testcase name="stores api test get single store" classname="[chromium] › api/stores.spec.ts › stores api test › get single store" time="0.354">
+<testcase name="stores api test get single store" classname="[chromium] › api/stores.spec.ts › stores api test › get single store" time="0.366">
 </testcase>
-<testcase name="stores api test create a store" classname="[chromium] › api/stores.spec.ts › stores api test › create a store" time="0.185">
+<testcase name="stores api test create a store" classname="[chromium] › api/stores.spec.ts › stores api test › create a store" time="0.2">
 </testcase>
-<testcase name="stores api test update a store" classname="[chromium] › api/stores.spec.ts › stores api test › update a store" time="0.348">
+<testcase name="stores api test update a store" classname="[chromium] › api/stores.spec.ts › stores api test › update a store" time="0.391">
 </testcase>
-<testcase name="stores api test delete a store" classname="[chromium] › api/stores.spec.ts › stores api test › delete a store" time="0.332">
+<testcase name="stores api test delete a store" classname="[chromium] › api/stores.spec.ts › stores api test › delete a store" time="0.362">
 <failure message="stores.spec.ts:169:5 delete a store" type="FAILURE">
 <![CDATA[  [chromium] › api/stores.spec.ts:169:5 › stores api test › delete a store =========================
 
@@ -703,13 +501,13 @@
 ]]>
 </failure>
 </testcase>
-<testcase name="stores api test get store current visitor" classname="[chromium] › api/stores.spec.ts › stores api test › get store current visitor" time="0.158">
+<testcase name="stores api test get store current visitor" classname="[chromium] › api/stores.spec.ts › stores api test › get store current visitor" time="0.174">
 </testcase>
-<testcase name="stores api test get store stats" classname="[chromium] › api/stores.spec.ts › stores api test › get store stats" time="0.358">
+<testcase name="stores api test get store stats" classname="[chromium] › api/stores.spec.ts › stores api test › get store stats" time="0.376">
 </testcase>
-<testcase name="stores api test get store categories" classname="[chromium] › api/stores.spec.ts › stores api test › get store categories" time="0.336">
+<testcase name="stores api test get store categories" classname="[chromium] › api/stores.spec.ts › stores api test › get store categories" time="0.368">
 </testcase>
-<testcase name="stores api test get store products" classname="[chromium] › api/stores.spec.ts › stores api test › get store products" time="0.335">
+<testcase name="stores api test get store products" classname="[chromium] › api/stores.spec.ts › stores api test › get store products" time="0.375">
 </testcase>
 <testcase name="stores api test get store reviews" classname="[chromium] › api/stores.spec.ts › stores api test › get store reviews" time="0">
 <skipped>
@@ -719,14 +517,14 @@
 <skipped>
 </skipped>
 </testcase>
-<testcase name="stores api test update a store status" classname="[chromium] › api/stores.spec.ts › stores api test › update a store status" time="0.35">
+<testcase name="stores api test update a store status" classname="[chromium] › api/stores.spec.ts › stores api test › update a store status" time="0.38">
 </testcase>
-<testcase name="stores api test admin contact store" classname="[chromium] › api/stores.spec.ts › stores api test › admin contact store" time="0.346">
+<testcase name="stores api test admin contact store" classname="[chromium] › api/stores.spec.ts › stores api test › admin contact store" time="0.377">
 </testcase>
-<testcase name="stores api test admitn email store" classname="[chromium] › api/stores.spec.ts › stores api test › admitn email store" time="0.342">
+<testcase name="stores api test admitn email store" classname="[chromium] › api/stores.spec.ts › stores api test › admitn email store" time="0.372">
 </testcase>
 </testsuite>
-<testsuite name="api/supportTickets.spec.ts" timestamp="1670258711274" hostname="" tests="8" failures="0" skipped="8" time="0" errors="0">
+<testsuite name="api/supportTickets.spec.ts" timestamp="1670259765531" hostname="" tests="8" failures="0" skipped="8" time="0" errors="0">
 <testcase name="support ticket api test get all support ticket customers" classname="[chromium] › api/supportTickets.spec.ts › support ticket api test › get all support ticket customers" time="0">
 <skipped>
 </skipped>
@@ -760,100 +558,40 @@
 </skipped>
 </testcase>
 </testsuite>
-<testsuite name="api/wholesaleCustomers.spec.ts" timestamp="1670258711274" hostname="" tests="4" failures="0" skipped="0" time="1.624" errors="0">
-<testcase name="wholesale customers api test get all wholesale customers" classname="[chromium] › api/wholesaleCustomers.spec.ts › wholesale customers api test › get all wholesale customers" time="0.155">
+<testsuite name="api/wholesaleCustomers.spec.ts" timestamp="1670259765531" hostname="" tests="4" failures="0" skipped="0" time="1.763" errors="0">
+<testcase name="wholesale customers api test get all wholesale customers" classname="[chromium] › api/wholesaleCustomers.spec.ts › wholesale customers api test › get all wholesale customers" time="0.171">
 </testcase>
-<testcase name="wholesale customers api test create a wholesale customer" classname="[chromium] › api/wholesaleCustomers.spec.ts › wholesale customers api test › create a wholesale customer" time="0.376">
+<testcase name="wholesale customers api test create a wholesale customer" classname="[chromium] › api/wholesaleCustomers.spec.ts › wholesale customers api test › create a wholesale customer" time="0.41">
 </testcase>
-<testcase name="wholesale customers api test update a wholesale customer" classname="[chromium] › api/wholesaleCustomers.spec.ts › wholesale customers api test › update a wholesale customer" time="0.55">
+<testcase name="wholesale customers api test update a wholesale customer" classname="[chromium] › api/wholesaleCustomers.spec.ts › wholesale customers api test › update a wholesale customer" time="0.592">
 </testcase>
-<testcase name="wholesale customers api test delete a wholesale customer" classname="[chromium] › api/wholesaleCustomers.spec.ts › wholesale customers api test › delete a wholesale customer" time="0.543">
+<testcase name="wholesale customers api test delete a wholesale customer" classname="[chromium] › api/wholesaleCustomers.spec.ts › wholesale customers api test › delete a wholesale customer" time="0.59">
 </testcase>
 </testsuite>
-<testsuite name="api/withdraws.spec.ts" timestamp="1670258711274" hostname="" tests="6" failures="4" skipped="0" time="1.445" errors="0">
-<testcase name="withdraw api test get balance details" classname="[chromium] › api/withdraws.spec.ts › withdraw api test › get balance details" time="0.155">
+<testsuite name="api/withdraws.spec.ts" timestamp="1670259765531" hostname="" tests="6" failures="0" skipped="6" time="0" errors="0">
+<testcase name="withdraw api test get balance details" classname="[chromium] › api/withdraws.spec.ts › withdraw api test › get balance details" time="0">
+<skipped>
+</skipped>
 </testcase>
-<testcase name="withdraw api test get all withdraws" classname="[chromium] › api/withdraws.spec.ts › withdraw api test › get all withdraws" time="0.187">
+<testcase name="withdraw api test get all withdraws" classname="[chromium] › api/withdraws.spec.ts › withdraw api test › get all withdraws" time="0">
+<skipped>
+</skipped>
 </testcase>
-<testcase name="withdraw api test get single withdraw" classname="[chromium] › api/withdraws.spec.ts › withdraw api test › get single withdraw" time="0.307">
-<failure message="withdraws.spec.ts:47:5 get single withdraw" type="FAILURE">
-<![CDATA[  [chromium] › api/withdraws.spec.ts:47:5 › withdraw api test › get single withdraw ================
-
-    Error: expect(received).toBeTruthy()
-
-    Received: false
-
-      50 |
-      51 |         let response = await request.get(endPoints.getSingleWithdraw(withdrawId))
-    > 52 |         expect(response.ok()).toBeTruthy()
-         |                               ^
-      53 |         expect(response.status()).toBe(200)
-      54 |
-      55 |         let responseBody = await response.json()
-
-        at /home/runner/work/dokan/dokan/tests/e2e/tests/api/withdraws.spec.ts:52:31
-]]>
-</failure>
+<testcase name="withdraw api test get single withdraw" classname="[chromium] › api/withdraws.spec.ts › withdraw api test › get single withdraw" time="0">
+<skipped>
+</skipped>
 </testcase>
-<testcase name="withdraw api test create a withdraw" classname="[chromium] › api/withdraws.spec.ts › withdraw api test › create a withdraw" time="0.167">
-<failure message="withdraws.spec.ts:59:5 create a withdraw" type="FAILURE">
-<![CDATA[  [chromium] › api/withdraws.spec.ts:59:5 › withdraw api test › create a withdraw ==================
-
-    Error: expect(received).toBeTruthy()
-
-    Received: false
-
-      59 |     test('create a withdraw', async ({ request }) => {
-      60 |         let response = await request.post(endPoints.createWithdraw, { data: payloads.createWithdraw })
-    > 61 |         expect(response.ok()).toBeTruthy()
-         |                               ^
-      62 |         expect(response.status()).toBe(201)
-      63 |
-      64 |         let responseBody = await response.json()
-
-        at /home/runner/work/dokan/dokan/tests/e2e/tests/api/withdraws.spec.ts:61:31
-]]>
-</failure>
+<testcase name="withdraw api test create a withdraw" classname="[chromium] › api/withdraws.spec.ts › withdraw api test › create a withdraw" time="0">
+<skipped>
+</skipped>
 </testcase>
-<testcase name="withdraw api test update a withdraw" classname="[chromium] › api/withdraws.spec.ts › withdraw api test › update a withdraw" time="0.315">
-<failure message="withdraws.spec.ts:68:5 update a withdraw" type="FAILURE">
-<![CDATA[  [chromium] › api/withdraws.spec.ts:68:5 › withdraw api test › update a withdraw ==================
-
-    Error: expect(received).toBeTruthy()
-
-    Received: false
-
-      71 |
-      72 |         let response = await request.put(endPoints.updateWithdraw(withdrawId), { data: payloads.updateWithdraw })
-    > 73 |         expect(response.ok()).toBeTruthy()
-         |                               ^
-      74 |         expect(response.status()).toBe(200)
-      75 |
-      76 |         let responseBody = await response.json()
-
-        at /home/runner/work/dokan/dokan/tests/e2e/tests/api/withdraws.spec.ts:73:31
-]]>
-</failure>
+<testcase name="withdraw api test update a withdraw" classname="[chromium] › api/withdraws.spec.ts › withdraw api test › update a withdraw" time="0">
+<skipped>
+</skipped>
 </testcase>
-<testcase name="withdraw api test cancel a withdraw" classname="[chromium] › api/withdraws.spec.ts › withdraw api test › cancel a withdraw" time="0.314">
-<failure message="withdraws.spec.ts:80:5 cancel a withdraw" type="FAILURE">
-<![CDATA[  [chromium] › api/withdraws.spec.ts:80:5 › withdraw api test › cancel a withdraw ==================
-
-    Error: expect(received).toBeTruthy()
-
-    Received: false
-
-      83 |
-      84 |         let response = await request.delete(endPoints.cancelAWithdraw(withdrawId))
-    > 85 |         expect(response.ok()).toBeTruthy()
-         |                               ^
-      86 |         expect(response.status()).toBe(200)
-      87 |
-      88 |         let responseBody = await response.json()
-
-        at /home/runner/work/dokan/dokan/tests/e2e/tests/api/withdraws.spec.ts:85:31
-]]>
-</failure>
+<testcase name="withdraw api test cancel a withdraw" classname="[chromium] › api/withdraws.spec.ts › withdraw api test › cancel a withdraw" time="0">
+<skipped>
+</skipped>
 </testcase>
 </testsuite>
 </testsuites>
