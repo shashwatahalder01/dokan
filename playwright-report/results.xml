@@ -1,29 +1,24 @@
-<testsuites id="" name="" tests="10" failures="0" skipped="0" errors="0" time="6.376598999999987">
-<testsuite name="api/admins.spec.ts" timestamp="1670235039266" hostname="" tests="10" failures="0" skipped="0" time="4.814" errors="0">
-<testcase name="admin api test get admin report overview" classname="[chromium] › api/admins.spec.ts › admin api test › get admin report overview" time="1.521">
-<system-out>
-<![CDATA[http://localhost:8889?rest_route=/dokan/v1/admin/report/overview
-[33m200[39m
+<testsuites id="" name="" tests="1" failures="1" skipped="0" errors="0" time="3.296771000000008">
+<testsuite name="api/refunds.spec.ts" timestamp="1670235676362" hostname="" tests="1" failures="1" skipped="0" time="1.892" errors="0">
+<testcase name="refunds api test get all refunds by status" classname="[chromium] › api/refunds.spec.ts › refunds api test › get all refunds by status" time="1.892">
+<failure message="refunds.spec.ts:33:10 get all refunds by status" type="FAILURE">
+<![CDATA[  [chromium] › api/refunds.spec.ts:33:10 › refunds api test › get all refunds by status ============
+
+    Error: expect(received).toBeTruthy()
+
+    Received: false
+
+      34 |         // let response = await request.get(endPoints.getAllRefundsByStatus('pending')) // pending, cancelled, completed
+      35 |         let response = await request.get(endPoints.getAllRefundsByStatus('completed')) // pending, cancelled, completed
+    > 36 |         expect(response.ok()).toBeTruthy()
+         |                               ^
+      37 |         expect(response.status()).toBe(200)
+      38 |
+      39 |         let responseBody = await response.json()
+
+        at /home/runner/work/dokan/dokan/tests/e2e/tests/api/refunds.spec.ts:36:31
 ]]>
-</system-out>
-</testcase>
-<testcase name="admin api test get admin report summary" classname="[chromium] › api/admins.spec.ts › admin api test › get admin report summary" time="0.202">
-</testcase>
-<testcase name="admin api test get getAdminDashboardFeed" classname="[chromium] › api/admins.spec.ts › admin api test › get getAdminDashboardFeed" time="0.458">
-</testcase>
-<testcase name="admin api test get admin help" classname="[chromium] › api/admins.spec.ts › admin api test › get admin help" time="0.875">
-</testcase>
-<testcase name="admin api test get changelog lite" classname="[chromium] › api/admins.spec.ts › admin api test › get changelog lite" time="0.228">
-</testcase>
-<testcase name="admin api test get changelog pro" classname="[chromium] › api/admins.spec.ts › admin api test › get changelog pro" time="0.217">
-</testcase>
-<testcase name="admin api test get getAdminNotices" classname="[chromium] › api/admins.spec.ts › admin api test › get getAdminNotices" time="0.173">
-</testcase>
-<testcase name="admin api test get admin promo notices " classname="[chromium] › api/admins.spec.ts › admin api test › get admin promo notices " time="0.793">
-</testcase>
-<testcase name="admin api test get admin logs " classname="[chromium] › api/admins.spec.ts › admin api test › get admin logs " time="0.173">
-</testcase>
-<testcase name="admin api test get admin export logs " classname="[chromium] › api/admins.spec.ts › admin api test › get admin export logs " time="0.174">
+</failure>
 </testcase>
 </testsuite>
 </testsuites>
