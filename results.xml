@@ -1,9 +1,9 @@
-<testsuites id="" name="" tests="143" failures="1" skipped="48" errors="0" time="48.466276000000015">
-<testsuite name="api/aapitest.spec.ts" timestamp="1670315644651" hostname="" tests="1" failures="0" skipped="0" time="0.58" errors="0">
-<testcase name=" api test update settings" classname="[chromium] › api/aapitest.spec.ts ›  api test › update settings" time="0.58">
+<testsuites id="" name="" tests="143" failures="1" skipped="48" errors="0" time="47.40717200000002">
+<testsuite name="api/aapitest.spec.ts" timestamp="1670317401162" hostname="" tests="1" failures="0" skipped="0" time="0.573" errors="0">
+<testcase name=" api test update settings" classname="[chromium] › api/aapitest.spec.ts ›  api test › update settings" time="0.573">
 </testcase>
 </testsuite>
-<testsuite name="api/abuseReports.spec.ts" timestamp="1670315644651" hostname="" tests="3" failures="0" skipped="3" time="0" errors="0">
+<testsuite name="api/abuseReports.spec.ts" timestamp="1670317401162" hostname="" tests="3" failures="0" skipped="3" time="0" errors="0">
 <testcase name="abuse report api test get all abuse report reasons" classname="[chromium] › api/abuseReports.spec.ts › abuse report api test › get all abuse report reasons" time="0">
 <skipped>
 </skipped>
@@ -17,240 +17,107 @@
 </skipped>
 </testcase>
 </testsuite>
-<testsuite name="api/admins.spec.ts" timestamp="1670315644651" hostname="" tests="10" failures="0" skipped="0" time="3.296" errors="0">
-<testcase name="admin api test get admin report overview" classname="[chromium] › api/admins.spec.ts › admin api test › get admin report overview" time="0.217">
-<system-out>
-<![CDATA[[33m200[39m
-]]>
-</system-out>
+<testsuite name="api/admins.spec.ts" timestamp="1670317401162" hostname="" tests="10" failures="0" skipped="0" time="3.626" errors="0">
+<testcase name="admin api test get admin report overview" classname="[chromium] › api/admins.spec.ts › admin api test › get admin report overview" time="0.208">
 </testcase>
-<testcase name="admin api test get admin report summary" classname="[chromium] › api/admins.spec.ts › admin api test › get admin report summary" time="0.245">
+<testcase name="admin api test get admin report summary" classname="[chromium] › api/admins.spec.ts › admin api test › get admin report summary" time="0.205">
 </testcase>
-<testcase name="admin api test get getAdminDashboardFeed" classname="[chromium] › api/admins.spec.ts › admin api test › get getAdminDashboardFeed" time="0.428">
+<testcase name="admin api test get getAdminDashboardFeed" classname="[chromium] › api/admins.spec.ts › admin api test › get getAdminDashboardFeed" time="0.847">
 </testcase>
-<testcase name="admin api test get admin help" classname="[chromium] › api/admins.spec.ts › admin api test › get admin help" time="0.755">
+<testcase name="admin api test get admin help" classname="[chromium] › api/admins.spec.ts › admin api test › get admin help" time="0.738">
 </testcase>
-<testcase name="admin api test get changelog lite" classname="[chromium] › api/admins.spec.ts › admin api test › get changelog lite" time="0.199">
+<testcase name="admin api test get changelog lite" classname="[chromium] › api/admins.spec.ts › admin api test › get changelog lite" time="0.205">
 </testcase>
-<testcase name="admin api test get changelog pro" classname="[chromium] › api/admins.spec.ts › admin api test › get changelog pro" time="0.182">
+<testcase name="admin api test get changelog pro" classname="[chromium] › api/admins.spec.ts › admin api test › get changelog pro" time="0.194">
 </testcase>
-<testcase name="admin api test get getAdminNotices" classname="[chromium] › api/admins.spec.ts › admin api test › get getAdminNotices" time="0.201">
+<testcase name="admin api test get getAdminNotices" classname="[chromium] › api/admins.spec.ts › admin api test › get getAdminNotices" time="0.178">
 </testcase>
-<testcase name="admin api test get admin promo notices " classname="[chromium] › api/admins.spec.ts › admin api test › get admin promo notices " time="0.705">
+<testcase name="admin api test get admin promo notices " classname="[chromium] › api/admins.spec.ts › admin api test › get admin promo notices " time="0.698">
 </testcase>
-<testcase name="admin api test get admin logs " classname="[chromium] › api/admins.spec.ts › admin api test › get admin logs " time="0.184">
+<testcase name="admin api test get admin logs " classname="[chromium] › api/admins.spec.ts › admin api test › get admin logs " time="0.18">
 </testcase>
-<testcase name="admin api test get admin export logs " classname="[chromium] › api/admins.spec.ts › admin api test › get admin export logs " time="0.18">
+<testcase name="admin api test get admin export logs " classname="[chromium] › api/admins.spec.ts › admin api test › get admin export logs " time="0.173">
 </testcase>
 </testsuite>
-<testsuite name="api/announcements.spec.ts" timestamp="1670315644651" hostname="" tests="6" failures="0" skipped="0" time="2.062" errors="0">
-<testcase name="announcements api test get all announcements" classname="[chromium] › api/announcements.spec.ts › announcements api test › get all announcements" time="0.172">
+<testsuite name="api/announcements.spec.ts" timestamp="1670317401162" hostname="" tests="6" failures="0" skipped="0" time="2.023" errors="0">
+<testcase name="announcements api test get all announcements" classname="[chromium] › api/announcements.spec.ts › announcements api test › get all announcements" time="0.171">
 </testcase>
-<testcase name="announcements api test get single announcement" classname="[chromium] › api/announcements.spec.ts › announcements api test › get single announcement" time="0.356">
+<testcase name="announcements api test get single announcement" classname="[chromium] › api/announcements.spec.ts › announcements api test › get single announcement" time="0.351">
 </testcase>
-<testcase name="announcements api test create a announcement" classname="[chromium] › api/announcements.spec.ts › announcements api test › create a announcement" time="0.198">
+<testcase name="announcements api test create a announcement" classname="[chromium] › api/announcements.spec.ts › announcements api test › create a announcement" time="0.193">
 </testcase>
-<testcase name="announcements api test update a announcement" classname="[chromium] › api/announcements.spec.ts › announcements api test › update a announcement" time="0.365">
+<testcase name="announcements api test update a announcement" classname="[chromium] › api/announcements.spec.ts › announcements api test › update a announcement" time="0.36">
 </testcase>
-<testcase name="announcements api test delete a announcement" classname="[chromium] › api/announcements.spec.ts › announcements api test › delete a announcement" time="0.366">
+<testcase name="announcements api test delete a announcement" classname="[chromium] › api/announcements.spec.ts › announcements api test › delete a announcement" time="0.368">
 </testcase>
-<testcase name="announcements api test update batch announcements" classname="[chromium] › api/announcements.spec.ts › announcements api test › update batch announcements" time="0.605">
-<system-out>
-<![CDATA[[ [33m17[39m, [33m18[39m, [33m15[39m, [33m16[39m ]
-]]>
-</system-out>
+<testcase name="announcements api test update batch announcements" classname="[chromium] › api/announcements.spec.ts › announcements api test › update batch announcements" time="0.58">
 </testcase>
 </testsuite>
-<testsuite name="api/coupons.spec.ts" timestamp="1670315644651" hostname="" tests="5" failures="0" skipped="0" time="2.603" errors="0">
-<testcase name="coupon api test get all coupons" classname="[chromium] › api/coupons.spec.ts › coupon api test › get all coupons" time="0.169">
+<testsuite name="api/coupons.spec.ts" timestamp="1670317401162" hostname="" tests="5" failures="0" skipped="0" time="2.527" errors="0">
+<testcase name="coupon api test get all coupons" classname="[chromium] › api/coupons.spec.ts › coupon api test › get all coupons" time="0.164">
 </testcase>
-<testcase name="coupon api test get single coupon" classname="[chromium] › api/coupons.spec.ts › coupon api test › get single coupon" time="0.639">
-<system-out>
-<![CDATA[{
-  id: [33m23[39m,
-  code: [32m'vc_a116ea82-78da-457c-a262-160c41d8d0bf'[39m,
-  amount: [32m'6.00'[39m,
-  date_created: [32m'2022-12-06T08:34:15'[39m,
-  date_created_gmt: [32m'2022-12-06T08:34:15'[39m,
-  date_modified: [32m'2022-12-06T08:34:15'[39m,
-  date_modified_gmt: [32m'2022-12-06T08:34:15'[39m,
-  discount_type: [32m'fixed_product'[39m,
-  description: [32m''[39m,
-  date_expires: [1mnull[22m,
-  date_expires_gmt: [1mnull[22m,
-  usage_count: [33m0[39m,
-  individual_use: [33mfalse[39m,
-  product_ids: [ [33m22[39m ],
-  excluded_product_ids: [],
-  usage_limit: [1mnull[22m,
-  usage_limit_per_user: [1mnull[22m,
-  limit_usage_to_x_items: [1mnull[22m,
-  free_shipping: [33mfalse[39m,
-  product_categories: [],
-  excluded_product_categories: [],
-  exclude_sale_items: [33mfalse[39m,
-  minimum_amount: [32m'0.00'[39m,
-  maximum_amount: [32m'0.00'[39m,
-  email_restrictions: [],
-  used_by: [],
-  meta_data: [],
-  _links: { self: [ [36m[Object][39m ], collection: [ [36m[Object][39m ] }
-}
-]]>
-</system-out>
+<testcase name="coupon api test get single coupon" classname="[chromium] › api/coupons.spec.ts › coupon api test › get single coupon" time="0.62">
 </testcase>
-<testcase name="coupon api test create a coupon" classname="[chromium] › api/coupons.spec.ts › coupon api test › create a coupon" time="0.458">
-<system-out>
-<![CDATA[{
-  id: [33m25[39m,
-  code: [32m'vc_3070771d-bdd4-4745-9335-cc121e1e1532'[39m,
-  amount: [32m'5.00'[39m,
-  date_created: [32m'2022-12-06T08:34:16'[39m,
-  date_created_gmt: [32m'2022-12-06T08:34:16'[39m,
-  date_modified: [32m'2022-12-06T08:34:16'[39m,
-  date_modified_gmt: [32m'2022-12-06T08:34:16'[39m,
-  discount_type: [32m'fixed_product'[39m,
-  description: [32m''[39m,
-  date_expires: [1mnull[22m,
-  date_expires_gmt: [1mnull[22m,
-  usage_count: [33m0[39m,
-  individual_use: [33mfalse[39m,
-  product_ids: [ [33m15[39m ],
-  excluded_product_ids: [],
-  usage_limit: [1mnull[22m,
-  usage_limit_per_user: [1mnull[22m,
-  limit_usage_to_x_items: [1mnull[22m,
-  free_shipping: [33mfalse[39m,
-  product_categories: [],
-  excluded_product_categories: [],
-  exclude_sale_items: [33mfalse[39m,
-  minimum_amount: [32m'0.00'[39m,
-  maximum_amount: [32m'0.00'[39m,
-  email_restrictions: [],
-  used_by: [],
-  meta_data: [],
-  _links: { self: [ [36m[Object][39m ], collection: [ [36m[Object][39m ] }
-}
-]]>
-</system-out>
+<testcase name="coupon api test create a coupon" classname="[chromium] › api/coupons.spec.ts › coupon api test › create a coupon" time="0.443">
 </testcase>
-<testcase name="coupon api test update a coupon" classname="[chromium] › api/coupons.spec.ts › coupon api test › update a coupon" time="0.678">
+<testcase name="coupon api test update a coupon" classname="[chromium] › api/coupons.spec.ts › coupon api test › update a coupon" time="0.643">
 </testcase>
-<testcase name="coupon api test delete a coupon" classname="[chromium] › api/coupons.spec.ts › coupon api test › delete a coupon" time="0.659">
+<testcase name="coupon api test delete a coupon" classname="[chromium] › api/coupons.spec.ts › coupon api test › delete a coupon" time="0.657">
 </testcase>
 </testsuite>
-<testsuite name="api/customers.spec.ts" timestamp="1670315644651" hostname="" tests="5" failures="0" skipped="0" time="1.701" errors="0">
-<testcase name="customers api test get all customers" classname="[chromium] › api/customers.spec.ts › customers api test › get all customers" time="0.171">
+<testsuite name="api/customers.spec.ts" timestamp="1670317401162" hostname="" tests="5" failures="0" skipped="0" time="1.652" errors="0">
+<testcase name="customers api test get all customers" classname="[chromium] › api/customers.spec.ts › customers api test › get all customers" time="0.167">
 </testcase>
-<testcase name="customers api test get single customer" classname="[chromium] › api/customers.spec.ts › customers api test › get single customer" time="0.416">
+<testcase name="customers api test get single customer" classname="[chromium] › api/customers.spec.ts › customers api test › get single customer" time="0.407">
 </testcase>
-<testcase name="customers api test create a customer" classname="[chromium] › api/customers.spec.ts › customers api test › create a customer" time="0.242">
+<testcase name="customers api test create a customer" classname="[chromium] › api/customers.spec.ts › customers api test › create a customer" time="0.232">
 </testcase>
-<testcase name="customers api test update a customer" classname="[chromium] › api/customers.spec.ts › customers api test › update a customer" time="0.423">
+<testcase name="customers api test update a customer" classname="[chromium] › api/customers.spec.ts › customers api test › update a customer" time="0.415">
 </testcase>
-<testcase name="customers api test delete a customer" classname="[chromium] › api/customers.spec.ts › customers api test › delete a customer" time="0.449">
-<system-out>
-<![CDATA[[33m6[39m
-{
-  id: [33m6[39m,
-  date_created: [32m'2022-12-06T08:34:19'[39m,
-  date_created_gmt: [32m'2022-12-06T08:34:19'[39m,
-  date_modified: [32m'2022-12-06T08:34:19'[39m,
-  date_modified_gmt: [32m'2022-12-06T08:34:19'[39m,
-  email: [32m'Mckenzie_Jakubowski57@yahoo.com'[39m,
-  first_name: [32m'Tiana'[39m,
-  last_name: [32m'DuBuque'[39m,
-  role: [32m'customer'[39m,
-  username: [32m'Kaylad09216c5-9b10-4dad-8c66-cfdcff4c7fe3'[39m,
-  billing: {
-    first_name: [32m'customer1'[39m,
-    last_name: [32m'c1'[39m,
-    company: [32m''[39m,
-    address_1: [32m'abc street'[39m,
-    address_2: [32m'xyz street'[39m,
-    city: [32m'New York'[39m,
-    postcode: [32m'10003'[39m,
-    country: [32m'US'[39m,
-    state: [32m'NY'[39m,
-    email: [32m'customer1@yopmail.com'[39m,
-    phone: [32m'0123456789'[39m
-  },
-  shipping: {
-    first_name: [32m'customer1'[39m,
-    last_name: [32m'c1'[39m,
-    company: [32m''[39m,
-    address_1: [32m'abc street'[39m,
-    address_2: [32m'xyz street'[39m,
-    city: [32m'New York'[39m,
-    postcode: [32m'10003'[39m,
-    country: [32m'US'[39m,
-    state: [32m'NY'[39m,
-    phone: [32m''[39m
-  },
-  is_paying_customer: [33mfalse[39m,
-  orders_count: [33m0[39m,
-  total_spent: [32m'0.00'[39m,
-  avatar_url: [32m'http://2.gravatar.com/avatar/e5e02489861ceb59752b95c9d4a92887?s=96&d=mm&r=g'[39m,
-  meta_data: [
-    { id: [33m187[39m, key: [32m'_wcs_subscription_ids_cache'[39m, value: [] },
-    {
-      id: [33m188[39m,
-      key: [32m'_dokan_email_verification_key'[39m,
-      value: [32m'2dd0da818db4ce9771dc05fe4c83c727fda5c44b'[39m
-    },
-    { id: [33m189[39m, key: [32m'_dokan_email_pending_verification'[39m, value: [32m'1'[39m }
-  ],
-  _links: { self: [ [36m[Object][39m ], collection: [ [36m[Object][39m ] }
-}
-]]>
-</system-out>
+<testcase name="customers api test delete a customer" classname="[chromium] › api/customers.spec.ts › customers api test › delete a customer" time="0.431">
 </testcase>
 </testsuite>
-<testsuite name="api/dummyData.spec.ts" timestamp="1670315644651" hostname="" tests="2" failures="0" skipped="0" time="0.515" errors="0">
-<testcase name="dummy Data api test get dummy data status" classname="[chromium] › api/dummyData.spec.ts › dummy Data api test › get dummy data status" time="0.172">
+<testsuite name="api/dummyData.spec.ts" timestamp="1670317401162" hostname="" tests="2" failures="0" skipped="0" time="0.524" errors="0">
+<testcase name="dummy Data api test get dummy data status" classname="[chromium] › api/dummyData.spec.ts › dummy Data api test › get dummy data status" time="0.188">
 </testcase>
-<testcase name="dummy Data api test clear dummuy data" classname="[chromium] › api/dummyData.spec.ts › dummy Data api test › clear dummuy data" time="0.343">
-</testcase>
-</testsuite>
-<testsuite name="api/followStores.spec.ts" timestamp="1670315644651" hostname="" tests="2" failures="0" skipped="0" time="0.784" errors="0">
-<testcase name="follow store api test get store follow status" classname="[chromium] › api/followStores.spec.ts › follow store api test › get store follow status" time="0.383">
-</testcase>
-<testcase name="follow store api test follow-unfollow a store" classname="[chromium] › api/followStores.spec.ts › follow store api test › follow-unfollow a store" time="0.401">
+<testcase name="dummy Data api test clear dummuy data" classname="[chromium] › api/dummyData.spec.ts › dummy Data api test › clear dummuy data" time="0.336">
 </testcase>
 </testsuite>
-<testsuite name="api/modules.spec.ts" timestamp="1670315644651" hostname="" tests="3" failures="0" skipped="0" time="1.109" errors="0">
-<testcase name="modules api test get all modules" classname="[chromium] › api/modules.spec.ts › modules api test › get all modules" time="0.167">
+<testsuite name="api/followStores.spec.ts" timestamp="1670317401162" hostname="" tests="2" failures="0" skipped="0" time="0.749" errors="0">
+<testcase name="follow store api test get store follow status" classname="[chromium] › api/followStores.spec.ts › follow store api test › get store follow status" time="0.362">
 </testcase>
-<testcase name="modules api test deactivate a module" classname="[chromium] › api/modules.spec.ts › modules api test › deactivate a module" time="0.6">
-</testcase>
-<testcase name="modules api test activate a module" classname="[chromium] › api/modules.spec.ts › modules api test › activate a module" time="0.342">
+<testcase name="follow store api test follow-unfollow a store" classname="[chromium] › api/followStores.spec.ts › follow store api test › follow-unfollow a store" time="0.387">
 </testcase>
 </testsuite>
-<testsuite name="api/orderNotes.spec.ts" timestamp="1670315644651" hostname="" tests="4" failures="0" skipped="0" time="3.455" errors="0">
-<testcase name="order note api test get all order notes" classname="[chromium] › api/orderNotes.spec.ts › order note api test › get all order notes" time="1.049">
+<testsuite name="api/modules.spec.ts" timestamp="1670317401162" hostname="" tests="3" failures="0" skipped="0" time="1.041" errors="0">
+<testcase name="modules api test get all modules" classname="[chromium] › api/modules.spec.ts › modules api test › get all modules" time="0.164">
 </testcase>
-<testcase name="order note api test get single order note" classname="[chromium] › api/orderNotes.spec.ts › order note api test › get single order note" time="1.044">
+<testcase name="modules api test deactivate a module" classname="[chromium] › api/modules.spec.ts › modules api test › deactivate a module" time="0.544">
 </testcase>
-<testcase name="order note api test create an order note" classname="[chromium] › api/orderNotes.spec.ts › order note api test › create an order note" time="0.356">
-</testcase>
-<testcase name="order note api test delete an order note" classname="[chromium] › api/orderNotes.spec.ts › order note api test › delete an order note" time="1.006">
+<testcase name="modules api test activate a module" classname="[chromium] › api/modules.spec.ts › modules api test › activate a module" time="0.333">
 </testcase>
 </testsuite>
-<testsuite name="api/orders.spec.ts" timestamp="1670315644651" hostname="" tests="4" failures="0" skipped="0" time="2.154" errors="0">
-<testcase name="order api test get all orders" classname="[chromium] › api/orders.spec.ts › order api test › get all orders" time="0.215">
+<testsuite name="api/orderNotes.spec.ts" timestamp="1670317401162" hostname="" tests="4" failures="0" skipped="0" time="3.37" errors="0">
+<testcase name="order note api test get all order notes" classname="[chromium] › api/orderNotes.spec.ts › order note api test › get all order notes" time="1.02">
 </testcase>
-<testcase name="order api test get orders summary" classname="[chromium] › api/orders.spec.ts › order api test › get orders summary" time="0.169">
+<testcase name="order note api test get single order note" classname="[chromium] › api/orderNotes.spec.ts › order note api test › get single order note" time="0.999">
 </testcase>
-<testcase name="order api test get single order" classname="[chromium] › api/orders.spec.ts › order api test › get single order" time="0.854">
+<testcase name="order note api test create an order note" classname="[chromium] › api/orderNotes.spec.ts › order note api test › create an order note" time="0.349">
 </testcase>
-<testcase name="order api test update an order" classname="[chromium] › api/orders.spec.ts › order api test › update an order" time="0.916">
-<system-out>
-<![CDATA[[33m42[39m
-]]>
-</system-out>
+<testcase name="order note api test delete an order note" classname="[chromium] › api/orderNotes.spec.ts › order note api test › delete an order note" time="1.002">
 </testcase>
 </testsuite>
-<testsuite name="api/productAdvertisements.spec.ts" timestamp="1670315644651" hostname="" tests="6" failures="0" skipped="6" time="0" errors="0">
+<testsuite name="api/orders.spec.ts" timestamp="1670317401162" hostname="" tests="4" failures="0" skipped="0" time="2.118" errors="0">
+<testcase name="order api test get all orders" classname="[chromium] › api/orders.spec.ts › order api test › get all orders" time="0.218">
+</testcase>
+<testcase name="order api test get orders summary" classname="[chromium] › api/orders.spec.ts › order api test › get orders summary" time="0.167">
+</testcase>
+<testcase name="order api test get single order" classname="[chromium] › api/orders.spec.ts › order api test › get single order" time="0.853">
+</testcase>
+<testcase name="order api test update an order" classname="[chromium] › api/orders.spec.ts › order api test › update an order" time="0.88">
+</testcase>
+</testsuite>
+<testsuite name="api/productAdvertisements.spec.ts" timestamp="1670317401162" hostname="" tests="6" failures="0" skipped="6" time="0" errors="0">
 <testcase name="product advertisement api test get all advertised product stores" classname="[chromium] › api/productAdvertisements.spec.ts › product advertisement api test › get all advertised product stores" time="0">
 <skipped>
 </skipped>
@@ -276,94 +143,95 @@
 </skipped>
 </testcase>
 </testsuite>
-<testsuite name="api/productAttributes.spec.ts" timestamp="1670315644651" hostname="" tests="5" failures="0" skipped="0" time="1.385" errors="0">
-<testcase name="attribute api test get all attributes" classname="[chromium] › api/productAttributes.spec.ts › attribute api test › get all attributes" time="0.173">
+<testsuite name="api/productAttributes.spec.ts" timestamp="1670317401162" hostname="" tests="5" failures="0" skipped="0" time="1.383" errors="0">
+<testcase name="attribute api test get all attributes" classname="[chromium] › api/productAttributes.spec.ts › attribute api test › get all attributes" time="0.172">
 </testcase>
-<testcase name="attribute api test get single attribute" classname="[chromium] › api/productAttributes.spec.ts › attribute api test › get single attribute" time="0.344">
+<testcase name="attribute api test get single attribute" classname="[chromium] › api/productAttributes.spec.ts › attribute api test › get single attribute" time="0.355">
 </testcase>
-<testcase name="attribute api test create an attribute" classname="[chromium] › api/productAttributes.spec.ts › attribute api test › create an attribute" time="0.181">
+<testcase name="attribute api test create an attribute" classname="[chromium] › api/productAttributes.spec.ts › attribute api test › create an attribute" time="0.171">
 </testcase>
-<testcase name="attribute api test update an attribute" classname="[chromium] › api/productAttributes.spec.ts › attribute api test › update an attribute" time="0.348">
+<testcase name="attribute api test update an attribute" classname="[chromium] › api/productAttributes.spec.ts › attribute api test › update an attribute" time="0.346">
 </testcase>
 <testcase name="attribute api test delete an attribute" classname="[chromium] › api/productAttributes.spec.ts › attribute api test › delete an attribute" time="0.339">
 </testcase>
 </testsuite>
-<testsuite name="api/productAttributeTerms.spec.ts" timestamp="1670315644651" hostname="" tests="5" failures="0" skipped="0" time="2.707" errors="0">
-<testcase name="attribute term api test get all attribute terms" classname="[chromium] › api/productAttributeTerms.spec.ts › attribute term api test › get all attribute terms" time="0.528">
+<testsuite name="api/productAttributeTerms.spec.ts" timestamp="1670317401162" hostname="" tests="5" failures="0" skipped="0" time="2.59" errors="0">
+<testcase name="attribute term api test get all attribute terms" classname="[chromium] › api/productAttributeTerms.spec.ts › attribute term api test › get all attribute terms" time="0.511">
 </testcase>
-<testcase name="attribute term api test get single attribute term" classname="[chromium] › api/productAttributeTerms.spec.ts › attribute term api test › get single attribute term" time="0.515">
+<testcase name="attribute term api test get single attribute term" classname="[chromium] › api/productAttributeTerms.spec.ts › attribute term api test › get single attribute term" time="0.511">
 </testcase>
-<testcase name="attribute term api test create an attribute term" classname="[chromium] › api/productAttributeTerms.spec.ts › attribute term api test › create an attribute term" time="0.587">
+<testcase name="attribute term api test create an attribute term" classname="[chromium] › api/productAttributeTerms.spec.ts › attribute term api test › create an attribute term" time="0.511">
 </testcase>
-<testcase name="attribute term api test update an attribute term " classname="[chromium] › api/productAttributeTerms.spec.ts › attribute term api test › update an attribute term " time="0.546">
+<testcase name="attribute term api test update an attribute term " classname="[chromium] › api/productAttributeTerms.spec.ts › attribute term api test › update an attribute term " time="0.538">
 </testcase>
-<testcase name="attribute term api test delete an attribute term" classname="[chromium] › api/productAttributeTerms.spec.ts › attribute term api test › delete an attribute term" time="0.531">
-</testcase>
-</testsuite>
-<testsuite name="api/productReviews.spec.ts" timestamp="1670315644651" hostname="" tests="3" failures="0" skipped="0" time="1.042" errors="0">
-<testcase name="product review api test get all product reviews" classname="[chromium] › api/productReviews.spec.ts › product review api test › get all product reviews" time="0.168">
-</testcase>
-<testcase name="product review api test get product reviews summary" classname="[chromium] › api/productReviews.spec.ts › product review api test › get product reviews summary" time="0.169">
-</testcase>
-<testcase name="product review api test update a product review" classname="[chromium] › api/productReviews.spec.ts › product review api test › update a product review" time="0.705">
+<testcase name="attribute term api test delete an attribute term" classname="[chromium] › api/productAttributeTerms.spec.ts › attribute term api test › delete an attribute term" time="0.519">
 </testcase>
 </testsuite>
-<testsuite name="api/products.spec.ts" timestamp="1670315644651" hostname="" tests="12" failures="0" skipped="0" time="3.544" errors="0">
-<testcase name="product api test get products summary" classname="[chromium] › api/products.spec.ts › product api test › get products summary" time="0.172">
+<testsuite name="api/productReviews.spec.ts" timestamp="1670317401162" hostname="" tests="3" failures="0" skipped="0" time="0.969" errors="0">
+<testcase name="product review api test get all product reviews" classname="[chromium] › api/productReviews.spec.ts › product review api test › get all product reviews" time="0.167">
 </testcase>
-<testcase name="product api test get top rated products" classname="[chromium] › api/products.spec.ts › product api test › get top rated products" time="0.188">
+<testcase name="product review api test get product reviews summary" classname="[chromium] › api/productReviews.spec.ts › product review api test › get product reviews summary" time="0.165">
 </testcase>
-<testcase name="product api test get best selling products" classname="[chromium] › api/products.spec.ts › product api test › get best selling products" time="0.203">
-</testcase>
-<testcase name="product api test get featured products" classname="[chromium] › api/products.spec.ts › product api test › get featured products" time="0.23">
-</testcase>
-<testcase name="product api test get latest products" classname="[chromium] › api/products.spec.ts › product api test › get latest products" time="0.197">
-</testcase>
-<testcase name="product api test get all multistep categories" classname="[chromium] › api/products.spec.ts › product api test › get all multistep categories" time="0.168">
-</testcase>
-<testcase name="product api test get all products" classname="[chromium] › api/products.spec.ts › product api test › get all products" time="0.206">
-</testcase>
-<testcase name="product api test get single product" classname="[chromium] › api/products.spec.ts › product api test › get single product" time="0.457">
-</testcase>
-<testcase name="product api test get all related products" classname="[chromium] › api/products.spec.ts › product api test › get all related products" time="0.493">
-</testcase>
-<testcase name="product api test create a product" classname="[chromium] › api/products.spec.ts › product api test › create a product" time="0.269">
-</testcase>
-<testcase name="product api test update a product" classname="[chromium] › api/products.spec.ts › product api test › update a product" time="0.477">
-</testcase>
-<testcase name="product api test delete a product" classname="[chromium] › api/products.spec.ts › product api test › delete a product" time="0.484">
+<testcase name="product review api test update a product review" classname="[chromium] › api/productReviews.spec.ts › product review api test › update a product review" time="0.637">
 </testcase>
 </testsuite>
-<testsuite name="api/productVariations.spec.ts" timestamp="1670315644651" hostname="" tests="5" failures="1" skipped="0" time="4.822" errors="0">
-<testcase name="product variation api test get all product variations" classname="[chromium] › api/productVariations.spec.ts › product variation api test › get all product variations" time="1.071">
+<testsuite name="api/products.spec.ts" timestamp="1670317401162" hostname="" tests="12" failures="0" skipped="0" time="3.453" errors="0">
+<testcase name="product api test get products summary" classname="[chromium] › api/products.spec.ts › product api test › get products summary" time="0.165">
 </testcase>
-<testcase name="product variation api test get single product variation" classname="[chromium] › api/productVariations.spec.ts › product variation api test › get single product variation" time="1.055">
+<testcase name="product api test get top rated products" classname="[chromium] › api/products.spec.ts › product api test › get top rated products" time="0.181">
 </testcase>
-<testcase name="product variation api test create a product variation" classname="[chromium] › api/productVariations.spec.ts › product variation api test › create a product variation" time="0.526">
+<testcase name="product api test get best selling products" classname="[chromium] › api/products.spec.ts › product api test › get best selling products" time="0.205">
 </testcase>
-<testcase name="product variation api test update a product variation" classname="[chromium] › api/productVariations.spec.ts › product variation api test › update a product variation" time="1.094">
+<testcase name="product api test get featured products" classname="[chromium] › api/products.spec.ts › product api test › get featured products" time="0.188">
 </testcase>
-<testcase name="product variation api test delete a product variation" classname="[chromium] › api/productVariations.spec.ts › product variation api test › delete a product variation" time="1.076">
+<testcase name="product api test get latest products" classname="[chromium] › api/products.spec.ts › product api test › get latest products" time="0.199">
+</testcase>
+<testcase name="product api test get all multistep categories" classname="[chromium] › api/products.spec.ts › product api test › get all multistep categories" time="0.171">
+</testcase>
+<testcase name="product api test get all products" classname="[chromium] › api/products.spec.ts › product api test › get all products" time="0.209">
+</testcase>
+<testcase name="product api test get single product" classname="[chromium] › api/products.spec.ts › product api test › get single product" time="0.437">
+</testcase>
+<testcase name="product api test get all related products" classname="[chromium] › api/products.spec.ts › product api test › get all related products" time="0.477">
+</testcase>
+<testcase name="product api test create a product" classname="[chromium] › api/products.spec.ts › product api test › create a product" time="0.3">
+</testcase>
+<testcase name="product api test update a product" classname="[chromium] › api/products.spec.ts › product api test › update a product" time="0.458">
+</testcase>
+<testcase name="product api test delete a product" classname="[chromium] › api/products.spec.ts › product api test › delete a product" time="0.463">
+</testcase>
+</testsuite>
+<testsuite name="api/productVariations.spec.ts" timestamp="1670317401162" hostname="" tests="5" failures="1" skipped="0" time="4.634" errors="0">
+<testcase name="product variation api test get all product variations" classname="[chromium] › api/productVariations.spec.ts › product variation api test › get all product variations" time="1.042">
+</testcase>
+<testcase name="product variation api test get single product variation" classname="[chromium] › api/productVariations.spec.ts › product variation api test › get single product variation" time="1.01">
+</testcase>
+<testcase name="product variation api test create a product variation" classname="[chromium] › api/productVariations.spec.ts › product variation api test › create a product variation" time="0.501">
+</testcase>
+<testcase name="product variation api test update a product variation" classname="[chromium] › api/productVariations.spec.ts › product variation api test › update a product variation" time="1.056">
+</testcase>
+<testcase name="product variation api test delete a product variation" classname="[chromium] › api/productVariations.spec.ts › product variation api test › delete a product variation" time="1.025">
 <failure message="productVariations.spec.ts:72:5 delete a product variation" type="FAILURE">
 <![CDATA[  [chromium] › api/productVariations.spec.ts:72:5 › product variation api test › delete a product variation 
 
-    SyntaxError: Unexpected token < in JSON at position 0
+    Error: expect(received).toBeTruthy()
 
-      74 |         let [productId, variationId] = await apiUtils.createVariableProductWithVariation(payloads.createAttribute(), payloads.createAttributeTerm(), payloads.createVariableProduct())
+    Received: false
+
       75 |         let response = await request.delete(endPoints.deleteProductVariation(productId, variationId))
-    > 76 |         let responseBody = await response.json()
-         |                            ^
-      77 |         console.log(responseBody)
-      78 |
-      79 |         expect(response.ok()).toBeTruthy()
+      76 |
+    > 77 |         expect(response.ok()).toBeTruthy()
+         |                               ^
+      78 |         expect(response.status()).toBe(200)
+      79 |         // let responseBody = await response.json()
+      80 |         // console.log(responseBody)
 
-        at JSON.parse (<anonymous>)
-        at /home/runner/work/dokan/dokan/tests/e2e/tests/api/productVariations.spec.ts:76:28
+        at /home/runner/work/dokan/dokan/tests/e2e/tests/api/productVariations.spec.ts:77:31
 ]]>
 </failure>
 </testcase>
 </testsuite>
-<testsuite name="api/refunds.spec.ts" timestamp="1670315644651" hostname="" tests="5" failures="0" skipped="5" time="0.001" errors="0">
+<testsuite name="api/refunds.spec.ts" timestamp="1670317401162" hostname="" tests="5" failures="0" skipped="5" time="0.001" errors="0">
 <testcase name="refunds api test get all refunds" classname="[chromium] › api/refunds.spec.ts › refunds api test › get all refunds" time="0">
 <skipped>
 </skipped>
@@ -385,17 +253,17 @@
 </skipped>
 </testcase>
 </testsuite>
-<testsuite name="api/reports.spec.ts" timestamp="1670315644651" hostname="" tests="4" failures="0" skipped="0" time="0.75" errors="0">
-<testcase name="report api test get sales overview report" classname="[chromium] › api/reports.spec.ts › report api test › get sales overview report" time="0.182">
+<testsuite name="api/reports.spec.ts" timestamp="1670317401162" hostname="" tests="4" failures="0" skipped="0" time="0.721" errors="0">
+<testcase name="report api test get sales overview report" classname="[chromium] › api/reports.spec.ts › report api test › get sales overview report" time="0.179">
 </testcase>
-<testcase name="report api test get summary report" classname="[chromium] › api/reports.spec.ts › report api test › get summary report" time="0.173">
+<testcase name="report api test get summary report" classname="[chromium] › api/reports.spec.ts › report api test › get summary report" time="0.166">
 </testcase>
-<testcase name="report api test get top earners report" classname="[chromium] › api/reports.spec.ts › report api test › get top earners report" time="0.198">
+<testcase name="report api test get top earners report" classname="[chromium] › api/reports.spec.ts › report api test › get top earners report" time="0.192">
 </testcase>
-<testcase name="report api test get top selling products report " classname="[chromium] › api/reports.spec.ts › report api test › get top selling products report " time="0.197">
+<testcase name="report api test get top selling products report " classname="[chromium] › api/reports.spec.ts › report api test › get top selling products report " time="0.184">
 </testcase>
 </testsuite>
-<testsuite name="api/reverseWithdrawal.spec.ts" timestamp="1670315644651" hostname="" tests="4" failures="0" skipped="4" time="0" errors="0">
+<testsuite name="api/reverseWithdrawal.spec.ts" timestamp="1670317401162" hostname="" tests="4" failures="0" skipped="4" time="0" errors="0">
 <testcase name="reverse withdrawal api test get reverse withdrawal transaction types" classname="[chromium] › api/reverseWithdrawal.spec.ts › reverse withdrawal api test › get reverse withdrawal transaction types" time="0">
 <skipped>
 </skipped>
@@ -413,19 +281,19 @@
 </skipped>
 </testcase>
 </testsuite>
-<testsuite name="api/roles.spec.ts" timestamp="1670315644651" hostname="" tests="1" failures="0" skipped="0" time="0.171" errors="0">
-<testcase name="roles api test get all user roles " classname="[chromium] › api/roles.spec.ts › roles api test › get all user roles " time="0.171">
+<testsuite name="api/roles.spec.ts" timestamp="1670317401162" hostname="" tests="1" failures="0" skipped="0" time="0.165" errors="0">
+<testcase name="roles api test get all user roles " classname="[chromium] › api/roles.spec.ts › roles api test › get all user roles " time="0.165">
 </testcase>
 </testsuite>
-<testsuite name="api/settings.spec.ts" timestamp="1670315644651" hostname="" tests="2" failures="0" skipped="1" time="0.17" errors="0">
-<testcase name="settings api test get settings" classname="[chromium] › api/settings.spec.ts › settings api test › get settings" time="0.17">
+<testsuite name="api/settings.spec.ts" timestamp="1670317401162" hostname="" tests="2" failures="0" skipped="1" time="0.165" errors="0">
+<testcase name="settings api test get settings" classname="[chromium] › api/settings.spec.ts › settings api test › get settings" time="0.165">
 </testcase>
 <testcase name="settings api test update settings" classname="[chromium] › api/settings.spec.ts › settings api test › update settings" time="0">
 <skipped>
 </skipped>
 </testcase>
 </testsuite>
-<testsuite name="api/storeCategories.spec.ts" timestamp="1670315644651" hostname="" tests="7" failures="0" skipped="7" time="0" errors="0">
+<testsuite name="api/storeCategories.spec.ts" timestamp="1670317401162" hostname="" tests="7" failures="0" skipped="7" time="0" errors="0">
 <testcase name="store categories api test get default store category" classname="[chromium] › api/storeCategories.spec.ts › store categories api test › get default store category" time="0">
 <skipped>
 </skipped>
@@ -455,7 +323,7 @@
 </skipped>
 </testcase>
 </testsuite>
-<testsuite name="api/storeReviews.spec.ts" timestamp="1670315644651" hostname="" tests="6" failures="0" skipped="6" time="0" errors="0">
+<testsuite name="api/storeReviews.spec.ts" timestamp="1670317401162" hostname="" tests="6" failures="0" skipped="6" time="0" errors="0">
 <testcase name="store reviews api test get all store reviews" classname="[chromium] › api/storeReviews.spec.ts › store reviews api test › get all store reviews" time="0">
 <skipped>
 </skipped>
@@ -481,26 +349,26 @@
 </skipped>
 </testcase>
 </testsuite>
-<testsuite name="api/stores.spec.ts" timestamp="1670315644651" hostname="" tests="15" failures="0" skipped="2" time="4.216" errors="0">
-<testcase name="stores api test get all stores check check_store_availability" classname="[chromium] › api/stores.spec.ts › stores api test › get all stores check check_store_availability" time="0.167">
+<testsuite name="api/stores.spec.ts" timestamp="1670317401162" hostname="" tests="15" failures="0" skipped="2" time="4.124" errors="0">
+<testcase name="stores api test get all stores check check_store_availability" classname="[chromium] › api/stores.spec.ts › stores api test › get all stores check check_store_availability" time="0.163">
 </testcase>
-<testcase name="stores api test get all stores" classname="[chromium] › api/stores.spec.ts › stores api test › get all stores" time="0.176">
+<testcase name="stores api test get all stores" classname="[chromium] › api/stores.spec.ts › stores api test › get all stores" time="0.175">
 </testcase>
-<testcase name="stores api test get single store" classname="[chromium] › api/stores.spec.ts › stores api test › get single store" time="0.385">
+<testcase name="stores api test get single store" classname="[chromium] › api/stores.spec.ts › stores api test › get single store" time="0.367">
 </testcase>
-<testcase name="stores api test create a store" classname="[chromium] › api/stores.spec.ts › stores api test › create a store" time="0.211">
+<testcase name="stores api test create a store" classname="[chromium] › api/stores.spec.ts › stores api test › create a store" time="0.223">
 </testcase>
-<testcase name="stores api test update a store" classname="[chromium] › api/stores.spec.ts › stores api test › update a store" time="0.388">
+<testcase name="stores api test update a store" classname="[chromium] › api/stores.spec.ts › stores api test › update a store" time="0.401">
 </testcase>
-<testcase name="stores api test delete a store" classname="[chromium] › api/stores.spec.ts › stores api test › delete a store" time="0.396">
+<testcase name="stores api test delete a store" classname="[chromium] › api/stores.spec.ts › stores api test › delete a store" time="0.387">
 </testcase>
-<testcase name="stores api test get store current visitor" classname="[chromium] › api/stores.spec.ts › stores api test › get store current visitor" time="0.171">
+<testcase name="stores api test get store current visitor" classname="[chromium] › api/stores.spec.ts › stores api test › get store current visitor" time="0.169">
 </testcase>
-<testcase name="stores api test get store stats" classname="[chromium] › api/stores.spec.ts › stores api test › get store stats" time="0.383">
+<testcase name="stores api test get store stats" classname="[chromium] › api/stores.spec.ts › stores api test › get store stats" time="0.371">
 </testcase>
-<testcase name="stores api test get store categories" classname="[chromium] › api/stores.spec.ts › stores api test › get store categories" time="0.384">
+<testcase name="stores api test get store categories" classname="[chromium] › api/stores.spec.ts › stores api test › get store categories" time="0.367">
 </testcase>
-<testcase name="stores api test get store products" classname="[chromium] › api/stores.spec.ts › stores api test › get store products" time="0.376">
+<testcase name="stores api test get store products" classname="[chromium] › api/stores.spec.ts › stores api test › get store products" time="0.368">
 </testcase>
 <testcase name="stores api test get store reviews" classname="[chromium] › api/stores.spec.ts › stores api test › get store reviews" time="0">
 <skipped>
@@ -510,14 +378,14 @@
 <skipped>
 </skipped>
 </testcase>
-<testcase name="stores api test update a store status" classname="[chromium] › api/stores.spec.ts › stores api test › update a store status" time="0.398">
+<testcase name="stores api test update a store status" classname="[chromium] › api/stores.spec.ts › stores api test › update a store status" time="0.379">
 </testcase>
-<testcase name="stores api test admin contact store" classname="[chromium] › api/stores.spec.ts › stores api test › admin contact store" time="0.402">
+<testcase name="stores api test admin contact store" classname="[chromium] › api/stores.spec.ts › stores api test › admin contact store" time="0.374">
 </testcase>
-<testcase name="stores api test admitn email store" classname="[chromium] › api/stores.spec.ts › stores api test › admitn email store" time="0.379">
+<testcase name="stores api test admitn email store" classname="[chromium] › api/stores.spec.ts › stores api test › admitn email store" time="0.38">
 </testcase>
 </testsuite>
-<testsuite name="api/supportTickets.spec.ts" timestamp="1670315644651" hostname="" tests="8" failures="0" skipped="8" time="0" errors="0">
+<testsuite name="api/supportTickets.spec.ts" timestamp="1670317401162" hostname="" tests="8" failures="0" skipped="8" time="0" errors="0">
 <testcase name="support ticket api test get all support ticket customers" classname="[chromium] › api/supportTickets.spec.ts › support ticket api test › get all support ticket customers" time="0">
 <skipped>
 </skipped>
@@ -551,17 +419,17 @@
 </skipped>
 </testcase>
 </testsuite>
-<testsuite name="api/wholesaleCustomers.spec.ts" timestamp="1670315644651" hostname="" tests="4" failures="0" skipped="0" time="1.79" errors="0">
-<testcase name="wholesale customers api test get all wholesale customers" classname="[chromium] › api/wholesaleCustomers.spec.ts › wholesale customers api test › get all wholesale customers" time="0.169">
+<testsuite name="api/wholesaleCustomers.spec.ts" timestamp="1670317401162" hostname="" tests="4" failures="0" skipped="0" time="1.738" errors="0">
+<testcase name="wholesale customers api test get all wholesale customers" classname="[chromium] › api/wholesaleCustomers.spec.ts › wholesale customers api test › get all wholesale customers" time="0.163">
 </testcase>
-<testcase name="wholesale customers api test create a wholesale customer" classname="[chromium] › api/wholesaleCustomers.spec.ts › wholesale customers api test › create a wholesale customer" time="0.422">
+<testcase name="wholesale customers api test create a wholesale customer" classname="[chromium] › api/wholesaleCustomers.spec.ts › wholesale customers api test › create a wholesale customer" time="0.41">
 </testcase>
-<testcase name="wholesale customers api test update a wholesale customer" classname="[chromium] › api/wholesaleCustomers.spec.ts › wholesale customers api test › update a wholesale customer" time="0.604">
+<testcase name="wholesale customers api test update a wholesale customer" classname="[chromium] › api/wholesaleCustomers.spec.ts › wholesale customers api test › update a wholesale customer" time="0.581">
 </testcase>
-<testcase name="wholesale customers api test delete a wholesale customer" classname="[chromium] › api/wholesaleCustomers.spec.ts › wholesale customers api test › delete a wholesale customer" time="0.595">
+<testcase name="wholesale customers api test delete a wholesale customer" classname="[chromium] › api/wholesaleCustomers.spec.ts › wholesale customers api test › delete a wholesale customer" time="0.584">
 </testcase>
 </testsuite>
-<testsuite name="api/withdraws.spec.ts" timestamp="1670315644651" hostname="" tests="6" failures="0" skipped="6" time="0" errors="0">
+<testsuite name="api/withdraws.spec.ts" timestamp="1670317401162" hostname="" tests="6" failures="0" skipped="6" time="0" errors="0">
 <testcase name="withdraw api test get balance details" classname="[chromium] › api/withdraws.spec.ts › withdraw api test › get balance details" time="0">
 <skipped>
 </skipped>
