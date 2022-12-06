@@ -1,11 +1,11 @@
-<testsuites id="" name="" tests="143" failures="0" skipped="143" errors="0" time="2.1965469999999625">
-<testsuite name="api/aapitest.spec.ts" timestamp="1670342728994" hostname="" tests="1" failures="0" skipped="1" time="0" errors="0">
+<testsuites id="" name="" tests="143" failures="0" skipped="143" errors="0" time="2.1716359999999986">
+<testsuite name="api/aapitest.spec.ts" timestamp="1670349000065" hostname="" tests="1" failures="0" skipped="1" time="0" errors="0">
 <testcase name=" api test update settings" classname="[chromium] › api/aapitest.spec.ts ›  api test › update settings" time="0">
 <skipped>
 </skipped>
 </testcase>
 </testsuite>
-<testsuite name="api/abuseReports.spec.ts" timestamp="1670342728994" hostname="" tests="3" failures="0" skipped="3" time="0" errors="0">
+<testsuite name="api/abuseReports.spec.ts" timestamp="1670349000065" hostname="" tests="3" failures="0" skipped="3" time="0" errors="0">
 <testcase name="abuse report api test get all abuse report reasons" classname="[chromium] › api/abuseReports.spec.ts › abuse report api test › get all abuse report reasons" time="0">
 <skipped>
 </skipped>
@@ -19,7 +19,7 @@
 </skipped>
 </testcase>
 </testsuite>
-<testsuite name="api/admins.spec.ts" timestamp="1670342728994" hostname="" tests="10" failures="0" skipped="10" time="0" errors="0">
+<testsuite name="api/admins.spec.ts" timestamp="1670349000065" hostname="" tests="10" failures="0" skipped="10" time="0" errors="0">
 <testcase name="admin api test get admin report overview" classname="[chromium] › api/admins.spec.ts › admin api test › get admin report overview" time="0">
 <skipped>
 </skipped>
@@ -61,7 +61,7 @@
 </skipped>
 </testcase>
 </testsuite>
-<testsuite name="api/announcements.spec.ts" timestamp="1670342728994" hostname="" tests="6" failures="0" skipped="6" time="0" errors="0">
+<testsuite name="api/announcements.spec.ts" timestamp="1670349000065" hostname="" tests="6" failures="0" skipped="6" time="0" errors="0">
 <testcase name="announcements api test get all announcements" classname="[chromium] › api/announcements.spec.ts › announcements api test › get all announcements" time="0">
 <skipped>
 </skipped>
@@ -87,7 +87,7 @@
 </skipped>
 </testcase>
 </testsuite>
-<testsuite name="api/coupons.spec.ts" timestamp="1670342728994" hostname="" tests="5" failures="0" skipped="5" time="0" errors="0">
+<testsuite name="api/coupons.spec.ts" timestamp="1670349000065" hostname="" tests="5" failures="0" skipped="5" time="0" errors="0">
 <testcase name="coupon api test get all coupons" classname="[chromium] › api/coupons.spec.ts › coupon api test › get all coupons" time="0">
 <skipped>
 </skipped>
@@ -109,7 +109,7 @@
 </skipped>
 </testcase>
 </testsuite>
-<testsuite name="api/customers.spec.ts" timestamp="1670342728994" hostname="" tests="5" failures="0" skipped="5" time="0" errors="0">
+<testsuite name="api/customers.spec.ts" timestamp="1670349000065" hostname="" tests="5" failures="0" skipped="5" time="0" errors="0">
 <testcase name="customers api test get all customers" classname="[chromium] › api/customers.spec.ts › customers api test › get all customers" time="0">
 <skipped>
 </skipped>
@@ -131,7 +131,7 @@
 </skipped>
 </testcase>
 </testsuite>
-<testsuite name="api/dummyData.spec.ts" timestamp="1670342728994" hostname="" tests="2" failures="0" skipped="2" time="0" errors="0">
+<testsuite name="api/dummyData.spec.ts" timestamp="1670349000065" hostname="" tests="2" failures="0" skipped="2" time="0" errors="0">
 <testcase name="dummy Data api test get dummy data status" classname="[chromium] › api/dummyData.spec.ts › dummy Data api test › get dummy data status" time="0">
 <skipped>
 </skipped>
@@ -141,7 +141,7 @@
 </skipped>
 </testcase>
 </testsuite>
-<testsuite name="api/followStores.spec.ts" timestamp="1670342728994" hostname="" tests="2" failures="0" skipped="2" time="0" errors="0">
+<testsuite name="api/followStores.spec.ts" timestamp="1670349000065" hostname="" tests="2" failures="0" skipped="2" time="0" errors="0">
 <testcase name="follow store api test get store follow status" classname="[chromium] › api/followStores.spec.ts › follow store api test › get store follow status" time="0">
 <skipped>
 </skipped>
@@ -151,7 +151,7 @@
 </skipped>
 </testcase>
 </testsuite>
-<testsuite name="api/modules.spec.ts" timestamp="1670342728994" hostname="" tests="3" failures="0" skipped="3" time="0" errors="0">
+<testsuite name="api/modules.spec.ts" timestamp="1670349000065" hostname="" tests="3" failures="0" skipped="3" time="0" errors="0">
 <testcase name="modules api test get all modules" classname="[chromium] › api/modules.spec.ts › modules api test › get all modules" time="0">
 <skipped>
 </skipped>
@@ -165,7 +165,7 @@
 </skipped>
 </testcase>
 </testsuite>
-<testsuite name="api/orderNotes.spec.ts" timestamp="1670342728994" hostname="" tests="4" failures="0" skipped="4" time="0" errors="0">
+<testsuite name="api/orderNotes.spec.ts" timestamp="1670349000065" hostname="" tests="4" failures="0" skipped="4" time="0" errors="0">
 <testcase name="order note api test get all order notes" classname="[chromium] › api/orderNotes.spec.ts › order note api test › get all order notes" time="0">
 <skipped>
 </skipped>
@@ -183,7 +183,7 @@
 </skipped>
 </testcase>
 </testsuite>
-<testsuite name="api/orders.spec.ts" timestamp="1670342728994" hostname="" tests="4" failures="0" skipped="4" time="0" errors="0">
+<testsuite name="api/orders.spec.ts" timestamp="1670349000065" hostname="" tests="4" failures="0" skipped="4" time="0" errors="0">
 <testcase name="order api test get all orders" classname="[chromium] › api/orders.spec.ts › order api test › get all orders" time="0">
 <skipped>
 </skipped>
@@ -201,7 +201,7 @@
 </skipped>
 </testcase>
 </testsuite>
-<testsuite name="api/productAdvertisements.spec.ts" timestamp="1670342728994" hostname="" tests="6" failures="0" skipped="6" time="0" errors="0">
+<testsuite name="api/productAdvertisements.spec.ts" timestamp="1670349000065" hostname="" tests="6" failures="0" skipped="6" time="0" errors="0">
 <testcase name="product advertisement api test get all advertised product stores" classname="[chromium] › api/productAdvertisements.spec.ts › product advertisement api test › get all advertised product stores" time="0">
 <skipped>
 </skipped>
@@ -227,7 +227,7 @@
 </skipped>
 </testcase>
 </testsuite>
-<testsuite name="api/productAttributes.spec.ts" timestamp="1670342728994" hostname="" tests="5" failures="0" skipped="5" time="0" errors="0">
+<testsuite name="api/productAttributes.spec.ts" timestamp="1670349000065" hostname="" tests="5" failures="0" skipped="5" time="0" errors="0">
 <testcase name="attribute api test get all attributes" classname="[chromium] › api/productAttributes.spec.ts › attribute api test › get all attributes" time="0">
 <skipped>
 </skipped>
@@ -249,7 +249,7 @@
 </skipped>
 </testcase>
 </testsuite>
-<testsuite name="api/productAttributeTerms.spec.ts" timestamp="1670342728994" hostname="" tests="5" failures="0" skipped="5" time="0" errors="0">
+<testsuite name="api/productAttributeTerms.spec.ts" timestamp="1670349000065" hostname="" tests="5" failures="0" skipped="5" time="0" errors="0">
 <testcase name="attribute term api test get all attribute terms" classname="[chromium] › api/productAttributeTerms.spec.ts › attribute term api test › get all attribute terms" time="0">
 <skipped>
 </skipped>
@@ -271,7 +271,7 @@
 </skipped>
 </testcase>
 </testsuite>
-<testsuite name="api/productReviews.spec.ts" timestamp="1670342728994" hostname="" tests="3" failures="0" skipped="3" time="0" errors="0">
+<testsuite name="api/productReviews.spec.ts" timestamp="1670349000065" hostname="" tests="3" failures="0" skipped="3" time="0" errors="0">
 <testcase name="product review api test get all product reviews" classname="[chromium] › api/productReviews.spec.ts › product review api test › get all product reviews" time="0">
 <skipped>
 </skipped>
@@ -285,7 +285,7 @@
 </skipped>
 </testcase>
 </testsuite>
-<testsuite name="api/products.spec.ts" timestamp="1670342728994" hostname="" tests="12" failures="0" skipped="12" time="0" errors="0">
+<testsuite name="api/products.spec.ts" timestamp="1670349000065" hostname="" tests="12" failures="0" skipped="12" time="0" errors="0">
 <testcase name="product api test get products summary" classname="[chromium] › api/products.spec.ts › product api test › get products summary" time="0">
 <skipped>
 </skipped>
@@ -335,7 +335,7 @@
 </skipped>
 </testcase>
 </testsuite>
-<testsuite name="api/productVariations.spec.ts" timestamp="1670342728994" hostname="" tests="5" failures="0" skipped="5" time="0" errors="0">
+<testsuite name="api/productVariations.spec.ts" timestamp="1670349000065" hostname="" tests="5" failures="0" skipped="5" time="0" errors="0">
 <testcase name="product variation api test get all product variations" classname="[chromium] › api/productVariations.spec.ts › product variation api test › get all product variations" time="0">
 <skipped>
 </skipped>
@@ -357,7 +357,7 @@
 </skipped>
 </testcase>
 </testsuite>
-<testsuite name="api/refunds.spec.ts" timestamp="1670342728994" hostname="" tests="5" failures="0" skipped="5" time="0" errors="0">
+<testsuite name="api/refunds.spec.ts" timestamp="1670349000065" hostname="" tests="5" failures="0" skipped="5" time="0" errors="0">
 <testcase name="refunds api test get all refunds" classname="[chromium] › api/refunds.spec.ts › refunds api test › get all refunds" time="0">
 <skipped>
 </skipped>
@@ -379,7 +379,7 @@
 </skipped>
 </testcase>
 </testsuite>
-<testsuite name="api/reports.spec.ts" timestamp="1670342728994" hostname="" tests="4" failures="0" skipped="4" time="0" errors="0">
+<testsuite name="api/reports.spec.ts" timestamp="1670349000065" hostname="" tests="4" failures="0" skipped="4" time="0" errors="0">
 <testcase name="report api test get sales overview report" classname="[chromium] › api/reports.spec.ts › report api test › get sales overview report" time="0">
 <skipped>
 </skipped>
@@ -397,7 +397,7 @@
 </skipped>
 </testcase>
 </testsuite>
-<testsuite name="api/reverseWithdrawal.spec.ts" timestamp="1670342728994" hostname="" tests="4" failures="0" skipped="4" time="0" errors="0">
+<testsuite name="api/reverseWithdrawal.spec.ts" timestamp="1670349000065" hostname="" tests="4" failures="0" skipped="4" time="0" errors="0">
 <testcase name="reverse withdrawal api test get reverse withdrawal transaction types" classname="[chromium] › api/reverseWithdrawal.spec.ts › reverse withdrawal api test › get reverse withdrawal transaction types" time="0">
 <skipped>
 </skipped>
@@ -415,13 +415,13 @@
 </skipped>
 </testcase>
 </testsuite>
-<testsuite name="api/roles.spec.ts" timestamp="1670342728994" hostname="" tests="1" failures="0" skipped="1" time="0" errors="0">
+<testsuite name="api/roles.spec.ts" timestamp="1670349000065" hostname="" tests="1" failures="0" skipped="1" time="0" errors="0">
 <testcase name="roles api test get all user roles " classname="[chromium] › api/roles.spec.ts › roles api test › get all user roles " time="0">
 <skipped>
 </skipped>
 </testcase>
 </testsuite>
-<testsuite name="api/settings.spec.ts" timestamp="1670342728994" hostname="" tests="2" failures="0" skipped="2" time="0" errors="0">
+<testsuite name="api/settings.spec.ts" timestamp="1670349000065" hostname="" tests="2" failures="0" skipped="2" time="0" errors="0">
 <testcase name="settings api test get settings" classname="[chromium] › api/settings.spec.ts › settings api test › get settings" time="0">
 <skipped>
 </skipped>
@@ -431,7 +431,7 @@
 </skipped>
 </testcase>
 </testsuite>
-<testsuite name="api/storeCategories.spec.ts" timestamp="1670342728994" hostname="" tests="7" failures="0" skipped="7" time="0" errors="0">
+<testsuite name="api/storeCategories.spec.ts" timestamp="1670349000065" hostname="" tests="7" failures="0" skipped="7" time="0" errors="0">
 <testcase name="store categories api test get default store category" classname="[chromium] › api/storeCategories.spec.ts › store categories api test › get default store category" time="0">
 <skipped>
 </skipped>
@@ -461,7 +461,7 @@
 </skipped>
 </testcase>
 </testsuite>
-<testsuite name="api/storeReviews.spec.ts" timestamp="1670342728994" hostname="" tests="6" failures="0" skipped="6" time="0" errors="0">
+<testsuite name="api/storeReviews.spec.ts" timestamp="1670349000065" hostname="" tests="6" failures="0" skipped="6" time="0" errors="0">
 <testcase name="store reviews api test get all store reviews" classname="[chromium] › api/storeReviews.spec.ts › store reviews api test › get all store reviews" time="0">
 <skipped>
 </skipped>
@@ -487,7 +487,7 @@
 </skipped>
 </testcase>
 </testsuite>
-<testsuite name="api/stores.spec.ts" timestamp="1670342728994" hostname="" tests="15" failures="0" skipped="15" time="0" errors="0">
+<testsuite name="api/stores.spec.ts" timestamp="1670349000065" hostname="" tests="15" failures="0" skipped="15" time="0" errors="0">
 <testcase name="stores api test get all stores check check_store_availability" classname="[chromium] › api/stores.spec.ts › stores api test › get all stores check check_store_availability" time="0">
 <skipped>
 </skipped>
@@ -549,7 +549,7 @@
 </skipped>
 </testcase>
 </testsuite>
-<testsuite name="api/supportTickets.spec.ts" timestamp="1670342728994" hostname="" tests="8" failures="0" skipped="8" time="0" errors="0">
+<testsuite name="api/supportTickets.spec.ts" timestamp="1670349000065" hostname="" tests="8" failures="0" skipped="8" time="0" errors="0">
 <testcase name="support ticket api test get all support ticket customers" classname="[chromium] › api/supportTickets.spec.ts › support ticket api test › get all support ticket customers" time="0">
 <skipped>
 </skipped>
@@ -583,7 +583,7 @@
 </skipped>
 </testcase>
 </testsuite>
-<testsuite name="api/wholesaleCustomers.spec.ts" timestamp="1670342728994" hostname="" tests="4" failures="0" skipped="4" time="0" errors="0">
+<testsuite name="api/wholesaleCustomers.spec.ts" timestamp="1670349000065" hostname="" tests="4" failures="0" skipped="4" time="0" errors="0">
 <testcase name="wholesale customers api test get all wholesale customers" classname="[chromium] › api/wholesaleCustomers.spec.ts › wholesale customers api test › get all wholesale customers" time="0">
 <skipped>
 </skipped>
@@ -601,7 +601,7 @@
 </skipped>
 </testcase>
 </testsuite>
-<testsuite name="api/withdraws.spec.ts" timestamp="1670342728994" hostname="" tests="6" failures="0" skipped="6" time="0" errors="0">
+<testsuite name="api/withdraws.spec.ts" timestamp="1670349000065" hostname="" tests="6" failures="0" skipped="6" time="0" errors="0">
 <testcase name="withdraw api test get balance details" classname="[chromium] › api/withdraws.spec.ts › withdraw api test › get balance details" time="0">
 <skipped>
 </skipped>
