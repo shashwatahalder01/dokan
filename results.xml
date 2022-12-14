@@ -1,8 +1,21 @@
-<testsuites id="" name="" tests="7" failures="5" skipped="0" errors="0" time="13.143988000000013">
-<testsuite name="api/quoteRules.spec.ts" timestamp="1671009393454" hostname="" tests="7" failures="5" skipped="0" time="1.424" errors="0">
-<testcase name="quote rules api test get all quote rules" classname="[chromium] › api/quoteRules.spec.ts › quote rules api test › get all quote rules" time="0.196">
+<testsuites id="" name="" tests="7" failures="5" skipped="0" errors="0" time="13.01098999999999">
+<testsuite name="api/quoteRules.spec.ts" timestamp="1671010265747" hostname="" tests="7" failures="5" skipped="0" time="1.403" errors="0">
+<testcase name="quote rules api test get all quote rules" classname="[chromium] › api/quoteRules.spec.ts › quote rules api test › get all quote rules" time="0.205">
 <system-out>
 <![CDATA[hellllllllllllllo
+{
+  rule_name: [32m'QR_3qdgm'[39m,
+  selected_user_role: [ [32m'customer'[39m ],
+  category_ids: [],
+  product_ids: [],
+  hide_price: [32m'1'[39m,
+  hide_price_text: [32m'Price is hidden'[39m,
+  hide_cart_button: [32m'replace'[39m,
+  button_text: [32m'Add to quote'[39m,
+  apply_on_all_product: [32m'1'[39m,
+  rule_priority: [32m'0'[39m,
+  status: [32m'publish'[39m
+}
 [33m404[39m
 {
   code: [32m'failed-to-insert'[39m,
@@ -13,7 +26,7 @@
 ]]>
 </system-out>
 </testcase>
-<testcase name="quote rules api test get single quote rule" classname="[chromium] › api/quoteRules.spec.ts › quote rules api test › get single quote rule" time="0.184">
+<testcase name="quote rules api test get single quote rule" classname="[chromium] › api/quoteRules.spec.ts › quote rules api test › get single quote rule" time="0.183">
 <failure message="quoteRules.spec.ts:30:5 get single quote rule" type="FAILURE">
 <![CDATA[  [chromium] › api/quoteRules.spec.ts:30:5 › quote rules api test › get single quote rule ==========
 
@@ -33,7 +46,7 @@
 ]]>
 </failure>
 </testcase>
-<testcase name="quote rules api test create a quote rule" classname="[chromium] › api/quoteRules.spec.ts › quote rules api test › create a quote rule" time="0.215">
+<testcase name="quote rules api test create a quote rule" classname="[chromium] › api/quoteRules.spec.ts › quote rules api test › create a quote rule" time="0.196">
 <failure message="quoteRules.spec.ts:38:5 create a quote rule" type="FAILURE">
 <![CDATA[  [chromium] › api/quoteRules.spec.ts:38:5 › quote rules api test › create a quote rule ============
 
@@ -54,6 +67,19 @@
 </failure>
 <system-out>
 <![CDATA[hellllllllllllllo
+{
+  rule_name: [32m'QR_iphx1'[39m,
+  selected_user_role: [ [32m'customer'[39m ],
+  category_ids: [],
+  product_ids: [],
+  hide_price: [32m'1'[39m,
+  hide_price_text: [32m'Price is hidden'[39m,
+  hide_cart_button: [32m'replace'[39m,
+  button_text: [32m'Add to quote'[39m,
+  apply_on_all_product: [32m'1'[39m,
+  rule_priority: [32m'0'[39m,
+  status: [32m'publish'[39m
+}
 [33m404[39m
 {
   code: [32m'failed-to-insert'[39m,
@@ -64,7 +90,7 @@
 ]]>
 </system-out>
 </testcase>
-<testcase name="quote rules api test update a quote rule" classname="[chromium] › api/quoteRules.spec.ts › quote rules api test › update a quote rule" time="0.171">
+<testcase name="quote rules api test update a quote rule" classname="[chromium] › api/quoteRules.spec.ts › quote rules api test › update a quote rule" time="0.162">
 <failure message="quoteRules.spec.ts:44:5 update a quote rule" type="FAILURE">
 <![CDATA[  [chromium] › api/quoteRules.spec.ts:44:5 › quote rules api test › update a quote rule ============
 
@@ -85,6 +111,19 @@
 </failure>
 <system-out>
 <![CDATA[hellllllllllllllo
+{
+  rule_name: [32m'QR_oqfhq'[39m,
+  selected_user_role: [ [32m'customer'[39m ],
+  category_ids: [],
+  product_ids: [],
+  hide_price: [32m'1'[39m,
+  hide_price_text: [32m'Price is hidden'[39m,
+  hide_cart_button: [32m'replace'[39m,
+  button_text: [32m'Add to quote'[39m,
+  apply_on_all_product: [32m'1'[39m,
+  rule_priority: [32m'0'[39m,
+  status: [32m'publish'[39m
+}
 [33m404[39m
 {
   code: [32m'failed-to-insert'[39m,
@@ -95,7 +134,7 @@
 ]]>
 </system-out>
 </testcase>
-<testcase name="quote rules api test delete a quote rule" classname="[chromium] › api/quoteRules.spec.ts › quote rules api test › delete a quote rule" time="0.168">
+<testcase name="quote rules api test delete a quote rule" classname="[chromium] › api/quoteRules.spec.ts › quote rules api test › delete a quote rule" time="0.179">
 <failure message="quoteRules.spec.ts:53:5 delete a quote rule" type="FAILURE">
 <![CDATA[  [chromium] › api/quoteRules.spec.ts:53:5 › quote rules api test › delete a quote rule ============
 
@@ -116,6 +155,19 @@
 </failure>
 <system-out>
 <![CDATA[hellllllllllllllo
+{
+  rule_name: [32m'QR_96883'[39m,
+  selected_user_role: [ [32m'customer'[39m ],
+  category_ids: [],
+  product_ids: [],
+  hide_price: [32m'1'[39m,
+  hide_price_text: [32m'Price is hidden'[39m,
+  hide_cart_button: [32m'replace'[39m,
+  button_text: [32m'Add to quote'[39m,
+  apply_on_all_product: [32m'1'[39m,
+  rule_priority: [32m'0'[39m,
+  status: [32m'publish'[39m
+}
 [33m404[39m
 {
   code: [32m'failed-to-insert'[39m,
@@ -126,7 +178,7 @@
 ]]>
 </system-out>
 </testcase>
-<testcase name="quote rules api test restore a deleted quote rule" classname="[chromium] › api/quoteRules.spec.ts › quote rules api test › restore a deleted quote rule" time="0.168">
+<testcase name="quote rules api test restore a deleted quote rule" classname="[chromium] › api/quoteRules.spec.ts › quote rules api test › restore a deleted quote rule" time="0.165">
 <failure message="quoteRules.spec.ts:61:5 restore a deleted quote rule" type="FAILURE">
 <![CDATA[  [chromium] › api/quoteRules.spec.ts:61:5 › quote rules api test › restore a deleted quote rule ===
 
@@ -147,6 +199,19 @@
 </failure>
 <system-out>
 <![CDATA[hellllllllllllllo
+{
+  rule_name: [32m'QR_dq232'[39m,
+  selected_user_role: [ [32m'customer'[39m ],
+  category_ids: [],
+  product_ids: [],
+  hide_price: [32m'1'[39m,
+  hide_price_text: [32m'Price is hidden'[39m,
+  hide_cart_button: [32m'replace'[39m,
+  button_text: [32m'Add to quote'[39m,
+  apply_on_all_product: [32m'1'[39m,
+  rule_priority: [32m'0'[39m,
+  status: [32m'publish'[39m
+}
 [33m404[39m
 {
   code: [32m'failed-to-insert'[39m,
@@ -157,9 +222,22 @@
 ]]>
 </system-out>
 </testcase>
-<testcase name="quote rules api test update batch quote rules" classname="[chromium] › api/quoteRules.spec.ts › quote rules api test › update batch quote rules" time="0.322">
+<testcase name="quote rules api test update batch quote rules" classname="[chromium] › api/quoteRules.spec.ts › quote rules api test › update batch quote rules" time="0.313">
 <system-out>
 <![CDATA[hellllllllllllllo
+{
+  rule_name: [32m'QR_wp1pa'[39m,
+  selected_user_role: [ [32m'customer'[39m ],
+  category_ids: [],
+  product_ids: [],
+  hide_price: [32m'1'[39m,
+  hide_price_text: [32m'Price is hidden'[39m,
+  hide_cart_button: [32m'replace'[39m,
+  button_text: [32m'Add to quote'[39m,
+  apply_on_all_product: [32m'1'[39m,
+  rule_priority: [32m'0'[39m,
+  status: [32m'publish'[39m
+}
 [33m404[39m
 {
   code: [32m'failed-to-insert'[39m,
