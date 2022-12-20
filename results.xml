@@ -1,6 +1,6 @@
-<testsuites id="" name="" tests="7" failures="5" skipped="0" errors="0" time="16.140761999999988">
-<testsuite name="api/quoteRules.spec.ts" timestamp="1671528155812" hostname="" tests="7" failures="5" skipped="0" time="1.4" errors="0">
-<testcase name="quote rules api test get all quote rules" classname="[chromium] › api/quoteRules.spec.ts › quote rules api test › get all quote rules" time="0.204">
+<testsuites id="" name="" tests="7" failures="5" skipped="0" errors="0" time="16.631339999999966">
+<testsuite name="api/quoteRules.spec.ts" timestamp="1671528248714" hostname="" tests="7" failures="5" skipped="0" time="1.604" errors="0">
+<testcase name="quote rules api test get all quote rules" classname="[chromium] › api/quoteRules.spec.ts › quote rules api test › get all quote rules" time="0.24">
 <system-out>
 <![CDATA[[
   [32m'dokan/dokan'[39m,
@@ -15,7 +15,7 @@
 ]]>
 </system-out>
 </testcase>
-<testcase name="quote rules api test get single quote rule" classname="[chromium] › api/quoteRules.spec.ts › quote rules api test › get single quote rule" time="0.185">
+<testcase name="quote rules api test get single quote rule" classname="[chromium] › api/quoteRules.spec.ts › quote rules api test › get single quote rule" time="0.208">
 <failure message="quoteRules.spec.ts:32:5 get single quote rule" type="FAILURE">
 <![CDATA[  [chromium] › api/quoteRules.spec.ts:32:5 › quote rules api test › get single quote rule ==========
 
@@ -35,7 +35,7 @@
 ]]>
 </failure>
 </testcase>
-<testcase name="quote rules api test create a quote rule" classname="[chromium] › api/quoteRules.spec.ts › quote rules api test › create a quote rule" time="0.179">
+<testcase name="quote rules api test create a quote rule" classname="[chromium] › api/quoteRules.spec.ts › quote rules api test › create a quote rule" time="0.192">
 <failure message="quoteRules.spec.ts:40:5 create a quote rule" type="FAILURE">
 <![CDATA[  [chromium] › api/quoteRules.spec.ts:40:5 › quote rules api test › create a quote rule ============
 
@@ -68,7 +68,7 @@
 ]]>
 </system-out>
 </testcase>
-<testcase name="quote rules api test update a quote rule" classname="[chromium] › api/quoteRules.spec.ts › quote rules api test › update a quote rule" time="0.173">
+<testcase name="quote rules api test update a quote rule" classname="[chromium] › api/quoteRules.spec.ts › quote rules api test › update a quote rule" time="0.217">
 <failure message="quoteRules.spec.ts:46:5 update a quote rule" type="FAILURE">
 <![CDATA[  [chromium] › api/quoteRules.spec.ts:46:5 › quote rules api test › update a quote rule ============
 
@@ -101,7 +101,7 @@
 ]]>
 </system-out>
 </testcase>
-<testcase name="quote rules api test delete a quote rule" classname="[chromium] › api/quoteRules.spec.ts › quote rules api test › delete a quote rule" time="0.169">
+<testcase name="quote rules api test delete a quote rule" classname="[chromium] › api/quoteRules.spec.ts › quote rules api test › delete a quote rule" time="0.183">
 <failure message="quoteRules.spec.ts:55:5 delete a quote rule" type="FAILURE">
 <![CDATA[  [chromium] › api/quoteRules.spec.ts:55:5 › quote rules api test › delete a quote rule ============
 
@@ -134,7 +134,7 @@
 ]]>
 </system-out>
 </testcase>
-<testcase name="quote rules api test restore a deleted quote rule" classname="[chromium] › api/quoteRules.spec.ts › quote rules api test › restore a deleted quote rule" time="0.164">
+<testcase name="quote rules api test restore a deleted quote rule" classname="[chromium] › api/quoteRules.spec.ts › quote rules api test › restore a deleted quote rule" time="0.185">
 <failure message="quoteRules.spec.ts:63:5 restore a deleted quote rule" type="FAILURE">
 <![CDATA[  [chromium] › api/quoteRules.spec.ts:63:5 › quote rules api test › restore a deleted quote rule ===
 
@@ -167,7 +167,7 @@
 ]]>
 </system-out>
 </testcase>
-<testcase name="quote rules api test update batch quote rules" classname="[chromium] › api/quoteRules.spec.ts › quote rules api test › update batch quote rules" time="0.326">
+<testcase name="quote rules api test update batch quote rules" classname="[chromium] › api/quoteRules.spec.ts › quote rules api test › update batch quote rules" time="0.379">
 <system-out>
 <![CDATA[[
   [32m'dokan/dokan'[39m,
