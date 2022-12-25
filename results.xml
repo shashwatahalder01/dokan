@@ -1,498 +1,431 @@
-<testsuites id="" name="" tests="181" failures="0" skipped="36" errors="0" time="61.87500599999999">
-<testsuite name="_setup.spec.ts" timestamp="1671792977195" hostname="" tests="3" failures="0" skipped="0" time="1.478" errors="0">
-<testcase name=" api test setup test store settings" classname="_setup.spec.ts ›  api test › setup test store settings" time="0.761">
-</testcase>
-<testcase name=" api test create test customer" classname="_setup.spec.ts ›  api test › create test customer" time="0.41">
-</testcase>
-<testcase name=" api test create test vendor" classname="_setup.spec.ts ›  api test › create test vendor" time="0.307">
+<testsuites id="" name="" tests="2" failures="2" skipped="0" errors="0" time="22.10149900000001">
+<testsuite name="v2/orderDownloads.spec.ts" timestamp="1671996383548" hostname="" tests="1" failures="1" skipped="0" time="0.622" errors="0">
+<testcase name="order downloads api test create order downloads" classname="v2/orderDownloads.spec.ts › order downloads api test › create order downloads" time="0.622">
+<failure message="orderDownloads.spec.ts:37:10 create order downloads" type="FAILURE">
+<![CDATA[  v2/orderDownloads.spec.ts:37:10 › order downloads api test › create order downloads ==============
+
+    Error: expect(received).toBeTruthy()
+
+    Received: false
+
+      38 |         let response = await request.post(endPoints.createOrderDownload('33'), { data: { ids: [31] } })
+      39 |         let responseBody = await apiUtils.getResponseBody(response)
+    > 40 |         expect(response.ok()).toBeTruthy()
+         |                               ^
+      41 |     });
+      42 |
+      43 |     test('delete order downloads', async ({ request }) => {
+
+        at /home/runner/work/dokan/dokan/tests/api/tests/v2/orderDownloads.spec.ts:40:31
+
+    Retry #1 ---------------------------------------------------------------------------------------
+
+    Error: expect(received).toBeTruthy()
+
+    Received: false
+
+      38 |         let response = await request.post(endPoints.createOrderDownload('33'), { data: { ids: [31] } })
+      39 |         let responseBody = await apiUtils.getResponseBody(response)
+    > 40 |         expect(response.ok()).toBeTruthy()
+         |                               ^
+      41 |     });
+      42 |
+      43 |     test('delete order downloads', async ({ request }) => {
+
+        at /home/runner/work/dokan/dokan/tests/api/tests/v2/orderDownloads.spec.ts:40:31
+
+    Retry #2 ---------------------------------------------------------------------------------------
+
+    Error: expect(received).toBeTruthy()
+
+    Received: false
+
+      38 |         let response = await request.post(endPoints.createOrderDownload('33'), { data: { ids: [31] } })
+      39 |         let responseBody = await apiUtils.getResponseBody(response)
+    > 40 |         expect(response.ok()).toBeTruthy()
+         |                               ^
+      41 |     });
+      42 |
+      43 |     test('delete order downloads', async ({ request }) => {
+
+        at /home/runner/work/dokan/dokan/tests/api/tests/v2/orderDownloads.spec.ts:40:31
+]]>
+</failure>
+<system-out>
+<![CDATA[ResponseBody:  {
+  code: [32m'invalid_request'[39m,
+  message: [32m'Error! Your account is not enabled for selling, please contact the admin'[39m,
+  data: { status: [33m400[39m }
+}
+ResponseBody:  {
+  code: [32m'invalid_request'[39m,
+  message: [32m'Error! Your account is not enabled for selling, please contact the admin'[39m,
+  data: { status: [33m400[39m }
+}
+ResponseBody:  {
+  id: [33m1[39m,
+  name: [32m'Test_attribute_qtjuoxeh'[39m,
+  slug: [32m'pa_test_attribute_qtjuoxeh'[39m,
+  type: [32m'select'[39m,
+  order_by: [32m'menu_order'[39m,
+  has_archives: [33mfalse[39m,
+  _links: { self: [ [36m[Object][39m ], collection: [ [36m[Object][39m ] }
+}
+ResponseBody:  {
+  id: [33m19[39m,
+  name: [32m'Test_attributeTerm_bejqsdnn'[39m,
+  slug: [32m'test_attributeterm_bejqsdnn'[39m,
+  description: [32m''[39m,
+  menu_order: [33m0[39m,
+  count: [33m0[39m,
+  _links: { self: [ [36m[Object][39m ], collection: [ [36m[Object][39m ] }
+}
+ResponseBody:  {
+  code: [32m'rest_no_route'[39m,
+  message: [32m'No route was found matching the URL and request method.'[39m,
+  data: { status: [33m404[39m }
+}
+ResponseBody:  {
+  code: [32m'invalid_request'[39m,
+  message: [32m'Error! Your account is not enabled for selling, please contact the admin'[39m,
+  data: { status: [33m400[39m }
+}
+ResponseBody:  {
+  code: [32m'woocommerce_rest_required_product_reference'[39m,
+  message: [32m'Product ID or SKU is required.'[39m,
+  data: { status: [33m400[39m }
+}
+ResponseBody:  {
+  code: [32m'rest_no_route'[39m,
+  message: [32m'No route was found matching the URL and request method.'[39m,
+  data: { status: [33m404[39m }
+}
+ResponseBody:  {
+  code: [32m'rest_no_route'[39m,
+  message: [32m'No route was found matching the URL and request method.'[39m,
+  data: { status: [33m404[39m }
+}
+ResponseBody:  {
+  code: [32m'invalid_request'[39m,
+  message: [32m'Error! Your account is not enabled for selling, please contact the admin'[39m,
+  data: { status: [33m400[39m }
+}
+ResponseBody:  {
+  code: [32m'invalid_request'[39m,
+  message: [32m'Error! Your account is not enabled for selling, please contact the admin'[39m,
+  data: { status: [33m400[39m }
+}
+ResponseBody:  {
+  id: [33m2[39m,
+  name: [32m'Test_attribute_gwtyqgnz'[39m,
+  slug: [32m'pa_test_attribute_gwtyqgnz'[39m,
+  type: [32m'select'[39m,
+  order_by: [32m'menu_order'[39m,
+  has_archives: [33mfalse[39m,
+  _links: { self: [ [36m[Object][39m ], collection: [ [36m[Object][39m ] }
+}
+ResponseBody:  {
+  id: [33m20[39m,
+  name: [32m'Test_attributeTerm_ungimuhw'[39m,
+  slug: [32m'test_attributeterm_ungimuhw'[39m,
+  description: [32m''[39m,
+  menu_order: [33m0[39m,
+  count: [33m0[39m,
+  _links: { self: [ [36m[Object][39m ], collection: [ [36m[Object][39m ] }
+}
+ResponseBody:  {
+  code: [32m'rest_no_route'[39m,
+  message: [32m'No route was found matching the URL and request method.'[39m,
+  data: { status: [33m404[39m }
+}
+ResponseBody:  {
+  code: [32m'invalid_request'[39m,
+  message: [32m'Error! Your account is not enabled for selling, please contact the admin'[39m,
+  data: { status: [33m400[39m }
+}
+ResponseBody:  {
+  code: [32m'woocommerce_rest_required_product_reference'[39m,
+  message: [32m'Product ID or SKU is required.'[39m,
+  data: { status: [33m400[39m }
+}
+ResponseBody:  {
+  code: [32m'rest_no_route'[39m,
+  message: [32m'No route was found matching the URL and request method.'[39m,
+  data: { status: [33m404[39m }
+}
+ResponseBody:  {
+  code: [32m'rest_no_route'[39m,
+  message: [32m'No route was found matching the URL and request method.'[39m,
+  data: { status: [33m404[39m }
+}
+ResponseBody:  {
+  code: [32m'invalid_request'[39m,
+  message: [32m'Error! Your account is not enabled for selling, please contact the admin'[39m,
+  data: { status: [33m400[39m }
+}
+ResponseBody:  {
+  code: [32m'invalid_request'[39m,
+  message: [32m'Error! Your account is not enabled for selling, please contact the admin'[39m,
+  data: { status: [33m400[39m }
+}
+ResponseBody:  {
+  id: [33m3[39m,
+  name: [32m'Test_attribute_ozvmprli'[39m,
+  slug: [32m'pa_test_attribute_ozvmprli'[39m,
+  type: [32m'select'[39m,
+  order_by: [32m'menu_order'[39m,
+  has_archives: [33mfalse[39m,
+  _links: { self: [ [36m[Object][39m ], collection: [ [36m[Object][39m ] }
+}
+ResponseBody:  {
+  id: [33m21[39m,
+  name: [32m'Test_attributeTerm_akzmxdsy'[39m,
+  slug: [32m'test_attributeterm_akzmxdsy'[39m,
+  description: [32m''[39m,
+  menu_order: [33m0[39m,
+  count: [33m0[39m,
+  _links: { self: [ [36m[Object][39m ], collection: [ [36m[Object][39m ] }
+}
+ResponseBody:  {
+  code: [32m'rest_no_route'[39m,
+  message: [32m'No route was found matching the URL and request method.'[39m,
+  data: { status: [33m404[39m }
+}
+ResponseBody:  {
+  code: [32m'invalid_request'[39m,
+  message: [32m'Error! Your account is not enabled for selling, please contact the admin'[39m,
+  data: { status: [33m400[39m }
+}
+ResponseBody:  {
+  code: [32m'woocommerce_rest_required_product_reference'[39m,
+  message: [32m'Product ID or SKU is required.'[39m,
+  data: { status: [33m400[39m }
+}
+ResponseBody:  {
+  code: [32m'rest_no_route'[39m,
+  message: [32m'No route was found matching the URL and request method.'[39m,
+  data: { status: [33m404[39m }
+}
+ResponseBody:  {
+  code: [32m'rest_no_route'[39m,
+  message: [32m'No route was found matching the URL and request method.'[39m,
+  data: { status: [33m404[39m }
+}
+]]>
+</system-out>
 </testcase>
 </testsuite>
-<testsuite name="abuseReports.spec.ts" timestamp="1671792977195" hostname="" tests="4" failures="0" skipped="2" time="0.552" errors="0">
-<testcase name="abuse report api test get all abuse report reasons @pro" classname="abuseReports.spec.ts › abuse report api test › get all abuse report reasons @pro" time="0.277">
-</testcase>
-<testcase name="abuse report api test get all abuse reports @pro" classname="abuseReports.spec.ts › abuse report api test › get all abuse reports @pro" time="0.275">
-</testcase>
-<testcase name="abuse report api test delete a abuse report @pro" classname="abuseReports.spec.ts › abuse report api test › delete a abuse report @pro" time="0">
-<skipped>
-</skipped>
-</testcase>
-<testcase name="abuse report api test delete batch abuse reports @pro" classname="abuseReports.spec.ts › abuse report api test › delete batch abuse reports @pro" time="0">
-<skipped>
-</skipped>
-</testcase>
-</testsuite>
-<testsuite name="admins.spec.ts" timestamp="1671792977195" hostname="" tests="10" failures="0" skipped="0" time="3.391" errors="0">
-<testcase name="admin api test get admin report overview" classname="admins.spec.ts › admin api test › get admin report overview" time="0.247">
-</testcase>
-<testcase name="admin api test get admin report summary" classname="admins.spec.ts › admin api test › get admin report summary" time="0.265">
-</testcase>
-<testcase name="admin api test get admin dashboard feed" classname="admins.spec.ts › admin api test › get admin dashboard feed" time="0.433">
-</testcase>
-<testcase name="admin api test get admin help" classname="admins.spec.ts › admin api test › get admin help" time="0.591">
-</testcase>
-<testcase name="admin api test get changelog lite" classname="admins.spec.ts › admin api test › get changelog lite" time="0.241">
-</testcase>
-<testcase name="admin api test get changelog pro @pro" classname="admins.spec.ts › admin api test › get changelog pro @pro" time="0.253">
-</testcase>
-<testcase name="admin api test get getAdminNotices" classname="admins.spec.ts › admin api test › get getAdminNotices" time="0.26">
-</testcase>
-<testcase name="admin api test get admin promo notices " classname="admins.spec.ts › admin api test › get admin promo notices " time="0.602">
-</testcase>
-<testcase name="admin api test get admin logs @pro" classname="admins.spec.ts › admin api test › get admin logs @pro" time="0.261">
-</testcase>
-<testcase name="admin api test get admin export logs @pro" classname="admins.spec.ts › admin api test › get admin export logs @pro" time="0.238">
-</testcase>
-</testsuite>
-<testsuite name="announcements.spec.ts" timestamp="1671792977195" hostname="" tests="7" failures="0" skipped="0" time="2.255" errors="0">
-<testcase name="announcements api test get all announcements @pro" classname="announcements.spec.ts › announcements api test › get all announcements @pro" time="0.237">
-</testcase>
-<testcase name="announcements api test get single announcement @pro" classname="announcements.spec.ts › announcements api test › get single announcement @pro" time="0.239">
-</testcase>
-<testcase name="announcements api test create a announcement @pro" classname="announcements.spec.ts › announcements api test › create a announcement @pro" time="0.253">
-</testcase>
-<testcase name="announcements api test update a announcement @pro" classname="announcements.spec.ts › announcements api test › update a announcement @pro" time="0.257">
-</testcase>
-<testcase name="announcements api test delete a announcement @pro" classname="announcements.spec.ts › announcements api test › delete a announcement @pro" time="0.257">
-</testcase>
-<testcase name="announcements api test restore a deleted announcement  @pro" classname="announcements.spec.ts › announcements api test › restore a deleted announcement  @pro" time="0.263">
-</testcase>
-<testcase name="announcements api test update batch announcements @pro" classname="announcements.spec.ts › announcements api test › update batch announcements @pro" time="0.749">
-</testcase>
-</testsuite>
-<testsuite name="coupons.spec.ts" timestamp="1671792977195" hostname="" tests="5" failures="0" skipped="0" time="1.204" errors="0">
-<testcase name="coupon api test get all coupons" classname="coupons.spec.ts › coupon api test › get all coupons" time="0.228">
-</testcase>
-<testcase name="coupon api test get single coupon" classname="coupons.spec.ts › coupon api test › get single coupon" time="0.233">
-</testcase>
-<testcase name="coupon api test create a coupon" classname="coupons.spec.ts › coupon api test › create a coupon" time="0.258">
-</testcase>
-<testcase name="coupon api test update a coupon" classname="coupons.spec.ts › coupon api test › update a coupon" time="0.23">
-</testcase>
-<testcase name="coupon api test delete a coupon" classname="coupons.spec.ts › coupon api test › delete a coupon" time="0.255">
-</testcase>
-</testsuite>
-<testsuite name="customers.spec.ts" timestamp="1671792977195" hostname="" tests="6" failures="0" skipped="0" time="1.782" errors="0">
-<testcase name="customers api test get all customers" classname="customers.spec.ts › customers api test › get all customers" time="0.227">
-</testcase>
-<testcase name="customers api test get single customer" classname="customers.spec.ts › customers api test › get single customer" time="0.231">
-</testcase>
-<testcase name="customers api test create a customer" classname="customers.spec.ts › customers api test › create a customer" time="0.324">
-</testcase>
-<testcase name="customers api test update a customer" classname="customers.spec.ts › customers api test › update a customer" time="0.246">
-</testcase>
-<testcase name="customers api test delete a customer" classname="customers.spec.ts › customers api test › delete a customer" time="0.267">
-</testcase>
-<testcase name="customers api test update batch customers" classname="customers.spec.ts › customers api test › update batch customers" time="0.487">
-</testcase>
-</testsuite>
-<testsuite name="dummyData.spec.ts" timestamp="1671792977195" hostname="" tests="3" failures="0" skipped="0" time="1.204" errors="0">
-<testcase name="dummy Data api test get dummy data status" classname="dummyData.spec.ts › dummy Data api test › get dummy data status" time="0.237">
-</testcase>
-<testcase name="dummy Data api test import dummy data" classname="dummyData.spec.ts › dummy Data api test › import dummy data" time="0.504">
-</testcase>
-<testcase name="dummy Data api test clear dummy data" classname="dummyData.spec.ts › dummy Data api test › clear dummy data" time="0.463">
-</testcase>
-</testsuite>
-<testsuite name="followStores.spec.ts" timestamp="1671792977195" hostname="" tests="2" failures="0" skipped="0" time="0.481" errors="0">
-<testcase name="follow store api test get store follow status @pro" classname="followStores.spec.ts › follow store api test › get store follow status @pro" time="0.228">
-</testcase>
-<testcase name="follow store api test follow-unfollow a store @pro" classname="followStores.spec.ts › follow store api test › follow-unfollow a store @pro" time="0.253">
-</testcase>
-</testsuite>
-<testsuite name="modules.spec.ts" timestamp="1671792977195" hostname="" tests="3" failures="0" skipped="0" time="0.757" errors="0">
-<testcase name="modules api test get all modules" classname="modules.spec.ts › modules api test › get all modules" time="0.232">
-</testcase>
-<testcase name="modules api test deactivate a module" classname="modules.spec.ts › modules api test › deactivate a module" time="0.242">
-</testcase>
-<testcase name="modules api test activate a module" classname="modules.spec.ts › modules api test › activate a module" time="0.283">
-</testcase>
-</testsuite>
-<testsuite name="new.spec.ts" timestamp="1671792977195" hostname="" tests="9" failures="0" skipped="9" time="0" errors="0">
-<testcase name="new v1 api test get product block details" classname="new.spec.ts › new v1 api test › get product block details" time="0">
-<skipped>
-</skipped>
-</testcase>
-<testcase name="new v1 api test get variable product block details" classname="new.spec.ts › new v1 api test › get variable product block details" time="0">
-<skipped>
-</skipped>
-</testcase>
-<testcase name="new v1 api test set default attribute" classname="new.spec.ts › new v1 api test › set default attribute" time="0">
-<skipped>
-</skipped>
-</testcase>
-<testcase name="new v1 api test update product attribute" classname="new.spec.ts › new v1 api test › update product attribute" time="0">
-<skipped>
-</skipped>
-</testcase>
-<testcase name="new v1 api test get single withdraw" classname="new.spec.ts › new v1 api test › get single withdraw" time="0">
-<skipped>
-</skipped>
-</testcase>
-<testcase name="new v1 api test create a withdraw" classname="new.spec.ts › new v1 api test › create a withdraw" time="0">
-<skipped>
-</skipped>
-</testcase>
-<testcase name="new v1 api test update a withdraw" classname="new.spec.ts › new v1 api test › update a withdraw" time="0">
-<skipped>
-</skipped>
-</testcase>
-<testcase name="new v1 api test cancel a withdraw" classname="new.spec.ts › new v1 api test › cancel a withdraw" time="0">
-<skipped>
-</skipped>
-</testcase>
-<testcase name="new v1 api test update batch withdraws" classname="new.spec.ts › new v1 api test › update batch withdraws" time="0">
-<skipped>
-</skipped>
-</testcase>
-</testsuite>
-<testsuite name="orderNotes.spec.ts" timestamp="1671792977195" hostname="" tests="4" failures="0" skipped="0" time="0.973" errors="0">
-<testcase name="order note api test get all order notes" classname="orderNotes.spec.ts › order note api test › get all order notes" time="0.249">
-</testcase>
-<testcase name="order note api test get single order note" classname="orderNotes.spec.ts › order note api test › get single order note" time="0.235">
-</testcase>
-<testcase name="order note api test create an order note" classname="orderNotes.spec.ts › order note api test › create an order note" time="0.243">
-</testcase>
-<testcase name="order note api test delete an order note" classname="orderNotes.spec.ts › order note api test › delete an order note" time="0.246">
-</testcase>
-</testsuite>
-<testsuite name="orders.spec.ts" timestamp="1671792977195" hostname="" tests="5" failures="0" skipped="0" time="1.273" errors="0">
-<testcase name="order api test get all orders" classname="orders.spec.ts › order api test › get all orders" time="0.256">
-</testcase>
-<testcase name="order api test get orders summary" classname="orders.spec.ts › order api test › get orders summary" time="0.229">
-</testcase>
-<testcase name="order api test get orders with before after" classname="orders.spec.ts › order api test › get orders with before after" time="0.241">
-</testcase>
-<testcase name="order api test get single order" classname="orders.spec.ts › order api test › get single order" time="0.251">
-</testcase>
-<testcase name="order api test update an order" classname="orders.spec.ts › order api test › update an order" time="0.296">
-</testcase>
-</testsuite>
-<testsuite name="productAdvertisements.spec.ts" timestamp="1671792977195" hostname="" tests="6" failures="0" skipped="0" time="2.011" errors="0">
-<testcase name="product advertisement api test get all advertised product stores @pro" classname="productAdvertisements.spec.ts › product advertisement api test › get all advertised product stores @pro" time="0.256">
-</testcase>
-<testcase name="product advertisement api test get all advertised product @pro" classname="productAdvertisements.spec.ts › product advertisement api test › get all advertised product @pro" time="0.228">
-</testcase>
-<testcase name="product advertisement api test create a product advertisement @pro" classname="productAdvertisements.spec.ts › product advertisement api test › create a product advertisement @pro" time="0.613">
-</testcase>
-<testcase name="product advertisement api test expire a product advertisement @pro" classname="productAdvertisements.spec.ts › product advertisement api test › expire a product advertisement @pro" time="0.24">
-</testcase>
-<testcase name="product advertisement api test delete a product advertisement @pro" classname="productAdvertisements.spec.ts › product advertisement api test › delete a product advertisement @pro" time="0.241">
-</testcase>
-<testcase name="product advertisement api test update batch product advertisements @pro" classname="productAdvertisements.spec.ts › product advertisement api test › update batch product advertisements @pro" time="0.433">
-</testcase>
-</testsuite>
-<testsuite name="productAttributes.spec.ts" timestamp="1671792977195" hostname="" tests="6" failures="0" skipped="0" time="1.758" errors="0">
-<testcase name="attribute api test get all attributes" classname="productAttributes.spec.ts › attribute api test › get all attributes" time="0.235">
-</testcase>
-<testcase name="attribute api test get single attribute" classname="productAttributes.spec.ts › attribute api test › get single attribute" time="0.268">
-</testcase>
-<testcase name="attribute api test create an attribute" classname="productAttributes.spec.ts › attribute api test › create an attribute" time="0.25">
-</testcase>
-<testcase name="attribute api test update an attribute" classname="productAttributes.spec.ts › attribute api test › update an attribute" time="0.275">
-</testcase>
-<testcase name="attribute api test delete an attribute" classname="productAttributes.spec.ts › attribute api test › delete an attribute" time="0.251">
-</testcase>
-<testcase name="attribute api test update batch attributes" classname="productAttributes.spec.ts › attribute api test › update batch attributes" time="0.479">
-</testcase>
-</testsuite>
-<testsuite name="productAttributeTerms.spec.ts" timestamp="1671792977195" hostname="" tests="6" failures="0" skipped="0" time="1.671" errors="0">
-<testcase name="attribute term api test get all attribute terms" classname="productAttributeTerms.spec.ts › attribute term api test › get all attribute terms" time="0.223">
-</testcase>
-<testcase name="attribute term api test get single attribute term" classname="productAttributeTerms.spec.ts › attribute term api test › get single attribute term" time="0.236">
-</testcase>
-<testcase name="attribute term api test create an attribute term" classname="productAttributeTerms.spec.ts › attribute term api test › create an attribute term" time="0.241">
-</testcase>
-<testcase name="attribute term api test update an attribute term " classname="productAttributeTerms.spec.ts › attribute term api test › update an attribute term " time="0.241">
-</testcase>
-<testcase name="attribute term api test delete an attribute term" classname="productAttributeTerms.spec.ts › attribute term api test › delete an attribute term" time="0.244">
-</testcase>
-<testcase name="attribute term api test update batch attribute terms" classname="productAttributeTerms.spec.ts › attribute term api test › update batch attribute terms" time="0.486">
-</testcase>
-</testsuite>
-<testsuite name="productReviews.spec.ts" timestamp="1671792977195" hostname="" tests="3" failures="0" skipped="0" time="0.724" errors="0">
-<testcase name="product review api test get all product reviews" classname="productReviews.spec.ts › product review api test › get all product reviews" time="0.23">
-</testcase>
-<testcase name="product review api test get product reviews summary" classname="productReviews.spec.ts › product review api test › get product reviews summary" time="0.227">
-</testcase>
-<testcase name="product review api test update a product review" classname="productReviews.spec.ts › product review api test › update a product review" time="0.267">
-</testcase>
-</testsuite>
-<testsuite name="products.spec.ts" timestamp="1671792977195" hostname="" tests="12" failures="0" skipped="0" time="3.274" errors="0">
-<testcase name="product api test get products summary" classname="products.spec.ts › product api test › get products summary" time="0.243">
-</testcase>
-<testcase name="product api test get top rated products" classname="products.spec.ts › product api test › get top rated products" time="0.253">
-</testcase>
-<testcase name="product api test get best selling products" classname="products.spec.ts › product api test › get best selling products" time="0.281">
-</testcase>
-<testcase name="product api test get featured products" classname="products.spec.ts › product api test › get featured products" time="0.232">
-</testcase>
-<testcase name="product api test get latest products" classname="products.spec.ts › product api test › get latest products" time="0.275">
-</testcase>
-<testcase name="product api test get all multiStep categories" classname="products.spec.ts › product api test › get all multiStep categories" time="0.226">
-</testcase>
-<testcase name="product api test get all products" classname="products.spec.ts › product api test › get all products" time="0.274">
-</testcase>
-<testcase name="product api test get single product" classname="products.spec.ts › product api test › get single product" time="0.243">
-</testcase>
-<testcase name="product api test get all related products" classname="products.spec.ts › product api test › get all related products" time="0.288">
-</testcase>
-<testcase name="product api test create a product" classname="products.spec.ts › product api test › create a product" time="0.37">
-</testcase>
-<testcase name="product api test update a product" classname="products.spec.ts › product api test › update a product" time="0.293">
-</testcase>
-<testcase name="product api test delete a product" classname="products.spec.ts › product api test › delete a product" time="0.296">
-</testcase>
-</testsuite>
-<testsuite name="productVariations.spec.ts" timestamp="1671792977195" hostname="" tests="5" failures="0" skipped="0" time="1.41" errors="0">
-<testcase name="product variation api test get all product variations" classname="productVariations.spec.ts › product variation api test › get all product variations" time="0.248">
-</testcase>
-<testcase name="product variation api test get single product variation" classname="productVariations.spec.ts › product variation api test › get single product variation" time="0.24">
-</testcase>
-<testcase name="product variation api test create a product variation" classname="productVariations.spec.ts › product variation api test › create a product variation" time="0.365">
-</testcase>
-<testcase name="product variation api test update a product variation" classname="productVariations.spec.ts › product variation api test › update a product variation" time="0.298">
-</testcase>
-<testcase name="product variation api test delete a product variation" classname="productVariations.spec.ts › product variation api test › delete a product variation" time="0.259">
-</testcase>
-</testsuite>
-<testsuite name="quoteRequests.spec.ts" timestamp="1671792977195" hostname="" tests="8" failures="0" skipped="1" time="2.073" errors="0">
-<testcase name="request quote api test get all request quotes @pro" classname="quoteRequests.spec.ts › request quote api test › get all request quotes @pro" time="0.235">
-</testcase>
-<testcase name="request quote api test get single request quote @pro" classname="quoteRequests.spec.ts › request quote api test › get single request quote @pro" time="0.241">
-</testcase>
-<testcase name="request quote api test create a request quote @pro" classname="quoteRequests.spec.ts › request quote api test › create a request quote @pro" time="0.315">
-</testcase>
-<testcase name="request quote api test update a request quote @pro" classname="quoteRequests.spec.ts › request quote api test › update a request quote @pro" time="0">
-<skipped>
-</skipped>
-</testcase>
-<testcase name="request quote api test delete a request quote @pro" classname="quoteRequests.spec.ts › request quote api test › delete a request quote @pro" time="0.227">
-</testcase>
-<testcase name="request quote api test restore a deleted request quote @pro" classname="quoteRequests.spec.ts › request quote api test › restore a deleted request quote @pro" time="0.228">
-</testcase>
-<testcase name="request quote api test convert request quote to order @pro" classname="quoteRequests.spec.ts › request quote api test › convert request quote to order @pro" time="0.369">
-</testcase>
-<testcase name="request quote api test update batch request quote @pro " classname="quoteRequests.spec.ts › request quote api test › update batch request quote @pro " time="0.458">
-</testcase>
-</testsuite>
-<testsuite name="quoteRules.spec.ts" timestamp="1671792977195" hostname="" tests="7" failures="0" skipped="0" time="1.86" errors="0">
-<testcase name="quote rules api test get all quote rules @pro" classname="quoteRules.spec.ts › quote rules api test › get all quote rules @pro" time="0.222">
-</testcase>
-<testcase name="quote rules api test get single quote rule @pro" classname="quoteRules.spec.ts › quote rules api test › get single quote rule @pro" time="0.214">
-</testcase>
-<testcase name="quote rules api test create a quote rule @pro" classname="quoteRules.spec.ts › quote rules api test › create a quote rule @pro" time="0.236">
-</testcase>
-<testcase name="quote rules api test update a quote rule @pro" classname="quoteRules.spec.ts › quote rules api test › update a quote rule @pro" time="0.232">
-</testcase>
-<testcase name="quote rules api test delete a quote rule @pro" classname="quoteRules.spec.ts › quote rules api test › delete a quote rule @pro" time="0.235">
-</testcase>
-<testcase name="quote rules api test restore a deleted quote rule @pro" classname="quoteRules.spec.ts › quote rules api test › restore a deleted quote rule @pro" time="0.248">
-</testcase>
-<testcase name="quote rules api test update batch quote rules @pro" classname="quoteRules.spec.ts › quote rules api test › update batch quote rules @pro" time="0.473">
-</testcase>
-</testsuite>
-<testsuite name="refunds.spec.ts" timestamp="1671792977195" hostname="" tests="6" failures="0" skipped="6" time="0" errors="0">
-<testcase name="refunds api test get all refunds @pro" classname="refunds.spec.ts › refunds api test › get all refunds @pro" time="0">
-<skipped>
-</skipped>
-</testcase>
-<testcase name="refunds api test get all refunds by status @pro" classname="refunds.spec.ts › refunds api test › get all refunds by status @pro" time="0">
-<skipped>
-</skipped>
-</testcase>
-<testcase name="refunds api test approve a refund @pro" classname="refunds.spec.ts › refunds api test › approve a refund @pro" time="0">
-<skipped>
-</skipped>
-</testcase>
-<testcase name="refunds api test cancel a refund @pro" classname="refunds.spec.ts › refunds api test › cancel a refund @pro" time="0">
-<skipped>
-</skipped>
-</testcase>
-<testcase name="refunds api test delete a refund @pro" classname="refunds.spec.ts › refunds api test › delete a refund @pro" time="0">
-<skipped>
-</skipped>
-</testcase>
-<testcase name="refunds api test update batch refunds @pro" classname="refunds.spec.ts › refunds api test › update batch refunds @pro" time="0">
-<skipped>
-</skipped>
-</testcase>
-</testsuite>
-<testsuite name="reports.spec.ts" timestamp="1671792977195" hostname="" tests="4" failures="0" skipped="0" time="1.016" errors="0">
-<testcase name="report api test get sales overview report" classname="reports.spec.ts › report api test › get sales overview report" time="0.256">
-</testcase>
-<testcase name="report api test get summary report" classname="reports.spec.ts › report api test › get summary report" time="0.251">
-</testcase>
-<testcase name="report api test get top earners report" classname="reports.spec.ts › report api test › get top earners report" time="0.25">
-</testcase>
-<testcase name="report api test get top selling products report " classname="reports.spec.ts › report api test › get top selling products report " time="0.259">
-</testcase>
-</testsuite>
-<testsuite name="reverseWithdrawal.spec.ts" timestamp="1671792977195" hostname="" tests="4" failures="0" skipped="3" time="0.233" errors="0">
-<testcase name="reverse withdrawal api test get reverse withdrawal transaction types" classname="reverseWithdrawal.spec.ts › reverse withdrawal api test › get reverse withdrawal transaction types" time="0.233">
-</testcase>
-<testcase name="reverse withdrawal api test get all reverse withdrawal stores" classname="reverseWithdrawal.spec.ts › reverse withdrawal api test › get all reverse withdrawal stores" time="0">
-<skipped>
-</skipped>
-</testcase>
-<testcase name="reverse withdrawal api test get all reverse withdrawal store balance" classname="reverseWithdrawal.spec.ts › reverse withdrawal api test › get all reverse withdrawal store balance" time="0">
-<skipped>
-</skipped>
-</testcase>
-<testcase name="reverse withdrawal api test getAllReverseWithdrawalTransactions" classname="reverseWithdrawal.spec.ts › reverse withdrawal api test › getAllReverseWithdrawalTransactions" time="0">
-<skipped>
-</skipped>
-</testcase>
-</testsuite>
-<testsuite name="roles.spec.ts" timestamp="1671792977195" hostname="" tests="1" failures="0" skipped="0" time="0.256" errors="0">
-<testcase name="roles api test get all user roles " classname="roles.spec.ts › roles api test › get all user roles " time="0.256">
-</testcase>
-</testsuite>
-<testsuite name="settings.spec.ts" timestamp="1671792977195" hostname="" tests="2" failures="0" skipped="0" time="0.498" errors="0">
-<testcase name="settings api test get settings" classname="settings.spec.ts › settings api test › get settings" time="0.26">
-</testcase>
-<testcase name="settings api test update settings" classname="settings.spec.ts › settings api test › update settings" time="0.238">
-</testcase>
-</testsuite>
-<testsuite name="storeCategories.spec.ts" timestamp="1671792977195" hostname="" tests="7" failures="0" skipped="7" time="0" errors="0">
-<testcase name="store categories api test get default store category @pro" classname="storeCategories.spec.ts › store categories api test › get default store category @pro" time="0">
-<skipped>
-</skipped>
-</testcase>
-<testcase name="store categories api test get all store categories @pro" classname="storeCategories.spec.ts › store categories api test › get all store categories @pro" time="0">
-<skipped>
-</skipped>
-</testcase>
-<testcase name="store categories api test get single store category @pro" classname="storeCategories.spec.ts › store categories api test › get single store category @pro" time="0">
-<skipped>
-</skipped>
-</testcase>
-<testcase name="store categories api test create a store category @pro" classname="storeCategories.spec.ts › store categories api test › create a store category @pro" time="0">
-<skipped>
-</skipped>
-</testcase>
-<testcase name="store categories api test update a store category @pro" classname="storeCategories.spec.ts › store categories api test › update a store category @pro" time="0">
-<skipped>
-</skipped>
-</testcase>
-<testcase name="store categories api test delete a store category @pro" classname="storeCategories.spec.ts › store categories api test › delete a store category @pro" time="0">
-<skipped>
-</skipped>
-</testcase>
-<testcase name="store categories api test set default store category @pro" classname="storeCategories.spec.ts › store categories api test › set default store category @pro" time="0">
-<skipped>
-</skipped>
-</testcase>
-</testsuite>
-<testsuite name="storeReviews.spec.ts" timestamp="1671792977195" hostname="" tests="6" failures="0" skipped="0" time="1.993" errors="0">
-<testcase name="store reviews api test get all store reviews @pro" classname="storeReviews.spec.ts › store reviews api test › get all store reviews @pro" time="0.249">
-</testcase>
-<testcase name="store reviews api test get single store review @pro" classname="storeReviews.spec.ts › store reviews api test › get single store review @pro" time="0.281">
-</testcase>
-<testcase name="store reviews api test update a store review @pro" classname="storeReviews.spec.ts › store reviews api test › update a store review @pro" time="0.26">
-</testcase>
-<testcase name="store reviews api test delete a store review  @pro" classname="storeReviews.spec.ts › store reviews api test › delete a store review  @pro" time="0.258">
-</testcase>
-<testcase name="store reviews api test restore a deleted store review  @pro" classname="storeReviews.spec.ts › store reviews api test › restore a deleted store review  @pro" time="0.244">
-</testcase>
-<testcase name="store reviews api test update batch store review @pro" classname="storeReviews.spec.ts › store reviews api test › update batch store review @pro" time="0.701">
-</testcase>
-</testsuite>
-<testsuite name="stores.spec.ts" timestamp="1671792977195" hostname="" tests="16" failures="0" skipped="0" time="5.352" errors="0">
-<testcase name="stores api test get store availability status" classname="stores.spec.ts › stores api test › get store availability status" time="0.225">
-</testcase>
-<testcase name="stores api test get all stores" classname="stores.spec.ts › stores api test › get all stores" time="0.227">
-</testcase>
-<testcase name="stores api test get single store" classname="stores.spec.ts › stores api test › get single store" time="0.249">
-</testcase>
-<testcase name="stores api test create a store" classname="stores.spec.ts › stores api test › create a store" time="0.296">
-</testcase>
-<testcase name="stores api test update a store" classname="stores.spec.ts › stores api test › update a store" time="0.257">
-</testcase>
-<testcase name="stores api test delete a store" classname="stores.spec.ts › stores api test › delete a store" time="0.55">
-</testcase>
-<testcase name="stores api test get store current visitor" classname="stores.spec.ts › stores api test › get store current visitor" time="0.238">
-</testcase>
-<testcase name="stores api test get store stats" classname="stores.spec.ts › stores api test › get store stats" time="0.253">
-</testcase>
-<testcase name="stores api test get store categories" classname="stores.spec.ts › stores api test › get store categories" time="0.233">
-</testcase>
-<testcase name="stores api test get store products" classname="stores.spec.ts › stores api test › get store products" time="0.895">
-</testcase>
-<testcase name="stores api test get store reviews" classname="stores.spec.ts › stores api test › get store reviews" time="0.231">
-</testcase>
-<testcase name="stores api test create a store review" classname="stores.spec.ts › stores api test › create a store review" time="0.261">
-</testcase>
-<testcase name="stores api test update a store status" classname="stores.spec.ts › stores api test › update a store status" time="0.274">
-</testcase>
-<testcase name="stores api test admin contact store" classname="stores.spec.ts › stores api test › admin contact store" time="0.279">
-</testcase>
-<testcase name="stores api test admin email store" classname="stores.spec.ts › stores api test › admin email store" time="0.254">
-</testcase>
-<testcase name="stores api test update batch stores" classname="stores.spec.ts › stores api test › update batch stores" time="0.63">
-</testcase>
-</testsuite>
-<testsuite name="supportTickets.spec.ts" timestamp="1671792977195" hostname="" tests="8" failures="0" skipped="8" time="0" errors="0">
-<testcase name="support ticket api test get all support ticket customers" classname="supportTickets.spec.ts › support ticket api test › get all support ticket customers" time="0">
-<skipped>
-</skipped>
-</testcase>
-<testcase name="support ticket api test get all support tickets" classname="supportTickets.spec.ts › support ticket api test › get all support tickets" time="0">
-<skipped>
-</skipped>
-</testcase>
-<testcase name="support ticket api test get single support ticket" classname="supportTickets.spec.ts › support ticket api test › get single support ticket" time="0">
-<skipped>
-</skipped>
-</testcase>
-<testcase name="support ticket api test create a support ticket comment" classname="supportTickets.spec.ts › support ticket api test › create a support ticket comment" time="0">
-<skipped>
-</skipped>
-</testcase>
-<testcase name="support ticket api test update support ticket status" classname="supportTickets.spec.ts › support ticket api test › update support ticket status" time="0">
-<skipped>
-</skipped>
-</testcase>
-<testcase name="support ticket api test update a support ticket email notification" classname="supportTickets.spec.ts › support ticket api test › update a support ticket email notification" time="0">
-<skipped>
-</skipped>
-</testcase>
-<testcase name="support ticket api test delete a support ticket comment" classname="supportTickets.spec.ts › support ticket api test › delete a support ticket comment" time="0">
-<skipped>
-</skipped>
-</testcase>
-<testcase name="support ticket api test update batch support tickets" classname="supportTickets.spec.ts › support ticket api test › update batch support tickets" time="0">
-<skipped>
-</skipped>
-</testcase>
-</testsuite>
-<testsuite name="wholesaleCustomers.spec.ts" timestamp="1671792977195" hostname="" tests="5" failures="0" skipped="0" time="1.862" errors="0">
-<testcase name="wholesale customers api test get all wholesale customers @pro" classname="wholesaleCustomers.spec.ts › wholesale customers api test › get all wholesale customers @pro" time="0.253">
-</testcase>
-<testcase name="wholesale customers api test create a wholesale customer @pro" classname="wholesaleCustomers.spec.ts › wholesale customers api test › create a wholesale customer @pro" time="0.592">
-</testcase>
-<testcase name="wholesale customers api test update a wholesale customer @pro" classname="wholesaleCustomers.spec.ts › wholesale customers api test › update a wholesale customer @pro" time="0.251">
-</testcase>
-<testcase name="wholesale customers api test delete a wholesale customer @pro" classname="wholesaleCustomers.spec.ts › wholesale customers api test › delete a wholesale customer @pro" time="0.267">
-</testcase>
-<testcase name="wholesale customers api test update batch wholesale customers @pro" classname="wholesaleCustomers.spec.ts › wholesale customers api test › update batch wholesale customers @pro" time="0.499">
-</testcase>
-</testsuite>
-<testsuite name="withdraws.spec.ts" timestamp="1671792977195" hostname="" tests="8" failures="0" skipped="0" time="2.294" errors="0">
-<testcase name="withdraw api test get balance details" classname="withdraws.spec.ts › withdraw api test › get balance details" time="0.243">
-</testcase>
-<testcase name="withdraw api test get all withdraws" classname="withdraws.spec.ts › withdraw api test › get all withdraws" time="0.257">
-</testcase>
-<testcase name="withdraw api test get all withdraws by status" classname="withdraws.spec.ts › withdraw api test › get all withdraws by status" time="0.27">
-</testcase>
-<testcase name="withdraw api test get single withdraw" classname="withdraws.spec.ts › withdraw api test › get single withdraw" time="0.246">
-</testcase>
-<testcase name="withdraw api test create a withdraw" classname="withdraws.spec.ts › withdraw api test › create a withdraw" time="0.261">
-</testcase>
-<testcase name="withdraw api test update a withdraw" classname="withdraws.spec.ts › withdraw api test › update a withdraw" time="0.261">
-</testcase>
-<testcase name="withdraw api test cancel a withdraw" classname="withdraws.spec.ts › withdraw api test › cancel a withdraw" time="0.246">
-</testcase>
-<testcase name="withdraw api test update batch withdraws" classname="withdraws.spec.ts › withdraw api test › update batch withdraws" time="0.51">
+<testsuite name="v2/v1productAttribute.spec.ts" timestamp="1671996383548" hostname="" tests="1" failures="1" skipped="0" time="1.824" errors="0">
+<testcase name="product attribute api test set default attribute" classname="v2/v1productAttribute.spec.ts › product attribute api test › set default attribute" time="1.824">
+<failure message="v1productAttribute.spec.ts:27:10 set default attribute" type="FAILURE">
+<![CDATA[  v2/v1productAttribute.spec.ts:27:10 › product attribute api test › set default attribute =========
+
+    Error: expect(received).toBeTruthy()
+
+    Received: false
+
+      38 |         let response = await request.put(endPoints.setDefaultAttribute(productId), { data: { attributes: [payload] } })
+      39 |         let responseBody = await apiUtils.getResponseBody(response)
+    > 40 |         expect(response.ok()).toBeTruthy()
+         |                               ^
+      41 |     });
+      42 |
+      43 |     test('update product attribute', async ({ request }) => {
+
+        at /home/runner/work/dokan/dokan/tests/api/tests/v2/v1productAttribute.spec.ts:40:31
+
+    Retry #1 ---------------------------------------------------------------------------------------
+
+    Error: expect(received).toBeTruthy()
+
+    Received: false
+
+      38 |         let response = await request.put(endPoints.setDefaultAttribute(productId), { data: { attributes: [payload] } })
+      39 |         let responseBody = await apiUtils.getResponseBody(response)
+    > 40 |         expect(response.ok()).toBeTruthy()
+         |                               ^
+      41 |     });
+      42 |
+      43 |     test('update product attribute', async ({ request }) => {
+
+        at /home/runner/work/dokan/dokan/tests/api/tests/v2/v1productAttribute.spec.ts:40:31
+
+    Retry #2 ---------------------------------------------------------------------------------------
+
+    Error: expect(received).toBeTruthy()
+
+    Received: false
+
+      38 |         let response = await request.put(endPoints.setDefaultAttribute(productId), { data: { attributes: [payload] } })
+      39 |         let responseBody = await apiUtils.getResponseBody(response)
+    > 40 |         expect(response.ok()).toBeTruthy()
+         |                               ^
+      41 |     });
+      42 |
+      43 |     test('update product attribute', async ({ request }) => {
+
+        at /home/runner/work/dokan/dokan/tests/api/tests/v2/v1productAttribute.spec.ts:40:31
+]]>
+</failure>
+<system-out>
+<![CDATA[ResponseBody:  {
+  code: [32m'invalid_request'[39m,
+  message: [32m'Error! Your account is not enabled for selling, please contact the admin'[39m,
+  data: { status: [33m400[39m }
+}
+ResponseBody:  {
+  id: [33m4[39m,
+  name: [32m'Test_attribute_ihrjcndo'[39m,
+  slug: [32m'pa_test_attribute_ihrjcndo'[39m,
+  type: [32m'select'[39m,
+  order_by: [32m'menu_order'[39m,
+  has_archives: [33mfalse[39m,
+  _links: { self: [ [36m[Object][39m ], collection: [ [36m[Object][39m ] }
+}
+ResponseBody:  {
+  id: [33m22[39m,
+  name: [32m'Test_attributeTerm_jfuihuls'[39m,
+  slug: [32m'test_attributeterm_jfuihuls'[39m,
+  description: [32m''[39m,
+  menu_order: [33m0[39m,
+  count: [33m0[39m,
+  _links: { self: [ [36m[Object][39m ], collection: [ [36m[Object][39m ] }
+}
+ResponseBody:  {
+  id: [33m4[39m,
+  name: [32m'Test_attribute_ihrjcndo'[39m,
+  slug: [32m'pa_test_attribute_ihrjcndo'[39m,
+  type: [32m'select'[39m,
+  order_by: [32m'menu_order'[39m,
+  has_archives: [33mfalse[39m,
+  _links: { self: [ [36m[Object][39m ], collection: [ [36m[Object][39m ] }
+}
+ResponseBody:  {
+  id: [33m22[39m,
+  name: [32m'Test_attributeTerm_jfuihuls'[39m,
+  slug: [32m'test_attributeterm_jfuihuls'[39m,
+  description: [32m''[39m,
+  menu_order: [33m0[39m,
+  count: [33m0[39m,
+  _links: { self: [ [36m[Object][39m ], collection: [ [36m[Object][39m ] }
+}
+payload {
+  id: [33m4[39m,
+  name: [32m'Test_attribute_ihrjcndo'[39m,
+  option: [32m'Test_attributeTerm_jfuihuls'[39m,
+  options: []
+}
+ResponseBody:  {
+  code: [32m'rest_no_route'[39m,
+  message: [32m'No route was found matching the URL and request method.'[39m,
+  data: { status: [33m404[39m }
+}
+ResponseBody:  {
+  code: [32m'invalid_request'[39m,
+  message: [32m'Error! Your account is not enabled for selling, please contact the admin'[39m,
+  data: { status: [33m400[39m }
+}
+ResponseBody:  {
+  id: [33m5[39m,
+  name: [32m'Test_attribute_eioavxqd'[39m,
+  slug: [32m'pa_test_attribute_eioavxqd'[39m,
+  type: [32m'select'[39m,
+  order_by: [32m'menu_order'[39m,
+  has_archives: [33mfalse[39m,
+  _links: { self: [ [36m[Object][39m ], collection: [ [36m[Object][39m ] }
+}
+ResponseBody:  {
+  id: [33m23[39m,
+  name: [32m'Test_attributeTerm_qimlaztc'[39m,
+  slug: [32m'test_attributeterm_qimlaztc'[39m,
+  description: [32m''[39m,
+  menu_order: [33m0[39m,
+  count: [33m0[39m,
+  _links: { self: [ [36m[Object][39m ], collection: [ [36m[Object][39m ] }
+}
+ResponseBody:  {
+  id: [33m5[39m,
+  name: [32m'Test_attribute_eioavxqd'[39m,
+  slug: [32m'pa_test_attribute_eioavxqd'[39m,
+  type: [32m'select'[39m,
+  order_by: [32m'menu_order'[39m,
+  has_archives: [33mfalse[39m,
+  _links: { self: [ [36m[Object][39m ], collection: [ [36m[Object][39m ] }
+}
+ResponseBody:  {
+  id: [33m23[39m,
+  name: [32m'Test_attributeTerm_qimlaztc'[39m,
+  slug: [32m'test_attributeterm_qimlaztc'[39m,
+  description: [32m''[39m,
+  menu_order: [33m0[39m,
+  count: [33m0[39m,
+  _links: { self: [ [36m[Object][39m ], collection: [ [36m[Object][39m ] }
+}
+payload {
+  id: [33m5[39m,
+  name: [32m'Test_attribute_eioavxqd'[39m,
+  option: [32m'Test_attributeTerm_qimlaztc'[39m,
+  options: []
+}
+ResponseBody:  {
+  code: [32m'rest_no_route'[39m,
+  message: [32m'No route was found matching the URL and request method.'[39m,
+  data: { status: [33m404[39m }
+}
+ResponseBody:  {
+  code: [32m'invalid_request'[39m,
+  message: [32m'Error! Your account is not enabled for selling, please contact the admin'[39m,
+  data: { status: [33m400[39m }
+}
+ResponseBody:  {
+  id: [33m6[39m,
+  name: [32m'Test_attribute_sxdgahim'[39m,
+  slug: [32m'pa_test_attribute_sxdgahim'[39m,
+  type: [32m'select'[39m,
+  order_by: [32m'menu_order'[39m,
+  has_archives: [33mfalse[39m,
+  _links: { self: [ [36m[Object][39m ], collection: [ [36m[Object][39m ] }
+}
+ResponseBody:  {
+  id: [33m24[39m,
+  name: [32m'Test_attributeTerm_siwdlrwx'[39m,
+  slug: [32m'test_attributeterm_siwdlrwx'[39m,
+  description: [32m''[39m,
+  menu_order: [33m0[39m,
+  count: [33m0[39m,
+  _links: { self: [ [36m[Object][39m ], collection: [ [36m[Object][39m ] }
+}
+ResponseBody:  {
+  id: [33m6[39m,
+  name: [32m'Test_attribute_sxdgahim'[39m,
+  slug: [32m'pa_test_attribute_sxdgahim'[39m,
+  type: [32m'select'[39m,
+  order_by: [32m'menu_order'[39m,
+  has_archives: [33mfalse[39m,
+  _links: { self: [ [36m[Object][39m ], collection: [ [36m[Object][39m ] }
+}
+ResponseBody:  {
+  id: [33m24[39m,
+  name: [32m'Test_attributeTerm_siwdlrwx'[39m,
+  slug: [32m'test_attributeterm_siwdlrwx'[39m,
+  description: [32m''[39m,
+  menu_order: [33m0[39m,
+  count: [33m0[39m,
+  _links: { self: [ [36m[Object][39m ], collection: [ [36m[Object][39m ] }
+}
+payload {
+  id: [33m6[39m,
+  name: [32m'Test_attribute_sxdgahim'[39m,
+  option: [32m'Test_attributeTerm_siwdlrwx'[39m,
+  options: []
+}
+ResponseBody:  {
+  code: [32m'rest_no_route'[39m,
+  message: [32m'No route was found matching the URL and request method.'[39m,
+  data: { status: [33m404[39m }
+}
+]]>
+</system-out>
 </testcase>
 </testsuite>
 </testsuites>
