@@ -1,6 +1,6 @@
-<testsuites id="" name="" tests="2" failures="2" skipped="0" errors="0" time="22.10149900000001">
-<testsuite name="v2/orderDownloads.spec.ts" timestamp="1671996383548" hostname="" tests="1" failures="1" skipped="0" time="0.622" errors="0">
-<testcase name="order downloads api test create order downloads" classname="v2/orderDownloads.spec.ts › order downloads api test › create order downloads" time="0.622">
+<testsuites id="" name="" tests="2" failures="2" skipped="0" errors="0" time="19.367931999999914">
+<testsuite name="v2/orderDownloads.spec.ts" timestamp="1672070682072" hostname="" tests="1" failures="1" skipped="0" time="0.544" errors="0">
+<testcase name="order downloads api test create order downloads" classname="v2/orderDownloads.spec.ts › order downloads api test › create order downloads" time="0.544">
 <failure message="orderDownloads.spec.ts:37:10 create order downloads" type="FAILURE">
 <![CDATA[  v2/orderDownloads.spec.ts:37:10 › order downloads api test › create order downloads ==============
 
@@ -64,8 +64,8 @@ ResponseBody:  {
 }
 ResponseBody:  {
   id: [33m1[39m,
-  name: [32m'Test_attribute_qtjuoxeh'[39m,
-  slug: [32m'pa_test_attribute_qtjuoxeh'[39m,
+  name: [32m'Test_attribute_sdmccxdw'[39m,
+  slug: [32m'pa_test_attribute_sdmccxdw'[39m,
   type: [32m'select'[39m,
   order_by: [32m'menu_order'[39m,
   has_archives: [33mfalse[39m,
@@ -73,8 +73,8 @@ ResponseBody:  {
 }
 ResponseBody:  {
   id: [33m19[39m,
-  name: [32m'Test_attributeTerm_bejqsdnn'[39m,
-  slug: [32m'test_attributeterm_bejqsdnn'[39m,
+  name: [32m'Test_attributeTerm_czthzzfj'[39m,
+  slug: [32m'test_attributeterm_czthzzfj'[39m,
   description: [32m''[39m,
   menu_order: [33m0[39m,
   count: [33m0[39m,
@@ -117,8 +117,8 @@ ResponseBody:  {
 }
 ResponseBody:  {
   id: [33m2[39m,
-  name: [32m'Test_attribute_gwtyqgnz'[39m,
-  slug: [32m'pa_test_attribute_gwtyqgnz'[39m,
+  name: [32m'Test_attribute_zfytdxps'[39m,
+  slug: [32m'pa_test_attribute_zfytdxps'[39m,
   type: [32m'select'[39m,
   order_by: [32m'menu_order'[39m,
   has_archives: [33mfalse[39m,
@@ -126,8 +126,8 @@ ResponseBody:  {
 }
 ResponseBody:  {
   id: [33m20[39m,
-  name: [32m'Test_attributeTerm_ungimuhw'[39m,
-  slug: [32m'test_attributeterm_ungimuhw'[39m,
+  name: [32m'Test_attributeTerm_pdqnuuzq'[39m,
+  slug: [32m'test_attributeterm_pdqnuuzq'[39m,
   description: [32m''[39m,
   menu_order: [33m0[39m,
   count: [33m0[39m,
@@ -170,8 +170,8 @@ ResponseBody:  {
 }
 ResponseBody:  {
   id: [33m3[39m,
-  name: [32m'Test_attribute_ozvmprli'[39m,
-  slug: [32m'pa_test_attribute_ozvmprli'[39m,
+  name: [32m'Test_attribute_wepydbgx'[39m,
+  slug: [32m'pa_test_attribute_wepydbgx'[39m,
   type: [32m'select'[39m,
   order_by: [32m'menu_order'[39m,
   has_archives: [33mfalse[39m,
@@ -179,8 +179,8 @@ ResponseBody:  {
 }
 ResponseBody:  {
   id: [33m21[39m,
-  name: [32m'Test_attributeTerm_akzmxdsy'[39m,
-  slug: [32m'test_attributeterm_akzmxdsy'[39m,
+  name: [32m'Test_attributeTerm_pyytonwt'[39m,
+  slug: [32m'test_attributeterm_pyytonwt'[39m,
   description: [32m''[39m,
   menu_order: [33m0[39m,
   count: [33m0[39m,
@@ -215,8 +215,8 @@ ResponseBody:  {
 </system-out>
 </testcase>
 </testsuite>
-<testsuite name="v2/v1productAttribute.spec.ts" timestamp="1671996383548" hostname="" tests="1" failures="1" skipped="0" time="1.824" errors="0">
-<testcase name="product attribute api test set default attribute" classname="v2/v1productAttribute.spec.ts › product attribute api test › set default attribute" time="1.824">
+<testsuite name="v2/v1productAttribute.spec.ts" timestamp="1672070682072" hostname="" tests="1" failures="1" skipped="0" time="1.576" errors="0">
+<testcase name="product attribute api test set default attribute" classname="v2/v1productAttribute.spec.ts › product attribute api test › set default attribute" time="1.576">
 <failure message="v1productAttribute.spec.ts:27:10 set default attribute" type="FAILURE">
 <![CDATA[  v2/v1productAttribute.spec.ts:27:10 › product attribute api test › set default attribute =========
 
@@ -275,8 +275,8 @@ ResponseBody:  {
 }
 ResponseBody:  {
   id: [33m4[39m,
-  name: [32m'Test_attribute_ihrjcndo'[39m,
-  slug: [32m'pa_test_attribute_ihrjcndo'[39m,
+  name: [32m'Test_attribute_cuygwffo'[39m,
+  slug: [32m'pa_test_attribute_cuygwffo'[39m,
   type: [32m'select'[39m,
   order_by: [32m'menu_order'[39m,
   has_archives: [33mfalse[39m,
@@ -284,8 +284,8 @@ ResponseBody:  {
 }
 ResponseBody:  {
   id: [33m22[39m,
-  name: [32m'Test_attributeTerm_jfuihuls'[39m,
-  slug: [32m'test_attributeterm_jfuihuls'[39m,
+  name: [32m'Test_attributeTerm_oenbfnxk'[39m,
+  slug: [32m'test_attributeterm_oenbfnxk'[39m,
   description: [32m''[39m,
   menu_order: [33m0[39m,
   count: [33m0[39m,
@@ -293,8 +293,8 @@ ResponseBody:  {
 }
 ResponseBody:  {
   id: [33m4[39m,
-  name: [32m'Test_attribute_ihrjcndo'[39m,
-  slug: [32m'pa_test_attribute_ihrjcndo'[39m,
+  name: [32m'Test_attribute_cuygwffo'[39m,
+  slug: [32m'pa_test_attribute_cuygwffo'[39m,
   type: [32m'select'[39m,
   order_by: [32m'menu_order'[39m,
   has_archives: [33mfalse[39m,
@@ -302,8 +302,8 @@ ResponseBody:  {
 }
 ResponseBody:  {
   id: [33m22[39m,
-  name: [32m'Test_attributeTerm_jfuihuls'[39m,
-  slug: [32m'test_attributeterm_jfuihuls'[39m,
+  name: [32m'Test_attributeTerm_oenbfnxk'[39m,
+  slug: [32m'test_attributeterm_oenbfnxk'[39m,
   description: [32m''[39m,
   menu_order: [33m0[39m,
   count: [33m0[39m,
@@ -311,8 +311,8 @@ ResponseBody:  {
 }
 payload {
   id: [33m4[39m,
-  name: [32m'Test_attribute_ihrjcndo'[39m,
-  option: [32m'Test_attributeTerm_jfuihuls'[39m,
+  name: [32m'Test_attribute_cuygwffo'[39m,
+  option: [32m'Test_attributeTerm_oenbfnxk'[39m,
   options: []
 }
 ResponseBody:  {
@@ -327,8 +327,8 @@ ResponseBody:  {
 }
 ResponseBody:  {
   id: [33m5[39m,
-  name: [32m'Test_attribute_eioavxqd'[39m,
-  slug: [32m'pa_test_attribute_eioavxqd'[39m,
+  name: [32m'Test_attribute_icnpgntd'[39m,
+  slug: [32m'pa_test_attribute_icnpgntd'[39m,
   type: [32m'select'[39m,
   order_by: [32m'menu_order'[39m,
   has_archives: [33mfalse[39m,
@@ -336,8 +336,8 @@ ResponseBody:  {
 }
 ResponseBody:  {
   id: [33m23[39m,
-  name: [32m'Test_attributeTerm_qimlaztc'[39m,
-  slug: [32m'test_attributeterm_qimlaztc'[39m,
+  name: [32m'Test_attributeTerm_zugvvbah'[39m,
+  slug: [32m'test_attributeterm_zugvvbah'[39m,
   description: [32m''[39m,
   menu_order: [33m0[39m,
   count: [33m0[39m,
@@ -345,8 +345,8 @@ ResponseBody:  {
 }
 ResponseBody:  {
   id: [33m5[39m,
-  name: [32m'Test_attribute_eioavxqd'[39m,
-  slug: [32m'pa_test_attribute_eioavxqd'[39m,
+  name: [32m'Test_attribute_icnpgntd'[39m,
+  slug: [32m'pa_test_attribute_icnpgntd'[39m,
   type: [32m'select'[39m,
   order_by: [32m'menu_order'[39m,
   has_archives: [33mfalse[39m,
@@ -354,8 +354,8 @@ ResponseBody:  {
 }
 ResponseBody:  {
   id: [33m23[39m,
-  name: [32m'Test_attributeTerm_qimlaztc'[39m,
-  slug: [32m'test_attributeterm_qimlaztc'[39m,
+  name: [32m'Test_attributeTerm_zugvvbah'[39m,
+  slug: [32m'test_attributeterm_zugvvbah'[39m,
   description: [32m''[39m,
   menu_order: [33m0[39m,
   count: [33m0[39m,
@@ -363,8 +363,8 @@ ResponseBody:  {
 }
 payload {
   id: [33m5[39m,
-  name: [32m'Test_attribute_eioavxqd'[39m,
-  option: [32m'Test_attributeTerm_qimlaztc'[39m,
+  name: [32m'Test_attribute_icnpgntd'[39m,
+  option: [32m'Test_attributeTerm_zugvvbah'[39m,
   options: []
 }
 ResponseBody:  {
@@ -379,8 +379,8 @@ ResponseBody:  {
 }
 ResponseBody:  {
   id: [33m6[39m,
-  name: [32m'Test_attribute_sxdgahim'[39m,
-  slug: [32m'pa_test_attribute_sxdgahim'[39m,
+  name: [32m'Test_attribute_qlzhliyz'[39m,
+  slug: [32m'pa_test_attribute_qlzhliyz'[39m,
   type: [32m'select'[39m,
   order_by: [32m'menu_order'[39m,
   has_archives: [33mfalse[39m,
@@ -388,8 +388,8 @@ ResponseBody:  {
 }
 ResponseBody:  {
   id: [33m24[39m,
-  name: [32m'Test_attributeTerm_siwdlrwx'[39m,
-  slug: [32m'test_attributeterm_siwdlrwx'[39m,
+  name: [32m'Test_attributeTerm_oqthnpfk'[39m,
+  slug: [32m'test_attributeterm_oqthnpfk'[39m,
   description: [32m''[39m,
   menu_order: [33m0[39m,
   count: [33m0[39m,
@@ -397,8 +397,8 @@ ResponseBody:  {
 }
 ResponseBody:  {
   id: [33m6[39m,
-  name: [32m'Test_attribute_sxdgahim'[39m,
-  slug: [32m'pa_test_attribute_sxdgahim'[39m,
+  name: [32m'Test_attribute_qlzhliyz'[39m,
+  slug: [32m'pa_test_attribute_qlzhliyz'[39m,
   type: [32m'select'[39m,
   order_by: [32m'menu_order'[39m,
   has_archives: [33mfalse[39m,
@@ -406,8 +406,8 @@ ResponseBody:  {
 }
 ResponseBody:  {
   id: [33m24[39m,
-  name: [32m'Test_attributeTerm_siwdlrwx'[39m,
-  slug: [32m'test_attributeterm_siwdlrwx'[39m,
+  name: [32m'Test_attributeTerm_oqthnpfk'[39m,
+  slug: [32m'test_attributeterm_oqthnpfk'[39m,
   description: [32m''[39m,
   menu_order: [33m0[39m,
   count: [33m0[39m,
@@ -415,8 +415,8 @@ ResponseBody:  {
 }
 payload {
   id: [33m6[39m,
-  name: [32m'Test_attribute_sxdgahim'[39m,
-  option: [32m'Test_attributeTerm_siwdlrwx'[39m,
+  name: [32m'Test_attribute_qlzhliyz'[39m,
+  option: [32m'Test_attributeTerm_oqthnpfk'[39m,
   options: []
 }
 ResponseBody:  {
