@@ -1,6 +1,6 @@
-<testsuites id="" name="" tests="198" failures="147" skipped="44" errors="0" time="684.277434">
-<testsuite name="_setup.spec.ts" timestamp="1674072665788" hostname="" tests="3" failures="3" skipped="0" time="1.636" errors="0">
-<testcase name=" api test setup test store settings" classname="_setup.spec.ts ›  api test › setup test store settings" time="0.701">
+<testsuites id="" name="" tests="198" failures="141" skipped="44" errors="0" time="676.9579689999999">
+<testsuite name="_setup.spec.ts" timestamp="1674073035097" hostname="" tests="3" failures="3" skipped="0" time="1.824" errors="0">
+<testcase name=" api test setup test store settings" classname="_setup.spec.ts ›  api test › setup test store settings" time="0.776">
 <failure message="_setup.spec.ts:19:9 setup test store settings" type="FAILURE">
 <![CDATA[  _setup.spec.ts:19:9 ›  api test › setup test store settings ======================================
 
@@ -52,7 +52,7 @@
 ]]>
 </failure>
 </testcase>
-<testcase name=" api test create test customer" classname="_setup.spec.ts ›  api test › create test customer" time="0.485">
+<testcase name=" api test create test customer" classname="_setup.spec.ts ›  api test › create test customer" time="0.531">
 <failure message="_setup.spec.ts:25:9 create test customer" type="FAILURE">
 <![CDATA[  _setup.spec.ts:25:9 ›  api test › create test customer ===========================================
 
@@ -104,7 +104,7 @@
 ]]>
 </failure>
 </testcase>
-<testcase name=" api test create test vendor" classname="_setup.spec.ts ›  api test › create test vendor" time="0.45">
+<testcase name=" api test create test vendor" classname="_setup.spec.ts ›  api test › create test vendor" time="0.517">
 <failure message="_setup.spec.ts:31:9 create test vendor" type="FAILURE">
 <![CDATA[  _setup.spec.ts:31:9 ›  api test › create test vendor =============================================
 
@@ -157,8 +157,8 @@
 </failure>
 </testcase>
 </testsuite>
-<testsuite name="abuseReports.spec.ts" timestamp="1674072665788" hostname="" tests="4" failures="2" skipped="2" time="0.893" errors="0">
-<testcase name="abuse report api test get all abuse report reasons @pro" classname="abuseReports.spec.ts › abuse report api test › get all abuse report reasons @pro" time="0.447">
+<testsuite name="abuseReports.spec.ts" timestamp="1674073035097" hostname="" tests="4" failures="2" skipped="2" time="0.979" errors="0">
+<testcase name="abuse report api test get all abuse report reasons @pro" classname="abuseReports.spec.ts › abuse report api test › get all abuse report reasons @pro" time="0.484">
 <failure message="abuseReports.spec.ts:18:9 get all abuse report reasons @pro" type="FAILURE">
 <![CDATA[  abuseReports.spec.ts:18:9 › abuse report api test › get all abuse report reasons @pro ============
 
@@ -210,7 +210,7 @@
 ]]>
 </failure>
 </testcase>
-<testcase name="abuse report api test get all abuse reports @pro" classname="abuseReports.spec.ts › abuse report api test › get all abuse reports @pro" time="0.445">
+<testcase name="abuse report api test get all abuse reports @pro" classname="abuseReports.spec.ts › abuse report api test › get all abuse reports @pro" time="0.49">
 <failure message="abuseReports.spec.ts:24:9 get all abuse reports @pro" type="FAILURE">
 <![CDATA[  abuseReports.spec.ts:24:9 › abuse report api test › get all abuse reports @pro ===================
 
@@ -266,13 +266,13 @@
 <skipped>
 </skipped>
 </testcase>
-<testcase name="abuse report api test delete batch abuse reports @pro" classname="abuseReports.spec.ts › abuse report api test › delete batch abuse reports @pro" time="0.001">
+<testcase name="abuse report api test delete batch abuse reports @pro" classname="abuseReports.spec.ts › abuse report api test › delete batch abuse reports @pro" time="0.005">
 <skipped>
 </skipped>
 </testcase>
 </testsuite>
-<testsuite name="admins.spec.ts" timestamp="1674072665788" hostname="" tests="10" failures="10" skipped="0" time="4.352" errors="0">
-<testcase name="admin api test get admin report overview" classname="admins.spec.ts › admin api test › get admin report overview" time="0.432">
+<testsuite name="admins.spec.ts" timestamp="1674073035097" hostname="" tests="10" failures="10" skipped="0" time="4.795" errors="0">
+<testcase name="admin api test get admin report overview" classname="admins.spec.ts › admin api test › get admin report overview" time="0.474">
 <failure message="admins.spec.ts:19:9 get admin report overview" type="FAILURE">
 <![CDATA[  admins.spec.ts:19:9 › admin api test › get admin report overview =================================
 
@@ -324,7 +324,7 @@
 ]]>
 </failure>
 </testcase>
-<testcase name="admin api test get admin report summary" classname="admins.spec.ts › admin api test › get admin report summary" time="0.484">
+<testcase name="admin api test get admin report summary" classname="admins.spec.ts › admin api test › get admin report summary" time="0.481">
 <failure message="admins.spec.ts:25:9 get admin report summary" type="FAILURE">
 <![CDATA[  admins.spec.ts:25:9 › admin api test › get admin report summary ==================================
 
@@ -376,7 +376,7 @@
 ]]>
 </failure>
 </testcase>
-<testcase name="admin api test get admin dashboard feed" classname="admins.spec.ts › admin api test › get admin dashboard feed" time="0.433">
+<testcase name="admin api test get admin dashboard feed" classname="admins.spec.ts › admin api test › get admin dashboard feed" time="0.481">
 <failure message="admins.spec.ts:31:9 get admin dashboard feed" type="FAILURE">
 <![CDATA[  admins.spec.ts:31:9 › admin api test › get admin dashboard feed ==================================
 
@@ -428,7 +428,7 @@
 ]]>
 </failure>
 </testcase>
-<testcase name="admin api test get admin help" classname="admins.spec.ts › admin api test › get admin help" time="0.428">
+<testcase name="admin api test get admin help" classname="admins.spec.ts › admin api test › get admin help" time="0.488">
 <failure message="admins.spec.ts:37:9 get admin help" type="FAILURE">
 <![CDATA[  admins.spec.ts:37:9 › admin api test › get admin help ============================================
 
@@ -480,7 +480,7 @@
 ]]>
 </failure>
 </testcase>
-<testcase name="admin api test get changelog lite" classname="admins.spec.ts › admin api test › get changelog lite" time="0.432">
+<testcase name="admin api test get changelog lite" classname="admins.spec.ts › admin api test › get changelog lite" time="0.479">
 <failure message="admins.spec.ts:43:9 get changelog lite" type="FAILURE">
 <![CDATA[  admins.spec.ts:43:9 › admin api test › get changelog lite ========================================
 
@@ -532,7 +532,7 @@
 ]]>
 </failure>
 </testcase>
-<testcase name="admin api test get changelog pro @pro" classname="admins.spec.ts › admin api test › get changelog pro @pro" time="0.43">
+<testcase name="admin api test get changelog pro @pro" classname="admins.spec.ts › admin api test › get changelog pro @pro" time="0.482">
 <failure message="admins.spec.ts:49:9 get changelog pro @pro" type="FAILURE">
 <![CDATA[  admins.spec.ts:49:9 › admin api test › get changelog pro @pro ====================================
 
@@ -584,7 +584,7 @@
 ]]>
 </failure>
 </testcase>
-<testcase name="admin api test get getAdminNotices" classname="admins.spec.ts › admin api test › get getAdminNotices" time="0.424">
+<testcase name="admin api test get getAdminNotices" classname="admins.spec.ts › admin api test › get getAdminNotices" time="0.477">
 <failure message="admins.spec.ts:55:9 get getAdminNotices" type="FAILURE">
 <![CDATA[  admins.spec.ts:55:9 › admin api test › get getAdminNotices =======================================
 
@@ -636,7 +636,7 @@
 ]]>
 </failure>
 </testcase>
-<testcase name="admin api test get admin promo notices " classname="admins.spec.ts › admin api test › get admin promo notices " time="0.43">
+<testcase name="admin api test get admin promo notices " classname="admins.spec.ts › admin api test › get admin promo notices " time="0.48">
 <failure message="admins.spec.ts:61:9 get admin promo notices " type="FAILURE">
 <![CDATA[  admins.spec.ts:61:9 › admin api test › get admin promo notices  ==================================
 
@@ -688,7 +688,7 @@
 ]]>
 </failure>
 </testcase>
-<testcase name="admin api test get admin logs @pro" classname="admins.spec.ts › admin api test › get admin logs @pro" time="0.431">
+<testcase name="admin api test get admin logs @pro" classname="admins.spec.ts › admin api test › get admin logs @pro" time="0.47">
 <failure message="admins.spec.ts:67:9 get admin logs @pro" type="FAILURE">
 <![CDATA[  admins.spec.ts:67:9 › admin api test › get admin logs @pro =======================================
 
@@ -740,7 +740,7 @@
 ]]>
 </failure>
 </testcase>
-<testcase name="admin api test get admin export logs @pro" classname="admins.spec.ts › admin api test › get admin export logs @pro" time="0.428">
+<testcase name="admin api test get admin export logs @pro" classname="admins.spec.ts › admin api test › get admin export logs @pro" time="0.483">
 <failure message="admins.spec.ts:73:9 get admin export logs @pro" type="FAILURE">
 <![CDATA[  admins.spec.ts:73:9 › admin api test › get admin export logs @pro ================================
 
@@ -793,8 +793,8 @@
 </failure>
 </testcase>
 </testsuite>
-<testsuite name="announcements.spec.ts" timestamp="1674072665788" hostname="" tests="7" failures="7" skipped="0" time="2.208" errors="0">
-<testcase name="announcements api test get all announcements @pro" classname="announcements.spec.ts › announcements api test › get all announcements @pro" time="0.319">
+<testsuite name="announcements.spec.ts" timestamp="1674073035097" hostname="" tests="7" failures="7" skipped="0" time="2.563" errors="0">
+<testcase name="announcements api test get all announcements @pro" classname="announcements.spec.ts › announcements api test › get all announcements @pro" time="0.376">
 <failure message="announcements.spec.ts:21:9 get all announcements @pro" type="FAILURE">
 <![CDATA[  announcements.spec.ts:21:9 › announcements api test › get all announcements @pro =================
 
@@ -846,7 +846,7 @@
 ]]>
 </failure>
 </testcase>
-<testcase name="announcements api test get single announcement @pro" classname="announcements.spec.ts › announcements api test › get single announcement @pro" time="0.318">
+<testcase name="announcements api test get single announcement @pro" classname="announcements.spec.ts › announcements api test › get single announcement @pro" time="0.366">
 <failure message="announcements.spec.ts:27:9 get single announcement @pro" type="FAILURE">
 <![CDATA[  announcements.spec.ts:27:9 › announcements api test › get single announcement @pro ===============
 
@@ -898,7 +898,7 @@
 ]]>
 </failure>
 </testcase>
-<testcase name="announcements api test create a announcement @pro" classname="announcements.spec.ts › announcements api test › create a announcement @pro" time="0.316">
+<testcase name="announcements api test create a announcement @pro" classname="announcements.spec.ts › announcements api test › create a announcement @pro" time="0.368">
 <failure message="announcements.spec.ts:35:9 create a announcement @pro" type="FAILURE">
 <![CDATA[  announcements.spec.ts:35:9 › announcements api test › create a announcement @pro =================
 
@@ -950,7 +950,7 @@
 ]]>
 </failure>
 </testcase>
-<testcase name="announcements api test update a announcement @pro" classname="announcements.spec.ts › announcements api test › update a announcement @pro" time="0.317">
+<testcase name="announcements api test update a announcement @pro" classname="announcements.spec.ts › announcements api test › update a announcement @pro" time="0.371">
 <failure message="announcements.spec.ts:41:9 update a announcement @pro" type="FAILURE">
 <![CDATA[  announcements.spec.ts:41:9 › announcements api test › update a announcement @pro =================
 
@@ -1002,7 +1002,7 @@
 ]]>
 </failure>
 </testcase>
-<testcase name="announcements api test delete a announcement @pro" classname="announcements.spec.ts › announcements api test › delete a announcement @pro" time="0.324">
+<testcase name="announcements api test delete a announcement @pro" classname="announcements.spec.ts › announcements api test › delete a announcement @pro" time="0.368">
 <failure message="announcements.spec.ts:49:9 delete a announcement @pro" type="FAILURE">
 <![CDATA[  announcements.spec.ts:49:9 › announcements api test › delete a announcement @pro =================
 
@@ -1054,7 +1054,7 @@
 ]]>
 </failure>
 </testcase>
-<testcase name="announcements api test restore a deleted announcement  @pro" classname="announcements.spec.ts › announcements api test › restore a deleted announcement  @pro" time="0.312">
+<testcase name="announcements api test restore a deleted announcement  @pro" classname="announcements.spec.ts › announcements api test › restore a deleted announcement  @pro" time="0.361">
 <failure message="announcements.spec.ts:57:9 restore a deleted announcement  @pro" type="FAILURE">
 <![CDATA[  announcements.spec.ts:57:9 › announcements api test › restore a deleted announcement  @pro =======
 
@@ -1106,7 +1106,7 @@
 ]]>
 </failure>
 </testcase>
-<testcase name="announcements api test update batch announcements @pro" classname="announcements.spec.ts › announcements api test › update batch announcements @pro" time="0.302">
+<testcase name="announcements api test update batch announcements @pro" classname="announcements.spec.ts › announcements api test › update batch announcements @pro" time="0.353">
 <failure message="announcements.spec.ts:66:9 update batch announcements @pro" type="FAILURE">
 <![CDATA[  announcements.spec.ts:66:9 › announcements api test › update batch announcements @pro ============
 
@@ -1153,14 +1153,14 @@
 </failure>
 </testcase>
 </testsuite>
-<testsuite name="calculation.spec.ts" timestamp="1674072665788" hostname="" tests="1" failures="0" skipped="1" time="0.001" errors="0">
+<testsuite name="calculation.spec.ts" timestamp="1674073035097" hostname="" tests="1" failures="0" skipped="1" time="0.001" errors="0">
 <testcase name="calculation test calculation test" classname="calculation.spec.ts › calculation test › calculation test" time="0.001">
 <skipped>
 </skipped>
 </testcase>
 </testsuite>
-<testsuite name="coupons.spec.ts" timestamp="1674072665788" hostname="" tests="5" failures="5" skipped="0" time="1.587" errors="0">
-<testcase name="coupon api test get all coupons" classname="coupons.spec.ts › coupon api test › get all coupons" time="0.321">
+<testsuite name="coupons.spec.ts" timestamp="1674073035097" hostname="" tests="5" failures="5" skipped="0" time="1.843" errors="0">
+<testcase name="coupon api test get all coupons" classname="coupons.spec.ts › coupon api test › get all coupons" time="0.372">
 <failure message="coupons.spec.ts:25:9 get all coupons" type="FAILURE">
 <![CDATA[  coupons.spec.ts:25:9 › coupon api test › get all coupons =========================================
 
@@ -1212,7 +1212,7 @@
 ]]>
 </failure>
 </testcase>
-<testcase name="coupon api test get single coupon" classname="coupons.spec.ts › coupon api test › get single coupon" time="0.317">
+<testcase name="coupon api test get single coupon" classname="coupons.spec.ts › coupon api test › get single coupon" time="0.363">
 <failure message="coupons.spec.ts:31:9 get single coupon" type="FAILURE">
 <![CDATA[  coupons.spec.ts:31:9 › coupon api test › get single coupon =======================================
 
@@ -1264,7 +1264,7 @@
 ]]>
 </failure>
 </testcase>
-<testcase name="coupon api test create a coupon" classname="coupons.spec.ts › coupon api test › create a coupon" time="0.322">
+<testcase name="coupon api test create a coupon" classname="coupons.spec.ts › coupon api test › create a coupon" time="0.372">
 <failure message="coupons.spec.ts:39:9 create a coupon" type="FAILURE">
 <![CDATA[  coupons.spec.ts:39:9 › coupon api test › create a coupon =========================================
 
@@ -1316,7 +1316,7 @@
 ]]>
 </failure>
 </testcase>
-<testcase name="coupon api test update a coupon" classname="coupons.spec.ts › coupon api test › update a coupon" time="0.311">
+<testcase name="coupon api test update a coupon" classname="coupons.spec.ts › coupon api test › update a coupon" time="0.369">
 <failure message="coupons.spec.ts:45:9 update a coupon" type="FAILURE">
 <![CDATA[  coupons.spec.ts:45:9 › coupon api test › update a coupon =========================================
 
@@ -1368,7 +1368,7 @@
 ]]>
 </failure>
 </testcase>
-<testcase name="coupon api test delete a coupon" classname="coupons.spec.ts › coupon api test › delete a coupon" time="0.316">
+<testcase name="coupon api test delete a coupon" classname="coupons.spec.ts › coupon api test › delete a coupon" time="0.367">
 <failure message="coupons.spec.ts:53:9 delete a coupon" type="FAILURE">
 <![CDATA[  coupons.spec.ts:53:9 › coupon api test › delete a coupon =========================================
 
@@ -1421,8 +1421,8 @@
 </failure>
 </testcase>
 </testsuite>
-<testsuite name="customers.spec.ts" timestamp="1674072665788" hostname="" tests="6" failures="6" skipped="0" time="1.873" errors="0">
-<testcase name="customers api test get all customers" classname="customers.spec.ts › customers api test › get all customers" time="0.312">
+<testsuite name="customers.spec.ts" timestamp="1674073035097" hostname="" tests="6" failures="6" skipped="0" time="2.187" errors="0">
+<testcase name="customers api test get all customers" classname="customers.spec.ts › customers api test › get all customers" time="0.363">
 <failure message="customers.spec.ts:22:9 get all customers" type="FAILURE">
 <![CDATA[  customers.spec.ts:22:9 › customers api test › get all customers ==================================
 
@@ -1474,7 +1474,7 @@
 ]]>
 </failure>
 </testcase>
-<testcase name="customers api test get single customer" classname="customers.spec.ts › customers api test › get single customer" time="0.312">
+<testcase name="customers api test get single customer" classname="customers.spec.ts › customers api test › get single customer" time="0.364">
 <failure message="customers.spec.ts:28:9 get single customer" type="FAILURE">
 <![CDATA[  customers.spec.ts:28:9 › customers api test › get single customer ================================
 
@@ -1526,7 +1526,7 @@
 ]]>
 </failure>
 </testcase>
-<testcase name="customers api test create a customer" classname="customers.spec.ts › customers api test › create a customer" time="0.314">
+<testcase name="customers api test create a customer" classname="customers.spec.ts › customers api test › create a customer" time="0.367">
 <failure message="customers.spec.ts:36:9 create a customer" type="FAILURE">
 <![CDATA[  customers.spec.ts:36:9 › customers api test › create a customer ==================================
 
@@ -1578,7 +1578,7 @@
 ]]>
 </failure>
 </testcase>
-<testcase name="customers api test update a customer" classname="customers.spec.ts › customers api test › update a customer" time="0.318">
+<testcase name="customers api test update a customer" classname="customers.spec.ts › customers api test › update a customer" time="0.373">
 <failure message="customers.spec.ts:43:9 update a customer" type="FAILURE">
 <![CDATA[  customers.spec.ts:43:9 › customers api test › update a customer ==================================
 
@@ -1630,7 +1630,7 @@
 ]]>
 </failure>
 </testcase>
-<testcase name="customers api test delete a customer" classname="customers.spec.ts › customers api test › delete a customer" time="0.311">
+<testcase name="customers api test delete a customer" classname="customers.spec.ts › customers api test › delete a customer" time="0.365">
 <failure message="customers.spec.ts:52:9 delete a customer" type="FAILURE">
 <![CDATA[  customers.spec.ts:52:9 › customers api test › delete a customer ==================================
 
@@ -1682,7 +1682,7 @@
 ]]>
 </failure>
 </testcase>
-<testcase name="customers api test update batch customers" classname="customers.spec.ts › customers api test › update batch customers" time="0.306">
+<testcase name="customers api test update batch customers" classname="customers.spec.ts › customers api test › update batch customers" time="0.355">
 <failure message="customers.spec.ts:60:9 update batch customers" type="FAILURE">
 <![CDATA[  customers.spec.ts:60:9 › customers api test › update batch customers =============================
 
@@ -1729,8 +1729,8 @@
 </failure>
 </testcase>
 </testsuite>
-<testsuite name="dummyData.spec.ts" timestamp="1674072665788" hostname="" tests="3" failures="3" skipped="0" time="1.331" errors="0">
-<testcase name="dummy Data api test get dummy data status" classname="dummyData.spec.ts › dummy Data api test › get dummy data status" time="0.452">
+<testsuite name="dummyData.spec.ts" timestamp="1674073035097" hostname="" tests="3" failures="3" skipped="0" time="1.503" errors="0">
+<testcase name="dummy Data api test get dummy data status" classname="dummyData.spec.ts › dummy Data api test › get dummy data status" time="0.5">
 <failure message="dummyData.spec.ts:19:9 get dummy data status" type="FAILURE">
 <![CDATA[  dummyData.spec.ts:19:9 › dummy Data api test › get dummy data status =============================
 
@@ -1782,7 +1782,7 @@
 ]]>
 </failure>
 </testcase>
-<testcase name="dummy Data api test import dummy data" classname="dummyData.spec.ts › dummy Data api test › import dummy data" time="0.444">
+<testcase name="dummy Data api test import dummy data" classname="dummyData.spec.ts › dummy Data api test › import dummy data" time="0.497">
 <failure message="dummyData.spec.ts:25:9 import dummy data" type="FAILURE">
 <![CDATA[  dummyData.spec.ts:25:9 › dummy Data api test › import dummy data =================================
 
@@ -1834,7 +1834,7 @@
 ]]>
 </failure>
 </testcase>
-<testcase name="dummy Data api test clear dummy data" classname="dummyData.spec.ts › dummy Data api test › clear dummy data" time="0.435">
+<testcase name="dummy Data api test clear dummy data" classname="dummyData.spec.ts › dummy Data api test › clear dummy data" time="0.506">
 <failure message="dummyData.spec.ts:31:9 clear dummy data" type="FAILURE">
 <![CDATA[  dummyData.spec.ts:31:9 › dummy Data api test › clear dummy data ==================================
 
@@ -1887,8 +1887,8 @@
 </failure>
 </testcase>
 </testsuite>
-<testsuite name="followStores.spec.ts" timestamp="1674072665788" hostname="" tests="2" failures="2" skipped="0" time="0.626" errors="0">
-<testcase name="follow store api test get store follow status @pro" classname="followStores.spec.ts › follow store api test › get store follow status @pro" time="0.314">
+<testsuite name="followStores.spec.ts" timestamp="1674073035097" hostname="" tests="2" failures="2" skipped="0" time="0.738" errors="0">
+<testcase name="follow store api test get store follow status @pro" classname="followStores.spec.ts › follow store api test › get store follow status @pro" time="0.369">
 <failure message="followStores.spec.ts:23:9 get store follow status @pro" type="FAILURE">
 <![CDATA[  followStores.spec.ts:23:9 › follow store api test › get store follow status @pro =================
 
@@ -1940,7 +1940,7 @@
 ]]>
 </failure>
 </testcase>
-<testcase name="follow store api test follow-unfollow a store @pro" classname="followStores.spec.ts › follow store api test › follow-unfollow a store @pro" time="0.312">
+<testcase name="follow store api test follow-unfollow a store @pro" classname="followStores.spec.ts › follow store api test › follow-unfollow a store @pro" time="0.369">
 <failure message="followStores.spec.ts:31:9 follow-unfollow a store @pro" type="FAILURE">
 <![CDATA[  followStores.spec.ts:31:9 › follow store api test › follow-unfollow a store @pro =================
 
@@ -1993,7 +1993,7 @@
 </failure>
 </testcase>
 </testsuite>
-<testsuite name="modules.spec.ts" timestamp="1674072665788" hostname="" tests="3" failures="1" skipped="2" time="0.009" errors="0">
+<testsuite name="modules.spec.ts" timestamp="1674073035097" hostname="" tests="3" failures="1" skipped="2" time="0.009" errors="0">
 <testcase name="modules api test get all modules" classname="modules.spec.ts › modules api test › get all modules" time="0.009">
 <failure message="modules.spec.ts:23:9 get all modules" type="FAILURE">
 <![CDATA[  modules.spec.ts:23:9 › modules api test › get all modules ========================================
@@ -2058,8 +2058,8 @@
 </skipped>
 </testcase>
 </testsuite>
-<testsuite name="orderNotes.spec.ts" timestamp="1674072665788" hostname="" tests="4" failures="4" skipped="0" time="1.231" errors="0">
-<testcase name="order note api test get all order notes" classname="orderNotes.spec.ts › order note api test › get all order notes" time="0.301">
+<testsuite name="orderNotes.spec.ts" timestamp="1674073035097" hostname="" tests="4" failures="4" skipped="0" time="1.429" errors="0">
+<testcase name="order note api test get all order notes" classname="orderNotes.spec.ts › order note api test › get all order notes" time="0.356">
 <failure message="orderNotes.spec.ts:25:9 get all order notes" type="FAILURE">
 <![CDATA[  orderNotes.spec.ts:25:9 › order note api test › get all order notes ==============================
 
@@ -2111,7 +2111,7 @@
 ]]>
 </failure>
 </testcase>
-<testcase name="order note api test get single order note" classname="orderNotes.spec.ts › order note api test › get single order note" time="0.31">
+<testcase name="order note api test get single order note" classname="orderNotes.spec.ts › order note api test › get single order note" time="0.356">
 <failure message="orderNotes.spec.ts:33:9 get single order note" type="FAILURE">
 <![CDATA[  orderNotes.spec.ts:33:9 › order note api test › get single order note ============================
 
@@ -2163,7 +2163,7 @@
 ]]>
 </failure>
 </testcase>
-<testcase name="order note api test create an order note" classname="orderNotes.spec.ts › order note api test › create an order note" time="0.304">
+<testcase name="order note api test create an order note" classname="orderNotes.spec.ts › order note api test › create an order note" time="0.358">
 <failure message="orderNotes.spec.ts:41:9 create an order note" type="FAILURE">
 <![CDATA[  orderNotes.spec.ts:41:9 › order note api test › create an order note =============================
 
@@ -2215,7 +2215,7 @@
 ]]>
 </failure>
 </testcase>
-<testcase name="order note api test delete an order note" classname="orderNotes.spec.ts › order note api test › delete an order note" time="0.316">
+<testcase name="order note api test delete an order note" classname="orderNotes.spec.ts › order note api test › delete an order note" time="0.359">
 <failure message="orderNotes.spec.ts:50:9 delete an order note" type="FAILURE">
 <![CDATA[  orderNotes.spec.ts:50:9 › order note api test › delete an order note =============================
 
@@ -2268,8 +2268,8 @@
 </failure>
 </testcase>
 </testsuite>
-<testsuite name="orders.spec.ts" timestamp="1674072665788" hostname="" tests="5" failures="5" skipped="0" time="1.563" errors="0">
-<testcase name="order api test get all orders" classname="orders.spec.ts › order api test › get all orders" time="0.312">
+<testsuite name="orders.spec.ts" timestamp="1674073035097" hostname="" tests="5" failures="5" skipped="0" time="1.841" errors="0">
+<testcase name="order api test get all orders" classname="orders.spec.ts › order api test › get all orders" time="0.367">
 <failure message="orders.spec.ts:23:9 get all orders" type="FAILURE">
 <![CDATA[  orders.spec.ts:23:9 › order api test › get all orders ============================================
 
@@ -2321,7 +2321,7 @@
 ]]>
 </failure>
 </testcase>
-<testcase name="order api test get orders summary" classname="orders.spec.ts › order api test › get orders summary" time="0.314">
+<testcase name="order api test get orders summary" classname="orders.spec.ts › order api test › get orders summary" time="0.368">
 <failure message="orders.spec.ts:29:9 get orders summary" type="FAILURE">
 <![CDATA[  orders.spec.ts:29:9 › order api test › get orders summary ========================================
 
@@ -2373,7 +2373,7 @@
 ]]>
 </failure>
 </testcase>
-<testcase name="order api test get orders with before after" classname="orders.spec.ts › order api test › get orders with before after" time="0.314">
+<testcase name="order api test get orders with before after" classname="orders.spec.ts › order api test › get orders with before after" time="0.367">
 <failure message="orders.spec.ts:35:9 get orders with before after" type="FAILURE">
 <![CDATA[  orders.spec.ts:35:9 › order api test › get orders with before after ==============================
 
@@ -2425,7 +2425,7 @@
 ]]>
 </failure>
 </testcase>
-<testcase name="order api test get single order" classname="orders.spec.ts › order api test › get single order" time="0.31">
+<testcase name="order api test get single order" classname="orders.spec.ts › order api test › get single order" time="0.369">
 <failure message="orders.spec.ts:41:9 get single order" type="FAILURE">
 <![CDATA[  orders.spec.ts:41:9 › order api test › get single order ==========================================
 
@@ -2477,7 +2477,7 @@
 ]]>
 </failure>
 </testcase>
-<testcase name="order api test update an order" classname="orders.spec.ts › order api test › update an order" time="0.313">
+<testcase name="order api test update an order" classname="orders.spec.ts › order api test › update an order" time="0.37">
 <failure message="orders.spec.ts:49:9 update an order" type="FAILURE">
 <![CDATA[  orders.spec.ts:49:9 › order api test › update an order ===========================================
 
@@ -2530,7 +2530,7 @@
 </failure>
 </testcase>
 </testsuite>
-<testsuite name="productAdvertisements.spec.ts" timestamp="1674072665788" hostname="" tests="6" failures="1" skipped="5" time="0.009" errors="0">
+<testsuite name="productAdvertisements.spec.ts" timestamp="1674073035097" hostname="" tests="6" failures="1" skipped="5" time="0.009" errors="0">
 <testcase name="product advertisement api test get all advertised product stores @pro" classname="productAdvertisements.spec.ts › product advertisement api test › get all advertised product stores @pro" time="0.009">
 <failure message="productAdvertisements.spec.ts:21:9 get all advertised product stores @pro" type="FAILURE">
 <![CDATA[  productAdvertisements.spec.ts:21:9 › product advertisement api test › get all advertised product stores @pro 
@@ -2607,8 +2607,8 @@
 </skipped>
 </testcase>
 </testsuite>
-<testsuite name="productAttributes.spec.ts" timestamp="1674072665788" hostname="" tests="6" failures="6" skipped="0" time="1.864" errors="0">
-<testcase name="attribute api test get all attributes" classname="productAttributes.spec.ts › attribute api test › get all attributes" time="0.311">
+<testsuite name="productAttributes.spec.ts" timestamp="1674073035097" hostname="" tests="6" failures="6" skipped="0" time="2.187" errors="0">
+<testcase name="attribute api test get all attributes" classname="productAttributes.spec.ts › attribute api test › get all attributes" time="0.364">
 <failure message="productAttributes.spec.ts:22:9 get all attributes" type="FAILURE">
 <![CDATA[  productAttributes.spec.ts:22:9 › attribute api test › get all attributes =========================
 
@@ -2660,7 +2660,7 @@
 ]]>
 </failure>
 </testcase>
-<testcase name="attribute api test get single attribute" classname="productAttributes.spec.ts › attribute api test › get single attribute" time="0.313">
+<testcase name="attribute api test get single attribute" classname="productAttributes.spec.ts › attribute api test › get single attribute" time="0.363">
 <failure message="productAttributes.spec.ts:28:9 get single attribute" type="FAILURE">
 <![CDATA[  productAttributes.spec.ts:28:9 › attribute api test › get single attribute =======================
 
@@ -2712,7 +2712,7 @@
 ]]>
 </failure>
 </testcase>
-<testcase name="attribute api test create an attribute" classname="productAttributes.spec.ts › attribute api test › create an attribute" time="0.312">
+<testcase name="attribute api test create an attribute" classname="productAttributes.spec.ts › attribute api test › create an attribute" time="0.365">
 <failure message="productAttributes.spec.ts:37:9 create an attribute" type="FAILURE">
 <![CDATA[  productAttributes.spec.ts:37:9 › attribute api test › create an attribute ========================
 
@@ -2764,7 +2764,7 @@
 ]]>
 </failure>
 </testcase>
-<testcase name="attribute api test update an attribute" classname="productAttributes.spec.ts › attribute api test › update an attribute" time="0.312">
+<testcase name="attribute api test update an attribute" classname="productAttributes.spec.ts › attribute api test › update an attribute" time="0.368">
 <failure message="productAttributes.spec.ts:44:9 update an attribute" type="FAILURE">
 <![CDATA[  productAttributes.spec.ts:44:9 › attribute api test › update an attribute ========================
 
@@ -2816,7 +2816,7 @@
 ]]>
 </failure>
 </testcase>
-<testcase name="attribute api test delete an attribute" classname="productAttributes.spec.ts › attribute api test › delete an attribute" time="0.314">
+<testcase name="attribute api test delete an attribute" classname="productAttributes.spec.ts › attribute api test › delete an attribute" time="0.371">
 <failure message="productAttributes.spec.ts:52:9 delete an attribute" type="FAILURE">
 <![CDATA[  productAttributes.spec.ts:52:9 › attribute api test › delete an attribute ========================
 
@@ -2868,7 +2868,7 @@
 ]]>
 </failure>
 </testcase>
-<testcase name="attribute api test update batch attributes" classname="productAttributes.spec.ts › attribute api test › update batch attributes" time="0.302">
+<testcase name="attribute api test update batch attributes" classname="productAttributes.spec.ts › attribute api test › update batch attributes" time="0.356">
 <failure message="productAttributes.spec.ts:60:9 update batch attributes" type="FAILURE">
 <![CDATA[  productAttributes.spec.ts:60:9 › attribute api test › update batch attributes ====================
 
@@ -2915,8 +2915,8 @@
 </failure>
 </testcase>
 </testsuite>
-<testsuite name="productAttributeTerms.spec.ts" timestamp="1674072665788" hostname="" tests="6" failures="6" skipped="0" time="1.88" errors="0">
-<testcase name="attribute term api test get all attribute terms" classname="productAttributeTerms.spec.ts › attribute term api test › get all attribute terms" time="0.314">
+<testsuite name="productAttributeTerms.spec.ts" timestamp="1674073035097" hostname="" tests="6" failures="6" skipped="0" time="2.196" errors="0">
+<testcase name="attribute term api test get all attribute terms" classname="productAttributeTerms.spec.ts › attribute term api test › get all attribute terms" time="0.365">
 <failure message="productAttributeTerms.spec.ts:23:9 get all attribute terms" type="FAILURE">
 <![CDATA[  productAttributeTerms.spec.ts:23:9 › attribute term api test › get all attribute terms ===========
 
@@ -2968,7 +2968,7 @@
 ]]>
 </failure>
 </testcase>
-<testcase name="attribute term api test get single attribute term" classname="productAttributeTerms.spec.ts › attribute term api test › get single attribute term" time="0.313">
+<testcase name="attribute term api test get single attribute term" classname="productAttributeTerms.spec.ts › attribute term api test › get single attribute term" time="0.369">
 <failure message="productAttributeTerms.spec.ts:31:9 get single attribute term" type="FAILURE">
 <![CDATA[  productAttributeTerms.spec.ts:31:9 › attribute term api test › get single attribute term =========
 
@@ -3020,7 +3020,7 @@
 ]]>
 </failure>
 </testcase>
-<testcase name="attribute term api test create an attribute term" classname="productAttributeTerms.spec.ts › attribute term api test › create an attribute term" time="0.319">
+<testcase name="attribute term api test create an attribute term" classname="productAttributeTerms.spec.ts › attribute term api test › create an attribute term" time="0.364">
 <failure message="productAttributeTerms.spec.ts:39:9 create an attribute term" type="FAILURE">
 <![CDATA[  productAttributeTerms.spec.ts:39:9 › attribute term api test › create an attribute term ==========
 
@@ -3072,7 +3072,7 @@
 ]]>
 </failure>
 </testcase>
-<testcase name="attribute term api test update an attribute term " classname="productAttributeTerms.spec.ts › attribute term api test › update an attribute term " time="0.316">
+<testcase name="attribute term api test update an attribute term " classname="productAttributeTerms.spec.ts › attribute term api test › update an attribute term " time="0.368">
 <failure message="productAttributeTerms.spec.ts:47:9 update an attribute term " type="FAILURE">
 <![CDATA[  productAttributeTerms.spec.ts:47:9 › attribute term api test › update an attribute term  =========
 
@@ -3124,7 +3124,7 @@
 ]]>
 </failure>
 </testcase>
-<testcase name="attribute term api test delete an attribute term" classname="productAttributeTerms.spec.ts › attribute term api test › delete an attribute term" time="0.312">
+<testcase name="attribute term api test delete an attribute term" classname="productAttributeTerms.spec.ts › attribute term api test › delete an attribute term" time="0.365">
 <failure message="productAttributeTerms.spec.ts:55:9 delete an attribute term" type="FAILURE">
 <![CDATA[  productAttributeTerms.spec.ts:55:9 › attribute term api test › delete an attribute term ==========
 
@@ -3176,7 +3176,7 @@
 ]]>
 </failure>
 </testcase>
-<testcase name="attribute term api test update batch attribute terms" classname="productAttributeTerms.spec.ts › attribute term api test › update batch attribute terms" time="0.306">
+<testcase name="attribute term api test update batch attribute terms" classname="productAttributeTerms.spec.ts › attribute term api test › update batch attribute terms" time="0.365">
 <failure message="productAttributeTerms.spec.ts:63:9 update batch attribute terms" type="FAILURE">
 <![CDATA[  productAttributeTerms.spec.ts:63:9 › attribute term api test › update batch attribute terms ======
 
@@ -3223,8 +3223,8 @@
 </failure>
 </testcase>
 </testsuite>
-<testsuite name="productReviews.spec.ts" timestamp="1674072665788" hostname="" tests="3" failures="3" skipped="0" time="0.942" errors="0">
-<testcase name="product review api test get all product reviews" classname="productReviews.spec.ts › product review api test › get all product reviews" time="0.312">
+<testsuite name="productReviews.spec.ts" timestamp="1674073035097" hostname="" tests="3" failures="3" skipped="0" time="1.102" errors="0">
+<testcase name="product review api test get all product reviews" classname="productReviews.spec.ts › product review api test › get all product reviews" time="0.368">
 <failure message="productReviews.spec.ts:22:9 get all product reviews" type="FAILURE">
 <![CDATA[  productReviews.spec.ts:22:9 › product review api test › get all product reviews ==================
 
@@ -3276,7 +3276,7 @@
 ]]>
 </failure>
 </testcase>
-<testcase name="product review api test get product reviews summary" classname="productReviews.spec.ts › product review api test › get product reviews summary" time="0.315">
+<testcase name="product review api test get product reviews summary" classname="productReviews.spec.ts › product review api test › get product reviews summary" time="0.367">
 <failure message="productReviews.spec.ts:28:9 get product reviews summary" type="FAILURE">
 <![CDATA[  productReviews.spec.ts:28:9 › product review api test › get product reviews summary ==============
 
@@ -3328,7 +3328,7 @@
 ]]>
 </failure>
 </testcase>
-<testcase name="product review api test update a product review" classname="productReviews.spec.ts › product review api test › update a product review" time="0.315">
+<testcase name="product review api test update a product review" classname="productReviews.spec.ts › product review api test › update a product review" time="0.367">
 <failure message="productReviews.spec.ts:34:9 update a product review" type="FAILURE">
 <![CDATA[  productReviews.spec.ts:34:9 › product review api test › update a product review ==================
 
@@ -3381,8 +3381,8 @@
 </failure>
 </testcase>
 </testsuite>
-<testsuite name="products.spec.ts" timestamp="1674072665788" hostname="" tests="12" failures="12" skipped="0" time="3.83" errors="0">
-<testcase name="product api test get products summary" classname="products.spec.ts › product api test › get products summary" time="0.316">
+<testsuite name="products.spec.ts" timestamp="1674073035097" hostname="" tests="12" failures="8" skipped="0" time="3.389" errors="0">
+<testcase name="product api test get products summary" classname="products.spec.ts › product api test › get products summary" time="0.364">
 <failure message="products.spec.ts:21:9 get products summary" type="FAILURE">
 <![CDATA[  products.spec.ts:21:9 › product api test › get products summary ==================================
 
@@ -3434,215 +3434,15 @@
 ]]>
 </failure>
 </testcase>
-<testcase name="product api test get top rated products" classname="products.spec.ts › product api test › get top rated products" time="0.333">
-<failure message="products.spec.ts:27:9 get top rated products" type="FAILURE">
-<![CDATA[  products.spec.ts:27:9 › product api test › get top rated products ================================
-
-    Error: expect(received).toBeTruthy()
-
-    Received: false
-
-      28 |         let response = await request.get(endPoints.getTopRatedProducts)
-      29 |         let responseBody = await apiUtils.getResponseBody(response)
-    > 30 |         expect(response.ok()).toBeTruthy()
-         |                               ^
-      31 |     });
-      32 |
-      33 |     test('get best selling products', async ({ request }) => {
-
-        at /home/runner/work/dokan/dokan/tests/api/tests/products.spec.ts:30:31
-
-    Retry #1 ---------------------------------------------------------------------------------------
-
-    Error: expect(received).toBeTruthy()
-
-    Received: false
-
-      28 |         let response = await request.get(endPoints.getTopRatedProducts)
-      29 |         let responseBody = await apiUtils.getResponseBody(response)
-    > 30 |         expect(response.ok()).toBeTruthy()
-         |                               ^
-      31 |     });
-      32 |
-      33 |     test('get best selling products', async ({ request }) => {
-
-        at /home/runner/work/dokan/dokan/tests/api/tests/products.spec.ts:30:31
-
-    Retry #2 ---------------------------------------------------------------------------------------
-
-    Error: expect(received).toBeTruthy()
-
-    Received: false
-
-      28 |         let response = await request.get(endPoints.getTopRatedProducts)
-      29 |         let responseBody = await apiUtils.getResponseBody(response)
-    > 30 |         expect(response.ok()).toBeTruthy()
-         |                               ^
-      31 |     });
-      32 |
-      33 |     test('get best selling products', async ({ request }) => {
-
-        at /home/runner/work/dokan/dokan/tests/api/tests/products.spec.ts:30:31
-]]>
-</failure>
+<testcase name="product api test get top rated products" classname="products.spec.ts › product api test › get top rated products" time="0.123">
 </testcase>
-<testcase name="product api test get best selling products" classname="products.spec.ts › product api test › get best selling products" time="0.333">
-<failure message="products.spec.ts:33:9 get best selling products" type="FAILURE">
-<![CDATA[  products.spec.ts:33:9 › product api test › get best selling products =============================
-
-    Error: expect(received).toBeTruthy()
-
-    Received: false
-
-      34 |         let response = await request.get(endPoints.getBestSellingProducts)
-      35 |         let responseBody = await apiUtils.getResponseBody(response)
-    > 36 |         expect(response.ok()).toBeTruthy()
-         |                               ^
-      37 |     });
-      38 |
-      39 |     test('get featured products', async ({ request }) => {
-
-        at /home/runner/work/dokan/dokan/tests/api/tests/products.spec.ts:36:31
-
-    Retry #1 ---------------------------------------------------------------------------------------
-
-    Error: expect(received).toBeTruthy()
-
-    Received: false
-
-      34 |         let response = await request.get(endPoints.getBestSellingProducts)
-      35 |         let responseBody = await apiUtils.getResponseBody(response)
-    > 36 |         expect(response.ok()).toBeTruthy()
-         |                               ^
-      37 |     });
-      38 |
-      39 |     test('get featured products', async ({ request }) => {
-
-        at /home/runner/work/dokan/dokan/tests/api/tests/products.spec.ts:36:31
-
-    Retry #2 ---------------------------------------------------------------------------------------
-
-    Error: expect(received).toBeTruthy()
-
-    Received: false
-
-      34 |         let response = await request.get(endPoints.getBestSellingProducts)
-      35 |         let responseBody = await apiUtils.getResponseBody(response)
-    > 36 |         expect(response.ok()).toBeTruthy()
-         |                               ^
-      37 |     });
-      38 |
-      39 |     test('get featured products', async ({ request }) => {
-
-        at /home/runner/work/dokan/dokan/tests/api/tests/products.spec.ts:36:31
-]]>
-</failure>
+<testcase name="product api test get best selling products" classname="products.spec.ts › product api test › get best selling products" time="0.117">
 </testcase>
-<testcase name="product api test get featured products" classname="products.spec.ts › product api test › get featured products" time="0.307">
-<failure message="products.spec.ts:39:9 get featured products" type="FAILURE">
-<![CDATA[  products.spec.ts:39:9 › product api test › get featured products =================================
-
-    Error: expect(received).toBeTruthy()
-
-    Received: false
-
-      40 |         let response = await request.get(endPoints.getFeaturedProducts)
-      41 |         let responseBody = await apiUtils.getResponseBody(response)
-    > 42 |         expect(response.ok()).toBeTruthy()
-         |                               ^
-      43 |     });
-      44 |
-      45 |     test('get latest products', async ({ request }) => {
-
-        at /home/runner/work/dokan/dokan/tests/api/tests/products.spec.ts:42:31
-
-    Retry #1 ---------------------------------------------------------------------------------------
-
-    Error: expect(received).toBeTruthy()
-
-    Received: false
-
-      40 |         let response = await request.get(endPoints.getFeaturedProducts)
-      41 |         let responseBody = await apiUtils.getResponseBody(response)
-    > 42 |         expect(response.ok()).toBeTruthy()
-         |                               ^
-      43 |     });
-      44 |
-      45 |     test('get latest products', async ({ request }) => {
-
-        at /home/runner/work/dokan/dokan/tests/api/tests/products.spec.ts:42:31
-
-    Retry #2 ---------------------------------------------------------------------------------------
-
-    Error: expect(received).toBeTruthy()
-
-    Received: false
-
-      40 |         let response = await request.get(endPoints.getFeaturedProducts)
-      41 |         let responseBody = await apiUtils.getResponseBody(response)
-    > 42 |         expect(response.ok()).toBeTruthy()
-         |                               ^
-      43 |     });
-      44 |
-      45 |     test('get latest products', async ({ request }) => {
-
-        at /home/runner/work/dokan/dokan/tests/api/tests/products.spec.ts:42:31
-]]>
-</failure>
+<testcase name="product api test get featured products" classname="products.spec.ts › product api test › get featured products" time="0.117">
 </testcase>
-<testcase name="product api test get latest products" classname="products.spec.ts › product api test › get latest products" time="0.307">
-<failure message="products.spec.ts:45:9 get latest products" type="FAILURE">
-<![CDATA[  products.spec.ts:45:9 › product api test › get latest products ===================================
-
-    Error: expect(received).toBeTruthy()
-
-    Received: false
-
-      46 |         let response = await request.get(endPoints.getLatestProducts)
-      47 |         let responseBody = await apiUtils.getResponseBody(response)
-    > 48 |         expect(response.ok()).toBeTruthy()
-         |                               ^
-      49 |     });
-      50 |
-      51 |     test('get all multiStep categories', async ({ request }) => {
-
-        at /home/runner/work/dokan/dokan/tests/api/tests/products.spec.ts:48:31
-
-    Retry #1 ---------------------------------------------------------------------------------------
-
-    Error: expect(received).toBeTruthy()
-
-    Received: false
-
-      46 |         let response = await request.get(endPoints.getLatestProducts)
-      47 |         let responseBody = await apiUtils.getResponseBody(response)
-    > 48 |         expect(response.ok()).toBeTruthy()
-         |                               ^
-      49 |     });
-      50 |
-      51 |     test('get all multiStep categories', async ({ request }) => {
-
-        at /home/runner/work/dokan/dokan/tests/api/tests/products.spec.ts:48:31
-
-    Retry #2 ---------------------------------------------------------------------------------------
-
-    Error: expect(received).toBeTruthy()
-
-    Received: false
-
-      46 |         let response = await request.get(endPoints.getLatestProducts)
-      47 |         let responseBody = await apiUtils.getResponseBody(response)
-    > 48 |         expect(response.ok()).toBeTruthy()
-         |                               ^
-      49 |     });
-      50 |
-      51 |     test('get all multiStep categories', async ({ request }) => {
-
-        at /home/runner/work/dokan/dokan/tests/api/tests/products.spec.ts:48:31
-]]>
-</failure>
+<testcase name="product api test get latest products" classname="products.spec.ts › product api test › get latest products" time="0.117">
 </testcase>
-<testcase name="product api test get all multiStep categories" classname="products.spec.ts › product api test › get all multiStep categories" time="0.314">
+<testcase name="product api test get all multiStep categories" classname="products.spec.ts › product api test › get all multiStep categories" time="0.361">
 <failure message="products.spec.ts:51:9 get all multiStep categories" type="FAILURE">
 <![CDATA[  products.spec.ts:51:9 › product api test › get all multiStep categories ==========================
 
@@ -3694,7 +3494,7 @@
 ]]>
 </failure>
 </testcase>
-<testcase name="product api test get all products" classname="products.spec.ts › product api test › get all products" time="0.311">
+<testcase name="product api test get all products" classname="products.spec.ts › product api test › get all products" time="0.369">
 <failure message="products.spec.ts:57:9 get all products" type="FAILURE">
 <![CDATA[  products.spec.ts:57:9 › product api test › get all products ======================================
 
@@ -3746,7 +3546,7 @@
 ]]>
 </failure>
 </testcase>
-<testcase name="product api test get single product" classname="products.spec.ts › product api test › get single product" time="0.312">
+<testcase name="product api test get single product" classname="products.spec.ts › product api test › get single product" time="0.363">
 <failure message="products.spec.ts:63:9 get single product" type="FAILURE">
 <![CDATA[  products.spec.ts:63:9 › product api test › get single product ====================================
 
@@ -3798,7 +3598,7 @@
 ]]>
 </failure>
 </testcase>
-<testcase name="product api test get all related products" classname="products.spec.ts › product api test › get all related products" time="0.31">
+<testcase name="product api test get all related products" classname="products.spec.ts › product api test › get all related products" time="0.361">
 <failure message="products.spec.ts:71:9 get all related products" type="FAILURE">
 <![CDATA[  products.spec.ts:71:9 › product api test › get all related products ==============================
 
@@ -3850,7 +3650,7 @@
 ]]>
 </failure>
 </testcase>
-<testcase name="product api test create a product" classname="products.spec.ts › product api test › create a product" time="0.309">
+<testcase name="product api test create a product" classname="products.spec.ts › product api test › create a product" time="0.374">
 <failure message="products.spec.ts:79:9 create a product" type="FAILURE">
 <![CDATA[  products.spec.ts:79:9 › product api test › create a product ======================================
 
@@ -3902,7 +3702,7 @@
 ]]>
 </failure>
 </testcase>
-<testcase name="product api test update a product" classname="products.spec.ts › product api test › update a product" time="0.35">
+<testcase name="product api test update a product" classname="products.spec.ts › product api test › update a product" time="0.364">
 <failure message="products.spec.ts:85:9 update a product" type="FAILURE">
 <![CDATA[  products.spec.ts:85:9 › product api test › update a product ======================================
 
@@ -3954,7 +3754,7 @@
 ]]>
 </failure>
 </testcase>
-<testcase name="product api test delete a product" classname="products.spec.ts › product api test › delete a product" time="0.328">
+<testcase name="product api test delete a product" classname="products.spec.ts › product api test › delete a product" time="0.359">
 <failure message="products.spec.ts:93:9 delete a product" type="FAILURE">
 <![CDATA[  products.spec.ts:93:9 › product api test › delete a product ======================================
 
@@ -4007,8 +3807,8 @@
 </failure>
 </testcase>
 </testsuite>
-<testsuite name="productVariations.spec.ts" timestamp="1674072665788" hostname="" tests="5" failures="4" skipped="1" time="1.242" errors="0">
-<testcase name="product variation api test get all product variations" classname="productVariations.spec.ts › product variation api test › get all product variations" time="0.303">
+<testsuite name="productVariations.spec.ts" timestamp="1674073035097" hostname="" tests="5" failures="4" skipped="1" time="1.427" errors="0">
+<testcase name="product variation api test get all product variations" classname="productVariations.spec.ts › product variation api test › get all product variations" time="0.357">
 <failure message="productVariations.spec.ts:24:9 get all product variations" type="FAILURE">
 <![CDATA[  productVariations.spec.ts:24:9 › product variation api test › get all product variations =========
 
@@ -4060,7 +3860,7 @@
 ]]>
 </failure>
 </testcase>
-<testcase name="product variation api test get single product variation" classname="productVariations.spec.ts › product variation api test › get single product variation" time="0.306">
+<testcase name="product variation api test get single product variation" classname="productVariations.spec.ts › product variation api test › get single product variation" time="0.356">
 <failure message="productVariations.spec.ts:32:9 get single product variation" type="FAILURE">
 <![CDATA[  productVariations.spec.ts:32:9 › product variation api test › get single product variation =======
 
@@ -4112,7 +3912,7 @@
 ]]>
 </failure>
 </testcase>
-<testcase name="product variation api test create a product variation" classname="productVariations.spec.ts › product variation api test › create a product variation" time="0.304">
+<testcase name="product variation api test create a product variation" classname="productVariations.spec.ts › product variation api test › create a product variation" time="0.355">
 <failure message="productVariations.spec.ts:40:9 create a product variation" type="FAILURE">
 <![CDATA[  productVariations.spec.ts:40:9 › product variation api test › create a product variation =========
 
@@ -4164,7 +3964,7 @@
 ]]>
 </failure>
 </testcase>
-<testcase name="product variation api test update a product variation" classname="productVariations.spec.ts › product variation api test › update a product variation" time="0.328">
+<testcase name="product variation api test update a product variation" classname="productVariations.spec.ts › product variation api test › update a product variation" time="0.358">
 <failure message="productVariations.spec.ts:48:9 update a product variation" type="FAILURE">
 <![CDATA[  productVariations.spec.ts:48:9 › product variation api test › update a product variation =========
 
@@ -4221,8 +4021,8 @@
 </skipped>
 </testcase>
 </testsuite>
-<testsuite name="quoteRequests.spec.ts" timestamp="1674072665788" hostname="" tests="8" failures="1" skipped="7" time="0.014" errors="0">
-<testcase name="request quote api test get all request quotes @pro" classname="quoteRequests.spec.ts › request quote api test › get all request quotes @pro" time="0.014">
+<testsuite name="quoteRequests.spec.ts" timestamp="1674073035097" hostname="" tests="8" failures="1" skipped="7" time="0.01" errors="0">
+<testcase name="request quote api test get all request quotes @pro" classname="quoteRequests.spec.ts › request quote api test › get all request quotes @pro" time="0.01">
 <failure message="quoteRequests.spec.ts:25:9 get all request quotes @pro" type="FAILURE">
 <![CDATA[  quoteRequests.spec.ts:25:9 › request quote api test › get all request quotes @pro ================
 
@@ -4306,8 +4106,8 @@
 </skipped>
 </testcase>
 </testsuite>
-<testsuite name="quoteRules.spec.ts" timestamp="1674072665788" hostname="" tests="7" failures="2" skipped="0" time="1.12" errors="0">
-<testcase name="quote rules api test get all quote rules @pro" classname="quoteRules.spec.ts › quote rules api test › get all quote rules @pro" time="0.318">
+<testsuite name="quoteRules.spec.ts" timestamp="1674073035097" hostname="" tests="7" failures="2" skipped="0" time="1.293" errors="0">
+<testcase name="quote rules api test get all quote rules @pro" classname="quoteRules.spec.ts › quote rules api test › get all quote rules @pro" time="0.36">
 <failure message="quoteRules.spec.ts:22:9 get all quote rules @pro" type="FAILURE">
 <![CDATA[  quoteRules.spec.ts:22:9 › quote rules api test › get all quote rules @pro ========================
 
@@ -4359,17 +4159,17 @@
 ]]>
 </failure>
 </testcase>
-<testcase name="quote rules api test get single quote rule @pro" classname="quoteRules.spec.ts › quote rules api test › get single quote rule @pro" time="0.103">
+<testcase name="quote rules api test get single quote rule @pro" classname="quoteRules.spec.ts › quote rules api test › get single quote rule @pro" time="0.119">
 </testcase>
-<testcase name="quote rules api test create a quote rule @pro" classname="quoteRules.spec.ts › quote rules api test › create a quote rule @pro" time="0.1">
+<testcase name="quote rules api test create a quote rule @pro" classname="quoteRules.spec.ts › quote rules api test › create a quote rule @pro" time="0.116">
 </testcase>
-<testcase name="quote rules api test update a quote rule @pro" classname="quoteRules.spec.ts › quote rules api test › update a quote rule @pro" time="0.099">
+<testcase name="quote rules api test update a quote rule @pro" classname="quoteRules.spec.ts › quote rules api test › update a quote rule @pro" time="0.117">
 </testcase>
-<testcase name="quote rules api test delete a quote rule @pro" classname="quoteRules.spec.ts › quote rules api test › delete a quote rule @pro" time="0.098">
+<testcase name="quote rules api test delete a quote rule @pro" classname="quoteRules.spec.ts › quote rules api test › delete a quote rule @pro" time="0.115">
 </testcase>
-<testcase name="quote rules api test restore a deleted quote rule @pro" classname="quoteRules.spec.ts › quote rules api test › restore a deleted quote rule @pro" time="0.1">
+<testcase name="quote rules api test restore a deleted quote rule @pro" classname="quoteRules.spec.ts › quote rules api test › restore a deleted quote rule @pro" time="0.114">
 </testcase>
-<testcase name="quote rules api test update batch quote rules @pro" classname="quoteRules.spec.ts › quote rules api test › update batch quote rules @pro" time="0.302">
+<testcase name="quote rules api test update batch quote rules @pro" classname="quoteRules.spec.ts › quote rules api test › update batch quote rules @pro" time="0.352">
 <failure message="quoteRules.spec.ts:77:9 update batch quote rules @pro" type="FAILURE">
 <![CDATA[  quoteRules.spec.ts:77:9 › quote rules api test › update batch quote rules @pro ===================
 
@@ -4416,7 +4216,7 @@
 </failure>
 </testcase>
 </testsuite>
-<testsuite name="refunds.spec.ts" timestamp="1674072665788" hostname="" tests="6" failures="0" skipped="6" time="0.001" errors="0">
+<testsuite name="refunds.spec.ts" timestamp="1674073035097" hostname="" tests="6" failures="0" skipped="6" time="0.001" errors="0">
 <testcase name="refunds api test get all refunds @pro" classname="refunds.spec.ts › refunds api test › get all refunds @pro" time="0">
 <skipped>
 </skipped>
@@ -4442,8 +4242,8 @@
 </skipped>
 </testcase>
 </testsuite>
-<testsuite name="reports.spec.ts" timestamp="1674072665788" hostname="" tests="4" failures="4" skipped="0" time="1.296" errors="0">
-<testcase name="report api test get sales overview report" classname="reports.spec.ts › report api test › get sales overview report" time="0.348">
+<testsuite name="reports.spec.ts" timestamp="1674073035097" hostname="" tests="4" failures="4" skipped="0" time="1.484" errors="0">
+<testcase name="report api test get sales overview report" classname="reports.spec.ts › report api test › get sales overview report" time="0.367">
 <failure message="reports.spec.ts:21:9 get sales overview report" type="FAILURE">
 <![CDATA[  reports.spec.ts:21:9 › report api test › get sales overview report ===============================
 
@@ -4495,7 +4295,7 @@
 ]]>
 </failure>
 </testcase>
-<testcase name="report api test get summary report" classname="reports.spec.ts › report api test › get summary report" time="0.32">
+<testcase name="report api test get summary report" classname="reports.spec.ts › report api test › get summary report" time="0.378">
 <failure message="reports.spec.ts:27:9 get summary report" type="FAILURE">
 <![CDATA[  reports.spec.ts:27:9 › report api test › get summary report ======================================
 
@@ -4547,7 +4347,7 @@
 ]]>
 </failure>
 </testcase>
-<testcase name="report api test get top earners report" classname="reports.spec.ts › report api test › get top earners report" time="0.319">
+<testcase name="report api test get top earners report" classname="reports.spec.ts › report api test › get top earners report" time="0.369">
 <failure message="reports.spec.ts:33:9 get top earners report" type="FAILURE">
 <![CDATA[  reports.spec.ts:33:9 › report api test › get top earners report ==================================
 
@@ -4599,7 +4399,7 @@
 ]]>
 </failure>
 </testcase>
-<testcase name="report api test get top selling products report " classname="reports.spec.ts › report api test › get top selling products report " time="0.309">
+<testcase name="report api test get top selling products report " classname="reports.spec.ts › report api test › get top selling products report " time="0.37">
 <failure message="reports.spec.ts:39:9 get top selling products report " type="FAILURE">
 <![CDATA[  reports.spec.ts:39:9 › report api test › get top selling products report  ========================
 
@@ -4652,8 +4452,8 @@
 </failure>
 </testcase>
 </testsuite>
-<testsuite name="reverseWithdrawal.spec.ts" timestamp="1674072665788" hostname="" tests="4" failures="1" skipped="3" time="0.302" errors="0">
-<testcase name="reverse withdrawal api test get reverse withdrawal transaction types" classname="reverseWithdrawal.spec.ts › reverse withdrawal api test › get reverse withdrawal transaction types" time="0.301">
+<testsuite name="reverseWithdrawal.spec.ts" timestamp="1674073035097" hostname="" tests="4" failures="1" skipped="3" time="0.37" errors="0">
+<testcase name="reverse withdrawal api test get reverse withdrawal transaction types" classname="reverseWithdrawal.spec.ts › reverse withdrawal api test › get reverse withdrawal transaction types" time="0.369">
 <failure message="reverseWithdrawal.spec.ts:23:9 get reverse withdrawal transaction types" type="FAILURE">
 <![CDATA[  reverseWithdrawal.spec.ts:23:9 › reverse withdrawal api test › get reverse withdrawal transaction types 
 
@@ -4718,8 +4518,8 @@
 </skipped>
 </testcase>
 </testsuite>
-<testsuite name="roles.spec.ts" timestamp="1674072665788" hostname="" tests="1" failures="1" skipped="0" time="0.433" errors="0">
-<testcase name="roles api test get all user roles " classname="roles.spec.ts › roles api test › get all user roles " time="0.433">
+<testsuite name="roles.spec.ts" timestamp="1674073035097" hostname="" tests="1" failures="1" skipped="0" time="0.496" errors="0">
+<testcase name="roles api test get all user roles " classname="roles.spec.ts › roles api test › get all user roles " time="0.496">
 <failure message="roles.spec.ts:19:9 get all user roles " type="FAILURE">
 <![CDATA[  roles.spec.ts:19:9 › roles api test › get all user roles  ========================================
 
@@ -4772,8 +4572,8 @@
 </failure>
 </testcase>
 </testsuite>
-<testsuite name="settings.spec.ts" timestamp="1674072665788" hostname="" tests="2" failures="2" skipped="0" time="0.887" errors="0">
-<testcase name="settings api test get settings" classname="settings.spec.ts › settings api test › get settings" time="0.448">
+<testsuite name="settings.spec.ts" timestamp="1674073035097" hostname="" tests="2" failures="2" skipped="0" time="0.992" errors="0">
+<testcase name="settings api test get settings" classname="settings.spec.ts › settings api test › get settings" time="0.497">
 <failure message="settings.spec.ts:25:9 get settings" type="FAILURE">
 <![CDATA[  settings.spec.ts:25:9 › settings api test › get settings =========================================
 
@@ -4825,7 +4625,7 @@
 ]]>
 </failure>
 </testcase>
-<testcase name="settings api test update settings" classname="settings.spec.ts › settings api test › update settings" time="0.439">
+<testcase name="settings api test update settings" classname="settings.spec.ts › settings api test › update settings" time="0.495">
 <failure message="settings.spec.ts:31:9 update settings" type="FAILURE">
 <![CDATA[  settings.spec.ts:31:9 › settings api test › update settings ======================================
 
@@ -4878,7 +4678,7 @@
 </failure>
 </testcase>
 </testsuite>
-<testsuite name="storeCategories.spec.ts" timestamp="1674072665788" hostname="" tests="7" failures="0" skipped="7" time="0.001" errors="0">
+<testsuite name="storeCategories.spec.ts" timestamp="1674073035097" hostname="" tests="7" failures="0" skipped="7" time="0.001" errors="0">
 <testcase name="store categories api test get default store category @pro" classname="storeCategories.spec.ts › store categories api test › get default store category @pro" time="0">
 <skipped>
 </skipped>
@@ -4908,8 +4708,8 @@
 </skipped>
 </testcase>
 </testsuite>
-<testsuite name="storeReviews.spec.ts" timestamp="1674072665788" hostname="" tests="6" failures="6" skipped="0" time="1.898" errors="0">
-<testcase name="store reviews api test get all store reviews @pro" classname="storeReviews.spec.ts › store reviews api test › get all store reviews @pro" time="0.314">
+<testsuite name="storeReviews.spec.ts" timestamp="1674073035097" hostname="" tests="6" failures="6" skipped="0" time="2.184" errors="0">
+<testcase name="store reviews api test get all store reviews @pro" classname="storeReviews.spec.ts › store reviews api test › get all store reviews @pro" time="0.366">
 <failure message="storeReviews.spec.ts:25:9 get all store reviews @pro" type="FAILURE">
 <![CDATA[  storeReviews.spec.ts:25:9 › store reviews api test › get all store reviews @pro ==================
 
@@ -4961,7 +4761,7 @@
 ]]>
 </failure>
 </testcase>
-<testcase name="store reviews api test get single store review @pro" classname="storeReviews.spec.ts › store reviews api test › get single store review @pro" time="0.321">
+<testcase name="store reviews api test get single store review @pro" classname="storeReviews.spec.ts › store reviews api test › get single store review @pro" time="0.364">
 <failure message="storeReviews.spec.ts:31:9 get single store review @pro" type="FAILURE">
 <![CDATA[  storeReviews.spec.ts:31:9 › store reviews api test › get single store review @pro ================
 
@@ -5013,7 +4813,7 @@
 ]]>
 </failure>
 </testcase>
-<testcase name="store reviews api test update a store review @pro" classname="storeReviews.spec.ts › store reviews api test › update a store review @pro" time="0.319">
+<testcase name="store reviews api test update a store review @pro" classname="storeReviews.spec.ts › store reviews api test › update a store review @pro" time="0.365">
 <failure message="storeReviews.spec.ts:41:9 update a store review @pro" type="FAILURE">
 <![CDATA[  storeReviews.spec.ts:41:9 › store reviews api test › update a store review @pro ==================
 
@@ -5065,7 +4865,7 @@
 ]]>
 </failure>
 </testcase>
-<testcase name="store reviews api test delete a store review  @pro" classname="storeReviews.spec.ts › store reviews api test › delete a store review  @pro" time="0.316">
+<testcase name="store reviews api test delete a store review  @pro" classname="storeReviews.spec.ts › store reviews api test › delete a store review  @pro" time="0.366">
 <failure message="storeReviews.spec.ts:52:9 delete a store review  @pro" type="FAILURE">
 <![CDATA[  storeReviews.spec.ts:52:9 › store reviews api test › delete a store review  @pro =================
 
@@ -5117,7 +4917,7 @@
 ]]>
 </failure>
 </testcase>
-<testcase name="store reviews api test restore a deleted store review  @pro" classname="storeReviews.spec.ts › store reviews api test › restore a deleted store review  @pro" time="0.319">
+<testcase name="store reviews api test restore a deleted store review  @pro" classname="storeReviews.spec.ts › store reviews api test › restore a deleted store review  @pro" time="0.364">
 <failure message="storeReviews.spec.ts:62:9 restore a deleted store review  @pro" type="FAILURE">
 <![CDATA[  storeReviews.spec.ts:62:9 › store reviews api test › restore a deleted store review  @pro ========
 
@@ -5169,7 +4969,7 @@
 ]]>
 </failure>
 </testcase>
-<testcase name="store reviews api test update batch store review @pro" classname="storeReviews.spec.ts › store reviews api test › update batch store review @pro" time="0.309">
+<testcase name="store reviews api test update batch store review @pro" classname="storeReviews.spec.ts › store reviews api test › update batch store review @pro" time="0.359">
 <failure message="storeReviews.spec.ts:73:9 update batch store review @pro" type="FAILURE">
 <![CDATA[  storeReviews.spec.ts:73:9 › store reviews api test › update batch store review @pro ==============
 
@@ -5216,112 +5016,12 @@
 </failure>
 </testcase>
 </testsuite>
-<testsuite name="stores.spec.ts" timestamp="1674072665788" hostname="" tests="16" failures="16" skipped="0" time="5.899" errors="0">
-<testcase name="stores api test get store availability status" classname="stores.spec.ts › stores api test › get store availability status" time="0.315">
-<failure message="stores.spec.ts:27:9 get store availability status" type="FAILURE">
-<![CDATA[  stores.spec.ts:27:9 › stores api test › get store availability status ============================
-
-    Error: expect(received).toBeTruthy()
-
-    Received: false
-
-      28 |         let response = await request.get(endPoints.getAllStoresCheck)
-      29 |         let responseBody = await apiUtils.getResponseBody(response)
-    > 30 |         expect(response.ok()).toBeTruthy()
-         |                               ^
-      31 |     });
-      32 |
-      33 |     test('get all stores', async ({ request }) => {
-
-        at /home/runner/work/dokan/dokan/tests/api/tests/stores.spec.ts:30:31
-
-    Retry #1 ---------------------------------------------------------------------------------------
-
-    Error: expect(received).toBeTruthy()
-
-    Received: false
-
-      28 |         let response = await request.get(endPoints.getAllStoresCheck)
-      29 |         let responseBody = await apiUtils.getResponseBody(response)
-    > 30 |         expect(response.ok()).toBeTruthy()
-         |                               ^
-      31 |     });
-      32 |
-      33 |     test('get all stores', async ({ request }) => {
-
-        at /home/runner/work/dokan/dokan/tests/api/tests/stores.spec.ts:30:31
-
-    Retry #2 ---------------------------------------------------------------------------------------
-
-    Error: expect(received).toBeTruthy()
-
-    Received: false
-
-      28 |         let response = await request.get(endPoints.getAllStoresCheck)
-      29 |         let responseBody = await apiUtils.getResponseBody(response)
-    > 30 |         expect(response.ok()).toBeTruthy()
-         |                               ^
-      31 |     });
-      32 |
-      33 |     test('get all stores', async ({ request }) => {
-
-        at /home/runner/work/dokan/dokan/tests/api/tests/stores.spec.ts:30:31
-]]>
-</failure>
+<testsuite name="stores.spec.ts" timestamp="1674073035097" hostname="" tests="16" failures="14" skipped="0" time="6.787" errors="0">
+<testcase name="stores api test get store availability status" classname="stores.spec.ts › stores api test › get store availability status" time="0.127">
 </testcase>
-<testcase name="stores api test get all stores" classname="stores.spec.ts › stores api test › get all stores" time="0.323">
-<failure message="stores.spec.ts:33:9 get all stores" type="FAILURE">
-<![CDATA[  stores.spec.ts:33:9 › stores api test › get all stores ===========================================
-
-    Error: expect(received).toBeTruthy()
-
-    Received: false
-
-      34 |         let response = await request.get(endPoints.getAllStores)
-      35 |         let responseBody = await apiUtils.getResponseBody(response)
-    > 36 |         expect(response.ok()).toBeTruthy()
-         |                               ^
-      37 |         // expect(responseBody[0]).toContainEqual(expect.objectContaining(
-      38 |         //     {
-      39 |         //         id: expect.any(Number),
-
-        at /home/runner/work/dokan/dokan/tests/api/tests/stores.spec.ts:36:31
-
-    Retry #1 ---------------------------------------------------------------------------------------
-
-    Error: expect(received).toBeTruthy()
-
-    Received: false
-
-      34 |         let response = await request.get(endPoints.getAllStores)
-      35 |         let responseBody = await apiUtils.getResponseBody(response)
-    > 36 |         expect(response.ok()).toBeTruthy()
-         |                               ^
-      37 |         // expect(responseBody[0]).toContainEqual(expect.objectContaining(
-      38 |         //     {
-      39 |         //         id: expect.any(Number),
-
-        at /home/runner/work/dokan/dokan/tests/api/tests/stores.spec.ts:36:31
-
-    Retry #2 ---------------------------------------------------------------------------------------
-
-    Error: expect(received).toBeTruthy()
-
-    Received: false
-
-      34 |         let response = await request.get(endPoints.getAllStores)
-      35 |         let responseBody = await apiUtils.getResponseBody(response)
-    > 36 |         expect(response.ok()).toBeTruthy()
-         |                               ^
-      37 |         // expect(responseBody[0]).toContainEqual(expect.objectContaining(
-      38 |         //     {
-      39 |         //         id: expect.any(Number),
-
-        at /home/runner/work/dokan/dokan/tests/api/tests/stores.spec.ts:36:31
-]]>
-</failure>
+<testcase name="stores api test get all stores" classname="stores.spec.ts › stores api test › get all stores" time="0.122">
 </testcase>
-<testcase name="stores api test get single store" classname="stores.spec.ts › stores api test › get single store" time="0.315">
+<testcase name="stores api test get single store" classname="stores.spec.ts › stores api test › get single store" time="0.366">
 <failure message="stores.spec.ts:89:9 get single store" type="FAILURE">
 <![CDATA[  stores.spec.ts:89:9 › stores api test › get single store =========================================
 
@@ -5373,7 +5073,7 @@
 ]]>
 </failure>
 </testcase>
-<testcase name="stores api test create a store" classname="stores.spec.ts › stores api test › create a store" time="0.317">
+<testcase name="stores api test create a store" classname="stores.spec.ts › stores api test › create a store" time="0.372">
 <failure message="stores.spec.ts:144:9 create a store" type="FAILURE">
 <![CDATA[  stores.spec.ts:144:9 › stores api test › create a store ==========================================
 
@@ -5425,7 +5125,7 @@
 ]]>
 </failure>
 </testcase>
-<testcase name="stores api test update a store" classname="stores.spec.ts › stores api test › update a store" time="0.318">
+<testcase name="stores api test update a store" classname="stores.spec.ts › stores api test › update a store" time="0.369">
 <failure message="stores.spec.ts:150:9 update a store" type="FAILURE">
 <![CDATA[  stores.spec.ts:150:9 › stores api test › update a store ==========================================
 
@@ -5477,7 +5177,7 @@
 ]]>
 </failure>
 </testcase>
-<testcase name="stores api test delete a store" classname="stores.spec.ts › stores api test › delete a store" time="0.601">
+<testcase name="stores api test delete a store" classname="stores.spec.ts › stores api test › delete a store" time="0.707">
 <failure message="stores.spec.ts:158:9 delete a store" type="FAILURE">
 <![CDATA[  stores.spec.ts:158:9 › stores api test › delete a store ==========================================
 
@@ -5529,7 +5229,7 @@
 ]]>
 </failure>
 </testcase>
-<testcase name="stores api test get store current visitor" classname="stores.spec.ts › stores api test › get store current visitor" time="0.315">
+<testcase name="stores api test get store current visitor" classname="stores.spec.ts › stores api test › get store current visitor" time="0.367">
 <failure message="stores.spec.ts:166:9 get store current visitor" type="FAILURE">
 <![CDATA[  stores.spec.ts:166:9 › stores api test › get store current visitor ===============================
 
@@ -5581,7 +5281,7 @@
 ]]>
 </failure>
 </testcase>
-<testcase name="stores api test get store stats" classname="stores.spec.ts › stores api test › get store stats" time="0.317">
+<testcase name="stores api test get store stats" classname="stores.spec.ts › stores api test › get store stats" time="0.369">
 <failure message="stores.spec.ts:172:9 get store stats" type="FAILURE">
 <![CDATA[  stores.spec.ts:172:9 › stores api test › get store stats =========================================
 
@@ -5633,7 +5333,7 @@
 ]]>
 </failure>
 </testcase>
-<testcase name="stores api test get store categories" classname="stores.spec.ts › stores api test › get store categories" time="0.309">
+<testcase name="stores api test get store categories" classname="stores.spec.ts › stores api test › get store categories" time="0.371">
 <failure message="stores.spec.ts:180:9 get store categories" type="FAILURE">
 <![CDATA[  stores.spec.ts:180:9 › stores api test › get store categories ====================================
 
@@ -5685,7 +5385,7 @@
 ]]>
 </failure>
 </testcase>
-<testcase name="stores api test get store products" classname="stores.spec.ts › stores api test › get store products" time="0.888">
+<testcase name="stores api test get store products" classname="stores.spec.ts › stores api test › get store products" time="1.064">
 <failure message="stores.spec.ts:188:9 get store products" type="FAILURE">
 <![CDATA[  stores.spec.ts:188:9 › stores api test › get store products ======================================
 
@@ -5737,7 +5437,7 @@
 ]]>
 </failure>
 </testcase>
-<testcase name="stores api test get store reviews" classname="stores.spec.ts › stores api test › get store reviews" time="0.318">
+<testcase name="stores api test get store reviews" classname="stores.spec.ts › stores api test › get store reviews" time="0.362">
 <failure message="stores.spec.ts:198:9 get store reviews" type="FAILURE">
 <![CDATA[  stores.spec.ts:198:9 › stores api test › get store reviews =======================================
 
@@ -5789,7 +5489,7 @@
 ]]>
 </failure>
 </testcase>
-<testcase name="stores api test create a store review" classname="stores.spec.ts › stores api test › create a store review" time="0.314">
+<testcase name="stores api test create a store review" classname="stores.spec.ts › stores api test › create a store review" time="0.37">
 <failure message="stores.spec.ts:208:9 create a store review" type="FAILURE">
 <![CDATA[  stores.spec.ts:208:9 › stores api test › create a store review ===================================
 
@@ -5841,7 +5541,7 @@
 ]]>
 </failure>
 </testcase>
-<testcase name="stores api test update a store status" classname="stores.spec.ts › stores api test › update a store status" time="0.313">
+<testcase name="stores api test update a store status" classname="stores.spec.ts › stores api test › update a store status" time="0.367">
 <failure message="stores.spec.ts:216:9 update a store status" type="FAILURE">
 <![CDATA[  stores.spec.ts:216:9 › stores api test › update a store status ===================================
 
@@ -5893,7 +5593,7 @@
 ]]>
 </failure>
 </testcase>
-<testcase name="stores api test admin contact store" classname="stores.spec.ts › stores api test › admin contact store" time="0.317">
+<testcase name="stores api test admin contact store" classname="stores.spec.ts › stores api test › admin contact store" time="0.366">
 <failure message="stores.spec.ts:224:9 admin contact store" type="FAILURE">
 <![CDATA[  stores.spec.ts:224:9 › stores api test › admin contact store =====================================
 
@@ -5945,7 +5645,7 @@
 ]]>
 </failure>
 </testcase>
-<testcase name="stores api test admin email store" classname="stores.spec.ts › stores api test › admin email store" time="0.311">
+<testcase name="stores api test admin email store" classname="stores.spec.ts › stores api test › admin email store" time="0.37">
 <failure message="stores.spec.ts:232:9 admin email store" type="FAILURE">
 <![CDATA[  stores.spec.ts:232:9 › stores api test › admin email store =======================================
 
@@ -5997,54 +5697,60 @@
 ]]>
 </failure>
 </testcase>
-<testcase name="stores api test update batch stores" classname="stores.spec.ts › stores api test › update batch stores" time="0.308">
+<testcase name="stores api test update batch stores" classname="stores.spec.ts › stores api test › update batch stores" time="0.718">
 <failure message="stores.spec.ts:240:9 update batch stores" type="FAILURE">
 <![CDATA[  stores.spec.ts:240:9 › stores api test › update batch stores =====================================
 
-    TypeError: (intermediate value).map is not a function
+    Error: expect(received).toBeTruthy()
 
-      239 |
-      240 |     test('update batch stores', async ({ request }) => {
-    > 241 |         let allStoreIds = (await apiUtils.getAllStores()).map((a: { id: any }) => a.id)
-          |                                                           ^
-      242 |         // console.log(allStoreIds)
-      243 |
+    Received: false
+
       244 |         let response = await request.put(endPoints.updateBatchStores, { data: { approved: allStoreIds } })
+      245 |         let responseBody = await apiUtils.getResponseBody(response)
+    > 246 |         expect(response.ok()).toBeTruthy()
+          |                               ^
+      247 |
+      248 |     });
+      249 |
 
-        at /home/runner/work/dokan/dokan/tests/api/tests/stores.spec.ts:241:59
+        at /home/runner/work/dokan/dokan/tests/api/tests/stores.spec.ts:246:31
 
     Retry #1 ---------------------------------------------------------------------------------------
 
-    TypeError: (intermediate value).map is not a function
+    Error: expect(received).toBeTruthy()
 
-      239 |
-      240 |     test('update batch stores', async ({ request }) => {
-    > 241 |         let allStoreIds = (await apiUtils.getAllStores()).map((a: { id: any }) => a.id)
-          |                                                           ^
-      242 |         // console.log(allStoreIds)
-      243 |
+    Received: false
+
       244 |         let response = await request.put(endPoints.updateBatchStores, { data: { approved: allStoreIds } })
+      245 |         let responseBody = await apiUtils.getResponseBody(response)
+    > 246 |         expect(response.ok()).toBeTruthy()
+          |                               ^
+      247 |
+      248 |     });
+      249 |
 
-        at /home/runner/work/dokan/dokan/tests/api/tests/stores.spec.ts:241:59
+        at /home/runner/work/dokan/dokan/tests/api/tests/stores.spec.ts:246:31
 
     Retry #2 ---------------------------------------------------------------------------------------
 
-    TypeError: (intermediate value).map is not a function
+    Error: expect(received).toBeTruthy()
 
-      239 |
-      240 |     test('update batch stores', async ({ request }) => {
-    > 241 |         let allStoreIds = (await apiUtils.getAllStores()).map((a: { id: any }) => a.id)
-          |                                                           ^
-      242 |         // console.log(allStoreIds)
-      243 |
+    Received: false
+
       244 |         let response = await request.put(endPoints.updateBatchStores, { data: { approved: allStoreIds } })
+      245 |         let responseBody = await apiUtils.getResponseBody(response)
+    > 246 |         expect(response.ok()).toBeTruthy()
+          |                               ^
+      247 |
+      248 |     });
+      249 |
 
-        at /home/runner/work/dokan/dokan/tests/api/tests/stores.spec.ts:241:59
+        at /home/runner/work/dokan/dokan/tests/api/tests/stores.spec.ts:246:31
 ]]>
 </failure>
 </testcase>
 </testsuite>
-<testsuite name="supportTickets.spec.ts" timestamp="1674072665788" hostname="" tests="8" failures="0" skipped="8" time="0.001" errors="0">
+<testsuite name="supportTickets.spec.ts" timestamp="1674073035097" hostname="" tests="8" failures="0" skipped="8" time="0.001" errors="0">
 <testcase name="support ticket api test get all support ticket customers" classname="supportTickets.spec.ts › support ticket api test › get all support ticket customers" time="0">
 <skipped>
 </skipped>
@@ -6078,14 +5784,14 @@
 </skipped>
 </testcase>
 </testsuite>
-<testsuite name="v2/orderDownloads.spec.ts" timestamp="1674072665788" hostname="" tests="1" failures="0" skipped="1" time="0" errors="0">
+<testsuite name="v2/orderDownloads.spec.ts" timestamp="1674073035097" hostname="" tests="1" failures="0" skipped="1" time="0" errors="0">
 <testcase name="order downloads api test get all order downloads @v2" classname="v2/orderDownloads.spec.ts › order downloads api test › get all order downloads @v2" time="0">
 <skipped>
 </skipped>
 </testcase>
 </testsuite>
-<testsuite name="v2/orders.spec.ts" timestamp="1674072665788" hostname="" tests="1" failures="1" skipped="0" time="0.304" errors="0">
-<testcase name="orders api test update batch orders @v2" classname="v2/orders.spec.ts › orders api test › update batch orders @v2" time="0.304">
+<testsuite name="v2/orders.spec.ts" timestamp="1674073035097" hostname="" tests="1" failures="1" skipped="0" time="0.36" errors="0">
+<testcase name="orders api test update batch orders @v2" classname="v2/orders.spec.ts › orders api test › update batch orders @v2" time="0.36">
 <failure message="orders.spec.ts:23:9 update batch orders @v2" type="FAILURE">
 <![CDATA[  v2/orders.spec.ts:23:9 › orders api test › update batch orders @v2 ===============================
 
@@ -6132,14 +5838,14 @@
 </failure>
 </testcase>
 </testsuite>
-<testsuite name="v2/productFilter.spec.ts" timestamp="1674072665788" hostname="" tests="2" failures="0" skipped="0" time="0.201" errors="0">
-<testcase name="product filter api test get products filter by data @v2" classname="v2/productFilter.spec.ts › product filter api test › get products filter by data @v2" time="0.102">
+<testsuite name="v2/productFilter.spec.ts" timestamp="1674073035097" hostname="" tests="2" failures="0" skipped="0" time="0.242" errors="0">
+<testcase name="product filter api test get products filter by data @v2" classname="v2/productFilter.spec.ts › product filter api test › get products filter by data @v2" time="0.125">
 </testcase>
-<testcase name="product filter api test get filtered products @v2" classname="v2/productFilter.spec.ts › product filter api test › get filtered products @v2" time="0.099">
+<testcase name="product filter api test get filtered products @v2" classname="v2/productFilter.spec.ts › product filter api test › get filtered products @v2" time="0.117">
 </testcase>
 </testsuite>
-<testsuite name="v2/setttingsGroup.spec.ts" timestamp="1674072665788" hostname="" tests="7" failures="7" skipped="0" time="3.075" errors="0">
-<testcase name="new settings api test get store settings @v2" classname="v2/setttingsGroup.spec.ts › new settings api test › get store settings @v2" time="0.4">
+<testsuite name="v2/setttingsGroup.spec.ts" timestamp="1674073035097" hostname="" tests="7" failures="7" skipped="0" time="3.475" errors="0">
+<testcase name="new settings api test get store settings @v2" classname="v2/setttingsGroup.spec.ts › new settings api test › get store settings @v2" time="0.451">
 <failure message="setttingsGroup.spec.ts:25:9 get store settings @v2" type="FAILURE">
 <![CDATA[  v2/setttingsGroup.spec.ts:25:9 › new settings api test › get store settings @v2 ==================
 
@@ -6191,7 +5897,7 @@
 ]]>
 </failure>
 </testcase>
-<testcase name="new settings api test get single setting group @v2" classname="v2/setttingsGroup.spec.ts › new settings api test › get single setting group @v2" time="0.448">
+<testcase name="new settings api test get single setting group @v2" classname="v2/setttingsGroup.spec.ts › new settings api test › get single setting group @v2" time="0.505">
 <failure message="setttingsGroup.spec.ts:31:9 get single setting group @v2" type="FAILURE">
 <![CDATA[  v2/setttingsGroup.spec.ts:31:9 › new settings api test › get single setting group @v2 ============
 
@@ -6243,7 +5949,7 @@
 ]]>
 </failure>
 </testcase>
-<testcase name="new settings api test update single setting group @v2" classname="v2/setttingsGroup.spec.ts › new settings api test › update single setting group @v2" time="0.455">
+<testcase name="new settings api test update single setting group @v2" classname="v2/setttingsGroup.spec.ts › new settings api test › update single setting group @v2" time="0.504">
 <failure message="setttingsGroup.spec.ts:37:9 update single setting group @v2" type="FAILURE">
 <![CDATA[  v2/setttingsGroup.spec.ts:37:9 › new settings api test › update single setting group @v2 =========
 
@@ -6295,7 +6001,7 @@
 ]]>
 </failure>
 </testcase>
-<testcase name="new settings api test get sub settings from single settings group @v2" classname="v2/setttingsGroup.spec.ts › new settings api test › get sub settings from single settings group @v2" time="0.442">
+<testcase name="new settings api test get sub settings from single settings group @v2" classname="v2/setttingsGroup.spec.ts › new settings api test › get sub settings from single settings group @v2" time="0.498">
 <failure message="setttingsGroup.spec.ts:43:9 get sub settings from single settings group @v2" type="FAILURE">
 <![CDATA[  v2/setttingsGroup.spec.ts:43:9 › new settings api test › get sub settings from single settings group @v2 
 
@@ -6347,7 +6053,7 @@
 ]]>
 </failure>
 </testcase>
-<testcase name="new settings api test update sub settings from single settings group @v2" classname="v2/setttingsGroup.spec.ts › new settings api test › update sub settings from single settings group @v2" time="0.444">
+<testcase name="new settings api test update sub settings from single settings group @v2" classname="v2/setttingsGroup.spec.ts › new settings api test › update sub settings from single settings group @v2" time="0.516">
 <failure message="setttingsGroup.spec.ts:49:9 update sub settings from single settings group @v2" type="FAILURE">
 <![CDATA[  v2/setttingsGroup.spec.ts:49:9 › new settings api test › update sub settings from single settings group @v2 
 
@@ -6399,7 +6105,7 @@
 ]]>
 </failure>
 </testcase>
-<testcase name="new settings api test get sub sub settings from single settings group @v2" classname="v2/setttingsGroup.spec.ts › new settings api test › get sub sub settings from single settings group @v2" time="0.439">
+<testcase name="new settings api test get sub sub settings from single settings group @v2" classname="v2/setttingsGroup.spec.ts › new settings api test › get sub sub settings from single settings group @v2" time="0.494">
 <failure message="setttingsGroup.spec.ts:55:9 get sub sub settings from single settings group @v2" type="FAILURE">
 <![CDATA[  v2/setttingsGroup.spec.ts:55:9 › new settings api test › get sub sub settings from single settings group @v2 
 
@@ -6451,7 +6157,7 @@
 ]]>
 </failure>
 </testcase>
-<testcase name="new settings api test update sub sub settings from single settings group @v2" classname="v2/setttingsGroup.spec.ts › new settings api test › update sub sub settings from single settings group @v2" time="0.447">
+<testcase name="new settings api test update sub sub settings from single settings group @v2" classname="v2/setttingsGroup.spec.ts › new settings api test › update sub sub settings from single settings group @v2" time="0.507">
 <failure message="setttingsGroup.spec.ts:61:9 update sub sub settings from single settings group @v2" type="FAILURE">
 <![CDATA[  v2/setttingsGroup.spec.ts:61:9 › new settings api test › update sub sub settings from single settings group @v2 
 
@@ -6504,8 +6210,8 @@
 </failure>
 </testcase>
 </testsuite>
-<testsuite name="v2/v1productAttribute.spec.ts" timestamp="1674072665788" hostname="" tests="2" failures="2" skipped="0" time="0.618" errors="0">
-<testcase name="product attribute api test set default attribute" classname="v2/v1productAttribute.spec.ts › product attribute api test › set default attribute" time="0.31">
+<testsuite name="v2/v1productAttribute.spec.ts" timestamp="1674073035097" hostname="" tests="2" failures="2" skipped="0" time="0.718" errors="0">
+<testcase name="product attribute api test set default attribute" classname="v2/v1productAttribute.spec.ts › product attribute api test › set default attribute" time="0.359">
 <failure message="v1productAttribute.spec.ts:31:9 set default attribute" type="FAILURE">
 <![CDATA[  v2/v1productAttribute.spec.ts:31:9 › product attribute api test › set default attribute ==========
 
@@ -6557,7 +6263,7 @@
 ]]>
 </failure>
 </testcase>
-<testcase name="product attribute api test update product attribute" classname="v2/v1productAttribute.spec.ts › product attribute api test › update product attribute" time="0.308">
+<testcase name="product attribute api test update product attribute" classname="v2/v1productAttribute.spec.ts › product attribute api test › update product attribute" time="0.359">
 <failure message="v1productAttribute.spec.ts:44:9 update product attribute" type="FAILURE">
 <![CDATA[  v2/v1productAttribute.spec.ts:44:9 › product attribute api test › update product attribute =======
 
@@ -6610,8 +6316,8 @@
 </failure>
 </testcase>
 </testsuite>
-<testsuite name="v2/v1productBlock.spec.ts" timestamp="1674072665788" hostname="" tests="2" failures="2" skipped="0" time="0.609" errors="0">
-<testcase name="product block api test get product block details" classname="v2/v1productBlock.spec.ts › product block api test › get product block details" time="0.304">
+<testsuite name="v2/v1productBlock.spec.ts" timestamp="1674073035097" hostname="" tests="2" failures="2" skipped="0" time="0.709" errors="0">
+<testcase name="product block api test get product block details" classname="v2/v1productBlock.spec.ts › product block api test › get product block details" time="0.354">
 <failure message="v1productBlock.spec.ts:25:9 get product block details" type="FAILURE">
 <![CDATA[  v2/v1productBlock.spec.ts:25:9 › product block api test › get product block details ==============
 
@@ -6663,7 +6369,7 @@
 ]]>
 </failure>
 </testcase>
-<testcase name="product block api test get variable product block details" classname="v2/v1productBlock.spec.ts › product block api test › get variable product block details" time="0.305">
+<testcase name="product block api test get variable product block details" classname="v2/v1productBlock.spec.ts › product block api test › get variable product block details" time="0.355">
 <failure message="v1productBlock.spec.ts:31:9 get variable product block details" type="FAILURE">
 <![CDATA[  v2/v1productBlock.spec.ts:31:9 › product block api test › get variable product block details =====
 
@@ -6716,14 +6422,14 @@
 </failure>
 </testcase>
 </testsuite>
-<testsuite name="v2/v1rankMath.spec.ts" timestamp="1674072665788" hostname="" tests="1" failures="0" skipped="1" time="0.001" errors="0">
+<testsuite name="v2/v1rankMath.spec.ts" timestamp="1674073035097" hostname="" tests="1" failures="0" skipped="1" time="0.001" errors="0">
 <testcase name="rank math api test rank math" classname="v2/v1rankMath.spec.ts › rank math api test › rank math" time="0.001">
 <skipped>
 </skipped>
 </testcase>
 </testsuite>
-<testsuite name="v2/v1vendorDashborad.spec.ts" timestamp="1674072665788" hostname="" tests="7" failures="7" skipped="0" time="2.99" errors="0">
-<testcase name="vendor dashboard api test get vendor dashboard statistics" classname="v2/v1vendorDashborad.spec.ts › vendor dashboard api test › get vendor dashboard statistics" time="0.427">
+<testsuite name="v2/v1vendorDashborad.spec.ts" timestamp="1674073035097" hostname="" tests="7" failures="7" skipped="0" time="3.388" errors="0">
+<testcase name="vendor dashboard api test get vendor dashboard statistics" classname="v2/v1vendorDashborad.spec.ts › vendor dashboard api test › get vendor dashboard statistics" time="0.485">
 <failure message="v1vendorDashborad.spec.ts:19:9 get vendor dashboard statistics" type="FAILURE">
 <![CDATA[  v2/v1vendorDashborad.spec.ts:19:9 › vendor dashboard api test › get vendor dashboard statistics ==
 
@@ -6775,7 +6481,7 @@
 ]]>
 </failure>
 </testcase>
-<testcase name="vendor dashboard api test get vendor profile information" classname="v2/v1vendorDashborad.spec.ts › vendor dashboard api test › get vendor profile information" time="0.428">
+<testcase name="vendor dashboard api test get vendor profile information" classname="v2/v1vendorDashborad.spec.ts › vendor dashboard api test › get vendor profile information" time="0.486">
 <failure message="v1vendorDashborad.spec.ts:25:9 get vendor profile information" type="FAILURE">
 <![CDATA[  v2/v1vendorDashborad.spec.ts:25:9 › vendor dashboard api test › get vendor profile information ===
 
@@ -6827,7 +6533,7 @@
 ]]>
 </failure>
 </testcase>
-<testcase name="vendor dashboard api test get vendor sales report" classname="v2/v1vendorDashborad.spec.ts › vendor dashboard api test › get vendor sales report" time="0.422">
+<testcase name="vendor dashboard api test get vendor sales report" classname="v2/v1vendorDashborad.spec.ts › vendor dashboard api test › get vendor sales report" time="0.484">
 <failure message="v1vendorDashborad.spec.ts:31:9 get vendor sales report" type="FAILURE">
 <![CDATA[  v2/v1vendorDashborad.spec.ts:31:9 › vendor dashboard api test › get vendor sales report ==========
 
@@ -6879,7 +6585,7 @@
 ]]>
 </failure>
 </testcase>
-<testcase name="vendor dashboard api test get vendor product reports summary" classname="v2/v1vendorDashborad.spec.ts › vendor dashboard api test › get vendor product reports summary" time="0.429">
+<testcase name="vendor dashboard api test get vendor product reports summary" classname="v2/v1vendorDashborad.spec.ts › vendor dashboard api test › get vendor product reports summary" time="0.484">
 <failure message="v1vendorDashborad.spec.ts:37:9 get vendor product reports summary" type="FAILURE">
 <![CDATA[  v2/v1vendorDashborad.spec.ts:37:9 › vendor dashboard api test › get vendor product reports summary 
 
@@ -6931,7 +6637,7 @@
 ]]>
 </failure>
 </testcase>
-<testcase name="vendor dashboard api test get vendor order reports summary" classname="v2/v1vendorDashborad.spec.ts › vendor dashboard api test › get vendor order reports summary" time="0.426">
+<testcase name="vendor dashboard api test get vendor order reports summary" classname="v2/v1vendorDashborad.spec.ts › vendor dashboard api test › get vendor order reports summary" time="0.489">
 <failure message="v1vendorDashborad.spec.ts:43:9 get vendor order reports summary" type="FAILURE">
 <![CDATA[  v2/v1vendorDashborad.spec.ts:43:9 › vendor dashboard api test › get vendor order reports summary =
 
@@ -6983,7 +6689,7 @@
 ]]>
 </failure>
 </testcase>
-<testcase name="vendor dashboard api test get vendor store preferences" classname="v2/v1vendorDashborad.spec.ts › vendor dashboard api test › get vendor store preferences" time="0.42">
+<testcase name="vendor dashboard api test get vendor store preferences" classname="v2/v1vendorDashborad.spec.ts › vendor dashboard api test › get vendor store preferences" time="0.487">
 <failure message="v1vendorDashborad.spec.ts:49:9 get vendor store preferences" type="FAILURE">
 <![CDATA[  v2/v1vendorDashborad.spec.ts:49:9 › vendor dashboard api test › get vendor store preferences =====
 
@@ -7035,7 +6741,7 @@
 ]]>
 </failure>
 </testcase>
-<testcase name="vendor dashboard api test get vendor profile progress bar data" classname="v2/v1vendorDashborad.spec.ts › vendor dashboard api test › get vendor profile progress bar data" time="0.438">
+<testcase name="vendor dashboard api test get vendor profile progress bar data" classname="v2/v1vendorDashborad.spec.ts › vendor dashboard api test › get vendor profile progress bar data" time="0.473">
 <failure message="v1vendorDashborad.spec.ts:55:9 get vendor profile progress bar data" type="FAILURE">
 <![CDATA[  v2/v1vendorDashborad.spec.ts:55:9 › vendor dashboard api test › get vendor profile progress bar data 
 
@@ -7088,8 +6794,8 @@
 </failure>
 </testcase>
 </testsuite>
-<testsuite name="v2/withdraw.spec.ts" timestamp="1674072665788" hostname="" tests="2" failures="2" skipped="0" time="0.849" errors="0">
-<testcase name="withdraw api test get withdraw settings @v2" classname="v2/withdraw.spec.ts › withdraw api test › get withdraw settings @v2" time="0.43">
+<testsuite name="v2/withdraw.spec.ts" timestamp="1674073035097" hostname="" tests="2" failures="2" skipped="0" time="0.962" errors="0">
+<testcase name="withdraw api test get withdraw settings @v2" classname="v2/withdraw.spec.ts › withdraw api test › get withdraw settings @v2" time="0.484">
 <failure message="withdraw.spec.ts:19:9 get withdraw settings @v2" type="FAILURE">
 <![CDATA[  v2/withdraw.spec.ts:19:9 › withdraw api test › get withdraw settings @v2 =========================
 
@@ -7141,7 +6847,7 @@
 ]]>
 </failure>
 </testcase>
-<testcase name="withdraw api test get withdraw summary @v2" classname="v2/withdraw.spec.ts › withdraw api test › get withdraw summary @v2" time="0.419">
+<testcase name="withdraw api test get withdraw summary @v2" classname="v2/withdraw.spec.ts › withdraw api test › get withdraw summary @v2" time="0.478">
 <failure message="withdraw.spec.ts:25:9 get withdraw summary @v2" type="FAILURE">
 <![CDATA[  v2/withdraw.spec.ts:25:9 › withdraw api test › get withdraw summary @v2 ==========================
 
@@ -7194,8 +6900,8 @@
 </failure>
 </testcase>
 </testsuite>
-<testsuite name="wholesaleCustomers.spec.ts" timestamp="1674072665788" hostname="" tests="5" failures="5" skipped="0" time="1.871" errors="0">
-<testcase name="wholesale customers api test get all wholesale customers @pro" classname="wholesaleCustomers.spec.ts › wholesale customers api test › get all wholesale customers @pro" time="0.317">
+<testsuite name="wholesaleCustomers.spec.ts" timestamp="1674073035097" hostname="" tests="5" failures="5" skipped="0" time="2.171" errors="0">
+<testcase name="wholesale customers api test get all wholesale customers @pro" classname="wholesaleCustomers.spec.ts › wholesale customers api test › get all wholesale customers @pro" time="0.37">
 <failure message="wholesaleCustomers.spec.ts:22:9 get all wholesale customers @pro" type="FAILURE">
 <![CDATA[  wholesaleCustomers.spec.ts:22:9 › wholesale customers api test › get all wholesale customers @pro 
 
@@ -7247,7 +6953,7 @@
 ]]>
 </failure>
 </testcase>
-<testcase name="wholesale customers api test create a wholesale customer @pro" classname="wholesaleCustomers.spec.ts › wholesale customers api test › create a wholesale customer @pro" time="0.603">
+<testcase name="wholesale customers api test create a wholesale customer @pro" classname="wholesaleCustomers.spec.ts › wholesale customers api test › create a wholesale customer @pro" time="0.703">
 <failure message="wholesaleCustomers.spec.ts:28:9 create a wholesale customer @pro" type="FAILURE">
 <![CDATA[  wholesaleCustomers.spec.ts:28:9 › wholesale customers api test › create a wholesale customer @pro 
 
@@ -7299,7 +7005,7 @@
 ]]>
 </failure>
 </testcase>
-<testcase name="wholesale customers api test update a wholesale customer @pro" classname="wholesaleCustomers.spec.ts › wholesale customers api test › update a wholesale customer @pro" time="0.322">
+<testcase name="wholesale customers api test update a wholesale customer @pro" classname="wholesaleCustomers.spec.ts › wholesale customers api test › update a wholesale customer @pro" time="0.368">
 <failure message="wholesaleCustomers.spec.ts:36:9 update a wholesale customer @pro" type="FAILURE">
 <![CDATA[  wholesaleCustomers.spec.ts:36:9 › wholesale customers api test › update a wholesale customer @pro 
 
@@ -7351,7 +7057,7 @@
 ]]>
 </failure>
 </testcase>
-<testcase name="wholesale customers api test delete a wholesale customer @pro" classname="wholesaleCustomers.spec.ts › wholesale customers api test › delete a wholesale customer @pro" time="0.314">
+<testcase name="wholesale customers api test delete a wholesale customer @pro" classname="wholesaleCustomers.spec.ts › wholesale customers api test › delete a wholesale customer @pro" time="0.368">
 <failure message="wholesaleCustomers.spec.ts:44:9 delete a wholesale customer @pro" type="FAILURE">
 <![CDATA[  wholesaleCustomers.spec.ts:44:9 › wholesale customers api test › delete a wholesale customer @pro 
 
@@ -7403,7 +7109,7 @@
 ]]>
 </failure>
 </testcase>
-<testcase name="wholesale customers api test update batch wholesale customers @pro" classname="wholesaleCustomers.spec.ts › wholesale customers api test › update batch wholesale customers @pro" time="0.315">
+<testcase name="wholesale customers api test update batch wholesale customers @pro" classname="wholesaleCustomers.spec.ts › wholesale customers api test › update batch wholesale customers @pro" time="0.362">
 <failure message="wholesaleCustomers.spec.ts:52:9 update batch wholesale customers @pro" type="FAILURE">
 <![CDATA[  wholesaleCustomers.spec.ts:52:9 › wholesale customers api test › update batch wholesale customers @pro 
 
@@ -7450,8 +7156,8 @@
 </failure>
 </testcase>
 </testsuite>
-<testsuite name="withdraws.spec.ts" timestamp="1674072665788" hostname="" tests="8" failures="8" skipped="0" time="3.007" errors="0">
-<testcase name="withdraw api test get balance details" classname="withdraws.spec.ts › withdraw api test › get balance details" time="0.306">
+<testsuite name="withdraws.spec.ts" timestamp="1674073035097" hostname="" tests="8" failures="8" skipped="0" time="3.56" errors="0">
+<testcase name="withdraw api test get balance details" classname="withdraws.spec.ts › withdraw api test › get balance details" time="0.36">
 <failure message="withdraws.spec.ts:26:9 get balance details" type="FAILURE">
 <![CDATA[  withdraws.spec.ts:26:9 › withdraw api test › get balance details =================================
 
@@ -7503,7 +7209,7 @@
 ]]>
 </failure>
 </testcase>
-<testcase name="withdraw api test get all withdraws" classname="withdraws.spec.ts › withdraw api test › get all withdraws" time="0.305">
+<testcase name="withdraw api test get all withdraws" classname="withdraws.spec.ts › withdraw api test › get all withdraws" time="0.36">
 <failure message="withdraws.spec.ts:32:9 get all withdraws" type="FAILURE">
 <![CDATA[  withdraws.spec.ts:32:9 › withdraw api test › get all withdraws ===================================
 
@@ -7555,7 +7261,7 @@
 ]]>
 </failure>
 </testcase>
-<testcase name="withdraw api test get all withdraws by status" classname="withdraws.spec.ts › withdraw api test › get all withdraws by status" time="0.308">
+<testcase name="withdraw api test get all withdraws by status" classname="withdraws.spec.ts › withdraw api test › get all withdraws by status" time="0.36">
 <failure message="withdraws.spec.ts:38:9 get all withdraws by status" type="FAILURE">
 <![CDATA[  withdraws.spec.ts:38:9 › withdraw api test › get all withdraws by status =========================
 
@@ -7607,7 +7313,7 @@
 ]]>
 </failure>
 </testcase>
-<testcase name="withdraw api test get single withdraw" classname="withdraws.spec.ts › withdraw api test › get single withdraw" time="0.305">
+<testcase name="withdraw api test get single withdraw" classname="withdraws.spec.ts › withdraw api test › get single withdraw" time="0.355">
 <failure message="withdraws.spec.ts:44:9 get single withdraw" type="FAILURE">
 <![CDATA[  withdraws.spec.ts:44:9 › withdraw api test › get single withdraw =================================
 
@@ -7659,7 +7365,7 @@
 ]]>
 </failure>
 </testcase>
-<testcase name="withdraw api test update a withdraw" classname="withdraws.spec.ts › withdraw api test › update a withdraw" time="0.306">
+<testcase name="withdraw api test update a withdraw" classname="withdraws.spec.ts › withdraw api test › update a withdraw" time="0.359">
 <failure message="withdraws.spec.ts:52:9 update a withdraw" type="FAILURE">
 <![CDATA[  withdraws.spec.ts:52:9 › withdraw api test › update a withdraw ===================================
 
@@ -7711,7 +7417,7 @@
 ]]>
 </failure>
 </testcase>
-<testcase name="withdraw api test cancel a withdraw" classname="withdraws.spec.ts › withdraw api test › cancel a withdraw" time="0.303">
+<testcase name="withdraw api test cancel a withdraw" classname="withdraws.spec.ts › withdraw api test › cancel a withdraw" time="0.357">
 <failure message="withdraws.spec.ts:60:9 cancel a withdraw" type="FAILURE">
 <![CDATA[  withdraws.spec.ts:60:9 › withdraw api test › cancel a withdraw ===================================
 
@@ -7763,7 +7469,7 @@
 ]]>
 </failure>
 </testcase>
-<testcase name="withdraw api test update batch withdraws" classname="withdraws.spec.ts › withdraw api test › update batch withdraws" time="0.297">
+<testcase name="withdraw api test update batch withdraws" classname="withdraws.spec.ts › withdraw api test › update batch withdraws" time="0.352">
 <failure message="withdraws.spec.ts:68:9 update batch withdraws" type="FAILURE">
 <![CDATA[  withdraws.spec.ts:68:9 › withdraw api test › update batch withdraws ==============================
 
@@ -7809,7 +7515,7 @@
 ]]>
 </failure>
 </testcase>
-<testcase name="withdraw api test create a withdraw" classname="withdraws.spec.ts › withdraw api test › create a withdraw" time="0.877">
+<testcase name="withdraw api test create a withdraw" classname="withdraws.spec.ts › withdraw api test › create a withdraw" time="1.057">
 <failure message="withdraws.spec.ts:78:9 create a withdraw" type="FAILURE">
 <![CDATA[  withdraws.spec.ts:78:9 › withdraw api test › create a withdraw ===================================
 
