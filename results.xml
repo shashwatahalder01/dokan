@@ -1,89 +1,189 @@
-<testsuites id="" name="" tests="3" failures="3" skipped="0" errors="0" time="6.460492000000028">
-<testsuite name="_setup.spec.ts" timestamp="1674101535337" hostname="" tests="3" failures="3" skipped="0" time="0.906" errors="0">
-<testcase name=" api test setup test store settings" classname="_setup.spec.ts ›  api test › setup test store settings" time="0.444">
-<failure message="_setup.spec.ts:19:9 setup test store settings" type="FAILURE">
-<![CDATA[  _setup.spec.ts:19:9 ›  api test › setup test store settings ======================================
-
-    Error: expect(received).toBeTruthy()
-
-    Received: false
-
-      21 |         let response = await request.put(endPoints.updateSettings, { data: payloads.setupStore })
-      22 |         let responseBody = await apiUtils.getResponseBody(response)
-    > 23 |         expect(response.ok()).toBeTruthy()
-         |                               ^
-      24 |     });
-      25 |
-      26 |     test('create test customer', async ({ request }) => {
-
-        at /home/runner/work/dokan/dokan/tests/api/tests/_setup.spec.ts:23:31
-]]>
-</failure>
+<testsuites id="" name="" tests="3" failures="0" skipped="0" errors="0" time="4.523972999999998">
+<testsuite name="_setup.spec.ts" timestamp="1674105648910" hostname="" tests="3" failures="0" skipped="0" time="1.333" errors="0">
+<testcase name=" api test setup test store settings" classname="_setup.spec.ts ›  api test › setup test store settings" time="0.688">
 <system-out>
 <![CDATA[http://localhost:8889?rest_route=/dokan/v1/settings
-Status Code:  [33m404[39m
+Status Code:  [33m200[39m
 ResponseBody:  {
-  code: [32m'rest_no_route'[39m,
-  message: [32m'No route was found matching the URL and request method.'[39m,
-  data: { status: [33m404[39m }
+  id: [33m1[39m,
+  store_name: [32m'admin_store'[39m,
+  first_name: [32m''[39m,
+  last_name: [32m''[39m,
+  email: [32m'wordpress@example.com'[39m,
+  social: [],
+  phone: [32m''[39m,
+  show_email: [33mfalse[39m,
+  address: [],
+  location: [32m''[39m,
+  banner: [32m''[39m,
+  banner_id: [33m0[39m,
+  gravatar: [32m'http://2.gravatar.com/avatar/ea8b076b398ee48b71cfaecf898c582b?s=96&d=mm&r=g'[39m,
+  gravatar_id: [33m0[39m,
+  shop_url: [32m'http://localhost:8889/store/admin/'[39m,
+  products_per_page: [33m12[39m,
+  show_more_product_tab: [33mtrue[39m,
+  toc_enabled: [33mfalse[39m,
+  store_toc: [32m''[39m,
+  featured: [33mfalse[39m,
+  rating: { rating: [32m'No Ratings found yet'[39m, count: [33m0[39m },
+  enabled: [33mtrue[39m,
+  registered: [32m'2023-01-19 05:20:31'[39m,
+  payment: {
+    paypal: { [32m'0'[39m: [32m'email'[39m, email: [32m'paypal@g.c'[39m },
+    bank: [],
+    stripe: [33mfalse[39m
+  },
+  trusted: [33mtrue[39m,
+  store_open_close: {
+    enabled: [33mfalse[39m,
+    time: [],
+    open_notice: [32m'Store is open'[39m,
+    close_notice: [32m'Store is closed'[39m
+  },
+  company_name: [32m''[39m,
+  vat_number: [32m''[39m,
+  company_id_number: [32m''[39m,
+  bank_name: [32m''[39m,
+  bank_iban: [32m''[39m,
+  _links: { self: [ [36m[Object][39m ], collection: [ [36m[Object][39m ] }
 }
 ]]>
 </system-out>
 </testcase>
-<testcase name=" api test create test customer" classname="_setup.spec.ts ›  api test › create test customer" time="0.238">
-<failure message="_setup.spec.ts:26:9 create test customer" type="FAILURE">
-<![CDATA[  _setup.spec.ts:26:9 ›  api test › create test customer ===========================================
-
-    Error: expect(received).toBeTruthy()
-
-    Received: false
-
-      27 |         let response = await request.post(endPoints.createCustomer, { data: payloads.createCustomer1 })
-      28 |         let responseBody = await apiUtils.getResponseBody(response)
-    > 29 |         responseBody.code === 'registration-error-email-exists' ? expect(response.status()).toBe(400) : expect(response.ok()).toBeTruthy()
-         |                                                                                                                               ^
-      30 |     });
-      31 |
-      32 |     test('create test vendor', async ({ request }) => {
-
-        at /home/runner/work/dokan/dokan/tests/api/tests/_setup.spec.ts:29:127
-]]>
-</failure>
+<testcase name=" api test create test customer" classname="_setup.spec.ts ›  api test › create test customer" time="0.353">
 <system-out>
-<![CDATA[Status Code:  [33m404[39m
+<![CDATA[Status Code:  [33m201[39m
 ResponseBody:  {
-  code: [32m'rest_no_route'[39m,
-  message: [32m'No route was found matching the URL and request method.'[39m,
-  data: { status: [33m404[39m }
+  id: [33m2[39m,
+  date_created: [32m'2023-01-19T05:20:52'[39m,
+  date_created_gmt: [32m'2023-01-19T05:20:52'[39m,
+  date_modified: [32m'2023-01-19T05:20:53'[39m,
+  date_modified_gmt: [32m'2023-01-19T05:20:53'[39m,
+  email: [32m'customer1@yopmail.com'[39m,
+  first_name: [32m'customer1'[39m,
+  last_name: [32m'c1'[39m,
+  role: [32m'customer'[39m,
+  username: [32m'customer1'[39m,
+  billing: {
+    first_name: [32m'customer1'[39m,
+    last_name: [32m'cus'[39m,
+    company: [32m''[39m,
+    address_1: [32m'abc street'[39m,
+    address_2: [32m'xyz street'[39m,
+    city: [32m'New York'[39m,
+    postcode: [32m'10003'[39m,
+    country: [32m'US'[39m,
+    state: [32m'NY'[39m,
+    email: [32m'customer1@yopmail.com'[39m,
+    phone: [32m'0123456789'[39m
+  },
+  shipping: {
+    first_name: [32m'customer1'[39m,
+    last_name: [32m'cus'[39m,
+    company: [32m''[39m,
+    address_1: [32m'abc street'[39m,
+    address_2: [32m'xyz street'[39m,
+    city: [32m'New York'[39m,
+    postcode: [32m'10003'[39m,
+    country: [32m'US'[39m,
+    state: [32m'NY'[39m,
+    phone: [32m''[39m
+  },
+  is_paying_customer: [33mfalse[39m,
+  avatar_url: [32m'http://0.gravatar.com/avatar/01ebd2652b0322bcbfde21ad44149bc3?s=96&d=mm&r=g'[39m,
+  meta_data: [
+    { id: [33m40[39m, key: [32m'_wcs_subscription_ids_cache'[39m, value: [] },
+    {
+      id: [33m41[39m,
+      key: [32m'_dokan_email_verification_key'[39m,
+      value: [32m'df1f736d79220db3e02ac7cf76ba7f289bb3e0ee'[39m
+    },
+    { id: [33m42[39m, key: [32m'_dokan_email_pending_verification'[39m, value: [32m'1'[39m }
+  ],
+  orders_count: [33m0[39m,
+  total_spent: [32m'0.00'[39m,
+  _links: { self: [ [36m[Object][39m ], collection: [ [36m[Object][39m ] }
 }
 ]]>
 </system-out>
 </testcase>
-<testcase name=" api test create test vendor" classname="_setup.spec.ts ›  api test › create test vendor" time="0.224">
-<failure message="_setup.spec.ts:32:9 create test vendor" type="FAILURE">
-<![CDATA[  _setup.spec.ts:32:9 ›  api test › create test vendor =============================================
-
-    Error: expect(received).toBeTruthy()
-
-    Received: false
-
-      33 |         let response = await request.post(endPoints.createStore, { data: payloads.createStore1 })
-      34 |         let responseBody = await apiUtils.getResponseBody(response)
-    > 35 |         responseBody.code === 'existing_user_login' ? expect(response.status()).toBe(500) : expect(response.ok()).toBeTruthy()
-         |                                                                                                                   ^
-      36 |     });
-      37 |
-      38 | });
-
-        at /home/runner/work/dokan/dokan/tests/api/tests/_setup.spec.ts:35:115
-]]>
-</failure>
+<testcase name=" api test create test vendor" classname="_setup.spec.ts ›  api test › create test vendor" time="0.292">
 <system-out>
-<![CDATA[Status Code:  [33m404[39m
+<![CDATA[Status Code:  [33m200[39m
 ResponseBody:  {
-  code: [32m'rest_no_route'[39m,
-  message: [32m'No route was found matching the URL and request method.'[39m,
-  data: { status: [33m404[39m }
+  id: [33m3[39m,
+  store_name: [32m'vendor1store'[39m,
+  first_name: [32m'vendor1'[39m,
+  last_name: [32m'ven'[39m,
+  email: [32m'vendor1@yopmail.com'[39m,
+  social: {
+    fb: [32m'http://dokan.test'[39m,
+    youtube: [32m'http://dokan.test'[39m,
+    twitter: [32m'http://dokan.test'[39m,
+    linkedin: [32m'http://dokan.test'[39m,
+    pinterest: [32m'http://dokan.test'[39m,
+    instagram: [32m'http://dokan.test'[39m,
+    flickr: [32m'http://dokan.test'[39m
+  },
+  phone: [32m'0123456789'[39m,
+  show_email: [33mfalse[39m,
+  address: {
+    street_1: [32m'abc street'[39m,
+    street_2: [32m'xyz street'[39m,
+    city: [32m'New York'[39m,
+    zip: [32m'10003'[39m,
+    state: [32m'NY'[39m,
+    country: [32m'US'[39m
+  },
+  location: [32m'40.7127753,-74.0059728'[39m,
+  banner: [32m''[39m,
+  banner_id: [33m0[39m,
+  gravatar: [32m'http://1.gravatar.com/avatar/d0a3c2b21493d94526341d191134884d?s=96&d=mm&r=g'[39m,
+  gravatar_id: [33m0[39m,
+  shop_url: [32m'http://localhost:8889/store/vendor1/'[39m,
+  products_per_page: [33m12[39m,
+  show_more_product_tab: [33mtrue[39m,
+  toc_enabled: [33mfalse[39m,
+  store_toc: [32m''[39m,
+  featured: [33mtrue[39m,
+  rating: { rating: [32m'No Ratings found yet'[39m, count: [33m0[39m },
+  enabled: [33mtrue[39m,
+  registered: [32m'2023-01-19 05:20:53'[39m,
+  payment: {
+    paypal: { [32m'0'[39m: [32m'email'[39m, email: [32m'paypal@g.c'[39m },
+    bank: {
+      ac_name: [32m'account name'[39m,
+      ac_type: [32m'personal'[39m,
+      ac_number: [32m'1234567'[39m,
+      bank_name: [32m'bank name'[39m,
+      bank_addr: [32m'bank address'[39m,
+      routing_number: [32m'123456'[39m,
+      iban: [32m'123456'[39m,
+      swift: [32m'12345'[39m
+    },
+    stripe: [33mfalse[39m
+  },
+  trusted: [33mtrue[39m,
+  store_open_close: {
+    enabled: [33mfalse[39m,
+    time: {
+      enabled: [33mfalse[39m,
+      time: [],
+      open_notice: [32m'Store is open'[39m,
+      close_notice: [32m'Store is closed'[39m
+    },
+    open_notice: [32m'Store is open'[39m,
+    close_notice: [32m'Store is closed'[39m
+  },
+  company_name: [32m''[39m,
+  vat_number: [32m''[39m,
+  company_id_number: [32m''[39m,
+  bank_name: [32m''[39m,
+  bank_iban: [32m''[39m,
+  admin_commission: [32m''[39m,
+  admin_additional_fee: [32m''[39m,
+  admin_commission_type: [32m''[39m,
+  _links: { self: [ [36m[Object][39m ], collection: [ [36m[Object][39m ] }
 }
 ]]>
 </system-out>
