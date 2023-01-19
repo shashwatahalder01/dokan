@@ -1,6 +1,6 @@
-<testsuites id="" name="" tests="3" failures="3" skipped="0" errors="0" time="5.816652000000002">
-<testsuite name="_setup.spec.ts" timestamp="1674100528231" hostname="" tests="3" failures="3" skipped="0" time="0.82" errors="0">
-<testcase name=" api test setup test store settings" classname="_setup.spec.ts ›  api test › setup test store settings" time="0.406">
+<testsuites id="" name="" tests="3" failures="3" skipped="0" errors="0" time="6.460492000000028">
+<testsuite name="_setup.spec.ts" timestamp="1674101535337" hostname="" tests="3" failures="3" skipped="0" time="0.906" errors="0">
+<testcase name=" api test setup test store settings" classname="_setup.spec.ts ›  api test › setup test store settings" time="0.444">
 <failure message="_setup.spec.ts:19:9 setup test store settings" type="FAILURE">
 <![CDATA[  _setup.spec.ts:19:9 ›  api test › setup test store settings ======================================
 
@@ -20,7 +20,7 @@
 ]]>
 </failure>
 <system-out>
-<![CDATA[http://localhost:8888?rest_route=/dokan/v1/settings
+<![CDATA[http://localhost:8889?rest_route=/dokan/v1/settings
 Status Code:  [33m404[39m
 ResponseBody:  {
   code: [32m'rest_no_route'[39m,
@@ -30,7 +30,7 @@ ResponseBody:  {
 ]]>
 </system-out>
 </testcase>
-<testcase name=" api test create test customer" classname="_setup.spec.ts ›  api test › create test customer" time="0.212">
+<testcase name=" api test create test customer" classname="_setup.spec.ts ›  api test › create test customer" time="0.238">
 <failure message="_setup.spec.ts:26:9 create test customer" type="FAILURE">
 <![CDATA[  _setup.spec.ts:26:9 ›  api test › create test customer ===========================================
 
@@ -59,7 +59,7 @@ ResponseBody:  {
 ]]>
 </system-out>
 </testcase>
-<testcase name=" api test create test vendor" classname="_setup.spec.ts ›  api test › create test vendor" time="0.202">
+<testcase name=" api test create test vendor" classname="_setup.spec.ts ›  api test › create test vendor" time="0.224">
 <failure message="_setup.spec.ts:32:9 create test vendor" type="FAILURE">
 <![CDATA[  _setup.spec.ts:32:9 ›  api test › create test vendor =============================================
 
