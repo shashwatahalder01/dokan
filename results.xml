@@ -1,6 +1,6 @@
-<testsuites id="" name="" tests="3" failures="3" skipped="0" errors="0" time="6.555397999999986">
-<testsuite name="_setup.spec.ts" timestamp="1674097202860" hostname="" tests="3" failures="3" skipped="0" time="0.819" errors="0">
-<testcase name=" api test setup test store settings" classname="_setup.spec.ts ›  api test › setup test store settings" time="0.417">
+<testsuites id="" name="" tests="3" failures="3" skipped="0" errors="0" time="8.674449000000022">
+<testsuite name="_setup.spec.ts" timestamp="1674099101706" hostname="" tests="3" failures="3" skipped="0" time="1.141" errors="0">
+<testcase name=" api test setup test store settings" classname="_setup.spec.ts ›  api test › setup test store settings" time="0.581">
 <failure message="_setup.spec.ts:19:9 setup test store settings" type="FAILURE">
 <![CDATA[  _setup.spec.ts:19:9 ›  api test › setup test store settings ======================================
 
@@ -20,17 +20,17 @@
 ]]>
 </failure>
 <system-out>
-<![CDATA[http://localhost:8889?rest_route=/dokan/v1/settings
-Status Code:  [33m500[39m
+<![CDATA[http://localhost:8888?rest_route=/dokan/v1/settings
+Status Code:  [33m404[39m
 ResponseBody:  {
-  code: [32m'Unauthorized'[39m,
-  message: [32m'You are not logged in'[39m,
-  data: { code: [33m401[39m }
+  code: [32m'rest_no_route'[39m,
+  message: [32m'No route was found matching the URL and request method.'[39m,
+  data: { status: [33m404[39m }
 }
 ]]>
 </system-out>
 </testcase>
-<testcase name=" api test create test customer" classname="_setup.spec.ts ›  api test › create test customer" time="0.194">
+<testcase name=" api test create test customer" classname="_setup.spec.ts ›  api test › create test customer" time="0.288">
 <failure message="_setup.spec.ts:26:9 create test customer" type="FAILURE">
 <![CDATA[  _setup.spec.ts:26:9 ›  api test › create test customer ===========================================
 
@@ -59,7 +59,7 @@ ResponseBody:  {
 ]]>
 </system-out>
 </testcase>
-<testcase name=" api test create test vendor" classname="_setup.spec.ts ›  api test › create test vendor" time="0.208">
+<testcase name=" api test create test vendor" classname="_setup.spec.ts ›  api test › create test vendor" time="0.272">
 <failure message="_setup.spec.ts:32:9 create test vendor" type="FAILURE">
 <![CDATA[  _setup.spec.ts:32:9 ›  api test › create test vendor =============================================
 
@@ -79,11 +79,11 @@ ResponseBody:  {
 ]]>
 </failure>
 <system-out>
-<![CDATA[Status Code:  [33m401[39m
+<![CDATA[Status Code:  [33m404[39m
 ResponseBody:  {
-  code: [32m'rest_forbidden'[39m,
-  message: [32m'Sorry, you are not allowed to do that.'[39m,
-  data: { status: [33m401[39m }
+  code: [32m'rest_no_route'[39m,
+  message: [32m'No route was found matching the URL and request method.'[39m,
+  data: { status: [33m404[39m }
 }
 ]]>
 </system-out>
