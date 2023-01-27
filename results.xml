@@ -1,5 +1,5 @@
-<testsuites id="" name="" tests="106" failures="0" skipped="106" errors="0" time="34.84709700000001">
-<testsuite name="_setupApi.spec.ts" timestamp="1674810465291" hostname="" tests="29" failures="0" skipped="29" time="0" errors="0">
+<testsuites id="" name="" tests="106" failures="0" skipped="106" errors="0" time="35.23591000000003">
+<testsuite name="_setupApi.spec.ts" timestamp="1674811182710" hostname="" tests="29" failures="0" skipped="29" time="0" errors="0">
 <testcase name="setup test api check active plugins " classname="[chromium] › _setupApi.spec.ts › setup test api › check active plugins " time="0">
 <skipped>
 </skipped>
@@ -117,7 +117,7 @@
 </skipped>
 </testcase>
 </testsuite>
-<testsuite name="admin.spec.ts" timestamp="1674810465291" hostname="" tests="31" failures="0" skipped="31" time="0" errors="0">
+<testsuite name="admin.spec.ts" timestamp="1674811182710" hostname="" tests="31" failures="0" skipped="31" time="0" errors="0">
 <testcase name="admin can login" classname="[chromium] › admin.spec.ts › admin can login" time="0">
 <skipped>
 </skipped>
@@ -243,7 +243,7 @@
 </skipped>
 </testcase>
 </testsuite>
-<testsuite name="customer.spec.ts" timestamp="1674810465291" hostname="" tests="19" failures="0" skipped="19" time="0" errors="0">
+<testsuite name="customer.spec.ts" timestamp="1674811182710" hostname="" tests="19" failures="0" skipped="19" time="0" errors="0">
 <testcase name="Customer functionality test customer register" classname="[chromium] › customer.spec.ts › Customer functionality test › customer register" time="0">
 <skipped>
 </skipped>
@@ -321,7 +321,7 @@
 </skipped>
 </testcase>
 </testsuite>
-<testsuite name="vendor.spec.ts" timestamp="1674810465291" hostname="" tests="27" failures="0" skipped="27" time="0" errors="0">
+<testsuite name="vendor.spec.ts" timestamp="1674811182710" hostname="" tests="27" failures="0" skipped="27" time="0" errors="0">
 <testcase name="Vendor functionality test vendor can add simple product @product" classname="[chromium] › vendor.spec.ts › Vendor functionality test › vendor can add simple product @product" time="0">
 <skipped>
 </skipped>
