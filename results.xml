@@ -1,20 +1,24 @@
-<testsuites id="" name="" tests="1" failures="1" skipped="0" errors="0" time="96.556625">
-<testsuite name="_setupApi.spec.ts" timestamp="1675246522556" hostname="" tests="1" failures="1" skipped="0" time="60" errors="0">
-<testcase name="setup test e2e admin set WpSettings" classname="[chromium] › _setupApi.spec.ts › setup test e2e › admin set WpSettings" time="60">
+<testsuites id="" name="" tests="1" failures="1" skipped="0" errors="0" time="1.7789329999999899">
+<testsuite name="_setupApi.spec.ts" timestamp="1675248042983" hostname="" tests="1" failures="1" skipped="0" time="0.01" errors="0">
+<testcase name="setup test e2e admin set WpSettings" classname="[chromium] › _setupApi.spec.ts › setup test e2e › admin set WpSettings" time="0.01">
 <failure message="_setupApi.spec.ts:239:7 admin set WpSettings" type="FAILURE">
 <![CDATA[  [chromium] › _setupApi.spec.ts:239:7 › setup test e2e › admin set WpSettings =====================
 
-    Test timeout of 60000ms exceeded.
+    TypeError: Cannot read property 'setPermalinkSettings' of undefined
 
-    attachment #1: screenshot (image/png) ----------------------------------------------------------
-    test-results/_setupApi-setup-test-e2e-admin-set-WpSettings-chromium/test-failed-1.png
-    ------------------------------------------------------------------------------------------------
+      246 | 			console.log('file not found!');
+      247 | 		}
+    > 248 | 		await adminPage.setPermalinkSettings(data.wpSettings.permalink);
+          | 		                ^
+      249 | 	});
+      250 |
+      251 | 	test('admin set dokan general settings', async ({ }) => {
+
+        at /home/runner/work/dokan/dokan/tests/e2e/tests/_setupApi.spec.ts:248:19
 ]]>
 </failure>
 <system-out>
-<![CDATA[file not found!
-
-[[ATTACHMENT|../test-results/_setupApi-setup-test-e2e-admin-set-WpSettings-chromium/test-failed-1.png]]
+<![CDATA[file exists
 ]]>
 </system-out>
 </testcase>
