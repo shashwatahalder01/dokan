@@ -1,558 +1,1197 @@
-<testsuites id="" name="" tests="201" failures="0" skipped="30" errors="0" time="57.54977799999999">
-<testsuite name="_setup.spec.ts" timestamp="1675223818650" hostname="" tests="3" failures="0" skipped="0" time="1.099" errors="0">
-<testcase name=" api test setup test store settings" classname="_setup.spec.ts ›  api test › setup test store settings" time="0.544">
-</testcase>
-<testcase name=" api test create test customer" classname="_setup.spec.ts ›  api test › create test customer" time="0.313">
-</testcase>
-<testcase name=" api test create test vendor" classname="_setup.spec.ts ›  api test › create test vendor" time="0.242">
-</testcase>
-</testsuite>
-<testsuite name="abuseReports.spec.ts" timestamp="1675223818650" hostname="" tests="4" failures="0" skipped="2" time="0.423" errors="0">
-<testcase name="abuse report api test get all abuse report reasons @pro" classname="abuseReports.spec.ts › abuse report api test › get all abuse report reasons @pro" time="0.211">
-</testcase>
-<testcase name="abuse report api test get all abuse reports @pro" classname="abuseReports.spec.ts › abuse report api test › get all abuse reports @pro" time="0.212">
-</testcase>
-<testcase name="abuse report api test delete a abuse report @pro" classname="abuseReports.spec.ts › abuse report api test › delete a abuse report @pro" time="0">
-<skipped>
-</skipped>
-</testcase>
-<testcase name="abuse report api test delete batch abuse reports @pro" classname="abuseReports.spec.ts › abuse report api test › delete batch abuse reports @pro" time="0">
-<skipped>
-</skipped>
-</testcase>
-</testsuite>
-<testsuite name="admins.spec.ts" timestamp="1675223818650" hostname="" tests="10" failures="0" skipped="0" time="2.817" errors="0">
-<testcase name="admin api test get admin report overview" classname="admins.spec.ts › admin api test › get admin report overview" time="0.192">
-</testcase>
-<testcase name="admin api test get admin report summary" classname="admins.spec.ts › admin api test › get admin report summary" time="0.2">
-</testcase>
-<testcase name="admin api test get admin dashboard feed" classname="admins.spec.ts › admin api test › get admin dashboard feed" time="0.342">
-</testcase>
-<testcase name="admin api test get admin help" classname="admins.spec.ts › admin api test › get admin help" time="0.407">
-</testcase>
-<testcase name="admin api test get changelog lite" classname="admins.spec.ts › admin api test › get changelog lite" time="0.212">
-</testcase>
-<testcase name="admin api test get changelog pro @pro" classname="admins.spec.ts › admin api test › get changelog pro @pro" time="0.209">
-</testcase>
-<testcase name="admin api test get getAdminNotices" classname="admins.spec.ts › admin api test › get getAdminNotices" time="0.194">
-</testcase>
-<testcase name="admin api test get admin promo notices " classname="admins.spec.ts › admin api test › get admin promo notices " time="0.691">
-</testcase>
-<testcase name="admin api test get admin logs @pro" classname="admins.spec.ts › admin api test › get admin logs @pro" time="0.185">
-</testcase>
-<testcase name="admin api test get admin export logs @pro" classname="admins.spec.ts › admin api test › get admin export logs @pro" time="0.185">
-</testcase>
-</testsuite>
-<testsuite name="announcements.spec.ts" timestamp="1675223818650" hostname="" tests="7" failures="0" skipped="0" time="1.745" errors="0">
-<testcase name="announcements api test get all announcements @pro" classname="announcements.spec.ts › announcements api test › get all announcements @pro" time="0.188">
-</testcase>
-<testcase name="announcements api test get single announcement @pro" classname="announcements.spec.ts › announcements api test › get single announcement @pro" time="0.184">
-</testcase>
-<testcase name="announcements api test create a announcement @pro" classname="announcements.spec.ts › announcements api test › create a announcement @pro" time="0.191">
-</testcase>
-<testcase name="announcements api test update a announcement @pro" classname="announcements.spec.ts › announcements api test › update a announcement @pro" time="0.196">
-</testcase>
-<testcase name="announcements api test delete a announcement @pro" classname="announcements.spec.ts › announcements api test › delete a announcement @pro" time="0.197">
-</testcase>
-<testcase name="announcements api test restore a deleted announcement  @pro" classname="announcements.spec.ts › announcements api test › restore a deleted announcement  @pro" time="0.196">
-</testcase>
-<testcase name="announcements api test update batch announcements @pro" classname="announcements.spec.ts › announcements api test › update batch announcements @pro" time="0.593">
-</testcase>
-</testsuite>
-<testsuite name="calculation.spec.ts" timestamp="1675223818650" hostname="" tests="1" failures="0" skipped="1" time="0" errors="0">
-<testcase name="calculation test calculation test" classname="calculation.spec.ts › calculation test › calculation test" time="0">
-<skipped>
-</skipped>
-</testcase>
-</testsuite>
-<testsuite name="coupons.spec.ts" timestamp="1675223818650" hostname="" tests="5" failures="0" skipped="0" time="0.961" errors="0">
-<testcase name="coupon api test get all coupons" classname="coupons.spec.ts › coupon api test › get all coupons" time="0.181">
-</testcase>
-<testcase name="coupon api test get single coupon" classname="coupons.spec.ts › coupon api test › get single coupon" time="0.189">
-</testcase>
-<testcase name="coupon api test create a coupon" classname="coupons.spec.ts › coupon api test › create a coupon" time="0.21">
-</testcase>
-<testcase name="coupon api test update a coupon" classname="coupons.spec.ts › coupon api test › update a coupon" time="0.186">
-</testcase>
-<testcase name="coupon api test delete a coupon" classname="coupons.spec.ts › coupon api test › delete a coupon" time="0.195">
-</testcase>
-</testsuite>
-<testsuite name="customers.spec.ts" timestamp="1675223818650" hostname="" tests="6" failures="0" skipped="0" time="1.405" errors="0">
-<testcase name="customers api test get all customers" classname="customers.spec.ts › customers api test › get all customers" time="0.185">
-</testcase>
-<testcase name="customers api test get single customer" classname="customers.spec.ts › customers api test › get single customer" time="0.182">
-</testcase>
-<testcase name="customers api test create a customer" classname="customers.spec.ts › customers api test › create a customer" time="0.249">
-</testcase>
-<testcase name="customers api test update a customer" classname="customers.spec.ts › customers api test › update a customer" time="0.205">
-</testcase>
-<testcase name="customers api test delete a customer" classname="customers.spec.ts › customers api test › delete a customer" time="0.208">
-</testcase>
-<testcase name="customers api test update batch customers" classname="customers.spec.ts › customers api test › update batch customers" time="0.376">
-</testcase>
-</testsuite>
-<testsuite name="dummyData.spec.ts" timestamp="1675223818650" hostname="" tests="3" failures="0" skipped="0" time="0.845" errors="0">
-<testcase name="dummy Data api test get dummy data status" classname="dummyData.spec.ts › dummy Data api test › get dummy data status" time="0.183">
-</testcase>
-<testcase name="dummy Data api test import dummy data" classname="dummyData.spec.ts › dummy Data api test › import dummy data" time="0.353">
-</testcase>
-<testcase name="dummy Data api test clear dummy data" classname="dummyData.spec.ts › dummy Data api test › clear dummy data" time="0.309">
-</testcase>
-</testsuite>
-<testsuite name="followStores.spec.ts" timestamp="1675223818650" hostname="" tests="2" failures="0" skipped="0" time="0.375" errors="0">
-<testcase name="follow store api test get store follow status @pro" classname="followStores.spec.ts › follow store api test › get store follow status @pro" time="0.179">
-</testcase>
-<testcase name="follow store api test follow-unfollow a store @pro" classname="followStores.spec.ts › follow store api test › follow-unfollow a store @pro" time="0.196">
-</testcase>
-</testsuite>
-<testsuite name="modules.spec.ts" timestamp="1675223818650" hostname="" tests="3" failures="0" skipped="0" time="0.563" errors="0">
-<testcase name="modules api test get all modules" classname="modules.spec.ts › modules api test › get all modules" time="0.184">
-</testcase>
-<testcase name="modules api test deactivate a module" classname="modules.spec.ts › modules api test › deactivate a module" time="0.181">
-</testcase>
-<testcase name="modules api test activate a module" classname="modules.spec.ts › modules api test › activate a module" time="0.198">
-</testcase>
-</testsuite>
-<testsuite name="new endpoints/orderDownloads.spec.ts" timestamp="1675223818650" hostname="" tests="3" failures="0" skipped="0" time="0.552" errors="0">
-<testcase name="order downloads api test get all order downloads @v2" classname="new endpoints/orderDownloads.spec.ts › order downloads api test › get all order downloads @v2" time="0.185">
-</testcase>
-<testcase name="order downloads api test create order downloads @v2" classname="new endpoints/orderDownloads.spec.ts › order downloads api test › create order downloads @v2" time="0.187">
-</testcase>
-<testcase name="order downloads api test delete order downloads @v2" classname="new endpoints/orderDownloads.spec.ts › order downloads api test › delete order downloads @v2" time="0.18">
-</testcase>
-</testsuite>
-<testsuite name="new endpoints/orders.spec.ts" timestamp="1675223818650" hostname="" tests="1" failures="0" skipped="0" time="0.517" errors="0">
-<testcase name="orders api test update batch orders @v2" classname="new endpoints/orders.spec.ts › orders api test › update batch orders @v2" time="0.517">
-</testcase>
-</testsuite>
-<testsuite name="new endpoints/productDuplicate.spec.ts" timestamp="1675223818650" hostname="" tests="1" failures="0" skipped="0" time="0.181" errors="0">
-<testcase name="product duplicate api test create duplicate product @v2" classname="new endpoints/productDuplicate.spec.ts › product duplicate api test › create duplicate product @v2" time="0.181">
+<testsuites id="" name="" tests="105" failures="41" skipped="64" errors="0" time="2599.0593710000003">
+<testsuite name="_setupApi.spec.ts" timestamp="1675223824981" hostname="" tests="29" failures="11" skipped="18" time="0.913" errors="0">
+<testcase name="setup test api check active plugins " classname="[chromium] › _setupApi.spec.ts › setup test api › check active plugins " time="0.091">
+<failure message="_setupApi.spec.ts:22:6 check active plugins " type="FAILURE">
+<![CDATA[  [chromium] › _setupApi.spec.ts:22:6 › setup test api › check active plugins  =====================
+
+    TypeError: Cannot read property 'map' of undefined
+
+      22 | 	test( 'check active plugins ', async ( { request } ) => {
+      23 | 		const apiUtils = new ApiUtils( request );
+    > 24 | 		const activePlugins = ( await apiUtils.getAllPluginByStatus( 'active' ) ).map( ( a: { plugin: any } ) => a.plugin );
+         | 		                                                                          ^
+      25 | 		expect( activePlugins ).toEqual( data.plugin.plugins );
+      26 | 		// console.log(activePlugins)
+      27 | 	} );
+
+        at /home/runner/work/dokan/dokan/tests/e2e/tests/_setupApi.spec.ts:24:77
+]]>
+</failure>
 <system-out>
-<![CDATA[{
-  code: [32m'rest_no_route'[39m,
-  message: [32m'No route was found matching the URL and request method.'[39m,
-  data: { status: [33m404[39m }
-}
+<![CDATA[Error:  Unexpected token < in JSON at position 0
+Status Code:  [33m404[39m
+Response text:  <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 2.0//EN">
+<html><head>
+<title>404 Not Found</title>
+</head><body>
+<h1>Not Found</h1>
+<p>The requested URL was not found on this server.</p>
+<hr>
+<address>Apache/2.4.54 (Debian) Server at localhost Port 8889</address>
+</body></html>
+
+]]>
+</system-out>
+</testcase>
+<testcase name="setup test api set wp settings" classname="[chromium] › _setupApi.spec.ts › setup test api › set wp settings" time="0.091">
+<failure message="_setupApi.spec.ts:29:6 set wp settings" type="FAILURE">
+<![CDATA[  [chromium] › _setupApi.spec.ts:29:6 › setup test api › set wp settings ===========================
+
+    Error: expect(received).toEqual(expected) // deep equality
+
+    Expected: ObjectContaining {"date_format": "F j, Y", "language": "", "start_of_week": 1, "time_format": "g:i a", "timezone": "Asia/Dhaka"}
+    Received: undefined
+
+      30 | 		const apiUtils = new ApiUtils( request );
+      31 | 		const siteSettings = await apiUtils.setSiteSettings( payloads.siteSettings );
+    > 32 | 		expect( siteSettings ).toEqual( expect.objectContaining( payloads.siteSettings ) );
+         | 		                       ^
+      33 | 	} );
+      34 |
+      35 | 	test( 'set wc settings', async ( { request } ) => {
+
+        at /home/runner/work/dokan/dokan/tests/e2e/tests/_setupApi.spec.ts:32:26
+]]>
+</failure>
+<system-out>
+<![CDATA[Error:  Unexpected token < in JSON at position 0
+Status Code:  [33m404[39m
+Response text:  <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 2.0//EN">
+<html><head>
+<title>404 Not Found</title>
+</head><body>
+<h1>Not Found</h1>
+<p>The requested URL was not found on this server.</p>
+<hr>
+<address>Apache/2.4.54 (Debian) Server at localhost Port 8889</address>
+</body></html>
+
+]]>
+</system-out>
+</testcase>
+<testcase name="setup test api set wc settings" classname="[chromium] › _setupApi.spec.ts › setup test api › set wc settings" time="0.097">
+<failure message="_setupApi.spec.ts:35:6 set wc settings" type="FAILURE">
+<![CDATA[  [chromium] › _setupApi.spec.ts:35:6 › setup test api › set wc settings ===========================
+
+    Error: expect(received).toBeTruthy()
+
+    Received: false
+
+      36 | 		const apiUtils = new ApiUtils( request );
+      37 | 		const [ generalSettingsResponse ] = await apiUtils.updateBatchWcSettingsOptions( 'general', payloads.general );
+    > 38 | 		expect( generalSettingsResponse.ok() ).toBeTruthy();
+         | 		                                       ^
+      39 | 		const [ accountSettingsResponse ] = await apiUtils.updateBatchWcSettingsOptions( 'account', payloads.account );
+      40 | 		expect( accountSettingsResponse.ok() ).toBeTruthy();
+      41 | 	} );
+
+        at /home/runner/work/dokan/dokan/tests/e2e/tests/_setupApi.spec.ts:38:42
+]]>
+</failure>
+<system-out>
+<![CDATA[Error:  Unexpected token < in JSON at position 0
+Status Code:  [33m404[39m
+Response text:  <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 2.0//EN">
+<html><head>
+<title>404 Not Found</title>
+</head><body>
+<h1>Not Found</h1>
+<p>The requested URL was not found on this server.</p>
+<hr>
+<address>Apache/2.4.54 (Debian) Server at localhost Port 8889</address>
+</body></html>
+
+]]>
+</system-out>
+</testcase>
+<testcase name="setup test api set tax rate" classname="[chromium] › _setupApi.spec.ts › setup test api › set tax rate" time="0.101">
+<failure message="_setupApi.spec.ts:43:6 set tax rate" type="FAILURE">
+<![CDATA[  [chromium] › _setupApi.spec.ts:43:6 › setup test api › set tax rate ==============================
+
+    TypeError: Cannot read property 'map' of undefined
+
+      48 |
+      49 | 		// delete previous tax rates
+    > 50 | 		const allTaxRateIds = ( await apiUtils.getAllTaxRates() ).map( ( a: { id: any } ) => a.id );
+         | 		                                                          ^
+      51 | 		if ( allTaxRateIds.length ) {
+      52 | 			await apiUtils.updateBatchTaxRates( 'delete', allTaxRateIds );
+      53 | 		}
+
+        at /home/runner/work/dokan/dokan/tests/e2e/tests/_setupApi.spec.ts:50:61
+]]>
+</failure>
+<system-out>
+<![CDATA[Error:  Unexpected token < in JSON at position 0
+Status Code:  [33m404[39m
+Response text:  <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 2.0//EN">
+<html><head>
+<title>404 Not Found</title>
+</head><body>
+<h1>Not Found</h1>
+<p>The requested URL was not found on this server.</p>
+<hr>
+<address>Apache/2.4.54 (Debian) Server at localhost Port 8889</address>
+</body></html>
+
+Error:  Unexpected token < in JSON at position 0
+Status Code:  [33m404[39m
+Response text:  <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 2.0//EN">
+<html><head>
+<title>404 Not Found</title>
+</head><body>
+<h1>Not Found</h1>
+<p>The requested URL was not found on this server.</p>
+<hr>
+<address>Apache/2.4.54 (Debian) Server at localhost Port 8889</address>
+</body></html>
+
+]]>
+</system-out>
+</testcase>
+<testcase name="setup test api set shipping methods" classname="[chromium] › _setupApi.spec.ts › setup test api › set shipping methods" time="0.094">
+<failure message="_setupApi.spec.ts:60:6 set shipping methods" type="FAILURE">
+<![CDATA[  [chromium] › _setupApi.spec.ts:60:6 › setup test api › set shipping methods ======================
+
+    TypeError: Cannot read property 'map' of undefined
+
+      62 |
+      63 | 		// delete previous shipping zones
+    > 64 | 		const allShippingZoneIds = ( await apiUtils.getAllShippingZones() ).map( ( a: { id: any } ) => a.id );
+         | 		                                                                    ^
+      65 | 		// allShippingZoneIds = helpers.removeItem(allShippingZoneIds, 0) // remove default zone id
+      66 | 		if ( allShippingZoneIds.length ) {
+      67 | 			for ( const shippingZoneId of allShippingZoneIds ) {
+
+        at /home/runner/work/dokan/dokan/tests/e2e/tests/_setupApi.spec.ts:64:71
+]]>
+</failure>
+<system-out>
+<![CDATA[Error:  Unexpected token < in JSON at position 0
+Status Code:  [33m404[39m
+Response text:  <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 2.0//EN">
+<html><head>
+<title>404 Not Found</title>
+</head><body>
+<h1>Not Found</h1>
+<p>The requested URL was not found on this server.</p>
+<hr>
+<address>Apache/2.4.54 (Debian) Server at localhost Port 8889</address>
+</body></html>
+
+]]>
+</system-out>
+</testcase>
+<testcase name="setup test api set basic payments" classname="[chromium] › _setupApi.spec.ts › setup test api › set basic payments" time="0.084">
+<failure message="_setupApi.spec.ts:89:6 set basic payments" type="FAILURE">
+<![CDATA[  [chromium] › _setupApi.spec.ts:89:6 › setup test api › set basic payments ========================
+
+    Error: expect(received).toBeTruthy()
+
+    Received: false
+
+      90 | 		const apiUtils = new ApiUtils( request );
+      91 | 		const [ bacsResponse ] = await apiUtils.updatePaymentGateway( 'bacs', payloads.bcs );
+    > 92 | 		expect( bacsResponse.ok() ).toBeTruthy();
+         | 		                            ^
+      93 | 		const [ chequeResponse ] = await apiUtils.updatePaymentGateway( 'cheque', payloads.cheque );
+      94 | 		expect( chequeResponse.ok() ).toBeTruthy();
+      95 | 		const [ codResponse ] = await apiUtils.updatePaymentGateway( 'cod', payloads.cod );
+
+        at /home/runner/work/dokan/dokan/tests/e2e/tests/_setupApi.spec.ts:92:31
+]]>
+</failure>
+<system-out>
+<![CDATA[Error:  Unexpected token < in JSON at position 0
+Status Code:  [33m405[39m
+Response text:  <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 2.0//EN">
+<html><head>
+<title>405 Method Not Allowed</title>
+</head><body>
+<h1>Method Not Allowed</h1>
+<p>The requested method PUT is not allowed for this URL.</p>
+<hr>
+<address>Apache/2.4.54 (Debian) Server at localhost Port 8889</address>
+</body></html>
+
+]]>
+</system-out>
+</testcase>
+<testcase name="setup test api add categories and attributes" classname="[chromium] › _setupApi.spec.ts › setup test api › add categories and attributes" time="0.089">
+<failure message="_setupApi.spec.ts:99:6 add categories and attributes" type="FAILURE">
+<![CDATA[  [chromium] › _setupApi.spec.ts:99:6 › setup test api › add categories and attributes =============
+
+    TypeError: Cannot read property 'map' of undefined
+
+      101 |
+      102 | 		// delete previous categories
+    > 103 | 		const allCategoryIds = ( await apiUtils.getAllCategories() ).map( ( a: { id: any } ) => a.id );
+          | 		                                                             ^
+      104 | 		await apiUtils.updateBatchCategories( 'delete', allCategoryIds );
+      105 |
+      106 | 		// delete previous attributes
+
+        at /home/runner/work/dokan/dokan/tests/e2e/tests/_setupApi.spec.ts:103:64
+]]>
+</failure>
+<system-out>
+<![CDATA[Error:  Unexpected token < in JSON at position 0
+Status Code:  [33m404[39m
+Response text:  <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 2.0//EN">
+<html><head>
+<title>404 Not Found</title>
+</head><body>
+<h1>Not Found</h1>
+<p>The requested URL was not found on this server.</p>
+<hr>
+<address>Apache/2.4.54 (Debian) Server at localhost Port 8889</address>
+</body></html>
+
+]]>
+</system-out>
+</testcase>
+<testcase name="setup test api add test vendor" classname="[chromium] › _setupApi.spec.ts › setup test api › add test vendor" time="0.093">
+<failure message="_setupApi.spec.ts:125:6 add test vendor" type="FAILURE">
+<![CDATA[  [chromium] › _setupApi.spec.ts:125:6 › setup test api › add test vendor ==========================
+
+    TypeError: Cannot read property 'code' of undefined
+
+      128 | 		// create store
+      129 | 		const [ storeResponseBody, storeResponseStatus ] = await apiUtils.createStore( payloads.createStore1 );
+    > 130 | 		storeResponseBody.code === 'existing_user_login' ? expect( storeResponseStatus ).toBe( 500 ) : expect( storeResponseStatus ).toBe( 200 );
+          | 		                  ^
+      131 |
+      132 | 		// create store product
+      133 | 		const product = { ...payloads.createProduct(), name: 'p1_v1' };
+
+        at /home/runner/work/dokan/dokan/tests/e2e/tests/_setupApi.spec.ts:130:21
+]]>
+</failure>
+<system-out>
+<![CDATA[Error:  Unexpected token < in JSON at position 0
+Status Code:  [33m404[39m
+Response text:  <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 2.0//EN">
+<html><head>
+<title>404 Not Found</title>
+</head><body>
+<h1>Not Found</h1>
+<p>The requested URL was not found on this server.</p>
+<hr>
+<address>Apache/2.4.54 (Debian) Server at localhost Port 8889</address>
+</body></html>
+
+]]>
+</system-out>
+</testcase>
+<testcase name="setup test api add test vendor1 rma settings" classname="[chromium] › _setupApi.spec.ts › setup test api › add test vendor1 rma settings" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="setup test api admin add test vendor products " classname="[chromium] › _setupApi.spec.ts › setup test api › admin add test vendor products " time="0.09">
+<failure message="_setupApi.spec.ts:149:6 admin add test vendor products " type="FAILURE">
+<![CDATA[  [chromium] › _setupApi.spec.ts:149:6 › setup test api › admin add test vendor products  ==========
+
+    Error: expect(received).toBeTruthy()
+
+    Received: false
+
+       at ../utils/apiUtils.ts:108
+
+      106 | 	async createProduct( payload: object, auth?: any ) {
+      107 | 		const response = await this.request.post( endPoints.createProduct, { data: payload, headers: auth } );
+    > 108 | 		expect( response.ok() ).toBeTruthy();
+          | 		                        ^
+      109 | 		const responseBody = await this.getResponseBody( response );
+      110 | 		const productId = responseBody.id;
+      111 | 		// console.log(productId)
+
+        at ApiUtils.createProduct (/home/runner/work/dokan/dokan/tests/e2e/utils/apiUtils.ts:108:27)
+        at /home/runner/work/dokan/dokan/tests/e2e/tests/_setupApi.spec.ts:152:3
+]]>
+</failure>
+</testcase>
+<testcase name="setup test api add test customer" classname="[chromium] › _setupApi.spec.ts › setup test api › add test customer" time="0.081">
+<failure message="_setupApi.spec.ts:160:6 add test customer" type="FAILURE">
+<![CDATA[  [chromium] › _setupApi.spec.ts:160:6 › setup test api › add test customer ========================
+
+    TypeError: Cannot read property 'code' of undefined
+
+      161 | 		const apiUtils = new ApiUtils( request );
+      162 | 		const [ responseBody, status ] = await apiUtils.createCustomer( payloads.createCustomer1 );
+    > 163 | 		responseBody.code === 'registration-error-email-exists' ? expect( status ).toBe( 400 ) : expect( status ).toBe( 200 );
+          | 		             ^
+      164 | 	} );
+      165 |
+      166 | 	// test('storageState', async ({ page }) => {
+
+        at /home/runner/work/dokan/dokan/tests/e2e/tests/_setupApi.spec.ts:163:16
+]]>
+</failure>
+<system-out>
+<![CDATA[Error:  Unexpected token < in JSON at position 0
+Status Code:  [33m404[39m
+Response text:  <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 2.0//EN">
+<html><head>
+<title>404 Not Found</title>
+</head><body>
+<h1>Not Found</h1>
+<p>The requested URL was not found on this server.</p>
+<hr>
+<address>Apache/2.4.54 (Debian) Server at localhost Port 8889</address>
+</body></html>
+
+]]>
+</system-out>
+</testcase>
+<testcase name="setup test e2e admin set WpSettings" classname="[chromium] › _setupApi.spec.ts › setup test e2e › admin set WpSettings" time="0.002">
+<failure message="_setupApi.spec.ts:237:6 admin set WpSettings" type="FAILURE">
+<![CDATA[  [chromium] › _setupApi.spec.ts:237:6 › setup test e2e › admin set WpSettings =====================
+
+    Error: ENOENT: no such file or directory, open 'adminStorageState.json'
+
+
+]]>
+</failure>
+</testcase>
+<testcase name="setup test e2e admin set dokan general settings" classname="[chromium] › _setupApi.spec.ts › setup test e2e › admin set dokan general settings" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="setup test e2e admin set dokan selling settings" classname="[chromium] › _setupApi.spec.ts › setup test e2e › admin set dokan selling settings" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="setup test e2e admin set dokan withdraw settings" classname="[chromium] › _setupApi.spec.ts › setup test e2e › admin set dokan withdraw settings" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="setup test e2e admin set dokan page settings" classname="[chromium] › _setupApi.spec.ts › setup test e2e › admin set dokan page settings" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="setup test e2e admin set dokan appearance settings" classname="[chromium] › _setupApi.spec.ts › setup test e2e › admin set dokan appearance settings" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="setup test e2e admin set dokan privacy policy settings" classname="[chromium] › _setupApi.spec.ts › setup test e2e › admin set dokan privacy policy settings" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="setup test e2e admin set dokan store support settings" classname="[chromium] › _setupApi.spec.ts › setup test e2e › admin set dokan store support settings" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="setup test e2e admin set dokan rma settings" classname="[chromium] › _setupApi.spec.ts › setup test e2e › admin set dokan rma settings" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="setup test e2e admin set dokan wholesale settings" classname="[chromium] › _setupApi.spec.ts › setup test e2e › admin set dokan wholesale settings" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="setup test e2e admin set dokan eu compliance settings" classname="[chromium] › _setupApi.spec.ts › setup test e2e › admin set dokan eu compliance settings" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="setup test e2e admin set dokan delivery time settings" classname="[chromium] › _setupApi.spec.ts › setup test e2e › admin set dokan delivery time settings" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="setup test e2e admin set dokan product advertising settings" classname="[chromium] › _setupApi.spec.ts › setup test e2e › admin set dokan product advertising settings" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="setup test e2e admin set dokan geolocation settings" classname="[chromium] › _setupApi.spec.ts › setup test e2e › admin set dokan geolocation settings" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="setup test e2e admin set dokan product report abuse settings" classname="[chromium] › _setupApi.spec.ts › setup test e2e › admin set dokan product report abuse settings" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="setup test e2e admin set dokan spmv settings" classname="[chromium] › _setupApi.spec.ts › setup test e2e › admin set dokan spmv settings" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="setup test e2e admin set dokan vendor subscription settings" classname="[chromium] › _setupApi.spec.ts › setup test e2e › admin set dokan vendor subscription settings" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="setup test e2e admin add dokan subscription" classname="[chromium] › _setupApi.spec.ts › setup test e2e › admin add dokan subscription" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="admin.spec.ts" timestamp="1675223824981" hostname="" tests="29" failures="3" skipped="26" time="120.001" errors="0">
+<testcase name="admin can login" classname="[chromium] › admin.spec.ts › admin can login" time="60">
+<failure message="admin.spec.ts:10:5 admin can login" type="FAILURE">
+<![CDATA[  [chromium] › admin.spec.ts:10:5 › admin can login ================================================
+
+    Test timeout of 60000ms exceeded.
+
+    Pending operations:
+      - page.fill at pages/basePage.ts:417:19
+
+
+    attachment #1: screenshot (image/png) ----------------------------------------------------------
+    test-results/admin-admin-can-login-chromium/test-failed-1.png
+    ------------------------------------------------------------------------------------------------
+]]>
+</failure>
+<system-out>
+<![CDATA[
+[[ATTACHMENT|../test-results/admin-admin-can-login-chromium/test-failed-1.png]]
+]]>
+</system-out>
+</testcase>
+<testcase name="admin can logout" classname="[chromium] › admin.spec.ts › admin can logout" time="59.999">
+<failure message="admin.spec.ts:15:5 admin can logout" type="FAILURE">
+<![CDATA[  [chromium] › admin.spec.ts:15:5 › admin can logout ===============================================
+
+    Test timeout of 60000ms exceeded.
+
+    Pending operations:
+      - page.fill at pages/basePage.ts:417:19
+
+
+    attachment #1: screenshot (image/png) ----------------------------------------------------------
+    test-results/admin-admin-can-logout-chromium/test-failed-1.png
+    ------------------------------------------------------------------------------------------------
+]]>
+</failure>
+<system-out>
+<![CDATA[
+[[ATTACHMENT|../test-results/admin-admin-can-logout-chromium/test-failed-1.png]]
+]]>
+</system-out>
+</testcase>
+<testcase name="Admin functionality test admin can set dokan setup wizard" classname="[chromium] › admin.spec.ts › Admin functionality test › admin can set dokan setup wizard" time="0.002">
+<failure message="admin.spec.ts:31:6 admin can set dokan setup wizard" type="FAILURE">
+<![CDATA[  [chromium] › admin.spec.ts:31:6 › Admin functionality test › admin can set dokan setup wizard ====
+
+    Error: ENOENT: no such file or directory, open 'adminStorageState.json'
+
+
+]]>
+</failure>
+</testcase>
+<testcase name="Admin functionality test admin can add vendor" classname="[chromium] › admin.spec.ts › Admin functionality test › admin can add vendor" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Admin functionality test admin can add simple product" classname="[chromium] › admin.spec.ts › Admin functionality test › admin can add simple product" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Admin functionality test admin can add simple subscription " classname="[chromium] › admin.spec.ts › Admin functionality test › admin can add simple subscription " time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Admin functionality test admin can add variable subscription " classname="[chromium] › admin.spec.ts › Admin functionality test › admin can add variable subscription " time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Admin functionality test admin can add external product" classname="[chromium] › admin.spec.ts › Admin functionality test › admin can add external product" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Admin functionality test admin can add vendor subscription " classname="[chromium] › admin.spec.ts › Admin functionality test › admin can add vendor subscription " time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Admin functionality test admin can add auction product" classname="[chromium] › admin.spec.ts › Admin functionality test › admin can add auction product" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Admin functionality test admin can add booking product" classname="[chromium] › admin.spec.ts › Admin functionality test › admin can add booking product" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Admin functionality test admin can add categories" classname="[chromium] › admin.spec.ts › Admin functionality test › admin can add categories" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Admin functionality test admin can add attributes" classname="[chromium] › admin.spec.ts › Admin functionality test › admin can add attributes" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Admin functionality test admin can set dokan general settings" classname="[chromium] › admin.spec.ts › Admin functionality test › admin can set dokan general settings" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Admin functionality test admin can set dokan selling settings" classname="[chromium] › admin.spec.ts › Admin functionality test › admin can set dokan selling settings" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Admin functionality test admin can set dokan withdraw settings" classname="[chromium] › admin.spec.ts › Admin functionality test › admin can set dokan withdraw settings" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Admin functionality test admin can set dokan page settings" classname="[chromium] › admin.spec.ts › Admin functionality test › admin can set dokan page settings" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Admin functionality test admin can set dokan appearance settings" classname="[chromium] › admin.spec.ts › Admin functionality test › admin can set dokan appearance settings" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Admin functionality test admin can set dokan privacy policy settings" classname="[chromium] › admin.spec.ts › Admin functionality test › admin can set dokan privacy policy settings" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Admin functionality test admin can set dokan store support settings" classname="[chromium] › admin.spec.ts › Admin functionality test › admin can set dokan store support settings" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Admin functionality test admin can set dokan rma settings" classname="[chromium] › admin.spec.ts › Admin functionality test › admin can set dokan rma settings" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Admin functionality test admin can set dokan wholesale settings" classname="[chromium] › admin.spec.ts › Admin functionality test › admin can set dokan wholesale settings" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Admin functionality test admin can set dokan eu compliance settings" classname="[chromium] › admin.spec.ts › Admin functionality test › admin can set dokan eu compliance settings" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Admin functionality test admin can set dokan delivery time settings" classname="[chromium] › admin.spec.ts › Admin functionality test › admin can set dokan delivery time settings" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Admin functionality test admin can set dokan product advertising settings" classname="[chromium] › admin.spec.ts › Admin functionality test › admin can set dokan product advertising settings" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Admin functionality test admin can set dokan geolocation settings" classname="[chromium] › admin.spec.ts › Admin functionality test › admin can set dokan geolocation settings" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Admin functionality test admin can set dokan product report abuse settings" classname="[chromium] › admin.spec.ts › Admin functionality test › admin can set dokan product report abuse settings" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Admin functionality test admin can set dokan spmv settings" classname="[chromium] › admin.spec.ts › Admin functionality test › admin can set dokan spmv settings" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Admin functionality test admin can set dokan vendor subscription settings" classname="[chromium] › admin.spec.ts › Admin functionality test › admin can set dokan vendor subscription settings" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="calculation.spec.ts" timestamp="1675223824981" hostname="" tests="1" failures="1" skipped="0" time="0.01" errors="0">
+<testcase name="Calculation functionality test calculation test" classname="[chromium] › calculation.spec.ts › Calculation functionality test › calculation test" time="0.01">
+<failure message="calculation.spec.ts:79:6 calculation test" type="FAILURE">
+<![CDATA[  [chromium] › calculation.spec.ts:79:6 › Calculation functionality test › calculation test ========
+
+    Error: ENOENT: no such file or directory, open 'adminStorageState.json'
+
+
+]]>
+</failure>
+</testcase>
+</testsuite>
+<testsuite name="customer.spec.ts" timestamp="1675223824981" hostname="" tests="19" failures="19" skipped="0" time="1139.994" errors="0">
+<testcase name="Customer functionality test customer register" classname="[chromium] › customer.spec.ts › Customer functionality test › customer register" time="60">
+<failure message="customer.spec.ts:16:6 customer register" type="FAILURE">
+<![CDATA[  [chromium] › customer.spec.ts:16:6 › Customer functionality test › customer register =============
+
+    Test timeout of 60000ms exceeded.
+
+    Pending operations:
+      - locator.click at pages/basePage.ts:164:39
+
+
+    attachment #1: screenshot (image/png) ----------------------------------------------------------
+    test-results/customer-Customer-functionality-test-customer-register-chromium/test-failed-1.png
+    ------------------------------------------------------------------------------------------------
+]]>
+</failure>
+<system-out>
+<![CDATA[
+[[ATTACHMENT|../test-results/customer-Customer-functionality-test-customer-register-chromium/test-failed-1.png]]
+]]>
+</system-out>
+</testcase>
+<testcase name="Customer functionality test customer login" classname="[chromium] › customer.spec.ts › Customer functionality test › customer login" time="59.999">
+<failure message="customer.spec.ts:23:6 customer login" type="FAILURE">
+<![CDATA[  [chromium] › customer.spec.ts:23:6 › Customer functionality test › customer login ================
+
+    Test timeout of 60000ms exceeded.
+
+    Pending operations:
+      - page.fill at pages/basePage.ts:417:19
+
+
+    attachment #1: screenshot (image/png) ----------------------------------------------------------
+    test-results/customer-Customer-functionality-test-customer-login-chromium/test-failed-1.png
+    ------------------------------------------------------------------------------------------------
+]]>
+</failure>
+<system-out>
+<![CDATA[
+[[ATTACHMENT|../test-results/customer-Customer-functionality-test-customer-login-chromium/test-failed-1.png]]
+]]>
+</system-out>
+</testcase>
+<testcase name="Customer functionality test customer logout" classname="[chromium] › customer.spec.ts › Customer functionality test › customer logout" time="59.999">
+<failure message="customer.spec.ts:28:6 customer logout" type="FAILURE">
+<![CDATA[  [chromium] › customer.spec.ts:28:6 › Customer functionality test › customer logout ===============
+
+    Test timeout of 60000ms exceeded.
+
+    Pending operations:
+      - page.fill at pages/basePage.ts:417:19
+
+
+    attachment #1: screenshot (image/png) ----------------------------------------------------------
+    test-results/customer-Customer-functionality-test-customer-logout-chromium/test-failed-1.png
+    ------------------------------------------------------------------------------------------------
+]]>
+</failure>
+<system-out>
+<![CDATA[
+[[ATTACHMENT|../test-results/customer-Customer-functionality-test-customer-logout-chromium/test-failed-1.png]]
+]]>
+</system-out>
+</testcase>
+<testcase name="Customer functionality test customer become a vendor" classname="[chromium] › customer.spec.ts › Customer functionality test › customer become a vendor" time="59.999">
+<failure message="customer.spec.ts:34:6 customer become a vendor" type="FAILURE">
+<![CDATA[  [chromium] › customer.spec.ts:34:6 › Customer functionality test › customer become a vendor ======
+
+    Test timeout of 60000ms exceeded.
+
+    Pending operations:
+      - locator.click at pages/basePage.ts:164:39
+
+
+    attachment #1: screenshot (image/png) ----------------------------------------------------------
+    test-results/customer-Customer-functionality-test-customer-become-a-vendor-chromium/test-failed-1.png
+    ------------------------------------------------------------------------------------------------
+]]>
+</failure>
+<system-out>
+<![CDATA[
+[[ATTACHMENT|../test-results/customer-Customer-functionality-test-customer-become-a-vendor-chromium/test-failed-1.png]]
+]]>
+</system-out>
+</testcase>
+<testcase name="Customer functionality test customer become a wholesale customer" classname="[chromium] › customer.spec.ts › Customer functionality test › customer become a wholesale customer" time="60">
+<failure message="customer.spec.ts:40:6 customer become a wholesale customer" type="FAILURE">
+<![CDATA[  [chromium] › customer.spec.ts:40:6 › Customer functionality test › customer become a wholesale customer 
+
+    Test timeout of 60000ms exceeded.
+
+    Pending operations:
+      - locator.click at pages/basePage.ts:164:39
+
+
+    attachment #1: screenshot (image/png) ----------------------------------------------------------
+    test-results/customer-Customer-functionality-test-customer-become-a-wholesale-customer-chromium/test-failed-1.png
+    ------------------------------------------------------------------------------------------------
+]]>
+</failure>
+<system-out>
+<![CDATA[
+[[ATTACHMENT|../test-results/customer-Customer-functionality-test-customer-become-a-wholesale-customer-chromium/test-failed-1.png]]
+]]>
+</system-out>
+</testcase>
+<testcase name="Customer functionality test customer add customer details" classname="[chromium] › customer.spec.ts › Customer functionality test › customer add customer details" time="60">
+<failure message="customer.spec.ts:46:6 customer add customer details" type="FAILURE">
+<![CDATA[  [chromium] › customer.spec.ts:46:6 › Customer functionality test › customer add customer details =
+
+    Test timeout of 60000ms exceeded.
+
+    Pending operations:
+      - locator.click at pages/basePage.ts:164:39
+
+
+    attachment #1: screenshot (image/png) ----------------------------------------------------------
+    test-results/customer-Customer-functionality-test-customer-add-customer-details-chromium/test-failed-1.png
+    ------------------------------------------------------------------------------------------------
+]]>
+</failure>
+<system-out>
+<![CDATA[
+[[ATTACHMENT|../test-results/customer-Customer-functionality-test-customer-add-customer-details-chromium/test-failed-1.png]]
+]]>
+</system-out>
+</testcase>
+<testcase name="Customer functionality test customer add billing details" classname="[chromium] › customer.spec.ts › Customer functionality test › customer add billing details" time="60">
+<failure message="customer.spec.ts:52:6 customer add billing details" type="FAILURE">
+<![CDATA[  [chromium] › customer.spec.ts:52:6 › Customer functionality test › customer add billing details ==
+
+    Test timeout of 60000ms exceeded.
+
+    Pending operations:
+      - page.fill at pages/basePage.ts:417:19
+
+
+    attachment #1: screenshot (image/png) ----------------------------------------------------------
+    test-results/customer-Customer-functionality-test-customer-add-billing-details-chromium/test-failed-1.png
+    ------------------------------------------------------------------------------------------------
+]]>
+</failure>
+<system-out>
+<![CDATA[
+[[ATTACHMENT|../test-results/customer-Customer-functionality-test-customer-add-billing-details-chromium/test-failed-1.png]]
+]]>
+</system-out>
+</testcase>
+<testcase name="Customer functionality test customer add shipping details" classname="[chromium] › customer.spec.ts › Customer functionality test › customer add shipping details" time="59.999">
+<failure message="customer.spec.ts:59:6 customer add shipping details" type="FAILURE">
+<![CDATA[  [chromium] › customer.spec.ts:59:6 › Customer functionality test › customer add shipping details =
+
+    Test timeout of 60000ms exceeded.
+
+    Pending operations:
+      - page.fill at pages/basePage.ts:417:19
+
+
+    attachment #1: screenshot (image/png) ----------------------------------------------------------
+    test-results/customer-Customer-functionality-test-customer-add-shipping-details-chromium/test-failed-1.png
+    ------------------------------------------------------------------------------------------------
+]]>
+</failure>
+<system-out>
+<![CDATA[
+[[ATTACHMENT|../test-results/customer-Customer-functionality-test-customer-add-shipping-details-chromium/test-failed-1.png]]
+]]>
+</system-out>
+</testcase>
+<testcase name="Customer functionality test customer search vendor" classname="[chromium] › customer.spec.ts › Customer functionality test › customer search vendor" time="60">
+<failure message="customer.spec.ts:66:6 customer search vendor" type="FAILURE">
+<![CDATA[  [chromium] › customer.spec.ts:66:6 › Customer functionality test › customer search vendor ========
+
+    Test timeout of 60000ms exceeded.
+
+    Pending operations:
+      - page.fill at pages/basePage.ts:417:19
+
+
+    attachment #1: screenshot (image/png) ----------------------------------------------------------
+    test-results/customer-Customer-functionality-test-customer-search-vendor-chromium/test-failed-1.png
+    ------------------------------------------------------------------------------------------------
+]]>
+</failure>
+<system-out>
+<![CDATA[
+[[ATTACHMENT|../test-results/customer-Customer-functionality-test-customer-search-vendor-chromium/test-failed-1.png]]
+]]>
+</system-out>
+</testcase>
+<testcase name="Customer functionality test customer search product   @product" classname="[chromium] › customer.spec.ts › Customer functionality test › customer search product   @product" time="60">
+<failure message="customer.spec.ts:73:6 customer search product   @product" type="FAILURE">
+<![CDATA[  [chromium] › customer.spec.ts:73:6 › Customer functionality test › customer search product   @product 
+
+    Test timeout of 60000ms exceeded.
+
+    Pending operations:
+      - page.fill at pages/basePage.ts:417:19
+
+
+    attachment #1: screenshot (image/png) ----------------------------------------------------------
+    test-results/customer-Customer-functionality-test-customer-search-product-product-chromium/test-failed-1.png
+    ------------------------------------------------------------------------------------------------
+]]>
+</failure>
+<system-out>
+<![CDATA[
+[[ATTACHMENT|../test-results/customer-Customer-functionality-test-customer-search-product-product-chromium/test-failed-1.png]]
+]]>
+</system-out>
+</testcase>
+<testcase name="Customer functionality test customer buy product" classname="[chromium] › customer.spec.ts › Customer functionality test › customer buy product" time="60.001">
+<failure message="customer.spec.ts:80:6 customer buy product" type="FAILURE">
+<![CDATA[  [chromium] › customer.spec.ts:80:6 › Customer functionality test › customer buy product ==========
+
+    Test timeout of 60000ms exceeded.
+
+    Pending operations:
+      - page.fill at pages/basePage.ts:417:19
+
+
+    attachment #1: screenshot (image/png) ----------------------------------------------------------
+    test-results/customer-Customer-functionality-test-customer-buy-product-chromium/test-failed-1.png
+    ------------------------------------------------------------------------------------------------
+]]>
+</failure>
+<system-out>
+<![CDATA[
+[[ATTACHMENT|../test-results/customer-Customer-functionality-test-customer-buy-product-chromium/test-failed-1.png]]
+]]>
+</system-out>
+</testcase>
+<testcase name="Customer functionality test customer can review product" classname="[chromium] › customer.spec.ts › Customer functionality test › customer can review product" time="60">
+<failure message="customer.spec.ts:91:6 customer can review product" type="FAILURE">
+<![CDATA[  [chromium] › customer.spec.ts:91:6 › Customer functionality test › customer can review product ===
+
+    Test timeout of 60000ms exceeded.
+
+    Pending operations:
+      - page.fill at pages/basePage.ts:417:19
+
+
+    attachment #1: screenshot (image/png) ----------------------------------------------------------
+    test-results/customer-Customer-functionality-test-customer-can-review-product-chromium/test-failed-1.png
+    ------------------------------------------------------------------------------------------------
+]]>
+</failure>
+<system-out>
+<![CDATA[
+[[ATTACHMENT|../test-results/customer-Customer-functionality-test-customer-can-review-product-chromium/test-failed-1.png]]
+]]>
+</system-out>
+</testcase>
+<testcase name="Customer functionality test customer can report product" classname="[chromium] › customer.spec.ts › Customer functionality test › customer can report product" time="60">
+<failure message="customer.spec.ts:98:6 customer can report product" type="FAILURE">
+<![CDATA[  [chromium] › customer.spec.ts:98:6 › Customer functionality test › customer can report product ===
+
+    Test timeout of 60000ms exceeded.
+
+    Pending operations:
+      - page.fill at pages/basePage.ts:417:19
+
+
+    attachment #1: screenshot (image/png) ----------------------------------------------------------
+    test-results/customer-Customer-functionality-test-customer-can-report-product-chromium/test-failed-1.png
+    ------------------------------------------------------------------------------------------------
+]]>
+</failure>
+<system-out>
+<![CDATA[
+[[ATTACHMENT|../test-results/customer-Customer-functionality-test-customer-can-report-product-chromium/test-failed-1.png]]
+]]>
+</system-out>
+</testcase>
+<testcase name="Customer functionality test customer can enquire product" classname="[chromium] › customer.spec.ts › Customer functionality test › customer can enquire product" time="60">
+<failure message="customer.spec.ts:105:6 customer can enquire product" type="FAILURE">
+<![CDATA[  [chromium] › customer.spec.ts:105:6 › Customer functionality test › customer can enquire product =
+
+    Test timeout of 60000ms exceeded.
+
+    Pending operations:
+      - page.fill at pages/basePage.ts:417:19
+
+
+    attachment #1: screenshot (image/png) ----------------------------------------------------------
+    test-results/customer-Customer-functionality-test-customer-can-enquire-product-chromium/test-failed-1.png
+    ------------------------------------------------------------------------------------------------
+]]>
+</failure>
+<system-out>
+<![CDATA[
+[[ATTACHMENT|../test-results/customer-Customer-functionality-test-customer-can-enquire-product-chromium/test-failed-1.png]]
+]]>
+</system-out>
+</testcase>
+<testcase name="Customer functionality test customer can add product to cart" classname="[chromium] › customer.spec.ts › Customer functionality test › customer can add product to cart" time="59.999">
+<failure message="customer.spec.ts:112:6 customer can add product to cart" type="FAILURE">
+<![CDATA[  [chromium] › customer.spec.ts:112:6 › Customer functionality test › customer can add product to cart 
+
+    Test timeout of 60000ms exceeded.
+
+    Pending operations:
+      - page.fill at pages/basePage.ts:417:19
+
+
+    attachment #1: screenshot (image/png) ----------------------------------------------------------
+    test-results/customer-Customer-functionality-test-customer-can-add-product-to-cart-chromium/test-failed-1.png
+    ------------------------------------------------------------------------------------------------
+]]>
+</failure>
+<system-out>
+<![CDATA[
+[[ATTACHMENT|../test-results/customer-Customer-functionality-test-customer-can-add-product-to-cart-chromium/test-failed-1.png]]
+]]>
+</system-out>
+</testcase>
+<testcase name="Customer functionality test customer can apply coupon" classname="[chromium] › customer.spec.ts › Customer functionality test › customer can apply coupon" time="60">
+<failure message="customer.spec.ts:122:6 customer can apply coupon" type="FAILURE">
+<![CDATA[  [chromium] › customer.spec.ts:122:6 › Customer functionality test › customer can apply coupon ====
+
+    Test timeout of 60000ms exceeded.
+
+    Pending operations:
+      - page.fill at pages/basePage.ts:417:19
+
+
+    attachment #1: screenshot (image/png) ----------------------------------------------------------
+    test-results/customer-Customer-functionality-test-customer-can-apply-coupon-chromium/test-failed-1.png
+    ------------------------------------------------------------------------------------------------
+]]>
+</failure>
+<system-out>
+<![CDATA[
+[[ATTACHMENT|../test-results/customer-Customer-functionality-test-customer-can-apply-coupon-chromium/test-failed-1.png]]
+]]>
+</system-out>
+</testcase>
+<testcase name="Customer functionality test customer can follow vendor @pro" classname="[chromium] › customer.spec.ts › Customer functionality test › customer can follow vendor @pro" time="59.999">
+<failure message="customer.spec.ts:132:6 customer can follow vendor @pro" type="FAILURE">
+<![CDATA[  [chromium] › customer.spec.ts:132:6 › Customer functionality test › customer can follow vendor @pro 
+
+    Test timeout of 60000ms exceeded.
+
+    Pending operations:
+      - page.fill at pages/basePage.ts:417:19
+
+
+    attachment #1: screenshot (image/png) ----------------------------------------------------------
+    test-results/customer-Customer-functionality-test-customer-can-follow-vendor-pro-chromium/test-failed-1.png
+    ------------------------------------------------------------------------------------------------
+]]>
+</failure>
+<system-out>
+<![CDATA[
+[[ATTACHMENT|../test-results/customer-Customer-functionality-test-customer-can-follow-vendor-pro-chromium/test-failed-1.png]]
+]]>
+</system-out>
+</testcase>
+<testcase name="Customer functionality test customer can review store" classname="[chromium] › customer.spec.ts › Customer functionality test › customer can review store" time="59.999">
+<failure message="customer.spec.ts:139:6 customer can review store" type="FAILURE">
+<![CDATA[  [chromium] › customer.spec.ts:139:6 › Customer functionality test › customer can review store ====
+
+    Test timeout of 60000ms exceeded.
+
+    Pending operations:
+      - page.fill at pages/basePage.ts:417:19
+
+
+    attachment #1: screenshot (image/png) ----------------------------------------------------------
+    test-results/customer-Customer-functionality-test-customer-can-review-store-chromium/test-failed-1.png
+    ------------------------------------------------------------------------------------------------
+]]>
+</failure>
+<system-out>
+<![CDATA[
+[[ATTACHMENT|../test-results/customer-Customer-functionality-test-customer-can-review-store-chromium/test-failed-1.png]]
+]]>
+</system-out>
+</testcase>
+<testcase name="Customer functionality test customer can ask for get support " classname="[chromium] › customer.spec.ts › Customer functionality test › customer can ask for get support " time="60">
+<failure message="customer.spec.ts:146:6 customer can ask for get support " type="FAILURE">
+<![CDATA[  [chromium] › customer.spec.ts:146:6 › Customer functionality test › customer can ask for get support  
+
+    Test timeout of 60000ms exceeded.
+
+    Pending operations:
+      - page.fill at pages/basePage.ts:417:19
+
+
+    attachment #1: screenshot (image/png) ----------------------------------------------------------
+    test-results/customer-Customer-functionality-test-customer-can-ask-for-get-support--chromium/test-failed-1.png
+    ------------------------------------------------------------------------------------------------
+]]>
+</failure>
+<system-out>
+<![CDATA[
+[[ATTACHMENT|../test-results/customer-Customer-functionality-test-customer-can-ask-for-get-support--chromium/test-failed-1.png]]
 ]]>
 </system-out>
 </testcase>
 </testsuite>
-<testsuite name="new endpoints/productFilter.spec.ts" timestamp="1675223818650" hostname="" tests="2" failures="0" skipped="0" time="0.389" errors="0">
-<testcase name="product filter api test get products filter by data @v2" classname="new endpoints/productFilter.spec.ts › product filter api test › get products filter by data @v2" time="0.182">
-</testcase>
-<testcase name="product filter api test get filtered products @v2" classname="new endpoints/productFilter.spec.ts › product filter api test › get filtered products @v2" time="0.207">
-</testcase>
-</testsuite>
-<testsuite name="new endpoints/setttingsGroup.spec.ts" timestamp="1675223818650" hostname="" tests="7" failures="0" skipped="0" time="1.313" errors="0">
-<testcase name="new settings api test get store settings @v2" classname="new endpoints/setttingsGroup.spec.ts › new settings api test › get store settings @v2" time="0.177">
-</testcase>
-<testcase name="new settings api test get single setting group @v2" classname="new endpoints/setttingsGroup.spec.ts › new settings api test › get single setting group @v2" time="0.188">
-</testcase>
-<testcase name="new settings api test update single setting group @v2" classname="new endpoints/setttingsGroup.spec.ts › new settings api test › update single setting group @v2" time="0.198">
-</testcase>
-<testcase name="new settings api test get sub settings from single settings group @v2" classname="new endpoints/setttingsGroup.spec.ts › new settings api test › get sub settings from single settings group @v2" time="0.184">
-</testcase>
-<testcase name="new settings api test update sub settings from single settings group @v2" classname="new endpoints/setttingsGroup.spec.ts › new settings api test › update sub settings from single settings group @v2" time="0.189">
-</testcase>
-<testcase name="new settings api test get sub sub settings from single settings group @v2" classname="new endpoints/setttingsGroup.spec.ts › new settings api test › get sub sub settings from single settings group @v2" time="0.182">
-</testcase>
-<testcase name="new settings api test update sub sub settings from single settings group @v2" classname="new endpoints/setttingsGroup.spec.ts › new settings api test › update sub sub settings from single settings group @v2" time="0.195">
-</testcase>
-</testsuite>
-<testsuite name="new endpoints/v1productAttribute.spec.ts" timestamp="1675223818650" hostname="" tests="2" failures="0" skipped="0" time="0.414" errors="0">
-<testcase name="product attribute api test set default attribute" classname="new endpoints/v1productAttribute.spec.ts › product attribute api test › set default attribute" time="0.204">
-</testcase>
-<testcase name="product attribute api test update product attribute" classname="new endpoints/v1productAttribute.spec.ts › product attribute api test › update product attribute" time="0.21">
-</testcase>
-</testsuite>
-<testsuite name="new endpoints/v1productBlock.spec.ts" timestamp="1675223818650" hostname="" tests="2" failures="0" skipped="0" time="0.386" errors="0">
-<testcase name="product block api test get product block details" classname="new endpoints/v1productBlock.spec.ts › product block api test › get product block details" time="0.189">
-</testcase>
-<testcase name="product block api test get variable product block details" classname="new endpoints/v1productBlock.spec.ts › product block api test › get variable product block details" time="0.197">
-</testcase>
-</testsuite>
-<testsuite name="new endpoints/v1rankMath.spec.ts" timestamp="1675223818650" hostname="" tests="1" failures="0" skipped="1" time="0" errors="0">
-<testcase name="rank math api test rank math" classname="new endpoints/v1rankMath.spec.ts › rank math api test › rank math" time="0">
-<skipped>
-</skipped>
-</testcase>
-</testsuite>
-<testsuite name="new endpoints/v1vendorDashborad.spec.ts" timestamp="1675223818650" hostname="" tests="7" failures="0" skipped="0" time="1.28" errors="0">
-<testcase name="vendor dashboard api test get vendor dashboard statistics" classname="new endpoints/v1vendorDashborad.spec.ts › vendor dashboard api test › get vendor dashboard statistics" time="0.179">
-</testcase>
-<testcase name="vendor dashboard api test get vendor profile information" classname="new endpoints/v1vendorDashborad.spec.ts › vendor dashboard api test › get vendor profile information" time="0.181">
-</testcase>
-<testcase name="vendor dashboard api test get vendor sales report" classname="new endpoints/v1vendorDashborad.spec.ts › vendor dashboard api test › get vendor sales report" time="0.184">
-</testcase>
-<testcase name="vendor dashboard api test get vendor product reports summary" classname="new endpoints/v1vendorDashborad.spec.ts › vendor dashboard api test › get vendor product reports summary" time="0.179">
-</testcase>
-<testcase name="vendor dashboard api test get vendor order reports summary" classname="new endpoints/v1vendorDashborad.spec.ts › vendor dashboard api test › get vendor order reports summary" time="0.183">
-</testcase>
-<testcase name="vendor dashboard api test get vendor store preferences" classname="new endpoints/v1vendorDashborad.spec.ts › vendor dashboard api test › get vendor store preferences" time="0.179">
-</testcase>
-<testcase name="vendor dashboard api test get vendor profile progress bar data" classname="new endpoints/v1vendorDashborad.spec.ts › vendor dashboard api test › get vendor profile progress bar data" time="0.195">
-</testcase>
-</testsuite>
-<testsuite name="new endpoints/withdraw.spec.ts" timestamp="1675223818650" hostname="" tests="2" failures="0" skipped="0" time="0.356" errors="0">
-<testcase name="withdraw api test get withdraw settings @v2" classname="new endpoints/withdraw.spec.ts › withdraw api test › get withdraw settings @v2" time="0.177">
-</testcase>
-<testcase name="withdraw api test get withdraw summary @v2" classname="new endpoints/withdraw.spec.ts › withdraw api test › get withdraw summary @v2" time="0.179">
-</testcase>
-</testsuite>
-<testsuite name="orderNotes.spec.ts" timestamp="1675223818650" hostname="" tests="4" failures="0" skipped="0" time="0.751" errors="0">
-<testcase name="order note api test get all order notes" classname="orderNotes.spec.ts › order note api test › get all order notes" time="0.183">
-</testcase>
-<testcase name="order note api test get single order note" classname="orderNotes.spec.ts › order note api test › get single order note" time="0.182">
-</testcase>
-<testcase name="order note api test create an order note" classname="orderNotes.spec.ts › order note api test › create an order note" time="0.198">
-</testcase>
-<testcase name="order note api test delete an order note" classname="orderNotes.spec.ts › order note api test › delete an order note" time="0.188">
-</testcase>
-</testsuite>
-<testsuite name="orders.spec.ts" timestamp="1675223818650" hostname="" tests="5" failures="0" skipped="0" time="1.01" errors="0">
-<testcase name="order api test get all orders" classname="orders.spec.ts › order api test › get all orders" time="0.208">
-</testcase>
-<testcase name="order api test get orders summary" classname="orders.spec.ts › order api test › get orders summary" time="0.179">
-</testcase>
-<testcase name="order api test get orders with before after" classname="orders.spec.ts › order api test › get orders with before after" time="0.211">
-</testcase>
-<testcase name="order api test get single order" classname="orders.spec.ts › order api test › get single order" time="0.191">
-</testcase>
-<testcase name="order api test update an order" classname="orders.spec.ts › order api test › update an order" time="0.221">
-</testcase>
-</testsuite>
-<testsuite name="productAdvertisements.spec.ts" timestamp="1675223818650" hostname="" tests="6" failures="0" skipped="0" time="1.623" errors="0">
-<testcase name="product advertisement api test get all advertised product stores @pro" classname="productAdvertisements.spec.ts › product advertisement api test › get all advertised product stores @pro" time="0.178">
-</testcase>
-<testcase name="product advertisement api test get all advertised product @pro" classname="productAdvertisements.spec.ts › product advertisement api test › get all advertised product @pro" time="0.18">
-</testcase>
-<testcase name="product advertisement api test create a product advertisement @pro" classname="productAdvertisements.spec.ts › product advertisement api test › create a product advertisement @pro" time="0.516">
-</testcase>
-<testcase name="product advertisement api test expire a product advertisement @pro" classname="productAdvertisements.spec.ts › product advertisement api test › expire a product advertisement @pro" time="0.183">
-</testcase>
-<testcase name="product advertisement api test delete a product advertisement @pro" classname="productAdvertisements.spec.ts › product advertisement api test › delete a product advertisement @pro" time="0.183">
-</testcase>
-<testcase name="product advertisement api test update batch product advertisements @pro" classname="productAdvertisements.spec.ts › product advertisement api test › update batch product advertisements @pro" time="0.383">
-</testcase>
-</testsuite>
-<testsuite name="productAttributes.spec.ts" timestamp="1675223818650" hostname="" tests="6" failures="0" skipped="0" time="1.312" errors="0">
-<testcase name="attribute api test get all attributes" classname="productAttributes.spec.ts › attribute api test › get all attributes" time="0.21">
-</testcase>
-<testcase name="attribute api test get single attribute" classname="productAttributes.spec.ts › attribute api test › get single attribute" time="0.179">
-</testcase>
-<testcase name="attribute api test create an attribute" classname="productAttributes.spec.ts › attribute api test › create an attribute" time="0.186">
-</testcase>
-<testcase name="attribute api test update an attribute" classname="productAttributes.spec.ts › attribute api test › update an attribute" time="0.186">
-</testcase>
-<testcase name="attribute api test delete an attribute" classname="productAttributes.spec.ts › attribute api test › delete an attribute" time="0.185">
-</testcase>
-<testcase name="attribute api test update batch attributes" classname="productAttributes.spec.ts › attribute api test › update batch attributes" time="0.366">
-</testcase>
-</testsuite>
-<testsuite name="productAttributeTerms.spec.ts" timestamp="1675223818650" hostname="" tests="6" failures="0" skipped="0" time="1.28" errors="0">
-<testcase name="attribute term api test get all attribute terms" classname="productAttributeTerms.spec.ts › attribute term api test › get all attribute terms" time="0.179">
-</testcase>
-<testcase name="attribute term api test get single attribute term" classname="productAttributeTerms.spec.ts › attribute term api test › get single attribute term" time="0.181">
-</testcase>
-<testcase name="attribute term api test create an attribute term" classname="productAttributeTerms.spec.ts › attribute term api test › create an attribute term" time="0.187">
-</testcase>
-<testcase name="attribute term api test update an attribute term " classname="productAttributeTerms.spec.ts › attribute term api test › update an attribute term " time="0.183">
-</testcase>
-<testcase name="attribute term api test delete an attribute term" classname="productAttributeTerms.spec.ts › attribute term api test › delete an attribute term" time="0.189">
-</testcase>
-<testcase name="attribute term api test update batch attribute terms" classname="productAttributeTerms.spec.ts › attribute term api test › update batch attribute terms" time="0.361">
-</testcase>
-</testsuite>
-<testsuite name="productReviews.spec.ts" timestamp="1675223818650" hostname="" tests="3" failures="0" skipped="0" time="0.548" errors="0">
-<testcase name="product review api test get all product reviews" classname="productReviews.spec.ts › product review api test › get all product reviews" time="0.18">
-</testcase>
-<testcase name="product review api test get product reviews summary" classname="productReviews.spec.ts › product review api test › get product reviews summary" time="0.178">
-</testcase>
-<testcase name="product review api test update a product review" classname="productReviews.spec.ts › product review api test › update a product review" time="0.19">
-</testcase>
-</testsuite>
-<testsuite name="products.spec.ts" timestamp="1675223818650" hostname="" tests="12" failures="0" skipped="0" time="2.56" errors="0">
-<testcase name="product api test get products summary" classname="products.spec.ts › product api test › get products summary" time="0.178">
-</testcase>
-<testcase name="product api test get top rated products" classname="products.spec.ts › product api test › get top rated products" time="0.205">
-</testcase>
-<testcase name="product api test get best selling products" classname="products.spec.ts › product api test › get best selling products" time="0.209">
-</testcase>
-<testcase name="product api test get featured products" classname="products.spec.ts › product api test › get featured products" time="0.18">
-</testcase>
-<testcase name="product api test get latest products" classname="products.spec.ts › product api test › get latest products" time="0.208">
-</testcase>
-<testcase name="product api test get all multiStep categories" classname="products.spec.ts › product api test › get all multiStep categories" time="0.178">
-</testcase>
-<testcase name="product api test get all products" classname="products.spec.ts › product api test › get all products" time="0.214">
-</testcase>
-<testcase name="product api test get single product" classname="products.spec.ts › product api test › get single product" time="0.189">
-</testcase>
-<testcase name="product api test get all related products" classname="products.spec.ts › product api test › get all related products" time="0.229">
-</testcase>
-<testcase name="product api test create a product" classname="products.spec.ts › product api test › create a product" time="0.304">
-</testcase>
-<testcase name="product api test update a product" classname="products.spec.ts › product api test › update a product" time="0.243">
-</testcase>
-<testcase name="product api test delete a product" classname="products.spec.ts › product api test › delete a product" time="0.223">
-</testcase>
-</testsuite>
-<testsuite name="productVariations.spec.ts" timestamp="1675223818650" hostname="" tests="5" failures="0" skipped="0" time="1.095" errors="0">
-<testcase name="product variation api test get all product variations" classname="productVariations.spec.ts › product variation api test › get all product variations" time="0.192">
+<testsuite name="vendor.spec.ts" timestamp="1675223824981" hostname="" tests="27" failures="7" skipped="20" time="419.998" errors="0">
+<testcase name="Vendor functionality test vendor can add simple product @product" classname="[chromium] › vendor.spec.ts › Vendor functionality test › vendor can add simple product @product" time="60">
+<failure message="vendor.spec.ts:45:6 vendor can add simple product @product" type="FAILURE">
+<![CDATA[  [chromium] › vendor.spec.ts:45:6 › Vendor functionality test › vendor can add simple product @product 
+
+    Test timeout of 60000ms exceeded.
+
+    attachment #1: screenshot (image/png) ----------------------------------------------------------
+    test-results/vendor-Vendor-functionality-test-vendor-can-add-simple-product-product-chromium/test-failed-1.png
+    ------------------------------------------------------------------------------------------------
+]]>
+</failure>
 <system-out>
-<![CDATA[[33m44[39m
+<![CDATA[
+[[ATTACHMENT|../test-results/vendor-Vendor-functionality-test-vendor-can-add-simple-product-product-chromium/test-failed-1.png]]
 ]]>
 </system-out>
 </testcase>
-<testcase name="product variation api test get single product variation" classname="productVariations.spec.ts › product variation api test › get single product variation" time="0.191">
-</testcase>
-<testcase name="product variation api test create a product variation" classname="productVariations.spec.ts › product variation api test › create a product variation" time="0.248">
-</testcase>
-<testcase name="product variation api test update a product variation" classname="productVariations.spec.ts › product variation api test › update a product variation" time="0.225">
-</testcase>
-<testcase name="product variation api test delete a product variation" classname="productVariations.spec.ts › product variation api test › delete a product variation" time="0.239">
-</testcase>
-</testsuite>
-<testsuite name="quoteRequests.spec.ts" timestamp="1675223818650" hostname="" tests="8" failures="0" skipped="1" time="1.588" errors="0">
-<testcase name="request quote api test get all request quotes @pro" classname="quoteRequests.spec.ts › request quote api test › get all request quotes @pro" time="0.18">
-</testcase>
-<testcase name="request quote api test get single request quote @pro" classname="quoteRequests.spec.ts › request quote api test › get single request quote @pro" time="0.188">
-</testcase>
-<testcase name="request quote api test create a request quote @pro" classname="quoteRequests.spec.ts › request quote api test › create a request quote @pro" time="0.219">
-</testcase>
-<testcase name="request quote api test update a request quote @pro" classname="quoteRequests.spec.ts › request quote api test › update a request quote @pro" time="0">
+<testcase name="Vendor functionality test vendor can add variable product" classname="[chromium] › vendor.spec.ts › Vendor functionality test › vendor can add variable product" time="0">
 <skipped>
 </skipped>
 </testcase>
-<testcase name="request quote api test delete a request quote @pro" classname="quoteRequests.spec.ts › request quote api test › delete a request quote @pro" time="0.179">
+<testcase name="Vendor functionality test vendor can add simple subscription product" classname="[chromium] › vendor.spec.ts › Vendor functionality test › vendor can add simple subscription product" time="60">
+<failure message="vendor.spec.ts:59:6 vendor can add simple subscription product" type="FAILURE">
+<![CDATA[  [chromium] › vendor.spec.ts:59:6 › Vendor functionality test › vendor can add simple subscription product 
+
+    Test timeout of 60000ms exceeded.
+
+    attachment #1: screenshot (image/png) ----------------------------------------------------------
+    test-results/vendor-Vendor-functionality-test-vendor-can-add-simple-subscription-product-chromium/test-failed-1.png
+    ------------------------------------------------------------------------------------------------
+]]>
+</failure>
+<system-out>
+<![CDATA[
+[[ATTACHMENT|../test-results/vendor-Vendor-functionality-test-vendor-can-add-simple-subscription-product-chromium/test-failed-1.png]]
+]]>
+</system-out>
 </testcase>
-<testcase name="request quote api test restore a deleted request quote @pro" classname="quoteRequests.spec.ts › request quote api test › restore a deleted request quote @pro" time="0.181">
-</testcase>
-<testcase name="request quote api test convert request quote to order @pro" classname="quoteRequests.spec.ts › request quote api test › convert request quote to order @pro" time="0.284">
-</testcase>
-<testcase name="request quote api test update batch request quote @pro " classname="quoteRequests.spec.ts › request quote api test › update batch request quote @pro " time="0.357">
-</testcase>
-</testsuite>
-<testsuite name="quoteRules.spec.ts" timestamp="1675223818650" hostname="" tests="7" failures="0" skipped="0" time="1.433" errors="0">
-<testcase name="quote rules api test get all quote rules @pro" classname="quoteRules.spec.ts › quote rules api test › get all quote rules @pro" time="0.178">
-</testcase>
-<testcase name="quote rules api test get single quote rule @pro" classname="quoteRules.spec.ts › quote rules api test › get single quote rule @pro" time="0.178">
-</testcase>
-<testcase name="quote rules api test create a quote rule @pro" classname="quoteRules.spec.ts › quote rules api test › create a quote rule @pro" time="0.182">
-</testcase>
-<testcase name="quote rules api test update a quote rule @pro" classname="quoteRules.spec.ts › quote rules api test › update a quote rule @pro" time="0.179">
-</testcase>
-<testcase name="quote rules api test delete a quote rule @pro" classname="quoteRules.spec.ts › quote rules api test › delete a quote rule @pro" time="0.179">
-</testcase>
-<testcase name="quote rules api test restore a deleted quote rule @pro" classname="quoteRules.spec.ts › quote rules api test › restore a deleted quote rule @pro" time="0.179">
-</testcase>
-<testcase name="quote rules api test update batch quote rules @pro" classname="quoteRules.spec.ts › quote rules api test › update batch quote rules @pro" time="0.358">
-</testcase>
-</testsuite>
-<testsuite name="refunds.spec.ts" timestamp="1675223818650" hostname="" tests="6" failures="0" skipped="6" time="0" errors="0">
-<testcase name="refunds api test get all refunds @pro" classname="refunds.spec.ts › refunds api test › get all refunds @pro" time="0">
+<testcase name="Vendor functionality test vendor can add variable subscription product" classname="[chromium] › vendor.spec.ts › Vendor functionality test › vendor can add variable subscription product" time="0">
 <skipped>
 </skipped>
 </testcase>
-<testcase name="refunds api test get all refunds by status @pro" classname="refunds.spec.ts › refunds api test › get all refunds by status @pro" time="0">
+<testcase name="Vendor functionality test vendor can add external product" classname="[chromium] › vendor.spec.ts › Vendor functionality test › vendor can add external product" time="59.999">
+<failure message="vendor.spec.ts:73:6 vendor can add external product" type="FAILURE">
+<![CDATA[  [chromium] › vendor.spec.ts:73:6 › Vendor functionality test › vendor can add external product ===
+
+    Test timeout of 60000ms exceeded.
+
+    attachment #1: screenshot (image/png) ----------------------------------------------------------
+    test-results/vendor-Vendor-functionality-test-vendor-can-add-external-product-chromium/test-failed-1.png
+    ------------------------------------------------------------------------------------------------
+]]>
+</failure>
+<system-out>
+<![CDATA[
+[[ATTACHMENT|../test-results/vendor-Vendor-functionality-test-vendor-can-add-external-product-chromium/test-failed-1.png]]
+]]>
+</system-out>
+</testcase>
+<testcase name="Vendor functionality test vendor can add auction product" classname="[chromium] › vendor.spec.ts › Vendor functionality test › vendor can add auction product" time="0">
 <skipped>
 </skipped>
 </testcase>
-<testcase name="refunds api test approve a refund @pro" classname="refunds.spec.ts › refunds api test › approve a refund @pro" time="0">
+<testcase name="Vendor functionality test vendor can add booking product" classname="[chromium] › vendor.spec.ts › Vendor functionality test › vendor can add booking product" time="59.999">
+<failure message="vendor.spec.ts:87:6 vendor can add booking product" type="FAILURE">
+<![CDATA[  [chromium] › vendor.spec.ts:87:6 › Vendor functionality test › vendor can add booking product ====
+
+    Test timeout of 60000ms exceeded.
+
+    attachment #1: screenshot (image/png) ----------------------------------------------------------
+    test-results/vendor-Vendor-functionality-test-vendor-can-add-booking-product-chromium/test-failed-1.png
+    ------------------------------------------------------------------------------------------------
+]]>
+</failure>
+<system-out>
+<![CDATA[
+[[ATTACHMENT|../test-results/vendor-Vendor-functionality-test-vendor-can-add-booking-product-chromium/test-failed-1.png]]
+]]>
+</system-out>
+</testcase>
+<testcase name="Vendor functionality test vendor can add coupon" classname="[chromium] › vendor.spec.ts › Vendor functionality test › vendor can add coupon" time="60">
+<failure message="vendor.spec.ts:94:6 vendor can add coupon" type="FAILURE">
+<![CDATA[  [chromium] › vendor.spec.ts:94:6 › Vendor functionality test › vendor can add coupon =============
+
+    Test timeout of 60000ms exceeded.
+
+    attachment #1: screenshot (image/png) ----------------------------------------------------------
+    test-results/vendor-Vendor-functionality-test-vendor-can-add-coupon-chromium/test-failed-1.png
+    ------------------------------------------------------------------------------------------------
+]]>
+</failure>
+<system-out>
+<![CDATA[
+[[ATTACHMENT|../test-results/vendor-Vendor-functionality-test-vendor-can-add-coupon-chromium/test-failed-1.png]]
+]]>
+</system-out>
+</testcase>
+<testcase name="Vendor functionality test vendor can request withdraw" classname="[chromium] › vendor.spec.ts › Vendor functionality test › vendor can request withdraw" time="0">
 <skipped>
 </skipped>
 </testcase>
-<testcase name="refunds api test cancel a refund @pro" classname="refunds.spec.ts › refunds api test › cancel a refund @pro" time="0">
+<testcase name="Vendor functionality test vendor can cancel request withdraw" classname="[chromium] › vendor.spec.ts › Vendor functionality test › vendor can cancel request withdraw" time="0">
 <skipped>
 </skipped>
 </testcase>
-<testcase name="refunds api test delete a refund @pro" classname="refunds.spec.ts › refunds api test › delete a refund @pro" time="0">
+<testcase name="Vendor functionality test vendor can add auto withdraw disbursement schedule" classname="[chromium] › vendor.spec.ts › Vendor functionality test › vendor can add auto withdraw disbursement schedule" time="60">
+<failure message="vendor.spec.ts:116:6 vendor can add auto withdraw disbursement schedule" type="FAILURE">
+<![CDATA[  [chromium] › vendor.spec.ts:116:6 › Vendor functionality test › vendor can add auto withdraw disbursement schedule 
+
+    Test timeout of 60000ms exceeded.
+
+    attachment #1: screenshot (image/png) ----------------------------------------------------------
+    test-results/vendor-Vendor-functionality-test-vendor-can-add-auto-withdraw-disbursement-schedule-chromium/test-failed-1.png
+    ------------------------------------------------------------------------------------------------
+]]>
+</failure>
+<system-out>
+<![CDATA[
+[[ATTACHMENT|../test-results/vendor-Vendor-functionality-test-vendor-can-add-auto-withdraw-disbursement-schedule-chromium/test-failed-1.png]]
+]]>
+</system-out>
+</testcase>
+<testcase name="Vendor functionality test vendor can add default withdraw payment methods " classname="[chromium] › vendor.spec.ts › Vendor functionality test › vendor can add default withdraw payment methods " time="0">
 <skipped>
 </skipped>
 </testcase>
-<testcase name="refunds api test update batch refunds @pro" classname="refunds.spec.ts › refunds api test › update batch refunds @pro" time="0">
+<testcase name="Vendor functionality test vendor can set store settings " classname="[chromium] › vendor.spec.ts › Vendor functionality test › vendor can set store settings " time="0">
 <skipped>
 </skipped>
 </testcase>
-</testsuite>
-<testsuite name="reports.spec.ts" timestamp="1675223818650" hostname="" tests="4" failures="0" skipped="0" time="0.764" errors="0">
-<testcase name="report api test get sales overview report" classname="reports.spec.ts › report api test › get sales overview report" time="0.192">
+<testcase name="Vendor functionality test vendor can add addons" classname="[chromium] › vendor.spec.ts › Vendor functionality test › vendor can add addons" time="59.999">
+<failure message="vendor.spec.ts:141:6 vendor can add addons" type="FAILURE">
+<![CDATA[  [chromium] › vendor.spec.ts:141:6 › Vendor functionality test › vendor can add addons ============
+
+    Test timeout of 60000ms exceeded.
+
+    attachment #1: screenshot (image/png) ----------------------------------------------------------
+    test-results/vendor-Vendor-functionality-test-vendor-can-add-addons-chromium/test-failed-1.png
+    ------------------------------------------------------------------------------------------------
+]]>
+</failure>
+<system-out>
+<![CDATA[
+[[ATTACHMENT|../test-results/vendor-Vendor-functionality-test-vendor-can-add-addons-chromium/test-failed-1.png]]
+]]>
+</system-out>
 </testcase>
-<testcase name="report api test get summary report" classname="reports.spec.ts › report api test › get summary report" time="0.181">
-</testcase>
-<testcase name="report api test get top earners report" classname="reports.spec.ts › report api test › get top earners report" time="0.197">
-</testcase>
-<testcase name="report api test get top selling products report " classname="reports.spec.ts › report api test › get top selling products report " time="0.194">
-</testcase>
-</testsuite>
-<testsuite name="reverseWithdrawal.spec.ts" timestamp="1675223818650" hostname="" tests="4" failures="0" skipped="4" time="0" errors="0">
-<testcase name="reverse withdrawal api test get reverse withdrawal transaction types" classname="reverseWithdrawal.spec.ts › reverse withdrawal api test › get reverse withdrawal transaction types" time="0">
+<testcase name="Vendor functionality test vendor can edit addon" classname="[chromium] › vendor.spec.ts › Vendor functionality test › vendor can edit addon" time="0">
 <skipped>
 </skipped>
 </testcase>
-<testcase name="reverse withdrawal api test get all reverse withdrawal stores" classname="reverseWithdrawal.spec.ts › reverse withdrawal api test › get all reverse withdrawal stores" time="0">
+<testcase name="Vendor functionality test vendor can send id verification request " classname="[chromium] › vendor.spec.ts › Vendor functionality test › vendor can send id verification request " time="0">
 <skipped>
 </skipped>
 </testcase>
-<testcase name="reverse withdrawal api test get all reverse withdrawal store balance" classname="reverseWithdrawal.spec.ts › reverse withdrawal api test › get all reverse withdrawal store balance" time="0">
+<testcase name="Vendor functionality test vendor can send address verification request " classname="[chromium] › vendor.spec.ts › Vendor functionality test › vendor can send address verification request " time="0">
 <skipped>
 </skipped>
 </testcase>
-<testcase name="reverse withdrawal api test get all reverse withdrawal transactions" classname="reverseWithdrawal.spec.ts › reverse withdrawal api test › get all reverse withdrawal transactions" time="0">
+<testcase name="Vendor functionality test vendor can send company verification request " classname="[chromium] › vendor.spec.ts › Vendor functionality test › vendor can send company verification request " time="0">
 <skipped>
 </skipped>
 </testcase>
-</testsuite>
-<testsuite name="roles.spec.ts" timestamp="1675223818650" hostname="" tests="1" failures="0" skipped="0" time="0.179" errors="0">
-<testcase name="roles api test get all user roles " classname="roles.spec.ts › roles api test › get all user roles " time="0.179">
-</testcase>
-</testsuite>
-<testsuite name="settings.spec.ts" timestamp="1675223818650" hostname="" tests="2" failures="0" skipped="0" time="0.366" errors="0">
-<testcase name="settings api test get settings" classname="settings.spec.ts › settings api test › get settings" time="0.179">
-</testcase>
-<testcase name="settings api test update settings" classname="settings.spec.ts › settings api test › update settings" time="0.187">
-</testcase>
-</testsuite>
-<testsuite name="storeCategories.spec.ts" timestamp="1675223818650" hostname="" tests="7" failures="0" skipped="7" time="0" errors="0">
-<testcase name="store categories api test get default store category @pro" classname="storeCategories.spec.ts › store categories api test › get default store category @pro" time="0">
+<testcase name="Vendor functionality test vendor can set delivery time settings " classname="[chromium] › vendor.spec.ts › Vendor functionality test › vendor can set delivery time settings " time="0">
 <skipped>
 </skipped>
 </testcase>
-<testcase name="store categories api test get all store categories @pro" classname="storeCategories.spec.ts › store categories api test › get all store categories @pro" time="0">
+<testcase name="Vendor functionality test vendor can set shipping policy" classname="[chromium] › vendor.spec.ts › Vendor functionality test › vendor can set shipping policy" time="0">
 <skipped>
 </skipped>
 </testcase>
-<testcase name="store categories api test get single store category @pro" classname="storeCategories.spec.ts › store categories api test › get single store category @pro" time="0">
+<testcase name="Vendor functionality test vendor can set flat rate shipping " classname="[chromium] › vendor.spec.ts › Vendor functionality test › vendor can set flat rate shipping " time="0">
 <skipped>
 </skipped>
 </testcase>
-<testcase name="store categories api test create a store category @pro" classname="storeCategories.spec.ts › store categories api test › create a store category @pro" time="0">
+<testcase name="Vendor functionality test vendor can set free shipping " classname="[chromium] › vendor.spec.ts › Vendor functionality test › vendor can set free shipping " time="0">
 <skipped>
 </skipped>
 </testcase>
-<testcase name="store categories api test update a store category @pro" classname="storeCategories.spec.ts › store categories api test › update a store category @pro" time="0">
+<testcase name="Vendor functionality test vendor can set local pickup shipping " classname="[chromium] › vendor.spec.ts › Vendor functionality test › vendor can set local pickup shipping " time="0">
 <skipped>
 </skipped>
 </testcase>
-<testcase name="store categories api test delete a store category @pro" classname="storeCategories.spec.ts › store categories api test › delete a store category @pro" time="0">
+<testcase name="Vendor functionality test vendor can set table rate shipping shipping " classname="[chromium] › vendor.spec.ts › Vendor functionality test › vendor can set table rate shipping shipping " time="0">
 <skipped>
 </skipped>
 </testcase>
-<testcase name="store categories api test set default store category @pro" classname="storeCategories.spec.ts › store categories api test › set default store category @pro" time="0">
+<testcase name="Vendor functionality test vendor can set dokan distance rate shipping " classname="[chromium] › vendor.spec.ts › Vendor functionality test › vendor can set dokan distance rate shipping " time="0">
 <skipped>
 </skipped>
 </testcase>
-</testsuite>
-<testsuite name="storeReviews.spec.ts" timestamp="1675223818650" hostname="" tests="6" failures="0" skipped="0" time="1.531" errors="0">
-<testcase name="store reviews api test get all store reviews @pro" classname="storeReviews.spec.ts › store reviews api test › get all store reviews @pro" time="0.202">
-</testcase>
-<testcase name="store reviews api test get single store review @pro" classname="storeReviews.spec.ts › store reviews api test › get single store review @pro" time="0.179">
-</testcase>
-<testcase name="store reviews api test update a store review @pro" classname="storeReviews.spec.ts › store reviews api test › update a store review @pro" time="0.188">
-</testcase>
-<testcase name="store reviews api test delete a store review  @pro" classname="storeReviews.spec.ts › store reviews api test › delete a store review  @pro" time="0.195">
-</testcase>
-<testcase name="store reviews api test restore a deleted store review  @pro" classname="storeReviews.spec.ts › store reviews api test › restore a deleted store review  @pro" time="0.191">
-</testcase>
-<testcase name="store reviews api test update batch store review @pro" classname="storeReviews.spec.ts › store reviews api test › update batch store review @pro" time="0.576">
-</testcase>
-</testsuite>
-<testsuite name="stores.spec.ts" timestamp="1675223818650" hostname="" tests="16" failures="0" skipped="0" time="4.203" errors="0">
-<testcase name="stores api test get store availability status" classname="stores.spec.ts › stores api test › get store availability status" time="0.178">
-</testcase>
-<testcase name="stores api test get all stores" classname="stores.spec.ts › stores api test › get all stores" time="0.187">
-</testcase>
-<testcase name="stores api test get single store" classname="stores.spec.ts › stores api test › get single store" time="0.181">
-</testcase>
-<testcase name="stores api test create a store" classname="stores.spec.ts › stores api test › create a store" time="0.213">
-</testcase>
-<testcase name="stores api test update a store" classname="stores.spec.ts › stores api test › update a store" time="0.199">
-</testcase>
-<testcase name="stores api test delete a store" classname="stores.spec.ts › stores api test › delete a store" time="0.415">
-</testcase>
-<testcase name="stores api test get store current visitor" classname="stores.spec.ts › stores api test › get store current visitor" time="0.179">
-</testcase>
-<testcase name="stores api test get store stats" classname="stores.spec.ts › stores api test › get store stats" time="0.187">
-</testcase>
-<testcase name="stores api test get store categories" classname="stores.spec.ts › stores api test › get store categories" time="0.185">
-</testcase>
-<testcase name="stores api test get store products" classname="stores.spec.ts › stores api test › get store products" time="0.711">
-</testcase>
-<testcase name="stores api test create a store review" classname="stores.spec.ts › stores api test › create a store review" time="0.19">
-</testcase>
-<testcase name="stores api test get store reviews" classname="stores.spec.ts › stores api test › get store reviews" time="0.368">
-</testcase>
-<testcase name="stores api test update a store status" classname="stores.spec.ts › stores api test › update a store status" time="0.203">
-</testcase>
-<testcase name="stores api test admin contact store" classname="stores.spec.ts › stores api test › admin contact store" time="0.191">
-</testcase>
-<testcase name="stores api test admin email store" classname="stores.spec.ts › stores api test › admin email store" time="0.181">
-</testcase>
-<testcase name="stores api test update batch stores" classname="stores.spec.ts › stores api test › update batch stores" time="0.435">
-</testcase>
-</testsuite>
-<testsuite name="supportTickets.spec.ts" timestamp="1675223818650" hostname="" tests="8" failures="0" skipped="8" time="0" errors="0">
-<testcase name="support ticket api test get all support ticket customers" classname="supportTickets.spec.ts › support ticket api test › get all support ticket customers" time="0">
+<testcase name="Vendor functionality test vendor can set social profile settings " classname="[chromium] › vendor.spec.ts › Vendor functionality test › vendor can set social profile settings " time="0">
 <skipped>
 </skipped>
 </testcase>
-<testcase name="support ticket api test get all support tickets" classname="supportTickets.spec.ts › support ticket api test › get all support tickets" time="0">
+<testcase name="Vendor functionality test vendor can set rma settings " classname="[chromium] › vendor.spec.ts › Vendor functionality test › vendor can set rma settings " time="0.001">
 <skipped>
 </skipped>
-</testcase>
-<testcase name="support ticket api test get single support ticket" classname="supportTickets.spec.ts › support ticket api test › get single support ticket" time="0">
-<skipped>
-</skipped>
-</testcase>
-<testcase name="support ticket api test create a support ticket comment" classname="supportTickets.spec.ts › support ticket api test › create a support ticket comment" time="0">
-<skipped>
-</skipped>
-</testcase>
-<testcase name="support ticket api test update support ticket status" classname="supportTickets.spec.ts › support ticket api test › update support ticket status" time="0">
-<skipped>
-</skipped>
-</testcase>
-<testcase name="support ticket api test update a support ticket email notification" classname="supportTickets.spec.ts › support ticket api test › update a support ticket email notification" time="0">
-<skipped>
-</skipped>
-</testcase>
-<testcase name="support ticket api test delete a support ticket comment" classname="supportTickets.spec.ts › support ticket api test › delete a support ticket comment" time="0">
-<skipped>
-</skipped>
-</testcase>
-<testcase name="support ticket api test update batch support tickets" classname="supportTickets.spec.ts › support ticket api test › update batch support tickets" time="0">
-<skipped>
-</skipped>
-</testcase>
-</testsuite>
-<testsuite name="wholesaleCustomers.spec.ts" timestamp="1675223818650" hostname="" tests="5" failures="0" skipped="0" time="1.36" errors="0">
-<testcase name="wholesale customers api test get all wholesale customers @pro" classname="wholesaleCustomers.spec.ts › wholesale customers api test › get all wholesale customers @pro" time="0.181">
-</testcase>
-<testcase name="wholesale customers api test create a wholesale customer @pro" classname="wholesaleCustomers.spec.ts › wholesale customers api test › create a wholesale customer @pro" time="0.432">
-</testcase>
-<testcase name="wholesale customers api test update a wholesale customer @pro" classname="wholesaleCustomers.spec.ts › wholesale customers api test › update a wholesale customer @pro" time="0.197">
-</testcase>
-<testcase name="wholesale customers api test delete a wholesale customer @pro" classname="wholesaleCustomers.spec.ts › wholesale customers api test › delete a wholesale customer @pro" time="0.186">
-</testcase>
-<testcase name="wholesale customers api test update batch wholesale customers @pro" classname="wholesaleCustomers.spec.ts › wholesale customers api test › update batch wholesale customers @pro" time="0.364">
-</testcase>
-</testsuite>
-<testsuite name="withdraws.spec.ts" timestamp="1675223818650" hostname="" tests="8" failures="0" skipped="0" time="1.858" errors="0">
-<testcase name="withdraw api test get balance details" classname="withdraws.spec.ts › withdraw api test › get balance details" time="0.178">
-</testcase>
-<testcase name="withdraw api test get all withdraws" classname="withdraws.spec.ts › withdraw api test › get all withdraws" time="0.181">
-</testcase>
-<testcase name="withdraw api test get all withdraws by status" classname="withdraws.spec.ts › withdraw api test › get all withdraws by status" time="0.181">
-</testcase>
-<testcase name="withdraw api test get single withdraw" classname="withdraws.spec.ts › withdraw api test › get single withdraw" time="0.179">
-</testcase>
-<testcase name="withdraw api test update a withdraw" classname="withdraws.spec.ts › withdraw api test › update a withdraw" time="0.184">
-</testcase>
-<testcase name="withdraw api test cancel a withdraw" classname="withdraws.spec.ts › withdraw api test › cancel a withdraw" time="0.207">
-</testcase>
-<testcase name="withdraw api test update batch withdraws" classname="withdraws.spec.ts › withdraw api test › update batch withdraws" time="0.384">
-</testcase>
-<testcase name="withdraw api test create a withdraw" classname="withdraws.spec.ts › withdraw api test › create a withdraw" time="0.364">
 </testcase>
 </testsuite>
 </testsuites>
