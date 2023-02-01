@@ -1,10 +1,10 @@
-<testsuites id="" name="" tests="1" failures="1" skipped="0" errors="0" time="77.63196600000002">
-<testsuite name="_setupApi.spec.ts" timestamp="1675275301992" hostname="" tests="1" failures="1" skipped="0" time="39.998" errors="0">
-<testcase name="setup test e2e admin set WpSettings" classname="[chromium] › _setupApi.spec.ts › setup test e2e › admin set WpSettings" time="39.998">
+<testsuites id="" name="" tests="1" failures="1" skipped="0" errors="0" time="157.70363400000002">
+<testsuite name="_setupApi.spec.ts" timestamp="1675276440441" hostname="" tests="1" failures="1" skipped="0" time="119.999" errors="0">
+<testcase name="setup test e2e admin set WpSettings" classname="[chromium] › _setupApi.spec.ts › setup test e2e › admin set WpSettings" time="119.999">
 <failure message="_setupApi.spec.ts:239:7 admin set WpSettings" type="FAILURE">
 <![CDATA[  [chromium] › _setupApi.spec.ts:239:7 › setup test e2e › admin set WpSettings =====================
 
-    Test timeout of 40000ms exceeded.
+    Test timeout of 120000ms exceeded.
 
     attachment #1: screenshot (image/png) ----------------------------------------------------------
     test-results/_setupApi-setup-test-e2e-admin-set-WpSettings-chromium/test-failed-1.png
