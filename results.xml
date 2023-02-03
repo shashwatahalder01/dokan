@@ -1,6 +1,6 @@
-<testsuites id="" name="" tests="1" failures="1" skipped="0" errors="0" time="161.644955">
-<testsuite name="_setupApi.spec.ts" timestamp="1675457082071" hostname="" tests="1" failures="1" skipped="0" time="119.999" errors="0">
-<testcase name="setup test e2e admin set WpSettings" classname="[chromium] › _setupApi.spec.ts › setup test e2e › admin set WpSettings" time="119.999">
+<testsuites id="" name="" tests="1" failures="1" skipped="0" errors="0" time="157.755809">
+<testsuite name="_setupApi.spec.ts" timestamp="1675457171375" hostname="" tests="1" failures="1" skipped="0" time="119.998" errors="0">
+<testcase name="setup test e2e admin set WpSettings" classname="[chromium] › _setupApi.spec.ts › setup test e2e › admin set WpSettings" time="119.998">
 <failure message="_setupApi.spec.ts:239:7 admin set WpSettings" type="FAILURE">
 <![CDATA[  [chromium] › _setupApi.spec.ts:239:7 › setup test e2e › admin set WpSettings =====================
 
