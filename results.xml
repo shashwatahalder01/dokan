@@ -1,21 +1,14 @@
-<testsuites id="" name="" tests="1" failures="1" skipped="0" errors="0" time="107.16073100000003">
-<testsuite name="_setupApi.spec.ts" timestamp="1679905956174" hostname="" tests="1" failures="1" skipped="0" time="60" errors="0">
-<testcase name="setup test e2e admin set dokan geolocation settings" classname="[chromium] › _setupApi.spec.ts › setup test e2e › admin set dokan geolocation settings" time="60">
+<testsuites id="" name="" tests="1" failures="1" skipped="0" errors="0" time="2.975030999999988">
+<testsuite name="_setupApi.spec.ts" timestamp="1680075352926" hostname="" tests="1" failures="1" skipped="0" time="0.002" errors="0">
+<testcase name="setup test e2e admin set dokan geolocation settings" classname="[chromium] › _setupApi.spec.ts › setup test e2e › admin set dokan geolocation settings" time="0.002">
 <failure message="_setupApi.spec.ts:292:7 admin set dokan geolocation settings" type="FAILURE">
 <![CDATA[  [chromium] › _setupApi.spec.ts:292:7 › setup test e2e › admin set dokan geolocation settings =====
 
-    Test timeout of 60000ms exceeded.
+    Error: ENOENT: no such file or directory, open 'adminStorageState.json'
 
-    attachment #1: screenshot (image/png) ----------------------------------------------------------
-    test-results/_setupApi-setup-test-e2e-admin-set-dokan-geolocation-settings-chromium/test-failed-1.png
-    ------------------------------------------------------------------------------------------------
+
 ]]>
 </failure>
-<system-out>
-<![CDATA[
-[[ATTACHMENT|../test-results/_setupApi-setup-test-e2e-admin-set-dokan-geolocation-settings-chromium/test-failed-1.png]]
-]]>
-</system-out>
 </testcase>
 </testsuite>
 </testsuites>
