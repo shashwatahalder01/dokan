@@ -1,14 +1,628 @@
-<testsuites id="" name="" tests="1" failures="1" skipped="0" errors="0" time="2.468656000000017">
-<testsuite name="_setupApi.spec.ts" timestamp="1680595348627" hostname="" tests="1" failures="1" skipped="0" time="0.003" errors="0">
-<testcase name="setup test e2e admin set dokan geolocation settings" classname="[chromium] › _setupApi.spec.ts › setup test e2e › admin set dokan geolocation settings" time="0.003">
-<failure message="_setupApi.spec.ts:292:7 admin set dokan geolocation settings" type="FAILURE">
-<![CDATA[  [chromium] › _setupApi.spec.ts:292:7 › setup test e2e › admin set dokan geolocation settings =====
-
-    Error: ENOENT: no such file or directory, open 'adminStorageState.json'
-
-
+<testsuites id="" name="" tests="235" failures="0" skipped="32" errors="0" time="67.890049">
+<testsuite name="_setup.spec.ts" timestamp="1680595309464" hostname="" tests="3" failures="0" skipped="0" time="1.196" errors="0">
+<testcase name=" api test setup test store settings @lite @pro" classname="_setup.spec.ts ›  api test › setup test store settings @lite @pro" time="0.591">
+</testcase>
+<testcase name=" api test create test customer @lite @pro" classname="_setup.spec.ts ›  api test › create test customer @lite @pro" time="0.337">
+</testcase>
+<testcase name=" api test create test vendor @lite @pro" classname="_setup.spec.ts ›  api test › create test vendor @lite @pro" time="0.268">
+</testcase>
+</testsuite>
+<testsuite name="abuseReports.spec.ts" timestamp="1680595309464" hostname="" tests="4" failures="0" skipped="3" time="0.23" errors="0">
+<testcase name="abuse report api test get all abuse report reasons @pro" classname="abuseReports.spec.ts › abuse report api test › get all abuse report reasons @pro" time="0.23">
+</testcase>
+<testcase name="abuse report api test get all abuse reports @pro" classname="abuseReports.spec.ts › abuse report api test › get all abuse reports @pro" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="abuse report api test delete a abuse report @pro" classname="abuseReports.spec.ts › abuse report api test › delete a abuse report @pro" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="abuse report api test delete batch abuse reports @pro" classname="abuseReports.spec.ts › abuse report api test › delete batch abuse reports @pro" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="admins.spec.ts" timestamp="1680595309464" hostname="" tests="10" failures="0" skipped="0" time="2.804" errors="0">
+<testcase name="admin api test get admin report overview @lite" classname="admins.spec.ts › admin api test › get admin report overview @lite" time="0.237">
+</testcase>
+<testcase name="admin api test get admin report summary @lite" classname="admins.spec.ts › admin api test › get admin report summary @lite" time="0.221">
+</testcase>
+<testcase name="admin api test get admin dashboard feed @lite" classname="admins.spec.ts › admin api test › get admin dashboard feed @lite" time="0.33">
+</testcase>
+<testcase name="admin api test get admin help @lite" classname="admins.spec.ts › admin api test › get admin help @lite" time="0.451">
+</testcase>
+<testcase name="admin api test get changelog lite @lite" classname="admins.spec.ts › admin api test › get changelog lite @lite" time="0.27">
+</testcase>
+<testcase name="admin api test get changelog pro @pro" classname="admins.spec.ts › admin api test › get changelog pro @pro" time="0.238">
+</testcase>
+<testcase name="admin api test get admin notices @lite" classname="admins.spec.ts › admin api test › get admin notices @lite" time="0.22">
+</testcase>
+<testcase name="admin api test get admin promo notices  @lite" classname="admins.spec.ts › admin api test › get admin promo notices  @lite" time="0.432">
+</testcase>
+<testcase name="admin api test get admin logs @pro" classname="admins.spec.ts › admin api test › get admin logs @pro" time="0.199">
+</testcase>
+<testcase name="admin api test get admin export logs @pro" classname="admins.spec.ts › admin api test › get admin export logs @pro" time="0.206">
+</testcase>
+</testsuite>
+<testsuite name="announcements.spec.ts" timestamp="1680595309464" hostname="" tests="7" failures="0" skipped="0" time="1.893" errors="0">
+<testcase name="announcements api test get all announcements @pro" classname="announcements.spec.ts › announcements api test › get all announcements @pro" time="0.202">
+</testcase>
+<testcase name="announcements api test get single announcement @pro" classname="announcements.spec.ts › announcements api test › get single announcement @pro" time="0.205">
+</testcase>
+<testcase name="announcements api test create a announcement @pro" classname="announcements.spec.ts › announcements api test › create a announcement @pro" time="0.209">
+</testcase>
+<testcase name="announcements api test update a announcement @pro" classname="announcements.spec.ts › announcements api test › update a announcement @pro" time="0.205">
+</testcase>
+<testcase name="announcements api test delete a announcement @pro" classname="announcements.spec.ts › announcements api test › delete a announcement @pro" time="0.216">
+</testcase>
+<testcase name="announcements api test restore a deleted announcement  @pro" classname="announcements.spec.ts › announcements api test › restore a deleted announcement  @pro" time="0.21">
+</testcase>
+<testcase name="announcements api test update batch announcements @pro" classname="announcements.spec.ts › announcements api test › update batch announcements @pro" time="0.646">
+</testcase>
+</testsuite>
+<testsuite name="attributes.spec.ts" timestamp="1680595309464" hostname="" tests="8" failures="0" skipped="0" time="1.871" errors="0">
+<testcase name="attribute api test get all attributes @lite" classname="attributes.spec.ts › attribute api test › get all attributes @lite" time="0.199">
+<system-out>
+<![CDATA[{
+  id: [33m1[39m,
+  name: [32m'Test_attribute_dodipspw'[39m,
+  slug: [32m'pa_test_attribute_dodipspw'[39m,
+  type: [32m'select'[39m,
+  order_by: [32m'menu_order'[39m,
+  has_archives: [33mfalse[39m,
+  _links: { self: [ [36m[Object][39m ], collection: [ [36m[Object][39m ] }
+}
 ]]>
-</failure>
+</system-out>
+</testcase>
+<testcase name="attribute api test get single attribute @lite" classname="attributes.spec.ts › attribute api test › get single attribute @lite" time="0.203">
+</testcase>
+<testcase name="attribute api test create an attribute @lite" classname="attributes.spec.ts › attribute api test › create an attribute @lite" time="0.202">
+</testcase>
+<testcase name="attribute api test update an attribute @lite" classname="attributes.spec.ts › attribute api test › update an attribute @lite" time="0.207">
+</testcase>
+<testcase name="attribute api test delete an attribute @lite" classname="attributes.spec.ts › attribute api test › delete an attribute @lite" time="0.205">
+</testcase>
+<testcase name="attribute api test update batch attributes @lite" classname="attributes.spec.ts › attribute api test › update batch attributes @lite" time="0.395">
+</testcase>
+<testcase name="attribute api test set default attribute @lite" classname="attributes.spec.ts › attribute api test › set default attribute @lite" time="0.237">
+</testcase>
+<testcase name="attribute api test update product attribute @lite" classname="attributes.spec.ts › attribute api test › update product attribute @lite" time="0.223">
+</testcase>
+</testsuite>
+<testsuite name="attributeTerms.spec.ts" timestamp="1680595309464" hostname="" tests="6" failures="0" skipped="0" time="1.408" errors="0">
+<testcase name="attribute term api test get all attribute terms @lite" classname="attributeTerms.spec.ts › attribute term api test › get all attribute terms @lite" time="0.196">
+</testcase>
+<testcase name="attribute term api test get single attribute term @lite" classname="attributeTerms.spec.ts › attribute term api test › get single attribute term @lite" time="0.2">
+</testcase>
+<testcase name="attribute term api test create an attribute term @lite" classname="attributeTerms.spec.ts › attribute term api test › create an attribute term @lite" time="0.205">
+</testcase>
+<testcase name="attribute term api test update an attribute term  @lite" classname="attributeTerms.spec.ts › attribute term api test › update an attribute term  @lite" time="0.201">
+</testcase>
+<testcase name="attribute term api test delete an attribute term @lite" classname="attributeTerms.spec.ts › attribute term api test › delete an attribute term @lite" time="0.203">
+</testcase>
+<testcase name="attribute term api test update batch attribute terms @lite" classname="attributeTerms.spec.ts › attribute term api test › update batch attribute terms @lite" time="0.403">
+</testcase>
+</testsuite>
+<testsuite name="calculation.spec.ts" timestamp="1680595309464" hostname="" tests="1" failures="0" skipped="1" time="0" errors="0">
+<testcase name="calculation test calculation test" classname="calculation.spec.ts › calculation test › calculation test" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="coupons.spec.ts" timestamp="1680595309464" hostname="" tests="5" failures="0" skipped="0" time="1.045" errors="0">
+<testcase name="coupon api test get all coupons @pro" classname="coupons.spec.ts › coupon api test › get all coupons @pro" time="0.202">
+</testcase>
+<testcase name="coupon api test get single coupon @pro" classname="coupons.spec.ts › coupon api test › get single coupon @pro" time="0.218">
+</testcase>
+<testcase name="coupon api test create a coupon @pro" classname="coupons.spec.ts › coupon api test › create a coupon @pro" time="0.215">
+</testcase>
+<testcase name="coupon api test update a coupon @pro" classname="coupons.spec.ts › coupon api test › update a coupon @pro" time="0.204">
+</testcase>
+<testcase name="coupon api test delete a coupon @pro" classname="coupons.spec.ts › coupon api test › delete a coupon @pro" time="0.206">
+</testcase>
+</testsuite>
+<testsuite name="customers.spec.ts" timestamp="1680595309464" hostname="" tests="6" failures="0" skipped="0" time="1.517" errors="0">
+<testcase name="customers api test get all customers @pro" classname="customers.spec.ts › customers api test › get all customers @pro" time="0.203">
+</testcase>
+<testcase name="customers api test get single customer @pro" classname="customers.spec.ts › customers api test › get single customer @pro" time="0.201">
+</testcase>
+<testcase name="customers api test create a customer @pro" classname="customers.spec.ts › customers api test › create a customer @pro" time="0.269">
+</testcase>
+<testcase name="customers api test update a customer @pro" classname="customers.spec.ts › customers api test › update a customer @pro" time="0.211">
+</testcase>
+<testcase name="customers api test delete a customer @pro" classname="customers.spec.ts › customers api test › delete a customer @pro" time="0.223">
+</testcase>
+<testcase name="customers api test update batch customers @pro" classname="customers.spec.ts › customers api test › update batch customers @pro" time="0.41">
+</testcase>
+</testsuite>
+<testsuite name="dummyData.spec.ts" timestamp="1680595309464" hostname="" tests="3" failures="0" skipped="0" time="0.912" errors="0">
+<testcase name="dummy Data api test get dummy data status @lite" classname="dummyData.spec.ts › dummy Data api test › get dummy data status @lite" time="0.195">
+</testcase>
+<testcase name="dummy Data api test import dummy data @lite" classname="dummyData.spec.ts › dummy Data api test › import dummy data @lite" time="0.361">
+</testcase>
+<testcase name="dummy Data api test clear dummy data @lite" classname="dummyData.spec.ts › dummy Data api test › clear dummy data @lite" time="0.356">
+</testcase>
+</testsuite>
+<testsuite name="followStores.spec.ts" timestamp="1680595309464" hostname="" tests="3" failures="0" skipped="0" time="0.613" errors="0">
+<testcase name="follow store api test get store follow status @pro" classname="followStores.spec.ts › follow store api test › get store follow status @pro" time="0.196">
+</testcase>
+<testcase name="follow store api test follow-unfollow a store @pro" classname="followStores.spec.ts › follow store api test › follow-unfollow a store @pro" time="0.213">
+</testcase>
+<testcase name="follow store api test get followers @pro" classname="followStores.spec.ts › follow store api test › get followers @pro" time="0.204">
+</testcase>
+</testsuite>
+<testsuite name="modules.spec.ts" timestamp="1680595309464" hostname="" tests="3" failures="0" skipped="0" time="0.617" errors="0">
+<testcase name="modules api test get all modules @pro" classname="modules.spec.ts › modules api test › get all modules @pro" time="0.209">
+</testcase>
+<testcase name="modules api test deactivate a module @pro" classname="modules.spec.ts › modules api test › deactivate a module @pro" time="0.204">
+</testcase>
+<testcase name="modules api test activate a module @pro" classname="modules.spec.ts › modules api test › activate a module @pro" time="0.204">
+</testcase>
+</testsuite>
+<testsuite name="orderDownloads.spec.ts" timestamp="1680595309464" hostname="" tests="3" failures="0" skipped="0" time="0.614" errors="0">
+<testcase name="order downloads api test get all order downloads @v2 @lite" classname="orderDownloads.spec.ts › order downloads api test › get all order downloads @v2 @lite" time="0.204">
+</testcase>
+<testcase name="order downloads api test create order downloads @v2 @lite" classname="orderDownloads.spec.ts › order downloads api test › create order downloads @v2 @lite" time="0.21">
+</testcase>
+<testcase name="order downloads api test delete order downloads @v2 @lite" classname="orderDownloads.spec.ts › order downloads api test › delete order downloads @v2 @lite" time="0.2">
+</testcase>
+</testsuite>
+<testsuite name="orderNotes.spec.ts" timestamp="1680595309464" hostname="" tests="4" failures="0" skipped="0" time="0.82" errors="0">
+<testcase name="order note api test get all order notes @lite" classname="orderNotes.spec.ts › order note api test › get all order notes @lite" time="0.2">
+</testcase>
+<testcase name="order note api test get single order note @lite" classname="orderNotes.spec.ts › order note api test › get single order note @lite" time="0.202">
+</testcase>
+<testcase name="order note api test create an order note @lite" classname="orderNotes.spec.ts › order note api test › create an order note @lite" time="0.205">
+</testcase>
+<testcase name="order note api test delete an order note @lite" classname="orderNotes.spec.ts › order note api test › delete an order note @lite" time="0.213">
+</testcase>
+</testsuite>
+<testsuite name="orders.spec.ts" timestamp="1680595309464" hostname="" tests="11" failures="0" skipped="0" time="2.814" errors="0">
+<testcase name="order api test v1 get all orders @lite" classname="orders.spec.ts › order api test v1 › get all orders @lite" time="0.228">
+</testcase>
+<testcase name="order api test v1 get orders summary @lite" classname="orders.spec.ts › order api test v1 › get orders summary @lite" time="0.198">
+</testcase>
+<testcase name="order api test v1 get orders with before after @lite" classname="orders.spec.ts › order api test v1 › get orders with before after @lite" time="0.221">
+</testcase>
+<testcase name="order api test v1 get single order @lite" classname="orders.spec.ts › order api test v1 › get single order @lite" time="0.213">
+</testcase>
+<testcase name="order api test v1 update an order @lite" classname="orders.spec.ts › order api test v1 › update an order @lite" time="0.245">
+</testcase>
+<testcase name="order api test v2 get all orders @lite" classname="orders.spec.ts › order api test v2 › get all orders @lite" time="0.222">
+</testcase>
+<testcase name="order api test v2 get orders summary @lite" classname="orders.spec.ts › order api test v2 › get orders summary @lite" time="0.201">
+</testcase>
+<testcase name="order api test v2 get orders with before after @lite" classname="orders.spec.ts › order api test v2 › get orders with before after @lite" time="0.22">
+</testcase>
+<testcase name="order api test v2 get single order @lite" classname="orders.spec.ts › order api test v2 › get single order @lite" time="0.214">
+</testcase>
+<testcase name="order api test v2 update an order @lite" classname="orders.spec.ts › order api test v2 › update an order @lite" time="0.232">
+</testcase>
+<testcase name="update batch orders @v2 @lite" classname="orders.spec.ts › update batch orders @v2 @lite" time="0.62">
+</testcase>
+</testsuite>
+<testsuite name="productAdvertisements.spec.ts" timestamp="1680595309464" hostname="" tests="6" failures="0" skipped="0" time="1.734" errors="0">
+<testcase name="product advertisement api test get all advertised product stores @pro" classname="productAdvertisements.spec.ts › product advertisement api test › get all advertised product stores @pro" time="0.197">
+</testcase>
+<testcase name="product advertisement api test get all advertised product @pro" classname="productAdvertisements.spec.ts › product advertisement api test › get all advertised product @pro" time="0.196">
+</testcase>
+<testcase name="product advertisement api test create a product advertisement @pro" classname="productAdvertisements.spec.ts › product advertisement api test › create a product advertisement @pro" time="0.524">
+</testcase>
+<testcase name="product advertisement api test expire a product advertisement @pro" classname="productAdvertisements.spec.ts › product advertisement api test › expire a product advertisement @pro" time="0.198">
+</testcase>
+<testcase name="product advertisement api test delete a product advertisement @pro" classname="productAdvertisements.spec.ts › product advertisement api test › delete a product advertisement @pro" time="0.197">
+</testcase>
+<testcase name="product advertisement api test update batch product advertisements @pro" classname="productAdvertisements.spec.ts › product advertisement api test › update batch product advertisements @pro" time="0.422">
+</testcase>
+</testsuite>
+<testsuite name="productBlock.spec.ts" timestamp="1680595309464" hostname="" tests="2" failures="0" skipped="0" time="1.79" errors="0">
+<testcase name="product block api test get product block details @lite" classname="productBlock.spec.ts › product block api test › get product block details @lite" time="0.533">
+</testcase>
+<testcase name="product block api test get variable product block details @pro" classname="productBlock.spec.ts › product block api test › get variable product block details @pro" time="1.257">
+</testcase>
+</testsuite>
+<testsuite name="productDuplicate.spec.ts" timestamp="1680595309464" hostname="" tests="1" failures="0" skipped="0" time="0.281" errors="0">
+<testcase name="product duplicate api test create duplicate product @v2 @pro" classname="productDuplicate.spec.ts › product duplicate api test › create duplicate product @v2 @pro" time="0.281">
+</testcase>
+</testsuite>
+<testsuite name="productFilter.spec.ts" timestamp="1680595309464" hostname="" tests="1" failures="0" skipped="0" time="0.199" errors="0">
+<testcase name="product filter api test get products filter by data @v2 @lite" classname="productFilter.spec.ts › product filter api test › get products filter by data @v2 @lite" time="0.199">
+</testcase>
+</testsuite>
+<testsuite name="productReviews.spec.ts" timestamp="1680595309464" hostname="" tests="3" failures="0" skipped="0" time="0.607" errors="0">
+<testcase name="product review api test get all product reviews @pro" classname="productReviews.spec.ts › product review api test › get all product reviews @pro" time="0.203">
+</testcase>
+<testcase name="product review api test get product reviews summary @pro" classname="productReviews.spec.ts › product review api test › get product reviews summary @pro" time="0.197">
+</testcase>
+<testcase name="product review api test update a product review @pro" classname="productReviews.spec.ts › product review api test › update a product review @pro" time="0.207">
+</testcase>
+</testsuite>
+<testsuite name="products.spec.ts" timestamp="1680595309464" hostname="" tests="26" failures="0" skipped="0" time="6.028" errors="0">
+<testcase name="product api test v1 get products summary @lite" classname="products.spec.ts › product api test v1 › get products summary @lite" time="0.195">
+</testcase>
+<testcase name="product api test v1 get top rated products @lite" classname="products.spec.ts › product api test v1 › get top rated products @lite" time="0.211">
+</testcase>
+<testcase name="product api test v1 get best selling products @lite" classname="products.spec.ts › product api test v1 › get best selling products @lite" time="0.237">
+</testcase>
+<testcase name="product api test v1 get featured products @lite" classname="products.spec.ts › product api test v1 › get featured products @lite" time="0.201">
+</testcase>
+<testcase name="product api test v1 get latest products @lite" classname="products.spec.ts › product api test v1 › get latest products @lite" time="0.234">
+</testcase>
+<testcase name="product api test v1 get all multiStep categories @lite" classname="products.spec.ts › product api test v1 › get all multiStep categories @lite" time="0.195">
+</testcase>
+<testcase name="product api test v1 get all products @lite" classname="products.spec.ts › product api test v1 › get all products @lite" time="0.232">
+</testcase>
+<testcase name="product api test v1 get single product @lite" classname="products.spec.ts › product api test v1 › get single product @lite" time="0.219">
+</testcase>
+<testcase name="product api test v1 get all related products @lite" classname="products.spec.ts › product api test v1 › get all related products @lite" time="0.263">
+</testcase>
+<testcase name="product api test v1 create a product @lite" classname="products.spec.ts › product api test v1 › create a product @lite" time="0.332">
+</testcase>
+<testcase name="product api test v1 update a product @lite" classname="products.spec.ts › product api test v1 › update a product @lite" time="0.259">
+</testcase>
+<testcase name="product api test v1 delete a product @lite" classname="products.spec.ts › product api test v1 › delete a product @lite" time="0.239">
+</testcase>
+<testcase name="product api test v1 get filtered products @v2 @lite" classname="products.spec.ts › product api test v1 › get filtered products @v2 @lite" time="0.232">
+</testcase>
+<testcase name="product api test v2 get products summary @lite" classname="products.spec.ts › product api test v2 › get products summary @lite" time="0.199">
+</testcase>
+<testcase name="product api test v2 get top rated products @lite" classname="products.spec.ts › product api test v2 › get top rated products @lite" time="0.203">
+</testcase>
+<testcase name="product api test v2 get best selling products @lite" classname="products.spec.ts › product api test v2 › get best selling products @lite" time="0.225">
+</testcase>
+<testcase name="product api test v2 get featured products @lite" classname="products.spec.ts › product api test v2 › get featured products @lite" time="0.2">
+</testcase>
+<testcase name="product api test v2 get latest products @lite" classname="products.spec.ts › product api test v2 › get latest products @lite" time="0.224">
+</testcase>
+<testcase name="product api test v2 get all multiStep categories @lite" classname="products.spec.ts › product api test v2 › get all multiStep categories @lite" time="0.194">
+</testcase>
+<testcase name="product api test v2 get all products @lite" classname="products.spec.ts › product api test v2 › get all products @lite" time="0.238">
+</testcase>
+<testcase name="product api test v2 get single product @lite" classname="products.spec.ts › product api test v2 › get single product @lite" time="0.22">
+</testcase>
+<testcase name="product api test v2 get all related products @lite" classname="products.spec.ts › product api test v2 › get all related products @lite" time="0.256">
+</testcase>
+<testcase name="product api test v2 create a product @lite" classname="products.spec.ts › product api test v2 › create a product @lite" time="0.321">
+</testcase>
+<testcase name="product api test v2 update a product @lite" classname="products.spec.ts › product api test v2 › update a product @lite" time="0.262">
+</testcase>
+<testcase name="product api test v2 delete a product @lite" classname="products.spec.ts › product api test v2 › delete a product @lite" time="0.206">
+</testcase>
+<testcase name="product api test v2 get filtered products @v2 @lite" classname="products.spec.ts › product api test v2 › get filtered products @v2 @lite" time="0.231">
+</testcase>
+</testsuite>
+<testsuite name="productVariations.spec.ts" timestamp="1680595309464" hostname="" tests="5" failures="0" skipped="0" time="1.176" errors="0">
+<testcase name="product variation api test get all product variations @pro" classname="productVariations.spec.ts › product variation api test › get all product variations @pro" time="0.205">
+</testcase>
+<testcase name="product variation api test get single product variation @pro" classname="productVariations.spec.ts › product variation api test › get single product variation @pro" time="0.203">
+</testcase>
+<testcase name="product variation api test create a product variation @pro" classname="productVariations.spec.ts › product variation api test › create a product variation @pro" time="0.272">
+</testcase>
+<testcase name="product variation api test update a product variation @pro" classname="productVariations.spec.ts › product variation api test › update a product variation @pro" time="0.242">
+</testcase>
+<testcase name="product variation api test delete a product variation @pro" classname="productVariations.spec.ts › product variation api test › delete a product variation @pro" time="0.254">
+</testcase>
+</testsuite>
+<testsuite name="quoteRequests.spec.ts" timestamp="1680595309464" hostname="" tests="8" failures="0" skipped="0" time="1.961" errors="0">
+<testcase name="request quote api test get all request quotes @pro" classname="quoteRequests.spec.ts › request quote api test › get all request quotes @pro" time="0.197">
+</testcase>
+<testcase name="request quote api test get single request quote @pro" classname="quoteRequests.spec.ts › request quote api test › get single request quote @pro" time="0.202">
+</testcase>
+<testcase name="request quote api test create a request quote @pro" classname="quoteRequests.spec.ts › request quote api test › create a request quote @pro" time="0.23">
+</testcase>
+<testcase name="request quote api test update a request quote @pro" classname="quoteRequests.spec.ts › request quote api test › update a request quote @pro" time="0.234">
+</testcase>
+<testcase name="request quote api test delete a request quote @pro" classname="quoteRequests.spec.ts › request quote api test › delete a request quote @pro" time="0.201">
+</testcase>
+<testcase name="request quote api test restore a deleted request quote @pro" classname="quoteRequests.spec.ts › request quote api test › restore a deleted request quote @pro" time="0.196">
+</testcase>
+<testcase name="request quote api test convert request quote to order @pro" classname="quoteRequests.spec.ts › request quote api test › convert request quote to order @pro" time="0.295">
+</testcase>
+<testcase name="request quote api test update batch request quote @pro " classname="quoteRequests.spec.ts › request quote api test › update batch request quote @pro " time="0.406">
+</testcase>
+</testsuite>
+<testsuite name="quoteRules.spec.ts" timestamp="1680595309464" hostname="" tests="7" failures="0" skipped="0" time="1.574" errors="0">
+<testcase name="quote rules api test get all quote rules @pro" classname="quoteRules.spec.ts › quote rules api test › get all quote rules @pro" time="0.195">
+</testcase>
+<testcase name="quote rules api test get single quote rule @pro" classname="quoteRules.spec.ts › quote rules api test › get single quote rule @pro" time="0.195">
+</testcase>
+<testcase name="quote rules api test create a quote rule @pro" classname="quoteRules.spec.ts › quote rules api test › create a quote rule @pro" time="0.197">
+</testcase>
+<testcase name="quote rules api test update a quote rule @pro" classname="quoteRules.spec.ts › quote rules api test › update a quote rule @pro" time="0.201">
+</testcase>
+<testcase name="quote rules api test delete a quote rule @pro" classname="quoteRules.spec.ts › quote rules api test › delete a quote rule @pro" time="0.197">
+</testcase>
+<testcase name="quote rules api test restore a deleted quote rule @pro" classname="quoteRules.spec.ts › quote rules api test › restore a deleted quote rule @pro" time="0.198">
+</testcase>
+<testcase name="quote rules api test update batch quote rules @pro" classname="quoteRules.spec.ts › quote rules api test › update batch quote rules @pro" time="0.391">
+</testcase>
+</testsuite>
+<testsuite name="rankMath.spec.ts" timestamp="1680595309464" hostname="" tests="1" failures="0" skipped="1" time="0" errors="0">
+<testcase name="rank math api test rank math @pro" classname="rankMath.spec.ts › rank math api test › rank math @pro" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="refunds.spec.ts" timestamp="1680595309464" hostname="" tests="6" failures="0" skipped="6" time="0" errors="0">
+<testcase name="refunds api test get all refunds @pro" classname="refunds.spec.ts › refunds api test › get all refunds @pro" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="refunds api test get all refunds by status @pro" classname="refunds.spec.ts › refunds api test › get all refunds by status @pro" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="refunds api test approve a refund @pro" classname="refunds.spec.ts › refunds api test › approve a refund @pro" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="refunds api test cancel a refund @pro" classname="refunds.spec.ts › refunds api test › cancel a refund @pro" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="refunds api test delete a refund @pro" classname="refunds.spec.ts › refunds api test › delete a refund @pro" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="refunds api test update batch refunds @pro" classname="refunds.spec.ts › refunds api test › update batch refunds @pro" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="reports.spec.ts" timestamp="1680595309464" hostname="" tests="4" failures="0" skipped="0" time="0.836" errors="0">
+<testcase name="report api test get sales overview report @pro" classname="reports.spec.ts › report api test › get sales overview report @pro" time="0.207">
+</testcase>
+<testcase name="report api test get summary report @pro" classname="reports.spec.ts › report api test › get summary report @pro" time="0.209">
+</testcase>
+<testcase name="report api test get top earners report @pro" classname="reports.spec.ts › report api test › get top earners report @pro" time="0.21">
+</testcase>
+<testcase name="report api test get top selling products report  @pro" classname="reports.spec.ts › report api test › get top selling products report  @pro" time="0.21">
+</testcase>
+</testsuite>
+<testsuite name="reverseWithdrawal.spec.ts" timestamp="1680595309464" hostname="" tests="6" failures="0" skipped="6" time="0" errors="0">
+<testcase name="reverse withdrawal api test get reverse withdrawal transaction types @lite" classname="reverseWithdrawal.spec.ts › reverse withdrawal api test › get reverse withdrawal transaction types @lite" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="reverse withdrawal api test get all reverse withdrawal stores @lite" classname="reverseWithdrawal.spec.ts › reverse withdrawal api test › get all reverse withdrawal stores @lite" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="reverse withdrawal api test get all reverse withdrawal store balance @lite" classname="reverseWithdrawal.spec.ts › reverse withdrawal api test › get all reverse withdrawal store balance @lite" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="reverse withdrawal api test get all reverse withdrawal transactions @lite" classname="reverseWithdrawal.spec.ts › reverse withdrawal api test › get all reverse withdrawal transactions @lite" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="reverse withdrawal api test get reverse withdrawal vendor due status @lite" classname="reverseWithdrawal.spec.ts › reverse withdrawal api test › get reverse withdrawal vendor due status @lite" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="reverse withdrawal api test add reverse withdrawal payment product to cart @lite" classname="reverseWithdrawal.spec.ts › reverse withdrawal api test › add reverse withdrawal payment product to cart @lite" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="roles.spec.ts" timestamp="1680595309464" hostname="" tests="1" failures="0" skipped="0" time="0.196" errors="0">
+<testcase name="roles api test get all user roles  @pro" classname="roles.spec.ts › roles api test › get all user roles  @pro" time="0.196">
+</testcase>
+</testsuite>
+<testsuite name="sellerBadge.spec.ts" timestamp="1680595309464" hostname="" tests="11" failures="0" skipped="0" time="2.431" errors="0">
+<testcase name="seller badge api test get verified-seller verification types @pro" classname="sellerBadge.spec.ts › seller badge api test › get verified-seller verification types @pro" time="0.196">
+</testcase>
+<testcase name="seller badge api test get all seller badge events @pro" classname="sellerBadge.spec.ts › seller badge api test › get all seller badge events @pro" time="0.213">
+</testcase>
+<testcase name="seller badge api test get all seller badges @pro" classname="sellerBadge.spec.ts › seller badge api test › get all seller badges @pro" time="0.199">
+</testcase>
+<testcase name="seller badge api test get single seller badge @pro" classname="sellerBadge.spec.ts › seller badge api test › get single seller badge @pro" time="0.197">
+</testcase>
+<testcase name="seller badge api test get vendor unseen seller badges @pro" classname="sellerBadge.spec.ts › seller badge api test › get vendor unseen seller badges @pro" time="0.197">
+</testcase>
+<testcase name="seller badge api test set vendor seller badges as seen @pro" classname="sellerBadge.spec.ts › seller badge api test › set vendor seller badges as seen @pro" time="0.201">
+</testcase>
+<testcase name="seller badge api test create a seller badge @pro" classname="sellerBadge.spec.ts › seller badge api test › create a seller badge @pro" time="0.214">
+</testcase>
+<testcase name="seller badge api test update a seller badge @pro" classname="sellerBadge.spec.ts › seller badge api test › update a seller badge @pro" time="0.203">
+</testcase>
+<testcase name="seller badge api test update row actions @pro" classname="sellerBadge.spec.ts › seller badge api test › update row actions @pro" time="0.203">
+</testcase>
+<testcase name="seller badge api test delete a seller badge @pro" classname="sellerBadge.spec.ts › seller badge api test › delete a seller badge @pro" time="0.211">
+</testcase>
+<testcase name="seller badge api test update batch seller badges @pro" classname="sellerBadge.spec.ts › seller badge api test › update batch seller badges @pro" time="0.397">
+</testcase>
+</testsuite>
+<testsuite name="settings.spec.ts" timestamp="1680595309464" hostname="" tests="2" failures="0" skipped="0" time="0.406" errors="0">
+<testcase name="settings api test get settings @lite" classname="settings.spec.ts › settings api test › get settings @lite" time="0.196">
+</testcase>
+<testcase name="settings api test update settings @lite" classname="settings.spec.ts › settings api test › update settings @lite" time="0.21">
+</testcase>
+</testsuite>
+<testsuite name="setttingsGroup.spec.ts" timestamp="1680595309464" hostname="" tests="7" failures="0" skipped="0" time="1.445" errors="0">
+<testcase name="new settings api test get store settings @v2 @lite" classname="setttingsGroup.spec.ts › new settings api test › get store settings @v2 @lite" time="0.197">
+</testcase>
+<testcase name="new settings api test get single setting group @v2 @lite" classname="setttingsGroup.spec.ts › new settings api test › get single setting group @v2 @lite" time="0.211">
+</testcase>
+<testcase name="new settings api test update single setting group @v2 @lite" classname="setttingsGroup.spec.ts › new settings api test › update single setting group @v2 @lite" time="0.214">
+</testcase>
+<testcase name="new settings api test get sub settings from single settings group @v2 @lite" classname="setttingsGroup.spec.ts › new settings api test › get sub settings from single settings group @v2 @lite" time="0.2">
+</testcase>
+<testcase name="new settings api test update sub settings from single settings group @v2 @lite" classname="setttingsGroup.spec.ts › new settings api test › update sub settings from single settings group @v2 @lite" time="0.208">
+</testcase>
+<testcase name="new settings api test get sub sub settings from single settings group @v2 @lite" classname="setttingsGroup.spec.ts › new settings api test › get sub sub settings from single settings group @v2 @lite" time="0.2">
+</testcase>
+<testcase name="new settings api test update sub sub settings from single settings group @v2 @lite" classname="setttingsGroup.spec.ts › new settings api test › update sub sub settings from single settings group @v2 @lite" time="0.215">
+</testcase>
+</testsuite>
+<testsuite name="storeCategories.spec.ts" timestamp="1680595309464" hostname="" tests="7" failures="0" skipped="7" time="0" errors="0">
+<testcase name="store categories api test get default store category @pro" classname="storeCategories.spec.ts › store categories api test › get default store category @pro" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="store categories api test get all store categories @pro" classname="storeCategories.spec.ts › store categories api test › get all store categories @pro" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="store categories api test get single store category @pro" classname="storeCategories.spec.ts › store categories api test › get single store category @pro" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="store categories api test create a store category @pro" classname="storeCategories.spec.ts › store categories api test › create a store category @pro" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="store categories api test update a store category @pro" classname="storeCategories.spec.ts › store categories api test › update a store category @pro" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="store categories api test delete a store category @pro" classname="storeCategories.spec.ts › store categories api test › delete a store category @pro" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="store categories api test set default store category @pro" classname="storeCategories.spec.ts › store categories api test › set default store category @pro" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="storeReviews.spec.ts" timestamp="1680595309464" hostname="" tests="8" failures="0" skipped="0" time="2.046" errors="0">
+<testcase name="store reviews api test get store reviews @pro" classname="storeReviews.spec.ts › store reviews api test › get store reviews @pro" time="0.197">
+</testcase>
+<testcase name="store reviews api test create a store review @pro" classname="storeReviews.spec.ts › store reviews api test › create a store review @pro" time="0.204">
+</testcase>
+<testcase name="store reviews api test get all store reviews @pro" classname="storeReviews.spec.ts › store reviews api test › get all store reviews @pro" time="0.199">
+</testcase>
+<testcase name="store reviews api test get single store review @pro" classname="storeReviews.spec.ts › store reviews api test › get single store review @pro" time="0.197">
+</testcase>
+<testcase name="store reviews api test update a store review @pro" classname="storeReviews.spec.ts › store reviews api test › update a store review @pro" time="0.201">
+</testcase>
+<testcase name="store reviews api test delete a store review  @pro" classname="storeReviews.spec.ts › store reviews api test › delete a store review  @pro" time="0.21">
+</testcase>
+<testcase name="store reviews api test restore a deleted store review  @pro" classname="storeReviews.spec.ts › store reviews api test › restore a deleted store review  @pro" time="0.209">
+</testcase>
+<testcase name="store reviews api test update batch store review @pro" classname="storeReviews.spec.ts › store reviews api test › update batch store review @pro" time="0.629">
+</testcase>
+</testsuite>
+<testsuite name="stores.spec.ts" timestamp="1680595309464" hostname="" tests="14" failures="0" skipped="0" time="3.95" errors="0">
+<testcase name="stores api test get all stores @lite" classname="stores.spec.ts › stores api test › get all stores @lite" time="0.203">
+</testcase>
+<testcase name="stores api test get single store @lite" classname="stores.spec.ts › stores api test › get single store @lite" time="0.199">
+</testcase>
+<testcase name="stores api test create a store @lite" classname="stores.spec.ts › stores api test › create a store @lite" time="0.243">
+</testcase>
+<testcase name="stores api test update a store @lite" classname="stores.spec.ts › stores api test › update a store @lite" time="0.206">
+</testcase>
+<testcase name="stores api test delete a store @lite" classname="stores.spec.ts › stores api test › delete a store @lite" time="0.45">
+</testcase>
+<testcase name="stores api test get store current visitor @pro" classname="stores.spec.ts › stores api test › get store current visitor @pro" time="0.194">
+</testcase>
+<testcase name="stores api test get store stats @pro" classname="stores.spec.ts › stores api test › get store stats @pro" time="0.2">
+</testcase>
+<testcase name="stores api test get store slug availability @lite" classname="stores.spec.ts › stores api test › get store slug availability @lite" time="0.197">
+</testcase>
+<testcase name="stores api test get store categories @lite" classname="stores.spec.ts › stores api test › get store categories @lite" time="0.197">
+</testcase>
+<testcase name="stores api test get store products @lite" classname="stores.spec.ts › stores api test › get store products @lite" time="0.765">
+</testcase>
+<testcase name="stores api test update a store status @lite" classname="stores.spec.ts › stores api test › update a store status @lite" time="0.217">
+</testcase>
+<testcase name="stores api test client contact store @lite" classname="stores.spec.ts › stores api test › client contact store @lite" time="0.21">
+</testcase>
+<testcase name="stores api test admin email store @pro" classname="stores.spec.ts › stores api test › admin email store @pro" time="0.211">
+</testcase>
+<testcase name="stores api test update batch stores @lite" classname="stores.spec.ts › stores api test › update batch stores @lite" time="0.458">
+</testcase>
+</testsuite>
+<testsuite name="supportTickets.spec.ts" timestamp="1680595309464" hostname="" tests="8" failures="0" skipped="8" time="0" errors="0">
+<testcase name="support ticket api test get all support ticket customers @pro" classname="supportTickets.spec.ts › support ticket api test › get all support ticket customers @pro" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="support ticket api test get all support tickets @pro" classname="supportTickets.spec.ts › support ticket api test › get all support tickets @pro" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="support ticket api test get single support ticket @pro" classname="supportTickets.spec.ts › support ticket api test › get single support ticket @pro" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="support ticket api test create a support ticket comment @pro" classname="supportTickets.spec.ts › support ticket api test › create a support ticket comment @pro" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="support ticket api test update support ticket status @pro" classname="supportTickets.spec.ts › support ticket api test › update support ticket status @pro" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="support ticket api test update a support ticket email notification @pro" classname="supportTickets.spec.ts › support ticket api test › update a support ticket email notification @pro" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="support ticket api test delete a support ticket comment @pro" classname="supportTickets.spec.ts › support ticket api test › delete a support ticket comment @pro" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="support ticket api test update batch support tickets @pro" classname="supportTickets.spec.ts › support ticket api test › update batch support tickets @pro" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="vendorDashborad.spec.ts" timestamp="1680595309464" hostname="" tests="7" failures="0" skipped="0" time="1.394" errors="0">
+<testcase name="vendor dashboard api test get vendor dashboard statistics @lite" classname="vendorDashborad.spec.ts › vendor dashboard api test › get vendor dashboard statistics @lite" time="0.195">
+</testcase>
+<testcase name="vendor dashboard api test get vendor profile information @lite" classname="vendorDashborad.spec.ts › vendor dashboard api test › get vendor profile information @lite" time="0.201">
+</testcase>
+<testcase name="vendor dashboard api test get vendor sales report @lite" classname="vendorDashborad.spec.ts › vendor dashboard api test › get vendor sales report @lite" time="0.201">
+</testcase>
+<testcase name="vendor dashboard api test get vendor product reports summary @lite" classname="vendorDashborad.spec.ts › vendor dashboard api test › get vendor product reports summary @lite" time="0.197">
+</testcase>
+<testcase name="vendor dashboard api test get vendor order reports summary @lite" classname="vendorDashborad.spec.ts › vendor dashboard api test › get vendor order reports summary @lite" time="0.2">
+</testcase>
+<testcase name="vendor dashboard api test get vendor store preferences @lite" classname="vendorDashborad.spec.ts › vendor dashboard api test › get vendor store preferences @lite" time="0.205">
+</testcase>
+<testcase name="vendor dashboard api test get vendor profile progress bar data @pro" classname="vendorDashborad.spec.ts › vendor dashboard api test › get vendor profile progress bar data @pro" time="0.195">
+</testcase>
+</testsuite>
+<testsuite name="wholesaleCustomers.spec.ts" timestamp="1680595309464" hostname="" tests="5" failures="0" skipped="0" time="1.481" errors="0">
+<testcase name="wholesale customers api test get all wholesale customers @pro" classname="wholesaleCustomers.spec.ts › wholesale customers api test › get all wholesale customers @pro" time="0.198">
+</testcase>
+<testcase name="wholesale customers api test create a wholesale customer @pro" classname="wholesaleCustomers.spec.ts › wholesale customers api test › create a wholesale customer @pro" time="0.48">
+</testcase>
+<testcase name="wholesale customers api test update a wholesale customer @pro" classname="wholesaleCustomers.spec.ts › wholesale customers api test › update a wholesale customer @pro" time="0.204">
+</testcase>
+<testcase name="wholesale customers api test delete a wholesale customer @pro" classname="wholesaleCustomers.spec.ts › wholesale customers api test › delete a wholesale customer @pro" time="0.204">
+</testcase>
+<testcase name="wholesale customers api test update batch wholesale customers @pro" classname="wholesaleCustomers.spec.ts › wholesale customers api test › update batch wholesale customers @pro" time="0.395">
+</testcase>
+</testsuite>
+<testsuite name="withdraws.spec.ts" timestamp="1680595309464" hostname="" tests="8" failures="0" skipped="0" time="1.973" errors="0">
+<testcase name="withdraw api test get balance details @lite" classname="withdraws.spec.ts › withdraw api test › get balance details @lite" time="0.195">
+</testcase>
+<testcase name="withdraw api test get all withdraws @lite" classname="withdraws.spec.ts › withdraw api test › get all withdraws @lite" time="0.196">
+</testcase>
+<testcase name="withdraw api test get all withdraws by status @lite" classname="withdraws.spec.ts › withdraw api test › get all withdraws by status @lite" time="0.198">
+</testcase>
+<testcase name="withdraw api test get single withdraw @lite" classname="withdraws.spec.ts › withdraw api test › get single withdraw @lite" time="0.208">
+</testcase>
+<testcase name="withdraw api test update a withdraw @lite" classname="withdraws.spec.ts › withdraw api test › update a withdraw @lite" time="0.198">
+</testcase>
+<testcase name="withdraw api test cancel a withdraw @lite" classname="withdraws.spec.ts › withdraw api test › cancel a withdraw @lite" time="0.198">
+</testcase>
+<testcase name="withdraw api test update batch withdraws @lite" classname="withdraws.spec.ts › withdraw api test › update batch withdraws @lite" time="0.389">
+</testcase>
+<testcase name="withdraw api test create a withdraw @lite" classname="withdraws.spec.ts › withdraw api test › create a withdraw @lite" time="0.391">
+</testcase>
+</testsuite>
+<testsuite name="withdrawSettings.spec.ts" timestamp="1680595309464" hostname="" tests="4" failures="0" skipped="0" time="0.769" errors="0">
+<testcase name="withdraw api test get withdraw settings @v2" classname="withdrawSettings.spec.ts › withdraw api test › get withdraw settings @v2" time="0.192">
+</testcase>
+<testcase name="withdraw api test get withdraw summary @v2" classname="withdrawSettings.spec.ts › withdraw api test › get withdraw summary @v2" time="0.192">
+</testcase>
+<testcase name="withdraw api test get withdraw disbursement settings @v2 @pro" classname="withdrawSettings.spec.ts › withdraw api test › get withdraw disbursement settings @v2 @pro" time="0.192">
+</testcase>
+<testcase name="withdraw api test update withdraw disbursement settings @v2 @pro" classname="withdrawSettings.spec.ts › withdraw api test › update withdraw disbursement settings @v2 @pro" time="0.193">
 </testcase>
 </testsuite>
 </testsuites>
