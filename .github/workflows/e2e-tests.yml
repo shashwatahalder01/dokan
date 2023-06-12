@@ -47,8 +47,6 @@ jobs:
     steps:
       - name: Checkout testing repo
         uses: actions/checkout@v3
-        with:
-         ref: "e2e-pw"
 
       - name: Use desired version of NodeJS
         uses: actions/setup-node@v3
