@@ -46,4 +46,9 @@ setup.describe(' setup environment', () => {
 		await dbUtils.setDokanSettings(dbData.dokan.optionName.reverseWithdraw, dbData.dokan.reverseWithdrawSettings);
 	});
 
+	setup('get test environment info @lite @pro', async () => {
+		const [, summaryInfo] = await apiUtils.getSystemStatus();
+		process.env.ENV_INFO = JSON.stringify(summaryInfo);
+	});
+
 });
