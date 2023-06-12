@@ -66,6 +66,7 @@
     "allure-playwright": "^2.4.0",
     "dotenv": "^16.1.4",
     "mysqlconnector": "^2.0.1",
-    "php-serialize": "^4.1.1"
+    "php-serialize": "^4.1.1",
+    "xml-js": "^1.6.11"
   }
 }
