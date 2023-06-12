@@ -1,8 +1,12 @@
 // import * as core from '@actions/core'
 const convert = require('xml-js');
 const fs = require('fs');
+const { ENV_INFO } = process.env;
 
-const envInfo = process.env.ENV_INFO
+console.log(ENV_INFO);
+const envInfo = JSON.parse(ENV_INFO);
+console.log(envInfo);
+
 const apiTestResultFile = './playwright-report/api/junit-report/api-results.xml';
 const e2eTestResultFile = './playwright-report/e2e/junit-report/e2e-results.xml';
 
@@ -47,8 +51,8 @@ const addSummaryHeadingAndTable = ( core ) => {
 };
 
 const addList = ( core ) => {
-	const pp = envInfo.activePlugins.slice(1, -2);
-	const pluginList = core.summary.addList(pp).stringify();
+	// const pp = envInfo.activePlugins.slice(1, -2);
+	const pluginList = core.summary.addList(envInfo.activePlugins).stringify();
 	core.summary.clear();
 	const pluginDetails =  core.summary.addDetails('Plugins: ', pluginList).stringify();
 	core.summary.clear();
