@@ -179,7 +179,7 @@ export const helpers = {
 		return fs.readFileSync(filePath, 'utf8');
 	},
 
-	// write to file
+	// write file
 	writeFile(filePath: string, content: string) {
 		fs.writeFile(filePath, content, (err) => {
 			if (err) throw err;

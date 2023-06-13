@@ -5,6 +5,8 @@ const fs = require('fs');
 
 const readEnvInfo = fs.readFileSync('./tests/pw/systemInfo.json', 'utf8');
 const envInfo = JSON.parse(readEnvInfo);
+console.log(envInfo);
+console.log(envInfo.activePlugins);
 
 const apiTestResultFile = './tests/pw/playwright-report/api/junit-report/api-results.xml';
 const e2eTestResultFile = './tests/pw/playwright-report/e2e/junit-report/e2e-results.xml';
@@ -49,7 +51,6 @@ const addSummaryHeadingAndTable = ( core ) => {
 };
 
 const addList = ( core ) => {
-	// const pp = envInfo.activePlugins.slice(1, -2);
 	const pluginList = core.summary.addList(envInfo.activePlugins).stringify();
 	core.summary.clear();
 	const pluginDetails =  core.summary.addDetails('Plugins: ', pluginList).stringify();
@@ -64,10 +65,10 @@ const addSummaryFooter = ( core, list) => {
 };
 
 module.exports = async ( { github, context, core } ) => {
-	// const plugins = addList(core);
-	// await core.summary.clear();
+	const plugins = addList(core);
+	await core.summary.clear();
 	addSummaryHeadingAndTable( core );
-	// addSummaryFooter( core, plugins );
+	addSummaryFooter( core, plugins );
 	const summary = core.summary.stringify();
 	await core.summary.write();
 	return summary;
