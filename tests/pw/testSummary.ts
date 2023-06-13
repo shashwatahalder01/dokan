@@ -7,8 +7,8 @@ const { ENV_INFO } = process.env;
 // const envInfo = JSON.parse(ENV_INFO);
 // console.log(envInfo);
 
-const apiTestResultFile = './playwright-report/api/junit-report/api-results.xml';
-const e2eTestResultFile = './playwright-report/e2e/junit-report/e2e-results.xml';
+const apiTestResultFile = './tests/pw/playwright-report/api/junit-report/api-results.xml';
+const e2eTestResultFile = './tests/pw/playwright-report/e2e/junit-report/e2e-results.xml';
 
 const getFormattedDuration = ( time) => {
 	time =  Number(time) * 1000;
