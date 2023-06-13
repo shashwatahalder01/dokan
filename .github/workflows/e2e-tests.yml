@@ -209,6 +209,9 @@ jobs:
       #     # annotate_notice: true,
       #     # job_name: 'e2e2e2e2e2e2e2e_jobName'
 
+      - name: Prepare test summary
+        run: |
+          env
 
       - name: Prepare test summary
         id: prepare-test-summary
