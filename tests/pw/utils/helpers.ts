@@ -1,4 +1,6 @@
 // const open = require( 'open' );
+import fs from 'fs';
+
 export const helpers = {
 
 	// replace '_' to space & capitalize first letter of string
@@ -164,5 +166,12 @@ export const helpers = {
 			.replace(/-$/g, ''); 					// Remove trailing -
 	}, // TODO: might fail sometimes, need to update with string-to-slug see google
 
+	// create env
+	createEnvVariable(key: string, value: string) {
+		const content = '\n' + key + '=' + value;
+		fs.appendFile('.env', content, (err) => {
+			if (err) throw err;
+		});
+	}
 
 };

@@ -3,9 +3,9 @@ const convert = require('xml-js');
 const fs = require('fs');
 const { ENV_INFO } = process.env;
 
-// console.log(ENV_INFO);
-// const envInfo = JSON.parse(ENV_INFO);
-// console.log(envInfo);
+console.log(ENV_INFO);
+const envInfo = JSON.parse(ENV_INFO);
+console.log(envInfo);
 
 const apiTestResultFile = './tests/pw/playwright-report/api/junit-report/api-results.xml';
 const e2eTestResultFile = './tests/pw/playwright-report/e2e/junit-report/e2e-results.xml';
