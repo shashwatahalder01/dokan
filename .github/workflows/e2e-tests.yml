@@ -210,6 +210,10 @@ jobs:
       #     # job_name: 'e2e2e2e2e2e2e2e_jobName'
 
       - name: Prepare test summary
+        run: |
+          env
+
+      - name: Prepare test summary
         id: prepare-test-summary
         uses: actions/github-script@v6
         with:
