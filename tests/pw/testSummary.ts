@@ -3,9 +3,9 @@ const convert = require('xml-js');
 const fs = require('fs');
 const { ENV_INFO } = process.env;
 
-console.log(ENV_INFO);
-const envInfo = JSON.parse(ENV_INFO);
-console.log(envInfo);
+// console.log(ENV_INFO);
+// const envInfo = JSON.parse(ENV_INFO);
+// console.log(envInfo);
 
 const apiTestResultFile = './playwright-report/api/junit-report/api-results.xml';
 const e2eTestResultFile = './playwright-report/e2e/junit-report/e2e-results.xml';
@@ -66,10 +66,10 @@ const addSummaryFooter = ( core, list) => {
 };
 
 module.exports = async ( { github, context, core } ) => {
-	const plugins = addList(core);
-	await core.summary.clear();
+	// const plugins = addList(core);
+	// await core.summary.clear();
 	addSummaryHeadingAndTable( core );
-	addSummaryFooter( core, plugins );
+	// addSummaryFooter( core, plugins );
 	const summary = core.summary.stringify();
 	await core.summary.write();
 	return summary;
