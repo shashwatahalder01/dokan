@@ -68,7 +68,6 @@ jobs:
 
       - name: Composer install and build (Dokan-lite)
         run: |
-
           composer install --no-dev
           composer dump-autoload -o
 
@@ -171,6 +170,7 @@ jobs:
       #     command: cd tests/pw && npm run test:e2e
 
       - name: 🧪 Running the e2e tests
+        if: always()
         timeout-minutes: 30
         run: |
           cd tests/pw 
@@ -178,6 +178,7 @@ jobs:
 
       #  cd tests/pw && npm run test setup.spec.ts
       - name: 🧪 Running the api tests
+        if: always()
         timeout-minutes: 30
         run: |
           cd tests/pw 
@@ -216,6 +217,7 @@ jobs:
       - name: Prepare test summary
         id: prepare-test-summary
         uses: actions/github-script@v6
+        if: always()
         with:
             result-encoding: string
             script: |
