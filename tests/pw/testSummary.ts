@@ -3,7 +3,7 @@ require('dotenv').config();
 const convert = require('xml-js');
 const fs = require('fs');
 
-const readEnvInfo = fs.readFileSync('./systemInfo.json', 'utf8');
+const readEnvInfo = fs.readFileSync('./tests/pw/systemInfo.json', 'utf8');
 const envInfo = JSON.parse(readEnvInfo);
 
 const apiTestResultFile = './tests/pw/playwright-report/api/junit-report/api-results.xml';
