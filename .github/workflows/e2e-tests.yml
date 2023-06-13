@@ -170,11 +170,11 @@ jobs:
       #     retry_on: error
       #     command: cd tests/pw && npm run test:e2e
 
-      # - name: 🧪 Running the e2e tests
-      #   timeout-minutes: 30
-      #   run: |
-      #     cd tests/pw 
-      #     npm run test:e2e
+      - name: 🧪 Running the e2e tests
+        timeout-minutes: 30
+        run: |
+          cd tests/pw 
+          npm run test:e2e
 
       #  cd tests/pw && npm run test setup.spec.ts
       - name: 🧪 Running the api tests
