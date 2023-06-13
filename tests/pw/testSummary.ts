@@ -1,11 +1,10 @@
 // import * as core from '@actions/core'
+require('dotenv').config();
 const convert = require('xml-js');
 const fs = require('fs');
-const { ENV_INFO } = process.env;
 
-console.log(ENV_INFO);
-const envInfo = JSON.parse(ENV_INFO);
-console.log(envInfo);
+const readEnvInfo = fs.readFileSync('./systemInfo.json', 'utf8');
+const envInfo = JSON.parse(readEnvInfo);
 
 const apiTestResultFile = './tests/pw/playwright-report/api/junit-report/api-results.xml';
 const e2eTestResultFile = './tests/pw/playwright-report/e2e/junit-report/e2e-results.xml';
@@ -25,7 +24,6 @@ const getTestResult = (suiteName, filePath) => {
 		const xmlFile = fs.readFileSync(filePath, 'utf8');
 		const jsonData = JSON.parse(convert.xml2json(xmlFile, { compact: true, spaces: 2 }));
 		const testResult = jsonData.testsuites._attributes;
-		console.log(testResult);
 		const testSummary = [suiteName, testResult.tests, String( testResult.tests - testResult.failures), testResult.failures, testResult.skipped, getFormattedDuration(testResult.time)];
 		return testSummary;}
 	else {

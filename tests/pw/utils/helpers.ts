@@ -169,9 +169,22 @@ export const helpers = {
 	// create env
 	createEnvVariable(key: string, value: string) {
 		const content = '\n' + key + '=' + value;
-		fs.appendFile('.env', content, (err) => {
+		fs.appendFile('.env', content, 'utf8', (err) => {
 			if (err) throw err;
 		});
-	}
+	},
+
+	// read file
+	readFile (filePath: string) {
+		return fs.readFileSync(filePath, 'utf8');
+	},
+
+	// write to file
+	writeFile(filePath: string, content: string) {
+		fs.writeFile(filePath, content, (err) => {
+			if (err) throw err;
+		});
+	},
+
 
 };

@@ -4,7 +4,7 @@ import { endPoints } from '../../utils/apiEndPoints';
 import { payloads } from '../../utils/payloads';
 import { dbUtils } from '../../utils/dbUtils';
 import { dbData } from '../../utils/dbData';
-import { helpers } from 'utils/helpers';
+import { helpers } from '../../utils/helpers';
 
 let apiUtils: ApiUtils;
 
@@ -23,12 +23,12 @@ setup.describe(' setup environment', () => {
 
 	setup('create customer @lite @pro', async () => {
 		const [, customerId] = await apiUtils.createCustomer (payloads.createCustomer1, payloads.adminAuth);
-		helpers.createEnvVariable('CUSTOMER_ID', customerId);
+		process.env.CUSTOMER_ID = customerId;
 	});
 
 	setup('create vendor @lite @pro', async () => {
 		const [, sellerId] = await apiUtils.createStore (payloads.createStore1, payloads.adminAuth);
-		helpers.createEnvVariable('VENDOR_ID', sellerId);
+		process.env.VENDOR_ID = sellerId;
 	});
 
 	setup('set dokan general settings @lite @pro', async () => {
@@ -49,7 +49,7 @@ setup.describe(' setup environment', () => {
 
 	setup('get test environment info @lite @pro', async () => {
 		const [, summaryInfo] = await apiUtils.getSystemStatus();
-		helpers.createEnvVariable('ENV_INFO', JSON.stringify(summaryInfo));
+		helpers.writeFile('systemInfo.json', JSON.stringify(summaryInfo));
 	});
 
 });
