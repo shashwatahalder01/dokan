@@ -1,4 +1,4 @@
-# Dokan E2E Tests (Playwright)
+# Dokan E2E-API Tests (Playwright)
 
 Automated e2e-api tests for Dokan plugin.
 
@@ -40,7 +40,7 @@ Follow instructions on the [Docker Desktop](https://docs.docker.com/docker-for-m
 ### Install Dependencies
 Run the following in a terminal/command line window to install dependencies.
 
-    cd test/e2e
+    cd test/pw
 
 ```
 npm i
