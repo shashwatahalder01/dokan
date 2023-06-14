@@ -5,7 +5,7 @@ async function globalSetup(config: FullConfig) {
 	console.log('Global Setup running....');
 	// get site url structure
 	const serverUrl = config.projects[0]?.use.baseURL as string;
-	for ( let i = 0; i <= 3; i++ ) {
+	for ( let i = 0; i < 3; i++ ) {
 		const apiUtils = new ApiUtils(await request.newContext({ ignoreHTTPSErrors: true }));
 		const headers = await apiUtils.getSiteHeaders(serverUrl);
 		if(headers.link) {

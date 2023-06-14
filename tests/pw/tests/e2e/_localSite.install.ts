@@ -40,6 +40,7 @@ test.describe('setup local site', () => {
 		// await dbUtils.UpdateWpOptionTable(dbData.dokan.optionName.dokanActiveModules, dbData.dokan.modules);
 	});
 
+	test.use({ ignoreHTTPSErrors: true });  //TODO: handle this globally & skip global setup for local_setup
 	test('activate dokan & woocommerce plugins', async ({ request }) => {
 		const apiUtils = new ApiUtils(request);
 		const plugins = ['woocommerce/woocommerce',
