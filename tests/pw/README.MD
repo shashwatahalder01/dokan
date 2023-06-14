@@ -1,6 +1,6 @@
 # Dokan E2E Tests (Playwright)
 
-Automated e2e tests for Dokan plugin.
+Automated e2e-api tests for Dokan plugin.
 
 ## Table of contents
 
@@ -12,10 +12,12 @@ Automated e2e tests for Dokan plugin.
 -   [Running tests](#running-tests)
 
     -   [Prep work for running tests](#prep-work-for-running-tests)
+        -   [Install Dependencies](#Install-Dependencies)
+        -   [Create env file](#Create-env-file)
     -   [How to run tests](#how-to-run-tests)
     -   [How to skip tests](#how-to-skip-tests)
     -   [How to debug tests](#how-to-debug-tests)
-    -   [How to server reports](#how-to-serve-reports)
+    -   [How to serve reports](#how-to-serve-reports)
 
 ## Pre-requisites
 
@@ -35,6 +37,7 @@ Follow instructions on the [Docker Desktop](https://docs.docker.com/docker-for-m
 
 ### Prep work for running tests
 
+### Install Dependencies
 Run the following in a terminal/command line window to install dependencies.
 
     cd test/e2e
@@ -42,6 +45,16 @@ Run the following in a terminal/command line window to install dependencies.
 ```
 npm i
 ```
+
+    Install Browser
+
+```
+npx playwright install chromium
+```
+
+### Create env file
+Create a .env file according to .env.example file
+
 
 ### How to run tests
 

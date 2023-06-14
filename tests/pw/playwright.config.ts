@@ -84,7 +84,7 @@ const e2eSuiteConfig = {
 		// channel: 'chrome', /* Browser distribution channel. */
 		// colorScheme: 'dark', /* Emulates 'prefers-colors-scheme' media feature, supported values are 'light', 'dark', 'no-preference' */
 		headless: process.env.CI ? !! process.env.CI : false, // Whether to run tests on headless or non-headless mode
-		ignoreHTTPSErrors: false, // Whether to ignore HTTPS errors during navigation.
+		ignoreHTTPSErrors: true, // Whether to ignore HTTPS errors during navigation.
 		// trace: 'on-first-retry', // Record trace only when retrying a test for the first time.
 		// screenshot: 'only-on-failure', // Capture screenshot after each test failure.
 		// video: 'on-first-retry', // Record video only when retrying a test for the first time.
@@ -124,24 +124,24 @@ export default defineConfig({
 			['list', { printSteps: true }],
 		// ['allure-playwright',	{ detail: true, outputFolder: 'playwright-report/allure-report', suiteTitle: false }]
 		],
-	// use: {
+	use: {
 	// 	...devices['Desktop Chrome'],
-	// 	acceptDownloads: true, /* Whether to automatically download all the attachments. */
-	// 	actionTimeout: 0, /* Maximum time each action such as `click()` can take. Defaults to 0 (no limit). */
-	// 	baseURL: process.env.BASE_URL ? process.env.BASE_URL : 'http://localhost:9999', // Base url
-	// 	browserName: 'chromium', /* Name of the browser that runs tests. */
-	// 	bypassCSP: true, /* Toggles bypassing page's Content-Security-Policy. */
-	// 	channel: 'chrome', /* Browser distribution channel. */
-	// 	colorScheme: 'dark', /* Emulates 'prefers-colors-scheme' media feature, supported values are 'light', 'dark', 'no-preference' */
-	// 	headless: process.env.CI ? !! process.env.CI : false, // Whether to run tests on headless or non-headless mode
-	// 	ignoreHTTPSErrors: false, // Whether to ignore HTTPS errors during navigation.
-	// 	trace: 'on-first-retry', // Record trace only when retrying a test for the first time.
-	// 	screenshot: 'only-on-failure', // Capture screenshot after each test failure.
-	// 	video: 'on-first-retry', // Record video only when retrying a test for the first time.
-	// // 	// viewport: { width: 1280, height: 720 }, /* Size of viewport */
-	// // 	launchOptions: { slowMo: process.env.SLOWMO ? Number(process.env.SLOWMO) * 1000 : 0, // whether to slow down test execution by provided seconds
-	// // 	},
-	// },
+		acceptDownloads: true, /* Whether to automatically download all the attachments. */
+		actionTimeout: 0, /* Maximum time each action such as `click()` can take. Defaults to 0 (no limit). */
+		baseURL: process.env.BASE_URL ? process.env.BASE_URL : 'http://localhost:9999', // Base url
+		// 	browserName: 'chromium', /* Name of the browser that runs tests. */
+		// 	bypassCSP: true, /* Toggles bypassing page's Content-Security-Policy. */
+		// 	channel: 'chrome', /* Browser distribution channel. */
+		// 	colorScheme: 'dark', /* Emulates 'prefers-colors-scheme' media feature, supported values are 'light', 'dark', 'no-preference' */
+		headless: process.env.CI ? !! process.env.CI : false, // Whether to run tests on headless or non-headless mode
+		ignoreHTTPSErrors: true, // Whether to ignore HTTPS errors during navigation.
+		trace: 'on-first-retry', // Record trace only when retrying a test for the first time.
+		screenshot: 'only-on-failure', // Capture screenshot after each test failure.
+		video: 'on-first-retry', // Record video only when retrying a test for the first time.
+		// // 	// viewport: { width: 1280, height: 720 }, /* Size of viewport */
+		launchOptions: { slowMo: process.env.SLOWMO ? Number(process.env.SLOWMO) * 1000 : 0, // whether to slow down test execution by provided seconds
+		},
+	},
 
 	/* Configure projects for major browsers */
 	projects: [

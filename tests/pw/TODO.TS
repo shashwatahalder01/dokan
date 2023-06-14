@@ -254,3 +254,28 @@ const config = {
 
 
 //TODO: read every playwright github issue & playwright comment
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//TODO: readme
+//TODO: remove e2e with pw & make generic for e2e and api
+//TODO: add how to run e2e & api project run command to readme
+//TODO: add browser install step
+//TODO: add env create step to readme

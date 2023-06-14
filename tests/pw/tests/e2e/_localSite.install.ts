@@ -17,7 +17,7 @@ test.describe('setup local site', () => {
 	// 	//TODO: get desired folder path
 	// 	//TODO: download wordpress zip and unzip it
 	// 	//TODO: clone desired plugins to wp-plugins
-	// 	//TODO:
+	// 	//TODO: clone theme to theme folder
 	// 	//TODO:
 	// 	//TODO:
 
@@ -40,7 +40,10 @@ test.describe('setup local site', () => {
 		// await dbUtils.UpdateWpOptionTable(dbData.dokan.optionName.dokanActiveModules, dbData.dokan.modules);
 	});
 
-	test.use({ ignoreHTTPSErrors: true });  //TODO: handle this globally & skip global setup for local_setup
+	// test('install and activate theme', async ({ request }) => {} //TODO
+
+	//TODO: skip global setup for local_setup
+
 	test('activate dokan & woocommerce plugins', async ({ request }) => {
 		const apiUtils = new ApiUtils(request);
 		const plugins = ['woocommerce/woocommerce',

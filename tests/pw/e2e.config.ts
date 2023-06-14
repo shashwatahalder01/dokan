@@ -18,7 +18,7 @@ export default defineConfig({
 	// forbidOnly: !!process.env.CI, 	/* Fail the build on CI if you accidentally left test.only in the source code. */
 	repeatEach: 1, /* The number of times to repeat each test, useful for debugging flaky tests. */
 	retries: process.env.CI ? 1 : 0,  	/* The maximum number of retry attempts given to failed tests.  */
-	workers: process.env.CI ? 1 : 0, 	/* Opt out of parallel tests on CI. */
+	workers: process.env.CI ? 1 : 1, 	/* Opt out of parallel tests on CI. */
 	reportSlowTests: { max: 10, threshold: 20 },  /* Whether to report slow test files. Pass null to disable this feature. */
 	reporter: process.env.CI
 		? [
@@ -42,7 +42,7 @@ export default defineConfig({
 		// channel: 'chrome', /* Browser distribution channel. */
 		// colorScheme: 'dark', /* Emulates 'prefers-colors-scheme' media feature, supported values are 'light', 'dark', 'no-preference' */
 		headless: process.env.CI ? !! process.env.CI : false, // Whether to run tests on headless or non-headless mode
-		ignoreHTTPSErrors: false, // Whether to ignore HTTPS errors during navigation.
+		ignoreHTTPSErrors: true, // Whether to ignore HTTPS errors during navigation.
 		// trace: 'on-first-retry', // Record trace only when retrying a test for the first time.
 		// screenshot: 'only-on-failure', // Capture screenshot after each test failure.
 		// video: 'on-first-retry', // Record video only when retrying a test for the first time.
