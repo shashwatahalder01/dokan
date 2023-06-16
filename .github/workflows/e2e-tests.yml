@@ -75,7 +75,7 @@ jobs:
 
       - name: Npm install and build (Dokan-lite)
         run: |
-          npm ci
+          npm i
           npm run build
 
       - name: Composer install and build (Dokan-pro)
@@ -87,7 +87,7 @@ jobs:
       - name: Npm install and build (Dokan-pro)
         run: |
           cd plugins/dokan-pro
-          npm ci
+          npm i
           npm run build
 
       - name: Install dependencies 
