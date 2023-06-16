@@ -1,5 +1,5 @@
 // import * as core from '@actions/core'
-require('dotenv').config();
+// require('dotenv').config();
 const convert = require('xml-js');
 const fs = require('fs');
 

@@ -15,7 +15,7 @@
         -   [Install Dependencies](#install-dependencies)
         -   [Create Env file](#create-env-file)
         
-   <br/> 
+<br/> 
 
 -   [Running tests :test_tube:  ](#running-tests)
     -   [How to run test projects](#how-to-run-test-projects)
@@ -27,28 +27,23 @@
 <br />
 
 ## :pushpin: Pre-requisites 
-<br/>
- 
-### :o: Install Node
->&emsp;Follow instructions on the [Node site](https://nodejs.org/en/download/) to install Node.
 
-<br/>
+### :o: Install Node
+
+&emsp;Follow instructions on the [Node site](https://nodejs.org/en/download/) to install Node.
 
 ### :o: Install NVM
 
->&emsp;Follow instructions in the [NVM repository](https://github.com/nvm-sh/nvm) to install NVM.
+&emsp;Follow instructions in the [NVM repository](https://github.com/nvm-sh/nvm) to install NVM.
 
-<br/>
 
 ### :o: Install Docker
 
->&emsp;Follow instructions on the [Docker Desktop](https://docs.docker.com/docker-for-mac/install/) to install Docker.
+&emsp;Follow instructions on the [Docker Desktop](https://docs.docker.com/docker-for-mac/install/) to install Docker.
 
-<br />
 <br/>
 
 ## :construction:  Prep for tests
-<br/>
 
 Preparation for running tests involves conducting necessary tasks and arrangements to ensure a smooth and efficient testing process. This may include setting up the testing environment, configuring dependencies, initializing resources, and performing any required setup actions.
 
@@ -59,10 +54,10 @@ Preparation for running tests involves conducting necessary tasks and arrangemen
 
 :radio_button: Go to project directory
 
-`cd tests/pw`
+    cd tests/pw
 <br/>
 
-:radio_button: Run the following in a terminal to install dependencies.
+:radio_button: Install dependencies.
 
 ```
 npm i
@@ -77,13 +72,11 @@ npx playwright install chromium
 <br/>
 
 ### :o: Create Env file
-<br/>
+
 Environment (env) file is used for storing configuration settings and variables specific to the testing environment. It allows managing and customizing the testing environment settings easily without modifying the test code. It provides flexibility and enables seamless configuration changes between different testing environments, ensuring efficient and effective testing of the project.
 
 <br/>
-
 Create .env file according to .env.example file
-
 <br/>
 
 ```
@@ -114,7 +107,6 @@ DB_PREFIX=wp                            [Prefix for database tables]
 <br />
 
 ## :test_tube: Running tests
-<br/>
 
 Running tests involves executing the predefined test cases or scripts to evaluate the functionality, performance, or other aspects of a system or software application. By running tests, potential issues, bugs, or errors can be identified, providing insights into the quality and behavior of the system under test. The results obtained from running tests contribute to validating the system's compliance with requirements, verifying expected outcomes, and supporting the overall quality assurance process.
 
