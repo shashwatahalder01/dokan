@@ -24,7 +24,7 @@
     -   [How to debug tests](#how-to-debug-tests)
     -   [How to serve reports](#how-to-serve-reports)
 
-<br />
+<br/>
 
 ## :pushpin: Pre-requisites 
 
@@ -64,7 +64,7 @@ npm i
 ```
 <br/>
 
-:radio_button: Install Browser
+:radio_button: Install browser
 
 ```
 npx playwright install chromium
@@ -105,7 +105,7 @@ DB_PREFIX=wp                            [Prefix for database tables]
 ```
 
 <br/>
-<br />
+<br/>
 
 ## :test_tube: Running tests
 

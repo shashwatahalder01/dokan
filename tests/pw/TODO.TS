@@ -259,7 +259,7 @@ const config = {
 //TODO: implement new playwright settings 
 //TODO: ['json', { outputFile: 'results.json' }] add json reporter and try to replace junit, ust json report for test summary
 
-//
+//TODO: fix npm run error without npx
 
 
 
