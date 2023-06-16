@@ -28,16 +28,16 @@
 
 ## :pushpin: Pre-requisites 
 
-### :o: Install Node
+#### :o: Install Node
 
 &emsp;Follow instructions on the [Node site](https://nodejs.org/en/download/) to install Node.
 
-### :o: Install NVM
+#### :o: Install NVM
 
 &emsp;Follow instructions in the [NVM repository](https://github.com/nvm-sh/nvm) to install NVM.
 
 
-### :o: Install Docker
+#### :o: Install Docker
 
 &emsp;Follow instructions on the [Docker Desktop](https://docs.docker.com/docker-for-mac/install/) to install Docker.
 
@@ -57,7 +57,7 @@ Preparation for running tests involves conducting necessary tasks and arrangemen
     cd tests/pw
 <br/>
 
-:radio_button: Install dependencies.
+:radio_button: Install dependencies
 
 ```
 npm i
@@ -77,6 +77,7 @@ Environment (env) file is used for storing configuration settings and variables 
 
 <br/>
 Create .env file according to .env.example file
+
 <br/>
 
 ```

@@ -2,6 +2,7 @@
 // require('dotenv').config();
 const convert = require('xml-js');
 const fs = require('fs');
+const {SHA, PR_NUMBER } = process.env;
 
 const readEnvInfo = fs.readFileSync('./tests/pw/systemInfo.json', 'utf8');
 const envInfo = JSON.parse(readEnvInfo);
@@ -47,6 +48,10 @@ const addSummaryHeadingAndTable = ( core ) => {
 	const e2eTesResult = getTestResult('E2E Tests', e2eTestResultFile);
 	core.summary
 		.addHeading( 'Tests Summary' )
+		.addBreak()
+		.addRaw( `Commit SHA: ${ SHA }` )
+		.addBreak()
+		.addBreak()
 		.addTable( [tableHeader, apiTesResult, e2eTesResult] );
 };
 

@@ -40,6 +40,8 @@ env:
   DB_USER_PASSWORD: password
   DATABASE: tests-wordpress
   DB_PREFIX: wp
+  PR_NUMBER: ${{ github.event.number }}
+  SHA: ${{ github.event.pull_request.head.sha }}
 
 jobs:
   tests:
@@ -55,7 +57,7 @@ jobs:
       - name: Use desired version of NodeJS
         uses: actions/setup-node@v3
         with:
-          node-version: '14'
+          node-version: '16'
           cache: "npm"
 
       - name: Clone dokan-pro
@@ -74,13 +76,11 @@ jobs:
       - name: Npm install and build (Dokan-lite)
         run: |
           npm ci
-          npm run dev:build
-          grunt
+          npm run build
 
       - name: Composer install and build (Dokan-pro)
         run: |
           cd plugins/dokan-pro
-          composer update
           composer install --no-dev
           composer dump-autoload -o
 
@@ -88,7 +88,6 @@ jobs:
         run: |
           cd plugins/dokan-pro
           npm ci
-          npm run dev:build
           npm run build
 
       - name: Install dependencies 
