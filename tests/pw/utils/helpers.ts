@@ -181,9 +181,10 @@ export const helpers = {
 
 	// write file
 	writeFile(filePath: string, content: string) {
-		fs.writeFile(filePath, content, (err) => {
-			if (err) throw err;
-		});
+		fs.writeFileSync(filePath, content,  { encoding: 'utf8' } );
+		// fs.writeFile(filePath, content, (err) => {
+		// 	if (err) throw err;
+		// });
 	},
 
 
