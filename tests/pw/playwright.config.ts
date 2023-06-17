@@ -33,7 +33,7 @@ const apiSuiteConfig = {
 	// 		['allure-playwright',	{ detail: true, outputFolder: 'playwright-report/api/allure/allure-report', suiteTitle: false }]
 	// 	],
 	use : {
-		baseURL: process.env.BASE_URL ? process.env.BASE_URL : 'http://localhost:8888',  /* Base URL */
+		baseURL: process.env.BASE_URL ? process.env.BASE_URL : 'http://localhost:9999',  /* Base URL */
 		ignoreHTTPSErrors: true, /* Whether to ignore HTTPS errors during navigation. */
 		/* api request headers */
 		extraHTTPHeaders: {

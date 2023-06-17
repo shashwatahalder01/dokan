@@ -35,7 +35,7 @@ export default defineConfig({
 		...devices['Desktop Chrome'],
 		acceptDownloads: true, /* Whether to automatically download all the attachments. */
 		actionTimeout: 0, /* Maximum time each action such as `click()` can take. Defaults to 0 (no limit). */
-		baseURL: process.env.BASE_URL ? process.env.BASE_URL : 'http://localhost:8888',  /* Base URL */
+		baseURL: process.env.BASE_URL ? process.env.BASE_URL : 'http://localhost:9999',  /* Base URL */
 		// browserName: 'chromium', /* Name of the browser that runs tests. */
 		bypassCSP: true, /* Toggles bypassing page's Content-Security-Policy. */
 		// channel: 'chrome', /* Browser distribution channel. */

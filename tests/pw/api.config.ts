@@ -33,7 +33,7 @@ export default defineConfig({
 		],
 
 	use: {
-		baseURL: process.env.BASE_URL ? process.env.BASE_URL : 'http://localhost:8888',  /* Base URL */
+		baseURL: process.env.BASE_URL ? process.env.BASE_URL : 'http://localhost:9999',  /* Base URL */
 		ignoreHTTPSErrors: true, /* Whether to ignore HTTPS errors during navigation. */
 		/* api request headers */
 		extraHTTPHeaders: {
