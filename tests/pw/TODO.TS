@@ -277,7 +277,6 @@ const config = {
 
 
 //TODO: readme
-//TODO: add env create step to readme
 //TODO: add emoji to readme
 //TODO: make readme follow readme guideline
 //TODO: use chatgpt to rephrase readme
