@@ -48,6 +48,7 @@ const addSummaryHeadingAndTable = ( core ) => {
 		.addHeading( 'Tests Summary' )
 		.addRaw( `Commit SHA: ${ SHA }` )
 		.addBreak()
+		.addBreak()
 		.addTable( [tableHeader, apiTesResult, e2eTesResult] );
 };
 
