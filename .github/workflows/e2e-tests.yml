@@ -68,10 +68,10 @@ jobs:
       #     path: "plugins/dokan-pro"
       #     ref: "develop"
 
-      - name: Composer install and build (Dokan-lite)
-        run: |
-          node -v 
-          npm  -v
+      # - name: Composer
+      #   run: |
+      #     node -v 
+      #     npm  -v
 
       - name: Composer install and build (Dokan-lite)
         run: |
@@ -80,7 +80,7 @@ jobs:
 
       - name: Npm install and build (Dokan-lite)
         run: |
-          npm i --force
+          npm ci 
           npm run build
 
       # - name: Composer install and build (Dokan-pro)
@@ -92,7 +92,7 @@ jobs:
       # - name: Npm install and build (Dokan-pro)
       #   run: |
       #     cd plugins/dokan-pro
-      #     npm i --force
+      #     npm ci
       #     npm run build
 
   #     - name: Install dependencies 
