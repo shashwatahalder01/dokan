@@ -60,13 +60,18 @@ jobs:
           node-version: '16'
           cache: "npm"
 
-      - name: Clone dokan-pro
-        uses: actions/checkout@v3
-        with:
-          repository: weDevsOfficial/dokan-pro
-          token: ${{ secrets.ACCESS_TOKEN }}
-          path: "plugins/dokan-pro"
-          ref: "develop"
+      # - name: Clone dokan-pro
+      #   uses: actions/checkout@v3
+      #   with:
+      #     repository: weDevsOfficial/dokan-pro
+      #     token: ${{ secrets.ACCESS_TOKEN }}
+      #     path: "plugins/dokan-pro"
+      #     ref: "develop"
+
+      - name: Composer install and build (Dokan-lite)
+        run: |
+          node -v 
+          npm  -v
 
       - name: Composer install and build (Dokan-lite)
         run: |
