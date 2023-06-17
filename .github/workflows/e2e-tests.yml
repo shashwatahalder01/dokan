@@ -60,13 +60,13 @@ jobs:
           node-version: '16'
           cache: "npm"
 
-      # - name: Clone dokan-pro
-      #   uses: actions/checkout@v3
-      #   with:
-      #     repository: weDevsOfficial/dokan-pro
-      #     token: ${{ secrets.ACCESS_TOKEN }}
-      #     path: "plugins/dokan-pro"
-      #     ref: "develop"
+      - name: Clone dokan-pro
+        uses: actions/checkout@v3
+        with:
+          repository: weDevsOfficial/dokan-pro
+          token: ${{ secrets.ACCESS_TOKEN }}
+          path: "plugins/dokan-pro"
+          ref: "develop"
 
       # node -v 
       # npm  -v
@@ -87,22 +87,22 @@ jobs:
           npm ci 
           npm run build
 
-      # - name: Composer install and build (Dokan-pro)
-      #   run: |
-      #     cd plugins/dokan-pro
-      #     composer install --no-dev
-      #     composer dump-autoload -o
+      - name: Composer install and build (Dokan-pro)
+        run: |
+          cd plugins/dokan-pro
+          composer install --no-dev
+          composer dump-autoload -o
 
-      # - name: Npm install and build (Dokan-pro)
-      #   run: |
-      #     cd plugins/dokan-pro
-      #     npm ci
-      #     npm run build
+      - name: Npm install and build (Dokan-pro)
+        run: |
+          cd plugins/dokan-pro
+          npm ci
+          npm run build
 
-  #     - name: Install dependencies 
-  #       run: |
-  #         cd tests/pw 
-  #         npm i --production
+      - name: Install dependencies 
+        run: |
+          cd tests/pw 
+          npm i --production
 
   #     - name: Start WordPress Env
   #       run: |
