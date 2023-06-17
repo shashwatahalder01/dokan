@@ -6,8 +6,6 @@ const { SHA, PR_NUMBER } = process.env;
 
 const readEnvInfo = fs.readFileSync('./tests/pw/systemInfo.json', 'utf8');
 const envInfo = JSON.parse(readEnvInfo);
-console.log(envInfo);
-console.log(envInfo.activePlugins);
 
 const apiTestResultFile = './tests/pw/playwright-report/api/junit-report/api-results.xml';
 const e2eTestResultFile = './tests/pw/playwright-report/e2e/junit-report/e2e-results.xml';
@@ -18,8 +16,8 @@ const getFormattedDuration = ( time) => {
 	// const sec = Math.floor( ( time / 1000 ) % 60 );
 	// return `${ min }m ${ (sec < 10 ? '0' : '') + sec }s`;
 	const date = new Date(time);
-	// return `${date.getMinutes()}m${date.getSeconds()}s`;
-	return `${date.getMinutes()}.${date.getSeconds()}s`;
+	return `${date.getMinutes()}m${date.getSeconds()}s`;
+	// return `${date.getMinutes()}.${date.getSeconds()}s`;
 };
 
 const getTestResult = (suiteName, filePath) => {
@@ -36,21 +34,19 @@ const getTestResult = (suiteName, filePath) => {
 
 const addSummaryHeadingAndTable = ( core ) => {
 	const tableHeader =   [
-		{ data: 'Test :test_tube:', header: true },
-		{ data: 'Total :bar_chart:', header: true },
-		{ data: 'Passed :white_check_mark:', header: true },
-		{ data: 'Failed :rotating_light:', header: true },
+		{ data: 'Test  :test_tube:', header: true },
+		{ data: 'Total  :bar_chart:', header: true },
+		{ data: 'Passed  :white_check_mark:', header: true },
+		{ data: 'Failed  :rotating_light:', header: true },
 		// { data: 'Flaky :construction:', header: true }, //TODO: add flaky
-		{ data: 'Skipped :next_track_button:', header: true },
-		{ data: 'Duration :alarm_clock:', header: true },
+		{ data: 'Skipped  :next_track_button:', header: true },
+		{ data: 'Duration  :alarm_clock:', header: true },
 	];
 	const apiTesResult = getTestResult('API Tests', apiTestResultFile);
 	const e2eTesResult = getTestResult('E2E Tests', e2eTestResultFile);
 	core.summary
 		.addHeading( 'Tests Summary' )
-		.addBreak()
 		.addRaw( `Commit SHA: ${ SHA }` )
-		.addBreak()
 		.addBreak()
 		.addTable( [tableHeader, apiTesResult, e2eTesResult] );
 };

@@ -76,9 +76,11 @@ npx playwright install chromium
 Environment (env) file is used for storing configuration settings and variables specific to the testing environment. It allows managing and customizing the testing environment settings easily without modifying the test code. It provides flexibility and enables seamless configuration changes between different testing environments, ensuring efficient and effective testing of the project.
 
 <br/>
+
 Create .env file according to .env.example file
 
 <br/>
+
 
 ```
 # Plugin Configuration
