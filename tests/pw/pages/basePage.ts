@@ -205,6 +205,16 @@ export class BasePage {
 		return response;
 	}
 
+	// click & wait for response
+	async clickAndAcceptAndWaitForResponse(subUrl: string, selector: string, code = 200): Promise<Response> {
+		const [response] = await Promise.all([
+			this.page.waitForResponse((resp) => resp.url().includes(subUrl) && resp.status() === code),
+			this.acceptAlert(),
+			this.page.locator(selector).click()
+		]);
+		return response;
+	}
+
 	// type & wait for response
 	async typeAndWaitForResponse(subUrl: string, selector: string, text: string, code = 200,): Promise<Response> {
 		const [response] = await Promise.all([
@@ -1059,26 +1069,20 @@ export class BasePage {
 	 * Dialog methods
 	 */
 
-	// // accept alert
-	// async acceptAlert(): Promise<void> {
-	// 	this.page.on('dialog', (dialog) => {
-	// 		dialog.accept();
-	// 	});
-	// }
+	// accept alert
+	acceptAlert(): void {
+		this.page.on('dialog', (dialog) => { dialog.accept(); });
+	}
 
-	// // dismiss alert
-	// async dismissAlert(): Promise<void> {
-	// 	this.page.on('dialog', (dialog) => {
-	// 		dialog.dismiss();
-	// 	});
-	// }
+	// dismiss alert
+	dismissAlert(): void {
+		this.page.on('dialog', (dialog) => { dialog.dismiss(); });
+	}
 
-	// // type on prompt box/alert
-	// async fillAlert(value: string): Promise<void> {
-	// 	this.page.on('dialog', (dialog) => {
-	// 		dialog.accept(value);
-	// 	});
-	// }
+	// type on prompt box/alert
+	fillAlert(value: string): void {
+		this.page.on('dialog', (dialog) => { dialog.accept(value); });
+	}
 
 	// // get default prompt value. Otherwise, returns empty string.
 	// getDefaultPromptValue(): string {
@@ -1174,19 +1178,19 @@ export class BasePage {
 	 * Extra methods
 	 */
 
-	multipleElementVisible(selectors: any){
+	async multipleElementVisible(selectors: any){
 
 		//TODO: implement for arrays
-		selectors = Object.values(selectors);
-		selectors.forEach( async (selector: string) => {
-			// console.log(selector);
-			await expect(this.page.locator(selector)).toBeVisible();
-		});
+		// selectors = Object.values(selectors);
+		// selectors.forEach( async (selector: string) => {
+		// 	// console.log(selector);
+		// 	await expect(this.page.locator(selector)).toBeVisible();
+		// });
 
-		// for (const selector in selectors ) {
-		// 	console.log(selectors[selector]);
-		// 	await expect(this.page.locator(selectors[selector])).toBeVisible();
-		// }
+		for (const selector in selectors ) {
+			// console.log(selectors[selector]);
+			await expect(this.page.locator(selectors[selector])).toBeVisible();
+		}
 
 	}
 

@@ -497,6 +497,13 @@ export class ApiUtils {
 	 * admin api methods
 	*/
 
+
+	// get admin report summary
+	async getAdminReportSummary(auth? : auth): Promise<responseBody> {
+		const [, responseBody] = await this.get(endPoints.getAdminReportSummary, { headers: auth });
+		return responseBody;
+	}
+
 	// get all order logs
 	async getAllOrderLogs(auth? : auth): Promise<responseBody> {
 		const [, responseBody] = await this.get(endPoints.getAdminLogs, { params: { per_page:100 }, headers: auth });

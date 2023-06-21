@@ -1,8 +1,8 @@
 import { test, Page } from '@playwright/test';
-import { data } from '../../utils/testData';
 import { LoginPage } from '../../pages/loginPage';
 import { AdminPage } from '../../pages/adminPage';
 import { ApiUtils } from '../../utils/apiUtils';
+import { data } from '../../utils/testData';
 import { payloads } from '../../utils/payloads';
 
 

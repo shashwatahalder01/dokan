@@ -1375,7 +1375,7 @@ export class AdminPage extends BasePage {
 	async dokanNotice(){
 		await this.goto(data.subUrls.backend.dokan);
 		// check dokan notice elements are visible
-		this.multipleElementVisible(selector.admin.dokan.notice);
+		await this.multipleElementVisible(selector.admin.dokan.notice);
 	}
 
 	// dokan pro features promo
@@ -1383,27 +1383,32 @@ export class AdminPage extends BasePage {
 
 		// dokan promo banner
 		await this.goIfNotThere(data.subUrls.backend.dokan);
+
 		// check promo banner elements are visible
-		this.multipleElementVisible(selector.admin.dokan.promoBanner);
+		await this.multipleElementVisible(selector.admin.dokan.promoBanner);
 
 		// dokan lite modules
 		await this.goIfNotThere(data.subUrls.backend.dokanLiteModules);
+
 		// check pro upgrade popup elements are visible
-		this.multipleElementVisible(selector.admin.dokan.modules.lite.popup);
+		await this.multipleElementVisible(selector.admin.dokan.modules.lite.popup);
 
 		// check module cards are visible
 		await this.click(selector.admin.dokan.modules.lite.popup.closeDokanUpgradePopup);
+		await expect(this.page.locator(selector.admin.dokan.modules.moduleText)).toBeVisible();
 		await expect(this.page.locator(selector.admin.dokan.modules.lite.moduleCard)).toHaveCount(27);
 
 		// dokan pro features menu
 		await this.goIfNotThere(data.subUrls.backend.dokanProFeatures);
+
 		// check dokan pro feature sections are visible
-		this.multipleElementVisible(selector.admin.dokan.proFeatures);
+		await this.multipleElementVisible(selector.admin.dokan.proFeatures);
 
 		// dokan settings pro advertisement
 		await this.goToDokanSettings();
+
 		// check settings pro advertisement banner elements are visible
-		this.multipleElementVisible(selector.admin.dokan.settings.proAdvertisementBanner);
+		await this.multipleElementVisible(selector.admin.dokan.settings.proAdvertisementBanner);
 	}
 
 	// search vendor
@@ -1472,22 +1477,211 @@ export class AdminPage extends BasePage {
 	}
 
 
-	// withdraw bulk action
-	async withdrawBulkAction(){
+	// admin dashboard
+
+	// admin dashboard render properly
+	async adminDashboardRenderProperly(){
+		await this.goIfNotThere(data.subUrls.backend.dokan);
+
+		// dashboard text is visible
+		await expect(this.page.locator(selector.admin.dokan.dashboard.dashboardText)).toBeVisible();
+
+		// check header elements are visible
+		await this.multipleElementVisible(selector.admin.dokan.dashboard.header);
+
+		// check at a glance elements are visible
+		await this.multipleElementVisible(selector.admin.dokan.dashboard.atAGlance);
+
+		// check overview elements are visible
+		await this.multipleElementVisible(selector.admin.dokan.dashboard.overview);
+
+		// check dokan new update elements are visible
+		await this.multipleElementVisible(selector.admin.dokan.dashboard.dokanNewUpdates);
+
+		// check Subscribe box elements are visible
+		// eslint-disable-next-line @typescript-eslint/no-unused-vars
+		const { thankYouMessage, ...subscribeBox } = selector.admin.dokan.dashboard.subscribeBox;
+		await this.multipleElementVisible(subscribeBox);
+
+	}
+
+	// at a glance value
+	async dokanAtAGlanceValueAccuracy(atAGlanceValues:any){
+		await this.goIfNotThere(data.subUrls.backend.dokan);
+		const netSales = await this.getElementText(selector.admin.dokan.dashboard.atAGlance.netSalesThisMonth);
+		const commissionEarned = await this.getElementText(selector.admin.dokan.dashboard.atAGlance.commissionEarned);
+
+		expect(Number(netSales.replace('$', ''))).toBe(Number(atAGlanceValues.sales.this_month));
+		expect(Number(commissionEarned.replace('$', ''))).toBe(Number(atAGlanceValues.earning.this_month));
+		await expect(this.page.locator(selector.admin.dokan.dashboard.atAGlance.signupThisMonth)).toContainText(atAGlanceValues.vendors.this_month + ' Vendor');
+		await expect(this.page.locator(selector.admin.dokan.dashboard.atAGlance.vendorAwaitingApproval)).toContainText(atAGlanceValues.vendors.inactive + ' Vendor');
+		await expect(this.page.locator(selector.admin.dokan.dashboard.atAGlance.productCreatedThisMonth)).toContainText(atAGlanceValues.products.this_month + ' Products');
+		await expect(this.page.locator(selector.admin.dokan.dashboard.atAGlance.withdrawAwaitingApproval)).toContainText(atAGlanceValues.withdraw.pending + ' Withdrawals');
+
+	}
+
+	// add dokan news subscriber
+	async addDokanNewsSubscriber(user:any){
+		await this.goIfNotThere(data.subUrls.backend.dokan);
+		await this.clearAndType(selector.admin.dokan.dashboard.subscribeBox.subscriberName, user.name());
+		await this.clearAndType(selector.admin.dokan.dashboard.subscribeBox.subscriberEmail, user.email());
+		await this.clickAndWaitForResponse(data.subUrls.backend.subscribe, selector.admin.dokan.dashboard.subscribeBox.subscribeButton);
+		await expect(this.page.locator(selector.admin.dokan.dashboard.subscribeBox.thankYouMessage)).toContainText('Thank you for subscribing!');
+
+	}
+
+	// withdraws
+
+	// admin dashboard render properly
+	async adminWithdrawsRenderProperly(){
 		await this.goIfNotThere(data.subUrls.backend.dokanWithdraw);
-		await this.click(selector.admin.dokan.withdraw.selectAll);
-		await this.selectByValue(selector.admin.dokan.withdraw.bulkActions, 'approved');
-		await this.clickAndWaitForResponse(data.subUrls.backend.stores, selector.admin.dokan.withdraw.applyBulkAction);
+
+		// withdraw requests text is visible
+		await expect(this.page.locator(selector.admin.dokan.withdraw.withdrawText)).toBeVisible();
+
+		// check nav tabs elements are visible
+		await this.multipleElementVisible(selector.admin.dokan.withdraw.navTabs);
+
+		// check bulk action elements are visible
+		await this.multipleElementVisible(selector.admin.dokan.withdraw.bulkActions);
+
+		// check nav filter elements are visible
+		// eslint-disable-next-line @typescript-eslint/no-unused-vars
+		// const { filterByVendorInput, ...filters } = selector.admin.dokan.withdraw.filters; //TODO: uncomment after fix
+		// await this.multipleElementVisible(filters);
+
+		// withdraw table is visible
+		await expect(this.page.locator(selector.admin.dokan.withdraw.withdrawTable)).toBeVisible();
+
+	}
+
+	// withdraw bulk action
+	async withdrawBulkAction(action: string){
+		await this.goIfNotThere(data.subUrls.backend.dokanWithdraw);
+
+		await this.click(selector.admin.dokan.withdraw.bulkActions.selectAll);
+		await this.selectByValue(selector.admin.dokan.withdraw.bulkActions.bulkActions, action);
+		await this.clickAndWaitForResponse(data.subUrls.backend.withdraws, selector.admin.dokan.withdraw.bulkActions.applyBulkAction);
 	}
 
 	// filter withdraw
 	async filterWithdraws(vendorName: string){
 		await this.goIfNotThere(data.subUrls.backend.dokanWithdraw);
 
-		await this.click(selector.admin.dokan.withdraw.filterByVendor);
-		await this.typeAndWaitForResponse(data.subUrls.backend.withdraws, selector.admin.dokan.withdraw.filterByVendorInput, vendorName);
+		await this.click(selector.admin.dokan.withdraw.filters.filterByVendor);
+		await this.typeAndWaitForResponse(data.subUrls.backend.stores, selector.admin.dokan.withdraw.filters.filterByVendorInput, vendorName);
 		await this.pressAndWaitForResponse(data.subUrls.backend.withdraws, data.key.enter);
 
 	}
 
+	// add note to withdraw request
+	async addNoteWithdrawRequest(vendorName: string, note: string){
+		await this.filterWithdraws(vendorName);
+
+		await this.click(selector.admin.dokan.withdraw.withdrawAddNote(vendorName));
+		await this.clearAndType(selector.admin.dokan.withdraw.addNote, note);
+		await this.clickAndWaitForResponse(data.subUrls.backend.withdraws, selector.admin.dokan.withdraw.updateNote);
+
+	}
+
+	// add note to withdraw request
+	async updateWithdrawRequest(vendorName: string, action: string){
+		await this.filterWithdraws(vendorName);
+
+		switch (action) {
+
+		case 'approve' :
+			await this.clickAndWaitForResponse(data.subUrls.backend.withdraws, selector.admin.dokan.withdraw.withdrawApprove(vendorName));
+			break;
+
+		case 'cancel' :
+			await this.hover(selector.admin.dokan.withdraw.withdrawCell(vendorName));
+			await this.clickAndWaitForResponse(data.subUrls.backend.withdraws, selector.admin.dokan.withdraw.withdrawCancel);
+			break;
+
+		case 'delete' :
+			await this.clickAndAcceptAndWaitForResponse(data.subUrls.backend.withdraws, selector.admin.dokan.withdraw.withdrawDelete);
+			break;
+
+		default :
+			break;
+		}
+	}
+
+
+	// reverse withdraw
+	async adminReverseWithdrawRenderProperly(){
+		await this.goIfNotThere(data.subUrls.backend.dokanReverseWithdraw);
+
+		// reverse withdraw text is visible
+		await expect(this.page.locator(selector.admin.dokan.reverseWithdraw.reverseWithdrawText)).toBeVisible();
+
+		// check fact cards elements are visible
+		await this.multipleElementVisible(selector.admin.dokan.reverseWithdraw.reverseWithdrawFactCards);
+
+		//TODO: add filters
+
+		// withdraw table is visible
+		await expect(this.page.locator(selector.admin.dokan.reverseWithdraw.revereWithdrawTable)).toBeVisible();
+
+	}
+
+	// help
+	async adminHelpRenderProperly(){
+		await this.goIfNotThere(data.subUrls.backend.dokanHelp);
+
+		// check basics elements are visible
+		await this.multipleElementVisible(selector.admin.dokan.help.basics);
+
+		// check payment And Shipping elements are visible
+		await this.multipleElementVisible(selector.admin.dokan.help.paymentAndShipping);
+
+		// check vendor related questions elements are visible
+		await this.multipleElementVisible(selector.admin.dokan.help.vendorRelatedQuestions);
+
+		// check miscellaneous elements are visible
+		await this.multipleElementVisible(selector.admin.dokan.help.miscellaneous);
+
+	}
+
+	// get help
+	async adminGetHelpRenderProperly(){
+		await this.goIfNotThere(data.subUrls.backend.dokanHelp);
+
+		await this.hover(selector.admin.dokan.dashboard.header.getHelpMenu);
+
+		// check get help drop down list elements are visible
+		await this.multipleElementVisible(selector.admin.dokan.dashboard.getHelp);
+
+	}
+
+	// settings
+
+	async adminSettingsRenderProperly(){
+		await this.goIfNotThere(data.subUrls.backend.dokanSettings);
+
+		// settings text is visible
+		await expect(this.page.locator(selector.admin.dokan.settings.settingsText)).toBeVisible();
+
+		// check settings section elements are visible
+		await this.multipleElementVisible(selector.admin.dokan.settings.sections);
+
+		// check settings header elements are visible
+		await this.multipleElementVisible(selector.admin.dokan.settings.header);
+
+		// settings field is visible
+		await expect(this.page.locator(selector.admin.dokan.settings.fields)).toBeVisible();
+
+		// settings save Changes is visible
+		await expect(this.page.locator(selector.admin.dokan.settings.saveChanges)).toBeVisible();
+
+	}
+
+	// search settings
+	async searchSettings(settings: string){
+		await this.goIfNotThere(data.subUrls.backend.dokanSettings);
+
+		await this.clearAndType(selector.admin.dokan.settings.search.input, settings);
+		await expect(this.page.locator(selector.admin.dokan.settings.fields)).toBeVisible();
+	}
 }

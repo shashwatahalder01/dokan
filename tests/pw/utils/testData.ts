@@ -27,8 +27,11 @@ export const data = {
 	user: {
 		username: () => faker.person.firstName('male'),
 		userDetails: {
+			name: () => faker.person.firstName('male'),
 			firstName: () => faker.person.firstName('male'),
 			lastName: () => faker.person.lastName('male'),
+			email: () => faker.person.firstName('male') + '@email.com',
+			email1: faker.internet.email(),
 			role: 'customer',
 		},
 	},
@@ -715,11 +718,13 @@ export const data = {
 			adminLogin: 'wp-admin',
 			adminLogout: 'wp-login.php?action=logout',
 			adminDashboard: 'wp-admin',
-			dokan: 'wp-admin/admin.php?page=dokan#/',
+			dokan: 'wp-admin/admin.php?page=dokan#',
 			dokanWholeSaleCustomer: 'wp-admin/admin.php?page=dokan#/wholesale-customer',
 			dokanSettings: 'wp-admin/admin.php?page=dokan#/settings',
 			dokanWithdraw: 'wp-admin/admin.php?page=dokan#/withdraw',
+			dokanReverseWithdraw: 'wp-admin/admin.php?page=dokan#/reverse-withdrawal',
 			dokanVendors: 'wp-admin/admin.php?page=dokan#/vendors',
+			dokanHelp: 'wp-admin/admin.php?page=dokan#/help',
 			dokanSetupWizard: 'wp-admin/admin.php?page=dokan-setup',
 			dokanLiteModules: 'wp-admin/admin.php?page=dokan#/pro-modules',
 			dokanProModules: 'wp-admin/admin.php?page=dokan#/modules',
@@ -733,6 +738,7 @@ export const data = {
 			plugins: 'wp-admin/plugins.php',
 			stores: 'dokan/v1/stores',
 			withdraws: 'dokan/v1/withdraw',
+			subscribe: 'https://api.getwemail.io/v1/embed/subscribe'
 		},
 
 		frontend: {

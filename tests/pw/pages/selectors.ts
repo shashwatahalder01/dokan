@@ -201,38 +201,134 @@ export const selector = {
 
 			// Dashboard
 			dashboard: {
+				// admin header
+				header: {
+					dokanLogo: '.dokan-admin-header-logo',
+					getHelpMenu: '.dokan-admin-header-menu .menu-icon',
+				},
+
+				getHelp:{
+					whatsNew: '//div[@class="list-item"]//a[normalize-space()="What’s New"]',
+					getSupport: '//div[@class="list-item"]//a[normalize-space()="Get Support"]',
+					community: '//div[@class="list-item"]//a[normalize-space()="Community"]',
+					documentation: '//div[@class="list-item"]//a[normalize-space()="Documentation"]',
+					faq: '//div[@class="list-item"]//a[normalize-space()="FAQ"]',
+					basicAndFundamental: '//div[@class="list-item"]//a[normalize-space()="Basic & Fundamental"]',
+					requestAFeature: '//div[@class="list-item"]//a[normalize-space()="Request a Feature"]',
+					runSetupWizard: '//div[@class="list-item"]//a[normalize-space()="Run Setup Wizard"]',
+					importDummyData: '//div[@class="list-item"]//a[normalize-space()="Import dummy data"]',
+				},
+
 				// Dashboard Text
 				dashboardText: '.dokan-dashboard h1',
 
-				// Divs
-				atAGlance: '.postbox.dokan-postbox.dokan-status',
-				overview: '.postbox.dokan-postbox.overview-chart',
-				dokanNewsUpdates: '//span[contains(text(),"Dokan News Updates")]/../../..',
-
 				// At a Glance
-				netSalesThisMonth: '.sale strong',
-				commissionEarned: '.commission strong div',
-				signupThisMonth: '.vendor strong',
-				vendorAwaitingApproval: '.approval strong',
-				createdThisMonth: '.product strong',
-				withdrawAwaitingApproval: '.withdraw strong',
+				atAGlance : {
+					atAGlance: '.postbox.dokan-postbox.dokan-status',
+					collapsibleButton: '.dokan-status .handle-actions button',
+					netSalesThisMonth: '.sale strong',
+					commissionEarned: '.commission strong div',
+					signupThisMonth: '.vendor strong',
+					vendorAwaitingApproval: '.approval strong',
+					productCreatedThisMonth: '.product strong',
+					withdrawAwaitingApproval: '.withdraw strong',
+				},
+
+				// Overview
+				overview: {
+					overview: '.postbox.dokan-postbox.overview-chart',
+					collapsibleButton: '.overview-chart .handle-actions button',
+					chart: '#line-chart',
+				},
+
+				// Dokan new Updates
+				dokanNewUpdates:{
+					dokanNewUpdates: '//div[@class="postbox dokan-postbox"]',
+					collapsibleButton: '//div[@class="postbox dokan-postbox"]//div[@class="postbox-header"]//button',
+					newUpdatesList: '.rss-widget ul',
+				},
+
+				// SubscribeBox
+				subscribeBox: {
+					subscribeBox: '.subscribe-box',
+					subscriberName: '//input[@placeholder="Your Name"]',
+					subscriberEmail: '//input[@placeholder="Your Email Address"]',
+					subscribeButton: '//button[normalize-space()="Subscribe"]',
+					thankYouMessage: '.thank-you',
+				}
+
+
 			},
+
 			// Withdraw
 			withdraw: {
+
+				withdrawText: '.withdraw-requests h1',
+
 				// Nav Tabs
-				pending: '//ul[@class="subsubsub"]//li//a[contains(text(),"Pending")]',
-				approved: '//ul[@class="subsubsub"]//li//a[contains(text(),"Approved")]',
-				cancelled: '//ul[@class="subsubsub"]//li//a[contains(text(),"Cancelled")]',
+				navTabs:{
+					pending: '//ul[@class="subsubsub"]//li//a[contains(text(),"Pending")]',
+					approved: '//ul[@class="subsubsub"]//li//a[contains(text(),"Approved")]',
+					cancelled: '//ul[@class="subsubsub"]//li//a[contains(text(),"Cancelled")]',
+				},
 
 				// Bulk Actions
-				bulkActions: '.tablenav.top #bulk-action-selector-top',  // approved, cancelled, delete, paypal
-				applyBulkAction: '.tablenav.top .button.action',
-				selectAll: 'thead .manage-column',
+				bulkActions: {
+					bulkActions: '.tablenav.top #bulk-action-selector-top',  // approved, cancelled, delete, paypal
+					applyBulkAction: '.tablenav.top .button.action',
+					selectAll: 'thead .manage-column',
+				},
 
-				//filters
-				filterByVendor: '.select2-selection__arrow',
-				filterByVendorInput: '.select2-search.select2-search--dropdown .select2-search__field',
+				// Filters
+				filters:{
+					filterByVendor: '.select2-selection__arrow',
+					filterByVendorInput: '.select2-search.select2-search--dropdown .select2-search__field',
+				},
+
+				// Table
+				withdrawTable: '.wp-list-table',
+
+				withdrawCell: (username: string) => `//td//a[contains(text(), '${username}')]/../..`,
+				withdrawDelete: '.row-actions .trash',
+				withdrawCancel: '.row-actions .cancel',
+				withdrawApprove:(username: string) => `//td//a[contains(text(), '${username}')]/../../..//button[@title='Approve Request']`,
+				withdrawAddNote:(username: string) => `//td//a[contains(text(), '${username}')]/../../..//button[@title='Add Note']`,
+				withdrawNoteModalClose: '.dokan-modal-content .modal-header button',
+				addNote: '.dokan-modal-content .modal-body textarea',
+				updateNote: '.dokan-modal-content .modal-footer button',
+
+
 			},
+
+			// Reverse Withdraw
+			reverseWithdraw: {
+
+				reverseWithdrawText: '.dokan-reverse-withdrawal h1',
+
+				// Fact Cards
+				reverseWithdrawFactCards: {
+					totalCollectedCard: '//p[normalize-space()="Total Collected"]/../..',
+					totalCollected: '//p[normalize-space()="Total Collected"]/../..//h3',
+					remainingBalanceCard: '//p[normalize-space()="Remaining Balance"]/../..',
+					remainingBalance: '//p[normalize-space()="Remaining Balance"]/../..//h3',
+					TotalTransactionsCard: '//p[normalize-space()="Total Transactions"]/../..',
+					TotalTransactions: '//p[normalize-space()="Total Transactions"]/../..//h3',
+					TotalVendorsCard: '//p[normalize-space()="Total Vendors"]/../..',
+					TotalVendors: '//p[normalize-space()="Total Vendors"]/../..//h3',
+				},
+
+				// Filters
+				filters: {
+					allStoresDropdown:'//div[@class="multiselect__select"]',
+					clearFilter: '//button[normalize-space()="Clear"]',
+				},
+
+				// Table
+				revereWithdrawTable: '#dokan_reverse_withdrawal_list_table table',
+
+
+			},
+
 			// Vendors
 			vendors: {
 				// Add New Vendors
@@ -472,6 +568,8 @@ export const selector = {
 			// Modules
 			modules: {
 
+				moduleText: '#lite-modules h1',
+
 				lite : {
 
 					// dokan upgrade popup
@@ -584,20 +682,68 @@ export const selector = {
 			},
 			// Help
 			help: {
-				// Divs
-				basics: '//span[contains(text(), "Basics")]/../../..',
-				paymentsAndShipping: '//span[contains(text(), "Payment and Shipping")]/../../..',
-				vendorRelatedQuestions: '//span[contains(text(), "Vendor Related Questions")]/../../..',
-				miscellaneous: '//span[contains(text(), "Miscellaneous")]/../../..',
+
+				// basics
+				basics: {
+					basics: '//span[contains(text(), "Basics")]/../../..',
+					collapsibleButton: '//span[contains(text(), "Basics")]/../../..//button',
+					basicsList: '//span[contains(text(), "Basics")]/../../..//ul',
+				},
+
+				// payment And Shipping
+				paymentAndShipping:{
+					paymentAndShipping: '//span[contains(text(), "Payment and Shipping")]/../../..',
+					collapsibleButton: '//span[contains(text(), "Payment and Shipping")]/../../..//button',
+					paymentAndShippingList: '//span[contains(text(), "Basics")]/../../..//ul',
+				},
+
+				// vendor related questions
+				vendorRelatedQuestions:{
+					vendorRelatedQuestions: '//span[contains(text(), "Vendor Related Questions")]/../../..',
+					collapsibleButton: '//span[contains(text(), "Vendor Related Questions")]/../../..//button',
+					vendorRelatedQuestionsList: '//span[contains(text(), "Basics")]/../../..//ul',
+				},
+
+				// miscellaneous
+				miscellaneous: {
+					miscellaneous: '//span[contains(text(), "Miscellaneous")]/../../..',
+					collapsibleButton: '//span[contains(text(), "Miscellaneous")]/../../..//button',
+					miscellaneousList: '//span[contains(text(), "Miscellaneous")]/../../..//button',
+				}
 			},
 
 			// Dokan Settings
 			settings: {
+
 				// settings pro advertisement
 				proAdvertisementBanner: {
 					settingsBanner: '#dokan-settings-banner',
 					upgradeToPro: '//a[normalize-space()="Upgrade to Pro"]',
 					checkOutAllVendorFunctionalities:'//a[normalize-space()="Check Out All Vendor Functionalities"]'
+				},
+
+				settingsText: '//h2[normalize-space()="Settings"]',
+
+				sections: {
+					settingsMenuSection: '.nab-section',
+					settingsMenuDetailsSection: '.nab-section',
+				},
+
+				header: {
+					settingsHeader: '.settings-header',
+					settingsTitle: '.settings-title',
+					settingsContent: '.settings-content',
+					settingsDocumentation: '.settings-document-button',
+				},
+
+				fields: '.dokan-settings-fields',
+
+				saveChanges: '.submit',
+
+
+				search: {
+					searchBox: '.search-box',
+					input: '#dokan-admin-search',
 				},
 
 				// Setting Menus

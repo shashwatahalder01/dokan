@@ -13,6 +13,7 @@
 
  -   [Prep for tests :construction:](#prep-for-tests)
         -   [Install Dependencies](#install-dependencies)
+        -   [Start Wordpress Environment](#start-wordpress-environment)
         -   [Create Env file](#create-env-file)
         
 <br/> 
@@ -70,6 +71,21 @@ npm i
 npx playwright install chromium
 ```
 <br/>
+
+### :o: Start Wordpress Environment
+<br/>
+
+:radio_button: Go to project directory
+
+    cd tests/pw
+<br/>
+
+:radio_button: Start Environment
+
+    npm run wp-env start
+<br/>
+
+
 
 ### :o: Create Env file
 
