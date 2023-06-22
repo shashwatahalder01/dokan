@@ -12,33 +12,33 @@ setup.describe('authenticate users & set permalink', () => {
 		await loginPage.adminLogin(data.admin, data.auth.adminAuthFile);
 	});
 
-	// setup('admin set WpSettings', async ({ page }) => {
-	// 	const loginPage = new LoginPage(page);
-	// 	const adminPage = new AdminPage(page);
-	// 	await loginPage.adminLogin(data.admin);
-	// 	await adminPage.setPermalinkSettings(data.wpSettings.permalink);
-	// });
+	setup('admin set WpSettings', async ({ page }) => {
+		const loginPage = new LoginPage(page);
+		const adminPage = new AdminPage(page);
+		await loginPage.adminLogin(data.admin);
+		await adminPage.setPermalinkSettings(data.wpSettings.permalink);
+	});
 
-	// setup('add customer', async ({ request }) => {
-	// 	const apiUtils = new ApiUtils(request);
-	// 	const [, customerId] = await apiUtils.createCustomer (payloads.createCustomer1, payloads.adminAuth);
-	// 	process.env.CUSTOMER_ID = customerId;
-	// });
+	setup('add customer', async ({ request }) => {
+		const apiUtils = new ApiUtils(request);
+		const [, customerId] = await apiUtils.createCustomer (payloads.createCustomer1, payloads.adminAuth);
+		process.env.CUSTOMER_ID = customerId;
+	});
 
-	// setup('add vendor', async ({ request }) => {
-	// 	const apiUtils = new ApiUtils(request);
-	// 	const [, sellerId] = await apiUtils.createStore (payloads.createStore1, payloads.adminAuth);
-	// 	process.env.VENDOR_ID = sellerId;
-	// });
+	setup('add vendor', async ({ request }) => {
+		const apiUtils = new ApiUtils(request);
+		const [, sellerId] = await apiUtils.createStore (payloads.createStore1, payloads.adminAuth);
+		process.env.VENDOR_ID = sellerId;
+	});
 
-	// setup('authenticate customer', async ({ page }) => {
-	// 	const loginPage = new LoginPage(page);
-	// 	await loginPage.login(data.customer, data.auth.customerAuthFile);
-	// });
+	setup('authenticate customer', async ({ page }) => {
+		const loginPage = new LoginPage(page);
+		await loginPage.login(data.customer, data.auth.customerAuthFile);
+	});
 
-	// setup('authenticate vendor', async ({ page }) => {
-	// 	const loginPage = new LoginPage(page);
-	// 	await loginPage.login(data.vendor, data.auth.vendorAuthFile);
-	// });
+	setup('authenticate vendor', async ({ page }) => {
+		const loginPage = new LoginPage(page);
+		await loginPage.login(data.vendor, data.auth.vendorAuthFile);
+	});
 
 });
