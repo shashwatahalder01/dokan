@@ -24,12 +24,24 @@ test.describe.skip('Modules test', () => {
 
 	test.use({ storageState: data.auth.adminAuthFile });
 
-	test('dokan admin modules menu page is rendering properly @pro', async ( ) => {
+	test('dokan pro modules menu page is rendering properly @pro', async ( ) => {
 		await adminPage.adminModulesRenderProperly();
 	});
 
-	test('admin search settings @lite @pro', async ( ) => {
-		await adminPage.searchSettings('Selling Options');
+	test('admin can search module @lite @pro', async ( ) => {
+		await adminPage.searchModule('Selling Options');
+	});
+
+	test('admin can filter modules @lite @pro', async ( ) => {
+		await adminPage.filterModule('Selling Options');
+	});
+
+	test('admin can deactivate module @lite @pro', async ( ) => {
+		await adminPage.searchModule('Selling Options');
+	});
+
+	test('admin can activate module @lite @pro', async ( ) => {
+		await adminPage.searchModule('Selling Options');
 	});
 
 

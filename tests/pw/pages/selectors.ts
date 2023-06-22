@@ -320,6 +320,7 @@ export const selector = {
 				// Filters
 				filters: {
 					allStoresDropdown:'//div[@class="multiselect__select"]',
+					//TODO: add date-range filter locator
 					clearFilter: '//button[normalize-space()="Clear"]',
 				},
 
@@ -355,11 +356,11 @@ export const selector = {
 				// table
 				vendorTable: '.vendor-list table',
 
-				statusSlider: (username: string) => `//td//a[contains(text(), '${username}')]/../../..//label[@class='switch tips']`,
 				vendorCell: (username: string) => `//td//a[contains(text(), '${username}')]/../../..`,
 				vendorEdit: '.row-actions .edit',
 				vendorProducts: '.row-actions .products',
 				vendorOrders: '.row-actions .orders',
+				statusSlider: (username: string) => `//td//a[contains(text(), '${username}')]/../../..//label[@class='switch tips']`,
 
 
 				// Add New Vendors
@@ -476,66 +477,122 @@ export const selector = {
 				},
 
 			},
+
 			// Abuse Reports
 			abuseReports: {
 				// Bulk Actions
-				bulkActions: '#bulk-action-selector-top',
-				selectAllCheckbox: '.check-column input',
+				bulkActions: {
+					bulkActions: '#bulk-action-selector-top',
+					selectAllCheckbox: '.check-column input',
+				},
+
 				// Filters
-				filterByAbuseReason: '(//select[@id="filter-products"]/..//select)[1]',
-				filterByProduct: '#filter-products',
-				filterByVendors: '#filter-vendors',
+				filters: {
+					filterByAbuseReason: '(//select[@id="filter-products"]/..//select)[1]',
+					filterByProduct: '#filter-products',
+					filterByVendors: '#filter-vendors',
+				},
 			},
 
 			// Store Reviews
 			storeReviews: {
 				// Nav Tabs
-				all: '//ul[@class="subsubsub"]//li//a[contains(text(),"All")]',
-				trash: '//ul[@class="subsubsub"]//li//a[contains(text(),"Trash")]',
+				navTabs: {
+					all: '//ul[@class="subsubsub"]//li//a[contains(text(),"All")]',
+					trash: '//ul[@class="subsubsub"]//li//a[contains(text(),"Trash")]',
+				},
+
 				// Bulk Actions
-				bulkActions: '#bulk-action-selector-top',
-				selectAllCheckbox: '.check-column input',
+				bulkActions: {
+					bulkActions: '#bulk-action-selector-top',
+					selectAllCheckbox: '.check-column input',
+				},
+
 				// Filters
-				filterByVendors: '#filter-vendors',
+				filters: {
+					filterByVendors: '#filter-vendors',
+				},
 			},
 
 			// Store Support
 			storeSupport: {
 				// Nav Tabs
-				open: '//ul[@class="subsubsub"]//li//a[contains(text(),"Open")]',
-				closed: '//ul[@class="subsubsub"]//li//a[contains(text(),"Closed")]',
-				all: '//ul[@class="subsubsub"]//li//a[contains(text(),"All")]',
+				navTabs: {
+					open: '//ul[@class="subsubsub"]//li//a[contains(text(),"Open")]',
+					closed: '//ul[@class="subsubsub"]//li//a[contains(text(),"Closed")]',
+					all: '//ul[@class="subsubsub"]//li//a[contains(text(),"All")]',
+				},
+
 				// Bulk Actions
-				bulkActions: '#bulk-action-selector-top',
-				selectAllCheckbox: '.check-column input',
+				bulkActions: {
+					bulkActions: '#bulk-action-selector-top',
+					selectAllCheckbox: '.check-column input',
+				},
+
 				// Filters
-				filterByVendors: '#select2-filter-vendors-container',
-				filterByCustomers: '#select2-filter-customers-container',
+				filters: {
+					filterByVendors: '#select2-filter-vendors-container',
+					filterByCustomers: '#select2-filter-customers-container',
+				},
 			},
 
 			// Announcements
 			announcements: {
+
+				announcementText: '.dokan-announcement-wrapper h1',
+
+				addNewAnnouncement: '//a[normalize-space()="Add Announcement"]',
+
+
 				// Nav Tabs
-				all: '//ul[@class="subsubsub"]//li//a[contains(text(),"All")]',
-				published: '//ul[@class="subsubsub"]//li//a[contains(text(),"Published")]',
-				pending: '//ul[@class="subsubsub"]//li//a[contains(text(),"Pending")]',
-				scheduled: '//ul[@class="subsubsub"]//li//a[contains(text(),"Scheduled")]',
-				draft: '//ul[@class="subsubsub"]//li//a[contains(text(),"Draft")]',
-				trash: '//ul[@class="subsubsub"]//li//a[contains(text(),"Trash")]',
+				navTabs: {
+					all: '//ul[@class="subsubsub"]//li//a[contains(text(),"All")]',
+					published: '//ul[@class="subsubsub"]//li//a[contains(text(),"Published")]',
+					pending: '//ul[@class="subsubsub"]//li//a[contains(text(),"Pending")]',
+					scheduled: '//ul[@class="subsubsub"]//li//a[contains(text(),"Scheduled")]',
+					draft: '//ul[@class="subsubsub"]//li//a[contains(text(),"Draft")]',
+					trash: '//ul[@class="subsubsub"]//li//a[contains(text(),"Trash")]',
+				},
+
 				// Bulk Actions
-				bulkActions: '#bulk-action-selector-top',
-				selectAllCheckbox: '.check-column input',
+				bulkActions: {
+					bulkActions: '.tablenav.top #bulk-action-selector-top',  // trash
+					applyBulkAction: '.tablenav.top .button.action',
+					selectAll: 'thead .manage-column',
+				},
+
+				announcementTable: '.dokan-announcement-wrapper table',
+				announcementCell: (title: string) => `//a[contains(text(),'${title}')]/../..`,
+				announcementEdit: '.row-actions .edit',
+				announcementDelete: '.row-actions .delete',
+
+				// add announcement
+				addAnnouncement: {
+					title: '#titlediv input',
+					contentIframe: '#postdivrich iframe',
+					contentHtmlBody: '#tinymce',
+					saveAsDraft: '.draft-btn',
+					publish: '.publish-btn'
+
+
+				},
 			},
 
 			// Refunds
 			refunds: {
 				// Nav Tabs
-				pending: '//ul[@class="subsubsub"]//li//a[contains(text(),"Pending")]',
-				approved: '//ul[@class="subsubsub"]//li//a[contains(text(),"Approved")]',
-				cancelled: '//ul[@class="subsubsub"]//li//a[contains(text(),"Cancelled")]',
+				navTabs: {
+					pending: '//ul[@class="subsubsub"]//li//a[contains(text(),"Pending")]',
+					approved: '//ul[@class="subsubsub"]//li//a[contains(text(),"Approved")]',
+					cancelled: '//ul[@class="subsubsub"]//li//a[contains(text(),"Cancelled")]',
+				},
+
 				// Bulk Actions
-				bulkActions: '#bulk-action-selector-top',
-				selectAllCheckbox: '.check-column input',
+				bulkActions: {
+					bulkActions: '#bulk-action-selector-top',
+					selectAllCheckbox: '.check-column input',
+				},
+
 				// Search Refund
 				searchRefund: '#post-search-input',
 				refundCell: (orderNumber: string) => `//strong[contains(text(),'#${orderNumber}')]/../..`,
@@ -545,11 +602,13 @@ export const selector = {
 
 			// Reports
 			reports: {
+
 				// Menus
 				reports: '//a[contains(@class, "nav-tab") and contains(text(),"Reports")]',
 				allLogs: '//a[contains(@class, "nav-tab") and contains(text(),"All Logs")]',
 
 				// Reports
+
 				// By Day
 				byDay: '//ul[contains(@class, "dokan-report-sub")]//a[contains(text(),"By Day")]',
 				byDayFrom: '//label[contains(text(),"From")]/../input',
@@ -567,6 +626,7 @@ export const selector = {
 				byVendorShow: '.button',
 
 				// All Logs
+
 				// Search
 				searchByOrder: '#post-search-input',
 				clearSearch: '//a[contains(text(),"Clear")]',
@@ -577,6 +637,7 @@ export const selector = {
 				filterByStatus: '#select2-filter-status-container',
 				filterByStatusValues: '.select2-results ul li',
 				filterByDate: '.form-control',
+
 				// Order Details
 				orderId: '.column.order_id > a',
 				store: '.column.vendor_id > a',
@@ -612,14 +673,18 @@ export const selector = {
 				},
 
 				// Nav Tabs
-				active: '//li//a[contains(text(),"Active")]',
-				inActive: '//li//a[contains(text(),"Inactive")]',
+				navTabs: {
+					active: '//li//a[contains(text(),"Active")]',
+					inActive: '//li//a[contains(text(),"Inactive")]',
+				},
+
 				// Search Box
 				searchBox: '.search-box input',
 				moduleActivationSwitch: '.switch.tips span',
 				moduleCard: '.module-card',
 				moduleCheckbox: '.module-checkbox input',
 				moduleName: '.module-details a',
+
 				// All Module Activation
 				selectAllBulkAction: '.bulk-actions li input',
 				activeAll: '.activate',
@@ -678,28 +743,52 @@ export const selector = {
 			// Verifications
 			verifications: {
 				// Nav Tabs
-				pending: '//ul[@class="subsubsub"]//li//a[contains(text(),"Pending")]',
-				approved: '//ul[@class="subsubsub"]//li//a[contains(text(),"Approved")]',
-				rejected: '//ul[@class="subsubsub"]//li//a[contains(text(),"Rejected")]',
+				navTabs: {
+					pending: '//ul[@class="subsubsub"]//li//a[contains(text(),"Pending")]',
+					approved: '//ul[@class="subsubsub"]//li//a[contains(text(),"Approved")]',
+					rejected: '//ul[@class="subsubsub"]//li//a[contains(text(),"Rejected")]',
+				},
 			},
 
 			// Advertising
 			advertising: {
+
+				productAdvertisingText: '.product-advertisement-list h1',
+
+				addNewProductAdvertising:'//button[normalize-space()="Add New Advertisement"]',
+
 				// Nav Tabs
-				all: '//ul[@class="subsubsub"]//li//a[contains(text(),"All")]',
-				active: '//ul[@class="subsubsub"]//li//a[contains(text(),"Active")]',
-				expired: '//ul[@class="subsubsub"]//li//a[contains(text(),"Expired")]',
+				navTabs: {
+					all: '//ul[@class="subsubsub"]//li//a[contains(text(),"All")]',
+					active: '//ul[@class="subsubsub"]//li//a[contains(text(),"Active")]',
+					expired: '//ul[@class="subsubsub"]//li//a[contains(text(),"Expired")]',
+				},
+
 				// Bulk Actions
-				bulkActions: '#bulk-action-selector-top',
-				selectAllCheckbox: '.check-column input',
+				bulkActions: {
+					bulkActions: '.tablenav.top #bulk-action-selector-top',  // delete
+					applyBulkAction: '.tablenav.top .button.action',
+					selectAll: 'thead .manage-column',
+				},
+
+				// Filters
+				filters: {
+					allStoresDropdown:'//div[@class="multiselect__select"]', //TODO: not unique
+					createdViaDropdown:'//div[@class="multiselect__select"]',
+					//TODO: add createdViaDropdown filter locator
+					//TODO: add date-range filter locator
+					clearFilter: '//button[normalize-space()="Clear"]',
+				},
+
 				// Search
 				search: '#post-search-input',
+
 			},
 
 			// Wholesale Customer
 			wholesaleCustomer: {
 
-				wholesaleText: '.dokan-help-page h1',
+				wholesaleCustomerText: '.wholesale-customer-list h1',
 
 				// Nav Tabs
 				navTabs: {
@@ -710,7 +799,7 @@ export const selector = {
 
 				// Bulk Actions
 				bulkActions: {
-					bulkActions: '.tablenav.top #bulk-action-selector-top',  // approved, cancelled, delete, paypal
+					bulkActions: '.tablenav.top #bulk-action-selector-top',  // activate, deactivate
 					applyBulkAction: '.tablenav.top .button.action',
 					selectAll: 'thead .manage-column',
 				},
@@ -718,8 +807,11 @@ export const selector = {
 				search: '#post-search-input',
 
 				// Table
-				wholeSaleCustomerTable: '.wholesale-customer-list table',
-
+				wholesaleCustomerTable: '.wholesale-customer-list table',
+				wholesaleCustomerCell: (username: string) => `//td[contains(text(), '${username}')]/..//td[@class='column full_name']`,
+				wholesaleCustomerEdit: '.row-actions .edit',
+				wholesaleCustomerOrders: '.row-actions .orders',
+				wholesaleCustomerRemove: '.row-actions .delete',
 				statusSlider: (username: string) => `//td[contains(text(), '${username}')]/..//label[@class='switch tips']`,
 				enableStatusUpdateSuccessMessage: '.notification-content',
 			},
@@ -786,11 +878,12 @@ export const selector = {
 
 				saveChanges: '.submit',
 
-
 				search: {
 					searchBox: '.search-box',
 					input: '#dokan-admin-search',
 				},
+
+				backToTop: '.back-to-top.tips',
 
 				// Setting Menus
 				general: '//div[@class="nav-title" and contains(text(),"General")]',

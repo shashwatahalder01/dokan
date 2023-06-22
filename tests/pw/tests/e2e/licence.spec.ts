@@ -23,12 +23,12 @@ test.describe('License test', () => {
 
 	test.use({ storageState: data.auth.adminAuthFile });
 
-	test('admin license menu page is rendering properly @pro', async ( ) => {
+	test('dokan license menu page is rendering properly @pro', async ( ) => {
 		await adminPage.adminLicenseRenderProperly();
 	});
 
-	// test.skip('admin can activate license @lite @pro', async ( ) => {
-	// 	await adminPage.activateLicense(LicenseKey);
+	//TODO: test('admin can activate license @pro', async ( ) => {
+	// await adminPage.activateLicense(LicenseKey);
 	// });
 
 

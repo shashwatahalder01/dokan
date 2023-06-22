@@ -3,6 +3,7 @@ import { BasePage } from './basePage';
 import { selector } from './selectors';
 import { data } from '../utils/testData';
 import { helpers } from '../utils/helpers';
+import { th } from '@faker-js/faker';
 
 export class AdminPage extends BasePage {
 
@@ -17,7 +18,7 @@ export class AdminPage extends BasePage {
 	}
 
 	async goToDokanSettings() {
-		await this.goIfNotThere(data.subUrls.backend.dokanSettings);
+		await this.goIfNotThere(data.subUrls.backend.dokan.dokanSettings);
 	}
 
 	async goToWooCommerceSettings() {
@@ -458,8 +459,14 @@ export class AdminPage extends BasePage {
 		await this.clickAndWaitForResponse(data.subUrls.ajax, selector.admin.dokan.settings.vendorSubscriptionSaveChanges);
 		await expect(this.page.locator(selector.admin.dokan.settings.dokanUpdateSuccessMessage)).toContainText(subscription.saveSuccessMessage);
 
+	}
+
+	async disableDokanVendorSubscription(subscription: any){
+		await this.goToDokanSettings();
+		await this.click(selector.admin.dokan.settings.vendorSubscription);
+
 		// Disabling Vendor Subscription
-		await this.disableSwitcher(selector.admin.dokan.settings.enableProductSubscription); // TODO: handle with flag
+		await this.disableSwitcher(selector.admin.dokan.settings.enableProductSubscription);
 
 		// save settings
 		await this.clickAndWaitForResponse(data.subUrls.ajax, selector.admin.dokan.settings.vendorSubscriptionSaveChanges);
@@ -694,7 +701,7 @@ export class AdminPage extends BasePage {
 		await this.click(selector.admin.wooCommerce.settings.payments);
 		// Bank Transfer
 		await this.enablePaymentMethod(selector.admin.wooCommerce.settings.enableDirectBankTransfer);
-		// Check Payments
+		// Payments
 		await this.enablePaymentMethod(selector.admin.wooCommerce.settings.enableCheckPayments);
 		// Cash on Delivery
 		await this.enablePaymentMethod(selector.admin.wooCommerce.settings.enableCashOnDelivery);
@@ -889,7 +896,7 @@ export class AdminPage extends BasePage {
 
 	// admin add new vendors
 	async addVendor(vendorInfo: any) {
-		await this.goIfNotThere(data.subUrls.backend.dokanVendors);
+		await this.goIfNotThere(data.subUrls.backend.dokan.dokanVendors);
 
 		const firstName = vendorInfo.firstName();
 		const email = vendorInfo.email();
@@ -1196,17 +1203,6 @@ export class AdminPage extends BasePage {
 	}
 
 
-	// Wholesale Customer
-
-	// Admin Approve Wholesale Request
-	async adminApproveWholesaleRequest(customer: string) {
-		// await this.hover(selector.admin.aDashboard.dokan)
-		// await this.click(selector.admin.dokan.wholesaleCustomerMenu)
-		await this.goIfNotThere(data.subUrls.backend.dokanWholeSaleCustomer);
-		await this.click(selector.admin.dokan.wholesaleCustomer.statusSlider(customer));
-		await expect(this.page.locator(selector.admin.dokan.wholesaleCustomer.enableStatusUpdateSuccessMessage)).toContainText(data.wholesale.wholesaleCapabilityActivate);
-	}
-
 	async getOrderDetails(orderNumber: any) {
 		const subMenuOpened = await this.getClassValue(selector.admin.aDashboard.dokanMenu);
 		if (subMenuOpened.includes('opensub')) {
@@ -1284,7 +1280,7 @@ export class AdminPage extends BasePage {
 		// Open Dokan Setup Wizard
 		// await this.click(selector.admin.dokan.tools.openSetupWizard)
 
-		await this.goto(data.subUrls.backend.dokanSetupWizard);
+		await this.goto(data.subUrls.backend.dokan.dokanSetupWizard);
 		await this.click(selector.admin.dokan.dokanSetupWizard.letsGo);
 		// Store
 		await this.clearAndType(selector.admin.dokan.dokanSetupWizard.vendorStoreURL, dokanSetupWizard.vendorStoreURL);
@@ -1373,41 +1369,40 @@ export class AdminPage extends BasePage {
 
 	// dokan notice
 	async dokanNotice(){
-		await this.goto(data.subUrls.backend.dokan);
-		// check dokan notice elements are visible
+		await this.goto(data.subUrls.backend.dokan.dokan);
+		// dokan notice elements are visible
 		await this.multipleElementVisible(selector.admin.dokan.notice);
 	}
 
 	// dokan pro features promo
 	async dokanProFeaturesPromo(){
-
 		// dokan promo banner
-		await this.goIfNotThere(data.subUrls.backend.dokan);
+		await this.goIfNotThere(data.subUrls.backend.dokan.dokan);
 
-		// check promo banner elements are visible
+		// promo banner elements are visible
 		await this.multipleElementVisible(selector.admin.dokan.promoBanner);
 
 		// dokan lite modules
-		await this.goIfNotThere(data.subUrls.backend.dokanLiteModules);
+		await this.goIfNotThere(data.subUrls.backend.dokan.dokanLiteModules);
 
-		// check pro upgrade popup elements are visible
+		// pro upgrade popup elements are visible
 		await this.multipleElementVisible(selector.admin.dokan.modules.lite.popup);
 
-		// check module cards are visible
+		// module cards are visible
 		await this.click(selector.admin.dokan.modules.lite.popup.closeDokanUpgradePopup);
 		await expect(this.page.locator(selector.admin.dokan.modules.moduleText)).toBeVisible();
 		await expect(this.page.locator(selector.admin.dokan.modules.lite.moduleCard)).toHaveCount(27);
 
 		// dokan pro features menu
-		await this.goIfNotThere(data.subUrls.backend.dokanProFeatures);
+		await this.goIfNotThere(data.subUrls.backend.dokan.dokanProFeatures);
 
-		// check dokan pro feature sections are visible
+		// dokan pro feature sections are visible
 		await this.multipleElementVisible(selector.admin.dokan.proFeatures);
 
 		// dokan settings pro advertisement
 		await this.goToDokanSettings();
 
-		// check settings pro advertisement banner elements are visible
+		// settings pro advertisement banner elements are visible
 		await this.multipleElementVisible(selector.admin.dokan.settings.proAdvertisementBanner);
 	}
 
@@ -1416,24 +1411,24 @@ export class AdminPage extends BasePage {
 
 	// admin dashboard render properly
 	async adminDashboardRenderProperly(){
-		await this.goIfNotThere(data.subUrls.backend.dokan);
+		await this.goIfNotThere(data.subUrls.backend.dokan.dokan);
 
 		// dashboard text is visible
 		await expect(this.page.locator(selector.admin.dokan.dashboard.dashboardText)).toBeVisible();
 
-		// check header elements are visible
+		// header elements are visible
 		await this.multipleElementVisible(selector.admin.dokan.dashboard.header);
 
-		// check at a glance elements are visible
+		// at a glance elements are visible
 		await this.multipleElementVisible(selector.admin.dokan.dashboard.atAGlance);
 
-		// check overview elements are visible
+		// overview elements are visible
 		await this.multipleElementVisible(selector.admin.dokan.dashboard.overview);
 
-		// check dokan new update elements are visible
+		// dokan new update elements are visible
 		await this.multipleElementVisible(selector.admin.dokan.dashboard.dokanNewUpdates);
 
-		// check Subscribe box elements are visible
+		// Subscribe box elements are visible
 		// eslint-disable-next-line @typescript-eslint/no-unused-vars
 		const { thankYouMessage, ...subscribeBox } = selector.admin.dokan.dashboard.subscribeBox;
 		await this.multipleElementVisible(subscribeBox);
@@ -1442,7 +1437,7 @@ export class AdminPage extends BasePage {
 
 	// at a glance value
 	async dokanAtAGlanceValueAccuracy(atAGlanceValues:any){
-		await this.goIfNotThere(data.subUrls.backend.dokan);
+		await this.goIfNotThere(data.subUrls.backend.dokan.dokan);
 		const netSales = await this.getElementText(selector.admin.dokan.dashboard.atAGlance.netSalesThisMonth);
 		const commissionEarned = await this.getElementText(selector.admin.dokan.dashboard.atAGlance.commissionEarned);
 
@@ -1457,7 +1452,8 @@ export class AdminPage extends BasePage {
 
 	// add dokan news subscriber
 	async addDokanNewsSubscriber(user:any){
-		await this.goIfNotThere(data.subUrls.backend.dokan);
+		await this.goIfNotThere(data.subUrls.backend.dokan.dokan);
+
 		await this.clearAndType(selector.admin.dokan.dashboard.subscribeBox.subscriberName, user.name());
 		await this.clearAndType(selector.admin.dokan.dashboard.subscribeBox.subscriberEmail, user.email());
 		await this.clickAndWaitForResponse(data.subUrls.backend.subscribe, selector.admin.dokan.dashboard.subscribeBox.subscribeButton);
@@ -1471,21 +1467,21 @@ export class AdminPage extends BasePage {
 
 	// admin dashboard render properly
 	async adminWithdrawsRenderProperly(){
-		await this.goIfNotThere(data.subUrls.backend.dokanWithdraw);
+		await this.goIfNotThere(data.subUrls.backend.dokan.dokanWithdraw);
 
 		// withdraw  text is visible
 		await expect(this.page.locator(selector.admin.dokan.withdraw.withdrawText)).toBeVisible();
 
-		// check nav tabs elements are visible
+		// nav tabs elements are visible
 		await this.multipleElementVisible(selector.admin.dokan.withdraw.navTabs);
 
-		// check bulk action elements are visible
+		// bulk action elements are visible
 		await this.multipleElementVisible(selector.admin.dokan.withdraw.bulkActions);
 
-		// check nav filter elements are visible
+		// nav filter elements are visible
 		// eslint-disable-next-line @typescript-eslint/no-unused-vars
-		// const { filterByVendorInput, ...filters } = selector.admin.dokan.withdraw.filters; //TODO: uncomment after fix
-		// await this.multipleElementVisible(filters);
+		const { filterByVendorInput, ...filters } = selector.admin.dokan.withdraw.filters;
+		await this.multipleElementVisible(filters);
 
 		// withdraw table is visible
 		await expect(this.page.locator(selector.admin.dokan.withdraw.withdrawTable)).toBeVisible();
@@ -1494,7 +1490,7 @@ export class AdminPage extends BasePage {
 
 	// withdraw bulk action
 	async withdrawBulkAction(action: string){
-		await this.goIfNotThere(data.subUrls.backend.dokanWithdraw);
+		await this.goIfNotThere(data.subUrls.backend.dokan.dokanWithdraw);
 
 		await this.click(selector.admin.dokan.withdraw.bulkActions.selectAll);
 		await this.selectByValue(selector.admin.dokan.withdraw.bulkActions.bulkActions, action);
@@ -1503,7 +1499,7 @@ export class AdminPage extends BasePage {
 
 	// filter withdraw
 	async filterWithdraws(vendorName: string){
-		await this.goIfNotThere(data.subUrls.backend.dokanWithdraw);
+		await this.goIfNotThere(data.subUrls.backend.dokan.dokanWithdraw);
 
 		await this.click(selector.admin.dokan.withdraw.filters.filterByVendor);
 		await this.typeAndWaitForResponse(data.subUrls.backend.stores, selector.admin.dokan.withdraw.filters.filterByVendorInput, vendorName);
@@ -1548,12 +1544,12 @@ export class AdminPage extends BasePage {
 
 	// reverse withdraw
 	async adminReverseWithdrawRenderProperly(){
-		await this.goIfNotThere(data.subUrls.backend.dokanReverseWithdraw);
+		await this.goIfNotThere(data.subUrls.backend.dokan.dokanReverseWithdraw);
 
 		// reverse withdraw text is visible
 		await expect(this.page.locator(selector.admin.dokan.reverseWithdraw.reverseWithdrawText)).toBeVisible();
 
-		// check fact cards elements are visible
+		// fact cards elements are visible
 		await this.multipleElementVisible(selector.admin.dokan.reverseWithdraw.reverseWithdrawFactCards);
 
 		//TODO: add filters
@@ -1568,7 +1564,7 @@ export class AdminPage extends BasePage {
 	// vendors
 
 	async adminVendorsRenderProperly(){
-		await this.goIfNotThere(data.subUrls.backend.dokanVendors);
+		await this.goIfNotThere(data.subUrls.backend.dokan.dokanVendors);
 
 		// vendor text is visible
 		await expect(this.page.locator(selector.admin.dokan.vendors.vendorsText)).toBeVisible();
@@ -1576,10 +1572,10 @@ export class AdminPage extends BasePage {
 		// and new vendor  is visible
 		await expect(this.page.locator(selector.admin.dokan.vendors.addNewVendor)).toBeVisible();
 
-		// check nav tabs are visible
+		// nav tabs are visible
 		await this.multipleElementVisible(selector.admin.dokan.vendors.navTabs);
 
-		// check bulk action elements are visible
+		// bulk action elements are visible
 		await this.multipleElementVisible(selector.admin.dokan.vendors.bulkActions);
 
 		// search vendor input is visible
@@ -1593,15 +1589,16 @@ export class AdminPage extends BasePage {
 
 	// search vendor
 	async searchVendor(vendorName: string){
-		await this.goIfNotThere(data.subUrls.backend.dokanVendors);
+		await this.goIfNotThere(data.subUrls.backend.dokan.dokanVendors);
 
 		await this.typeAndWaitForResponse(data.subUrls.backend.stores, selector.admin.dokan.vendors.search, vendorName);
-		await expect(this.page.locator(selector.admin.dokan.vendors.search)).toBeVisible();
+		await expect(this.page.locator(selector.admin.dokan.vendors.vendorCell(vendorName))).toBeVisible();
 	}
 
 	// vendor bulk action
 	async vendorBulkAction(action: string){
-		await this.goIfNotThere(data.subUrls.backend.dokanVendors);
+		// await this.searchVendor(vendorName); //TODO: can be used to minimized number of rows to be affected
+		await this.goIfNotThere(data.subUrls.backend.dokan.dokanVendors);
 
 		await this.click(selector.admin.dokan.vendors.bulkActions.selectAll);
 		await this.selectByValue(selector.admin.dokan.vendors.bulkActions.bulkActions, action);
@@ -1610,9 +1607,9 @@ export class AdminPage extends BasePage {
 
 	// update vendor status
 	async updateVendorStatus(vendorName: string){
-		await this.goIfNotThere(data.subUrls.backend.dokanVendors);
-		await this.clickAndWaitForResponse(data.subUrls.backend.stores, selector.admin.dokan.vendors.statusSlider(vendorName));
+		await this.searchVendor(vendorName);
 
+		await this.clickAndWaitForResponse(data.subUrls.backend.stores, selector.admin.dokan.vendors.statusSlider(vendorName));
 	}
 
 	// edit vendor
@@ -1622,8 +1619,7 @@ export class AdminPage extends BasePage {
 		await this.hover(selector.admin.dokan.vendors.vendorCell(vendorName));
 		await this.clickAndWaitForNavigation(selector.admin.dokan.vendors.vendorEdit);
 
-		if (true){
-
+		if (vendorName){
 			// store settings
 			await this.clearAndType(selector.admin.users.dokanStoreName, vendorName );
 
@@ -1663,82 +1659,149 @@ export class AdminPage extends BasePage {
 
 	/*************************************************************************************************/
 
+	// announcements
+
+	async adminAnnouncementsRenderProperly(){
+		await this.goIfNotThere(data.subUrls.backend.dokan.dokanAnnouncements);
+
+		// announcement text is visible
+		await expect(this.page.locator(selector.admin.dokan.announcements.announcementText)).toBeVisible();
+
+		// and announcement is visible
+		await expect(this.page.locator(selector.admin.dokan.announcements.addNewAnnouncement)).toBeVisible();
+
+		// nav tabs are visible
+		await this.multipleElementVisible(selector.admin.dokan.announcements.navTabs);
+
+		// bulk action elements are visible
+		await this.multipleElementVisible(selector.admin.dokan.announcements.bulkActions);
+
+		// announcement table is visible
+		await expect(this.page.locator(selector.admin.dokan.announcements.announcementTable)).toBeVisible();
+
+	}
+
+	// announcement bulk action
+	async announcementBulkAction(action: string){
+		await this.goIfNotThere(data.subUrls.backend.dokan.dokanAnnouncements);
+
+		await this.click(selector.admin.dokan.announcements.bulkActions.selectAll);
+		await this.selectByValue(selector.admin.dokan.announcements.bulkActions.bulkActions, action);
+		await this.clickAndWaitForResponse(data.subUrls.backend.announcements, selector.admin.dokan.announcements.bulkActions.applyBulkAction);
+	}
+
+	// add announcement
+	async addAnnouncement(announcement: any){
+		await this.goIfNotThere(data.subUrls.backend.dokan.dokanAnnouncements);
+
+		await this.click(selector.admin.dokan.announcements.addNewAnnouncement);
+
+		await this.clearAndType(selector.admin.dokan.announcements.addAnnouncement.title, announcement.title);
+		await this.typeFrameSelector(selector.admin.dokan.announcements.addAnnouncement.contentIframe, selector.admin.dokan.announcements.addAnnouncement.contentHtmlBody, announcement.content);
+		await this.clickAndWaitForResponse(data.subUrls.backend.announcements, selector.admin.dokan.announcements.addAnnouncement.publish);
+		//TODO: add assertion
+	}
+
+	// edit announcement
+	async editAnnouncement(announcementTitle: string){
+		await this.goIfNotThere(data.subUrls.backend.dokan.dokanAnnouncements);
+
+		await this.hover(selector.admin.dokan.announcements.announcementCell(announcementTitle));
+		await this.click(selector.admin.dokan.announcements.announcementEdit);
+
+		await this.typeFrameSelector(selector.admin.dokan.announcements.addAnnouncement.contentIframe, selector.admin.dokan.announcements.addAnnouncement.contentHtmlBody, announcement.content);
+		await this.clickAndWaitForResponse(data.subUrls.backend.announcements, selector.admin.dokan.announcements.addAnnouncement.publish);
+		//TODO: add assertion
+	}
+
+	// delete announcement
+	async deleteAnnouncement(announcementTitle: string){
+		await this.goIfNotThere(data.subUrls.backend.dokan.dokanAnnouncements);
+
+		await this.hover(selector.admin.dokan.announcements.announcementCell(announcementTitle));
+		await this.clickAndWaitForResponse(data.subUrls.backend.announcements, selector.admin.dokan.announcements.announcementDelete);
+	}
+
+
+	/*************************************************************************************************/
+
 	async adminWholesaleCustomersRenderProperly(){
-		await this.goIfNotThere(data.subUrls.backend.dokanVendors);
+		await this.goIfNotThere(data.subUrls.backend.dokan.dokanWholeSaleCustomer);
 
 		// wholesale customer text is visible
-		await expect(this.page.locator(selector.admin.dokan.wholesaleCustomer.wholesaleText)).toBeVisible();
+		await expect(this.page.locator(selector.admin.dokan.wholesaleCustomer.wholesaleCustomerText)).toBeVisible();
 
-		// check nav tabs are visible
+		// nav tabs are visible
 		await this.multipleElementVisible(selector.admin.dokan.wholesaleCustomer.navTabs);
 
-		// check bulk action elements are visible
+		// bulk action elements are visible
 		await this.multipleElementVisible(selector.admin.dokan.wholesaleCustomer.bulkActions);
 
 		// search wholesale customer input is visible
 		await expect(this.page.locator(selector.admin.dokan.wholesaleCustomer.search)).toBeVisible();
 
 		// wholesale customer table is visible
-		await expect(this.page.locator(selector.admin.dokan.wholesaleCustomer.wholeSaleCustomerTable)).toBeVisible();
+		await expect(this.page.locator(selector.admin.dokan.wholesaleCustomer.wholesaleCustomerTable)).toBeVisible();
 
 	}
 
+	// search wholesale customer
+	async searchWholesaleCustomer(wholesaleCustomer: string){
+		await this.goIfNotThere(data.subUrls.backend.dokan.dokanWholeSaleCustomer);
 
-	// search vendor
-	async searchWholesaleCustomer(vendorName: string){
-		await this.goIfNotThere(data.subUrls.backend.dokanVendors);
-
-		await this.typeAndWaitForResponse(data.subUrls.backend.stores, selector.admin.dokan.vendors.search, vendorName);
-		await expect(this.page.locator(selector.admin.dokan.vendors.search)).toBeVisible();
+		await this.typeAndWaitForResponse(data.subUrls.backend.wholesaleCustomers, selector.admin.dokan.wholesaleCustomer.search, wholesaleCustomer);
+		await expect(this.page.locator(selector.admin.dokan.wholesaleCustomer.wholesaleCustomerCell(wholesaleCustomer))).toBeVisible();
 	}
 
 	// vendor bulk action
 	async wholesaleCustomerBulkAction(action: string){
-		await this.goIfNotThere(data.subUrls.backend.dokanVendors);
+		// await this.searchWholesaleCustomer(wholesaleCustomer); //TODO: can be used to minimized number of rows to be affected
+		await this.goIfNotThere(data.subUrls.backend.dokan.dokanWholeSaleCustomer);
 
-		await this.click(selector.admin.dokan.vendors.bulkActions.selectAll);
-		await this.selectByValue(selector.admin.dokan.vendors.bulkActions.bulkActions, action);
-		await this.clickAndWaitForResponse(data.subUrls.backend.stores, selector.admin.dokan.vendors.bulkActions.applyBulkAction);
+		await this.click(selector.admin.dokan.wholesaleCustomer.bulkActions.selectAll);
+		await this.selectByValue(selector.admin.dokan.wholesaleCustomer.bulkActions.bulkActions, action);
+		await this.clickAndWaitForResponse(data.subUrls.backend.wholesaleCustomers, selector.admin.dokan.wholesaleCustomer.bulkActions.applyBulkAction);
 	}
 
-	// update vendor status
-	async updateWholesaleCustomerStatus(vendorName: string){
-		await this.goIfNotThere(data.subUrls.backend.dokanVendors);
-		await this.clickAndWaitForResponse(data.subUrls.backend.stores, selector.admin.dokan.vendors.statusSlider(vendorName));
 
+	// update wholesale customer status
+	async updateWholesaleCustomerStatus(wholesaleCustomer: string){
+		//TODO: add choice and based on choice enable or disable stasus
+		await this.searchWholesaleCustomer(wholesaleCustomer);
+
+		await this.clickAndWaitForResponse(data.subUrls.backend.wholesaleCustomers, selector.admin.dokan.wholesaleCustomer.statusSlider(wholesaleCustomer));
 	}
 
 	/*************************************************************************************************/
 
 	// help
 	async adminHelpRenderProperly(){
-		await this.goIfNotThere(data.subUrls.backend.dokanHelp);
+		await this.goIfNotThere(data.subUrls.backend.dokan.dokanHelp);
 
 		// help text is visible
 		await expect(this.page.locator(selector.admin.dokan.help.helpText)).toBeVisible();
 
-
-		// check basics elements are visible
+		// basics elements are visible
 		await this.multipleElementVisible(selector.admin.dokan.help.basics);
 
-		// check payment And Shipping elements are visible
+		// payment And Shipping elements are visible
 		await this.multipleElementVisible(selector.admin.dokan.help.paymentAndShipping);
 
-		// check vendor related questions elements are visible
+		// vendor related questions elements are visible
 		await this.multipleElementVisible(selector.admin.dokan.help.vendorRelatedQuestions);
 
-		// check miscellaneous elements are visible
+		// miscellaneous elements are visible
 		await this.multipleElementVisible(selector.admin.dokan.help.miscellaneous);
 
 	}
 
 	// get help
 	async adminGetHelpDropdownRenderProperly(){
-		await this.goIfNotThere(data.subUrls.backend.dokanHelp);
+		await this.goIfNotThere(data.subUrls.backend.dokan.dokanHelp);
 
 		await this.hover(selector.admin.dokan.dashboard.header.getHelpMenu);
 
-		// check get help drop down list elements are visible
+		// get help drop down list elements are visible
 		await this.multipleElementVisible(selector.admin.dokan.dashboard.getHelp);
 
 	}
@@ -1748,15 +1811,15 @@ export class AdminPage extends BasePage {
 	// settings
 
 	async adminSettingsRenderProperly(){
-		await this.goIfNotThere(data.subUrls.backend.dokanSettings);
+		await this.goIfNotThere(data.subUrls.backend.dokan.dokanSettings);
 
 		// settings text is visible
 		await expect(this.page.locator(selector.admin.dokan.settings.settingsText)).toBeVisible();
 
-		// check settings section elements are visible
+		// settings section elements are visible
 		await this.multipleElementVisible(selector.admin.dokan.settings.sections);
 
-		// check settings header elements are visible
+		// settings header elements are visible
 		await this.multipleElementVisible(selector.admin.dokan.settings.header);
 
 		// settings field is visible
@@ -1769,22 +1832,30 @@ export class AdminPage extends BasePage {
 
 	// search settings
 	async searchSettings(settings: string){
-		await this.goIfNotThere(data.subUrls.backend.dokanSettings);
+		await this.goIfNotThere(data.subUrls.backend.dokan.dokanSettings);
 
 		await this.clearAndType(selector.admin.dokan.settings.search.input, settings);
 		await expect(this.page.locator(selector.admin.dokan.settings.fields)).toBeVisible();
+	}
+
+	// scroll to top settings
+	async scrollToTopSettings(){
+		await this.goIfNotThere(data.subUrls.backend.dokan.dokanSettings);
+
+		await this.scrollToBottom();
+		await expect(this.page.locator(selector.admin.dokan.settings.backToTop)).toBeVisible();
 	}
 
 	/*************************************************************************************************/
 
 	// license
 	async adminLicenseRenderProperly(){
-		await this.goIfNotThere(data.subUrls.backend.dokanLicense);
+		await this.goIfNotThere(data.subUrls.backend.dokan.dokanLicense);
 
 		// license settings text is visible
 		await expect(this.page.locator(selector.admin.dokan.license.licenseText)).toBeVisible();
 
-		// check license section elements are visible
+		// license section elements are visible
 		await this.multipleElementVisible(selector.admin.dokan.license.section);
 
 	}

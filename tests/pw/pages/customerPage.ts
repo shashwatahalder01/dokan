@@ -103,7 +103,7 @@ export class CustomerPage extends BasePage {
 		else {
 			await expect(this.page.locator(selector.customer.cWooSelector.wooCommerceSuccessMessage)).toContainText(data.wholesale.wholesaleRequestSendMessage);
 			await this.loginPage.switchUser(data.admin);
-			await this.adminPage.adminApproveWholesaleRequest(currentUser);
+			await this.adminPage.updateWholesaleCustomerStatus(currentUser);
 		}
 	}
 

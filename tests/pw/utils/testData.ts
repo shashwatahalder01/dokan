@@ -718,18 +718,34 @@ export const data = {
 			adminLogin: 'wp-admin',
 			adminLogout: 'wp-login.php?action=logout',
 			adminDashboard: 'wp-admin',
-			dokan: 'wp-admin/admin.php?page=dokan#',
-			dokanWholeSaleCustomer: 'wp-admin/admin.php?page=dokan#/wholesale-customer',
-			dokanSettings: 'wp-admin/admin.php?page=dokan#/settings',
-			dokanWithdraw: 'wp-admin/admin.php?page=dokan#/withdraw',
-			dokanReverseWithdraw: 'wp-admin/admin.php?page=dokan#/reverse-withdrawal',
-			dokanVendors: 'wp-admin/admin.php?page=dokan#/vendors',
-			dokanHelp: 'wp-admin/admin.php?page=dokan#/help',
-			dokanSetupWizard: 'wp-admin/admin.php?page=dokan-setup',
-			dokanLiteModules: 'wp-admin/admin.php?page=dokan#/pro-modules',
-			dokanProModules: 'wp-admin/admin.php?page=dokan#/modules',
-			dokanProFeatures: 'wp-admin/admin.php?page=dokan#/premium',
-			dokanLicense: 'wp-admin/admin.php?page=dokan_updates',
+			dokan: {
+				dokanSetupWizard: 'wp-admin/admin.php?page=dokan-setup',
+
+				dokan: 'wp-admin/admin.php?page=dokan#',
+				// only lite
+				dokanLiteModules: 'wp-admin/admin.php?page=dokan#/pro-modules',
+				dokanProFeatures: 'wp-admin/admin.php?page=dokan#/premium',
+				// lite and pro
+				dokanWithdraw: 'wp-admin/admin.php?page=dokan#/withdraw',
+				dokanReverseWithdraw: 'wp-admin/admin.php?page=dokan#/reverse-withdrawal',
+				dokanVendors: 'wp-admin/admin.php?page=dokan#/vendors',
+				dokanAbuseReports: 'wp-admin/admin.php?page=dokan#/abuse-reports',
+				dokanStoreReviews: 'wp-admin/admin.php?page=dokan#/store-reviews',
+				dokanStoreSupport: 'wp-admin/admin.php?page=dokan#/admin-store-support',
+				dokanSellerBadge: 'wp-admin/admin.php?page=dokan#/dokan-seller-badge',
+				dokanRequestForQuotation: 'wp-admin/admin.php?page=dokan#/request-for-quote',
+				dokanAnnouncements: 'wp-admin/admin.php?page=dokan#/announcement',
+				dokanRefunds: 'wp-admin/admin.php?page=dokan#/refund?status=pending',
+				dokanReports: 'wp-admin/admin.php?page=dokan#/reports',
+				dokanModules: 'wp-admin/admin.php?page=dokan#/modules',
+				dokanTools: 'wp-admin/admin.php?page=dokan#/tools',
+				dokanVerifications: 'wp-admin/admin.php?page=dokan-seller-verifications',
+				dokanProductAdvertising: 'wp-admin/admin.php?page=dokan#/product-advertising',
+				dokanWholeSaleCustomer: 'wp-admin/admin.php?page=dokan#/wholesale-customer',
+				dokanHelp: 'wp-admin/admin.php?page=dokan#/help',
+				dokanSettings: 'wp-admin/admin.php?page=dokan#/settings',
+				dokanLicense: 'wp-admin/admin.php?page=dokan_updates',
+			},
 			woocommerceSettings: 'wp-admin/admin.php?page=wc-settings',
 			wcAddNewProducts: 'wp-admin/post-new.php?post_type=product',
 			wcAddNewCategories: 'wp-admin/edit-tags.php?taxonomy=product_cat&post_type=product',
@@ -739,6 +755,8 @@ export const data = {
 			plugins: 'wp-admin/plugins.php',
 			stores: 'dokan/v1/stores',
 			withdraws: 'dokan/v1/withdraw',
+			announcements: 'dokan/v1/announcement',
+			wholesaleCustomers: 'dokan/v1/wholesale/customers',
 			subscribe: 'https://api.getwemail.io/v1/embed/subscribe'
 		},
 
@@ -1162,6 +1180,8 @@ export const data = {
 	key: {
 		arrowDown: 'ArrowDown',
 		enter: 'Enter',
+		home: 'Home',
+		end: 'End'
 	},
 
 	plugin: {
@@ -1206,6 +1226,14 @@ export const data = {
 		adminPassword: process.env.USER_PASSWORD,
 		adminEmail: 'shashwata@wedevs.com',
 
+	},
+
+	// announcement
+
+	announcement: {
+		title: 'test announcement title _' + faker.string.uuid(),
+		content:  'test announcement Content',
+		updateContent:  'update test announcement Content'
 	},
 
 
@@ -1275,6 +1303,7 @@ export const data = {
 			firstName: () => 'customer1',
 			lastName: () => 'c1',
 			username: () => 'customer1',
+			username1: 'customer1',
 		},
 	},
 };
