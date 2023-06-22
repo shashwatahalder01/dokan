@@ -28,7 +28,7 @@ test.describe('Vendors test', () => {
 		await adminPage.adminVendorsRenderProperly();
 	});
 
-	test.only('admin can add new vendor @lite @pro', async ( ) => {
+	test('admin can add new vendor @lite @pro', async ( ) => {
 		await adminPage.addVendor(data.vendor.vendorInfo);
 	});
 

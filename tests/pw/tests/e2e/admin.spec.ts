@@ -132,27 +132,27 @@ test.describe('Admin functionality test', () => {
 
 	// payment
 
-	// test.only('admin can add basic payment methods', async ( ) => {
+	// test('admin can add basic payment methods', async ( ) => {
 	//     await adminPage.setupBasicPaymentMethods(data.payment)
 	// })
 
-	// test.only('admin can add strip payment method', async ( ) => {
+	// test('admin can add strip payment method', async ( ) => {
 	//     await adminPage.setupStripeConnect(data.payment)
 	// })
 
-	// test.only('admin can add paypal marketplace payment method', async ( ) => {
+	// test('admin can add paypal marketplace payment method', async ( ) => {
 	//     await adminPage.setupPaypalMarketPlace(data.payment)
 	// })
 
-	// test.only('admin can add mangopay payment method', async ( ) => {
+	// test('admin can add mangopay payment method', async ( ) => {
 	//     await adminPage.setupMangoPay(data.payment)
 	// })
 
-	// test.only('admin can add razorpay payment method', async ( ) => {
+	// test('admin can add razorpay payment method', async ( ) => {
 	//     await adminPage.setupRazorpay(data.payment)
 	// })
 
-	// test.only('admin can add strip express payment method', async ( ) => {
+	// test('admin can add strip express payment method', async ( ) => {
 	//     await adminPage.setupStripeExpress(data.payment)
 	// })
 

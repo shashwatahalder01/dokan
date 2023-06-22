@@ -23,7 +23,7 @@ test.describe('setup local site', () => {
 
 	// });
 
-	// test.only('delete database or all tables ', async ({ page }) => {
+	// test('delete database or all tables ', async ({ page }) => {
 	//  });
 
 
