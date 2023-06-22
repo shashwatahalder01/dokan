@@ -729,6 +729,7 @@ export const data = {
 			dokanLiteModules: 'wp-admin/admin.php?page=dokan#/pro-modules',
 			dokanProModules: 'wp-admin/admin.php?page=dokan#/modules',
 			dokanProFeatures: 'wp-admin/admin.php?page=dokan#/premium',
+			dokanLicense: 'wp-admin/admin.php?page=dokan_updates',
 			woocommerceSettings: 'wp-admin/admin.php?page=wc-settings',
 			wcAddNewProducts: 'wp-admin/post-new.php?post_type=product',
 			wcAddNewCategories: 'wp-admin/edit-tags.php?taxonomy=product_cat&post_type=product',

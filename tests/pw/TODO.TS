@@ -268,7 +268,9 @@ const config = {
 
 
 
-
+//TODO: check dokan pro activate or not via api and set env.dokanPro to separate code for******
+// dokan lite and pro
+//TODO: Selectors: separate settings locator into more objects ***********
 
 
 
@@ -277,6 +279,7 @@ const config = {
 
 
 //TODO: readme
+//TODO: add lite & pro config on readme
 //TODO: add emoji to readme
 //TODO: make readme follow readme guideline
 //TODO: use chatgpt to rephrase readme

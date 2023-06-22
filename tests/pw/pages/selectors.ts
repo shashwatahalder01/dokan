@@ -331,6 +331,37 @@ export const selector = {
 
 			// Vendors
 			vendors: {
+
+				vendorsText: '.vendor-list h1',
+				addNewVendor: '//button[contains(text(), "Add New")]',
+
+				// Nav Tabs
+				navTabs: {
+					cancelled: '//ul[@class="subsubsub"]//li//a[contains(text(),"All")]',
+					approved: '//ul[@class="subsubsub"]//li//a[contains(text(),"Approved")]',
+					pending: '//ul[@class="subsubsub"]//li//a[contains(text(),"Pending")]',
+				},
+
+				// Bulk Actions
+				bulkActions: {
+					bulkActions: '.tablenav.top #bulk-action-selector-top',  // approved, cancelled, delete, paypal
+					applyBulkAction: '.tablenav.top .button.action',
+					selectAll: 'thead .manage-column',
+				},
+
+
+				search: '#post-search-input',
+
+				// table
+				vendorTable: '.vendor-list table',
+
+				statusSlider: (username: string) => `//td//a[contains(text(), '${username}')]/../../..//label[@class='switch tips']`,
+				vendorCell: (username: string) => `//td//a[contains(text(), '${username}')]/../../..`,
+				vendorEdit: '.row-actions .edit',
+				vendorProducts: '.row-actions .products',
+				vendorOrders: '.row-actions .orders',
+
+
 				// Add New Vendors
 
 				// Menus
@@ -341,7 +372,7 @@ export const selector = {
 				next: '.button.button-primary',
 
 				// Account Info
-				addNewVendor: '//button[contains(text(), "Add New")]',
+
 				vendorPicture: '.profile-image .dokan-upload-image',
 				banner: '.banner-image .dokan-upload-image button',
 				firstName: '#first-name',
@@ -444,16 +475,6 @@ export const selector = {
 					confirmSaveChanges: '.swal2-confirm',
 				},
 
-				search: '#post-search-input',
-				bulkActions: '.tablenav.top #bulk-action-selector-top',  // approved, pending
-				applyBulkAction: '.tablenav.top .button.action',
-				selectAll: 'thead .manage-column',
-				statusSlider: (username: string) => `//td//a[contains(text(), '${username}')]/../../..//label[@class='switch tips']`,
-				vendorCell: (username: string) => `//td//a[contains(text(), '${username}')]/../../..`,
-				vendorEdit: '.row-actions .edit',
-				vendorProducts: '.row-actions .products',
-				vendorOrders: '.row-actions .orders',
-
 			},
 			// Abuse Reports
 			abuseReports: {
@@ -465,6 +486,7 @@ export const selector = {
 				filterByProduct: '#filter-products',
 				filterByVendors: '#filter-vendors',
 			},
+
 			// Store Reviews
 			storeReviews: {
 				// Nav Tabs
@@ -476,6 +498,7 @@ export const selector = {
 				// Filters
 				filterByVendors: '#filter-vendors',
 			},
+
 			// Store Support
 			storeSupport: {
 				// Nav Tabs
@@ -489,6 +512,7 @@ export const selector = {
 				filterByVendors: '#select2-filter-vendors-container',
 				filterByCustomers: '#select2-filter-customers-container',
 			},
+
 			// Announcements
 			announcements: {
 				// Nav Tabs
@@ -502,6 +526,7 @@ export const selector = {
 				bulkActions: '#bulk-action-selector-top',
 				selectAllCheckbox: '.check-column input',
 			},
+
 			// Refunds
 			refunds: {
 				// Nav Tabs
@@ -602,6 +627,7 @@ export const selector = {
 				// No Modules Message
 				noModulesFound: '.not-found h5',
 			},
+
 			// pro features
 			proFeatures: {
 				dokanProFeatures: '.dokan-pro-features',
@@ -641,12 +667,14 @@ export const selector = {
 				upgradeToPro: '//a[normalize-space()="Upgrade to Pro"]',
 
 			},
+
 			// Tools
 			tools: {
 				reBuild: '//a[contains(text(),"Re-build")]',
 				checkOrders: '//a[contains(text(),"Check Orders")]',
 				openSetupWizard: '//a[contains(text(),"Open Setup Wizard")]',
 			},
+
 			// Verifications
 			verifications: {
 				// Nav Tabs
@@ -654,6 +682,7 @@ export const selector = {
 				approved: '//ul[@class="subsubsub"]//li//a[contains(text(),"Approved")]',
 				rejected: '//ul[@class="subsubsub"]//li//a[contains(text(),"Rejected")]',
 			},
+
 			// Advertising
 			advertising: {
 				// Nav Tabs
@@ -666,22 +695,39 @@ export const selector = {
 				// Search
 				search: '#post-search-input',
 			},
+
 			// Wholesale Customer
 			wholesaleCustomer: {
+
+				wholesaleText: '.dokan-help-page h1',
+
 				// Nav Tabs
-				all: '//ul[@class="subsubsub"]//li//a[contains(text(),"All")]',
-				active: '//ul[@class="subsubsub"]//li//a[contains(text(),"Active")]',
-				deActive: '//ul[@class="subsubsub"]//li//a[contains(text(),"Deactive")]',
+				navTabs: {
+					all: '//ul[@class="subsubsub"]//li//a[contains(text(),"All")]',
+					active: '//ul[@class="subsubsub"]//li//a[contains(text(),"Active")]',
+					deActive: '//ul[@class="subsubsub"]//li//a[contains(text(),"Deactive")]',
+				},
+
 				// Bulk Actions
-				bulkActions: '#bulk-action-selector-top',
-				selectAllCheckbox: '.check-column input',
-				// Search
+				bulkActions: {
+					bulkActions: '.tablenav.top #bulk-action-selector-top',  // approved, cancelled, delete, paypal
+					applyBulkAction: '.tablenav.top .button.action',
+					selectAll: 'thead .manage-column',
+				},
+
 				search: '#post-search-input',
+
+				// Table
+				wholeSaleCustomerTable: '.wholesale-customer-list table',
+
 				statusSlider: (username: string) => `//td[contains(text(), '${username}')]/..//label[@class='switch tips']`,
 				enableStatusUpdateSuccessMessage: '.notification-content',
 			},
+
 			// Help
 			help: {
+
+				helpText: '.dokan-help-page h1',
 
 				// basics
 				basics: {
@@ -1111,7 +1157,13 @@ export const selector = {
 
 			// License
 			license: {
-				activateLicense: '//button[contains(text(),"Activate License")]',
+				licenseText: '.appsero-license-settings-wrapper h1',
+
+				section:{
+					licenseSection: '.appsero-license-settings.appsero-license-section',
+					licenseKeyInput: '.license-input-fields .license-input-key',
+					activateLicense: '//button[contains(text(),"Activate License")]',
+				}
 			},
 
 			// Dokan Setup Wizard
