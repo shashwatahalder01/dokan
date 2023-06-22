@@ -25,7 +25,7 @@ test.describe('Dokan help test', () => {
 	});
 
 	test('dokan get help dropdown is rendering properly @lite @pro', async ( ) => {
-		await adminPage.adminGetHelpRenderProperly();
+		await adminPage.adminGetHelpDropdownRenderProperly();
 	});
 
 });

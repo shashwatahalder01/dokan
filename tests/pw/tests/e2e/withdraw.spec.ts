@@ -28,31 +28,31 @@ test.describe.skip('Withdraw test', () => {
 
 	test.use({ storageState: data.auth.adminAuthFile });
 
-	test('dokan admin withdraw menu page is rendering properly @lite @pro', async ( ) => {
+	test('admin withdraw menu page is rendering properly @lite @pro', async ( ) => {
 		await adminPage.adminWithdrawsRenderProperly();
 	});
 
-	test('filter withdraws by vendor @lite @pro', async ( ) => {
+	test('admin can filter withdraws by vendor @lite @pro', async ( ) => {
 		await adminPage.filterWithdraws(data.predefined.vendorStores.vendor1);
 	});
 
-	test('admin add note to withdraw request @lite @pro', async ( ) => {
+	test('admin can add note to withdraw request @lite @pro', async ( ) => {
 		await adminPage.addNoteWithdrawRequest(data.predefined.vendorStores.vendor1, 'test withdraw note');
 	});
 
-	test('admin approve withdraw request @lite @pro', async ( ) => {
+	test('admin can approve withdraw request @lite @pro', async ( ) => {
 		await adminPage.updateWithdrawRequest(data.predefined.vendorStores.vendor1, 'approve');
 	});
 
-	test('admin cancel withdraw request  @lite @pro', async ( ) => {
+	test('admin can cancel withdraw request  @lite @pro', async ( ) => {
 		await adminPage.updateWithdrawRequest(data.predefined.vendorStores.vendor1, 'cancel');
 	});
 
-	test('admin delete withdraw request  @lite @pro', async ( ) => {
+	test('admin can delete withdraw request  @lite @pro', async ( ) => {
 		await adminPage.updateWithdrawRequest(data.predefined.vendorStores.vendor1,  'delete');
 	});
 
-	test('withdraw bulk actions @lite @pro', async ( ) => {
+	test('admin can perform withdraw bulk actions @lite @pro', async ( ) => {
 		await adminPage.withdrawBulkAction('cancelled');
 	});
 

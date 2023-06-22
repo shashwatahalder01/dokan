@@ -2,7 +2,6 @@ import { test, Page } from '@playwright/test';
 import { AdminPage } from '../../pages/adminPage';
 import { ApiUtils } from '../../utils/apiUtils';
 import { data } from '../../utils/testData';
-// import { payloads } from '../../utils/payloads';
 
 
 let adminPage: AdminPage;
@@ -20,20 +19,16 @@ test.afterAll(async ( ) => {
 	await page.close();
 });
 
-test.describe('Settings test', () => {
+test.describe('License test', () => {
 
 	test.use({ storageState: data.auth.adminAuthFile });
 
-	test('admin settings menu page is rendering properly @lite @pro', async ( ) => {
-		await adminPage.adminSettingsRenderProperly();
+	test('admin license menu page is rendering properly @pro', async ( ) => {
+		await adminPage.adminLicenseRenderProperly();
 	});
 
-	test('admin can search settings @lite @pro', async ( ) => {
-		await adminPage.searchSettings('Selling Options');
-	});
-
-	// TODO: test('admin can scroll to top on settings @lite @pro', async ( ) => {
-	// 	await adminPage.searchSettings('Selling Options');
+	// test.skip('admin can activate license @lite @pro', async ( ) => {
+	// 	await adminPage.activateLicense(LicenseKey);
 	// });
 
 

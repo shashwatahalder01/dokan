@@ -31,6 +31,10 @@ test.describe('Reverse withdraw test', () => {
 		await adminPage.adminReverseWithdrawRenderProperly();
 	});
 
+	test.skip('reverse Withdraw payment product exists @lite @pro', async ( ) => {
+		//todo
+	});
+
 	test.skip('filter reverse withdraws by store @lite @pro', async ( ) => {
 		//todo
 	});

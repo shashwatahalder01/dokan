@@ -2,7 +2,6 @@ import { test, Page } from '@playwright/test';
 import { AdminPage } from '../../pages/adminPage';
 import { ApiUtils } from '../../utils/apiUtils';
 import { data } from '../../utils/testData';
-import { payloads } from '../../utils/payloads';
 
 
 let adminPage: AdminPage;
@@ -20,21 +19,13 @@ test.afterAll(async ( ) => {
 	await page.close();
 });
 
-test.describe('Vendors test', () => {
+test.describe.skip('License test', () => {
 
 	test.use({ storageState: data.auth.adminAuthFile });
 
-	test('admin vendors menu page is rendering properly @lite @pro', async ( ) => {
-		await adminPage.adminVendorsRenderProperly();
+	test('admin wholesale customers menu page is rendering properly @pro', async ( ) => {
+		await adminPage.adminWholesaleCustomersRenderProperly();
 	});
-
-	test.only('admin can add new vendor @lite @pro', async ( ) => {
-		await adminPage.addVendor(data.vendor.vendorInfo);
-	});
-
-	// test.fixme('admin can add edit vendor info  @lite @pro', async ( ) => {
-	// 	await adminPage.editVendor(data.vendor.vendorInfo);
-	// });
 
 	test('admin can search vendors @lite @pro', async ( ) => {
 		await adminPage.searchVendor(data.predefined.vendorStores.vendor1);
@@ -44,8 +35,8 @@ test.describe('Vendors test', () => {
 		await adminPage.vendorBulkAction('approved');
 	});
 
-	//TODO: test('admin can update vendor selling capability @lite @pro', async ( ) => {
-		// await adminPage.vendorBulkAction('approved');
+	test('admin can update vendor selling capability @lite @pro', async ( ) => {
+		await adminPage.vendorBulkAction('approved');
 	});
 
 

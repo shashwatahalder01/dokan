@@ -56,9 +56,7 @@ test.describe('Admin functionality test', () => {
 		await adminPage.setDokanSetupWizard(data.dokanSetupWizard);
 	});
 
-	test('admin can add vendor @lite @pro', async ( ) => {
-		await adminPage.addVendor(data.vendor.vendorInfo);
-	});
+
 
 	test('admin can add simple product @lite @pro', async ( ) => {
 		await adminPage.addSimpleProduct(data.product.simple);

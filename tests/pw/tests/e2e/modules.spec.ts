@@ -24,7 +24,7 @@ test.describe.skip('Modules test', () => {
 
 	test.use({ storageState: data.auth.adminAuthFile });
 
-	test('dokan admin modules menu page is rendering properly @lite @pro', async ( ) => {
+	test('dokan admin modules menu page is rendering properly @pro', async ( ) => {
 		await adminPage.adminModulesRenderProperly();
 	});
 
