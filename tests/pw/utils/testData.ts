@@ -759,6 +759,7 @@ export const data = {
 			announcements: 'dokan/v1/announcement',
 			storeReviews: 'dokan/v1/store-reviews',
 			wholesaleCustomers: 'dokan/v1/wholesale/customers',
+			supportTicket: 'dokan/v1/admin/support-ticket',
 			subscribe: 'https://api.getwemail.io/v1/embed/subscribe'
 		},
 

@@ -1772,49 +1772,52 @@ export class AdminPage extends BasePage {
 	// store support
 
 	async adminStoreSupportRenderProperly(){
-		await this.goIfNotThere(data.subUrls.backend.dokan.dokanStoreReviews);
+		await this.goIfNotThere(data.subUrls.backend.dokan.dokanStoreSupport);
 
-		// store reviews text is visible
-		await expect(this.page.locator(selector.admin.dokan.storeReviews.storeReviewsText)).toBeVisible();
+		// store support text is visible
+		await expect(this.page.locator(selector.admin.dokan.storeSupport.storeSupportText)).toBeVisible();
 
 		// nav tabs are visible
-		await this.multipleElementVisible(selector.admin.dokan.storeReviews.navTabs);
+		await this.multipleElementVisible(selector.admin.dokan.storeSupport.navTabs);
 
 		// bulk action elements are visible
-		await this.multipleElementVisible(selector.admin.dokan.storeReviews.bulkActions);
+		await this.multipleElementVisible(selector.admin.dokan.storeSupport.bulkActions);
 
 		// filter elements are visible
 		// eslint-disable-next-line @typescript-eslint/no-unused-vars
-		const { filterInput, filterClear, ...filters } = selector.admin.dokan.storeReviews.filters;
+		const { filterInput, ...filters } = selector.admin.dokan.storeSupport.filters;
 		await this.multipleElementVisible(filters);
 
+		// search store support is visible
+		await expect(this.page.locator(selector.admin.dokan.storeSupport.searchTicket)).toBeVisible();
+
 		// store reviews table is visible
-		await expect(this.page.locator(selector.admin.dokan.storeReviews.storeReviewsTable)).toBeVisible();
+		await expect(this.page.locator(selector.admin.dokan.storeSupport.storeSupportTable)).toBeVisible();
 	}
 
 	// search support ticket
 	async searchSupportTicket(vendorName: string){
-		await this.goIfNotThere(data.subUrls.backend.dokan.dokanVendors);
+		await this.goIfNotThere(data.subUrls.backend.dokan.dokanStoreSupport);
 
-		await this.typeAndWaitForResponse(data.subUrls.backend.stores, selector.admin.dokan.vendors.search, vendorName);
+		await this.typeAndWaitForResponse(data.subUrls.backend.supportTicket, selector.admin.dokan.storeSupport.searchTicket, vendorName);
 		await expect(this.page.locator(selector.admin.dokan.vendors.vendorCell(vendorName))).toBeVisible();
 	}
 
 	// store support bulk action
 	async storeSupportBulkAction(action: string){
-		await this.goIfNotThere(data.subUrls.backend.dokan.dokanStoreReviews);
+		await this.goIfNotThere(data.subUrls.backend.dokan.dokanStoreSupport);
 
-		await this.click(selector.admin.dokan.storeReviews.bulkActions.selectAll);
-		await this.selectByValue(selector.admin.dokan.storeReviews.bulkActions.bulkActions, action);
-		await this.clickAndWaitForResponse(data.subUrls.backend.storeReviews, selector.admin.dokan.storeReviews.bulkActions.applyBulkAction);
+		await this.click(selector.admin.dokan.storeSupport.bulkActions.selectAll);
+		await this.selectByValue(selector.admin.dokan.storeSupport.bulkActions.bulkActions, action);
+		await this.clickAndWaitForResponse(data.subUrls.backend.supportTicket, selector.admin.dokan.storeSupport.bulkActions.applyBulkAction);
 	}
 
 	// filter store supports
 	async filterStoreSupports(vendorName: string){
-		await this.goIfNotThere(data.subUrls.backend.dokan.dokanStoreReviews);
+		await this.goIfNotThere(data.subUrls.backend.dokan.dokanStoreSupport);
 
-		await this.clickIfVisible(selector.admin.dokan.storeReviews.filters.filterClear);
-
+		// await this.clickIfVisible(selector.admin.dokan.storeReviews.filters.filterClear);
+		//TODO: multiple filter exists
 		//filter by vendor
 		await this.click(selector.admin.dokan.storeReviews.filters.filterByVendor);
 		await this.typeAndWaitForResponse(data.subUrls.backend.stores, selector.admin.dokan.storeReviews.filters.filterInput, vendorName);

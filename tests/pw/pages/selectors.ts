@@ -576,6 +576,34 @@ export const selector = {
 
 			},
 
+			// Seller Badge
+			sellerBadge: {
+
+				sellerBadgeText:  '.seller-badge-list h1',
+				createBadge:  '//a[normalize-space()="+ Create Badge"]',
+
+				// Nav Tabs
+				navTabs: {
+					all: '//ul[@class="subsubsub"]//li//a[contains(text(),"All")]',
+					published: '//ul[@class="subsubsub"]//li//a[contains(text(),"Published")]',
+					draft: '//ul[@class="subsubsub"]//li//a[contains(text(),"Draft")]',
+				},
+
+				// Bulk Actions
+				bulkActions: {
+					bulkActions: '.tablenav.top #bulk-action-selector-top',  // trash
+					applyBulkAction: '.tablenav.top .button.action',
+					selectAll: 'thead .manage-column',
+				},
+
+				search: '#post-search-input',
+
+				sellerBadgeTable:  '.seller-badge-list table',
+
+
+			},
+
+
 			// Announcements
 			announcements: {
 
@@ -901,7 +929,7 @@ export const selector = {
 					checkOutAllVendorFunctionalities:'//a[normalize-space()="Check Out All Vendor Functionalities"]'
 				},
 
-				settingsText: '//h2[normalize-space()="Settings"]',
+				settingsText: '//h1[normalize-space()="Settings"]',
 
 				sections: {
 					settingsMenuSection: '.nab-section',
