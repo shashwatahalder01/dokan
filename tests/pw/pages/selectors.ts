@@ -282,7 +282,7 @@ export const selector = {
 				// Filters
 				filters:{
 					filterByVendor: '.select2-selection__arrow',
-					filterByVendorInput: '.select2-search.select2-search--dropdown .select2-search__field',
+					filterInput: '.select2-search.select2-search--dropdown .select2-search__field',
 				},
 
 				// Table
@@ -480,22 +480,32 @@ export const selector = {
 
 			// Abuse Reports
 			abuseReports: {
+
+				abuseReportsText: 'h1.wp-heading-inline',
+
 				// Bulk Actions
 				bulkActions: {
-					bulkActions: '#bulk-action-selector-top',
-					selectAllCheckbox: '.check-column input',
+					bulkActions: '.tablenav.top #bulk-action-selector-top',  // delete
+					applyBulkAction: '.tablenav.top .button.action',
+					selectAll: 'thead .manage-column',
 				},
 
 				// Filters
 				filters: {
 					filterByAbuseReason: '(//select[@id="filter-products"]/..//select)[1]',
-					filterByProduct: '#filter-products',
-					filterByVendors: '#filter-vendors',
+					filterByProduct: '(//span[@class="select2-selection__arrow"])[1]',
+					filterByVendors: '(//span[@class="select2-selection__arrow"])[2]',
+					filterInput: '.select2-search.select2-search--dropdown .select2-search__field',
 				},
+
+				abuseReportsTable: '.wp-list-table'
 			},
 
 			// Store Reviews
 			storeReviews: {
+
+				storeReviewsText: '.dokan-store-reviews h1',
+
 				// Nav Tabs
 				navTabs: {
 					all: '//ul[@class="subsubsub"]//li//a[contains(text(),"All")]',
@@ -504,18 +514,40 @@ export const selector = {
 
 				// Bulk Actions
 				bulkActions: {
-					bulkActions: '#bulk-action-selector-top',
-					selectAllCheckbox: '.check-column input',
+					bulkActions: '.tablenav.top #bulk-action-selector-top',  // trash
+					applyBulkAction: '.tablenav.top .button.action',
+					selectAll: 'thead .manage-column',
 				},
 
 				// Filters
 				filters: {
-					filterByVendors: '#filter-vendors',
+					filterByVendor: '.select2-selection__arrow',
+					filterInput: '.select2-search.select2-search--dropdown .select2-search__field',
+					filterClear: '.select2-selection__clear',
 				},
+
+				storeReviewsTable: '.dokan-store-reviews table',
+
+				storeReviewCell: (title: string) => `//td//a[contains(text(), '${title}')]/../..`,
+				storeReviewEdit: '.row-actions .cancel',
+				storeReviewDelete: '.row-actions .trash',
+				storeReviewPermanentlyDelete: '.row-actions .delete',
+
+				editReview:{
+					rating: (star: string) => `(//span[@class='vue-star-rating-pointer vue-star-rating-star'])[${star}]`,
+					title: '#store-review-title',
+					content: '#store-review-content',
+					update: 'input[value="Update Review"]',
+
+				}
+
 			},
 
 			// Store Support
 			storeSupport: {
+
+				storeSupportText: '.admin-store-support-tickets h1',
+
 				// Nav Tabs
 				navTabs: {
 					open: '//ul[@class="subsubsub"]//li//a[contains(text(),"Open")]',
@@ -525,15 +557,23 @@ export const selector = {
 
 				// Bulk Actions
 				bulkActions: {
-					bulkActions: '#bulk-action-selector-top',
-					selectAllCheckbox: '.check-column input',
+					bulkActions: '.tablenav.top #bulk-action-selector-top',  // trash
+					applyBulkAction: '.tablenav.top .button.action',
+					selectAll: 'thead .manage-column',
 				},
 
 				// Filters
 				filters: {
-					filterByVendors: '#select2-filter-vendors-container',
-					filterByCustomers: '#select2-filter-customers-container',
+					filterByVendors: '//select[@id="filter-vendors"]/..//span[@class="select2-selection__arrow"]',
+					filterByCustomers: '//select[@id="filter-customers"]/..//span[@class="select2-selection__arrow"]',
+					filterInput: '.select2-search.select2-search--dropdown .select2-search__field',
+					filterButton: '//button[normalize-space()="Filter"]',
 				},
+
+				searchTicket:'#post-search-input',
+
+				storeSupportTable: '.admin-store-support-tickets table',
+
 			},
 
 			// Announcements
@@ -848,6 +888,7 @@ export const selector = {
 					collapsibleButton: '//span[contains(text(), "Miscellaneous")]/../../..//button',
 					miscellaneousList: '//span[contains(text(), "Miscellaneous")]/../../..//button',
 				}
+
 			},
 
 			// Dokan Settings

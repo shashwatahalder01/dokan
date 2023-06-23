@@ -1478,9 +1478,9 @@ export class AdminPage extends BasePage {
 		// bulk action elements are visible
 		await this.multipleElementVisible(selector.admin.dokan.withdraw.bulkActions);
 
-		// nav filter elements are visible
+		// filter elements are visible
 		// eslint-disable-next-line @typescript-eslint/no-unused-vars
-		const { filterByVendorInput, ...filters } = selector.admin.dokan.withdraw.filters;
+		const { filterInput, ...filters } = selector.admin.dokan.withdraw.filters;
 		await this.multipleElementVisible(filters);
 
 		// withdraw table is visible
@@ -1502,7 +1502,7 @@ export class AdminPage extends BasePage {
 		await this.goIfNotThere(data.subUrls.backend.dokan.dokanWithdraw);
 
 		await this.click(selector.admin.dokan.withdraw.filters.filterByVendor);
-		await this.typeAndWaitForResponse(data.subUrls.backend.stores, selector.admin.dokan.withdraw.filters.filterByVendorInput, vendorName);
+		await this.typeAndWaitForResponse(data.subUrls.backend.stores, selector.admin.dokan.withdraw.filters.filterInput, vendorName);
 		await this.pressAndWaitForResponse(data.subUrls.backend.withdraws, data.key.enter);
 
 	}
@@ -1586,7 +1586,6 @@ export class AdminPage extends BasePage {
 
 	}
 
-
 	// search vendor
 	async searchVendor(vendorName: string){
 		await this.goIfNotThere(data.subUrls.backend.dokan.dokanVendors);
@@ -1657,7 +1656,173 @@ export class AdminPage extends BasePage {
 		}
 	}
 
+
 	/*************************************************************************************************/
+
+	// abuse reports
+
+	async adminAbuseReportRenderProperly(){
+		await this.goIfNotThere(data.subUrls.backend.dokan.dokanAbuseReports);
+
+		// abuse reports text is visible
+		await expect(this.page.locator(selector.admin.dokan.abuseReports.abuseReportsText)).toBeVisible();
+
+		// bulk action elements are visible
+		await this.multipleElementVisible(selector.admin.dokan.abuseReports.bulkActions);
+
+		// filter elements are visible
+		// eslint-disable-next-line @typescript-eslint/no-unused-vars
+		const { filterInput, ...filters } = selector.admin.dokan.abuseReports.filters;
+		await this.multipleElementVisible(filters);
+
+		// abuse report table is visible
+		await expect(this.page.locator(selector.admin.dokan.abuseReports.abuseReportsTable)).toBeVisible();
+
+	}
+
+	// abuse report bulk action
+	async abuseReportBulkAction(action: string){
+		await this.goIfNotThere(data.subUrls.backend.dokan.dokanAbuseReports);
+
+		await this.click(selector.admin.dokan.abuseReports.bulkActions.selectAll);
+		await this.selectByValue(selector.admin.dokan.abuseReports.bulkActions.bulkActions, action);
+		await this.clickAndWaitForResponse(data.subUrls.backend.abuseReports, selector.admin.dokan.abuseReports.bulkActions.applyBulkAction);
+	}
+
+	// filter abuse reports
+	// async filterAbuseReports(vendorName){
+	// 	await this.goIfNotThere(data.subUrls.backend.dokan.dokanAbuseReports);
+
+	// 	await this.click(selector.admin.dokan.abuseReports.filters.filterByAbuseReason);
+	// 	await this.typeAndWaitForResponse(data.subUrls.backend.abuseReports, selector.admin.dokan.withdraw.filters.filterByVendorInput, vendorName);
+	// 	await this.pressAndWaitForResponse(data.subUrls.backend.abuseReports, data.key.enter);
+	// }
+
+
+	/*************************************************************************************************/
+
+	// store reviews
+
+	async adminStoreReviewsRenderProperly(){
+		await this.goIfNotThere(data.subUrls.backend.dokan.dokanStoreReviews);
+
+		// store reviews text is visible
+		await expect(this.page.locator(selector.admin.dokan.storeReviews.storeReviewsText)).toBeVisible();
+
+		// nav tabs are visible
+		await this.multipleElementVisible(selector.admin.dokan.storeReviews.navTabs);
+
+		// bulk action elements are visible
+		await this.multipleElementVisible(selector.admin.dokan.storeReviews.bulkActions);
+
+		// filter elements are visible
+		// eslint-disable-next-line @typescript-eslint/no-unused-vars
+		const { filterInput, filterClear, ...filters } = selector.admin.dokan.storeReviews.filters;
+		await this.multipleElementVisible(filters);
+
+		// store reviews table is visible
+		await expect(this.page.locator(selector.admin.dokan.storeReviews.storeReviewsTable)).toBeVisible();
+	}
+
+	// store reviews bulk action
+	async storeReviewsBulkAction(action: string){
+		await this.goIfNotThere(data.subUrls.backend.dokan.dokanStoreReviews);
+
+		await this.click(selector.admin.dokan.storeReviews.bulkActions.selectAll);
+		await this.selectByValue(selector.admin.dokan.storeReviews.bulkActions.bulkActions, action);
+		await this.clickAndWaitForResponse(data.subUrls.backend.storeReviews, selector.admin.dokan.storeReviews.bulkActions.applyBulkAction);
+	}
+
+	// filter store reviews
+	async filterStoreReviews(vendorName: string){
+		await this.goIfNotThere(data.subUrls.backend.dokan.dokanStoreReviews);
+
+		await this.clickIfVisible(selector.admin.dokan.storeReviews.filters.filterClear);
+
+		//filter by vendor
+		await this.click(selector.admin.dokan.storeReviews.filters.filterByVendor);
+		await this.typeAndWaitForResponse(data.subUrls.backend.stores, selector.admin.dokan.storeReviews.filters.filterInput, vendorName);
+		await this.pressAndWaitForResponse(data.subUrls.backend.storeReviews, data.key.enter);
+	}
+
+	// edit store review
+	async editStoreReview(review: any){
+		await this.filterStoreReviews(review.filter.byVendor);
+
+		await this.hover(selector.admin.dokan.storeReviews.storeReviewCell(review.create.title));
+		await this.click(selector.admin.dokan.storeReviews.storeReviewEdit);
+
+		await this.click(selector.admin.dokan.storeReviews.editReview.rating(review.update.rating));
+		await this.clearAndType(selector.admin.dokan.storeReviews.editReview.title, review.update.title );
+		await this.clearAndType(selector.admin.dokan.storeReviews.editReview.content, review.update.content );
+
+		await this.clickAndWaitForResponse(data.subUrls.backend.storeReviews, selector.admin.dokan.storeReviews.editReview.update);
+	}
+
+	// edit store review
+	async deleteStoreReview(review: any){
+		await this.filterStoreReviews(review.filter.byVendor);
+
+		await this.hover(selector.admin.dokan.storeReviews.storeReviewCell(review.update.title));
+		await this.clickAndWaitForResponse(data.subUrls.backend.storeReviews, selector.admin.dokan.storeReviews.storeReviewDelete);
+	}
+
+	/*************************************************************************************************/
+
+	// store support
+
+	async adminStoreSupportRenderProperly(){
+		await this.goIfNotThere(data.subUrls.backend.dokan.dokanStoreReviews);
+
+		// store reviews text is visible
+		await expect(this.page.locator(selector.admin.dokan.storeReviews.storeReviewsText)).toBeVisible();
+
+		// nav tabs are visible
+		await this.multipleElementVisible(selector.admin.dokan.storeReviews.navTabs);
+
+		// bulk action elements are visible
+		await this.multipleElementVisible(selector.admin.dokan.storeReviews.bulkActions);
+
+		// filter elements are visible
+		// eslint-disable-next-line @typescript-eslint/no-unused-vars
+		const { filterInput, filterClear, ...filters } = selector.admin.dokan.storeReviews.filters;
+		await this.multipleElementVisible(filters);
+
+		// store reviews table is visible
+		await expect(this.page.locator(selector.admin.dokan.storeReviews.storeReviewsTable)).toBeVisible();
+	}
+
+	// search support ticket
+	async searchSupportTicket(vendorName: string){
+		await this.goIfNotThere(data.subUrls.backend.dokan.dokanVendors);
+
+		await this.typeAndWaitForResponse(data.subUrls.backend.stores, selector.admin.dokan.vendors.search, vendorName);
+		await expect(this.page.locator(selector.admin.dokan.vendors.vendorCell(vendorName))).toBeVisible();
+	}
+
+	// store support bulk action
+	async storeSupportBulkAction(action: string){
+		await this.goIfNotThere(data.subUrls.backend.dokan.dokanStoreReviews);
+
+		await this.click(selector.admin.dokan.storeReviews.bulkActions.selectAll);
+		await this.selectByValue(selector.admin.dokan.storeReviews.bulkActions.bulkActions, action);
+		await this.clickAndWaitForResponse(data.subUrls.backend.storeReviews, selector.admin.dokan.storeReviews.bulkActions.applyBulkAction);
+	}
+
+	// filter store supports
+	async filterStoreSupports(vendorName: string){
+		await this.goIfNotThere(data.subUrls.backend.dokan.dokanStoreReviews);
+
+		await this.clickIfVisible(selector.admin.dokan.storeReviews.filters.filterClear);
+
+		//filter by vendor
+		await this.click(selector.admin.dokan.storeReviews.filters.filterByVendor);
+		await this.typeAndWaitForResponse(data.subUrls.backend.stores, selector.admin.dokan.storeReviews.filters.filterInput, vendorName);
+		await this.pressAndWaitForResponse(data.subUrls.backend.storeReviews, data.key.enter);
+	}
+
+	/*************************************************************************************************/
+
 
 	// announcements
 

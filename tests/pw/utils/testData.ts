@@ -755,7 +755,9 @@ export const data = {
 			plugins: 'wp-admin/plugins.php',
 			stores: 'dokan/v1/stores',
 			withdraws: 'dokan/v1/withdraw',
+			abuseReports: 'dokan/v1/abuse-reports',
 			announcements: 'dokan/v1/announcement',
+			storeReviews: 'dokan/v1/store-reviews',
 			wholesaleCustomers: 'dokan/v1/wholesale/customers',
 			subscribe: 'https://api.getwemail.io/v1/embed/subscribe'
 		},
@@ -1234,6 +1236,26 @@ export const data = {
 		title: 'test announcement title _' + faker.string.uuid(),
 		content:  'test announcement Content',
 		updateContent:  'update test announcement Content'
+	},
+
+	storeReview:{
+
+		create:{
+			rating: '2',
+			title: 'test store review title',
+			content: 'test store review content',
+		},
+
+		update:{
+			rating: '4',
+			title: 'updated test store review title',
+			content: 'updated test store review content',
+		},
+
+		filter: {
+			byVendor: String(process.env.VENDOR) + 'store',
+		}
+
 	},
 
 
