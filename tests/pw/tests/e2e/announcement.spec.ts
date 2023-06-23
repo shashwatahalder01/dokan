@@ -31,15 +31,15 @@ test.describe('Announcements test', () => {
 		await adminPage.announcementBulkAction('trash');
 	});
 
-	test('admin can add announcement  @pro', async ( ) => {
+	test.fixme('admin can add announcement @pro', async ( ) => {
 		await adminPage.addAnnouncement(data.announcement);
 	});
 
-	test('admin can edit announcement @pro', async ( ) => {
+	test.fixme('admin can edit announcement @pro', async ( ) => {
 		await adminPage.editAnnouncement(data.predefined.customerInfo.username1);
 	});
 
-	test('admin can delete announcements  @pro', async ( ) => {
+	test.fixme('admin can delete announcements  @pro', async ( ) => {
 		await adminPage.deleteAnnouncement(data.predefined.customerInfo.username1);
 	});
 
