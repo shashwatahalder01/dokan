@@ -19,12 +19,12 @@ test.afterAll(async ( ) => {
 	await page.close();
 });
 
-test.describe('Wholesale customer test', () => {
+test.describe('Tools test', () => {
 
 	test.use({ storageState: data.auth.adminAuthFile });
 
-	test('dokan wholesale customers menu page is rendering properly @pro', async ( ) => {
-		await adminPage.adminWholesaleCustomersRenderProperly();
+	test('dokan tools menu page is rendering properly @pro', async ( ) => {
+		await adminPage.adminToolsRenderProperly();
 	});
 
 	test('admin can search wholesale customer @pro', async ( ) => {

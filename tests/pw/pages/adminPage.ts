@@ -2128,6 +2128,38 @@ export class AdminPage extends BasePage {
 
 	/*************************************************************************************************/
 
+	async adminToolsRenderProperly(){
+		await this.goIfNotThere(data.subUrls.backend.dokan.dokanWholeSaleCustomer);
+
+		// tools text is visible
+		await expect(this.page.locator(selector.admin.dokan.tools.toolsText)).toBeVisible();
+
+		// Page Installation elements are visible
+		await this.multipleElementVisible(selector.admin.dokan.tools.pageInstallation);
+
+		// Regenerate Order Sync Tab elements are visible
+		await this.multipleElementVisible(selector.admin.dokan.tools.regenerateOrderSyncTab);
+
+		// Check For Duplicate Orders are visible
+		await this.multipleElementVisible(selector.admin.dokan.tools.checkForDuplicateOrders);
+
+		// Dokan Setup Wizard elements are visible
+		await this.multipleElementVisible(selector.admin.dokan.tools.dokanSetupWizard);
+
+		// Regenerate Variable Product Variations Author Ids elements are visible elements are visible
+		await this.multipleElementVisible(selector.admin.dokan.tools.regenerateVariableProductVariationsAuthorIds);
+
+		//  Import Dummy Data elements are visible
+		await this.multipleElementVisible(selector.admin.dokan.tools.importDummyData);
+
+		//  Test Distance Matrix API (Google MAP) elements are visible
+		await this.multipleElementVisible(selector.admin.dokan.tools.testDistanceMatrixApi);
+
+
+	}
+
+	/*************************************************************************************************/
+
 	async adminWholesaleCustomersRenderProperly(){
 		await this.goIfNotThere(data.subUrls.backend.dokan.dokanWholeSaleCustomer);
 
