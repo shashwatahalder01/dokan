@@ -162,24 +162,26 @@ export const selector = {
 		// Dokan
 		dokan: {
 			// Dokan Menus
-			dashboardMenu: '//li[contains(@class,"toplevel_page_dokan")]//a[text()="Dashboard"]',
-			withdrawMenu: '//li[contains(@class,"toplevel_page_dokan")]//a[text()="Withdraw"]',
-			vendorsMenu: '//li[contains(@class,"toplevel_page_dokan")]//a[text()="Vendors"]',
-			abuseReportsMenu: '//li[contains(@class,"toplevel_page_dokan")]//a[text()="Abuse Reports"]',
-			storeReviewsMenu: '//li[contains(@class,"toplevel_page_dokan")]//a[text()="Store Reviews"]',
-			storeSupportMenu: '//li[contains(@class,"toplevel_page_dokan")]//a[text()="Store Support"]',
-			announcementsMenu: '//li[contains(@class,"toplevel_page_dokan")]//a[text()="Announcements"]',
-			refundsMenu: '//li[contains(@class,"toplevel_page_dokan")]//a[contains(text(),"Refunds")]',
-			reportsMenu: '//li[contains(@class,"toplevel_page_dokan")]//a[text()="Reports"]',
-			modulesMenu: '//li[contains(@class,"toplevel_page_dokan")]//a[text()="Modules"]',
-			proFeatureMenu: '//li[contains(@class,"toplevel_page_dokan")]//a[text()="PRO Features"]',
-			toolsMenu: '//li[contains(@class,"toplevel_page_dokan")]//a[text()="Tools"]',
-			verificationsMenu: '//li[contains(@class,"toplevel_page_dokan")]//a[text()="Verifications"]',
-			advertisingMenu: '//li[contains(@class,"toplevel_page_dokan")]//a[text()="Advertising"]',
-			wholesaleCustomerMenu: '//li[contains(@class,"toplevel_page_dokan")]//a[text()="Wholesale Customer"]',
-			helpMenu: '//li[contains(@class,"toplevel_page_dokan")]//span[text()="Help"]/..',
-			settingsMenu: '//li[contains(@class,"toplevel_page_dokan")]//a[text()="Settings"]',
-			licenseMenu: '//li[contains(@class,"toplevel_page_dokan")]//a[text()="License"]',
+			menus:{
+				dashboardMenu: '//li[contains(@class,"toplevel_page_dokan")]//a[text()="Dashboard"]',
+				withdrawMenu: '//li[contains(@class,"toplevel_page_dokan")]//a[text()="Withdraw"]',
+				vendorsMenu: '//li[contains(@class,"toplevel_page_dokan")]//a[text()="Vendors"]',
+				abuseReportsMenu: '//li[contains(@class,"toplevel_page_dokan")]//a[text()="Abuse Reports"]',
+				storeReviewsMenu: '//li[contains(@class,"toplevel_page_dokan")]//a[text()="Store Reviews"]',
+				storeSupportMenu: '//li[contains(@class,"toplevel_page_dokan")]//a[text()="Store Support"]',
+				announcementsMenu: '//li[contains(@class,"toplevel_page_dokan")]//a[text()="Announcements"]',
+				refundsMenu: '//li[contains(@class,"toplevel_page_dokan")]//a[contains(text(),"Refunds")]',
+				reportsMenu: '//li[contains(@class,"toplevel_page_dokan")]//a[text()="Reports"]',
+				modulesMenu: '//li[contains(@class,"toplevel_page_dokan")]//a[text()="Modules"]',
+				proFeatureMenu: '//li[contains(@class,"toplevel_page_dokan")]//a[text()="PRO Features"]',
+				toolsMenu: '//li[contains(@class,"toplevel_page_dokan")]//a[text()="Tools"]',
+				verificationsMenu: '//li[contains(@class,"toplevel_page_dokan")]//a[text()="Verifications"]',
+				advertisingMenu: '//li[contains(@class,"toplevel_page_dokan")]//a[text()="Advertising"]',
+				wholesaleCustomerMenu: '//li[contains(@class,"toplevel_page_dokan")]//a[text()="Wholesale Customer"]',
+				helpMenu: '//li[contains(@class,"toplevel_page_dokan")]//span[text()="Help"]/..',
+				settingsMenu: '//li[contains(@class,"toplevel_page_dokan")]//a[text()="Settings"]',
+				licenseMenu: '//li[contains(@class,"toplevel_page_dokan")]//a[text()="License"]',
+			},
 
 			// dokan notice
 			notice : {
@@ -350,12 +352,19 @@ export const selector = {
 					selectAll: 'thead .manage-column',
 				},
 
+				// Filters
+				filters:{
+					filterByBadges: '#badge_name',
+					clearFilter: '//select[@id="badge_name"]/..//button',
+				},
 
 				search: '#post-search-input',
 
 				// table
 				vendorTable: '.vendor-list table',
-
+				numberOfVendorsFound: '.tablenav.top .displaying-num',
+				noVendorsFound: '//td[normalize-space()="No vendors found."]',
+				vendorViewDetails: (username: string) => `//td//a[contains(text(), '${username}')]`,
 				vendorCell: (username: string) => `//td//a[contains(text(), '${username}')]/../../..`,
 				vendorEdit: '.row-actions .edit',
 				vendorProducts: '.row-actions .products',
@@ -413,11 +422,21 @@ export const selector = {
 				publishProductDirectly: '//span[contains(text(), "Publish Product Directly")]/..//span[@class="slider round"]',
 				makeVendorFeature: '//span[contains(text(), "Make Vendor Featured")]/..//span[@class="slider round"]',
 				createVendor: '.button.button-primary.button-hero',
+
 				// Sweet Alert
 				createAnother: '.swal2-confirm', // Sweet Alert Confirm
 				editVendorInfo: '.swal2-cancel', // Sweet Alert Cancel
 				closeSweetAlert: '.swal2-close', // Sweet Alert Close
 				sweetAlertTitle: '#swal2-title', // sweet alert title
+
+				vendorDetails: {
+
+					// badges
+					badgesAcquired: '.seller-badge-list-card',
+					noBadgesAvailable: '.no-badge-available',
+					badgesGallery: '.myGallery',
+
+				},
 
 				// Edit Vendor Form
 				editVendor: {
@@ -591,7 +610,7 @@ export const selector = {
 
 				// Bulk Actions
 				bulkActions: {
-					bulkActions: '.tablenav.top #bulk-action-selector-top',  // trash
+					bulkActions: '.tablenav.top #bulk-action-selector-top',  // delete
 					applyBulkAction: '.tablenav.top .button.action',
 					selectAll: 'thead .manage-column',
 				},
@@ -599,6 +618,58 @@ export const selector = {
 				search: '#post-search-input',
 
 				sellerBadgeTable:  '.seller-badge-list table',
+
+				sellerBadgeCell: (name: string) => `//a[contains(text(),'${name}')]/../..`,
+				sellerBadgeLevel: (name: string) => `//a[contains(text(),'${name}')]/../../..//span[@class="level_count"]//strong`,
+				sellerBadgeEdit: '.row-actions .edit',
+				sellerBadgePreview: '.row-actions .view',
+				sellerBadgeVendors: '.row-actions .show_vendors',
+				sellerBadgePublish: '.row-actions .publish',
+				sellerBadgeDraft: '.row-actions .draft',
+				sellerBadgeDelete: '.row-actions .delete',
+				confirmAction: '.swal2-actions .swal2-confirm',
+				cancelAction: '.swal2-actions .swal2-cancel',
+				successMessage: '.swal2-actions .swal2-confirm',
+
+				previewBadgeDetails: {
+					modal: '.seller-badge-modal-content',
+
+					modalHeader: {
+						modalImage: '.modal-header .modal-img',
+						modalTitle: '.modal-header .modal-title',
+						modalClose:  '.modal-header .modal-close',
+					},
+
+					levelBox: '.modal-level-box',
+
+				},
+
+				badgeDetails: {
+					badgeEventDropdown: '.seller-badge-event-dropdown',
+					badgeEvent: (name: string) => `//h3[normalize-space()="${name}"]/../..`,
+					badgeName: '#title',
+					badgeLevel: '.badge-level',
+					startingLevelValue: '//span[normalize-space()="Level 1"]/..//input',
+					levelInputValue: (value: string) => `//span[normalize-space()="Level ${value}"]/..//input`,
+					addBadgeLevel: '.dokan-logical-container button',
+					removeBadgeLevel: '(//i[@class="remove-level"])[2]',
+					verifiedSellerMethod: '//option[normalize-space()="Select a method"]/..',
+					disabledVerifiedSellerMethod: '//select//option[@disabled="disabled"]',
+					verifiedSellerMethod1:(number: number) => `(//option[normalize-space()="Select a method"]/..)[${number}]`,
+					trendingProductPeriod: '.dokan-logical-container select',
+					trendingProductTopBestSellingProduct: '.dokan-logical-container input',
+
+					uploadBadgeImage:  '//div[@class="dokan-upload-image-container"]//img',
+					badgePhotoReset: '//a[normalize-space()="restore default."]',
+
+					badgeStatus: '#status',
+					create: '//button[normalize-space()="Create"]',
+					update: '//button[normalize-space()="Update"]',
+					goBack: '//button[normalize-space()="Go Back"]',
+
+					confirmBadgeUpdate: '.swal2-actions .swal2-confirm',
+					badgeAddedSuccessfully: '.swal2-actions .swal2-confirm',
+				},
 
 
 			},

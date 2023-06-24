@@ -1188,6 +1188,7 @@ export class BasePage {
 
 	async multipleElementVisible(selectors: any){
 
+		// TODO: can also be merge with isVisible method or this method should support single selector too
 		//TODO: implement for arrays
 		// selectors = Object.values(selectors);
 		// selectors.forEach( async (selector: string) => {

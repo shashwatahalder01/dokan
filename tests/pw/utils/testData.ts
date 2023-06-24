@@ -760,6 +760,8 @@ export const data = {
 			storeReviews: 'dokan/v1/store-reviews',
 			wholesaleCustomers: 'dokan/v1/wholesale/customers',
 			supportTicket: 'dokan/v1/admin/support-ticket',
+			sellerBadge: 'dokan/v1/seller-badge',
+			sellerBadgeEvent: 'dokan/v1/seller-badge/events',
 			subscribe: 'https://api.getwemail.io/v1/embed/subscribe'
 		},
 
@@ -1257,6 +1259,50 @@ export const data = {
 			byVendor: String(process.env.VENDOR) + 'store',
 		}
 
+	},
+
+	sellerBadge:{
+		eventName:{
+			// product related badges
+			productsPublished: 'Products Published',
+			numberOfItemsSold: 'Number of Items Sold',
+			featuredProducts: 'Featured Products',
+			trendingProduct: 'Trending Product',
+
+			// seller related badges
+			featuredSeller:'Featured Seller',
+			exclusiveToPlatform: 'Exclusive to Platform',
+			verifiedSeller: 'Verified Seller',
+			yearsActive: 'Years Active',
+
+			// Order Related Badges
+			numberOfOrders: 'Number of Orders',
+			// Sale Amount Related Badges
+			saleAmount: 'Sale Amount',
+
+			// Customer Related Badges
+			customerReview: 'Customer Review',
+			storeSupportCount: 'Store Support Count',
+
+		},
+
+		badgeName: '',
+		verificationMethod: '',
+		trendingProductPeriod: 'week', // week, month
+		trendingProductTopBestSellingProduct: '3',
+
+		startingLevelValue: '1',
+		maxLevel: '5',
+
+		verifiedSellerMethod: {
+			idVerification: 'id_verification',
+			companyVerification: 'company_verification',
+			addressVerification: 'address_verification',
+			phoneVerification: 'phone_verification',
+			socialProfiles: 'social_profiles',
+		},
+
+		badgeStatus: 'published' // published, draft
 	},
 
 
