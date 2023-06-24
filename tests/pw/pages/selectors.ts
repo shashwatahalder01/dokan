@@ -2261,27 +2261,30 @@ export const selector = {
 		// Vendor Dashboard
 		vDashboard: {
 			// Dashboard Menus
-			dashboard: '.dashboard > a',
-			products: '.products > a',
-			orders: '.orders > a',
-			userSubscription: '.user-subscription > a',
-			coupons: '.coupons > a',
-			reports: '.reports > a',
-			deliveryTime: '.delivery-time-dashboard > a',
-			reviews: '.reviews > a',
-			withdraw: '.withdraw > a',
-			returnRequest: '.return-request > a',
-			staff: '.staffs > a',
-			followers: '.followers > a',
-			booking: '.booking > a',
-			analytics: '.analytics > a',
-			announcements: '.announcement > a',
-			tools: '.tools > a',
-			auction: '.auction > a',
-			support: '.support > a',
-			settings: '.settings > a',
-			visitStore: '.fa-external-link-alt',
-			editAccount: '.fa-user',
+			menus: {
+				dashboard: '.dashboard a',
+				products: '.products a',
+				orders: '.orders a',
+				userSubscription: '.user-subscription a',
+				coupons: '.coupons a',
+				reports: '.reports a',
+				deliveryTime: '.delivery-time-dashboard a',
+				reviews: '.reviews a',
+				withdraw: '.withdraw a',
+				badges: '.seller-badge a',
+				returnRequest: '.return-request a',
+				staff: '.staffs a',
+				followers: '.followers a',
+				booking: '.booking a',
+				analytics: '.analytics a',
+				announcements: '.announcement a',
+				tools: '.tools a',
+				auction: '.auction a',
+				support: '.support a',
+				settings: '.settings a',
+				visitStore: '.fa-external-link-alt',
+				editAccount: '.fa-user',
+			},
 
 			//overview
 			sales: '//div[@class="title" and contains(text(), "Sales")]/..//div[@class="count"]',
@@ -2743,6 +2746,20 @@ export const selector = {
 			// Default Payment Setup Links
 			customMethodSetup: (methodName: string) => `//strong[contains( text(), '${methodName}')]/../..//a[@class='dokan-btn']`,
 			defaultPaymentMethodUpdateSuccessMessage: 'Default method update successful.',
+		},
+
+		//badges
+
+		vBadges:{
+
+			search: '#post-search-input',
+
+			// filters
+			filterBadges: '.tablenav.top .actions select', // all, my_badges, available_badges
+
+			sellerBadgeCell: (name: string) => `//strong[contains(text(),'${name}')]/../..`,
+			numberOfBadgesFound: '.tablenav.top .displaying-num',
+
 		},
 
 		// Return Request

@@ -375,7 +375,7 @@ export class VendorPage extends BasePage {
 		await this.selectByValue(selector.vendor.vWithdraw.onlyWhenBalanceIs, withdraw.minimumWithdrawAmount);
 		await this.selectByValue(selector.vendor.vWithdraw.maintainAReserveBalance, withdraw.reservedBalance);
 		await this.clickAndWaitForResponse(data.subUrls.ajax, selector.vendor.vWithdraw.changeSchedule);
-		await expect(this.page.getByText(selector.vendor.vWithdraw.withdrawScheduleSaveSuccessMessage)).toBeVisible(); //TODO: find when invokes it 
+		await expect(this.page.getByText(selector.vendor.vWithdraw.withdrawScheduleSaveSuccessMessage)).toBeVisible(); //TODO: find when invokes it
 		// await expect(this.page.locator(selector.vendor.vWithdraw.scheduleMessage).filter({ hasText: 'text in column 1' })
 		// ).toBeVisible();
 		// let a = await this.page.locator(selector.vendor.vWithdraw.scheduleMessage).textContent();
@@ -1204,4 +1204,35 @@ export class VendorPage extends BasePage {
 		await this.goToVendorDashboard();
 		return helpers.price(await this.getElementText(selector.vendor.vDashboard.earning));
 	}
+
+
+	/*******************************************************************************/
+
+
+	// seller badges
+
+	// search seller badge
+	async searchSellerBadge(badgeName: string){
+		await this.goIfNotThere(data.subUrls.frontend.badges);
+
+		await this.clearAndType( selector.vendor.vBadges.search, badgeName);
+		await expect(this.page.locator(selector.vendor.vBadges.sellerBadgeCell(badgeName))).toBeVisible();
+	}
+
+	// filter vendors by badge
+	async filterBadges(option: string){
+		await this.goIfNotThere(data.subUrls.frontend.badges);
+
+		await this.selectByLabel( selector.vendor.vBadges.filterBadges, option);
+
+		const count = (await this.getElementText(selector.vendor.vBadges.numberOfBadgesFound))?.split(' ')[0];
+		expect(Number(count)).not.toBe(0);
+		//TOdo: either this or that assertion
+		//todo: to have count more than
+	}
+
+
+	/*******************************************************************************/
+
+
 }

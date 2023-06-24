@@ -1,12 +1,13 @@
 import { test, Page } from '@playwright/test';
 import { AdminPage } from '../../pages/adminPage';
+import { VendorPage } from '../../pages/vendorPage';
 import { ApiUtils } from '../../utils/apiUtils';
 import { data } from '../../utils/testData';
-import { LoginPage } from '../../pages/loginPage';
 import { payloads } from '../../utils/payloads';
 
 
 let adminPage: AdminPage;
+let vendorPage: VendorPage;
 let page: Page;
 let apiUtils: ApiUtils;
 
@@ -14,8 +15,10 @@ test.beforeAll(async ({ browser, request }) => {
 	const context = await browser.newContext({});
 	page = await context.newPage();
 	adminPage = new AdminPage(page);
+	vendorPage = new VendorPage(page);
 	apiUtils = new ApiUtils(request);
 	// await apiUtils.deleteAllSellerBadges(payloads.adminAuth);
+	//TODO: create a badge for bulk action
 });
 
 test.afterAll(async ( ) => {
@@ -31,16 +34,15 @@ test.describe('Seller badge test', () => {
 	});
 
 	test('admin can create seller badge @pro', async ( ) => {
-		// await adminPage.createSellerBadge({ ...data.sellerBadge, badgeName: data.sellerBadge.eventName.productsPublished });
-		await adminPage.createSellerBadge({ ...data.sellerBadge, badgeName: data.sellerBadge.eventName.verifiedSeller,  verificationMethod: data.sellerBadge.verifiedSellerMethod.addressVerification });
+		await adminPage.createSellerBadge({ ...data.sellerBadge, badgeName: data.sellerBadge.eventName.productsPublished });
 	});
 
 	test('admin can search seller badge @pro', async ( ) => {
 		await adminPage.searchSellerBadge(data.sellerBadge.eventName.productsPublished);
 	});
 
-	test.only('admin can edit seller badge @pro', async ( ) => {
-		await adminPage.editSellerBadge({ ...data.sellerBadge, badgeName: data.sellerBadge.eventName.verifiedSeller,  verificationMethod: data.sellerBadge.verifiedSellerMethod.idVerification });
+	test('admin can edit seller badge @pro', async ( ) => {
+		await adminPage.editSellerBadge({ ...data.sellerBadge, badgeName: data.sellerBadge.eventName.productsPublished });
 	});
 
 	test('admin can preview seller badge @pro', async ( ) => {
@@ -67,14 +69,20 @@ test.describe('Seller badge test', () => {
 		await adminPage.deleteSellerBadge(data.sellerBadge.eventName.productsPublished);
 	});
 
+	test('admin can perform seller badge bulk action @pro', async ( ) => {
+		await adminPage.sellerBadgeBulkAction('delete');
+	});
 
-	// test('admin can perform seller badge bulk action @pro', async ( ) => {
-	// 	await adminPage.sellerBadgeBulkAction('delete');
+	// test.skip('vendor can view badge acquired congratulation popup message action @pro', async ( ) => {
+	// 	//TODO: await vendorPage.sellerBadgeCongratsPopup();
 	// });
 
-
-	// test.only('authenticate admin', async ({ page }) => {
-	// 	const loginPage = new LoginPage(page);
-	// 	await loginPage.adminLogin(data.admin, data.auth.adminAuthFile);
+	// test.skip('vendor can search seller badge @pro', async ( ) => {
+	// 	await vendorPage.searchSellerBadge(data.sellerBadge.eventName.productsPublished);
 	// });
+
+	// test.skip('vendor can filter seller badges  @pro', async ( ) => {
+	// 	await vendorPage.filterBadges(data.sellerBadge.eventName.productsPublished);
+	// });
+
 });

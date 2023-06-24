@@ -799,6 +799,7 @@ export const data = {
 			coupon: 'dashboard/coupons',
 			reviews: 'dashboard/reviews/',
 			withdraw: 'dashboard/withdraw/',
+			badges: 'dashboard/seller-badge/',
 			withdrawRequests: 'dashboard/withdraw-requests',
 			auction: 'dashboard/auction',
 			booking: 'dashboard/booking',

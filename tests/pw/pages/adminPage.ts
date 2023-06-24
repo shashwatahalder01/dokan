@@ -1859,17 +1859,10 @@ export class AdminPage extends BasePage {
 	async searchSellerBadge(badgeName: string){
 		await this.goIfNotThere(data.subUrls.backend.dokan.dokanSellerBadge);
 
+		await this.clearInputField(selector.admin.dokan.sellerBadge.search); // TODO: clear by cross, or use type instead of fill
+
 		await this.typeAndWaitForResponse(data.subUrls.backend.sellerBadge, selector.admin.dokan.sellerBadge.search, badgeName);
 		await expect(this.page.locator(selector.admin.dokan.sellerBadge.sellerBadgeCell(badgeName))).toBeVisible();
-	}
-
-	// seller badge bulk action
-	async sellerBadgeBulkAction(action: string){
-		await this.goIfNotThere(data.subUrls.backend.dokan.dokanSellerBadge);
-
-		await this.click(selector.admin.dokan.sellerBadge.bulkActions.selectAll);
-		await this.selectByValue(selector.admin.dokan.sellerBadge.bulkActions.bulkActions, action);
-		await this.clickAndWaitForResponse(data.subUrls.backend.sellerBadge, selector.admin.dokan.sellerBadge.bulkActions.applyBulkAction);
 	}
 
 	// create seller badge
@@ -1981,6 +1974,7 @@ export class AdminPage extends BasePage {
 
 		await expect(this.page.locator(selector.admin.dokan.sellerBadge.previewBadgeDetails.levelBox)).toHaveCount(Number(badgeLevel));
 
+		await this.click(selector.admin.dokan.sellerBadge.previewBadgeDetails.modalHeader.modalClose);
 	}
 
 	// filter vendors by badge
@@ -2007,8 +2001,6 @@ export class AdminPage extends BasePage {
 		const count = (await this.getElementText(selector.admin.dokan.vendors.numberOfVendorsFound))?.split(' ')[0];
 		expect(Number(count)).not.toBe(0);
 		//TOdo: either this or that assertion
-
-		await this.filterVendorsByBadge(badgeName);
 
 	}
 
@@ -2051,6 +2043,17 @@ export class AdminPage extends BasePage {
 
 		await this.hover(selector.admin.dokan.sellerBadge.sellerBadgeCell(badgeName));
 		await this.click(selector.admin.dokan.sellerBadge.sellerBadgeDelete);
+		await this.clickAndWaitForResponse(data.subUrls.backend.sellerBadge, selector.admin.dokan.sellerBadge.confirmAction);
+		await this.click(selector.admin.dokan.sellerBadge.successMessage);
+	}
+
+	// seller badge bulk action
+	async sellerBadgeBulkAction(action: string){
+		await this.goIfNotThere(data.subUrls.backend.dokan.dokanSellerBadge);
+
+		await this.click(selector.admin.dokan.sellerBadge.bulkActions.selectAll);
+		await this.selectByValue(selector.admin.dokan.sellerBadge.bulkActions.bulkActions, action);
+		await this.click( selector.admin.dokan.sellerBadge.bulkActions.applyBulkAction);
 		await this.clickAndWaitForResponse(data.subUrls.backend.sellerBadge, selector.admin.dokan.sellerBadge.confirmAction);
 		await this.click(selector.admin.dokan.sellerBadge.successMessage);
 	}
