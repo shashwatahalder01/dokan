@@ -780,6 +780,7 @@ export const data = {
 			permalinks: 'wp-admin/options-permalink.php',
 			general: 'wp-admin/options-general.php',
 			plugins: 'wp-admin/plugins.php',
+			products: 'dokan/v1/products',
 			stores: 'dokan/v1/stores',
 			withdraws: 'dokan/v1/withdraw',
 			abuseReports: 'dokan/v1/abuse-reports',
@@ -787,6 +788,7 @@ export const data = {
 			dummyData: 'dokan/v1/dummy-data',
 			modules: 'dokan/v1/admin/modules',
 			storeReviews: 'dokan/v1/store-reviews',
+			productAdvertising: 'dokan/v1/product_adv',
 			wholesaleCustomers: 'dokan/v1/wholesale/customers',
 			supportTicket: 'dokan/v1/admin/support-ticket',
 			sellerBadge: 'dokan/v1/seller-badge',
@@ -1343,6 +1345,13 @@ export const data = {
 			address3: 'P2J3+93 New York, USA',
 			address4: 'M2CP+FG New York, USA'
 		}
+	},
+
+	productAdvertisement: {
+		advertisedProductStore: String(process.env.VENDOR) + 'store',
+		advertisedProduct: 'p1_v1 (simple)',
+
+
 	},
 
 

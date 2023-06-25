@@ -1853,6 +1853,7 @@ export class AdminPage extends BasePage {
 
 		//  seller badge table is visible
 		await expect(this.page.locator(selector.admin.dokan.sellerBadge.sellerBadgeTable)).toBeVisible();
+
 	}
 
 	// search seller badge
@@ -2206,10 +2207,18 @@ export class AdminPage extends BasePage {
 
 		await this.click(selector.admin.dokan.modules.pro.firstModuleCheckbox);
 		await this.click(selector.admin.dokan.modules.pro.selectAllBulkAction);
-		if(action === 'activate'){
+		switch (action) {
+
+		case 'activate' :
 			await this.clickAndWaitForResponse(data.subUrls.backend.modules, selector.admin.dokan.modules.pro.activeAll);
-		} else {
+			break;
+
+		case 'deactivate' :
 			await this.clickAndWaitForResponse(data.subUrls.backend.modules, selector.admin.dokan.modules.pro.deActivateAll);
+			break;
+
+		default :
+			break;
 		}
 
 	}
@@ -2250,10 +2259,18 @@ export class AdminPage extends BasePage {
 		await this.goIfNotThere(data.subUrls.backend.dokan.dokanVerifications);
 
 		await this.hover(selector.admin.dokan.verifications.vendorRow(storeName));
-		if(action === 'approve'){
+		switch (action) {
+
+		case 'approve' :
 			await this.clickAndWaitForResponse(data.subUrls.ajax, selector.admin.dokan.verifications.idRequest.approveRequest(storeName));
-		} else {
+			break;
+
+		case 'reject' :
 			await this.clickAndWaitForResponse(data.subUrls.ajax, selector.admin.dokan.verifications.idRequest.rejectRequest(storeName));
+			break;
+
+		default :
+			break;
 		}
 
 	}
@@ -2263,10 +2280,18 @@ export class AdminPage extends BasePage {
 		await this.goIfNotThere(data.subUrls.backend.dokan.dokanVerifications);
 
 		await this.hover(selector.admin.dokan.verifications.vendorRow(storeName));
-		if(action === 'approve'){
+		switch (action) {
+
+		case 'approve' :
 			await this.clickAndWaitForResponse(data.subUrls.ajax, selector.admin.dokan.verifications.addressRequest.approveRequest(storeName));
-		} else {
+			break;
+
+		case 'reject' :
 			await this.clickAndWaitForResponse(data.subUrls.ajax, selector.admin.dokan.verifications.addressRequest.rejectRequest(storeName));
+			break;
+
+		default :
+			break;
 		}
 	}
 
@@ -2275,12 +2300,117 @@ export class AdminPage extends BasePage {
 		await this.goIfNotThere(data.subUrls.backend.dokan.dokanVerifications);
 
 		await this.hover(selector.admin.dokan.verifications.vendorRow(storeName));
-		if(action === 'approve'){
+		switch (action) {
+
+		case 'approve' :
 			await this.clickAndWaitForResponse(data.subUrls.ajax, selector.admin.dokan.verifications.companyRequest.approveRequest(storeName));
-		} else {
+			break;
+
+		case 'reject' :
 			await this.clickAndWaitForResponse(data.subUrls.ajax, selector.admin.dokan.verifications.companyRequest.rejectRequest(storeName));
+			break;
+
+		default :
+			break;
 		}
 
+	}
+
+
+	/*************************************************************************************************/
+
+	// product advertising
+
+	async adminProductAdvertisingRenderProperly(){
+		await this.goIfNotThere(data.subUrls.backend.dokan.dokanProductAdvertising);
+
+		// product advertising text is visible
+		await expect(this.page.locator(selector.admin.dokan.productAdvertising.productAdvertisingText)).toBeVisible();
+
+		// add new Advertisement is visible
+		await expect(this.page.locator(selector.admin.dokan.productAdvertising.addNewProductAdvertising)).toBeVisible();
+
+		// nav tabs are visible
+		await this.multipleElementVisible(selector.admin.dokan.productAdvertising.navTabs);
+
+		// bulk action elements are visible
+		await this.multipleElementVisible(selector.admin.dokan.productAdvertising.bulkActions);
+
+		// filter elements are visible
+		// await this.multipleElementVisible(selector.admin.dokan.productAdvertising.filters);
+
+		// product advertising search is visible
+		await expect(this.page.locator(selector.admin.dokan.productAdvertising.search)).toBeVisible();
+
+		// product advertising table is visible
+		await expect(this.page.locator(selector.admin.dokan.productAdvertising.productAdvertisingTable)).toBeVisible();
+
+	}
+
+	// add new product advertisement
+	async addNewProductAdvertisement(advertising: any){
+		await this.goIfNotThere(data.subUrls.backend.dokan.dokanProductAdvertising);
+
+		await this.click(selector.admin.dokan.productAdvertising.addNewProductAdvertising);
+
+		await this.click(selector.admin.dokan.productAdvertising.addNewAdvertisement.selectStoreDropdown);
+		await this.typeAndWaitForResponse(data.subUrls.backend.stores, selector.admin.dokan.productAdvertising.addNewAdvertisement.selectStoreInput, advertising.advertisedProductStore);
+		await this.press(data.key.enter);
+
+		await this.click(selector.admin.dokan.productAdvertising.addNewAdvertisement.selectProductDropdown);
+		await this.typeAndWaitForResponse(data.subUrls.backend.products, selector.admin.dokan.productAdvertising.addNewAdvertisement.selectProductInput, advertising.advertisedProduct);
+		await this.press(data.key.enter);
+
+		await this.clickAndWaitForResponse(data.subUrls.backend.productAdvertising, selector.admin.dokan.productAdvertising.addNewAdvertisement.addNew);
+		await this.click(selector.admin.dokan.productAdvertising.actionSuccessful);
+		await this.click(selector.admin.dokan.productAdvertising.addNewAdvertisement.closeModal);
+	}
+
+	// search advertised product
+	async searchAdvertisedProduct(productOrOrder: string | number){
+		await this.goIfNotThere(data.subUrls.backend.dokan.dokanProductAdvertising);
+
+		await this.typeAndWaitForResponse(data.subUrls.backend.productAdvertising, selector.admin.dokan.productAdvertising.search, String(productOrOrder));
+		if (typeof(productOrOrder) != 'number'){
+			await expect(this.page.locator(selector.admin.dokan.productAdvertising.advertisedProductCell(productOrOrder))).toBeVisible();
+		} else {
+			await expect(this.page.locator(selector.admin.dokan.productAdvertising.advertisedProductOrderIdCell(productOrOrder))).toBeVisible();
+		}
+	}
+
+	// search advertised product
+	async updateAdvertisedProduct(productName: string, action: string){
+		await this.searchAdvertisedProduct(productName);
+
+		await this.hover(selector.admin.dokan.productAdvertising.advertisedProductCell(productName));
+		switch (action) {
+
+		case 'expire' :
+			await this.click(selector.admin.dokan.productAdvertising.advertisedProductExpire);
+			break;
+
+		case 'delete' :
+			await this.click(selector.admin.dokan.productAdvertising.advertisedProductDelete);
+			break;
+
+		default :
+			break;
+		}
+
+		await this.clickAndWaitForResponse(data.subUrls.backend.productAdvertising, selector.admin.dokan.productAdvertising.confirmAction);
+		await this.click(selector.admin.dokan.productAdvertising.actionSuccessful);
+	}
+
+	// product advertising bulk action
+	async productAdvertisingBulkAction(action: string){
+		// await this.searchAdvertisedProduct(vendorName); //TODO: can be used to minimized number of rows to be affected
+		await this.goIfNotThere(data.subUrls.backend.dokan.dokanProductAdvertising);
+
+		await this.click(selector.admin.dokan.vendors.bulkActions.selectAll);
+		await this.selectByValue(selector.admin.dokan.vendors.bulkActions.bulkActions, action);
+		await this.click(selector.admin.dokan.productAdvertising.bulkActions.applyBulkAction);
+		await this.clickAndWaitForResponse(data.subUrls.backend.productAdvertising, selector.admin.dokan.productAdvertising.confirmAction);
+		await this.click(selector.admin.dokan.productAdvertising.actionSuccessful);
 	}
 
 
@@ -2335,7 +2465,6 @@ export class AdminPage extends BasePage {
 	async regenerateOrderSyncTable(){
 		await this.goIfNotThere(data.subUrls.backend.dokan.dokanTools);
 		await this.clickAndWaitForResponse(data.subUrls.ajax, selector.admin.dokan.tools.regenerateOrderSyncTable.reBuild);
-
 	}
 
 	// check for duplicate order
@@ -2364,7 +2493,6 @@ export class AdminPage extends BasePage {
 	async importDummyData(){
 		await this.goIfNotThere(data.subUrls.backend.dokan.dokanTools);
 		await this.clickAndWaitForResponse(data.subUrls.backend.dummyData, selector.admin.dokan.tools.importDummyData.import);
-
 		await this.clickAndWaitForResponse(data.subUrls.backend.dummyData, selector.admin.dokan.dummyData.runTheImporter);
 		// await expect(this.page.locator(selector.admin.dokan.dummyData.importComplete)).toBeVisible();
 	}

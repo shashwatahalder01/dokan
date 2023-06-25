@@ -20,7 +20,7 @@ setup.describe('setup site & woocommerce & user settings', () => {
 	setup('check active dokan modules @pro', async ({ request }) => {
 		const apiUtils = new ApiUtils(request);
 		const activeModules = await apiUtils.getAllModuleIds({ status:'active' });
-		expect(activeModules).toEqual(expect.arrayContaining(data.module.modules));
+		expect(activeModules).toEqual(expect.arrayContaining(data.modules.modules));
 	});
 
 	setup('set wp settings @lite @pro', async ({ request }) => {

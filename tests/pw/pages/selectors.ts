@@ -1018,7 +1018,7 @@ export const selector = {
 			},
 
 			// Advertising
-			advertising: {
+			productAdvertising: {
 
 				productAdvertisingText: '.product-advertisement-list h1',
 
@@ -1034,7 +1034,7 @@ export const selector = {
 				// Bulk Actions
 				bulkActions: {
 					bulkActions: '.tablenav.top #bulk-action-selector-top',  // delete
-					applyBulkAction: '.tablenav.top .button.action',
+					applyBulkAction: '//div[@class="tablenav top"]//button[normalize-space()="Apply"]',
 					selectAll: 'thead .manage-column',
 				},
 
@@ -1050,7 +1050,25 @@ export const selector = {
 				// Search
 				search: '#post-search-input',
 
-				productAdvertisingTable: '#product_advertisement_list_table table'
+				productAdvertisingTable: '#product_advertisement_list_table table',
+
+				advertisedProductCell: (productName: string) => `//a[normalize-space()="${productName}"]/../..`,
+				advertisedProductOrderIdCell: (orderId: number) => `//a[normalize-space()="${orderId}"]/../..`,
+				advertisedProductExpire: '.row-actions .expire',
+				advertisedProductDelete: '.row-actions .delete',
+				confirmAction: '.swal2-actions .swal2-confirm', //TODO: merge this type of locators
+				actionSuccessful: '.swal2-actions .swal2-confirm', //TODO: merge this type of locators
+
+				addNewAdvertisement: {
+					closeModal: '.modal-header button',
+					selectStoreDropdown: '//label[normalize-space()="Select Store"]/..//div[@class="multiselect__select"]',
+					selectStoreInput: '#filter-vendors',
+					selectProductDropdown: '//label[normalize-space()="Select Product"]/..//div[@class="multiselect__select"]',
+					selectProductInput: '#filter-products',
+					addNew: '.modal-footer button',
+					addedSuccessfully: '',
+
+				},
 
 			},
 
