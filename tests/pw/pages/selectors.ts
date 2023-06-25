@@ -879,53 +879,55 @@ export const selector = {
 
 				// Page Installation
 				pageInstallation: {
-					pageInstallation: '//span[normalize-space()="Page Installation"]/../../../',
+					pageInstallation: '//span[normalize-space()="Page Installation"]/../../..',
 					collapsibleButton: '//span[normalize-space()="Page Installation"]/../../..//button',
 					allPagesCreated:'//a[normalize-space()="All Pages Created"]'
 				},
 
 				// Regenerate Order Sync Tab
-				regenerateOrderSyncTab: {
-					regenerateOrderSyncTab: '//span[normalize-space()="Regenerate Order Sync Table"]/../../../',
+				regenerateOrderSyncTable: {
+					regenerateOrderSyncTable: '//span[normalize-space()="Regenerate Order Sync Table"]/../../..',
 					collapsibleButton: '//span[normalize-space()="Regenerate Order Sync Table"]/../../..//button',
 					reBuild: '//a[normalize-space()="Re-build"]',
 				},
 
 				// Check for Duplicate Orders
 				checkForDuplicateOrders: {
-					checkForDuplicateOrders: '//span[normalize-space()="Check for Duplicate Orders"]/../../../',
+					checkForDuplicateOrders: '//span[normalize-space()="Check for Duplicate Orders"]/../../..',
 					collapsibleButton: '//span[normalize-space()="Check for Duplicate Orders"]/../../..//button',
 					checkOrders: '//a[normalize-space()="Check Orders"]',
 				},
 
 				// Dokan Setup Wizard
 				dokanSetupWizard: {
-					dokanSetupWizard: '//span[normalize-space()="Dokan Setup Wizard"]/../../../',
+					dokanSetupWizard: '//span[normalize-space()="Dokan Setup Wizard"]/../../..',
 					collapsibleButton: '//span[normalize-space()="Dokan Setup Wizard"]/../../..//button',
 					openSetupWizard: '//a[normalize-space()="Open Setup Wizard"]'
 				},
 
 				// regenerate Variable Product Variations Author Ids
 				regenerateVariableProductVariationsAuthorIds: {
-					regenerateVariableProductVariationsAuthorIds: '//span[normalize-space()="Regenerate Variable Product Variations Author IDs"]/../../../',
-					collapsibleButton: '//span[normalize-space()="Regenerate Variable Product Variations Author IDsn"]/../../..//button',
+					regenerateVariableProductVariationsAuthorIds: '//span[normalize-space()="Regenerate Variable Product Variations Author IDs"]/../../..',
+					collapsibleButton: '//span[normalize-space()="Regenerate Variable Product Variations Author IDs"]/../../..//button',
 					regenerate: '//a[normalize-space()="Regenerate"]'
 				},
 
 				// Import Dummy Data
 				importDummyData: {
-					importDummyData: '//span[normalize-space()="Import Dummy Data"]/../../../',
+					importDummyData: '//span[normalize-space()="Import Dummy Data"]/../../..',
 					collapsibleButton: '//span[normalize-space()="Import Dummy Data"]/../../..//button',
 					import:'//span[normalize-space()="Import Dummy Data"]/../../..//a'
 				},
 
 				// Test Distance Matrix API (Google MAP)
 				testDistanceMatrixApi: {
-					testDistanceMatrixApi: '//span[normalize-space()="Test Distance Matrix API (Google MAP)"]/../../../',
-					collapsibleButton: '//span[normalize-space()="Test Distance Matrix API (Google MAP)"]/../../..//button',
+					testDistanceMatrixApi: '//span[normalize-space()="Test Distance Matrix API (Google MAP)"]/../../..',
+					collapsibleButton: '//span[normalize-space()="Test Distance Matrix API (Google MAP)"]/../../..//button[@class="handlediv"]',
 					address1: '#address1',
 					address2: '#address2',
-					getDistance:'//button[normalize-space()="Get Distance"]'
+					getDistance:'//button[normalize-space()="Get Distance"]',
+					enabledSuccess: '//div[@class="formatted-message succes"]'
+
 				},
 
 
@@ -1505,6 +1507,17 @@ export const selector = {
 				moreSettings: '//a[contains(text(),"More Settings")]',
 				ReturnToTheWordPressDashboard: '.wc-return-to-dashboard',
 			},
+
+			// Dummy data
+			dummyData:{
+				runTheImporter: '.dokan-import-continue-btn',
+				importComplete: '//p[normalize-space()="Import complete!"]',
+				viewVendors: '//a[normalize-space()="View vendors"]',
+				viewProducts: '//a[normalize-space()="View products"]',
+				clearDummyData: '.cancel-btn.dokan-import-continue-btn',
+				confirmClearDummyData: '.swal2-actions .swal2-confirm',
+
+			}
 		},
 
 		// Woocommerce

@@ -425,10 +425,7 @@ export class BasePage {
 	//get element has class or not
 	async hasClass(selector: string, className: string): Promise<boolean> {
 		const element = this.page.locator(selector);
-		const hasClass = await element.evaluate(
-			(element, className) => element.classList.contains(className),
-			className,
-		);
+		const hasClass = await element.evaluate((element, className) => element.classList.contains(className), className,);
 		return hasClass;
 	}
 

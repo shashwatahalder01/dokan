@@ -1280,7 +1280,7 @@ export class AdminPage extends BasePage {
 		// Open Dokan Setup Wizard
 		// await this.click(selector.admin.dokan.tools.openSetupWizard)
 
-		await this.goto(data.subUrls.backend.dokan.dokanSetupWizard);
+		await this.goIfNotThere(data.subUrls.backend.dokan.dokanSetupWizard);
 		await this.click(selector.admin.dokan.dokanSetupWizard.letsGo);
 		// Store
 		await this.clearAndType(selector.admin.dokan.dokanSetupWizard.vendorStoreURL, dokanSetupWizard.vendorStoreURL);
@@ -2128,8 +2128,10 @@ export class AdminPage extends BasePage {
 
 	/*************************************************************************************************/
 
+	// tools
+
 	async adminToolsRenderProperly(){
-		await this.goIfNotThere(data.subUrls.backend.dokan.dokanWholeSaleCustomer);
+		await this.goIfNotThere(data.subUrls.backend.dokan.dokanTools);
 
 		// tools text is visible
 		await expect(this.page.locator(selector.admin.dokan.tools.toolsText)).toBeVisible();
@@ -2138,7 +2140,7 @@ export class AdminPage extends BasePage {
 		await this.multipleElementVisible(selector.admin.dokan.tools.pageInstallation);
 
 		// Regenerate Order Sync Tab elements are visible
-		await this.multipleElementVisible(selector.admin.dokan.tools.regenerateOrderSyncTab);
+		await this.multipleElementVisible(selector.admin.dokan.tools.regenerateOrderSyncTable);
 
 		// Check For Duplicate Orders are visible
 		await this.multipleElementVisible(selector.admin.dokan.tools.checkForDuplicateOrders);
@@ -2153,13 +2155,64 @@ export class AdminPage extends BasePage {
 		await this.multipleElementVisible(selector.admin.dokan.tools.importDummyData);
 
 		//  Test Distance Matrix API (Google MAP) elements are visible
-		await this.multipleElementVisible(selector.admin.dokan.tools.testDistanceMatrixApi);
-
+		// eslint-disable-next-line @typescript-eslint/no-unused-vars
+		const { enabledSuccess, ...testDistanceMatrixApi } = selector.admin.dokan.tools.testDistanceMatrixApi;
+		await this.multipleElementVisible(testDistanceMatrixApi);
 
 	}
 
+	// dokan page installation
+	async dokanPageInstallation(){
+		await this.goIfNotThere(data.subUrls.backend.dokan.dokanTools);
+
+		// all page created button should be disabled
+		await this.hasClass(selector.admin.dokan.tools.pageInstallation.allPagesCreated, 'button-disabled');
+
+	}
+
+	// regenerate order sync table
+	async regenerateOrderSyncTable(){
+		await this.goIfNotThere(data.subUrls.backend.dokan.dokanTools);
+		await this.clickAndWaitForResponse(data.subUrls.ajax, selector.admin.dokan.tools.regenerateOrderSyncTable.reBuild);
+
+	}
+
+	// check for duplicate order
+	async checkForDuplicateOrders(){
+		await this.goIfNotThere(data.subUrls.backend.dokan.dokanTools);
+		await this.clickAndWaitForResponse(data.subUrls.ajax, selector.admin.dokan.tools.checkForDuplicateOrders.checkOrders);
+	}
+
+	// regenerate variable product variations author IDs
+	async regenerateVariableProductVariationsAuthorIds(){
+		await this.goIfNotThere(data.subUrls.backend.dokan.dokanTools);
+		await this.clickAndWaitForResponse(data.subUrls.ajax, selector.admin.dokan.tools.regenerateVariableProductVariationsAuthorIds.regenerate);
+
+	}
+
+	// import dummy data
+	async importDummyData(){
+		await this.goIfNotThere(data.subUrls.backend.dokan.dokanTools);
+		await this.clickAndWaitForResponse(data.subUrls.backend.dummyData, selector.admin.dokan.tools.importDummyData.import);
+
+		await this.clickAndWaitForResponse(data.subUrls.backend.dummyData, selector.admin.dokan.dummyData.runTheImporter);
+		await expect(this.page.locator(selector.admin.dokan.dummyData.importComplete)).toBeVisible();
+	}
+
+	// test distance matrix API
+	async testDistanceMatrixApi(address: any){
+		await this.goIfNotThere(data.subUrls.backend.dokan.dokanTools);
+
+		await this.clearAndType(selector.admin.dokan.tools.testDistanceMatrixApi.address1, address.address3);
+		await this.clearAndType(selector.admin.dokan.tools.testDistanceMatrixApi.address2, address.address4);
+		await this.click(selector.admin.dokan.tools.testDistanceMatrixApi.getDistance);
+
+	}
+
+
 	/*************************************************************************************************/
 
+	// wholesale customers
 	async adminWholesaleCustomersRenderProperly(){
 		await this.goIfNotThere(data.subUrls.backend.dokan.dokanWholeSaleCustomer);
 
@@ -2197,7 +2250,6 @@ export class AdminPage extends BasePage {
 		await this.selectByValue(selector.admin.dokan.wholesaleCustomer.bulkActions.bulkActions, action);
 		await this.clickAndWaitForResponse(data.subUrls.backend.wholesaleCustomers, selector.admin.dokan.wholesaleCustomer.bulkActions.applyBulkAction);
 	}
-
 
 	// update wholesale customer status
 	async updateWholesaleCustomerStatus(wholesaleCustomer: string){

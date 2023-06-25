@@ -27,29 +27,32 @@ test.describe('Tools test', () => {
 		await adminPage.adminToolsRenderProperly();
 	});
 
-	test('admin can search wholesale customer @pro', async ( ) => {
-		await adminPage.searchWholesaleCustomer(data.predefined.customerInfo.username1);
+	test('admin can perform dokan page Installation @pro', async ( ) => {
+		await adminPage.dokanPageInstallation();
 	});
 
-	test('admin can perform wholesale customer bulk action @pro', async ( ) => {
-		await adminPage.wholesaleCustomerBulkAction('activate');
+	test('admin can regenerate order sync table @pro', async ( ) => {
+		await adminPage.regenerateOrderSyncTable();
 	});
 
-	test('admin can update wholesale customer wholesale capability @pro', async ( ) => {
-		await adminPage.updateWholesaleCustomerStatus(data.predefined.customerInfo.username1);
+	test('admin can check for duplicate orders @pro', async ( ) => {
+		await adminPage.checkForDuplicateOrders();
 	});
 
-	test.skip('admin can edit wholesale customer  @pro', async ( ) => {
-		// await adminPage.editWholesaleCustomer(data.predefined.customerInfo.username1);
+	// test('admin can set dokan setup wizard @lite @pro', async ( ) => {
+	// 	await adminPage.setDokanSetupWizard(data.dokanSetupWizard);
+	// });
+
+	test('admin can regenerate variable product variations author IDs  @pro', async ( ) => {
+		await adminPage.regenerateVariableProductVariationsAuthorIds();
 	});
 
-	test.skip('admin can view wholesale customer orders @pro', async ( ) => {
-		// await adminPage.viewWholesaleCustomerOrders(data.predefined.customerInfo.username1);
+	test.only('admin can import dummy data  @pro', async ( ) => {
+		await adminPage.importDummyData();
 	});
 
-	test.skip('admin can delete wholesale customer  @pro', async ( ) => {
-		// await adminPage.deleteWholesaleCustomer(data.predefined.customerInfo.username1);
+	test('admin can test distance matrix API @pro', async ( ) => {
+		await adminPage.testDistanceMatrixApi(data.tools.distanceMatrixApi);
 	});
-
 
 });

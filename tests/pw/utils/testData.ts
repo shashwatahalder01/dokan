@@ -757,6 +757,7 @@ export const data = {
 			withdraws: 'dokan/v1/withdraw',
 			abuseReports: 'dokan/v1/abuse-reports',
 			announcements: 'dokan/v1/announcement',
+			dummyData: 'dokan/v1/dummy-data',
 			storeReviews: 'dokan/v1/store-reviews',
 			wholesaleCustomers: 'dokan/v1/wholesale/customers',
 			supportTicket: 'dokan/v1/admin/support-ticket',
@@ -1304,6 +1305,16 @@ export const data = {
 		},
 
 		badgeStatus: 'published' // published, draft
+	},
+
+
+	tools: {
+		distanceMatrixApi: {
+			address1: 'R9PG+W7 Dhaka',
+			address2: 'R9H7+HF Dhaka',
+			address3: 'P2J3+93 New York, USA',
+			address4: 'M2CP+FG New York, USA'
+		}
 	},
 
 
