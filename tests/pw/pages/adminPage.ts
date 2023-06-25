@@ -2160,7 +2160,7 @@ export class AdminPage extends BasePage {
 		await expect(this.page.locator(selector.admin.dokan.modules.pro.moduleActivationSwitch)).toHaveCount(39);
 		await expect(this.page.locator(selector.admin.dokan.modules.pro.moduleDocs)).toHaveCount(38);
 		await expect(this.page.locator(selector.admin.dokan.modules.pro.moduleVideos)).toHaveCount(17);
-		
+
 		// module category tags are visible
 		await expect(this.page.locator(selector.admin.dokan.modules.pro.moduleCategoryTag('Product Management'))).toHaveCount(13);
 		await expect(this.page.locator(selector.admin.dokan.modules.pro.moduleCategoryTag('Integration'))).toHaveCount(6);
@@ -2226,6 +2226,63 @@ export class AdminPage extends BasePage {
 		}
 
 	}
+
+	/*************************************************************************************************/
+
+	// verification requests
+
+	async adminVerificationsRenderProperly(){
+		await this.goIfNotThere(data.subUrls.backend.dokan.dokanVerifications);
+
+		// tools text is visible
+		await expect(this.page.locator(selector.admin.dokan.verifications.verificationRequestsText)).toBeVisible();
+
+		// navTab elements are visible
+		await this.multipleElementVisible(selector.admin.dokan.verifications.navTabs);
+
+		// verification table is visible
+		await expect(this.page.locator(selector.admin.dokan.verifications.verificationTable)).toBeVisible();
+
+	}
+
+	// ID verification requests
+	async idVerificationRequest(storeName: string, action: string){
+		await this.goIfNotThere(data.subUrls.backend.dokan.dokanVerifications);
+
+		await this.hover(selector.admin.dokan.verifications.vendorRow(storeName));
+		if(action === 'approve'){
+			await this.clickAndWaitForResponse(data.subUrls.ajax, selector.admin.dokan.verifications.idRequest.approveRequest(storeName));
+		} else {
+			await this.clickAndWaitForResponse(data.subUrls.ajax, selector.admin.dokan.verifications.idRequest.rejectRequest(storeName));
+		}
+
+	}
+
+	// address verification requests
+	async addressVerificationRequest(storeName: string, action: string){
+		await this.goIfNotThere(data.subUrls.backend.dokan.dokanVerifications);
+
+		await this.hover(selector.admin.dokan.verifications.vendorRow(storeName));
+		if(action === 'approve'){
+			await this.clickAndWaitForResponse(data.subUrls.ajax, selector.admin.dokan.verifications.addressRequest.approveRequest(storeName));
+		} else {
+			await this.clickAndWaitForResponse(data.subUrls.ajax, selector.admin.dokan.verifications.addressRequest.rejectRequest(storeName));
+		}
+	}
+
+	// company verification requests
+	async companyVerificationRequest(storeName: string, action: string){
+		await this.goIfNotThere(data.subUrls.backend.dokan.dokanVerifications);
+
+		await this.hover(selector.admin.dokan.verifications.vendorRow(storeName));
+		if(action === 'approve'){
+			await this.clickAndWaitForResponse(data.subUrls.ajax, selector.admin.dokan.verifications.companyRequest.approveRequest(storeName));
+		} else {
+			await this.clickAndWaitForResponse(data.subUrls.ajax, selector.admin.dokan.verifications.companyRequest.rejectRequest(storeName));
+		}
+
+	}
+
 
 	/*************************************************************************************************/
 

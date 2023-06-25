@@ -981,12 +981,40 @@ export const selector = {
 
 			// Verifications
 			verifications: {
+
+				verificationRequestsText: '//h2[normalize-space()="Verification Requests"]',
+
 				// Nav Tabs
 				navTabs: {
 					pending: '//ul[@class="subsubsub"]//li//a[contains(text(),"Pending")]',
 					approved: '//ul[@class="subsubsub"]//li//a[contains(text(),"Approved")]',
 					rejected: '//ul[@class="subsubsub"]//li//a[contains(text(),"Rejected")]',
 				},
+
+				verificationTable:'.verification-table',
+
+				vendorRow: (storeName: string) => `//a[normalize-space()="${storeName}"]/../../..`,
+
+				idRequest : {
+					approveRequest: (storeName: string) => `(//a[normalize-space()="${storeName}"]/../../..//a[@data-status="approved"])[1]`,
+					rejectRequest: (storeName: string) => `(//a[normalize-space()="${storeName}"]/../../..//a[@data-status="rejected"])[1]`,
+				},
+
+				addressRequest : {
+					approveRequest: (storeName: string) => `//a[normalize-space()="${storeName}"]/../../..//a[@data-type="address"][normalize-space()="Approve"]`,
+					rejectRequest: (storeName: string) => `//a[normalize-space()="${storeName}"]/../../..//a[@data-type="address"][normalize-space()="Reject"]`,
+					proofOfResidence: (storeName: string) => `//a[normalize-space()="${storeName}"]/../../..//a[normalize-space()="Proof of residence"]`,
+				},
+
+				phoneRequest: {
+					// TODO:
+				},
+
+				companyRequest: {
+					approveRequest: (storeName: string) => `//a[normalize-space()="${storeName}"]/../../..//a[@data-type="company_verification_files"][normalize-space()="Approve"]`,
+					rejectRequest: (storeName: string) => `//a[normalize-space()="${storeName}"]/../../..//a[@data-type="company_verification_files"][normalize-space()="Reject"]`,
+				}
+
 			},
 
 			// Advertising
@@ -1021,6 +1049,8 @@ export const selector = {
 
 				// Search
 				search: '#post-search-input',
+
+				productAdvertisingTable: '#product_advertisement_list_table table'
 
 			},
 

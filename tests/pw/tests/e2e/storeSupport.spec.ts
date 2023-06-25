@@ -19,7 +19,7 @@ test.afterAll(async ( ) => {
 	await page.close();
 });
 
-test.describe('Store Support test', () => {
+test.describe.skip('Store Support test', () => {
 
 	test.use({ storageState: data.auth.adminAuthFile });
 

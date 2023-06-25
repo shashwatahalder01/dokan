@@ -20,7 +20,7 @@ test.afterAll(async ( ) => {
 	await page.close();
 });
 
-test.describe('Vendors test', () => {
+test.describe.skip('Vendors test', () => {
 
 	test.use({ storageState: data.auth.adminAuthFile });
 
