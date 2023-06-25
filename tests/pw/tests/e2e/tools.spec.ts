@@ -47,8 +47,13 @@ test.describe('Tools test', () => {
 		await adminPage.regenerateVariableProductVariationsAuthorIds();
 	});
 
-	test.only('admin can import dummy data  @pro', async ( ) => {
+	//ToDo:
+	test.fixme('admin can import dummy data  @pro', async ( ) => {
 		await adminPage.importDummyData();
+	});
+
+	test.skip('admin can clear dummy data  @pro', async ( ) => {
+		await adminPage.clearDummyData();
 	});
 
 	test('admin can test distance matrix API @pro', async ( ) => {

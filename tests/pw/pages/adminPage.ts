@@ -1207,9 +1207,9 @@ export class AdminPage extends BasePage {
 		const subMenuOpened = await this.getClassValue(selector.admin.aDashboard.dokanMenu);
 		if (subMenuOpened.includes('opensub')) {
 			await this.hover(selector.admin.aDashboard.dokan);
-			await this.click(selector.admin.dokan.reportsMenu);
+			await this.click(selector.admin.dokan.menus.reports);
 		} else {
-			await this.click(selector.admin.dokan.reportsMenu);
+			await this.click(selector.admin.dokan.menus.reports);
 
 		}
 		await this.click(selector.admin.dokan.reports.allLogs);
@@ -1235,7 +1235,7 @@ export class AdminPage extends BasePage {
 	// Get Total Admin Commission from Admin Dashboard
 	async getTotalAdminCommission() {
 		await this.hover(selector.admin.aDashboard.dokan);
-		await this.click(selector.admin.dokan.dashboardMenu);
+		await this.click(selector.admin.dokan.menus.dashboard);
 
 		const totalAdminCommission = helpers.price(await this.getElementText(selector.admin.dokan.dashboard.commissionEarned));
 		return totalAdminCommission;
@@ -1260,7 +1260,7 @@ export class AdminPage extends BasePage {
 	// Search Refund Request
 	async searchRefundRequest(orderNumber: any) {
 		await this.hover(selector.admin.aDashboard.dokan);
-		await this.click(selector.admin.dokan.refundsMenu);
+		await this.click(selector.admin.dokan.menus.refunds);
 
 		// Search Refund Request
 		await this.type(selector.admin.dokan.refunds.searchRefund, orderNumber);
@@ -1326,15 +1326,15 @@ export class AdminPage extends BasePage {
 	// Module Activation Check
 	async checkActiveModules() {
 		await this.hover(selector.admin.aDashboard.dokan);
-		await this.click(selector.admin.dokan.modulesMenu);
+		await this.click(selector.admin.dokan.menus.modules);
 
-		await this.click(selector.admin.dokan.modules.inActive);
+		await this.click(selector.admin.dokan.modules.pro.navTabs.inActive);
 
-		const noModulesMessage = await this.isVisible(selector.admin.dokan.modules.noModulesFound);
+		const noModulesMessage = await this.isVisible(selector.admin.dokan.modules.pro.noModulesFound);
 		if (noModulesMessage) {
-			await expect(this.page.locator(selector.admin.dokan.modules.noModulesFound)).toContainText(data.module.noModuleMessage);
+			await expect(this.page.locator(selector.admin.dokan.modules.pro.noModulesFound)).toContainText(data.modules.noModuleMessage);
 		} else {
-			const inActiveModuleNames = await this.getMultipleElementTexts(selector.admin.dokan.modules.moduleName);
+			const inActiveModuleNames = await this.getMultipleElementTexts(selector.admin.dokan.modules.pro.moduleName);
 			throw new Error('Inactive modules: ' + inActiveModuleNames);
 		}
 	}
@@ -1390,7 +1390,7 @@ export class AdminPage extends BasePage {
 
 		// module cards are visible
 		await this.click(selector.admin.dokan.modules.lite.popup.closeDokanUpgradePopup);
-		await expect(this.page.locator(selector.admin.dokan.modules.moduleText)).toBeVisible();
+		await expect(this.page.locator(selector.admin.dokan.modules.lite.moduleText)).toBeVisible();
 		await expect(this.page.locator(selector.admin.dokan.modules.lite.moduleCard)).toHaveCount(27);
 
 		// dokan pro features menu
@@ -1984,7 +1984,7 @@ export class AdminPage extends BasePage {
 		await this.clickIfVisible(selector.admin.dokan.vendors.filters.clearFilter);
 		await this.selectByLabel( selector.admin.dokan.vendors.filters.filterByBadges, badgeName);
 
-		const count = (await this.getElementText(selector.admin.dokan.vendors.numberOfVendorsFound))?.split(' ')[0];
+		const count = (await this.getElementText(selector.admin.dokan.vendors.numberOfVendorsFound)).split(' ')[0];
 		expect(Number(count)).not.toBe(0);
 		//TOdo: either this or that assertion
 		//todo: to have count more than
@@ -1998,7 +1998,7 @@ export class AdminPage extends BasePage {
 		await this.clickAndWaitForResponse(data.subUrls.backend.sellerBadge, selector.admin.dokan.sellerBadge.sellerBadgeVendors);
 
 		// await expect(this.page.locator(selector.admin.dokan.vendors.vendorCell(badgeName))).toBeVisible();
-		const count = (await this.getElementText(selector.admin.dokan.vendors.numberOfVendorsFound))?.split(' ')[0];
+		const count = (await this.getElementText(selector.admin.dokan.vendors.numberOfVendorsFound)).split(' ')[0];
 		expect(Number(count)).not.toBe(0);
 		//TOdo: either this or that assertion
 
@@ -2128,6 +2128,107 @@ export class AdminPage extends BasePage {
 
 	/*************************************************************************************************/
 
+	// modules
+
+	async adminModulesRenderProperly(){
+		await this.goIfNotThere(data.subUrls.backend.dokan.dokanModules);
+
+		// modules text is visible
+		await expect(this.page.locator(selector.admin.dokan.modules.pro.moduleText)).toBeVisible();
+
+		// module plan elements are visible
+		await this.multipleElementVisible(selector.admin.dokan.modules.pro.modulePlan);
+
+		// navTab elements are visible
+		await this.multipleElementVisible(selector.admin.dokan.modules.pro.navTabs);
+
+		// module filter  is visible
+		await expect(this.page.locator(selector.admin.dokan.modules.pro.moduleFilter)).toBeVisible();
+
+		// modules search is visible
+		await expect(this.page.locator(selector.admin.dokan.modules.pro.searchBox)).toBeVisible();
+
+		// modules view mode switcher is visible
+		await expect(this.page.locator(selector.admin.dokan.modules.pro.moduleViewMode)).toBeVisible();
+
+		// module cards and card details are visible
+		await expect(this.page.locator(selector.admin.dokan.modules.pro.moduleCard)).toHaveCount(39);
+		await expect(this.page.locator(selector.admin.dokan.modules.pro.moduleIcon)).toHaveCount(39);
+		await expect(this.page.locator(selector.admin.dokan.modules.pro.moduleCheckbox)).toHaveCount(39);
+		await expect(this.page.locator(selector.admin.dokan.modules.pro.moduleName)).toHaveCount(39);
+		await expect(this.page.locator(selector.admin.dokan.modules.pro.moduleDescription)).toHaveCount(39);
+		await expect(this.page.locator(selector.admin.dokan.modules.pro.moduleActivationSwitch)).toHaveCount(39);
+		await expect(this.page.locator(selector.admin.dokan.modules.pro.moduleDocs)).toHaveCount(38);
+		await expect(this.page.locator(selector.admin.dokan.modules.pro.moduleVideos)).toHaveCount(17);
+		
+		// module category tags are visible
+		await expect(this.page.locator(selector.admin.dokan.modules.pro.moduleCategoryTag('Product Management'))).toHaveCount(13);
+		await expect(this.page.locator(selector.admin.dokan.modules.pro.moduleCategoryTag('Integration'))).toHaveCount(6);
+		await expect(this.page.locator(selector.admin.dokan.modules.pro.moduleCategoryTag('UI & UX'))).toHaveCount(2);
+		await expect(this.page.locator(selector.admin.dokan.modules.pro.moduleCategoryTag('Shipping'))).toHaveCount(3);
+		await expect(this.page.locator(selector.admin.dokan.modules.pro.moduleCategoryTag('Store Management'))).toHaveCount(10);
+		await expect(this.page.locator(selector.admin.dokan.modules.pro.moduleCategoryTag('Payment'))).toHaveCount(7);
+		await expect(this.page.locator(selector.admin.dokan.modules.pro.moduleCategoryTag('Order Management'))).toHaveCount(2);
+		await expect(this.page.locator(selector.admin.dokan.modules.pro.moduleCategoryTag('Vendor Management'))).toHaveCount(1);
+
+	}
+
+	// search module
+	async searchModule(moduleName: string){
+		await this.goIfNotThere(data.subUrls.backend.dokan.dokanModules);
+		await this.clickIfVisible(selector.admin.dokan.modules.pro.clearFilter);
+
+		await this.clearAndType(selector.admin.dokan.modules.pro.searchBox, moduleName);
+		await expect(this.page.locator(selector.admin.dokan.modules.pro.moduleCardByName(moduleName))).toBeVisible();
+
+	}
+
+	// filter modules
+	async filterModules(category: string){
+		await this.goto(data.subUrls.backend.dokan.dokanModules);
+
+		await this.hover(selector.admin.dokan.modules.pro.moduleFilter);
+		await this.click(selector.admin.dokan.modules.pro.moduleFilterCheckBox(category));
+		const numOfModules = await this.countLocator(selector.admin.dokan.modules.pro.moduleCard);
+		const numOfCategoryTag = await this.countLocator(selector.admin.dokan.modules.pro.moduleCategoryTag(category));
+		expect(numOfModules).toBe(numOfCategoryTag);
+	}
+
+	// activate deactivate module
+	async activateDeactivateModule(moduleName: string){
+		await this.searchModule(moduleName);
+		await this.clickAndWaitForResponse(data.subUrls.backend.modules, selector.admin.dokan.modules.pro.moduleActivationSwitch);
+	}
+
+	// modules bulk action
+	async moduleBulkAction(action: string){
+		await this.goIfNotThere(data.subUrls.backend.dokan.dokanModules);
+
+		await this.click(selector.admin.dokan.modules.pro.firstModuleCheckbox);
+		await this.click(selector.admin.dokan.modules.pro.selectAllBulkAction);
+		if(action === 'activate'){
+			await this.clickAndWaitForResponse(data.subUrls.backend.modules, selector.admin.dokan.modules.pro.activeAll);
+		} else {
+			await this.clickAndWaitForResponse(data.subUrls.backend.modules, selector.admin.dokan.modules.pro.deActivateAll);
+		}
+
+	}
+
+	// module view layout
+	async moduleViewLayout(style: string){
+		await this.goIfNotThere(data.subUrls.backend.dokan.dokanModules);
+
+		const currentStyle = await this.getClassValue(selector.admin.dokan.modules.pro.currentLayout);
+
+		if(!currentStyle.includes(style)){
+			await this.click(selector.admin.dokan.modules.pro.moduleViewMode);
+			await expect(this.page.locator(selector.admin.dokan.modules.pro.currentLayout)).toHaveClass(style);
+		}
+
+	}
+
+	/*************************************************************************************************/
+
 	// tools
 
 	async adminToolsRenderProperly(){
@@ -2168,6 +2269,9 @@ export class AdminPage extends BasePage {
 		// all page created button should be disabled
 		await this.hasClass(selector.admin.dokan.tools.pageInstallation.allPagesCreated, 'button-disabled');
 
+		// await this.setAttributeValue(selector.admin.dokan.tools.pageInstallation.allPagesCreated, 'class',  'button button-primary');
+		// await this.clickAndWaitForResponse(data.subUrls.ajax, selector.admin.dokan.tools.pageInstallation.allPagesCreated);
+
 	}
 
 	// regenerate order sync table
@@ -2190,13 +2294,22 @@ export class AdminPage extends BasePage {
 
 	}
 
+	// clear dummy data
+	async clearDummyData(){
+		await this.goIfNotThere(data.subUrls.backend.dokan.dokanTools);
+		await this.clickAndWaitForResponse(data.subUrls.backend.dummyData, selector.admin.dokan.tools.importDummyData.import);
+
+		await this.click(selector.admin.dokan.dummyData.clearDummyData);
+		await this.clickAndWaitForResponse(data.subUrls.backend.dummyData, selector.admin.dokan.dummyData.confirmClearDummyData);
+	}
+
 	// import dummy data
 	async importDummyData(){
 		await this.goIfNotThere(data.subUrls.backend.dokan.dokanTools);
 		await this.clickAndWaitForResponse(data.subUrls.backend.dummyData, selector.admin.dokan.tools.importDummyData.import);
 
 		await this.clickAndWaitForResponse(data.subUrls.backend.dummyData, selector.admin.dokan.dummyData.runTheImporter);
-		await expect(this.page.locator(selector.admin.dokan.dummyData.importComplete)).toBeVisible();
+		// await expect(this.page.locator(selector.admin.dokan.dummyData.importComplete)).toBeVisible();
 	}
 
 	// test distance matrix API

@@ -539,7 +539,7 @@ export class BasePage {
 
 	// Or
 	async clearInputField1(selector: string): Promise<void> {
-		const element = await this.getElement(selector);
+		const element = this.getElement(selector);
 		await element.click({ clickCount: 3 });
 		await this.press('Backspace');
 	}

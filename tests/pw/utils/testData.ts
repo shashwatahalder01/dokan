@@ -666,13 +666,40 @@ export const data = {
 		},
 	},
 
-	module: {
+	modules: {
 		noModuleMessage: 'No modules found.',
 		modules: [
 			'booking', 'color_scheme_customizer', 'delivery_time', 'elementor', 'export_import', 'follow_store', 'geolocation', 'germanized', 'live_chat', 'live_search',
 			'moip', 'dokan_paypal_ap', 'paypal_marketplace', 'product_addon', 'product_enquiry', 'report_abuse', 'rma', 'seller_vacation', 'shipstation', 'auction', 'spmv',
 			'store_reviews', 'stripe', 'product_advertising', 'product_subscription', 'vendor_analytics', 'vendor_staff', 'vsp', 'vendor_verification', 'wholesale',
-			'rank_math', 'table_rate_shipping', 'mangopay', 'order_min_max', 'razorpay', 'seller_badge', 'stripe_express', 'request_for_quotation' ]
+			'rank_math', 'table_rate_shipping', 'mangopay', 'order_min_max', 'razorpay', 'seller_badge', 'stripe_express', 'request_for_quotation' ],
+
+		modulesName: {
+			AuctionIntegration: 'Auction Integration',
+			ColorSchemeCustomize: 'Color Scheme Customize',
+			DeliveryTime: 'Delivery Time',
+			Elementor : 'Elementor',
+			EUComplianceFields: 'EU Compliance Fields',
+			FollowStore: 'Follow Store',
+		},
+
+		moduleCategory:{
+			productManagement:'Product Management',
+			integration: 'Integration',
+			uiUx: 'UI & UX',
+			shipping: 'Shipping',
+			storeManagement: 'Store Management',
+			payment: 'Payment',
+			orderManagement: 'Order Management',
+			vendorManagement: 'Vendor Management',
+		},
+
+		layout:{
+			grid:'my-modules grid-view',
+			list: 'my-modules list-view'
+		},
+
+
 	},
 
 	// Dokan Setup Wizard
@@ -758,6 +785,7 @@ export const data = {
 			abuseReports: 'dokan/v1/abuse-reports',
 			announcements: 'dokan/v1/announcement',
 			dummyData: 'dokan/v1/dummy-data',
+			modules: 'dokan/v1/admin/modules',
 			storeReviews: 'dokan/v1/store-reviews',
 			wholesaleCustomers: 'dokan/v1/wholesale/customers',
 			supportTicket: 'dokan/v1/admin/support-ticket',

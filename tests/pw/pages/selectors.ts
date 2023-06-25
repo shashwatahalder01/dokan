@@ -163,24 +163,24 @@ export const selector = {
 		dokan: {
 			// Dokan Menus
 			menus:{
-				dashboardMenu: '//li[contains(@class,"toplevel_page_dokan")]//a[text()="Dashboard"]',
-				withdrawMenu: '//li[contains(@class,"toplevel_page_dokan")]//a[text()="Withdraw"]',
-				vendorsMenu: '//li[contains(@class,"toplevel_page_dokan")]//a[text()="Vendors"]',
-				abuseReportsMenu: '//li[contains(@class,"toplevel_page_dokan")]//a[text()="Abuse Reports"]',
-				storeReviewsMenu: '//li[contains(@class,"toplevel_page_dokan")]//a[text()="Store Reviews"]',
-				storeSupportMenu: '//li[contains(@class,"toplevel_page_dokan")]//a[text()="Store Support"]',
-				announcementsMenu: '//li[contains(@class,"toplevel_page_dokan")]//a[text()="Announcements"]',
-				refundsMenu: '//li[contains(@class,"toplevel_page_dokan")]//a[contains(text(),"Refunds")]',
-				reportsMenu: '//li[contains(@class,"toplevel_page_dokan")]//a[text()="Reports"]',
-				modulesMenu: '//li[contains(@class,"toplevel_page_dokan")]//a[text()="Modules"]',
-				proFeatureMenu: '//li[contains(@class,"toplevel_page_dokan")]//a[text()="PRO Features"]',
-				toolsMenu: '//li[contains(@class,"toplevel_page_dokan")]//a[text()="Tools"]',
-				verificationsMenu: '//li[contains(@class,"toplevel_page_dokan")]//a[text()="Verifications"]',
-				advertisingMenu: '//li[contains(@class,"toplevel_page_dokan")]//a[text()="Advertising"]',
-				wholesaleCustomerMenu: '//li[contains(@class,"toplevel_page_dokan")]//a[text()="Wholesale Customer"]',
-				helpMenu: '//li[contains(@class,"toplevel_page_dokan")]//span[text()="Help"]/..',
-				settingsMenu: '//li[contains(@class,"toplevel_page_dokan")]//a[text()="Settings"]',
-				licenseMenu: '//li[contains(@class,"toplevel_page_dokan")]//a[text()="License"]',
+				dashboard: '//li[contains(@class,"toplevel_page_dokan")]//a[text()="Dashboard"]',
+				withdraw: '//li[contains(@class,"toplevel_page_dokan")]//a[text()="Withdraw"]',
+				vendors: '//li[contains(@class,"toplevel_page_dokan")]//a[text()="Vendors"]',
+				abuseReports: '//li[contains(@class,"toplevel_page_dokan")]//a[text()="Abuse Reports"]',
+				storeReviews: '//li[contains(@class,"toplevel_page_dokan")]//a[text()="Store Reviews"]',
+				storeSupport: '//li[contains(@class,"toplevel_page_dokan")]//a[text()="Store Support"]',
+				announcements: '//li[contains(@class,"toplevel_page_dokan")]//a[text()="Announcements"]',
+				refunds: '//li[contains(@class,"toplevel_page_dokan")]//a[contains(text(),"Refunds")]',
+				reports: '//li[contains(@class,"toplevel_page_dokan")]//a[text()="Reports"]',
+				modules: '//li[contains(@class,"toplevel_page_dokan")]//a[text()="Modules"]',
+				proFeature: '//li[contains(@class,"toplevel_page_dokan")]//a[text()="PRO Features"]',
+				tools: '//li[contains(@class,"toplevel_page_dokan")]//a[text()="Tools"]',
+				verifications: '//li[contains(@class,"toplevel_page_dokan")]//a[text()="Verifications"]',
+				advertising: '//li[contains(@class,"toplevel_page_dokan")]//a[text()="Advertising"]',
+				wholesaleCustomer: '//li[contains(@class,"toplevel_page_dokan")]//a[text()="Wholesale Customer"]',
+				help: '//li[contains(@class,"toplevel_page_dokan")]//span[text()="Help"]/..',
+				settings: '//li[contains(@class,"toplevel_page_dokan")]//a[text()="Settings"]',
+				license: '//li[contains(@class,"toplevel_page_dokan")]//a[text()="License"]',
 			},
 
 			// dokan notice
@@ -793,9 +793,9 @@ export const selector = {
 			// Modules
 			modules: {
 
-				moduleText: '#lite-modules h1',
-
 				lite : {
+
+					moduleText: '#lite-modules h1',
 
 					// dokan upgrade popup
 					popup: {
@@ -811,25 +811,70 @@ export const selector = {
 					moduleCard: '.plugin-card',
 				},
 
-				// Nav Tabs
-				navTabs: {
-					active: '//li//a[contains(text(),"Active")]',
-					inActive: '//li//a[contains(text(),"Inactive")]',
-				},
+				pro : {
 
-				// Search Box
-				searchBox: '.search-box input',
-				moduleActivationSwitch: '.switch.tips span',
-				moduleCard: '.module-card',
-				moduleCheckbox: '.module-checkbox input',
-				moduleName: '.module-details a',
+					moduleText: '.dokan-modules-wrap h1',
 
-				// All Module Activation
-				selectAllBulkAction: '.bulk-actions li input',
-				activeAll: '.activate',
-				deActivateAll: '.deactivate',
-				// No Modules Message
-				noModulesFound: '.not-found h5',
+					// module plan
+					modulePlan: {
+						planName: '.plan-name',
+						upgradePlan: '.module-plan .upgrade-plan'
+					},
+
+					// Nav Tabs
+					navTabs: {
+						myModules: '//li//a[contains(text(),"My Modules")]',
+						active: '//li//a[contains(text(),"Active")]',
+						inActive: '//li//a[contains(text(),"Inactive")]',
+					},
+
+					// filter
+					moduleFilter: '.module-category-filter',
+					moduleFilterCheckBox: (category: string) => `//label[contains(text(),"${category}")]/..//input`,
+					clearFilter: '//a[normalize-space()="Clear filter"]',
+					moduleCategoryTag: (category: string) => `//span[normalize-space()="${category}"]`,
+					moduleCategoryTypes:{
+						productManagement:'.product-management',
+						integration: '.integration',
+						uiUx: '.ui-ux',
+						shipping: '.shipping',
+						storeManagement: '.store-management',
+						payment: '.payment',
+						orderManagement: '.order-management',
+						vendorManagement: '.vendor-management',
+					},
+
+					// Search Box
+					searchBox: '.search-box input',
+					clearSearch: '.search-box svg',
+
+					// view mode
+					currentLayout: '.my-modules',
+					moduleViewMode: '.module-view-mode',
+
+					// module card
+					moduleCard: '.module-card',
+					moduleCardByName: (moduleName: string) => `//a[normalize-space()="${moduleName}"]/../../..`,
+					moduleIcon: '.module-icon',
+					moduleCheckbox: '.module-checkbox input',
+					moduleName: '.module-details a',
+					moduleDescription: '.module-details p',
+					moduleCategory: '.module-details span',
+					moduleActivationSwitch: '.switch.tips span',
+					moduleDocs: '//a[normalize-space()="Docs"]',
+					moduleVideos: '//a[normalize-space()="Video"]',
+
+					// All Module Activation
+					firstModuleCheckbox: '(//div[@class="module-checkbox"]//input)[1]',
+					selectAllBulkAction: '.bulk-actions li input',
+					activeAll: '.activate',
+					deActivateAll: '.deactivate',
+					cancelBulkAction: '.cancel',
+
+					// No Modules Message
+					noModulesFound: '.not-found h5',
+
+				}
 			},
 
 			// pro features
@@ -871,6 +916,7 @@ export const selector = {
 				upgradeToPro: '//a[normalize-space()="Upgrade to Pro"]',
 
 			},
+
 
 			// Tools
 			tools: {
