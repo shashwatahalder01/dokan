@@ -24,24 +24,70 @@ test.describe.skip('Request for quotation test', () => {
 
 	test.use({ storageState: data.auth.adminAuthFile });
 
-	test('admin refunds menu page is rendering properly @pro', async ( ) => {
-		await adminPage.adminRefundRequestsRenderProperly();
+	// quote rules
+
+	test('admin quote rules menu page is rendering properly @pro', async ( ) => {
+		await adminPage.adminQuoteRulesRenderProperly();
 	});
 
-	test('admin can search refund requests @pro', async ( ) => {
-		await adminPage.searchRefundRequests(data.refunds);
+	test('admin can add quote rule @pro', async ( ) => {
+		await adminPage.addQuoteRule(data.requestForQuotation.quoteRule);
 	});
 
-	test('admin can approve refund request @pro', async ( ) => {
-		await adminPage.updateRefundRequests(data.predefined.vendorStores.vendor1, 'approve');
+	test('admin can edit quote rule @pro', async ( ) => {
+		await adminPage.editQuoteRule(data.requestForQuotation.quoteRule);
 	});
 
-	test('admin can cancel refund requests @pro', async ( ) => {
-		await adminPage.updateRefundRequests(data.predefined.vendorStores.vendor1, 'cancel');
+	test('admin can trash quote rule @pro', async ( ) => {
+		await adminPage.updateQuoteRule(data.requestForQuotation.quoteRule.title, 'trash');
 	});
 
-	test('admin can perform refund requests bulk actions @pro', async ( ) => {
-		await adminPage.refundRequestsBulkAction('delete');
+	test('admin can restore quote rule @pro', async ( ) => {
+		await adminPage.updateQuoteRule(data.requestForQuotation.quoteRule.title, 'restore');
+	});
+
+	test('admin can permanently delete quote rule @pro', async ( ) => {
+		await adminPage.updateQuoteRule(data.requestForQuotation.quoteRule.title, 'permanently-delete');
+	});
+
+	test('admin can perform quote rule bulk actions @pro', async ( ) => {
+		await adminPage.quoteRulesBulkAction('delete');
+	});
+
+
+	// quotes
+
+	test('admin quotes menu page is rendering properly @pro', async ( ) => {
+		await adminPage.adminQuotesRenderProperly();
+	});
+
+	test('admin can add quote @pro', async ( ) => {
+		await adminPage.addQuote(data.requestForQuotation.quoteRule);
+	});
+
+	test('admin can edit quote @pro', async ( ) => {
+		await adminPage.editQuote(data.requestForQuotation.quoteRule);
+	});
+
+	test('admin can trash quote @pro', async ( ) => {
+		await adminPage.updateQuote(data.requestForQuotation.quoteRule.title, 'trash');
+	});
+
+	test('admin can restore quote @pro', async ( ) => {
+		await adminPage.updateQuote(data.requestForQuotation.quoteRule.title, 'restore');
+	});
+
+	test('admin can permanently delete quote @pro', async ( ) => {
+		await adminPage.updateQuote(data.requestForQuotation.quoteRule.title, 'permanently-delete');
+	});
+
+	test('admin can convert quote to order @pro', async ( ) => {
+		await adminPage.convertQuoteToOrder(data.requestForQuotation.quoteRule.title);
+	});
+
+
+	test('admin can perform quote bulk actions @pro', async ( ) => {
+		await adminPage.quotesBulkAction('delete');
 	});
 
 });

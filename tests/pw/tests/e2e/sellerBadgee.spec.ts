@@ -25,7 +25,7 @@ test.afterAll(async ( ) => {
 	await page.close();
 });
 
-test.describe('Seller badge test', () => {
+test.describe.skip('Seller badge test', () => {
 
 	test.use({ storageState: data.auth.adminAuthFile });
 

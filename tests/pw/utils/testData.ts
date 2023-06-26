@@ -759,8 +759,9 @@ export const data = {
 				dokanAbuseReports: 'wp-admin/admin.php?page=dokan#/abuse-reports',
 				dokanStoreReviews: 'wp-admin/admin.php?page=dokan#/store-reviews',
 				dokanStoreSupport: 'wp-admin/admin.php?page=dokan#/admin-store-support',
+				dokanRequestForQuote: 'wp-admin/admin.php?page=dokan#/request-for-quote',
+				dokanRequestForQuoteRules: 'wp-admin/admin.php?page=dokan#/request-for-quote/quote-rules',
 				dokanSellerBadge: 'wp-admin/admin.php?page=dokan#/dokan-seller-badge',
-				dokanRequestForQuotation: 'wp-admin/admin.php?page=dokan#/request-for-quote',
 				dokanAnnouncements: 'wp-admin/admin.php?page=dokan#/announcement',
 				dokanRefunds: 'wp-admin/admin.php?page=dokan#/refund?status=pending',
 				dokanReports: 'wp-admin/admin.php?page=dokan#/reports',
@@ -792,6 +793,8 @@ export const data = {
 			productAdvertising: 'dokan/v1/product_adv',
 			wholesaleCustomers: 'dokan/v1/wholesale/customers',
 			supportTicket: 'dokan/v1/admin/support-ticket',
+			quotes: 'dokan/v1/request-for-quote',
+			quoteRules: 'dokan/v1/request-for-quote/quote-rule',
 			sellerBadge: 'dokan/v1/seller-badge',
 			sellerBadgeEvent: 'dokan/v1/seller-badge/events',
 			subscribe: 'https://api.getwemail.io/v1/embed/subscribe'
@@ -1308,7 +1311,19 @@ export const data = {
 			vendorStaff:'vendor_staff',
 			wholesaleCustomer:'dokan_wholesale_customer',
 			guest:'guest',
-		}
+		},
+
+		quoteRule: {
+			title: 'test quote rule',
+			role: '',
+			product: 'p1_v1 (simple)',
+			category: 'Uncategorized',
+			hidePrice: '1',
+			hidePriceText: 'Price is hidden',
+			hideAddToCartButton: 'keep_and_add_new', // replace, keep_and_add_new
+			customButtonLabel: 'Add to quote',
+			order: '0',
+		},
 
 	},
 

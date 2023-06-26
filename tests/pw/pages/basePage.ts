@@ -204,6 +204,8 @@ export class BasePage {
 		]);
 	}
 
+	// TODO: urgent : update wait for multiple different response
+	// TODO: urgent : update wait for multiple same response
 	// click & wait for response
 	async clickAndWaitForResponse(subUrl: string, selector: string, code = 200): Promise<Response> {
 		const [response] = await Promise.all([

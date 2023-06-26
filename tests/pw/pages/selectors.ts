@@ -276,9 +276,9 @@ export const selector = {
 
 				// Bulk Actions
 				bulkActions: {
-					bulkActions: '.tablenav.top #bulk-action-selector-top',  // approved, cancelled, delete, paypal
-					applyBulkAction: '.tablenav.top .button.action',
 					selectAll: 'thead .manage-column',
+					selectAction: '.tablenav.top #bulk-action-selector-top',  // approved, cancelled, delete, paypal
+					applyAction: '.tablenav.top .button.action',
 				},
 
 				// Filters
@@ -347,9 +347,10 @@ export const selector = {
 
 				// Bulk Actions
 				bulkActions: {
-					bulkActions: '.tablenav.top #bulk-action-selector-top',  // approved, cancelled, delete, paypal
-					applyBulkAction: '.tablenav.top .button.action',
 					selectAll: 'thead .manage-column',
+					selectAction: '.tablenav.top #bulk-action-selector-top',  // approved, cancelled, delete, paypal
+					applyAction: '.tablenav.top .button.action',
+
 				},
 
 				// Filters
@@ -504,9 +505,10 @@ export const selector = {
 
 				// Bulk Actions
 				bulkActions: {
-					bulkActions: '.tablenav.top #bulk-action-selector-top',  // delete
-					applyBulkAction: '.tablenav.top .button.action',
 					selectAll: 'thead .manage-column',
+					selectAction: '.tablenav.top #bulk-action-selector-top',  // delete
+					applyAction: '.tablenav.top .button.action',
+
 				},
 
 				// Filters
@@ -533,9 +535,9 @@ export const selector = {
 
 				// Bulk Actions
 				bulkActions: {
-					bulkActions: '.tablenav.top #bulk-action-selector-top',  // trash
-					applyBulkAction: '.tablenav.top .button.action',
 					selectAll: 'thead .manage-column',
+					selectAction: '.tablenav.top #bulk-action-selector-top',  // trash
+					applyAction: '.tablenav.top .button.action',
 				},
 
 				// Filters
@@ -576,9 +578,10 @@ export const selector = {
 
 				// Bulk Actions
 				bulkActions: {
-					bulkActions: '.tablenav.top #bulk-action-selector-top',  // trash
-					applyBulkAction: '.tablenav.top .button.action',
 					selectAll: 'thead .manage-column',
+					selectAction: '.tablenav.top #bulk-action-selector-top',  // trash
+					applyAction: '.tablenav.top .button.action',
+
 				},
 
 				// Filters
@@ -604,7 +607,7 @@ export const selector = {
 
 				},
 
-				quoteList:{
+				quotesList:{
 
 					quotesText:  '.dokan-quote-wrapper h1',
 
@@ -622,12 +625,11 @@ export const selector = {
 
 					// Bulk Actions
 					bulkActions: {
-						bulkActions: '.tablenav.top #bulk-action-selector-top',  // trash
-						applyBulkAction: '.tablenav.top .button.action',
 						selectAll: 'thead .manage-column',
-					},
+						selectAction: '.tablenav.top #bulk-action-selector-top',  // trash
+						applyAction: '.tablenav.top .button.action',
 
-					search: '#post-search-input',
+					},
 
 					quotesTable:  '.dokan-quote-wrapper table',
 
@@ -639,7 +641,6 @@ export const selector = {
 						// customer information
 						quoteUserDropDown: '.multiselect__select',
 						quoteUserInput: '.multiselect__input',
-						selectCategories: (category: string) => `//span[normalize-space()="${category}"]/..//input`,
 						fullName: '#announcement_sender_type',  // 1, 0
 						email: '//th[normalize-space()="Hide Price Text"]/..//input',
 						companyName: 'select[name="hide_cart_button"]',  // replace, keep_and_add_new
@@ -685,41 +686,45 @@ export const selector = {
 
 					// Bulk Actions
 					bulkActions: {
-						bulkActions: '.tablenav.top #bulk-action-selector-top',  // trash
-						applyBulkAction: '.tablenav.top .button.action',
 						selectAll: 'thead .manage-column',
+						selectAction: '.tablenav.top #bulk-action-selector-top',  // trash
+						applyAction: '.tablenav.top .button.action',
+
 					},
 
 					quoteRulesTable:  '.dokan-announcement-wrapper table',
 					quoteRulesCell:  (title: string) => `//a[contains(text(),'${title}')]/../..`,
 					quoteRulesEdit: '.row-actions .edit',
 					quoteRulesTrash: '.row-actions .trash',
+					quoteRulesPermanentlyDelete: '.row-actions .delete',
+					quoteRulesRestore: '.row-actions .restore',
 
-				},
 
-				addNewQuoteRules: {
+					addNewQuoteRules: {
 
-					// title
-					rulesTitle: '#title',
+						// title
+						rulesTitle: '#title',
 
-					// rule settings
-					applyQuoteFor: (role: string) => `#${role}`,
-					applyQuoteFor1: (role: string) => `//label[normalize-space()="${role}"]/..//input`,
-					applyOnAllProducts: '#apply_on_all_product',
-					selectProductsDropDown: '.multiselect__select',
-					selectProductsInput: '.multiselect__input',
-					selectCategories: (category: string) => `//span[normalize-space()="${category}"]/..//input`,
-					hidePrice: '#announcement_sender_type',  // 1, 0
-					hidePriceText: '//th[normalize-space()="Hide Price Text"]/..//input',
-					hideAddToCartButton: 'select[name="hide_cart_button"]',  // replace, keep_and_add_new
-					customButtonLabel: '//th[normalize-space()="Custom Button Label"]/..//input',
+						// rule settings
+						applyQuoteFor: (role: string) => `#${role}`,
+						applyQuoteFor1: (role: string) => `//label[normalize-space()="${role}"]/..//input`,
+						applyOnAllProducts: '#apply_on_all_product',
+						selectProductsDropDown: '.multiselect__select',
+						selectProductsInput: '.multiselect__input',
+						selectCategories: (category: string) => `//span[normalize-space()="${category}"]/..//input`,
+						hidePrice: '#announcement_sender_type',  // 1, 0
+						hidePriceText: '//th[normalize-space()="Hide Price Text"]/..//input',
+						hideAddToCartButton: 'select[name="hide_cart_button"]',  // replace, keep_and_add_new
+						customButtonLabel: '//th[normalize-space()="Custom Button Label"]/..//input',
 
-					// rule priority
-					priorityOrder: '//span[normalize-space()="Rule priority"]/../../..//input',
+						// rule priority
+						priorityOrder: '//span[normalize-space()="Rule priority"]/../../..//input',
 
-					// publish
-					saveRuleAsDraft: 'input[value="Save as Draft"]',
-					publishRule: 'input[value="Publish"]',
+						// publish
+						saveRuleAsDraft: 'input[value="Save as Draft"]',
+						publishRule: 'input[value="Publish"]',
+
+					},
 
 				},
 
@@ -740,9 +745,9 @@ export const selector = {
 
 				// Bulk Actions
 				bulkActions: {
-					bulkActions: '.tablenav.top #bulk-action-selector-top',  // delete
-					applyBulkAction: '.tablenav.top .button.action',
 					selectAll: 'thead .manage-column',
+					selectAction: '.tablenav.top #bulk-action-selector-top',  // delete
+					applyAction: '.tablenav.top .button.action',
 				},
 
 				search: '#post-search-input',
@@ -825,9 +830,9 @@ export const selector = {
 
 				// Bulk Actions
 				bulkActions: {
-					bulkActions: '.tablenav.top #bulk-action-selector-top',  // trash
-					applyBulkAction: '.tablenav.top .button.action',
 					selectAll: 'thead .manage-column',
+					selectAction: '.tablenav.top #bulk-action-selector-top',  // trash
+					applyAction: '.tablenav.top .button.action',
 				},
 
 				announcementTable: '.dokan-announcement-wrapper table',
@@ -861,9 +866,9 @@ export const selector = {
 
 				// Bulk Actions
 				bulkActions: {
-					bulkActions: '.tablenav.top #bulk-action-selector-top',  // Delete
-					applyBulkAction: '.tablenav.top .button.action',
 					selectAll: 'thead .manage-column',
+					selectAction: '.tablenav.top #bulk-action-selector-top',  // Delete
+					applyAction: '.tablenav.top .button.action',
 				},
 
 				// Search Refund
@@ -1171,9 +1176,9 @@ export const selector = {
 
 				// Bulk Actions
 				bulkActions: {
-					bulkActions: '.tablenav.top #bulk-action-selector-top',  // delete
-					applyBulkAction: '//div[@class="tablenav top"]//button[normalize-space()="Apply"]',
 					selectAll: 'thead .manage-column',
+					selectAction: '.tablenav.top #bulk-action-selector-top',  // delete
+					applyAction: '//div[@class="tablenav top"]//button[normalize-space()="Apply"]',
 				},
 
 				// Filters
@@ -1224,9 +1229,9 @@ export const selector = {
 
 				// Bulk Actions
 				bulkActions: {
-					bulkActions: '.tablenav.top #bulk-action-selector-top',  // activate, deactivate
-					applyBulkAction: '.tablenav.top .button.action',
 					selectAll: 'thead .manage-column',
+					selectAction: '.tablenav.top #bulk-action-selector-top',  // activate, deactivate
+					applyAction: '.tablenav.top .button.action',
 				},
 
 				search: '#post-search-input',
@@ -2608,9 +2613,9 @@ export const selector = {
 			searchProduct: '.dokan-w5 .dokan-form-control',
 			search: '.dokan-w5 > .dokan-btn',
 			// Bulk Action
-			bulkAction: {
+			bulkActions: {
 				selectAll: '#cb-select-all',
-				action: '#bulk-product-action-selector',
+				selectAction: '#bulk-product-action-selector',
 				applyAction: '#bulk-product-action',
 			},
 

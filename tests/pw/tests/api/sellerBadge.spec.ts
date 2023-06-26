@@ -27,8 +27,6 @@ test.describe('seller badge api test', () => {
 		const [response, responseBody] = await apiUtils.get(endPoints.getAllSellerBadgeEvents);
 		expect(response.ok()).toBeTruthy();
 		expect(responseBody).toBeTruthy();
-		console.log(responseBody);
-		
 	});
 
 	test('get all seller badges @pro', async () => {

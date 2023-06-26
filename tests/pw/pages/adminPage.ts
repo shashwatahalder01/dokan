@@ -1203,43 +1203,43 @@ export class AdminPage extends BasePage {
 	}
 
 
-	async getOrderDetails(orderNumber: any) {
-		const subMenuOpened = await this.getClassValue(selector.admin.aDashboard.dokanMenu);
-		if (subMenuOpened.includes('opensub')) {
-			await this.hover(selector.admin.aDashboard.dokan);
-			await this.click(selector.admin.dokan.menus.reports);
-		} else {
-			await this.click(selector.admin.dokan.menus.reports);
+	// async getOrderDetails(orderNumber: any) {
+	// 	const subMenuOpened = await this.getClassValue(selector.admin.aDashboard.dokanMenu);
+	// 	if (subMenuOpened.includes('opensub')) {
+	// 		await this.hover(selector.admin.aDashboard.dokan);
+	// 		await this.click(selector.admin.dokan.menus.reports);
+	// 	} else {
+	// 		await this.click(selector.admin.dokan.menus.reports);
 
-		}
-		await this.click(selector.admin.dokan.reports.allLogs);
+	// 	}
+	// 	await this.click(selector.admin.dokan.reports.allLogs);
 
-		await this.type(selector.admin.dokan.reports.searchByOrder, orderNumber);
+	// 	await this.type(selector.admin.dokan.reports.searchByOrder, orderNumber);
 
 
-		const aOrderDetails = {
-			orderNumber: (await this.getElementText(selector.admin.dokan.reports.orderId)).split('#')[1],
-			store: await this.getElementText(selector.admin.dokan.reports.store),
-			orderTotal: helpers.price(await this.getElementText(selector.admin.dokan.reports.orderTotal)),
-			vendorEarning: helpers.price(await this.getElementText(selector.admin.dokan.reports.vendorEarning)),
-			commission: helpers.price(await this.getElementText(selector.admin.dokan.reports.commission)),
-			gatewayFee: helpers.price(await this.getElementText(selector.admin.dokan.reports.gatewayFee)),
-			shippingCost: helpers.price(await this.getElementText(selector.admin.dokan.reports.shippingCost)),
-			tax: helpers.price(await this.getElementText(selector.admin.dokan.reports.tax)),
-			orderStatus: await this.getElementText(selector.admin.dokan.reports.orderStatus),
-			orderDate: await this.getElementText(selector.admin.dokan.reports.orderDate),
-		};
-		return aOrderDetails;
-	}
+	// 	const aOrderDetails = {
+	// 		orderNumber: (await this.getElementText(selector.admin.dokan.reports.orderId)).split('#')[1],
+	// 		store: await this.getElementText(selector.admin.dokan.reports.store),
+	// 		orderTotal: helpers.price(await this.getElementText(selector.admin.dokan.reports.orderTotal)),
+	// 		vendorEarning: helpers.price(await this.getElementText(selector.admin.dokan.reports.vendorEarning)),
+	// 		commission: helpers.price(await this.getElementText(selector.admin.dokan.reports.commission)),
+	// 		gatewayFee: helpers.price(await this.getElementText(selector.admin.dokan.reports.gatewayFee)),
+	// 		shippingCost: helpers.price(await this.getElementText(selector.admin.dokan.reports.shippingCost)),
+	// 		tax: helpers.price(await this.getElementText(selector.admin.dokan.reports.tax)),
+	// 		orderStatus: await this.getElementText(selector.admin.dokan.reports.orderStatus),
+	// 		orderDate: await this.getElementText(selector.admin.dokan.reports.orderDate),
+	// 	};
+	// 	return aOrderDetails;
+	// }
 
-	// Get Total Admin Commission from Admin Dashboard
-	async getTotalAdminCommission() {
-		await this.hover(selector.admin.aDashboard.dokan);
-		await this.click(selector.admin.dokan.menus.dashboard);
+	// // Get Total Admin Commission from Admin Dashboard
+	// async getTotalAdminCommission() {
+	// 	await this.hover(selector.admin.aDashboard.dokan);
+	// 	await this.click(selector.admin.dokan.menus.dashboard);
 
-		const totalAdminCommission = helpers.price(await this.getElementText(selector.admin.dokan.dashboard.commissionEarned));
-		return totalAdminCommission;
-	}
+	// 	const totalAdminCommission = helpers.price(await this.getElementText(selector.admin.dokan.dashboard.commissionEarned));
+	// 	return totalAdminCommission;
+	// }
 
 
 	// Dokan Setup Wizard
@@ -1465,8 +1465,8 @@ export class AdminPage extends BasePage {
 		await this.goIfNotThere(data.subUrls.backend.dokan.dokanWithdraw);
 
 		await this.click(selector.admin.dokan.withdraw.bulkActions.selectAll);
-		await this.selectByValue(selector.admin.dokan.withdraw.bulkActions.bulkActions, action);
-		await this.clickAndWaitForResponse(data.subUrls.backend.withdraws, selector.admin.dokan.withdraw.bulkActions.applyBulkAction);
+		await this.selectByValue(selector.admin.dokan.withdraw.bulkActions.selectAction, action);
+		await this.clickAndWaitForResponse(data.subUrls.backend.withdraws, selector.admin.dokan.withdraw.bulkActions.applyAction);
 	}
 
 	// filter withdraw
@@ -1579,8 +1579,8 @@ export class AdminPage extends BasePage {
 		await this.goIfNotThere(data.subUrls.backend.dokan.dokanVendors);
 
 		await this.click(selector.admin.dokan.vendors.bulkActions.selectAll);
-		await this.selectByValue(selector.admin.dokan.vendors.bulkActions.bulkActions, action);
-		await this.clickAndWaitForResponse(data.subUrls.backend.stores, selector.admin.dokan.vendors.bulkActions.applyBulkAction);
+		await this.selectByValue(selector.admin.dokan.vendors.bulkActions.selectAction, action);
+		await this.clickAndWaitForResponse(data.subUrls.backend.stores, selector.admin.dokan.vendors.bulkActions.applyAction);
 	}
 
 	// update vendor status
@@ -1664,8 +1664,8 @@ export class AdminPage extends BasePage {
 		await this.goIfNotThere(data.subUrls.backend.dokan.dokanAbuseReports);
 
 		await this.click(selector.admin.dokan.abuseReports.bulkActions.selectAll);
-		await this.selectByValue(selector.admin.dokan.abuseReports.bulkActions.bulkActions, action);
-		await this.clickAndWaitForResponse(data.subUrls.backend.abuseReports, selector.admin.dokan.abuseReports.bulkActions.applyBulkAction);
+		await this.selectByValue(selector.admin.dokan.abuseReports.bulkActions.selectAction, action);
+		await this.clickAndWaitForResponse(data.subUrls.backend.abuseReports, selector.admin.dokan.abuseReports.bulkActions.applyAction);
 	}
 
 	// filter abuse reports
@@ -1708,8 +1708,8 @@ export class AdminPage extends BasePage {
 		await this.goIfNotThere(data.subUrls.backend.dokan.dokanStoreReviews);
 
 		await this.click(selector.admin.dokan.storeReviews.bulkActions.selectAll);
-		await this.selectByValue(selector.admin.dokan.storeReviews.bulkActions.bulkActions, action);
-		await this.clickAndWaitForResponse(data.subUrls.backend.storeReviews, selector.admin.dokan.storeReviews.bulkActions.applyBulkAction);
+		await this.selectByValue(selector.admin.dokan.storeReviews.bulkActions.selectAction, action);
+		await this.clickAndWaitForResponse(data.subUrls.backend.storeReviews, selector.admin.dokan.storeReviews.bulkActions.applyAction);
 	}
 
 	// filter store reviews
@@ -1789,8 +1789,8 @@ export class AdminPage extends BasePage {
 		await this.goIfNotThere(data.subUrls.backend.dokan.dokanStoreSupport);
 
 		await this.click(selector.admin.dokan.storeSupport.bulkActions.selectAll);
-		await this.selectByValue(selector.admin.dokan.storeSupport.bulkActions.bulkActions, action);
-		await this.clickAndWaitForResponse(data.subUrls.backend.supportTicket, selector.admin.dokan.storeSupport.bulkActions.applyBulkAction);
+		await this.selectByValue(selector.admin.dokan.storeSupport.bulkActions.selectAction, action);
+		await this.clickAndWaitForResponse(data.subUrls.backend.supportTicket, selector.admin.dokan.storeSupport.bulkActions.applyAction);
 	}
 
 	// filter store supports
@@ -1804,6 +1804,228 @@ export class AdminPage extends BasePage {
 		await this.typeAndWaitForResponse(data.subUrls.backend.stores, selector.admin.dokan.storeReviews.filters.filterInput, vendorName);
 		await this.pressAndWaitForResponse(data.subUrls.backend.storeReviews, data.key.enter);
 	}
+	/*************************************************************************************************/
+
+	// request for quote
+
+	// quote rules
+
+	async adminQuoteRulesRenderProperly(){
+		await this.goIfNotThere(data.subUrls.backend.dokan.dokanRequestForQuoteRules);
+
+		// request for quote menus are visible
+		await this.multipleElementVisible(selector.admin.dokan.requestForQuotation.menus);
+
+		// quote rules text is visible
+		await expect(this.page.locator(selector.admin.dokan.requestForQuotation.quoteRules.quoteRulesText)).toBeVisible();
+
+		// new quote rules is visible
+		await expect(this.page.locator(selector.admin.dokan.requestForQuotation.quoteRules.newQuoteRules)).toBeVisible();
+
+		// nav tabs are visible
+		await this.multipleElementVisible(selector.admin.dokan.requestForQuotation.quoteRules.navTabs);
+
+		// bulk action elements are visible
+		await this.multipleElementVisible(selector.admin.dokan.requestForQuotation.quoteRules.bulkActions);
+
+		// quote rules table is visible
+		await expect(this.page.locator(selector.admin.dokan.requestForQuotation.quoteRules.quoteRulesTable)).toBeVisible();
+	}
+
+
+	async updateQuoteRuleFields(rule: any){
+		await this.clearAndType(selector.admin.dokan.requestForQuotation.quoteRules.addNewQuoteRules.rulesTitle, rule.title);
+		await this.click(selector.admin.dokan.requestForQuotation.quoteRules.addNewQuoteRules.applyQuoteFor(rule.role));
+
+		// products
+		await this.click(selector.admin.dokan.requestForQuotation.quoteRules.addNewQuoteRules.applyOnAllProducts);
+		// await this.click(selector.admin.dokan.requestForQuotation.quoteRules.addNewQuoteRules.selectProductsDropDown);
+		// await this.typeAndWaitForResponse(data.subUrls.backend.quoteRules, selector.admin.dokan.requestForQuotation.quoteRules.addNewQuoteRules.selectProductsInput, rule.product);
+		// await this.press(data.key.enter);
+
+		// category
+		await this.click(selector.admin.dokan.requestForQuotation.quoteRules.addNewQuoteRules.selectCategories(rule.category));
+
+		await this.selectByValue(selector.admin.dokan.requestForQuotation.quoteRules.addNewQuoteRules.hidePrice, rule.hidePrice);
+		await this.clearAndType(selector.admin.dokan.requestForQuotation.quoteRules.addNewQuoteRules.hidePriceText, rule.hidePriceText);
+		await this.selectByValue(selector.admin.dokan.requestForQuotation.quoteRules.addNewQuoteRules.hideAddToCartButton, rule.hideAddToCartButton);
+		await this.clearAndType(selector.admin.dokan.requestForQuotation.quoteRules.addNewQuoteRules.customButtonLabel, rule.customButtonLabel);
+
+		// priority
+		await this.clearAndType(selector.admin.dokan.requestForQuotation.quoteRules.addNewQuoteRules.priorityOrder, rule.order);
+
+		// publish
+		await this.clickAndWaitForResponse(data.subUrls.backend.quoteRules, selector.admin.dokan.requestForQuotation.quoteRules.addNewQuoteRules.publishRule);
+
+	}
+
+	// add quote rule
+	async addQuoteRule(rule: any){
+		await this.goIfNotThere(data.subUrls.backend.dokan.dokanRequestForQuoteRules);
+
+		// TODO: need to wait for multiple response
+		await this.clickAndWaitForResponse(data.subUrls.backend.quoteRules, selector.admin.dokan.requestForQuotation.quoteRules.newQuoteRules);
+
+		await this.updateQuoteRuleFields(rule);
+	}
+
+	// edit quote rule
+	async editQuoteRule(rule: any){
+		await this.goIfNotThere(data.subUrls.backend.dokan.dokanRequestForQuoteRules);
+
+		await this.hover(selector.admin.dokan.requestForQuotation.quoteRules.quoteRulesCell(rule.title));
+		// TODO: need to wait for multiple response
+		await this.clickAndWaitForResponse(data.subUrls.backend.quoteRules, selector.admin.dokan.requestForQuotation.quoteRules.quoteRulesEdit);
+
+		await this.updateQuoteRuleFields(rule);
+
+	}
+
+	// update quote rule
+	async updateQuoteRule(quoteTitle: string, action: string){
+		await this.goIfNotThere(data.subUrls.backend.dokan.dokanRequestForQuoteRules);
+
+		switch (action) {
+
+		case 'trash' :
+			await this.hover(selector.admin.dokan.requestForQuotation.quoteRules.quoteRulesCell(quoteTitle));
+			await this.clickAndWaitForResponse(data.subUrls.backend.quoteRules, selector.admin.dokan.requestForQuotation.quoteRules.quoteRulesTrash);
+			break;
+
+		case 'permanently-delete' :
+			await this.clickAndWaitForResponse(data.subUrls.backend.quoteRules, selector.admin.dokan.requestForQuotation.quoteRules.navTabs.trash);
+			await this.hover(selector.admin.dokan.requestForQuotation.quoteRules.quoteRulesCell(quoteTitle));
+			await this.clickAndWaitForResponse(data.subUrls.backend.quoteRules, selector.admin.dokan.requestForQuotation.quoteRules.quoteRulesPermanentlyDelete);
+			break;
+
+		case 'restore' :
+			await this.clickAndWaitForResponse(data.subUrls.backend.quoteRules, selector.admin.dokan.requestForQuotation.quoteRules.navTabs.trash);
+			await this.hover(selector.admin.dokan.requestForQuotation.quoteRules.quoteRulesCell(quoteTitle));
+			await this.clickAndWaitForResponse(data.subUrls.backend.quoteRules, selector.admin.dokan.requestForQuotation.quoteRules.quoteRulesRestore);
+			break;
+
+		default :
+			break;
+		}
+
+	}
+
+	// quote rules bulk action
+	async quoteRulesBulkAction(action: string){
+		await this.goIfNotThere(data.subUrls.backend.dokan.dokanRequestForQuoteRules);
+
+		await this.click(selector.admin.dokan.requestForQuotation.quoteRules.bulkActions.selectAll);
+		await this.selectByValue(selector.admin.dokan.requestForQuotation.quoteRules.bulkActions.selectAction, action);
+		await this.clickAndWaitForResponse(data.subUrls.backend.quoteRules, selector.admin.dokan.requestForQuotation.quoteRules.bulkActions.applyAction);
+	}
+
+
+	// quotes
+
+	async adminQuotesRenderProperly(){
+		await this.goIfNotThere(data.subUrls.backend.dokan.dokanRequestForQuote);
+
+		// request for quote menus are visible
+		await this.multipleElementVisible(selector.admin.dokan.requestForQuotation.menus);
+
+		// quotes text is visible
+		await expect(this.page.locator(selector.admin.dokan.requestForQuotation.quotesList.quotesText)).toBeVisible();
+
+		// new quote is visible
+		await expect(this.page.locator(selector.admin.dokan.requestForQuotation.quotesList.newQuote)).toBeVisible();
+
+		// nav tabs are visible
+		await this.multipleElementVisible(selector.admin.dokan.requestForQuotation.quotesList.navTabs);
+
+		// bulk action elements are visible
+		await this.multipleElementVisible(selector.admin.dokan.requestForQuotation.quotesList.bulkActions);
+
+		// quotes table is visible
+		await expect(this.page.locator(selector.admin.dokan.requestForQuotation.quotesList.quotesTable)).toBeVisible();
+	}
+
+	// add quote
+	async addQuote(quote: any){
+		await this.goIfNotThere(data.subUrls.backend.dokan.dokanRequestForQuote);
+
+		// TODO: need to wait for multiple response
+		await this.click(selector.admin.dokan.requestForQuotation.quotesList.newQuote);
+
+		// customer information
+		await this.click(selector.admin.dokan.requestForQuotation.quotesList.addNewQuote.quoteUserDropDown);
+		await this.typeAndWaitForResponse(data.subUrls.backend.quotes, selector.admin.dokan.requestForQuotation.quotesList.addNewQuote.quoteUserInput, quote.user);
+		await this.press(data.key.enter);
+		// await this.clearAndType(selector.admin.dokan.requestForQuotation.quotesList.addNewQuote.fullName, quote.quantity);
+		// await this.clearAndType(selector.admin.dokan.requestForQuotation.quotesList.addNewQuote.email, quote.email);
+		// await this.clearAndType(selector.admin.dokan.requestForQuotation.quotesList.addNewQuote.companyName, quote.companyName);
+		// await this.clearAndType(selector.admin.dokan.requestForQuotation.quotesList.addNewQuote.phoneNumber, quote.phoneNumber);
+
+		// quote product
+		await this.click(selector.admin.dokan.requestForQuotation.quotesList.addNewQuote.addProducts);
+
+		await this.click(selector.admin.dokan.requestForQuotation.quotesList.addNewQuote.quoteProductDropDown);
+		await this.typeAndWaitForResponse(data.subUrls.backend.products, selector.admin.dokan.requestForQuotation.quotesList.addNewQuote.quoteProductInput, quote.product);
+		await this.press(data.key.enter);
+
+		await this.clearAndType(selector.admin.dokan.requestForQuotation.quotesList.addNewQuote.quoteProductQuantity, quote.quantity);
+		await this.click(selector.admin.dokan.requestForQuotation.quotesList.addNewQuote.addToQuote);
+
+		await this.clearAndType(selector.admin.dokan.requestForQuotation.quotesList.addNewQuote.offerPrice, quote.offerPrice);
+		await this.clearAndType(selector.admin.dokan.requestForQuotation.quotesList.addNewQuote.offerProductQuantity, quote.offerProductQuantity);
+
+		await this.clickAndWaitForResponse(data.subUrls.backend.quotes, selector.admin.dokan.requestForQuotation.quotesList.addNewQuote.publishQuote);
+
+	}
+
+	// add quote
+	async editQuote(quote: any){}
+
+
+	// update quote
+	async updateQuote(quoteTitle: string, action: string){
+		await this.goIfNotThere(data.subUrls.backend.dokan.dokanRequestForQuoteRules);
+
+		switch (action) {
+
+		case 'trash' :
+			await this.hover(selector.admin.dokan.requestForQuotation.quoteRules.quoteRulesCell(quoteTitle));
+			await this.clickAndWaitForResponse(data.subUrls.backend.quoteRules, selector.admin.dokan.requestForQuotation.quoteRules.quoteRulesTrash);
+			break;
+
+		case 'permanently-delete' :
+			await this.clickAndWaitForResponse(data.subUrls.backend.quoteRules, selector.admin.dokan.requestForQuotation.quoteRules.navTabs.trash);
+			await this.hover(selector.admin.dokan.requestForQuotation.quoteRules.quoteRulesCell(quoteTitle));
+			await this.clickAndWaitForResponse(data.subUrls.backend.quoteRules, selector.admin.dokan.requestForQuotation.quoteRules.quoteRulesPermanentlyDelete);
+			break;
+
+		case 'restore' :
+			await this.clickAndWaitForResponse(data.subUrls.backend.quoteRules, selector.admin.dokan.requestForQuotation.quoteRules.navTabs.trash);
+			await this.hover(selector.admin.dokan.requestForQuotation.quoteRules.quoteRulesCell(quoteTitle));
+			await this.clickAndWaitForResponse(data.subUrls.backend.quoteRules, selector.admin.dokan.requestForQuotation.quoteRules.quoteRulesRestore);
+			break;
+
+		default :
+			break;
+		}
+
+	}
+
+
+	// convert quote to order
+	async convertQuoteToOrder(action: string){
+		//todo
+	}
+
+
+	// quotes bulk action
+	async quotesBulkAction(action: string){
+		await this.goIfNotThere(data.subUrls.backend.dokan.dokanRequestForQuote);
+
+		await this.click(selector.admin.dokan.requestForQuotation.quotesList.bulkActions.selectAll);
+		await this.selectByValue(selector.admin.dokan.requestForQuotation.quotesList.bulkActions.selectAction, action);
+		await this.clickAndWaitForResponse(data.subUrls.backend.quotes, selector.admin.dokan.requestForQuotation.quotesList.bulkActions.applyAction);
+	}
+
 
 	/*************************************************************************************************/
 
@@ -2029,8 +2251,8 @@ export class AdminPage extends BasePage {
 		await this.goIfNotThere(data.subUrls.backend.dokan.dokanSellerBadge);
 
 		await this.click(selector.admin.dokan.sellerBadge.bulkActions.selectAll);
-		await this.selectByValue(selector.admin.dokan.sellerBadge.bulkActions.bulkActions, action);
-		await this.click( selector.admin.dokan.sellerBadge.bulkActions.applyBulkAction);
+		await this.selectByValue(selector.admin.dokan.sellerBadge.bulkActions.selectAction, action);
+		await this.click( selector.admin.dokan.sellerBadge.bulkActions.applyAction);
 		await this.clickAndWaitForResponse(data.subUrls.backend.sellerBadge, selector.admin.dokan.sellerBadge.confirmAction);
 		await this.click(selector.admin.dokan.sellerBadge.successMessage);
 	}
@@ -2066,8 +2288,8 @@ export class AdminPage extends BasePage {
 		await this.goIfNotThere(data.subUrls.backend.dokan.dokanAnnouncements);
 
 		await this.click(selector.admin.dokan.announcements.bulkActions.selectAll);
-		await this.selectByValue(selector.admin.dokan.announcements.bulkActions.bulkActions, action);
-		await this.clickAndWaitForResponse(data.subUrls.backend.announcements, selector.admin.dokan.announcements.bulkActions.applyBulkAction);
+		await this.selectByValue(selector.admin.dokan.announcements.bulkActions.selectAction, action);
+		await this.clickAndWaitForResponse(data.subUrls.backend.announcements, selector.admin.dokan.announcements.bulkActions.applyAction);
 	}
 
 	// add announcement
@@ -2168,8 +2390,8 @@ export class AdminPage extends BasePage {
 		await this.goIfNotThere(data.subUrls.backend.dokan.dokanRefunds);
 
 		await this.click(selector.admin.dokan.refunds.bulkActions.selectAll);
-		await this.selectByValue(selector.admin.dokan.refunds.bulkActions.bulkActions, action);
-		await this.clickAndWaitForResponse(data.subUrls.backend.refunds, selector.admin.dokan.refunds.bulkActions.applyBulkAction);
+		await this.selectByValue(selector.admin.dokan.refunds.bulkActions.selectAction, action);
+		await this.clickAndWaitForResponse(data.subUrls.backend.refunds, selector.admin.dokan.refunds.bulkActions.applyAction);
 	}
 
 	/*************************************************************************************************/
@@ -2454,8 +2676,8 @@ export class AdminPage extends BasePage {
 		await this.goIfNotThere(data.subUrls.backend.dokan.dokanProductAdvertising);
 
 		await this.click(selector.admin.dokan.vendors.bulkActions.selectAll);
-		await this.selectByValue(selector.admin.dokan.vendors.bulkActions.bulkActions, action);
-		await this.click(selector.admin.dokan.productAdvertising.bulkActions.applyBulkAction);
+		await this.selectByValue(selector.admin.dokan.vendors.bulkActions.selectAction, action);
+		await this.click(selector.admin.dokan.productAdvertising.bulkActions.applyAction);
 		await this.clickAndWaitForResponse(data.subUrls.backend.productAdvertising, selector.admin.dokan.productAdvertising.confirmAction);
 		await this.click(selector.admin.dokan.productAdvertising.actionSuccessful);
 	}
@@ -2594,8 +2816,8 @@ export class AdminPage extends BasePage {
 		await this.goIfNotThere(data.subUrls.backend.dokan.dokanWholeSaleCustomer);
 
 		await this.click(selector.admin.dokan.wholesaleCustomer.bulkActions.selectAll);
-		await this.selectByValue(selector.admin.dokan.wholesaleCustomer.bulkActions.bulkActions, action);
-		await this.clickAndWaitForResponse(data.subUrls.backend.wholesaleCustomers, selector.admin.dokan.wholesaleCustomer.bulkActions.applyBulkAction);
+		await this.selectByValue(selector.admin.dokan.wholesaleCustomer.bulkActions.selectAction, action);
+		await this.clickAndWaitForResponse(data.subUrls.backend.wholesaleCustomers, selector.admin.dokan.wholesaleCustomer.bulkActions.applyAction);
 	}
 
 	// update wholesale customer status
