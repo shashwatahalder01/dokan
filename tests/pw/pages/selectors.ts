@@ -1148,7 +1148,7 @@ export const selector = {
 					checkOutAllVendorFunctionalities:'//a[normalize-space()="Check Out All Vendor Functionalities"]'
 				},
 
-				settingsText: '//h1[normalize-space()="Settings"]',
+				settingsText: '.dokan-settings h1',
 
 				sections: {
 					settingsMenuSection: '.nab-section',

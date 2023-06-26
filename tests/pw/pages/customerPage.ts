@@ -62,7 +62,7 @@ export class CustomerPage extends BasePage {
 	}
 
 	// customer become vendor
-	async customerBecomeVendor(customerInfo: { firstName: () => any; lastName: () => string; storename: () => string; street1: string; phone: string; companyName: string; companyId: string; vatNumber: string; bankName: string; bankIban: string; }): Promise<void> {
+	async customerBecomeVendor(customerInfo: { firstName: () => any; lastName: () => string; storename: () => string; phone: string; companyName: string; companyId: string; vatNumber: string; bankName: string; bankIban: string; }): Promise<void> {
 		const firstName = customerInfo.firstName();
 		await this.click(selector.customer.cDashboard.becomeVendor);
 		// vendor registration form
@@ -70,7 +70,6 @@ export class CustomerPage extends BasePage {
 		await this.clearAndType(selector.customer.cDashboard.lastName, customerInfo.lastName());
 		await this.clearAndType(selector.customer.cDashboard.shopName, customerInfo.storename());
 		await this.click(selector.customer.cDashboard.shopUrl);
-		await this.clearAndType(selector.customer.cDashboard.address, customerInfo.street1);
 		await this.clearAndType(selector.customer.cDashboard.phone, customerInfo.phone);
 		await this.clearAndType(selector.customer.cDashboard.companyName, customerInfo.companyName);
 		await this.clearAndType(selector.customer.cDashboard.companyId, customerInfo.companyId);
@@ -88,7 +87,7 @@ export class CustomerPage extends BasePage {
 		}
 		// skip vendor setup wizard
 		await this.clickAndWaitForResponse(data.subUrls.frontend.dashboard, selector.vendor.vSetup.notRightNow);
-		await expect(this.page.locator(selector.vendor.vDashboard.dashboard)).toBeVisible();
+		await expect(this.page.locator(selector.vendor.vDashboard.menus.dashboard)).toBeVisible();
 	}
 
 	// customer become wholesale customer
@@ -103,7 +102,7 @@ export class CustomerPage extends BasePage {
 		else {
 			await expect(this.page.locator(selector.customer.cWooSelector.wooCommerceSuccessMessage)).toContainText(data.wholesale.wholesaleRequestSendMessage);
 			await this.loginPage.switchUser(data.admin);
-			await this.adminPage.updateWholesaleCustomerStatus(currentUser);
+			await this.adminPage.updateWholesaleCustomerStatus(currentUser!);
 		}
 	}
 
@@ -498,98 +497,98 @@ export class CustomerPage extends BasePage {
 	//     await this.clickAndWaitForResponse(data.subUrls.frontend.placeOrder, selector.customer.cCheckout.placeOrder);
 	// }
 
-	// get order details after purchase
-	async getOrderDetailsAfterPlaceOrder(): Promise<object> {
-		const cOrderDetails: { orderNumber: string, subtotal: number, shippingCost: number, shippingMethod: string, tax: number, paymentMethod: string, orderTotal: number } = { orderNumber: '',
-			subtotal: 0,
-			shippingCost: 0,
-			shippingMethod: '',
-			tax: 0,
-			paymentMethod: '',
-			orderTotal: 0, };
-		cOrderDetails.orderNumber = await this.getElementText(selector.customer.cOrderReceived.orderNumber);
-		cOrderDetails.subtotal = helpers.price(await this.getElementText(selector.customer.cOrderReceived.subTotal));
+	// // get order details after purchase
+	// async getOrderDetailsAfterPlaceOrder(): Promise<object> {
+	// 	const cOrderDetails: { orderNumber: string, subtotal: number, shippingCost: number, shippingMethod: string, tax: number, paymentMethod: string, orderTotal: number } = { orderNumber: '',
+	// 		subtotal: 0,
+	// 		shippingCost: 0,
+	// 		shippingMethod: '',
+	// 		tax: 0,
+	// 		paymentMethod: '',
+	// 		orderTotal: 0, };
+	// 	cOrderDetails.orderNumber = await this.getElementText(selector.customer.cOrderReceived.orderNumber);
+	// 	cOrderDetails.subtotal = helpers.price(await this.getElementText(selector.customer.cOrderReceived.subTotal));
 
-		// let onlyShippingIsVisible = await this.isVisible(selector.customer.cOrderReceived.shipping)//TODO:delete this line when shipping is fixed
-		// if (onlyShippingIsVisible) cOrderDetails.shippingMethod = await this.getElementText(selector.customer.cOrderReceived.shipping)//TODO:delete this line when shipping is fixed
+	// 	// let onlyShippingIsVisible = await this.isVisible(selector.customer.cOrderReceived.shipping)//TODO:delete this line when shipping is fixed
+	// 	// if (onlyShippingIsVisible) cOrderDetails.shippingMethod = await this.getElementText(selector.customer.cOrderReceived.shipping)//TODO:delete this line when shipping is fixed
 
-		const shippingIsVisible = await this.isVisible(selector.customer.cOrderReceived.shippingCost);
-		if (shippingIsVisible) {
-			cOrderDetails.shippingCost = helpers.price(await this.getElementText(selector.customer.cOrderReceived.shippingCost));
-			cOrderDetails.shippingMethod = await this.getElementText(selector.customer.cOrderReceived.shippingMethod);
-		}
-		const taxIsVisible = await this.isVisible(selector.customer.cOrderReceived.shipping);
-		if (taxIsVisible) {
-			cOrderDetails.tax = helpers.price(await this.getElementText(selector.customer.cOrderReceived.tax));
-		}
+	// 	const shippingIsVisible = await this.isVisible(selector.customer.cOrderReceived.shippingCost);
+	// 	if (shippingIsVisible) {
+	// 		cOrderDetails.shippingCost = helpers.price(await this.getElementText(selector.customer.cOrderReceived.shippingCost));
+	// 		cOrderDetails.shippingMethod = await this.getElementText(selector.customer.cOrderReceived.shippingMethod);
+	// 	}
+	// 	const taxIsVisible = await this.isVisible(selector.customer.cOrderReceived.shipping);
+	// 	if (taxIsVisible) {
+	// 		cOrderDetails.tax = helpers.price(await this.getElementText(selector.customer.cOrderReceived.tax));
+	// 	}
 
-		cOrderDetails.paymentMethod = await this.getElementText(selector.customer.cOrderReceived.orderPaymentMethod);
-		cOrderDetails.orderTotal = helpers.price(await this.getElementText(selector.customer.cOrderReceived.orderTotal));
+	// 	cOrderDetails.paymentMethod = await this.getElementText(selector.customer.cOrderReceived.orderPaymentMethod);
+	// 	cOrderDetails.orderTotal = helpers.price(await this.getElementText(selector.customer.cOrderReceived.orderTotal));
 
-		return cOrderDetails;
-	}
+	// 	return cOrderDetails;
+	// }
 
-	// get order details
-	async getOrderDetails(orderNumber: any): Promise<object> {
-		await this.goToMyAccount();
+	// // get order details
+	// async getOrderDetails(orderNumber: any): Promise<object> {
+	// 	await this.goToMyAccount();
 
-		await this.click(selector.customer.cMyAccount.orders);
-		await this.click(selector.customer.cOrders.OrderDetailsLInk(orderNumber));
+	// 	await this.click(selector.customer.cMyAccount.orders);
+	// 	await this.click(selector.customer.cOrders.OrderDetailsLInk(orderNumber));
 
-		const cOrderDetails = { orderNumber: '',
-			orderDate: '',
-			orderStatus: '',
-			subtotal: 0,
-			shippingCost: 0,
-			shippingMethod: '',
-			tax: 0,
-			orderDiscount: 0,
-			quantityDiscount: 0,
-			discount: 0,
-			paymentMethod: '',
-			orderTotal: 0, };
+	// 	const cOrderDetails = { orderNumber: '',
+	// 		orderDate: '',
+	// 		orderStatus: '',
+	// 		subtotal: 0,
+	// 		shippingCost: 0,
+	// 		shippingMethod: '',
+	// 		tax: 0,
+	// 		orderDiscount: 0,
+	// 		quantityDiscount: 0,
+	// 		discount: 0,
+	// 		paymentMethod: '',
+	// 		orderTotal: 0, };
 
-		cOrderDetails.orderNumber = await this.getElementText(selector.customer.cOrders.orderNumber);
-		cOrderDetails.orderDate = await this.getElementText(selector.customer.cOrders.orderDate);
-		cOrderDetails.orderStatus = await this.getElementText(selector.customer.cOrders.orderStatus);
-		cOrderDetails.subtotal = helpers.price(await this.getElementText(selector.customer.cOrders.subTotal));
+	// 	cOrderDetails.orderNumber = await this.getElementText(selector.customer.cOrders.orderNumber);
+	// 	cOrderDetails.orderDate = await this.getElementText(selector.customer.cOrders.orderDate);
+	// 	cOrderDetails.orderStatus = await this.getElementText(selector.customer.cOrders.orderStatus);
+	// 	cOrderDetails.subtotal = helpers.price(await this.getElementText(selector.customer.cOrders.subTotal));
 
-		// let onlyShippingIsVisible = await this.isVisible(selector.customer.cOrders.shipping)//TODO:delete this line when shipping is fixed
-		// if (onlyShippingIsVisible) cOrderDetails.shippingMethod = await this.getElementText(selector.customer.cOrders.shippingMethod)//TODO:delete this line when shipping is fixed
+	// 	// let onlyShippingIsVisible = await this.isVisible(selector.customer.cOrders.shipping)//TODO:delete this line when shipping is fixed
+	// 	// if (onlyShippingIsVisible) cOrderDetails.shippingMethod = await this.getElementText(selector.customer.cOrders.shippingMethod)//TODO:delete this line when shipping is fixed
 
-		const shippingIsVisible = await this.isVisible(selector.customer.cOrders.shippingCost);
-		if (shippingIsVisible) {
-			cOrderDetails.shippingCost = helpers.price(await this.getElementText(selector.customer.cOrders.shippingCost));
-			cOrderDetails.shippingMethod = (await this.getElementText(selector.customer.cOrders.shippingMethod)).replace('via ', '');
-		}
+	// 	const shippingIsVisible = await this.isVisible(selector.customer.cOrders.shippingCost);
+	// 	if (shippingIsVisible) {
+	// 		cOrderDetails.shippingCost = helpers.price(await this.getElementText(selector.customer.cOrders.shippingCost));
+	// 		cOrderDetails.shippingMethod = (await this.getElementText(selector.customer.cOrders.shippingMethod)).replace('via ', '');
+	// 	}
 
-		const taxIsVisible = await this.isVisible(selector.customer.cOrders.tax);
-		if (taxIsVisible) {
-			cOrderDetails.tax = helpers.price(await this.getElementText(selector.customer.cOrders.tax));
-		}
+	// 	const taxIsVisible = await this.isVisible(selector.customer.cOrders.tax);
+	// 	if (taxIsVisible) {
+	// 		cOrderDetails.tax = helpers.price(await this.getElementText(selector.customer.cOrders.tax));
+	// 	}
 
-		const orderDiscount = await this.isVisible(selector.customer.cOrders.orderDiscount);
-		if (orderDiscount) {
-			cOrderDetails.orderDiscount = helpers.price(await this.getElementText(selector.customer.cOrders.orderDiscount));
-		}
+	// 	const orderDiscount = await this.isVisible(selector.customer.cOrders.orderDiscount);
+	// 	if (orderDiscount) {
+	// 		cOrderDetails.orderDiscount = helpers.price(await this.getElementText(selector.customer.cOrders.orderDiscount));
+	// 	}
 
-		const quantityDiscount = await this.isVisible(selector.customer.cOrders.quantityDiscount);
-		if (quantityDiscount) {
-			cOrderDetails.quantityDiscount = helpers.price(await this.getElementText(selector.customer.cOrders.quantityDiscount));
-		}
+	// 	const quantityDiscount = await this.isVisible(selector.customer.cOrders.quantityDiscount);
+	// 	if (quantityDiscount) {
+	// 		cOrderDetails.quantityDiscount = helpers.price(await this.getElementText(selector.customer.cOrders.quantityDiscount));
+	// 	}
 
-		const discount = await this.isVisible(selector.customer.cOrders.discount);
-		if (discount) {
-			cOrderDetails.discount = helpers.price(await this.getElementText(selector.customer.cOrders.discount));
-		}
+	// 	const discount = await this.isVisible(selector.customer.cOrders.discount);
+	// 	if (discount) {
+	// 		cOrderDetails.discount = helpers.price(await this.getElementText(selector.customer.cOrders.discount));
+	// 	}
 
-		cOrderDetails.paymentMethod = await this.getElementText(selector.customer.cOrders.paymentMethod);
-		cOrderDetails.orderTotal = helpers.price(await this.getElementText(selector.customer.cOrders.orderTotal));
-		return cOrderDetails;
-	}
+	// 	cOrderDetails.paymentMethod = await this.getElementText(selector.customer.cOrders.paymentMethod);
+	// 	cOrderDetails.orderTotal = helpers.price(await this.getElementText(selector.customer.cOrders.orderTotal));
+	// 	return cOrderDetails;
+	// }
 
 	// customer add billing address in checkout
-	async addBillingAddressInCheckout(billingInfo): Promise<void> {
+	async addBillingAddressInCheckout(billingInfo: any): Promise<void> {
 		// Billing Address
 		await this.clearAndType(selector.customer.cAddress.billingFirstName, billingInfo.firstName());
 		await this.clearAndType(selector.customer.cAddress.billingLastName, billingInfo.lastName());
@@ -614,7 +613,7 @@ export class CustomerPage extends BasePage {
 	}
 
 	// customer add shipping address in checkout
-	async addShippingAddressInCheckout(shippingInfo): Promise<void> {
+	async addShippingAddressInCheckout(shippingInfo: any): Promise<void> {
 		await this.clickAndWaitForResponse(data.subUrls.frontend.shippingAddressCheckout, selector.customer.cCheckout.shipToADifferentAddress);
 		// shipping address
 		await this.clearAndType(selector.customer.cAddress.shippingFirstName, shippingInfo.firstName());

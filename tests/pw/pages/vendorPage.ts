@@ -121,7 +121,7 @@ export class VendorPage extends BasePage {
 		} else {
 			await this.clickAndWaitForResponse(data.subUrls.frontend.dashboard, selector.vendor.vSetup.notRightNow);
 		}
-		await expect(this.page.locator(selector.vendor.vDashboard.dashboard)).toBeVisible();
+		await expect(this.page.locator(selector.vendor.vDashboard.menus.dashboard)).toBeVisible();
 	}
 
 	// vendor add product category
@@ -143,7 +143,7 @@ export class VendorPage extends BasePage {
 	// products
 
 	// vendor add simple product
-	async addSimpleProduct(product: { productType?: any; productName: any; category: any; regularPrice: any; storeName?: string; status?: string; stockStatus?: boolean; attribute?: any; attributeTerms?: string[]; variations?: any; saveSuccessMessage?: any; subscriptionPrice?: any; subscriptionPeriodInterval?: any; subscriptionPeriod?: any; expireAfter?: any; subscriptionTrialLength?: any; subscriptionTrialPeriod?: any; productUrl?: any; buttonText?: any; }): Promise<void> {
+	async addSimpleProduct(product: any): Promise<void> {
 		await this.goIfNotThere(data.subUrls.frontend.product);
 		const productName = product.productName();
 		// add new simple product
@@ -158,7 +158,7 @@ export class VendorPage extends BasePage {
 	}
 
 	// vendor add variable product
-	async addVariableProduct(product: { productType: any; productName?: () => string; category?: string; regularPrice: any; storeName?: string; status?: string; stockStatus?: boolean; attribute: any; attributeTerms?: string[]; variations: any; saveSuccessMessage: any; }): Promise<void> {
+	async addVariableProduct(product: any ): Promise<void> {
 		await this.addSimpleProduct(product);
 
 		// edit product
@@ -204,7 +204,7 @@ export class VendorPage extends BasePage {
 	}
 
 	// vendor add variable subscription product
-	async addVariableSubscription(product: { productType: any; productName?: () => string; category?: string; subscriptionPrice?: () => string; subscriptionPeriodInterval?: string; subscriptionPeriod?: string; expireAfter?: string; subscriptionTrialLength?: string; subscriptionTrialPeriod?: string; storeName?: string; status?: string; attribute: any; attributeTerms?: string[]; variations: any; saveSuccessMessage: any; regularPrice?: any; }): Promise<void> {
+	async addVariableSubscription(product: any): Promise<void> {
 		await this.addSimpleProduct(product);
 		// edit product
 		await this.selectByValue(selector.vendor.product.productType, product.productType);
@@ -235,7 +235,7 @@ export class VendorPage extends BasePage {
 	}
 
 	// vendor add external product
-	async addExternalProduct(product: { productType: any; productName?: () => string; productUrl: any; buttonText: any; category?: string; regularPrice: any; storeName?: string; status?: string; saveSuccessMessage: any; }): Promise<void> {
+	async addExternalProduct(product: any): Promise<void> {
 		await this.addSimpleProduct(product);
 		// edit product
 		await this.selectByValue(selector.vendor.product.productType, product.productType);
@@ -249,7 +249,7 @@ export class VendorPage extends BasePage {
 	}
 
 	// vendor add auction product
-	async addAuctionProduct(product: { productName: any; productType?: string; category?: string; itemCondition: any; auctionType: any; regularPrice: any; bidIncrement: any; reservedPrice: any; buyItNowPrice: any; startDate: any; endDate: any; saveSuccessMessage: any; }): Promise<void> {
+	async addAuctionProduct(product: any): Promise<void> {
 		await this.goIfNotThere(data.subUrls.frontend.auction);
 
 		// add new auction product
@@ -447,7 +447,7 @@ export class VendorPage extends BasePage {
 
 
 	// vendor set basic info settings
-	async basicInfoSettings(vendorInfo: { email?: () => string; emailDomain?: string; password?: string; password1?: string; firstName?: () => string; lastName?: () => string; userName?: string; shopName?: string; shopUrl?: string; companyName?: string; companyId?: string; vatNumber?: string; bankName?: string; bankIban?: string; phoneNumber?: string; street1?: string; street2?: string; country?: string; countrySelectValue?: string; stateSelectValue?: string; city?: string; zipCode?: string; state?: string; accountName?: string; accountNumber?: string; bankAddress?: string; routingNumber?: string; swiftCode?: string; iban?: string; banner?: string; profilePicture?: string; storeName?: string; productsPerPage?: string; mapLocation: any; termsAndConditions: any; biography: any; supportButtonText: any; openingClosingTime: any; vacation: any; discount: any; minMax: any; storeSettingsSaveSuccessMessage: any }): Promise<void> {
+	async basicInfoSettings(vendorInfo: any): Promise<void> {
 		// store basic info
 		await this.clearAndType(selector.vendor.vStoreSettings.storeName, vendorInfo.storeName);
 		await this.clearAndType(selector.vendor.vStoreSettings.storeProductsPerPage, vendorInfo.productsPerPage);
@@ -700,9 +700,7 @@ export class VendorPage extends BasePage {
 	}
 
 	// bank transfer payment settings
-	async setBankTransfer(paymentMethod: {
-		bankAccountType: string; bankAccountName: string; bankAccountNumber: string; bankName: string; bankAddress: string; bankRoutingNumber: string; bankIban: string; bankSwiftCode: string; saveSuccessMessage: string | RegExp;
-	}): Promise<void> {
+	async setBankTransfer(paymentMethod:any): Promise<void> {
 		await this.goIfNotThere(data.subUrls.frontend.bankTransfer);
 		// bank transfer
 		await this.clickIfVisible(selector.vendor.vPaymentSettings.disconnectAccount);
@@ -776,7 +774,7 @@ export class VendorPage extends BasePage {
 	}
 
 	// vendor send id verification request
-	async sendIdVerificationRequest(verification: { idRequestSubmitCancel: string | RegExp; file: any; file2?: string; street1?: string; street2?: string; city?: string; zipCode?: string; country?: string; state?: string; idRequestSubmitSuccessMessage: any; addressRequestSubmitSuccessMessage?: string; companyRequestSubmitSuccessMessage?: string; }): Promise<void> {
+	async sendIdVerificationRequest(verification: any): Promise<void> {
 		await this.goIfNotThere(data.subUrls.frontend.settingsVerification);
 
 		// cancel previous verification request if any
@@ -802,7 +800,7 @@ export class VendorPage extends BasePage {
 	}
 
 	// vendor send address verification request
-	async sendAddressVerificationRequest(verification: { addressRequestSubmitCancel: string | RegExp; file: any; file2?: string; street1: any; street2: any; city: any; zipCode: any; country: any; state: any; idRequestSubmitSuccessMessage?: string; addressRequestSubmitSuccessMessage: any; companyRequestSubmitSuccessMessage?: string; }): Promise<void> {
+	async sendAddressVerificationRequest(verification: any): Promise<void> {
 		await this.goIfNotThere(data.subUrls.frontend.settingsVerification);
 		// cancel previous verification request if any
 		const cancelRequestIsVisible = await this.isVisible(selector.vendor.vVerificationSettings.cancelAddressVerificationRequest);
@@ -859,7 +857,7 @@ export class VendorPage extends BasePage {
 	}
 
 	// vendor set verification settings
-	async setVerificationSettings(verification: { idRequestSubmitCancel?: string | RegExp; file: any; file2: string; street1: any; street2: any; city: any; zipCode: any; country: any; state: any; idRequestSubmitSuccessMessage: any; addressRequestSubmitSuccessMessage: any; companyRequestSubmitSuccessMessage: any; addressRequestSubmitCancel?: string | RegExp; companyRequestSubmitCancel?: string | RegExp; }): Promise<void> {
+	async setVerificationSettings(verification: any): Promise<void> {
 		await this.sendIdVerificationRequest(verification);
 		await this.sendAddressVerificationRequest(verification);
 		await this.sendCompanyVerificationRequest(verification);
@@ -898,7 +896,7 @@ export class VendorPage extends BasePage {
 	}
 
 	// set shipping policies
-	async setShippingPolicies(shippingPolicy: { processingTime: any; shippingPolicy: any; refundPolicy: any; saveSuccessMessage: any; }): Promise<void> {
+	async setShippingPolicies(shippingPolicy: any): Promise<void> {
 		await this.goIfNotThere(data.subUrls.frontend.settingsShipping);
 		await this.click(selector.vendor.vShippingSettings.shippingPolicies.clickHereToAddShippingPolicies);
 		await this.selectByValue(selector.vendor.vShippingSettings.shippingPolicies.processingTime, shippingPolicy.processingTime);
@@ -909,12 +907,7 @@ export class VendorPage extends BasePage {
 	}
 
 	// vendor set shipping settings
-	async setShippingSettings(shipping: {
-		shippingZone: any; shippingCountry?: string; selectShippingMethod: any; shippingMethod: any; taxStatus?: any; shippingCost?: any; description?: any; calculationType?:
-		any; saveSuccessMessage: any; freeShippingRequires?: string; freeShippingMinimumOrderAmount?: any; taxIncludedInShippingCosts?: any; handlingFee?: any; maximumShippingCost?: any; handlingFeePerOrder?:
-		any; minimumCostPerOrder?: any; maximumCostPerOrder?: any; transportationMode?: any; avoid?: any; distanceUnit?: any; street1?: any; street2?: any; city?: any; zipCode?: any; state?: any; country?:
-		any; shippingMethodSaveSuccessMessage?: any; zoneSaveSuccessMessage?: any; tableRateSaveSuccessMessage?: any; distanceRateSaveSuccessMessage?: any;
-	}): Promise<void> {
+	async setShippingSettings(shipping: any): Promise<void> {
 		await this.goIfNotThere(data.subUrls.frontend.settingsShipping);
 		// edit shipping zone
 		await this.hover(selector.vendor.vShippingSettings.shippingZoneCell(shipping.shippingZone));
@@ -1141,32 +1134,32 @@ export class VendorPage extends BasePage {
 		expect(currentOrderStatus.toLowerCase()).toMatch((orderStatus.replace(/(^wc)|(\W)/g, '')).toLowerCase());
 	}
 
-	// vendor refund order
-	async refundOrder(orderNumber: string, productName: string, partialRefund = false): Promise<void> {
-		await this.goToVendorDashboard();
-		await this.click(selector.vendor.vDashboard.orders);
-		await this.click(selector.vendor.vOrders.orderLink(orderNumber));
+	// // vendor refund order
+	// async refundOrder(orderNumber: string, productName: string, partialRefund = false): Promise<void> {
+	// 	await this.goToVendorDashboard();
+	// 	await this.click(selector.vendor.vDashboard.orders);
+	// 	await this.click(selector.vendor.vOrders.orderLink(orderNumber));
 
-		//request refund
-		await this.click(selector.vendor.vOrders.requestRefund);
-		const productQuantity = await this.getElementText(selector.vendor.vOrders.productQuantity(productName));
-		const productCost = helpers.price(await this.getElementText(selector.vendor.vOrders.productCost(productName)));
-		const productTax = helpers.price(await this.getElementText(selector.vendor.vOrders.productTax(productName)));
-		await this.type(selector.vendor.vOrders.refundProductQuantity(productName), productQuantity);
-		if (partialRefund) {
-			await this.click(selector.vendor.vOrders.refundDiv);
-			await this.clearAndType(selector.vendor.vOrders.refundProductCostAmount(productName), String(helpers.roundToTwo(productCost / 2)));
-			await this.clearAndType(selector.vendor.vOrders.refundProductTaxAmount(productName), String(helpers.roundToTwo(productTax / 2)));
-		}
-		await this.type(selector.vendor.vOrders.refundReason, 'Defective product');
-		await this.click(selector.vendor.vOrders.refundManually);
-		await this.click(selector.vendor.vOrders.confirmRefund);
+	// 	//request refund
+	// 	await this.click(selector.vendor.vOrders.requestRefund);
+	// 	const productQuantity = await this.getElementText(selector.vendor.vOrders.productQuantity(productName));
+	// 	const productCost = helpers.price(await this.getElementText(selector.vendor.vOrders.productCost(productName)));
+	// 	const productTax = helpers.price(await this.getElementText(selector.vendor.vOrders.productTax(productName)));
+	// 	await this.type(selector.vendor.vOrders.refundProductQuantity(productName), productQuantity);
+	// 	if (partialRefund) {
+	// 		await this.click(selector.vendor.vOrders.refundDiv);
+	// 		await this.clearAndType(selector.vendor.vOrders.refundProductCostAmount(productName), String(helpers.roundToTwo(productCost / 2)));
+	// 		await this.clearAndType(selector.vendor.vOrders.refundProductTaxAmount(productName), String(helpers.roundToTwo(productTax / 2)));
+	// 	}
+	// 	await this.type(selector.vendor.vOrders.refundReason, 'Defective product');
+	// 	await this.click(selector.vendor.vOrders.refundManually);
+	// 	await this.click(selector.vendor.vOrders.confirmRefund);
 
-		// const successMessage = await this.getElementText(selector.vendor.vOrders.refundRequestSuccessMessage);
-		// expect(successMessage).toMatch('Refund request submitted.');
-		await expect(this.page.locator(selector.vendor.vOrders.refundRequestSuccessMessage)).toContainText('Refund request submitted.');
-		await this.click(selector.vendor.vOrders.refundRequestSuccessMessageOk);
-	}
+	// 	// const successMessage = await this.getElementText(selector.vendor.vOrders.refundRequestSuccessMessage);
+	// 	// expect(successMessage).toMatch('Refund request submitted.');
+	// 	await expect(this.page.locator(selector.vendor.vOrders.refundRequestSuccessMessage)).toContainText('Refund request submitted.');
+	// 	await this.click(selector.vendor.vOrders.refundRequestSuccessMessageOk);
+	// }
 
 	// get order details vendor
 	// async getOrderDetails(orderNumber): Promise<object> {
@@ -1200,10 +1193,10 @@ export class VendorPage extends BasePage {
 
 	// get total vendor earnings
 
-	async getTotalVendorEarning(): Promise<number> {
-		await this.goToVendorDashboard();
-		return helpers.price(await this.getElementText(selector.vendor.vDashboard.earning));
-	}
+	// async getTotalVendorEarning(): Promise<number> {
+	// 	await this.goToVendorDashboard();
+	// 	return helpers.price(await this.getElementText(selector.vendor.vDashboard.earning));
+	// }
 
 
 	/*******************************************************************************/
