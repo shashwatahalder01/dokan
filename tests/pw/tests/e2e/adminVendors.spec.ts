@@ -45,7 +45,7 @@ test.describe.skip('Vendors test', () => {
 	});
 
 	//TODO: test('admin can update vendor selling capability @lite @pro', async ( ) => {
-		// await adminPage.vendorBulkAction('approved');
+	// await adminPage.vendorBulkAction('approved');
 	// });
 
 

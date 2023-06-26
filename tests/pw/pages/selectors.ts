@@ -595,6 +595,136 @@ export const selector = {
 
 			},
 
+			// Request for quotation
+			requestForQuotation: {
+
+				menus:{
+					quoteList: '//a[normalize-space()="Quotes List"]',
+					quoteRules: '//a[normalize-space()="Quote Rules"]',
+
+				},
+
+				quoteList:{
+
+					quotesText:  '.dokan-quote-wrapper h1',
+
+					newQuote: '.page-title-action',
+
+					// Nav Tabs
+					navTabs: {
+						all: '//ul[@class="subsubsub"]//li//a[contains(text(),"All")]',
+						pending: '//ul[@class="subsubsub"]//li//a[contains(text(),"Pending")]',
+						draft: '//ul[@class="subsubsub"]//li//a[contains(text(),"Draft")]',
+						converted: '//ul[@class="subsubsub"]//li//a[contains(text(),"Converted")]',
+						approved: '//ul[@class="subsubsub"]//li//a[contains(text(),"Approved")]',
+						trash: '//ul[@class="subsubsub"]//li//a[contains(text(),"Trash")]',
+					},
+
+					// Bulk Actions
+					bulkActions: {
+						bulkActions: '.tablenav.top #bulk-action-selector-top',  // trash
+						applyBulkAction: '.tablenav.top .button.action',
+						selectAll: 'thead .manage-column',
+					},
+
+					search: '#post-search-input',
+
+					quotesTable:  '.dokan-quote-wrapper table',
+
+					addNewQuote: {
+
+						// title
+						quoteTitle: '#title',
+
+						// customer information
+						quoteUserDropDown: '.multiselect__select',
+						quoteUserInput: '.multiselect__input',
+						selectCategories: (category: string) => `//span[normalize-space()="${category}"]/..//input`,
+						fullName: '#announcement_sender_type',  // 1, 0
+						email: '//th[normalize-space()="Hide Price Text"]/..//input',
+						companyName: 'select[name="hide_cart_button"]',  // replace, keep_and_add_new
+						phoneNumber: 'input[name="phone_field"]',
+
+						// quote details
+						addProducts: 'input[value="Add product(s)"]',
+						quoteProductDropDown: '.multiselect__select',
+						quoteProductInput: '.multiselect__input',
+						quoteProductQuantity: '#quantity',
+						addToQuote: 'input[value="Add to quote"]',
+						offerPrice: '#offer_price',
+						offerProductQuantity: '#offer_product_quantity',
+						deleteQuoteProduct: '.dashicons.dashicons-no',
+
+						offerPriceByProductName: (product: string) => `//a[normalize-space()="${product}"]/../../..//input[@id="offer_price"]`,
+						offerProductQuantityByProductName: (product: string) => `//a[normalize-space()="${product}"]/../../..//input[@id="offer_product_quantity"]`,
+						deleteQuoteProductByProductName: (product: string) => `//a[normalize-space()="${product}"]/../../..//span[@class="dashicons dashicons-no"]`,
+
+
+						// publish
+						saveQuoteAsDraft: 'input[value="Save as Draft"]',
+						publishQuote: 'input[value="Publish"]',
+
+
+					},
+
+				},
+
+				quoteRules:{
+
+					quoteRulesText:  '.dokan-announcement-wrapper h1',
+
+					newQuoteRules: '.page-title-action',
+
+					// Nav Tabs
+					navTabs: {
+						all: '//ul[@class="subsubsub"]//li//a[contains(text(),"All")]',
+						published: '//ul[@class="subsubsub"]//li//a[contains(text(),"Published")]',
+						draft: '//ul[@class="subsubsub"]//li//a[contains(text(),"Draft")]',
+						trash: '//ul[@class="subsubsub"]//li//a[contains(text(),"Trash")]',
+					},
+
+					// Bulk Actions
+					bulkActions: {
+						bulkActions: '.tablenav.top #bulk-action-selector-top',  // trash
+						applyBulkAction: '.tablenav.top .button.action',
+						selectAll: 'thead .manage-column',
+					},
+
+					quoteRulesTable:  '.dokan-announcement-wrapper table',
+					quoteRulesCell:  (title: string) => `//a[contains(text(),'${title}')]/../..`,
+					quoteRulesEdit: '.row-actions .edit',
+					quoteRulesTrash: '.row-actions .trash',
+
+				},
+
+				addNewQuoteRules: {
+
+					// title
+					rulesTitle: '#title',
+
+					// rule settings
+					applyQuoteFor: (role: string) => `#${role}`,
+					applyQuoteFor1: (role: string) => `//label[normalize-space()="${role}"]/..//input`,
+					applyOnAllProducts: '#apply_on_all_product',
+					selectProductsDropDown: '.multiselect__select',
+					selectProductsInput: '.multiselect__input',
+					selectCategories: (category: string) => `//span[normalize-space()="${category}"]/..//input`,
+					hidePrice: '#announcement_sender_type',  // 1, 0
+					hidePriceText: '//th[normalize-space()="Hide Price Text"]/..//input',
+					hideAddToCartButton: 'select[name="hide_cart_button"]',  // replace, keep_and_add_new
+					customButtonLabel: '//th[normalize-space()="Custom Button Label"]/..//input',
+
+					// rule priority
+					priorityOrder: '//span[normalize-space()="Rule priority"]/../../..//input',
+
+					// publish
+					saveRuleAsDraft: 'input[value="Save as Draft"]',
+					publishRule: 'input[value="Publish"]',
+
+				},
+
+			},
+
 			// Seller Badge
 			sellerBadge: {
 
@@ -719,6 +849,9 @@ export const selector = {
 
 			// Refunds
 			refunds: {
+
+				refundRequestsText: '.dokan-refund-wrapper h1',
+
 				// Nav Tabs
 				navTabs: {
 					pending: '//ul[@class="subsubsub"]//li//a[contains(text(),"Pending")]',
@@ -728,15 +861,20 @@ export const selector = {
 
 				// Bulk Actions
 				bulkActions: {
-					bulkActions: '#bulk-action-selector-top',
-					selectAllCheckbox: '.check-column input',
+					bulkActions: '.tablenav.top #bulk-action-selector-top',  // Delete
+					applyBulkAction: '.tablenav.top .button.action',
+					selectAll: 'thead .manage-column',
 				},
 
 				// Search Refund
-				searchRefund: '#post-search-input',
+				search: '#post-search-input',
+
+				refundRequestTable: '.dokan-refund-wrapper table',
+				numberOfRowsFound: '.tablenav.top .displaying-num',
 				refundCell: (orderNumber: string) => `//strong[contains(text(),'#${orderNumber}')]/../..`,
 				approveRefund: (orderNumber: string) => `//strong[contains(text(),'#${orderNumber}')]/../..//span[@class='completed']`,
 				cancelRefund: (orderNumber: string) => `//strong[contains(text(),'#${orderNumber}')]/../..//span[@class='cancelled']`,
+
 			},
 
 			// Reports

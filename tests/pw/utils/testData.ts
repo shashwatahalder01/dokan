@@ -786,6 +786,7 @@ export const data = {
 			abuseReports: 'dokan/v1/abuse-reports',
 			announcements: 'dokan/v1/announcement',
 			dummyData: 'dokan/v1/dummy-data',
+			refunds: 'dokan/v1/refunds',
 			modules: 'dokan/v1/admin/modules',
 			storeReviews: 'dokan/v1/store-reviews',
 			productAdvertising: 'dokan/v1/product_adv',
@@ -1289,6 +1290,24 @@ export const data = {
 
 		filter: {
 			byVendor: String(process.env.VENDOR) + 'store',
+		}
+
+	},
+
+	requestForQuotation: {
+
+		userRole: {
+			administrator:'administrator',
+			editor:'editor',
+			author:'author',
+			contributor:'contributor',
+			subscriber:'subscriber',
+			customer:'customer',
+			shopManager: 'shop_manager',
+			vendor:'seller',
+			vendorStaff:'vendor_staff',
+			wholesaleCustomer:'dokan_wholesale_customer',
+			guest:'guest',
 		}
 
 	},

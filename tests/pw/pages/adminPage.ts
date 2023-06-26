@@ -1241,34 +1241,6 @@ export class AdminPage extends BasePage {
 		return totalAdminCommission;
 	}
 
-	// Admin Approve Return Request
-	async approveRefundRequest(orderNumber: any, approve = false) {
-		await this.searchRefundRequest(orderNumber);
-
-		await this.hover(selector.admin.dokan.refunds.refundCell(orderNumber));
-		if (approve) {
-			await this.click(selector.admin.dokan.refunds.approveRefund(orderNumber));
-		} else {
-			await this.click(selector.admin.dokan.refunds.cancelRefund(orderNumber));
-		}
-
-
-		const refundRequestIsVisible = await this.isVisible(selector.admin.dokan.refunds.refundCell(orderNumber));
-		expect(refundRequestIsVisible).toBe(false);
-	}
-
-	// Search Refund Request
-	async searchRefundRequest(orderNumber: any) {
-		await this.hover(selector.admin.aDashboard.dokan);
-		await this.click(selector.admin.dokan.menus.refunds);
-
-		// Search Refund Request
-		await this.type(selector.admin.dokan.refunds.searchRefund, orderNumber);
-		// await this.press(data.key.enter)
-
-		await expect(this.page.locator(selector.admin.dokan.refunds.refundCell(orderNumber))).toBeVisible();
-	}
-
 
 	// Dokan Setup Wizard
 
@@ -1590,6 +1562,8 @@ export class AdminPage extends BasePage {
 	async searchVendor(vendorName: string){
 		await this.goIfNotThere(data.subUrls.backend.dokan.dokanVendors);
 
+		await this.clearInputField(selector.admin.dokan.vendors.search); // TODO: clear by cross, or use type instead of fill  //TODO: is it necessary
+
 		await this.typeAndWaitForResponse(data.subUrls.backend.stores, selector.admin.dokan.vendors.search, vendorName);
 		await expect(this.page.locator(selector.admin.dokan.vendors.vendorCell(vendorName))).toBeVisible();
 
@@ -1803,6 +1777,8 @@ export class AdminPage extends BasePage {
 	// search support ticket
 	async searchSupportTicket(vendorName: string){
 		await this.goIfNotThere(data.subUrls.backend.dokan.dokanStoreSupport);
+
+		await this.clearInputField(selector.admin.dokan.storeSupport.search); // TODO: clear by cross, or use type instead of fill  //TODO: is it necessary
 
 		await this.typeAndWaitForResponse(data.subUrls.backend.supportTicket, selector.admin.dokan.storeSupport.searchTicket, vendorName);
 		await expect(this.page.locator(selector.admin.dokan.vendors.vendorCell(vendorName))).toBeVisible();
@@ -2126,6 +2102,75 @@ export class AdminPage extends BasePage {
 		await this.clickAndWaitForResponse(data.subUrls.backend.announcements, selector.admin.dokan.announcements.announcementDelete);
 	}
 
+	/*************************************************************************************************/
+
+
+	// refunds
+
+	async adminRefundRequestsRenderProperly(){
+		await this.goIfNotThere(data.subUrls.backend.dokan.dokanRefunds);
+
+		// refund request text is visible
+		await expect(this.page.locator(selector.admin.dokan.refunds.refundRequestsText)).toBeVisible();
+
+		// nav tabs are visible
+		await this.multipleElementVisible(selector.admin.dokan.refunds.navTabs);
+
+		// bulk action elements are visible
+		await this.multipleElementVisible(selector.admin.dokan.refunds.bulkActions);
+
+		// refund request search is visible
+		await expect(this.page.locator(selector.admin.dokan.refunds.search)).toBeVisible();
+
+		// refund request table is visible
+		await expect(this.page.locator(selector.admin.dokan.refunds.refundRequestTable)).toBeVisible();
+
+	}
+
+	// search refund request
+	async searchRefundRequests(orderOrStore: string){
+		await this.goIfNotThere(data.subUrls.backend.dokan.dokanRefunds);
+
+		await this.clearInputField(selector.admin.dokan.refunds.search); // TODO: clear by cross, or use type instead of fill
+
+		await this.typeAndWaitForResponse(data.subUrls.backend.refunds, selector.admin.dokan.refunds.search, String(orderOrStore));
+		if (typeof(orderOrStore) != 'number'){
+			const count = (await this.getElementText(selector.admin.dokan.refunds.numberOfRowsFound)).split(' ')[0];
+			expect(Number(count)).not.toBe(0);
+		} else {
+			await expect(this.page.locator(selector.admin.dokan.refunds.refundCell(orderOrStore))).toBeVisible();
+		}
+	}
+
+	// update refund request
+	async updateRefundRequests(orderNumber: any, action: string){
+		await this.searchRefundRequests(orderNumber);
+
+		await this.hover(selector.admin.dokan.refunds.refundCell(orderNumber));
+		switch (action) {
+
+		case 'approve' :
+			await this.clickAndWaitForResponse(data.subUrls.backend.refunds, selector.admin.dokan.refunds.approveRefund(orderNumber));
+			break;
+
+		case 'reject' :
+			await this.clickAndWaitForResponse(data.subUrls.backend.refunds, selector.admin.dokan.refunds.cancelRefund(orderNumber));
+			break;
+
+		default :
+			break;
+		}
+
+	}
+
+	// refund request bulk action
+	async refundRequestsBulkAction(action: string){
+		await this.goIfNotThere(data.subUrls.backend.dokan.dokanRefunds);
+
+		await this.click(selector.admin.dokan.refunds.bulkActions.selectAll);
+		await this.selectByValue(selector.admin.dokan.refunds.bulkActions.bulkActions, action);
+		await this.clickAndWaitForResponse(data.subUrls.backend.refunds, selector.admin.dokan.refunds.bulkActions.applyBulkAction);
+	}
 
 	/*************************************************************************************************/
 
@@ -2177,7 +2222,7 @@ export class AdminPage extends BasePage {
 	// search module
 	async searchModule(moduleName: string){
 		await this.goIfNotThere(data.subUrls.backend.dokan.dokanModules);
-		await this.clickIfVisible(selector.admin.dokan.modules.pro.clearFilter);
+		await this.clickIfVisible(selector.admin.dokan.modules.pro.clearFilter); //TODO: why clear filer
 
 		await this.clearAndType(selector.admin.dokan.modules.pro.searchBox, moduleName);
 		await expect(this.page.locator(selector.admin.dokan.modules.pro.moduleCardByName(moduleName))).toBeVisible();
@@ -2370,6 +2415,8 @@ export class AdminPage extends BasePage {
 	async searchAdvertisedProduct(productOrOrder: string | number){
 		await this.goIfNotThere(data.subUrls.backend.dokan.dokanProductAdvertising);
 
+		await this.clearInputField(selector.admin.dokan.productAdvertising.search); // TODO: clear by cross, or use type instead of fill  //TODO: is it necessary
+
 		await this.typeAndWaitForResponse(data.subUrls.backend.productAdvertising, selector.admin.dokan.productAdvertising.search, String(productOrOrder));
 		if (typeof(productOrOrder) != 'number'){
 			await expect(this.page.locator(selector.admin.dokan.productAdvertising.advertisedProductCell(productOrOrder))).toBeVisible();
@@ -2534,6 +2581,8 @@ export class AdminPage extends BasePage {
 	// search wholesale customer
 	async searchWholesaleCustomer(wholesaleCustomer: string){
 		await this.goIfNotThere(data.subUrls.backend.dokan.dokanWholeSaleCustomer);
+
+		await this.clearInputField(selector.admin.dokan.wholesaleCustomer.search); // TODO: clear by cross, or use type instead of fill  //TODO: is it necessary
 
 		await this.typeAndWaitForResponse(data.subUrls.backend.wholesaleCustomers, selector.admin.dokan.wholesaleCustomer.search, wholesaleCustomer);
 		await expect(this.page.locator(selector.admin.dokan.wholesaleCustomer.wholesaleCustomerCell(wholesaleCustomer))).toBeVisible();
