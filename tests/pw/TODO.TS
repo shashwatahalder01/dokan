@@ -29,13 +29,13 @@
 //TODO: theme is not activating fix this
 //TODO: test cli dont work
 //TODO: fix permalink issue 
+//TODO: replace click with check all suite
 //TODO:
 //TODO:
 //TODO:
 //TODO:
-//TODO:
-//TODO:
-//TODO:
+//TODO: add wait for navigation to add wait for responses or build a new onw merging both *****************
+//TODO: add more ui assertions to all tests
 //TODO:
 //TODO:
 //TODO:

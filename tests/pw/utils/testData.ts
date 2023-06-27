@@ -1315,7 +1315,7 @@ export const data = {
 
 		quoteRule: {
 			title: 'test quote rule',
-			role: '',
+			userRole: '',
 			product: 'p1_v1 (simple)',
 			category: 'Uncategorized',
 			hidePrice: '1',
@@ -1324,6 +1324,43 @@ export const data = {
 			customButtonLabel: 'Add to quote',
 			order: '0',
 		},
+
+		updateQuoteRule: {
+			title: 'test quote rule',
+			userRole: '',
+			product: 'p1_v1 (simple)',
+			category: 'Uncategorized',
+			hidePrice: '0',
+			hidePriceText: 'Price is hidden',
+			hideAddToCartButton: 'replace', // replace, keep_and_add_new
+			customButtonLabel: 'Add to quote',
+			order: '1',
+		},
+
+		quote:{
+			title: 'test quote',
+			user: 'customer1',
+			fullName: 'Jhon Doe',
+			email: 'customer1@g.com',
+			companyName: 'abc',
+			phoneNumber: '0123456789',
+			product: 'p1_v1 (simple)',
+			quantity: '5',
+			offerPrice: '80',
+			offerProductQuantity: '10',
+		},
+
+		updateQuote:{
+			title: 'test quote',
+			user: 'customer1',
+			fullName: 'Jhon Doe',
+			email: 'customer1@g.com',
+			companyName: 'abc',
+			phoneNumber: '0123456789',
+			product: 'p1_v1 (simple)',
+			offerPrice: '70',
+			offerProductQuantity: '20',
+		}
 
 	},
 

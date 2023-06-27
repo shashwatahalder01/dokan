@@ -633,7 +633,22 @@ export const selector = {
 
 					quotesTable:  '.dokan-quote-wrapper table',
 
+					quoteCell:  (title: string) => `//strong[contains(text(),'${title}')]/../..//td[@class='column sl']`,
+					//TODO: uncomment after search added
+					// quoteRulesEdit: '.row-actions .edit',
+					// quoteRulesTrash: '.row-actions .trash',
+					// quoteRulesPermanentlyDelete: '.row-actions .delete',
+					// quoteRulesRestore: '.row-actions .restore',
+					quoteEdit: (title: string) => `//strong[contains(text(),'${title}')]/../..//td[@class='column sl']//span[@class="edit"]`,
+					quoteTrash: (title: string) => `//strong[contains(text(),'${title}')]/../..//td[@class='column sl']//span[@class="trash"]`,
+					quotePermanentlyDelete: (title: string) => `//strong[contains(text(),'${title}')]/../..//span[@class="delete"]`,
+					quoteRestore: (title: string) => `//strong[contains(text(),'${title}')]/../..//span[@class="restore"]`,
+
+					convertToOrder: 'input[value="Convert to Order"]',
+
 					addNewQuote: {
+
+						goBack: '//a[normalize-space()="Go Back"]',
 
 						// title
 						quoteTitle: '#title',
@@ -641,15 +656,15 @@ export const selector = {
 						// customer information
 						quoteUserDropDown: '.multiselect__select',
 						quoteUserInput: '.multiselect__input',
-						fullName: '#announcement_sender_type',  // 1, 0
-						email: '//th[normalize-space()="Hide Price Text"]/..//input',
-						companyName: 'select[name="hide_cart_button"]',  // replace, keep_and_add_new
+						fullName: 'input[name="name_field"]',
+						email: 'input[name="email_field"]',
+						companyName: 'input[placeholder="Company Name"]',
 						phoneNumber: 'input[name="phone_field"]',
 
 						// quote details
 						addProducts: 'input[value="Add product(s)"]',
-						quoteProductDropDown: '.multiselect__select',
-						quoteProductInput: '.multiselect__input',
+						quoteProductDropDown: '.dokan-modal .multiselect__select',
+						quoteProductInput: '.dokan-modal .multiselect__input',
 						quoteProductQuantity: '#quantity',
 						addToQuote: 'input[value="Add to quote"]',
 						offerPrice: '#offer_price',
@@ -674,7 +689,7 @@ export const selector = {
 
 					quoteRulesText:  '.dokan-announcement-wrapper h1',
 
-					newQuoteRules: '.page-title-action',
+					newQuoteRule: '.page-title-action',
 
 					// Nav Tabs
 					navTabs: {
@@ -694,16 +709,24 @@ export const selector = {
 
 					quoteRulesTable:  '.dokan-announcement-wrapper table',
 					quoteRulesCell:  (title: string) => `//a[contains(text(),'${title}')]/../..`,
-					quoteRulesEdit: '.row-actions .edit',
-					quoteRulesTrash: '.row-actions .trash',
-					quoteRulesPermanentlyDelete: '.row-actions .delete',
-					quoteRulesRestore: '.row-actions .restore',
+					trashedQuoteRulesCell:  (title: string) => `//strong[contains(text(),'${title}')]/../..`,
+					//TODO: uncomment after search added
+					// quoteRulesEdit: '.row-actions .edit',
+					// quoteRulesTrash: '.row-actions .trash',
+					// quoteRulesPermanentlyDelete: '.row-actions .delete',
+					// quoteRulesRestore: '.row-actions .restore',
+					quoteRulesEdit: (title: string) => `//a[contains(text(),'${title}')]/../..//span[@class="edit"]`,
+					quoteRulesTrash: (title: string) => `//a[contains(text(),'${title}')]/../..//span[@class="trash"]`,
+					quoteRulesPermanentlyDelete: (title: string) => `//strong[contains(text(),'${title}')]/../..//span[@class="delete"]`,
+					quoteRulesRestore: (title: string) => `//strong[contains(text(),'${title}')]/../..//span[@class="restore"]`,
 
 
-					addNewQuoteRules: {
+					addNewQuoteRule: {
+
+						goBack: '//a[normalize-space()="Go Back"]',
 
 						// title
-						rulesTitle: '#title',
+						ruleTitle: '#title',
 
 						// rule settings
 						applyQuoteFor: (role: string) => `#${role}`,

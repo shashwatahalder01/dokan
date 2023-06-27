@@ -1413,8 +1413,8 @@ export class AdminPage extends BasePage {
 		const netSales = await this.getElementText(selector.admin.dokan.dashboard.atAGlance.netSalesThisMonth);
 		const commissionEarned = await this.getElementText(selector.admin.dokan.dashboard.atAGlance.commissionEarned);
 
-		expect(Number(netSales.replace('$', ''))).toBe(Number(atAGlanceValues.sales.this_month));
-		expect(Number(commissionEarned.replace('$', ''))).toBe(Number(atAGlanceValues.earning.this_month));
+		expect(Number(netSales?.replace('$', ''))).toBe(Number(atAGlanceValues.sales.this_month));
+		expect(Number(commissionEarned?.replace('$', ''))).toBe(Number(atAGlanceValues.earning.this_month));
 		await expect(this.page.locator(selector.admin.dokan.dashboard.atAGlance.signupThisMonth)).toContainText(atAGlanceValues.vendors.this_month + ' Vendor');
 		await expect(this.page.locator(selector.admin.dokan.dashboard.atAGlance.vendorAwaitingApproval)).toContainText(atAGlanceValues.vendors.inactive + ' Vendor');
 		await expect(this.page.locator(selector.admin.dokan.dashboard.atAGlance.productCreatedThisMonth)).toContainText(atAGlanceValues.products.this_month + ' Products');
@@ -1778,7 +1778,7 @@ export class AdminPage extends BasePage {
 	async searchSupportTicket(vendorName: string){
 		await this.goIfNotThere(data.subUrls.backend.dokan.dokanStoreSupport);
 
-		await this.clearInputField(selector.admin.dokan.storeSupport.search); // TODO: clear by cross, or use type instead of fill  //TODO: is it necessary
+		await this.clearInputField(selector.admin.dokan.storeSupport.searchTicket); // TODO: clear by cross, or use type instead of fill  //TODO: is it necessary
 
 		await this.typeAndWaitForResponse(data.subUrls.backend.supportTicket, selector.admin.dokan.storeSupport.searchTicket, vendorName);
 		await expect(this.page.locator(selector.admin.dokan.vendors.vendorCell(vendorName))).toBeVisible();
@@ -1820,7 +1820,7 @@ export class AdminPage extends BasePage {
 		await expect(this.page.locator(selector.admin.dokan.requestForQuotation.quoteRules.quoteRulesText)).toBeVisible();
 
 		// new quote rules is visible
-		await expect(this.page.locator(selector.admin.dokan.requestForQuotation.quoteRules.newQuoteRules)).toBeVisible();
+		await expect(this.page.locator(selector.admin.dokan.requestForQuotation.quoteRules.newQuoteRule)).toBeVisible();
 
 		// nav tabs are visible
 		await this.multipleElementVisible(selector.admin.dokan.requestForQuotation.quoteRules.navTabs);
@@ -1834,28 +1834,29 @@ export class AdminPage extends BasePage {
 
 
 	async updateQuoteRuleFields(rule: any){
-		await this.clearAndType(selector.admin.dokan.requestForQuotation.quoteRules.addNewQuoteRules.rulesTitle, rule.title);
-		await this.click(selector.admin.dokan.requestForQuotation.quoteRules.addNewQuoteRules.applyQuoteFor(rule.role));
+		await this.clearAndType(selector.admin.dokan.requestForQuotation.quoteRules.addNewQuoteRule.ruleTitle, rule.title);
+		await this.check(selector.admin.dokan.requestForQuotation.quoteRules.addNewQuoteRule.applyQuoteFor(rule.userRole));
 
 		// products
-		await this.click(selector.admin.dokan.requestForQuotation.quoteRules.addNewQuoteRules.applyOnAllProducts);
-		// await this.click(selector.admin.dokan.requestForQuotation.quoteRules.addNewQuoteRules.selectProductsDropDown);
-		// await this.typeAndWaitForResponse(data.subUrls.backend.quoteRules, selector.admin.dokan.requestForQuotation.quoteRules.addNewQuoteRules.selectProductsInput, rule.product);
+		await this.click(selector.admin.dokan.requestForQuotation.quoteRules.addNewQuoteRule.applyOnAllProducts);
+		// await this.click(selector.admin.dokan.requestForQuotation.quoteRules.addNewQuoteRule.selectProductsDropDown);
+		// await this.typeAndWaitForResponse(data.subUrls.backend.quoteRules, selector.admin.dokan.requestForQuotation.quoteRules.addNewQuoteRule.selectProductsInput, rule.product);
 		// await this.press(data.key.enter);
 
 		// category
-		await this.click(selector.admin.dokan.requestForQuotation.quoteRules.addNewQuoteRules.selectCategories(rule.category));
+		// await this.check(selector.admin.dokan.requestForQuotation.quoteRules.addNewQuoteRule.selectCategories(rule.category));
 
-		await this.selectByValue(selector.admin.dokan.requestForQuotation.quoteRules.addNewQuoteRules.hidePrice, rule.hidePrice);
-		await this.clearAndType(selector.admin.dokan.requestForQuotation.quoteRules.addNewQuoteRules.hidePriceText, rule.hidePriceText);
-		await this.selectByValue(selector.admin.dokan.requestForQuotation.quoteRules.addNewQuoteRules.hideAddToCartButton, rule.hideAddToCartButton);
-		await this.clearAndType(selector.admin.dokan.requestForQuotation.quoteRules.addNewQuoteRules.customButtonLabel, rule.customButtonLabel);
+		await this.selectByValue(selector.admin.dokan.requestForQuotation.quoteRules.addNewQuoteRule.hidePrice, rule.hidePrice);
+		await this.clearAndType(selector.admin.dokan.requestForQuotation.quoteRules.addNewQuoteRule.hidePriceText, rule.hidePriceText);
+		await this.selectByValue(selector.admin.dokan.requestForQuotation.quoteRules.addNewQuoteRule.hideAddToCartButton, rule.hideAddToCartButton);
+		await this.clearAndType(selector.admin.dokan.requestForQuotation.quoteRules.addNewQuoteRule.customButtonLabel, rule.customButtonLabel);
 
 		// priority
-		await this.clearAndType(selector.admin.dokan.requestForQuotation.quoteRules.addNewQuoteRules.priorityOrder, rule.order);
+		await this.clearAndType(selector.admin.dokan.requestForQuotation.quoteRules.addNewQuoteRule.priorityOrder, rule.order);
 
 		// publish
-		await this.clickAndWaitForResponse(data.subUrls.backend.quoteRules, selector.admin.dokan.requestForQuotation.quoteRules.addNewQuoteRules.publishRule);
+		await this.clickAndWaitForResponse(data.subUrls.backend.quoteRules, selector.admin.dokan.requestForQuotation.quoteRules.addNewQuoteRule.publishRule);
+		// await this.wait(5);
 
 	}
 
@@ -1863,8 +1864,12 @@ export class AdminPage extends BasePage {
 	async addQuoteRule(rule: any){
 		await this.goIfNotThere(data.subUrls.backend.dokan.dokanRequestForQuoteRules);
 
+		await this.clickAndWaitForResponse(data.subUrls.backend.quotes, selector.admin.dokan.requestForQuotation.quoteRules.newQuoteRule);
+
 		// TODO: need to wait for multiple response
-		await this.clickAndWaitForResponse(data.subUrls.backend.quoteRules, selector.admin.dokan.requestForQuotation.quoteRules.newQuoteRules);
+		// // const qrs: string[][] = [[data.subUrls.backend.quotes, '200'], [data.subUrls.backend.products, '200']];
+		// const qrs: string[][] = [[data.subUrls.backend.quotes, '200']];
+		// await this.clickAndWaitForResponses(qrs, selector.admin.dokan.requestForQuotation.quoteRules.newQuoteRule);
 
 		await this.updateQuoteRuleFields(rule);
 	}
@@ -1875,7 +1880,7 @@ export class AdminPage extends BasePage {
 
 		await this.hover(selector.admin.dokan.requestForQuotation.quoteRules.quoteRulesCell(rule.title));
 		// TODO: need to wait for multiple response
-		await this.clickAndWaitForResponse(data.subUrls.backend.quoteRules, selector.admin.dokan.requestForQuotation.quoteRules.quoteRulesEdit);
+		await this.clickAndWaitForResponse(data.subUrls.backend.quoteRules, selector.admin.dokan.requestForQuotation.quoteRules.quoteRulesEdit(rule.title));
 
 		await this.updateQuoteRuleFields(rule);
 
@@ -1889,19 +1894,19 @@ export class AdminPage extends BasePage {
 
 		case 'trash' :
 			await this.hover(selector.admin.dokan.requestForQuotation.quoteRules.quoteRulesCell(quoteTitle));
-			await this.clickAndWaitForResponse(data.subUrls.backend.quoteRules, selector.admin.dokan.requestForQuotation.quoteRules.quoteRulesTrash);
+			await this.clickAndWaitForResponse(data.subUrls.backend.quoteRules, selector.admin.dokan.requestForQuotation.quoteRules.quoteRulesTrash(quoteTitle));
 			break;
 
 		case 'permanently-delete' :
 			await this.clickAndWaitForResponse(data.subUrls.backend.quoteRules, selector.admin.dokan.requestForQuotation.quoteRules.navTabs.trash);
-			await this.hover(selector.admin.dokan.requestForQuotation.quoteRules.quoteRulesCell(quoteTitle));
-			await this.clickAndWaitForResponse(data.subUrls.backend.quoteRules, selector.admin.dokan.requestForQuotation.quoteRules.quoteRulesPermanentlyDelete);
+			await this.hover(selector.admin.dokan.requestForQuotation.quoteRules.trashedQuoteRulesCell(quoteTitle));
+			await this.clickAndWaitForResponse(data.subUrls.backend.quoteRules, selector.admin.dokan.requestForQuotation.quoteRules.quoteRulesPermanentlyDelete(quoteTitle));
 			break;
 
 		case 'restore' :
 			await this.clickAndWaitForResponse(data.subUrls.backend.quoteRules, selector.admin.dokan.requestForQuotation.quoteRules.navTabs.trash);
-			await this.hover(selector.admin.dokan.requestForQuotation.quoteRules.quoteRulesCell(quoteTitle));
-			await this.clickAndWaitForResponse(data.subUrls.backend.quoteRules, selector.admin.dokan.requestForQuotation.quoteRules.quoteRulesRestore);
+			await this.hover(selector.admin.dokan.requestForQuotation.quoteRules.trashedQuoteRulesCell(quoteTitle));
+			await this.clickAndWaitForResponse(data.subUrls.backend.quoteRules, selector.admin.dokan.requestForQuotation.quoteRules.quoteRulesRestore(quoteTitle));
 			break;
 
 		default :
@@ -1944,31 +1949,30 @@ export class AdminPage extends BasePage {
 		await expect(this.page.locator(selector.admin.dokan.requestForQuotation.quotesList.quotesTable)).toBeVisible();
 	}
 
-	// add quote
-	async addQuote(quote: any){
-		await this.goIfNotThere(data.subUrls.backend.dokan.dokanRequestForQuote);
+	async updateQuoteFields(quote: any, action = 'create'){
 
-		// TODO: need to wait for multiple response
-		await this.click(selector.admin.dokan.requestForQuotation.quotesList.newQuote);
+		await this.clearAndType(selector.admin.dokan.requestForQuotation.quotesList.addNewQuote.quoteTitle, quote.title);
 
 		// customer information
 		await this.click(selector.admin.dokan.requestForQuotation.quotesList.addNewQuote.quoteUserDropDown);
 		await this.typeAndWaitForResponse(data.subUrls.backend.quotes, selector.admin.dokan.requestForQuotation.quotesList.addNewQuote.quoteUserInput, quote.user);
 		await this.press(data.key.enter);
-		// await this.clearAndType(selector.admin.dokan.requestForQuotation.quotesList.addNewQuote.fullName, quote.quantity);
+		// await this.clearAndType(selector.admin.dokan.requestForQuotation.quotesList.addNewQuote.fullName, quote.fullName);
 		// await this.clearAndType(selector.admin.dokan.requestForQuotation.quotesList.addNewQuote.email, quote.email);
-		// await this.clearAndType(selector.admin.dokan.requestForQuotation.quotesList.addNewQuote.companyName, quote.companyName);
-		// await this.clearAndType(selector.admin.dokan.requestForQuotation.quotesList.addNewQuote.phoneNumber, quote.phoneNumber);
+		await this.clearAndType(selector.admin.dokan.requestForQuotation.quotesList.addNewQuote.companyName, quote.companyName);
+		await this.clearAndType(selector.admin.dokan.requestForQuotation.quotesList.addNewQuote.phoneNumber, quote.phoneNumber);
 
 		// quote product
-		await this.click(selector.admin.dokan.requestForQuotation.quotesList.addNewQuote.addProducts);
+		if (action === 'create'){
+			await this.click(selector.admin.dokan.requestForQuotation.quotesList.addNewQuote.addProducts);
 
-		await this.click(selector.admin.dokan.requestForQuotation.quotesList.addNewQuote.quoteProductDropDown);
-		await this.typeAndWaitForResponse(data.subUrls.backend.products, selector.admin.dokan.requestForQuotation.quotesList.addNewQuote.quoteProductInput, quote.product);
-		await this.press(data.key.enter);
+			await this.click(selector.admin.dokan.requestForQuotation.quotesList.addNewQuote.quoteProductDropDown);
+			await this.typeAndWaitForResponse(data.subUrls.backend.products, selector.admin.dokan.requestForQuotation.quotesList.addNewQuote.quoteProductInput, quote.product);
+			await this.press(data.key.enter);
 
-		await this.clearAndType(selector.admin.dokan.requestForQuotation.quotesList.addNewQuote.quoteProductQuantity, quote.quantity);
-		await this.click(selector.admin.dokan.requestForQuotation.quotesList.addNewQuote.addToQuote);
+			await this.clearAndType(selector.admin.dokan.requestForQuotation.quotesList.addNewQuote.quoteProductQuantity, quote.quantity);
+			await this.click(selector.admin.dokan.requestForQuotation.quotesList.addNewQuote.addToQuote);
+		}
 
 		await this.clearAndType(selector.admin.dokan.requestForQuotation.quotesList.addNewQuote.offerPrice, quote.offerPrice);
 		await this.clearAndType(selector.admin.dokan.requestForQuotation.quotesList.addNewQuote.offerProductQuantity, quote.offerProductQuantity);
@@ -1978,30 +1982,49 @@ export class AdminPage extends BasePage {
 	}
 
 	// add quote
-	async editQuote(quote: any){}
+	async addQuote(quote: any){
+		await this.goIfNotThere(data.subUrls.backend.dokan.dokanRequestForQuote);
+
+		await this.click(selector.admin.dokan.requestForQuotation.quotesList.newQuote);
+		// TODO: need to wait for multiple response
+
+		await this.updateQuoteFields(quote, 'create');
+
+	}
+
+	// add quote
+	async editQuote(quote: any){
+		await this.goIfNotThere(data.subUrls.backend.dokan.dokanRequestForQuote);
+
+		await this.hover(selector.admin.dokan.requestForQuotation.quotesList.quoteCell(quote.title));
+		// TODO: need to wait for multiple response
+		await this.clickAndWaitForResponse(data.subUrls.backend.quotes, selector.admin.dokan.requestForQuotation.quotesList.quoteEdit(quote.title));
+
+		await this.updateQuoteFields(quote, 'update');
+	}
 
 
 	// update quote
 	async updateQuote(quoteTitle: string, action: string){
-		await this.goIfNotThere(data.subUrls.backend.dokan.dokanRequestForQuoteRules);
+		await this.goIfNotThere(data.subUrls.backend.dokan.dokanRequestForQuote);
 
 		switch (action) {
 
 		case 'trash' :
-			await this.hover(selector.admin.dokan.requestForQuotation.quoteRules.quoteRulesCell(quoteTitle));
-			await this.clickAndWaitForResponse(data.subUrls.backend.quoteRules, selector.admin.dokan.requestForQuotation.quoteRules.quoteRulesTrash);
+			await this.hover(selector.admin.dokan.requestForQuotation.quotesList.quoteCell(quoteTitle));
+			await this.clickAndWaitForResponse(data.subUrls.backend.quotes, selector.admin.dokan.requestForQuotation.quotesList.quoteTrash(quoteTitle));
 			break;
 
 		case 'permanently-delete' :
-			await this.clickAndWaitForResponse(data.subUrls.backend.quoteRules, selector.admin.dokan.requestForQuotation.quoteRules.navTabs.trash);
-			await this.hover(selector.admin.dokan.requestForQuotation.quoteRules.quoteRulesCell(quoteTitle));
-			await this.clickAndWaitForResponse(data.subUrls.backend.quoteRules, selector.admin.dokan.requestForQuotation.quoteRules.quoteRulesPermanentlyDelete);
+			await this.clickAndWaitForResponse(data.subUrls.backend.quotes, selector.admin.dokan.requestForQuotation.quotesList.navTabs.trash);
+			await this.hover(selector.admin.dokan.requestForQuotation.quotesList.quoteCell(quoteTitle));
+			await this.clickAndWaitForResponse(data.subUrls.backend.quotes, selector.admin.dokan.requestForQuotation.quotesList.quotePermanentlyDelete(quoteTitle));
 			break;
 
 		case 'restore' :
-			await this.clickAndWaitForResponse(data.subUrls.backend.quoteRules, selector.admin.dokan.requestForQuotation.quoteRules.navTabs.trash);
-			await this.hover(selector.admin.dokan.requestForQuotation.quoteRules.quoteRulesCell(quoteTitle));
-			await this.clickAndWaitForResponse(data.subUrls.backend.quoteRules, selector.admin.dokan.requestForQuotation.quoteRules.quoteRulesRestore);
+			await this.clickAndWaitForResponse(data.subUrls.backend.quotes, selector.admin.dokan.requestForQuotation.quotesList.navTabs.trash);
+			await this.hover(selector.admin.dokan.requestForQuotation.quotesList.quoteCell(quoteTitle));
+			await this.clickAndWaitForResponse(data.subUrls.backend.quotes, selector.admin.dokan.requestForQuotation.quotesList.quoteRestore(quoteTitle));
 			break;
 
 		default :
@@ -2012,8 +2035,16 @@ export class AdminPage extends BasePage {
 
 
 	// convert quote to order
-	async convertQuoteToOrder(action: string){
-		//todo
+	async convertQuoteToOrder(quote: any){
+		await this.addQuote(quote);
+
+		await this.goIfNotThere(data.subUrls.backend.dokan.dokanRequestForQuote);
+
+		await this.hover(selector.admin.dokan.requestForQuotation.quotesList.quoteCell(quote.title));
+		// TODO: need to wait for multiple response
+		await this.clickAndWaitForResponse(data.subUrls.backend.quotes, selector.admin.dokan.requestForQuotation.quotesList.quoteEdit(quote.title));
+		await this.clickAndWaitForResponse(data.subUrls.backend.quotes, selector.admin.dokan.requestForQuotation.quotesList.convertToOrder);
+
 	}
 
 
@@ -2086,9 +2117,9 @@ export class AdminPage extends BasePage {
 			}
 			if(badge.badgeName ===  'Verified Seller'){
 				// await this.selectByValue(selector.admin.dokan.sellerBadge.badgeDetails.verifiedSellerMethod, badge.verificationMethod);
-				const methods  = Object.values(badge.verifiedSellerMethod);
+				const methods: string[]  = Object.values(badge.verifiedSellerMethod);
 				for(let i = 1; i <= methods.length; i++){
-					await this.selectByValue(selector.admin.dokan.sellerBadge.badgeDetails.verifiedSellerMethod1(i), methods[i-1] );
+					await this.selectByValue(selector.admin.dokan.sellerBadge.badgeDetails.verifiedSellerMethod1(i), methods[i-1] as string );
 					if( i === methods.length ) { continue; }
 					await this.click(selector.admin.dokan.sellerBadge.badgeDetails.addBadgeLevel);
 				}
@@ -2139,10 +2170,9 @@ export class AdminPage extends BasePage {
 				}
 
 				// add badge level
-				const methods  = Object.values(badge.verifiedSellerMethod);
+				const methods: string[]  = Object.values(badge.verifiedSellerMethod);
 				for(let i = 1; i <= methods.length; i++){
-					console.log(i, methods[i-1]);
-					await this.selectByValue(selector.admin.dokan.sellerBadge.badgeDetails.verifiedSellerMethod1(i), methods[i-1] );
+					await this.selectByValue(selector.admin.dokan.sellerBadge.badgeDetails.verifiedSellerMethod1(i), methods[i-1] as string);
 					if( i === methods.length ) { continue; }
 					await this.click(selector.admin.dokan.sellerBadge.badgeDetails.addBadgeLevel);
 				}
@@ -2183,7 +2213,7 @@ export class AdminPage extends BasePage {
 		await this.clickIfVisible(selector.admin.dokan.vendors.filters.clearFilter);
 		await this.selectByLabel( selector.admin.dokan.vendors.filters.filterByBadges, badgeName);
 
-		const count = (await this.getElementText(selector.admin.dokan.vendors.numberOfVendorsFound)).split(' ')[0];
+		const count = (await this.getElementText(selector.admin.dokan.vendors.numberOfVendorsFound))?.split(' ')[0];
 		expect(Number(count)).not.toBe(0);
 		//TOdo: either this or that assertion
 		//todo: to have count more than
@@ -2197,7 +2227,7 @@ export class AdminPage extends BasePage {
 		await this.clickAndWaitForResponse(data.subUrls.backend.sellerBadge, selector.admin.dokan.sellerBadge.sellerBadgeVendors);
 
 		// await expect(this.page.locator(selector.admin.dokan.vendors.vendorCell(badgeName))).toBeVisible();
-		const count = (await this.getElementText(selector.admin.dokan.vendors.numberOfVendorsFound)).split(' ')[0];
+		const count = (await this.getElementText(selector.admin.dokan.vendors.numberOfVendorsFound))?.split(' ')[0];
 		expect(Number(count)).not.toBe(0);
 		//TOdo: either this or that assertion
 
@@ -2305,10 +2335,10 @@ export class AdminPage extends BasePage {
 	}
 
 	// edit announcement
-	async editAnnouncement(announcementTitle: string){
+	async editAnnouncement(announcement: any){
 		await this.goIfNotThere(data.subUrls.backend.dokan.dokanAnnouncements);
 
-		await this.hover(selector.admin.dokan.announcements.announcementCell(announcementTitle));
+		await this.hover(selector.admin.dokan.announcements.announcementCell(announcement.title));
 		await this.click(selector.admin.dokan.announcements.announcementEdit);
 
 		await this.typeFrameSelector(selector.admin.dokan.announcements.addAnnouncement.contentIframe, selector.admin.dokan.announcements.addAnnouncement.contentHtmlBody, announcement.content);
@@ -2357,7 +2387,7 @@ export class AdminPage extends BasePage {
 
 		await this.typeAndWaitForResponse(data.subUrls.backend.refunds, selector.admin.dokan.refunds.search, String(orderOrStore));
 		if (typeof(orderOrStore) != 'number'){
-			const count = (await this.getElementText(selector.admin.dokan.refunds.numberOfRowsFound)).split(' ')[0];
+			const count = (await this.getElementText(selector.admin.dokan.refunds.numberOfRowsFound))?.split(' ')[0];
 			expect(Number(count)).not.toBe(0);
 		} else {
 			await expect(this.page.locator(selector.admin.dokan.refunds.refundCell(orderOrStore))).toBeVisible();
@@ -2496,7 +2526,7 @@ export class AdminPage extends BasePage {
 
 		const currentStyle = await this.getClassValue(selector.admin.dokan.modules.pro.currentLayout);
 
-		if(!currentStyle.includes(style)){
+		if(!(currentStyle?.includes(style))){
 			await this.click(selector.admin.dokan.modules.pro.moduleViewMode);
 			await expect(this.page.locator(selector.admin.dokan.modules.pro.currentLayout)).toHaveClass(style);
 		}
@@ -2762,7 +2792,9 @@ export class AdminPage extends BasePage {
 	async importDummyData(){
 		await this.goIfNotThere(data.subUrls.backend.dokan.dokanTools);
 		await this.clickAndWaitForResponse(data.subUrls.backend.dummyData, selector.admin.dokan.tools.importDummyData.import);
-		await this.clickAndWaitForResponse(data.subUrls.backend.dummyData, selector.admin.dokan.dummyData.runTheImporter);
+		// await this.clickAndWaitForResponse(data.subUrls.backend.dummyData, selector.admin.dokan.dummyData.runTheImporter);
+		const subUrls = [[data.subUrls.backend.dummyData], [data.subUrls.backend.dummyData], [data.subUrls.backend.dummyData], [data.subUrls.backend.dummyData], [data.subUrls.backend.dummyData]];
+		await this.clickAndWaitForResponses(subUrls, selector.admin.dokan.dummyData.runTheImporter);
 		// await expect(this.page.locator(selector.admin.dokan.dummyData.importComplete)).toBeVisible();
 	}
 
@@ -2822,7 +2854,7 @@ export class AdminPage extends BasePage {
 
 	// update wholesale customer status
 	async updateWholesaleCustomerStatus(wholesaleCustomer: string){
-		//TODO: add choice and based on choice enable or disable stasus
+		//TODO: add choice and based on choice enable or disable status
 		await this.searchWholesaleCustomer(wholesaleCustomer);
 
 		await this.clickAndWaitForResponse(data.subUrls.backend.wholesaleCustomers, selector.admin.dokan.wholesaleCustomer.statusSlider(wholesaleCustomer));

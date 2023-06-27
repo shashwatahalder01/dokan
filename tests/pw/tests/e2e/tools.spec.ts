@@ -43,16 +43,16 @@ test.describe('Tools test', () => {
 	// 	await adminPage.setDokanSetupWizard(data.dokanSetupWizard);
 	// });
 
-	test('admin can regenerate variable product variations author IDs  @pro', async ( ) => {
+	test('admin can regenerate variable product variations author IDs @pro', async ( ) => {
 		await adminPage.regenerateVariableProductVariationsAuthorIds();
 	});
 
 	//ToDo:
-	test.fixme('admin can import dummy data  @pro', async ( ) => {
+	test.only('admin can import dummy data @pro', async ( ) => {
 		await adminPage.importDummyData();
 	});
 
-	test.skip('admin can clear dummy data  @pro', async ( ) => {
+	test.skip('admin can clear dummy data @pro', async ( ) => {
 		await adminPage.clearDummyData();
 	});
 

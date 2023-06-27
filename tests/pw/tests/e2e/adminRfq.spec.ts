@@ -31,11 +31,11 @@ test.describe.skip('Request for quotation test', () => {
 	});
 
 	test('admin can add quote rule @pro', async ( ) => {
-		await adminPage.addQuoteRule(data.requestForQuotation.quoteRule);
+		await adminPage.addQuoteRule({ ...data.requestForQuotation.quoteRule, userRole:data.requestForQuotation.userRole.customer });
 	});
 
 	test('admin can edit quote rule @pro', async ( ) => {
-		await adminPage.editQuoteRule(data.requestForQuotation.quoteRule);
+		await adminPage.editQuoteRule({ ...data.requestForQuotation.updateQuoteRule, userRole:data.requestForQuotation.userRole.customer });
 	});
 
 	test('admin can trash quote rule @pro', async ( ) => {
@@ -51,7 +51,7 @@ test.describe.skip('Request for quotation test', () => {
 	});
 
 	test('admin can perform quote rule bulk actions @pro', async ( ) => {
-		await adminPage.quoteRulesBulkAction('delete');
+		await adminPage.quoteRulesBulkAction('trash');
 	});
 
 
@@ -62,32 +62,32 @@ test.describe.skip('Request for quotation test', () => {
 	});
 
 	test('admin can add quote @pro', async ( ) => {
-		await adminPage.addQuote(data.requestForQuotation.quoteRule);
+		await adminPage.addQuote(data.requestForQuotation.quote);
 	});
 
 	test('admin can edit quote @pro', async ( ) => {
-		await adminPage.editQuote(data.requestForQuotation.quoteRule);
+		await adminPage.editQuote(data.requestForQuotation.updateQuote);
 	});
 
 	test('admin can trash quote @pro', async ( ) => {
-		await adminPage.updateQuote(data.requestForQuotation.quoteRule.title, 'trash');
+		await adminPage.updateQuote(data.requestForQuotation.quote.title, 'trash');
 	});
 
 	test('admin can restore quote @pro', async ( ) => {
-		await adminPage.updateQuote(data.requestForQuotation.quoteRule.title, 'restore');
+		await adminPage.updateQuote(data.requestForQuotation.quote.title, 'restore');
 	});
 
 	test('admin can permanently delete quote @pro', async ( ) => {
-		await adminPage.updateQuote(data.requestForQuotation.quoteRule.title, 'permanently-delete');
+		await adminPage.updateQuote(data.requestForQuotation.quote.title, 'permanently-delete');
 	});
 
 	test('admin can convert quote to order @pro', async ( ) => {
-		await adminPage.convertQuoteToOrder(data.requestForQuotation.quoteRule.title);
+		await adminPage.convertQuoteToOrder(data.requestForQuotation.quote);
 	});
 
 
 	test('admin can perform quote bulk actions @pro', async ( ) => {
-		await adminPage.quotesBulkAction('delete');
+		await adminPage.quotesBulkAction('trash');
 	});
 
 });

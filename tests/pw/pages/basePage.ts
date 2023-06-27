@@ -215,6 +215,28 @@ export class BasePage {
 		return response;
 	}
 
+	// click & wait for multiple responses
+	async clickAndWaitForResponses(subUrls:   string[][], selector: string, code = 200): Promise<void | Response[]> {
+		const promises = [];
+
+		subUrls.forEach((subUrl) => {
+			console.log('subUls: ', subUrl[0], ' code: ', subUrl[1]);
+			// const promise = this.page.waitForResponse((resp) => resp.url().includes(subUrl[0] as string ) && resp.status() ===  (subUrl[1] ?? code));
+			const promise = this.page.waitForResponse((resp) => resp.url().includes(subUrl[0]) && resp.status() ===  (subUrl[1]));
+			promises.push(promise);
+		});
+
+		// promises.push(this.page.locator(selector).click());
+		// const response = await Promise.all(promises);
+		await Promise.all([
+			...promises,
+			this.page.locator(selector).click()
+		]);
+
+		return response;
+
+	}
+
 	// click & wait for response
 	async clickAndAcceptAndWaitForResponse(subUrl: string, selector: string, code = 200): Promise<Response> {
 		const [response] = await Promise.all([
@@ -393,7 +415,7 @@ export class BasePage {
 	async hasText(selector: string, text: string): Promise<boolean> {
 		//TODO: implement all has methods hasText, hasClass, hasAttribute, hasColor
 		const elementText = await this.textContentOfLocator(selector);
-		return elementText.trim() === text ? true : false;
+		return elementText?.trim() === text ? true : false;
 	}
 
 	// get element text content
