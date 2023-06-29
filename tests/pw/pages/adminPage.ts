@@ -3,7 +3,6 @@ import { BasePage } from './basePage';
 import { selector } from './selectors';
 import { data } from '../utils/testData';
 import { helpers } from '../utils/helpers';
-import { th } from '@faker-js/faker';
 
 export class AdminPage extends BasePage {
 

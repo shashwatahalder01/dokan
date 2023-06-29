@@ -1893,10 +1893,11 @@ export const selector = {
 			license: {
 				licenseText: '.appsero-license-settings-wrapper h1',
 
-				section:{
+				activateSection:{
 					licenseSection: '.appsero-license-settings.appsero-license-section',
-					licenseKeyInput: '.license-input-fields .license-input-key',
+					licenseKeyInput: '.license-input-fields .license-input-key input',
 					activateLicense: '//button[contains(text(),"Activate License")]',
+					errorNotice: '.notice-error',
 				}
 			},
 

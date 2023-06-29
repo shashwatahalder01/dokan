@@ -774,6 +774,7 @@ export const data = {
 				dokanHelp: 'wp-admin/admin.php?page=dokan#/help',
 				dokanSettings: 'wp-admin/admin.php?page=dokan#/settings',
 				dokanLicense: 'wp-admin/admin.php?page=dokan_updates',
+
 			},
 			woocommerceSettings: 'wp-admin/admin.php?page=wc-settings',
 			wcAddNewProducts: 'wp-admin/post-new.php?post_type=product',
@@ -1424,6 +1425,11 @@ export const data = {
 		advertisedProductStore: String(process.env.VENDOR) + 'store',
 		advertisedProduct: 'p1_v1 (simple)',
 
+	},
+
+	dokanLicense: {
+		correctKey: String(process.env.LICENSE_KEY),
+		incorrectKey: 'ABC-123-DEF-456-GHI-789'
 
 	},
 
