@@ -4,7 +4,7 @@ import { selector } from 'pages/selectors';
 import { data } from 'utils/testData';
 
 
-export class WholesalePage extends AdminPage {
+export class WholesaleCustomersPage extends AdminPage {
 
 	constructor(page: Page) {
 		super(page);
@@ -41,7 +41,51 @@ export class WholesalePage extends AdminPage {
 		await expect(this.page.locator(selector.admin.dokan.wholesaleCustomer.wholesaleCustomerCell(wholesaleCustomer))).toBeVisible();
 	}
 
-	// vendor bulk action
+	// edit wholesale customer
+	async editWholesaleCustomer(wholesaleCustomer: string){
+		await this.searchWholesaleCustomer(wholesaleCustomer);
+		await this.hover(selector.admin.dokan.wholesaleCustomer.wholesaleCustomerCell(wholesaleCustomer));
+		await this.clickAndWaitForNavigation(selector.admin.dokan.wholesaleCustomer.wholesaleCustomerEdit);
+		//TODO:
+	}
+
+
+	// view wholesale customer
+	async viewWholesaleCustomerOrders(wholesaleCustomer: string){
+		await this.searchWholesaleCustomer(wholesaleCustomer);
+		await this.hover(selector.admin.dokan.wholesaleCustomer.wholesaleCustomerCell(wholesaleCustomer));
+		await this.clickAndWaitForNavigation(selector.admin.dokan.wholesaleCustomer.wholesaleCustomerOrders);
+		//TODO: add assertion
+	}
+
+	// update wholesale customer
+	async updateWholesaleCustomer(wholesaleCustomer: string, action: string ){
+		await this.searchWholesaleCustomer(wholesaleCustomer);
+
+		switch(action){
+
+		case 'enable' :
+			await this.enableSwitcherAndWaitForResponse(data.subUrls.backend.wholesaleCustomers, selector.admin.dokan.wholesaleCustomer.statusSlider(wholesaleCustomer));
+			break;
+
+		case 'disable' :
+			await this.disableSwitcherAndWaitForResponse(data.subUrls.backend.wholesaleCustomers, selector.admin.dokan.wholesaleCustomer.statusSlider(wholesaleCustomer));
+			break;
+
+		case 'delete' :
+			await this.hover(selector.admin.dokan.wholesaleCustomer.wholesaleCustomerCell(wholesaleCustomer));
+			this.acceptAlert();
+			await this.clickAndWaitForResponse(data.subUrls.backend.wholesaleCustomers, selector.admin.dokan.wholesaleCustomer.wholesaleCustomerRemove);
+			break;
+
+		default :
+			break;
+
+		}
+
+	}
+
+	//  wholesale customers bulk action
 	async wholesaleCustomerBulkAction(action: string){
 		// await this.searchWholesaleCustomer(wholesaleCustomer); //TODO: can be used to minimized number of rows to be affected
 		await this.goIfNotThere(data.subUrls.backend.dokan.dokanWholeSaleCustomer);
@@ -49,14 +93,6 @@ export class WholesalePage extends AdminPage {
 		await this.click(selector.admin.dokan.wholesaleCustomer.bulkActions.selectAll);
 		await this.selectByValue(selector.admin.dokan.wholesaleCustomer.bulkActions.selectAction, action);
 		await this.clickAndWaitForResponse(data.subUrls.backend.wholesaleCustomers, selector.admin.dokan.wholesaleCustomer.bulkActions.applyAction);
-	}
-
-	// update wholesale customer status
-	async updateWholesaleCustomerStatus(wholesaleCustomer: string, ){
-		//TODO: add choice and based on choice enable or disable status
-		await this.searchWholesaleCustomer(wholesaleCustomer);
-
-		await this.clickAndWaitForResponse(data.subUrls.backend.wholesaleCustomers, selector.admin.dokan.wholesaleCustomer.statusSlider(wholesaleCustomer));
 	}
 
 }

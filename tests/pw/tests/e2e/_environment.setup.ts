@@ -367,7 +367,7 @@ setup.describe('setup testPrerequisites', () => {
 		await dbUtils.createRefund(orderResponseBody);
 	});
 
-	setup('create test vendor refund @pro', async ({ request }) => {
+	setup('create abuse report @pro', async ({ request }) => {
 		const apiUtils = new ApiUtils(request);
 		const[, productId] = await apiUtils.createProduct(payloads.createProduct(), payloads. vendorAuth);
 		await dbUtils.createAbuseReport(dbData.dokan.createAbuseReport, productId, VENDOR_ID, CUSTOMER_ID);

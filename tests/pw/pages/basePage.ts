@@ -1264,6 +1264,35 @@ export class BasePage {
 		}
 	}
 
+	// admin enable switcher , if enabled then Skip : admin settings switcher
+	async enableSwitcherAndWaitForResponse(subUrl: string, selector: string, code = 200): Promise<Response | string> {
+		/^(\/\/|\(\/\/)/.test(selector) ? (selector += '//span') : (selector += ' span');
+		const value = await this.getElementBackgroundColor(selector);
+		if (!value.includes('rgb(0, 144, 255)')) {
+			const [response] = await Promise.all([
+				this.page.waitForResponse((resp) => resp.url().includes(subUrl) && resp.status() === code),
+				this.page.locator(selector).click()
+			]);
+			return response;
+		}
+		return '';
+	}
+
+	// admin disable switcher , if disabled then skip : admin settings switcher
+	async disableSwitcherAndWaitForResponse(subUrl: string, selector: string, code = 200): Promise<Response | string> {
+		/^(\/\/|\(\/\/)/.test(selector) ? (selector += '//span') : (selector += ' span');
+		const value = await this.getElementBackgroundColor(selector);
+		if (value.includes('rgb(0, 144, 255)')) {
+			const [response] = await Promise.all([
+				this.page.waitForResponse((resp) => resp.url().includes(subUrl) && resp.status() === code),
+				this.page.locator(selector).click()
+			]);
+			return response;
+		}
+		return '';
+
+	}
+
 	// enable switch or checkbox: dokan setup wizard
 	async enableSwitcherSetupWizard(selector: string): Promise<void> {
 		const value = await this.getPseudoElementStyles(selector, 'before', 'background-color');
