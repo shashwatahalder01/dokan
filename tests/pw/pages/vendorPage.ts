@@ -8,6 +8,7 @@ import { data } from '../utils/testData';
 import { helpers } from '../utils/helpers';
 
 export class VendorPage extends BasePage {
+
 	constructor(page: Page) {
 		super(page);
 	}

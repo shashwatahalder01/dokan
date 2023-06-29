@@ -7,6 +7,7 @@ import { helpers } from '../utils/helpers';
 import { data } from '../utils/testData';
 
 export class CustomerPage extends BasePage {
+
 	constructor(page: Page) {
 		super(page);
 	}
