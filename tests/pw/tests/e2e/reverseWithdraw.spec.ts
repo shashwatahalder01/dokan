@@ -27,7 +27,7 @@ test.describe.skip('Reverse withdraw test', () => {
 
 	test.use({ storageState: data.auth.adminAuthFile });
 
-	test('dokan admin reverse withdraw menu page is rendering properly @lite @pro', async ( ) => {
+	test('dokan admin reverse withdraw menu page is rendering properly @lite @pro @explo', async ( ) => {
 		await adminPage.adminReverseWithdrawRenderProperly();
 	});
 

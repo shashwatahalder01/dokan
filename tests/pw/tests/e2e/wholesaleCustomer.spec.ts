@@ -23,7 +23,7 @@ test.describe.skip('Wholesale customer test', () => {
 
 	test.use({ storageState: data.auth.adminAuthFile });
 
-	test('dokan wholesale customers menu page is rendering properly @pro', async ( ) => {
+	test('dokan wholesale customers menu page is rendering properly @pro @explo', async ( ) => {
 		await adminPage.adminWholesaleCustomersRenderProperly();
 	});
 

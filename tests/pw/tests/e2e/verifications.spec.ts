@@ -25,7 +25,7 @@ test.describe.skip('Verifications test', () => {
 
 	test.use({ storageState: data.auth.adminAuthFile });
 
-	test('admin verifications menu page is rendering properly @pro', async ( ) => {
+	test('admin verifications menu page is rendering properly @pro @explo', async ( ) => {
 		await adminPage.adminVerificationsRenderProperly();
 	});
 

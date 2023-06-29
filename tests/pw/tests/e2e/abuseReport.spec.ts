@@ -23,7 +23,7 @@ test.describe.skip('Abuse report test', () => {
 
 	test.use({ storageState: data.auth.adminAuthFile });
 
-	test('dokan abuse report menu page is rendering properly @pro', async ( ) => {
+	test('dokan abuse report menu page is rendering properly @pro @explo', async ( ) => {
 		await adminPage.adminAbuseReportRenderProperly();
 	});
 

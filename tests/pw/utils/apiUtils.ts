@@ -1,6 +1,6 @@
 import { expect, type APIRequestContext, APIResponse, Request } from '@playwright/test';
-import { endPoints } from './apiEndPoints';
-import { payloads } from './payloads';
+import { endPoints } from 'utils/apiEndPoints';
+import { payloads } from 'utils/payloads';
 import fs from 'fs';
 // import FormData from 'form-data';
 
@@ -563,6 +563,8 @@ export class ApiUtils {
 	// get support ticket id
 	async getSupportTicketId(auth? : auth): Promise<[string, string]> {
 		const allSupportTickets = await this.getAllSupportTickets(auth);
+		console.log(allSupportTickets);
+		console.log(allSupportTickets[0]);
 		const supportTicketId = allSupportTickets[0].ID;
 		const sellerId = allSupportTickets[0].vendor_id;
 		return [supportTicketId, sellerId];

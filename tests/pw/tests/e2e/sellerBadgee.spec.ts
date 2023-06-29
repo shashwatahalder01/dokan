@@ -29,7 +29,7 @@ test.describe.skip('Seller badge test', () => {
 
 	test.use({ storageState: data.auth.adminAuthFile });
 
-	test('dokan seller badge menu page is rendering properly @pro', async ( ) => {
+	test('dokan seller badge menu page is rendering properly @pro @explo', async ( ) => {
 		await adminPage.adminSellerBadgeRenderProperly();
 	});
 

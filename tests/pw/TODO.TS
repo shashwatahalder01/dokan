@@ -271,7 +271,7 @@ const config = {
 //TODO: check dokan pro activate or not via api and set env.dokanPro to separate code for******
 // dokan lite and pro
 //TODO: Selectors: separate settings locator into more objects ***********
-//TODO: '../../pages/loginPage to 'pages/loginPage' for all file path
+//TODO: 'pages/loginPage to 'pages/loginPage' for all file path
 
 
 

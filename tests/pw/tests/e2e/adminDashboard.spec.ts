@@ -26,7 +26,7 @@ test.describe('Admin dashboard test', () => {
 
 	test.use({ storageState: data.auth.adminAuthFile });
 
-	test('dokan admin dashboard is rendering properly @lite @pro', async ( ) => {
+	test('dokan admin dashboard is rendering properly @lite @pro @explo', async ( ) => {
 		await adminPage.adminDashboardRenderProperly();
 	});
 

@@ -20,11 +20,11 @@ test.describe('Dokan help test', () => {
 
 	test.use({ storageState: data.auth.adminAuthFile });
 
-	test('dokan help menu page is rendering properly @lite @pro', async ( ) => {
+	test('dokan help menu page is rendering properly @lite @pro @explo', async ( ) => {
 		await adminPage.adminHelpRenderProperly();
 	});
 
-	test('dokan get help dropdown is rendering properly @lite @pro', async ( ) => {
+	test('dokan get help dropdown is rendering properly @lite @pro @explo', async ( ) => {
 		await adminPage.adminGetHelpDropdownRenderProperly();
 	});
 

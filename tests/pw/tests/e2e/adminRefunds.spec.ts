@@ -24,12 +24,12 @@ test.describe.skip('Refunds test', () => {
 
 	test.use({ storageState: data.auth.adminAuthFile });
 
-	test('admin refunds menu page is rendering properly @pro', async ( ) => {
+	test('admin refunds menu page is rendering properly @pro @explo', async ( ) => {
 		await adminPage.adminRefundRequestsRenderProperly();
 	});
 
 	test('admin can search refund requests @pro', async ( ) => {
-		await adminPage.searchRefundRequests(data.refunds);
+		await adminPage.searchRefundRequests(data.predefined.vendorStores.vendor1);
 	});
 
 	test('admin can approve refund request @pro', async ( ) => {

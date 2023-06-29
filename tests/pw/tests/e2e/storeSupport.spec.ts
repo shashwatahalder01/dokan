@@ -23,7 +23,7 @@ test.describe.skip('Store Support test', () => {
 
 	test.use({ storageState: data.auth.adminAuthFile });
 
-	test('dokan store support menu page is rendering properly @pro', async ( ) => {
+	test('dokan store support menu page is rendering properly @pro @explo', async ( ) => {
 		await adminPage.adminStoreSupportRenderProperly();
 	});
 

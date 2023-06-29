@@ -23,7 +23,7 @@ test.describe.skip('Store Reviews test', () => {
 
 	test.use({ storageState: data.auth.adminAuthFile });
 
-	test('dokan store reviews menu page is rendering properly @pro', async ( ) => {
+	test('dokan store reviews menu page is rendering properly @pro @explo', async ( ) => {
 		await adminPage.adminStoreReviewsRenderProperly();
 	});
 

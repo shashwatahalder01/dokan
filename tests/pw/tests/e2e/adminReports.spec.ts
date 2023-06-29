@@ -26,13 +26,13 @@ test.describe.skip('Reports test', () => {
 
 	// reports
 
-	test('admin reports menu page is rendering properly @pro', async ( ) => {
+	test('admin reports menu page is rendering properly @pro @explo', async ( ) => {
 		await adminPage.adminReportsRenderProperly();
 	});
 
 	// all logs
 
-	test('admin All Logs menu page is rendering properly @pro', async ( ) => {
+	test('admin All Logs menu page is rendering properly @pro @explo', async ( ) => {
 		await adminPage.adminAllLogsRenderProperly();
 	});
 

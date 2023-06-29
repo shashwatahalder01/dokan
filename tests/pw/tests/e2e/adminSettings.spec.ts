@@ -24,7 +24,7 @@ test.describe('Settings test', () => {
 
 	test.use({ storageState: data.auth.adminAuthFile });
 
-	test('admin settings menu page is rendering properly @lite @pro', async ( ) => {
+	test('admin settings menu page is rendering properly @lite @pro @explo', async ( ) => {
 		await adminPage.adminSettingsRenderProperly();
 	});
 

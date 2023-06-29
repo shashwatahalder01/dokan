@@ -31,7 +31,7 @@ test.describe('Modules test', () => {
 	// 	await loginPage.adminLogin(data.admin, data.auth.adminAuthFile);
 	// });
 
-	test('dokan modules menu page is rendering properly @pro', async ( ) => {
+	test('dokan modules menu page is rendering properly @pro @explo', async ( ) => {
 		await adminPage.adminModulesRenderProperly();
 	});
 

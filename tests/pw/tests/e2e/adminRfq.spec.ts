@@ -26,7 +26,7 @@ test.describe('Request for quotation test', () => {
 
 	// quote rules
 
-	test('admin quote rules menu page is rendering properly @pro', async ( ) => {
+	test('admin quote rules menu page is rendering properly @pro @explo', async ( ) => {
 		await adminPage.adminQuoteRulesRenderProperly();
 	});
 
@@ -57,7 +57,7 @@ test.describe('Request for quotation test', () => {
 
 	// quotes
 
-	test('admin quotes menu page is rendering properly @pro', async ( ) => {
+	test('admin quotes menu page is rendering properly @pro @explo', async ( ) => {
 		await adminPage.adminQuotesRenderProperly();
 	});
 

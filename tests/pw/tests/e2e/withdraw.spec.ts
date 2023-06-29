@@ -28,7 +28,7 @@ test.describe.skip('Withdraw test', () => {
 
 	test.use({ storageState: data.auth.adminAuthFile });
 
-	test('admin withdraw menu page is rendering properly @lite @pro', async ( ) => {
+	test('admin withdraw menu page is rendering properly @lite @pro @explo', async ( ) => {
 		await adminPage.adminWithdrawsRenderProperly();
 	});
 

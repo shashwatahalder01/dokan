@@ -24,7 +24,7 @@ test.describe.skip('Vendors test', () => {
 
 	test.use({ storageState: data.auth.adminAuthFile });
 
-	test('admin vendors menu page is rendering properly @lite @pro', async ( ) => {
+	test('admin vendors menu page is rendering properly @lite @pro @explo', async ( ) => {
 		await adminPage.adminVendorsRenderProperly();
 	});
 
