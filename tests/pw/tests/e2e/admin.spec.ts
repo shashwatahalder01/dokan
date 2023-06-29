@@ -1,9 +1,9 @@
 import { test, Page } from '@playwright/test';
-import { LoginPage } from '../../pages/loginPage';
-import { AdminPage } from '../../pages/adminPage';
-import { ApiUtils } from '../../utils/apiUtils';
-import { data } from '../../utils/testData';
-import { payloads } from '../../utils/payloads';
+import { LoginPage } from 'pages/loginPage';
+import { AdminPage } from 'pages/adminPage';
+import { ApiUtils } from 'utils/apiUtils';
+import { data } from 'utils/testData';
+import { payloads } from 'utils/payloads';
 
 
 test.describe('Admin user functionality test', () => {
@@ -55,7 +55,6 @@ test.describe('Admin functionality test', () => {
 	test('admin can set dokan setup wizard @lite @pro', async ( ) => {
 		await adminPage.setDokanSetupWizard(data.dokanSetupWizard);
 	});
-
 
 
 	test('admin can add simple product @lite @pro', async ( ) => {
@@ -155,8 +154,6 @@ test.describe('Admin functionality test', () => {
 	// test('admin can add strip express payment method', async ( ) => {
 	//     await adminPage.setupStripeExpress(data.payment)
 	// })
-
-	
 
 
 	test.skip('dokan pro features promo @lite', async ({ request } ) => {

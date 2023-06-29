@@ -1,7 +1,7 @@
 import { test, Page } from '@playwright/test';
-import { AdminPage } from '../../pages/adminPage';
-import { ApiUtils } from '../../utils/apiUtils';
-import { data } from '../../utils/testData';
+import { AdminPage } from 'pages/adminPage';
+import { ApiUtils } from 'utils/apiUtils';
+import { data } from 'utils/testData';
 
 
 let adminPage: AdminPage;
@@ -48,7 +48,7 @@ test.describe('Tools test', () => {
 	});
 
 	//ToDo:
-	test.only('admin can import dummy data @pro', async ( ) => {
+	test.skip('admin can import dummy data @pro', async ( ) => {
 		await adminPage.importDummyData();
 	});
 

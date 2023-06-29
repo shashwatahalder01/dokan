@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test';
-import { ApiUtils } from '../../utils/apiUtils';
-import { endPoints } from '../../utils/apiEndPoints';
-import { payloads } from '../../utils/payloads';
+import { ApiUtils } from 'utils/apiUtils';
+import { endPoints } from 'utils/apiEndPoints';
+import { payloads } from 'utils/payloads';
 const { VENDOR_ID, CUSTOMER_ID } = process.env;
 
 let apiUtils: ApiUtils;
@@ -38,7 +38,7 @@ test.describe('support ticket api test', () => {
 		expect(responseBody).toBeTruthy();
 	});
 
-	test('update support ticket status @pro', async () => {
+	test('update a support ticket status @pro', async () => {
 		const [response, responseBody] = await apiUtils.post(endPoints.updateSupportTicketStatus(supportTicketId), { data: payloads.updateSupportTicketStatus });
 		expect(response.ok()).toBeTruthy();
 		expect(responseBody).toBeTruthy();

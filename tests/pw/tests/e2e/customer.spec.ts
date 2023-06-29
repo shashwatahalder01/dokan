@@ -1,7 +1,7 @@
 import { test, Page } from '@playwright/test';
-import { data } from '../../utils/testData';
-import { LoginPage } from '../../pages/loginPage';
-import { CustomerPage } from '../../pages/customerPage';
+import { data } from 'utils/testData';
+import { LoginPage } from 'pages/loginPage';
+import { CustomerPage } from 'pages/customerPage';
 
 test.describe('Customer user functionality test', () => {
 	test.use({ storageState: { cookies: [], origins: [] } });

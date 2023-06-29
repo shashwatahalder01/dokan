@@ -1,7 +1,7 @@
 import { test, Page } from '@playwright/test';
-import { AdminPage } from '../../pages/adminPage';
-import { ApiUtils } from '../../utils/apiUtils';
-import { data } from '../../utils/testData';
+import { AdminPage } from 'pages/adminPage';
+import { ApiUtils } from 'utils/apiUtils';
+import { data } from 'utils/testData';
 
 
 let adminPage: AdminPage;

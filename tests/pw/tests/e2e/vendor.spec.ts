@@ -1,7 +1,7 @@
 import { test, Page } from '@playwright/test';
-import { data } from '../../utils/testData';
-import { LoginPage } from '../../pages/loginPage';
-import { VendorPage } from '../../pages/vendorPage';
+import { data } from 'utils/testData';
+import { LoginPage } from 'pages/loginPage';
+import { VendorPage } from 'pages/vendorPage';
 
 test.describe('Vendor user functionality test1', () => {
 

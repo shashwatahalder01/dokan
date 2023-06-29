@@ -1,6 +1,6 @@
 import { test, Page } from '@playwright/test';
-import { AdminPage } from '../../pages/adminPage';
-import { data } from '../../utils/testData';
+import { AdminPage } from 'pages/adminPage';
+import { data } from 'utils/testData';
 
 
 let adminPage: AdminPage;

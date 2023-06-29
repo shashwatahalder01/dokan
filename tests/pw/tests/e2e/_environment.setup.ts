@@ -1,9 +1,9 @@
 import { test as setup, expect } from '@playwright/test';
-import { ApiUtils } from '../../utils/apiUtils';
-import { payloads } from '../../utils/payloads';
-import { dbUtils } from '../../utils/dbUtils';
-import { dbData } from '../../utils/dbData';
-import { data } from '../../utils/testData';
+import { ApiUtils } from 'utils/apiUtils';
+import { payloads } from 'utils/payloads';
+import { dbUtils } from 'utils/dbUtils';
+import { dbData } from 'utils/dbData';
+import { data } from 'utils/testData';
 // import { AdminPage } from '../pages/adminPage';
 
 setup.describe('setup site & woocommerce & user settings', () => {
