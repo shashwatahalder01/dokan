@@ -563,8 +563,6 @@ export class ApiUtils {
 	// get support ticket id
 	async getSupportTicketId(auth? : auth): Promise<[string, string]> {
 		const allSupportTickets = await this.getAllSupportTickets(auth);
-		console.log(allSupportTickets);
-		console.log(allSupportTickets[0]);
 		const supportTicketId = allSupportTickets[0].ID;
 		const sellerId = allSupportTickets[0].vendor_id;
 		return [supportTicketId, sellerId];

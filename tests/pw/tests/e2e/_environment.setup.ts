@@ -339,6 +339,8 @@ const { VENDOR_ID, CUSTOMER_ID } = process.env;
 
 setup.describe('setup testPrerequisites', () => {
 
+	setup.use({ extraHTTPHeaders: { Authorization: payloads.aAuth } });
+
 	setup('add test vendor withdraws @pro', async ({ request }) => {
 		const apiUtils = new ApiUtils(request);
 		const minimumWithdrawLimit = await apiUtils.getMinimumWithdrawLimit();
