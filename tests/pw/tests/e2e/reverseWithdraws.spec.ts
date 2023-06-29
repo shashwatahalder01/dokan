@@ -1,18 +1,18 @@
 import { test, Page } from '@playwright/test';
-import { AdminPage } from 'pages/adminPage';
+import { ReverseWithdrawsPage } from 'pages/reverseWithdrawsPage';
 import { ApiUtils } from 'utils/apiUtils';
 import { data } from 'utils/testData';
 import { payloads } from 'utils/payloads';
 
 
-let adminPage: AdminPage;
+let reverseWithdrawsPage: ReverseWithdrawsPage;
 let page: Page;
 let apiUtils: ApiUtils;
 
 test.beforeAll(async ({ browser, request }) => {
 	const context = await browser.newContext({});
 	page = await context.newPage();
-	adminPage = new AdminPage(page);
+	reverseWithdrawsPage = new ReverseWithdrawsPage(page);
 	apiUtils = new ApiUtils(request);
 	// const minimumWithdrawLimit = await apiUtils.getMinimumWithdrawLimit();
 	// await apiUtils.createOrderWithStatus(payloads.createProduct(), payloads.createOrder, 'wc-completed');
@@ -28,7 +28,7 @@ test.describe.skip('Reverse withdraw test', () => {
 	test.use({ storageState: data.auth.adminAuthFile });
 
 	test('dokan admin reverse withdraw menu page is rendering properly @lite @pro @explo', async ( ) => {
-		await adminPage.adminReverseWithdrawRenderProperly();
+		await reverseWithdrawsPage.adminReverseWithdrawRenderProperly();
 	});
 
 	test.skip('reverse Withdraw payment product exists @lite @pro', async ( ) => {
