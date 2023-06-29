@@ -1,19 +1,15 @@
 import { test, Page } from '@playwright/test';
-import { AdminPage } from 'pages/adminPage';
-import { ApiUtils } from 'utils/apiUtils';
+import { VerificationsPage } from 'pages/verificationsPage';
 import { data } from 'utils/testData';
-import { payloads } from 'utils/payloads';
 
 
-let adminPage: AdminPage;
+let verificationsPage: VerificationsPage;
 let page: Page;
-let apiUtils: ApiUtils;
 
-test.beforeAll(async ({ browser, request }) => {
+test.beforeAll(async ({ browser }) => {
 	const context = await browser.newContext({});
 	page = await context.newPage();
-	adminPage = new AdminPage(page);
-	apiUtils = new ApiUtils(request);
+	verificationsPage = new VerificationsPage(page);
 });
 
 test.afterAll(async ( ) => {
@@ -26,23 +22,23 @@ test.describe.skip('Verifications test', () => {
 	test.use({ storageState: data.auth.adminAuthFile });
 
 	test('admin verifications menu page is rendering properly @pro @explo', async ( ) => {
-		await adminPage.adminVerificationsRenderProperly();
+		await verificationsPage.adminVerificationsRenderProperly();
 	});
 
 	test('admin can approve ID verification request @pro', async ( ) => {
-		await adminPage.idVerificationRequest(data.predefined.vendorInfo.username, 'approve');
+		await verificationsPage.idVerificationRequest(data.predefined.vendorInfo.username, 'approve');
 	});
 
 	test('admin can approve address verification request @pro', async ( ) => {
-		await adminPage.addressVerificationRequest(data.predefined.vendorInfo.username, 'approve');
+		await verificationsPage.addressVerificationRequest(data.predefined.vendorInfo.username, 'approve');
 	});
 
 	test('admin can approve company verification request @pro', async ( ) => {
-		await adminPage.companyVerificationRequest(data.predefined.vendorInfo.username, 'approve');
+		await verificationsPage.companyVerificationRequest(data.predefined.vendorInfo.username, 'approve');
 	});
 
 	test.skip('admin can approve phone verification request @pro', async ( ) => {
-		//TODO: await adminPage.phoneVerificationRequest(data.predefined.vendorInfo.username,'approve');
+		//TODO: await verificationsPage.phoneVerificationRequest(data.predefined.vendorInfo.username,'approve');
 	});
 
 
