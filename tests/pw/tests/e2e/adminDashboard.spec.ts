@@ -9,7 +9,7 @@ let page: Page;
 let apiUtils: ApiUtils;
 let summary: any;
 
-test.beforeAll(async ({ browser }) => {
+test.beforeAll(async ({ browser, request }) => {
 	const context = await browser.newContext({});
 	page = await context.newPage();
 	adminDashboardPage = new AdminDashboardPage(page);

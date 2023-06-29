@@ -1,7 +1,7 @@
 import { test  } from '@playwright/test';
 import { data } from 'utils/testData';
 import { LoginPage } from 'pages/loginPage';
-import { AdminPage } from 'pages/adminPage';
+import { LocalSetupPage } from 'pages/localSetupPage';
 import { ApiUtils } from 'utils/apiUtils';
 // import { apiEndpoints } from 'utils/apiEndPoints';
 import { payloads } from 'utils/payloads';
@@ -29,10 +29,10 @@ test.describe('setup local site', () => {
 
 	test('admin setup WP', async ({ page }) => {
 		const loginPage = new LoginPage(page);
-		const adminPage = new AdminPage(page);
-		await adminPage.setupWp();
+		const localSetupPage = new LocalSetupPage(page);
+		await localSetupPage.setupWp();
 		await loginPage.adminLogin(data.admin);
-		await adminPage.setPermalinkSettings(data.wpSettings.permalink);
+		await localSetupPage.setPermalinkSettings(data.wpSettings.permalink);
 	});
 
 	test('activate basic auth plugin', async () => {

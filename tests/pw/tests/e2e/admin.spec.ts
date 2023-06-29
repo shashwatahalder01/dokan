@@ -159,11 +159,11 @@ test.describe('Admin functionality test', () => {
 	test.skip('dokan pro features promo @lite', async ({ request } ) => {
 		const apiUtils = new ApiUtils(request);
 		await apiUtils.updatePlugin('dokan-pro/dokan-pro', { status:'inactive' }, payloads.adminAuth);
-		await adminPage.dokanProFeaturesPromo();
+		// await adminPage.dokanProFeaturesPromo();
 		await apiUtils.updatePlugin('dokan-pro/dokan-pro', { status:'inactive' }, payloads.adminAuth);
 	});
 
-	test.skip('dokan notice  @lite @pro', async ( ) => {
+	test('dokan notice  @lite @pro', async ( ) => {
 		await adminPage.dokanNotice();
 	});
 

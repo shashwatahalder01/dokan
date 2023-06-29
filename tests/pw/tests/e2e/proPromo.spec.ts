@@ -1,17 +1,17 @@
 import { test, Page } from '@playwright/test';
-import { AdminPage } from 'pages/adminPage';
+import { ProPromoPage } from 'pages/proPromoPage';
 import { ApiUtils } from 'utils/apiUtils';
 import { data } from 'utils/testData';
 import { payloads } from 'utils/payloads';
 
 
-let adminPage: AdminPage;
+let proPromoPage: ProPromoPage;
 let page: Page;
 
 test.beforeAll(async ({ browser }) => {
 	const context = await browser.newContext({});
 	page = await context.newPage();
-	adminPage = new AdminPage(page);
+	proPromoPage = new ProPromoPage(page);
 });
 
 test.afterAll(async ( ) => {
@@ -25,7 +25,7 @@ test.describe.skip('Dokan pro feature promo test', () => {
 	test('dokan pro features promo @lite', async ({ request } ) => {
 		const apiUtils = new ApiUtils(request);
 		// await apiUtils.updatePlugin('dokan-pro/dokan-pro', { status:'inactive' }, payloads.adminAuth);
-		await adminPage.dokanProFeaturesPromo();
+		await proPromoPage.dokanProPromo();
 		// await apiUtils.updatePlugin('dokan-pro/dokan-pro', { status:'inactive' }, payloads.adminAuth);
 	});
 
