@@ -343,9 +343,9 @@ setup.describe('setup testPrerequisites', () => {
 
 	setup('add test vendor withdraws @pro', async ({ request }) => {
 		const apiUtils = new ApiUtils(request);
-		const minimumWithdrawLimit = await apiUtils.getMinimumWithdrawLimit();
-		await apiUtils.createOrderWithStatus(payloads.createProduct(), payloads.createOrder, 'wc-completed');
-		await apiUtils.createWithdraw({ ...payloads.createWithdraw, amount: minimumWithdrawLimit });
+		const minimumWithdrawLimit = await apiUtils.getMinimumWithdrawLimit(payloads.vendorAuth);
+		await apiUtils.createOrderWithStatus(payloads.createProduct(), payloads.createOrder, 'wc-completed', payloads.vendorAuth);
+		await apiUtils.createWithdraw({ ...payloads.createWithdraw, amount: minimumWithdrawLimit }, payloads.vendorAuth);
 	});
 
 	setup('create wholesale customer @pro', async ({ request }) => {
@@ -371,7 +371,7 @@ setup.describe('setup testPrerequisites', () => {
 
 	setup('create abuse report @pro', async ({ request }) => {
 		const apiUtils = new ApiUtils(request);
-		const[, productId] = await apiUtils.createProduct(payloads.createProduct(), payloads. vendorAuth);
+		const[, productId] = await apiUtils.createProduct(payloads.createProduct(), payloads.vendorAuth);
 		await dbUtils.createAbuseReport(dbData.dokan.createAbuseReport, productId, VENDOR_ID, CUSTOMER_ID);
 	});
 
