@@ -5,6 +5,7 @@ import { data } from 'utils/testData';
 
 
 export class ModulesPage extends AdminPage {
+
 	constructor(page: Page) {
 		super(page);
 	}

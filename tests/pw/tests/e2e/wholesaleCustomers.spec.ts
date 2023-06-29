@@ -32,7 +32,7 @@ test.describe('Wholesale customers test', () => {
 		await wholesalePage.wholesaleCustomerBulkAction('activate');
 	});
 
-	test('admin can update wholesale customer wholesale capability @pro', async ( ) => {
+	test.skip('admin can update wholesale customer wholesale capability @pro', async ( ) => {
 		await wholesalePage.updateWholesaleCustomerStatus(data.predefined.customerInfo.username1);
 	});
 

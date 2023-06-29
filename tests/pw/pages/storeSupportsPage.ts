@@ -53,6 +53,7 @@ export class StoreSupportsPage extends AdminPage {
 		await this.click(selector.admin.dokan.storeSupport.bulkActions.selectAll);
 		await this.selectByValue(selector.admin.dokan.storeSupport.bulkActions.selectAction, action);
 		await this.clickAndWaitForResponse(data.subUrls.backend.supportTicket, selector.admin.dokan.storeSupport.bulkActions.applyAction);
+		//TODO: add assertion
 	}
 
 	// filter store supports
@@ -65,6 +66,8 @@ export class StoreSupportsPage extends AdminPage {
 		await this.click(selector.admin.dokan.storeReviews.filters.filterByVendor);
 		await this.typeAndWaitForResponse(data.subUrls.backend.stores, selector.admin.dokan.storeReviews.filters.filterInput, vendorName);
 		await this.pressAndWaitForResponse(data.subUrls.backend.storeReviews, data.key.enter);
+
+		//TODO: add assertion
 	}
 
 }

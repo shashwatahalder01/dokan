@@ -40,7 +40,7 @@ test.describe('Tools test', () => {
 		await toolsPage.setDokanSetupWizard(data.dokanSetupWizard);
 	});
 
-	test.skip('admin can regenerate variable product variations author IDs @pro', async ( ) => {
+	test('admin can regenerate variable product variations author IDs @pro', async ( ) => {
 		await toolsPage.regenerateVariableProductVariationsAuthorIds();
 	});
 

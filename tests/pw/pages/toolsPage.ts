@@ -49,7 +49,7 @@ export class ToolsPage extends AdminPage {
 
 		// all page created button should be disabled
 		await this.hasClass(selector.admin.dokan.tools.pageInstallation.allPagesCreated, 'button-disabled');
-
+		//TODO: enable the button then install pages again
 		// await this.setAttributeValue(selector.admin.dokan.tools.pageInstallation.allPagesCreated, 'class',  'button button-primary');
 		// await this.clickAndWaitForResponse(data.subUrls.ajax, selector.admin.dokan.tools.pageInstallation.allPagesCreated);
 
@@ -59,18 +59,21 @@ export class ToolsPage extends AdminPage {
 	async regenerateOrderSyncTable(){
 		await this.goIfNotThere(data.subUrls.backend.dokan.dokanTools);
 		await this.clickAndWaitForResponse(data.subUrls.ajax, selector.admin.dokan.tools.regenerateOrderSyncTable.reBuild);
+		//TODO: add assertion
 	}
 
 	// check for duplicate order
 	async checkForDuplicateOrders(){
 		await this.goIfNotThere(data.subUrls.backend.dokan.dokanTools);
 		await this.clickAndWaitForResponse(data.subUrls.ajax, selector.admin.dokan.tools.checkForDuplicateOrders.checkOrders);
+		//TODO: add assertion
 	}
 
 	// regenerate variable product variations author IDs
 	async regenerateVariableProductVariationsAuthorIds(){
 		await this.goIfNotThere(data.subUrls.backend.dokan.dokanTools);
 		await this.clickAndWaitForResponse(data.subUrls.ajax, selector.admin.dokan.tools.regenerateVariableProductVariationsAuthorIds.regenerate);
+		//TODO: add assertion
 	}
 
 	// clear dummy data
@@ -99,6 +102,7 @@ export class ToolsPage extends AdminPage {
 		await this.clearAndType(selector.admin.dokan.tools.testDistanceMatrixApi.address1, address.address3);
 		await this.clearAndType(selector.admin.dokan.tools.testDistanceMatrixApi.address2, address.address4);
 		await this.click(selector.admin.dokan.tools.testDistanceMatrixApi.getDistance);
+		await expect(this.page.locator(selector.admin.dokan.tools.testDistanceMatrixApi.enabledSuccess)).toContainText('Distance Matrix API is enabled.');
 	}
 
 }

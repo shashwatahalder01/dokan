@@ -20,7 +20,7 @@ test.afterAll(async ( ) => {
 	await page.close();
 });
 
-test.describe.skip('Vendors test', () => {
+test.describe('Vendors test', () => {
 
 	test.use({ storageState: data.auth.adminAuthFile });
 
@@ -32,9 +32,9 @@ test.describe.skip('Vendors test', () => {
 		await adminPage.addVendor(data.vendor.vendorInfo);
 	});
 
-	// test.fixme('admin can add edit vendor info  @lite @pro', async ( ) => {
-	// 	await adminPage.editVendor(data.vendor.vendorInfo);
-	// });
+	test.skip('admin can add edit vendor info  @lite @pro', async ( ) => {
+		// await adminPage.editVendor(data.vendor.vendorInfo);
+	});
 
 	test('admin can search vendors @lite @pro', async ( ) => {
 		await adminPage.searchVendor(data.predefined.vendorStores.vendor1);
@@ -44,9 +44,9 @@ test.describe.skip('Vendors test', () => {
 		await adminPage.vendorBulkAction('approved');
 	});
 
-	//TODO: test('admin can update vendor selling capability @lite @pro', async ( ) => {
+	test.skip('admin can update vendor selling capability @lite @pro', async ( ) => {
 	// await adminPage.vendorBulkAction('approved');
-	// });
+	});
 
 
 });

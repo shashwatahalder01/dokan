@@ -23,7 +23,7 @@ test.afterAll(async ( ) => {
 	await page.close();
 });
 
-test.describe.skip('Withdraw test', () => {
+test.describe('Withdraw test', () => {
 	//TODO: need multiple withdraw request
 
 	test.use({ storageState: data.auth.adminAuthFile });
@@ -44,15 +44,15 @@ test.describe.skip('Withdraw test', () => {
 		await withdrawsPage.updateWithdrawRequest(data.predefined.vendorStores.vendor1, 'approve');
 	});
 
-	test('admin can cancel withdraw request  @lite @pro', async ( ) => {
+	test.skip('admin can cancel withdraw request  @lite @pro', async ( ) => {
 		await withdrawsPage.updateWithdrawRequest(data.predefined.vendorStores.vendor1, 'cancel');
 	});
 
-	test('admin can delete withdraw request  @lite @pro', async ( ) => {
+	test.skip('admin can delete withdraw request  @lite @pro', async ( ) => {
 		await withdrawsPage.updateWithdrawRequest(data.predefined.vendorStores.vendor1,  'delete');
 	});
 
-	test('admin can perform withdraw bulk actions @lite @pro', async ( ) => {
+	test.skip('admin can perform withdraw bulk actions @lite @pro', async ( ) => {
 		await withdrawsPage.withdrawBulkAction('cancelled');
 	});
 

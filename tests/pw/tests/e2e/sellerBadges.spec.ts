@@ -24,7 +24,7 @@ test.afterAll(async ( ) => {
 	await page.close();
 });
 
-test.describe.skip('Seller badge test', () => {
+test.describe('Seller badge test', () => {
 
 	test.use({ storageState: data.auth.adminAuthFile });
 
@@ -68,7 +68,7 @@ test.describe.skip('Seller badge test', () => {
 		await sellerBadgesPage.deleteSellerBadge(data.sellerBadge.eventName.productsPublished);
 	});
 
-	test('admin can perform seller badge bulk action @pro', async ( ) => {
+	test.skip('admin can perform seller badge bulk action @pro', async ( ) => {
 		await sellerBadgesPage.sellerBadgeBulkAction('delete');
 	});
 

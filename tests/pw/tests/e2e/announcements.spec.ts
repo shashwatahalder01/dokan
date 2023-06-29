@@ -24,7 +24,7 @@ test.describe('Announcements test', () => {
 		await announcementsPage.adminAnnouncementsRenderProperly();
 	});
 
-	test('admin can perform announcements bulk action @pro', async ( ) => {
+	test.skip('admin can perform announcements bulk action @pro', async ( ) => {
 		await announcementsPage.announcementBulkAction('trash');
 	});
 

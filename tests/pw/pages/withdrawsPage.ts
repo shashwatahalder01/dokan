@@ -51,7 +51,7 @@ export class WithdrawsPage extends AdminPage {
 		await this.click(selector.admin.dokan.withdraw.filters.filterByVendor);
 		await this.typeAndWaitForResponse(data.subUrls.backend.stores, selector.admin.dokan.withdraw.filters.filterInput, vendorName);
 		await this.pressAndWaitForResponse(data.subUrls.backend.withdraws, data.key.enter);
-
+		await expect(this.page.locator(selector.admin.dokan.withdraw.withdrawCell(vendorName))).toBeVisible();
 	}
 
 	// add note to withdraw request

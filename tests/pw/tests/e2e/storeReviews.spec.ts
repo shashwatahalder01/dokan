@@ -16,7 +16,7 @@ test.afterAll(async ( ) => {
 	await page.close();
 });
 
-test.describe.skip('Store Reviews test', () => {
+test.describe('Store Reviews test', () => {
 
 	test.use({ storageState: data.auth.adminAuthFile });
 
@@ -36,15 +36,15 @@ test.describe.skip('Store Reviews test', () => {
 		await storeReviewsPage.deleteStoreReview(data.storeReview);
 	});
 
-	// test('admin can restore deleted store review @pro', async ( ) => {
-	// 	await storeReviewsPage.restoreStoreReview(data.storeReview);
-	// });
+	test.skip('admin can restore deleted store review @pro', async ( ) => {
+		// await storeReviewsPage.restoreStoreReview(data.storeReview);
+	});
 
-	// test('admin can permanently delete store review @pro', async ( ) => {
-	// 	await storeReviewsPage.permanentlyDeleteStoreReview(data.storeReview);
-	// });
+	test.skip('admin can permanently delete store review @pro', async ( ) => {
+		// await storeReviewsPage.permanentlyDeleteStoreReview(data.storeReview);
+	});
 
-	test('admin can perform store reviews bulk action @pro', async ( ) => {
+	test.skip('admin can perform store reviews bulk action @pro', async ( ) => {
 		await storeReviewsPage.storeReviewsBulkAction('trash');
 	});
 

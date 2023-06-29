@@ -16,7 +16,7 @@ test.afterAll(async ( ) => {
 	await page.close();
 });
 
-test.describe.skip('Abuse report test', () => {
+test.describe('Abuse report test', () => {
 
 	test.use({ storageState: data.auth.adminAuthFile });
 
@@ -28,7 +28,7 @@ test.describe.skip('Abuse report test', () => {
 		await abuseReportsPage.abuseReportBulkAction('delete');
 	});
 
-	test.fixme('admin can filter abuse reports @pro', async ( ) => {
+	test.skip('admin can filter abuse reports @pro', async ( ) => {
 		// await abuseReportsPage.filterAbuseReports();
 	});
 

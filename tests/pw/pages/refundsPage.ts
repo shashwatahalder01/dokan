@@ -9,7 +9,7 @@ export class RefundsPage extends AdminPage {
 	constructor(page: Page) {
 		super(page);
 	}
-	
+
 	// refunds
 
 	async adminRefundRequestsRenderProperly(){

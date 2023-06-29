@@ -1297,7 +1297,7 @@ export const selector = {
 					address1: '#address1',
 					address2: '#address2',
 					getDistance:'//button[normalize-space()="Get Distance"]',
-					enabledSuccess: '//div[@class="formatted-message succes"]'
+					enabledSuccess: '//div[@class="formatted-message success"]'
 
 				},
 

@@ -16,7 +16,7 @@ test.afterAll(async ( ) => {
 	await page.close();
 });
 
-test.describe.skip('Verifications test', () => {
+test.describe('Verifications test', () => {
 	//TODO: need multiple verification request
 
 	test.use({ storageState: data.auth.adminAuthFile });
@@ -25,15 +25,15 @@ test.describe.skip('Verifications test', () => {
 		await verificationsPage.adminVerificationsRenderProperly();
 	});
 
-	test('admin can approve ID verification request @pro', async ( ) => {
+	test.skip('admin can approve ID verification request @pro', async ( ) => {
 		await verificationsPage.idVerificationRequest(data.predefined.vendorInfo.username, 'approve');
 	});
 
-	test('admin can approve address verification request @pro', async ( ) => {
+	test.skip('admin can approve address verification request @pro', async ( ) => {
 		await verificationsPage.addressVerificationRequest(data.predefined.vendorInfo.username, 'approve');
 	});
 
-	test('admin can approve company verification request @pro', async ( ) => {
+	test.skip('admin can approve company verification request @pro', async ( ) => {
 		await verificationsPage.companyVerificationRequest(data.predefined.vendorInfo.username, 'approve');
 	});
 

@@ -16,7 +16,7 @@ test.afterAll(async ( ) => {
 	await page.close();
 });
 
-test.describe.skip('refundsPage test', () => {
+test.describe('refundsPage test', () => {
 
 	test.use({ storageState: data.auth.adminAuthFile });
 
@@ -32,11 +32,11 @@ test.describe.skip('refundsPage test', () => {
 		await refundsPage.updateRefundRequests(data.predefined.vendorStores.vendor1, 'approve');
 	});
 
-	test('admin can cancel refund requests @pro', async ( ) => {
+	test.skip('admin can cancel refund requests @pro', async ( ) => {
 		await refundsPage.updateRefundRequests(data.predefined.vendorStores.vendor1, 'cancel');
 	});
 
-	test('admin can perform refund requests bulk actions @pro', async ( ) => {
+	test.skip('admin can perform refund requests bulk actions @pro', async ( ) => {
 		await refundsPage.refundRequestsBulkAction('delete');
 	});
 

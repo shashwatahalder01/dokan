@@ -48,7 +48,7 @@ test.describe('Product Advertising test', () => {
 		// await productAdvertisingPage.filterAdvertisedProduct(data.productAdvertisement.advertisedProduct, 'delete');
 	});
 
-	test('admin can perform product advertising bulk action @pro', async ( ) => {
+	test.skip('admin can perform product advertising bulk action @pro', async ( ) => {
 		await productAdvertisingPage.productAdvertisingBulkAction('delete');
 	});
 

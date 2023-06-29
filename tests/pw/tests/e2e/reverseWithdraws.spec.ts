@@ -23,7 +23,7 @@ test.afterAll(async ( ) => {
 	await page.close();
 });
 
-test.describe.skip('Reverse withdraw test', () => {
+test.describe('Reverse withdraw test', () => {
 
 	test.use({ storageState: data.auth.adminAuthFile });
 

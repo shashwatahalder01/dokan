@@ -16,7 +16,7 @@ test.afterAll(async ( ) => {
 	await page.close();
 });
 
-test.describe.skip('Reports test', () => {
+test.describe('Reports test', () => {
 
 	test.use({ storageState: data.auth.adminAuthFile });
 
@@ -32,11 +32,11 @@ test.describe.skip('Reports test', () => {
 		await reportsPage.adminAllLogsRenderProperly();
 	});
 
-	test('admin can search all logs @pro', async ( ) => {
+	test.skip('admin can search all logs @pro', async ( ) => {
 		await reportsPage.searchAllLogs('470');
 	});
 
-	test('admin can export all logs @pro', async ( ) => {
+	test.skip('admin can export all logs @pro', async ( ) => {
 		await reportsPage.exportAllLogs('470');
 	});
 
