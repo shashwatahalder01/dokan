@@ -1,19 +1,15 @@
 import { test, Page } from '@playwright/test';
-import { AdminPage } from 'pages/adminPage';
-import { ApiUtils } from 'utils/apiUtils';
+import { ReportsPage } from 'pages/reportsPage';
 import { data } from 'utils/testData';
-import { payloads } from 'utils/payloads';
 
 
-let adminPage: AdminPage;
+let reportsPage: ReportsPage;
 let page: Page;
-let apiUtils: ApiUtils;
 
-test.beforeAll(async ({ browser, request }) => {
+test.beforeAll(async ({ browser }) => {
 	const context = await browser.newContext({});
 	page = await context.newPage();
-	adminPage = new AdminPage(page);
-	apiUtils = new ApiUtils(request);
+	reportsPage = new ReportsPage(page);
 });
 
 test.afterAll(async ( ) => {
@@ -27,29 +23,29 @@ test.describe.skip('Reports test', () => {
 	// reports
 
 	test('admin reports menu page is rendering properly @pro @explo', async ( ) => {
-		await adminPage.adminReportsRenderProperly();
+		await reportsPage.adminReportsRenderProperly();
 	});
 
 	// all logs
 
 	test('admin All Logs menu page is rendering properly @pro @explo', async ( ) => {
-		await adminPage.adminAllLogsRenderProperly();
+		await reportsPage.adminAllLogsRenderProperly();
 	});
 
 	test('admin can search all logs @pro', async ( ) => {
-		await adminPage.searchAllLogs('470');
+		await reportsPage.searchAllLogs('470');
 	});
 
 	test('admin can export all logs @pro', async ( ) => {
-		await adminPage.exportAllLogs('470');
+		await reportsPage.exportAllLogs('470');
 	});
 
 	test('admin can filter all logs by store name @pro', async ( ) => {
-		await adminPage.filterAllLogsByStore(data.predefined.vendorStores.vendor1);
+		await reportsPage.filterAllLogsByStore(data.predefined.vendorStores.vendor1);
 	});
 
 	test('admin can filter all logs by order status @pro', async ( ) => {
-		await adminPage.filterAllLogsByStatus('completed');
+		await reportsPage.filterAllLogsByStatus('completed');
 	});
 
 });
