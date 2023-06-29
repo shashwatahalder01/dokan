@@ -1455,8 +1455,8 @@ export class AdminPage extends BasePage {
 		const { filterInput, ...filters } = selector.admin.dokan.withdraw.filters;
 		await this.multipleElementVisible(filters);
 
-		// withdraw table is visible
-		await expect(this.page.locator(selector.admin.dokan.withdraw.withdrawTable)).toBeVisible();
+		// withdraw table elements are visible
+		await this.multipleElementVisible(selector.admin.dokan.withdraw.table);
 
 	}
 
@@ -1526,9 +1526,8 @@ export class AdminPage extends BasePage {
 
 		//TODO: add filters
 
-		// withdraw table is visible
-		await expect(this.page.locator(selector.admin.dokan.reverseWithdraw.revereWithdrawTable)).toBeVisible();
-
+		// reverse withdraw table elements are visible
+		await this.multipleElementVisible(selector.admin.dokan.reverseWithdraw.table);
 	}
 
 	/*************************************************************************************************/
@@ -1553,9 +1552,8 @@ export class AdminPage extends BasePage {
 		// search vendor input is visible
 		await expect(this.page.locator(selector.admin.dokan.vendors.search)).toBeVisible();
 
-		// vendor table is visible
-		await expect(this.page.locator(selector.admin.dokan.vendors.vendorTable)).toBeVisible();
-
+		// vendor table elements are visible
+		await this.multipleElementVisible(selector.admin.dokan.vendors.table);
 	}
 
 	// search vendor
@@ -1654,8 +1652,8 @@ export class AdminPage extends BasePage {
 		const { filterInput, ...filters } = selector.admin.dokan.abuseReports.filters;
 		await this.multipleElementVisible(filters);
 
-		// abuse report table is visible
-		await expect(this.page.locator(selector.admin.dokan.abuseReports.abuseReportsTable)).toBeVisible();
+		// abuse report table elements are visible
+		await this.multipleElementVisible(selector.admin.dokan.abuseReports.table);
 
 	}
 
@@ -1699,8 +1697,8 @@ export class AdminPage extends BasePage {
 		const { filterInput, filterClear, ...filters } = selector.admin.dokan.storeReviews.filters;
 		await this.multipleElementVisible(filters);
 
-		// store reviews table is visible
-		await expect(this.page.locator(selector.admin.dokan.storeReviews.storeReviewsTable)).toBeVisible();
+		// store reviews table elements are visible
+		await this.multipleElementVisible(selector.admin.dokan.storeReviews.table);
 	}
 
 	// store reviews bulk action
@@ -1770,8 +1768,8 @@ export class AdminPage extends BasePage {
 		// search store support is visible
 		await expect(this.page.locator(selector.admin.dokan.storeSupport.searchTicket)).toBeVisible();
 
-		// store reviews table is visible
-		await expect(this.page.locator(selector.admin.dokan.storeSupport.storeSupportTable)).toBeVisible();
+		// store support table elements are visible
+		await this.multipleElementVisible(selector.admin.dokan.storeSupport.table);
 	}
 
 	// search support ticket
@@ -1828,8 +1826,8 @@ export class AdminPage extends BasePage {
 		// bulk action elements are visible
 		await this.multipleElementVisible(selector.admin.dokan.requestForQuotation.quoteRules.bulkActions);
 
-		// quote rules table is visible
-		await expect(this.page.locator(selector.admin.dokan.requestForQuotation.quoteRules.quoteRulesTable)).toBeVisible();
+		// quote rules elements are visible
+		await this.multipleElementVisible(selector.admin.dokan.requestForQuotation.quoteRules.table);
 	}
 
 
@@ -1864,12 +1862,17 @@ export class AdminPage extends BasePage {
 	async addQuoteRule(rule: any){
 		await this.goIfNotThere(data.subUrls.backend.dokan.dokanRequestForQuoteRules);
 
-		await this.clickAndWaitForResponse(data.subUrls.backend.quotes, selector.admin.dokan.requestForQuotation.quoteRules.newQuoteRule);
+		// await this.clickAndWaitForResponse(data.subUrls.backend.quotes, selector.admin.dokan.requestForQuotation.quoteRules.newQuoteRule);
 
 		// TODO: need to wait for multiple response
 		// // const qrs: string[][] = [[data.subUrls.backend.quotes, '200'], [data.subUrls.backend.products, '200']];
 		// const qrs: string[][] = [[data.subUrls.backend.quotes, '200']];
 		// await this.clickAndWaitForResponses(qrs, selector.admin.dokan.requestForQuotation.quoteRules.newQuoteRule);
+		await Promise.all([
+			this.page.waitForResponse((resp) => resp.url().includes(data.subUrls.backend.quotes) && resp.status() === 200),
+			this.page.waitForResponse((resp) => resp.url().includes(data.subUrls.backend.products) && resp.status() === 200),
+			this.page.locator(selector.admin.dokan.requestForQuotation.quoteRules.newQuoteRule).click()
+		]);
 
 		await this.updateQuoteRuleFields(rule);
 	}
@@ -1880,7 +1883,12 @@ export class AdminPage extends BasePage {
 
 		await this.hover(selector.admin.dokan.requestForQuotation.quoteRules.quoteRulesCell(rule.title));
 		// TODO: need to wait for multiple response
-		await this.clickAndWaitForResponse(data.subUrls.backend.quoteRules, selector.admin.dokan.requestForQuotation.quoteRules.quoteRulesEdit(rule.title));
+		// await this.clickAndWaitForResponse(data.subUrls.backend.quotes, selector.admin.dokan.requestForQuotation.quoteRules.quoteRulesEdit(rule.title));
+		await Promise.all([
+			this.page.waitForResponse((resp) => resp.url().includes(data.subUrls.backend.quotes) && resp.status() === 200),
+			this.page.waitForResponse((resp) => resp.url().includes(data.subUrls.backend.products) && resp.status() === 200),
+			this.page.locator(selector.admin.dokan.requestForQuotation.quoteRules.quoteRulesEdit(rule.title)).click()
+		]);
 
 		await this.updateQuoteRuleFields(rule);
 
@@ -1945,8 +1953,8 @@ export class AdminPage extends BasePage {
 		// bulk action elements are visible
 		await this.multipleElementVisible(selector.admin.dokan.requestForQuotation.quotesList.bulkActions);
 
-		// quotes table is visible
-		await expect(this.page.locator(selector.admin.dokan.requestForQuotation.quotesList.quotesTable)).toBeVisible();
+		// quotes table elements are visible
+		await this.multipleElementVisible(selector.admin.dokan.requestForQuotation.quotesList.table);
 	}
 
 	async updateQuoteFields(quote: any, action = 'create'){
@@ -1986,10 +1994,7 @@ export class AdminPage extends BasePage {
 		await this.goIfNotThere(data.subUrls.backend.dokan.dokanRequestForQuote);
 
 		await this.click(selector.admin.dokan.requestForQuotation.quotesList.newQuote);
-		// TODO: need to wait for multiple response
-
 		await this.updateQuoteFields(quote, 'create');
-
 	}
 
 	// add quote
@@ -1997,9 +2002,7 @@ export class AdminPage extends BasePage {
 		await this.goIfNotThere(data.subUrls.backend.dokan.dokanRequestForQuote);
 
 		await this.hover(selector.admin.dokan.requestForQuotation.quotesList.quoteCell(quote.title));
-		// TODO: need to wait for multiple response
 		await this.clickAndWaitForResponse(data.subUrls.backend.quotes, selector.admin.dokan.requestForQuotation.quotesList.quoteEdit(quote.title));
-
 		await this.updateQuoteFields(quote, 'update');
 	}
 
@@ -2041,7 +2044,6 @@ export class AdminPage extends BasePage {
 		await this.goIfNotThere(data.subUrls.backend.dokan.dokanRequestForQuote);
 
 		await this.hover(selector.admin.dokan.requestForQuotation.quotesList.quoteCell(quote.title));
-		// TODO: need to wait for multiple response
 		await this.clickAndWaitForResponse(data.subUrls.backend.quotes, selector.admin.dokan.requestForQuotation.quotesList.quoteEdit(quote.title));
 		await this.clickAndWaitForResponse(data.subUrls.backend.quotes, selector.admin.dokan.requestForQuotation.quotesList.convertToOrder);
 
@@ -2080,8 +2082,8 @@ export class AdminPage extends BasePage {
 		// search seller badge is visible
 		await expect(this.page.locator(selector.admin.dokan.sellerBadge.search)).toBeVisible();
 
-		//  seller badge table is visible
-		await expect(this.page.locator(selector.admin.dokan.sellerBadge.sellerBadgeTable)).toBeVisible();
+		//  seller badge table elements are visible
+		await this.multipleElementVisible(selector.admin.dokan.sellerBadge.table);
 
 	}
 
@@ -2308,8 +2310,8 @@ export class AdminPage extends BasePage {
 		// bulk action elements are visible
 		await this.multipleElementVisible(selector.admin.dokan.announcements.bulkActions);
 
-		// announcement table is visible
-		await expect(this.page.locator(selector.admin.dokan.announcements.announcementTable)).toBeVisible();
+		// announcement table elements are visible
+		await this.multipleElementVisible(selector.admin.dokan.announcements.table);
 
 	}
 
@@ -2356,6 +2358,117 @@ export class AdminPage extends BasePage {
 
 	/*************************************************************************************************/
 
+	// reports
+
+	async adminReportsRenderProperly(){
+		await this.goIfNotThere(data.subUrls.backend.dokan.dokanReports);
+
+		// report Menus are visible
+		await this.multipleElementVisible(selector.admin.dokan.reports.menus);
+
+		// filter Menus are visible
+		await this.multipleElementVisible(selector.admin.dokan.reports.reports.filterMenus);
+
+		// calender from input is visible
+		await expect(this.page.locator(selector.admin.dokan.reports.reports.dateFrom)).toBeVisible();
+
+		// calender from input is visible
+		await expect(this.page.locator(selector.admin.dokan.reports.reports.dateTo)).toBeVisible();
+
+		// show button is visible
+		await expect(this.page.locator(selector.admin.dokan.reports.reports.show)).toBeVisible();
+
+		// at a glance elements are visible
+		await this.multipleElementVisible(selector.admin.dokan.reports.reports.atAGlance);
+
+		// overview elements are visible
+		await this.multipleElementVisible(selector.admin.dokan.reports.reports.overview);
+
+	}
+
+	// all logs
+
+	async adminAllLogsRenderProperly(){
+		await this.goIfNotThere(data.subUrls.backend.dokan.dokanAllLogs);
+
+		// report Menus are visible
+		await this.multipleElementVisible(selector.admin.dokan.reports.menus);
+
+		// filter elements are visible
+		// eslint-disable-next-line @typescript-eslint/no-unused-vars
+		const { filterByStoreInput, filterByStatusInput, ...filters } = selector.admin.dokan.reports.allLogs.filters;
+		await this.multipleElementVisible(filters);
+
+		// search is visible
+		await expect(this.page.locator(selector.admin.dokan.reports.allLogs.search)).toBeVisible();
+
+		// export log is visible
+		await expect(this.page.locator(selector.admin.dokan.reports.allLogs.exportLogs)).toBeVisible();
+
+		// all logs table elements are visible
+		await this.multipleElementVisible(selector.admin.dokan.reports.allLogs.table);
+
+	}
+
+	// search all logs
+	async searchAllLogs(orderId: string){
+		await this.goIfNotThere(data.subUrls.backend.dokan.dokanAllLogs);
+
+		await this.clearInputField(selector.admin.dokan.reports.allLogs.search); // TODO: clear by cross, or use type instead of fill  //TODO: is it necessary
+		await this.typeAndWaitForResponse(data.subUrls.backend.logs, selector.admin.dokan.reports.allLogs.search, orderId);
+		await expect(this.page.locator(selector.admin.dokan.reports.allLogs.orderIdCell(orderId))).toBeVisible();
+		// await this.clickAndWaitForResponse(data.subUrls.backend.logs, selector.admin.dokan.reports.allLogs.filters.clear);
+
+	}
+
+	// export all logs
+	async exportAllLogs(orderId: string){
+		await this.searchAllLogs(orderId);
+		// await this.goIfNotThere(data.subUrls.backend.dokan.dokanAllLogs);
+		// await this.clickAndWaitForResponse(data.subUrls.backend.logs, selector.admin.dokan.reports.allLogs.exportLogs);
+		// await this.page.waitForResponse((resp) => resp.url().includes('wp-admin/admin.php?download-order-log-csv') && resp.status() === 200); //TODO: MERGE WITH PREVIOUS
+		// TODO: need to wait for multiple response
+		await Promise.all([
+			this.page.waitForResponse((resp) => resp.url().includes(data.subUrls.backend.logs) && resp.status() === 200),
+			this.page.waitForResponse((resp) => resp.url().includes('wp-admin/admin.php?download-order-log-csv') && resp.status() === 200),
+			this.page.locator(selector.admin.dokan.reports.allLogs.exportLogs).click()
+		]);
+
+		//TODO: add wait for multiple different response on base-page
+		//TODO: might fail on CI, need to accept downloads
+	}
+
+	// filter all logs by store
+	async filterAllLogsByStore(storeName: string){
+		await this.goIfNotThere(data.subUrls.backend.dokan.dokanAllLogs);
+
+		await this.click(selector.admin.dokan.reports.allLogs.filters.filterByStore);
+		await this.typeAndWaitForResponse(data.subUrls.backend.stores, selector.admin.dokan.reports.allLogs.filters.filterByStoreInput, storeName);
+		await this.pressAndWaitForResponse(data.subUrls.backend.logs, data.key.enter);
+
+		const count = (await this.getElementText(selector.admin.dokan.reports.allLogs.numberOfRowsFound))?.split(' ')[0];
+		expect(Number(count)).not.toBe(0);
+
+		// await this.clickAndWaitForResponse(data.subUrls.backend.logs, selector.admin.dokan.reports.allLogs.filters.clear);
+	}
+
+	// filter all logs by status
+	async filterAllLogsByStatus(orderStatus: string){
+		await this.goIfNotThere(data.subUrls.backend.dokan.dokanAllLogs);
+
+		await this.click(selector.admin.dokan.reports.allLogs.filters.filterByStatus);
+		await this.clearAndType( selector.admin.dokan.reports.allLogs.filters.filterByStatusInput, orderStatus);
+		await this.pressAndWaitForResponse(data.subUrls.backend.logs, data.key.enter);
+
+		const count = (await this.getElementText(selector.admin.dokan.reports.allLogs.numberOfRowsFound))?.split(' ')[0];
+		expect(Number(count)).not.toBe(0);
+
+		// await this.clickAndWaitForResponse(data.subUrls.backend.logs, selector.admin.dokan.reports.allLogs.filters.clear);
+	}
+
+
+	/*************************************************************************************************/
+
 
 	// refunds
 
@@ -2374,8 +2487,8 @@ export class AdminPage extends BasePage {
 		// refund request search is visible
 		await expect(this.page.locator(selector.admin.dokan.refunds.search)).toBeVisible();
 
-		// refund request table is visible
-		await expect(this.page.locator(selector.admin.dokan.refunds.refundRequestTable)).toBeVisible();
+		// refund table elements are visible
+		await this.multipleElementVisible(selector.admin.dokan.refunds.table);
 
 	}
 
@@ -2546,9 +2659,8 @@ export class AdminPage extends BasePage {
 		// navTab elements are visible
 		await this.multipleElementVisible(selector.admin.dokan.verifications.navTabs);
 
-		// verification table is visible
-		await expect(this.page.locator(selector.admin.dokan.verifications.verificationTable)).toBeVisible();
-
+		// verification table elements are visible
+		await this.multipleElementVisible(selector.admin.dokan.verifications.table);
 	}
 
 	// ID verification requests
@@ -2639,9 +2751,8 @@ export class AdminPage extends BasePage {
 		// product advertising search is visible
 		await expect(this.page.locator(selector.admin.dokan.productAdvertising.search)).toBeVisible();
 
-		// product advertising table is visible
-		await expect(this.page.locator(selector.admin.dokan.productAdvertising.productAdvertisingTable)).toBeVisible();
-
+		// product advertising table elements are visible
+		await this.multipleElementVisible(selector.admin.dokan.productAdvertising.table);
 	}
 
 	// add new product advertisement
@@ -2827,8 +2938,8 @@ export class AdminPage extends BasePage {
 		// search wholesale customer input is visible
 		await expect(this.page.locator(selector.admin.dokan.wholesaleCustomer.search)).toBeVisible();
 
-		// wholesale customer table is visible
-		await expect(this.page.locator(selector.admin.dokan.wholesaleCustomer.wholesaleCustomerTable)).toBeVisible();
+		// wholesale customer table elements are visible
+		await this.multipleElementVisible(selector.admin.dokan.wholesaleCustomer.table);
 
 	}
 

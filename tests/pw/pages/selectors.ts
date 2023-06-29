@@ -288,7 +288,18 @@ export const selector = {
 				},
 
 				// Table
-				withdrawTable: '.wp-list-table',
+				table : {
+					withdrawTable: '.wp-list-table',
+					vendorColumn: 'thead th.seller',
+					amountColumn: 'thead th.amount',
+					statusColumn: 'thead th.status',
+					methodColumn: 'thead th.method_title',
+					detailsColumn: 'thead th.method_details',
+					noteColumn: 'thead th.note',
+					dateColumn: 'thead th.created',
+					actionsColumn: 'thead th.actions',
+
+				},
 
 				withdrawCell: (username: string) => `//td//a[contains(text(), '${username}')]/../..`,
 				withdrawDelete: '.row-actions .trash',
@@ -327,8 +338,12 @@ export const selector = {
 				},
 
 				// Table
-				revereWithdrawTable: '#dokan_reverse_withdrawal_list_table table',
-
+				table : {
+					revereWithdrawTable: '#dokan_reverse_withdrawal_list_table table',
+					storesColumn: 'thead th.store_name',
+					balanceColumn: 'thead th.balance',
+					lastPaymentDateColumn: 'thead th.last_payment_date',
+				},
 
 			},
 
@@ -361,8 +376,18 @@ export const selector = {
 
 				search: '#post-search-input',
 
-				// table
-				vendorTable: '.vendor-list table',
+				// Table
+				table : {
+					vendorTable: '.vendor-list table',
+					storeColumn: 'thead th.store_name',
+					emailColumn: 'thead th.email',
+					categoryColumn: 'thead th.categories',
+					phoneColumn: 'thead th.phone',
+					RegisteredColumn: 'thead th.registered',
+					StatusColumn: 'thead th.enabled',
+
+				},
+
 				numberOfVendorsFound: '.tablenav.top .displaying-num',
 				noVendorsFound: '//td[normalize-space()="No vendors found."]',
 				vendorViewDetails: (username: string) => `//td//a[contains(text(), '${username}')]`,
@@ -508,7 +533,6 @@ export const selector = {
 					selectAll: 'thead .manage-column',
 					selectAction: '.tablenav.top #bulk-action-selector-top',  // delete
 					applyAction: '.tablenav.top .button.action',
-
 				},
 
 				// Filters
@@ -519,7 +543,16 @@ export const selector = {
 					filterInput: '.select2-search.select2-search--dropdown .select2-search__field',
 				},
 
-				abuseReportsTable: '.wp-list-table'
+				// Table
+				table : {
+					abuseReportsTable: '.wp-list-table',
+					reasonColumn: 'thead th.reason',
+					productColumn: 'thead th.product',
+					vendorColumn: 'thead th.vendor',
+					reportedByColumn: 'thead th.reported_by',
+					reportedAtColumn: 'thead th.reported_at',
+				},
+
 			},
 
 			// Store Reviews
@@ -547,7 +580,17 @@ export const selector = {
 					filterClear: '.select2-selection__clear',
 				},
 
-				storeReviewsTable: '.dokan-store-reviews table',
+				// Table
+				table : {
+					storeReviewsTable: '.dokan-store-reviews table',
+					titleColumn: 'thead th.title',
+					contentColumn: 'thead th.content',
+					customerColumn: 'thead th.customer',
+					vendorColumn: 'thead th.vendor',
+					ratingColumn: 'thead th.rating',
+					dateColumn: 'thead th.created_at',
+				},
+
 
 				storeReviewCell: (title: string) => `//td//a[contains(text(), '${title}')]/../..`,
 				storeReviewEdit: '.row-actions .cancel',
@@ -594,7 +637,18 @@ export const selector = {
 
 				searchTicket:'#post-search-input',
 
-				storeSupportTable: '.admin-store-support-tickets table',
+				// Table
+				table : {
+					storeSupportTable: '.admin-store-support-tickets table',
+					topicColumn: 'thead th.ID',
+					titleColumn: 'thead th.post_title',
+					vendorColumn: 'thead th.vendor_name',
+					customerColumn: 'thead th.customer_name',
+					statusColumn: 'thead th.post_status',
+					dateColumn: 'thead th.ticket_date',
+					actionColumn: 'thead th.action',
+				},
+
 
 			},
 
@@ -631,7 +685,15 @@ export const selector = {
 
 					},
 
-					quotesTable:  '.dokan-quote-wrapper table',
+					// Table
+					table : {
+						quotesTable:  '.dokan-quote-wrapper table',
+						quoteColumn: 'thead th.sl',
+						quoteTitleColumn: 'thead th.title',
+						customerEmailColumn: 'thead th.customer_email',
+						quoteStatusColumn: 'thead th.status',
+						dateColumn: 'thead th.created_at',
+					},
 
 					quoteCell:  (title: string) => `//strong[contains(text(),'${title}')]/../..//td[@class='column sl']`,
 					//TODO: uncomment after search added
@@ -707,7 +769,18 @@ export const selector = {
 
 					},
 
-					quoteRulesTable:  '.dokan-announcement-wrapper table',
+					// Table
+					table : {
+						quoteRulesTable:  '.dokan-announcement-wrapper table',
+						titleColumn: 'thead th.rule_name',
+						userRolesColumn: 'thead th.selected_user_role',
+						hidePriceColumn: 'thead th.hide_price',
+						buttonTextColumn: 'thead th.button_text',
+						rulePriorityColumn: 'thead th.rule_priority',
+						ruleStatusColumn: 'thead th.status',
+						dateColumn: 'thead th.created_at',
+					},
+
 					quoteRulesCell:  (title: string) => `//a[contains(text(),'${title}')]/../..`,
 					trashedQuoteRulesCell:  (title: string) => `//strong[contains(text(),'${title}')]/../..`,
 					//TODO: uncomment after search added
@@ -775,7 +848,14 @@ export const selector = {
 
 				search: '#post-search-input',
 
-				sellerBadgeTable:  '.seller-badge-list table',
+				// Table
+				table : {
+					sellerBadgeTable:  '.seller-badge-list table',
+					badgesNameColumn: 'thead th.badge_name',
+					badgeEventColumn: 'thead th.event_type',
+					noOfVendorsColumn: 'thead th.vendor_count',
+					statusColumn: 'thead th.badge_status',
+				},
 
 				sellerBadgeCell: (name: string) => `//a[contains(text(),'${name}')]/../..`,
 				sellerBadgeLevel: (name: string) => `//a[contains(text(),'${name}')]/../../..//span[@class="level_count"]//strong`,
@@ -858,7 +938,16 @@ export const selector = {
 					applyAction: '.tablenav.top .button.action',
 				},
 
-				announcementTable: '.dokan-announcement-wrapper table',
+				// Table
+				table : {
+					announcementTable: '.dokan-announcement-wrapper table',
+					titleColumn: 'thead th.title',
+					contentColumn: 'thead th.content',
+					sentToColumn: 'thead th.send_to',
+					statusColumn: 'thead th.status',
+					dateColumn: 'thead th.created_at',
+				},
+
 				announcementCell: (title: string) => `//a[contains(text(),'${title}')]/../..`,
 				announcementEdit: '.row-actions .edit',
 				announcementDelete: '.row-actions .delete',
@@ -897,7 +986,17 @@ export const selector = {
 				// Search Refund
 				search: '#post-search-input',
 
-				refundRequestTable: '.dokan-refund-wrapper table',
+				// Table
+				table : {
+					refundRequestTable: '.dokan-refund-wrapper table',
+					orderIdColumn: 'thead th.order_id',
+					vendorColumn: 'thead th.vendor',
+					refundAmountColumn: 'thead th.amount',
+					refundReasonColumn: 'thead th.reason',
+					paymentGatewayColumn: 'thead th.method',
+					dateColumn: 'thead th.date',
+				},
+
 				numberOfRowsFound: '.tablenav.top .displaying-num',
 				refundCell: (orderNumber: string) => `//strong[contains(text(),'#${orderNumber}')]/../..`,
 				approveRefund: (orderNumber: string) => `//strong[contains(text(),'#${orderNumber}')]/../..//span[@class='completed']`,
@@ -909,51 +1008,111 @@ export const selector = {
 			reports: {
 
 				// Menus
-				reports: '//a[contains(@class, "nav-tab") and contains(text(),"Reports")]',
-				allLogs: '//a[contains(@class, "nav-tab") and contains(text(),"All Logs")]',
-
+				menus:{
+					reports: '//a[contains(@class, "nav-tab") and contains(text(),"Reports")]',
+					allLogs: '//a[contains(@class, "nav-tab") and contains(text(),"All Logs")]',
+				},
 				// Reports
 
-				// By Day
-				byDay: '//ul[contains(@class, "dokan-report-sub")]//a[contains(text(),"By Day")]',
-				byDayFrom: '//label[contains(text(),"From")]/../input',
-				byDayTo: '//label[contains(text(),"To")]/../input',
-				byDayShow: '//label[contains(text(),"To")]/../button',
-				// By Year
-				byYear: '//ul[contains(@class, "dokan-report-sub")]//a[contains(text(),"By Year")]',
-				byYearNumber: '.dokan-input',
-				byYearShow: '.button',
-				// By Vendor
-				byVendor: '//ul[contains(@class, "dokan-report-sub")]//a[contains(text(),"By Vendor")]',
-				storeName: '.multiselect__tags',
-				byVendorFrom: '//label[contains(text(),"From")]/../input',
-				byVendorTo: '//label[contains(text(),"To")]/../input',
-				byVendorShow: '.button',
+				reports: {
+
+					// At a Glance
+					atAGlance : {
+						atAGlance: '.postbox.dokan-postbox.dokan-status',
+						collapsibleButton: '.dokan-status .handle-actions button',
+						netSalesThisMonth: '.sale strong',
+						commissionEarned: '.commission strong div',
+						signupThisMonth: '.vendor strong',
+						vendorAwaitingApproval: '.approval strong',
+						productCreatedThisMonth: '.product strong',
+						withdrawAwaitingApproval: '.withdraw strong',
+					},
+
+					// Overview
+					overview: {
+						overview: '.postbox.dokan-postbox.overview-chart',
+						collapsibleButton: '.overview-chart .handle-actions button',
+						chart: '#line-chart',
+					},
+
+					// filterMenus
+
+					filterMenus: {
+						byDay: '//ul[contains(@class, "dokan-report-sub")]//a[contains(text(),"By Day")]',
+						byYear: '//ul[contains(@class, "dokan-report-sub")]//a[contains(text(),"By Year")]',
+						byVendor: '//ul[contains(@class, "dokan-report-sub")]//a[contains(text(),"By Vendor")]',
+					},
+
+					// By Year
+					filterByYearNumber: '.dokan-input',
+					// By Vendor
+					filterByStoreName: '.multiselect__tags',
+					filterByStoreNameInput: 'multiselect__input',
+					// calender
+					dateFrom: '(//form[@class="form-inline report-filter"]//input[@class="dokan-input hasDatepicker"])[1]',
+					dateTo: '(//form[@class="form-inline report-filter"]//input[@class="dokan-input hasDatepicker"])[2]',
+					// show
+					show: '//button[normalize-space()="Show"]',
+
+				},
+
 
 				// All Logs
 
-				// Search
-				searchByOrder: '#post-search-input',
-				clearSearch: '//a[contains(text(),"Clear")]',
-				exportLogs: '#export-all-logs',
-				// Filter
-				filterByStore: '#select2-filter-vendors-container',
-				filterByStoreValues: '.select2-results ul li',
-				filterByStatus: '#select2-filter-status-container',
-				filterByStatusValues: '.select2-results ul li',
-				filterByDate: '.form-control',
+				allLogs:{
 
-				// Order Details
-				orderId: '.column.order_id > a',
-				store: '.column.vendor_id > a',
-				orderTotal: '.column.order_total > div',
-				vendorEarning: '.column.vendor_earning > div',
-				commission: '.column.commission > div',
-				gatewayFee: '.column.dokan_gateway_fee > div',
-				shippingCost: '.column.shipping_total > div',
-				tax: '.column.tax_total > div',
-				orderStatus: 'td.column.status',
-				orderDate: 'td.column.date ',
+					// Filter
+					filters:{
+						filterByStore: '//span[@id="select2-filter-vendors-container"]/..//span[@class="select2-selection__arrow"]',
+						filterByStoreInput: '.select2-search__field',
+						// filterByStoreValues: '.select2-results ul li',
+						filterByStatus: '//span[@id="select2-filter-status-container"]/..//span[@class="select2-selection__arrow"]',
+						filterByStatusInput: '.select2-search__field',
+						// filterByStatusValues: '.select2-results ul li',
+						filterByDate: '.form-control',
+						clear: '//a[contains(text(),"Clear")]',
+					},
+
+					// Search
+					search: '#post-search-input',
+
+					// Logs
+					exportLogs: '#export-all-logs',
+
+					table: {
+						allLogsTable: '.reports-page table',
+						orderIdColumn: 'thead th.order_id',
+						storeColumn: 'thead th.vendor_id',
+						orderTotalColumn: 'thead th.order_total',
+						vendorEarningColumn: 'thead th.vendor_earning',
+						commissionColumn: 'thead th.commission',
+						gatewayFeeColumn: 'thead th.dokan_gateway_fee',
+						shippingColumn: 'thead th.shipping_total',
+						shippingTaxColumn: 'thead th.shipping_total_tax',
+						productTaxColumn: 'thead th.tax_total',
+						statusColumn: 'thead th.status',
+						DateColumn: 'thead th.date',
+					},
+
+					// Order Details
+					numberOfRowsFound: '.tablenav.top .displaying-num',
+					orderIdRow: (orderId: string) => `//a[normalize-space()='#${orderId}']/..//..`,
+					orderIdCell: (orderId: string) => `//a[normalize-space()='#${orderId}']/..`,
+					orderIdOrderTotal: (orderId: string) => `//a[normalize-space()='#${orderId}']/..//..//td[@class="column order_total"]//div`,
+					orderId: '.column.order_id > a',
+					store: '.column.vendor_id > a',
+					orderTotal: '.column.order_total > div',
+					vendorEarning: '.column.vendor_earning > div',
+					commission: '.column.commission > div',
+					gatewayFee: '.column.dokan_gateway_fee > div',
+					shippingCost: '.column.shipping_total > div',
+					tax: '.column.tax_total > div',
+					orderStatus: 'td.column.status',
+					orderDate: 'td.column.date ',
+
+				},
+
+
 			},
 
 			// Modules
@@ -1157,7 +1316,16 @@ export const selector = {
 					rejected: '//ul[@class="subsubsub"]//li//a[contains(text(),"Rejected")]',
 				},
 
-				verificationTable:'.verification-table',
+				// Table
+				table : {
+					verificationTable:'.verification-table',
+					storeNameColumn: '//thead//th[contains(text(),"Store Name")]',
+					photoIdColumn: '//thead//th[contains(text(),"Photo ID")]',
+					addressColumn: '//thead//th[contains(text(),"Address")]',
+					phoneNumberColumn: '//thead//th[contains(text(),"Phone Number")]',
+					companyColumn: '//thead//th[contains(text(),"Company")]',
+
+				},
 
 				vendorRow: (storeName: string) => `//a[normalize-space()="${storeName}"]/../../..`,
 
@@ -1216,7 +1384,17 @@ export const selector = {
 				// Search
 				search: '#post-search-input',
 
-				productAdvertisingTable: '#product_advertisement_list_table table',
+				// Table
+				table: {
+					productAdvertisingTable: '#product_advertisement_list_table table',
+					productNameColumn: 'thead th.product_title',
+					storeNameColumn: 'thead th.store',
+					createdViaColumn: 'thead th.created_via',
+					orderIDColumn: 'thead th.order_id',
+					costColumn: 'thead th.price',
+					expiresColumn: 'thead th.expires_at',
+					dateColumn: 'thead th.added',
+				},
 
 				advertisedProductCell: (productName: string) => `//a[normalize-space()="${productName}"]/../..`,
 				advertisedProductOrderIdCell: (orderId: number) => `//a[normalize-space()="${orderId}"]/../..`,
@@ -1260,7 +1438,16 @@ export const selector = {
 				search: '#post-search-input',
 
 				// Table
-				wholesaleCustomerTable: '.wholesale-customer-list table',
+				table: {
+					wholesaleCustomerTable: '.wholesale-customer-list table',
+					nameColumn: 'thead th.full_name',
+					emailColumn: 'thead th.email',
+					usernameColumn: 'thead th.username',
+					rolesColumn: 'thead th.role',
+					registeredColumn: 'thead th.registered',
+					statusColumn: 'thead th.wholesale_status',
+				},
+
 				wholesaleCustomerCell: (username: string) => `//td[contains(text(), '${username}')]/..//td[@class='column full_name']`,
 				wholesaleCustomerEdit: '.row-actions .edit',
 				wholesaleCustomerOrders: '.row-actions .orders',

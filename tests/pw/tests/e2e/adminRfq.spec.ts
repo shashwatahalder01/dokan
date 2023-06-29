@@ -20,7 +20,7 @@ test.afterAll(async ( ) => {
 	await page.close();
 });
 
-test.describe.skip('Request for quotation test', () => {
+test.describe('Request for quotation test', () => {
 
 	test.use({ storageState: data.auth.adminAuthFile });
 
