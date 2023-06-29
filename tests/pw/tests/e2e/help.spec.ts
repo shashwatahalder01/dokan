@@ -1,15 +1,15 @@
 import { test, Page } from '@playwright/test';
-import { AdminPage } from 'pages/adminPage';
+import { HelpPage } from 'pages/helpPage';
 import { data } from 'utils/testData';
 
 
-let adminPage: AdminPage;
+let helpPage: HelpPage;
 let page: Page;
 
 test.beforeAll(async ({ browser }) => {
 	const context = await browser.newContext({});
 	page = await context.newPage();
-	adminPage = new AdminPage(page);
+	helpPage = new HelpPage(page);
 });
 
 test.afterAll(async ( ) => {
@@ -21,11 +21,11 @@ test.describe('Dokan help test', () => {
 	test.use({ storageState: data.auth.adminAuthFile });
 
 	test('dokan help menu page is rendering properly @lite @pro @explo', async ( ) => {
-		await adminPage.adminHelpRenderProperly();
+		await helpPage.adminHelpRenderProperly();
 	});
 
 	test('dokan get help dropdown is rendering properly @lite @pro @explo', async ( ) => {
-		await adminPage.adminGetHelpDropdownRenderProperly();
+		await helpPage.adminGetHelpDropdownRenderProperly();
 	});
 
 });
