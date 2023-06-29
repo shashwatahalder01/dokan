@@ -40,7 +40,7 @@ export class CustomerPage extends BasePage {
 
 	// customer register
 	async customerRegister(customerInfo: any): Promise<void> {
-		const username: string = customerInfo.firstName() + customerInfo.lastName();
+		const username: string = (customerInfo.firstName() + customerInfo.lastName()).replace('\'', '');
 		await this.goToMyAccount();
 		const regIsVisible = await this.isVisible(selector.customer.cRegistration.regEmail);
 		if (!regIsVisible) {
