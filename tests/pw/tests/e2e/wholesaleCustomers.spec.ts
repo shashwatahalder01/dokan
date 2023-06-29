@@ -50,7 +50,7 @@ test.describe('Wholesale customers test', () => {
 		await wholesaleCustomersPage.viewWholesaleCustomerOrders(data.predefined.customerInfo.username1);
 	});
 
-	test.only('admin can delete wholesale customer  @pro', async ( ) => {
+	test('admin can delete wholesale customer  @pro', async ( ) => {
 		await wholesaleCustomersPage.updateWholesaleCustomer(data.predefined.customerInfo.username1, 'delete');
 	});
 
