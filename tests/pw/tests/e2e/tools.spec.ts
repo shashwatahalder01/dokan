@@ -1,18 +1,15 @@
 import { test, Page } from '@playwright/test';
-import { AdminPage } from 'pages/adminPage';
-import { ApiUtils } from 'utils/apiUtils';
+import { ToolsPage } from 'pages/toolsPage';
 import { data } from 'utils/testData';
 
 
-let adminPage: AdminPage;
+let toolsPage: ToolsPage;
 let page: Page;
-let apiUtils: ApiUtils;
 
-test.beforeAll(async ({ browser, request }) => {
+test.beforeAll(async ({ browser }) => {
 	const context = await browser.newContext({});
 	page = await context.newPage();
-	adminPage = new AdminPage(page);
-	apiUtils = new ApiUtils(request);
+	toolsPage = new ToolsPage(page);
 });
 
 test.afterAll(async ( ) => {
@@ -24,40 +21,39 @@ test.describe('Tools test', () => {
 	test.use({ storageState: data.auth.adminAuthFile });
 
 	test('dokan tools menu page is rendering properly @pro @explo', async ( ) => {
-		await adminPage.adminToolsRenderProperly();
+		await toolsPage.adminToolsRenderProperly();
 	});
 
 	test('admin can perform dokan page Installation @pro', async ( ) => {
-		await adminPage.dokanPageInstallation();
+		await toolsPage.dokanPageInstallation();
 	});
 
 	test('admin can regenerate order sync table @pro', async ( ) => {
-		await adminPage.regenerateOrderSyncTable();
+		await toolsPage.regenerateOrderSyncTable();
 	});
 
 	test('admin can check for duplicate orders @pro', async ( ) => {
-		await adminPage.checkForDuplicateOrders();
+		await toolsPage.checkForDuplicateOrders();
 	});
 
-	// test('admin can set dokan setup wizard @lite @pro', async ( ) => {
-	// 	await adminPage.setDokanSetupWizard(data.dokanSetupWizard);
-	// });
+	test.skip('admin can set dokan setup wizard @lite @pro', async ( ) => {
+		await toolsPage.setDokanSetupWizard(data.dokanSetupWizard);
+	});
 
 	test.skip('admin can regenerate variable product variations author IDs @pro', async ( ) => {
-		await adminPage.regenerateVariableProductVariationsAuthorIds();
+		await toolsPage.regenerateVariableProductVariationsAuthorIds();
 	});
 
-	//ToDo:
 	test.skip('admin can import dummy data @pro', async ( ) => {
-		await adminPage.importDummyData();
+		await toolsPage.importDummyData();
 	});
 
 	test.skip('admin can clear dummy data @pro', async ( ) => {
-		await adminPage.clearDummyData();
+		await toolsPage.clearDummyData();
 	});
 
 	test('admin can test distance matrix API @pro', async ( ) => {
-		await adminPage.testDistanceMatrixApi(data.tools.distanceMatrixApi);
+		await toolsPage.testDistanceMatrixApi(data.tools.distanceMatrixApi);
 	});
 
 });
