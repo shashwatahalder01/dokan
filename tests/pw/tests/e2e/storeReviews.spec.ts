@@ -1,18 +1,15 @@
 import { test, Page } from '@playwright/test';
-import { AdminPage } from 'pages/adminPage';
-import { ApiUtils } from 'utils/apiUtils';
+import { StoreReviewsPage } from 'pages/storeReviewsPage';
 import { data } from 'utils/testData';
 
 
-let adminPage: AdminPage;
+let storeReviewsPage: StoreReviewsPage;
 let page: Page;
-let apiUtils: ApiUtils;
 
-test.beforeAll(async ({ browser, request }) => {
+test.beforeAll(async ({ browser }) => {
 	const context = await browser.newContext({});
 	page = await context.newPage();
-	adminPage = new AdminPage(page);
-	apiUtils = new ApiUtils(request);
+	storeReviewsPage = new StoreReviewsPage(page);
 });
 
 test.afterAll(async ( ) => {
@@ -24,31 +21,31 @@ test.describe.skip('Store Reviews test', () => {
 	test.use({ storageState: data.auth.adminAuthFile });
 
 	test('dokan store reviews menu page is rendering properly @pro @explo', async ( ) => {
-		await adminPage.adminStoreReviewsRenderProperly();
+		await storeReviewsPage.adminStoreReviewsRenderProperly();
 	});
 
 	test('admin can filter store reviews by vendor @pro', async ( ) => {
-		await adminPage.filterStoreReviews(data.storeReview.filter.byVendor);
+		await storeReviewsPage.filterStoreReviews(data.storeReview.filter.byVendor);
 	});
 
 	test('admin can edit store review @pro', async ( ) => {
-		await adminPage.editStoreReview(data.storeReview);
+		await storeReviewsPage.editStoreReview(data.storeReview);
 	});
 
 	test('admin can delete store review @pro', async ( ) => {
-		await adminPage.deleteStoreReview(data.storeReview);
+		await storeReviewsPage.deleteStoreReview(data.storeReview);
 	});
 
 	// test('admin can restore deleted store review @pro', async ( ) => {
-	// 	await adminPage.restoreStoreReview(data.storeReview);
+	// 	await storeReviewsPage.restoreStoreReview(data.storeReview);
 	// });
 
 	// test('admin can permanently delete store review @pro', async ( ) => {
-	// 	await adminPage.permanentlyDeleteStoreReview(data.storeReview);
+	// 	await storeReviewsPage.permanentlyDeleteStoreReview(data.storeReview);
 	// });
 
 	test('admin can perform store reviews bulk action @pro', async ( ) => {
-		await adminPage.storeReviewsBulkAction('trash');
+		await storeReviewsPage.storeReviewsBulkAction('trash');
 	});
 
 });

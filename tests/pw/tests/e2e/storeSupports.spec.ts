@@ -1,18 +1,15 @@
 import { test, Page } from '@playwright/test';
-import { AdminPage } from 'pages/adminPage';
-import { ApiUtils } from 'utils/apiUtils';
+import { StoreSupportsPage } from 'pages/storeSupportsPage';
 import { data } from 'utils/testData';
 
 
-let adminPage: AdminPage;
+let storeSupportsPage: StoreSupportsPage;
 let page: Page;
-let apiUtils: ApiUtils;
 
-test.beforeAll(async ({ browser, request }) => {
+test.beforeAll(async ({ browser }) => {
 	const context = await browser.newContext({});
 	page = await context.newPage();
-	adminPage = new AdminPage(page);
-	apiUtils = new ApiUtils(request);
+	storeSupportsPage = new StoreSupportsPage(page);
 });
 
 test.afterAll(async ( ) => {
@@ -24,35 +21,35 @@ test.describe.skip('Store Support test', () => {
 	test.use({ storageState: data.auth.adminAuthFile });
 
 	test('dokan store support menu page is rendering properly @pro @explo', async ( ) => {
-		await adminPage.adminStoreSupportRenderProperly();
+		await storeSupportsPage.adminStoreSupportRenderProperly();
 	});
 
 	test('admin can search support ticket @pro', async ( ) => {
-		await adminPage.searchSupportTicket(data.predefined.vendorStores.vendor1);
+		await storeSupportsPage.searchSupportTicket(data.predefined.vendorStores.vendor1);
 	});
 
 	test('admin can filter store support by vendor @pro', async ( ) => {
-		await adminPage.filterStoreSupports(data.storeReview.filter.byVendor);
+		await storeSupportsPage.filterStoreSupports(data.storeReview.filter.byVendor);
 	});
 
 	// test('admin can close store support @pro', async ( ) => {
-	// 	await adminPage.editStoreSupport(data.storesupport);
+	// 	await storeSupportsPage.editStoreSupport(data.storesupport);
 	// });
 
 	// test('admin can reopen close store support @pro', async ( ) => {
-	// 	await adminPage.deleteStoresupport(data.storesupport);
+	// 	await storeSupportsPage.deleteStoresupport(data.storesupport);
 	// });
 
 	// test('admin can restore deleted store support @pro', async ( ) => {
-	// 	await adminPage.restoreStoresupport(data.storesupport);
+	// 	await storeSupportsPage.restoreStoresupport(data.storesupport);
 	// });
 
 	// test('admin can permanently delete store support @pro', async ( ) => {
-	// 	await adminPage.permanentlyDeleteStoresupport(data.storesupport);
+	// 	await storeSupportsPage.permanentlyDeleteStoresupport(data.storesupport);
 	// });
 
 	test('admin can perform store support bulk action @pro', async ( ) => {
-		await adminPage.storeSupportBulkAction('trash');
+		await storeSupportsPage.storeSupportBulkAction('trash');
 	});
 
 });
