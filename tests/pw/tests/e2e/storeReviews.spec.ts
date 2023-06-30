@@ -24,12 +24,11 @@ test.describe('Store Reviews test', () => {
 		await storeReviewsPage.adminStoreReviewsRenderProperly();
 	});
 
-	test('admin can filter store reviews by vendor @pro', async ( ) => {
-		await storeReviewsPage.filterStoreReviews(data.storeReview.filter.byVendor);
-	});
-
 	test('admin can edit store review @pro', async ( ) => {
 		await storeReviewsPage.editStoreReview(data.storeReview);
+	});
+	test('admin can filter store reviews by vendor @pro', async ( ) => {
+		await storeReviewsPage.filterStoreReviews(data.storeReview.filter.byVendor);
 	});
 
 	test('admin can delete store review @pro', async ( ) => {

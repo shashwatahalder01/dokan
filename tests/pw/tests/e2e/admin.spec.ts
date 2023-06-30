@@ -163,7 +163,7 @@ test.describe('Admin functionality test', () => {
 		await apiUtils.updatePlugin('dokan-pro/dokan-pro', { status:'inactive' }, payloads.adminAuth);
 	});
 
-	test('dokan notice  @lite @pro', async ( ) => {
+	test('dokan notice @lite @pro', async ( ) => {
 		await adminPage.dokanNotice();
 	});
 

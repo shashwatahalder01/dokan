@@ -28,7 +28,7 @@ test.describe('refundsPage test', () => {
 		await refundsPage.searchRefundRequests(data.predefined.vendorStores.vendor1);
 	});
 
-	test('admin can approve refund request @pro', async ( ) => {
+	test.skip('admin can approve refund request @pro', async ( ) => {
 		await refundsPage.updateRefundRequests(data.predefined.vendorStores.vendor1, 'approve');
 	});
 

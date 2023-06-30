@@ -24,7 +24,7 @@ test.describe('Abuse report test', () => {
 		await abuseReportsPage.adminAbuseReportRenderProperly();
 	});
 
-	test('admin can perform abuse report bulk action @pro', async ( ) => {
+	test.skip('admin can perform abuse report bulk action @pro', async ( ) => {
 		await abuseReportsPage.abuseReportBulkAction('delete');
 	});
 

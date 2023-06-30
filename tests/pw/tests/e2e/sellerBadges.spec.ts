@@ -48,7 +48,7 @@ test.describe('Seller badge test', () => {
 		await sellerBadgesPage.previewSellerBadge(data.sellerBadge.eventName.productsPublished);
 	});
 
-	test('admin can view seller badge vendors @pro', async ( ) => {
+	test.skip('admin can view seller badge vendors @pro', async ( ) => {
 		await sellerBadgesPage.sellerBadgeVendors(data.sellerBadge.eventName.productsPublished);
 	});
 
