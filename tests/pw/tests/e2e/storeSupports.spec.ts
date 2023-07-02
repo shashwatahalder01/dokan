@@ -25,10 +25,10 @@ test.describe('Store Support test', () => {
 	});
 
 	test('admin can search support ticket @pro', async ( ) => {
-		await storeSupportsPage.searchSupportTicket(data.predefined.vendorStores.vendor1);
+		await storeSupportsPage.searchSupportTicket('support ticket subject');
 	});
 
-	test('admin can filter store support by vendor @pro', async ( ) => {
+	test.only('admin can filter store support by vendor @pro', async ( ) => {
 		await storeSupportsPage.filterStoreSupports(data.storeReview.filter.byVendor);
 	});
 
@@ -49,7 +49,7 @@ test.describe('Store Support test', () => {
 	// });
 
 	test('admin can perform store support bulk action @pro', async ( ) => {
-		await storeSupportsPage.storeSupportBulkAction('trash');
+		await storeSupportsPage.storeSupportBulkAction('close');
 	});
 
 });

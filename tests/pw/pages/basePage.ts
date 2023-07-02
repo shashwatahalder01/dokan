@@ -189,7 +189,7 @@ export class BasePage {
 		]);
 	}
 	// click & wait for navigation to complete
-	async clickAndWaitForUrl(selector: string, url: string): Promise<void> {
+	async clickAndWaitForUrl(url: string, selector: string ): Promise<void> {
 		await Promise.all([
 			this.page.waitForURL(url, { waitUntil: 'networkidle' }),
 			this.page.locator(selector).click(),

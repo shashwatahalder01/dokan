@@ -24,12 +24,12 @@ test.describe('Settings test', () => {
 		await settingsPage.adminSettingsRenderProperly();
 	});
 
-	test('admin can search settings @lite @pro', async ( ) => {
-		await settingsPage.searchSettings('Selling Options');
-	});
-
 	test('admin can scroll to top on settings @lite @pro', async ( ) => {
 		await settingsPage.scrollToTopSettings();
+	});
+
+	test('admin can search settings @lite @pro', async ( ) => {
+		await settingsPage.searchSettings('Selling Options');
 	});
 
 	// dokan settings

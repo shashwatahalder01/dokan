@@ -185,7 +185,7 @@ export const selector = {
 
 			// dokan notice
 			notice : {
-				notice: '.dokan-admin-notices',
+				notice: '.notice .dokan-admin-notices',
 				closeNotice: '.close-notice',
 				// slider: '.slide-notice',
 				sliderPrev: '.slide-notice .prev',
@@ -622,7 +622,7 @@ export const selector = {
 				// Bulk Actions
 				bulkActions: {
 					selectAll: 'thead .manage-column',
-					selectAction: '.tablenav.top #bulk-action-selector-top',  // trash
+					selectAction: '.tablenav.top #bulk-action-selector-top',  // close
 					applyAction: '.tablenav.top .button.action',
 
 				},
@@ -649,6 +649,8 @@ export const selector = {
 					actionColumn: 'thead th.action',
 				},
 
+				supportTicketCell: (title: string) => `//strong[contains(text(), '${title}')]/../..`,
+				supportTicketLink: (title: string) => `//strong[contains(text(), '${title}')]/..`,
 
 			},
 

@@ -37,13 +37,13 @@ export class StoreSupportsPage extends AdminPage {
 	}
 
 	// search support ticket
-	async searchSupportTicket(vendorName: string){
+	async searchSupportTicket(title: string){
 		await this.goIfNotThere(data.subUrls.backend.dokan.dokanStoreSupport);
 
 		await this.clearInputField(selector.admin.dokan.storeSupport.searchTicket); // TODO: clear by cross, or use type instead of fill  //TODO: is it necessary
 
-		await this.typeAndWaitForResponse(data.subUrls.backend.supportTicket, selector.admin.dokan.storeSupport.searchTicket, vendorName);
-		await expect(this.page.locator(selector.admin.dokan.vendors.vendorCell(vendorName))).toBeVisible();
+		await this.typeAndWaitForResponse(data.subUrls.backend.supportTicket, selector.admin.dokan.storeSupport.searchTicket, title);
+		await expect(this.page.locator(selector.admin.dokan.storeSupport.supportTicketLink(title))).toBeVisible();
 	}
 
 	// store support bulk action
@@ -63,10 +63,10 @@ export class StoreSupportsPage extends AdminPage {
 		// await this.clickIfVisible(selector.admin.dokan.storeReviews.filters.filterClear);
 		//TODO: multiple filter exists
 		//filter by vendor
-		await this.click(selector.admin.dokan.storeReviews.filters.filterByVendor);
-		await this.typeAndWaitForResponse(data.subUrls.backend.stores, selector.admin.dokan.storeReviews.filters.filterInput, vendorName);
-		await this.pressAndWaitForResponse(data.subUrls.backend.storeReviews, data.key.enter);
-
+		await this.click(selector.admin.dokan.storeSupport.filters.filterByVendors);
+		await this.typeAndWaitForResponse(data.subUrls.backend.stores, selector.admin.dokan.storeSupport.filters.filterInput, vendorName);
+		await this.press(data.key.enter);
+		await this.clickAndWaitForResponse(data.subUrls.backend.dokan.dokanStoreSupport, selector.admin.dokan.storeSupport.filters.filterButton);
 		//TODO: add assertion
 	}
 

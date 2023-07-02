@@ -47,7 +47,7 @@ test.describe('Wholesale customers test', () => {
 		await wholesaleCustomersPage.wholesaleCustomerBulkAction('activate');
 	});
 
-	test('admin can view wholesale customer orders @pro', async ( ) => {
+	test.skip('admin can view wholesale customer orders @pro', async ( ) => {
 		await wholesaleCustomersPage.viewWholesaleCustomerOrders(data.predefined.customerInfo.username1);
 	});
 

@@ -780,6 +780,7 @@ export const data = {
 			wcAddNewProducts: 'wp-admin/post-new.php?post_type=product',
 			wcAddNewCategories: 'wp-admin/edit-tags.php?taxonomy=product_cat&post_type=product',
 			wcAddNewAttributes: 'wp-admin/edit.php?post_type=product&page=product_attributes',
+			wcOrders: 'wp-admin/edit.php?post_type=shop_order',
 			permalinks: 'wp-admin/options-permalink.php',
 			general: 'wp-admin/options-general.php',
 			plugins: 'wp-admin/plugins.php',
