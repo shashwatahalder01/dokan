@@ -70,7 +70,7 @@ export class ProductAdvertisingPage extends AdminPage {
 		}
 	}
 
-	// search advertised product
+	// update advertised product
 	async updateAdvertisedProduct(productName: string, action: string){
 		await this.searchAdvertisedProduct(productName);
 

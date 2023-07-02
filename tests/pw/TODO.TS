@@ -34,7 +34,7 @@
 //TODO:
 //TODO:
 //TODO:
-//TODO: add wait for navigation to add wait for responses or build a new onw merging both *****************
+//TODO: add wait for navigation to add wait for responses or build a new one merging both *****************
 //TODO: add more ui assertions to all tests
 //TODO:
 //TODO:

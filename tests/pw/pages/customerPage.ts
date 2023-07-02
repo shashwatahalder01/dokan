@@ -1,10 +1,10 @@
 import { expect, type Page } from '@playwright/test';
-import { BasePage } from './basePage';
-import { LoginPage } from './loginPage';
-import { AdminPage } from './adminPage';
-import { selector } from './selectors';
-import { helpers } from '../utils/helpers';
-import { data } from '../utils/testData';
+import { BasePage } from 'pages/basePage';
+import { LoginPage } from 'pages/loginPage';
+import { AdminPage } from 'pages/adminPage';
+import { selector } from 'pages/selectors';
+import { helpers } from 'utils/helpers';
+import { data } from 'utils/testData';
 
 export class CustomerPage extends BasePage {
 

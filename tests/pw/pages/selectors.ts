@@ -1409,9 +1409,8 @@ export const selector = {
 					selectStoreInput: '#filter-vendors',
 					selectProductDropdown: '//label[normalize-space()="Select Product"]/..//div[@class="multiselect__select"]',
 					selectProductInput: '#filter-products',
+					addReverseWithdrawalEntry:'#reverse-withdrawal-entry',
 					addNew: '.modal-footer button',
-					addedSuccessfully: '',
-
 				},
 
 			},

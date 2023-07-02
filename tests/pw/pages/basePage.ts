@@ -43,6 +43,7 @@ export class BasePage {
 	// goto subUrl
 	async goto(subPath: string): Promise<void> {
 		// let subPath1: string = await this.createUrl(subPath)
+		// await this.page.goto(subPath);
 		await this.page.goto(subPath, { waitUntil: 'networkidle' });
 	}
 
