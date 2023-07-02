@@ -36,7 +36,7 @@ export const dbData = {
 		generalSettings: {
 
 			//site settings
-			site_options: '', //TODO : WHY EMPTY
+			site_options: '', //TODO : WHY EMPTY , value exists find out what
 			admin_access: 'off',
 			custom_store_url: 'store',
 			setup_wizard_logo_url: '',
@@ -53,7 +53,7 @@ export const dbData = {
 			enabled_address_on_reg: 'off',
 			enable_tc_on_reg: 'on',
 			enable_single_seller_mode: 'off',
-			store_category_type: 'none'
+			store_category_type: 'multiple' // none, multiple
 		},
 
 		sellingSettings:  {

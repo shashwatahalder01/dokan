@@ -36,6 +36,7 @@ export class AbuseReportsPage extends AdminPage {
 		await this.goIfNotThere(data.subUrls.backend.dokan.dokanAbuseReports);
 
 		await this.click(selector.admin.dokan.abuseReports.bulkActions.selectAll);
+		//TODO: check data exists or not for all bulk action
 		await this.selectByValue(selector.admin.dokan.abuseReports.bulkActions.selectAction, action);
 		await this.clickAndWaitForResponse(data.subUrls.backend.abuseReports, selector.admin.dokan.abuseReports.bulkActions.applyAction);
 	}

@@ -187,7 +187,7 @@ export const selector = {
 			notice : {
 				notice: '.dokan-admin-notices',
 				closeNotice: '.close-notice',
-				slider: '.slide-notice',
+				// slider: '.slide-notice',
 				sliderPrev: '.slide-notice .prev',
 				sliderNext: '.slide-notice .next'
 			},
@@ -593,7 +593,7 @@ export const selector = {
 
 
 				storeReviewCell: (title: string) => `//td//a[contains(text(), '${title}')]/../..`,
-				storeReviewEdit: '.row-actions .cancel',
+				storeReviewEdit: '.row-actions .edit',
 				storeReviewDelete: '.row-actions .trash',
 				storeReviewPermanentlyDelete: '.row-actions .delete',
 
@@ -1896,8 +1896,8 @@ export const selector = {
 					licenseSection: '.appsero-license-settings.appsero-license-section',
 					licenseKeyInput: '.license-input-fields .license-input-key input',
 					activateLicense: '//button[contains(text(),"Activate License")]',
-					errorNotice: '.notice-error',
-				}
+				},
+				errorNotice: '.notice-error',
 			},
 
 			// Dokan Setup Wizard

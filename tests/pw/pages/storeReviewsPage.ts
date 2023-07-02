@@ -44,9 +44,15 @@ export class StoreReviewsPage extends AdminPage {
 
 	// filter store reviews
 	async filterStoreReviews(vendorName: string){
-		await this.goIfNotThere(data.subUrls.backend.dokan.dokanStoreReviews);
-
 		await this.clickIfVisible(selector.admin.dokan.storeReviews.filters.filterClear);
+		await this.goto(data.subUrls.backend.dokan.dokanStoreReviews);
+		//TODO: fix this clear filter not works
+		// await this.goIfNotThere(data.subUrls.backend.dokan.dokanStoreReviews);
+
+		// const clearIsVisible = await this.isVisible(selector.admin.dokan.storeReviews.filters.filterClear);
+		// if(clearIsVisible) {
+		// 	await this.clickAndWaitForResponse(data.subUrls.backend.storeReviews, selector.admin.dokan.storeReviews.filters.filterClear);
+		// }
 
 		//filter by vendor
 		await this.click(selector.admin.dokan.storeReviews.filters.filterByVendor);
