@@ -1290,7 +1290,7 @@ export const data = {
 
 		update:{
 			rating: '4',
-			title: 'test store review title',
+			title: 'updated test store review title',
 			content: 'updated test store review content',
 		},
 

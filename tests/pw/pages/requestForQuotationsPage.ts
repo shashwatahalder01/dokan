@@ -85,8 +85,7 @@ export class RequestForQuotationsPage extends AdminPage {
 
 	// edit quote rule
 	async editQuoteRule(rule: any){
-		await this.goto(data.subUrls.backend.dokan.dokanRequestForQuoteRules);
-		// await this.goIfNotThere(data.subUrls.backend.dokan.dokanRequestForQuoteRules);//Todo: fix
+		await this.goIfNotThere(data.subUrls.backend.dokan.dokanRequestForQuoteRules);
 
 		await this.hover(selector.admin.dokan.requestForQuotation.quoteRules.quoteRulesCell(rule.title));
 		// TODO: need to wait for multiple response
@@ -103,8 +102,7 @@ export class RequestForQuotationsPage extends AdminPage {
 
 	// update quote rule
 	async updateQuoteRule(quoteTitle: string, action: string){
-		await this.goto(data.subUrls.backend.dokan.dokanRequestForQuoteRules);
-		// await this.goIfNotThere(data.subUrls.backend.dokan.dokanRequestForQuoteRules);//Todo: fix
+		await this.goIfNotThere(data.subUrls.backend.dokan.dokanRequestForQuoteRules);
 
 		switch (action) {
 

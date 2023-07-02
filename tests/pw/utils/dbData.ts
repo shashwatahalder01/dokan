@@ -53,7 +53,7 @@ export const dbData = {
 			enabled_address_on_reg: 'off',
 			enable_tc_on_reg: 'on',
 			enable_single_seller_mode: 'off',
-			store_category_type: 'multiple'   // none, multiple
+			store_category_type: 'none'
 		},
 
 		sellingSettings:  {

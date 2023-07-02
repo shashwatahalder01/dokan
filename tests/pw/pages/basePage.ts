@@ -43,7 +43,7 @@ export class BasePage {
 	// goto subUrl
 	async goto(subPath: string): Promise<void> {
 		// let subPath1: string = await this.createUrl(subPath)
-		await this.page.goto(subPath, { waitUntil: 'networkidle' });
+		await this.page.goto(subPath);
 	}
 
 	// go forward
@@ -78,7 +78,7 @@ export class BasePage {
 
 	// goto subPath if not already there
 	async goIfNotThere(subPath: string): Promise<void> {
-		if (!(this.isCurrentUrl(subPath))) {
+		if (!(await this.isCurrentUrl(subPath))) {
 			const url = this.createUrl(subPath);
 			await this.page.goto(url, { waitUntil: 'networkidle' });
 			const currentUrl = this.getCurrentUrl();

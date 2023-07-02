@@ -1,15 +1,18 @@
 import { test, Page } from '@playwright/test';
 import { WholesaleCustomersPage } from 'pages/wholesaleCustomersPage';
+import { CustomerPage } from 'pages/customerPage';
 import { data } from 'utils/testData';
 
 
 let wholesaleCustomersPage: WholesaleCustomersPage;
+let customerPage: CustomerPage;
 let page: Page;
 
 test.beforeAll(async ({ browser }) => {
 	const context = await browser.newContext({});
 	page = await context.newPage();
 	wholesaleCustomersPage = new WholesaleCustomersPage(page);
+	customerPage = new CustomerPage(page);
 });
 
 test.afterAll(async ( ) => {
@@ -36,7 +39,6 @@ test.describe('Wholesale customers test', () => {
 		await wholesaleCustomersPage.updateWholesaleCustomer(data.predefined.customerInfo.username1, 'disable');
 	});
 
-
 	test.skip('admin can edit wholesale customer @pro', async ( ) => {
 		await wholesaleCustomersPage.editWholesaleCustomer(data.predefined.customerInfo.username1);
 	});
@@ -45,14 +47,25 @@ test.describe('Wholesale customers test', () => {
 		await wholesaleCustomersPage.wholesaleCustomerBulkAction('activate');
 	});
 
-
 	test('admin can view wholesale customer orders @pro', async ( ) => {
 		await wholesaleCustomersPage.viewWholesaleCustomerOrders(data.predefined.customerInfo.username1);
 	});
 
-	test('admin can delete wholesale customer  @pro', async ( ) => {
+	test('admin can delete wholesale customer @pro', async ( ) => {
 		await wholesaleCustomersPage.updateWholesaleCustomer(data.predefined.customerInfo.username1, 'delete');
 	});
+
+	test.skip('customer can requst for become a wholesale customer', async () => {
+		await customerPage.customerRegister(data.customer.customerInfo);
+		await wholesaleCustomersPage.customerRequestForBecomeWholesaleCustomer(); // TODO
+	});
+
+	test.skip('customer can become a wholesale customer', async () => {
+		await customerPage.customerRegister(data.customer.customerInfo);
+		await wholesaleCustomersPage.customerBecomeWholesaleCustomer();
+	});
+
+
 
 
 });

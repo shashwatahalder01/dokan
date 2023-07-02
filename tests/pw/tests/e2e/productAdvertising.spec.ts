@@ -25,7 +25,7 @@ test.describe('Product Advertising test', () => {
 	});
 
 	test.skip('product advertisement payment product exists @pro', async ( ) => {
-		//todo
+		//todo: move to beforeall
 	});
 
 	test('admin can add product advertisement @pro', async ( ) => {

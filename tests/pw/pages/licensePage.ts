@@ -30,7 +30,7 @@ export class LicensePage extends AdminPage {
 		if(type === 'correct') {
 			//TODO:
 		} else {
-			await expect(this.page.locator(selector.admin.dokan.license.errorNotice)).toContainText('Invalid License Key');
+			await expect(this.page.locator(selector.admin.dokan.license.activateSection.errorNotice)).toContainText('Invalid License Key');
 		}
 	}
 
