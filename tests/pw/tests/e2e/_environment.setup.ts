@@ -335,17 +335,14 @@ setup.describe('setup dokan settings', () => {
 // });
 
 
-const { VENDOR_ID, CUSTOMER_ID } = process.env;
-
 setup.describe('setup testPrerequisites', () => {
 
 	setup.use({ extraHTTPHeaders: { Authorization: payloads.aAuth } });
 
-
-	setup('create wholesale customer @pro', async ({ request }) => {
-		const apiUtils = new ApiUtils(request);
-		await apiUtils.createWholesaleCustomer(payloads.createCustomer1);
-	});
+	// setup('create wholesale customer @pro', async ({ request }) => {
+	// 	const apiUtils = new ApiUtils(request);
+	// 	await apiUtils.createWholesaleCustomer(payloads.createCustomer1);
+	// });
 
 	setup('create test vendor refund @pro', async ({ request }) => {
 		const apiUtils = new ApiUtils(request);
