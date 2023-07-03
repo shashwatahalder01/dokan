@@ -1,15 +1,19 @@
 import { test, Page } from '@playwright/test';
 import { ProductAdvertisingPage } from 'pages/productAdvertisingPage';
+import { ApiUtils } from 'utils/apiUtils';
 import { data } from 'utils/testData';
+import { payloads } from 'utils/payloads';
 
 
 let productAdvertisingPage: ProductAdvertisingPage;
-let page: Page;
+let aPage: Page;
+let apiUtils: ApiUtils;
 
-test.beforeAll(async ({ browser }) => {
-	const context = await browser.newContext({});
-	page = await context.newPage();
-	productAdvertisingPage = new ProductAdvertisingPage(page);
+test.beforeAll(async ({ browser, request }) => {
+	const adminContext = await browser.newContext({ storageState: data.auth.adminAuthFile });
+	aPage = await adminContext.newPage();
+	productAdvertisingPage = new ProductAdvertisingPage(aPage);
+	apiUtils = new ApiUtils(request);
 });
 
 test.afterAll(async ( ) => {
@@ -18,7 +22,7 @@ test.afterAll(async ( ) => {
 
 test.describe('Product Advertising test', () => {
 
-	test.use({ storageState: data.auth.adminAuthFile });
+	// test.use({ storageState: data.auth.adminAuthFile });
 
 	test('dokan product advertising menu page is rendering properly @pro @explo', async ( ) => {
 		await productAdvertisingPage.adminProductAdvertisingRenderProperly();
@@ -26,6 +30,11 @@ test.describe('Product Advertising test', () => {
 
 	test.skip('product advertisement payment product exists @pro', async ( ) => {
 		//todo: move to beforeall
+	});
+
+	test('product advertisement payment product exists @pro', async ( ) => {
+		const product = await apiUtils.productExistsOrNot('Reverse Withdrawal Payment',  payloads.adminAuth);
+		expect(product).toBeTruthy();
 	});
 
 	test('admin can add product advertisement @pro', async ( ) => {

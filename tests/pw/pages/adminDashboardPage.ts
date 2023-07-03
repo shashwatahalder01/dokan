@@ -1,6 +1,7 @@
 import { expect, type Page } from '@playwright/test';
 import { AdminPage } from 'pages/adminPage';
 import { selector } from 'pages/selectors';
+import { helpers } from 'utils/helpers';
 import { data } from 'utils/testData';
 
 
@@ -39,18 +40,17 @@ export class AdminDashboardPage extends AdminPage {
 	}
 
 	// at a glance value
-	async dokanAtAGlanceValueAccuracy(atAGlanceValues:any){
+	async dokanAtAGlanceValueAccuracy(atAGlanceValues: any){
 		await this.goIfNotThere(data.subUrls.backend.dokan.dokan);
-		const netSales = await this.getElementText(selector.admin.dokan.dashboard.atAGlance.netSalesThisMonth);
-		const commissionEarned = await this.getElementText(selector.admin.dokan.dashboard.atAGlance.commissionEarned);
+		const netSales = await this.getElementText(selector.admin.dokan.dashboard.atAGlance.netSalesThisMonth) as string;
+		const commissionEarned = await this.getElementText(selector.admin.dokan.dashboard.atAGlance.commissionEarned) as string;
 
-		expect(Number(netSales?.replace('$', ''))).toBe(Number(atAGlanceValues.sales.this_month));
-		expect(Number(commissionEarned?.replace('$', ''))).toBe(Number(atAGlanceValues.earning.this_month));
+		expect(Number(helpers.price(netSales))).toBe(Number(atAGlanceValues.sales.this_month));
+		expect(Number(helpers.price(commissionEarned))).toBe(Number(atAGlanceValues.earning.this_month));
 		await expect(this.page.locator(selector.admin.dokan.dashboard.atAGlance.signupThisMonth)).toContainText(atAGlanceValues.vendors.this_month + ' Vendor');
 		await expect(this.page.locator(selector.admin.dokan.dashboard.atAGlance.vendorAwaitingApproval)).toContainText(atAGlanceValues.vendors.inactive + ' Vendor');
 		await expect(this.page.locator(selector.admin.dokan.dashboard.atAGlance.productCreatedThisMonth)).toContainText(atAGlanceValues.products.this_month + ' Products');
 		await expect(this.page.locator(selector.admin.dokan.dashboard.atAGlance.withdrawAwaitingApproval)).toContainText(atAGlanceValues.withdraw.pending + ' Withdrawals');
-
 	}
 
 	// add dokan news subscriber

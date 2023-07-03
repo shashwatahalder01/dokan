@@ -283,8 +283,9 @@ export const selector = {
 
 				// Filters
 				filters:{
-					filterByVendor: '.select2-selection__arrow',
+					filterByVendor: '//select[@id="filter-vendors"]/..//span[@class="select2-selection__arrow"]',
 					filterInput: '.select2-search.select2-search--dropdown .select2-search__field',
+					clearFilter: '//select[@id="filter-vendors"]/..//button',
 				},
 
 				// Table
@@ -301,11 +302,11 @@ export const selector = {
 
 				},
 
-				withdrawCell: (username: string) => `//td//a[contains(text(), '${username}')]/../..`,
+				withdrawCell: (storeName: string) => `//td//a[contains(text(), '${storeName}')]/../..`,
 				withdrawDelete: '.row-actions .trash',
 				withdrawCancel: '.row-actions .cancel',
-				withdrawApprove:(username: string) => `//td//a[contains(text(), '${username}')]/../../..//button[@title='Approve Request']`,
-				withdrawAddNote:(username: string) => `//td//a[contains(text(), '${username}')]/../../..//button[@title='Add Note']`,
+				withdrawApprove:(storeName: string) => `//td//a[contains(text(), '${storeName}')]/../../..//button[@title='Approve Request']`,
+				withdrawAddNote:(storeName: string) => `//td//a[contains(text(), '${storeName}')]/../../..//button[@title='Add Note']`,
 				withdrawNoteModalClose: '.dokan-modal-content .modal-header button',
 				addNote: '.dokan-modal-content .modal-body textarea',
 				updateNote: '.dokan-modal-content .modal-footer button',
@@ -332,9 +333,10 @@ export const selector = {
 
 				// Filters
 				filters: {
-					allStoresDropdown:'//div[@class="multiselect__select"]',
-					//TODO: add date-range filter locator
+					filterByStore:'.multiselect__select',
+					filterInput: '.multiselect__input',
 					clearFilter: '//button[normalize-space()="Clear"]',
+					filteredResult: (storeName: string) => `//span[contains(text(), '${storeName}')]/..`,
 				},
 
 				// Table
@@ -344,6 +346,8 @@ export const selector = {
 					balanceColumn: 'thead th.balance',
 					lastPaymentDateColumn: 'thead th.last_payment_date',
 				},
+
+				revereWithdrawCell: (storeName: string) => `//td//a[contains(text(), '${storeName}')]/../..`,
 
 			},
 

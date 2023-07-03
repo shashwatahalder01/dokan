@@ -240,6 +240,7 @@ export class ApiUtils {
 	 * product api methods
 	 */
 
+
 	// get all products
 	async getAllProducts(auth? : auth): Promise<responseBody> {
 		const [, responseBody] = await this.get(endPoints.getAllProducts, { params: { per_page:100 }, headers: auth });
@@ -279,6 +280,13 @@ export class ApiUtils {
 		}
 		const [, responseBody] = await this.put(endPoints.wc.updateBatchProducts, { data: { delete: allProductIds }, headers: payloads.adminAuth });
 		return responseBody;
+	}
+
+	// get product exists or not
+	async productExistsOrNot(productName: string, auth? : auth): Promise<boolean> {
+		const allProducts = await this.getAllProducts(auth);
+		const res = allProducts.find((o: { name: unknown; }) => o.name === productName);
+		return res ? res.id : false;
 	}
 
 	/**

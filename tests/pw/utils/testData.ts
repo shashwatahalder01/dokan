@@ -753,7 +753,7 @@ export const data = {
 				dokanLiteModules: 'wp-admin/admin.php?page=dokan#/pro-modules',
 				dokanProFeatures: 'wp-admin/admin.php?page=dokan#/premium',
 				// lite and pro
-				dokanWithdraw: 'wp-admin/admin.php?page=dokan#/withdraw',
+				dokanWithdraw: 'wp-admin/admin.php?page=dokan#/withdraw?status=pending', //TODO: if needed make separate for status pending
 				dokanReverseWithdraw: 'wp-admin/admin.php?page=dokan#/reverse-withdrawal',
 				dokanVendors: 'wp-admin/admin.php?page=dokan#/vendors',
 				dokanAbuseReports: 'wp-admin/admin.php?page=dokan#/abuse-reports',
@@ -787,6 +787,7 @@ export const data = {
 			products: 'dokan/v1/products',
 			stores: 'dokan/v1/stores',
 			withdraws: 'dokan/v1/withdraw',
+			reverseWithdraws: 'dokan/v1/reverse-withdrawal',
 			abuseReports: 'dokan/v1/abuse-reports',
 			logs: 'dokan/v1/admin/logs',
 			announcements: 'dokan/v1/announcement',

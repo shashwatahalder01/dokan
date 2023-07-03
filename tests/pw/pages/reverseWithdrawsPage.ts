@@ -21,10 +21,26 @@ export class ReverseWithdrawsPage extends AdminPage {
 		// fact cards elements are visible
 		await this.multipleElementVisible(selector.admin.dokan.reverseWithdraw.reverseWithdrawFactCards);
 
-		//TODO: add filters
+		// filter elements are visible
+		// eslint-disable-next-line @typescript-eslint/no-unused-vars
+		const { filterInput, clearFilter, filteredResult,  ...filters } = selector.admin.dokan.reverseWithdraw.filters;
+		await this.multipleElementVisible(filters);
 
 		// reverse withdraw table elements are visible
 		await this.multipleElementVisible(selector.admin.dokan.reverseWithdraw.table);
+	}
+
+	// filter reverse withdraw
+	async filterReverseWithdraws(vendorName: string){
+		await this.goIfNotThere(data.subUrls.backend.dokan.dokanReverseWithdraw);
+
+		await this.clickIfVisible(selector.admin.dokan.reverseWithdraw.filters.clearFilter);
+
+		await this.click(selector.admin.dokan.reverseWithdraw.filters.filterByStore);
+		await this.typeAndWaitForResponse(data.subUrls.backend.reverseWithdraws, selector.admin.dokan.reverseWithdraw.filters.filterInput, vendorName);
+		await this.clickAndWaitForResponse(data.subUrls.backend.reverseWithdraws, selector.admin.dokan.reverseWithdraw.filters.filteredResult(vendorName));
+		await expect(this.page.locator(selector.admin.dokan.reverseWithdraw.revereWithdrawCell(vendorName))).toBeVisible();
+
 	}
 
 }

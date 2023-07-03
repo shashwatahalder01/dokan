@@ -77,8 +77,7 @@ export class WholesaleCustomersPage extends AdminPage {
 
 		case 'delete' :
 			await this.hover(selector.admin.dokan.wholesaleCustomer.wholesaleCustomerCell(wholesaleCustomer));
-			this.acceptAlert();
-			await this.clickAndWaitForResponse(data.subUrls.backend.wholesaleCustomers, selector.admin.dokan.wholesaleCustomer.wholesaleCustomerRemove);
+			await this.clickAndAcceptAndWaitForResponse(data.subUrls.backend.wholesaleCustomers, selector.admin.dokan.wholesaleCustomer.wholesaleCustomerRemove);
 			break;
 
 		default :

@@ -138,7 +138,7 @@ export default defineConfig({
 		trace: 'on-first-retry', /* Record trace only when retrying a test for the first time. */
 		screenshot: 'only-on-failure', /* Capture screenshot after each test failure. */
 		video: 'on-first-retry', /* Record video only when retrying a test for the first time. */
-		// viewport: { width: 1280, height: 720 }, /* Size of viewport */
+		viewport: { width:1920, height:1080 }, /* Size of viewport */
 		launchOptions: { slowMo: process.env.SLOWMO ? Number(process.env.SLOWMO) * 1000 : 0, /* whether to slow down test execution by provided seconds */
 		},
 	},

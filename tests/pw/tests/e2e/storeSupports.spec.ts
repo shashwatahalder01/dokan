@@ -28,7 +28,7 @@ test.describe('Store Support test', () => {
 		await storeSupportsPage.searchSupportTicket('support ticket subject');
 	});
 
-	test.only('admin can filter store support by vendor @pro', async ( ) => {
+	test('admin can filter store support by vendor @pro', async ( ) => {
 		await storeSupportsPage.filterStoreSupports(data.storeReview.filter.byVendor);
 	});
 

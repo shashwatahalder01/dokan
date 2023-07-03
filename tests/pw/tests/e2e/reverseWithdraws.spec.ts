@@ -1,4 +1,4 @@
-import { test, Page } from '@playwright/test';
+import { test, Page, expect } from '@playwright/test';
 import { ReverseWithdrawsPage } from 'pages/reverseWithdrawsPage';
 import { ApiUtils } from 'utils/apiUtils';
 import { data } from 'utils/testData';
@@ -6,41 +6,42 @@ import { payloads } from 'utils/payloads';
 
 
 let reverseWithdrawsPage: ReverseWithdrawsPage;
-let page: Page;
+let aPage: Page;
 let apiUtils: ApiUtils;
 
 test.beforeAll(async ({ browser, request }) => {
-	const context = await browser.newContext({});
-	page = await context.newPage();
-	reverseWithdrawsPage = new ReverseWithdrawsPage(page);
+	const adminContext = await browser.newContext({ storageState: data.auth.adminAuthFile });
+	aPage = await adminContext.newPage();
+	reverseWithdrawsPage = new ReverseWithdrawsPage(aPage);
 	apiUtils = new ApiUtils(request);
-	// const minimumWithdrawLimit = await apiUtils.getMinimumWithdrawLimit();
-	// await apiUtils.createOrderWithStatus(payloads.createProduct(), payloads.createOrder, 'wc-completed');
-	// await apiUtils.createWithdraw({ ...payloads.createWithdraw, amount: minimumWithdrawLimit });
+	await apiUtils.createOrderWithStatus(payloads.createProduct(), payloads.createOrderCod, 'wc-completed', payloads.vendorAuth);
 });
 
 test.afterAll(async ( ) => {
-	await page.close();
+	await aPage.close();
 });
 
 test.describe('Reverse withdraw test', () => {
 
-	test.use({ storageState: data.auth.adminAuthFile });
+	// test.use({ storageState: data.auth.adminAuthFile });
 
 	test('dokan admin reverse withdraw menu page is rendering properly @lite @pro @explo', async ( ) => {
 		await reverseWithdrawsPage.adminReverseWithdrawRenderProperly();
 	});
 
-	test.skip('reverse Withdraw payment product exists @lite @pro', async ( ) => {
-		//todo
+	test('reverse Withdraw payment product exists @lite @pro', async ( ) => {
+		const product = await apiUtils.productExistsOrNot('Reverse Withdrawal Payment',  payloads.adminAuth);
+		expect(product).toBeTruthy();
 	});
 
-	test.skip('filter reverse withdraws by store @lite @pro', async ( ) => {
-		//todo
+	test('filter reverse withdraws by store @lite @pro', async ( ) => {
+		await reverseWithdrawsPage.filterReverseWithdraws(data.predefined.vendorStores.vendor1);
 	});
 
-	test.skip('filter reverse withdraws by calender @lite @pro', async ( ) => {
-		//todo
-	});
+	// test.skip('filter reverse withdraws by calender @lite @pro', async ( ) => {
+	// 	//todo
+	// });
+
+	//TODO: add vendor tests
 
 });

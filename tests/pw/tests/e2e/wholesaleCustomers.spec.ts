@@ -4,15 +4,30 @@ import { CustomerPage } from 'pages/customerPage';
 import { data } from 'utils/testData';
 
 
+let wholesaleAdmin: WholesaleCustomersPage;
+let wholesaleCustomer: WholesaleCustomersPage;
+
+
 let wholesaleCustomersPage: WholesaleCustomersPage;
 let customerPage: CustomerPage;
 let page: Page;
 
 test.beforeAll(async ({ browser }) => {
-	const context = await browser.newContext({});
-	page = await context.newPage();
-	wholesaleCustomersPage = new WholesaleCustomersPage(page);
-	customerPage = new CustomerPage(page);
+	// const context = await browser.newContext({});
+	// page = await context.newPage();
+	// wholesaleCustomersPage = new WholesaleCustomersPage(page);
+	// customerPage = new CustomerPage(page);
+
+
+	//TODO: apply this for multiple user role
+	const adminContext = await browser.newContext({ storageState: data.auth.adminAuthFile });
+	const admin = await adminContext.newPage();
+	wholesaleAdmin = new WholesaleCustomersPage(admin);
+
+	const customerContext = await browser.newContext({ storageState: data.auth.customerAuthFile });
+	const customer = await customerContext.newPage();
+	customerPage = new CustomerPage(customer);
+	wholesaleCustomer = new WholesaleCustomersPage(customer);
 });
 
 test.afterAll(async ( ) => {
@@ -55,17 +70,17 @@ test.describe('Wholesale customers test', () => {
 		await wholesaleCustomersPage.updateWholesaleCustomer(data.predefined.customerInfo.username1, 'delete');
 	});
 
-	test.skip('customer can requst for become a wholesale customer', async () => {
+	test.skip('customer can request for become a wholesale customer', async () => {
 		await customerPage.customerRegister(data.customer.customerInfo);
 		await wholesaleCustomersPage.customerRequestForBecomeWholesaleCustomer(); // TODO
 	});
 
-	test.skip('customer can become a wholesale customer', async () => {
+	test.only('customer can become a wholesale customer', async () => {
+		// await customerPage.customerRegister(data.customer.customerInfo);
+		// await wholesaleCustomersPage.customerBecomeWholesaleCustomer();
 		await customerPage.customerRegister(data.customer.customerInfo);
-		await wholesaleCustomersPage.customerBecomeWholesaleCustomer();
+		await wholesaleAdmin.customerBecomeWholesaleCustomer();
 	});
-
-
 
 
 });

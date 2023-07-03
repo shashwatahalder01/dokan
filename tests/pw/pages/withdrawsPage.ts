@@ -27,7 +27,7 @@ export class WithdrawsPage extends AdminPage {
 
 		// filter elements are visible
 		// eslint-disable-next-line @typescript-eslint/no-unused-vars
-		const { filterInput, ...filters } = selector.admin.dokan.withdraw.filters;
+		const { filterInput, clearFilter, ...filters } = selector.admin.dokan.withdraw.filters;
 		await this.multipleElementVisible(filters);
 
 		// withdraw table elements are visible
@@ -48,10 +48,13 @@ export class WithdrawsPage extends AdminPage {
 	async filterWithdraws(vendorName: string){
 		await this.goIfNotThere(data.subUrls.backend.dokan.dokanWithdraw);
 
+		await this.clickIfVisible(selector.admin.dokan.withdraw.filters.clearFilter);
+
 		await this.click(selector.admin.dokan.withdraw.filters.filterByVendor);
 		await this.typeAndWaitForResponse(data.subUrls.backend.stores, selector.admin.dokan.withdraw.filters.filterInput, vendorName);
 		await this.pressAndWaitForResponse(data.subUrls.backend.withdraws, data.key.enter);
 		await expect(this.page.locator(selector.admin.dokan.withdraw.withdrawCell(vendorName))).toBeVisible();
+
 	}
 
 	// add note to withdraw request
@@ -80,6 +83,8 @@ export class WithdrawsPage extends AdminPage {
 			break;
 
 		case 'delete' :
+			await this.hover(selector.admin.dokan.withdraw.withdrawCell(vendorName));
+			// this.acceptAlert();
 			await this.clickAndAcceptAndWaitForResponse(data.subUrls.backend.withdraws, selector.admin.dokan.withdraw.withdrawDelete);
 			break;
 
