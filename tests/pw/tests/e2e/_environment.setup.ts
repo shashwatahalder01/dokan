@@ -347,27 +347,10 @@ setup.describe('setup testPrerequisites', () => {
 		await apiUtils.createWholesaleCustomer(payloads.createCustomer1);
 	});
 
-	setup('create support ticket @pro', async ({ request }) => {
-		const apiUtils = new ApiUtils(request);
-		await apiUtils.createSupportTicket({ ...payloads.createSupportTicket, author: CUSTOMER_ID, store_id: VENDOR_ID }, payloads.adminAuth );
-	});
-
-	setup('create store review @pro', async ({ request }) => {
-		const apiUtils = new ApiUtils(request);
-		await apiUtils.createStoreReview(VENDOR_ID, payloads.createStoreReview, payloads.customerAuth);
-	});
-
 	setup('create test vendor refund @pro', async ({ request }) => {
 		const apiUtils = new ApiUtils(request);
 		const [, orderResponseBody,] = await apiUtils.createOrderWithStatus(payloads.createProduct(), payloads.createOrder, 'wc-processing', payloads.vendorAuth);
 		await dbUtils.createRefund(orderResponseBody);
 	});
-
-	setup('create abuse report @pro', async ({ request }) => {
-		const apiUtils = new ApiUtils(request);
-		const[, productId] = await apiUtils.createProduct(payloads.createProduct(), payloads.vendorAuth);
-		await dbUtils.createAbuseReport(dbData.dokan.createAbuseReport, productId, VENDOR_ID, CUSTOMER_ID);
-	});
-
 
 });

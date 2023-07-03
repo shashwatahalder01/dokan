@@ -5,9 +5,7 @@ import { data } from 'utils/testData';
 import { payloads } from 'utils/payloads';
 
 
-// const { VENDOR_ID } = process.env;
-
-const VENDOR_ID = '3';
+const { VENDOR_ID } = process.env;
 
 
 let storeReviewsPage: StoreReviewsPage;

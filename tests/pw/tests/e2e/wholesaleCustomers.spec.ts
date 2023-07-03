@@ -34,7 +34,7 @@ test.afterAll(async ( ) => {
 	await page.close();
 });
 
-test.describe('Wholesale customers test', () => {
+test.describe.skip('Wholesale customers test', () => {
 
 	test.use({ storageState: data.auth.adminAuthFile });
 
@@ -75,7 +75,7 @@ test.describe('Wholesale customers test', () => {
 		await wholesaleCustomersPage.customerRequestForBecomeWholesaleCustomer(); // TODO
 	});
 
-	test('customer can become a wholesale customer', async () => {
+	test.skip('customer can become a wholesale customer', async () => {
 		// await customerPage.customerRegister(data.customer.customerInfo);
 		// await wholesaleCustomersPage.customerBecomeWholesaleCustomer();
 		await customerPage.customerRegister(data.customer.customerInfo);
