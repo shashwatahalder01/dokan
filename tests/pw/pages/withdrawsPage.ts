@@ -48,7 +48,7 @@ export class WithdrawsPage extends AdminPage {
 	async filterWithdraws(vendorName: string){
 		await this.goIfNotThere(data.subUrls.backend.dokan.dokanWithdraw);
 
-		await this.clickIfVisible(selector.admin.dokan.withdraw.filters.clearFilter);
+		await this.clickIfVisible(selector.admin.dokan.withdraw.filters.clearFilter); //TODO: add wait for response also add to all
 
 		await this.click(selector.admin.dokan.withdraw.filters.filterByVendor);
 		await this.typeAndWaitForResponse(data.subUrls.backend.stores, selector.admin.dokan.withdraw.filters.filterInput, vendorName);

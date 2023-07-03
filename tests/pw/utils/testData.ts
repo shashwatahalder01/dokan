@@ -784,6 +784,7 @@ export const data = {
 			permalinks: 'wp-admin/options-permalink.php',
 			general: 'wp-admin/options-general.php',
 			plugins: 'wp-admin/plugins.php',
+			//TODO: move to api
 			products: 'dokan/v1/products',
 			stores: 'dokan/v1/stores',
 			withdraws: 'dokan/v1/withdraw',
@@ -857,6 +858,34 @@ export const data = {
 			bankTransfer: 'dashboard/settings/payment-manage-bank',
 			customPayment: 'dashboard/settings/payment-manage-dokan_custom',
 			skrill: 'dashboard/settings/payment-manage-skrill',
+		},
+
+		api: {
+			dokan:{
+				products: 'dokan/v1/products',
+				stores: 'dokan/v1/stores',
+				withdraws: 'dokan/v1/withdraw',
+				reverseWithdraws: 'dokan/v1/reverse-withdrawal',
+				abuseReports: 'dokan/v1/abuse-reports',
+				logs: 'dokan/v1/admin/logs',
+				announcements: 'dokan/v1/announcement',
+				dummyData: 'dokan/v1/dummy-data',
+				refunds: 'dokan/v1/refunds',
+				modules: 'dokan/v1/admin/modules',
+				storeReviews: 'dokan/v1/store-reviews',
+				productAdvertising: 'dokan/v1/product_adv',
+				wholesaleCustomers: 'dokan/v1/wholesale/customers',
+				supportTicket: 'dokan/v1/admin/support-ticket',
+				quotes: 'dokan/v1/request-for-quote',
+				quoteRules: 'dokan/v1/request-for-quote/quote-rule',
+				sellerBadge: 'dokan/v1/seller-badge',
+				sellerBadgeEvent: 'dokan/v1/seller-badge/events',
+			},
+
+			wc: {
+				wcProducts: 'wc/v3/products',
+			},
+
 		},
 
 		ajax: '/admin-ajax.php',

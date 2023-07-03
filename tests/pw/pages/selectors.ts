@@ -557,6 +557,23 @@ export const selector = {
 					reportedAtColumn: 'thead th.reported_at',
 				},
 
+				numberOfRowsFound: '.tablenav.top .displaying-num',
+				abuseReportCell: (input: string) => `//a[contains(text(), '${input}')]/../..`,  // abuse-reason, product-name, vendor-name
+				abuseReportFirstCell: '(//a[@href="#view-report"])[1]',
+
+
+				abuseReportModal:{
+					modalTitle: '.modal-header h1',
+					closeModal: '.modal-close',
+					reportedProduct: '//strong[normalize-space()="Reported Product:"]',
+					reason: '//strong[normalize-space()="Reason:"]',
+					description: '//strong[normalize-space()="Description:"]',
+					reportedBy: '//strong[normalize-space()="Reported by:"]',
+					reportedAt: '//strong[normalize-space()="Reported At:"]',
+					productVendor: '//strong[normalize-space()="Product Vendor:"]',
+
+				},
+
 			},
 
 			// Store Reviews
@@ -597,9 +614,15 @@ export const selector = {
 
 
 				storeReviewCell: (title: string) => `//td//a[contains(text(), '${title}')]/../..`,
-				storeReviewEdit: '.row-actions .edit',
-				storeReviewDelete: '.row-actions .trash',
-				storeReviewPermanentlyDelete: '.row-actions .delete',
+				storeReviewFirstCell: '(//td[@class="column title"]//a[@href="#"]/../..)[1]',
+				storeReviewEdit: '(//a[normalize-space()="Edit"])[1]',
+				storeReviewDelete: '(//a[normalize-space()="Trash"])[1]',
+				storeReviewRestore: '(//a[normalize-space()="Restore"])[1]',
+				storeReviewPermanentlyDelete: '(//a[normalize-space()="Permanent Delete"])[1]',
+				// storeReviewEdit: '.row-actions .edit',
+				// storeReviewDelete: '.row-actions .trash',
+				// storeReviewRestore: '.row-actions .restore',
+				// storeReviewPermanentlyDelete: '.row-actions .delete',
 
 				editReview:{
 					rating: (star: string) => `(//span[@class='vue-star-rating-pointer vue-star-rating-star'])[${star}]`,

@@ -31,7 +31,7 @@ export class BasePage {
 
 	// wait for load state
 	async waitForLoadState(): Promise<void> {
-		return await this.page.waitForLoadState();
+		return await this.page.waitForLoadState( 'domcontentloaded');
 	}
 
 	// wait for url to be loaded
@@ -691,6 +691,14 @@ export class BasePage {
 	// select by number
 	async selectByNumber(selector: string, value: number): Promise<string[]> {
 		return await this.page.selectOption(selector, { index: value });
+	}
+
+	async selectByLabelAndWaitForResponse(subUrl: string, selector: string, value: string, code = 200): Promise<Response> {
+		const [response] = await Promise.all([
+			this.page.waitForResponse((resp) => resp.url().includes(subUrl) && resp.status() === code),
+			this.page.selectOption(selector, { label: value })
+		]);
+		return response;
 	}
 
 	// // set value based on select options text

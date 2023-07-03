@@ -1,4 +1,4 @@
-import { test, Page } from '@playwright/test';
+import { test, Page, expect } from '@playwright/test';
 import { ProductAdvertisingPage } from 'pages/productAdvertisingPage';
 import { ApiUtils } from 'utils/apiUtils';
 import { data } from 'utils/testData';
@@ -17,7 +17,7 @@ test.beforeAll(async ({ browser, request }) => {
 });
 
 test.afterAll(async ( ) => {
-	await page.close();
+	await aPage.close();
 });
 
 test.describe('Product Advertising test', () => {
@@ -28,12 +28,8 @@ test.describe('Product Advertising test', () => {
 		await productAdvertisingPage.adminProductAdvertisingRenderProperly();
 	});
 
-	test.skip('product advertisement payment product exists @pro', async ( ) => {
-		//todo: move to beforeall
-	});
-
 	test('product advertisement payment product exists @pro', async ( ) => {
-		const product = await apiUtils.productExistsOrNot('Reverse Withdrawal Payment',  payloads.adminAuth);
+		const product = await apiUtils.productExistsOrNot('Product Advertisement Payment',  payloads.adminAuth);
 		expect(product).toBeTruthy();
 	});
 

@@ -31,24 +31,57 @@ export class AbuseReportsPage extends AdminPage {
 
 	}
 
+	// filter abuse reports
+	async abuseReportDetails(){
+		await this.goIfNotThere(data.subUrls.backend.dokan.dokanAbuseReports);
+		await this.click(selector.admin.dokan.abuseReports.abuseReportFirstCell);
+
+		// abuse report modal elements are visible
+		await this.multipleElementVisible(selector.admin.dokan.abuseReports.abuseReportModal);
+		await this.click(selector.admin.dokan.abuseReports.abuseReportModal.closeModal);
+	}
+
+
+	// filter abuse reports
+	async filterAbuseReports(input: string, action: string){
+		await this.goIfNotThere(data.subUrls.backend.dokan.dokanAbuseReports);
+
+		switch(action){
+
+		case 'by-reason' :
+			await this.selectByLabelAndWaitForResponse(data.subUrls.backend.abuseReports, selector.admin.dokan.abuseReports.filters.filterByAbuseReason, input);
+			break;
+
+		case 'by-product' :
+			await this.click(selector.admin.dokan.abuseReports.filters.filterByProduct);
+			await this.typeAndWaitForResponse(data.subUrls.api.wc.wcProducts, selector.admin.dokan.abuseReports.filters.filterInput, input);
+			await this.pressAndWaitForResponse(data.subUrls.backend.abuseReports, data.key.enter);
+			break;
+
+		case 'by-vendor' :
+			await this.click(selector.admin.dokan.abuseReports.filters.filterByVendors);
+			await this.typeAndWaitForResponse(data.subUrls.backend.stores, selector.admin.dokan.abuseReports.filters.filterInput, input);
+			await this.pressAndWaitForResponse(data.subUrls.backend.abuseReports, data.key.enter);
+			break;
+
+		default :
+			break;
+
+		}
+
+		const count = (await this.getElementText(selector.admin.dokan.abuseReports.numberOfRowsFound))?.split(' ')[0];
+		expect(Number(count)).not.toBe(0);
+
+	}
+
 	// abuse report bulk action
 	async abuseReportBulkAction(action: string){
 		await this.goIfNotThere(data.subUrls.backend.dokan.dokanAbuseReports);
 
 		await this.click(selector.admin.dokan.abuseReports.bulkActions.selectAll);
-		//TODO: check data exists or not for all bulk action
 		await this.selectByValue(selector.admin.dokan.abuseReports.bulkActions.selectAction, action);
-		await this.clickAndWaitForResponse(data.subUrls.backend.abuseReports, selector.admin.dokan.abuseReports.bulkActions.applyAction);
+		await this.clickAndAcceptAndWaitForResponse(data.subUrls.backend.abuseReports, selector.admin.dokan.abuseReports.bulkActions.applyAction);
 	}
-
-	// filter abuse reports
-	// async filterAbuseReports(vendorName){
-	// 	await this.goIfNotThere(data.subUrls.backend.dokan.dokanAbuseReports);
-
-	// 	await this.click(selector.admin.dokan.abuseReports.filters.filterByAbuseReason);
-	// 	await this.typeAndWaitForResponse(data.subUrls.backend.abuseReports, selector.admin.dokan.withdraw.filters.filterByVendorInput, vendorName);
-	// 	await this.pressAndWaitForResponse(data.subUrls.backend.abuseReports, data.key.enter);
-	// }
 
 
 }

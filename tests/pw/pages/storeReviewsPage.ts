@@ -33,22 +33,13 @@ export class StoreReviewsPage extends AdminPage {
 		await this.multipleElementVisible(selector.admin.dokan.storeReviews.table);
 	}
 
-	// store reviews bulk action
-	async storeReviewsBulkAction(action: string){
-		await this.goIfNotThere(data.subUrls.backend.dokan.dokanStoreReviews);
-
-		await this.click(selector.admin.dokan.storeReviews.bulkActions.selectAll);
-		await this.selectByValue(selector.admin.dokan.storeReviews.bulkActions.selectAction, action);
-		await this.clickAndWaitForResponse(data.subUrls.backend.storeReviews, selector.admin.dokan.storeReviews.bulkActions.applyAction);
-	}
 
 	// filter store reviews
 	async filterStoreReviews(vendorName: string){
-		await this.clickIfVisible(selector.admin.dokan.storeReviews.filters.filterClear);
+		// await this.clickIfVisible(selector.admin.dokan.storeReviews.filters.filterClear);
 		await this.goto(data.subUrls.backend.dokan.dokanStoreReviews);
 		//TODO: fix this clear filter not works
 		// await this.goIfNotThere(data.subUrls.backend.dokan.dokanStoreReviews);
-
 		// const clearIsVisible = await this.isVisible(selector.admin.dokan.storeReviews.filters.filterClear);
 		// if(clearIsVisible) {
 		// 	await this.clickAndWaitForResponse(data.subUrls.backend.storeReviews, selector.admin.dokan.storeReviews.filters.filterClear);
@@ -62,9 +53,9 @@ export class StoreReviewsPage extends AdminPage {
 
 	// edit store review
 	async editStoreReview(review: any){
-		await this.filterStoreReviews(review.filter.byVendor);
-
-		await this.hover(selector.admin.dokan.storeReviews.storeReviewCell(review.create.title));
+		await this.goto(data.subUrls.backend.dokan.dokanStoreReviews);
+		// await this.goIfNotThere(data.subUrls.backend.dokan.dokanStoreReviews);
+		await this.hover(selector.admin.dokan.storeReviews.storeReviewFirstCell);
 		await this.click(selector.admin.dokan.storeReviews.storeReviewEdit);
 
 		await this.click(selector.admin.dokan.storeReviews.editReview.rating(review.update.rating));
@@ -74,12 +65,43 @@ export class StoreReviewsPage extends AdminPage {
 		await this.clickAndWaitForResponse(data.subUrls.backend.storeReviews, selector.admin.dokan.storeReviews.editReview.update);
 	}
 
-	// edit store review
-	async deleteStoreReview(review: any){
-		await this.filterStoreReviews(review.filter.byVendor);
-
-		await this.hover(selector.admin.dokan.storeReviews.storeReviewCell(review.update.title));
+	// delete store review
+	async deleteStoreReview(){
+		await this.goto(data.subUrls.backend.dokan.dokanStoreReviews);
+		// await this.goIfNotThere(data.subUrls.backend.dokan.dokanStoreReviews);
+		await this.hover(selector.admin.dokan.storeReviews.storeReviewFirstCell);
 		await this.clickAndWaitForResponse(data.subUrls.backend.storeReviews, selector.admin.dokan.storeReviews.storeReviewDelete);
+		//TODO: also wait for content to load
+	}
+
+	// restore store review
+	async restoreStoreReview(){
+		await this.goto(data.subUrls.backend.dokan.dokanStoreReviews);
+		// await this.goIfNotThere(data.subUrls.backend.dokan.dokanStoreReviews);
+		await this.clickAndWaitForResponse(data.subUrls.backend.storeReviews, selector.admin.dokan.storeReviews.navTabs.trash);
+
+		await this.hover(selector.admin.dokan.storeReviews.storeReviewFirstCell);
+		await this.clickAndWaitForResponse(data.subUrls.backend.storeReviews, selector.admin.dokan.storeReviews.storeReviewRestore);
+	}
+
+	// permanently delete store review
+	async permanentlyDeleteStoreReview(){
+		await this.goto(data.subUrls.backend.dokan.dokanStoreReviews);
+		// await this.goIfNotThere(data.subUrls.backend.dokan.dokanStoreReviews);
+		await this.clickAndWaitForResponse(data.subUrls.backend.storeReviews, selector.admin.dokan.storeReviews.navTabs.trash);
+
+		await this.hover(selector.admin.dokan.storeReviews.storeReviewFirstCell);
+		await this.clickAndWaitForResponse(data.subUrls.backend.storeReviews, selector.admin.dokan.storeReviews.storeReviewPermanentlyDelete);
+	}
+
+	// store reviews bulk action
+	async storeReviewsBulkAction(action: string){
+		await this.goto(data.subUrls.backend.dokan.dokanStoreReviews);
+		// await this.goIfNotThere(data.subUrls.backend.dokan.dokanStoreReviews); //Todo: fix this
+
+		await this.click(selector.admin.dokan.storeReviews.bulkActions.selectAll);
+		await this.selectByValue(selector.admin.dokan.storeReviews.bulkActions.selectAction, action);
+		await this.clickAndWaitForResponse(data.subUrls.backend.storeReviews, selector.admin.dokan.storeReviews.bulkActions.applyAction);
 	}
 
 }

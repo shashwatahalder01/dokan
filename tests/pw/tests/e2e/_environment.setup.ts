@@ -341,12 +341,6 @@ setup.describe('setup testPrerequisites', () => {
 
 	setup.use({ extraHTTPHeaders: { Authorization: payloads.aAuth } });
 
-	setup('add test vendor withdraws @pro', async ({ request }) => {
-		const apiUtils = new ApiUtils(request);
-		const minimumWithdrawLimit = await apiUtils.getMinimumWithdrawLimit(payloads.vendorAuth);
-		await apiUtils.createOrderWithStatus(payloads.createProduct(), payloads.createOrder, 'wc-completed', payloads.vendorAuth);
-		await apiUtils.createWithdraw({ ...payloads.createWithdraw, amount: minimumWithdrawLimit }, payloads.vendorAuth);
-	});
 
 	setup('create wholesale customer @pro', async ({ request }) => {
 		const apiUtils = new ApiUtils(request);

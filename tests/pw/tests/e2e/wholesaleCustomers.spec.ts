@@ -75,7 +75,7 @@ test.describe('Wholesale customers test', () => {
 		await wholesaleCustomersPage.customerRequestForBecomeWholesaleCustomer(); // TODO
 	});
 
-	test.only('customer can become a wholesale customer', async () => {
+	test('customer can become a wholesale customer', async () => {
 		// await customerPage.customerRegister(data.customer.customerInfo);
 		// await wholesaleCustomersPage.customerBecomeWholesaleCustomer();
 		await customerPage.customerRegister(data.customer.customerInfo);
