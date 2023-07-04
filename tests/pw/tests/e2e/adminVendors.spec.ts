@@ -6,23 +6,23 @@ import { payloads } from 'utils/payloads';
 
 
 let adminPage: AdminPage;
-let page: Page;
+let aPage: Page;
 let apiUtils: ApiUtils;
 
 test.beforeAll(async ({ browser, request }) => {
-	const context = await browser.newContext({});
-	page = await context.newPage();
-	adminPage = new AdminPage(page);
+	const adminContext = await browser.newContext({ storageState: data.auth.adminAuthFile });
+	aPage = await adminContext.newPage();
+	adminPage = new AdminPage(aPage);
 	apiUtils = new ApiUtils(request);
 });
 
 test.afterAll(async ( ) => {
-	await page.close();
+	await aPage.close();
 });
 
 test.describe('Vendors test', () => {
 
-	test.use({ storageState: data.auth.adminAuthFile });
+	// test.use({ storageState: data.auth.adminAuthFile });
 
 	test('admin vendors menu page is rendering properly @lite @pro @explo', async ( ) => {
 		await adminPage.adminVendorsRenderProperly();

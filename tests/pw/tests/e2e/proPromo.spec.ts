@@ -6,27 +6,28 @@ import { payloads } from 'utils/payloads';
 
 
 let proPromoPage: ProPromoPage;
-let page: Page;
+let aPage: Page;
+let apiUtils: ApiUtils;
 
-test.beforeAll(async ({ browser }) => {
-	const context = await browser.newContext({});
-	page = await context.newPage();
-	proPromoPage = new ProPromoPage(page);
+test.beforeAll(async ({ browser, request }) => {
+	const adminContext = await browser.newContext({ storageState: data.auth.adminAuthFile });
+	aPage = await adminContext.newPage();
+	proPromoPage = new ProPromoPage(aPage);
+	apiUtils = new ApiUtils(request);
 });
 
 test.afterAll(async ( ) => {
-	await page.close();
+	await aPage.close();
 });
 
 test.describe.skip('Dokan pro feature promo test', () => {
 
-	test.use({ storageState: data.auth.adminAuthFile });
+	// test.use({ storageState: data.auth.adminAuthFile });
 
-	test('dokan pro features promo @lite', async ({ request } ) => {
-		const apiUtils = new ApiUtils(request);
-		// await apiUtils.updatePlugin('dokan-pro/dokan-pro', { status:'inactive' }, payloads.adminAuth);
+	test('dokan pro features promo @lite', async ( ) => {
+		await apiUtils.updatePlugin('dokan-pro/dokan-pro', { status:'inactive' }, payloads.adminAuth);
 		await proPromoPage.dokanProPromo();
-		// await apiUtils.updatePlugin('dokan-pro/dokan-pro', { status:'inactive' }, payloads.adminAuth);
+		await apiUtils.updatePlugin('dokan-pro/dokan-pro', { status:'active' }, payloads.adminAuth);
 	});
 
 });

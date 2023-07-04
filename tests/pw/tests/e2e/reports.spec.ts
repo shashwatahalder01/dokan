@@ -1,24 +1,30 @@
 import { test, Page } from '@playwright/test';
 import { ReportsPage } from 'pages/reportsPage';
+import { ApiUtils } from 'utils/apiUtils';
 import { data } from 'utils/testData';
+import { payloads } from 'utils/payloads';
 
 
 let reportsPage: ReportsPage;
-let page: Page;
+let aPage: Page;
+let apiUtils: ApiUtils;
+let orderId: string;
 
-test.beforeAll(async ({ browser }) => {
-	const context = await browser.newContext({});
-	page = await context.newPage();
-	reportsPage = new ReportsPage(page);
+test.beforeAll(async ({ browser, request }) => {
+	const adminContext = await browser.newContext({ storageState: data.auth.adminAuthFile });
+	aPage = await adminContext.newPage();
+	reportsPage = new ReportsPage(aPage);
+	apiUtils = new ApiUtils(request);
+	orderId = String(await apiUtils.getOrderId(payloads.adminAuth));
 });
 
 test.afterAll(async ( ) => {
-	await page.close();
+	await aPage.close();
 });
 
 test.describe('Reports test', () => {
 
-	test.use({ storageState: data.auth.adminAuthFile });
+	// test.use({ storageState: data.auth.adminAuthFile });
 
 	// reports
 
@@ -32,12 +38,12 @@ test.describe('Reports test', () => {
 		await reportsPage.adminAllLogsRenderProperly();
 	});
 
-	test.skip('admin can search all logs @pro', async ( ) => {
-		await reportsPage.searchAllLogs('470');
+	test('admin can search all logs @pro', async ( ) => {
+		await reportsPage.searchAllLogs(orderId);
 	});
 
-	test.skip('admin can export all logs @pro', async ( ) => {
-		await reportsPage.exportAllLogs('470');
+	test('admin can export all logs @pro', async ( ) => {
+		await reportsPage.exportAllLogs(orderId);
 	});
 
 	test('admin can filter all logs by store name @pro', async ( ) => {

@@ -1,24 +1,28 @@
 import { test, Page } from '@playwright/test';
 import { AnnouncementsPage } from 'pages/announcementsPage';
+import { ApiUtils } from 'utils/apiUtils';
 import { data } from 'utils/testData';
+import { payloads } from 'utils/payloads';
 
 
 let announcementsPage: AnnouncementsPage;
-let page: Page;
+let aPage: Page;
+let apiUtils: ApiUtils;
 
-test.beforeAll(async ({ browser }) => {
-	const context = await browser.newContext({});
-	page = await context.newPage();
-	announcementsPage = new AnnouncementsPage(page);
+test.beforeAll(async ({ browser, request }) => {
+	const adminContext = await browser.newContext({ storageState: data.auth.adminAuthFile });
+	aPage = await adminContext.newPage();
+	announcementsPage = new AnnouncementsPage(aPage);
+	apiUtils = new ApiUtils(request);
 });
 
 test.afterAll(async ( ) => {
-	await page.close();
+	await aPage.close();
 });
 
 test.describe('Announcements test', () => {
 
-	test.use({ storageState: data.auth.adminAuthFile });
+	// test.use({ storageState: data.auth.adminAuthFile });
 
 	test('dokan announcements menu page is rendering properly @pro @explo', async ( ) => {
 		await announcementsPage.adminAnnouncementsRenderProperly();

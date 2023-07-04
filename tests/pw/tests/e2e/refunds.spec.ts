@@ -1,26 +1,33 @@
 import { test, Page } from '@playwright/test';
 import { RefundsPage } from 'pages/refundsPage';
+import { ApiUtils } from 'utils/apiUtils';
+import { dbUtils } from 'utils/dbUtils';
 import { data } from 'utils/testData';
+import { payloads } from 'utils/payloads';
 
 
 let refundsPage: RefundsPage;
-let page: Page;
+let aPage: Page;
+let apiUtils: ApiUtils;
 
-test.beforeAll(async ({ browser }) => {
-	const context = await browser.newContext({});
-	page = await context.newPage();
-	refundsPage = new RefundsPage(page);
+test.beforeAll(async ({ browser, request }) => {
+	const adminContext = await browser.newContext({ storageState: data.auth.adminAuthFile });
+	aPage = await adminContext.newPage();
+	refundsPage = new RefundsPage(aPage);
+	apiUtils = new ApiUtils(request);
+	const [, orderResponseBody,] = await apiUtils.createOrderWithStatus(payloads.createProduct(), payloads.createOrder, 'wc-processing', payloads.vendorAuth);
+	await dbUtils.createRefund(orderResponseBody);
 });
 
 test.afterAll(async ( ) => {
-	await page.close();
+	await aPage.close();
 });
 
-test.describe('refundsPage test', () => {
+test.describe('refunds test', () => {
 
-	test.use({ storageState: data.auth.adminAuthFile });
+	// test.use({ storageState: data.auth.adminAuthFile });
 
-	test('admin refundsPage menu page is rendering properly @pro @explo', async ( ) => {
+	test('admin refunds menu page is rendering properly @pro @explo', async ( ) => {
 		await refundsPage.adminRefundRequestsRenderProperly();
 	});
 

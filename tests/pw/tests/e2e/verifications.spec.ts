@@ -4,22 +4,22 @@ import { data } from 'utils/testData';
 
 
 let verificationsPage: VerificationsPage;
-let page: Page;
+let aPage: Page;
 
 test.beforeAll(async ({ browser }) => {
-	const context = await browser.newContext({});
-	page = await context.newPage();
-	verificationsPage = new VerificationsPage(page);
+	const adminContext = await browser.newContext({ storageState: data.auth.adminAuthFile });
+	aPage = await adminContext.newPage();
+	verificationsPage = new VerificationsPage(aPage);
 });
 
 test.afterAll(async ( ) => {
-	await page.close();
+	await aPage.close();
 });
 
 test.describe('Verifications test', () => {
 	//TODO: need multiple verification request
 
-	test.use({ storageState: data.auth.adminAuthFile });
+	// test.use({ storageState: data.auth.adminAuthFile });
 
 	test('admin verifications menu page is rendering properly @pro @explo', async ( ) => {
 		await verificationsPage.adminVerificationsRenderProperly();
