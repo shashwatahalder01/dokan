@@ -18,6 +18,8 @@ test.beforeAll(async ({ browser, request }) => {
 	storeSupportsPage = new StoreSupportsPage(aPage);
 	apiUtils = new ApiUtils(request);
 	await apiUtils.createSupportTicket({ ...payloads.createSupportTicket, author: CUSTOMER_ID, store_id: VENDOR_ID }, payloads.adminAuth );
+	const[, supportTicketId] = await apiUtils.createSupportTicket({ ...payloads.createSupportTicket, author: CUSTOMER_ID, store_id: VENDOR_ID }, payloads.adminAuth );
+	await apiUtils.updateSupportTicketStatus(supportTicketId, 'close', payloads.adminAuth);
 });
 
 test.afterAll(async ( ) => {
@@ -33,31 +35,48 @@ test.describe('Store Support test', () => {
 	});
 
 	test('admin can search support ticket @pro', async ( ) => {
-		await storeSupportsPage.searchSupportTicket('support ticket subject');
+		await storeSupportsPage.searchSupportTicket(data.storeSupport.title);
 	});
 
 	test('admin can filter store support by vendor @pro', async ( ) => {
-		await storeSupportsPage.filterStoreSupports(data.storeReview.filter.byVendor);
+		await storeSupportsPage.filterStoreSupports(data.storeSupport.filter.byVendor, 'by-vendor');
 	});
 
-	// test('admin can close store support @pro', async ( ) => {
-	// 	await storeSupportsPage.editStoreSupport(data.storesupport);
+	test('admin can filter store support by customer @pro', async ( ) => {
+		await storeSupportsPage.filterStoreSupports(data.storeSupport.filter.byCustomer, 'by-customer');
+	});
+
+	// test.skip('filter store support by calender @pro', async ( ) => {
+	// 	//todo
 	// });
 
-	// test('admin can reopen close store support @pro', async ( ) => {
-	// 	await storeSupportsPage.deleteStoresupport(data.storesupport);
-	// });
+	test('admin can reply to support ticket as admin @pro', async ( ) => {
+		await storeSupportsPage.replySupportTicket(data.storeSupport.chatReply.asAdmin);
+	});
 
-	// test('admin can restore deleted store support @pro', async ( ) => {
-	// 	await storeSupportsPage.restoreStoresupport(data.storesupport);
-	// });
+	test('admin can reply to support ticket as vendor @pro', async ( ) => {
+		await storeSupportsPage.replySupportTicket(data.storeSupport.chatReply.asVendor);
+	});
 
-	// test('admin can permanently delete store support @pro', async ( ) => {
-	// 	await storeSupportsPage.permanentlyDeleteStoresupport(data.storesupport);
-	// });
+	test('admin can disable support ticket email notification @pro', async ( ) => {
+		await storeSupportsPage.updateSupportTicketEmailNotification('disable');
+	});
+
+	test('admin can enable support ticket email notification @pro', async ( ) => {
+		await storeSupportsPage.updateSupportTicketEmailNotification('enable');
+	});
+
+	test('admin can close store support @pro', async ( ) => {
+		await storeSupportsPage.closeSupportTicket();
+	});
+
+	test('admin can reopen closed store support @pro', async ( ) => {
+		await storeSupportsPage.reopenSupportTicket();
+	});
 
 	test('admin can perform store support bulk action @pro', async ( ) => {
 		await storeSupportsPage.storeSupportBulkAction('close');
 	});
+
 
 });

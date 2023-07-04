@@ -957,8 +957,8 @@ export const payloads = {
 	// support ticket
 	createSupportTicket: {
 		author: 2,
-		title: 'support ticket subject',
-		content: 'support ticket message',
+		title: 'test support ticket',
+		content: 'test support ticket message',
 		status: 'open',
 		comment_status: 'open',
 		meta:  {

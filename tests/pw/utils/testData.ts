@@ -798,7 +798,7 @@ export const data = {
 			storeReviews: 'dokan/v1/store-reviews',
 			productAdvertising: 'dokan/v1/product_adv',
 			wholesaleCustomers: 'dokan/v1/wholesale/customers',
-			supportTicket: 'dokan/v1/admin/support-ticket',
+			storeSupport: 'dokan/v1/admin/support-ticket',
 			quotes: 'dokan/v1/request-for-quote',
 			quoteRules: 'dokan/v1/request-for-quote/quote-rule',
 			sellerBadge: 'dokan/v1/seller-badge',
@@ -1329,6 +1329,19 @@ export const data = {
 			byVendor: String(process.env.VENDOR) + 'store',
 		}
 
+	},
+
+	storeSupport: {
+		title: 'test support ticket',
+		filter: {
+			byCustomer: String(process.env.CUSTOMER),
+			byVendor: String(process.env.VENDOR) + 'store',
+		},
+
+		chatReply: {
+			asAdmin: 'admin chat reply',
+			asVendor: 'vendor chat reply',
+		}
 	},
 
 	requestForQuotation: {

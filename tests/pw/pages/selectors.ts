@@ -183,9 +183,16 @@ export const selector = {
 				license: '//li[contains(@class,"toplevel_page_dokan")]//a[text()="License"]',
 			},
 
+			// dokan promotion
+			promotion: {
+				promotion: '.dokan-notice-slides .dokan-promotion',
+				joinTheSale:'//a[contains(text(),"Join the Sale! →")]',
+			},
+
 			// dokan notice
 			notice : {
-				notice: '.notice .dokan-admin-notices',
+				// notice: '.dokan-admin-notices',
+				noticeDiv: '.dokan-admin-notice.dokan-alert',
 				closeNotice: '.close-notice',
 				// slider: '.slide-notice',
 				sliderPrev: '.slide-notice .prev',
@@ -676,8 +683,21 @@ export const selector = {
 					actionColumn: 'thead th.action',
 				},
 
+				numberOfRowsFound: '.tablenav.top .displaying-num',
 				supportTicketCell: (title: string) => `//strong[contains(text(), '${title}')]/../..`,
+				supportTicketFirstCell: '(//td[@class="column ID"]//a)[1]',
 				supportTicketLink: (title: string) => `//strong[contains(text(), '${title}')]/..`,
+
+				supportTicketDetails: {
+					backToTickets: '//span[@class="back-to-tickets"]//..',
+					chatAuthor: '#sender', // admin, vendor
+					chatReply: '.dokan-chat-replay',
+					sendReply: '.dokan-send-replay',
+					closeTicket: '.dokan-close-ticket',
+					reopenTicket: '.dokan-reopen-ticket',
+					emailNotification: '.dokan-summary-info .switch.tips',
+				},
+
 
 			},
 

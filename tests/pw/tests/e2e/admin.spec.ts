@@ -167,4 +167,8 @@ test.describe('Admin functionality test', () => {
 		await adminPage.dokanNotice();
 	});
 
+	test('dokan promotion @lite @pro', async ( ) => {
+		await adminPage.dokanPromotion();
+	});
+
 });

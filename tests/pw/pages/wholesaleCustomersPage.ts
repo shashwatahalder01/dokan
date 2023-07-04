@@ -6,9 +6,8 @@ import { selector } from 'pages/selectors';
 import { data } from 'utils/testData';
 
 
-
 export class WholesaleCustomersPage extends AdminPage {
-		// https://medium.com/@thevirtuoid/extending-multiple-classes-in-javascript-2f4752574e65
+	// https://medium.com/@thevirtuoid/extending-multiple-classes-in-javascript-2f4752574e65
 	constructor(page: Page) {
 		super(page);
 	}
@@ -97,7 +96,7 @@ export class WholesaleCustomersPage extends AdminPage {
 		await this.clickAndWaitForResponse(data.subUrls.backend.wholesaleCustomers, selector.admin.dokan.wholesaleCustomer.bulkActions.applyAction);
 	}
 
-	
+
 	// customer request to become wholesale customer
 	async customerRequestForBecomeWholesaleCustomer(): Promise<void> {
 		await this.goIfNotThere(data.subUrls.frontend.myAccount);

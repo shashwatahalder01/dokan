@@ -74,6 +74,8 @@ export class StoreReviewsPage extends AdminPage {
 		//TODO: also wait for content to load
 	}
 
+	// TODO: delete, restore, and  permanently delete can be merged into one
+
 	// restore store review
 	async restoreStoreReview(){
 		await this.goto(data.subUrls.backend.dokan.dokanStoreReviews);

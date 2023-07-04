@@ -906,10 +906,27 @@ export class AdminPage extends BasePage {
 
 
 	// dokan notice
+	async dokanPromotion(){
+		await this.goto(data.subUrls.backend.dokan.dokan);
+		// dokan promotion elements are visible
+		const isPromotionVisible = await this.isVisible(selector.admin.dokan.promotion.promotion);
+		if(isPromotionVisible){
+			await this.multipleElementVisible(selector.admin.dokan.promotion);
+		} else {
+			console.log('No promotion is ongoing');
+		}
+	}
+
+	// dokan notice
 	async dokanNotice(){
 		await this.goto(data.subUrls.backend.dokan.dokan);
+
+		await expect(this.page.locator(selector.admin.dokan.notice.noticeDiv)).toHaveCount(2); // because of promo notice
+
 		// dokan notice elements are visible
-		await this.multipleElementVisible(selector.admin.dokan.notice);
+		// eslint-disable-next-line @typescript-eslint/no-unused-vars
+		const { noticeDiv, ...notice } = selector.admin.dokan.notice;
+		await this.multipleElementVisible(notice);
 	}
 
 	// vendors
