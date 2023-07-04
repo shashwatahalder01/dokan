@@ -17,12 +17,12 @@ test.beforeAll(async ({ browser, request }) => {
 	sellerBadgesAdmin = new SellerBadgesPage(aPage);
 
 	const vendorContext = await browser.newContext({ storageState: data.auth.vendorAuthFile });
-	const vPage = await vendorContext.newPage();
+	vPage = await vendorContext.newPage();
 	sellerBadgesVendor = new SellerBadgesPage(vPage);
 
 	apiUtils = new ApiUtils(request);
 	await apiUtils.deleteAllSellerBadges(payloads.adminAuth);
-	await apiUtils.createSellerBadge(payloads.createSellerBadgeExclusiveToPlatform);
+	await apiUtils.createSellerBadge(payloads.createSellerBadgeExclusiveToPlatform, payloads.adminAuth);
 });
 
 test.afterAll(async ( ) => {
@@ -34,7 +34,7 @@ test.describe('Seller badge test', () => {
 
 	// test.use({ storageState: data.auth.adminAuthFile });
 
-	test.only('dokan seller badge menu page is rendering properly @pro @explo', async ( ) => {
+	test('dokan seller badge menu page is rendering properly @pro @explo', async ( ) => {
 		await sellerBadgesAdmin.adminSellerBadgeRenderProperly();
 	});
 
