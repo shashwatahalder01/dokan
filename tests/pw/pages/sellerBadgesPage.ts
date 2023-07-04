@@ -40,7 +40,6 @@ export class SellerBadgesPage extends AdminPage {
 		await this.goIfNotThere(data.subUrls.backend.dokan.dokanSellerBadge);
 
 		await this.clearInputField(selector.admin.dokan.sellerBadge.search); // TODO: clear by cross, or use type instead of fill
-
 		await this.typeAndWaitForResponse(data.subUrls.backend.sellerBadge, selector.admin.dokan.sellerBadge.search, badgeName);
 		await expect(this.page.locator(selector.admin.dokan.sellerBadge.sellerBadgeCell(badgeName))).toBeVisible();
 	}
@@ -235,6 +234,46 @@ export class SellerBadgesPage extends AdminPage {
 		await this.click( selector.admin.dokan.sellerBadge.bulkActions.applyAction);
 		await this.clickAndWaitForResponse(data.subUrls.backend.sellerBadge, selector.admin.dokan.sellerBadge.confirmAction);
 		await this.click(selector.admin.dokan.sellerBadge.successMessage);
+	}
+
+
+	// vendor achieved badges congrats popup
+	async sellerBadgeCongratsPopup(){
+		await this.goIfNotThere(data.subUrls.frontend.badges);
+
+		const congratsModalIsVisible = await this.isVisible(selector.vendor.vBadges.congratsModal.sellerBadgeModal);
+		if (congratsModalIsVisible){
+			//  seller badge congrats modal elements are visible
+			await this.multipleElementVisible(selector.vendor.vBadges.congratsModal);
+
+			await this.clickIfVisible(selector.vendor.vBadges.congratsModal.closeModal);
+		} else {
+			console.log('No Congrats message appeared');
+
+		}
+
+	}
+
+
+	// vendor search seller badge
+	async vendorSearchSellerBadge(badgeName: string){
+		await this.clickIfVisible(selector.vendor.vBadges.congratsModal.closeModal);
+
+		await this.goIfNotThere(data.subUrls.frontend.badges);
+		await this.clearAndType( selector.vendor.vBadges.search, badgeName);
+		await expect(this.page.locator(selector.vendor.vBadges.sellerBadgeCell(badgeName))).toBeVisible();
+	}
+
+	// vendor filter seller badge
+	async filterSellerBadges(option: string){
+		await this.clickIfVisible(selector.vendor.vBadges.congratsModal.closeModal);
+
+		await this.goIfNotThere(data.subUrls.frontend.badges);
+		await this.selectByLabel( selector.vendor.vBadges.filterBadges, option);
+		const count = (await this.getElementText(selector.vendor.vBadges.numberOfBadgesFound))?.split(' ')[0];
+		expect(Number(count)).not.toBe(0);
+		//TOdo: either this or that assertion
+		//todo: to have count more than
 	}
 
 }

@@ -185,7 +185,7 @@ export class VendorPage extends BasePage {
 		await this.click(selector.vendor.product.okVariationPrice);
 		await this.clickAndWaitForResponse(data.subUrls.frontend.product, selector.vendor.product.saveProduct, 302);
 		const productCreateSuccessMessage = await this.getElementText(selector.vendor.product.updatedSuccessMessage);
-		expect(productCreateSuccessMessage.replace(/\s+/g, ' ').trim()).toMatch(product.saveSuccessMessage);
+		expect(productCreateSuccessMessage?.replace(/\s+/g, ' ').trim()).toMatch(product.saveSuccessMessage);
 	}
 
 	// vendor add simple subscription product
@@ -201,7 +201,7 @@ export class VendorPage extends BasePage {
 		await this.selectByValue(selector.vendor.product.subscriptionTrialPeriod, product.subscriptionTrialPeriod);
 		await this.clickAndWaitForResponse(data.subUrls.frontend.product, selector.vendor.product.saveProduct, 302);
 		const productCreateSuccessMessage = await this.getElementText(selector.vendor.product.updatedSuccessMessage);
-		expect(productCreateSuccessMessage.replace(/\s+/g, ' ').trim()).toMatch(product.saveSuccessMessage);
+		expect(productCreateSuccessMessage?.replace(/\s+/g, ' ').trim()).toMatch(product.saveSuccessMessage);
 	}
 
 	// vendor add variable subscription product
@@ -232,7 +232,7 @@ export class VendorPage extends BasePage {
 
 		await this.waitForVisibleLocator(selector.vendor.product.updatedSuccessMessage);
 		const productCreateSuccessMessage = await this.getElementText(selector.vendor.product.updatedSuccessMessage);
-		expect(productCreateSuccessMessage.replace(/\s+/g, ' ').trim()).toMatch(product.saveSuccessMessage);
+		expect(productCreateSuccessMessage?.replace(/\s+/g, ' ').trim()).toMatch(product.saveSuccessMessage);
 	}
 
 	// vendor add external product
@@ -246,7 +246,7 @@ export class VendorPage extends BasePage {
 
 		await this.clickAndWaitForResponse(data.subUrls.frontend.product, selector.vendor.product.saveProduct, 302);
 		const productCreateSuccessMessage = await this.getElementText(selector.vendor.product.updatedSuccessMessage);
-		expect(productCreateSuccessMessage.replace(/\s+/g, ' ').trim()).toMatch(product.saveSuccessMessage);
+		expect(productCreateSuccessMessage?.replace(/\s+/g, ' ').trim()).toMatch(product.saveSuccessMessage);
 	}
 
 	// vendor add auction product
@@ -269,7 +269,7 @@ export class VendorPage extends BasePage {
 		await this.type(selector.vendor.vAuction.auctionEndDate, product.endDate);
 		await this.clickAndWaitForResponse(data.subUrls.frontend.productAuction, selector.vendor.vAuction.addAuctionProduct, 302);
 		const productCreateSuccessMessage = await this.getElementText(selector.vendor.product.updatedSuccessMessage);
-		expect(productCreateSuccessMessage.replace(/\s+/g, ' ').trim()).toMatch(product.saveSuccessMessage);
+		expect(productCreateSuccessMessage?.replace(/\s+/g, ' ').trim()).toMatch(product.saveSuccessMessage);
 	}
 
 	// vendor add booking product
@@ -1090,7 +1090,7 @@ export class VendorPage extends BasePage {
 		await this.clearAndType(selector.vendor.product.lotDiscountInPercentage, discountPercentage);
 		await this.clickAndWaitForResponse(data.subUrls.frontend.product, selector.vendor.product.saveProduct, 302);
 		const productCreateSuccessMessage = await this.getElementText(selector.vendor.product.updatedSuccessMessage);
-		expect(productCreateSuccessMessage.replace(/\s+/g, ' ').trim()).toMatch(data.product.createUpdateSaveSuccessMessage);
+		expect(productCreateSuccessMessage?.replace(/\s+/g, ' ').trim()).toMatch(data.product.createUpdateSaveSuccessMessage);
 	}
 
 	// vendor search product
@@ -1120,7 +1120,7 @@ export class VendorPage extends BasePage {
 		}
 		await this.clickAndWaitForResponse(data.subUrls.frontend.product, selector.vendor.product.saveProduct, 302);
 		const productCreateSuccessMessage = await this.getElementText(selector.vendor.product.updatedSuccessMessage);
-		expect(productCreateSuccessMessage.replace(/\s+/g, ' ').trim()).toMatch(data.product.createUpdateSaveSuccessMessage);
+		expect(productCreateSuccessMessage?.replace(/\s+/g, ' ').trim()).toMatch(data.product.createUpdateSaveSuccessMessage);
 	}
 
 	// vendor change order status
@@ -1132,7 +1132,7 @@ export class VendorPage extends BasePage {
 		await this.selectByValue(selector.vendor.vOrders.orderStatus, orderStatus);
 		await this.click(selector.vendor.vOrders.updateOrderStatus);
 		const currentOrderStatus = await this.getElementText(selector.vendor.vOrders.currentOrderStatus);
-		expect(currentOrderStatus.toLowerCase()).toMatch((orderStatus.replace(/(^wc)|(\W)/g, '')).toLowerCase());
+		expect(currentOrderStatus?.toLowerCase()).toMatch((orderStatus.replace(/(^wc)|(\W)/g, '')).toLowerCase());
 	}
 
 	// // vendor refund order
@@ -1198,35 +1198,6 @@ export class VendorPage extends BasePage {
 	// 	await this.goToVendorDashboard();
 	// 	return helpers.price(await this.getElementText(selector.vendor.vDashboard.earning));
 	// }
-
-
-	/*******************************************************************************/
-
-
-	// seller badges
-
-	// search seller badge
-	async searchSellerBadge(badgeName: string){
-		await this.goIfNotThere(data.subUrls.frontend.badges);
-
-		await this.clearAndType( selector.vendor.vBadges.search, badgeName);
-		await expect(this.page.locator(selector.vendor.vBadges.sellerBadgeCell(badgeName))).toBeVisible();
-	}
-
-	// filter vendors by badge
-	async filterBadges(option: string){
-		await this.goIfNotThere(data.subUrls.frontend.badges);
-
-		await this.selectByLabel( selector.vendor.vBadges.filterBadges, option);
-
-		const count = (await this.getElementText(selector.vendor.vBadges.numberOfBadgesFound))?.split(' ')[0];
-		expect(Number(count)).not.toBe(0);
-		//TOdo: either this or that assertion
-		//todo: to have count more than
-	}
-
-
-	/*******************************************************************************/
 
 
 }

@@ -1,6 +1,5 @@
 import { test, Page } from '@playwright/test';
 import { SellerBadgesPage } from 'pages/sellerBadgesPage';
-// import { VendorPage } from 'pages/vendorPage';
 import { ApiUtils } from 'utils/apiUtils';
 import { data } from 'utils/testData';
 import { payloads } from 'utils/payloads';
@@ -8,18 +7,16 @@ import { payloads } from 'utils/payloads';
 
 let sellerBadgesAdmin: SellerBadgesPage;
 let sellerBadgesVendor: SellerBadgesPage;
-
-// let sellerBadgesAdmin: sellerBadgesAdmin;
-// let vendorPage: VendorPage;
 let aPage: Page, vPage: Page;
 let apiUtils: ApiUtils;
+
 
 test.beforeAll(async ({ browser, request }) => {
 	const adminContext = await browser.newContext({ storageState: data.auth.adminAuthFile });
 	aPage = await adminContext.newPage();
 	sellerBadgesAdmin = new SellerBadgesPage(aPage);
 
-	const vendorContext = await browser.newContext({ storageState: data.auth.customerAuthFile });
+	const vendorContext = await browser.newContext({ storageState: data.auth.vendorAuthFile });
 	const vPage = await vendorContext.newPage();
 	sellerBadgesVendor = new SellerBadgesPage(vPage);
 
@@ -37,7 +34,7 @@ test.describe('Seller badge test', () => {
 
 	// test.use({ storageState: data.auth.adminAuthFile });
 
-	test('dokan seller badge menu page is rendering properly @pro @explo', async ( ) => {
+	test.only('dokan seller badge menu page is rendering properly @pro @explo', async ( ) => {
 		await sellerBadgesAdmin.adminSellerBadgeRenderProperly();
 	});
 
@@ -77,20 +74,20 @@ test.describe('Seller badge test', () => {
 		await sellerBadgesAdmin.deleteSellerBadge(data.sellerBadge.eventName.productsPublished);
 	});
 
-	test.skip('admin can perform seller badge bulk action @pro', async ( ) => {
+	test('admin can perform seller badge bulk action @pro', async ( ) => {
 		await sellerBadgesAdmin.sellerBadgeBulkAction('delete');
 	});
 
-	// test.skip('vendor can view badge acquired congratulation popup message action @pro', async ( ) => {
-	// 	//TODO: await sellerBadgesVendor.sellerBadgeCongratsPopup();
-	// });
+	test('vendor can view badge acquired congratulation popup message action @pro', async ( ) => {
+		await sellerBadgesVendor.sellerBadgeCongratsPopup();
+	});
 
-	// test.skip('vendor can search seller badge @pro', async ( ) => {
-	// await sellerBadgesVendor.searchSellerBadge(data.sellerBadge.eventName.productsPublished);
-	// });
+	test('vendor can search seller badge @pro', async ( ) => {
+		await sellerBadgesVendor.vendorSearchSellerBadge(data.sellerBadge.eventName.productsPublished);
+	});
 
-	// test.skip('vendor can filter seller badges  @pro', async ( ) => {
-	// 	await sellerBadgesVendor.filterBadges(data.sellerBadge.eventName.productsPublished);
-	// });
+	test('vendor can filter seller badges  @pro', async ( ) => {
+		await sellerBadgesVendor.filterSellerBadges(data.sellerBadge.eventName.productsPublished);
+	});
 
 });

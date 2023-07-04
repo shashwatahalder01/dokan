@@ -3321,6 +3321,16 @@ export const selector = {
 			sellerBadgeCell: (name: string) => `//strong[contains(text(),'${name}')]/../..`,
 			numberOfBadgesFound: '.tablenav.top .displaying-num',
 
+			congratsModal:{
+				closeModal: '.modal-close.modal-close-link',
+				sellerBadgeModal: '.seller-badge-modal .seller-badge-modal-content',
+				modalBody: '.modal-body',
+				congratsMessage: '//div[@class="modal-title"]//h2[contains(text(), "Congratulations!")]',
+				acquiredBadges: '//div[@class="modal-sub-title"]//h3[contains(text(), "Acquired Badge & Level:")]',
+
+
+			},
+
 		},
 
 		// Return Request
