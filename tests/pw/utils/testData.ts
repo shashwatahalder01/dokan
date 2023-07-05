@@ -1384,6 +1384,11 @@ export const data = {
 			order: '1',
 		},
 
+		trashedQuoteRule:{
+			title: 'trashed quote rule ',
+			status: 'trash'
+		},
+
 		quote:{
 			title: 'test quote',
 			user: 'customer1',
@@ -1407,6 +1412,15 @@ export const data = {
 			product: 'p1_v1 (simple)',
 			offerPrice: '70',
 			offerProductQuantity: '20',
+		},
+
+		trashedQuote:{
+			title: 'trashed quote',
+			status: 'trash'
+		},
+
+		convertedQuote:{
+			title: 'converted quote',
 		}
 
 	},

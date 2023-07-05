@@ -860,7 +860,7 @@ export class ApiUtils {
 		return responseBody;
 	}
 
-	// delete store review
+	// delete all quote rules
 	async deleteAllQuoteRules(auth? : auth): Promise<responseBody> {
 		const allQuoteRuleIds = (await this.getAllQuoteRules(auth)).map((o: { id: unknown; }) => o.id);
 		const [, responseBody] = await this.put(endPoints.updateBatchQuoteRules, { data: { trash: allQuoteRuleIds }, headers : auth });
@@ -890,6 +890,14 @@ export class ApiUtils {
 		const [, responseBody] = await this.delete(endPoints.deleteRequestQuote(quoteRuleId), { headers: auth });
 		return responseBody;
 	}
+
+	// delete all quotes
+	async deleteAllQuotes(auth? : auth): Promise<responseBody> {
+		const allQuoteIds = (await this.getAllRequestQuotes(auth)).map((o: { id: unknown; }) => o.id);
+		const [, responseBody] = await this.put(endPoints.updateBatchRequestQuotes, { data: { trash: allQuoteIds }, headers : auth });
+		return responseBody;
+	}
+
 	/**
 	 * order downloads  api methods
 	 */

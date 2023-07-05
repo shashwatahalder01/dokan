@@ -60,20 +60,14 @@ export class RequestForQuotationsPage extends AdminPage {
 
 		// publish
 		await this.clickAndWaitForResponse(data.subUrls.backend.quoteRules, selector.admin.dokan.requestForQuotation.quoteRules.addNewQuoteRule.publishRule);
-		// await this.wait(5);
-
+		// TODO: also wait for load for future tests
 	}
 
 	// add quote rule
 	async addQuoteRule(rule: any){
 		await this.goIfNotThere(data.subUrls.backend.dokan.dokanRequestForQuoteRules);
 
-		// await this.clickAndWaitForResponse(data.subUrls.backend.quotes, selector.admin.dokan.requestForQuotation.quoteRules.newQuoteRule);
-
-		// TODO: need to wait for multiple response
-		// // const qrs: string[][] = [[data.subUrls.backend.quotes, '200'], [data.subUrls.backend.products, '200']];
-		// const qrs: string[][] = [[data.subUrls.backend.quotes, '200']];
-		// await this.clickAndWaitForResponses(qrs, selector.admin.dokan.requestForQuotation.quoteRules.newQuoteRule);
+		// TODO: create a general function for below scenario on base page
 		await Promise.all([
 			this.page.waitForResponse((resp) => resp.url().includes(data.subUrls.backend.quotes) && resp.status() === 200),
 			this.page.waitForResponse((resp) => resp.url().includes(data.subUrls.backend.products) && resp.status() === 200),
@@ -86,11 +80,10 @@ export class RequestForQuotationsPage extends AdminPage {
 	// edit quote rule
 	async editQuoteRule(rule: any){
 		await this.goto(data.subUrls.backend.dokan.dokanRequestForQuoteRules);
-		// await this.goIfNotThere(data.subUrls.backend.dokan.dokanRequestForQuoteRules);//Todo: fix
+		// await this.goIfNotThere(data.subUrls.backend.dokan.dokanRequestForQuoteRules);//Todo: fix and apply this
 
 		await this.hover(selector.admin.dokan.requestForQuotation.quoteRules.quoteRulesCell(rule.title));
-		// TODO: need to wait for multiple response
-		// await this.clickAndWaitForResponse(data.subUrls.backend.quotes, selector.admin.dokan.requestForQuotation.quoteRules.quoteRulesEdit(rule.title));
+		// TODO: create a general function for below scenario on base page
 		await Promise.all([
 			this.page.waitForResponse((resp) => resp.url().includes(data.subUrls.backend.quotes) && resp.status() === 200),
 			this.page.waitForResponse((resp) => resp.url().includes(data.subUrls.backend.products) && resp.status() === 200),
@@ -98,13 +91,12 @@ export class RequestForQuotationsPage extends AdminPage {
 		]);
 
 		await this.updateQuoteRuleFields(rule);
-
 	}
 
 	// update quote rule
 	async updateQuoteRule(quoteTitle: string, action: string){
 		await this.goto(data.subUrls.backend.dokan.dokanRequestForQuoteRules);
-		// await this.goIfNotThere(data.subUrls.backend.dokan.dokanRequestForQuoteRules);//Todo: fix
+		// await this.goIfNotThere(data.subUrls.backend.dokan.dokanRequestForQuoteRules);//Todo: fix and apply this
 
 		switch (action) {
 
@@ -133,7 +125,8 @@ export class RequestForQuotationsPage extends AdminPage {
 
 	// quote rules bulk action
 	async quoteRulesBulkAction(action: string){
-		await this.goIfNotThere(data.subUrls.backend.dokan.dokanRequestForQuoteRules);
+		await this.goto(data.subUrls.backend.dokan.dokanRequestForQuoteRules);
+		// await this.goIfNotThere(data.subUrls.backend.dokan.dokanRequestForQuoteRules);//Todo: fix and apply this
 
 		await this.click(selector.admin.dokan.requestForQuotation.quoteRules.bulkActions.selectAll);
 		await this.selectByValue(selector.admin.dokan.requestForQuotation.quoteRules.bulkActions.selectAction, action);
@@ -244,13 +237,11 @@ export class RequestForQuotationsPage extends AdminPage {
 	}
 
 	// convert quote to order
-	async convertQuoteToOrder(quote: any){
-		await this.addQuote(quote);
-
+	async convertQuoteToOrder(quoteTitle: string){
 		await this.goIfNotThere(data.subUrls.backend.dokan.dokanRequestForQuote);
 
-		await this.hover(selector.admin.dokan.requestForQuotation.quotesList.quoteCell(quote.title));
-		await this.clickAndWaitForResponse(data.subUrls.backend.quotes, selector.admin.dokan.requestForQuotation.quotesList.quoteEdit(quote.title));
+		await this.hover(selector.admin.dokan.requestForQuotation.quotesList.quoteCell(quoteTitle));
+		await this.clickAndWaitForResponse(data.subUrls.backend.quotes, selector.admin.dokan.requestForQuotation.quotesList.quoteEdit(quoteTitle));
 		await this.clickAndWaitForResponse(data.subUrls.backend.quotes, selector.admin.dokan.requestForQuotation.quotesList.convertToOrder);
 
 	}

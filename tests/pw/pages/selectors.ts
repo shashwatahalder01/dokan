@@ -66,7 +66,7 @@ export const selector = {
 		dashboardMenu: '.wp-first-item > .wp-menu-name',
 		dashboardText: '.wrap h1',
 		// Admin Logout
-		userMenu: '#wp-admin-bar-my-account a',
+		userMenu: '#wp-admin-bar-my-account',
 		logout: '#wp-admin-bar-logout a',
 		// Logout Message
 		logoutSuccessMessage: '#login p',

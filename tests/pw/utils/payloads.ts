@@ -1413,6 +1413,7 @@ export const payloads = {
 		product_ids: [''],
 		offer_price: ['50'],
 		offer_product_quantity: ['10'],
+		// status: '' //TODO: status can be used to create direct pending, trashed quote
 	}),
 
 	updateRequestQuote: {
@@ -1469,10 +1470,10 @@ export const payloads = {
 	// seller badge
 
 	createSellerBadgeFeatureProducts:  {
-		'event_type': 'featured_products',
-		'badge_name': 'Featured Products',
-		'badge_status': 'published',
-		'levels': [
+		event_type: 'featured_products',
+		badge_name: 'Featured Products',
+		badge_status: 'published',
+		levels: [
 			{
 				level: 0,
 				level_condition: '',

@@ -218,6 +218,11 @@ export class BasePage {
 
 	// click & wait for multiple responses
 	async clickAndWaitForResponses(subUrls:   string[][], selector: string, code = 200): Promise<void | Response[]> {
+
+		// 		// // const qrs: string[][] = [[data.subUrls.backend.quotes, '200'], [data.subUrls.backend.products, '200']];
+		// // const qrs: string[][] = [[data.subUrls.backend.quotes, '200']];
+		// await this.clickAndWaitForResponses(qrs, selector.admin.dokan.requestForQuotation.quoteRules.newQuoteRule);
+
 		const promises = [];
 
 		subUrls.forEach((subUrl) => {
@@ -837,7 +842,7 @@ export class BasePage {
 	// check locator
 	async checkLocator(selector: string): Promise<void> {
 		const locator = this.page.locator(selector);
-		await locator.check();
+		await locator.check( { force: true }); //forced is used to avoid "locator.check: Clicking the checkbox did not change its state" error
 	}
 
 	// click locator
