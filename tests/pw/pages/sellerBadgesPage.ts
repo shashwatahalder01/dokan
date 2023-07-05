@@ -37,7 +37,8 @@ export class SellerBadgesPage extends AdminPage {
 
 	// search seller badge
 	async searchSellerBadge(badgeName: string){
-		await this.goIfNotThere(data.subUrls.backend.dokan.dokanSellerBadge);
+		await this.goto(data.subUrls.backend.dokan.dokanSellerBadge);
+		// await this.goIfNotThere(data.subUrls.backend.dokan.dokanSellerBadge);
 
 		await this.clearInputField(selector.admin.dokan.sellerBadge.search); // TODO: clear by cross, or use type instead of fill
 		await this.typeAndWaitForResponse(data.subUrls.backend.sellerBadge, selector.admin.dokan.sellerBadge.search, badgeName);

@@ -207,7 +207,7 @@ export class ApiUtils {
 	// create store
 	async createStore(payload: any, auth? : auth): Promise<[responseBody, string]> {
 		const response = await this.request.post(endPoints.createStore, { data: payload, headers: auth });
-		const responseBody = await this.getResponseBody(response, false);   //TODO: covert to this.get , implement multiple optional function parameter to pass false to responsebody
+		const responseBody = await this.getResponseBody(response, false);   //TODO: convert to this.get , implement multiple optional function parameter to pass false to response-body
 		let sellerId :string;
 		if(responseBody.code){
 			expect(response.status()).toBe(500);
@@ -372,7 +372,7 @@ export class ApiUtils {
 	// create attribute term
 	async createAttributeTerm(attribute: any, attributeTerm: object, auth? : auth): Promise<[responseBody, string, string]> {
 		let attributeId: string;
-		typeof (attribute) === 'object' ? [, attributeId] = await this.createAttribute(attribute) : attributeId = attribute;
+		typeof (attribute) === 'object' ? [, attributeId] = await this.createAttribute(attribute, auth) : attributeId = attribute;
 		const [, responseBody] = await this.post(endPoints.createAttributeTerm(attributeId), { data: attributeTerm, headers: auth });
 		const attributeTermId = responseBody.id;
 		return [responseBody, attributeId, attributeTermId];
@@ -455,8 +455,8 @@ export class ApiUtils {
 	}
 
 	// cancel withdraw
-	async cancelWithdraw(withdrawId: string): Promise<responseBody> {
-		const [, responseBody] = await this.delete(endPoints.cancelWithdraw(withdrawId));
+	async cancelWithdraw(withdrawId: string, auth? : auth): Promise<responseBody> {
+		const [, responseBody] = await this.delete(endPoints.cancelWithdraw(withdrawId), { headers: auth });
 		return responseBody;
 	}
 
@@ -862,7 +862,7 @@ export class ApiUtils {
 
 	// delete store review
 	async deleteAllQuoteRules(auth? : auth): Promise<responseBody> {
-		const allQuoteRuleIds = (await this.getAllQuoteRules()).map((o: { id: unknown; }) => o.id);
+		const allQuoteRuleIds = (await this.getAllQuoteRules(auth)).map((o: { id: unknown; }) => o.id);
 		const [, responseBody] = await this.put(endPoints.updateBatchQuoteRules, { data: { trash: allQuoteRuleIds }, headers : auth });
 		return responseBody;
 	}
@@ -926,9 +926,9 @@ export class ApiUtils {
 
 	// create seller badge
 	async createSellerBadge(payload: any, auth? : auth): Promise<[responseBody, string]> {
-		const response = await this.request.post(endPoints.createSellerBadge, { data: payload, headers: auth });
+		const response = await this.request.post(endPoints.createSellerBadge, { data: payload, headers: auth }); //TODO: remove this.request from everywhere
 		const responseBody = await this.getResponseBody(response, false);
-		const badgeId = responseBody.code === 'invalid-event-type' ? await this.getSellerBadgeId(payload.event_type) : responseBody.id;
+		const badgeId = responseBody.code === 'invalid-event-type' ? await this.getSellerBadgeId(payload.event_type, auth) : responseBody.id;
 		return [responseBody, badgeId];
 	}
 
@@ -940,7 +940,10 @@ export class ApiUtils {
 
 	// delete all seller badges
 	async deleteAllSellerBadges(auth? : auth): Promise<void> {
-		const allBadgeIds = (await this.getAllSellerBadges()).map((o: { id: unknown; }) => o.id);
+		// const allBadges = await this.getAllSellerBadges(auth);
+		// if(!allBadges){return;} // TODO: return here if possible or use the later soln.
+
+		const allBadgeIds = (await this.getAllSellerBadges(auth)).map((o: { id: unknown; }) => o.id);
 		if(allBadgeIds.length < 1) return; //TODO: apply this to all batch update/ anywhere a action can be lessened
 		await this.updateBatchSellerBadges('delete', allBadgeIds, auth);
 	}
@@ -1173,7 +1176,7 @@ export class ApiUtils {
 
 	//create product review
 	async createProductReview(product: object, review: object, auth? : auth): Promise<[responseBody, string]> {
-		const [, productId] = await this.createProduct(product);
+		const [, productId] = await this.createProduct(product, auth);
 		const [, responseBody] = await this.post(endPoints.wc.createReview, { data: { ...review, product_id: productId }, headers: auth });
 		const reviewId = responseBody.id;
 		return [responseBody, reviewId];
@@ -1281,18 +1284,18 @@ export class ApiUtils {
 	}
 
 	// setup tax
-	async setUpTaxRate(enableTaxPayload: object, taxPayload: taxRate): Promise<number> {
+	async setUpTaxRate(enableTaxPayload: object, taxPayload: taxRate, auth? : auth): Promise<number> {
 		// enable tax rate
-		await this.updateBatchWcSettingsOptions('general', enableTaxPayload);
+		await this.updateBatchWcSettingsOptions('general', enableTaxPayload, auth);
 
 		// delete previous tax rates
-		const allTaxRateIds = (await this.getAllTaxRates()).map((o: { id: unknown; }) => o.id);
+		const allTaxRateIds = (await this.getAllTaxRates(auth)).map((o: { id: unknown; }) => o.id);
 		if (allTaxRateIds.length) {
-			await this.updateBatchTaxRates('delete', allTaxRateIds);
+			await this.updateBatchTaxRates('delete', allTaxRateIds, auth);
 		}
 
 		// create tax rate
-		const taxRateResponse = await this.createTaxRate(taxPayload);
+		const taxRateResponse = await this.createTaxRate(taxPayload, auth);
 		expect(parseInt(taxRateResponse.rate)).toBe(parseInt(taxPayload.rate));
 		return Number(taxPayload.rate);
 	}
@@ -1308,7 +1311,7 @@ export class ApiUtils {
 	// get zoneId
 	async getZoneId(zoneName: string, auth? : auth): Promise<string> {
 		const allZones = await this.getAllShippingZones(auth);
-		const zoneId = (allZones.find((o: { name: unknown; }) => o.name === zoneName)).id;
+		const zoneId = ((allZones).find((o: { name: unknown; }) => o.name === zoneName)).id;
 		return zoneId;
 	}
 
