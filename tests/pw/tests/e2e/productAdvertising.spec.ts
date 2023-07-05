@@ -14,6 +14,7 @@ test.beforeAll(async ({ browser, request }) => {
 	aPage = await adminContext.newPage();
 	productAdvertisingPage = new ProductAdvertisingPage(aPage);
 	apiUtils = new ApiUtils(request);
+	await productAdvertisingPage.reCreateProductAdvertisementPaymentViaSettingsSave();
 });
 
 test.afterAll(async ( ) => {

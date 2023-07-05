@@ -12,6 +12,15 @@ export class ProductAdvertisingPage extends AdminPage {
 
 	// product advertising
 
+	// regenerate product advertisement payment product
+	async reCreateProductAdvertisementPaymentViaSettingsSave(){
+		await this.goToDokanSettings();
+		await this.click(selector.admin.dokan.settings.productAdvertising);
+		await this.clickAndWaitForNavigation(selector.admin.dokan.settings.reverseWithdrawSaveChanges);
+		await this.clickAndWaitForResponse(data.subUrls.ajax, selector.admin.dokan.settings.productAdvertisingSaveChanges);
+		await expect(this.page.locator(selector.admin.dokan.settings.dokanUpdateSuccessMessage)).toContainText('Setting has been saved successfully.');
+	}
+
 	async adminProductAdvertisingRenderProperly(){
 		await this.goIfNotThere(data.subUrls.backend.dokan.dokanProductAdvertising);
 
