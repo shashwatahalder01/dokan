@@ -116,7 +116,7 @@ jobs:
       - name: DB PORT
         run: |
           cd tests/pw 
-          echo "The value of TEST_DB_PORT is ${{ env.DB_PORT }}"
+          echo "The value of test DB_PORT is ${{ env.DB_PORT }}"
 
       # - name: Activate theme:Storefront
       #   run: |
