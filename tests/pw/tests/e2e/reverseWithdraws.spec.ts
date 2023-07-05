@@ -15,7 +15,7 @@ test.beforeAll(async ({ browser, request }) => {
 	reverseWithdrawsPage = new ReverseWithdrawsPage(aPage);
 	apiUtils = new ApiUtils(request);
 	await apiUtils.createOrderWithStatus(payloads.createProduct(), payloads.createOrderCod, 'wc-completed', payloads.vendorAuth);
-	await reverseWithdrawsPage.reCreateReverseWithdrawalPaymentViaSettingsSave();
+	await reverseWithdrawsPage.reCreateReverseWithdrawalPaymentViaSettingsSave(); //TODO: user db manipulation api also needs this
 });
 
 test.afterAll(async ( ) => {

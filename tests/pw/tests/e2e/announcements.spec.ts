@@ -28,20 +28,20 @@ test.describe('Announcements test', () => {
 		await announcementsPage.adminAnnouncementsRenderProperly();
 	});
 
-	test.skip('admin can perform announcements bulk action @pro', async ( ) => {
+	test('admin can add announcement @pro', async ( ) => {
+		await announcementsPage.addAnnouncement(data.announcement.create);
+	});
+
+	// test('admin can edit announcement @pro', async ( ) => {  //TODO: don't exist
+	// 	await announcementsPage.editAnnouncement(data.announcement.update);
+	// });
+
+	test('admin can delete announcements @pro', async ( ) => {
+		await announcementsPage.deleteAnnouncement(data.announcement.create.title);
+	});
+
+	test('admin can perform announcements bulk action @pro', async ( ) => {
 		await announcementsPage.announcementBulkAction('trash');
-	});
-
-	test.fixme('admin can add announcement @pro', async ( ) => {
-		await announcementsPage.addAnnouncement(data.announcement);
-	});
-
-	test.fixme('admin can edit announcement @pro', async ( ) => {
-		await announcementsPage.editAnnouncement(data.predefined.customerInfo.username1);
-	});
-
-	test.fixme('admin can delete announcements  @pro', async ( ) => {
-		await announcementsPage.deleteAnnouncement(data.predefined.customerInfo.username1);
 	});
 
 
