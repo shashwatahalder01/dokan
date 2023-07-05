@@ -1306,9 +1306,18 @@ export const data = {
 	// announcement
 
 	announcement: {
-		title: 'test announcement title _' + faker.string.uuid(),
-		content:  'test announcement Content',
-		updateContent:  'update test announcement Content'
+
+		create:{
+			// title: 'test announcement title _' + faker.string.uuid(),
+			title: 'test announcement title',
+			content:  'test announcement Content',
+		},
+
+		update:{
+			title: 'test announcement title',  // title should be same as create, cause search by title //TODO: updatedTitle:  can be added
+			content:  'update test announcement Content'
+		},
+
 	},
 
 	storeReview:{
@@ -1332,6 +1341,7 @@ export const data = {
 	},
 
 	storeSupport: {
+
 		title: 'test support ticket',
 		filter: {
 			byCustomer: String(process.env.CUSTOMER),
@@ -1342,6 +1352,7 @@ export const data = {
 			asAdmin: 'admin chat reply',
 			asVendor: 'vendor chat reply',
 		}
+
 	},
 
 	requestForQuotation: {
@@ -1361,7 +1372,7 @@ export const data = {
 		},
 
 		quoteRule: {
-			title: 'test quote rule',
+			title: 'test quote rule',  //TODO: title can be used with uuid, tests has to update too
 			userRole: '',
 			product: 'p1_v1 (simple)',
 			category: 'Uncategorized',
@@ -1373,7 +1384,7 @@ export const data = {
 		},
 
 		updateQuoteRule: {
-			title: 'test quote rule',
+			title: 'test quote rule', // title should be same as create, cause search by title //TODO: updatedTitle:  can be added
 			userRole: '',
 			product: 'p1_v1 (simple)',
 			category: 'Uncategorized',
@@ -1403,7 +1414,7 @@ export const data = {
 		},
 
 		updateQuote:{
-			title: 'test quote',
+			title: 'test quote', // title should be same as create, cause search by title //TODO: updatedTitle:  can be added
 			user: 'customer1',
 			fullName: 'Jhon Doe',
 			email: 'customer1@g.com',
