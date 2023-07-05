@@ -36,7 +36,7 @@ export class RefundsPage extends AdminPage {
 	async searchRefundRequests(orderOrStore: string){
 		await this.goIfNotThere(data.subUrls.backend.dokan.dokanRefunds);
 
-		await this.clearInputField(selector.admin.dokan.refunds.search); // TODO: clear by cross, or use type instead of fill
+		await this.clearInputField(selector.admin.dokan.refunds.search);
 
 		await this.typeAndWaitForResponse(data.subUrls.backend.refunds, selector.admin.dokan.refunds.search, String(orderOrStore));
 		if (typeof(orderOrStore) != 'number'){

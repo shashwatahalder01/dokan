@@ -37,10 +37,9 @@ export class SellerBadgesPage extends AdminPage {
 
 	// search seller badge
 	async searchSellerBadge(badgeName: string){
-		await this.goto(data.subUrls.backend.dokan.dokanSellerBadge);
-		// await this.goIfNotThere(data.subUrls.backend.dokan.dokanSellerBadge);
+		await this.goIfNotThere(data.subUrls.backend.dokan.dokanSellerBadge);
 
-		await this.clearInputField(selector.admin.dokan.sellerBadge.search); // TODO: clear by cross, or use type instead of fill
+		await this.clearInputField(selector.admin.dokan.sellerBadge.search);
 		await this.typeAndWaitForResponse(data.subUrls.backend.sellerBadge, selector.admin.dokan.sellerBadge.search, badgeName);
 		await expect(this.page.locator(selector.admin.dokan.sellerBadge.sellerBadgeCell(badgeName))).toBeVisible();
 	}
@@ -189,7 +188,7 @@ export class SellerBadgesPage extends AdminPage {
 
 		await this.clickAndWaitForResponse(data.subUrls.backend.sellerBadge, selector.admin.dokan.vendors.vendorViewDetails(vendorName));
 		await expect(this.page.locator(selector.admin.dokan.vendors.vendorDetails.badgesAcquired)).toBeVisible();
-		//TOdo: either this or that assertion
+		//TOdo: either this or that assertion also add assertions for achieved badges
 	}
 
 
@@ -198,6 +197,7 @@ export class SellerBadgesPage extends AdminPage {
 		await this.searchSellerBadge(badgeName);
 
 		await this.hover(selector.admin.dokan.sellerBadge.sellerBadgeCell(badgeName));
+
 		switch (status) {
 
 		case 'publish' :
@@ -227,9 +227,12 @@ export class SellerBadgesPage extends AdminPage {
 	}
 
 	// seller badge bulk action
-	async sellerBadgeBulkAction(action: string){
-		await this.goIfNotThere(data.subUrls.backend.dokan.dokanSellerBadge);
-
+	async sellerBadgeBulkAction(action: string, badgeName?: string){
+		if(badgeName){
+			await this.searchSellerBadge(badgeName);  //TODO: use search like this for all
+		} else {
+			await this.goIfNotThere(data.subUrls.backend.dokan.dokanSellerBadge);
+		}
 		await this.click(selector.admin.dokan.sellerBadge.bulkActions.selectAll);
 		await this.selectByValue(selector.admin.dokan.sellerBadge.bulkActions.selectAction, action);
 		await this.click( selector.admin.dokan.sellerBadge.bulkActions.applyAction);
@@ -270,7 +273,7 @@ export class SellerBadgesPage extends AdminPage {
 		await this.clickIfVisible(selector.vendor.vBadges.congratsModal.closeModal);
 
 		await this.goIfNotThere(data.subUrls.frontend.badges);
-		await this.selectByLabel( selector.vendor.vBadges.filterBadges, option);
+		await this.selectByValue( selector.vendor.vBadges.filterBadges, option);
 		const count = (await this.getElementText(selector.vendor.vBadges.numberOfBadgesFound))?.split(' ')[0];
 		expect(Number(count)).not.toBe(0);
 		//TOdo: either this or that assertion

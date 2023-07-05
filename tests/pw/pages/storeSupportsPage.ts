@@ -40,8 +40,7 @@ export class StoreSupportsPage extends AdminPage {
 	async searchSupportTicket(title: string){
 		await this.goIfNotThere(data.subUrls.backend.dokan.dokanStoreSupport);
 
-		await this.clearInputField(selector.admin.dokan.storeSupport.searchTicket); // TODO: clear by cross, or use type instead of fill  //TODO: is it necessary
-
+		await this.clearInputField(selector.admin.dokan.storeSupport.searchTicket);
 		await this.typeAndWaitForResponse(data.subUrls.backend.storeSupport, selector.admin.dokan.storeSupport.searchTicket, title);
 		// await expect(this.page.locator(selector.admin.dokan.storeSupport.supportTicketLink(title))).toBeVisible();
 		const count = (await this.getElementText(selector.admin.dokan.storeSupport.numberOfRowsFound))?.split(' ')[0];

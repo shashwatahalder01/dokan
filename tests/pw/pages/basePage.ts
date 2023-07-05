@@ -388,8 +388,10 @@ export class BasePage {
 
 	// hover on selector
 	async hover(selector: string): Promise<void> {
-		await this.page.hover(selector, { timeout: 2000 });
-		await this.wait(1);
+		// await this.page.hover(selector, { timeout: 2000 });
+		// await this.wait(1);
+		await this.page.locator(selector).hover();
+		await this.wait(1.5);
 	}
 
 	// drag and drop

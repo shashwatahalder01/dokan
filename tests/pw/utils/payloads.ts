@@ -1468,10 +1468,23 @@ export const payloads = {
 
 	// seller badge
 
+	createSellerBadgeFeatureProducts:  {
+		'event_type': 'featured_products',
+		'badge_name': 'Featured Products',
+		'badge_status': 'published',
+		'levels': [
+			{
+				level: 0,
+				level_condition: '',
+				level_data: ''
+			}
+		],
+
+	},
+
 	createSellerBadgeExclusiveToPlatform: {
 		event_type: 'exclusive_to_platform',
 		badge_name: 'Exclusive to Platform',
-		badge_logo: 'http://dokan16.test/wp-content/plugins/dokan-pro/modules/seller-badge/assets/images/badges/sale-only-here.svg',
 		badge_status: 'published',
 		levels: [
 			{
@@ -1485,7 +1498,6 @@ export const payloads = {
 	createSellerBadgeProductPublished: {
 		event_type: 'product_published',
 		badge_name: 'Product Published',
-		badge_logo: 'http://dokan16.test/wp-content/plugins/dokan-pro/modules/seller-badge/assets/images/badges/sale-only-here.svg',
 		badge_status: 'published',
 		levels: [
 			{

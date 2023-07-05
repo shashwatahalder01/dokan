@@ -21,8 +21,9 @@ test.beforeAll(async ({ browser, request }) => {
 	sellerBadgesVendor = new SellerBadgesPage(vPage);
 
 	apiUtils = new ApiUtils(request);
-	await apiUtils.deleteAllSellerBadges(payloads.adminAuth);
+	await apiUtils.deleteAllSellerBadges(payloads.adminAuth); // TODO: if any test failed because of this multiple test will fail
 	await apiUtils.createSellerBadge(payloads.createSellerBadgeExclusiveToPlatform, payloads.adminAuth);
+	await apiUtils.createSellerBadge(payloads.createSellerBadgeFeatureProducts, payloads.adminAuth);
 });
 
 test.afterAll(async ( ) => {
@@ -54,12 +55,14 @@ test.describe('Seller badge test', () => {
 		await sellerBadgesAdmin.previewSellerBadge(data.sellerBadge.eventName.productsPublished);
 	});
 
-	test.skip('admin can view seller badge vendors @pro', async ( ) => {
-		await sellerBadgesAdmin.sellerBadgeVendors(data.sellerBadge.eventName.productsPublished);
+	test.skip('admin can filter vendors by seller badge  @pro', async ( ) => {
+		//TODO: need to wait 1 min after badge create ; run via background process; can background process can be automated
+		await sellerBadgesAdmin.filterVendorsByBadge(data.sellerBadge.eventName.productsPublished);
 	});
 
-	test('admin can filter vendors by seller badge  @pro', async ( ) => {
-		await sellerBadgesAdmin.filterVendorsByBadge(data.sellerBadge.eventName.productsPublished);
+	test.skip('admin can view seller badge vendors @pro', async ( ) => {
+		//TODO: need to wait 1 min after badge create; run via background process ; can background process can be automated
+		await sellerBadgesAdmin.sellerBadgeVendors(data.sellerBadge.eventName.productsPublished);
 	});
 
 	test('admin can view seller badges acquired by vendor @pro', async ( ) => {
@@ -67,15 +70,15 @@ test.describe('Seller badge test', () => {
 	});
 
 	test('admin can update seller badge status @pro', async ( ) => {
-		await sellerBadgesAdmin.updateSellerBadgeStatus(data.sellerBadge.eventName.productsPublished, 'draft');
+		await sellerBadgesAdmin.updateSellerBadgeStatus(data.sellerBadge.eventName.exclusiveToPlatform, 'draft');
 	});
 
 	test('admin can delete seller badge @pro', async ( ) => {
-		await sellerBadgesAdmin.deleteSellerBadge(data.sellerBadge.eventName.productsPublished);
+		await sellerBadgesAdmin.deleteSellerBadge(data.sellerBadge.eventName.exclusiveToPlatform);
 	});
 
 	test('admin can perform seller badge bulk action @pro', async ( ) => {
-		await sellerBadgesAdmin.sellerBadgeBulkAction('delete');
+		await sellerBadgesAdmin.sellerBadgeBulkAction('delete', data.sellerBadge.eventName.featuredProducts);
 	});
 
 	test('vendor can view badge acquired congratulation popup message action @pro', async ( ) => {
@@ -87,7 +90,7 @@ test.describe('Seller badge test', () => {
 	});
 
 	test('vendor can filter seller badges  @pro', async ( ) => {
-		await sellerBadgesVendor.filterSellerBadges(data.sellerBadge.eventName.productsPublished);
+		await sellerBadgesVendor.filterSellerBadges('available_badges');
 	});
 
 });

@@ -268,7 +268,7 @@ export class ApiUtils {
 	}
 
 	// delete all products
-	async deleteAllProducts( productName = '', auth? : auth): Promise<responseBody> {
+	async deleteAllProducts( productName = '', auth? : auth): Promise<responseBody> { //TODO: update handle first parameter
 		const allProducts = await this.getAllProducts(auth);
 		let allProductIds: any;
 		// delete all products with same name

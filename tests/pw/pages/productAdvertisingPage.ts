@@ -60,7 +60,7 @@ export class ProductAdvertisingPage extends AdminPage {
 	async searchAdvertisedProduct(productOrOrder: string | number){
 		await this.goIfNotThere(data.subUrls.backend.dokan.dokanProductAdvertising);
 
-		await this.clearInputField(selector.admin.dokan.productAdvertising.search); // TODO: clear by cross, or use type instead of fill  //TODO: is it necessary
+		await this.clearInputField(selector.admin.dokan.productAdvertising.search);
 
 		await this.typeAndWaitForResponse(data.subUrls.backend.productAdvertising, selector.admin.dokan.productAdvertising.search, String(productOrOrder));
 		if (typeof(productOrOrder) != 'number'){

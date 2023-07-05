@@ -38,7 +38,7 @@ export class WholesaleCustomersPage extends AdminPage {
 	async searchWholesaleCustomer(wholesaleCustomer: string){
 		await this.goIfNotThere(data.subUrls.backend.dokan.dokanWholeSaleCustomer);
 
-		await this.clearInputField(selector.admin.dokan.wholesaleCustomer.search); // TODO: clear by cross, or use type instead of fill  //TODO: is it necessary
+		await this.clearInputField(selector.admin.dokan.wholesaleCustomer.search);
 
 		await this.typeAndWaitForResponse(data.subUrls.backend.wholesaleCustomers, selector.admin.dokan.wholesaleCustomer.search, wholesaleCustomer);
 		await expect(this.page.locator(selector.admin.dokan.wholesaleCustomer.wholesaleCustomerCell(wholesaleCustomer))).toBeVisible();

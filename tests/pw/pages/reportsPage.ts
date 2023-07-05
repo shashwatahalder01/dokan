@@ -66,7 +66,7 @@ export class ReportsPage extends AdminPage {
 	async searchAllLogs(orderId: string){
 		await this.goIfNotThere(data.subUrls.backend.dokan.dokanAllLogs);
 
-		await this.clearInputField(selector.admin.dokan.reports.allLogs.search); // TODO: clear by cross, or use type instead of fill  //TODO: is it necessary
+		await this.clearInputField(selector.admin.dokan.reports.allLogs.search);
 		await this.typeAndWaitForResponse(data.subUrls.backend.logs, selector.admin.dokan.reports.allLogs.search, orderId);
 		await expect(this.page.locator(selector.admin.dokan.reports.allLogs.orderIdCell(orderId))).toBeVisible();
 		// await this.clickAndWaitForResponse(data.subUrls.backend.logs, selector.admin.dokan.reports.allLogs.filters.clear);

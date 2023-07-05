@@ -957,7 +957,7 @@ export class AdminPage extends BasePage {
 	async searchVendor(vendorName: string){
 		await this.goIfNotThere(data.subUrls.backend.dokan.dokanVendors);
 
-		await this.clearInputField(selector.admin.dokan.vendors.search); // TODO: clear by cross, or use type instead of fill  //TODO: is it necessary
+		await this.clearInputField(selector.admin.dokan.vendors.search);
 
 		await this.typeAndWaitForResponse(data.subUrls.backend.stores, selector.admin.dokan.vendors.search, vendorName);
 		await expect(this.page.locator(selector.admin.dokan.vendors.vendorCell(vendorName))).toBeVisible();  //TODO: add this to base page
