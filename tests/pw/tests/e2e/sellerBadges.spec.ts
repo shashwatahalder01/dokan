@@ -73,7 +73,7 @@ test.describe('Seller badge test', () => {
 		await sellerBadgesAdmin.updateSellerBadge(data.sellerBadge.eventName.exclusiveToPlatform, 'draft');
 	});
 
-	test.only('admin can delete seller badge @pro', async ( ) => {
+	test('admin can delete seller badge @pro', async ( ) => {
 		await sellerBadgesAdmin.updateSellerBadge(data.sellerBadge.eventName.exclusiveToPlatform, 'delete');
 	});
 
