@@ -192,8 +192,8 @@ export class SellerBadgesPage extends AdminPage {
 	}
 
 
-	// delete seller badge
-	async updateSellerBadgeStatus(badgeName: string, status: string){
+	// update seller badge
+	async updateSellerBadge(badgeName: string, status: string){
 		await this.searchSellerBadge(badgeName);
 
 		await this.hover(selector.admin.dokan.sellerBadge.sellerBadgeCell(badgeName));
@@ -208,20 +208,14 @@ export class SellerBadgesPage extends AdminPage {
 			await this.click(selector.admin.dokan.sellerBadge.sellerBadgeDraft);
 			break;
 
+		case 'delete' :
+			await this.click(selector.admin.dokan.sellerBadge.sellerBadgeDelete);
+			break;
+
 		default :
 			break;
 		}
 
-		await this.clickAndWaitForResponse(data.subUrls.backend.sellerBadge, selector.admin.dokan.sellerBadge.confirmAction);
-		await this.click(selector.admin.dokan.sellerBadge.successMessage);
-	}
-
-	// delete seller badge
-	async deleteSellerBadge(badgeName: string){
-		await this.searchSellerBadge(badgeName);
-
-		await this.hover(selector.admin.dokan.sellerBadge.sellerBadgeCell(badgeName));
-		await this.click(selector.admin.dokan.sellerBadge.sellerBadgeDelete);
 		await this.clickAndWaitForResponse(data.subUrls.backend.sellerBadge, selector.admin.dokan.sellerBadge.confirmAction);
 		await this.click(selector.admin.dokan.sellerBadge.successMessage);
 	}

@@ -41,8 +41,10 @@ export class AnnouncementsPage extends AdminPage {
 
 		await this.clearAndType(selector.admin.dokan.announcements.addAnnouncement.title, announcement.title);
 		await this.typeFrameSelector(selector.admin.dokan.announcements.addAnnouncement.contentIframe, selector.admin.dokan.announcements.addAnnouncement.contentHtmlBody, announcement.content);
+		await this.selectByValue(selector.admin.dokan.announcements.addAnnouncement.sendAnnouncementTo, announcement.receiver);
 		await this.clickAndWaitForResponse(data.subUrls.backend.announcements, selector.admin.dokan.announcements.addAnnouncement.publish);
-		//TODO: add assertion
+		//TODO: add wait for load then assert
+		// await expect(this.page.locator(selector.admin.dokan.announcements.announcementCell(announcement.title))).toBeVisible();
 	}
 
 	// edit announcement
@@ -50,21 +52,46 @@ export class AnnouncementsPage extends AdminPage {
 		await this.goto(data.subUrls.backend.dokan.dokanAnnouncements);
 		// await this.goIfNotThere(data.subUrls.backend.dokan.dokanAnnouncements);
 
+		// await this.clickAndWaitForResponse(data.subUrls.backend.announcements, selector.admin.dokan.announcements.navTabs.draft);
 		await this.hover(selector.admin.dokan.announcements.announcementCell(announcement.title));
-		await this.click(selector.admin.dokan.announcements.announcementEdit);
+		await this.clickAndWaitForResponse(data.subUrls.backend.announcements, selector.admin.dokan.announcements.announcementEdit(announcement.title));
 
+		await this.clearAndType(selector.admin.dokan.announcements.addAnnouncement.title, announcement.title);
 		await this.typeFrameSelector(selector.admin.dokan.announcements.addAnnouncement.contentIframe, selector.admin.dokan.announcements.addAnnouncement.contentHtmlBody, announcement.content);
+		await this.selectByValue(selector.admin.dokan.announcements.addAnnouncement.sendAnnouncementTo, announcement.receiver);
 		await this.clickAndWaitForResponse(data.subUrls.backend.announcements, selector.admin.dokan.announcements.addAnnouncement.publish);
-		//TODO: add assertion
+		//TODO: add wait for load then assert
+		// await expect(this.page.locator(selector.admin.dokan.announcements.announcementCell(announcement.title))).toBeVisible();
 	}
 
-	// delete announcement
-	async deleteAnnouncement(announcementTitle: string){
+	// update announcement
+	async updateAnnouncement(announcementTitle: string, action: string){
 		await this.goto(data.subUrls.backend.dokan.dokanAnnouncements);
 		// await this.goIfNotThere(data.subUrls.backend.dokan.dokanAnnouncements);
 
-		await this.hover(selector.admin.dokan.announcements.announcementCell(announcementTitle));
-		await this.clickAndWaitForResponse(data.subUrls.backend.announcements, selector.admin.dokan.announcements.announcementDelete);
+		switch (action) {
+
+		case 'trash' :
+			await this.hover(selector.admin.dokan.announcements.announcementCellPublished(announcementTitle));
+			await this.clickAndWaitForResponse(data.subUrls.backend.announcements, selector.admin.dokan.announcements.announcementDelete(announcementTitle));
+			break;
+
+		case 'restore' :
+			await this.clickAndWaitForResponse(data.subUrls.backend.announcements, selector.admin.dokan.announcements.navTabs.trash);
+			await this.hover(selector.admin.dokan.announcements.announcementCell(announcementTitle));
+			await this.clickAndWaitForResponse(data.subUrls.backend.announcements, selector.admin.dokan.announcements.announcementRestore(announcementTitle));
+			break;
+
+		case 'permanently-delete' :
+			await this.clickAndWaitForResponse(data.subUrls.backend.announcements, selector.admin.dokan.announcements.navTabs.trash);
+			await this.hover(selector.admin.dokan.announcements.announcementCell(announcementTitle));
+			await this.clickAndWaitForResponse(data.subUrls.backend.announcements, selector.admin.dokan.announcements.announcementPermanentlyDelete(announcementTitle));
+			break;
+
+		default :
+			break;
+		}
+
 	}
 
 	// announcement bulk action

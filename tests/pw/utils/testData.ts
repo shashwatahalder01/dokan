@@ -1307,16 +1307,26 @@ export const data = {
 
 	announcement: {
 
+		receiver: {
+			allVendors: 'all_seller',
+			selectedVendors: 'selected_seller',
+			enabledVendors: 'enabled_seller',
+			disabledVendors: 'disabled_seller',
+			featuredVendors: 'featured_seller',
+		},
+
 		create:{
-			// title: 'test announcement title _' + faker.string.uuid(),
+			randomTitle: () => 'test announcement_' + faker.string.uuid(),
 			title: 'test announcement title',
 			content:  'test announcement Content',
+			receiver: ''
 		},
 
 		update:{
 			title: 'test announcement title',  // title should be same as create, cause search by title //TODO: updatedTitle:  can be added
 			content:  'update test announcement Content'
 		},
+
 
 	},
 

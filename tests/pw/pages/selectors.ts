@@ -998,14 +998,21 @@ export const selector = {
 				},
 
 				announcementCell: (title: string) => `//a[contains(text(),'${title}')]/../..`,
-				announcementEdit: '.row-actions .edit',
-				announcementDelete: '.row-actions .delete',
+				announcementCellPublished: (title: string) => `//strong[contains(text(),'${title}')]/../..`,
+				announcementEdit: (title: string) => `//a[contains(text(),'${title}')]/../..//span[@class="edit"]`,
+				announcementDelete: (title: string) => `//strong[contains(text(),'${title}')]/../..//span[@class="trash"]`,
+				announcementPermanentlyDelete: (title: string) => `//a[contains(text(),'${title}')]/../..//span[@class="delete"]`,
+				announcementRestore: (title: string) => `//a[contains(text(),'${title}')]/../..//span[@class="restore"]`,
+				// announcementEdit: '.row-actions .edit',
+				// announcementDelete: '.row-actions .delete',
+
 
 				// add announcement
 				addAnnouncement: {
 					title: '#titlediv input',
 					contentIframe: '#postdivrich iframe',
 					contentHtmlBody: '#tinymce',
+					sendAnnouncementTo: '#announcement_sender_type', // all_seller, selected_seller, enabled_seller, disabled_seller, featured_seller
 					saveAsDraft: '.draft-btn',
 					publish: '.publish-btn'
 

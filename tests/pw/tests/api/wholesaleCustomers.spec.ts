@@ -8,7 +8,7 @@ let wholesaleCustomerId: string;
 
 test.beforeAll(async ({ request }) => {
 	apiUtils = new ApiUtils(request);
-	[, wholesaleCustomerId] = await apiUtils.createWholesaleCustomer(payloads.createCustomer());
+	[, wholesaleCustomerId] = await apiUtils.createWholesaleCustomer(payloads.createCustomer(), payloads.adminAuth);
 });
 
 test.describe('wholesale customers api test', () => {

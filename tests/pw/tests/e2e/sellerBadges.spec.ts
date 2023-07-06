@@ -70,11 +70,11 @@ test.describe('Seller badge test', () => {
 	});
 
 	test('admin can update seller badge status @pro', async ( ) => {
-		await sellerBadgesAdmin.updateSellerBadgeStatus(data.sellerBadge.eventName.exclusiveToPlatform, 'draft');
+		await sellerBadgesAdmin.updateSellerBadge(data.sellerBadge.eventName.exclusiveToPlatform, 'draft');
 	});
 
-	test('admin can delete seller badge @pro', async ( ) => {
-		await sellerBadgesAdmin.deleteSellerBadge(data.sellerBadge.eventName.exclusiveToPlatform);
+	test.only('admin can delete seller badge @pro', async ( ) => {
+		await sellerBadgesAdmin.updateSellerBadge(data.sellerBadge.eventName.exclusiveToPlatform, 'delete');
 	});
 
 	test('admin can perform seller badge bulk action @pro', async ( ) => {
