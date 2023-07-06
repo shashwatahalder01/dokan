@@ -20,7 +20,8 @@ test.beforeAll(async ({ browser, request }) => {
 	aPage = await adminContext.newPage();
 	wholesaleAdmin = new WholesaleCustomersPage(aPage);
 
-	const customerContext = await browser.newContext({ storageState: data.auth.customerAuthFile });
+	// const customerContext = await browser.newContext({ storageState: data.auth.customerAuthFile });
+	const customerContext = await browser.newContext({ storageState: { cookies: [], origins: [] } });
 	cPage = await customerContext.newPage();
 	customerPage = new CustomerPage(cPage);
 	wholesaleCustomer = new WholesaleCustomersPage(cPage);
