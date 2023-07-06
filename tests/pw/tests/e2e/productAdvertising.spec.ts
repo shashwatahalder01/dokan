@@ -43,16 +43,20 @@ test.describe('Product Advertising test', () => {
 		await productAdvertisingPage.searchAdvertisedProduct(data.productAdvertisement.advertisedProduct);
 	});
 
+	test('admin can filter advertised product by stores @pro', async ( ) => {
+		await productAdvertisingPage.filterAdvertisedProduct(data.productAdvertisement.filter.byStore, 'by-store');
+	});
+
+	test('admin can filter advertised product by creation process @pro', async ( ) => {
+		await productAdvertisingPage.filterAdvertisedProduct(data.productAdvertisement.filter.createVia.admin, 'by-creation');
+	});
+
 	test('admin can expire advertised product @pro', async ( ) => {
 		await productAdvertisingPage.updateAdvertisedProduct(data.productAdvertisement.advertisedProduct, 'expire');
 	});
 
 	test('admin can delete advertised product @pro', async ( ) => {
 		await productAdvertisingPage.updateAdvertisedProduct(data.productAdvertisement.advertisedProduct, 'delete');
-	});
-
-	test.skip('admin can filter advertised product @pro', async ( ) => {
-		// await productAdvertisingPage.filterAdvertisedProduct(data.productAdvertisement.advertisedProduct, 'delete');
 	});
 
 	test('admin can perform product advertising bulk action @pro', async ( ) => {

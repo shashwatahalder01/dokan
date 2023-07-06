@@ -78,6 +78,32 @@ export class ProductAdvertisingPage extends AdminPage {
 		}
 	}
 
+	// filter advertised product
+	async filterAdvertisedProduct(input: string, action: string){
+		await this.goIfNotThere(data.subUrls.backend.dokan.dokanProductAdvertising);
+
+		switch (action) {
+
+		case 'by-store' :
+			await this.click(selector.admin.dokan.productAdvertising.filters.allStoresDropdown);
+			await this.typeAndWaitForResponse(data.subUrls.backend.productAdvertising, selector.admin.dokan.productAdvertising.filters.filterByStoreInput, input);
+			await this.pressAndWaitForResponse(data.subUrls.backend.productAdvertising, data.key.enter);
+			break;
+
+		case 'by-creation' :
+			await this.click(selector.admin.dokan.productAdvertising.filters.createdViaDropdown);
+			await this.clickAndWaitForResponse(data.subUrls.backend.productAdvertising, selector.admin.dokan.productAdvertising.filters.filterByCreatedVia(input));
+			break;
+
+		default :
+			break;
+		}
+
+		const count = (await this.getElementText(selector.admin.dokan.productAdvertising.numberOfRowsFound))?.split(' ')[0];
+		expect(Number(count)).not.toBe(0);
+
+	}
+
 	// update advertised product
 	async updateAdvertisedProduct(productName: string, action: string){
 		await this.searchAdvertisedProduct(productName);

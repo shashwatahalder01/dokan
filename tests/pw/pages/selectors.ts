@@ -1430,11 +1430,12 @@ export const selector = {
 
 				// Filters
 				filters: {
-					allStoresDropdown:'//div[@class="multiselect__select"]', //TODO: not unique
-					createdViaDropdown:'//div[@class="multiselect__select"]',
-					//TODO: add createdViaDropdown filter locator
-					//TODO: add date-range filter locator
+					allStoresDropdown:'//input[@placeholder="Filter by store"]/../..//div[@class="multiselect__select"]',
+					createdViaDropdown:'(//div[@class="multiselect__select"])[2]',
+					filterByStoreInput: 'input[placeholder="Filter by store"]',
+					filterByCreatedVia: (createdVia: string) => `//li[@class="multiselect__element"]//span[contains(@class,"multiselect__option")]//span[contains(text(), "${createdVia}")]`,
 					clearFilter: '//button[normalize-space()="Clear"]',
+					//TODO: add date-range filter locator
 				},
 
 				// Search
@@ -1452,6 +1453,7 @@ export const selector = {
 					dateColumn: 'thead th.added',
 				},
 
+				numberOfRowsFound: '.tablenav.top .displaying-num',
 				advertisedProductCell: (productName: string) => `//a[normalize-space()="${productName}"]/../..`,
 				advertisedProductOrderIdCell: (orderId: number) => `//a[normalize-space()="${orderId}"]/../..`,
 				advertisedProductExpire: '.row-actions .expire',
@@ -4802,7 +4804,7 @@ export const selector = {
 		},
 
 		cOrderReceived: {
-			orderReceivedPageHeader: 'h1.entry-title',
+			orderReceivedSuccessMessage: '.woocommerce-notice.woocommerce-notice--success.woocommerce-thankyou-order-received',
 
 			// Order Details
 			orderNumber: '.woocommerce-order-overview__order.order strong',

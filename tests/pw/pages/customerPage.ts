@@ -438,7 +438,7 @@ export class CustomerPage extends BasePage {
 			break;
 		}
 		await this.clickAndWaitForResponse(data.subUrls.frontend.placeOrder, selector.customer.cCheckout.placeOrder); //todo:  remove from other places
-		await expect(this.page.locator(selector.customer.cOrderReceived.orderReceivedPageHeader)).toBeVisible();
+		await expect(this.page.locator(selector.customer.cOrderReceived.orderReceivedSuccessMessage)).toBeVisible();
 
 		// if (getOrderDetails) {
 		//     return await this.getOrderDetailsAfterPlaceOrder()

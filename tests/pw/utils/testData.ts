@@ -1504,6 +1504,17 @@ export const data = {
 		advertisedProductStore: String(process.env.VENDOR) + 'store',
 		advertisedProduct: 'p1_v1 (simple)',
 
+		filter: {
+			byStore: String(process.env.VENDOR) + 'store',
+			createVia: {
+				admin: 'Admin',
+				order: 'Order',
+				subscription: 'Subscription',
+				freePurchase: 'Free Purchase',
+
+			},
+		},
+
 	},
 
 	dokanLicense: {
