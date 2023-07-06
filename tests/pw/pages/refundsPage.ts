@@ -70,7 +70,8 @@ export class RefundsPage extends AdminPage {
 
 	// refund request bulk action
 	async refundRequestsBulkAction(action: string){
-		await this.goIfNotThere(data.subUrls.backend.dokan.dokanRefunds);
+		await this.goto(data.subUrls.backend.dokan.dokanRefunds);
+		// await this.goIfNotThere(data.subUrls.backend.dokan.dokanRefunds);
 
 		await this.click(selector.admin.dokan.refunds.bulkActions.selectAll);
 		await this.selectByValue(selector.admin.dokan.refunds.bulkActions.selectAction, action);

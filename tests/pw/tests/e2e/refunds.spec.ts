@@ -48,6 +48,8 @@ test.describe('refunds test', () => {
 	});
 
 	test('admin can perform refund requests bulk actions @pro', async ( ) => {
+		const[, orderResponseBody,, ] = await apiUtils.createOrderWithStatus(payloads.createProduct(), payloads.createOrder, 'wc-processing', payloads.vendorAuth);
+		await dbUtils.createRefund(orderResponseBody);
 		await refundsPage.refundRequestsBulkAction('completed');
 	});
 
