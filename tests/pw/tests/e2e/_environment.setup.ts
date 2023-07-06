@@ -339,11 +339,6 @@ setup.describe('setup testPrerequisites', () => {
 
 	setup.use({ extraHTTPHeaders: { Authorization: payloads.aAuth } });
 
-	// setup('create wholesale customer @pro', async ({ request }) => {
-	// 	const apiUtils = new ApiUtils(request);
-	// 	await apiUtils.createWholesaleCustomer(payloads.createCustomer1);
-	// });
-
 	setup('create test vendor refund @pro', async ({ request }) => {
 		const apiUtils = new ApiUtils(request);
 		const [, orderResponseBody,] = await apiUtils.createOrderWithStatus(payloads.createProduct(), payloads.createOrder, 'wc-processing', payloads.vendorAuth);

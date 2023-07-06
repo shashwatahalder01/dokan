@@ -2695,7 +2695,8 @@ export const selector = {
 			// Dokan Subscription
 			assignSubscriptionPack: '.dps_assign_pack select',
 			// Update User
-			updateUser: '#submit',
+			updateUser: 'input#submit',
+			updateSuccessMessage: '//div[@id="message"]//p',
 		},
 
 		// Tools

@@ -45,11 +45,22 @@ export class WholesaleCustomersPage extends AdminPage {
 	}
 
 	// edit wholesale customer
-	async editWholesaleCustomer(wholesaleCustomer: string){
-		await this.searchWholesaleCustomer(wholesaleCustomer);
-		await this.hover(selector.admin.dokan.wholesaleCustomer.wholesaleCustomerCell(wholesaleCustomer));
+	async editWholesaleCustomer(wholesaleCustomer: any){
+		await this.searchWholesaleCustomer(wholesaleCustomer.username);
+		await this.hover(selector.admin.dokan.wholesaleCustomer.wholesaleCustomerCell(wholesaleCustomer.username));
 		await this.clickAndWaitForNavigation(selector.admin.dokan.wholesaleCustomer.wholesaleCustomerEdit);
-		//TODO:
+
+
+		// Customer details
+		await this.selectByValue(selector.admin.users.role, wholesaleCustomer.customerInfo.role);
+		await this.clearAndType(selector.admin.users.firstName, wholesaleCustomer.username);
+		await this.clearAndType(selector.admin.users.lastName, wholesaleCustomer.lastname);
+		await this.clearAndType(selector.admin.users.nickname, wholesaleCustomer.username );
+		// TODO: add more details
+
+		// update user
+		await this.clickAndWaitForResponse(data.subUrls.user, selector.admin.users.updateUser, 302);
+		await expect(this.page.locator(selector.admin.users.updateSuccessMessage)).toContainText('User updated.');
 	}
 
 	// view wholesale customer orders
@@ -108,13 +119,13 @@ export class WholesaleCustomersPage extends AdminPage {
 	async customerBecomeWholesaleCustomer(): Promise<void> {
 		await this.goIfNotThere(data.subUrls.frontend.myAccount);
 		const currentUser = await this.getCurrentUser();
-		await this.click(selector.customer.cDashboard.becomeWholesaleCustomer);
+		await this.clickAndWaitForResponse(data.subUrls.backend.wholesaleRegister, selector.customer.cDashboard.becomeWholesaleCustomer);
 		const neeApproval = await this.isVisible(selector.customer.cDashboard.wholesaleRequestReturnMessage);
 		if (!neeApproval) {
 			await expect(this.page.locator(selector.customer.cWooSelector.wooCommerceSuccessMessage)).toContainText(data.wholesale.becomeWholesaleCustomerSuccessMessage);
 		}
 		else {
-			await expect(this.page.locator(selector.customer.cWooSelector.wooCommerceSuccessMessage)).toContainText(data.wholesale.wholesaleRequestSendMessage);
+			await expect(this.page.locator(selector.customer.cDashboard.wholesaleRequestReturnMessage)).toContainText(data.wholesale.wholesaleRequestSendMessage);
 			await this.loginPage.switchUser(data.admin);
 			await this.updateWholesaleCustomer(currentUser!, 'enable'); //TOOD: fix this
 		}

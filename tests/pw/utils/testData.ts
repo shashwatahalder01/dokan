@@ -797,6 +797,7 @@ export const data = {
 			modules: 'dokan/v1/admin/modules',
 			storeReviews: 'dokan/v1/store-reviews',
 			productAdvertising: 'dokan/v1/product_adv',
+			wholesaleRegister: 'dokan/v1/wholesale/register',
 			wholesaleCustomers: 'dokan/v1/wholesale/customers',
 			storeSupport: 'dokan/v1/admin/support-ticket',
 			quotes: 'dokan/v1/request-for-quote',
@@ -874,6 +875,7 @@ export const data = {
 				modules: 'dokan/v1/admin/modules',
 				storeReviews: 'dokan/v1/store-reviews',
 				productAdvertising: 'dokan/v1/product_adv',
+				wholesaleRegister: 'dokan/v1/wholesale/register',
 				wholesaleCustomers: 'dokan/v1/wholesale/customers',
 				supportTicket: 'dokan/v1/admin/support-ticket',
 				quotes: 'dokan/v1/request-for-quote',
@@ -891,6 +893,7 @@ export const data = {
 		ajax: '/admin-ajax.php',
 		post: '/post.php',
 		gmap: '/maps/api',
+		user: 'wp-admin/user-edit.php',
 	},
 
 	admin: {
@@ -1193,6 +1196,8 @@ export const data = {
 	customer: {
 		username: String(process.env.CUSTOMER),
 		password: String(process.env.USER_PASSWORD),
+		lastname: String(process.env.CUSTOMER)[0] + String(process.env.CUSTOMER)[String(process.env.CUSTOMER).length-1], //TODO: add last-name to other users
+		// lastname1: ( name = process.env.CUSTOMER) => {  name[0] + name[name.length - 1]; },
 
 		customerInfo: {
 			// emailDomain: '_' + faker.string.alphanumeric(5) + '@email.com',
@@ -1204,6 +1209,7 @@ export const data = {
 			lastName: () => faker.person.lastName('male'),
 			// username: () => this.customer.customerInfo.firstName, //TODO: handel callback  & not works
 			// storename: () => this.customer.customerInfo.firstName + 'store',
+			role: 'customer',
 			username: () => faker.person.firstName('male'),
 			storename: () => faker.person.firstName('male') + 'store',
 			companyName: faker.company.name(),
