@@ -58,7 +58,7 @@ export class RefundsPage extends AdminPage {
 			await this.clickAndWaitForResponse(data.subUrls.backend.refunds, selector.admin.dokan.refunds.approveRefund(orderNumber));
 			break;
 
-		case 'reject' :
+		case 'cancel' :
 			await this.clickAndWaitForResponse(data.subUrls.backend.refunds, selector.admin.dokan.refunds.cancelRefund(orderNumber));
 			break;
 

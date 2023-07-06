@@ -333,16 +333,3 @@ setup.describe('setup dokan settings', () => {
 // 	// });
 
 // });
-
-
-setup.describe('setup testPrerequisites', () => {
-
-	setup.use({ extraHTTPHeaders: { Authorization: payloads.aAuth } });
-
-	setup('create test vendor refund @pro', async ({ request }) => {
-		const apiUtils = new ApiUtils(request);
-		const [, orderResponseBody,] = await apiUtils.createOrderWithStatus(payloads.createProduct(), payloads.createOrder, 'wc-processing', payloads.vendorAuth);
-		await dbUtils.createRefund(orderResponseBody);
-	});
-
-});

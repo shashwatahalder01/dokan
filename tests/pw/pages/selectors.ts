@@ -1035,7 +1035,7 @@ export const selector = {
 				// Bulk Actions
 				bulkActions: {
 					selectAll: 'thead .manage-column',
-					selectAction: '.tablenav.top #bulk-action-selector-top',  // Delete
+					selectAction: '.tablenav.top #bulk-action-selector-top',  // completed, cancelled
 					applyAction: '.tablenav.top .button.action',
 				},
 
