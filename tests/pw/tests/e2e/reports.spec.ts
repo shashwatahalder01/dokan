@@ -15,7 +15,9 @@ test.beforeAll(async ({ browser, request }) => {
 	aPage = await adminContext.newPage();
 	reportsPage = new ReportsPage(aPage);
 	apiUtils = new ApiUtils(request);
-	orderId = String(await apiUtils.getOrderId(payloads.adminAuth)); //TODO: can be replaced with create order
+	// orderId = String(await apiUtils.getOrderId(payloads.adminAuth)); //TODO: can be replaced with create order
+	[,, orderId,] = await apiUtils.createOrder(payloads.createProduct(), payloads.createOrder, payloads.vendorAuth);
+	console.log(orderId);
 });
 
 test.afterAll(async ( ) => {

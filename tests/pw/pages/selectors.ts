@@ -4802,7 +4802,7 @@ export const selector = {
 		},
 
 		cOrderReceived: {
-			orderReceivedPageHeader: '.entry-title',
+			orderReceivedPageHeader: 'h1.entry-title',
 
 			// Order Details
 			orderNumber: '.woocommerce-order-overview__order.order strong',

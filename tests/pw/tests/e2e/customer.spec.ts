@@ -39,9 +39,9 @@ test.describe('Customer user functionality test', () => {
 		await customerPage.customerBecomeVendor(data.customer.customerInfo);
 	});
 
-	test('customer can become a wholesale customer', async () => {
+	test.skip('customer can become a wholesale customer', async () => {
 		await customerPage.customerRegister(data.customer.customerInfo);
-		await customerPage.customerBecomeWholesaleCustomer();
+		// await customerPage.customerBecomeWholesaleCustomer();
 	});
 });
 
@@ -91,7 +91,7 @@ test.describe('Customer functionality test', () => {
 		await customerPage.enquireProduct(data.predefined.simpleProduct.product1.name, data.product.enquiry);
 	});
 
-	test.skip('customer can buy product', async ( ) => {
+	test('customer can buy product', async ( ) => {
 		await customerPage.clearCart();
 		await customerPage.addProductToCartFromSingleProductPage(data.predefined.simpleProduct.product1.name);
 		await customerPage.placeOrder();

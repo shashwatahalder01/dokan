@@ -16,7 +16,7 @@ test.beforeAll(async ({ browser, request }) => {
 	refundsPage = new RefundsPage(aPage);
 	apiUtils = new ApiUtils(request);
 	const [, orderResponseBody,] = await apiUtils.createOrderWithStatus(payloads.createProduct(), payloads.createOrder, 'wc-processing', payloads.vendorAuth);
-	await dbUtils.createRefund(orderResponseBody);
+	await dbUtils.createRefund(orderResponseBody); // TODO: why processing
 });
 
 test.afterAll(async ( ) => {

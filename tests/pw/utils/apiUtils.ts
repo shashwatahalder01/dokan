@@ -479,6 +479,7 @@ export class ApiUtils {
 	// get orderId
 	async getOrderId(auth? : auth): Promise<string> {
 		const allOrders = await this.getAllOrders(auth);
+		console.log(allOrders);
 		const orderId = allOrders[0].id;
 		return orderId;
 	}
@@ -716,7 +717,7 @@ export class ApiUtils {
 	async createProductAdvertisement(product: object, auth? : auth): Promise<[responseBody, string]> {
 		const [body, productId] = await this.createProduct(product, auth);
 		const sellerId = body.store.id;
-		const [, responseBody] = await this.post(endPoints.createProductAdvertisement, { data: { vendor_id: sellerId, product_id: productId }, headers: auth });
+		const [, responseBody] = await this.post(endPoints.createProductAdvertisement, { data: { vendor_id: sellerId, product_id: productId }, headers: payloads.adminAuth });
 		const productAdvertisementId = responseBody.id;
 		return [responseBody, productAdvertisementId];
 	}

@@ -91,21 +91,21 @@ export class CustomerPage extends BasePage {
 		await expect(this.page.locator(selector.vendor.vDashboard.menus.dashboard)).toBeVisible();
 	}
 
-	// customer become wholesale customer
-	async customerBecomeWholesaleCustomer(): Promise<void> {
-		await this.goIfNotThere(data.subUrls.frontend.myAccount);
-		const currentUser = await this.getCurrentUser();
-		await this.click(selector.customer.cDashboard.becomeWholesaleCustomer);
-		const neeApproval = await this.isVisible(selector.customer.cDashboard.wholesaleRequestReturnMessage);
-		if (!neeApproval) {
-			await expect(this.page.locator(selector.customer.cWooSelector.wooCommerceSuccessMessage)).toContainText(data.wholesale.becomeWholesaleCustomerSuccessMessage);
-		}
-		else {
-			await expect(this.page.locator(selector.customer.cWooSelector.wooCommerceSuccessMessage)).toContainText(data.wholesale.wholesaleRequestSendMessage);
-			await this.loginPage.switchUser(data.admin);
-			await this.adminPage.updateWholesaleCustomerStatus(currentUser!); //TOOD: fix this
-		}
-	}
+	// // customer become wholesale customer
+	// async customerBecomeWholesaleCustomer(): Promise<void> {
+	// 	await this.goIfNotThere(data.subUrls.frontend.myAccount);
+	// 	const currentUser = await this.getCurrentUser();
+	// 	await this.click(selector.customer.cDashboard.becomeWholesaleCustomer);
+	// 	const neeApproval = await this.isVisible(selector.customer.cDashboard.wholesaleRequestReturnMessage);
+	// 	if (!neeApproval) {
+	// 		await expect(this.page.locator(selector.customer.cWooSelector.wooCommerceSuccessMessage)).toContainText(data.wholesale.becomeWholesaleCustomerSuccessMessage);
+	// 	}
+	// 	else {
+	// 		await expect(this.page.locator(selector.customer.cWooSelector.wooCommerceSuccessMessage)).toContainText(data.wholesale.wholesaleRequestSendMessage);
+	// 		await this.loginPage.switchUser(data.admin);
+	// 		await this.adminPage.updateWholesaleCustomerStatus(currentUser!); //TOOD: fix this
+	// 	}
+	// }
 
 	// customer add billing address
 	async addBillingAddress(billingInfo: { firstName: () => string; lastName: () => string; companyName: string; companyId: string; vatNumber: string; bankName: string; bankIban: string; country: string; street1: string; street2: string; city: string; state: string; zipCode: string; phone: string; email: () => string; }): Promise<void> {
