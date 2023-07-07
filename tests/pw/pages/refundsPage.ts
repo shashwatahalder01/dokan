@@ -39,11 +39,12 @@ export class RefundsPage extends AdminPage {
 		await this.clearInputField(selector.admin.dokan.refunds.search);
 
 		await this.typeAndWaitForResponse(data.subUrls.backend.refunds, selector.admin.dokan.refunds.search, String(orderOrStore));
-		if (typeof(orderOrStore) != 'number'){
+		if (!isNaN(Number(orderOrStore))){
+			await expect(this.page.locator(selector.admin.dokan.refunds.refundCell(orderOrStore))).toBeVisible();
+
+		} else {
 			const count = (await this.getElementText(selector.admin.dokan.refunds.numberOfRowsFound))?.split(' ')[0];
 			expect(Number(count)).not.toBe(0);
-		} else {
-			await expect(this.page.locator(selector.admin.dokan.refunds.refundCell(orderOrStore))).toBeVisible();
 		}
 	}
 

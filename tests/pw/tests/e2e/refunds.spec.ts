@@ -33,7 +33,7 @@ test.describe('refunds test', () => {
 		await refundsPage.adminRefundRequestsRenderProperly();
 	});
 
-	test('admin can search refund requests @pro', async ( ) => {
+	test('admin can search refund requests @pro', async ( ) => {  //TODO: separate test for search by storename ??
 		await refundsPage.searchRefundRequests(orderId);
 	});
 
