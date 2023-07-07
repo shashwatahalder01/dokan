@@ -39,7 +39,7 @@ test.describe('Reports test', () => {
 		await reportsPage.adminAllLogsRenderProperly();
 	});
 
-	test.only('admin can search all logs @pro', async ( ) => {
+	test('admin can search all logs @pro', async ( ) => {
 		await reportsPage.searchAllLogs(orderId);
 	});
 
