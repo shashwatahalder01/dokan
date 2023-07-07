@@ -2696,7 +2696,7 @@ export const selector = {
 			assignSubscriptionPack: '.dps_assign_pack select',
 			// Update User
 			updateUser: 'input#submit',
-			updateSuccessMessage: '//div[@id="message"]//p',
+			updateSuccessMessage: '//strong[normalize-space()="User updated."]',
 		},
 
 		// Tools

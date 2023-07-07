@@ -15,9 +15,8 @@ test.beforeAll(async ({ browser, request }) => {
 	aPage = await adminContext.newPage();
 	reportsPage = new ReportsPage(aPage);
 	apiUtils = new ApiUtils(request);
-	// orderId = String(await apiUtils.getOrderId(payloads.adminAuth)); //TODO: can be replaced with create order
-	[,, orderId,] = await apiUtils.createOrder(payloads.createProduct(), payloads.createOrder, payloads.vendorAuth);
-	orderId = String(orderId);
+	[,, orderId, ] = await apiUtils.createOrderWithStatus(payloads.createProduct(), payloads.createOrder, data.order.orderStatus.completed, payloads.vendorAuth);
+	orderId = String(orderId); // TODO: why need to convert to string
 });
 
 test.afterAll(async ( ) => {

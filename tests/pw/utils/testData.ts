@@ -791,6 +791,7 @@ export const data = {
 			reverseWithdraws: 'dokan/v1/reverse-withdrawal',
 			abuseReports: 'dokan/v1/abuse-reports',
 			logs: 'dokan/v1/admin/logs',
+			downloadOrderLogs: 'wp-admin/admin.php?download-order-log-csv',
 			announcements: 'dokan/v1/announcement',
 			dummyData: 'dokan/v1/dummy-data',
 			refunds: 'dokan/v1/refunds',

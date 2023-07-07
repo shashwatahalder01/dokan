@@ -82,7 +82,7 @@ export class ReportsPage extends AdminPage {
 		// TODO: need to wait for multiple response
 		await Promise.all([
 			this.page.waitForResponse((resp) => resp.url().includes(data.subUrls.backend.logs) && resp.status() === 200),
-			this.page.waitForResponse((resp) => resp.url().includes('wp-admin/admin.php?download-order-log-csv') && resp.status() === 200),
+			this.page.waitForResponse((resp) => resp.url().includes(data.subUrls.backend.downloadOrderLogs) && resp.status() === 200),
 			this.page.locator(selector.admin.dokan.reports.allLogs.exportLogs).click()
 		]);
 

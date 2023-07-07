@@ -17,7 +17,7 @@ test.beforeAll(async ({ browser, request }) => {
 	aPage = await adminContext.newPage();
 	refundsPage = new RefundsPage(aPage);
 	apiUtils = new ApiUtils(request);
-	[, orderResponseBody, orderId, ] = await apiUtils.createOrderWithStatus(payloads.createProduct(), payloads.createOrder, 'wc-processing', payloads.vendorAuth);
+	[, orderResponseBody, orderId, ] = await apiUtils.createOrderWithStatus(payloads.createProduct(), payloads.createOrder, data.order.orderStatus.processing, payloads.vendorAuth);
 	await dbUtils.createRefund(orderResponseBody);
 });
 
@@ -42,13 +42,13 @@ test.describe('refunds test', () => {
 	});
 
 	test('admin can cancel refund requests @pro', async ( ) => {
-		const[, orderResponseBody, orderId, ] = await apiUtils.createOrderWithStatus(payloads.createProduct(), payloads.createOrder, 'wc-processing', payloads.vendorAuth);
+		const[, orderResponseBody, orderId, ] = await apiUtils.createOrderWithStatus(payloads.createProduct(), payloads.createOrder, data.order.orderStatus.processing, payloads.vendorAuth);
 		await dbUtils.createRefund(orderResponseBody);
 		await refundsPage.updateRefundRequests(orderId, 'cancel');
 	});
 
 	test('admin can perform refund requests bulk actions @pro', async ( ) => {
-		const[, orderResponseBody,, ] = await apiUtils.createOrderWithStatus(payloads.createProduct(), payloads.createOrder, 'wc-processing', payloads.vendorAuth);
+		const[, orderResponseBody,, ] = await apiUtils.createOrderWithStatus(payloads.createProduct(), payloads.createOrder, data.order.orderStatus.processing, payloads.vendorAuth);
 		await dbUtils.createRefund(orderResponseBody);
 		await refundsPage.refundRequestsBulkAction('completed');
 	});

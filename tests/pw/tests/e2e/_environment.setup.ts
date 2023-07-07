@@ -157,7 +157,7 @@ setup.describe('setup  user settings', () => {
 	// 	await apiUtils.createProduct({ ...product, status: 'publish', in_stock: true }, payloads.vendorAuth);
 	// });
 
-	setup('add test vendor orders @pro', async ({ request }) => {
+	setup('add test vendor orders @pro', async ({ request }) => {  //TODO: required for which test, might be replaced with create order with status
 		const apiUtils = new ApiUtils(request);
 		await apiUtils.createOrder(payloads.createProduct(), payloads.createOrder, payloads.vendorAuth);
 	});
