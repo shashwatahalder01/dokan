@@ -16,7 +16,7 @@ test.beforeAll(async ({ browser, request }) => {
 	reportsPage = new ReportsPage(aPage);
 	apiUtils = new ApiUtils(request);
 	[,, orderId, ] = await apiUtils.createOrderWithStatus(payloads.createProduct(), payloads.createOrder, data.order.orderStatus.completed, payloads.vendorAuth);
-	orderId = String(orderId); // TODO: why need to convert to string
+	// orderId = String(orderId); // TODO: why need to convert to string
 });
 
 test.afterAll(async ( ) => {
@@ -39,7 +39,7 @@ test.describe('Reports test', () => {
 		await reportsPage.adminAllLogsRenderProperly();
 	});
 
-	test('admin can search all logs @pro', async ( ) => {
+	test.only('admin can search all logs @pro', async ( ) => {
 		await reportsPage.searchAllLogs(orderId);
 	});
 

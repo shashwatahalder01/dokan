@@ -1251,7 +1251,7 @@ export class ApiUtils {
 		payload.line_items[0].product_id = productId;
 		const response = await this.request.post(endPoints.wc.createOrder, { data: payload, headers: payloads.adminAuth });
 		const responseBody = await this.getResponseBody(response);
-		const orderId = responseBody.id;
+		const orderId = String(responseBody.id); //TODO: need to cast everywhere [any values assigned from type any, here responsebody type is any, sending orederid as string, but actually it sending it as number], some test might need it to be number look for it and update accordingly
 		return [response, responseBody, orderId, productId];
 	}
 
