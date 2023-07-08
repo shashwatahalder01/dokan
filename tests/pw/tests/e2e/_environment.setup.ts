@@ -32,15 +32,15 @@ setup.describe('setup site & woocommerce & user settings', () => {
 		expect(siteSettings).toEqual(expect.objectContaining(payloads.siteSettings));
 	});
 
-	setup('reset dokan previous settings @lite @pro', async ({ request }) => {
-		setup.skip(!!process.env.CI, 'skip previous settings check');
-		//TODO: remove previous quote rule & list things thats need to reset
-		// previous seller badges
+	// setup('reset dokan previous settings @lite @pro', async ({ request }) => {
+	// 	setup.skip(!!process.env.CI, 'skip previous settings check');
+	// 	//TODO: remove previous quote rule & list things thats need to reset
+	// 	// previous seller badges
 
-		// previous quote rules
-		const apiUtils = new ApiUtils(request);
-		await apiUtils.deleteAllQuoteRules();
-	});
+	// 	// previous quote rules
+	// 	const apiUtils = new ApiUtils(request);
+	// 	await apiUtils.deleteAllQuoteRules();
+	// });
 
 	setup('set wc settings @lite @pro', async ({ request }) => {
 		const apiUtils = new ApiUtils(request);
@@ -249,7 +249,7 @@ setup.describe('setup dokan settings', () => {
 
 setup.describe('setup dokan settings e2e', () => {
 
-	setup.use({ storageState: data.auth.adminAuthFile });
+	// setup.use({ storageState: data.auth.adminAuthFile });
 
 	// let adminPage: AdminPage;
 	let productAdvertisingPage: ProductAdvertisingPage;

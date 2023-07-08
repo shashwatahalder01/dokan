@@ -8,7 +8,7 @@ let apiUtils: ApiUtils;
 
 test.beforeAll(async ({ request }) => {
 	apiUtils = new ApiUtils(request);
-	// check reverse withdrawal payment product exists
+	// check reverse withdrawal payment product exists //todo: add reverse withdraw check on setup
 	// await apiUtils.getReverseWithdrawalProductId(); //TODO: failed on git action. payment product not created
 	//TODO: add create product to admin after feature merged with pro
 	await apiUtils.createOrderWithStatus(payloads.createProduct(), payloads.createOrderCod, 'wc-completed', payloads.vendorAuth);
@@ -47,8 +47,8 @@ test.describe('reverse withdrawal api test', () => {
 		expect(responseBody).toBeTruthy();
 	});
 
-	test.skip('add reverse withdrawal payment product to cart @lite', async () => {
-		test.fail(!! process.env.CI, 'Issue not fixed yet');
+	test('add reverse withdrawal payment product to cart @lite', async () => {
+		// test.fail(!! process.env.CI, 'Issue not fixed yet'); //TODO: remove if fixed
 		const [response, responseBody] = await apiUtils.post(endPoints.getReverseWithdrawalAddProductToCart, { data: payloads.amountToPay, headers: payloads.vendorAuth });
 		expect(response.ok()).toBeTruthy();
 		expect(responseBody).toBeTruthy();

@@ -20,7 +20,7 @@ test.afterAll(async ( ) => {
 	await aPage.close();
 });
 
-test.describe.skip('Dokan pro feature promo test', () => {
+test.describe('Dokan pro feature promo test', () => {
 
 	// test.use({ storageState: data.auth.adminAuthFile });
 
