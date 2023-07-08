@@ -279,7 +279,7 @@ setup.describe('setup dokan settings e2e', () => {
 		expect(product).toBeTruthy();
 	});
 
-	setup('recreate product advertisement payment product via settings save @pro', async () => {
+	setup('recreate reverse withdrawal payment product via settings save @pro', async () => {
 		await reverseWithdrawsPage.reCreateReverseWithdrawalPaymentViaSettingsSave();
 	});
 
