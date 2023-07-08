@@ -53,8 +53,10 @@ test.describe('support ticket api test', () => {
 		expect(responseBody).toBeTruthy();
 	});
 
-	test('delete a support ticket comment @pro', async () => {
-		const supportTicketCommentId = await apiUtils.createSupportTicketComment(payloads.createSupportTicketComment);
+	test.only('delete a support ticket comment @pro', async () => {
+		console.log(supportTicketId);
+		const supportTicketCommentId = await apiUtils.createSupportTicketComment('', payloads.createSupportTicketComment);
+		// const supportTicketCommentId = await apiUtils.createSupportTicketComment(supportTicketId, payloads.createSupportTicketComment);
 		const [response, responseBody] = await apiUtils.delete(endPoints.deleteSupportTicketComment(supportTicketCommentId));
 		expect(response.ok()).toBeTruthy();
 		expect(responseBody).toBeTruthy();

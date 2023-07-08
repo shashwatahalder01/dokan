@@ -1,10 +1,13 @@
-import { test as setup, expect } from '@playwright/test';
+import { test as setup, Page, expect } from '@playwright/test';
+// import { AdminPage } from 'pages/adminPage';
+import { ProductAdvertisingPage } from 'pages/productAdvertisingPage';
+import { ReverseWithdrawsPage } from 'pages/reverseWithdrawsPage';
 import { ApiUtils } from 'utils/apiUtils';
 import { payloads } from 'utils/payloads';
 import { dbUtils } from 'utils/dbUtils';
 import { dbData } from 'utils/dbData';
 import { data } from 'utils/testData';
-// import { AdminPage } from '../pages/adminPage';
+
 
 setup.describe('setup site & woocommerce & user settings', () => {
 	setup.use({ extraHTTPHeaders: { Authorization: payloads.aAuth } });
@@ -244,92 +247,124 @@ setup.describe('setup dokan settings', () => {
 });
 
 
-// setup.describe.skip('setup dokan settings e2e', ()=> {
+setup.describe('setup dokan settings e2e', () => {
 
-// 	setup.use({ storageState: data.auth.adminAuthFile });
+	setup.use({ storageState: data.auth.adminAuthFile });
 
-// 	let adminPage: AdminPage;
+	// let adminPage: AdminPage;
+	let productAdvertisingPage: ProductAdvertisingPage;
+	let reverseWithdrawsPage: ReverseWithdrawsPage;
+	let aPage: Page;
+	let apiUtils: ApiUtils;
 
-// 	setup.beforeAll(async ({ browser })=> {
-// 		const page = await browser.newPage();
-// 		adminPage = new AdminPage(page);
-// 	});
+	setup.beforeAll(async ({ browser, request }) => {
+		const adminContext = await browser.newContext({ storageState: data.auth.adminAuthFile });
+		const aPage = await adminContext.newPage();
+		// adminPage = new AdminPage(page);
+		productAdvertisingPage = new ProductAdvertisingPage(aPage);
+		reverseWithdrawsPage = new ReverseWithdrawsPage(aPage);
+		apiUtils = new ApiUtils(request);
+	});
 
-// 	setup.skip('admin set WpSettings @lite @pro', async ()=> {
-// 		await adminPage.setPermalinkSettings(data.wpSettings.permalink);
-// 	});
+	setup.afterAll(async ( ) => {
+		await aPage.close();
+	});
 
-// 	setup('admin set dokan general settings @lite @pro', async ()=> {
-// 		await adminPage.setDokanGeneralSettings(data.dokanSettings.general);
-// 	});
+	setup('recreate product advertisement payment product via settings save @pro', async () => {
+		await productAdvertisingPage.recreateProductAdvertisementPaymentViaSettingsSave();
+	});
 
-// 	setup('admin set dokan selling settings @lite @pro', async ()=> {
-// 		await adminPage.setDokanSellingSettings(data.dokanSettings.selling);
-// 	});
+	setup('product advertisement payment product exists @pro', async ( ) => {
+		const product = await apiUtils.productExistsOrNot('Product Advertisement Payment',  payloads.adminAuth);
+		expect(product).toBeTruthy();
+	});
 
-// 	setup('admin set dokan withdraw settings @lite @pro', async ()=> {
-// 		await adminPage.setDokanWithdrawSettings(data.dokanSettings.withdraw);
-// 	});
+	setup('recreate product advertisement payment product via settings save @pro', async () => {
+		await reverseWithdrawsPage.reCreateReverseWithdrawalPaymentViaSettingsSave();
+	});
 
-// 	setup('admin set dokan reverse withdraw settings @lite @pro', async ()=> {
-// 		await adminPage.setDokanReverseWithdrawSettings(data.dokanSettings.reverseWithdraw);
-// 	});
+	setup('reverse Withdraw payment product exists @lite @pro', async ( ) => {
+		const product = await apiUtils.productExistsOrNot('Reverse Withdrawal Payment',  payloads.adminAuth);
+		expect(product).toBeTruthy();
+	});
 
-// 	setup('admin set dokan page settings @lite @pro', async ()=> {
-// 		await adminPage.setPageSettings(data.dokanSettings.page);
-// 	});
+	// dokan settings
 
-// 	setup('admin set dokan appearance settings @lite @pro', async ()=> {
-// 		await adminPage.setDokanAppearanceSettings(data.dokanSettings.appearance);
-// 	});
+	// 	setup.skip('admin set WpSettings @lite @pro', async ()=> {
+	// 		await adminPage.setPermalinkSettings(data.wpSettings.permalink);
+	// 	});
 
-// 	setup('admin set dokan privacy policy settings @lite @pro', async ()=> {
-// 		await adminPage.setDokanPrivacyPolicySettings(data.dokanSettings.privacyPolicy);
-// 	});
+	// 	setup('admin set dokan general settings @lite @pro', async ()=> {
+	// 		await adminPage.setDokanGeneralSettings(data.dokanSettings.general);
+	// 	});
 
-// 	setup('admin set dokan store support settings @pro', async ()=> {
-// 		await adminPage.setDokanStoreSupportSettings(data.dokanSettings.storeSupport);
-// 	});
+	// 	setup('admin set dokan selling settings @lite @pro', async ()=> {
+	// 		await adminPage.setDokanSellingSettings(data.dokanSettings.selling);
+	// 	});
 
-// 	setup('admin set dokan rma settings @pro', async ()=> {
-// 		await adminPage.setDokanRmaSettings(data.dokanSettings.rma);
-// 	});
+	// 	setup('admin set dokan withdraw settings @lite @pro', async ()=> {
+	// 		await adminPage.setDokanWithdrawSettings(data.dokanSettings.withdraw);
+	// 	});
 
-// 	setup('admin set dokan wholesale settings @pro', async ()=> {
-// 		await adminPage.setDokanWholesaleSettings(data.dokanSettings.wholesale);
-// 	});
+	// 	setup('admin set dokan reverse withdraw settings @lite @pro', async ()=> {
+	// 		await adminPage.setDokanReverseWithdrawSettings(data.dokanSettings.reverseWithdraw);
+	// 	});
 
-// 	setup('admin set dokan eu compliance settings @pro', async ()=> {
-// 		await adminPage.setDokanEuComplianceSettings(data.dokanSettings.euCompliance);
-// 	});
+	// 	setup('admin set dokan page settings @lite @pro', async ()=> {
+	// 		await adminPage.setPageSettings(data.dokanSettings.page);
+	// 	});
 
-// 	// setup.skip('admin set dokan delivery time settings @pro', async ()=> {
-// 	// 	await adminPage.setDokanDeliveryTimeSettings(data.dokanSettings.deliveryTime);
-// 	// });
+	// 	setup('admin set dokan appearance settings @lite @pro', async ()=> {
+	// 		await adminPage.setDokanAppearanceSettings(data.dokanSettings.appearance);
+	// 	});
 
-// 	setup('admin set dokan product advertising settings @pro', async ()=> {
-// 		await adminPage.setDokanProductAdvertisingSettings(data.dokanSettings.productAdvertising);
-// 	});
+	// 	setup('admin set dokan privacy policy settings @lite @pro', async ()=> {
+	// 		await adminPage.setDokanPrivacyPolicySettings(data.dokanSettings.privacyPolicy);
+	// 	});
 
-// 	setup('admin set dokan geolocation settings @pro', async ()=> {
-// 		await adminPage.setDokanGeolocationSettings(data.dokanSettings.geolocation);
-// 	});
+	// 	setup('admin set dokan store support settings @pro', async ()=> {
+	// 		await adminPage.setDokanStoreSupportSettings(data.dokanSettings.storeSupport);
+	// 	});
 
-// 	setup('admin set dokan product report abuse settings @pro', async ()=> {
-// 		await adminPage.setDokanProductReportAbuseSettings(data.dokanSettings.productReportAbuse);
-// 	});
+	// 	setup('admin set dokan rma settings @pro', async ()=> {
+	// 		await adminPage.setDokanRmaSettings(data.dokanSettings.rma);
+	// 	});
 
-// 	setup('admin set dokan spmv settings @pro', async ()=> {
-// 		await adminPage.setDokanSpmvSettings(data.dokanSettings.spmv);
-// 	});
+	// 	setup('admin set dokan wholesale settings @pro', async ()=> {
+	// 		await adminPage.setDokanWholesaleSettings(data.dokanSettings.wholesale);
+	// 	});
 
-// 	// setup.fixme('admin set dokan vendor subscription settings @pro', async ()=> {
-// 	// 	await adminPage.setDokanVendorSubscriptionSettings(data.dokanSettings.vendorSubscription);
-// 	// });
+	// 	setup('admin set dokan eu compliance settings @pro', async ()=> {
+	// 		await adminPage.setDokanEuComplianceSettings(data.dokanSettings.euCompliance);
+	// 	});
 
-// 	// setup.skip('admin add dokan subscription @pro', async ()=> {
-// 	// 	await adminPage.addDokanSubscription({ ...data.product.vendorSubscription,
-// 	// 		productName: data.predefined.vendorSubscription.nonRecurring, });
-// 	// });
+	// 	// setup.skip('admin set dokan delivery time settings @pro', async ()=> {
+	// 	// 	await adminPage.setDokanDeliveryTimeSettings(data.dokanSettings.deliveryTime);
+	// 	// });
 
-// });
+	// 	setup('admin set dokan product advertising settings @pro', async ()=> {
+	// 		await adminPage.setDokanProductAdvertisingSettings(data.dokanSettings.productAdvertising);
+	// 	});
+
+	// 	setup('admin set dokan geolocation settings @pro', async ()=> {
+	// 		await adminPage.setDokanGeolocationSettings(data.dokanSettings.geolocation);
+	// 	});
+
+	// 	setup('admin set dokan product report abuse settings @pro', async ()=> {
+	// 		await adminPage.setDokanProductReportAbuseSettings(data.dokanSettings.productReportAbuse);
+	// 	});
+
+	// 	setup('admin set dokan spmv settings @pro', async ()=> {
+	// 		await adminPage.setDokanSpmvSettings(data.dokanSettings.spmv);
+	// 	});
+
+	// 	// setup.fixme('admin set dokan vendor subscription settings @pro', async ()=> {
+	// 	// 	await adminPage.setDokanVendorSubscriptionSettings(data.dokanSettings.vendorSubscription);
+	// 	// });
+
+	// 	// setup.skip('admin add dokan subscription @pro', async ()=> {
+	// 	// 	await adminPage.addDokanSubscription({ ...data.product.vendorSubscription,
+	// 	// 		productName: data.predefined.vendorSubscription.nonRecurring, });
+	// 	// });
+
+});

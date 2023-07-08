@@ -969,8 +969,8 @@ export const payloads = {
 
 	createSupportTicketComment: {
 		replay: 'sp replay...1',
-		vendor_id: '1',
-		selected_user: 'vendor',
+		vendor_id: '1',  //TODO: it's admin id remove it, is admin id always one
+		selected_user: 'admin',
 	},
 
 	updateSupportTicketStatus: {

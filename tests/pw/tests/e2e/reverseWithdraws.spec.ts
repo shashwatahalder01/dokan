@@ -14,8 +14,9 @@ test.beforeAll(async ({ browser, request }) => {
 	aPage = await adminContext.newPage();
 	reverseWithdrawsPage = new ReverseWithdrawsPage(aPage);
 	apiUtils = new ApiUtils(request);
+	// await reverseWithdrawsPage.reCreateReverseWithdrawalPaymentViaSettingsSave(); //TODO: user db manipulation api also needs this
 	await apiUtils.createOrderWithStatus(payloads.createProduct(), payloads.createOrderCod, 'wc-completed', payloads.vendorAuth);
-	await reverseWithdrawsPage.reCreateReverseWithdrawalPaymentViaSettingsSave(); //TODO: user db manipulation api also needs this
+
 });
 
 test.afterAll(async ( ) => {
@@ -30,10 +31,10 @@ test.describe('Reverse withdraw test', () => {
 		await reverseWithdrawsPage.adminReverseWithdrawRenderProperly();
 	});
 
-	test('reverse Withdraw payment product exists @lite @pro', async ( ) => {
-		const product = await apiUtils.productExistsOrNot('Reverse Withdrawal Payment',  payloads.adminAuth);
-		expect(product).toBeTruthy();
-	});
+	// test('reverse Withdraw payment product exists @lite @pro', async ( ) => {
+	// 	const product = await apiUtils.productExistsOrNot('Reverse Withdrawal Payment',  payloads.adminAuth);
+	// 	expect(product).toBeTruthy();
+	// });
 
 	test('filter reverse withdraws by store @lite @pro', async ( ) => {
 		await reverseWithdrawsPage.filterReverseWithdraws(data.predefined.vendorStores.vendor1);

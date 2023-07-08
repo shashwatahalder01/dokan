@@ -572,16 +572,24 @@ export class ApiUtils {
 	// get support ticket id
 	async getSupportTicketId(auth? : auth): Promise<[string, string]> {
 		const allSupportTickets = await this.getAllSupportTickets(auth);
+		console.log(allSupportTickets);
 		const supportTicketId = allSupportTickets[0].ID;
 		const sellerId = allSupportTickets[0].vendor_id;
 		return [supportTicketId, sellerId];
 	}
 
 	// create support ticket comment
-	async createSupportTicketComment(payload: object, auth? : auth): Promise<responseBody> {
-		const [supportTicketId] = await this.getSupportTicketId(auth);
+	async createSupportTicketComment( supportTicketId = '', payload: object, auth? : auth): Promise<responseBody> { //TODO: update handle first parameter
+		if(!supportTicketId){
+			[supportTicketId,] = await this.getSupportTicketId(auth);
+			console.log('get existing id');
+
+		}
+		console.log(supportTicketId);
+
 		const [, responseBody] = await this.post(endPoints.createSupportTicketComment(supportTicketId), { data: payload, headers: auth });
 		return responseBody;
+
 	}
 
 	// update support ticket status
@@ -591,7 +599,7 @@ export class ApiUtils {
 	}
 
 	async createSupportTicket(payload: object, auth? : auth): Promise<[responseBody, string]> {
-		const [, responseBody] = await this.post(endPoints.wp.createCustomPost('dokan_store_support'), { data: payload, headers: auth });
+		const [, responseBody] = await this.post(endPoints.wp.createCustomPost('dokan_store_support'), { data: payload, headers: auth }); // TODO: always admin
 		const supportTicketId = responseBody.id;
 		return [responseBody, supportTicketId];
 	}
@@ -716,7 +724,7 @@ export class ApiUtils {
 	// create a product advertisement
 	async createProductAdvertisement(product: object, auth? : auth): Promise<[responseBody, string]> {
 		const [body, productId] = await this.createProduct(product, auth);
-		const sellerId = body.store.id;
+		const sellerId = body.store.id;									//TODO: hardcoding admin auth will hinder negative testing : test with invalid user
 		const [, responseBody] = await this.post(endPoints.createProductAdvertisement, { data: { vendor_id: sellerId, product_id: productId }, headers: payloads.adminAuth });
 		const productAdvertisementId = responseBody.id;
 		return [responseBody, productAdvertisementId];

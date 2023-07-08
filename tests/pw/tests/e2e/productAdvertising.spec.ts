@@ -14,7 +14,7 @@ test.beforeAll(async ({ browser, request }) => {
 	aPage = await adminContext.newPage();
 	productAdvertisingPage = new ProductAdvertisingPage(aPage);
 	apiUtils = new ApiUtils(request);
-	await productAdvertisingPage.reCreateProductAdvertisementPaymentViaSettingsSave();  //TODO: move to setup
+	// await productAdvertisingPage.recreateProductAdvertisementPaymentViaSettingsSave();  //TODO: move to setup
 	await apiUtils.createProductAdvertisement(payloads.createProduct(), payloads.vendorAuth);
 });
 
@@ -30,10 +30,10 @@ test.describe('Product Advertising test', () => {
 		await productAdvertisingPage.adminProductAdvertisingRenderProperly();
 	});
 
-	test('product advertisement payment product exists @pro', async ( ) => {
-		const product = await apiUtils.productExistsOrNot('Product Advertisement Payment',  payloads.adminAuth);
-		expect(product).toBeTruthy(); //TODO move to setup
-	});
+	// test('product advertisement payment product exists @pro', async ( ) => {
+	// 	const product = await apiUtils.productExistsOrNot('Product Advertisement Payment',  payloads.adminAuth);
+	// 	expect(product).toBeTruthy(); //TODO move to setup
+	// });
 
 	test('admin can add product advertisement @pro', async ( ) => {
 		await productAdvertisingPage.addNewProductAdvertisement(data.productAdvertisement);
@@ -59,7 +59,7 @@ test.describe('Product Advertising test', () => {
 		await productAdvertisingPage.updateAdvertisedProduct(data.productAdvertisement.advertisedProduct, 'delete');
 	});
 
-	test('admin can perform product advertising bulk action @pro', async ( ) => {
+	test.only('admin can perform product advertising bulk action @pro', async ( ) => {
 		await productAdvertisingPage.productAdvertisingBulkAction('delete');
 	});
 

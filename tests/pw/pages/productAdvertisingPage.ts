@@ -13,7 +13,7 @@ export class ProductAdvertisingPage extends AdminPage {
 	// product advertising
 
 	// regenerate product advertisement payment product
-	async reCreateProductAdvertisementPaymentViaSettingsSave(){
+	async recreateProductAdvertisementPaymentViaSettingsSave(){
 		await this.goToDokanSettings();
 		await this.click(selector.admin.dokan.settings.productAdvertising);
 		await this.clickAndWaitForResponse(data.subUrls.ajax, selector.admin.dokan.settings.productAdvertisingSaveChanges);
@@ -36,7 +36,9 @@ export class ProductAdvertisingPage extends AdminPage {
 		await this.multipleElementVisible(selector.admin.dokan.productAdvertising.bulkActions);
 
 		// filter elements are visible
-		// await this.multipleElementVisible(selector.admin.dokan.productAdvertising.filters);
+		// eslint-disable-next-line @typescript-eslint/no-unused-vars
+		const { filterByStoreInput, filterByCreatedVia, ...filters } = selector.admin.dokan.productAdvertising.filters;
+		await this.multipleElementVisible(filters);
 
 		// product advertising search is visible
 		await expect(this.page.locator(selector.admin.dokan.productAdvertising.search)).toBeVisible();
@@ -130,10 +132,11 @@ export class ProductAdvertisingPage extends AdminPage {
 	// product advertising bulk action
 	async productAdvertisingBulkAction(action: string){
 		// await this.searchAdvertisedProduct(vendorName); //TODO: can be used to minimized number of rows to be affected
+		// await this.goto(data.subUrls.backend.dokan.dokanProductAdvertising);
 		await this.goIfNotThere(data.subUrls.backend.dokan.dokanProductAdvertising);
 
 		await this.click(selector.admin.dokan.vendors.bulkActions.selectAll);
-		await this.selectByValue(selector.admin.dokan.vendors.bulkActions.selectAction, action);
+		await this.selectByValue(selector.admin.dokan.productAdvertising.bulkActions.selectAction, action);
 		await this.click(selector.admin.dokan.productAdvertising.bulkActions.applyAction);
 		await this.clickAndWaitForResponse(data.subUrls.backend.productAdvertising, selector.admin.dokan.productAdvertising.confirmAction);
 		await this.click(selector.admin.dokan.productAdvertising.actionSuccessful);

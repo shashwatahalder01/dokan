@@ -42,9 +42,9 @@ export default defineConfig({
 		// colorScheme: 'dark', /* Emulates 'prefers-colors-scheme' media feature, supported values are 'light', 'dark', 'no-preference' */
 		headless: process.env.CI ? !! process.env.CI : false, /* Whether to run tests on headless or non-headless mode */
 		ignoreHTTPSErrors: true, /* Whether to ignore HTTPS errors during navigation. */
-		// trace: 'on-first-retry', /* Record trace only when retrying a test for the first time. */
-		// screenshot: 'only-on-failure', /* Capture screenshot after each test failure. */
-		// video: 'on-first-retry', /* Record video only when retrying a test for the first time. */
+		trace: 'on-first-retry', /* Record trace only when retrying a test for the first time. */
+		screenshot: 'only-on-failure', /* Capture screenshot after each test failure. */
+		video: 'on-first-retry', /* Record video only when retrying a test for the first time. */
 		// viewport: { width: 1280, height: 720 }, /* Size of viewport */
 		launchOptions: { slowMo: process.env.SLOWMO ? Number(process.env.SLOWMO) * 1000 : 0, /* whether to slow down test execution by provided seconds */
 		},
