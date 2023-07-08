@@ -55,4 +55,6 @@ test.describe('Reports test', () => {
 		await reportsPage.filterAllLogsByStatus('completed');
 	});
 
+	//TODO: filter by calendar
+
 });

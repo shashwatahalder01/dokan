@@ -40,7 +40,7 @@ test.describe('Product Advertising test', () => {
 	});
 
 	test('admin can search advertised product @pro', async ( ) => {
-		await productAdvertisingPage.searchAdvertisedProduct(data.productAdvertisement.advertisedProduct);
+		await productAdvertisingPage.searchAdvertisedProduct(data.productAdvertisement.advertisedProduct);  //TODO: add search by order
 	});
 
 	test('admin can filter advertised product by stores @pro', async ( ) => {
@@ -67,5 +67,6 @@ test.describe('Product Advertising test', () => {
 		// await vendorPage.buyProductAdvertising(data.productAdvertisement.advertisedProduct);
 	});
 
-
+	//TODO: filter by calendar
+	//TODO: add tests for every setting options
 });

@@ -82,7 +82,13 @@ test.describe('Wholesale customers test', () => {
 		await wholesaleCustomer.customerRequestForBecomeWholesaleCustomer();
 	});
 
-	//TODO: customer can see wholesale price
+	// wholesale setting options tests
+	//TODO: customer need or don't need approval : re-modify above two tests
+	//TODO: only customer can see wholesale price
+	//TODO: all users can see wholesale price
 	//TODO: customer can purchase product at wholesale price
+	//TODO: vendor can see Wholesale Price on Shop Archive
+	//TODO: vendor can create wholesale product
+
 
 });

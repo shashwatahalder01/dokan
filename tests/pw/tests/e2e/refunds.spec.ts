@@ -33,7 +33,7 @@ test.describe('refunds test', () => {
 		await refundsPage.adminRefundRequestsRenderProperly();
 	});
 
-	test('admin can search refund requests @pro', async ( ) => {  //TODO: separate test for search by storename ??
+	test('admin can search refund requests @pro', async ( ) => {  //TODO: add search by storename: add separate test/separate entry in same test/or always both
 		await refundsPage.searchRefundRequests(orderId);
 	});
 
@@ -52,5 +52,7 @@ test.describe('refunds test', () => {
 		await dbUtils.createRefund(orderResponseBody);
 		await refundsPage.refundRequestsBulkAction('completed');
 	});
+
+	//TODO: add vendor tests
 
 });
