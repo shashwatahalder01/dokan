@@ -973,6 +973,9 @@ export class AdminPage extends BasePage {
 		// await this.searchVendor(vendorName); //TODO: can be used to minimized number of rows to be affected
 		await this.goIfNotThere(data.subUrls.backend.dokan.dokanVendors);
 
+		// ensure row exists
+		await expect(this.page.locator(selector.admin.dokan.vendors.noRowsFound)).not.toBeVisible();
+
 		await this.click(selector.admin.dokan.vendors.bulkActions.selectAll);
 		await this.selectByValue(selector.admin.dokan.vendors.bulkActions.selectAction, action);
 		await this.clickAndWaitForResponse(data.subUrls.backend.stores, selector.admin.dokan.vendors.bulkActions.applyAction);

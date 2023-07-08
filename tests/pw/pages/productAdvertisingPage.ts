@@ -45,6 +45,8 @@ export class ProductAdvertisingPage extends AdminPage {
 
 		// product advertising table elements are visible
 		await this.multipleElementVisible(selector.admin.dokan.productAdvertising.table);
+
+		//TODO: modals can be added : for other tests too
 	}
 
 	// add new product advertisement
@@ -63,6 +65,8 @@ export class ProductAdvertisingPage extends AdminPage {
 
 		await this.clickAndWaitForResponse(data.subUrls.backend.productAdvertising, selector.admin.dokan.productAdvertising.addNewAdvertisement.addNew);
 		await this.click(selector.admin.dokan.productAdvertising.actionSuccessful);
+
+		//close modal
 		await this.click(selector.admin.dokan.productAdvertising.addNewAdvertisement.closeModal);
 	}
 
@@ -104,6 +108,8 @@ export class ProductAdvertisingPage extends AdminPage {
 		const count = (await this.getElementText(selector.admin.dokan.productAdvertising.numberOfRowsFound))?.split(' ')[0];
 		expect(Number(count)).not.toBe(0);
 
+		//clear filter
+		await this.clickAndWaitForResponse(data.subUrls.backend.productAdvertising, selector.admin.dokan.productAdvertising.filters.clearFilter);
 	}
 
 	// update advertised product
@@ -127,6 +133,9 @@ export class ProductAdvertisingPage extends AdminPage {
 
 		await this.clickAndWaitForResponse(data.subUrls.backend.productAdvertising, selector.admin.dokan.productAdvertising.confirmAction);
 		await this.click(selector.admin.dokan.productAdvertising.actionSuccessful);
+
+		// refresh table by clicking filter
+		await this.clickAndWaitForResponse(data.subUrls.backend.productAdvertising, selector.admin.dokan.productAdvertising.filters.clearFilter);
 	}
 
 	// product advertising bulk action
@@ -135,7 +144,10 @@ export class ProductAdvertisingPage extends AdminPage {
 		// await this.goto(data.subUrls.backend.dokan.dokanProductAdvertising);
 		await this.goIfNotThere(data.subUrls.backend.dokan.dokanProductAdvertising);
 
-		await this.click(selector.admin.dokan.vendors.bulkActions.selectAll);
+		// ensure row exists
+		await expect(this.page.locator(selector.admin.dokan.productAdvertising.noRowsFound)).not.toBeVisible();
+
+		await this.click(selector.admin.dokan.productAdvertising.bulkActions.selectAll);
 		await this.selectByValue(selector.admin.dokan.productAdvertising.bulkActions.selectAction, action);
 		await this.click(selector.admin.dokan.productAdvertising.bulkActions.applyAction);
 		await this.clickAndWaitForResponse(data.subUrls.backend.productAdvertising, selector.admin.dokan.productAdvertising.confirmAction);

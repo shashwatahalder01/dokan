@@ -527,7 +527,7 @@ export const data = {
 			vendorStoreUrl: 'store',
 			sellingProductTypes: 'sell_both', // 'sell_both', 'sell_physical', 'sell_digital'
 			storeProductPerPage: '12',
-			storCategory: 'none',  // 'none', 'Single', 'Multiple'
+			storCategory: 'Multiple',  // 'none', 'Single', 'Multiple'
 			saveSuccessMessage: 'Setting has been saved successfully.',
 		},
 

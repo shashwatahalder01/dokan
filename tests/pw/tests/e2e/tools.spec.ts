@@ -36,9 +36,9 @@ test.describe('Tools test', () => {
 		await toolsPage.checkForDuplicateOrders();
 	});
 
-	test.skip('admin can set dokan setup wizard @lite @pro', async ( ) => {
-		await toolsPage.setDokanSetupWizard(data.dokanSetupWizard);
-	});
+	// test.skip('admin can set dokan setup wizard @lite @pro', async ( ) => { //TODO: remove test from admin and run this if db setup is enabled
+	// 	await toolsPage.setDokanSetupWizard(data.dokanSetupWizard);
+	// });
 
 	test('admin can regenerate variable product variations author IDs @pro', async ( ) => {
 		await toolsPage.regenerateVariableProductVariationsAuthorIds();

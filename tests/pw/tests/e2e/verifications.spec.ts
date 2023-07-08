@@ -17,7 +17,7 @@ test.afterAll(async ( ) => {
 });
 
 test.describe('Verifications test', () => {
-	//TODO: need multiple verification request
+	//TODO: need multiple verification request via admin
 
 	// test.use({ storageState: data.auth.adminAuthFile });
 
@@ -41,5 +41,7 @@ test.describe('Verifications test', () => {
 		//TODO: await verificationsPage.phoneVerificationRequest(data.predefined.vendorInfo.username,'approve');
 	});
 
+	//TODO: admin can disapprove verification request
+	//TODO: add vendor tests
 
 });

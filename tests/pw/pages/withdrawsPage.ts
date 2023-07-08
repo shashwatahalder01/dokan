@@ -39,6 +39,9 @@ export class WithdrawsPage extends AdminPage {
 	async withdrawBulkAction(action: string){
 		await this.goIfNotThere(data.subUrls.backend.dokan.dokanWithdraw);
 
+		// ensure row exists
+		await expect(this.page.locator(selector.admin.dokan.withdraw.noRowsFound)).not.toBeVisible();
+
 		await this.click(selector.admin.dokan.withdraw.bulkActions.selectAll);
 		await this.selectByValue(selector.admin.dokan.withdraw.bulkActions.selectAction, action);
 		await this.clickAndWaitForResponse(data.subUrls.backend.withdraws, selector.admin.dokan.withdraw.bulkActions.applyAction);

@@ -60,13 +60,15 @@ test.describe('Product Advertising test', () => {
 	});
 
 	test('admin can perform product advertising bulk action @pro', async ( ) => {
+		// await apiUtils.createProductAdvertisement(payloads.createProduct(), payloads.vendorAuth);
 		await productAdvertisingPage.productAdvertisingBulkAction('delete');
 	});
 
-	test.skip('vendor can buy product advertising @pro', async ( ) => {
-		// await vendorPage.buyProductAdvertising(data.productAdvertisement.advertisedProduct);
-	});
+	// test.skip('vendor can buy product advertising @pro', async ( ) => {
+	// 	// await vendorPage.buyProductAdvertising(data.productAdvertisement.advertisedProduct);
+	// });
 
 	//TODO: filter by calendar
 	//TODO: add tests for every setting options
+	//TODO: add vendor tests
 });

@@ -309,6 +309,8 @@ export const selector = {
 
 				},
 
+				numberOfRowsFound: '.tablenav.top .displaying-num',
+				noRowsFound: '//td[normalize-space()="No requests found."]',
 				withdrawCell: (storeName: string) => `//td//a[contains(text(), '${storeName}')]/../..`,
 				withdrawDelete: '.row-actions .trash',
 				withdrawCancel: '.row-actions .cancel',
@@ -399,8 +401,8 @@ export const selector = {
 
 				},
 
-				numberOfVendorsFound: '.tablenav.top .displaying-num',
-				noVendorsFound: '//td[normalize-space()="No vendors found."]',
+				numberOfRowsFound: '.tablenav.top .displaying-num',
+				noRowsFound: '//td[normalize-space()="No vendors found."]',
 				vendorViewDetails: (username: string) => `//td//a[contains(text(), '${username}')]`,
 				vendorCell: (username: string) => `//td//a[contains(text(), '${username}')]/../../..`,
 				vendorEdit: '.row-actions .edit',
@@ -565,6 +567,7 @@ export const selector = {
 				},
 
 				numberOfRowsFound: '.tablenav.top .displaying-num',
+				noRowsFound: '//td[normalize-space()="No items found."]',
 				abuseReportCell: (input: string) => `//a[contains(text(), '${input}')]/../..`,  // abuse-reason, product-name, vendor-name
 				abuseReportFirstCell: '(//a[@href="#view-report"])[1]',
 
@@ -619,7 +622,8 @@ export const selector = {
 					dateColumn: 'thead th.created_at',
 				},
 
-
+				numberOfRowsFound: '.tablenav.top .displaying-num',
+				noRowsFound: '//td[normalize-space()="No reviews found."]',
 				storeReviewCell: (title: string) => `//td//a[contains(text(), '${title}')]/../..`,
 				storeReviewFirstCell: '(//td[@class="column title"]//a[@href="#"]/../..)[1]',
 				storeReviewEdit: '(//a[normalize-space()="Edit"])[1]',
@@ -684,6 +688,7 @@ export const selector = {
 				},
 
 				numberOfRowsFound: '.tablenav.top .displaying-num',
+				noRowsFound: '//td[normalize-space()="No tickets found."]',
 				supportTicketCell: (title: string) => `//strong[contains(text(), '${title}')]/../..`,
 				supportTicketFirstCell: '(//td[@class="column ID"]//a)[1]',
 				supportTicketLink: (title: string) => `//strong[contains(text(), '${title}')]/..`,
@@ -744,6 +749,8 @@ export const selector = {
 						dateColumn: 'thead th.created_at',
 					},
 
+					numberOfRowsFound: '.tablenav.top .displaying-num',
+					noRowsFound: '//td[normalize-space()="No quote found."]',
 					quoteCell:  (title: string) => `//strong[contains(text(),'${title}')]/../..//td[@class='column sl']`,
 					//TODO: uncomment after search added
 					// quoteRulesEdit: '.row-actions .edit',
@@ -786,11 +793,9 @@ export const selector = {
 						offerProductQuantityByProductName: (product: string) => `//a[normalize-space()="${product}"]/../../..//input[@id="offer_product_quantity"]`,
 						deleteQuoteProductByProductName: (product: string) => `//a[normalize-space()="${product}"]/../../..//span[@class="dashicons dashicons-no"]`,
 
-
 						// publish
 						saveQuoteAsDraft: 'input[value="Save as Draft"]',
 						publishQuote: 'input[value="Publish"]',
-
 
 					},
 
@@ -830,6 +835,8 @@ export const selector = {
 						dateColumn: 'thead th.created_at',
 					},
 
+					numberOfRowsFound: '.tablenav.top .displaying-num',
+					noRowsFound: '//td[normalize-space()="No quote found."]',
 					quoteRulesCell:  (title: string) => `//a[contains(text(),'${title}')]/../..`,
 					trashedQuoteRulesCell:  (title: string) => `//strong[contains(text(),'${title}')]/../..`,
 					//TODO: uncomment after search added
@@ -906,6 +913,8 @@ export const selector = {
 					statusColumn: 'thead th.badge_status',
 				},
 
+				numberOfRowsFound: '.tablenav.top .displaying-num',
+				noRowsFound: '//td[normalize-space()="No badges found."]',
 				sellerBadgeCell: (name: string) => `//a[contains(text(),'${name}')]/../..`,
 				sellerBadgeLevel: (name: string) => `//a[contains(text(),'${name}')]/../../..//span[@class="level_count"]//strong`,
 				sellerBadgeEdit: '.row-actions .edit',
@@ -997,6 +1006,8 @@ export const selector = {
 					dateColumn: 'thead th.created_at',
 				},
 
+				numberOfRowsFound: '.tablenav.top .displaying-num',
+				noRowsFound: '//td[normalize-space()="No announcement found."]',
 				announcementCell: (title: string) => `//a[contains(text(),'${title}')]/../..`,
 				announcementCellPublished: (title: string) => `//strong[contains(text(),'${title}')]/../..`,
 				announcementEdit: (title: string) => `//a[contains(text(),'${title}')]/../..//span[@class="edit"]`,
@@ -1054,6 +1065,7 @@ export const selector = {
 				},
 
 				numberOfRowsFound: '.tablenav.top .displaying-num',
+				noRowsFound: '//td[normalize-space()="No request found."]',
 				refundCell: (orderNumber: string) => `//strong[contains(text(),'#${orderNumber}')]/../..`,
 				approveRefund: (orderNumber: string) => `//strong[contains(text(),'#${orderNumber}')]/../..//span[@class='completed']`,
 				cancelRefund: (orderNumber: string) => `//strong[contains(text(),'#${orderNumber}')]/../..//span[@class='cancelled']`,
@@ -1454,6 +1466,7 @@ export const selector = {
 				},
 
 				numberOfRowsFound: '.tablenav.top .displaying-num',
+				noRowsFound: '//td[normalize-space()="No advertisement found."]',
 				advertisedProductCell: (productName: string) => `//a[normalize-space()="${productName}"]/../..`,
 				advertisedProductOrderIdCell: (orderId: number) => `//a[normalize-space()="${orderId}"]/../..`,
 				advertisedProductExpire: '.row-actions .expire',
@@ -1505,6 +1518,8 @@ export const selector = {
 					statusColumn: 'thead th.wholesale_status',
 				},
 
+				numberOfRowsFound: '.tablenav.top .displaying-num',
+				noRowsFound: '//td[normalize-space()="No customers found."]',
 				wholesaleCustomerCell: (username: string) => `//td[contains(text(), '${username}')]/..//td[@class='column full_name']`,
 				wholesaleCustomerEdit: '.row-actions .edit',
 				wholesaleCustomerOrders: '.row-actions .orders',

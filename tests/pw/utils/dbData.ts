@@ -410,7 +410,7 @@ export const dbData = {
 			time_slot_minutes: 30,
 			order_per_slot: 0,
 			delivery_box_info: 'This store needs %DAY% day(s) to process your delivery request',
-			selection_required: 'on',
+			selection_required: 'off',
 			delivery_day: '',
 			delivery_day_monday: {
 				delivery_status: 'monday',

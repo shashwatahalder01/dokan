@@ -128,6 +128,9 @@ export class RequestForQuotationsPage extends AdminPage {
 		await this.goto(data.subUrls.backend.dokan.dokanRequestForQuoteRules);
 		// await this.goIfNotThere(data.subUrls.backend.dokan.dokanRequestForQuoteRules);//Todo: fix and apply this
 
+		// ensure row exists
+		await expect(this.page.locator(selector.admin.dokan.requestForQuotation.quoteRules.noRowsFound)).not.toBeVisible();
+
 		await this.click(selector.admin.dokan.requestForQuotation.quoteRules.bulkActions.selectAll);
 		await this.selectByValue(selector.admin.dokan.requestForQuotation.quoteRules.bulkActions.selectAction, action);
 		await this.clickAndWaitForResponse(data.subUrls.backend.quoteRules, selector.admin.dokan.requestForQuotation.quoteRules.bulkActions.applyAction);
@@ -249,6 +252,9 @@ export class RequestForQuotationsPage extends AdminPage {
 	// quotes bulk action
 	async quotesBulkAction(action: string){
 		await this.goIfNotThere(data.subUrls.backend.dokan.dokanRequestForQuote);
+
+		// ensure row exists
+		await expect(this.page.locator(selector.admin.dokan.requestForQuotation.quotesList.noRowsFound)).not.toBeVisible();
 
 		await this.click(selector.admin.dokan.requestForQuotation.quotesList.bulkActions.selectAll);
 		await this.selectByValue(selector.admin.dokan.requestForQuotation.quotesList.bulkActions.selectAction, action);

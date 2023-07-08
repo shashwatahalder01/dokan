@@ -162,7 +162,7 @@ export class SellerBadgesPage extends AdminPage {
 		await this.clickIfVisible(selector.admin.dokan.vendors.filters.clearFilter);
 		await this.selectByLabel( selector.admin.dokan.vendors.filters.filterByBadges, badgeName);
 
-		const count = (await this.getElementText(selector.admin.dokan.vendors.numberOfVendorsFound))?.split(' ')[0];
+		const count = (await this.getElementText(selector.admin.dokan.vendors.numberOfRowsFound))?.split(' ')[0];
 		expect(Number(count)).not.toBe(0);
 		//TOdo: either this or that assertion
 		//todo: to have count more than
@@ -176,7 +176,7 @@ export class SellerBadgesPage extends AdminPage {
 		await this.clickAndWaitForResponse(data.subUrls.backend.sellerBadge, selector.admin.dokan.sellerBadge.sellerBadgeVendors);
 
 		// await expect(this.page.locator(selector.admin.dokan.vendors.vendorCell(badgeName))).toBeVisible();
-		const count = (await this.getElementText(selector.admin.dokan.vendors.numberOfVendorsFound))?.split(' ')[0];
+		const count = (await this.getElementText(selector.admin.dokan.vendors.numberOfRowsFound))?.split(' ')[0];
 		expect(Number(count)).not.toBe(0);
 		//TOdo: either this or that assertion
 
@@ -227,6 +227,10 @@ export class SellerBadgesPage extends AdminPage {
 		} else {
 			await this.goIfNotThere(data.subUrls.backend.dokan.dokanSellerBadge);
 		}
+
+		// ensure row exists
+		await expect(this.page.locator(selector.admin.dokan.sellerBadge.noRowsFound)).not.toBeVisible();
+
 		await this.click(selector.admin.dokan.sellerBadge.bulkActions.selectAll);
 		await this.selectByValue(selector.admin.dokan.sellerBadge.bulkActions.selectAction, action);
 		await this.click( selector.admin.dokan.sellerBadge.bulkActions.applyAction);

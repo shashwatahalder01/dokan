@@ -102,6 +102,9 @@ export class WholesaleCustomersPage extends AdminPage {
 		// await this.searchWholesaleCustomer(wholesaleCustomer); //TODO: can be used to minimized number of rows to be affected
 		await this.goIfNotThere(data.subUrls.backend.dokan.dokanWholeSaleCustomer);
 
+		// ensure row exists
+		await expect(this.page.locator(selector.admin.dokan.wholesaleCustomer.noRowsFound)).not.toBeVisible();
+
 		await this.click(selector.admin.dokan.wholesaleCustomer.bulkActions.selectAll);
 		await this.selectByValue(selector.admin.dokan.wholesaleCustomer.bulkActions.selectAction, action);
 		await this.clickAndWaitForResponse(data.subUrls.backend.wholesaleCustomers, selector.admin.dokan.wholesaleCustomer.bulkActions.applyAction);

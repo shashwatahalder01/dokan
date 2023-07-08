@@ -22,11 +22,11 @@ export default defineConfig({
 	reportSlowTests: { max: 10, threshold: 20 },  /* Whether to report slow test files. Pass null to disable this feature. */
 	reporter: process.env.CI
 		? [
-			// ['html', { open: 'never', outputFolder: 'playwright-report/api/html/html-report-api' }],
+			['html', { open: 'never', outputFolder: 'playwright-report/api/html/html-report-api' }],
 			['junit', { outputFile: 'playwright-report/api/junit-report/api-results.xml' }],
 			['list', { printSteps: true }]]
 		: [
-			// ['html', { open: 'never', outputFolder: 'playwright-report/api/html/html-report-api' }],
+			['html', { open: 'never', outputFolder: 'playwright-report/api/html/html-report-api' }],
 			['junit', { outputFile: 'playwright-report/api/junit-report/api-results.xml' }],
 			['list', { printSteps: true }],
 			// ['allure-playwright',	{ detail: true, outputFolder: 'playwright-report/api/allure/allure-report', suiteTitle: false }]

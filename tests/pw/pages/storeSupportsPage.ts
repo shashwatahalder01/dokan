@@ -132,6 +132,9 @@ export class StoreSupportsPage extends AdminPage {
 	async storeSupportBulkAction(action: string){
 		await this.goIfNotThere(data.subUrls.backend.dokan.dokanStoreSupport);
 
+		// ensure row exists
+		await expect(this.page.locator(selector.admin.dokan.storeSupport.noRowsFound)).not.toBeVisible();
+
 		await this.click(selector.admin.dokan.storeSupport.bulkActions.selectAll);
 		await this.selectByValue(selector.admin.dokan.storeSupport.bulkActions.selectAction, action);
 		await this.clickAndWaitForResponse(data.subUrls.backend.storeSupport, selector.admin.dokan.storeSupport.bulkActions.applyAction);

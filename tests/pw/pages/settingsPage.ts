@@ -323,7 +323,7 @@ export class SettingsPage extends AdminPage {
 		await this.clearAndType(selector.admin.dokan.settings.timeSlot, deliveryTime.timeSlot);
 		await this.clearAndType(selector.admin.dokan.settings.orderPerSlot, deliveryTime.orderPerSlot);
 		await this.clearAndType(selector.admin.dokan.settings.deliveryBoxInfo, deliveryTime.deliveryBoxInfo);
-		await this.enableSwitcher(selector.admin.dokan.settings.requireDeliveryDateAndTime);
+		await this.disableSwitcher(selector.admin.dokan.settings.requireDeliveryDateAndTime);
 		for (const day of deliveryTime.days) {
 			await this.enableSwitcher(selector.admin.dokan.settings.deliveryDay(day));
 			await this.click(selector.admin.dokan.settings.openingTime(day));
