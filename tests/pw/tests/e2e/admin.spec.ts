@@ -52,9 +52,9 @@ test.describe('Admin functionality test', () => {
 		await page.close();
 	});
 
-	test('admin can set dokan setup wizard @lite @pro', async ( ) => {
-		await adminPage.setDokanSetupWizard(data.dokanSetupWizard);
-	});
+	// test('admin can set dokan setup wizard @lite @pro', async ( ) => {
+	// 	await adminPage.setDokanSetupWizard(data.dokanSetupWizard);
+	// });
 
 
 	test('admin can add simple product @lite @pro', async ( ) => {

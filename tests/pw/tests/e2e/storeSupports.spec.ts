@@ -46,10 +46,6 @@ test.describe('Store Support test', () => {
 		await storeSupportsPage.filterStoreSupports(data.storeSupport.filter.byCustomer, 'by-customer');
 	});
 
-	// test.skip('filter store support by calender @pro', async ( ) => {
-	// 	//todo
-	// });
-
 	test('admin can reply to support ticket as admin @pro', async ( ) => {
 		await storeSupportsPage.replySupportTicket(data.storeSupport.chatReply.asAdmin);
 	});
@@ -77,6 +73,8 @@ test.describe('Store Support test', () => {
 	test('admin can perform store support bulk action @pro', async ( ) => {
 		await storeSupportsPage.storeSupportBulkAction('close');
 	});
+
+	//todo: filter store support by calender
 
 
 });

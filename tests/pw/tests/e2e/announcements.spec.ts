@@ -24,9 +24,9 @@ test.describe('Announcements test', () => {
 
 	// test.use({ storageState: data.auth.adminAuthFile });
 
-	// test('dokan announcements menu page is rendering properly @pro @explo', async ( ) => {
-	// 	await announcementsPage.adminAnnouncementsRenderProperly();
-	// });
+	test('dokan announcements menu page is rendering properly @pro @explo', async ( ) => {
+		await announcementsPage.adminAnnouncementsRenderProperly();
+	});
 
 	test('admin can add announcement @pro', async ( ) => {
 		await announcementsPage.addAnnouncement({ ...data.announcement.create, receiver: data.announcement.receiver.allVendors });
@@ -58,5 +58,7 @@ test.describe('Announcements test', () => {
 	});
 
 	//TODO: separate tc for announcement receiver, needed or not
+	//TODO: add vendor tests
+
 
 });

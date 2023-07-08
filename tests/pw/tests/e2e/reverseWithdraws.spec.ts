@@ -40,10 +40,8 @@ test.describe('Reverse withdraw test', () => {
 		await reverseWithdrawsPage.filterReverseWithdraws(data.predefined.vendorStores.vendor1);
 	});
 
-	// test.skip('filter reverse withdraws by calender @lite @pro', async ( ) => {
-	// 	//todo
-	// });
-
+	//todo: admin can add reverse withdraw
+	//todo: filter reverse withdraws by calender
 	//TODO: add vendor tests
 
 });
