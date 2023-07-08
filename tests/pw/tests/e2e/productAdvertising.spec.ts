@@ -59,7 +59,7 @@ test.describe('Product Advertising test', () => {
 		await productAdvertisingPage.updateAdvertisedProduct(data.productAdvertisement.advertisedProduct, 'delete');
 	});
 
-	test.only('admin can perform product advertising bulk action @pro', async ( ) => {
+	test('admin can perform product advertising bulk action @pro', async ( ) => {
 		await productAdvertisingPage.productAdvertisingBulkAction('delete');
 	});
 
