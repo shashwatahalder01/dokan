@@ -6,7 +6,7 @@ import { data } from 'utils/testData';
 const { DOKAN_PRO } = process.env;
 
 
-export class StorePage extends AdminPage {
+export class StoresPage extends AdminPage {
 
 	constructor(page: Page) {
 		super(page);
@@ -333,6 +333,22 @@ export class StorePage extends AdminPage {
 
 
 	// store categories
+
+
+	async adminStoreCategoryRenderProperly(){
+		await this.goIfNotThere(data.subUrls.backend.dokan.dokanVendors);
+		await this.click(selector.admin.dokan.vendors.storeCategories);
+
+		// add new category elements are visible
+		await this.multipleElementVisible(selector.admin.dokan.vendors.storeCategory.addNewCategory);
+
+		// search category input is visible
+		await expect(this.page.locator(selector.admin.dokan.vendors.storeCategory.search)).toBeVisible();
+
+		// store category table elements are visible
+		await this.multipleElementVisible(selector.admin.dokan.vendors.storeCategory.table);
+
+	}
 
 	// add store category
 	async addStoreCategory(storeCategory: any) {

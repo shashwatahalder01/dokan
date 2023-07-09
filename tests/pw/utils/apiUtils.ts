@@ -2,7 +2,6 @@ import { expect, type APIRequestContext, APIResponse, Request } from '@playwrigh
 import { endPoints } from 'utils/apiEndPoints';
 import { payloads } from 'utils/payloads';
 import fs from 'fs';
-import { pl } from '@faker-js/faker';
 import { helpers } from './helpers';
 // import FormData from 'form-data';
 
@@ -828,6 +827,19 @@ export class ApiUtils {
 	 * store categories api methods
 	 */
 
+	// get all store categories
+	async getAllStoreCategories(auth? : auth): Promise<responseBody> {
+		const [, responseBody] = await this.get(endPoints.getAllStoreCategories, { params: { per_page:100 }, headers: auth });
+		return responseBody;
+	}
+
+	// get sellerId
+	async getStoreCategoryId(StoreCategoryName?: string, auth? : auth): Promise<string> {
+		const allStoreCategories = await this.getAllStoreCategories(auth);
+		const storeCategoryId = StoreCategoryName ? (allStoreCategories.find((o: { name: unknown; }) => o.name === StoreCategoryName)).id : allStoreCategories[0].id;
+		return storeCategoryId;
+	}
+
 	// create store category
 	async createStoreCategory(payload: object, auth? : auth): Promise<[responseBody, string]> {
 		const [, responseBody] = await this.post(endPoints.createStoreCategory, { data: payload, headers: auth });
@@ -842,8 +854,11 @@ export class ApiUtils {
 		return [responseBody, categoryId];
 	}
 
-	// get default store category
+	// set default store category
 	async setDefaultStoreCategory(categoryId: string, auth? : auth): Promise<responseBody> {
+		if (isNaN(Number(categoryId))){
+			categoryId = await this.getStoreCategoryId(categoryId, auth);
+		}
 		const [, responseBody] = await this.put(endPoints.setDefaultStoreCategory, { data: { id: categoryId }, headers: auth });
 		return responseBody;
 	}

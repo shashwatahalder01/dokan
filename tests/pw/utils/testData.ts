@@ -756,6 +756,7 @@ export const data = {
 				dokanWithdraw: 'wp-admin/admin.php?page=dokan#/withdraw?status=pending', //TODO: if needed make separate for status pending
 				dokanReverseWithdraw: 'wp-admin/admin.php?page=dokan#/reverse-withdrawal',
 				dokanVendors: 'wp-admin/admin.php?page=dokan#/vendors',
+				dokanStoreCategories: 'wp-admin/admin.php?page=dokan#/store-categories',
 				dokanAbuseReports: 'wp-admin/admin.php?page=dokan#/abuse-reports',
 				dokanStoreReviews: 'wp-admin/admin.php?page=dokan#/store-reviews',
 				dokanStoreSupport: 'wp-admin/admin.php?page=dokan#/admin-store-support',
@@ -910,7 +911,7 @@ export const data = {
 		storeName: String(process.env.VENDOR) + 'store',
 
 		vendorInfo: {
-			
+
 			email: () => faker.internet.email(),
 			// emailDomain: '_' + faker.string.alphanumeric(5) + '@email.com',
 			emailDomain: '@email.com',
@@ -1341,6 +1342,21 @@ export const data = {
 
 	},
 
+	// store category
+	storeCategory:{
+
+		create:{
+			name: 'test store category',
+			description: 'test store category description',
+		},
+
+		update:{
+			name: 'test store category',  // name should be same as create, cause search by title //TODO: updatedTitle:  can be added
+			description: 'updated test store category description',
+		},
+
+	},
+
 	// announcement
 
 	announcement: {
@@ -1395,7 +1411,6 @@ export const data = {
 			byCustomer: String(process.env.CUSTOMER),
 			byVendor: String(process.env.VENDOR) + 'store',
 		},
-
 		chatReply: {
 			asAdmin: 'admin chat reply',
 			asVendor: 'vendor chat reply',

@@ -55,7 +55,7 @@ test.describe('Wholesale customers test', () => {
 		await wholesaleAdmin.updateWholesaleCustomer(data.predefined.customerInfo.username1, 'enable');
 	});
 
-	test.only('admin can edit wholesale customer @pro', async ( ) => {
+	test('admin can edit wholesale customer @pro', async ( ) => {
 		await wholesaleAdmin.editWholesaleCustomer(data.customer);
 	});
 

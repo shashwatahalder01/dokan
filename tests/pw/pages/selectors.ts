@@ -551,19 +551,31 @@ export const selector = {
 
 					addNewCategory: {
 						name: '#tag-name',
+						slug: '#tag-slug',
 						description: '#tag-description',
 						addNewCategory: '#submit'
 					},
 
 					editCategory:{
 						name: '#name',
+						slug: '#slug',
 						description: '#description',
 						update: 'button[type="submit"]'
 					},
 
 					search: '//input[@placeholder="Search Categories"]',
 
+					// Table
+					table : {
+						vendorTable: '#dokan-store-categories table',
+						nameColumn: 'thead th.name',
+						descriptionColumn: 'thead th.description',
+						slugColumn: 'thead th.slug',
+						countColumn: 'thead th.count',
+					},
 
+					numberOfRowsFound: '.tablenav.top .displaying-num',
+					noRowsFound: '//td[normalize-space()="No category found"]',
 					storeCategoryCell: (title: string) => `//td//a[contains(text(), '${title}')]/../..`,
 					storeCategoryEdit: '.row-actions .edit',
 					storeCategoryDelete: '.row-actions .delete',
