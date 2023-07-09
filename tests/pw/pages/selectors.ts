@@ -365,6 +365,7 @@ export const selector = {
 
 				vendorsText: '.vendor-list h1',
 				addNewVendor: '//button[contains(text(), "Add New")]',
+				storeCategories: '//a[normalize-space()="Store Categories"]',
 
 				// Nav Tabs
 				navTabs: {
@@ -545,6 +546,31 @@ export const selector = {
 					saveChangesOnTop: '//div[contains(@class, "profile-banner")]//button[contains(text(),"Save Changes")]',
 					confirmSaveChanges: '.swal2-confirm',
 				},
+
+				storeCategory: {
+
+					addNewCategory: {
+						name: '#tag-name',
+						description: '#tag-description',
+						addNewCategory: '#submit'
+					},
+
+					editCategory:{
+						name: '#name',
+						description: '#description',
+						update: 'button[type="submit"]'
+					},
+
+					search: '//input[@placeholder="Search Categories"]',
+
+
+					storeCategoryCell: (title: string) => `//td//a[contains(text(), '${title}')]/../..`,
+					storeCategoryEdit: '.row-actions .edit',
+					storeCategoryDelete: '.row-actions .delete',
+					storeCategorySetDefault: '.row-actions .set_as_default',
+
+
+				}
 
 			},
 
@@ -2614,113 +2640,134 @@ export const selector = {
 		// Users
 		users: {
 			// Users Menu
-			allUsers: '//li[@id="menu-users"]//a[contains(text(),"All Users")]',
-			addNew: '//li[@id="menu-users"]//a[contains(text(),"Add New")]',
-			profile: '//li[@id="menu-users"]//a[contains(text(),"Profile")]',
+			menus: {
+				allUsers: '//li[@id="menu-users"]//a[contains(text(),"All Users")]',
+				addNew: '//li[@id="menu-users"]//a[contains(text(),"Add New")]',
+				profile: '//li[@id="menu-users"]//a[contains(text(),"Profile")]',
+			},
 
 			// All Users
 			allUsersAddNew: '.page-title-action',
 			editUser: '.visible > .edit > a',
 
 			// Add New User
-			newUserName: '#user_login',
-			newUserEmail: '#email',
-			newUserFirstName: '#first_name',
-			newUserFastName: '#last_name',
-			newUserWebsite: '#url',
-			newUserLanguage: '#locale',
-			newUserPassword: '#pass1',
-			newUserSendUserNotification: '#send_user_notification',
-			newUserRole: '#role',
-			addNewUser: '#createusersub',
+			newUser: {
+				username: '#user_login',
+				email: '#email',
+				firstName: '#first_name',
+				lastName: '#last_name',
+				website: '#url',
+				language: '#locale',
+				password: '#pass1',
+				sendUserNotification: '#send_user_notification',
+				role: '#role',
+				addNewUser: '#createusersub',
+			},
 
-			// Edit User
-			// Personal Info
-			role: '#role',
-			firstName: '#first_name',
-			lastName: '#last_name',
-			nickname: '#nickname',
-			displayNamePubliclyAs: '#display_name',
-			// Contact Info
-			email: '#email',
-			website: '#url',
-			// About the User
-			biographicalInfo: '#description',
-			// Account Management
-			setNewPassword: '.wp-generate-pw',
-			newPassword: '#pass1',
-			// Customer Billing Address
-			billingFirstName: '#billing_first_name',
-			billingLastName: '#billing_last_name',
-			billingCompany: '#billing_company',
-			billingAddress1: '#billing_address_1',
-			billingAddress2: '#billing_address_2',
-			billingCity: '#billing_city',
-			billingPostcode: '#billing_postcode',
-			// billingCountryOrRegion: "#select2-billing_country-container",
-			billingCountryOrRegion: '.select2-selection__arrow',
+			// Edit User info
+			userInfo: { //TODO: userinfo/userDetails/editUser
 
-			billingCountryOrRegionValues: '.select2-results ul li',
-			billingState: '#billing_state',
-			billingPhone: '#billing_phone',
-			billingEmailAddress: '#billing_email',
-			billingCompanyIdOrEuidNumber: '#billing_dokan_company_id_number',
-			billingVatOrTaxNumber: '#billing_dokan_vat_number',
-			billingBank: '#billing_dokan_bank_name',
-			billingBankIban: '#billing_dokan_bank_iban',
-			// Customer Shipping Address
-			copyFromBillingAddress: '#copy_billing',
-			shippingFirstName: '#shipping_first_name',
-			shippingLastName: '#shipping_last_name',
-			shippingCompany: '#shipping_company',
-			shippingAddress1: '#shipping_address_1',
-			shippingAddress2: '#shipping_address_2',
-			shippingCity: '#shipping_city',
-			shippingPostcode: '#shipping_postcode',
-			// shippingCountryOrRegion: "#select2-shipping_country-container",
-			shippingCountryOrRegion: '.select2-selection__arrow',
-			shippingCountryOrRegionValues: '.select2-results ul li',
-			shippingState: '#shipping_state',
-			shippingPhone: '#shipping_phone',
-			// Dokan Options
-			dokanBanner: '.dokan-banner .button-area a',
-			dokanStoreName: '//input[@name="dokan_store_name"]',
-			dokanStoreUrl: '#seller-url',
-			dokanAddress1: '//input[@name="dokan_store_address[street_1]"]',
-			dokanAddress2: '//input[@name="dokan_store_address[street_2]"]',
-			dokanCity: '//input[@name="dokan_store_address[city]"]',
-			dokanPostcode: '//input[@name="dokan_store_address[zip]"]',
-			// dokanCountry: '#select2-country-container',
-			// dokanCountryValues: '.select2-results ul li',
-			// dokanState: '##select2-state-container',
-			// dokanStateValues: '.select2-results ul li',
-			dokanCountry: '(//span[@class="select2-selection__arrow"])[1]',
-			dokanCountryInput: '.select2-search.select2-search--dropdown .select2-search__field',
-			dokanState: '(//span[@class="select2-selection__arrow"])[2]',
-			dokanStateInput: '.select2-search.select2-search--dropdown .select2-search__field',
+				// Personal Info
+				role: '#role',
+				firstName: '#first_name',
+				lastName: '#last_name',
+				nickname: '#nickname',
+				displayNamePubliclyAs: '#display_name',
 
-			dokanPhone: '//input[@name="dokan_store_phone"]',
-			dokanCompanyName: '//input[@name="dokan_company_name"]',
-			dokanCompanyIdOrEuidNumber: '//input[@name="dokan_company_id_number"]',
-			dokanVatOrTaxNumber: '//input[@name="dokan_vat_number"]',
-			dokanBank: '//input[@name="dokan_bank_name"]',
-			dokanBankIban: '//input[@name="dokan_bank_iban"]',
-			dokanFacebook: '//input[@name="dokan_social[fb]"]',
-			dokanTwitter: '//input[@name="dokan_social[twitter]"]',
-			dokanPinterest: '//input[@name="dokan_social[pinterest]"]',
-			dokanLinkedin: '//input[@name="dokan_social[linkedin]"]',
-			dokanYoutube: '//input[@name="dokan_social[youtube]"]',
-			dokanInstagram: '//input[@name="dokan_social[instagram]"]',
-			dokanFlicker: '//input[@name="dokan_social[flickr]"]',
-			dokanSelling: '#dokan_enable_selling',
-			dokanPublishing: '#dokan_publish',
-			dokanAdminCommissionType: '#dokan_admin_percentage_type',
-			dokanAdminCommission: '#admin-commission',
-			dokanFeaturedVendor: '#dokan_feature',
-			dokanWithdrawThreshold: '#withdraw_date_limit',
-			dokanAuction: '#dokan_disable_auction',
-			// Dokan Subscription
-			assignSubscriptionPack: '.dps_assign_pack select',
+				// Contact Info
+				email: '#email',
+				website: '#url',
+
+				// About the User
+				biographicalInfo: '#description',
+
+				// Account Management
+				setNewPassword: '.wp-generate-pw',
+				newPassword: '#pass1',
+
+				// Customer Billing Address
+				billingAddress:{
+					firstName: '#billing_first_name',
+					lastName: '#billing_last_name',
+					company: '#billing_company',
+					address1: '#billing_address_1',
+					address2: '#billing_address_2',
+					city: '#billing_city',
+					postcode: '#billing_postcode',
+					// country: '#select2-billing_country-container',
+					// countryInput: '.select2-results ul li',
+					country: '//select[@id="billing_country"]/..//span[@class="select2-selection__arrow"]',
+					countryInput: '.select2-search.select2-search--dropdown .select2-search__field',
+					state: '//select[@id="billing_state"]/..//span[@class="select2-selection__arrow"]',
+					stateInput: '.select2-search.select2-search--dropdown .select2-search__field',
+					phone: '#billing_phone',
+					email: '#billing_email',
+					companyIdOrEuidNumber: '#billing_dokan_company_id_number',
+					vatOrTaxNumber: '#billing_dokan_vat_number',
+					bank: '#billing_dokan_bank_name',
+					bankIban: '#billing_dokan_bank_iban',
+				},
+
+				// Customer Shipping Address
+				shippingAddress:{
+					copyFromBillingAddress: '#copy_billing',
+					firstName: '#shipping_first_name',
+					lastName: '#shipping_last_name',
+					company: '#shipping_company',
+					address1: '#shipping_address_1',
+					address2: '#shipping_address_2',
+					city: '#shipping_city',
+					postcode: '#shipping_postcode',
+					country: '//select[@id="shipping_country"]/..//span[@class="select2-selection__arrow"]',
+					countryInput: '.select2-search.select2-search--dropdown .select2-search__field',
+					state: '//select[@id="shipping_state"]/..//span[@class="select2-selection__arrow"]',
+					stateInput: '.select2-search.select2-search--dropdown .select2-search__field',
+					phone: '#shipping_phone',
+				},
+
+				// Dokan Options
+				dokanOptions: {
+					banner: '.dokan-banner .button-area a',
+					storeName: '//input[@name="dokan_store_name"]',
+					storeUrl: '#seller-url',
+					address1: '//input[@name="dokan_store_address[street_1]"]',
+					address2: '//input[@name="dokan_store_address[street_2]"]',
+					city: '//input[@name="dokan_store_address[city]"]',
+					postcode: '//input[@name="dokan_store_address[zip]"]',
+					// country: '#select2-country-container',
+					// countryValues: '.select2-results ul li',
+					// state: '##select2-state-container',
+					// stateValues: '.select2-results ul li',
+					country: '(//span[@class="select2-selection__arrow"])[1]',
+					countryInput: '.select2-search.select2-search--dropdown .select2-search__field',
+					state: '(//span[@class="select2-selection__arrow"])[2]',
+					stateInput: '.select2-search.select2-search--dropdown .select2-search__field',
+
+					phone: '//input[@name="dokan_store_phone"]',
+					companyName: '//input[@name="dokan_company_name"]',
+					companyIdOrEuidNumber: '//input[@name="dokan_company_id_number"]',
+					vatOrTaxNumber: '//input[@name="dokan_vat_number"]',
+					bank: '//input[@name="dokan_bank_name"]',
+					bankIban: '//input[@name="dokan_bank_iban"]',
+					facebook: '//input[@name="dokan_social[fb]"]',
+					twitter: '//input[@name="dokan_social[twitter]"]',
+					pinterest: '//input[@name="dokan_social[pinterest]"]',
+					linkedin: '//input[@name="dokan_social[linkedin]"]',
+					youtube: '//input[@name="dokan_social[youtube]"]',
+					instagram: '//input[@name="dokan_social[instagram]"]',
+					flickr: '//input[@name="dokan_social[flickr]"]',
+					selling: '#dokan_enable_selling',
+					publishing: '#dokan_publish',
+					adminCommissionType: '#dokan_admin_percentage_type',
+					adminCommission: '#admin-commission',
+					featuredVendor: '#dokan_feature',
+					withdrawThreshold: '#withdraw_date_limit',
+					auction: '#dokan_disable_auction',
+					// Dokan Subscription
+					assignSubscriptionPack: '.dps_assign_pack select',
+				},
+			},
+
 			// Update User
 			updateUser: 'input#submit',
 			updateSuccessMessage: '//strong[normalize-space()="User updated."]',

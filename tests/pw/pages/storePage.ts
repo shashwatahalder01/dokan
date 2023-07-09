@@ -100,41 +100,101 @@ export class StorePage extends AdminPage {
 		await this.clickAndWaitForNavigation(selector.admin.dokan.vendors.vendorEdit);
 
 		if (!DOKAN_PRO){
-			console.log('lite');
 
-			// store settings
-			// await this.clearAndType(selector.admin.users.dokanStoreName, vendorName );
+			// basic info
+			await this.selectByValue(selector.admin.users.userInfo.role, vendor.vendorInfo.role);
+			await this.clearAndType(selector.admin.users.userInfo.firstName, vendor.username);
+			await this.clearAndType(selector.admin.users.userInfo.lastName, vendor.lastname);
+			await this.clearAndType(selector.admin.users.userInfo.nickname, vendor.username );
 
-			// // vendor address
-			// await this.clearAndType(selector.admin.users.dokanStoreUrl, vendorName );
-			// await this.clearAndType(selector.admin.users.dokanAddress1, vendorName );
-			// await this.clearAndType(selector.admin.users.dokanAddress2, vendorName);
-			// await this.clearAndType(selector.admin.users.dokanCity, vendorName);
-			// await this.clearAndType(selector.admin.users.dokanPostcode, vendorName);
-			// await this.clearAndType(selector.admin.users.dokanStoreName, vendorName);
-			// await this.clearAndType(selector.admin.users.dokanStoreName, vendorName);
-			// await this.click(selector.admin.users.dokanCountry);
-			// await this.clearAndType(selector.admin.users.dokanCountryInput, vendorName);
-			// await this.press(data.key.enter);
-			// await this.click(selector.admin.users.dokanState);
-			// await this.clearAndType(selector.admin.users.dokanStateInput, vendorName);
-			// await this.press(data.key.enter);
+			// contact info
+			await this.clearAndType(selector.admin.users.userInfo.email, vendor.username + data.vendor.vendorInfo.emailDomain);
 
-			// await this.clearAndType(selector.admin.users.dokanPhone, vendorName);
+			// About the user
+			await this.clearAndType(selector.admin.users.userInfo.biographicalInfo, vendor.vendorInfo.biography);
 
-			// // social options
-			// await this.clearAndType(selector.admin.users.dokanFacebook, vendorName);
-			// await this.clearAndType(selector.admin.users.dokanTwitter, vendorName);
-			// await this.clearAndType(selector.admin.users.dokanPinterest, vendorName);
-			// await this.clearAndType(selector.admin.users.dokanLinkedin, vendorName);
-			// await this.clearAndType(selector.admin.users.dokanInstagram, vendorName);
-			// await this.clearAndType(selector.admin.users.dokanFlicker, vendorName);
+			// vendor address
+
+			// billing
+			await this.clearAndType(selector.admin.users.userInfo.billingAddress.firstName, vendor.username );
+			await this.clearAndType(selector.admin.users.userInfo.billingAddress.lastName, vendor.lastname );
+			await this.clearAndType(selector.admin.users.userInfo.billingAddress.company, vendor.vendorInfo.companyName);
+			await this.clearAndType(selector.admin.users.userInfo.billingAddress.address1, vendor.vendorInfo.street1);
+			await this.clearAndType(selector.admin.users.userInfo.billingAddress.address2, vendor.vendorInfo.street2);
+			await this.clearAndType(selector.admin.users.userInfo.billingAddress.city, vendor.vendorInfo.city);
+			await this.clearAndType(selector.admin.users.userInfo.billingAddress.postcode, vendor.vendorInfo.zipCode);
+			await this.click(selector.admin.users.userInfo.billingAddress.country);
+			await this.clearAndType(selector.admin.users.userInfo.billingAddress.countryInput, vendor.vendorInfo.country);
+			await this.press(data.key.enter);
+			await this.click(selector.admin.users.userInfo.billingAddress.state);
+			await this.clearAndType(selector.admin.users.userInfo.billingAddress.stateInput, vendor.vendorInfo.state);
+			await this.press(data.key.enter);
+			await this.clearAndType(selector.admin.users.userInfo.billingAddress.phone, vendor.vendorInfo.phoneNumber);
+			await this.clearAndType(selector.admin.users.userInfo.billingAddress.email, vendor.username + data.vendor.vendorInfo.emailDomain);
+
+			// pro edit user
+			// await this.clearAndType(selector.admin.users.userInfo.billingAddress.companyIdOrEuidNumber, vendor.vendorInfo.companyId);
+			// await this.clearAndType(selector.admin.users.userInfo.billingAddress.vatOrTaxNumber, vendor.vendorInfo.vatNumber);
+			// await this.clearAndType(selector.admin.users.userInfo.billingAddress.bank, vendor.vendorInfo.bankName);
+			// await this.clearAndType(selector.admin.users.userInfo.billingAddress.bankIban, vendor.vendorInfo.bankIban);
+
+			// shipping
+			await this.clearAndType(selector.admin.users.userInfo.shippingAddress.firstName, vendor.username );
+			await this.clearAndType(selector.admin.users.userInfo.shippingAddress.lastName, vendor.lastname );
+			await this.clearAndType(selector.admin.users.userInfo.shippingAddress.company, vendor.vendorInfo.companyName);
+			await this.clearAndType(selector.admin.users.userInfo.shippingAddress.address1, vendor.vendorInfo.street1);
+			await this.clearAndType(selector.admin.users.userInfo.shippingAddress.address2, vendor.vendorInfo.street2);
+			await this.clearAndType(selector.admin.users.userInfo.shippingAddress.city, vendor.vendorInfo.city);
+			await this.clearAndType(selector.admin.users.userInfo.shippingAddress.postcode, vendor.vendorInfo.zipCode);
+			await this.click(selector.admin.users.userInfo.shippingAddress.country);
+			await this.clearAndType(selector.admin.users.userInfo.shippingAddress.countryInput, vendor.vendorInfo.country);
+			await this.press(data.key.enter);
+			await this.click(selector.admin.users.userInfo.shippingAddress.state);
+			await this.clearAndType(selector.admin.users.userInfo.shippingAddress.stateInput, vendor.vendorInfo.state);
+			await this.press(data.key.enter);
+			await this.clearAndType(selector.admin.users.userInfo.shippingAddress.phone, vendor.vendorInfo.phoneNumber);
+
+			// dokan options
+			await this.clearAndType(selector.admin.users.userInfo.dokanOptions.storeName, vendor.vendorInfo.storeName);
+			await this.clearAndType(selector.admin.users.userInfo.dokanOptions.storeUrl, vendor.vendorInfo.storeName);
+			// store address
+			await this.clearAndType(selector.admin.users.userInfo.dokanOptions.address1, vendor.vendorInfo.street1);
+			await this.clearAndType(selector.admin.users.userInfo.dokanOptions.address2, vendor.vendorInfo.street2);
+			await this.clearAndType(selector.admin.users.userInfo.dokanOptions.city, vendor.vendorInfo.city);
+			await this.clearAndType(selector.admin.users.userInfo.dokanOptions.postcode, vendor.vendorInfo.zipCode);
+			await this.click(selector.admin.users.userInfo.dokanOptions.country);
+			await this.clearAndType(selector.admin.users.userInfo.dokanOptions.countryInput, vendor.vendorInfo.country);
+			await this.press(data.key.enter);
+			await this.click(selector.admin.users.userInfo.dokanOptions.state);
+			await this.clearAndType(selector.admin.users.userInfo.dokanOptions.stateInput, vendor.vendorInfo.state);
+			await this.press(data.key.enter);
+			await this.clearAndType(selector.admin.users.userInfo.dokanOptions.phone, vendor.vendorInfo.phoneNumber);
+
+			// pro edit user
+			// await this.clearAndType(selector.admin.users.userInfo.dokanOptions.companyName, vendor.vendorInfo.companyName);
+			// await this.clearAndType(selector.admin.users.userInfo.dokanOptions.companyIdOrEuidNumber, vendor.vendorInfo.companyId);
+			// await this.clearAndType(selector.admin.users.userInfo.dokanOptions.vatOrTaxNumber, vendor.vendorInfo.vatNumber);
+			// await this.clearAndType(selector.admin.users.userInfo.dokanOptions.bank, vendor.vendorInfo.bankName);
+			// await this.clearAndType(selector.admin.users.userInfo.dokanOptions.bankIban, vendor.vendorInfo.bankIban);
+
+			// social profiles
+			await this.clearAndType(selector.admin.users.userInfo.dokanOptions.facebook, vendor.vendorInfo.socialProfileUrls.facebook);
+			await this.clearAndType(selector.admin.users.userInfo.dokanOptions.twitter, vendor.vendorInfo.socialProfileUrls.twitter);
+			await this.clearAndType(selector.admin.users.userInfo.dokanOptions.pinterest, vendor.vendorInfo.socialProfileUrls.pinterest);
+			await this.clearAndType(selector.admin.users.userInfo.dokanOptions.linkedin, vendor.vendorInfo.socialProfileUrls.linkedin);
+			await this.clearAndType(selector.admin.users.userInfo.dokanOptions.youtube, vendor.vendorInfo.socialProfileUrls.youtube);
+			await this.clearAndType(selector.admin.users.userInfo.dokanOptions.instagram, vendor.vendorInfo.socialProfileUrls.instagram);
+			await this.clearAndType(selector.admin.users.userInfo.dokanOptions.flickr, vendor.vendorInfo.socialProfileUrls.flickr);
 
 			// other settings
-			await this.click(selector.admin.users.dokanSelling);
-			await this.click(selector.admin.users.dokanPublishing);
-			await this.click(selector.admin.users.dokanFeaturedVendor);
-			// TODO: fix this
+			await this.check(selector.admin.users.userInfo.dokanOptions.selling);
+			await this.check(selector.admin.users.userInfo.dokanOptions.publishing);
+			await this.check(selector.admin.users.userInfo.dokanOptions.featuredVendor);
+
+			// update user
+			await this.clickAndWaitForResponse(data.subUrls.user, selector.admin.users.updateUser, 302);
+			await expect(this.page.locator(selector.admin.users.updateSuccessMessage)).toContainText('User updated.');
+
 		} else {
 
 			// basic
@@ -269,6 +329,67 @@ export class StorePage extends AdminPage {
 		await this.click(selector.admin.dokan.vendors.bulkActions.selectAll);
 		await this.selectByValue(selector.admin.dokan.vendors.bulkActions.selectAction, action);
 		await this.clickAndWaitForResponse(data.subUrls.backend.stores, selector.admin.dokan.vendors.bulkActions.applyAction);
+	}
+
+
+	// store categories
+
+	// add store category
+	async addStoreCategory(storeCategory: any) {
+		await this.goIfNotThere(data.subUrls.backend.dokan.dokanVendors);
+		await this.click(selector.admin.dokan.vendors.storeCategories);
+
+		await this.clearAndType(selector.admin.dokan.vendors.storeCategory.addNewCategory.name, storeCategory.name);
+		await this.clearAndType(selector.admin.dokan.vendors.storeCategory.addNewCategory.description, storeCategory.description);
+		await this.clickAndWaitForResponse(data.subUrls.backend.storeCategories, selector.admin.dokan.vendors.storeCategory.addNewCategory.addNewCategory);
+	}
+
+	// search store category
+	async searchStoreCategory(categoryName: string){
+		await this.goIfNotThere(data.subUrls.backend.dokan.dokanVendors);
+		await this.click(selector.admin.dokan.vendors.storeCategories);
+
+		await this.clearInputField(selector.admin.dokan.vendors.storeCategory.search);
+
+		await this.typeAndWaitForResponse(data.subUrls.backend.storeCategories, selector.admin.dokan.vendors.storeCategory.search, categoryName);
+		await expect(this.page.locator(selector.admin.dokan.vendors.storeCategory.storeCategoryCell(categoryName))).toBeVisible();
+
+	}
+
+	// edit store category
+	async editStoreCategory(storeCategory: any) {
+		await this.searchStoreCategory(storeCategory.name);
+
+		await this.hover(selector.admin.dokan.vendors.storeCategory.storeCategoryCell(storeCategory.name));
+
+		await this.clearAndType(selector.admin.dokan.vendors.storeCategory.editCategory.name, storeCategory.name);
+		await this.clearAndType(selector.admin.dokan.vendors.storeCategory.editCategory.description, storeCategory.description);
+		await this.clickAndWaitForResponse(data.subUrls.backend.storeCategories, selector.admin.dokan.vendors.storeCategory.editCategory.update);
+
+	}
+
+	// update store category
+	async updateStoreCategory(categoryName: string, action: string) {
+		await this.searchStoreCategory(categoryName);
+
+		await this.hover(selector.admin.dokan.vendors.storeCategory.storeCategoryCell(categoryName));
+
+		switch(action){
+
+		case 'set-default' :
+			await this.clickAndWaitForResponse(data.subUrls.backend.storeCategories, selector.admin.dokan.vendors.storeCategory.storeCategorySetDefault);
+			break;
+
+		case 'delete' :
+			await this.clickAndAcceptAndWaitForResponse(data.subUrls.backend.storeCategories, selector.admin.dokan.vendors.storeCategory.storeCategoryDelete);
+			break;
+
+		default :
+			break;
+
+		}
+
+
 	}
 
 }

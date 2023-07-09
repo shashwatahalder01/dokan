@@ -787,6 +787,7 @@ export const data = {
 			//TODO: move to api
 			products: 'dokan/v1/products',
 			stores: 'dokan/v1/stores',
+			storeCategories: 'dokan/v1/store-categories',
 			withdraws: 'dokan/v1/withdraw',
 			reverseWithdraws: 'dokan/v1/reverse-withdrawal',
 			abuseReports: 'dokan/v1/abuse-reports',
@@ -909,6 +910,7 @@ export const data = {
 		storeName: String(process.env.VENDOR) + 'store',
 
 		vendorInfo: {
+			
 			email: () => faker.internet.email(),
 			// emailDomain: '_' + faker.string.alphanumeric(5) + '@email.com',
 			emailDomain: '@email.com',
@@ -940,6 +942,7 @@ export const data = {
 			routingNumber: faker.string.alphanumeric(10),
 			swiftCode: faker.string.alphanumeric(10),
 			iban: faker.string.alphanumeric(10),
+			role: 'seller',
 
 			//shop details
 			banner: 'tests/e2e/utils/sampleData/banner.png',
@@ -1258,6 +1261,7 @@ export const data = {
 			routingNumber: faker.string.alphanumeric(10),
 			swiftCode: faker.string.alphanumeric(10),
 			iban: faker.string.alphanumeric(10),
+			biography: 'Customer biography',
 			addressChangeSuccessMessage: 'Address changed successfully.',
 			getSupport: {
 				subject: 'get Support Subject',

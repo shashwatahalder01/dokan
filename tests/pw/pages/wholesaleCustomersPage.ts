@@ -50,13 +50,52 @@ export class WholesaleCustomersPage extends AdminPage {
 		await this.hover(selector.admin.dokan.wholesaleCustomer.wholesaleCustomerCell(wholesaleCustomer.username));
 		await this.clickAndWaitForNavigation(selector.admin.dokan.wholesaleCustomer.wholesaleCustomerEdit);
 
+		// basic info
+		await this.selectByValue(selector.admin.users.userInfo.role, wholesaleCustomer.customerInfo.role);
+		await this.clearAndType(selector.admin.users.userInfo.firstName, wholesaleCustomer.username);
+		await this.clearAndType(selector.admin.users.userInfo.lastName, wholesaleCustomer.lastname);
+		await this.clearAndType(selector.admin.users.userInfo.nickname, wholesaleCustomer.username );
 
-		// Customer details
-		await this.selectByValue(selector.admin.users.role, wholesaleCustomer.customerInfo.role);
-		await this.clearAndType(selector.admin.users.firstName, wholesaleCustomer.username);
-		await this.clearAndType(selector.admin.users.lastName, wholesaleCustomer.lastname);
-		await this.clearAndType(selector.admin.users.nickname, wholesaleCustomer.username );
-		// TODO: add more details
+		// contact info
+		await this.clearAndType(selector.admin.users.userInfo.email, wholesaleCustomer.username + data.customer.customerInfo.emailDomain);
+
+		// About the user
+		await this.clearAndType(selector.admin.users.userInfo.biographicalInfo, wholesaleCustomer.customerInfo.biography);
+
+		// customer address
+
+		// billing
+		await this.clearAndType(selector.admin.users.userInfo.billingAddress.firstName, wholesaleCustomer.username );
+		await this.clearAndType(selector.admin.users.userInfo.billingAddress.lastName, wholesaleCustomer.lastname );
+		await this.clearAndType(selector.admin.users.userInfo.billingAddress.company, wholesaleCustomer.customerInfo.companyName);
+		await this.clearAndType(selector.admin.users.userInfo.billingAddress.address1, wholesaleCustomer.customerInfo.street1);
+		await this.clearAndType(selector.admin.users.userInfo.billingAddress.address2, wholesaleCustomer.customerInfo.street2);
+		await this.clearAndType(selector.admin.users.userInfo.billingAddress.city, wholesaleCustomer.customerInfo.city);
+		await this.clearAndType(selector.admin.users.userInfo.billingAddress.postcode, wholesaleCustomer.customerInfo.zipCode);
+		await this.click(selector.admin.users.userInfo.billingAddress.country);
+		await this.clearAndType(selector.admin.users.userInfo.billingAddress.countryInput, wholesaleCustomer.customerInfo.country);
+		await this.press(data.key.enter);
+		await this.click(selector.admin.users.userInfo.billingAddress.state);
+		await this.clearAndType(selector.admin.users.userInfo.billingAddress.stateInput, wholesaleCustomer.customerInfo.state);
+		await this.press(data.key.enter);
+		await this.clearAndType(selector.admin.users.userInfo.billingAddress.phone, wholesaleCustomer.customerInfo.phone);
+		await this.clearAndType(selector.admin.users.userInfo.billingAddress.email, wholesaleCustomer.username + data.customer.customerInfo.emailDomain);
+
+		// shipping
+		await this.clearAndType(selector.admin.users.userInfo.shippingAddress.firstName, wholesaleCustomer.username );
+		await this.clearAndType(selector.admin.users.userInfo.shippingAddress.lastName, wholesaleCustomer.lastname );
+		await this.clearAndType(selector.admin.users.userInfo.shippingAddress.company, wholesaleCustomer.customerInfo.companyName);
+		await this.clearAndType(selector.admin.users.userInfo.shippingAddress.address1, wholesaleCustomer.customerInfo.street1);
+		await this.clearAndType(selector.admin.users.userInfo.shippingAddress.address2, wholesaleCustomer.customerInfo.street2);
+		await this.clearAndType(selector.admin.users.userInfo.shippingAddress.city, wholesaleCustomer.customerInfo.city);
+		await this.clearAndType(selector.admin.users.userInfo.shippingAddress.postcode, wholesaleCustomer.customerInfo.zipCode);
+		await this.click(selector.admin.users.userInfo.shippingAddress.country);
+		await this.clearAndType(selector.admin.users.userInfo.shippingAddress.countryInput, wholesaleCustomer.customerInfo.country);
+		await this.press(data.key.enter);
+		await this.click(selector.admin.users.userInfo.shippingAddress.state);
+		await this.clearAndType(selector.admin.users.userInfo.shippingAddress.stateInput, wholesaleCustomer.customerInfo.state);
+		await this.press(data.key.enter);
+		await this.clearAndType(selector.admin.users.userInfo.shippingAddress.phone, wholesaleCustomer.customerInfo.phone);
 
 		// update user
 		await this.clickAndWaitForResponse(data.subUrls.user, selector.admin.users.updateUser, 302);

@@ -28,7 +28,7 @@ test.describe('Vendors test', () => {
 		await storePage.adminVendorsRenderProperly();
 	});
 
-	test('admin can add new vendor @lite @pro', async ( ) => {
+	test('admin can add vendor @lite @pro', async ( ) => {
 		await storePage.addVendor(data.vendor.vendorInfo);
 	});
 
@@ -44,7 +44,7 @@ test.describe('Vendors test', () => {
 		await storePage.updateVendor(data.predefined.vendorStores.vendor1, 'enable');
 	});
 
-	test('admin can add edit vendor info  @lite @pro', async ( ) => {
+	test('admin can edit vendor info @lite @pro', async ( ) => {
 		await storePage.editVendor(data.vendor);
 	});
 
@@ -58,6 +58,30 @@ test.describe('Vendors test', () => {
 	test('admin can perform vendor bulk actions @lite @pro', async ( ) => {
 		await storePage.vendorBulkAction('approved');
 	});
+
+	// store category
+
+	// test('admin store category page is rendering properly @lite @pro @explo', async ( ) => {
+	// 	await storePage.adminVendorsRenderProperly();
+	// });
+
+	// test('admin can add store category @lite @pro', async ( ) => {
+	// 	await storePage.addStoreCategory(data.vendor.vendorInfo);
+	// });
+
+	// test('admin can search store category @lite @pro', async ( ) => {
+	// 	await storePage.searchStoreCategory(data.predefined.vendorStores.vendor1);
+	// });
+
+	// test('admin can edit store category @lite @pro', async ( ) => {
+	// 	await storePage.editStoreCategory(data.predefined.vendorStores.vendor1);
+	// });
+	// test('admin can delete store category @lite @pro', async ( ) => {
+	// 	await storePage.updateStoreCategory(data.predefined.vendorStores.vendor1, 'delete');
+	// });
+	// test('admin can set default store category @lite @pro', async ( ) => {
+	// 	await storePage.updateStoreCategory(data.predefined.vendorStores.vendor1, 'set-default');
+	// });
 
 
 });
