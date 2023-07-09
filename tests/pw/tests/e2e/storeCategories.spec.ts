@@ -24,7 +24,7 @@ test.describe('Vendors test', () => {
 
 	// test.use({ storageState: data.auth.adminAuthFile });
 
-	// store category
+	// store categories
 
 	test('admin store category page is rendering properly @pro @explo', async ( ) => {
 		await storeCategoriesPage.adminStoreCategoryRenderProperly();

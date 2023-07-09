@@ -1,5 +1,6 @@
 import { expect, type Page } from '@playwright/test';
 import { AdminPage } from 'pages/adminPage';
+import { StoresPage } from 'pages/storesPage';
 import { selector } from 'pages/selectors';
 import { data } from 'utils/testData';
 
@@ -9,6 +10,8 @@ export class SellerBadgesPage extends AdminPage {
 	constructor(page: Page) {
 		super(page);
 	}
+
+	storesPage = new StoresPage(this.page);
 
 	// seller badge
 
@@ -184,7 +187,7 @@ export class SellerBadgesPage extends AdminPage {
 
 	// badges acquired by vendor
 	async sellerBadgeAcquiredByVendor(vendorName: string){
-		await this.searchVendor(vendorName);
+		await this.storesPage.searchVendor(vendorName);
 
 		await this.clickAndWaitForResponse(data.subUrls.backend.sellerBadge, selector.admin.dokan.vendors.vendorViewDetails(vendorName));
 		await expect(this.page.locator(selector.admin.dokan.vendors.vendorDetails.badgesAcquired)).toBeVisible();

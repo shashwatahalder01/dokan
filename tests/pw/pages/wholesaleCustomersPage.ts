@@ -11,6 +11,7 @@ export class WholesaleCustomersPage extends AdminPage {
 	constructor(page: Page) {
 		super(page);
 	}
+
 	loginPage = new LoginPage(this.page);
 
 	// wholesale customers
@@ -172,7 +173,7 @@ export class WholesaleCustomersPage extends AdminPage {
 		else {
 			await expect(this.page.locator(selector.customer.cDashboard.wholesaleRequestReturnMessage)).toContainText(data.wholesale.wholesaleRequestSendMessage);
 			await this.loginPage.switchUser(data.admin);
-			await this.updateWholesaleCustomer(currentUser!, 'enable'); //TOOD: fix this
+			await this.updateWholesaleCustomer(currentUser!, 'enable'); //TODo: fix this
 		}
 	}
 
