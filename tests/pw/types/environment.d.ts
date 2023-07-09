@@ -13,6 +13,7 @@ declare global {
             VENDOR_ID: string;
             CUSTOMER_ID: string;
             GMAP: string;
+            DOKAN_PRO: string
             BASE_URL:string;
             QUERY:string;
             HEADLESS: string;

@@ -527,7 +527,7 @@ export const data = {
 			vendorStoreUrl: 'store',
 			sellingProductTypes: 'sell_both', // 'sell_both', 'sell_physical', 'sell_digital'
 			storeProductPerPage: '12',
-			storCategory: 'Multiple',  // 'none', 'Single', 'Multiple'
+			storCategory: 'multiple',  // 'none', 'single', 'multiple'
 			saveSuccessMessage: 'Setting has been saved successfully.',
 		},
 
@@ -905,6 +905,8 @@ export const data = {
 	vendor: {
 		username: String(process.env.VENDOR),
 		password: String(process.env.USER_PASSWORD),
+		lastname: String(process.env.VENDOR)[0] + String(process.env.VENDOR)[String(process.env.VENDOR).length-1], //TODO: add last-name to other users
+		storeName: String(process.env.VENDOR) + 'store',
 
 		vendorInfo: {
 			email: () => faker.internet.email(),
@@ -922,6 +924,7 @@ export const data = {
 			vatNumber: faker.string.alphanumeric(10),
 			bankIban: faker.finance.iban(),
 			phoneNumber: faker.phone.number('(###) ###-####'),
+			phone: '0123456789',
 			street1: 'abc street',
 			street2: 'xyz street',
 			country: 'United States (US)',
@@ -983,6 +986,28 @@ export const data = {
 				category: 'Uncategorized',
 			},
 			storeSettingsSaveSuccessMessage: 'Your information has been saved successfully',
+
+			socialProfileUrls: {
+				facebook: 'https://www.facebook.com/',
+				twitter: 'https://www.twitter.com/',
+				pinterest: 'https://www.pinterest.com/',
+				linkedin: 'https://www.linkedin.com/',
+				youtube: 'https://www.youtube.com/',
+				instagram: 'https://www.instagram.com/',
+				flickr: 'https://www.flickr.com/',
+			},
+
+			payment: {
+				email: () => faker.internet.email(),
+				bankAccountName: 'accountName',
+				bankAccountType: faker.helpers.arrayElement(['personal', 'business']),
+				bankAccountNumber: faker.string.alphanumeric(10),
+				bankName: 'bankName',
+				bankAddress: 'bankAddress',
+				bankRoutingNumber: faker.string.alphanumeric(10),
+				bankIban: faker.string.alphanumeric(10),
+				bankSwiftCode: faker.string.alphanumeric(10),
+			},
 		},
 
 		shipping: {
@@ -1270,7 +1295,9 @@ export const data = {
 		// PluginSlugList: ['dokan-lite', 'dokan-pro', 'woocommerce', 'woocommerce-bookings', 'woocommerce-product-add-ons', 'woocommerce-simple-auction', 'woocommerce-subscriptions', 'elementor', 'elementor-pro'],
 		plugins:['basic-auth', 'dokan', 'dokan-pro', 'woocommerce', 'woocommerce-bookings', 'woocommerce-product-addons', 'woocommerce-simple-auctions', 'woocommerce-subscriptions'],
 		// plugins: ['dokan/dokan', 'dokan-pro/dokan-pro', 'woocommerce/woocommerce'],
+		dokanPro: ['dokan-pro'],
 		activeClass: 'active',
+
 	},
 
 	woocommerce: {

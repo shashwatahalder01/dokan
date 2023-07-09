@@ -24,6 +24,8 @@ export const helpers = {
 	// remove array element
 	removeItem: (arr: any[], removeItem: any) => arr.filter((item) => item !== removeItem),
 
+	isSubArray: (parentArray: any[], subArray: any[]) => subArray.every(el => parentArray.includes(el)),
+
 	// check if object is empty
 	isObjEmpty: ( obj: object ) => Object.keys( obj ).length === 0,
 

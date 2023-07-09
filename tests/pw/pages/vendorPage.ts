@@ -619,7 +619,7 @@ export class VendorPage extends BasePage {
 		await this.selectByValue(selector.vendor.vStoreSettings.state, vendorInfo.stateSelectValue);
 		// update settings
 		await this.click(selector.vendor.vStoreSettings.updateSettings);
-		await expect(this.page.locator(selector.vendor.vSocialProfileSettings.updateSettingsSuccessMessage)).toContainText(vendorInfo.storeSettingsSaveSuccessMessage);
+		await expect(this.page.locator(selector.vendor.vStoreSettings.updateSettingsSuccessMessage)).toContainText(vendorInfo.storeSettingsSaveSuccessMessage);
 	}
 
 	// vendor add addons
@@ -1004,7 +1004,7 @@ export class VendorPage extends BasePage {
 		await this.clearAndType(selector.vendor.vSocialProfileSettings.linkedin, urls.linkedin);
 		await this.clearAndType(selector.vendor.vSocialProfileSettings.youtube, urls.youtube);
 		await this.clearAndType(selector.vendor.vSocialProfileSettings.instagram, urls.instagram);
-		await this.clearAndType(selector.vendor.vSocialProfileSettings.flicker, urls.flickr);
+		await this.clearAndType(selector.vendor.vSocialProfileSettings.flickr, urls.flickr);
 		// await this.clickAndWaitForResponse(data.subUrls.ajax, selector.vendor.vSocialProfileSettings.updateSettings); //TODO: don't work, alternate soln. below line
 		await this.pressOnSelector(selector.vendor.vSocialProfileSettings.updateSettings, data.key.enter);
 		await expect(this.page.locator(selector.vendor.vSocialProfileSettings.updateSettingsSuccessMessage)).toContainText(urls.saveSuccessMessage);

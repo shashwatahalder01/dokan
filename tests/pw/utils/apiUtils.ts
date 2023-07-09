@@ -2,6 +2,8 @@ import { expect, type APIRequestContext, APIResponse, Request } from '@playwrigh
 import { endPoints } from 'utils/apiEndPoints';
 import { payloads } from 'utils/payloads';
 import fs from 'fs';
+import { pl } from '@faker-js/faker';
+import { helpers } from './helpers';
 // import FormData from 'form-data';
 
 
@@ -1053,6 +1055,15 @@ export class ApiUtils {
 		const [, responseBody] = await this.delete(endPoints.wp.deletePlugin(plugin), { headers: auth });
 		return responseBody;
 	}
+
+	// get plugin active or not
+	async pluginsActiveOrNot(plugins: string[], auth? : auth): Promise<boolean> {
+		const activePlugins = (await this.getAllPlugins({ status:'active' }, auth)).map((a: { plugin: string }) => (a.plugin).split('/')[1]);
+		return helpers.isSubArray(activePlugins, plugins );
+	}
+
+
+	// media
 
 	// upload media
 	async uploadMedia(filePath: string, auth?: auth): Promise<[responseBody, string]> { //TODO: handle different file upload, hardcoded: image

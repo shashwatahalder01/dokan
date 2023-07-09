@@ -47,11 +47,11 @@ test.describe('Wholesale customers test', () => {
 		await wholesaleAdmin.searchWholesaleCustomer(data.predefined.customerInfo.username1);
 	});
 
-	test('admin can disable customer\'s  wholesale capability @pro', async ( ) => {
+	test('admin can disable customer\'s wholesale capability @pro', async ( ) => {
 		await wholesaleAdmin.updateWholesaleCustomer(data.predefined.customerInfo.username1, 'disable');
 	});
 
-	test('admin can enable customer\'s  wholesale capability @pro', async ( ) => {
+	test('admin can enable customer\'s wholesale capability @pro', async ( ) => {
 		await wholesaleAdmin.updateWholesaleCustomer(data.predefined.customerInfo.username1, 'enable');
 	});
 

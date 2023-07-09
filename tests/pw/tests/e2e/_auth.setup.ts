@@ -1,4 +1,4 @@
-import { test as setup } from '@playwright/test';
+import { test as setup, expect } from '@playwright/test';
 import { LoginPage } from 'pages/loginPage';
 import { AdminPage } from 'pages/adminPage';
 import { ApiUtils } from 'utils/apiUtils';
@@ -39,6 +39,14 @@ setup.describe('authenticate users & set permalink', () => {
 	setup('authenticate vendor', async ({ page }) => {
 		const loginPage = new LoginPage(page);
 		await loginPage.login(data.vendor, data.auth.vendorAuthFile);
+	});
+
+	setup('Dokan Pro enabled or not ', async ({ request }) => {
+		const apiUtils = new ApiUtils(request);
+		const res = await apiUtils.pluginsActiveOrNot(data.plugin.dokanPro, payloads.adminAuth);
+		process.env.DOKAN_PRO = String(res);
+		expect(res).toBeTruthy();
+
 	});
 
 });

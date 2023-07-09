@@ -69,6 +69,9 @@ export class WholesaleCustomersPage extends AdminPage {
 		await this.hover(selector.admin.dokan.wholesaleCustomer.wholesaleCustomerCell(wholesaleCustomer));
 		await this.clickAndWaitForNavigation(selector.admin.dokan.wholesaleCustomer.wholesaleCustomerOrders);
 		// await expect(this.page).toHaveURL(/.*wp-admin\/edit.php?post_type=shop_order&_customer_user.*/);
+
+		const count = (await this.getElementText(selector.admin.dokan.wholesaleCustomer.numberOfRowsFound))?.split(' ')[0];
+		expect(Number(count)).not.toBe(0);
 	}
 
 	// update wholesale customer

@@ -413,54 +413,57 @@ export const selector = {
 
 				// Add New Vendors
 
-				// Menus
-				accountInfo: '//div[@class="tab-link"]//a[contains(text(), "Account Info")]',
-				address: '//div[@class="tab-link"]//a[contains(text(), "Address")]',
-				paymentOptions: '//div[@class="tab-link"]//a[contains(text(), "Payment Options")]',
-				addNewVendorCloseModal: '.modal-close',
-				next: '.button.button-primary',
+				newVendor: {
 
-				// Account Info
+					// Menus
+					accountInfo: '//div[@class="tab-link"]//a[contains(text(), "Account Info")]',
+					address: '//div[@class="tab-link"]//a[contains(text(), "Address")]',
+					paymentOptions: '//div[@class="tab-link"]//a[contains(text(), "Payment Options")]',
+					addNewVendorCloseModal: '.modal-close',
+					next: '.button.button-primary',
 
-				vendorPicture: '.profile-image .dokan-upload-image',
-				banner: '.banner-image .dokan-upload-image button',
-				firstName: '#first-name',
-				lastName: '#last-name',
-				storeName: '#store-name',
-				storeUrl: '#user-nicename',
-				phoneNumber: '#store-phone',
-				email: '#store-email',
-				username: '#user-login',
-				generatePassword: '.button.button-secondary',
-				password: '#store-password',
-				companyName: '#company-name',
-				companyIdEuidNumber: '#company-id-number',
-				vatOrTaxNumber: '#vat-tax-number',
-				nameOfBank: '#dokan-bank-name',
-				bankIban: '#dokan-bank-iban',
-				// Address
-				street1: '#street-1',
-				street2: '#street-2',
-				city: '#city',
-				zip: '#zip',
-				// country: '.multiselect__single',
-				country: '//label[@for="country"]/..//div[@class="multiselect__select"]',
-				countryInput: '#country',
-				// state: '#state',
-				state: '//label[@for="state"]/..//div[@class="multiselect__select"]',
-				// Payment Options
-				accountName: '#account-name',
-				accountNumber: '#account-number',
-				bankName: '#bank-name',
-				bankAddress: '#bank-address',
-				routingNumber: '#routing-number',
-				iban: '#iban',
-				swift: '#swift',
-				payPalEmail: '#paypal-email',
-				enableSelling: '//span[contains(text(),"Enable Selling")]/..//span[@class="slider round"]',
-				publishProductDirectly: '//span[contains(text(), "Publish Product Directly")]/..//span[@class="slider round"]',
-				makeVendorFeature: '//span[contains(text(), "Make Vendor Featured")]/..//span[@class="slider round"]',
-				createVendor: '.button.button-primary.button-hero',
+					// Account Info
+
+					vendorPicture: '.profile-image .dokan-upload-image',
+					banner: '.banner-image .dokan-upload-image button',
+					firstName: '#first-name',
+					lastName: '#last-name',
+					storeName: '#store-name',
+					storeUrl: '#user-nicename',
+					phoneNumber: '#store-phone',
+					email: '#store-email',
+					username: '#user-login',
+					generatePassword: '.button.button-secondary',
+					password: '#store-password',
+					companyName: '#company-name',
+					companyIdEuidNumber: '#company-id-number',
+					vatOrTaxNumber: '#vat-tax-number',
+					nameOfBank: '#dokan-bank-name',
+					bankIban: '#dokan-bank-iban',
+					// Address
+					street1: '#street-1',
+					street2: '#street-2',
+					city: '#city',
+					zip: '#zip',
+					// country: '.multiselect__single',
+					country: '//label[@for="country"]/..//div[@class="multiselect__select"]',
+					countryInput: '#country',
+					state: '//label[@for="state"]/..//div[@class="multiselect__select"]',
+					stateInput: '#state',
+					// Payment Options
+					accountName: '#account-name',
+					accountNumber: '#account-number',
+					bankName: '#bank-name',
+					bankAddress: '#bank-address',
+					routingNumber: '#routing-number',
+					iban: '#iban',
+					swift: '#swift',
+					payPalEmail: '#paypal-email',
+					enableSelling: '//span[contains(text(),"Enable Selling")]/..//span[@class="slider round"]',
+					publishProductDirectly: '//span[contains(text(), "Publish Product Directly")]/..//span[@class="slider round"]',
+					makeVendorFeature: '//span[contains(text(), "Make Vendor Featured")]/..//span[@class="slider round"]',
+					createVendor: '.button.button-primary.button-hero',
+				},
 
 				// Sweet Alert
 				createAnother: '.swal2-confirm', // Sweet Alert Confirm
@@ -477,11 +480,12 @@ export const selector = {
 
 				},
 
-				// Edit Vendor Form
+				// Edit Vendor
 				editVendor: {
 					editVendorIcon: '.dashicons-edit',
 					changeStorePhoto: '.profile-icon .dokan-upload-image img',
 					changeStoreBanner: '.profile-banner .dokan-upload-image img',
+
 					// Account Info
 					firstName: '#first-name',
 					lastName: '#last-name',
@@ -493,26 +497,31 @@ export const selector = {
 					vatOrTaxNumber: '#vat-tax-number',
 					nameOfBank: '#dokan-bank-name',
 					bankIban: '#dokan-bank-iban',
+
 					// Address
 					street1: '#street-1',
 					street2: '#street-2',
 					city: '#city',
-					zip: '#zip',
-					country: '.address-multiselect .multiselect__single',
+					zipCode: '#zip',
+					country: '//input[@id="country"]/../..//div[@class="multiselect__select"]',
 					countryInput: '#country',
-					state: '#state',
+					state: '//input[@id="state"]/../..//div[@class="multiselect__select"]',
+					stateInput: '#state',
+
 					// Social Options
 					facebook: '#facebook',
 					flickr: '#flickr',
 					twitter: '#twitter',
 					youtube: '#youtube',
 					linkedin: '#linkedin',
-					pinterest: '#pinterest',
+					pinterest: '//label[@id="pinterest"]/..//input',
 					instagram: '#instagram',
+
 					// Payment Options
 					accountName: '#account-name',
 					accountNumber: '#account-number',
 					bankName: '#bank-name',
+					accountType: '#account-type',  // personal, business
 					bankAddress: '#bank-address',
 					routingNumber: '#routing-number',
 					iban: '#iban',
@@ -521,11 +530,14 @@ export const selector = {
 					AdminCommissionType: '//label[@for="commission-type"]/..//span[@class="multiselect__single"]',
 					AdminCommissionFlat: '.wc_input_price',
 					AdminCommissionPercentage: '.wc_input_decimal',
-					enableSelling: '//span[contains(text(), "Enable Selling")]/..//span',
-					publishProductDirectly: '//span[contains(text(), "Publish Product Directly")]/..//span',
-					makeVendorFeature: '//span[contains(text(), "Make Vendor Featured")]/..//span',
+
+					enableSelling: '//span[contains(text(), "Enable Selling")]/..//label[@class="switch tips"]',
+					publishProductDirectly: '//span[contains(text(), "Publish Product Directly")]/..//label[@class="switch tips"]',
+					makeVendorFeature: '//span[contains(text(), "Make Vendor Featured")]/..//label[@class="switch tips"]',
+
 					// Vendor Subscription
 					AssignSubscriptionPack: '.multiselect--active > .multiselect__tags',
+
 					// Edit Options
 					cancelEdit: '//div[contains(@class, "action-links footer")]//button[contains(text(),"Cancel")]',
 					saveChanges: '//div[contains(@class, "action-links footer")]//button[contains(text(),"Save Changes")]',
@@ -4269,7 +4281,7 @@ export const selector = {
 			linkedin: '#settings\\[social\\]\\[linkedin\\]',
 			youtube: '#settings\\[social\\]\\[youtube\\]',
 			instagram: '#settings\\[social\\]\\[instagram\\]',
-			flicker: '#settings\\[social\\]\\[flickr\\]',
+			flickr: '#settings\\[social\\]\\[flickr\\]',
 			// updateSettings: '.dokan-btn.dokan-btn-danger.dokan-btn-theme',
 			updateSettings: 'input[value="Update Settings"]',
 			// updateSettings: "//input[@name='dokan_update_profile_settings']/..",
