@@ -82,9 +82,8 @@ export class ReportsPage extends AdminPage {
 			this.page.waitForResponse((resp) => resp.url().includes(data.subUrls.backend.downloadOrderLogs) && resp.status() === 200),
 			this.page.locator(selector.admin.dokan.reports.allLogs.exportLogs).click()
 		]);
-
 		//TODO: add wait for multiple different response on base-page
-		//TODO: might fail on CI, need to accept downloads
+		//TODO: assert file download
 	}
 
 	// filter all logs by store

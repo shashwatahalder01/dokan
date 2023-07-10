@@ -161,7 +161,8 @@ export class CustomerPage extends BasePage {
 	async sendRmaMessage(message: string): Promise<void> {
 		await this.click(selector.customer.cMyAccount.rmaRequests);
 		await this.clearAndType(selector.customer.cRma.message, message);
-		await this.click(selector.customer.cRma.sendMessage); //TODO: add ajax is exists
+		await this.click(selector.customer.cRma.sendMessage); //TODO: add ajax is exists soln. below line
+		// await this.clickAndWaitForResponse(data.subUrls.ajax, selector.customer.cRma.sendMessage); //TODO: add ajax is exists
 		await this.toContainText(selector.customer.cWooSelector.wooCommerceSuccessMessage, data.customer.rma.sendMessage);
 	}
 
