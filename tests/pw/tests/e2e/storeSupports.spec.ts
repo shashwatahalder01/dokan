@@ -74,7 +74,7 @@ test.describe('Store Support test', () => {
 		await storeSupportsPage.storeSupportBulkAction('close');
 	});
 
-	//todo: filter store support by calender
+	//todo: filter store support by calendar
 
 
 });

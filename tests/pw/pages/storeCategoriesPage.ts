@@ -20,7 +20,7 @@ export class StoreCategoriesPage extends AdminPage {
 		await this.multipleElementVisible(selector.admin.dokan.vendors.storeCategory.addNewCategory);
 
 		// search category input is visible
-		await expect(this.page.locator(selector.admin.dokan.vendors.storeCategory.search)).toBeVisible();
+		await this.toBeVisible(selector.admin.dokan.vendors.storeCategory.search);
 
 		// store category table elements are visible
 		await this.multipleElementVisible(selector.admin.dokan.vendors.storeCategory.table);
@@ -45,7 +45,7 @@ export class StoreCategoriesPage extends AdminPage {
 		await this.clearInputField(selector.admin.dokan.vendors.storeCategory.search);
 
 		await this.typeAndWaitForResponse(data.subUrls.backend.storeCategories, selector.admin.dokan.vendors.storeCategory.search, categoryName);
-		await expect(this.page.locator(selector.admin.dokan.vendors.storeCategory.storeCategoryCell(categoryName))).toBeVisible();
+		await this.toBeVisible(selector.admin.dokan.vendors.storeCategory.storeCategoryCell(categoryName));
 
 	}
 

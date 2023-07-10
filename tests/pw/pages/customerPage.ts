@@ -88,7 +88,7 @@ export class CustomerPage extends BasePage {
 		}
 		// skip vendor setup wizard
 		await this.clickAndWaitForResponse(data.subUrls.frontend.dashboard, selector.vendor.vSetup.notRightNow);
-		await expect(this.page.locator(selector.vendor.vDashboard.menus.dashboard)).toBeVisible();
+		await this.toBeVisible(selector.vendor.vDashboard.menus.dashboard);
 	}
 
 	// // customer become wholesale customer
@@ -98,10 +98,10 @@ export class CustomerPage extends BasePage {
 	// 	await this.click(selector.customer.cDashboard.becomeWholesaleCustomer);
 	// 	const neeApproval = await this.isVisible(selector.customer.cDashboard.wholesaleRequestReturnMessage);
 	// 	if (!neeApproval) {
-	// 		await expect(this.page.locator(selector.customer.cWooSelector.wooCommerceSuccessMessage)).toContainText(data.wholesale.becomeWholesaleCustomerSuccessMessage);
+	// await this.toContainText(selector.customer.cWooSelector.wooCommerceSuccessMessage, data.wholesale.becomeWholesaleCustomerSuccessMessage);
 	// 	}
 	// 	else {
-	// 		await expect(this.page.locator(selector.customer.cWooSelector.wooCommerceSuccessMessage)).toContainText(data.wholesale.wholesaleRequestSendMessage);
+	// await this.toContainText(selector.customer.cWooSelector.wooCommerceSuccessMessage, data.wholesale.wholesaleRequestSendMessage);
 	// 		await this.loginPage.switchUser(data.admin);
 	// 		await this.adminPage.updateWholesaleCustomerStatus(currentUser!); //TOOD: fix this
 	// 	}
@@ -132,7 +132,7 @@ export class CustomerPage extends BasePage {
 		await this.clearAndType(selector.customer.cAddress.billingPhone, billingInfo.phone);
 		await this.clearAndType(selector.customer.cAddress.billingEmailAddress, billingInfo.email());
 		await this.clickAndWaitForResponse(data.subUrls.frontend.billingAddress, selector.customer.cAddress.billingSaveAddress, 302);
-		await expect(this.page.locator(selector.customer.cWooSelector.wooCommerceSuccessMessage)).toContainText(data.customer.customerInfo.addressChangeSuccessMessage);
+		await this.toContainText(selector.customer.cWooSelector.wooCommerceSuccessMessage, data.customer.customerInfo.addressChangeSuccessMessage);
 	}
 
 	// customer add shipping address
@@ -154,7 +154,7 @@ export class CustomerPage extends BasePage {
 		await this.press(data.key.enter);
 		await this.clearAndType(selector.customer.cAddress.shippingZipCode, shippingInfo.zipCode);
 		await this.clickAndWaitForResponse(data.subUrls.frontend.shippingAddress, selector.customer.cAddress.shippingSaveAddress, 302);
-		await expect(this.page.locator(selector.customer.cWooSelector.wooCommerceSuccessMessage)).toContainText(data.customer.customerInfo.addressChangeSuccessMessage);
+		await this.toContainText(selector.customer.cWooSelector.wooCommerceSuccessMessage, data.customer.customerInfo.addressChangeSuccessMessage );
 	}
 
 	// customer Send Rma Request
@@ -162,7 +162,7 @@ export class CustomerPage extends BasePage {
 		await this.click(selector.customer.cMyAccount.rmaRequests);
 		await this.clearAndType(selector.customer.cRma.message, message);
 		await this.click(selector.customer.cRma.sendMessage); //TODO: add ajax is exists
-		await expect(this.page.locator(selector.customer.cWooSelector.wooCommerceSuccessMessage)).toContainText(data.customer.rma.sendMessage);
+		await this.toContainText(selector.customer.cWooSelector.wooCommerceSuccessMessage, data.customer.rma.sendMessage);
 	}
 
 
@@ -184,7 +184,7 @@ export class CustomerPage extends BasePage {
 		// await this.clearAndType(selector.customer.cAccountDetails.NewPassword, newPassword);
 		// await this.clearAndType(selector.customer.cAccountDetails.confirmNewPassword, newPassword);
 		await this.clickAndWaitForResponse(data.subUrls.frontend.editAccountCustomer, selector.customer.cAccountDetails.saveChanges);
-		await expect(this.page.locator(selector.customer.cWooSelector.wooCommerceSuccessMessage)).toContainText(data.customer.account.updateSuccessMessage);
+		await this.toContainText(selector.customer.cWooSelector.wooCommerceSuccessMessage, data.customer.account.updateSuccessMessage);
 	}
 
 	// customer search store
@@ -193,7 +193,7 @@ export class CustomerPage extends BasePage {
 		await this.click(selector.customer.cStoreList.filter);
 		await this.clearAndType(selector.customer.cStoreList.searchVendors, storeName);
 		await this.clickAndWaitForResponse(data.subUrls.frontend.storeListing, selector.customer.cStoreList.apply);
-		await expect(this.page.locator(selector.customer.cStoreList.visitStore(storeName))).toBeVisible();
+		await this.toBeVisible(selector.customer.cStoreList.visitStore(storeName));
 	}
 
 	// customer follow vendor
@@ -207,23 +207,24 @@ export class CustomerPage extends BasePage {
 			// unfollow if not already
 			if (currentFollowStatus) {
 				await this.clickAndWaitForResponse(data.subUrls.ajax, selector.customer.cStoreList.followUnFollowStore(storeName));
-				await expect(this.page.locator(selector.customer.cStoreList.currentFollowStatus(storeName))).toContainText('Follow');
+				await this.toContainText(selector.customer.cStoreList.currentFollowStatus(storeName), 'Follow');
 			}
 			await this.clickAndWaitForResponse(data.subUrls.ajax, selector.customer.cStoreList.followUnFollowStore(storeName));
-			await expect(this.page.locator(selector.customer.cStoreList.currentFollowStatus(storeName))).toContainText('Following');
+			await this.toContainText(selector.customer.cStoreList.currentFollowStatus(storeName), 'Following');
 			break;
 
 			// store page
 		case 'storePage' :
 			await this.goIfNotThere(data.subUrls.frontend.vendorDetails(helpers.slugify(storeName)));
 			currentFollowStatus = await this.hasText(selector.customer.cStoreList.currentFollowStatusStorePage, 'Following');
+
 			// unfollow if not already
 			if (currentFollowStatus) {
 				await this.clickAndWaitForResponse(data.subUrls.ajax, selector.customer.cStoreList.followUnFollowStoreStorePage);
-				await expect(this.page.locator(selector.customer.cStoreList.currentFollowStatusStorePage)).toContainText('Follow');
+				await this.toContainText(selector.customer.cStoreList.currentFollowStatusStorePage, 'Follow');
 			}
 			await this.clickAndWaitForResponse(data.subUrls.ajax, selector.customer.cStoreList.followUnFollowStoreStorePage);
-			await expect(this.page.locator(selector.customer.cStoreList.currentFollowStatusStorePage)).toContainText('Following');
+			await this.toContainText(selector.customer.cStoreList.currentFollowStatusStorePage, 'Following');
 			break;
 
 		default :
@@ -244,7 +245,7 @@ export class CustomerPage extends BasePage {
 		await this.clearAndType(selector.customer.cSingleStore.reviewTitle, store.reviewTitle);
 		await this.clearAndType(selector.customer.cSingleStore.reviewMessage, reviewMessage);
 		await this.clickAndWaitForResponse(data.subUrls.ajax, selector.customer.cSingleStore.submitReview);
-		await expect(this.page.locator(selector.customer.cSingleStore.submittedReview(reviewMessage))).toContainText(reviewMessage);
+		await this.toContainText(selector.customer.cSingleStore.submittedReview(reviewMessage), reviewMessage);
 	}
 
 	// customer ask for get support
@@ -254,7 +255,7 @@ export class CustomerPage extends BasePage {
 		await this.clearAndType(selector.customer.cSingleStore.subject, getSupport.subject);
 		await this.clearAndType(selector.customer.cSingleStore.message, getSupport.message);
 		await this.clickAndWaitForResponse(data.subUrls.ajax, selector.customer.cSingleStore.submitGetSupport);
-		await expect(this.page.locator(selector.customer.cDokanSelector.dokanAlertSuccessMessage)).toContainText(getSupport.supportSubmitSuccessMessage);
+		await this.toContainText(selector.customer.cDokanSelector.dokanAlertSuccessMessage, getSupport.supportSubmitSuccessMessage);
 		// close popup
 		await this.click(selector.customer.cDokanSelector.dokanAlertClose);
 	}
@@ -266,7 +267,7 @@ export class CustomerPage extends BasePage {
 		await this.click(selector.customer.cSupportTickets.firstOpenTicket);
 		await this.clearAndType(selector.customer.cSupportTickets.addReply, message);
 		await this.clickAndWaitForResponse(data.subUrls.frontend.submitSupport, selector.customer.cSupportTickets.submitReply, 302);
-		await expect(this.page.locator(selector.customer.cSupportTickets.chatText(message))).toBeVisible();
+		await this.toBeVisible(selector.customer.cSupportTickets.chatText(message));
 	}
 
 	// customer rate & review product
@@ -277,7 +278,7 @@ export class CustomerPage extends BasePage {
 		await this.click(selector.customer.cSingleProduct.rating(review.rating));
 		await this.clearAndType(selector.customer.cSingleProduct.reviewMessage, reviewMessage);
 		await this.clickAndWaitForResponse(data.subUrls.frontend.productReview, selector.customer.cSingleProduct.submitReview, 302);
-		await expect(this.page.locator(selector.customer.cSingleProduct.submittedReview(reviewMessage))).toContainText(reviewMessage);
+		await this.toContainText(selector.customer.cSingleProduct.submittedReview(reviewMessage), reviewMessage);
 	}
 
 	// customer report product
@@ -287,18 +288,18 @@ export class CustomerPage extends BasePage {
 		await this.click(selector.customer.cSingleProduct.reportReasonByName(report.reportReason));
 		await this.clearAndType(selector.customer.cSingleProduct.reportDescription, report.reportReasonDescription);
 		await this.clickAndWaitForResponse(data.subUrls.ajax, selector.customer.cSingleProduct.reportSubmit);
-		await expect(this.page.locator(selector.customer.cSingleProduct.reportSubmitSuccessMessage)).toContainText(report.reportSubmitSuccessMessage);
+		await this.toContainText(selector.customer.cSingleProduct.reportSubmitSuccessMessage, report.reportSubmitSuccessMessage);
 		// close popup
 		await this.click(selector.customer.cSingleProduct.confirmReportSubmit);
 	}
 
 	// customer enquire product
-	async enquireProduct(productName: string, enquiry: { enquiryDetails: string; enquirySubmitSuccessMessage: string | RegExp | (string | RegExp)[]; }): Promise<void> {
+	async enquireProduct(productName: string, enquiry: { enquiryDetails: string; enquirySubmitSuccessMessage: string}): Promise<void> {
 		await this.goIfNotThere(data.subUrls.frontend.productDetails(helpers.slugify(productName)));
 		await this.click(selector.customer.cSingleProduct.productEnquiry);
 		await this.clearAndType(selector.customer.cSingleProduct.enquiryMessage, enquiry.enquiryDetails);
 		await this.clickAndWaitForResponse(data.subUrls.ajax, selector.customer.cSingleProduct.submitEnquiry);
-		await expect(this.page.locator(selector.customer.cSingleProduct.submitEnquirySuccessMessage)).toContainText(enquiry.enquirySubmitSuccessMessage);
+		await this.toContainText(selector.customer.cSingleProduct.submitEnquirySuccessMessage, enquiry.enquirySubmitSuccessMessage);
 	}
 
 	// customer search product
@@ -306,14 +307,14 @@ export class CustomerPage extends BasePage {
 		await this.goToShop();
 		await this.clearAndType(selector.customer.cShop.searchProduct, productName);
 		await this.click(selector.customer.cShop.search);
-		await expect(this.page.locator(selector.customer.cShop.searchedProductName)).toContainText(productName);
+		await this.toContainText(selector.customer.cShop.searchedProductName, productName);
 	}
 
 	// customer go to product(single) details
 	async goToProductDetails(productName: string): Promise<void> {
 		await this.searchProduct(productName);
 		await this.clickAndWaitForResponse(data.subUrls.frontend.productCustomerPage, selector.customer.cShop.productDetailsViewLink);
-		await expect(this.page.locator(selector.customer.cSingleProduct.productTitle)).toContainText(productName);
+		await this.toContainText(selector.customer.cSingleProduct.productTitle, productName );
 	}
 
 	// customer add product to cart from shop page
@@ -321,7 +322,7 @@ export class CustomerPage extends BasePage {
 		await this.goToShop();
 		await this.searchProduct(productName);
 		await this.clickAndWaitForResponse(data.subUrls.frontend.addToCart, selector.customer.cShop.addToCart);
-		await expect(this.page.locator(selector.customer.cShop.viewCart)).toBeVisible();
+		await this.toBeVisible(selector.customer.cShop.viewCart);
 	}
 
 	// customer add product to cart from product details page
@@ -332,12 +333,12 @@ export class CustomerPage extends BasePage {
 			await this.selectByNumber(selector.customer.cSingleProduct.addOnSelect, 1);
 		}
 		await this.clickAndWaitForResponse(data.subUrls.frontend.productCustomerPage, selector.customer.cSingleProduct.addToCart);
-		await expect(this.page.locator(selector.customer.cWooSelector.wooCommerceSuccessMessage)).toContainText(`“${productName}” has been added to your cart.`);
+		await this.toContainText(selector.customer.cWooSelector.wooCommerceSuccessMessage, `“${productName}” has been added to your cart.`);
 	}
 
 	// customer check whether product is on cart
 	async productIsOnCart(productName: string): Promise<void> {
-		await expect(this.page.locator(selector.customer.cCart.cartItem(productName))).toBeVisible();
+		await this.toBeVisible(selector.customer.cCart.cartItem(productName));
 	}
 
 	// go to cart from shop page
@@ -367,11 +368,11 @@ export class CustomerPage extends BasePage {
 		const cartProductIsVisible = await this.isVisible(selector.customer.cCart.firstProductCrossIcon);
 		if (cartProductIsVisible) {
 			await this.clickAndWaitForResponse(data.subUrls.frontend.cart, selector.customer.cCart.firstProductCrossIcon);
-			await expect(this.page.locator(selector.customer.cWooSelector.wooCommerceSuccessMessage)).toContainText('removed. Undo?');
+			await this.toContainText(selector.customer.cWooSelector.wooCommerceSuccessMessage, 'removed. Undo?');
 			await this.clearCart(); //Todo: avoid recursion
 		}
 		else {
-			await expect(this.page.locator(selector.customer.cCart.cartEmptyMessage)).toContainText('Your cart is currently empty.');
+			await this.toContainText(selector.customer.cCart.cartEmptyMessage, 'Your cart is currently empty.');
 		}
 	}
 
@@ -379,8 +380,8 @@ export class CustomerPage extends BasePage {
 	async updateProductQuantityOnCart(productName: string, quantity: string): Promise<void> {
 		await this.clearAndType(selector.customer.cCart.quantity(productName), quantity);
 		await this.clickAndWaitForResponse(data.subUrls.frontend.cart, selector.customer.cCart.updateCart);
-		await expect(this.page.locator(selector.customer.cWooSelector.wooCommerceSuccessMessage)).toContainText('Cart updated.');
-		await expect(this.page.locator(selector.customer.cCart.quantity(productName))).toHaveValue(quantity);
+		await this.toContainText(selector.customer.cWooSelector.wooCommerceSuccessMessage, 'Cart updated.');
+		await this.toHaveValue(selector.customer.cCart.quantity(productName), quantity );
 	}
 
 	// customer apply coupon
@@ -389,11 +390,11 @@ export class CustomerPage extends BasePage {
 		const couponIsApplied = await this.isVisible(selector.customer.cCart.removeCoupon(couponTitle));
 		if (couponIsApplied) {
 			await this.click(selector.customer.cCart.removeCoupon(couponTitle));
-			await expect(this.page.locator(selector.customer.cWooSelector.wooCommerceSuccessMessage)).toContainText('Coupon has been removed.');
+			await this.toContainText(selector.customer.cWooSelector.wooCommerceSuccessMessage, 'Coupon has been removed.');
 		}
 		await this.clearAndType(selector.customer.cCart.couponCode, couponTitle);
 		await this.clickAndWaitForResponse(data.subUrls.frontend.applyCoupon, selector.customer.cCart.applyCoupon);
-		await expect(this.page.locator(selector.customer.cWooSelector.wooCommerceSuccessMessage)).toContainText('Coupon code applied successfully.');
+		await this.toContainText(selector.customer.cWooSelector.wooCommerceSuccessMessage, 'Coupon code applied successfully.' );
 	}
 
 	async buyProduct(productName: string, couponCode: string, applyCoupon = false, getOrderDetails = false, paymentMethod = 'bank', paymentDetails: any): Promise<void | object> {
@@ -438,7 +439,7 @@ export class CustomerPage extends BasePage {
 			break;
 		}
 		await this.clickAndWaitForResponse(data.subUrls.frontend.placeOrder, selector.customer.cCheckout.placeOrder); //todo:  remove from other places
-		await expect(this.page.locator(selector.customer.cOrderReceived.orderReceivedSuccessMessage)).toBeVisible();
+		await this.toBeVisible(selector.customer.cOrderReceived.orderReceivedSuccessMessage);
 
 		// if (getOrderDetails) {
 		//     return await this.getOrderDetailsAfterPlaceOrder()
@@ -634,7 +635,7 @@ export class CustomerPage extends BasePage {
 	}
 
 	// customer ask for warranty
-	async sendWarrantyRequest(orderNumber: string, productName: string, refund: { refundRequestType: string; refundRequestDetails: string; refundSubmitSuccessMessage: string | RegExp | (string | RegExp)[]; }): Promise<void> {
+	async sendWarrantyRequest(orderNumber: string, productName: string, refund: { refundRequestType: string; refundRequestDetails: string; refundSubmitSuccessMessage: string }): Promise<void> {
 		// await this.goToMyAccount();
 		// await this.click(selector.customer.cMyAccount.orders);
 		await this.goIfNotThere(data.subUrls.frontend.ordersCustomerPage);
@@ -647,6 +648,6 @@ export class CustomerPage extends BasePage {
 		await this.click(selector.customer.cOrders.warrantySubmitRequest);
 		// const successMessage = await this.getElementText(selector.customer.cWooSelector.wooCommerceSuccessMessage);
 		// expect(successMessage).toMatch(refund.refundSubmitSuccessMessage);
-		await expect(this.page.locator(selector.customer.cWooSelector.wooCommerceSuccessMessage)).toContainText(refund.refundSubmitSuccessMessage);
+		await this.toContainText(selector.customer.cWooSelector.wooCommerceSuccessMessage, refund.refundSubmitSuccessMessage);
 	}
 }

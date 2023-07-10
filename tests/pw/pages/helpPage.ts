@@ -15,7 +15,7 @@ export class HelpPage extends AdminPage {
 		await this.goIfNotThere(data.subUrls.backend.dokan.dokanHelp);
 
 		// help text is visible
-		await expect(this.page.locator(selector.admin.dokan.help.helpText)).toBeVisible();
+		await this.toBeVisible(selector.admin.dokan.help.helpText);
 
 		// basics elements are visible
 		await this.multipleElementVisible(selector.admin.dokan.help.basics);

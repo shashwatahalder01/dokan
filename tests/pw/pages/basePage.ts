@@ -1230,14 +1230,80 @@ export class BasePage {
 		// selectors = Object.values(selectors);
 		// selectors.forEach( async (selector: string) => {
 		// 	// console.log(selector);
-		// 	await expect(this.page.locator(selector)).toBeVisible();
+		// await expect(this.page.locator(selector)).toBeVisible();
 		// });
 
 		for (const selector in selectors ) {
 			// console.log(selectors[selector]);
-			await expect(this.page.locator(selectors[selector])).toBeVisible();
+			// await expect(this.page.locator(selectors[selector])).toBeVisible();
+			await this.toBeVisible(selectors[selector]);
 		}
 
+	}
+
+
+	/**
+	 * Assertion methods
+	 */
+
+	// await this.toBeVisible();
+	// await this.toContainText();
+	// await this.toHaveCount();
+	// await this.toHaveValue();
+	// await this.toHaveClass();
+
+	// await this.notToBeVisible();
+	// await this.notToContainText();
+	// await this.notToHaveCount();
+
+	// assert element to be visible
+	async toBeVisible(selector: string,){
+		await expect(this.page.locator(selector)).toBeVisible();
+	}
+
+	// assert element to contain text
+	async toContainText(selector: string, text: string){
+		await expect(this.page.locator(selector)).toContainText(text);
+	}
+
+	// assert element to have count
+	async toHaveCount(selector: string, count: number){
+		await expect(this.page.locator(selector)).toHaveCount(count);
+	}
+
+	// assert element to have value
+	async toHaveValue(selector: string, value: string){
+		await expect(this.page.locator(selector)).toHaveValue(value);
+	}
+
+	// assert element to have class
+	async toHaveClass(selector: string, className: string){
+		await expect(this.page.locator(selector)).toHaveClass(className);
+	}
+
+	// assert element not to be visible
+	async notToBeVisible(selector: string,){
+		await expect(this.page.locator(selector)).not.toBeVisible();
+	}
+
+	// assert element not to contain text
+	async notToContainText(selector: string, text: string){
+		await expect(this.page.locator(selector)).not.toContainText(text);
+	}
+
+	// assert element not to have count
+	async notToHaveCount(selector: string, count: number){
+		await expect(this.page.locator(selector)).not.toHaveCount(count);
+	}
+
+	// assert element not to have value
+	async notToHaveValue(selector: string, value: string){
+		await expect(this.page.locator(selector)).not.toHaveValue(value);
+	}
+
+	// assert element not to have class
+	async notToHaveClass(selector: string, className: string){
+		await expect(this.page.locator(selector)).not.toHaveClass(className);
 	}
 
 

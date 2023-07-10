@@ -41,7 +41,7 @@ test.describe('Reverse withdraw test', () => {
 	});
 
 	//todo: admin can add reverse withdraw
-	//todo: filter reverse withdraws by calender
+	//todo: filter reverse withdraws by calendar
 	//TODO: add vendor tests
 
 });

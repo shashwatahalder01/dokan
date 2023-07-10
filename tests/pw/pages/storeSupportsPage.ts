@@ -16,7 +16,7 @@ export class StoreSupportsPage extends AdminPage {
 		await this.goIfNotThere(data.subUrls.backend.dokan.dokanStoreSupport);
 
 		// store support text is visible
-		await expect(this.page.locator(selector.admin.dokan.storeSupport.storeSupportText)).toBeVisible();
+		await this.toBeVisible(selector.admin.dokan.storeSupport.storeSupportText);
 
 		// nav tabs are visible
 		await this.multipleElementVisible(selector.admin.dokan.storeSupport.navTabs);
@@ -30,7 +30,7 @@ export class StoreSupportsPage extends AdminPage {
 		await this.multipleElementVisible(filters);
 
 		// search store support is visible
-		await expect(this.page.locator(selector.admin.dokan.storeSupport.searchTicket)).toBeVisible();
+		await this.toBeVisible(selector.admin.dokan.storeSupport.searchTicket);
 
 		// store support table elements are visible
 		await this.multipleElementVisible(selector.admin.dokan.storeSupport.table);
@@ -42,7 +42,7 @@ export class StoreSupportsPage extends AdminPage {
 
 		await this.clearInputField(selector.admin.dokan.storeSupport.searchTicket);
 		await this.typeAndWaitForResponse(data.subUrls.backend.storeSupport, selector.admin.dokan.storeSupport.searchTicket, title);
-		// await expect(this.page.locator(selector.admin.dokan.storeSupport.supportTicketLink(title))).toBeVisible();
+		// await this.toBeVisible(selector.admin.dokan.storeSupport.supportTicketLink(title));
 		const count = (await this.getElementText(selector.admin.dokan.storeSupport.numberOfRowsFound))?.split(' ')[0];
 		expect(Number(count)).not.toBe(0);
 	}
@@ -75,7 +75,6 @@ export class StoreSupportsPage extends AdminPage {
 		const count = (await this.getElementText(selector.admin.dokan.storeSupport.numberOfRowsFound))?.split(' ')[0];
 		expect(Number(count)).not.toBe(0);
 	}
-
 
 	// reply to support ticket
 	async replySupportTicket(replyMessage: string, replier = 'admin'){
@@ -127,13 +126,12 @@ export class StoreSupportsPage extends AdminPage {
 		await this.clickAndWaitForResponse(data.subUrls.backend.storeSupport, selector.admin.dokan.storeSupport.supportTicketDetails.reopenTicket);
 	}
 
-
 	// store support bulk action
 	async storeSupportBulkAction(action: string){
 		await this.goIfNotThere(data.subUrls.backend.dokan.dokanStoreSupport);
 
 		// ensure row exists
-		await expect(this.page.locator(selector.admin.dokan.storeSupport.noRowsFound)).not.toBeVisible();
+		await this.notToBeVisible(selector.admin.dokan.storeSupport.noRowsFound);
 
 		await this.click(selector.admin.dokan.storeSupport.bulkActions.selectAll);
 		await this.selectByValue(selector.admin.dokan.storeSupport.bulkActions.selectAction, action);

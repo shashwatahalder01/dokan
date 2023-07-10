@@ -16,7 +16,7 @@ export class AbuseReportsPage extends AdminPage {
 		await this.goIfNotThere(data.subUrls.backend.dokan.dokanAbuseReports);
 
 		// abuse reports text is visible
-		await expect(this.page.locator(selector.admin.dokan.abuseReports.abuseReportsText)).toBeVisible();
+		await this.toBeVisible(selector.admin.dokan.abuseReports.abuseReportsText);
 
 		// bulk action elements are visible
 		await this.multipleElementVisible(selector.admin.dokan.abuseReports.bulkActions);
@@ -79,7 +79,7 @@ export class AbuseReportsPage extends AdminPage {
 		await this.goIfNotThere(data.subUrls.backend.dokan.dokanAbuseReports);
 
 		// ensure row exists
-		await expect(this.page.locator(selector.admin.dokan.abuseReports.noRowsFound)).not.toBeVisible();
+		await this.notToBeVisible(selector.admin.dokan.abuseReports.noRowsFound);
 
 		await this.click(selector.admin.dokan.abuseReports.bulkActions.selectAll);
 		await this.selectByValue(selector.admin.dokan.abuseReports.bulkActions.selectAction, action);

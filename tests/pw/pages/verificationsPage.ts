@@ -16,7 +16,7 @@ export class VerificationsPage extends AdminPage {
 		await this.goIfNotThere(data.subUrls.backend.dokan.dokanVerifications);
 
 		// tools text is visible
-		await expect(this.page.locator(selector.admin.dokan.verifications.verificationRequestsText)).toBeVisible();
+		await this.toBeVisible(selector.admin.dokan.verifications.verificationRequestsText);
 
 		// navTab elements are visible
 		await this.multipleElementVisible(selector.admin.dokan.verifications.navTabs);

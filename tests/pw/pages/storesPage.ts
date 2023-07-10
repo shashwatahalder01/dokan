@@ -19,10 +19,10 @@ export class StoresPage extends AdminPage {
 		await this.goIfNotThere(data.subUrls.backend.dokan.dokanVendors);
 
 		// vendor text is visible
-		await expect(this.page.locator(selector.admin.dokan.vendors.vendorsText)).toBeVisible();
+		await this.toBeVisible(selector.admin.dokan.vendors.vendorsText);
 
 		// and new vendor  is visible
-		await expect(this.page.locator(selector.admin.dokan.vendors.addNewVendor)).toBeVisible();
+		await this.toBeVisible(selector.admin.dokan.vendors.addNewVendor);
 
 		// nav tabs are visible
 		await this.multipleElementVisible(selector.admin.dokan.vendors.navTabs);
@@ -31,7 +31,7 @@ export class StoresPage extends AdminPage {
 		await this.multipleElementVisible(selector.admin.dokan.vendors.bulkActions);
 
 		// search vendor input is visible
-		await expect(this.page.locator(selector.admin.dokan.vendors.search)).toBeVisible();
+		await this.toBeVisible(selector.admin.dokan.vendors.search);
 
 		// vendor table elements are visible
 		await this.multipleElementVisible(selector.admin.dokan.vendors.table);
@@ -88,7 +88,7 @@ export class StoresPage extends AdminPage {
 		await this.check(selector.admin.dokan.vendors.newVendor.makeVendorFeature);
 		// create vendor
 		await this.clickAndWaitForResponse(data.subUrls.backend.stores, selector.admin.dokan.vendors.newVendor.createVendor);
-		await expect(this.page.locator(selector.admin.dokan.vendors.sweetAlertTitle)).toContainText('Vendor Created');
+		await this.toContainText(selector.admin.dokan.vendors.sweetAlertTitle, 'Vendor Created');
 		await this.click(selector.admin.dokan.vendors.closeSweetAlert);
 	}
 
@@ -193,7 +193,7 @@ export class StoresPage extends AdminPage {
 
 			// update user
 			await this.clickAndWaitForResponse(data.subUrls.user, selector.admin.users.updateUser, 302);
-			await expect(this.page.locator(selector.admin.users.updateSuccessMessage)).toContainText('User updated.');
+			await this.toContainText(selector.admin.users.updateSuccessMessage, 'User updated.');
 
 		} else {
 
@@ -263,11 +263,11 @@ export class StoresPage extends AdminPage {
 		await this.clearInputField(selector.admin.dokan.vendors.search);
 
 		await this.typeAndWaitForResponse(data.subUrls.backend.stores, selector.admin.dokan.vendors.search, vendorName);
-		await expect(this.page.locator(selector.admin.dokan.vendors.vendorCell(vendorName))).toBeVisible();  //TODO: add this to base page
+		await this.toBeVisible(selector.admin.dokan.vendors.vendorCell(vendorName));
 
 		// negative scenario //TODO: add this to all search also add flag to avoid this scenario
 		// await this.typeAndWaitForResponse(data.subUrls.backend.stores, selector.admin.dokan.vendors.search, vendorName + 'abcdefgh');
-		// await expect(this.page.locator(selector.admin.dokan.vendors.noVendorsFound)).toBeVisible();
+		// await this.toBeVisible(selector.admin.dokan.vendors.noRowsFound);
 
 	}
 
@@ -324,7 +324,7 @@ export class StoresPage extends AdminPage {
 		await this.goIfNotThere(data.subUrls.backend.dokan.dokanVendors);
 
 		// ensure row exists
-		await expect(this.page.locator(selector.admin.dokan.vendors.noRowsFound)).not.toBeVisible();
+		await this.notToBeVisible(selector.admin.dokan.vendors.noRowsFound);
 
 		await this.click(selector.admin.dokan.vendors.bulkActions.selectAll);
 		await this.selectByValue(selector.admin.dokan.vendors.bulkActions.selectAction, action);

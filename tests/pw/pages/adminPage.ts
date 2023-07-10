@@ -31,7 +31,7 @@ export class AdminPage extends BasePage {
 	async checkActivePlugins(plugins: any) {
 		await this.goIfNotThere(data.subUrls.backend.plugins);
 		for (const pluginSlug of plugins.pluginSlugList) {
-			await expect(this.page.locator(selector.admin.plugins.plugin(pluginSlug))).toHaveClass(plugins.activeClass);
+			await this.toHaveClass(selector.admin.plugins.plugin(pluginSlug), plugins.activeClass);
 		}
 	}
 
@@ -50,7 +50,7 @@ export class AdminPage extends BasePage {
 		// timezone
 		await this.selectByValue(selector.admin.settings.timezone, general.timezone);
 		await this.click(selector.admin.settings.generalSaveChanges);
-		await expect(this.page.locator(selector.admin.settings.updatedSuccessMessage)).toContainText(general.saveSuccessMessage);
+		await this.toContainText(selector.admin.settings.updatedSuccessMessage, general.saveSuccessMessage);
 	}
 
 	// admin set permalink settings
@@ -65,7 +65,7 @@ export class AdminPage extends BasePage {
 			await this.clearAndType(selector.admin.settings.customBaseInput, permalink.customBaseInput);
 		}
 		await this.click(selector.admin.settings.permalinkSaveChanges);
-		await expect(this.page.locator(selector.admin.settings.updatedSuccessMessage)).toContainText(permalink.saveSuccessMessage);
+		await this.toContainText(selector.admin.settings.updatedSuccessMessage, permalink.saveSuccessMessage);
 	}
 
 	// Tax
@@ -76,7 +76,7 @@ export class AdminPage extends BasePage {
 		// Enable-Disable Tax
 		enableTax ? await this.check(selector.admin.wooCommerce.settings.enableTaxes) : await this.uncheck(selector.admin.wooCommerce.settings.enableTaxes);
 		await this.click(selector.admin.wooCommerce.settings.generalSaveChanges);
-		await expect(this.page.locator(selector.admin.wooCommerce.settings.updatedSuccessMessage)).toContainText(data.tax.saveSuccessMessage);
+		await this.toContainText(selector.admin.wooCommerce.settings.updatedSuccessMessage, data.tax.saveSuccessMessage);
 	}
 
 	// Admin Add Standard Tax Rate
@@ -128,7 +128,7 @@ export class AdminPage extends BasePage {
 		await this.click(selector.admin.wooCommerce.settings.accounts);
 		await this.uncheck(selector.admin.wooCommerce.settings.automaticPasswordGeneration);
 		await this.click(selector.admin.wooCommerce.settings.accountSaveChanges);
-		await expect(this.page.locator(selector.admin.wooCommerce.settings.updatedSuccessMessage)).toContainText(woocommerce.saveSuccessMessage);
+		await this.toContainText(selector.admin.wooCommerce.settings.updatedSuccessMessage, woocommerce.saveSuccessMessage);
 	}
 
 	// Shipping Methods
@@ -145,7 +145,7 @@ export class AdminPage extends BasePage {
 			await this.setDropdownOptionSpan(selector.admin.wooCommerce.settings.enableShippingValues, data.shipping.disableShipping);
 		}
 		await this.click(selector.admin.wooCommerce.settings.generalSaveChanges);
-		await expect(this.page.locator(selector.admin.wooCommerce.settings.updatedSuccessMessage)).toContainText(data.shipping.saveSuccessMessage);
+		await this.toContainText(selector.admin.wooCommerce.settings.updatedSuccessMessage, data.shipping.saveSuccessMessage);
 
 	}
 
@@ -227,7 +227,7 @@ export class AdminPage extends BasePage {
 		}
 
 		await this.click(selector.admin.wooCommerce.settings.shippingMethodSaveChanges);
-		await expect(this.page.locator(selector.admin.wooCommerce.settings.shippingMethodCell(shipping.shippingMethod))).toBeVisible();
+		await this.toBeVisible(selector.admin.wooCommerce.settings.shippingMethodCell(shipping.shippingMethod));
 
 	}
 
@@ -270,7 +270,7 @@ export class AdminPage extends BasePage {
 		await this.clearAndType(selector.admin.wooCommerce.settings.decimalSeparator, currency.currencyOptions.decimalSeparator);
 		await this.clearAndType(selector.admin.wooCommerce.settings.numberOfDecimals, currency.currencyOptions.numberOfDecimals);
 		await this.click(selector.admin.wooCommerce.settings.generalSaveChanges);
-		await expect(this.page.locator(selector.admin.wooCommerce.settings.updatedSuccessMessage)).toContainText(currency.saveSuccessMessage);
+		await this.toContainText(selector.admin.wooCommerce.settings.updatedSuccessMessage, currency.saveSuccessMessage);
 
 	}
 
@@ -283,7 +283,7 @@ export class AdminPage extends BasePage {
 			await this.type(selector.admin.wooCommerce.settings.currency, currency);
 			await this.press(data.key.enter);
 			await this.click(selector.admin.wooCommerce.settings.generalSaveChanges);
-			await expect(this.page.locator(selector.admin.wooCommerce.settings.updatedSuccessMessage)).toContainText(data.payment.currency.saveSuccessMessage);
+			await this.toContainText(selector.admin.wooCommerce.settings.updatedSuccessMessage, data.payment.currency.saveSuccessMessage );
 		}
 	}
 
@@ -300,7 +300,7 @@ export class AdminPage extends BasePage {
 		await this.enablePaymentMethod(selector.admin.wooCommerce.settings.enableCashOnDelivery);
 
 		await this.click(selector.admin.wooCommerce.settings.paymentMethodsSaveChanges);
-		await expect(this.page.locator(selector.admin.wooCommerce.settings.updatedSuccessMessage)).toContainText(payment.saveSuccessMessage);
+		await this.toContainText(selector.admin.wooCommerce.settings.updatedSuccessMessage, payment.saveSuccessMessage);
 	}
 
 	// Admin Setup Stripe
@@ -332,7 +332,7 @@ export class AdminPage extends BasePage {
 		await this.clearAndType(selector.admin.wooCommerce.settings.stripe.testClientId, payment.stripeConnect.testClientId);
 		await this.click(selector.admin.wooCommerce.settings.stripe.stripeSaveChanges);
 
-		await expect(this.page.locator(selector.admin.wooCommerce.settings.updatedSuccessMessage)).toContainText(payment.saveSuccessMessage);
+		await this.toContainText(selector.admin.wooCommerce.settings.updatedSuccessMessage, payment.saveSuccessMessage);
 
 	}
 
@@ -364,7 +364,7 @@ export class AdminPage extends BasePage {
 		await this.clearAndType(selector.admin.wooCommerce.settings.paypalMarketPlace.sendAnnouncementInterval, payment.paypalMarketPlace.announcementInterval);
 		await this.click(selector.admin.wooCommerce.settings.paypalMarketPlace.paypalMarketPlaceSaveChanges);
 
-		await expect(this.page.locator(selector.admin.wooCommerce.settings.updatedSuccessMessage)).toContainText(payment.saveSuccessMessage);
+		await this.toContainText(selector.admin.wooCommerce.settings.updatedSuccessMessage, payment.saveSuccessMessage);
 	}
 
 	// Admin Setup Mangopay
@@ -408,7 +408,7 @@ export class AdminPage extends BasePage {
 		await this.clearAndType(selector.admin.wooCommerce.settings.dokanMangoPay.announcementInterval, payment.mangoPay.announcementInterval);
 		await this.click(selector.admin.wooCommerce.settings.dokanMangoPay.dokanMangopaySaveChanges);
 
-		await expect(this.page.locator(selector.admin.wooCommerce.settings.updatedSuccessMessage)).toContainText(payment.saveSuccessMessage);
+		await this.toContainText(selector.admin.wooCommerce.settings.updatedSuccessMessage, payment.saveSuccessMessage);
 	}
 
 	// Admin Setup Razorpay
@@ -435,7 +435,8 @@ export class AdminPage extends BasePage {
 		await this.clearAndType(selector.admin.wooCommerce.settings.dokanRazorpay.sendAnnouncementInterval, payment.razorPay.announcementInterval);
 		await this.click(selector.admin.wooCommerce.settings.dokanRazorpay.dokanRazorpaySaveChanges);
 
-		await expect(this.page.locator(selector.admin.wooCommerce.settings.updatedSuccessMessage)).toContainText(payment.saveSuccessMessage);
+		await this.toContainText(selector.admin.wooCommerce.settings.updatedSuccessMessage, payment.saveSuccessMessage);
+
 	}
 
 	// Admin Setup Stripe Express
@@ -481,7 +482,7 @@ export class AdminPage extends BasePage {
 		await this.clearAndType(selector.admin.wooCommerce.settings.stripeExpress.announcementInterval, payment.stripeExpress.announcementInterval);
 		await this.click(selector.admin.wooCommerce.settings.stripeExpress.stripeExpressSaveChanges);
 
-		await expect(this.page.locator(selector.admin.wooCommerce.settings.updatedSuccessMessage)).toContainText(payment.saveSuccessMessage);
+		await this.toContainText(selector.admin.wooCommerce.settings.updatedSuccessMessage, payment.saveSuccessMessage);
 	}
 
 	// admin add categories
@@ -492,7 +493,7 @@ export class AdminPage extends BasePage {
 		await this.fill(selector.admin.products.category.name, categoryName);
 		await this.fill(selector.admin.products.category.slug, categoryName);
 		await this.clickAndWaitForResponse(data.subUrls.ajax, selector.admin.products.category.addNewCategory);
-		await expect(this.page.locator(selector.admin.products.category.categoryCell(categoryName))).toBeVisible();
+		await this.toBeVisible(selector.admin.products.category.categoryCell(categoryName));
 	}
 
 	// admin add attributes
@@ -503,7 +504,7 @@ export class AdminPage extends BasePage {
 		await this.fill(selector.admin.products.attribute.name, attribute.attributeName);
 		await this.fill(selector.admin.products.attribute.slug, attribute.attributeName);
 		await this.clickAndWaitForResponse(data.subUrls.backend.wcAddNewAttributes, selector.admin.products.attribute.addAttribute);
-		await expect(this.page.locator(selector.admin.products.attribute.attributeCell(attribute.attributeName))).toBeVisible();
+		await this.toBeVisible(selector.admin.products.attribute.attributeCell(attribute.attributeName));
 		await this.clickAndWaitForResponse('wp-admin/edit-tags.php?taxonomy', selector.admin.products.attribute.configureTerms(attribute.attributeName));
 
 		// add new term
@@ -511,7 +512,7 @@ export class AdminPage extends BasePage {
 			await this.fill(selector.admin.products.attribute.attributeTerm, attributeTerm);
 			await this.fill(selector.admin.products.attribute.attributeTermSlug, attributeTerm);
 			await this.clickAndWaitForResponse(data.subUrls.ajax, selector.admin.products.attribute.addAttributeTerm);
-			await expect(this.page.locator(selector.admin.products.attribute.attributeTermCell(attributeTerm))).toBeVisible();
+			await this.toBeVisible(selector.admin.products.attribute.attributeTermCell(attributeTerm));
 		}
 	}
 
@@ -535,19 +536,19 @@ export class AdminPage extends BasePage {
 		case 'publish' :
 			// await this.clickAndWaitForResponse(data.subUrls.ajax, selector.admin.products.product.publish);
 			await this.clickAndWaitForNavigation(selector.admin.products.product.publish);
-			await expect(this.page.locator(selector.admin.products.product.updatedSuccessMessage)).toContainText(data.product.publishSuccessMessage);
+			await this.toContainText(selector.admin.products.product.updatedSuccessMessage, data.product.publishSuccessMessage);
 			break;
 
 		case 'draft' :
 			await this.click(selector.admin.products.product.saveDraft);
-			await expect(this.page.locator(selector.admin.products.product.updatedSuccessMessage)).toContainText(data.product.draftUpdateSuccessMessage);
+			await this.toContainText(selector.admin.products.product.updatedSuccessMessage, data.product.draftUpdateSuccessMessage);
 			break;
 
 		case 'pending' :
 			await this.click(selector.admin.products.product.editStatus);
 			await this.selectByValue(selector.admin.products.product.status, data.product.status.pending);
 			await this.click(selector.admin.products.product.saveDraft);
-			await expect(this.page.locator(selector.admin.products.product.updatedSuccessMessage)).toContainText(data.product.pendingProductUpdateSuccessMessage);
+			await this.toContainText(selector.admin.products.product.updatedSuccessMessage, data.product.pendingProductUpdateSuccessMessage);
 			break;
 
 		default :
@@ -597,7 +598,7 @@ export class AdminPage extends BasePage {
 		await this.scrollToTop();
 		// Publish
 		await this.clickAndWaitForResponse(data.subUrls.post, selector.admin.products.product.publish, 302);
-		await expect(this.page.locator(selector.admin.products.product.updatedSuccessMessage)).toContainText(data.product.publishSuccessMessage);
+		await this.toContainText(selector.admin.products.product.updatedSuccessMessage, data.product.publishSuccessMessage);
 	}
 
 	// Admin Add Simple Subscription Product
@@ -623,7 +624,7 @@ export class AdminPage extends BasePage {
 		// Publish
 		await this.clickAndWaitForResponse(data.subUrls.post, selector.admin.products.product.publish, 302);
 
-		await expect(this.page.locator(selector.admin.products.product.updatedSuccessMessage)).toContainText(data.product.publishSuccessMessage);
+		await this.toContainText(selector.admin.products.product.updatedSuccessMessage, data.product.publishSuccessMessage);
 	}
 
 	// Admin Add External Product
@@ -647,7 +648,7 @@ export class AdminPage extends BasePage {
 		// Publish
 		await this.clickAndWaitForResponse(data.subUrls.post, selector.admin.products.product.publish, 302);
 
-		await expect(this.page.locator(selector.admin.products.product.updatedSuccessMessage)).toContainText(data.product.publishSuccessMessage);
+		await this.toContainText(selector.admin.products.product.updatedSuccessMessage, data.product.publishSuccessMessage);
 	}
 
 	// Admin Add Dokan Subscription Product
@@ -674,7 +675,7 @@ export class AdminPage extends BasePage {
 
 		// Publish
 		await this.clickAndWaitForResponse(data.subUrls.post, selector.admin.products.product.publish, 302);
-		await expect(this.page.locator(selector.admin.products.product.updatedSuccessMessage)).toContainText(data.product.publishSuccessMessage);
+		await this.toContainText(selector.admin.products.product.updatedSuccessMessage, data.product.publishSuccessMessage);
 	}
 
 	// Admin Add Auction Product
@@ -702,7 +703,7 @@ export class AdminPage extends BasePage {
 
 		// Publish
 		await this.clickAndWaitForResponse(data.subUrls.post, selector.admin.products.product.publish, 302);
-		await expect(this.page.locator(selector.admin.products.product.updatedSuccessMessage)).toContainText(data.product.publishSuccessMessage);
+		await this.toContainText(selector.admin.products.product.updatedSuccessMessage, data.product.publishSuccessMessage);
 	}
 
 	// Admin Add Booking Product
@@ -729,7 +730,7 @@ export class AdminPage extends BasePage {
 
 		// Publish
 		await this.clickAndWaitForResponse(data.subUrls.post, selector.admin.products.product.publish, 302);
-		await expect(this.page.locator(selector.admin.products.product.updatedSuccessMessage)).toContainText(data.product.publishSuccessMessage);
+		await this.toContainText(selector.admin.products.product.updatedSuccessMessage, data.product.publishSuccessMessage);
 	}
 
 	// Admin Update Product Stock Status
@@ -826,7 +827,7 @@ export class AdminPage extends BasePage {
 		// Ready!
 		await this.click(selector.admin.dokan.dokanSetupWizard.visitDokanDashboard);
 
-		await expect(this.page.locator(selector.admin.dokan.dashboard.dashboardText)).toBeVisible();
+		await this.toBeVisible(selector.admin.dokan.dashboard.dashboardText);
 	}
 
 	// Dokan Modules
@@ -840,7 +841,7 @@ export class AdminPage extends BasePage {
 
 		const noModulesMessage = await this.isVisible(selector.admin.dokan.modules.pro.noModulesFound);
 		if (noModulesMessage) {
-			await expect(this.page.locator(selector.admin.dokan.modules.pro.noModulesFound)).toContainText(data.modules.noModuleMessage);
+			await this.toContainText(selector.admin.dokan.modules.pro.noModulesFound, data.modules.noModuleMessage);
 		} else {
 			const inActiveModuleNames = await this.getMultipleElementTexts(selector.admin.dokan.modules.pro.moduleName);
 			throw new Error('Inactive modules: ' + inActiveModuleNames);
@@ -867,7 +868,7 @@ export class AdminPage extends BasePage {
 	async dokanNotice(){
 		await this.goto(data.subUrls.backend.dokan.dokan);
 
-		await expect(this.page.locator(selector.admin.dokan.notice.noticeDiv)).toHaveCount(2); // because of promo notice
+		await this.toHaveCount(selector.admin.dokan.notice.noticeDiv, 2); // because of promo notice
 
 		// dokan notice elements are visible
 		// eslint-disable-next-line @typescript-eslint/no-unused-vars

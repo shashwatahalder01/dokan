@@ -122,7 +122,7 @@ export class VendorPage extends BasePage {
 		} else {
 			await this.clickAndWaitForResponse(data.subUrls.frontend.dashboard, selector.vendor.vSetup.notRightNow);
 		}
-		await expect(this.page.locator(selector.vendor.vDashboard.menus.dashboard)).toBeVisible();
+		await this.toBeVisible(selector.vendor.vDashboard.menus.dashboard);
 	}
 
 	// vendor add product category
@@ -285,7 +285,7 @@ export class VendorPage extends BasePage {
 		await this.clearAndType(selector.vendor.vBooking.bookingDurationMax, product.bookingDurationMax);
 		await this.selectByValue(selector.vendor.vBooking.bookingDurationUnit, product.bookingDurationUnit);
 		// calendar display mode
-		await this.selectByValue(selector.vendor.vBooking.calenderDisplayMode, product.calendarDisplayMode);
+		await this.selectByValue(selector.vendor.vBooking.calendarDisplayMode, product.calendarDisplayMode);
 		await this.check(selector.vendor.vBooking.enableCalendarRangePicker);
 		// availability
 		await this.clearAndType(selector.vendor.vBooking.maxBookingsPerBlock, product.maxBookingsPerBlock);
@@ -377,8 +377,7 @@ export class VendorPage extends BasePage {
 		await this.selectByValue(selector.vendor.vWithdraw.maintainAReserveBalance, withdraw.reservedBalance);
 		await this.clickAndWaitForResponse(data.subUrls.ajax, selector.vendor.vWithdraw.changeSchedule);
 		await expect(this.page.getByText(selector.vendor.vWithdraw.withdrawScheduleSaveSuccessMessage)).toBeVisible(); //TODO: find when invokes it
-		// await expect(this.page.locator(selector.vendor.vWithdraw.scheduleMessage).filter({ hasText: 'text in column 1' })
-		// ).toBeVisible();
+		// await expect(this.page.locator(selector.vendor.vWithdraw.scheduleMessage).filter({ hasText: 'text in column 1' })).toBeVisible();
 		// let a = await this.page.locator(selector.vendor.vWithdraw.scheduleMessage).textContent();
 		// console.log(a);
 		// await expect(this.page.getByText(selector.vendor.vWithdraw.scheduleMessage)).not.toContainText(data.vendor.withdraw.scheduleMessageInitial);
@@ -394,7 +393,7 @@ export class VendorPage extends BasePage {
 			// // await this.waitForNavigation()
 			// await this.waitForUrl(data.subUrls.frontend.withdraw);
 			await this.clickAndWaitForNavigation(selector.vendor.vWithdraw.customMethodMakeDefault(preferredSchedule)); //TODO: fix before soln
-			await expect(this.page.locator(selector.vendor.vWithdraw.defaultMethod(preferredSchedule))).toBeVisible();
+			await this.toBeVisible(selector.vendor.vWithdraw.defaultMethod(preferredSchedule));
 		}
 	}
 
@@ -430,7 +429,7 @@ export class VendorPage extends BasePage {
 		await this.minMaxSettings(vendorInfo.minMax);
 		// update settings
 		await this.click(selector.vendor.vStoreSettings.updateSettings);
-		await expect(this.page.locator(selector.vendor.vStoreSettings.updateSettingsSuccessMessage)).toContainText(vendorInfo.storeSettingsSaveSuccessMessage);
+		await this.toContainText(selector.vendor.vStoreSettings.updateSettingsSuccessMessage, vendorInfo.storeSettingsSaveSuccessMessage);
 
 	}
 
@@ -608,7 +607,7 @@ export class VendorPage extends BasePage {
 	}
 
 	// vendor set store address
-	async setStoreAddress(vendorInfo: { street1: string; street2: string; city: string; zipCode: string; countrySelectValue: string; stateSelectValue: string; storeSettingsSaveSuccessMessage: string | RegExp; }): Promise<void> {
+	async setStoreAddress(vendorInfo: { street1: string; street2: string; city: string; zipCode: string; countrySelectValue: string; stateSelectValue: string; storeSettingsSaveSuccessMessage: string; }): Promise<void> {
 		await this.goIfNotThere(data.subUrls.frontend.settingsStore);
 		// store address
 		await this.clearAndType(selector.vendor.vStoreSettings.street, vendorInfo.street1);
@@ -619,7 +618,7 @@ export class VendorPage extends BasePage {
 		await this.selectByValue(selector.vendor.vStoreSettings.state, vendorInfo.stateSelectValue);
 		// update settings
 		await this.click(selector.vendor.vStoreSettings.updateSettings);
-		await expect(this.page.locator(selector.vendor.vStoreSettings.updateSettingsSuccessMessage)).toContainText(vendorInfo.storeSettingsSaveSuccessMessage);
+		await this.toContainText(selector.vendor.vStoreSettings.updateSettingsSuccessMessage, vendorInfo.storeSettingsSaveSuccessMessage);
 	}
 
 	// vendor add addons
@@ -648,7 +647,7 @@ export class VendorPage extends BasePage {
 		await this.clearAndType(selector.vendor.vAddonSettings.optionPriceInput, addon.optionPriceInput);
 		await this.click(selector.vendor.vAddonSettings.publish);
 
-		await expect(this.page.locator(selector.vendor.vAddonSettings.addonUpdateSuccessMessage)).toContainText(addon.saveSuccessMessage);
+		await this.toContainText(selector.vendor.vAddonSettings.addonUpdateSuccessMessage, addon.saveSuccessMessage);
 		return addonName;
 	}
 
@@ -675,7 +674,7 @@ export class VendorPage extends BasePage {
 		await this.selectByValue(selector.vendor.vAddonSettings.optionPriceType, addon.optionPriceType);
 		await this.clearAndType(selector.vendor.vAddonSettings.optionPriceInput, addon.optionPriceInput);
 		await this.click(selector.vendor.vAddonSettings.update);
-		await expect(this.page.locator(selector.vendor.vAddonSettings.addonUpdateSuccessMessage)).toContainText(addon.saveSuccessMessage);
+		await this.toContainText(selector.vendor.vAddonSettings.addonUpdateSuccessMessage, addon.saveSuccessMessage);
 	}
 
 	// vendor set payment settings
@@ -691,13 +690,13 @@ export class VendorPage extends BasePage {
 	}
 
 	// paypal payment settings
-	async setPaypal(paymentMethod: { email: () => string; saveSuccessMessage: string | RegExp; }): Promise<void> {
+	async setPaypal(paymentMethod: { email: () => string; saveSuccessMessage: string; }): Promise<void> {
 		await this.goIfNotThere(data.subUrls.frontend.paypal);
 		//paypal
 		await this.clearAndType(selector.vendor.vPaymentSettings.paypal, paymentMethod.email());
 		// update settings
 		await this.clickAndWaitForResponse(data.subUrls.ajax, selector.vendor.vPaymentSettings.updateSettings);
-		await expect(this.page.locator(selector.vendor.vPaymentSettings.updateSettingsSuccessMessage)).toContainText(paymentMethod.saveSuccessMessage);
+		await this.toContainText(selector.vendor.vPaymentSettings.updateSettingsSuccessMessage, paymentMethod.saveSuccessMessage);
 	}
 
 	// bank transfer payment settings
@@ -718,7 +717,7 @@ export class VendorPage extends BasePage {
 		// update settings
 		// await this.clickAndWaitForResponse(data.subUrls.ajax, selector.vendor.vPaymentSettings.updateSettings);
 		await this.clickAndWaitForResponse(data.subUrls.ajax, selector.vendor.vPaymentSettings.addAccount);
-		await expect(this.page.locator(selector.vendor.vPaymentSettings.updateSettingsSuccessMessage)).toContainText(paymentMethod.saveSuccessMessage);
+		await this.toContainText(selector.vendor.vPaymentSettings.updateSettingsSuccessMessage, paymentMethod.saveSuccessMessage);
 	}
 
 	// // stripe payment settings
@@ -755,23 +754,23 @@ export class VendorPage extends BasePage {
 	// }
 
 	// custom payment settings
-	async setCustom(paymentMethod: { email: () => string; saveSuccessMessage: string | RegExp; }): Promise<void> {
+	async setCustom(paymentMethod: { email: () => string; saveSuccessMessage: string  }): Promise<void> {
 		await this.goIfNotThere(data.subUrls.frontend.customPayment);
 		// custom payment method
 		await this.clearAndType(selector.vendor.vPaymentSettings.customPayment, paymentMethod.email());
 		// update settings
 		await this.clickAndWaitForResponse(data.subUrls.ajax, selector.vendor.vPaymentSettings.updateSettings);
-		await expect(this.page.locator(selector.vendor.vPaymentSettings.updateSettingsSuccessMessage)).toContainText(paymentMethod.saveSuccessMessage);
+		await this.toContainText(selector.vendor.vPaymentSettings.updateSettingsSuccessMessage, paymentMethod.saveSuccessMessage);
 	}
 
 	// skrill Payment Settings
-	async setSkrill(paymentMethod: { email: () => string; saveSuccessMessage: string | RegExp; }): Promise<void> {
+	async setSkrill(paymentMethod: any): Promise<void> {
 		await this.goIfNotThere(data.subUrls.frontend.skrill);
 		// skrill
 		await this.clearAndType(selector.vendor.vPaymentSettings.skrill, paymentMethod.email());
 		// update settings
 		await this.clickAndWaitForResponse(data.subUrls.ajax, selector.vendor.vPaymentSettings.updateSettings);
-		await expect(this.page.locator(selector.vendor.vPaymentSettings.updateSettingsSuccessMessage)).toContainText(paymentMethod.saveSuccessMessage);
+		await this.toContainText(selector.vendor.vPaymentSettings.updateSettingsSuccessMessage, paymentMethod.saveSuccessMessage);
 	}
 
 	// vendor send id verification request
@@ -797,7 +796,7 @@ export class VendorPage extends BasePage {
 		await this.clickAndWaitForResponse(data.subUrls.ajax, selector.vendor.vVerificationSettings.uploadPhoto);
 		await this.uploadMedia(verification.file);
 		await this.clickAndWaitForResponse(data.subUrls.ajax, selector.vendor.vVerificationSettings.submitId);
-		await expect(this.page.locator(selector.vendor.vVerificationSettings.idUpdateSuccessMessage)).toContainText(verification.idRequestSubmitSuccessMessage);
+		await this.toContainText(selector.vendor.vVerificationSettings.idUpdateSuccessMessage, verification.idRequestSubmitSuccessMessage);
 	}
 
 	// vendor send address verification request
@@ -820,7 +819,7 @@ export class VendorPage extends BasePage {
 		await this.clickAndWaitForResponse(data.subUrls.ajax, selector.vendor.vVerificationSettings.uploadResidenceProof);
 		await this.uploadMedia(verification.file);
 		await this.clickAndWaitForResponse(data.subUrls.ajax, selector.vendor.vVerificationSettings.submitAddress);
-		await expect(this.page.locator(selector.vendor.vVerificationSettings.addressUpdateSuccessMessage)).toContainText(verification.addressRequestSubmitSuccessMessage);
+		await this.toContainText(selector.vendor.vVerificationSettings.addressUpdateSuccessMessage, verification.addressRequestSubmitSuccessMessage);
 	}
 
 	// vendor send company verification request
@@ -842,7 +841,7 @@ export class VendorPage extends BasePage {
 		await this.clickAndWaitForResponse(data.subUrls.ajax, selector.vendor.vVerificationSettings.uploadFiles);
 		await this.uploadMedia(verification.file);
 		await this.clickAndWaitForResponse(data.subUrls.ajax, selector.vendor.vVerificationSettings.submitCompanyInfo);
-		await expect(this.page.locator(selector.vendor.vVerificationSettings.companyInfoUpdateSuccessMessage)).toContainText(verification.companyRequestSubmitSuccessMessage);
+		await this.toContainText(selector.vendor.vVerificationSettings.companyInfoUpdateSuccessMessage, verification.companyRequestSubmitSuccessMessage);
 	}
 
 	// upload media
@@ -882,7 +881,7 @@ export class VendorPage extends BasePage {
 			await this.setAttributeValue(selector.vendor.vDeliveryTimeSettings.closingTimeHiddenInput(day), 'value', deliveryTime.closingTime);
 		}
 		await this.click(selector.vendor.vDeliveryTimeSettings.deliveryTimeUpdateSettings);
-		await expect(this.page.locator(selector.vendor.vDeliveryTimeSettings.deliveryTimeUpdateSettingsSuccessMessage)).toContainText(deliveryTime.saveSuccessMessage);
+		await this.toContainText(selector.vendor.vDeliveryTimeSettings.deliveryTimeUpdateSettingsSuccessMessage, deliveryTime.saveSuccessMessage);
 	}
 
 	// vendor shipping settings
@@ -904,7 +903,7 @@ export class VendorPage extends BasePage {
 		await this.clearAndType(selector.vendor.vShippingSettings.shippingPolicies.shippingPolicy, shippingPolicy.shippingPolicy);
 		await this.type(selector.vendor.vShippingSettings.shippingPolicies.refundPolicy, shippingPolicy.refundPolicy);
 		await this.click(selector.vendor.vShippingSettings.shippingPolicies.shippingPoliciesSaveSettings);
-		await expect(this.page.locator(selector.vendor.vShippingSettings.updateSettingsSuccessMessage)).toContainText(shippingPolicy.saveSuccessMessage);
+		await this.toContainText(selector.vendor.vShippingSettings.updateSettingsSuccessMessage, shippingPolicy.saveSuccessMessage);
 	}
 
 	// vendor set shipping settings
@@ -964,7 +963,7 @@ export class VendorPage extends BasePage {
 			await this.clearAndType(selector.vendor.vShippingSettings.tableRateShippingMinimumCostPerOrder, shipping.minimumCostPerOrder);
 			await this.clearAndType(selector.vendor.vShippingSettings.tableRateShippingMaximumCostPerOrder, shipping.maximumCostPerOrder);
 			await this.click(selector.vendor.vShippingSettings.tableRateShippingUpdateSettings);
-			await expect(this.page.locator(selector.vendor.vShippingSettings.tableRateShippingUpdateSettingsSuccessMessage)).toContainText(shipping.tableRateSaveSuccessMessage);
+			await this.toContainText(selector.vendor.vShippingSettings.tableRateShippingUpdateSettingsSuccessMessage, shipping.tableRateSaveSuccessMessage);
 			return;
 
 			// dokan distance rate shipping
@@ -984,7 +983,7 @@ export class VendorPage extends BasePage {
 			await this.clearAndType(selector.vendor.vShippingSettings.distanceRateShippingStateOrProvince, shipping.state);
 			await this.selectByValue(selector.vendor.vShippingSettings.distanceRateShippingCountry, shipping.country);
 			await this.click(selector.vendor.vShippingSettings.distanceRateShippingUpdateSettings);
-			await expect(this.page.locator(selector.vendor.vShippingSettings.distanceRateShippingUpdateSettingsSuccessMessage)).toContainText(shipping.distanceRateSaveSuccessMessage);
+			await this.toContainText(selector.vendor.vShippingSettings.distanceRateShippingUpdateSettingsSuccessMessage, shipping.distanceRateSaveSuccessMessage);
 			return;
 
 		default :
@@ -992,11 +991,11 @@ export class VendorPage extends BasePage {
 		}
 		await this.clickAndWaitForResponse(data.subUrls.ajax, selector.vendor.vShippingSettings.shippingSettingsSaveSettings);
 		await this.clickAndWaitForResponse(data.subUrls.ajax, selector.vendor.vShippingSettings.saveChanges);
-		await expect(this.page.locator(selector.vendor.vShippingSettings.updateSettingsSuccessMessage)).toContainText(shipping.saveSuccessMessage);
+		await this.toContainText(selector.vendor.vShippingSettings.updateSettingsSuccessMessage, shipping.saveSuccessMessage);
 	}
 
 	// vendor set social profile settings
-	async setSocialProfile(urls: { facebook: any; twitter: any; pinterest: any; linkedin: any; youtube: any; instagram: any; flickr: any; saveSuccessMessage?: string; }): Promise<void> {
+	async setSocialProfile(urls: any): Promise<void> {
 		await this.goIfNotThere(data.subUrls.frontend.settingsSocialProfile);
 		await this.clearAndType(selector.vendor.vSocialProfileSettings.facebook, urls.facebook);
 		await this.clearAndType(selector.vendor.vSocialProfileSettings.twitter, urls.twitter);
@@ -1007,11 +1006,11 @@ export class VendorPage extends BasePage {
 		await this.clearAndType(selector.vendor.vSocialProfileSettings.flickr, urls.flickr);
 		// await this.clickAndWaitForResponse(data.subUrls.ajax, selector.vendor.vSocialProfileSettings.updateSettings); //TODO: don't work, alternate soln. below line
 		await this.pressOnSelector(selector.vendor.vSocialProfileSettings.updateSettings, data.key.enter);
-		await expect(this.page.locator(selector.vendor.vSocialProfileSettings.updateSettingsSuccessMessage)).toContainText(urls.saveSuccessMessage);
+		await this.toContainText(selector.vendor.vSocialProfileSettings.updateSettingsSuccessMessage, urls.saveSuccessMessage);
 	}
 
 	// vendor set rma settings
-	async setRmaSettings(rma: { label: any; type: any; rmaLength: any; lengthValue: any; lengthDuration: any; refundPolicyHtmlBody: any; saveSuccessMessage: any; }): Promise<void> {
+	async setRmaSettings(rma: any): Promise<void> {
 		await this.goIfNotThere(data.subUrls.frontend.settingsRma);
 		await this.clearAndType(selector.vendor.vRmaSettings.label, rma.label);
 		await this.selectByValue(selector.vendor.vRmaSettings.type, rma.type);
@@ -1044,7 +1043,7 @@ export class VendorPage extends BasePage {
 
 		// const reviewIsVisible = await this.isVisible(selector.vendor.vReviews.reviewRow(reviewMessage));
 		// expect(reviewIsVisible).toBe(true);
-		await expect(this.page.locator(selector.vendor.vReviews.reviewRow(reviewMessage))).toBeVisible();
+		await this.toBeVisible(selector.vendor.vReviews.reviewRow(reviewMessage));
 	}
 
 	// vendor approve return request
@@ -1067,7 +1066,7 @@ export class VendorPage extends BasePage {
 
 		// const successMessage = await this.getElementText(selector.vendor.vReturnRequest.sendRequestSuccessMessage);
 		// expect(successMessage).toMatch('Already send refund request. Wait for admin approval');
-		await expect(this.page.locator(selector.vendor.vReturnRequest.sendRequestSuccessMessage)).toContainText('Already send refund request. Wait for admin approval');
+		await this.toContainText(selector.vendor.vReturnRequest.sendRequestSuccessMessage, 'Already send refund request. Wait for admin approval' );
 	}
 
 	// delete return request
@@ -1099,7 +1098,7 @@ export class VendorPage extends BasePage {
 		//search product
 		await this.clearAndType(selector.vendor.product.searchProduct, productName);
 		await this.click(selector.vendor.product.search);
-		await expect(this.page.locator(selector.vendor.product.productLink(productName))).toBeVisible();
+		await this.toBeVisible(selector.vendor.product.productLink(productName));
 	}
 
 	// vendor override rma settings
@@ -1158,7 +1157,7 @@ export class VendorPage extends BasePage {
 
 	// 	// const successMessage = await this.getElementText(selector.vendor.vOrders.refundRequestSuccessMessage);
 	// 	// expect(successMessage).toMatch('Refund request submitted.');
-	// 	await expect(this.page.locator(selector.vendor.vOrders.refundRequestSuccessMessage)).toContainText('Refund request submitted.');
+	// await this.toContainText(selector.vendor.vOrders.refundRequestSuccessMessage, 'Refund request submitted.');
 	// 	await this.click(selector.vendor.vOrders.refundRequestSuccessMessageOk);
 	// }
 

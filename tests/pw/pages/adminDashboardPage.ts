@@ -18,7 +18,7 @@ export class AdminDashboardPage extends AdminPage {
 		await this.goIfNotThere(data.subUrls.backend.dokan.dokan);
 
 		// dashboard text is visible
-		await expect(this.page.locator(selector.admin.dokan.dashboard.dashboardText)).toBeVisible();
+		await this.toBeVisible(selector.admin.dokan.dashboard.dashboardText);
 
 		// header elements are visible
 		await this.multipleElementVisible(selector.admin.dokan.dashboard.header);
@@ -47,10 +47,10 @@ export class AdminDashboardPage extends AdminPage {
 
 		expect(helpers.roundToTwo(Number(helpers.price(netSales)))).toBe(helpers.roundToTwo(Number(atAGlanceValues.sales.this_month))); // TODO: check for further errors
 		expect(helpers.roundToTwo(Number(helpers.price(commissionEarned)))).toBe(helpers.roundToTwo(Number(atAGlanceValues.earning.this_month))); // TODO: check for further errors
-		await expect(this.page.locator(selector.admin.dokan.dashboard.atAGlance.signupThisMonth)).toContainText(atAGlanceValues.vendors.this_month + ' Vendor');
-		await expect(this.page.locator(selector.admin.dokan.dashboard.atAGlance.vendorAwaitingApproval)).toContainText(atAGlanceValues.vendors.inactive + ' Vendor');
-		await expect(this.page.locator(selector.admin.dokan.dashboard.atAGlance.productCreatedThisMonth)).toContainText(atAGlanceValues.products.this_month + ' Products');
-		await expect(this.page.locator(selector.admin.dokan.dashboard.atAGlance.withdrawAwaitingApproval)).toContainText(atAGlanceValues.withdraw.pending + ' Withdrawals');
+		await this.toContainText(selector.admin.dokan.dashboard.atAGlance.signupThisMonth, atAGlanceValues.vendors.this_month + ' Vendor');
+		await this.toContainText(selector.admin.dokan.dashboard.atAGlance.vendorAwaitingApproval, atAGlanceValues.vendors.inactive + ' Vendor');
+		await this.toContainText(selector.admin.dokan.dashboard.atAGlance.productCreatedThisMonth, atAGlanceValues.products.this_month + ' Products');
+		await this.toContainText(selector.admin.dokan.dashboard.atAGlance.withdrawAwaitingApproval, atAGlanceValues.withdraw.pending + ' Withdrawals');
 	}
 
 	// add dokan news subscriber
@@ -60,7 +60,7 @@ export class AdminDashboardPage extends AdminPage {
 		await this.clearAndType(selector.admin.dokan.dashboard.subscribeBox.subscriberName, user.name());
 		await this.clearAndType(selector.admin.dokan.dashboard.subscribeBox.subscriberEmail, user.email());
 		await this.clickAndWaitForResponse(data.subUrls.backend.subscribe, selector.admin.dokan.dashboard.subscribeBox.subscribeButton);
-		await expect(this.page.locator(selector.admin.dokan.dashboard.subscribeBox.thankYouMessage)).toContainText('Thank you for subscribing!');
+		await this.toContainText(selector.admin.dokan.dashboard.subscribeBox.thankYouMessage, 'Thank you for subscribing!' );
 
 	}
 

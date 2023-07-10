@@ -7,7 +7,7 @@ import { data } from 'utils/testData';
 
 
 export class WholesaleCustomersPage extends AdminPage {
-	// https://medium.com/@thevirtuoid/extending-multiple-classes-in-javascript-2f4752574e65
+	//TODO: https://medium.com/@thevirtuoid/extending-multiple-classes-in-javascript-2f4752574e65
 	constructor(page: Page) {
 		super(page);
 	}
@@ -19,7 +19,7 @@ export class WholesaleCustomersPage extends AdminPage {
 		await this.goIfNotThere(data.subUrls.backend.dokan.dokanWholeSaleCustomer);
 
 		// wholesale customer text is visible
-		await expect(this.page.locator(selector.admin.dokan.wholesaleCustomer.wholesaleCustomerText)).toBeVisible();
+		await this.toBeVisible(selector.admin.dokan.wholesaleCustomer.wholesaleCustomerText);
 
 		// nav tabs are visible
 		await this.multipleElementVisible(selector.admin.dokan.wholesaleCustomer.navTabs);
@@ -28,7 +28,7 @@ export class WholesaleCustomersPage extends AdminPage {
 		await this.multipleElementVisible(selector.admin.dokan.wholesaleCustomer.bulkActions);
 
 		// search wholesale customer input is visible
-		await expect(this.page.locator(selector.admin.dokan.wholesaleCustomer.search)).toBeVisible();
+		await this.toBeVisible(selector.admin.dokan.wholesaleCustomer.search);
 
 		// wholesale customer table elements are visible
 		await this.multipleElementVisible(selector.admin.dokan.wholesaleCustomer.table);
@@ -42,7 +42,7 @@ export class WholesaleCustomersPage extends AdminPage {
 		await this.clearInputField(selector.admin.dokan.wholesaleCustomer.search);
 
 		await this.typeAndWaitForResponse(data.subUrls.backend.wholesaleCustomers, selector.admin.dokan.wholesaleCustomer.search, wholesaleCustomer);
-		await expect(this.page.locator(selector.admin.dokan.wholesaleCustomer.wholesaleCustomerCell(wholesaleCustomer))).toBeVisible();
+		await this.toBeVisible(selector.admin.dokan.wholesaleCustomer.wholesaleCustomerCell(wholesaleCustomer));
 	}
 
 	// edit wholesale customer
@@ -100,7 +100,7 @@ export class WholesaleCustomersPage extends AdminPage {
 
 		// update user
 		await this.clickAndWaitForResponse(data.subUrls.user, selector.admin.users.updateUser, 302);
-		await expect(this.page.locator(selector.admin.users.updateSuccessMessage)).toContainText('User updated.');
+		await this.toContainText(selector.admin.users.updateSuccessMessage, 'User updated.' );
 	}
 
 	// view wholesale customer orders
@@ -146,7 +146,7 @@ export class WholesaleCustomersPage extends AdminPage {
 		await this.goIfNotThere(data.subUrls.backend.dokan.dokanWholeSaleCustomer);
 
 		// ensure row exists
-		await expect(this.page.locator(selector.admin.dokan.wholesaleCustomer.noRowsFound)).not.toBeVisible();
+		await this.notToBeVisible(selector.admin.dokan.wholesaleCustomer.noRowsFound);
 
 		await this.click(selector.admin.dokan.wholesaleCustomer.bulkActions.selectAll);
 		await this.selectByValue(selector.admin.dokan.wholesaleCustomer.bulkActions.selectAction, action);
@@ -158,7 +158,7 @@ export class WholesaleCustomersPage extends AdminPage {
 	async customerRequestForBecomeWholesaleCustomer(): Promise<void> {
 		await this.goIfNotThere(data.subUrls.frontend.myAccount);
 		await this.click(selector.customer.cDashboard.becomeWholesaleCustomer);
-		await expect(this.page.locator(selector.customer.cDashboard.wholesaleRequestReturnMessage)).toContainText(data.wholesale.wholesaleRequestSendMessage);
+		await this.toContainText(selector.customer.cDashboard.wholesaleRequestReturnMessage, data.wholesale.wholesaleRequestSendMessage);
 	}
 
 	// customer become wholesale customer
@@ -168,10 +168,10 @@ export class WholesaleCustomersPage extends AdminPage {
 		await this.clickAndWaitForResponse(data.subUrls.backend.wholesaleRegister, selector.customer.cDashboard.becomeWholesaleCustomer);
 		const neeApproval = await this.isVisible(selector.customer.cDashboard.wholesaleRequestReturnMessage);
 		if (!neeApproval) {
-			await expect(this.page.locator(selector.customer.cWooSelector.wooCommerceSuccessMessage)).toContainText(data.wholesale.becomeWholesaleCustomerSuccessMessage);
+			await this.toContainText(selector.customer.cWooSelector.wooCommerceSuccessMessage, data.wholesale.becomeWholesaleCustomerSuccessMessage);
 		}
 		else {
-			await expect(this.page.locator(selector.customer.cDashboard.wholesaleRequestReturnMessage)).toContainText(data.wholesale.wholesaleRequestSendMessage);
+			await this.toContainText(selector.customer.cDashboard.wholesaleRequestReturnMessage, data.wholesale.wholesaleRequestSendMessage);
 			await this.loginPage.switchUser(data.admin);
 			await this.updateWholesaleCustomer(currentUser!, 'enable'); //TODo: fix this
 		}

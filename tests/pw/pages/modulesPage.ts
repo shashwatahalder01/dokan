@@ -16,7 +16,7 @@ export class ModulesPage extends AdminPage {
 		await this.goIfNotThere(data.subUrls.backend.dokan.dokanModules);
 
 		// modules text is visible
-		await expect(this.page.locator(selector.admin.dokan.modules.pro.moduleText)).toBeVisible();
+		await this.toBeVisible(selector.admin.dokan.modules.pro.moduleText);
 
 		// module plan elements are visible
 		await this.multipleElementVisible(selector.admin.dokan.modules.pro.modulePlan);
@@ -25,35 +25,34 @@ export class ModulesPage extends AdminPage {
 		await this.multipleElementVisible(selector.admin.dokan.modules.pro.navTabs);
 
 		// module filter  is visible
-		await expect(this.page.locator(selector.admin.dokan.modules.pro.moduleFilter)).toBeVisible();
+		await this.toBeVisible(selector.admin.dokan.modules.pro.moduleFilter);
 
 		// modules search is visible
-		await expect(this.page.locator(selector.admin.dokan.modules.pro.searchBox)).toBeVisible();
+		await this.toBeVisible(selector.admin.dokan.modules.pro.searchBox);
 
 		// modules view mode switcher is visible
-		await expect(this.page.locator(selector.admin.dokan.modules.pro.moduleViewMode)).toBeVisible();
+		await this.toBeVisible(selector.admin.dokan.modules.pro.moduleViewMode);
 
 		// module cards and card details are visible
-		await expect(this.page.locator(selector.admin.dokan.modules.pro.moduleCard)).toHaveCount(39);
-		await expect(this.page.locator(selector.admin.dokan.modules.pro.moduleIcon)).toHaveCount(39);
-		await expect(this.page.locator(selector.admin.dokan.modules.pro.moduleCheckbox)).toHaveCount(39);
-		await expect(this.page.locator(selector.admin.dokan.modules.pro.moduleName)).toHaveCount(39);
-		await expect(this.page.locator(selector.admin.dokan.modules.pro.moduleDescription)).toHaveCount(39);
-		await expect(this.page.locator(selector.admin.dokan.modules.pro.moduleActivationSwitch)).toHaveCount(39);
-		await expect(this.page.locator(selector.admin.dokan.modules.pro.moduleDocs)).toHaveCount(38);
-		await expect(this.page.locator(selector.admin.dokan.modules.pro.moduleVideos)).toHaveCount(17);
+		await this.toHaveCount(selector.admin.dokan.modules.pro.moduleCard, 39);
+		await this.toHaveCount(selector.admin.dokan.modules.pro.moduleIcon, 39);
+		await this.toHaveCount(selector.admin.dokan.modules.pro.moduleCheckbox, 39);
+		await this.toHaveCount(selector.admin.dokan.modules.pro.moduleName, 39);
+		await this.toHaveCount(selector.admin.dokan.modules.pro.moduleDescription, 39);
+		await this.toHaveCount(selector.admin.dokan.modules.pro.moduleActivationSwitch, 39);
+		await this.toHaveCount(selector.admin.dokan.modules.pro.moduleDocs, 38);
+		await this.toHaveCount(selector.admin.dokan.modules.pro.moduleVideos, 17);
 
 		// module category tags are visible
 		//TODO: try to remove hardcoded category
-		await expect(this.page.locator(selector.admin.dokan.modules.pro.moduleCategoryTag('Product Management'))).toHaveCount(13);
-		await expect(this.page.locator(selector.admin.dokan.modules.pro.moduleCategoryTag('Integration'))).toHaveCount(6);
-		await expect(this.page.locator(selector.admin.dokan.modules.pro.moduleCategoryTag('UI & UX'))).toHaveCount(2);
-		await expect(this.page.locator(selector.admin.dokan.modules.pro.moduleCategoryTag('Shipping'))).toHaveCount(3);
-		await expect(this.page.locator(selector.admin.dokan.modules.pro.moduleCategoryTag('Store Management'))).toHaveCount(10);
-		await expect(this.page.locator(selector.admin.dokan.modules.pro.moduleCategoryTag('Payment'))).toHaveCount(7);
-		await expect(this.page.locator(selector.admin.dokan.modules.pro.moduleCategoryTag('Order Management'))).toHaveCount(2);
-		await expect(this.page.locator(selector.admin.dokan.modules.pro.moduleCategoryTag('Vendor Management'))).toHaveCount(1);
-
+		await this.toHaveCount(selector.admin.dokan.modules.pro.moduleCategoryTag('Product Management'), 13);
+		await this.toHaveCount(selector.admin.dokan.modules.pro.moduleCategoryTag('Integration'), 6);
+		await this.toHaveCount(selector.admin.dokan.modules.pro.moduleCategoryTag('UI & UX'), 2);
+		await this.toHaveCount(selector.admin.dokan.modules.pro.moduleCategoryTag('Shipping'), 3);
+		await this.toHaveCount(selector.admin.dokan.modules.pro.moduleCategoryTag('Store Management'), 10);
+		await this.toHaveCount(selector.admin.dokan.modules.pro.moduleCategoryTag('Payment'), 7);
+		await this.toHaveCount(selector.admin.dokan.modules.pro.moduleCategoryTag('Order Management'), 2);
+		await this.toHaveCount(selector.admin.dokan.modules.pro.moduleCategoryTag('Vendor Management'), 1);
 	}
 
 	// search module
@@ -62,7 +61,7 @@ export class ModulesPage extends AdminPage {
 		await this.clickIfVisible(selector.admin.dokan.modules.pro.clearFilter); //TODO: why clear filer
 
 		await this.clearAndType(selector.admin.dokan.modules.pro.searchBox, moduleName);
-		await expect(this.page.locator(selector.admin.dokan.modules.pro.moduleCardByName(moduleName))).toBeVisible();
+		await this.toBeVisible(selector.admin.dokan.modules.pro.moduleCardByName(moduleName));
 
 	}
 
@@ -113,7 +112,7 @@ export class ModulesPage extends AdminPage {
 
 		if(!(currentStyle?.includes(style))){
 			await this.click(selector.admin.dokan.modules.pro.moduleViewMode);
-			await expect(this.page.locator(selector.admin.dokan.modules.pro.currentLayout)).toHaveClass(style);
+			await this.toHaveClass(selector.admin.dokan.modules.pro.currentLayout, style);
 		}
 
 	}

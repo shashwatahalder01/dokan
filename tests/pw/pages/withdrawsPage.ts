@@ -17,7 +17,7 @@ export class WithdrawsPage extends AdminPage {
 		await this.goIfNotThere(data.subUrls.backend.dokan.dokanWithdraw);
 
 		// withdraw  text is visible
-		await expect(this.page.locator(selector.admin.dokan.withdraw.withdrawText)).toBeVisible();
+		await this.toBeVisible(selector.admin.dokan.withdraw.withdrawText);
 
 		// nav tabs elements are visible
 		await this.multipleElementVisible(selector.admin.dokan.withdraw.navTabs);
@@ -40,7 +40,7 @@ export class WithdrawsPage extends AdminPage {
 		await this.goIfNotThere(data.subUrls.backend.dokan.dokanWithdraw);
 
 		// ensure row exists
-		await expect(this.page.locator(selector.admin.dokan.withdraw.noRowsFound)).not.toBeVisible();
+		await this.notToBeVisible(selector.admin.dokan.withdraw.noRowsFound);
 
 		await this.click(selector.admin.dokan.withdraw.bulkActions.selectAll);
 		await this.selectByValue(selector.admin.dokan.withdraw.bulkActions.selectAction, action);
@@ -56,7 +56,7 @@ export class WithdrawsPage extends AdminPage {
 		await this.click(selector.admin.dokan.withdraw.filters.filterByVendor);
 		await this.typeAndWaitForResponse(data.subUrls.backend.stores, selector.admin.dokan.withdraw.filters.filterInput, vendorName);
 		await this.pressAndWaitForResponse(data.subUrls.backend.withdraws, data.key.enter);
-		await expect(this.page.locator(selector.admin.dokan.withdraw.withdrawCell(vendorName))).toBeVisible();
+		await this.toBeVisible(selector.admin.dokan.withdraw.withdrawCell(vendorName));
 
 	}
 
@@ -87,7 +87,6 @@ export class WithdrawsPage extends AdminPage {
 
 		case 'delete' :
 			await this.hover(selector.admin.dokan.withdraw.withdrawCell(vendorName));
-			// this.acceptAlert();
 			await this.clickAndAcceptAndWaitForResponse(data.subUrls.backend.withdraws, selector.admin.dokan.withdraw.withdrawDelete);
 			break;
 

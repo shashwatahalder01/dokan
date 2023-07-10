@@ -16,7 +16,7 @@ export class ToolsPage extends AdminPage {
 		await this.goIfNotThere(data.subUrls.backend.dokan.dokanTools);
 
 		// tools text is visible
-		await expect(this.page.locator(selector.admin.dokan.tools.toolsText)).toBeVisible();
+		await this.toBeVisible(selector.admin.dokan.tools.toolsText);
 
 		// Page Installation elements are visible
 		await this.multipleElementVisible(selector.admin.dokan.tools.pageInstallation);
@@ -92,7 +92,7 @@ export class ToolsPage extends AdminPage {
 		//TODO: fix this
 		const subUrls = [[data.subUrls.backend.dummyData], [data.subUrls.backend.dummyData], [data.subUrls.backend.dummyData], [data.subUrls.backend.dummyData], [data.subUrls.backend.dummyData]];
 		await this.clickAndWaitForResponses(subUrls, selector.admin.dokan.dummyData.runTheImporter);
-		// await expect(this.page.locator(selector.admin.dokan.dummyData.importComplete)).toBeVisible();
+		// await this.toBeVisible(selector.admin.dokan.dummyData.importComplete);
 	}
 
 	// test distance matrix API
@@ -102,7 +102,7 @@ export class ToolsPage extends AdminPage {
 		await this.clearAndType(selector.admin.dokan.tools.testDistanceMatrixApi.address1, address.address3);
 		await this.clearAndType(selector.admin.dokan.tools.testDistanceMatrixApi.address2, address.address4);
 		await this.click(selector.admin.dokan.tools.testDistanceMatrixApi.getDistance);
-		await expect(this.page.locator(selector.admin.dokan.tools.testDistanceMatrixApi.enabledSuccess)).toContainText('Distance Matrix API is enabled.');
+		await this.toContainText(selector.admin.dokan.tools.testDistanceMatrixApi.enabledSuccess, 'Distance Matrix API is enabled.');
 	}
 
 }

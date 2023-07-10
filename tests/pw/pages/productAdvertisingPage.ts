@@ -17,17 +17,17 @@ export class ProductAdvertisingPage extends AdminPage {
 		await this.goToDokanSettings();
 		await this.click(selector.admin.dokan.settings.productAdvertising);
 		await this.clickAndWaitForResponse(data.subUrls.ajax, selector.admin.dokan.settings.productAdvertisingSaveChanges);
-		await expect(this.page.locator(selector.admin.dokan.settings.dokanUpdateSuccessMessage)).toContainText('Setting has been saved successfully.');
+		await this.toContainText(selector.admin.dokan.settings.dokanUpdateSuccessMessage, 'Setting has been saved successfully.');
 	}
 
 	async adminProductAdvertisingRenderProperly(){
 		await this.goIfNotThere(data.subUrls.backend.dokan.dokanProductAdvertising);
 
 		// product advertising text is visible
-		await expect(this.page.locator(selector.admin.dokan.productAdvertising.productAdvertisingText)).toBeVisible();
+		await this.toBeVisible(selector.admin.dokan.productAdvertising.productAdvertisingText);
 
 		// add new Advertisement is visible
-		await expect(this.page.locator(selector.admin.dokan.productAdvertising.addNewProductAdvertising)).toBeVisible();
+		await this.toBeVisible(selector.admin.dokan.productAdvertising.addNewProductAdvertising);
 
 		// nav tabs are visible
 		await this.multipleElementVisible(selector.admin.dokan.productAdvertising.navTabs);
@@ -41,7 +41,7 @@ export class ProductAdvertisingPage extends AdminPage {
 		await this.multipleElementVisible(filters);
 
 		// product advertising search is visible
-		await expect(this.page.locator(selector.admin.dokan.productAdvertising.search)).toBeVisible();
+		await this.toBeVisible(selector.admin.dokan.productAdvertising.search);
 
 		// product advertising table elements are visible
 		await this.multipleElementVisible(selector.admin.dokan.productAdvertising.table);
@@ -78,9 +78,9 @@ export class ProductAdvertisingPage extends AdminPage {
 
 		await this.typeAndWaitForResponse(data.subUrls.backend.productAdvertising, selector.admin.dokan.productAdvertising.search, String(productOrOrder));
 		if (typeof(productOrOrder) != 'number'){
-			await expect(this.page.locator(selector.admin.dokan.productAdvertising.advertisedProductCell(productOrOrder))).toBeVisible();
+			await this.toBeVisible(selector.admin.dokan.productAdvertising.advertisedProductCell(productOrOrder));
 		} else {
-			await expect(this.page.locator(selector.admin.dokan.productAdvertising.advertisedProductOrderIdCell(productOrOrder))).toBeVisible();
+			await this.toBeVisible(selector.admin.dokan.productAdvertising.advertisedProductOrderIdCell(productOrOrder));
 		}
 	}
 
@@ -145,7 +145,7 @@ export class ProductAdvertisingPage extends AdminPage {
 		await this.goIfNotThere(data.subUrls.backend.dokan.dokanProductAdvertising);
 
 		// ensure row exists
-		await expect(this.page.locator(selector.admin.dokan.productAdvertising.noRowsFound)).not.toBeVisible();
+		await this.notToBeVisible(selector.admin.dokan.productAdvertising.noRowsFound);
 
 		await this.click(selector.admin.dokan.productAdvertising.bulkActions.selectAll);
 		await this.selectByValue(selector.admin.dokan.productAdvertising.bulkActions.selectAction, action);

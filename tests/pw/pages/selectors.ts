@@ -1161,14 +1161,20 @@ export const selector = {
 						byVendor: '//ul[contains(@class, "dokan-report-sub")]//a[contains(text(),"By Vendor")]',
 					},
 
-					// By Year
-					filterByYearNumber: '.dokan-input',
-					// By Vendor
-					filterByStoreName: '.multiselect__tags',
-					filterByStoreNameInput: 'multiselect__input',
-					// calender
-					dateFrom: '(//form[@class="form-inline report-filter"]//input[@class="dokan-input hasDatepicker"])[1]',
-					dateTo: '(//form[@class="form-inline report-filter"]//input[@class="dokan-input hasDatepicker"])[2]',
+					filters: {
+						// By Year
+						filterByYearNumber: '.dokan-input',
+						// By Vendor
+						filterByStoreName: '.multiselect__tags',
+						filterByStoreNameInput: 'multiselect__input',
+					},
+
+					// calendar
+					calendar: {
+						dateFrom: '(//form[@class="form-inline report-filter"]//input[@class="dokan-input hasDatepicker"])[1]',
+						dateTo: '(//form[@class="form-inline report-filter"]//input[@class="dokan-input hasDatepicker"])[2]',
+					},
+
 					// show
 					show: '//button[normalize-space()="Show"]',
 
@@ -2581,7 +2587,7 @@ export const selector = {
 			allBooking: '//li[@id="menu-posts-wc_booking"]//a[contains(text(),"All Bookings")]',
 			resources: '//li[@id="menu-posts-wc_booking"]//a[contains(text(),"Resources")]',
 			addBooking: '//li[@id="menu-posts-wc_booking"]//a[contains(text(),"Add Booking")]',
-			calender: '//li[@id="menu-posts-wc_booking"]//a[contains(text(),"Calendar")]',
+			calendar: '//li[@id="menu-posts-wc_booking"]//a[contains(text(),"Calendar")]',
 			sendNotification: '//li[@id="menu-posts-wc_booking"]//a[contains(text(),"Send Notification")]',
 			settings: '//li[@id="menu-posts-wc_booking"]//a[contains(text(),"Settings")]',
 		},
@@ -3332,7 +3338,7 @@ export const selector = {
 			// Filter
 			deliveryTimeFilter: '#delivery-type-filter',
 			filter: '.dokan-btn',
-			// Calender Navigation
+			// calendar Navigation
 			month: '.fc-dayGridMonth-button',
 			week: '.fc-timeGridWeek-button',
 			day: '.fc-timeGridDay-button',
@@ -3482,10 +3488,12 @@ export const selector = {
 		// Booking
 		vBooking: {
 			// Menus
-			allBookingProduct: '//ul[@class="dokan_tabs"]//a[contains(text(),"All Booking Product")]',
-			manageBookings: '//ul[@class="dokan_tabs"]//a[contains(text(),"Manage Bookings")]',
-			calendar: '//ul[@class="dokan_tabs"]//a[contains(text(),"Calendar")]',
-			manageResources: '//ul[@class="dokan_tabs"]//a[contains(text(),"Manage Resources")]',
+			menus: {
+				allBookingProduct: '//ul[@class="dokan_tabs"]//a[contains(text(),"All Booking Product")]',
+				manageBookings: '//ul[@class="dokan_tabs"]//a[contains(text(),"Manage Bookings")]',
+				calendar: '//ul[@class="dokan_tabs"]//a[contains(text(),"Calendar")]',
+				manageResources: '//ul[@class="dokan_tabs"]//a[contains(text(),"Manage Resources")]',
+			},
 
 			// Create Booking Product
 			viewProduct: '.view-product',
@@ -3507,7 +3515,7 @@ export const selector = {
 			bookingDurationMax: '#_wc_booking_max_duration',
 			bookingDurationUnit: '#\\_wc_booking_duration_unit',
 
-			calenderDisplayMode: '#\\_wc_booking_calendar_display_mode',
+			calendarDisplayMode: '#\\_wc_booking_calendar_display_mode',
 			// Checkboxes
 			enableCalendarRangePicker: '#\\_wc_booking_enable_range_picker',
 			requiresConfirmation: '#\\_wc_booking_requires_confirmation',
@@ -3678,14 +3686,14 @@ export const selector = {
 			UpdateOrderStatus: '.dokan-btn-success',
 			cancelUpdateOrderStatus: 'dokan-btn-default',
 
-			// Calender
-			calender: {
+			// calendar
+			calendar: {
 				calendarBookingsFilter: '#calendar-bookings-filter',
 				month: '//select[@name="calendar_month"]',
 				year: '//select[@name="calendar_year"]',
 				previous: '.prev',
 				next: '.next',
-				calenderDay: '//input[@placeholder="yyyy-mm-dd"]',
+				calendarDay: '//input[@placeholder="yyyy-mm-dd"]',
 				dayView: '.day',
 				monthView: '.month',
 			},

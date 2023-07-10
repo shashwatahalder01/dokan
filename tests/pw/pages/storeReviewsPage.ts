@@ -16,7 +16,7 @@ export class StoreReviewsPage extends AdminPage {
 		await this.goIfNotThere(data.subUrls.backend.dokan.dokanStoreReviews);
 
 		// store reviews text is visible
-		await expect(this.page.locator(selector.admin.dokan.storeReviews.storeReviewsText)).toBeVisible();
+		await this.toBeVisible(selector.admin.dokan.storeReviews.storeReviewsText);
 
 		// nav tabs are visible
 		await this.multipleElementVisible(selector.admin.dokan.storeReviews.navTabs);
@@ -102,7 +102,7 @@ export class StoreReviewsPage extends AdminPage {
 		// await this.goIfNotThere(data.subUrls.backend.dokan.dokanStoreReviews); //Todo: fix this
 
 		// ensure row exists
-		await expect(this.page.locator(selector.admin.dokan.storeReviews.noRowsFound)).not.toBeVisible();
+		await this.notToBeVisible(selector.admin.dokan.storeReviews.noRowsFound);
 
 		await this.click(selector.admin.dokan.storeReviews.bulkActions.selectAll);
 		await this.selectByValue(selector.admin.dokan.storeReviews.bulkActions.selectAction, action);

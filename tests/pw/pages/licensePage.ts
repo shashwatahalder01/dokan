@@ -15,7 +15,7 @@ export class LicensePage extends AdminPage {
 		await this.goIfNotThere(data.subUrls.backend.dokan.dokanLicense);
 
 		// license settings text is visible
-		await expect(this.page.locator(selector.admin.dokan.license.licenseText)).toBeVisible();
+		await this.toBeVisible(selector.admin.dokan.license.licenseText);
 
 		// license section elements are visible
 		await this.multipleElementVisible(selector.admin.dokan.license.activateSection);
@@ -30,7 +30,7 @@ export class LicensePage extends AdminPage {
 		if(type === 'correct') {
 			//TODO:
 		} else {
-			await expect(this.page.locator(selector.admin.dokan.license.errorNotice)).toContainText('Invalid License Key');
+			await this.toContainText(selector.admin.dokan.license.errorNotice, 'Invalid License Key');
 		}
 	}
 

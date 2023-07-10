@@ -21,14 +21,11 @@ export class ReportsPage extends AdminPage {
 		// filter Menus are visible
 		await this.multipleElementVisible(selector.admin.dokan.reports.reports.filterMenus);
 
-		// calender from input is visible
-		await expect(this.page.locator(selector.admin.dokan.reports.reports.dateFrom)).toBeVisible();
-
-		// calender from input is visible
-		await expect(this.page.locator(selector.admin.dokan.reports.reports.dateTo)).toBeVisible();
+		// calendar input is visible
+		await this.multipleElementVisible(selector.admin.dokan.reports.reports.calendar);
 
 		// show button is visible
-		await expect(this.page.locator(selector.admin.dokan.reports.reports.show)).toBeVisible();
+		await this.toBeVisible(selector.admin.dokan.reports.reports.show);
 
 		// at a glance elements are visible
 		await this.multipleElementVisible(selector.admin.dokan.reports.reports.atAGlance);
@@ -52,10 +49,10 @@ export class ReportsPage extends AdminPage {
 		await this.multipleElementVisible(filters);
 
 		// search is visible
-		await expect(this.page.locator(selector.admin.dokan.reports.allLogs.search)).toBeVisible();
+		await this.toBeVisible(selector.admin.dokan.reports.allLogs.search);
 
 		// export log is visible
-		await expect(this.page.locator(selector.admin.dokan.reports.allLogs.exportLogs)).toBeVisible();
+		await this.toBeVisible(selector.admin.dokan.reports.allLogs.exportLogs);
 
 		// all logs table elements are visible
 		await this.multipleElementVisible(selector.admin.dokan.reports.allLogs.table);
@@ -68,7 +65,7 @@ export class ReportsPage extends AdminPage {
 
 		await this.clearInputField(selector.admin.dokan.reports.allLogs.search);
 		await this.typeAndWaitForResponse(data.subUrls.backend.logs, selector.admin.dokan.reports.allLogs.search, orderId);
-		await expect(this.page.locator(selector.admin.dokan.reports.allLogs.orderIdCell(orderId))).toBeVisible();
+		await this.toBeVisible(selector.admin.dokan.reports.allLogs.orderIdCell(orderId));
 		// await this.clickAndWaitForResponse(data.subUrls.backend.logs, selector.admin.dokan.reports.allLogs.filters.clear);
 
 	}
@@ -100,7 +97,6 @@ export class ReportsPage extends AdminPage {
 
 		const count = (await this.getElementText(selector.admin.dokan.reports.allLogs.numberOfRowsFound))?.split(' ')[0];
 		expect(Number(count)).not.toBe(0);
-
 		// await this.clickAndWaitForResponse(data.subUrls.backend.logs, selector.admin.dokan.reports.allLogs.filters.clear);
 	}
 
@@ -114,7 +110,6 @@ export class ReportsPage extends AdminPage {
 
 		const count = (await this.getElementText(selector.admin.dokan.reports.allLogs.numberOfRowsFound))?.split(' ')[0];
 		expect(Number(count)).not.toBe(0);
-
 		// await this.clickAndWaitForResponse(data.subUrls.backend.logs, selector.admin.dokan.reports.allLogs.filters.clear);
 	}
 

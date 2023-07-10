@@ -16,10 +16,10 @@ export class AnnouncementsPage extends AdminPage {
 		await this.goIfNotThere(data.subUrls.backend.dokan.dokanAnnouncements);
 
 		// announcement text is visible
-		await expect(this.page.locator(selector.admin.dokan.announcements.announcementText)).toBeVisible();
+		await this.toBeVisible(selector.admin.dokan.announcements.announcementText);
 
 		// and announcement is visible
-		await expect(this.page.locator(selector.admin.dokan.announcements.addNewAnnouncement)).toBeVisible();
+		await this.toBeVisible(selector.admin.dokan.announcements.addNewAnnouncement);
 
 		// nav tabs are visible
 		await this.multipleElementVisible(selector.admin.dokan.announcements.navTabs);
@@ -44,7 +44,7 @@ export class AnnouncementsPage extends AdminPage {
 		await this.selectByValue(selector.admin.dokan.announcements.addAnnouncement.sendAnnouncementTo, announcement.receiver);
 		await this.clickAndWaitForResponse(data.subUrls.backend.announcements, selector.admin.dokan.announcements.addAnnouncement.publish);
 		//TODO: add wait for load then assert
-		// await expect(this.page.locator(selector.admin.dokan.announcements.announcementCell(announcement.title))).toBeVisible();
+		// await this.toBeVisible(selector.admin.dokan.announcements.announcementCell(announcement.title));
 	}
 
 	// edit announcement
@@ -61,7 +61,7 @@ export class AnnouncementsPage extends AdminPage {
 		await this.selectByValue(selector.admin.dokan.announcements.addAnnouncement.sendAnnouncementTo, announcement.receiver);
 		await this.clickAndWaitForResponse(data.subUrls.backend.announcements, selector.admin.dokan.announcements.addAnnouncement.publish);
 		//TODO: add wait for load then assert
-		// await expect(this.page.locator(selector.admin.dokan.announcements.announcementCell(announcement.title))).toBeVisible();
+		// await this.toBeVisible(selector.admin.dokan.announcements.announcementCell(announcement.title));
 	}
 
 	// update announcement
@@ -100,7 +100,7 @@ export class AnnouncementsPage extends AdminPage {
 		// await this.goIfNotThere(data.subUrls.backend.dokan.dokanAnnouncements);
 
 		// ensure row exists
-		await expect(this.page.locator(selector.admin.dokan.announcements.noRowsFound)).not.toBeVisible();
+		await this.notToBeVisible(selector.admin.dokan.announcements.noRowsFound);
 
 		await this.click(selector.admin.dokan.announcements.bulkActions.selectAll);
 		await this.selectByValue(selector.admin.dokan.announcements.bulkActions.selectAction, action);

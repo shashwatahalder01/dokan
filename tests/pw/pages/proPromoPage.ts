@@ -26,8 +26,8 @@ export class ProPromoPage extends AdminPage {
 
 		// module cards are visible
 		await this.click(selector.admin.dokan.modules.lite.popup.closeDokanUpgradePopup);
-		await expect(this.page.locator(selector.admin.dokan.modules.lite.moduleText)).toBeVisible();
-		await expect(this.page.locator(selector.admin.dokan.modules.lite.moduleCard)).toHaveCount(27);
+		await this.toBeVisible(selector.admin.dokan.modules.lite.moduleText);
+		await this.toHaveCount(selector.admin.dokan.modules.lite.moduleCard, 27);
 
 		// dokan pro features menu
 		await this.goIfNotThere(data.subUrls.backend.dokan.dokanProFeatures);

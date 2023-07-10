@@ -19,10 +19,10 @@ export class SellerBadgesPage extends AdminPage {
 		await this.goIfNotThere(data.subUrls.backend.dokan.dokanSellerBadge);
 
 		// seller badge text is visible
-		await expect(this.page.locator(selector.admin.dokan.sellerBadge.sellerBadgeText)).toBeVisible();
+		await this.toBeVisible(selector.admin.dokan.sellerBadge.sellerBadgeText);
 
 		// create badge is visible
-		await expect(this.page.locator(selector.admin.dokan.sellerBadge.createBadge)).toBeVisible();
+		await this.toBeVisible(selector.admin.dokan.sellerBadge.createBadge);
 
 		// nav tabs are visible
 		await this.multipleElementVisible(selector.admin.dokan.sellerBadge.navTabs);
@@ -31,7 +31,7 @@ export class SellerBadgesPage extends AdminPage {
 		await this.multipleElementVisible(selector.admin.dokan.sellerBadge.bulkActions);
 
 		// search seller badge is visible
-		await expect(this.page.locator(selector.admin.dokan.sellerBadge.search)).toBeVisible();
+		await this.toBeVisible(selector.admin.dokan.sellerBadge.search);
 
 		//  seller badge table elements are visible
 		await this.multipleElementVisible(selector.admin.dokan.sellerBadge.table);
@@ -44,7 +44,7 @@ export class SellerBadgesPage extends AdminPage {
 
 		await this.clearInputField(selector.admin.dokan.sellerBadge.search);
 		await this.typeAndWaitForResponse(data.subUrls.backend.sellerBadge, selector.admin.dokan.sellerBadge.search, badgeName);
-		await expect(this.page.locator(selector.admin.dokan.sellerBadge.sellerBadgeCell(badgeName))).toBeVisible();
+		await this.toBeVisible(selector.admin.dokan.sellerBadge.sellerBadgeCell(badgeName));
 	}
 
 	// create seller badge
@@ -148,12 +148,12 @@ export class SellerBadgesPage extends AdminPage {
 		await this.clickAndWaitForResponse(data.subUrls.backend.sellerBadge, selector.admin.dokan.sellerBadge.sellerBadgePreview);
 
 		// badge preview modal is visible
-		await expect(this.page.locator(selector.admin.dokan.sellerBadge.previewBadgeDetails.modal)).toBeVisible();
+		await this.toBeVisible(selector.admin.dokan.sellerBadge.previewBadgeDetails.modal);
 
 		// badge preview header elements are visible
 		await this.multipleElementVisible(selector.admin.dokan.sellerBadge.previewBadgeDetails.modalHeader);
 
-		await expect(this.page.locator(selector.admin.dokan.sellerBadge.previewBadgeDetails.levelBox)).toHaveCount(Number(badgeLevel));
+		await this.toHaveCount(selector.admin.dokan.sellerBadge.previewBadgeDetails.levelBox, Number(badgeLevel) );
 
 		await this.click(selector.admin.dokan.sellerBadge.previewBadgeDetails.modalHeader.modalClose);
 	}
@@ -177,8 +177,7 @@ export class SellerBadgesPage extends AdminPage {
 
 		await this.hover(selector.admin.dokan.sellerBadge.sellerBadgeCell(badgeName));
 		await this.clickAndWaitForResponse(data.subUrls.backend.sellerBadge, selector.admin.dokan.sellerBadge.sellerBadgeVendors);
-
-		// await expect(this.page.locator(selector.admin.dokan.vendors.vendorCell(badgeName))).toBeVisible();
+		// await this.toBeVisible(selector.admin.dokan.vendors.vendorCell(badgeName));
 		const count = (await this.getElementText(selector.admin.dokan.vendors.numberOfRowsFound))?.split(' ')[0];
 		expect(Number(count)).not.toBe(0);
 		//TOdo: either this or that assertion
@@ -190,10 +189,9 @@ export class SellerBadgesPage extends AdminPage {
 		await this.storesPage.searchVendor(vendorName);
 
 		await this.clickAndWaitForResponse(data.subUrls.backend.sellerBadge, selector.admin.dokan.vendors.vendorViewDetails(vendorName));
-		await expect(this.page.locator(selector.admin.dokan.vendors.vendorDetails.badgesAcquired)).toBeVisible();
+		await this.toBeVisible(selector.admin.dokan.vendors.vendorDetails.badgesAcquired);
 		//TOdo: either this or that assertion also add assertions for achieved badges
 	}
-
 
 	// update seller badge
 	async updateSellerBadge(badgeName: string, status: string){
@@ -232,7 +230,7 @@ export class SellerBadgesPage extends AdminPage {
 		}
 
 		// ensure row exists
-		await expect(this.page.locator(selector.admin.dokan.sellerBadge.noRowsFound)).not.toBeVisible();
+		await this.notToBeVisible(selector.admin.dokan.sellerBadge.noRowsFound);
 
 		await this.click(selector.admin.dokan.sellerBadge.bulkActions.selectAll);
 		await this.selectByValue(selector.admin.dokan.sellerBadge.bulkActions.selectAction, action);
@@ -240,7 +238,6 @@ export class SellerBadgesPage extends AdminPage {
 		await this.clickAndWaitForResponse(data.subUrls.backend.sellerBadge, selector.admin.dokan.sellerBadge.confirmAction);
 		await this.click(selector.admin.dokan.sellerBadge.successMessage);
 	}
-
 
 	// vendor achieved badges congrats popup
 	async sellerBadgeCongratsPopup(){
@@ -259,14 +256,13 @@ export class SellerBadgesPage extends AdminPage {
 
 	}
 
-
 	// vendor search seller badge
 	async vendorSearchSellerBadge(badgeName: string){
 		await this.clickIfVisible(selector.vendor.vBadges.congratsModal.closeModal);
 
 		await this.goIfNotThere(data.subUrls.frontend.badges);
 		await this.clearAndType( selector.vendor.vBadges.search, badgeName);
-		await expect(this.page.locator(selector.vendor.vBadges.sellerBadgeCell(badgeName))).toBeVisible();
+		await this.toBeVisible(selector.vendor.vBadges.sellerBadgeCell(badgeName));
 	}
 
 	// vendor filter seller badge

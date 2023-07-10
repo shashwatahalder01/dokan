@@ -21,10 +21,10 @@ export class RequestForQuotationsPage extends AdminPage {
 		await this.multipleElementVisible(selector.admin.dokan.requestForQuotation.menus);
 
 		// quote rules text is visible
-		await expect(this.page.locator(selector.admin.dokan.requestForQuotation.quoteRules.quoteRulesText)).toBeVisible();
+		await this.toBeVisible(selector.admin.dokan.requestForQuotation.quoteRules.quoteRulesText);
 
 		// new quote rules is visible
-		await expect(this.page.locator(selector.admin.dokan.requestForQuotation.quoteRules.newQuoteRule)).toBeVisible();
+		await this.toBeVisible(selector.admin.dokan.requestForQuotation.quoteRules.newQuoteRule);
 
 		// nav tabs are visible
 		await this.multipleElementVisible(selector.admin.dokan.requestForQuotation.quoteRules.navTabs);
@@ -129,7 +129,7 @@ export class RequestForQuotationsPage extends AdminPage {
 		// await this.goIfNotThere(data.subUrls.backend.dokan.dokanRequestForQuoteRules);//Todo: fix and apply this
 
 		// ensure row exists
-		await expect(this.page.locator(selector.admin.dokan.requestForQuotation.quoteRules.noRowsFound)).not.toBeVisible();
+		await this.notToBeVisible(selector.admin.dokan.requestForQuotation.quoteRules.noRowsFound);
 
 		await this.click(selector.admin.dokan.requestForQuotation.quoteRules.bulkActions.selectAll);
 		await this.selectByValue(selector.admin.dokan.requestForQuotation.quoteRules.bulkActions.selectAction, action);
@@ -146,10 +146,10 @@ export class RequestForQuotationsPage extends AdminPage {
 		await this.multipleElementVisible(selector.admin.dokan.requestForQuotation.menus);
 
 		// quotes text is visible
-		await expect(this.page.locator(selector.admin.dokan.requestForQuotation.quotesList.quotesText)).toBeVisible();
+		await this.toBeVisible(selector.admin.dokan.requestForQuotation.quotesList.quotesText);
 
 		// new quote is visible
-		await expect(this.page.locator(selector.admin.dokan.requestForQuotation.quotesList.newQuote)).toBeVisible();
+		await this.toBeVisible(selector.admin.dokan.requestForQuotation.quotesList.newQuote);
 
 		// nav tabs are visible
 		await this.multipleElementVisible(selector.admin.dokan.requestForQuotation.quotesList.navTabs);
@@ -254,7 +254,7 @@ export class RequestForQuotationsPage extends AdminPage {
 		await this.goIfNotThere(data.subUrls.backend.dokan.dokanRequestForQuote);
 
 		// ensure row exists
-		await expect(this.page.locator(selector.admin.dokan.requestForQuotation.quotesList.noRowsFound)).not.toBeVisible();
+		await this.notToBeVisible(selector.admin.dokan.requestForQuotation.quotesList.noRowsFound);
 
 		await this.click(selector.admin.dokan.requestForQuotation.quotesList.bulkActions.selectAll);
 		await this.selectByValue(selector.admin.dokan.requestForQuotation.quotesList.bulkActions.selectAction, action);
