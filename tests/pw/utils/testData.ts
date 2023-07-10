@@ -23,18 +23,27 @@ export const data = {
 		customerAuthFile:'playwright/.auth/customerStorageState.json'
 	},
 
-	//User
-	user: {
-		username: () => faker.person.firstName('male'),
-		userDetails: {
-			name: () => faker.person.firstName('male'),
-			firstName: () => faker.person.firstName('male'),
-			lastName: () => faker.person.lastName('male'),
-			email: () => faker.person.firstName('male') + '@email.com',
-			email1: faker.internet.email(),
-			role: 'customer',
-		},
+	// keyboard key
+	key: {
+		arrowDown: 'ArrowDown',
+		enter: 'Enter',
+		home: 'Home',
+		end: 'End'
 	},
+
+	plugin: {
+		// PluginSlugList: ['dokan-lite', 'dokan-pro', 'woocommerce', 'woocommerce-bookings', 'woocommerce-product-add-ons', 'woocommerce-simple-auction', 'woocommerce-subscriptions', 'elementor', 'elementor-pro'],
+		plugins:['basic-auth', 'dokan', 'dokan-pro', 'woocommerce', 'woocommerce-bookings', 'woocommerce-product-addons', 'woocommerce-simple-auctions', 'woocommerce-subscriptions'],
+		// plugins: ['dokan/dokan', 'dokan-pro/dokan-pro', 'woocommerce/woocommerce'],
+		dokanPro: ['dokan-pro'],
+		activeClass: 'active',
+
+	},
+
+	woocommerce: {
+		saveSuccessMessage: 'Your settings have been saved.',
+	},
+
 
 	//Product
 	product: {
@@ -279,12 +288,14 @@ export const data = {
 		},
 	},
 
+	// store
 	store: {
 		rating: faker.helpers.arrayElement(['width: 20%', 'width: 40%', 'width: 60%', 'width: 80%', 'width: 100%']),
 		reviewTitle: 'store review title',
 		reviewMessage: () => faker.string.uuid(),
 	},
 
+	//order
 	order: {
 		orderStatus: {
 			pending: 'wc-pending',
@@ -306,6 +317,8 @@ export const data = {
 		},
 	},
 
+
+	// card
 	card: {
 		strip: {
 			striptNon3D: '4242424242424242',
@@ -338,6 +351,7 @@ export const data = {
 		},
 	},
 
+	// coupon
 	coupon: {
 		// title: () => 'VC_' + faker.string.alpha({count: 5, casing: 'upper'},),
 		title: () => 'VC_' + faker.string.uuid(),
@@ -348,6 +362,17 @@ export const data = {
 		existingCouponErrorMessage: 'Coupon title already exists',
 	},
 
+	// address
+	address: {
+		street1: 'abc street',
+		street2: 'xyz street',
+		country: 'United States (US)',
+		countrySelectValue: 'US',
+		stateSelectValue: 'NY',
+		city: 'New York',
+		zipCode: '10006',
+		state: 'New York',
+	},
 
 	wpSettings: {
 		saveSuccessMessage: 'Your settings have been saved.',
@@ -520,187 +545,6 @@ export const data = {
 		},
 	},
 
-	dokanSettings: {
-
-		// General Settings
-		general: {
-			vendorStoreUrl: 'store',
-			sellingProductTypes: 'sell_both', // 'sell_both', 'sell_physical', 'sell_digital'
-			storeProductPerPage: '12',
-			storCategory: 'multiple',  // 'none', 'single', 'multiple'
-			saveSuccessMessage: 'Setting has been saved successfully.',
-		},
-
-		// Selling Options Settings
-		selling: {
-			commissionType: 'percentage', //'flat', 'percentage', 'combine'
-			adminCommission: '10',
-			shippingFeeRecipient: 'seller', //'seller', 'admin'
-			taxFeeRecipient: 'seller', //'seller', 'admin'
-			newProductStatus: 'publish', //'publish', 'pending'
-			productCategorySelection: 'single', //'single', 'multiple'
-			saveSuccessMessage: 'Setting has been saved successfully.',
-		},
-
-		// Withdraw
-		withdraw: {
-			customMethodName: 'Bksh',
-			customMethodType: 'Phone',
-			minimumWithdrawAmount: '5',
-			withdrawThreshold: '0',
-			quarterlyScheduleMonth: 'march', // 'january', 'february', 'march'
-			quarterlyScheduleWeek: '1', //'1', '2', '3', 'L'
-			quarterlyScheduleDay: 'monday', //'monday', 'tuesday', 'wednesday', 'thursday', 'friday'
-			monthlyScheduleWeek: '1', //'1', '2', '3', 'L'
-			monthlyScheduleDay: 'monday', // 'monday', 'tuesday', 'wednesday', 'thursday', 'friday'
-			biweeklyScheduleWeek: '1', //'1', '2'
-			biweeklyScheduleDay: 'monday', //'saturday', 'sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday'
-			weeklyScheduleDay: 'monday', // 'saturday', 'sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday'
-			saveSuccessMessage: 'Setting has been saved successfully.',
-		},
-
-		reverseWithdraw: {
-			billingType: 'by_amount', // 'by_month'
-			reverseBalanceThreshold: '21',
-			gracePeriod: '7',
-			saveSuccessMessage: 'Setting has been saved successfully.',
-		},
-
-		page: {
-			termsAndConditionsPage: 'Sample Page',
-			saveSuccessMessage: 'Setting has been saved successfully.',
-		},
-
-		appearance: {
-			googleMapApiKey: String(process.env.GMAP),
-			mapBoxApiKey: String(process.env.MAPBOX_API_KEY),
-			storeBannerWidth: '625',
-			storeBannerHeight: '300',
-			saveSuccessMessage: 'Setting has been saved successfully.',
-		},
-
-		privacyPolicy: {
-			privacyPage: '2', // '2', '3', '4', '5', '6', '7', '8', '9', '10'
-			privacyPolicyHtmlBody: 'Your personal data will be used to support your experience throughout this website, to manage access to your account, and for other purposes described in our [dokan_privacy_policy]',
-			saveSuccessMessage: 'Setting has been saved successfully.',
-		},
-
-		storeSupport: {
-			displayOnSingleProductPage: 'above_tab', // 'above_tab', 'inside_tab', 'dont_show'
-			supportButtonLabel: 'Get Support',
-			saveSuccessMessage: 'Setting has been saved successfully.',
-		},
-
-		// Rma Settings
-		rma: {
-			orderStatus: 'wc-processing', // 'wc-pending', 'wc-processing', 'wc-on-hold', 'wc-completed', 'wc-cancelled', 'wc-refunded', 'wc-failed'
-			rmaReasons: ['Defective', 'Wrong Product', 'Other'],
-			refundPolicyHtmlBody: 'Refund Policy',
-			saveSuccessMessage: 'Setting has been saved successfully.',
-		},
-
-		wholesale: {
-			whoCanSeeWholesalePrice: 'all_user',
-			saveSuccessMessage: 'Setting has been saved successfully.',
-		},
-
-		euCompliance: {
-			saveSuccessMessage: 'Setting has been saved successfully.',
-		},
-
-		deliveryTime: {
-			deliveryDateLabel: 'Delivery Date',
-			deliveryBlockedBuffer: '0',
-			deliveryBoxInfo: 'This store needs %DAY% day(s) to process your delivery request',
-			days: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
-			openingTime: '6:00 am',
-			closingTime: '11:30 pm',
-			timeSlot: '30',
-			orderPerSlot: '90',
-			saveSuccessMessage: 'Setting has been saved successfully.',
-		},
-
-		productAdvertising: {
-			noOfAvailableSlot: '100',
-			expireAfterDays: '10',
-			advertisementCost: '15',
-			saveSuccessMessage: 'Setting has been saved successfully.',
-		},
-
-		// Geolocation Settings
-		geolocation: {
-			locationMapPosition: 'top', // 'top', 'left', 'right'
-			showMap: 'all', // 'all', 'store_listing', 'shop'
-			radiusSearchUnit: 'km', // 'km', 'miles'
-			radiusSearchMinimumDistance: '0',
-			radiusSearchMaximumDistance: '10',
-			mapZoomLevel: '11',
-			defaultLocation: 'New York',
-			saveSuccessMessage: 'Setting has been saved successfully.',
-		},
-
-		productReportAbuse: {
-			reasonsForAbuseReport: 'This product is fake',
-			saveSuccessMessage: 'Setting has been saved successfully.',
-		},
-
-		// Spmv Settings
-		spmv: {
-			sellItemButtonText: 'Sell This Item',
-			availableVendorDisplayAreaTitle: 'Other Available Vendor',
-			availableVendorSectionDisplayPosition: 'below_tabs', // 'below_tabs', 'inside_tabs', 'after_tabs'
-			showSpmvProducts: 'show_all', // 'show_all', 'min_price', 'max_price', 'top_rated_vendor'
-			saveSuccessMessage: 'Setting has been saved successfully.',
-		},
-
-		// Vendor Subscription Settings
-		vendorSubscription: {
-			displayPage: '2', // '2', '4', '5', '6', '8', '9', '10', '11', '15', '-1'
-			noOfDays: '2',
-			productStatus: 'draft', // 'publish', 'pending', 'draft'
-			cancellingEmailSubject: 'Subscription Package Cancel notification',
-			cancellingEmailBody: 'Dear subscriber, Your subscription has expired. Please renew your package to continue using it.',
-			alertEmailSubject: 'Subscription Ending Soon',
-			alertEmailBody: 'Dear subscriber, Your subscription will be ending soon. Please renew your package in a timely',
-			saveSuccessMessage: 'Setting has been saved successfully.',
-		},
-	},
-
-	modules: {
-		noModuleMessage: 'No modules found.',
-		modules: [
-			'booking', 'color_scheme_customizer', 'delivery_time', 'elementor', 'export_import', 'follow_store', 'geolocation', 'germanized', 'live_chat', 'live_search',
-			'moip', 'dokan_paypal_ap', 'paypal_marketplace', 'product_addon', 'product_enquiry', 'report_abuse', 'rma', 'seller_vacation', 'shipstation', 'auction', 'spmv',
-			'store_reviews', 'stripe', 'product_advertising', 'product_subscription', 'vendor_analytics', 'vendor_staff', 'vsp', 'vendor_verification', 'wholesale',
-			'rank_math', 'table_rate_shipping', 'mangopay', 'order_min_max', 'razorpay', 'seller_badge', 'stripe_express', 'request_for_quotation' ],
-
-		modulesName: {
-			AuctionIntegration: 'Auction Integration',
-			ColorSchemeCustomize: 'Color Scheme Customize',
-			DeliveryTime: 'Delivery Time',
-			Elementor : 'Elementor',
-			EUComplianceFields: 'EU Compliance Fields',
-			FollowStore: 'Follow Store',
-		},
-
-		moduleCategory:{
-			productManagement:'Product Management',
-			integration: 'Integration',
-			uiUx: 'UI & UX',
-			shipping: 'Shipping',
-			storeManagement: 'Store Management',
-			payment: 'Payment',
-			orderManagement: 'Order Management',
-			vendorManagement: 'Vendor Management',
-		},
-
-		layout:{
-			grid:'my-modules grid-view',
-			list: 'my-modules list-view'
-		},
-
-
-	},
 
 	// Dokan Setup Wizard
 	dokanSetupWizard: {
@@ -716,6 +560,8 @@ export const data = {
 		minimumWithdrawLimit: '5',
 	},
 
+
+	// Vendor Setup Wizard
 	vendorSetupWizard: {
 		choice: false,
 		storeProductsPerPage: '12',
@@ -745,9 +591,9 @@ export const data = {
 			adminLogin: 'wp-admin',
 			adminLogout: 'wp-login.php?action=logout',
 			adminDashboard: 'wp-admin',
+
 			dokan: {
 				dokanSetupWizard: 'wp-admin/admin.php?page=dokan-setup',
-
 				dokan: 'wp-admin/admin.php?page=dokan#',
 				// only lite
 				dokanLiteModules: 'wp-admin/admin.php?page=dokan#/pro-modules',
@@ -775,8 +621,8 @@ export const data = {
 				dokanHelp: 'wp-admin/admin.php?page=dokan#/help',
 				dokanSettings: 'wp-admin/admin.php?page=dokan#/settings',
 				dokanLicense: 'wp-admin/admin.php?page=dokan_updates',
-
 			},
+
 			woocommerceSettings: 'wp-admin/admin.php?page=wc-settings',
 			wcAddNewProducts: 'wp-admin/post-new.php?post_type=product',
 			wcAddNewCategories: 'wp-admin/edit-tags.php?taxonomy=product_cat&post_type=product',
@@ -899,11 +745,29 @@ export const data = {
 		user: 'wp-admin/user-edit.php',
 	},
 
+
+	//User
+	user: {
+		username: () => faker.person.firstName('male'),
+		userDetails: {
+			name: () => faker.person.firstName('male'),
+			firstName: () => faker.person.firstName('male'),
+			lastName: () => faker.person.lastName('male'),
+			email: () => faker.person.firstName('male') + '@email.com',
+			email1: faker.internet.email(),
+			role: 'customer',
+		},
+	},
+
+
+	//admin
 	admin: {
 		username: String(process.env.ADMIN),
 		password: String(process.env.ADMIN_PASSWORD),
 	},
 
+
+	// vendor
 	vendor: {
 		username: String(process.env.VENDOR),
 		password: String(process.env.USER_PASSWORD),
@@ -1223,6 +1087,8 @@ export const data = {
 		registrationErrorMessage: 'Error: An account is already registered with your email address. Please log in.',
 	},
 
+
+	//customer
 	customer: {
 		username: String(process.env.CUSTOMER),
 		password: String(process.env.USER_PASSWORD),
@@ -1289,58 +1155,6 @@ export const data = {
 		registrationErrorMessage: 'Error: An account is already registered with your email address. Please log in.',
 	},
 
-	key: {
-		arrowDown: 'ArrowDown',
-		enter: 'Enter',
-		home: 'Home',
-		end: 'End'
-	},
-
-	plugin: {
-		// PluginSlugList: ['dokan-lite', 'dokan-pro', 'woocommerce', 'woocommerce-bookings', 'woocommerce-product-add-ons', 'woocommerce-simple-auction', 'woocommerce-subscriptions', 'elementor', 'elementor-pro'],
-		plugins:['basic-auth', 'dokan', 'dokan-pro', 'woocommerce', 'woocommerce-bookings', 'woocommerce-product-addons', 'woocommerce-simple-auctions', 'woocommerce-subscriptions'],
-		// plugins: ['dokan/dokan', 'dokan-pro/dokan-pro', 'woocommerce/woocommerce'],
-		dokanPro: ['dokan-pro'],
-		activeClass: 'active',
-
-	},
-
-	woocommerce: {
-		saveSuccessMessage: 'Your settings have been saved.',
-	},
-
-	wholesale: {
-		wholesaleRequestSendMessage: 'Your wholesale customer request send to the admin. Please wait for approval',
-		becomeWholesaleCustomerSuccessMessage: 'You are succefully converted as a wholesale customer',
-		wholesaleCapabilityActivate: 'Wholesale capability activate',
-	},
-
-	address: {
-		street1: 'abc street',
-		street2: 'xyz street',
-		country: 'United States (US)',
-		countrySelectValue: 'US',
-		stateSelectValue: 'NY',
-		city: 'New York',
-		zipCode: '10006',
-		state: 'New York',
-	},
-
-	// install wordpress
-	installWp: {
-		// db info
-		dbHost: process.env.DB_HOST_NAME,
-		dbUserName: process.env.DB_USER_NAME,
-		dbPassword: process.env.DB_USER_PASSWORD,
-		dbName: process.env.DATABASE,
-		dbTablePrefix: process.env.DB_PREFIX,
-		// site info
-		siteTitle: process.env.DATABASE,
-		adminUserName: process.env.ADMIN,
-		adminPassword: process.env.USER_PASSWORD,
-		adminEmail: 'shashwata@wedevs.com',
-
-	},
 
 	// store category
 	storeCategory:{
@@ -1357,33 +1171,8 @@ export const data = {
 
 	},
 
-	// announcement
 
-	announcement: {
-
-		receiver: {
-			allVendors: 'all_seller',
-			selectedVendors: 'selected_seller',
-			enabledVendors: 'enabled_seller',
-			disabledVendors: 'disabled_seller',
-			featuredVendors: 'featured_seller',
-		},
-
-		create:{
-			randomTitle: () => 'test announcement_' + faker.string.uuid(),
-			title: 'test announcement title',
-			content:  'test announcement Content',
-			receiver: ''
-		},
-
-		update:{
-			title: 'test announcement title',  // title should be same as create, cause search by title //TODO: updatedTitle:  can be added
-			content:  'update test announcement Content'
-		},
-
-
-	},
-
+	// store review
 	storeReview:{
 
 		create:{
@@ -1404,6 +1193,7 @@ export const data = {
 
 	},
 
+	// store support
 	storeSupport: {
 
 		title: 'test support ticket',
@@ -1418,6 +1208,8 @@ export const data = {
 
 	},
 
+
+	// request for quotation
 	requestForQuotation: {
 
 		userRole: {
@@ -1499,6 +1291,8 @@ export const data = {
 
 	},
 
+
+	// seller badge
 	sellerBadge:{
 		eventName:{
 			// product related badges
@@ -1544,6 +1338,70 @@ export const data = {
 	},
 
 
+	// announcement
+	announcement: {
+
+		receiver: {
+			allVendors: 'all_seller',
+			selectedVendors: 'selected_seller',
+			enabledVendors: 'enabled_seller',
+			disabledVendors: 'disabled_seller',
+			featuredVendors: 'featured_seller',
+		},
+
+		create:{
+			randomTitle: () => 'test announcement_' + faker.string.uuid(),
+			title: 'test announcement title',
+			content:  'test announcement Content',
+			receiver: ''
+		},
+
+		update:{
+			title: 'test announcement title',  // title should be same as create, cause search by title //TODO: updatedTitle:  can be added
+			content:  'update test announcement Content'
+		},
+
+
+	},
+
+	modules: {
+		noModuleMessage: 'No modules found.',
+		modules: [
+			'booking', 'color_scheme_customizer', 'delivery_time', 'elementor', 'export_import', 'follow_store', 'geolocation', 'germanized', 'live_chat', 'live_search',
+			'moip', 'dokan_paypal_ap', 'paypal_marketplace', 'product_addon', 'product_enquiry', 'report_abuse', 'rma', 'seller_vacation', 'shipstation', 'auction', 'spmv',
+			'store_reviews', 'stripe', 'product_advertising', 'product_subscription', 'vendor_analytics', 'vendor_staff', 'vsp', 'vendor_verification', 'wholesale',
+			'rank_math', 'table_rate_shipping', 'mangopay', 'order_min_max', 'razorpay', 'seller_badge', 'stripe_express', 'request_for_quotation' ],
+
+		modulesName: {
+			AuctionIntegration: 'Auction Integration',
+			ColorSchemeCustomize: 'Color Scheme Customize',
+			DeliveryTime: 'Delivery Time',
+			Elementor : 'Elementor',
+			EUComplianceFields: 'EU Compliance Fields',
+			FollowStore: 'Follow Store',
+		},
+
+		moduleCategory:{
+			productManagement:'Product Management',
+			integration: 'Integration',
+			uiUx: 'UI & UX',
+			shipping: 'Shipping',
+			storeManagement: 'Store Management',
+			payment: 'Payment',
+			orderManagement: 'Order Management',
+			vendorManagement: 'Vendor Management',
+		},
+
+		layout:{
+			grid:'my-modules grid-view',
+			list: 'my-modules list-view'
+		},
+
+
+	},
+
+
+	// tools
 	tools: {
 		distanceMatrixApi: {
 			address1: 'R9PG+W7 Dhaka',
@@ -1553,6 +1411,8 @@ export const data = {
 		}
 	},
 
+
+	// product advertisement
 	productAdvertisement: {
 		advertisedProductStore: String(process.env.VENDOR) + 'store',
 		advertisedProduct: 'p1_v1 (simple)',
@@ -1570,6 +1430,172 @@ export const data = {
 
 	},
 
+
+	// wholesale customers
+	wholesale: {
+		wholesaleRequestSendMessage: 'Your wholesale customer request send to the admin. Please wait for approval',
+		becomeWholesaleCustomerSuccessMessage: 'You are succefully converted as a wholesale customer',
+		wholesaleCapabilityActivate: 'Wholesale capability activate',
+	},
+
+	// dokan settings
+	dokanSettings: {
+
+		// General Settings
+		general: {
+			vendorStoreUrl: 'store',
+			sellingProductTypes: 'sell_both', // 'sell_both', 'sell_physical', 'sell_digital'
+			storeProductPerPage: '12',
+			storCategory: 'multiple',  // 'none', 'single', 'multiple'
+			saveSuccessMessage: 'Setting has been saved successfully.',
+		},
+
+		// Selling Options Settings
+		selling: {
+			commissionType: 'percentage', //'flat', 'percentage', 'combine'
+			adminCommission: '10',
+			shippingFeeRecipient: 'seller', //'seller', 'admin'
+			taxFeeRecipient: 'seller', //'seller', 'admin'
+			newProductStatus: 'publish', //'publish', 'pending'
+			productCategorySelection: 'single', //'single', 'multiple'
+			saveSuccessMessage: 'Setting has been saved successfully.',
+		},
+
+		// Withdraw
+		withdraw: {
+			customMethodName: 'Bksh',
+			customMethodType: 'Phone',
+			minimumWithdrawAmount: '5',
+			withdrawThreshold: '0',
+			quarterlyScheduleMonth: 'march', // 'january', 'february', 'march'
+			quarterlyScheduleWeek: '1', //'1', '2', '3', 'L'
+			quarterlyScheduleDay: 'monday', //'monday', 'tuesday', 'wednesday', 'thursday', 'friday'
+			monthlyScheduleWeek: '1', //'1', '2', '3', 'L'
+			monthlyScheduleDay: 'monday', // 'monday', 'tuesday', 'wednesday', 'thursday', 'friday'
+			biweeklyScheduleWeek: '1', //'1', '2'
+			biweeklyScheduleDay: 'monday', //'saturday', 'sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday'
+			weeklyScheduleDay: 'monday', // 'saturday', 'sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday'
+			saveSuccessMessage: 'Setting has been saved successfully.',
+		},
+
+		// Reverse withdraw
+		reverseWithdraw: {
+			billingType: 'by_amount', // 'by_month'
+			reverseBalanceThreshold: '21',
+			gracePeriod: '7',
+			saveSuccessMessage: 'Setting has been saved successfully.',
+		},
+
+		// Pages
+		page: {
+			termsAndConditionsPage: 'Sample Page',
+			saveSuccessMessage: 'Setting has been saved successfully.',
+		},
+
+		// Appearance
+		appearance: {
+			googleMapApiKey: String(process.env.GMAP),
+			mapBoxApiKey: String(process.env.MAPBOX_API_KEY),
+			storeBannerWidth: '625',
+			storeBannerHeight: '300',
+			saveSuccessMessage: 'Setting has been saved successfully.',
+		},
+
+		// privacy policy
+		privacyPolicy: {
+			privacyPage: '2', // '2', '3', '4', '5', '6', '7', '8', '9', '10'
+			privacyPolicyHtmlBody: 'Your personal data will be used to support your experience throughout this website, to manage access to your account, and for other purposes described in our [dokan_privacy_policy]',
+			saveSuccessMessage: 'Setting has been saved successfully.',
+		},
+
+		// Store support
+		storeSupport: {
+			displayOnSingleProductPage: 'above_tab', // 'above_tab', 'inside_tab', 'dont_show'
+			supportButtonLabel: 'Get Support',
+			saveSuccessMessage: 'Setting has been saved successfully.',
+		},
+
+		// Rma Settings
+		rma: {
+			orderStatus: 'wc-processing', // 'wc-pending', 'wc-processing', 'wc-on-hold', 'wc-completed', 'wc-cancelled', 'wc-refunded', 'wc-failed'
+			rmaReasons: ['Defective', 'Wrong Product', 'Other'],
+			refundPolicyHtmlBody: 'Refund Policy',
+			saveSuccessMessage: 'Setting has been saved successfully.',
+		},
+
+		// Wholesale
+		wholesale: {
+			whoCanSeeWholesalePrice: 'all_user',
+			saveSuccessMessage: 'Setting has been saved successfully.',
+		},
+
+		// EuCompliance
+		euCompliance: {
+			saveSuccessMessage: 'Setting has been saved successfully.',
+		},
+
+		// delivery time
+		deliveryTime: {
+			deliveryDateLabel: 'Delivery Date',
+			deliveryBlockedBuffer: '0',
+			deliveryBoxInfo: 'This store needs %DAY% day(s) to process your delivery request',
+			days: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
+			openingTime: '6:00 am',
+			closingTime: '11:30 pm',
+			timeSlot: '30',
+			orderPerSlot: '90',
+			saveSuccessMessage: 'Setting has been saved successfully.',
+		},
+
+		// Product advertising
+		productAdvertising: {
+			noOfAvailableSlot: '100',
+			expireAfterDays: '10',
+			advertisementCost: '15',
+			saveSuccessMessage: 'Setting has been saved successfully.',
+		},
+
+		// Geolocation Settings
+		geolocation: {
+			locationMapPosition: 'top', // 'top', 'left', 'right'
+			showMap: 'all', // 'all', 'store_listing', 'shop'
+			radiusSearchUnit: 'km', // 'km', 'miles'
+			radiusSearchMinimumDistance: '0',
+			radiusSearchMaximumDistance: '10',
+			mapZoomLevel: '11',
+			defaultLocation: 'New York',
+			saveSuccessMessage: 'Setting has been saved successfully.',
+		},
+
+		// Product report abuse
+		productReportAbuse: {
+			reasonsForAbuseReport: 'This product is fake',
+			saveSuccessMessage: 'Setting has been saved successfully.',
+		},
+
+		// Spmv Settings
+		spmv: {
+			sellItemButtonText: 'Sell This Item',
+			availableVendorDisplayAreaTitle: 'Other Available Vendor',
+			availableVendorSectionDisplayPosition: 'below_tabs', // 'below_tabs', 'inside_tabs', 'after_tabs'
+			showSpmvProducts: 'show_all', // 'show_all', 'min_price', 'max_price', 'top_rated_vendor'
+			saveSuccessMessage: 'Setting has been saved successfully.',
+		},
+
+		// Vendor Subscription Settings
+		vendorSubscription: {
+			displayPage: '2', // '2', '4', '5', '6', '8', '9', '10', '11', '15', '-1'
+			noOfDays: '2',
+			productStatus: 'draft', // 'publish', 'pending', 'draft'
+			cancellingEmailSubject: 'Subscription Package Cancel notification',
+			cancellingEmailBody: 'Dear subscriber, Your subscription has expired. Please renew your package to continue using it.',
+			alertEmailSubject: 'Subscription Ending Soon',
+			alertEmailBody: 'Dear subscriber, Your subscription will be ending soon. Please renew your package in a timely',
+			saveSuccessMessage: 'Setting has been saved successfully.',
+		},
+	},
+
+	// dokan license
 	dokanLicense: {
 		correctKey: String(process.env.LICENSE_KEY),
 		incorrectKey: 'ABC-123-DEF-456-GHI-789'
@@ -1645,5 +1671,21 @@ export const data = {
 			username: () => 'customer1',
 			username1: 'customer1',
 		},
+	},
+
+	// install wordpress
+	installWp: {
+		// db info
+		dbHost: process.env.DB_HOST_NAME,
+		dbUserName: process.env.DB_USER_NAME,
+		dbPassword: process.env.DB_USER_PASSWORD,
+		dbName: process.env.DATABASE,
+		dbTablePrefix: process.env.DB_PREFIX,
+		// site info
+		siteTitle: process.env.DATABASE,
+		adminUserName: process.env.ADMIN,
+		adminPassword: process.env.USER_PASSWORD,
+		adminEmail: 'shashwata@wedevs.com',
+
 	},
 };
