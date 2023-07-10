@@ -27,6 +27,7 @@ test.beforeAll(async ({ browser, request }) => {
 	wholesaleCustomer = new WholesaleCustomersPage(cPage);
 
 	apiUtils = new ApiUtils(request);
+	await apiUtils.createWholesaleCustomer(payloads.createCustomer(), payloads.adminAuth);
 	await apiUtils.createWholesaleCustomer(payloads.createCustomer1, payloads.adminAuth);
 });
 

@@ -356,6 +356,8 @@ export const selector = {
 					lastPaymentDateColumn: 'thead th.last_payment_date',
 				},
 
+				numberOfRowsFound: '.tablenav.top .displaying-num',
+				noRowsFound: '//td[normalize-space()="No transaction found."]',
 				revereWithdrawCell: (storeName: string) => `//td//a[contains(text(), '${storeName}')]/../..`,
 
 			},

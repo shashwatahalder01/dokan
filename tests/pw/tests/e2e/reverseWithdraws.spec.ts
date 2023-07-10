@@ -1,6 +1,8 @@
 import { test, Page, expect } from '@playwright/test';
 import { ReverseWithdrawsPage } from 'pages/reverseWithdrawsPage';
 import { ApiUtils } from 'utils/apiUtils';
+import { dbUtils } from 'utils/dbUtils';
+import { dbData } from 'utils/dbData';
 import { data } from 'utils/testData';
 import { payloads } from 'utils/payloads';
 
@@ -20,6 +22,7 @@ test.beforeAll(async ({ browser, request }) => {
 });
 
 test.afterAll(async ( ) => {
+	await dbUtils.setDokanSettings(dbData.dokan.optionName.reverseWithdraw, { ...dbData.dokan.reverseWithdrawSettings, enabled: 'off' });
 	await aPage.close();
 });
 

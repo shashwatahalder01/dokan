@@ -1246,16 +1246,6 @@ export class BasePage {
 	 * Assertion methods
 	 */
 
-	// await this.toBeVisible();
-	// await this.toContainText();
-	// await this.toHaveCount();
-	// await this.toHaveValue();
-	// await this.toHaveClass();
-
-	// await this.notToBeVisible();
-	// await this.notToContainText();
-	// await this.notToHaveCount();
-
 	// assert element to be visible
 	async toBeVisible(selector: string,){
 		await expect(this.page.locator(selector)).toBeVisible();
