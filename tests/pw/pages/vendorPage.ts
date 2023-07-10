@@ -367,7 +367,7 @@ export class VendorPage extends BasePage {
 	}
 
 	// vendor add auto withdraw disbursement schedule
-	async addAutoWithdrawDisbursementSchedule(withdraw: { withdrawMethod?: { default: string; paypal: string; skrill: string; }; defaultWithdrawMethod?: { paypal: string; skrill: string; }; preferredPaymentMethod: any; preferredSchedule: any; minimumWithdrawAmount: any; reservedBalance: any; }): Promise<void> {
+	async addAutoWithdrawDisbursementSchedule(withdraw: any): Promise<void> {
 		await this.goIfNotThere(data.subUrls.frontend.withdraw);
 		await this.enableSwitcherDisbursement(selector.vendor.vWithdraw.enableSchedule);
 		await this.click(selector.vendor.vWithdraw.editSchedule);
@@ -398,7 +398,7 @@ export class VendorPage extends BasePage {
 	}
 
 	// vendor add vendor details
-	async setVendorDetails(vendorInfo: { firstName: () => string; lastName: () => string; email: () => string; password: string; password1: string; }): Promise<void> {
+	async setVendorDetails(vendorInfo: any): Promise<void> {
 		await this.goIfNotThere(data.subUrls.frontend.editAccountVendor);
 		await this.clearAndType(selector.vendor.vAccountDetails.firstName, vendorInfo.firstName());
 		await this.clearAndType(selector.vendor.vAccountDetails.lastName, vendorInfo.lastName());
@@ -413,7 +413,7 @@ export class VendorPage extends BasePage {
 	// vendor settings
 
 	// vendor set store settings
-	async setStoreSettings(vendorInfo: { email?: () => string; emailDomain?: string; password?: string; password1?: string; firstName?: () => string; lastName?: () => string; userName?: string; shopName?: string; shopUrl?: string; companyName?: string; companyId?: string; vatNumber?: string; bankName?: string; bankIban?: string; phoneNumber?: string; street1?: string; street2?: string; country?: string; countrySelectValue?: string; stateSelectValue?: string; city?: string; zipCode?: string; state?: string; accountName?: string; accountNumber?: string; bankAddress?: string; routingNumber?: string; swiftCode?: string; iban?: string; banner?: string; profilePicture?: string; storeName?: string; productsPerPage?: string; mapLocation: any; termsAndConditions: any; biography: any; supportButtonText: any; openingClosingTime: any; vacation: any; discount: any; minMax: any; storeSettingsSaveSuccessMessage: any; }): Promise<void> {
+	async setStoreSettings(vendorInfo: any): Promise<void> {
 		await this.goIfNotThere(data.subUrls.frontend.settingsStore);
 
 		// await this.bannerAndProfilePictureSettings();
@@ -493,7 +493,7 @@ export class VendorPage extends BasePage {
 	}
 
 	// vendor set opening closing time settings
-	async openingClosingTimeSettings(openingClosingTime: { days: any; openingTime: string; closingTime: string; storeOpenNotice: string; storeCloseNotice: string; }): Promise<void> {
+	async openingClosingTimeSettings(openingClosingTime: any): Promise<void> {
 		// store opening closing time
 		const openCloseTimeEnabled = await this.isVisible(selector.vendor.vStoreSettings.storeOpeningClosingTime);
 		if (openCloseTimeEnabled) {
@@ -511,7 +511,7 @@ export class VendorPage extends BasePage {
 	}
 
 	// vendor set vacation settings
-	async vacationSettings(vacation: { closingStyle: string; vacationDayFrom: any; vacationDayTo: any; vacationMessage: string; }): Promise<void> {
+	async vacationSettings(vacation: any): Promise<void> {
 
 		// // delete pervious datewise vacation settings if any  //TODO: skip this not needed ,might use in delete test
 		// const noVacationIsSetIsVisible = await this.isVisible(selector.vendor.vStoreSettings.noVacationIsSet);
@@ -547,7 +547,7 @@ export class VendorPage extends BasePage {
 	}
 
 	// vendor set discount settings
-	async discountSettings(discount: { minimumOrderAmount: string; minimumOrderAmountPercentage: string; }): Promise<void> {
+	async discountSettings(discount: any): Promise<void> {
 		// discount
 		const discountEnabled = await this.isVisible(selector.vendor.vStoreSettings.enableStoreWideDiscount);
 		if (discountEnabled) {
@@ -585,7 +585,7 @@ export class VendorPage extends BasePage {
 	}
 
 	// vendor set minmax settings
-	async minMaxSettings(minMax: { minimumProductQuantity: string; maximumProductQuantity: string; minimumAmount: string; maximumAmount: string; category: string; }): Promise<void> {
+	async minMaxSettings(minMax: any): Promise<void> {
 		// min-max
 		const minMaxEnabled = await this.isVisible(selector.vendor.vStoreSettings.enableMinMaxQuantities);
 		if (minMaxEnabled) {
@@ -607,7 +607,7 @@ export class VendorPage extends BasePage {
 	}
 
 	// vendor set store address
-	async setStoreAddress(vendorInfo: { street1: string; street2: string; city: string; zipCode: string; countrySelectValue: string; stateSelectValue: string; storeSettingsSaveSuccessMessage: string; }): Promise<void> {
+	async setStoreAddress(vendorInfo: any): Promise<void> {
 		await this.goIfNotThere(data.subUrls.frontend.settingsStore);
 		// store address
 		await this.clearAndType(selector.vendor.vStoreSettings.street, vendorInfo.street1);
@@ -622,7 +622,7 @@ export class VendorPage extends BasePage {
 	}
 
 	// vendor add addons
-	async addAddon(addon: { name: any; priority: any; category: any; type: any; displayAs: any; titleRequired: any; formatTitle: any; addDescription: any; enterAnOption: any; optionPriceType: any; optionPriceInput: any; saveSuccessMessage: any; }): Promise<string> {
+	async addAddon(addon: any): Promise<string> {
 		await this.goIfNotThere(data.subUrls.frontend.settingsAddon);
 
 		// add addon
@@ -652,7 +652,7 @@ export class VendorPage extends BasePage {
 	}
 
 	// vendor edit addons
-	async editAddon(addon: { name: any; priority: any; category: any; type: any; displayAs: any; titleRequired: any; formatTitle: any; addDescription: any; enterAnOption: any; optionPriceType: any; optionPriceInput: any; saveSuccessMessage: any; }, addonName: string): Promise<void> {
+	async editAddon(addon: any, addonName: string): Promise<void> {
 		await this.goIfNotThere(data.subUrls.frontend.settingsAddon);
 		// add addon
 		await this.click(selector.vendor.vAddonSettings.editAddon(addonName));
@@ -690,7 +690,7 @@ export class VendorPage extends BasePage {
 	}
 
 	// paypal payment settings
-	async setPaypal(paymentMethod: { email: () => string; saveSuccessMessage: string; }): Promise<void> {
+	async setPaypal(paymentMethod: any): Promise<void> {
 		await this.goIfNotThere(data.subUrls.frontend.paypal);
 		//paypal
 		await this.clearAndType(selector.vendor.vPaymentSettings.paypal, paymentMethod.email());
@@ -754,7 +754,7 @@ export class VendorPage extends BasePage {
 	// }
 
 	// custom payment settings
-	async setCustom(paymentMethod: { email: () => string; saveSuccessMessage: string  }): Promise<void> {
+	async setCustom(paymentMethod: any): Promise<void> {
 		await this.goIfNotThere(data.subUrls.frontend.customPayment);
 		// custom payment method
 		await this.clearAndType(selector.vendor.vPaymentSettings.customPayment, paymentMethod.email());
@@ -823,7 +823,7 @@ export class VendorPage extends BasePage {
 	}
 
 	// vendor send company verification request
-	async sendCompanyVerificationRequest(verification: { companyRequestSubmitCancel: string | RegExp; file: any; file2?: string; street1?: string; street2?: string; city?: string; zipCode?: string; country?: string; state?: string; idRequestSubmitSuccessMessage?: string; addressRequestSubmitSuccessMessage?: string; companyRequestSubmitSuccessMessage: any; }): Promise<void> {
+	async sendCompanyVerificationRequest(verification: any): Promise<void> {
 		await this.goIfNotThere(data.subUrls.frontend.settingsVerification);
 		// cancel previous verification request if any
 		const cancelRequestIsVisible = await this.isVisible(selector.vendor.vVerificationSettings.cancelCompanyVerificationRequest);
@@ -864,7 +864,7 @@ export class VendorPage extends BasePage {
 	}
 
 	// vendor set delivery settings
-	async setDeliveryTimeSettings(deliveryTime: { deliveryBlockedBuffer: any; days: any; openingTime: any; closingTime: any; timeSlot: any; orderPerSlot: any; saveSuccessMessage: any; }): Promise<void> {
+	async setDeliveryTimeSettings(deliveryTime: any): Promise<void> {
 		await this.goIfNotThere(data.subUrls.frontend.settingsDeliveryTime);
 		// delivery support
 		await this.check(selector.vendor.vDeliveryTimeSettings.homeDelivery);

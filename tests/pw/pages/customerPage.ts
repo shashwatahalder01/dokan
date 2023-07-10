@@ -63,7 +63,7 @@ export class CustomerPage extends BasePage {
 	}
 
 	// customer become vendor
-	async customerBecomeVendor(customerInfo: { firstName: () => any; lastName: () => string; storename: () => string; phone: string; companyName: string; companyId: string; vatNumber: string; bankName: string; bankIban: string; }): Promise<void> {
+	async customerBecomeVendor(customerInfo: any): Promise<void> {
 		const firstName = customerInfo.firstName();
 		await this.click(selector.customer.cDashboard.becomeVendor);
 		// vendor registration form
@@ -108,7 +108,7 @@ export class CustomerPage extends BasePage {
 	// }
 
 	// customer add billing address
-	async addBillingAddress(billingInfo: { firstName: () => string; lastName: () => string; companyName: string; companyId: string; vatNumber: string; bankName: string; bankIban: string; country: string; street1: string; street2: string; city: string; state: string; zipCode: string; phone: string; email: () => string; }): Promise<void> {
+	async addBillingAddress(billingInfo: any): Promise<void> {
 		await this.goIfNotThere(data.subUrls.frontend.billingAddress);
 		//billing address
 		await this.clearAndType(selector.customer.cAddress.billingFirstName, billingInfo.firstName());
@@ -136,7 +136,7 @@ export class CustomerPage extends BasePage {
 	}
 
 	// customer add shipping address
-	async addShippingAddress(shippingInfo: { firstName: () => string; lastName: () => string; companyName: string; country: string; street1: string; street2: string; city: string; state: string; zipCode: string; }): Promise<void> {
+	async addShippingAddress(shippingInfo: any): Promise<void> {
 		await this.goIfNotThere(data.subUrls.frontend.shippingAddress);
 		//shipping address
 		await this.clearAndType(selector.customer.cAddress.shippingFirstName, shippingInfo.firstName());
@@ -167,7 +167,7 @@ export class CustomerPage extends BasePage {
 
 
 	// customer add customer details
-	async addCustomerDetails(customerInfo: { firstName: () => string; lastName: () => string; password: string; password1: string; }): Promise<void> {
+	async addCustomerDetails(customerInfo: any): Promise<void> {
 		await this.goIfNotThere(data.subUrls.frontend.editAccountCustomer);
 		await this.clearAndType(selector.customer.cAccountDetails.firstName, customerInfo.firstName());
 		await this.clearAndType(selector.customer.cAccountDetails.lastName, customerInfo.lastName());
@@ -233,7 +233,7 @@ export class CustomerPage extends BasePage {
 	}
 
 	// customer review store
-	async reviewStore(storeName: string, store: { reviewMessage: () => any; rating: string; reviewTitle: string; }): Promise<void> {
+	async reviewStore(storeName: string, store: any): Promise<void> {
 		await this.goIfNotThere(data.subUrls.frontend.vendorDetails(helpers.slugify(storeName)));
 		const reviewMessage = store.reviewMessage();
 		await this.clickAndWaitForNavigation(selector.customer.cSingleStore.reviews);
@@ -249,7 +249,7 @@ export class CustomerPage extends BasePage {
 	}
 
 	// customer ask for get support
-	async askForGetSupport(storeName: string, getSupport: { subject: string; message: string; supportSubmitSuccessMessage: string }): Promise<void> {
+	async askForGetSupport(storeName: string, getSupport: any): Promise<void> {
 		await this.goIfNotThere(data.subUrls.frontend.vendorDetails(helpers.slugify(storeName)));
 		await this.clickAndWaitForResponse(data.subUrls.ajax, selector.customer.cSingleStore.getSupport);
 		await this.clearAndType(selector.customer.cSingleStore.subject, getSupport.subject);
@@ -282,7 +282,7 @@ export class CustomerPage extends BasePage {
 	}
 
 	// customer report product
-	async reportProduct(productName: string, report: { reportReason: string; reportReasonDescription: string; reportSubmitSuccessMessage: string }): Promise<void> {
+	async reportProduct(productName: string, report: any): Promise<void> {
 		await this.goIfNotThere(data.subUrls.frontend.productDetails(helpers.slugify(productName)));
 		await this.clickAndWaitForResponse(data.subUrls.ajax, selector.customer.cSingleProduct.reportAbuse);
 		await this.click(selector.customer.cSingleProduct.reportReasonByName(report.reportReason));
@@ -294,7 +294,7 @@ export class CustomerPage extends BasePage {
 	}
 
 	// customer enquire product
-	async enquireProduct(productName: string, enquiry: { enquiryDetails: string; enquirySubmitSuccessMessage: string}): Promise<void> {
+	async enquireProduct(productName: string, enquiry: any): Promise<void> {
 		await this.goIfNotThere(data.subUrls.frontend.productDetails(helpers.slugify(productName)));
 		await this.click(selector.customer.cSingleProduct.productEnquiry);
 		await this.clearAndType(selector.customer.cSingleProduct.enquiryMessage, enquiry.enquiryDetails);
@@ -635,7 +635,7 @@ export class CustomerPage extends BasePage {
 	}
 
 	// customer ask for warranty
-	async sendWarrantyRequest(orderNumber: string, productName: string, refund: { refundRequestType: string; refundRequestDetails: string; refundSubmitSuccessMessage: string }): Promise<void> {
+	async sendWarrantyRequest(orderNumber: string, productName: string, refund: any): Promise<void> {
 		// await this.goToMyAccount();
 		// await this.click(selector.customer.cMyAccount.orders);
 		await this.goIfNotThere(data.subUrls.frontend.ordersCustomerPage);
