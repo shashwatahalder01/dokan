@@ -2,7 +2,7 @@ import { Page, expect } from '@playwright/test';
 import { AdminPage } from 'pages/adminPage';
 import { selector } from 'pages/selectors';
 import { data } from 'utils/testData';
-
+import { productAdvertisement  } from 'utils/interfaces';
 
 export class ProductAdvertisingPage extends AdminPage {
 
@@ -53,7 +53,7 @@ export class ProductAdvertisingPage extends AdminPage {
 
 
 	// add new product advertisement
-	async addNewProductAdvertisement(advertising: any){
+	async addNewProductAdvertisement(advertising: productAdvertisement){
 		await this.goIfNotThere(data.subUrls.backend.dokan.productAdvertising);
 
 		await this.click(selector.admin.dokan.productAdvertising.addNewProductAdvertising);

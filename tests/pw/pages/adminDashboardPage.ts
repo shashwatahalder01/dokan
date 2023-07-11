@@ -3,7 +3,7 @@ import { AdminPage } from 'pages/adminPage';
 import { selector } from 'pages/selectors';
 import { helpers } from 'utils/helpers';
 import { data } from 'utils/testData';
-
+import {  } from 'utils/interfaces';
 
 export class AdminDashboardPage extends AdminPage {
 
@@ -56,7 +56,7 @@ export class AdminDashboardPage extends AdminPage {
 
 
 	// add dokan news subscriber
-	async addDokanNewsSubscriber(user:any){
+	async addDokanNewsSubscriber(user:user['userDetails']){
 		await this.goIfNotThere(data.subUrls.backend.dokan.dokan);
 
 		await this.clearAndType(selector.admin.dokan.dashboard.subscribeBox.subscriberName, user.name());

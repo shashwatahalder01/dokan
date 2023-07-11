@@ -1,7 +1,8 @@
-import { Page, expect } from '@playwright/test';
+import { Page } from '@playwright/test';
 import { AdminPage } from 'pages/adminPage';
 import { selector } from 'pages/selectors';
 import { data } from 'utils/testData';
+import{ storeReview } from 'utils/interfaces';
 
 
 export class StoreReviewsPage extends AdminPage {
@@ -55,7 +56,7 @@ export class StoreReviewsPage extends AdminPage {
 
 
 	// edit store review
-	async editStoreReview(review: any){
+	async editStoreReview(review: storeReview){
 		await this.goto(data.subUrls.backend.dokan.storeReviews);
 		// await this.goIfNotThere(data.subUrls.backend.dokan.storeReviews);
 		await this.hover(selector.admin.dokan.storeReviews.storeReviewFirstCell);

@@ -1,4 +1,4 @@
-import { Page, expect } from '@playwright/test';
+import { Page } from '@playwright/test';
 import { WpPage } from 'pages/wpPage';
 import { selector } from 'pages/selectors';
 import { data } from 'utils/testData';

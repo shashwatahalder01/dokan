@@ -2,6 +2,7 @@ import { Page, expect } from '@playwright/test';
 import { AdminPage } from 'pages/adminPage';
 import { selector } from 'pages/selectors';
 import { data } from 'utils/testData';
+import { vendor } from 'utils/interfaces';
 
 const { DOKAN_PRO } = process.env;
 
@@ -40,7 +41,7 @@ export class StoresPage extends AdminPage {
 
 
 	// admin add new vendors
-	async addVendor(vendorInfo: any) {
+	async addVendor(vendorInfo: vendor['vendorInfo']) {
 		await this.goIfNotThere(data.subUrls.backend.dokan.vendors);
 
 		const firstName = vendorInfo.firstName();
@@ -96,7 +97,7 @@ export class StoresPage extends AdminPage {
 
 
 	// edit vendor
-	async editVendor(vendor: any ){
+	async editVendor(vendor: vendor ){
 		await this.searchVendor(vendor.storeName);
 
 		await this.hover(selector.admin.dokan.vendors.vendorCell(vendor.storeName));
