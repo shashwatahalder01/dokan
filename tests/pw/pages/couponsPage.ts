@@ -1,8 +1,8 @@
-import { th } from '@faker-js/faker';
 import { Page, expect } from '@playwright/test';
 import { AdminPage } from 'pages/adminPage';
 import { selector } from 'pages/selectors';
 import { data } from 'utils/testData';
+import{ coupon } from 'utils/interfaces';
 
 
 export class CouponsPage extends AdminPage {
@@ -13,7 +13,7 @@ export class CouponsPage extends AdminPage {
 
 
 	// add marketplace coupon
-	async addMarketplaceCoupon(coupon: any){
+	async addMarketplaceCoupon(coupon: coupon){
 		await this.goIfNotThere(data.subUrls.backend.wc.coupons);
 
 		await this.clickAndWaitForResponse(data.subUrls.backend.wc.addCoupon, selector.admin.marketing.addCoupon);
@@ -31,7 +31,7 @@ export class CouponsPage extends AdminPage {
 	}
 
 	// vendor add coupon
-	async addCoupon(coupon: any) {
+	async addCoupon(coupon: coupon) {
 		await this.goIfNotThere(data.subUrls.frontend.vDashboard.coupon);
 		await this.click(selector.vendor.vCoupon.addNewCoupon);
 		await this.type(selector.vendor.vCoupon.couponTitle, coupon.title());
