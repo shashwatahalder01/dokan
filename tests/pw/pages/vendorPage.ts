@@ -1,4 +1,4 @@
-import { expect, type Page } from '@playwright/test';
+import { Page, expect } from '@playwright/test';
 import { BasePage } from './basePage';
 import { LoginPage } from './loginPage';
 import { AdminPage } from './adminPage';
@@ -24,7 +24,7 @@ export class VendorPage extends BasePage {
 	}
 
 	async goToVendorDashboard(): Promise<void> {
-		await this.goIfNotThere(data.subUrls.frontend.dashboard);
+		await this.goIfNotThere(data.subUrls.frontend.vDashboard.dashboard);
 	}
 
 	// setup wizard
@@ -86,7 +86,7 @@ export class VendorPage extends BasePage {
 
 	// vendor setup wizard
 	async vendorSetupWizard(setupWizardData: { choice: boolean ; storeProductsPerPage: any; street1: any; street2: any; country: any; city: any; zipCode: any; state: any; paypal: any; bankAccountName: any; bankAccountType: any; bankAccountNumber: any; bankName: any; bankAddress: any; bankRoutingNumber: any; bankIban: any; bankSwiftCode: any; customPayment: any; skrill: any; }): Promise<void> {
-		await this.goIfNotThere(data.subUrls.frontend.vendorSetupWizard);
+		await this.goIfNotThere(data.subUrls.frontend.vDashboard.setupWizard);
 		if (setupWizardData.choice) {
 			await this.click(selector.vendor.vSetup.letsGo);
 			await this.clearAndType(selector.vendor.vSetup.storeProductsPerPage, setupWizardData.storeProductsPerPage);
@@ -118,9 +118,9 @@ export class VendorPage extends BasePage {
 			// skrill
 			await this.typeIfVisible(selector.vendor.vSetup.skrill, setupWizardData.skrill);
 			await this.click(selector.vendor.vSetup.continuePaymentSetup);
-			await this.clickAndWaitForResponse(data.subUrls.frontend.dashboard, selector.vendor.vSetup.goToStoreDashboard);
+			await this.clickAndWaitForResponse(data.subUrls.frontend.vDashboard.dashboard, selector.vendor.vSetup.goToStoreDashboard);
 		} else {
-			await this.clickAndWaitForResponse(data.subUrls.frontend.dashboard, selector.vendor.vSetup.notRightNow);
+			await this.clickAndWaitForResponse(data.subUrls.frontend.vDashboard.dashboard, selector.vendor.vSetup.notRightNow);
 		}
 		await this.toBeVisible(selector.vendor.vDashboard.menus.dashboard);
 	}
@@ -145,7 +145,7 @@ export class VendorPage extends BasePage {
 
 	// vendor add simple product
 	async addSimpleProduct(product: any): Promise<void> {
-		await this.goIfNotThere(data.subUrls.frontend.product);
+		await this.goIfNotThere(data.subUrls.frontend.vDashboard.product);
 		const productName = product.productName();
 		// add new simple product
 		await this.click(selector.vendor.product.addNewProduct);
@@ -183,7 +183,7 @@ export class VendorPage extends BasePage {
 		// await this.waitForVisibleLocator(selector.vendor.product.variationPrice)
 		await this.type(selector.vendor.product.variationPrice, product.regularPrice());
 		await this.click(selector.vendor.product.okVariationPrice);
-		await this.clickAndWaitForResponse(data.subUrls.frontend.product, selector.vendor.product.saveProduct, 302);
+		await this.clickAndWaitForResponse(data.subUrls.frontend.vDashboard.product, selector.vendor.product.saveProduct, 302);
 		const productCreateSuccessMessage = await this.getElementText(selector.vendor.product.updatedSuccessMessage);
 		expect(productCreateSuccessMessage?.replace(/\s+/g, ' ').trim()).toMatch(product.saveSuccessMessage);
 	}
@@ -199,7 +199,7 @@ export class VendorPage extends BasePage {
 		await this.selectByValue(selector.vendor.product.expireAfter, product.expireAfter);
 		await this.type(selector.vendor.product.subscriptionTrialLength, product.subscriptionTrialLength);
 		await this.selectByValue(selector.vendor.product.subscriptionTrialPeriod, product.subscriptionTrialPeriod);
-		await this.clickAndWaitForResponse(data.subUrls.frontend.product, selector.vendor.product.saveProduct, 302);
+		await this.clickAndWaitForResponse(data.subUrls.frontend.vDashboard.product, selector.vendor.product.saveProduct, 302);
 		const productCreateSuccessMessage = await this.getElementText(selector.vendor.product.updatedSuccessMessage);
 		expect(productCreateSuccessMessage?.replace(/\s+/g, ' ').trim()).toMatch(product.saveSuccessMessage);
 	}
@@ -228,7 +228,7 @@ export class VendorPage extends BasePage {
 		await this.waitForVisibleLocator(selector.vendor.product.variationPrice);
 		await this.type(selector.vendor.product.variationPrice, product.regularPrice());
 		await this.click(selector.vendor.product.okVariationPrice); // todo : add waitForResponse with click
-		await this.clickAndWaitForResponse(data.subUrls.frontend.product, selector.vendor.product.saveProduct, 302);
+		await this.clickAndWaitForResponse(data.subUrls.frontend.vDashboard.product, selector.vendor.product.saveProduct, 302);
 
 		await this.waitForVisibleLocator(selector.vendor.product.updatedSuccessMessage);
 		const productCreateSuccessMessage = await this.getElementText(selector.vendor.product.updatedSuccessMessage);
@@ -244,14 +244,14 @@ export class VendorPage extends BasePage {
 		await this.type(selector.vendor.product.buttonText, product.buttonText);
 		await this.clearAndType(selector.vendor.product.price, product.regularPrice());
 
-		await this.clickAndWaitForResponse(data.subUrls.frontend.product, selector.vendor.product.saveProduct, 302);
+		await this.clickAndWaitForResponse(data.subUrls.frontend.vDashboard.product, selector.vendor.product.saveProduct, 302);
 		const productCreateSuccessMessage = await this.getElementText(selector.vendor.product.updatedSuccessMessage);
 		expect(productCreateSuccessMessage?.replace(/\s+/g, ' ').trim()).toMatch(product.saveSuccessMessage);
 	}
 
 	// vendor add auction product
 	async addAuctionProduct(product: any): Promise<void> {
-		await this.goIfNotThere(data.subUrls.frontend.auction);
+		await this.goIfNotThere(data.subUrls.frontend.vDashboard.auction);
 
 		// add new auction product
 		await this.click(selector.vendor.vAuction.addNewActionProduct);
@@ -267,14 +267,14 @@ export class VendorPage extends BasePage {
 		await this.removeAttribute(selector.vendor.vAuction.auctionEndDate, 'readonly');
 		await this.type(selector.vendor.vAuction.auctionStartDate, product.startDate);
 		await this.type(selector.vendor.vAuction.auctionEndDate, product.endDate);
-		await this.clickAndWaitForResponse(data.subUrls.frontend.productAuction, selector.vendor.vAuction.addAuctionProduct, 302);
+		await this.clickAndWaitForResponse(data.subUrls.frontend.vDashboard.productAuction, selector.vendor.vAuction.addAuctionProduct, 302);
 		const productCreateSuccessMessage = await this.getElementText(selector.vendor.product.updatedSuccessMessage);
 		expect(productCreateSuccessMessage?.replace(/\s+/g, ' ').trim()).toMatch(product.saveSuccessMessage);
 	}
 
 	// vendor add booking product
 	async addBookingProduct(product: { productName: any; productType?: string; category?: string; bookingDurationType: any; bookingDuration?: string; bookingDurationMax: any; bookingDurationUnit: any; calendarDisplayMode: any; maxBookingsPerBlock: any; minimumBookingWindowIntoTheFutureDate: any; minimumBookingWindowIntoTheFutureDateUnit: any; maximumBookingWindowIntoTheFutureDate: any; maximumBookingWindowIntoTheFutureDateUnit: any; baseCost: any; blockCost: any; }): Promise<void> {
-		await this.goIfNotThere(data.subUrls.frontend.booking);
+		await this.goIfNotThere(data.subUrls.frontend.vDashboard.booking);
 		const productName = product.productName();
 		await this.click(selector.vendor.vBooking.addNewBookingProduct);
 		// add new booking product
@@ -296,7 +296,7 @@ export class VendorPage extends BasePage {
 		// costs
 		await this.type(selector.vendor.vBooking.baseCost, product.baseCost);
 		await this.type(selector.vendor.vBooking.blockCost, product.blockCost);
-		await this.clickAndWaitForResponse(data.subUrls.frontend.productBooking, selector.vendor.vBooking.saveProduct, 302);
+		await this.clickAndWaitForResponse(data.subUrls.frontend.vDashboard.productBooking, selector.vendor.vBooking.saveProduct, 302);
 		await this.waitForVisibleLocator(selector.vendor.vBooking.productName);
 		const createdProduct = await this.getElementValue(selector.vendor.vBooking.productName);
 		expect(createdProduct.toLowerCase()).toBe(productName.toLowerCase());
@@ -315,14 +315,14 @@ export class VendorPage extends BasePage {
 
 	// vendor add coupon
 	async addCoupon(coupon: any): Promise<void> {
-		await this.goIfNotThere(data.subUrls.frontend.coupon);
+		await this.goIfNotThere(data.subUrls.frontend.vDashboard.coupon);
 		await this.click(selector.vendor.vCoupon.addNewCoupon);
 		await this.type(selector.vendor.vCoupon.couponTitle, coupon.title());
 		await this.type(selector.vendor.vCoupon.amount, coupon.amount());
 		await this.click(selector.vendor.vCoupon.selectAll);
 		await this.click(selector.vendor.vCoupon.applyForNewProducts);
 		await this.click(selector.vendor.vCoupon.showOnStore);
-		await this.clickAndWaitForResponse(data.subUrls.frontend.coupon, selector.vendor.vCoupon.createCoupon, 302);
+		await this.clickAndWaitForResponse(data.subUrls.frontend.vDashboard.coupon, selector.vendor.vCoupon.createCoupon, 302);
 		await expect(this.page.getByText(selector.vendor.vCoupon.couponSaveSuccessMessage)).toBeVisible();
 	}
 
@@ -330,7 +330,7 @@ export class VendorPage extends BasePage {
 
 	// vendor request withdraw
 	async requestWithdraw(withdraw: { withdrawMethod: any; defaultWithdrawMethod?: { paypal: string; skrill: string; }; preferredPaymentMethod?: string; preferredSchedule?: string; minimumWithdrawAmount?: string; reservedBalance?: string; }): Promise<void> {
-		await this.goIfNotThere(data.subUrls.frontend.withdraw);
+		await this.goIfNotThere(data.subUrls.frontend.vDashboard.withdraw);
 		const cancelRequestIsVisible = await this.isVisible(selector.vendor.vWithdraw.cancelRequest);
 		if (cancelRequestIsVisible) {
 			this.cancelRequestWithdraw(withdraw);
@@ -357,18 +357,18 @@ export class VendorPage extends BasePage {
 
 	// vendor cancel withdraw request
 	async cancelRequestWithdraw(withdraw: { withdrawMethod: any; defaultWithdrawMethod?: { paypal: string; skrill: string; }; preferredPaymentMethod?: string; preferredSchedule?: string; minimumWithdrawAmount?: string; reservedBalance?: string; }): Promise<void> {
-		await this.goIfNotThere(data.subUrls.frontend.withdraw);
+		await this.goIfNotThere(data.subUrls.frontend.vDashboard.withdraw);
 		const cancelRequestIsVisible = await this.isVisible(selector.vendor.vWithdraw.cancelRequest);
 		if (!cancelRequestIsVisible) {
 			this.requestWithdraw(withdraw);
 		}
-		await this.clickAndWaitForResponse(data.subUrls.frontend.withdrawRequests, selector.vendor.vWithdraw.cancelRequest, 302);
+		await this.clickAndWaitForResponse(data.subUrls.frontend.vDashboard.withdrawRequests, selector.vendor.vWithdraw.cancelRequest, 302);
 		await expect(this.page.getByText(selector.vendor.vWithdraw.cancelWithdrawRequestSaveSuccessMessage)).toBeVisible();
 	}
 
 	// vendor add auto withdraw disbursement schedule
 	async addAutoWithdrawDisbursementSchedule(withdraw: any): Promise<void> {
-		await this.goIfNotThere(data.subUrls.frontend.withdraw);
+		await this.goIfNotThere(data.subUrls.frontend.vDashboard.withdraw);
 		await this.enableSwitcherDisbursement(selector.vendor.vWithdraw.enableSchedule);
 		await this.click(selector.vendor.vWithdraw.editSchedule);
 		await this.selectByValue(selector.vendor.vWithdraw.preferredPaymentMethod, withdraw.preferredPaymentMethod);
@@ -385,13 +385,13 @@ export class VendorPage extends BasePage {
 
 	// vendor add default withdraw payment methods
 	async addDefaultWithdrawPaymentMethods(preferredSchedule: string): Promise<void> {
-		await this.goIfNotThere(data.subUrls.frontend.withdraw);
+		await this.goIfNotThere(data.subUrls.frontend.vDashboard.withdraw);
 		const methodIsDefault = await this.isVisible(selector.vendor.vWithdraw.defaultMethod(preferredSchedule));
 		if (!methodIsDefault) {
 			// await this.clickAndWaitForResponse(data.subUrls.ajax, selector.vendor.vWithdraw.customMethodMakeDefault(preferredSchedule));
 			// await expect(this.page.getByText(selector.vendor.vWithdraw.defaultPaymentMethodUpdateSuccessMessage)).toBeVisible();
 			// // await this.waitForNavigation()
-			// await this.waitForUrl(data.subUrls.frontend.withdraw);
+			// await this.waitForUrl(data.subUrls.frontend.vDashboard.withdraw);
 			await this.clickAndWaitForNavigation(selector.vendor.vWithdraw.customMethodMakeDefault(preferredSchedule)); //TODO: fix before soln
 			await this.toBeVisible(selector.vendor.vWithdraw.defaultMethod(preferredSchedule));
 		}
@@ -399,14 +399,14 @@ export class VendorPage extends BasePage {
 
 	// vendor add vendor details
 	async setVendorDetails(vendorInfo: any): Promise<void> {
-		await this.goIfNotThere(data.subUrls.frontend.editAccountVendor);
+		await this.goIfNotThere(data.subUrls.frontend.vDashboard.editAccountVendor);
 		await this.clearAndType(selector.vendor.vAccountDetails.firstName, vendorInfo.firstName());
 		await this.clearAndType(selector.vendor.vAccountDetails.lastName, vendorInfo.lastName());
 		// await this.clearAndType(selector.vendor.vAccountDetails.email, vendorInfo.email());
 		// await this.type(selector.vendor.vAccountDetails.currentPassword, vendorInfo.password);
 		// await this.type(selector.vendor.vAccountDetails.NewPassword, vendorInfo.password1);
 		// await this.type(selector.vendor.vAccountDetails.confirmNewPassword, vendorInfo.password1);
-		await this.clickAndWaitForResponse(data.subUrls.frontend.editAccountVendor, selector.vendor.vAccountDetails.saveChanges, 302);
+		await this.clickAndWaitForResponse(data.subUrls.frontend.vDashboard.editAccountVendor, selector.vendor.vAccountDetails.saveChanges, 302);
 		await expect(this.page.getByText(selector.vendor.vAccountDetails.editAccountSaveChangesSuccessMessage)).toBeVisible();
 	}
 
@@ -414,7 +414,7 @@ export class VendorPage extends BasePage {
 
 	// vendor set store settings
 	async setStoreSettings(vendorInfo: any): Promise<void> {
-		await this.goIfNotThere(data.subUrls.frontend.settingsStore);
+		await this.goIfNotThere(data.subUrls.frontend.vDashboard.settingsStore);
 
 		// await this.bannerAndProfilePictureSettings();
 		await this.basicInfoSettings(vendorInfo);
@@ -608,7 +608,7 @@ export class VendorPage extends BasePage {
 
 	// vendor set store address
 	async setStoreAddress(vendorInfo: any): Promise<void> {
-		await this.goIfNotThere(data.subUrls.frontend.settingsStore);
+		await this.goIfNotThere(data.subUrls.frontend.vDashboard.settingsStore);
 		// store address
 		await this.clearAndType(selector.vendor.vStoreSettings.street, vendorInfo.street1);
 		await this.clearAndType(selector.vendor.vStoreSettings.street2, vendorInfo.street2);
@@ -623,7 +623,7 @@ export class VendorPage extends BasePage {
 
 	// vendor add addons
 	async addAddon(addon: any): Promise<string> {
-		await this.goIfNotThere(data.subUrls.frontend.settingsAddon);
+		await this.goIfNotThere(data.subUrls.frontend.vDashboard.settingsAddon);
 
 		// add addon
 		const addonName = addon.name();
@@ -653,7 +653,7 @@ export class VendorPage extends BasePage {
 
 	// vendor edit addons
 	async editAddon(addon: any, addonName: string): Promise<void> {
-		await this.goIfNotThere(data.subUrls.frontend.settingsAddon);
+		await this.goIfNotThere(data.subUrls.frontend.vDashboard.settingsAddon);
 		// add addon
 		await this.click(selector.vendor.vAddonSettings.editAddon(addonName));
 		// await this.click(selector.vendor.vAddonSettings.firstAddon)
@@ -691,7 +691,7 @@ export class VendorPage extends BasePage {
 
 	// paypal payment settings
 	async setPaypal(paymentMethod: any): Promise<void> {
-		await this.goIfNotThere(data.subUrls.frontend.paypal);
+		await this.goIfNotThere(data.subUrls.frontend.vDashboard.paypal);
 		//paypal
 		await this.clearAndType(selector.vendor.vPaymentSettings.paypal, paymentMethod.email());
 		// update settings
@@ -701,7 +701,7 @@ export class VendorPage extends BasePage {
 
 	// bank transfer payment settings
 	async setBankTransfer(paymentMethod:any): Promise<void> {
-		await this.goIfNotThere(data.subUrls.frontend.bankTransfer);
+		await this.goIfNotThere(data.subUrls.frontend.vDashboard.bankTransfer);
 		// bank transfer
 		await this.clickIfVisible(selector.vendor.vPaymentSettings.disconnectAccount);
 		await this.clearAndType(selector.vendor.vPaymentSettings.bankAccountName, paymentMethod.bankAccountName);
@@ -755,7 +755,7 @@ export class VendorPage extends BasePage {
 
 	// custom payment settings
 	async setCustom(paymentMethod: any): Promise<void> {
-		await this.goIfNotThere(data.subUrls.frontend.customPayment);
+		await this.goIfNotThere(data.subUrls.frontend.vDashboard.customPayment);
 		// custom payment method
 		await this.clearAndType(selector.vendor.vPaymentSettings.customPayment, paymentMethod.email());
 		// update settings
@@ -765,7 +765,7 @@ export class VendorPage extends BasePage {
 
 	// skrill Payment Settings
 	async setSkrill(paymentMethod: any): Promise<void> {
-		await this.goIfNotThere(data.subUrls.frontend.skrill);
+		await this.goIfNotThere(data.subUrls.frontend.vDashboard.skrill);
 		// skrill
 		await this.clearAndType(selector.vendor.vPaymentSettings.skrill, paymentMethod.email());
 		// update settings
@@ -775,7 +775,7 @@ export class VendorPage extends BasePage {
 
 	// vendor send id verification request
 	async sendIdVerificationRequest(verification: any): Promise<void> {
-		await this.goIfNotThere(data.subUrls.frontend.settingsVerification);
+		await this.goIfNotThere(data.subUrls.frontend.vDashboard.settingsVerification);
 
 		// cancel previous verification request if any
 		const cancelRequestIsVisible = await this.isVisible(selector.vendor.vVerificationSettings.cancelIdVerificationRequest);
@@ -801,7 +801,7 @@ export class VendorPage extends BasePage {
 
 	// vendor send address verification request
 	async sendAddressVerificationRequest(verification: any): Promise<void> {
-		await this.goIfNotThere(data.subUrls.frontend.settingsVerification);
+		await this.goIfNotThere(data.subUrls.frontend.vDashboard.settingsVerification);
 		// cancel previous verification request if any
 		const cancelRequestIsVisible = await this.isVisible(selector.vendor.vVerificationSettings.cancelAddressVerificationRequest);
 		if (cancelRequestIsVisible) {
@@ -824,7 +824,7 @@ export class VendorPage extends BasePage {
 
 	// vendor send company verification request
 	async sendCompanyVerificationRequest(verification: any): Promise<void> {
-		await this.goIfNotThere(data.subUrls.frontend.settingsVerification);
+		await this.goIfNotThere(data.subUrls.frontend.vDashboard.settingsVerification);
 		// cancel previous verification request if any
 		const cancelRequestIsVisible = await this.isVisible(selector.vendor.vVerificationSettings.cancelCompanyVerificationRequest);
 		if (cancelRequestIsVisible) {
@@ -865,7 +865,7 @@ export class VendorPage extends BasePage {
 
 	// vendor set delivery settings
 	async setDeliveryTimeSettings(deliveryTime: any): Promise<void> {
-		await this.goIfNotThere(data.subUrls.frontend.settingsDeliveryTime);
+		await this.goIfNotThere(data.subUrls.frontend.vDashboard.settingsDeliveryTime);
 		// delivery support
 		await this.check(selector.vendor.vDeliveryTimeSettings.homeDelivery);
 		await this.check(selector.vendor.vDeliveryTimeSettings.storePickup);
@@ -897,7 +897,7 @@ export class VendorPage extends BasePage {
 
 	// set shipping policies
 	async setShippingPolicies(shippingPolicy: any): Promise<void> {
-		await this.goIfNotThere(data.subUrls.frontend.settingsShipping);
+		await this.goIfNotThere(data.subUrls.frontend.vDashboard.settingsShipping);
 		await this.click(selector.vendor.vShippingSettings.shippingPolicies.clickHereToAddShippingPolicies);
 		await this.selectByValue(selector.vendor.vShippingSettings.shippingPolicies.processingTime, shippingPolicy.processingTime);
 		await this.clearAndType(selector.vendor.vShippingSettings.shippingPolicies.shippingPolicy, shippingPolicy.shippingPolicy);
@@ -908,7 +908,7 @@ export class VendorPage extends BasePage {
 
 	// vendor set shipping settings
 	async setShippingSettings(shipping: any): Promise<void> {
-		await this.goIfNotThere(data.subUrls.frontend.settingsShipping);
+		await this.goIfNotThere(data.subUrls.frontend.vDashboard.settingsShipping);
 		// edit shipping zone
 		await this.hover(selector.vendor.vShippingSettings.shippingZoneCell(shipping.shippingZone));
 		await this.clickAndWaitForResponse(data.subUrls.ajax, selector.vendor.vShippingSettings.editShippingZone(shipping.shippingZone));
@@ -996,7 +996,7 @@ export class VendorPage extends BasePage {
 
 	// vendor set social profile settings
 	async setSocialProfile(urls: any): Promise<void> {
-		await this.goIfNotThere(data.subUrls.frontend.settingsSocialProfile);
+		await this.goIfNotThere(data.subUrls.frontend.vDashboard.settingsSocialProfile);
 		await this.clearAndType(selector.vendor.vSocialProfileSettings.facebook, urls.facebook);
 		await this.clearAndType(selector.vendor.vSocialProfileSettings.twitter, urls.twitter);
 		await this.clearAndType(selector.vendor.vSocialProfileSettings.pinterest, urls.pinterest);
@@ -1011,7 +1011,7 @@ export class VendorPage extends BasePage {
 
 	// vendor set rma settings
 	async setRmaSettings(rma: any): Promise<void> {
-		await this.goIfNotThere(data.subUrls.frontend.settingsRma);
+		await this.goIfNotThere(data.subUrls.frontend.vDashboard.settingsRma);
 		await this.clearAndType(selector.vendor.vRmaSettings.label, rma.label);
 		await this.selectByValue(selector.vendor.vRmaSettings.type, rma.type);
 		await this.selectByValue(selector.vendor.vRmaSettings.length, rma.rmaLength);
@@ -1023,7 +1023,7 @@ export class VendorPage extends BasePage {
 			await this.checkMultiple(selector.vendor.vRmaSettings.refundReasons);
 		}
 		await this.typeFrameSelector(selector.vendor.vRmaSettings.refundPolicyIframe, selector.vendor.vRmaSettings.refundPolicyHtmlBody, rma.refundPolicyHtmlBody);
-		await this.clickAndWaitForResponse(data.subUrls.frontend.settingsRma, selector.vendor.vRmaSettings.rmaSaveChanges, 302);
+		await this.clickAndWaitForResponse(data.subUrls.frontend.vDashboard.settingsRma, selector.vendor.vRmaSettings.rmaSaveChanges, 302);
 		await expect(this.page.getByText(rma.saveSuccessMessage)).toBeVisible();
 	}
 
@@ -1031,7 +1031,7 @@ export class VendorPage extends BasePage {
 
 	// vendor approve product review
 	async approveProductReview(reviewMessage: any): Promise<void> {
-		await this.goIfNotThere(data.subUrls.frontend.reviews);
+		await this.goIfNotThere(data.subUrls.frontend.vDashboard.reviews);
 		// let approvedReviewIsVisible = await this.isVisible(selector.vendor.vReviews.reviewRow(reviewMessage))
 		// if (approvedReviewIsVisible) {
 		//     expect(approvedReviewIsVisible).toBe(true)
@@ -1049,7 +1049,7 @@ export class VendorPage extends BasePage {
 	// vendor approve return request
 	async approveReturnRequest(orderId: any, productName: any): Promise<void> {
 		await this.goToVendorDashboard();
-		await this.click(selector.vendor.vDashboard.returnRequest);
+		await this.click(selector.vendor.vDashboard.menus.returnRequest);
 		await this.click(selector.vendor.vReturnRequest.view(orderId));
 		// change order status to refund
 		await this.selectByValue(selector.vendor.vReturnRequest.changeOrderStatus, 'processing');
@@ -1072,7 +1072,7 @@ export class VendorPage extends BasePage {
 	// delete return request
 	async deleteReturnRequest(orderId: any): Promise<void> {
 		await this.goToVendorDashboard();
-		await this.click(selector.vendor.vDashboard.returnRequest);
+		await this.click(selector.vendor.vDashboard.menus.returnRequest);
 		await this.hover(selector.vendor.vReturnRequest.returnRequestCell(orderId));
 		await this.click(selector.vendor.vReturnRequest.delete(orderId));
 		const successMessage = await this.getElementText(selector.customer.cWooSelector.wooCommerceSuccessMessage);
@@ -1087,14 +1087,14 @@ export class VendorPage extends BasePage {
 		await this.check(selector.vendor.product.enableBulkDiscount);
 		await this.clearAndType(selector.vendor.product.lotMinimumQuantity, minimumQuantity);
 		await this.clearAndType(selector.vendor.product.lotDiscountInPercentage, discountPercentage);
-		await this.clickAndWaitForResponse(data.subUrls.frontend.product, selector.vendor.product.saveProduct, 302);
+		await this.clickAndWaitForResponse(data.subUrls.frontend.vDashboard.product, selector.vendor.product.saveProduct, 302);
 		const productCreateSuccessMessage = await this.getElementText(selector.vendor.product.updatedSuccessMessage);
 		expect(productCreateSuccessMessage?.replace(/\s+/g, ' ').trim()).toMatch(data.product.createUpdateSaveSuccessMessage);
 	}
 
 	// vendor search product
 	async searchProduct(productName: string): Promise<void> {
-		await this.goIfNotThere(data.subUrls.frontend.product);
+		await this.goIfNotThere(data.subUrls.frontend.vDashboard.product);
 		//search product
 		await this.clearAndType(selector.vendor.product.searchProduct, productName);
 		await this.click(selector.vendor.product.search);
@@ -1117,14 +1117,14 @@ export class VendorPage extends BasePage {
 		if (refundReasonIsVisible) {
 			// await this.clickAndWaitMultiple(selector.vendor.product.refundReasons)//TODO: update this
 		}
-		await this.clickAndWaitForResponse(data.subUrls.frontend.product, selector.vendor.product.saveProduct, 302);
+		await this.clickAndWaitForResponse(data.subUrls.frontend.vDashboard.product, selector.vendor.product.saveProduct, 302);
 		const productCreateSuccessMessage = await this.getElementText(selector.vendor.product.updatedSuccessMessage);
 		expect(productCreateSuccessMessage?.replace(/\s+/g, ' ').trim()).toMatch(data.product.createUpdateSaveSuccessMessage);
 	}
 
 	// vendor change order status
 	async changeOrderStatus(orderNumber: string, orderStatus: string): Promise<void> {
-		await this.goIfNotThere(data.subUrls.frontend.order);
+		await this.goIfNotThere(data.subUrls.frontend.vDashboard.order);
 		//change order status
 		await this.click(selector.vendor.vOrders.orderLink(orderNumber));
 		await this.click(selector.vendor.vOrders.edit);

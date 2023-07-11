@@ -1,4 +1,4 @@
-import { expect, type Page } from '@playwright/test';
+import { Page, expect } from '@playwright/test';
 import { AdminPage } from 'pages/adminPage';
 import { selector } from 'pages/selectors';
 import { data } from 'utils/testData';
@@ -9,11 +9,12 @@ export class StoreCategoriesPage extends AdminPage {
 		super(page);
 	}
 
+
 	// store categories
 
-
+	// store categories render properly
 	async adminStoreCategoryRenderProperly(){
-		await this.goIfNotThere(data.subUrls.backend.dokan.dokanVendors);
+		await this.goIfNotThere(data.subUrls.backend.dokan.vendors);
 		await this.click(selector.admin.dokan.vendors.storeCategories);
 
 		// add new category elements are visible
@@ -27,39 +28,43 @@ export class StoreCategoriesPage extends AdminPage {
 
 	}
 
+
 	// add store category
 	async addStoreCategory(storeCategory: any) {
-		await this.goIfNotThere(data.subUrls.backend.dokan.dokanVendors);
+		await this.goIfNotThere(data.subUrls.backend.dokan.vendors);
 		await this.click(selector.admin.dokan.vendors.storeCategories);
 
 		await this.clearAndType(selector.admin.dokan.vendors.storeCategory.addNewCategory.name, storeCategory.name);
 		await this.clearAndType(selector.admin.dokan.vendors.storeCategory.addNewCategory.description, storeCategory.description);
-		await this.clickAndWaitForResponse(data.subUrls.backend.storeCategories, selector.admin.dokan.vendors.storeCategory.addNewCategory.addNewCategory);
+		await this.clickAndWaitForResponse(data.subUrls.api.dokan.storeCategories, selector.admin.dokan.vendors.storeCategory.addNewCategory.addNewCategory);
 	}
+
 
 	// search store category
 	async searchStoreCategory(categoryName: string){
-		await this.goIfNotThere(data.subUrls.backend.dokan.dokanStoreCategories);
+		await this.goIfNotThere(data.subUrls.backend.dokan.storeCategories);
 		// await this.click(selector.admin.dokan.vendors.storeCategories);
 
 		await this.clearInputField(selector.admin.dokan.vendors.storeCategory.search);
 
-		await this.typeAndWaitForResponse(data.subUrls.backend.storeCategories, selector.admin.dokan.vendors.storeCategory.search, categoryName);
+		await this.typeAndWaitForResponse(data.subUrls.api.dokan.storeCategories, selector.admin.dokan.vendors.storeCategory.search, categoryName);
 		await this.toBeVisible(selector.admin.dokan.vendors.storeCategory.storeCategoryCell(categoryName));
 
 	}
+
 
 	// edit store category
 	async editStoreCategory(storeCategory: any) {
 		await this.searchStoreCategory(storeCategory.name);
 
 		await this.hover(selector.admin.dokan.vendors.storeCategory.storeCategoryCell(storeCategory.name));
-		await this.clickAndWaitForResponse(data.subUrls.backend.storeCategories, selector.admin.dokan.vendors.storeCategory.storeCategoryEdit);
+		await this.clickAndWaitForResponse(data.subUrls.api.dokan.storeCategories, selector.admin.dokan.vendors.storeCategory.storeCategoryEdit);
 		await this.clearAndType(selector.admin.dokan.vendors.storeCategory.editCategory.name, storeCategory.name);
 		await this.clearAndType(selector.admin.dokan.vendors.storeCategory.editCategory.description, storeCategory.description);
-		await this.clickAndWaitForResponse(data.subUrls.backend.storeCategories, selector.admin.dokan.vendors.storeCategory.editCategory.update);
+		await this.clickAndWaitForResponse(data.subUrls.api.dokan.storeCategories, selector.admin.dokan.vendors.storeCategory.editCategory.update);
 
 	}
+
 
 	// update store category
 	async updateStoreCategory(categoryName: string, action: string) {
@@ -70,11 +75,11 @@ export class StoreCategoriesPage extends AdminPage {
 		switch(action){
 
 		case 'set-default' :
-			await this.clickAndWaitForResponse(data.subUrls.backend.storeCategories, selector.admin.dokan.vendors.storeCategory.storeCategorySetDefault);
+			await this.clickAndWaitForResponse(data.subUrls.api.dokan.storeCategories, selector.admin.dokan.vendors.storeCategory.storeCategorySetDefault);
 			break;
 
 		case 'delete' :
-			await this.clickAndAcceptAndWaitForResponse(data.subUrls.backend.storeCategories, selector.admin.dokan.vendors.storeCategory.storeCategoryDelete);
+			await this.clickAndAcceptAndWaitForResponse(data.subUrls.api.dokan.storeCategories, selector.admin.dokan.vendors.storeCategory.storeCategoryDelete);
 			break;
 
 		default :

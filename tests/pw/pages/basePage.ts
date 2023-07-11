@@ -222,9 +222,7 @@ export class BasePage {
 		// 		// // const qrs: string[][] = [[data.subUrls.backend.quotes, '200'], [data.subUrls.backend.products, '200']];
 		// // const qrs: string[][] = [[data.subUrls.backend.quotes, '200']];
 		// await this.clickAndWaitForResponses(qrs, selector.admin.dokan.requestForQuotation.quoteRules.newQuoteRule);
-
 		const promises = [];
-
 		subUrls.forEach((subUrl) => {
 			console.log('subUls: ', subUrl[0], ' code: ', subUrl[1]);
 			// const promise = this.page.waitForResponse((resp) => resp.url().includes(subUrl[0] as string ) && resp.status() ===  (subUrl[1] ?? code));
@@ -241,6 +239,14 @@ export class BasePage {
 
 		return response;
 
+	}
+
+	// click & accept
+	async clickAndAccept(selector: string,): Promise<void> {
+		await Promise.all([
+			this.acceptAlert(),
+			this.page.locator(selector).click()
+		]);
 	}
 
 	// click & wait for response

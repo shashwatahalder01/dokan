@@ -52,11 +52,6 @@ test.describe('Admin functionality test', () => {
 		await page.close();
 	});
 
-	// test('admin can set dokan setup wizard @lite @pro', async ( ) => {
-	// 	await adminPage.setDokanSetupWizard(data.dokanSetupWizard);
-	// });
-
-
 	test('admin can add simple product @lite @pro', async ( ) => {
 		await adminPage.addSimpleProduct(data.product.simple);
 	});
@@ -105,9 +100,9 @@ test.describe('Admin functionality test', () => {
 	// })
 
 	// shipping settings
-	// test('admin can set flat rate shipping', async ( ) => {
-	//     await adminPage.addShippingMethod(data.shipping.shippingMethods.flatRate)
-	// })
+	test.only('admin can set flat rate shipping', async ( ) => {
+	    await adminPage.addShippingMethod(data.shipping.shippingMethods.flatRate);
+	});
 
 	// test('admin can set free shipping', async ( ) => {
 	//     await adminPage.addShippingMethod(data.shipping.shippingMethods.freeShipping)

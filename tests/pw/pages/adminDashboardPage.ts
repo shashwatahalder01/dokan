@@ -1,4 +1,4 @@
-import { expect, type Page } from '@playwright/test';
+import { Page, expect } from '@playwright/test';
 import { AdminPage } from 'pages/adminPage';
 import { selector } from 'pages/selectors';
 import { helpers } from 'utils/helpers';
@@ -36,8 +36,8 @@ export class AdminDashboardPage extends AdminPage {
 		// eslint-disable-next-line @typescript-eslint/no-unused-vars
 		const { thankYouMessage, ...subscribeBox } = selector.admin.dokan.dashboard.subscribeBox;
 		await this.multipleElementVisible(subscribeBox);
-
 	}
+
 
 	// at a glance value
 	async dokanAtAGlanceValueAccuracy(atAGlanceValues: any){
@@ -45,13 +45,14 @@ export class AdminDashboardPage extends AdminPage {
 		const netSales = await this.getElementText(selector.admin.dokan.dashboard.atAGlance.netSalesThisMonth) as string;
 		const commissionEarned = await this.getElementText(selector.admin.dokan.dashboard.atAGlance.commissionEarned) as string;
 
-		expect(helpers.roundToTwo(Number(helpers.price(netSales)))).toBe(helpers.roundToTwo(Number(atAGlanceValues.sales.this_month))); // TODO: check for further errors
-		expect(helpers.roundToTwo(Number(helpers.price(commissionEarned)))).toBe(helpers.roundToTwo(Number(atAGlanceValues.earning.this_month))); // TODO: check for further errors
+		expect(helpers.roundToTwo(Number(helpers.price(netSales)))).toBe(helpers.roundToTwo(Number(atAGlanceValues.sales.this_month)));
+		expect(helpers.roundToTwo(Number(helpers.price(commissionEarned)))).toBe(helpers.roundToTwo(Number(atAGlanceValues.earning.this_month)));
 		await this.toContainText(selector.admin.dokan.dashboard.atAGlance.signupThisMonth, atAGlanceValues.vendors.this_month + ' Vendor');
 		await this.toContainText(selector.admin.dokan.dashboard.atAGlance.vendorAwaitingApproval, atAGlanceValues.vendors.inactive + ' Vendor');
 		await this.toContainText(selector.admin.dokan.dashboard.atAGlance.productCreatedThisMonth, atAGlanceValues.products.this_month + ' Products');
 		await this.toContainText(selector.admin.dokan.dashboard.atAGlance.withdrawAwaitingApproval, atAGlanceValues.withdraw.pending + ' Withdrawals');
 	}
+
 
 	// add dokan news subscriber
 	async addDokanNewsSubscriber(user:any){
@@ -59,7 +60,7 @@ export class AdminDashboardPage extends AdminPage {
 
 		await this.clearAndType(selector.admin.dokan.dashboard.subscribeBox.subscriberName, user.name());
 		await this.clearAndType(selector.admin.dokan.dashboard.subscribeBox.subscriberEmail, user.email());
-		await this.clickAndWaitForResponse(data.subUrls.backend.subscribe, selector.admin.dokan.dashboard.subscribeBox.subscribeButton);
+		await this.clickAndWaitForResponse(data.subUrls.backend.dokan.subscribe, selector.admin.dokan.dashboard.subscribeBox.subscribeButton);
 		await this.toContainText(selector.admin.dokan.dashboard.subscribeBox.thankYouMessage, 'Thank you for subscribing!' );
 
 	}

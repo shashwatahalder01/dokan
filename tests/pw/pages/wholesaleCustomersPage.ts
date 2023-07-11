@@ -1,4 +1,4 @@
-import { expect, type Page } from '@playwright/test';
+import { Page, expect } from '@playwright/test';
 import { LoginPage } from 'pages/loginPage';
 import { AdminPage } from 'pages/adminPage';
 // import { CustomerPage } from './customerPage';
@@ -7,16 +7,19 @@ import { data } from 'utils/testData';
 
 
 export class WholesaleCustomersPage extends AdminPage {
-	//TODO: https://medium.com/@thevirtuoid/extending-multiple-classes-in-javascript-2f4752574e65
+
 	constructor(page: Page) {
 		super(page);
 	}
 
 	loginPage = new LoginPage(this.page);
 
+
 	// wholesale customers
+
+	// wholesale customers render properly
 	async adminWholesaleCustomersRenderProperly(){
-		await this.goIfNotThere(data.subUrls.backend.dokan.dokanWholeSaleCustomer);
+		await this.goIfNotThere(data.subUrls.backend.dokan.wholeSaleCustomer);
 
 		// wholesale customer text is visible
 		await this.toBeVisible(selector.admin.dokan.wholesaleCustomer.wholesaleCustomerText);
@@ -35,15 +38,17 @@ export class WholesaleCustomersPage extends AdminPage {
 
 	}
 
+
 	// search wholesale customer
 	async searchWholesaleCustomer(wholesaleCustomer: string){
-		await this.goIfNotThere(data.subUrls.backend.dokan.dokanWholeSaleCustomer);
+		await this.goIfNotThere(data.subUrls.backend.dokan.wholeSaleCustomer);
 
 		await this.clearInputField(selector.admin.dokan.wholesaleCustomer.search);
 
-		await this.typeAndWaitForResponse(data.subUrls.backend.wholesaleCustomers, selector.admin.dokan.wholesaleCustomer.search, wholesaleCustomer);
+		await this.typeAndWaitForResponse(data.subUrls.api.dokan.wholesaleCustomers, selector.admin.dokan.wholesaleCustomer.search, wholesaleCustomer);
 		await this.toBeVisible(selector.admin.dokan.wholesaleCustomer.wholesaleCustomerCell(wholesaleCustomer));
 	}
+
 
 	// edit wholesale customer
 	async editWholesaleCustomer(wholesaleCustomer: any){
@@ -99,9 +104,10 @@ export class WholesaleCustomersPage extends AdminPage {
 		await this.clearAndType(selector.admin.users.userInfo.shippingAddress.phone, wholesaleCustomer.customerInfo.phone);
 
 		// update user
-		await this.clickAndWaitForResponse(data.subUrls.user, selector.admin.users.updateUser, 302);
+		await this.clickAndWaitForResponse(data.subUrls.backend.user, selector.admin.users.updateUser, 302);
 		await this.toContainText(selector.admin.users.updateSuccessMessage, 'User updated.' );
 	}
+
 
 	// view wholesale customer orders
 	async viewWholesaleCustomerOrders(wholesaleCustomer: string){
@@ -114,6 +120,7 @@ export class WholesaleCustomersPage extends AdminPage {
 		expect(Number(count)).not.toBe(0);
 	}
 
+
 	// update wholesale customer
 	async updateWholesaleCustomer(wholesaleCustomer: string, action: string ){
 		await this.searchWholesaleCustomer(wholesaleCustomer);
@@ -121,16 +128,16 @@ export class WholesaleCustomersPage extends AdminPage {
 		switch(action){
 
 		case 'enable' :
-			await this.enableSwitcherAndWaitForResponse(data.subUrls.backend.wholesaleCustomers, selector.admin.dokan.wholesaleCustomer.statusSlider(wholesaleCustomer));
+			await this.enableSwitcherAndWaitForResponse(data.subUrls.api.dokan.wholesaleCustomers, selector.admin.dokan.wholesaleCustomer.statusSlider(wholesaleCustomer));
 			break;
 
 		case 'disable' :
-			await this.disableSwitcherAndWaitForResponse(data.subUrls.backend.wholesaleCustomers, selector.admin.dokan.wholesaleCustomer.statusSlider(wholesaleCustomer));
+			await this.disableSwitcherAndWaitForResponse(data.subUrls.api.dokan.wholesaleCustomers, selector.admin.dokan.wholesaleCustomer.statusSlider(wholesaleCustomer));
 			break;
 
 		case 'delete' :
 			await this.hover(selector.admin.dokan.wholesaleCustomer.wholesaleCustomerCell(wholesaleCustomer));
-			await this.clickAndAcceptAndWaitForResponse(data.subUrls.backend.wholesaleCustomers, selector.admin.dokan.wholesaleCustomer.wholesaleCustomerRemove);
+			await this.clickAndAcceptAndWaitForResponse(data.subUrls.api.dokan.wholesaleCustomers, selector.admin.dokan.wholesaleCustomer.wholesaleCustomerRemove);
 			break;
 
 		default :
@@ -140,17 +147,18 @@ export class WholesaleCustomersPage extends AdminPage {
 
 	}
 
+
 	//  wholesale customers bulk action
 	async wholesaleCustomerBulkAction(action: string){
 		// await this.searchWholesaleCustomer(wholesaleCustomer); //TODO: can be used to minimized number of rows to be affected
-		await this.goIfNotThere(data.subUrls.backend.dokan.dokanWholeSaleCustomer);
+		await this.goIfNotThere(data.subUrls.backend.dokan.wholeSaleCustomer);
 
 		// ensure row exists
 		await this.notToBeVisible(selector.admin.dokan.wholesaleCustomer.noRowsFound);
 
 		await this.click(selector.admin.dokan.wholesaleCustomer.bulkActions.selectAll);
 		await this.selectByValue(selector.admin.dokan.wholesaleCustomer.bulkActions.selectAction, action);
-		await this.clickAndWaitForResponse(data.subUrls.backend.wholesaleCustomers, selector.admin.dokan.wholesaleCustomer.bulkActions.applyAction);
+		await this.clickAndWaitForResponse(data.subUrls.api.dokan.wholesaleCustomers, selector.admin.dokan.wholesaleCustomer.bulkActions.applyAction);
 	}
 
 
@@ -161,11 +169,12 @@ export class WholesaleCustomersPage extends AdminPage {
 		await this.toContainText(selector.customer.cDashboard.wholesaleRequestReturnMessage, data.wholesale.wholesaleRequestSendMessage);
 	}
 
+
 	// customer become wholesale customer
 	async customerBecomeWholesaleCustomer(): Promise<void> {
 		await this.goIfNotThere(data.subUrls.frontend.myAccount);
 		const currentUser = await this.getCurrentUser();
-		await this.clickAndWaitForResponse(data.subUrls.backend.wholesaleRegister, selector.customer.cDashboard.becomeWholesaleCustomer);
+		await this.clickAndWaitForResponse(data.subUrls.api.dokan.wholesaleRegister, selector.customer.cDashboard.becomeWholesaleCustomer);
 		const neeApproval = await this.isVisible(selector.customer.cDashboard.wholesaleRequestReturnMessage);
 		if (!neeApproval) {
 			await this.toContainText(selector.customer.cWooSelector.wooCommerceSuccessMessage, data.wholesale.becomeWholesaleCustomerSuccessMessage);

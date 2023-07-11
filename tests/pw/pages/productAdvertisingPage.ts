@@ -1,4 +1,4 @@
-import { expect, type Page } from '@playwright/test';
+import { Page, expect } from '@playwright/test';
 import { AdminPage } from 'pages/adminPage';
 import { selector } from 'pages/selectors';
 import { data } from 'utils/testData';
@@ -20,8 +20,10 @@ export class ProductAdvertisingPage extends AdminPage {
 		await this.toContainText(selector.admin.dokan.settings.dokanUpdateSuccessMessage, 'Setting has been saved successfully.');
 	}
 
+
+	// product advertising render properly
 	async adminProductAdvertisingRenderProperly(){
-		await this.goIfNotThere(data.subUrls.backend.dokan.dokanProductAdvertising);
+		await this.goIfNotThere(data.subUrls.backend.dokan.productAdvertising);
 
 		// product advertising text is visible
 		await this.toBeVisible(selector.admin.dokan.productAdvertising.productAdvertisingText);
@@ -49,34 +51,36 @@ export class ProductAdvertisingPage extends AdminPage {
 		//TODO: modals can be added : for other tests too
 	}
 
+
 	// add new product advertisement
 	async addNewProductAdvertisement(advertising: any){
-		await this.goIfNotThere(data.subUrls.backend.dokan.dokanProductAdvertising);
+		await this.goIfNotThere(data.subUrls.backend.dokan.productAdvertising);
 
 		await this.click(selector.admin.dokan.productAdvertising.addNewProductAdvertising);
 
 		await this.click(selector.admin.dokan.productAdvertising.addNewAdvertisement.selectStoreDropdown);
-		await this.typeAndWaitForResponse(data.subUrls.backend.stores, selector.admin.dokan.productAdvertising.addNewAdvertisement.selectStoreInput, advertising.advertisedProductStore);
+		await this.typeAndWaitForResponse(data.subUrls.api.dokan.stores, selector.admin.dokan.productAdvertising.addNewAdvertisement.selectStoreInput, advertising.advertisedProductStore);
 		await this.press(data.key.enter);
 
 		await this.click(selector.admin.dokan.productAdvertising.addNewAdvertisement.selectProductDropdown);
-		await this.typeAndWaitForResponse(data.subUrls.backend.products, selector.admin.dokan.productAdvertising.addNewAdvertisement.selectProductInput, advertising.advertisedProduct);
+		await this.typeAndWaitForResponse(data.subUrls.api.dokan.products, selector.admin.dokan.productAdvertising.addNewAdvertisement.selectProductInput, advertising.advertisedProduct);
 		await this.press(data.key.enter);
 
-		await this.clickAndWaitForResponse(data.subUrls.backend.productAdvertising, selector.admin.dokan.productAdvertising.addNewAdvertisement.addNew);
+		await this.clickAndWaitForResponse(data.subUrls.api.dokan.productAdvertising, selector.admin.dokan.productAdvertising.addNewAdvertisement.addNew);
 		await this.click(selector.admin.dokan.productAdvertising.actionSuccessful);
 
 		//close modal
 		await this.click(selector.admin.dokan.productAdvertising.addNewAdvertisement.closeModal);
 	}
 
+
 	// search advertised product
 	async searchAdvertisedProduct(productOrOrder: string | number){
-		await this.goIfNotThere(data.subUrls.backend.dokan.dokanProductAdvertising);
+		await this.goIfNotThere(data.subUrls.backend.dokan.productAdvertising);
 
 		await this.clearInputField(selector.admin.dokan.productAdvertising.search);
 
-		await this.typeAndWaitForResponse(data.subUrls.backend.productAdvertising, selector.admin.dokan.productAdvertising.search, String(productOrOrder));
+		await this.typeAndWaitForResponse(data.subUrls.api.dokan.productAdvertising, selector.admin.dokan.productAdvertising.search, String(productOrOrder));
 		if (typeof(productOrOrder) != 'number'){
 			await this.toBeVisible(selector.admin.dokan.productAdvertising.advertisedProductCell(productOrOrder));
 		} else {
@@ -84,21 +88,22 @@ export class ProductAdvertisingPage extends AdminPage {
 		}
 	}
 
+
 	// filter advertised product
 	async filterAdvertisedProduct(input: string, action: string){
-		await this.goIfNotThere(data.subUrls.backend.dokan.dokanProductAdvertising);
+		await this.goIfNotThere(data.subUrls.backend.dokan.productAdvertising);
 
 		switch (action) {
 
 		case 'by-store' :
 			await this.click(selector.admin.dokan.productAdvertising.filters.allStoresDropdown);
-			await this.typeAndWaitForResponse(data.subUrls.backend.productAdvertising, selector.admin.dokan.productAdvertising.filters.filterByStoreInput, input);
-			await this.pressAndWaitForResponse(data.subUrls.backend.productAdvertising, data.key.enter);
+			await this.typeAndWaitForResponse(data.subUrls.api.dokan.productAdvertising, selector.admin.dokan.productAdvertising.filters.filterByStoreInput, input);
+			await this.pressAndWaitForResponse(data.subUrls.api.dokan.productAdvertising, data.key.enter);
 			break;
 
 		case 'by-creation' :
 			await this.click(selector.admin.dokan.productAdvertising.filters.createdViaDropdown);
-			await this.clickAndWaitForResponse(data.subUrls.backend.productAdvertising, selector.admin.dokan.productAdvertising.filters.filterByCreatedVia(input));
+			await this.clickAndWaitForResponse(data.subUrls.api.dokan.productAdvertising, selector.admin.dokan.productAdvertising.filters.filterByCreatedVia(input));
 			break;
 
 		default :
@@ -109,8 +114,9 @@ export class ProductAdvertisingPage extends AdminPage {
 		expect(Number(count)).not.toBe(0);
 
 		//clear filter
-		await this.clickAndWaitForResponse(data.subUrls.backend.productAdvertising, selector.admin.dokan.productAdvertising.filters.clearFilter);
+		await this.clickAndWaitForResponse(data.subUrls.api.dokan.productAdvertising, selector.admin.dokan.productAdvertising.filters.clearFilter);
 	}
+
 
 	// update advertised product
 	async updateAdvertisedProduct(productName: string, action: string){
@@ -131,18 +137,19 @@ export class ProductAdvertisingPage extends AdminPage {
 			break;
 		}
 
-		await this.clickAndWaitForResponse(data.subUrls.backend.productAdvertising, selector.admin.dokan.productAdvertising.confirmAction);
+		await this.clickAndWaitForResponse(data.subUrls.api.dokan.productAdvertising, selector.admin.dokan.productAdvertising.confirmAction);
 		await this.click(selector.admin.dokan.productAdvertising.actionSuccessful);
 
 		// refresh table by clicking filter
-		await this.clickAndWaitForResponse(data.subUrls.backend.productAdvertising, selector.admin.dokan.productAdvertising.filters.clearFilter);
+		await this.clickAndWaitForResponse(data.subUrls.api.dokan.productAdvertising, selector.admin.dokan.productAdvertising.filters.clearFilter);
 	}
+
 
 	// product advertising bulk action
 	async productAdvertisingBulkAction(action: string){
 		// await this.searchAdvertisedProduct(vendorName); //TODO: can be used to minimized number of rows to be affected
-		// await this.goto(data.subUrls.backend.dokan.dokanProductAdvertising);
-		await this.goIfNotThere(data.subUrls.backend.dokan.dokanProductAdvertising);
+		// await this.goto(data.subUrls.backend.dokan.productAdvertising);
+		await this.goIfNotThere(data.subUrls.backend.dokan.productAdvertising);
 
 		// ensure row exists
 		await this.notToBeVisible(selector.admin.dokan.productAdvertising.noRowsFound);
@@ -150,7 +157,7 @@ export class ProductAdvertisingPage extends AdminPage {
 		await this.click(selector.admin.dokan.productAdvertising.bulkActions.selectAll);
 		await this.selectByValue(selector.admin.dokan.productAdvertising.bulkActions.selectAction, action);
 		await this.click(selector.admin.dokan.productAdvertising.bulkActions.applyAction);
-		await this.clickAndWaitForResponse(data.subUrls.backend.productAdvertising, selector.admin.dokan.productAdvertising.confirmAction);
+		await this.clickAndWaitForResponse(data.subUrls.api.dokan.productAdvertising, selector.admin.dokan.productAdvertising.confirmAction);
 		await this.click(selector.admin.dokan.productAdvertising.actionSuccessful);
 	}
 

@@ -1,4 +1,4 @@
-import { expect, type Page } from '@playwright/test';
+import { Page, expect } from '@playwright/test';
 import { AdminPage } from 'pages/adminPage';
 import { selector } from 'pages/selectors';
 import { data } from 'utils/testData';
@@ -11,8 +11,10 @@ export class LicensePage extends AdminPage {
 	}
 
 	// license
+
+	// license render properly
 	async adminLicenseRenderProperly(){
-		await this.goIfNotThere(data.subUrls.backend.dokan.dokanLicense);
+		await this.goIfNotThere(data.subUrls.backend.dokan.license);
 
 		// license settings text is visible
 		await this.toBeVisible(selector.admin.dokan.license.licenseText);
@@ -22,11 +24,12 @@ export class LicensePage extends AdminPage {
 
 	}
 
+
 	// activate license
 	async activateLicense(key: string, type = 'correct'){
-		await this.goIfNotThere(data.subUrls.backend.dokan.dokanLicense);
+		await this.goIfNotThere(data.subUrls.backend.dokan.license);
 		await this.clearAndType(selector.admin.dokan.license.activateSection.licenseKeyInput, key);
-		await this.clickAndWaitForResponse(data.subUrls.backend.dokan.dokanLicense, selector.admin.dokan.license.activateSection.activateLicense);
+		await this.clickAndWaitForResponse(data.subUrls.backend.dokan.license, selector.admin.dokan.license.activateSection.activateLicense);
 		if(type === 'correct') {
 			//TODO:
 		} else {

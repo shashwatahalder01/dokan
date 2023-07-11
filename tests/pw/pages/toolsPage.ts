@@ -1,4 +1,4 @@
-import { expect, type Page } from '@playwright/test';
+import { Page, expect } from '@playwright/test';
 import { AdminPage } from 'pages/adminPage';
 import { selector } from 'pages/selectors';
 import { data } from 'utils/testData';
@@ -10,10 +10,12 @@ export class ToolsPage extends AdminPage {
 		super(page);
 	}
 
+
 	// tools
 
+	// tools render properly
 	async adminToolsRenderProperly(){
-		await this.goIfNotThere(data.subUrls.backend.dokan.dokanTools);
+		await this.goIfNotThere(data.subUrls.backend.dokan.tools);
 
 		// tools text is visible
 		await this.toBeVisible(selector.admin.dokan.tools.toolsText);
@@ -43,9 +45,10 @@ export class ToolsPage extends AdminPage {
 
 	}
 
+
 	// dokan page installation
 	async dokanPageInstallation(){
-		await this.goIfNotThere(data.subUrls.backend.dokan.dokanTools);
+		await this.goIfNotThere(data.subUrls.backend.dokan.tools);
 
 		// all page created button should be disabled
 		await this.hasClass(selector.admin.dokan.tools.pageInstallation.allPagesCreated, 'button-disabled');
@@ -55,49 +58,55 @@ export class ToolsPage extends AdminPage {
 
 	}
 
+
 	// regenerate order sync table
 	async regenerateOrderSyncTable(){
-		await this.goIfNotThere(data.subUrls.backend.dokan.dokanTools);
+		await this.goIfNotThere(data.subUrls.backend.dokan.tools);
 		await this.clickAndWaitForResponse(data.subUrls.ajax, selector.admin.dokan.tools.regenerateOrderSyncTable.reBuild);
 		//TODO: add assertion
 	}
 
+
 	// check for duplicate order
 	async checkForDuplicateOrders(){
-		await this.goIfNotThere(data.subUrls.backend.dokan.dokanTools);
+		await this.goIfNotThere(data.subUrls.backend.dokan.tools);
 		await this.clickAndWaitForResponse(data.subUrls.ajax, selector.admin.dokan.tools.checkForDuplicateOrders.checkOrders);
 		//TODO: add assertion
 	}
 
+
 	// regenerate variable product variations author IDs
 	async regenerateVariableProductVariationsAuthorIds(){
-		await this.goIfNotThere(data.subUrls.backend.dokan.dokanTools);
+		await this.goIfNotThere(data.subUrls.backend.dokan.tools);
 		await this.clickAndWaitForResponse(data.subUrls.ajax, selector.admin.dokan.tools.regenerateVariableProductVariationsAuthorIds.regenerate);
 		//TODO: add assertion
 	}
 
+
 	// clear dummy data
 	async clearDummyData(){
-		await this.goIfNotThere(data.subUrls.backend.dokan.dokanTools);
-		await this.clickAndWaitForResponse(data.subUrls.backend.dummyData, selector.admin.dokan.tools.importDummyData.import);
+		await this.goIfNotThere(data.subUrls.backend.dokan.tools);
+		await this.clickAndWaitForResponse(data.subUrls.api.dokan.dummyData, selector.admin.dokan.tools.importDummyData.import);
 		await this.click(selector.admin.dokan.dummyData.clearDummyData);
-		await this.clickAndWaitForResponse(data.subUrls.backend.dummyData, selector.admin.dokan.dummyData.confirmClearDummyData);
+		await this.clickAndWaitForResponse(data.subUrls.api.dokan.dummyData, selector.admin.dokan.dummyData.confirmClearDummyData);
 	}
+
 
 	// import dummy data
 	async importDummyData(){
-		await this.goIfNotThere(data.subUrls.backend.dokan.dokanTools);
-		await this.clickAndWaitForResponse(data.subUrls.backend.dummyData, selector.admin.dokan.tools.importDummyData.import);
-		// await this.clickAndWaitForResponse(data.subUrls.backend.dummyData, selector.admin.dokan.dummyData.runTheImporter);
+		await this.goIfNotThere(data.subUrls.backend.dokan.tools);
+		await this.clickAndWaitForResponse(data.subUrls.api.dokan.dummyData, selector.admin.dokan.tools.importDummyData.import);
+		// await this.clickAndWaitForResponse(data.subUrls.api.dokan.dummyData, selector.admin.dokan.dummyData.runTheImporter);
 		//TODO: fix this
-		const subUrls = [[data.subUrls.backend.dummyData], [data.subUrls.backend.dummyData], [data.subUrls.backend.dummyData], [data.subUrls.backend.dummyData], [data.subUrls.backend.dummyData]];
+		const subUrls = [[data.subUrls.api.dokan.dummyData], [data.subUrls.api.dokan.dummyData], [data.subUrls.api.dokan.dummyData], [data.subUrls.api.dokan.dummyData], [data.subUrls.api.dokan.dummyData]];
 		await this.clickAndWaitForResponses(subUrls, selector.admin.dokan.dummyData.runTheImporter);
 		// await this.toBeVisible(selector.admin.dokan.dummyData.importComplete);
 	}
 
+
 	// test distance matrix API
 	async testDistanceMatrixApi(address: any){
-		await this.goIfNotThere(data.subUrls.backend.dokan.dokanTools);
+		await this.goIfNotThere(data.subUrls.backend.dokan.tools);
 
 		await this.clearAndType(selector.admin.dokan.tools.testDistanceMatrixApi.address1, address.address3);
 		await this.clearAndType(selector.admin.dokan.tools.testDistanceMatrixApi.address2, address.address4);

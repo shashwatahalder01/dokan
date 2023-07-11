@@ -1,4 +1,4 @@
-import { expect, type Page } from '@playwright/test';
+import { Page, expect } from '@playwright/test';
 import { AdminPage } from 'pages/adminPage';
 import { selector } from 'pages/selectors';
 import { data } from 'utils/testData';
@@ -10,6 +10,7 @@ export class ProPromoPage extends AdminPage {
 		super(page);
 	}
 
+
 	// dokan pro promo
 	async dokanProPromo(){
 		// dokan promo banner
@@ -19,7 +20,7 @@ export class ProPromoPage extends AdminPage {
 		await this.multipleElementVisible(selector.admin.dokan.promoBanner);
 
 		// dokan lite modules
-		await this.goIfNotThere(data.subUrls.backend.dokan.dokanLiteModules);
+		await this.goIfNotThere(data.subUrls.backend.dokan.liteModules);
 
 		// pro upgrade popup elements are visible
 		await this.multipleElementVisible(selector.admin.dokan.modules.lite.popup);
@@ -30,7 +31,7 @@ export class ProPromoPage extends AdminPage {
 		await this.toHaveCount(selector.admin.dokan.modules.lite.moduleCard, 27);
 
 		// dokan pro features menu
-		await this.goIfNotThere(data.subUrls.backend.dokan.dokanProFeatures);
+		await this.goIfNotThere(data.subUrls.backend.dokan.proFeatures);
 
 		// dokan pro feature sections are visible
 		await this.multipleElementVisible(selector.admin.dokan.proFeatures);

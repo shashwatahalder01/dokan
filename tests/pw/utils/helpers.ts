@@ -33,7 +33,7 @@ export const helpers = {
 	openUrl: (url: string) => open(url),
 
 	// opens test report in the default browser
-	openReport: () => open('./artifacts/jest-stare/index.html'), //TODO: update for playwright
+	openReport: () => open('playwright-report/html-report/index.html'),
 
 	// convert string to price format
 	price: (str: string) => parseFloat(str.replace(/[^\d\-.,]/g, '').replace(/,/g, '.').replace(/\.(?=.*\.)/g, '')),

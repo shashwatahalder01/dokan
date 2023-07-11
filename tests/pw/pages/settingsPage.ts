@@ -1,4 +1,4 @@
-import { expect, type Page } from '@playwright/test';
+import { Page, expect } from '@playwright/test';
 import { AdminPage } from 'pages/adminPage';
 import { selector } from 'pages/selectors';
 import { data } from 'utils/testData';
@@ -10,10 +10,12 @@ export class SettingsPage extends AdminPage {
 		super(page);
 	}
 
+
 	// settings
 
+	// settings render properly
 	async adminSettingsRenderProperly(){
-		await this.goIfNotThere(data.subUrls.backend.dokan.dokanSettings);
+		await this.goIfNotThere(data.subUrls.backend.dokan.settings);
 
 		// settings text is visible
 		await this.toBeVisible(selector.admin.dokan.settings.settingsText);
@@ -31,21 +33,24 @@ export class SettingsPage extends AdminPage {
 		await this.toBeVisible(selector.admin.dokan.settings.saveChanges);
 	}
 
+
 	// search settings
 	async searchSettings(settings: string){
-		await this.goIfNotThere(data.subUrls.backend.dokan.dokanSettings);
+		await this.goIfNotThere(data.subUrls.backend.dokan.settings);
 
 		await this.clearAndType(selector.admin.dokan.settings.search.input, settings);
 		await this.toBeVisible(selector.admin.dokan.settings.fields);
 	}
 
+
 	// scroll to top settings
 	async scrollToTopSettings(){
-		await this.goIfNotThere(data.subUrls.backend.dokan.dokanSettings);
+		await this.goIfNotThere(data.subUrls.backend.dokan.settings);
 
 		await this.scrollToBottom();
 		await this.toBeVisible(selector.admin.dokan.settings.backToTop);
 	}
+
 
 	// dokan settings
 
@@ -69,6 +74,7 @@ export class SettingsPage extends AdminPage {
 		await this.clickAndWaitForResponse(data.subUrls.ajax, selector.admin.dokan.settings.generalSaveChanges);
 		await this.toContainText(selector.admin.dokan.settings.dokanUpdateSuccessMessage, general.saveSuccessMessage );
 	}
+
 
 	// admin set dokan selling settings
 	async setDokanSellingSettings(selling: any) {
@@ -104,6 +110,7 @@ export class SettingsPage extends AdminPage {
 		await this.clickAndWaitForNavigation(selector.admin.dokan.settings.sellingOptionsSaveChanges);
 		await this.toHaveValue(selector.admin.dokan.settings.adminCommission, selling.adminCommission);
 	}
+
 
 	// Admin Set Dokan Withdraw Settings
 	async setDokanWithdrawSettings(withdraw: any) {
@@ -150,6 +157,7 @@ export class SettingsPage extends AdminPage {
 		await this.toContainText(selector.admin.dokan.settings.dokanUpdateSuccessMessage, withdraw.saveSuccessMessage );
 	}
 
+
 	// Admin Set Dokan Reverse Withdraw Settings
 	async setDokanReverseWithdrawSettings(reverseWithdraw: any) {
 		await this.goToDokanSettings();
@@ -191,6 +199,7 @@ export class SettingsPage extends AdminPage {
 		await this.toContainText(selector.admin.dokan.settings.dokanUpdateSuccessMessage, page.saveSuccessMessage );
 	}
 
+
 	// Admin Set Dokan Appearance Settings
 	async setDokanAppearanceSettings(appearance: any) {
 		await this.goToDokanSettings();
@@ -216,6 +225,7 @@ export class SettingsPage extends AdminPage {
 		await this.toHaveValue(selector.admin.dokan.settings.googleMapApiKey, appearance.googleMapApiKey);
 	}
 
+
 	// Admin Set Dokan Privacy Policy Settings
 	async setDokanPrivacyPolicySettings(privacyPolicy: any) {
 		await this.goToDokanSettings();
@@ -230,6 +240,7 @@ export class SettingsPage extends AdminPage {
 		await this.clickAndWaitForResponse(data.subUrls.ajax, selector.admin.dokan.settings.privacyPolicySaveChanges);
 		await this.toContainText(selector.admin.dokan.settings.dokanUpdateSuccessMessage, privacyPolicy.saveSuccessMessage );
 	}
+
 
 	// Admin Set Dokan Store Support Settings
 	async setDokanStoreSupportSettings(storeSupport: any) {
@@ -246,6 +257,7 @@ export class SettingsPage extends AdminPage {
 		await this.clickAndWaitForResponse(data.subUrls.ajax, selector.admin.dokan.settings.storeSupportSaveChanges);
 		await this.toContainText(selector.admin.dokan.settings.dokanUpdateSuccessMessage, storeSupport.saveSuccessMessage );
 	}
+
 
 	// Admin Set Dokan Rma Settings
 	async setDokanRmaSettings(rma: any) {
@@ -270,6 +282,7 @@ export class SettingsPage extends AdminPage {
 		await this.toContainText(selector.admin.dokan.settings.dokanUpdateSuccessMessage, rma.saveSuccessMessage );
 	}
 
+
 	// Admin Set Dokan Wholesale Settings
 	async setDokanWholesaleSettings(wholesale: any) {
 		await this.goToDokanSettings();
@@ -284,6 +297,7 @@ export class SettingsPage extends AdminPage {
 		await this.clickAndWaitForResponse(data.subUrls.ajax, selector.admin.dokan.settings.wholesaleSaveChanges);
 		await this.toContainText(selector.admin.dokan.settings.dokanUpdateSuccessMessage, wholesale.saveSuccessMessage );
 	}
+
 
 	// Admin Set Dokan Eu Compliance Settings
 	async setDokanEuComplianceSettings(euCompliance: any) {
@@ -308,6 +322,7 @@ export class SettingsPage extends AdminPage {
 		await this.clickAndWaitForResponse(data.subUrls.ajax, selector.admin.dokan.settings.euComplianceFieldsSaveChanges);
 		await this.toContainText(selector.admin.dokan.settings.dokanUpdateSuccessMessage, euCompliance.saveSuccessMessage );
 	}
+
 
 	// Admin Set Dokan Delivery Time Settings
 	async setDokanDeliveryTimeSettings(deliveryTime: any) {
@@ -338,6 +353,7 @@ export class SettingsPage extends AdminPage {
 		await this.toContainText(selector.admin.dokan.settings.dokanUpdateSuccessMessage, deliveryTime.saveSuccessMessage );
 	}
 
+
 	// Admin Set Dokan Product Advertising Settings
 	async setDokanProductAdvertisingSettings(productAdvertising: any) {
 		await this.goToDokanSettings();
@@ -357,6 +373,7 @@ export class SettingsPage extends AdminPage {
 		await this.clickAndWaitForResponse(data.subUrls.ajax, selector.admin.dokan.settings.productAdvertisingSaveChanges);
 		await this.toContainText(selector.admin.dokan.settings.dokanUpdateSuccessMessage, productAdvertising.saveSuccessMessage );
 	}
+
 
 	// Admin Set Dokan Geolocation Settings
 	async setDokanGeolocationSettings(geolocation: any) {
@@ -384,6 +401,7 @@ export class SettingsPage extends AdminPage {
 		await this.toContainText(selector.admin.dokan.settings.dokanUpdateSuccessMessage, geolocation.saveSuccessMessage );
 	}
 
+
 	// Admin Set Dokan Product Report Abuse Settings
 	async setDokanProductReportAbuseSettings(productReportAbuse: any) {
 		await this.goToDokanSettings();
@@ -398,6 +416,7 @@ export class SettingsPage extends AdminPage {
 		await this.clickAndWaitForResponse(data.subUrls.ajax, selector.admin.dokan.settings.productReportAbuseSaveChanges);
 		await this.toContainText(selector.admin.dokan.settings.dokanUpdateSuccessMessage, productReportAbuse.saveSuccessMessage );
 	}
+
 
 	// Admin Set Dokan Spmv Settings
 	async setDokanSpmvSettings(spmv: any) {
@@ -415,6 +434,7 @@ export class SettingsPage extends AdminPage {
 		await this.toContainText(selector.admin.dokan.settings.dokanUpdateSuccessMessage, spmv.saveSuccessMessage );
 
 	}
+
 
 	// Admin Set Dokan Vendor Subscription Settings
 	async setDokanVendorSubscriptionSettings(subscription: any) {
@@ -439,6 +459,7 @@ export class SettingsPage extends AdminPage {
 
 	}
 
+	// disable dokan vendor subscription
 	async disableDokanVendorSubscription(subscription: any){
 		await this.goToDokanSettings();
 		await this.click(selector.admin.dokan.settings.vendorSubscription);

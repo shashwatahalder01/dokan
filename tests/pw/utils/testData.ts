@@ -585,75 +585,72 @@ export const data = {
 	},
 
 	subUrls: {
+
+		ajax: '/admin-ajax.php',
+		post: '/post.php',
+		gmap: '/maps/api',
+
 		backend: {
-			setupWP: 'wp-admin/install.php',
+
 			login: 'wp-login.php',
 			adminLogin: 'wp-admin',
 			adminLogout: 'wp-login.php?action=logout',
 			adminDashboard: 'wp-admin',
+			user: 'wp-admin/user-edit.php',
+			setupWP: 'wp-admin/install.php',
+			general: 'wp-admin/options-general.php',
+			permalinks: 'wp-admin/options-permalink.php',
+			plugins: 'wp-admin/plugins.php',
 
 			dokan: {
-				dokanSetupWizard: 'wp-admin/admin.php?page=dokan-setup',
+				setupWizard: 'wp-admin/admin.php?page=dokan-setup',
 				dokan: 'wp-admin/admin.php?page=dokan#',
+
 				// only lite
-				dokanLiteModules: 'wp-admin/admin.php?page=dokan#/pro-modules',
-				dokanProFeatures: 'wp-admin/admin.php?page=dokan#/premium',
+				liteModules: 'wp-admin/admin.php?page=dokan#/pro-modules',
+				proFeatures: 'wp-admin/admin.php?page=dokan#/premium',
+
 				// lite and pro
-				dokanWithdraw: 'wp-admin/admin.php?page=dokan#/withdraw?status=pending', //TODO: if needed make separate for status pending
-				dokanReverseWithdraw: 'wp-admin/admin.php?page=dokan#/reverse-withdrawal',
-				dokanVendors: 'wp-admin/admin.php?page=dokan#/vendors',
-				dokanStoreCategories: 'wp-admin/admin.php?page=dokan#/store-categories',
-				dokanAbuseReports: 'wp-admin/admin.php?page=dokan#/abuse-reports',
-				dokanStoreReviews: 'wp-admin/admin.php?page=dokan#/store-reviews',
-				dokanStoreSupport: 'wp-admin/admin.php?page=dokan#/admin-store-support',
-				dokanRequestForQuote: 'wp-admin/admin.php?page=dokan#/request-for-quote',
-				dokanRequestForQuoteRules: 'wp-admin/admin.php?page=dokan#/request-for-quote/quote-rules',
-				dokanSellerBadge: 'wp-admin/admin.php?page=dokan#/dokan-seller-badge',
-				dokanAnnouncements: 'wp-admin/admin.php?page=dokan#/announcement',
-				dokanRefunds: 'wp-admin/admin.php?page=dokan#/refund?status=pending',
-				dokanReports: 'wp-admin/admin.php?page=dokan#/reports',
-				dokanAllLogs: 'wp-admin/admin.php?page=dokan#/reports?tab=logs',
-				dokanModules: 'wp-admin/admin.php?page=dokan#/modules',
-				dokanTools: 'wp-admin/admin.php?page=dokan#/tools',
-				dokanVerifications: 'wp-admin/admin.php?page=dokan-seller-verifications',
-				dokanProductAdvertising: 'wp-admin/admin.php?page=dokan#/product-advertising',
-				dokanWholeSaleCustomer: 'wp-admin/admin.php?page=dokan#/wholesale-customer',
-				dokanHelp: 'wp-admin/admin.php?page=dokan#/help',
-				dokanSettings: 'wp-admin/admin.php?page=dokan#/settings',
-				dokanLicense: 'wp-admin/admin.php?page=dokan_updates',
+				withdraw: 'wp-admin/admin.php?page=dokan#/withdraw?status=pending',
+				reverseWithdraws: 'wp-admin/admin.php?page=dokan#/reverse-withdrawal',
+				vendors: 'wp-admin/admin.php?page=dokan#/vendors',
+				storeCategories: 'wp-admin/admin.php?page=dokan#/store-categories',
+				abuseReports: 'wp-admin/admin.php?page=dokan#/abuse-reports',
+				storeReviews: 'wp-admin/admin.php?page=dokan#/store-reviews',
+				storeSupport: 'wp-admin/admin.php?page=dokan#/admin-store-support',
+				requestForQuote: 'wp-admin/admin.php?page=dokan#/request-for-quote',
+				requestForQuoteRules: 'wp-admin/admin.php?page=dokan#/request-for-quote/quote-rules',
+				sellerBadge: 'wp-admin/admin.php?page=dokan#/dokan-seller-badge',
+				announcements: 'wp-admin/admin.php?page=dokan#/announcement',
+				refunds: 'wp-admin/admin.php?page=dokan#/refund?status=pending',
+				reports: 'wp-admin/admin.php?page=dokan#/reports',
+				allLogs: 'wp-admin/admin.php?page=dokan#/reports?tab=logs',
+				modules: 'wp-admin/admin.php?page=dokan#/modules',
+				tools: 'wp-admin/admin.php?page=dokan#/tools',
+				verifications: 'wp-admin/admin.php?page=dokan-seller-verifications',
+				productAdvertising: 'wp-admin/admin.php?page=dokan#/product-advertising',
+				wholeSaleCustomer: 'wp-admin/admin.php?page=dokan#/wholesale-customer',
+				help: 'wp-admin/admin.php?page=dokan#/help',
+				settings: 'wp-admin/admin.php?page=dokan#/settings',
+				license: 'wp-admin/admin.php?page=dokan_updates',
+
+				//others
+				downloadOrderLogs: 'wp-admin/admin.php?download-order-log-csv',
+				subscribe: 'https://api.getwemail.io/v1/embed/subscribe'
 			},
 
-			woocommerceSettings: 'wp-admin/admin.php?page=wc-settings',
-			wcAddNewProducts: 'wp-admin/post-new.php?post_type=product',
-			wcAddNewCategories: 'wp-admin/edit-tags.php?taxonomy=product_cat&post_type=product',
-			wcAddNewAttributes: 'wp-admin/edit.php?post_type=product&page=product_attributes',
-			wcOrders: 'wp-admin/edit.php?post_type=shop_order',
-			permalinks: 'wp-admin/options-permalink.php',
-			general: 'wp-admin/options-general.php',
-			plugins: 'wp-admin/plugins.php',
-			//TODO: move to api
-			products: 'dokan/v1/products',
-			stores: 'dokan/v1/stores',
-			storeCategories: 'dokan/v1/store-categories',
-			withdraws: 'dokan/v1/withdraw',
-			reverseWithdraws: 'dokan/v1/reverse-withdrawal',
-			abuseReports: 'dokan/v1/abuse-reports',
-			logs: 'dokan/v1/admin/logs',
-			downloadOrderLogs: 'wp-admin/admin.php?download-order-log-csv',
-			announcements: 'dokan/v1/announcement',
-			dummyData: 'dokan/v1/dummy-data',
-			refunds: 'dokan/v1/refunds',
-			modules: 'dokan/v1/admin/modules',
-			storeReviews: 'dokan/v1/store-reviews',
-			productAdvertising: 'dokan/v1/product_adv',
-			wholesaleRegister: 'dokan/v1/wholesale/register',
-			wholesaleCustomers: 'dokan/v1/wholesale/customers',
-			storeSupport: 'dokan/v1/admin/support-ticket',
-			quotes: 'dokan/v1/request-for-quote',
-			quoteRules: 'dokan/v1/request-for-quote/quote-rule',
-			sellerBadge: 'dokan/v1/seller-badge',
-			sellerBadgeEvent: 'dokan/v1/seller-badge/events',
-			subscribe: 'https://api.getwemail.io/v1/embed/subscribe'
+			wc: {
+				addNewProducts: 'wp-admin/post-new.php?post_type=product',
+				addNewCategories: 'wp-admin/edit-tags.php?taxonomy=product_cat&post_type=product',
+				addNewAttributes: 'wp-admin/edit.php?post_type=product&page=product_attributes',
+				searchAttribute: 'wp-admin/admin-ajax.php?action=woocommerce_json_search_product_attributes',
+				term: 'wp-admin/admin-ajax.php?term',
+				taxonomyTerms: 'wp-admin/admin-ajax.php?action=woocommerce_json_search_taxonomy_terms',
+				taxonomy: 'wp-admin/edit-tags.php?taxonomy',
+				orders: 'wp-admin/edit.php?post_type=shop_order',
+				settings: 'wp-admin/admin.php?page=wc-settings',
+			},
+
 		},
 
 		frontend: {
@@ -680,40 +677,43 @@ export const data = {
 			productReview: 'wp-comments-post.php',
 			submitSupport: 'wp-comments-post.php',
 
-			//vendor dashboard
-			vendorSetupWizard: '?page=dokan-seller-setup',
-			dashboard: 'dashboard',
-			product: 'dashboard/products',
-			productAuction: 'dashboard/new-auction-product',
-			productBooking: 'dashboard/booking/new-product',
-			order: 'dashboard/orders',
-			coupon: 'dashboard/coupons',
-			reviews: 'dashboard/reviews/',
-			withdraw: 'dashboard/withdraw/',
-			badges: 'dashboard/seller-badge/',
-			withdrawRequests: 'dashboard/withdraw-requests',
-			auction: 'dashboard/auction',
-			booking: 'dashboard/booking',
-			settingsStore: 'dashboard/settings/store',
-			settingsAddon: 'dashboard/settings/product-addon',
-			settingsPayment: 'dashboard/settings/payment',
-			settingsVerification: 'dashboard/settings/verification',
-			settingsDeliveryTime: 'dashboard/settings/delivery-time',
-			settingsShipping: 'dashboard/settings/shipping',
-			settingsSocialProfile: 'dashboard/settings/social',
-			settingsRma: 'dashboard/settings/rma',
-			settingsSeo: 'dashboard/settings/seo',
-			editAccountVendor: 'dashboard/edit-account',
-			paypal: 'dashboard/settings/payment-manage-paypal',
-			bankTransfer: 'dashboard/settings/payment-manage-bank',
-			customPayment: 'dashboard/settings/payment-manage-dokan_custom',
-			skrill: 'dashboard/settings/payment-manage-skrill',
+			// vendor dashboard
+			vDashboard:{
+				setupWizard: '?page=dokan-seller-setup',
+				dashboard: 'dashboard',
+				product: 'dashboard/products',
+				productAuction: 'dashboard/new-auction-product',
+				productBooking: 'dashboard/booking/new-product',
+				order: 'dashboard/orders',
+				coupon: 'dashboard/coupons',
+				reviews: 'dashboard/reviews/',
+				withdraw: 'dashboard/withdraw/',
+				badges: 'dashboard/seller-badge/',
+				withdrawRequests: 'dashboard/withdraw-requests',
+				auction: 'dashboard/auction',
+				booking: 'dashboard/booking',
+				settingsStore: 'dashboard/settings/store',
+				settingsAddon: 'dashboard/settings/product-addon',
+				settingsPayment: 'dashboard/settings/payment',
+				settingsVerification: 'dashboard/settings/verification',
+				settingsDeliveryTime: 'dashboard/settings/delivery-time',
+				settingsShipping: 'dashboard/settings/shipping',
+				settingsSocialProfile: 'dashboard/settings/social',
+				settingsRma: 'dashboard/settings/rma',
+				settingsSeo: 'dashboard/settings/seo',
+				editAccountVendor: 'dashboard/edit-account',
+				paypal: 'dashboard/settings/payment-manage-paypal',
+				bankTransfer: 'dashboard/settings/payment-manage-bank',
+				customPayment: 'dashboard/settings/payment-manage-dokan_custom',
+				skrill: 'dashboard/settings/payment-manage-skrill',
+			},
 		},
 
 		api: {
 			dokan:{
 				products: 'dokan/v1/products',
 				stores: 'dokan/v1/stores',
+				storeCategories: 'dokan/v1/store-categories',
 				withdraws: 'dokan/v1/withdraw',
 				reverseWithdraws: 'dokan/v1/reverse-withdrawal',
 				abuseReports: 'dokan/v1/abuse-reports',
@@ -726,7 +726,7 @@ export const data = {
 				productAdvertising: 'dokan/v1/product_adv',
 				wholesaleRegister: 'dokan/v1/wholesale/register',
 				wholesaleCustomers: 'dokan/v1/wholesale/customers',
-				supportTicket: 'dokan/v1/admin/support-ticket',
+				storeSupport: 'dokan/v1/admin/support-ticket',
 				quotes: 'dokan/v1/request-for-quote',
 				quoteRules: 'dokan/v1/request-for-quote/quote-rule',
 				sellerBadge: 'dokan/v1/seller-badge',
@@ -739,14 +739,10 @@ export const data = {
 
 		},
 
-		ajax: '/admin-ajax.php',
-		post: '/post.php',
-		gmap: '/maps/api',
-		user: 'wp-admin/user-edit.php',
 	},
 
 
-	//User
+	// user
 	user: {
 		username: () => faker.person.firstName('male'),
 		userDetails: {
@@ -760,7 +756,7 @@ export const data = {
 	},
 
 
-	//admin
+	// admin
 	admin: {
 		username: String(process.env.ADMIN),
 		password: String(process.env.ADMIN_PASSWORD),

@@ -1,4 +1,4 @@
-import { expect, type Page } from '@playwright/test';
+import { Page, expect } from '@playwright/test';
 import { AdminPage } from 'pages/adminPage';
 import { selector } from 'pages/selectors';
 import { data } from 'utils/testData';
@@ -11,8 +11,10 @@ export class HelpPage extends AdminPage {
 	}
 
 	// help
+
+	// help render properly
 	async adminHelpRenderProperly(){
-		await this.goIfNotThere(data.subUrls.backend.dokan.dokanHelp);
+		await this.goIfNotThere(data.subUrls.backend.dokan.help);
 
 		// help text is visible
 		await this.toBeVisible(selector.admin.dokan.help.helpText);
@@ -31,9 +33,10 @@ export class HelpPage extends AdminPage {
 
 	}
 
+
 	// get help
 	async adminGetHelpDropdownRenderProperly(){
-		await this.goIfNotThere(data.subUrls.backend.dokan.dokanHelp);
+		await this.goIfNotThere(data.subUrls.backend.dokan.help);
 
 		await this.hover(selector.admin.dokan.dashboard.header.getHelpMenu);
 

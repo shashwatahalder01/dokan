@@ -1,4 +1,4 @@
-import { expect, type Page } from '@playwright/test';
+import { Page, expect } from '@playwright/test';
 import { BasePage } from 'pages/basePage';
 import { LoginPage } from 'pages/loginPage';
 import { AdminPage } from 'pages/adminPage';
@@ -87,7 +87,7 @@ export class CustomerPage extends BasePage {
 			await this.placeOrder('bank', false, true, false);
 		}
 		// skip vendor setup wizard
-		await this.clickAndWaitForResponse(data.subUrls.frontend.dashboard, selector.vendor.vSetup.notRightNow);
+		await this.clickAndWaitForResponse(data.subUrls.frontend.vDashboard.dashboard, selector.vendor.vSetup.notRightNow);
 		await this.toBeVisible(selector.vendor.vDashboard.menus.dashboard);
 	}
 

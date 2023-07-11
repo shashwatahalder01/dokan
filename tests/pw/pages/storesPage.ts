@@ -1,4 +1,4 @@
-import { expect, type Page } from '@playwright/test';
+import { Page, expect } from '@playwright/test';
 import { AdminPage } from 'pages/adminPage';
 import { selector } from 'pages/selectors';
 import { data } from 'utils/testData';
@@ -15,8 +15,9 @@ export class StoresPage extends AdminPage {
 
 	// vendors
 
+	// vendors render properly
 	async adminVendorsRenderProperly(){
-		await this.goIfNotThere(data.subUrls.backend.dokan.dokanVendors);
+		await this.goIfNotThere(data.subUrls.backend.dokan.vendors);
 
 		// vendor text is visible
 		await this.toBeVisible(selector.admin.dokan.vendors.vendorsText);
@@ -37,9 +38,10 @@ export class StoresPage extends AdminPage {
 		await this.multipleElementVisible(selector.admin.dokan.vendors.table);
 	}
 
+
 	// admin add new vendors
 	async addVendor(vendorInfo: any) {
-		await this.goIfNotThere(data.subUrls.backend.dokan.dokanVendors);
+		await this.goIfNotThere(data.subUrls.backend.dokan.vendors);
 
 		const firstName = vendorInfo.firstName();
 		const email = vendorInfo.email();
@@ -50,12 +52,12 @@ export class StoresPage extends AdminPage {
 		await this.type(selector.admin.dokan.vendors.newVendor.firstName, firstName);
 		await this.type(selector.admin.dokan.vendors.newVendor.lastName, vendorInfo.lastName());
 		await this.type(selector.admin.dokan.vendors.newVendor.storeName, vendorInfo.shopName);
-		await this.typeAndWaitForResponse(data.subUrls.backend.stores, selector.admin.dokan.vendors.newVendor.storeUrl, vendorInfo.shopName);
+		await this.typeAndWaitForResponse(data.subUrls.api.dokan.stores, selector.admin.dokan.vendors.newVendor.storeUrl, vendorInfo.shopName);
 		await this.type(selector.admin.dokan.vendors.newVendor.phoneNumber, vendorInfo.phoneNumber);
-		await this.typeAndWaitForResponse(data.subUrls.backend.stores, selector.admin.dokan.vendors.newVendor.email, email);
+		await this.typeAndWaitForResponse(data.subUrls.api.dokan.stores, selector.admin.dokan.vendors.newVendor.email, email);
 		await this.click(selector.admin.dokan.vendors.newVendor.generatePassword);
 		await this.clearAndType(selector.admin.dokan.vendors.newVendor.password, vendorInfo.password);
-		await this.typeAndWaitForResponse(data.subUrls.backend.stores, selector.admin.dokan.vendors.newVendor.username, firstName);
+		await this.typeAndWaitForResponse(data.subUrls.api.dokan.stores, selector.admin.dokan.vendors.newVendor.username, firstName);
 		await this.type(selector.admin.dokan.vendors.newVendor.companyName, vendorInfo.companyName);
 		await this.type(selector.admin.dokan.vendors.newVendor.companyIdEuidNumber, vendorInfo.companyId);
 		await this.type(selector.admin.dokan.vendors.newVendor.vatOrTaxNumber, vendorInfo.vatNumber);
@@ -87,10 +89,11 @@ export class StoresPage extends AdminPage {
 		await this.check(selector.admin.dokan.vendors.newVendor.publishProductDirectly);
 		await this.check(selector.admin.dokan.vendors.newVendor.makeVendorFeature);
 		// create vendor
-		await this.clickAndWaitForResponse(data.subUrls.backend.stores, selector.admin.dokan.vendors.newVendor.createVendor);
+		await this.clickAndWaitForResponse(data.subUrls.api.dokan.stores, selector.admin.dokan.vendors.newVendor.createVendor);
 		await this.toContainText(selector.admin.dokan.vendors.sweetAlertTitle, 'Vendor Created');
 		await this.click(selector.admin.dokan.vendors.closeSweetAlert);
 	}
+
 
 	// edit vendor
 	async editVendor(vendor: any ){
@@ -192,7 +195,7 @@ export class StoresPage extends AdminPage {
 			await this.check(selector.admin.users.userInfo.dokanOptions.featuredVendor);
 
 			// update user
-			await this.clickAndWaitForResponse(data.subUrls.user, selector.admin.users.updateUser, 302);
+			await this.clickAndWaitForResponse(data.subUrls.backend.user, selector.admin.users.updateUser, 302);
 			await this.toContainText(selector.admin.users.updateSuccessMessage, 'User updated.');
 
 		} else {
@@ -251,25 +254,27 @@ export class StoresPage extends AdminPage {
 			await this.enableSwitcher(selector.admin.dokan.vendors.editVendor.publishProductDirectly);
 			await this.enableSwitcher(selector.admin.dokan.vendors.editVendor.makeVendorFeature);
 
-			await this.clickAndWaitForResponse(data.subUrls.backend.stores, selector.admin.dokan.vendors.editVendor.saveChanges);
+			await this.clickAndWaitForResponse(data.subUrls.api.dokan.stores, selector.admin.dokan.vendors.editVendor.saveChanges);
 
 		}
 	}
 
+
 	// search vendor
 	async searchVendor(vendorName: string){
-		await this.goIfNotThere(data.subUrls.backend.dokan.dokanVendors);
+		await this.goIfNotThere(data.subUrls.backend.dokan.vendors);
 
 		await this.clearInputField(selector.admin.dokan.vendors.search);
 
-		await this.typeAndWaitForResponse(data.subUrls.backend.stores, selector.admin.dokan.vendors.search, vendorName);
+		await this.typeAndWaitForResponse(data.subUrls.api.dokan.stores, selector.admin.dokan.vendors.search, vendorName);
 		await this.toBeVisible(selector.admin.dokan.vendors.vendorCell(vendorName));
 
 		// negative scenario //TODO: add this to all search also add flag to avoid this scenario
-		// await this.typeAndWaitForResponse(data.subUrls.backend.stores, selector.admin.dokan.vendors.search, vendorName + 'abcdefgh');
+		// await this.typeAndWaitForResponse(data.subUrls.api.dokan.stores, selector.admin.dokan.vendors.search, vendorName + 'abcdefgh');
 		// await this.toBeVisible(selector.admin.dokan.vendors.noRowsFound);
 
 	}
+
 
 	// update vendor
 	async updateVendor(vendorName: string, action: string ){
@@ -278,11 +283,11 @@ export class StoresPage extends AdminPage {
 		switch(action){
 
 		case 'enable' :
-			await this.enableSwitcherAndWaitForResponse(data.subUrls.backend.stores, selector.admin.dokan.vendors.statusSlider(vendorName));
+			await this.enableSwitcherAndWaitForResponse(data.subUrls.api.dokan.stores, selector.admin.dokan.vendors.statusSlider(vendorName));
 			break;
 
 		case 'disable' :
-			await this.disableSwitcherAndWaitForResponse(data.subUrls.backend.stores, selector.admin.dokan.vendors.statusSlider(vendorName));
+			await this.disableSwitcherAndWaitForResponse(data.subUrls.api.dokan.stores, selector.admin.dokan.vendors.statusSlider(vendorName));
 			break;
 
 		default :
@@ -291,6 +296,7 @@ export class StoresPage extends AdminPage {
 		}
 
 	}
+
 
 	// view vendor orders, products
 	async viewVendor(vendorName: string, action: string ){
@@ -318,17 +324,18 @@ export class StoresPage extends AdminPage {
 
 	}
 
+
 	// vendor bulk action
 	async vendorBulkAction(action: string){
 		// await this.searchVendor(vendorName); //TODO: can be used to minimized number of rows to be affected
-		await this.goIfNotThere(data.subUrls.backend.dokan.dokanVendors);
+		await this.goIfNotThere(data.subUrls.backend.dokan.vendors);
 
 		// ensure row exists
 		await this.notToBeVisible(selector.admin.dokan.vendors.noRowsFound);
 
 		await this.click(selector.admin.dokan.vendors.bulkActions.selectAll);
 		await this.selectByValue(selector.admin.dokan.vendors.bulkActions.selectAction, action);
-		await this.clickAndWaitForResponse(data.subUrls.backend.stores, selector.admin.dokan.vendors.bulkActions.applyAction);
+		await this.clickAndWaitForResponse(data.subUrls.api.dokan.stores, selector.admin.dokan.vendors.bulkActions.applyAction);
 	}
 
 }

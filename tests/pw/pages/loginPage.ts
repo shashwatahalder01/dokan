@@ -1,4 +1,4 @@
-import { expect, type Page } from '@playwright/test';
+import { Page, expect } from '@playwright/test';
 import { BasePage } from './basePage';
 import { data, user } from '../utils/testData';
 import { selector } from './selectors';
@@ -10,24 +10,29 @@ export class LoginPage extends BasePage {
 		super(page);
 	}
 
+
 	// user login
 	async login(user: user, storageState?: string): Promise<void> {
 		await this.loginFronted(user, storageState);
 	}
 
+
 	// user loginFronted
 	async loginFronted(user: user, storageState?: string ): Promise<void> {
 		await this.goIfNotThere(data.subUrls.frontend.myAccount);
 		const currentUser = await this.getCurrentUser();
+
 		// skip if user is already logged in
 		if (user.username === currentUser) {
 			return;
 		}
+
 		// logout if other user is already logged in
 		else if ( ( user.username !== currentUser ) && ( currentUser !== undefined ) ) { // TODO : got undefined for using storage.json
 		// else if ((user.username !== currentUser) || (currentUser === undefined)) {
 			await this.logoutFrontend();
 		}
+
 		// login user
 		await this.clearAndFill(selector.frontend.username, user.username);
 		await this.clearAndFill(selector.frontend.userPassword, user.password);
@@ -38,6 +43,7 @@ export class LoginPage extends BasePage {
 		const loggedInUser = await this.getCurrentUser();
 		expect(loggedInUser).toBe(user.username);
 	}
+
 
 	// user loginBackend
 	async loginBackend(user: user, url: string = data.subUrls.backend.login, storageState?: string): Promise<void> {
@@ -57,10 +63,12 @@ export class LoginPage extends BasePage {
 		}
 	}
 
+
 	// user logout
 	async logout(): Promise<void> {
 		await this.logoutFrontend();
 	}
+
 
 	// user logoutFrontend
 	async logoutFrontend(): Promise<void> {
@@ -71,10 +79,12 @@ export class LoginPage extends BasePage {
 		expect(loggedInUser).toBeUndefined();
 	}
 
+
 	// admin login
 	async adminLogin(user: user, storageState?: string) {
 		await this.loginBackend(user, data.subUrls.backend.adminLogin, storageState);
 	}
+
 
 	// admin logout
 	async logoutBackend(): Promise<void> {
@@ -83,6 +93,7 @@ export class LoginPage extends BasePage {
 		const loggedInUser = await this.getCurrentUser();
 		expect(loggedInUser).toBeUndefined();
 	}
+
 
 	// switch user
 	async switchUser(user: user): Promise<void> {

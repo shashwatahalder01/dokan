@@ -1,15 +1,18 @@
-import { expect, type Page } from '@playwright/test';
-import { AdminPage } from 'pages/adminPage';
+import { Page, expect } from '@playwright/test';
+import { WpPage } from 'pages/wpPage';
 import { selector } from 'pages/selectors';
 import { data } from 'utils/testData';
 
 
-export class LocalSetupPage extends AdminPage {
+export class LocalSetupPage extends WpPage {
 
 	constructor(page: Page) {
 		super(page);
 	}
 
+	//  local site setup
+
+	// setup wordpress
 	async setupWp() {
 		await this.goto(data.subUrls.backend.setupWP);
 		const alreadyInstalledIsVisible = await this.isVisible(selector.backend.alreadyInstalled);
@@ -18,6 +21,7 @@ export class LocalSetupPage extends AdminPage {
 		}
 		await this.clickAndWaitForNavigation(selector.backend.languageContinue);
 		const letsGoIsVisible = await this.isVisible(selector.backend.letsGo);
+
 		if (letsGoIsVisible) {
 			await this.clickAndWaitForNavigation(selector.backend.letsGo);
 			await this.fill(selector.backend.dbName, data.installWp.dbName);
@@ -27,6 +31,7 @@ export class LocalSetupPage extends AdminPage {
 			await this.fill(selector.backend.dbTablePrefix, data.installWp.dbTablePrefix);
 			await this.clickAndWaitForNavigation(selector.backend.submit);
 			await this.clickAndWaitForNavigation(selector.backend.runTheInstallation);
+
 		} else {
 			await this.fill(selector.backend.siteTitle, data.installWp.siteTitle);
 			await this.fill(selector.backend.adminUserName, data.installWp.adminUserName);
@@ -35,8 +40,6 @@ export class LocalSetupPage extends AdminPage {
 			await this.clickAndWaitForNavigation(selector.backend.installWp);
 			await this.clickAndWaitForNavigation(selector.backend.successLoginIn);
 		}
-
-		//TODO: add assertion
 	}
 
 }

@@ -1,4 +1,4 @@
-import { expect, type Page } from '@playwright/test';
+import { Page, expect } from '@playwright/test';
 import { AdminPage } from 'pages/adminPage';
 import { selector } from 'pages/selectors';
 import { data } from 'utils/testData';
@@ -12,8 +12,9 @@ export class AbuseReportsPage extends AdminPage {
 
 	// abuse reports
 
+	// abuse report render properly
 	async adminAbuseReportRenderProperly(){
-		await this.goIfNotThere(data.subUrls.backend.dokan.dokanAbuseReports);
+		await this.goIfNotThere(data.subUrls.backend.dokan.abuseReports);
 
 		// abuse reports text is visible
 		await this.toBeVisible(selector.admin.dokan.abuseReports.abuseReportsText);
@@ -31,9 +32,10 @@ export class AbuseReportsPage extends AdminPage {
 
 	}
 
-	// filter abuse reports
+
+	// abuse report details
 	async abuseReportDetails(){
-		await this.goIfNotThere(data.subUrls.backend.dokan.dokanAbuseReports);
+		await this.goIfNotThere(data.subUrls.backend.dokan.abuseReports);
 		await this.click(selector.admin.dokan.abuseReports.abuseReportFirstCell);
 
 		// abuse report modal elements are visible
@@ -44,24 +46,24 @@ export class AbuseReportsPage extends AdminPage {
 
 	// filter abuse reports
 	async filterAbuseReports(input: string, action: string){
-		await this.goIfNotThere(data.subUrls.backend.dokan.dokanAbuseReports);
+		await this.goIfNotThere(data.subUrls.backend.dokan.abuseReports);
 
 		switch(action){
 
 		case 'by-reason' :
-			await this.selectByLabelAndWaitForResponse(data.subUrls.backend.abuseReports, selector.admin.dokan.abuseReports.filters.filterByAbuseReason, input);
+			await this.selectByLabelAndWaitForResponse(data.subUrls.api.dokan.abuseReports, selector.admin.dokan.abuseReports.filters.filterByAbuseReason, input);
 			break;
 
 		case 'by-product' :
 			await this.click(selector.admin.dokan.abuseReports.filters.filterByProduct);
 			await this.typeAndWaitForResponse(data.subUrls.api.wc.wcProducts, selector.admin.dokan.abuseReports.filters.filterInput, input);
-			await this.pressAndWaitForResponse(data.subUrls.backend.abuseReports, data.key.enter);
+			await this.pressAndWaitForResponse(data.subUrls.api.dokan.abuseReports, data.key.enter);
 			break;
 
 		case 'by-vendor' :
 			await this.click(selector.admin.dokan.abuseReports.filters.filterByVendors);
-			await this.typeAndWaitForResponse(data.subUrls.backend.stores, selector.admin.dokan.abuseReports.filters.filterInput, input);
-			await this.pressAndWaitForResponse(data.subUrls.backend.abuseReports, data.key.enter);
+			await this.typeAndWaitForResponse(data.subUrls.api.dokan.stores, selector.admin.dokan.abuseReports.filters.filterInput, input);
+			await this.pressAndWaitForResponse(data.subUrls.api.dokan.abuseReports, data.key.enter);
 			break;
 
 		default :
@@ -74,16 +76,17 @@ export class AbuseReportsPage extends AdminPage {
 
 	}
 
+
 	// abuse report bulk action
 	async abuseReportBulkAction(action: string){
-		await this.goIfNotThere(data.subUrls.backend.dokan.dokanAbuseReports);
+		await this.goIfNotThere(data.subUrls.backend.dokan.abuseReports);
 
 		// ensure row exists
 		await this.notToBeVisible(selector.admin.dokan.abuseReports.noRowsFound);
 
 		await this.click(selector.admin.dokan.abuseReports.bulkActions.selectAll);
 		await this.selectByValue(selector.admin.dokan.abuseReports.bulkActions.selectAction, action);
-		await this.clickAndAcceptAndWaitForResponse(data.subUrls.backend.abuseReports, selector.admin.dokan.abuseReports.bulkActions.applyAction);
+		await this.clickAndAcceptAndWaitForResponse(data.subUrls.api.dokan.abuseReports, selector.admin.dokan.abuseReports.bulkActions.applyAction);
 	}
 
 

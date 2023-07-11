@@ -1,6 +1,6 @@
 import { test as setup, expect } from '@playwright/test';
 import { LoginPage } from 'pages/loginPage';
-import { AdminPage } from 'pages/adminPage';
+import { WpPage } from 'pages/wpPage';
 import { ApiUtils } from 'utils/apiUtils';
 import { data } from 'utils/testData';
 import { payloads } from 'utils/payloads';
@@ -14,9 +14,9 @@ setup.describe('authenticate users & set permalink', () => {
 
 	setup('admin set WpSettings', async ({ page }) => {
 		const loginPage = new LoginPage(page);
-		const adminPage = new AdminPage(page);
+		const wpPage = new WpPage(page);
 		await loginPage.adminLogin(data.admin);
-		await adminPage.setPermalinkSettings(data.wpSettings.permalink);
+		await wpPage.setPermalinkSettings(data.wpSettings.permalink);
 	});
 
 	setup('add customer', async ({ request }) => {

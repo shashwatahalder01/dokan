@@ -1,4 +1,4 @@
-import { expect, type Page } from '@playwright/test';
+import { Page, expect } from '@playwright/test';
 import { AdminPage } from 'pages/adminPage';
 import { selector } from 'pages/selectors';
 import { data } from 'utils/testData';
@@ -10,10 +10,12 @@ export class ReportsPage extends AdminPage {
 		super(page);
 	}
 
+
 	// reports
 
+	// reports render properly
 	async adminReportsRenderProperly(){
-		await this.goIfNotThere(data.subUrls.backend.dokan.dokanReports);
+		await this.goIfNotThere(data.subUrls.backend.dokan.reports);
 
 		// report Menus are visible
 		await this.multipleElementVisible(selector.admin.dokan.reports.menus);
@@ -35,10 +37,12 @@ export class ReportsPage extends AdminPage {
 
 	}
 
+
 	// all logs
 
+	// all logs render properly
 	async adminAllLogsRenderProperly(){
-		await this.goIfNotThere(data.subUrls.backend.dokan.dokanAllLogs);
+		await this.goIfNotThere(data.subUrls.backend.dokan.allLogs);
 
 		// report Menus are visible
 		await this.multipleElementVisible(selector.admin.dokan.reports.menus);
@@ -59,57 +63,61 @@ export class ReportsPage extends AdminPage {
 
 	}
 
+
 	// search all logs
 	async searchAllLogs(orderId: string){
-		await this.goIfNotThere(data.subUrls.backend.dokan.dokanAllLogs);
+		await this.goIfNotThere(data.subUrls.backend.dokan.allLogs);
 
 		await this.clearInputField(selector.admin.dokan.reports.allLogs.search);
-		await this.typeAndWaitForResponse(data.subUrls.backend.logs, selector.admin.dokan.reports.allLogs.search, orderId);
+		await this.typeAndWaitForResponse(data.subUrls.api.dokan.logs, selector.admin.dokan.reports.allLogs.search, orderId);
 		await this.toBeVisible(selector.admin.dokan.reports.allLogs.orderIdCell(orderId));
-		// await this.clickAndWaitForResponse(data.subUrls.backend.logs, selector.admin.dokan.reports.allLogs.filters.clear);
+		// await this.clickAndWaitForResponse(data.subUrls.api.dokan.logs, selector.admin.dokan.reports.allLogs.filters.clear);
 
 	}
+
 
 	// export all logs
 	async exportAllLogs(orderId: string){
 		await this.searchAllLogs(orderId);
-		// await this.goIfNotThere(data.subUrls.backend.dokan.dokanAllLogs);
-		// await this.clickAndWaitForResponse(data.subUrls.backend.logs, selector.admin.dokan.reports.allLogs.exportLogs);
+		// await this.goIfNotThere(data.subUrls.backend.dokan.allLogs);
+		// await this.clickAndWaitForResponse(data.subUrls.api.dokan.logs, selector.admin.dokan.reports.allLogs.exportLogs);
 		// await this.page.waitForResponse((resp) => resp.url().includes('wp-admin/admin.php?download-order-log-csv') && resp.status() === 200); //TODO: MERGE WITH PREVIOUS
 		// TODO: need to wait for multiple response
 		await Promise.all([
-			this.page.waitForResponse((resp) => resp.url().includes(data.subUrls.backend.logs) && resp.status() === 200),
-			this.page.waitForResponse((resp) => resp.url().includes(data.subUrls.backend.downloadOrderLogs) && resp.status() === 200),
+			this.page.waitForResponse((resp) => resp.url().includes(data.subUrls.api.dokan.logs) && resp.status() === 200),
+			this.page.waitForResponse((resp) => resp.url().includes(data.subUrls.backend.dokan.downloadOrderLogs) && resp.status() === 200),
 			this.page.locator(selector.admin.dokan.reports.allLogs.exportLogs).click()
 		]);
 		//TODO: add wait for multiple different response on base-page
 		//TODO: assert file download
 	}
 
+
 	// filter all logs by store
 	async filterAllLogsByStore(storeName: string){
-		await this.goIfNotThere(data.subUrls.backend.dokan.dokanAllLogs);
+		await this.goIfNotThere(data.subUrls.backend.dokan.allLogs);
 
 		await this.click(selector.admin.dokan.reports.allLogs.filters.filterByStore);
-		await this.typeAndWaitForResponse(data.subUrls.backend.stores, selector.admin.dokan.reports.allLogs.filters.filterByStoreInput, storeName);
-		await this.pressAndWaitForResponse(data.subUrls.backend.logs, data.key.enter);
+		await this.typeAndWaitForResponse(data.subUrls.api.dokan.stores, selector.admin.dokan.reports.allLogs.filters.filterByStoreInput, storeName);
+		await this.pressAndWaitForResponse(data.subUrls.api.dokan.logs, data.key.enter);
 
 		const count = (await this.getElementText(selector.admin.dokan.reports.allLogs.numberOfRowsFound))?.split(' ')[0];
 		expect(Number(count)).not.toBe(0);
-		// await this.clickAndWaitForResponse(data.subUrls.backend.logs, selector.admin.dokan.reports.allLogs.filters.clear);
+		// await this.clickAndWaitForResponse(data.subUrls.api.dokan.logs, selector.admin.dokan.reports.allLogs.filters.clear);
 	}
+
 
 	// filter all logs by status
 	async filterAllLogsByStatus(orderStatus: string){
-		await this.goIfNotThere(data.subUrls.backend.dokan.dokanAllLogs);
+		await this.goIfNotThere(data.subUrls.backend.dokan.allLogs);
 
 		await this.click(selector.admin.dokan.reports.allLogs.filters.filterByStatus);
 		await this.clearAndType( selector.admin.dokan.reports.allLogs.filters.filterByStatusInput, orderStatus);
-		await this.pressAndWaitForResponse(data.subUrls.backend.logs, data.key.enter);
+		await this.pressAndWaitForResponse(data.subUrls.api.dokan.logs, data.key.enter);
 
 		const count = (await this.getElementText(selector.admin.dokan.reports.allLogs.numberOfRowsFound))?.split(' ')[0];
 		expect(Number(count)).not.toBe(0);
-		// await this.clickAndWaitForResponse(data.subUrls.backend.logs, selector.admin.dokan.reports.allLogs.filters.clear);
+		// await this.clickAndWaitForResponse(data.subUrls.api.dokan.logs, selector.admin.dokan.reports.allLogs.filters.clear);
 	}
 
 }

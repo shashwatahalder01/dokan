@@ -1,4 +1,4 @@
-import { expect, type Page } from '@playwright/test';
+import { Page, expect } from '@playwright/test';
 import { AdminPage } from 'pages/adminPage';
 import { selector } from 'pages/selectors';
 import { data } from 'utils/testData';
@@ -10,10 +10,12 @@ export class VerificationsPage extends AdminPage {
 		super(page);
 	}
 
+
 	// verification requests
 
+	// verification requests render properly
 	async adminVerificationsRenderProperly(){
-		await this.goIfNotThere(data.subUrls.backend.dokan.dokanVerifications);
+		await this.goIfNotThere(data.subUrls.backend.dokan.verifications);
 
 		// tools text is visible
 		await this.toBeVisible(selector.admin.dokan.verifications.verificationRequestsText);
@@ -25,9 +27,10 @@ export class VerificationsPage extends AdminPage {
 		await this.multipleElementVisible(selector.admin.dokan.verifications.table);
 	}
 
+
 	// ID verification requests
 	async idVerificationRequest(storeName: string, action: string){
-		await this.goIfNotThere(data.subUrls.backend.dokan.dokanVerifications);
+		await this.goIfNotThere(data.subUrls.backend.dokan.verifications);
 
 		await this.hover(selector.admin.dokan.verifications.vendorRow(storeName));
 		switch (action) {
@@ -46,9 +49,10 @@ export class VerificationsPage extends AdminPage {
 
 	}
 
+
 	// address verification requests
 	async addressVerificationRequest(storeName: string, action: string){
-		await this.goIfNotThere(data.subUrls.backend.dokan.dokanVerifications);
+		await this.goIfNotThere(data.subUrls.backend.dokan.verifications);
 
 		await this.hover(selector.admin.dokan.verifications.vendorRow(storeName));
 		switch (action) {
@@ -66,9 +70,10 @@ export class VerificationsPage extends AdminPage {
 		}
 	}
 
+
 	// company verification requests
 	async companyVerificationRequest(storeName: string, action: string){
-		await this.goIfNotThere(data.subUrls.backend.dokan.dokanVerifications);
+		await this.goIfNotThere(data.subUrls.backend.dokan.verifications);
 
 		await this.hover(selector.admin.dokan.verifications.vendorRow(storeName));
 		switch (action) {

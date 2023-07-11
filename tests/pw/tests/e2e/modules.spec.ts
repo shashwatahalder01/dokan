@@ -20,7 +20,7 @@ test.describe('Modules test', () => {
 
 	test.use({ storageState: data.auth.adminAuthFile });
 
-	test('dokan modules menu page is rendering properly @pro @explo', async ( ) => {
+	test.only('dokan modules menu page is rendering properly @pro @explo', async ( ) => {
 		await modulesPage.adminModulesRenderProperly();
 	});
 

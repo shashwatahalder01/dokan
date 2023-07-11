@@ -32,15 +32,14 @@ setup.describe('setup site & woocommerce & user settings', () => {
 		expect(siteSettings).toEqual(expect.objectContaining(payloads.siteSettings));
 	});
 
-	// setup('reset dokan previous settings @lite @pro', async ({ request }) => {
-	// 	setup.skip(!!process.env.CI, 'skip previous settings check');
-	// 	//TODO: remove previous quote rule & list things thats need to reset
-	// 	// previous seller badges
-
-	// 	// previous quote rules
-	// 	const apiUtils = new ApiUtils(request);
-	// 	await apiUtils.deleteAllQuoteRules();
-	// });
+	setup.fixme('reset dokan previous settings @lite @pro', async ({ request }) => {
+		setup.skip(!!process.env.CI, 'skip previous settings check');
+		const apiUtils = new ApiUtils(request);
+		// previous seller badges
+		await apiUtils.deleteAllSellerBadges();
+		// previous quote rules
+		await apiUtils.deleteAllQuoteRules();
+	});
 
 	setup('set wc settings @lite @pro', async ({ request }) => {
 		const apiUtils = new ApiUtils(request);
@@ -116,18 +115,10 @@ setup.describe('setup site & woocommerce & user settings', () => {
 setup.describe('setup  user settings', () => {
 	setup.use({ extraHTTPHeaders: { Authorization: payloads.aAuth } });
 
-	// // Customer Details
-	// setup('add customer @lite @pro', async ({ request })=> {
-	// 	const apiUtils = new ApiUtils(request);
-	// 	await apiUtils.createCustomer (payloads.createCustomer1, payloads.adminAuth);
-	// });
 
 	// Vendor Details
-	setup('add vendor & product @lite @pro', async ({ request }) => {
+	setup('add vendor product @lite @pro', async ({ request }) => {
 		const apiUtils = new ApiUtils(request);
-
-		// create store
-		// await apiUtils.createStore(payloads.createStore1, payloads.adminAuth);
 
 		// delete previous store products with predefined name if any
 		await apiUtils.deleteAllProducts(data.predefined.simpleProduct.product1.name, payloads.vendorAuth);
@@ -192,6 +183,7 @@ setup.describe('setup dokan settings', () => {
 	setup('admin set dokan privacy policy settings @lite @pro', async () => {
 		await dbUtils.setDokanSettings(dbData.dokan.optionName.privacyPolicy, dbData.dokan.privacyPolicySettings);
 	});
+
 	setup('admin set dokan color settings @pro', async () => {
 		await dbUtils.setDokanSettings(dbData.dokan.optionName.colors, dbData.dokan.colorsSettings);
 	});
@@ -288,6 +280,7 @@ setup.describe('setup dokan settings e2e', () => {
 		expect(product).toBeTruthy();
 	});
 
+
 	// dokan settings
 
 	// 	setup.skip('admin set WpSettings @lite @pro', async ()=> {
@@ -338,9 +331,9 @@ setup.describe('setup dokan settings e2e', () => {
 	// 		await adminPage.setDokanEuComplianceSettings(data.dokanSettings.euCompliance);
 	// 	});
 
-	// 	// setup.skip('admin set dokan delivery time settings @pro', async ()=> {
-	// 	// 	await adminPage.setDokanDeliveryTimeSettings(data.dokanSettings.deliveryTime);
-	// 	// });
+	// setup.skip('admin set dokan delivery time settings @pro', async ()=> {
+	// 	await adminPage.setDokanDeliveryTimeSettings(data.dokanSettings.deliveryTime);
+	// });
 
 	// 	setup('admin set dokan product advertising settings @pro', async ()=> {
 	// 		await adminPage.setDokanProductAdvertisingSettings(data.dokanSettings.productAdvertising);
@@ -358,13 +351,13 @@ setup.describe('setup dokan settings e2e', () => {
 	// 		await adminPage.setDokanSpmvSettings(data.dokanSettings.spmv);
 	// 	});
 
-	// 	// setup.fixme('admin set dokan vendor subscription settings @pro', async ()=> {
-	// 	// 	await adminPage.setDokanVendorSubscriptionSettings(data.dokanSettings.vendorSubscription);
-	// 	// });
+	// setup.fixme('admin set dokan vendor subscription settings @pro', async ()=> {
+	// 	await adminPage.setDokanVendorSubscriptionSettings(data.dokanSettings.vendorSubscription);
+	// });
 
-	// 	// setup.skip('admin add dokan subscription @pro', async ()=> {
-	// 	// 	await adminPage.addDokanSubscription({ ...data.product.vendorSubscription,
-	// 	// 		productName: data.predefined.vendorSubscription.nonRecurring, });
-	// 	// });
+	// setup.skip('admin add dokan subscription @pro', async ()=> {
+	// 	await adminPage.addDokanSubscription({ ...data.product.vendorSubscription,
+	// 		productName: data.predefined.vendorSubscription.nonRecurring, });
+	// });
 
 });
