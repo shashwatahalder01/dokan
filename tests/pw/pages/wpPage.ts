@@ -10,6 +10,7 @@ export class WpPage extends AdminPage {
 		super(page);
 	}
 
+
 	// wordpress site settings
 
 	// plugin activation check
@@ -20,11 +21,13 @@ export class WpPage extends AdminPage {
 		}
 	}
 
+
 	// admin set wordpress site settings
 	async setWpSettings(wpSettings: any) {
 		await this.setWpGeneralSettings(wpSettings.general);
 		await this.setPermalinkSettings(wpSettings.permalink);
 	}
+
 
 	// set wp general settings
 	async setWpGeneralSettings(general: any) {
@@ -37,6 +40,7 @@ export class WpPage extends AdminPage {
 		await this.click(selector.admin.settings.generalSaveChanges);
 		await this.toContainText(selector.admin.settings.updatedSuccessMessage, general.saveSuccessMessage);
 	}
+
 
 	// admin set permalink settings
 	async setPermalinkSettings(permalink: any) {

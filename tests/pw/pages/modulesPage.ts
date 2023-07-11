@@ -10,6 +10,7 @@ export class ModulesPage extends AdminPage {
 		super(page);
 	}
 
+
 	// modules
 
 	// modules render properly

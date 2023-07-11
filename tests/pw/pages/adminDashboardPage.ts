@@ -11,6 +11,7 @@ export class AdminDashboardPage extends AdminPage {
 		super(page);
 	}
 
+
 	// admin dashboard
 
 	// admin dashboard render properly

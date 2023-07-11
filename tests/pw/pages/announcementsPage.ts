@@ -10,6 +10,7 @@ export class AnnouncementsPage extends AdminPage {
 		super(page);
 	}
 
+
 	// announcements
 
 	// announcements render properly

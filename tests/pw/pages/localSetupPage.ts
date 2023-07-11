@@ -10,6 +10,7 @@ export class LocalSetupPage extends WpPage {
 		super(page);
 	}
 
+
 	//  local site setup
 
 	// setup wordpress

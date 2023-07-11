@@ -85,7 +85,7 @@ export class VendorPage extends BasePage {
 	}
 
 	// vendor setup wizard
-	async vendorSetupWizard(setupWizardData: { choice: boolean ; storeProductsPerPage: any; street1: any; street2: any; country: any; city: any; zipCode: any; state: any; paypal: any; bankAccountName: any; bankAccountType: any; bankAccountNumber: any; bankName: any; bankAddress: any; bankRoutingNumber: any; bankIban: any; bankSwiftCode: any; customPayment: any; skrill: any; }): Promise<void> {
+	async vendorSetupWizard(setupWizardData: any): Promise<void> {
 		await this.goIfNotThere(data.subUrls.frontend.vDashboard.setupWizard);
 		if (setupWizardData.choice) {
 			await this.click(selector.vendor.vSetup.letsGo);
@@ -124,6 +124,7 @@ export class VendorPage extends BasePage {
 		}
 		await this.toBeVisible(selector.vendor.vDashboard.menus.dashboard);
 	}
+
 
 	// vendor add product category
 	async addCategory(category: string): Promise<void> {

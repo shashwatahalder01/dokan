@@ -10,6 +10,7 @@ export class HelpPage extends AdminPage {
 		super(page);
 	}
 
+
 	// help
 
 	// help render properly

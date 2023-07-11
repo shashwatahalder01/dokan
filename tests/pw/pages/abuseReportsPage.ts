@@ -10,6 +10,7 @@ export class AbuseReportsPage extends AdminPage {
 		super(page);
 	}
 
+
 	// abuse reports
 
 	// abuse report render properly

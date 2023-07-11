@@ -459,6 +459,7 @@ export class SettingsPage extends AdminPage {
 
 	}
 
+
 	// disable dokan vendor subscription
 	async disableDokanVendorSubscription(subscription: any){
 		await this.goToDokanSettings();

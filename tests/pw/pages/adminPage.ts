@@ -1,14 +1,14 @@
-import { expect, Page } from '@playwright/test';
+import { Page, expect } from '@playwright/test';
 import { BasePage } from './basePage';
 import { selector } from './selectors';
 import { data } from '../utils/testData';
-import { helpers } from '../utils/helpers';
 
 export class AdminPage extends BasePage {
 
 	constructor(page: Page) {
 		super(page);
 	}
+
 
 	// navigation
 
@@ -42,6 +42,7 @@ export class AdminPage extends BasePage {
 		// await this.deleteShippingZone(data.shipping.shippingZone);
 	}
 
+
 	// Enable Password Field
 	async enablePasswordInputField(woocommerce: any) {
 		await this.goToWooCommerceSettings();
@@ -50,6 +51,7 @@ export class AdminPage extends BasePage {
 		await this.click(selector.admin.wooCommerce.settings.accountSaveChanges);
 		await this.toContainText(selector.admin.wooCommerce.settings.updatedSuccessMessage, woocommerce.saveSuccessMessage);
 	}
+
 
 	// Admin Set Currency Options
 	async setCurrencyOptions(currency: any) {
@@ -63,6 +65,7 @@ export class AdminPage extends BasePage {
 		await this.toContainText(selector.admin.wooCommerce.settings.updatedSuccessMessage, currency.saveSuccessMessage);
 
 	}
+
 
 	// Admin Set Currency
 	async setCurrency(currency: any) {
@@ -172,6 +175,7 @@ export class AdminPage extends BasePage {
 		await this.toBeVisible(selector.admin.dokan.dashboard.dashboardText);
 	}
 
+
 	// dokan notice & promotion
 
 	// dokan notice
@@ -185,6 +189,7 @@ export class AdminPage extends BasePage {
 			console.log('No promotion is ongoing');
 		}
 	}
+
 
 	// dokan notice
 	async dokanNotice(){

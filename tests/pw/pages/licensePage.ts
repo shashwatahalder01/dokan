@@ -10,6 +10,7 @@ export class LicensePage extends AdminPage {
 		super(page);
 	}
 
+
 	// license
 
 	// license render properly
