@@ -359,6 +359,8 @@ export const data = {
 			min: 1, max: 10
 		},).toString(),
 		discount_type: () => faker.helpers.arrayElement(['percent', 'fixed_product']),
+		discountType: 'percent',
+		description:'Coupon description',
 		existingCouponErrorMessage: 'Coupon title already exists',
 	},
 
@@ -647,6 +649,8 @@ export const data = {
 				term: 'wp-admin/admin-ajax.php?term',
 				taxonomyTerms: 'wp-admin/admin-ajax.php?action=woocommerce_json_search_taxonomy_terms',
 				taxonomy: 'wp-admin/edit-tags.php?taxonomy',
+				coupons: 'wp-admin/edit.php?post_type=shop_coupon',
+				addCoupon: 'wp-admin/post-new.php?post_type=shop_coupon',
 				orders: 'wp-admin/edit.php?post_type=shop_order',
 				settings: 'wp-admin/admin.php?page=wc-settings',
 			},

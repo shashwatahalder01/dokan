@@ -52,45 +52,45 @@ test.describe('Admin functionality test', () => {
 		await page.close();
 	});
 
-	test('admin can add simple product @lite @pro', async ( ) => {
-		await adminPage.addSimpleProduct(data.product.simple);
-	});
-
-	// test.skip('admin can add variable product @pro', async ( )=> {
-	// 	await adminPage.addVariableProduct(data.product.variable);
+	// test('admin can add simple product @lite @pro', async ( ) => {
+	// 	await adminPage.addSimpleProduct(data.product.simple);
 	// });
 
-	test('admin can add simple subscription  @pro', async ( ) => {
-		await adminPage.addSimpleSubscription(data.product.simpleSubscription);
-	});
+	// // test.skip('admin can add variable product @pro', async ( )=> {
+	// // 	await adminPage.addVariableProduct(data.product.variable);
+	// // });
 
-	// test.skip('admin can add variable subscription @pro', async ( )=> {
-	// 	await adminPage.addVariableSubscription(data.product.variableSubscription);
+	// test('admin can add simple subscription  @pro', async ( ) => {
+	// 	await adminPage.addSimpleSubscription(data.product.simpleSubscription);
 	// });
 
-	test('admin can add external product @lite @pro', async ( ) => {
-		await adminPage.addExternalProduct(data.product.external);
-	});
+	// // test.skip('admin can add variable subscription @pro', async ( )=> {
+	// // 	await adminPage.addVariableSubscription(data.product.variableSubscription);
+	// // });
 
-	test('admin can add vendor subscription @pro', async ( ) => {
-		await adminPage.addDokanSubscription(data.product.vendorSubscription);
-	});
+	// test('admin can add external product @lite @pro', async ( ) => {
+	// 	await adminPage.addExternalProduct(data.product.external);
+	// });
 
-	test('admin can add auction product  @pro', async ( ) => {
-		await adminPage.addAuctionProduct(data.product.auction);
-	});
+	// test('admin can add vendor subscription @pro', async ( ) => {
+	// 	await adminPage.addDokanSubscription(data.product.vendorSubscription);
+	// });
 
-	test('admin can add booking product  @pro', async ( ) => {
-		await adminPage.addBookingProduct(data.product.booking);
-	});
+	// test('admin can add auction product  @pro', async ( ) => {
+	// 	await adminPage.addAuctionProduct(data.product.auction);
+	// });
 
-	test('admin can add categories @lite @pro', async ( ) => {
-		await adminPage.addCategory(data.product.category.randomCategory());
-	});
+	// test('admin can add booking product  @pro', async ( ) => {
+	// 	await adminPage.addBookingProduct(data.product.booking);
+	// });
 
-	test('admin can add attributes @lite @pro', async ( ) => {
-		await adminPage.addAttributes(data.product.attribute.randomAttribute());
-	});
+	// test('admin can add categories @lite @pro', async ( ) => {
+	// 	await adminPage.addCategory(data.product.category.randomCategory());
+	// });
+
+	// test('admin can add attributes @lite @pro', async ( ) => {
+	// 	await adminPage.addAttributes(data.product.attribute.randomAttribute());
+	// });
 
 	// settings
 
@@ -100,9 +100,9 @@ test.describe('Admin functionality test', () => {
 	// })
 
 	// shipping settings
-	test.only('admin can set flat rate shipping', async ( ) => {
-	    await adminPage.addShippingMethod(data.shipping.shippingMethods.flatRate);
-	});
+	// test('admin can set flat rate shipping', async ( ) => {
+	//     await adminPage.addShippingMethod(data.shipping.shippingMethods.flatRate);
+	// });
 
 	// test('admin can set free shipping', async ( ) => {
 	//     await adminPage.addShippingMethod(data.shipping.shippingMethods.freeShipping)

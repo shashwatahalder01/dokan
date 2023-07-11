@@ -2598,39 +2598,52 @@ export const selector = {
 		marketing: {
 			// Menus
 			coupons: '//li[@id="toplevel_page_woocommerce-marketing"]//a[contains(text(),"Coupons")]',
+
 			// Coupon
-			// Coupon Sub Menus
-			general: 'ss=#general_coupon_data',
 
 			addCoupon: '//a[contains(text(),"Add coupon")]',
-			couponCode: '#title',
-			couponDescription: '#woocommerce-coupon-description',
-			// General
-			discountType: '#discount_type',
-			couponAmount: '#coupon_amount',
-			allowFreeShipping: '#free_shipping',
-			couponExpiryDate: '#expiry_date',
-			// Vendor Limits
-			enableForAllVendors: '#admin_coupons_enabled_for_vendor',
-			couponPriceDeduct: '#coupon_commissions_type',
-			vendors: '.dokan-admin-coupons-include-vendors .select2-search__field',
-			products: '.dokan-coupons-include-product-search-group .select2-search__field',
-			excludeProducts: '//label[contains(text(),"Exclude products")]/..//input[@class="select2-search__field"]',
-			showOnStores: '#admin_coupons_show_on_stores',
-			notifyVendors: '#admin_coupons_send_notify_to_vendors',
-			// Usage Restriction
-			minimumSpend: '#minimum_amount',
-			maximumSpend: '#maximum_amount',
-			individualUseOnly: '#individual_use',
-			excludeSaleItems: '#exclude_sale_items',
-			productCategories: '//label[contains(text(),"Product categories")]/..//input[@class="select2-search__field"]',
-			excludeCategories: '//label[contains(text(),"Exclude categories")]/..//input[@class="select2-search__field"]',
-			allowedEmails: '#customer_email',
-			// Usage Limits
-			usageLimitPerCoupon: '//input[@id="usage_limit"]',
-			usageLimitPerUser: '#usage_limit_per_user',
 
-			publish: '#publish',
+			addNewCoupon: {
+
+				// Coupon Sub Menus
+				general: 'a[href="#general_coupon_data"]',
+				vendorLimits: 'a[href="#vendor_usage_limit_coupon_data"]',
+				usageRestriction: 'a[href="#usage_restriction_coupon_data"]',
+				usageLimits: 'a[href="#usage_limit_coupon_data"]',
+
+				couponCode: '#title',
+				couponDescription: '#woocommerce-coupon-description',
+
+				// General
+				discountType: '#discount_type', // percent, fixed_cart, fixed_product, sign_up_fee, sign_up_fee_percent, recurring_fee, recurring_percent, booking_person
+				couponAmount: '#coupon_amount',
+				allowFreeShipping: '#free_shipping',
+				couponExpiryDate: '#expiry_date',
+
+				// Vendor Limits
+				enableForAllVendors: '#admin_coupons_enabled_for_vendor',
+				couponPriceDeduct: '#coupon_commissions_type',
+				vendors: '.dokan-admin-coupons-include-vendors .select2-search__field',
+				products: '.dokan-coupons-include-product-search-group .select2-search__field',
+				excludeProducts: '//label[contains(text(),"Exclude products")]/..//input[@class="select2-search__field"]',
+				showOnStores: '#admin_coupons_show_on_stores',
+				notifyVendors: '#admin_coupons_send_notify_to_vendors',
+
+				// Usage Restriction
+				minimumSpend: '#minimum_amount',
+				maximumSpend: '#maximum_amount',
+				individualUseOnly: '#individual_use',
+				excludeSaleItems: '#exclude_sale_items',
+				productCategories: '//label[contains(text(),"Product categories")]/..//input[@class="select2-search__field"]',
+				excludeCategories: '//label[contains(text(),"Exclude categories")]/..//input[@class="select2-search__field"]',
+				allowedEmails: '#customer_email',
+
+				// Usage Limits
+				usageLimitPerCoupon: '//input[@id="usage_limit"]',
+				usageLimitPerUser: '#usage_limit_per_user',
+
+				publish: '#publish',
+			},
 		},
 
 		// Appearance

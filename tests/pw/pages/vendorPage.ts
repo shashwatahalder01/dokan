@@ -312,20 +312,6 @@ export class VendorPage extends BasePage {
 		//TODO: add assertion
 	}
 
-	// coupons
-
-	// vendor add coupon
-	async addCoupon(coupon: any): Promise<void> {
-		await this.goIfNotThere(data.subUrls.frontend.vDashboard.coupon);
-		await this.click(selector.vendor.vCoupon.addNewCoupon);
-		await this.type(selector.vendor.vCoupon.couponTitle, coupon.title());
-		await this.type(selector.vendor.vCoupon.amount, coupon.amount());
-		await this.click(selector.vendor.vCoupon.selectAll);
-		await this.click(selector.vendor.vCoupon.applyForNewProducts);
-		await this.click(selector.vendor.vCoupon.showOnStore);
-		await this.clickAndWaitForResponse(data.subUrls.frontend.vDashboard.coupon, selector.vendor.vCoupon.createCoupon, 302);
-		await expect(this.page.getByText(selector.vendor.vCoupon.couponSaveSuccessMessage)).toBeVisible();
-	}
 
 	// withdraw
 
