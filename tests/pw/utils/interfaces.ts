@@ -99,19 +99,8 @@ export interface product {
 	}
 
 	attribute: {
-		size: {
 			attributeName: string;
-			attributeTerms: string;
-		}
-
-		color: {
-			attributeName: string;
-			attributeTerms: string;
-		}
-
-		randomAttribute: () => string;
-			attributeName: string;
-			attributeTerms: string;
+			attributeTerms: string[];
 	}
 
 	simple: {
@@ -189,13 +178,12 @@ export interface product {
 			variableRegularPrice: string;
 		}
 		saveSuccessMessage: string;
+
 	}
 
 	vendorSubscription: {
 		productType: string;
 		productName: () => string;
-			length: 5,
-			casing: string;
 		category: string;
 		regularPrice: () => string;
 		numberOfProducts: string;
@@ -611,7 +599,7 @@ export interface vendor {
 		supportButtonText: string;
 
 		openingClosingTime: {
-			days: string;
+			days: string[];
 			openingTime: string;
 			closingTime: string;
 			storeOpenNotice: string;
