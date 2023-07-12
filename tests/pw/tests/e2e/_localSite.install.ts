@@ -30,7 +30,7 @@ test.describe('setup local site', () => {
 	test('admin setup WP', async ({ page }) => {
 		const loginPage = new LoginPage(page);
 		const localSetupPage = new LocalSetupPage(page);
-		await localSetupPage.setupWp();
+		await localSetupPage.setupWp(data.installWp);
 		await loginPage.adminLogin(data.admin);
 		await localSetupPage.setPermalinkSettings(data.wpSettings.permalink);
 	});

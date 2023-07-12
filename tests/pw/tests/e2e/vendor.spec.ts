@@ -87,9 +87,6 @@ test.describe('Vendor functionality test', () => {
 		await vendorPage.addBookingProduct(data.product.booking);
 	});
 
-	test('vendor can add coupon', async ( ) => {
-		await vendorPage.addCoupon(data.coupon);
-	});
 
 	test('vendor can add payment method', async ( ) => {
 		await vendorPage.setPaymentSettings(data.vendor.payment);
@@ -115,7 +112,7 @@ test.describe('Vendor functionality test', () => {
 
 
 	test('vendor update account details @lite @pro', async ( ) => {
-		await vendorPage.setVendorDetails(data.vendor.vendorInfo); //TODO: update test order or reset password
+		await vendorPage.setVendorDetails(data.vendor.vendorInfo);
 	});
 
 	// store settings

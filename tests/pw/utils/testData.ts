@@ -196,6 +196,7 @@ export const data = {
 			productType: 'variable-subscription',
 			productName: () => faker.commerce.productName() + (' (Variable Subscription)'),
 			category: 'Uncategorized',
+			regularPrice: () => (faker.finance.amount(100, 200, faker.helpers.arrayElement([1, 2]))).replace('.', ','),
 			subscriptionPrice: () => (faker.finance.amount(100, 200, faker.helpers.arrayElement([1, 2]))).replace('.', ','),
 			subscriptionPeriodInterval: '1',
 			subscriptionPeriod: 'month',
@@ -268,9 +269,7 @@ export const data = {
 
 		// Review
 		review: {
-			rating: faker.number.int({
-				min: 1, max: 5
-			}),
+			rating: String(faker.number.int({ min: 1, max: 5 })),
 			reviewMessage: () => faker.string.uuid(),
 		},
 

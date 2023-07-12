@@ -5,6 +5,7 @@ import { AdminPage } from 'pages/adminPage';
 import { selector } from 'pages/selectors';
 import { helpers } from 'utils/helpers';
 import { data } from 'utils/testData';
+import { customer, product, store, paymentDetails, order } from 'utils/interfaces';
 
 export class CustomerPage extends BasePage {
 
@@ -40,7 +41,7 @@ export class CustomerPage extends BasePage {
 	// customer details
 
 	// customer register
-	async customerRegister(customerInfo: any): Promise<void> {
+	async customerRegister(customerInfo: customer['customerInfo']): Promise<void> {
 		const username: string = (customerInfo.firstName() + customerInfo.lastName()).replace('\'', '');
 		await this.goToMyAccount();
 		const regIsVisible = await this.isVisible(selector.customer.cRegistration.regEmail);
@@ -63,7 +64,7 @@ export class CustomerPage extends BasePage {
 	}
 
 	// customer become vendor
-	async customerBecomeVendor(customerInfo: any): Promise<void> {
+	async customerBecomeVendor(customerInfo: customer['customerInfo']): Promise<void> {
 		const firstName = customerInfo.firstName();
 		await this.click(selector.customer.cDashboard.becomeVendor);
 		// vendor registration form
@@ -91,24 +92,8 @@ export class CustomerPage extends BasePage {
 		await this.toBeVisible(selector.vendor.vDashboard.menus.dashboard);
 	}
 
-	// // customer become wholesale customer
-	// async customerBecomeWholesaleCustomer(): Promise<void> {
-	// 	await this.goIfNotThere(data.subUrls.frontend.myAccount);
-	// 	const currentUser = await this.getCurrentUser();
-	// 	await this.click(selector.customer.cDashboard.becomeWholesaleCustomer);
-	// 	const neeApproval = await this.isVisible(selector.customer.cDashboard.wholesaleRequestReturnMessage);
-	// 	if (!neeApproval) {
-	// await this.toContainText(selector.customer.cWooSelector.wooCommerceSuccessMessage, data.wholesale.becomeWholesaleCustomerSuccessMessage);
-	// 	}
-	// 	else {
-	// await this.toContainText(selector.customer.cWooSelector.wooCommerceSuccessMessage, data.wholesale.wholesaleRequestSendMessage);
-	// 		await this.loginPage.switchUser(data.admin);
-	// 		await this.adminPage.updateWholesaleCustomerStatus(currentUser!); //TOOD: fix this
-	// 	}
-	// }
-
 	// customer add billing address
-	async addBillingAddress(billingInfo: any): Promise<void> {
+	async addBillingAddress(billingInfo: customer['customerInfo']): Promise<void> {
 		await this.goIfNotThere(data.subUrls.frontend.billingAddress);
 		//billing address
 		await this.clearAndType(selector.customer.cAddress.billingFirstName, billingInfo.firstName());
@@ -136,7 +121,7 @@ export class CustomerPage extends BasePage {
 	}
 
 	// customer add shipping address
-	async addShippingAddress(shippingInfo: any): Promise<void> {
+	async addShippingAddress(shippingInfo: customer['customerInfo']): Promise<void> {
 		await this.goIfNotThere(data.subUrls.frontend.shippingAddress);
 		//shipping address
 		await this.clearAndType(selector.customer.cAddress.shippingFirstName, shippingInfo.firstName());
@@ -168,24 +153,29 @@ export class CustomerPage extends BasePage {
 
 
 	// customer add customer details
-	async addCustomerDetails(customerInfo: any): Promise<void> {
+	async addCustomerDetails(customerInfo: customer['customerInfo']): Promise<void> {
 		await this.goIfNotThere(data.subUrls.frontend.editAccountCustomer);
 		await this.clearAndType(selector.customer.cAccountDetails.firstName, customerInfo.firstName());
 		await this.clearAndType(selector.customer.cAccountDetails.lastName, customerInfo.lastName());
 		await this.clearAndType(selector.customer.cAccountDetails.displayName, customerInfo.firstName());
 		// await this.clearAndType(selector.customer.cAccountDetails.email, customerInfo.email())
-		await this.updatePassword(customerInfo.password, customerInfo.password1);
+		// await this.updatePassword(customerInfo.password, customerInfo.password1);
+		await this.clickAndWaitForResponse(data.subUrls.frontend.editAccountCustomer, selector.customer.cAccountDetails.saveChanges);
+		await this.toContainText(selector.customer.cWooSelector.wooCommerceSuccessMessage, data.customer.account.updateSuccessMessage);
 		// cleanup
-		// await this.updatePassword(customerInfo.password1, customerInfo.password); //TODO: improve assert only in update password ,also update vendor
+		// await this.updatePassword(customerInfo.password1, customerInfo.password, true);
+
 	}
 
 	// customer update password
-	async updatePassword(currentPassword: string, newPassword: string): Promise<void> {
-		// await this.clearAndType(selector.customer.cAccountDetails.currentPassword, currentPassword);
-		// await this.clearAndType(selector.customer.cAccountDetails.NewPassword, newPassword);
-		// await this.clearAndType(selector.customer.cAccountDetails.confirmNewPassword, newPassword);
-		await this.clickAndWaitForResponse(data.subUrls.frontend.editAccountCustomer, selector.customer.cAccountDetails.saveChanges);
-		await this.toContainText(selector.customer.cWooSelector.wooCommerceSuccessMessage, data.customer.account.updateSuccessMessage);
+	async updatePassword(currentPassword: string, newPassword: string, saveChanges = false): Promise<void> {
+		await this.clearAndType(selector.customer.cAccountDetails.currentPassword, currentPassword);
+		await this.clearAndType(selector.customer.cAccountDetails.NewPassword, newPassword);
+		await this.clearAndType(selector.customer.cAccountDetails.confirmNewPassword, newPassword);
+		if (saveChanges){
+			await this.clickAndWaitForResponse(data.subUrls.frontend.editAccountCustomer, selector.customer.cAccountDetails.saveChanges);
+			await this.toContainText(selector.customer.cWooSelector.wooCommerceSuccessMessage, data.customer.account.updateSuccessMessage);
+		}
 	}
 
 	// customer search store
@@ -201,6 +191,7 @@ export class CustomerPage extends BasePage {
 	async followStore(storeName: string, followLocation: string): Promise<void> {
 		let currentFollowStatus: boolean;
 		switch (followLocation) {
+
 		// shop page
 		case 'shopPage' :
 			await this.searchStore(storeName);
@@ -214,7 +205,7 @@ export class CustomerPage extends BasePage {
 			await this.toContainText(selector.customer.cStoreList.currentFollowStatus(storeName), 'Following');
 			break;
 
-			// store page
+		// store page
 		case 'storePage' :
 			await this.goIfNotThere(data.subUrls.frontend.vendorDetails(helpers.slugify(storeName)));
 			currentFollowStatus = await this.hasText(selector.customer.cStoreList.currentFollowStatusStorePage, 'Following');
@@ -234,7 +225,7 @@ export class CustomerPage extends BasePage {
 	}
 
 	// customer review store
-	async reviewStore(storeName: string, store: any): Promise<void> {
+	async reviewStore(storeName: string, store: store): Promise<void> {
 		await this.goIfNotThere(data.subUrls.frontend.vendorDetails(helpers.slugify(storeName)));
 		const reviewMessage = store.reviewMessage();
 		await this.clickAndWaitForNavigation(selector.customer.cSingleStore.reviews);
@@ -250,7 +241,7 @@ export class CustomerPage extends BasePage {
 	}
 
 	// customer ask for get support
-	async askForGetSupport(storeName: string, getSupport: any): Promise<void> {
+	async askForGetSupport(storeName: string, getSupport: customer['customerInfo']['getSupport']): Promise<void> {
 		await this.goIfNotThere(data.subUrls.frontend.vendorDetails(helpers.slugify(storeName)));
 		await this.clickAndWaitForResponse(data.subUrls.ajax, selector.customer.cSingleStore.getSupport);
 		await this.clearAndType(selector.customer.cSingleStore.subject, getSupport.subject);
@@ -262,7 +253,7 @@ export class CustomerPage extends BasePage {
 	}
 
 	// customer add customer support ticket
-	async sendMessageCustomerSupportTicket(supportTicket: { message: () => any; }): Promise<void> {
+	async sendMessageCustomerSupportTicket(supportTicket: customer['supportTicket']): Promise<void> {
 		const message = supportTicket.message();
 		await this.goIfNotThere(data.subUrls.frontend.supportTickets);
 		await this.click(selector.customer.cSupportTickets.firstOpenTicket);
@@ -271,8 +262,9 @@ export class CustomerPage extends BasePage {
 		await this.toBeVisible(selector.customer.cSupportTickets.chatText(message));
 	}
 
+
 	// customer rate & review product
-	async reviewProduct(productName: string, review: any): Promise<void> {
+	async reviewProduct(productName: string, review: product['review']): Promise<void> {
 		await this.goIfNotThere(data.subUrls.frontend.productDetails(helpers.slugify(productName)));
 		const reviewMessage = review.reviewMessage();
 		await this.click(selector.customer.cSingleProduct.reviews);
@@ -283,7 +275,7 @@ export class CustomerPage extends BasePage {
 	}
 
 	// customer report product
-	async reportProduct(productName: string, report: any): Promise<void> {
+	async reportProduct(productName: string, report: product['report']): Promise<void> {
 		await this.goIfNotThere(data.subUrls.frontend.productDetails(helpers.slugify(productName)));
 		await this.clickAndWaitForResponse(data.subUrls.ajax, selector.customer.cSingleProduct.reportAbuse);
 		await this.click(selector.customer.cSingleProduct.reportReasonByName(report.reportReason));
@@ -295,7 +287,7 @@ export class CustomerPage extends BasePage {
 	}
 
 	// customer enquire product
-	async enquireProduct(productName: string, enquiry: any): Promise<void> {
+	async enquireProduct(productName: string, enquiry: product['enquiry']): Promise<void> {
 		await this.goIfNotThere(data.subUrls.frontend.productDetails(helpers.slugify(productName)));
 		await this.click(selector.customer.cSingleProduct.productEnquiry);
 		await this.clearAndType(selector.customer.cSingleProduct.enquiryMessage, enquiry.enquiryDetails);
@@ -398,13 +390,13 @@ export class CustomerPage extends BasePage {
 		await this.toContainText(selector.customer.cWooSelector.wooCommerceSuccessMessage, 'Coupon code applied successfully.' );
 	}
 
-	async buyProduct(productName: string, couponCode: string, applyCoupon = false, getOrderDetails = false, paymentMethod = 'bank', paymentDetails: any): Promise<void | object> {
+	async buyProduct(productName: string, couponCode: string, applyCoupon = false, getOrderDetails = false, paymentMethod = 'bank', paymentDetails: paymentDetails): Promise<void | object> {
 		// clear cart before buying
 		await this.clearCart();
 		// buy product
 		await this.addProductToCartFromSingleProductPage(productName);
 		applyCoupon && await this.applyCoupon(couponCode);
-		return await this.placeOrder(paymentMethod, getOrderDetails, paymentDetails);
+		return await this.placeOrder(paymentMethod, getOrderDetails);
 	}
 
 	// customer place order
@@ -591,7 +583,7 @@ export class CustomerPage extends BasePage {
 	// }
 
 	// customer add billing address in checkout
-	async addBillingAddressInCheckout(billingInfo: any): Promise<void> {
+	async addBillingAddressInCheckout(billingInfo: customer['customerInfo']): Promise<void> {
 		// Billing Address
 		await this.clearAndType(selector.customer.cAddress.billingFirstName, billingInfo.firstName());
 		await this.clearAndType(selector.customer.cAddress.billingLastName, billingInfo.lastName());
@@ -616,7 +608,7 @@ export class CustomerPage extends BasePage {
 	}
 
 	// customer add shipping address in checkout
-	async addShippingAddressInCheckout(shippingInfo: any): Promise<void> {
+	async addShippingAddressInCheckout(shippingInfo: customer['customerInfo']): Promise<void> {
 		await this.clickAndWaitForResponse(data.subUrls.frontend.shippingAddressCheckout, selector.customer.cCheckout.shipToADifferentAddress);
 		// shipping address
 		await this.clearAndType(selector.customer.cAddress.shippingFirstName, shippingInfo.firstName());
@@ -636,7 +628,7 @@ export class CustomerPage extends BasePage {
 	}
 
 	// customer ask for warranty
-	async sendWarrantyRequest(orderNumber: string, productName: string, refund: any): Promise<void> {
+	async sendWarrantyRequest(orderNumber: string, productName: string, refund: order['refund']): Promise<void> {
 		// await this.goToMyAccount();
 		// await this.click(selector.customer.cMyAccount.orders);
 		await this.goIfNotThere(data.subUrls.frontend.ordersCustomerPage);

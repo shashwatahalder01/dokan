@@ -126,7 +126,7 @@ export class shippingPage extends AdminPage {
 
 
 	// Admin Delete Shipping Method
-	async deleteShippingMethod(shipping: shipping) {
+	async deleteShippingMethod(shipping: any) {
 		await this.click(selector.admin.wooCommerce.settings.shipping);
 
 		await this.hover(selector.admin.wooCommerce.settings.shippingZoneCell(shipping.shippingZone));

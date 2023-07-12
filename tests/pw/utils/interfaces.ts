@@ -133,7 +133,7 @@ export interface product {
 		status: string;
 		stockStatus: boolean;
 		attribute: string;
-		attributeTerms: string;
+		attributeTerms: string[];
 		variations: {
 			linkAllVariation: string;
 			variableRegularPrice: string;
@@ -173,6 +173,7 @@ export interface product {
 		productType: string;
 		productName: () => string;
 		category: string;
+		regularPrice: () => string;
 		subscriptionPrice: () => string;
 		subscriptionPeriodInterval: string;
 		subscriptionPeriod: string;
@@ -182,7 +183,7 @@ export interface product {
 		storeName: string;
 		status: string;
 		attribute: string;
-		attributeTerms: string;
+		attributeTerms: string[];
 		variations: {
 			linkAllVariation: string;
 			variableRegularPrice: string;
@@ -263,14 +264,15 @@ export interface product {
 }
 
 // store
-export interface	store {
+export interface store {
 	rating: string;
 	reviewTitle: string;
 	reviewMessage: () => string;
 }
 
 //order
-export interface	order {
+export interface order {
+
 	orderStatus: {
 		pending: string;
 		processing: string;
@@ -291,6 +293,20 @@ export interface	order {
 	}
 }
 
+
+// payment details
+export interface paymentDetails {
+		stripExpress: {
+			paymentMethod: string;
+			cardInfo: {
+				cardNumber: string;
+				expiryMonth: string;
+				expiryYear: string;
+				expiryDate: string;
+				cvc: string;
+			},
+		},
+}
 
 // coupon
 export interface coupon {
@@ -326,19 +342,19 @@ export interface wpSettings {
 	}
 }
 
-export interface	tax {
+export interface tax {
 	taxRate: string;
 	enableTax: boolean;
 	saveSuccessMessage: string;
 }
 
-export interface	shipping {
+export interface shipping {
 
 	enableShipping: string;
 	disableShipping: string;
 	shippingZone: string;
 
-	shippingMethods: {
+		shippingMethods: {
 		methods: string;
 
 		flatRate: {
@@ -606,15 +622,15 @@ export interface vendor {
 			instantly: {
 				closingStyle: string;
 				vacationMessage: string;
-			}
+			},
 
 			datewise: {
 				vacationDayFrom: () => string;
-				vacationDayTo: () => string;
+				vacationDayTo: (arg0: string) => string;
 				closingStyle: string;
 				vacationMessage: string;
 			}
-		}
+		},
 
 		discount: {
 			minimumOrderAmount: string;
@@ -628,6 +644,7 @@ export interface vendor {
 			maximumAmount: string;
 			category: string;
 		}
+
 		storeSettingsSaveSuccessMessage: string;
 
 		socialProfileUrls: {
@@ -654,6 +671,7 @@ export interface vendor {
 	}
 
 	shipping: {
+
 		shippingPolicy: {
 			processingTime: string;
 			shippingPolicy: string;
@@ -664,7 +682,50 @@ export interface vendor {
 		shippingZone: string;
 		shippingCountry: string;
 		methods: string;
+
+		shippingMethod: {
+
+				shippingZone: string;
+				shippingCountry: string;
+				selectShippingMethod: string;
+				shippingMethod: string;
+				taxStatus: string;
+				shippingCost: string;
+				description: string;
+				calculationType: string;
+				shippingMethodSaveSuccessMessage: string;
+				zoneSaveSuccessMessage: string;
+				saveSuccessMessage: string;
+
+				freeShippingRequires: string;
+				freeShippingMinimumOrderAmount: string;
+
+				taxIncludedInShippingCosts: string;
+				handlingFee: string;
+				maximumShippingCost: string;
+
+				handlingFeePerOrder: string;
+				minimumCostPerOrder: string;
+				maximumCostPerOrder: string;
+
+				tableRateSaveSuccessMessage: string;
+
+				transportationMode: string;
+				avoid: string;
+				distanceUnit: string;
+				street1: string;
+				street2: string;
+				city: string;
+				zipCode: string;
+				state: string;
+				country: string;
+
+				distanceRateSaveSuccessMessage: string;
+
+		}
+
 		shippingMethods: {
+
 			flatRate: {
 				shippingZone: string;
 				shippingCountry: string;
@@ -1174,7 +1235,7 @@ export interface tools {
 
 
 // product advertisement
-export interface	productAdvertisement {
+export interface productAdvertisement {
 	advertisedProductStore:  string;
 	advertisedProduct:  string;
 

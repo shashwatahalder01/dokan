@@ -6,6 +6,7 @@ import { CustomerPage } from 'pages/customerPage';
 import { selector } from 'pages/selectors';
 import { data } from 'utils/testData';
 import { helpers } from 'utils/helpers';
+import { product, vendor, vendorSetupWizard,  } from 'utils/interfaces';
 
 export class VendorPage extends BasePage {
 
@@ -30,7 +31,7 @@ export class VendorPage extends BasePage {
 	// setup wizard
 
 	// vendor registration
-	async vendorRegister(vendorInfo: any, setupWizardData: any ): Promise<void> {
+	async vendorRegister(vendorInfo: any, setupWizardData: vendorSetupWizard ): Promise<void> {
 		await this.goToMyAccount();
 		const loginIsVisible = await this.isVisible(selector.customer.cRegistration.regEmail);
 		if (!loginIsVisible) {
@@ -85,7 +86,7 @@ export class VendorPage extends BasePage {
 	}
 
 	// vendor setup wizard
-	async vendorSetupWizard(setupWizardData: any): Promise<void> {
+	async vendorSetupWizard(setupWizardData: vendorSetupWizard): Promise<void> {
 		await this.goIfNotThere(data.subUrls.frontend.vDashboard.setupWizard);
 		if (setupWizardData.choice) {
 			await this.click(selector.vendor.vSetup.letsGo);
@@ -145,7 +146,7 @@ export class VendorPage extends BasePage {
 	// products
 
 	// vendor add simple product
-	async addSimpleProduct(product: any): Promise<void> {
+	async addSimpleProduct(product: product['simple'] | product['simpleSubscription'] | product['external']): Promise<void> {
 		await this.goIfNotThere(data.subUrls.frontend.vDashboard.product);
 		const productName = product.productName();
 		// add new simple product
@@ -160,7 +161,7 @@ export class VendorPage extends BasePage {
 	}
 
 	// vendor add variable product
-	async addVariableProduct(product: any ): Promise<void> {
+	async addVariableProduct(product: product['variable'] ): Promise<void> {
 		await this.addSimpleProduct(product);
 
 		// edit product
@@ -190,7 +191,7 @@ export class VendorPage extends BasePage {
 	}
 
 	// vendor add simple subscription product
-	async addSimpleSubscription(product: { productType: any; productName?: () => string; category?: string; regularPrice?: () => string; subscriptionPrice: any; subscriptionPeriodInterval: any; subscriptionPeriod: any; expireAfter: any; subscriptionTrialLength: any; subscriptionTrialPeriod: any; storeName?: string; status?: string; saveSuccessMessage: any; }): Promise<void> {
+	async addSimpleSubscription(product: product['simpleSubscription']): Promise<void> {
 		await this.addSimpleProduct(product);
 		// edit product
 		await this.selectByValue(selector.vendor.product.productType, product.productType);
@@ -206,7 +207,7 @@ export class VendorPage extends BasePage {
 	}
 
 	// vendor add variable subscription product
-	async addVariableSubscription(product: any): Promise<void> {
+	async addVariableSubscription(product: product['variableSubscription']): Promise<void> {
 		await this.addSimpleProduct(product);
 		// edit product
 		await this.selectByValue(selector.vendor.product.productType, product.productType);
@@ -237,7 +238,7 @@ export class VendorPage extends BasePage {
 	}
 
 	// vendor add external product
-	async addExternalProduct(product: any): Promise<void> {
+	async addExternalProduct(product: product['external']): Promise<void> {
 		await this.addSimpleProduct(product);
 		// edit product
 		await this.selectByValue(selector.vendor.product.productType, product.productType);
@@ -251,7 +252,7 @@ export class VendorPage extends BasePage {
 	}
 
 	// vendor add auction product
-	async addAuctionProduct(product: any): Promise<void> {
+	async addAuctionProduct(product: product['auction']): Promise<void> {
 		await this.goIfNotThere(data.subUrls.frontend.vDashboard.auction);
 
 		// add new auction product
@@ -274,7 +275,7 @@ export class VendorPage extends BasePage {
 	}
 
 	// vendor add booking product
-	async addBookingProduct(product: { productName: any; productType?: string; category?: string; bookingDurationType: any; bookingDuration?: string; bookingDurationMax: any; bookingDurationUnit: any; calendarDisplayMode: any; maxBookingsPerBlock: any; minimumBookingWindowIntoTheFutureDate: any; minimumBookingWindowIntoTheFutureDateUnit: any; maximumBookingWindowIntoTheFutureDate: any; maximumBookingWindowIntoTheFutureDateUnit: any; baseCost: any; blockCost: any; }): Promise<void> {
+	async addBookingProduct(product: product['booking']): Promise<void> {
 		await this.goIfNotThere(data.subUrls.frontend.vDashboard.booking);
 		const productName = product.productName();
 		await this.click(selector.vendor.vBooking.addNewBookingProduct);
@@ -316,7 +317,7 @@ export class VendorPage extends BasePage {
 	// withdraw
 
 	// vendor request withdraw
-	async requestWithdraw(withdraw: { withdrawMethod: any; defaultWithdrawMethod?: { paypal: string; skrill: string; }; preferredPaymentMethod?: string; preferredSchedule?: string; minimumWithdrawAmount?: string; reservedBalance?: string; }): Promise<void> {
+	async requestWithdraw(withdraw: vendor['withdraw']): Promise<void> {
 		await this.goIfNotThere(data.subUrls.frontend.vDashboard.withdraw);
 		const cancelRequestIsVisible = await this.isVisible(selector.vendor.vWithdraw.cancelRequest);
 		if (cancelRequestIsVisible) {
@@ -324,8 +325,8 @@ export class VendorPage extends BasePage {
 			await this.clickAndWaitForNavigation(selector.vendor.vWithdraw.withdrawDashboard);
 		}
 
-		const minimumWithdrawAmount: number = helpers.price(await this.getElementText(selector.vendor.vWithdraw.minimumWithdrawAmount));
-		const balance: number = helpers.price(await this.getElementText(selector.vendor.vWithdraw.balance));
+		const minimumWithdrawAmount: number = helpers.price(await this.getElementText(selector.vendor.vWithdraw.minimumWithdrawAmount) as string);
+		const balance: number = helpers.price(await this.getElementText(selector.vendor.vWithdraw.balance) as string);
 
 		if (balance > minimumWithdrawAmount) {
 			await this.click(selector.vendor.vWithdraw.requestWithdraw);
@@ -343,7 +344,7 @@ export class VendorPage extends BasePage {
 	}
 
 	// vendor cancel withdraw request
-	async cancelRequestWithdraw(withdraw: { withdrawMethod: any; defaultWithdrawMethod?: { paypal: string; skrill: string; }; preferredPaymentMethod?: string; preferredSchedule?: string; minimumWithdrawAmount?: string; reservedBalance?: string; }): Promise<void> {
+	async cancelRequestWithdraw(withdraw: vendor['withdraw']): Promise<void> {
 		await this.goIfNotThere(data.subUrls.frontend.vDashboard.withdraw);
 		const cancelRequestIsVisible = await this.isVisible(selector.vendor.vWithdraw.cancelRequest);
 		if (!cancelRequestIsVisible) {
@@ -354,7 +355,7 @@ export class VendorPage extends BasePage {
 	}
 
 	// vendor add auto withdraw disbursement schedule
-	async addAutoWithdrawDisbursementSchedule(withdraw: any): Promise<void> {
+	async addAutoWithdrawDisbursementSchedule(withdraw: vendor['withdraw']): Promise<void> {
 		await this.goIfNotThere(data.subUrls.frontend.vDashboard.withdraw);
 		await this.enableSwitcherDisbursement(selector.vendor.vWithdraw.enableSchedule);
 		await this.click(selector.vendor.vWithdraw.editSchedule);
@@ -379,7 +380,7 @@ export class VendorPage extends BasePage {
 			// await expect(this.page.getByText(selector.vendor.vWithdraw.defaultPaymentMethodUpdateSuccessMessage)).toBeVisible();
 			// // await this.waitForNavigation()
 			// await this.waitForUrl(data.subUrls.frontend.vDashboard.withdraw);
-			await this.clickAndWaitForNavigation(selector.vendor.vWithdraw.customMethodMakeDefault(preferredSchedule)); //TODO: fix before soln
+			await this.clickAndWaitForNavigation(selector.vendor.vWithdraw.customMethodMakeDefault(preferredSchedule)); //TODO: fix above soln
 			await this.toBeVisible(selector.vendor.vWithdraw.defaultMethod(preferredSchedule));
 		}
 	}
@@ -390,11 +391,23 @@ export class VendorPage extends BasePage {
 		await this.clearAndType(selector.vendor.vAccountDetails.firstName, vendorInfo.firstName());
 		await this.clearAndType(selector.vendor.vAccountDetails.lastName, vendorInfo.lastName());
 		// await this.clearAndType(selector.vendor.vAccountDetails.email, vendorInfo.email());
-		// await this.type(selector.vendor.vAccountDetails.currentPassword, vendorInfo.password);
-		// await this.type(selector.vendor.vAccountDetails.NewPassword, vendorInfo.password1);
-		// await this.type(selector.vendor.vAccountDetails.confirmNewPassword, vendorInfo.password1);
+		// await this.updatePassword(vendorInfo.password, vendorInfo.password1);
 		await this.clickAndWaitForResponse(data.subUrls.frontend.vDashboard.editAccountVendor, selector.vendor.vAccountDetails.saveChanges, 302);
 		await expect(this.page.getByText(selector.vendor.vAccountDetails.editAccountSaveChangesSuccessMessage)).toBeVisible();
+
+		// cleanup
+		// await this.updatePassword(vendorInfo.password, vendorInfo.password1, true);
+	}
+
+	// vendor update password
+	async updatePassword(currentPassword: string, newPassword: string, saveChanges = false): Promise<void> {
+		await this.type(selector.vendor.vAccountDetails.currentPassword, currentPassword);
+		await this.type(selector.vendor.vAccountDetails.NewPassword, newPassword);
+		await this.type(selector.vendor.vAccountDetails.confirmNewPassword, newPassword);
+		if (saveChanges){
+			await this.clickAndWaitForResponse(data.subUrls.frontend.vDashboard.editAccountVendor, selector.vendor.vAccountDetails.saveChanges, 302);
+			await expect(this.page.getByText(selector.vendor.vAccountDetails.editAccountSaveChangesSuccessMessage)).toBeVisible();
+		}
 	}
 
 	// vendor settings
@@ -434,7 +447,7 @@ export class VendorPage extends BasePage {
 
 
 	// vendor set basic info settings
-	async basicInfoSettings(vendorInfo: any): Promise<void> {
+	async basicInfoSettings(vendorInfo: vendor['vendorInfo']): Promise<void> {
 		// store basic info
 		await this.clearAndType(selector.vendor.vStoreSettings.storeName, vendorInfo.storeName);
 		await this.clearAndType(selector.vendor.vStoreSettings.storeProductsPerPage, vendorInfo.productsPerPage);
@@ -480,7 +493,7 @@ export class VendorPage extends BasePage {
 	}
 
 	// vendor set opening closing time settings
-	async openingClosingTimeSettings(openingClosingTime: any): Promise<void> {
+	async openingClosingTimeSettings(openingClosingTime: vendor['vendorInfo']['openingClosingTime']): Promise<void> {
 		// store opening closing time
 		const openCloseTimeEnabled = await this.isVisible(selector.vendor.vStoreSettings.storeOpeningClosingTime);
 		if (openCloseTimeEnabled) {
@@ -498,7 +511,7 @@ export class VendorPage extends BasePage {
 	}
 
 	// vendor set vacation settings
-	async vacationSettings(vacation: any): Promise<void> {
+	async vacationSettings(vacation: vendor['vendorInfo']['vacation']['datewise']): Promise<void> {
 
 		// // delete pervious datewise vacation settings if any  //TODO: skip this not needed ,might use in delete test
 		// const noVacationIsSetIsVisible = await this.isVisible(selector.vendor.vStoreSettings.noVacationIsSet);
@@ -518,14 +531,15 @@ export class VendorPage extends BasePage {
 				break;
 
 			// datewise close
-			case 'datewise' :
-				const vacationDayFrom = (vacation.vacationDayFrom()).split(',')[0];
-				const vacationDayTo = (vacation.vacationDayTo(vacationDayFrom)).split(',')[0];
+			case 'datewise' :{
+				const vacationDayFrom = (vacation.vacationDayFrom()).split(',')[0] as string;
+				const vacationDayTo = (vacation.vacationDayTo(vacationDayFrom)).split(',')[0] as string;
 				await this.setAttributeValue(selector.vendor.vStoreSettings.vacationDateRangeFrom, 'value', vacationDayFrom);
 				await this.setAttributeValue(selector.vendor.vStoreSettings.vacationDateRangeTo, 'value', vacationDayTo);
 				await this.clearAndType(selector.vendor.vStoreSettings.setVacationMessageDatewise, vacation.vacationMessage);
 				await this.clickAndWaitForResponse(data.subUrls.ajax, selector.vendor.vStoreSettings.saveVacationEdit);
 				break;
+			}
 
 			default :
 				break;
@@ -534,7 +548,7 @@ export class VendorPage extends BasePage {
 	}
 
 	// vendor set discount settings
-	async discountSettings(discount: any): Promise<void> {
+	async discountSettings(discount: vendor['vendorInfo']['discount']): Promise<void> {
 		// discount
 		const discountEnabled = await this.isVisible(selector.vendor.vStoreSettings.enableStoreWideDiscount);
 		if (discountEnabled) {
@@ -572,7 +586,7 @@ export class VendorPage extends BasePage {
 	}
 
 	// vendor set minmax settings
-	async minMaxSettings(minMax: any): Promise<void> {
+	async minMaxSettings(minMax: vendor['vendorInfo']['minMax']): Promise<void> {
 		// min-max
 		const minMaxEnabled = await this.isVisible(selector.vendor.vStoreSettings.enableMinMaxQuantities);
 		if (minMaxEnabled) {
@@ -594,7 +608,7 @@ export class VendorPage extends BasePage {
 	}
 
 	// vendor set store address
-	async setStoreAddress(vendorInfo: any): Promise<void> {
+	async setStoreAddress(vendorInfo: vendor['vendorInfo']): Promise<void> {
 		await this.goIfNotThere(data.subUrls.frontend.vDashboard.settingsStore);
 		// store address
 		await this.clearAndType(selector.vendor.vStoreSettings.street, vendorInfo.street1);
@@ -609,7 +623,7 @@ export class VendorPage extends BasePage {
 	}
 
 	// vendor add addons
-	async addAddon(addon: any): Promise<string> {
+	async addAddon(addon: vendor['addon']): Promise<string> {
 		await this.goIfNotThere(data.subUrls.frontend.vDashboard.settingsAddon);
 
 		// add addon
@@ -639,7 +653,7 @@ export class VendorPage extends BasePage {
 	}
 
 	// vendor edit addons
-	async editAddon(addon: any, addonName: string): Promise<void> {
+	async editAddon(addon: vendor['addon'], addonName: string): Promise<void> {
 		await this.goIfNotThere(data.subUrls.frontend.vDashboard.settingsAddon);
 		// add addon
 		await this.click(selector.vendor.vAddonSettings.editAddon(addonName));
@@ -665,7 +679,7 @@ export class VendorPage extends BasePage {
 	}
 
 	// vendor set payment settings
-	async setPaymentSettings(payment: any): Promise<void> {
+	async setPaymentSettings(payment: vendor['payment']): Promise<void> {
 		await this.setPaypal(payment);
 		await this.setBankTransfer(payment);
 		await this.setCustom(payment);
@@ -677,7 +691,7 @@ export class VendorPage extends BasePage {
 	}
 
 	// paypal payment settings
-	async setPaypal(paymentMethod: any): Promise<void> {
+	async setPaypal(paymentMethod: vendor['payment']): Promise<void> {
 		await this.goIfNotThere(data.subUrls.frontend.vDashboard.paypal);
 		//paypal
 		await this.clearAndType(selector.vendor.vPaymentSettings.paypal, paymentMethod.email());
@@ -687,7 +701,7 @@ export class VendorPage extends BasePage {
 	}
 
 	// bank transfer payment settings
-	async setBankTransfer(paymentMethod:any): Promise<void> {
+	async setBankTransfer(paymentMethod: vendor['payment']): Promise<void> {
 		await this.goIfNotThere(data.subUrls.frontend.vDashboard.bankTransfer);
 		// bank transfer
 		await this.clickIfVisible(selector.vendor.vPaymentSettings.disconnectAccount);
@@ -741,7 +755,7 @@ export class VendorPage extends BasePage {
 	// }
 
 	// custom payment settings
-	async setCustom(paymentMethod: any): Promise<void> {
+	async setCustom(paymentMethod: vendor['payment']): Promise<void> {
 		await this.goIfNotThere(data.subUrls.frontend.vDashboard.customPayment);
 		// custom payment method
 		await this.clearAndType(selector.vendor.vPaymentSettings.customPayment, paymentMethod.email());
@@ -751,7 +765,7 @@ export class VendorPage extends BasePage {
 	}
 
 	// skrill Payment Settings
-	async setSkrill(paymentMethod: any): Promise<void> {
+	async setSkrill(paymentMethod: vendor['payment']): Promise<void> {
 		await this.goIfNotThere(data.subUrls.frontend.vDashboard.skrill);
 		// skrill
 		await this.clearAndType(selector.vendor.vPaymentSettings.skrill, paymentMethod.email());
@@ -761,7 +775,7 @@ export class VendorPage extends BasePage {
 	}
 
 	// vendor send id verification request
-	async sendIdVerificationRequest(verification: any): Promise<void> {
+	async sendIdVerificationRequest(verification: vendor['verification']): Promise<void> {
 		await this.goIfNotThere(data.subUrls.frontend.vDashboard.settingsVerification);
 
 		// cancel previous verification request if any
@@ -787,7 +801,7 @@ export class VendorPage extends BasePage {
 	}
 
 	// vendor send address verification request
-	async sendAddressVerificationRequest(verification: any): Promise<void> {
+	async sendAddressVerificationRequest(verification: vendor['verification']): Promise<void> {
 		await this.goIfNotThere(data.subUrls.frontend.vDashboard.settingsVerification);
 		// cancel previous verification request if any
 		const cancelRequestIsVisible = await this.isVisible(selector.vendor.vVerificationSettings.cancelAddressVerificationRequest);
@@ -810,7 +824,7 @@ export class VendorPage extends BasePage {
 	}
 
 	// vendor send company verification request
-	async sendCompanyVerificationRequest(verification: any): Promise<void> {
+	async sendCompanyVerificationRequest(verification: vendor['verification']): Promise<void> {
 		await this.goIfNotThere(data.subUrls.frontend.vDashboard.settingsVerification);
 		// cancel previous verification request if any
 		const cancelRequestIsVisible = await this.isVisible(selector.vendor.vVerificationSettings.cancelCompanyVerificationRequest);
@@ -832,7 +846,7 @@ export class VendorPage extends BasePage {
 	}
 
 	// upload media
-	async uploadMedia(file: any) { //TODO: move uploadMedia to base page, try to make only one function for media upload for whole project
+	async uploadMedia(file: string) { //TODO: move uploadMedia to base page, try to make only one function for media upload for whole project
 		const uploadedMediaIsVisible = await this.isVisible(selector.wpMedia.uploadedMedia);
 		if (uploadedMediaIsVisible) {
 			await this.click(selector.wpMedia.uploadedMedia);
@@ -844,14 +858,14 @@ export class VendorPage extends BasePage {
 	}
 
 	// vendor set verification settings
-	async setVerificationSettings(verification: any): Promise<void> {
+	async setVerificationSettings(verification: vendor['verification']): Promise<void> {
 		await this.sendIdVerificationRequest(verification);
 		await this.sendAddressVerificationRequest(verification);
 		await this.sendCompanyVerificationRequest(verification);
 	}
 
 	// vendor set delivery settings
-	async setDeliveryTimeSettings(deliveryTime: any): Promise<void> {
+	async setDeliveryTimeSettings(deliveryTime: vendor['deliveryTime']): Promise<void> {
 		await this.goIfNotThere(data.subUrls.frontend.vDashboard.settingsDeliveryTime);
 		// delivery support
 		await this.check(selector.vendor.vDeliveryTimeSettings.homeDelivery);
@@ -874,16 +888,16 @@ export class VendorPage extends BasePage {
 	// vendor shipping settings
 
 	// vendor set all shipping settings
-	async setAllShippingSettings(): Promise<void> {
-		await this.setShippingSettings(data.vendor.shipping.shippingMethods.flatRate);
-		await this.setShippingSettings(data.vendor.shipping.shippingMethods.freeShipping);
-		await this.setShippingSettings(data.vendor.shipping.shippingMethods.localPickup);
-		await this.setShippingSettings(data.vendor.shipping.shippingMethods.tableRateShipping);
-		await this.setShippingSettings(data.vendor.shipping.shippingMethods.distanceRateShipping);
-	}
+	// async setAllShippingSettings(): Promise<void> {
+	// 	await this.setShippingSettings(data.vendor.shipping.shippingMethods.flatRate);
+	// 	await this.setShippingSettings(data.vendor.shipping.shippingMethods.freeShipping);
+	// 	await this.setShippingSettings(data.vendor.shipping.shippingMethods.localPickup);
+	// 	await this.setShippingSettings(data.vendor.shipping.shippingMethods.tableRateShipping);
+	// 	await this.setShippingSettings(data.vendor.shipping.shippingMethods.distanceRateShipping);
+	// }
 
 	// set shipping policies
-	async setShippingPolicies(shippingPolicy: any): Promise<void> {
+	async setShippingPolicies(shippingPolicy: vendor['shipping']['shippingPolicy']): Promise<void> {
 		await this.goIfNotThere(data.subUrls.frontend.vDashboard.settingsShipping);
 		await this.click(selector.vendor.vShippingSettings.shippingPolicies.clickHereToAddShippingPolicies);
 		await this.selectByValue(selector.vendor.vShippingSettings.shippingPolicies.processingTime, shippingPolicy.processingTime);
@@ -982,7 +996,7 @@ export class VendorPage extends BasePage {
 	}
 
 	// vendor set social profile settings
-	async setSocialProfile(urls: any): Promise<void> {
+	async setSocialProfile(urls: vendor['socialProfileUrls']): Promise<void> {
 		await this.goIfNotThere(data.subUrls.frontend.vDashboard.settingsSocialProfile);
 		await this.clearAndType(selector.vendor.vSocialProfileSettings.facebook, urls.facebook);
 		await this.clearAndType(selector.vendor.vSocialProfileSettings.twitter, urls.twitter);
@@ -997,7 +1011,7 @@ export class VendorPage extends BasePage {
 	}
 
 	// vendor set rma settings
-	async setRmaSettings(rma: any): Promise<void> {
+	async setRmaSettings(rma: vendor['rma']): Promise<void> {
 		await this.goIfNotThere(data.subUrls.frontend.vDashboard.settingsRma);
 		await this.clearAndType(selector.vendor.vRmaSettings.label, rma.label);
 		await this.selectByValue(selector.vendor.vRmaSettings.type, rma.type);
@@ -1017,7 +1031,7 @@ export class VendorPage extends BasePage {
 	// vendor functions
 
 	// vendor approve product review
-	async approveProductReview(reviewMessage: any): Promise<void> {
+	async approveProductReview(reviewMessage: string): Promise<void> {
 		await this.goIfNotThere(data.subUrls.frontend.vDashboard.reviews);
 		// let approvedReviewIsVisible = await this.isVisible(selector.vendor.vReviews.reviewRow(reviewMessage))
 		// if (approvedReviewIsVisible) {
@@ -1034,7 +1048,7 @@ export class VendorPage extends BasePage {
 	}
 
 	// vendor approve return request
-	async approveReturnRequest(orderId: any, productName: any): Promise<void> {
+	async approveReturnRequest(orderId: string, productName: string): Promise<void> {
 		await this.goToVendorDashboard();
 		await this.click(selector.vendor.vDashboard.menus.returnRequest);
 		await this.click(selector.vendor.vReturnRequest.view(orderId));
@@ -1045,8 +1059,8 @@ export class VendorPage extends BasePage {
 		await this.click(selector.vendor.vReturnRequest.updateOrderStatus);
 		// refund request
 		await this.click(selector.vendor.vReturnRequest.sendRefund);
-		const tax = String(helpers.price(await this.getElementText(selector.vendor.vReturnRequest.taxAmount(productName))));
-		const subTotal = String(helpers.price(await this.getElementText(selector.vendor.vReturnRequest.subTotal(productName))));
+		const tax = String(helpers.price(await this.getElementText(selector.vendor.vReturnRequest.taxAmount(productName)) as string));
+		const subTotal = String(helpers.price(await this.getElementText(selector.vendor.vReturnRequest.subTotal(productName)) as string));
 		await this.type(selector.vendor.vReturnRequest.taxRefund, tax);
 		await this.type(selector.vendor.vReturnRequest.subTotalRefund, subTotal);
 		await this.click(selector.vendor.vReturnRequest.sendRequest);
@@ -1057,7 +1071,7 @@ export class VendorPage extends BasePage {
 	}
 
 	// delete return request
-	async deleteReturnRequest(orderId: any): Promise<void> {
+	async deleteReturnRequest(orderId: string): Promise<void> {
 		await this.goToVendorDashboard();
 		await this.click(selector.vendor.vDashboard.menus.returnRequest);
 		await this.hover(selector.vendor.vReturnRequest.returnRequestCell(orderId));
@@ -1067,7 +1081,7 @@ export class VendorPage extends BasePage {
 	}
 
 	// add quantity discount
-	async addQuantityDiscount(productName: any, minimumQuantity: string, discountPercentage: string): Promise<void> {
+	async addQuantityDiscount(productName: string, minimumQuantity: string, discountPercentage: string): Promise<void> {
 		await this.searchProduct(productName);
 		await this.click(selector.vendor.product.productLink(productName));
 		// add quantity discount
@@ -1089,7 +1103,7 @@ export class VendorPage extends BasePage {
 	}
 
 	// vendor override rma settings
-	async overrideProductRmaSettings(productName: any, label: string, type: string, length: string, lengthValue: string, lengthDuration: string): Promise<void> {
+	async overrideProductRmaSettings(productName: string, label: string, type: string, length: string, lengthValue: string, lengthDuration: string): Promise<void> {
 		await this.searchProduct(productName);
 		await this.click(selector.vendor.product.productLink(productName));
 		// override rma settings

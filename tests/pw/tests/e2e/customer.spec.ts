@@ -39,10 +39,6 @@ test.describe('Customer user functionality test', () => {
 		await customerPage.customerBecomeVendor(data.customer.customerInfo);
 	});
 
-	// test.skip('customer can become a wholesale customer', async () => {
-	// 	await customerPage.customerRegister(data.customer.customerInfo);
-	// 	// await customerPage.customerBecomeWholesaleCustomer();
-	// });
 });
 
 test.describe('Customer functionality test', () => {
