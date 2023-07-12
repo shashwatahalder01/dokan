@@ -2,7 +2,8 @@ import { Page, expect } from '@playwright/test';
 import { AdminPage } from 'pages/adminPage';
 import { selector } from 'pages/selectors';
 import { data } from 'utils/testData';
-import { helpers } from '../utils/helpers';
+import { helpers } from 'utils/helpers';
+import { shipping } from 'utils/interfaces';
 
 
 export class shippingPage extends AdminPage {
@@ -113,7 +114,7 @@ export class shippingPage extends AdminPage {
 
 
 	// Admin Delete Shipping Zone
-	async deleteShippingZone(shippingZone: any) {
+	async deleteShippingZone(shippingZone: string) {
 		await this.click(selector.admin.wooCommerce.settings.shipping);
 
 		await this.hover(selector.admin.wooCommerce.settings.shippingZoneCell(shippingZone));

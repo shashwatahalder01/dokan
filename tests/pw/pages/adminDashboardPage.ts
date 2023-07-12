@@ -3,7 +3,7 @@ import { AdminPage } from 'pages/adminPage';
 import { selector } from 'pages/selectors';
 import { helpers } from 'utils/helpers';
 import { data } from 'utils/testData';
-import {  } from 'utils/interfaces';
+import { user, adminDashboard } from 'utils/interfaces';
 
 export class AdminDashboardPage extends AdminPage {
 
@@ -41,7 +41,7 @@ export class AdminDashboardPage extends AdminPage {
 
 
 	// at a glance value
-	async dokanAtAGlanceValueAccuracy(atAGlanceValues: any){
+	async dokanAtAGlanceValueAccuracy(atAGlanceValues: adminDashboard['summary'] ){
 		await this.goIfNotThere(data.subUrls.backend.dokan.dokan);
 		const netSales = await this.getElementText(selector.admin.dokan.dashboard.atAGlance.netSalesThisMonth) as string;
 		const commissionEarned = await this.getElementText(selector.admin.dokan.dashboard.atAGlance.commissionEarned) as string;
@@ -56,7 +56,7 @@ export class AdminDashboardPage extends AdminPage {
 
 
 	// add dokan news subscriber
-	async addDokanNewsSubscriber(user:user['userDetails']){
+	async addDokanNewsSubscriber(user: user['userDetails']){
 		await this.goIfNotThere(data.subUrls.backend.dokan.dokan);
 
 		await this.clearAndType(selector.admin.dokan.dashboard.subscribeBox.subscriberName, user.name());

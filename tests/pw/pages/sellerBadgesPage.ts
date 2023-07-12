@@ -3,6 +3,7 @@ import { AdminPage } from 'pages/adminPage';
 import { StoresPage } from 'pages/storesPage';
 import { selector } from 'pages/selectors';
 import { data } from 'utils/testData';
+import { sellerBadge } from 'utils/interfaces';
 
 
 export class SellerBadgesPage extends AdminPage {
@@ -52,7 +53,7 @@ export class SellerBadgesPage extends AdminPage {
 
 
 	// create seller badge
-	async createSellerBadge(badge: any){
+	async createSellerBadge(badge: sellerBadge){
 		await this.goIfNotThere(data.subUrls.backend.dokan.sellerBadge);
 
 		await this.clickAndWaitForResponse(data.subUrls.api.dokan.sellerBadgeEvent, selector.admin.dokan.sellerBadge.createBadge);
@@ -90,7 +91,7 @@ export class SellerBadgesPage extends AdminPage {
 
 
 	// edit seller badge
-	async editSellerBadge(badge: any){
+	async editSellerBadge(badge: sellerBadge){
 		await this.searchSellerBadge(badge.badgeName);
 
 		await this.hover(selector.admin.dokan.sellerBadge.sellerBadgeCell(badge.badgeName));

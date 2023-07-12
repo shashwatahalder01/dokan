@@ -1,8 +1,8 @@
-import { Page, expect } from '@playwright/test';
+import { Page } from '@playwright/test';
 import { AdminPage } from 'pages/adminPage';
 import { selector } from 'pages/selectors';
 import { data } from 'utils/testData';
-import {  } from 'utils/interfaces';
+import { announcement } from 'utils/interfaces';
 
 
 export class AnnouncementsPage extends AdminPage {
@@ -37,7 +37,7 @@ export class AnnouncementsPage extends AdminPage {
 
 
 	// add announcement
-	async addAnnouncement(announcement: any){
+	async addAnnouncement(announcement: announcement['create']){
 		await this.goIfNotThere(data.subUrls.backend.dokan.announcements);
 
 		await this.click(selector.admin.dokan.announcements.addNewAnnouncement);
@@ -52,7 +52,7 @@ export class AnnouncementsPage extends AdminPage {
 
 
 	// edit announcement
-	async editAnnouncement(announcement: any){
+	async editAnnouncement(announcement: announcement['update']){
 		await this.goto(data.subUrls.backend.dokan.announcements);
 		// await this.goIfNotThere(data.subUrls.backend.dokan.announcements);
 

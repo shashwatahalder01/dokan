@@ -1,7 +1,8 @@
-import { Page, expect } from '@playwright/test';
+import { Page } from '@playwright/test';
 import { AdminPage } from 'pages/adminPage';
 import { selector } from 'pages/selectors';
 import { data } from 'utils/testData';
+import { storeCategory } from 'utils/interfaces';
 
 export class StoreCategoriesPage extends AdminPage {
 
@@ -30,7 +31,7 @@ export class StoreCategoriesPage extends AdminPage {
 
 
 	// add store category
-	async addStoreCategory(storeCategory: any) {
+	async addStoreCategory(storeCategory: storeCategory) {
 		await this.goIfNotThere(data.subUrls.backend.dokan.vendors);
 		await this.click(selector.admin.dokan.vendors.storeCategories);
 
@@ -54,7 +55,7 @@ export class StoreCategoriesPage extends AdminPage {
 
 
 	// edit store category
-	async editStoreCategory(storeCategory: any) {
+	async editStoreCategory(storeCategory: storeCategory) {
 		await this.searchStoreCategory(storeCategory.name);
 
 		await this.hover(selector.admin.dokan.vendors.storeCategory.storeCategoryCell(storeCategory.name));

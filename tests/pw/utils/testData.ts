@@ -771,7 +771,7 @@ export const data = {
 	vendor: {
 		username: String(process.env.VENDOR),
 		password: String(process.env.USER_PASSWORD),
-		lastname: String(process.env.VENDOR)[0] + String(process.env.VENDOR)[String(process.env.VENDOR).length-1], //TODO: add last-name to other users
+		lastname: String(process.env.VENDOR)[0] + String(process.env.VENDOR)[String(process.env.VENDOR).length - 1], //TODO: add last-name to other users
 		storeName: String(process.env.VENDOR) + 'store',
 
 		vendorInfo: {
@@ -996,8 +996,8 @@ export const data = {
 		},
 
 		verification: {
-			// file: '../utils/sampleData/avatar.png',
-			// file2: './tests/e2e/utils/sampleData/avatar.png',
+			// file: 'utils/sampleData/avatar.png',
+			// file2: 'tests/e2e/utils/sampleData/avatar.png',
 			file: 'tests/avatar.png', //TODO : image path need to fixed
 			street1: 'abc street',
 			street2: 'xyz street',
@@ -1276,6 +1276,7 @@ export const data = {
 			companyName: 'abc',
 			phoneNumber: '0123456789',
 			product: 'p1_v1 (simple)',
+			quantity: '', // TODO: because of interface, resolve interface issue
 			offerPrice: '70',
 			offerProductQuantity: '20',
 		},
@@ -1294,6 +1295,7 @@ export const data = {
 
 	// seller badge
 	sellerBadge:{
+
 		eventName:{
 			// product related badges
 			productsPublished: 'Products Published',
@@ -1324,7 +1326,7 @@ export const data = {
 		trendingProductTopBestSellingProduct: '3',
 
 		startingLevelValue: '1',
-		maxLevel: '5',
+		maxLevel: 5,
 
 		verifiedSellerMethod: {
 			idVerification: 'id_verification',

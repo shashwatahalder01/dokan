@@ -1,7 +1,7 @@
-import { Page, expect } from '@playwright/test';
-import { BasePage } from './basePage';
-import { selector } from './selectors';
-import { data } from '../utils/testData';
+import { Page } from '@playwright/test';
+import { BasePage } from 'pages/basePage';
+import { selector } from 'pages/selectors';
+import { data } from 'utils/testData';
 import {  } from 'utils/interfaces';
 
 export class AdminPage extends BasePage {

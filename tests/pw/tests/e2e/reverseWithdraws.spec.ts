@@ -1,4 +1,4 @@
-import { test, Page, expect } from '@playwright/test';
+import { test, Page } from '@playwright/test';
 import { ReverseWithdrawsPage } from 'pages/reverseWithdrawsPage';
 import { ApiUtils } from 'utils/apiUtils';
 import { dbUtils } from 'utils/dbUtils';

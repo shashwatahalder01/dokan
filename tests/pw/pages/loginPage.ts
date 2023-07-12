@@ -1,6 +1,6 @@
 import { Page, expect } from '@playwright/test';
 import { BasePage } from './basePage';
-import { data, user } from '../utils/testData';
+import { data, user } from '.utils/testData';
 import { selector } from './selectors';
 
 

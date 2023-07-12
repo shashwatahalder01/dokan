@@ -1,8 +1,8 @@
-import { Page, expect } from '@playwright/test';
+import { Page } from '@playwright/test';
 import { AdminPage } from 'pages/adminPage';
 import { selector } from 'pages/selectors';
 import { data } from 'utils/testData';
-
+import { product  } from 'utils/interfaces';
 
 export class ProductsPage extends AdminPage {
 
@@ -22,7 +22,7 @@ export class ProductsPage extends AdminPage {
 
 
 	// admin add product attribute
-	async addAttribute(attribute: any) {
+	async addAttribute(attribute: product['attribute']) {
 		await this.goIfNotThere(data.subUrls.backend.wc.addNewAttributes);
 		await this.fill(selector.admin.products.attribute.name, attribute.attributeName);
 		await this.fill(selector.admin.products.attribute.slug, attribute.attributeName);
@@ -41,7 +41,7 @@ export class ProductsPage extends AdminPage {
 
 
 	// admin add simple product
-	async addSimpleProduct(product: any) {
+	async addSimpleProduct(product: product['simple']) {
 		await this.goIfNotThere(data.subUrls.backend.wc.addNewProducts);
 
 		// product basic info
@@ -87,7 +87,7 @@ export class ProductsPage extends AdminPage {
 
 
 	// admin add variable product
-	async addVariableProduct(product: any) {
+	async addVariableProduct(product: product['variable']) {
 		await this.goIfNotThere(data.subUrls.backend.wc.addNewProducts);
 
 		// name
@@ -135,7 +135,7 @@ export class ProductsPage extends AdminPage {
 
 
 	// Admin Add Simple Subscription Product
-	async addSimpleSubscription(product: any) {
+	async addSimpleSubscription(product: product['simpleSubscription']) {
 		await this.goIfNotThere(data.subUrls.backend.wc.addNewProducts);
 
 		// Name
@@ -163,7 +163,7 @@ export class ProductsPage extends AdminPage {
 
 
 	// Admin Add External Product
-	async addExternalProduct(product: any) {
+	async addExternalProduct(product: product['external']) {
 		await this.goIfNotThere(data.subUrls.backend.wc.addNewProducts);
 
 		// Name
@@ -187,7 +187,7 @@ export class ProductsPage extends AdminPage {
 
 
 	// Admin Add Dokan Subscription Product
-	async addDokanSubscription(product: any) {
+	async addDokanSubscription(product: product['vendorSubscription']) {
 		await this.goIfNotThere(data.subUrls.backend.wc.addNewProducts);
 
 		// Name
@@ -216,7 +216,7 @@ export class ProductsPage extends AdminPage {
 
 
 	// Admin Add Auction Product
-	async addAuctionProduct(product: any) {
+	async addAuctionProduct(product: product['auction']) {
 		await this.goIfNotThere(data.subUrls.backend.wc.addNewProducts);
 
 		// Name
@@ -245,7 +245,7 @@ export class ProductsPage extends AdminPage {
 
 
 	// Admin Add Booking Product
-	async addBookingProduct(product: any) {
+	async addBookingProduct(product: product['booking']) {
 		await this.goIfNotThere(data.subUrls.backend.wc.addNewProducts);
 
 		// Name

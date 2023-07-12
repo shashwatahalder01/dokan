@@ -52,7 +52,7 @@ export class RefundsPage extends AdminPage {
 
 
 	// update refund request
-	async updateRefundRequests(orderNumber: any, action: string){
+	async updateRefundRequests(orderNumber: string, action: string){
 		await this.searchRefundRequests(orderNumber);
 
 		await this.hover(selector.admin.dokan.refunds.refundCell(orderNumber));

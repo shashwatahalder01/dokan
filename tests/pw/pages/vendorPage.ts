@@ -1,11 +1,11 @@
 import { Page, expect } from '@playwright/test';
-import { BasePage } from './basePage';
-import { LoginPage } from './loginPage';
-import { AdminPage } from './adminPage';
-import { CustomerPage } from './customerPage';
-import { selector } from './selectors';
-import { data } from '../utils/testData';
-import { helpers } from '../utils/helpers';
+import { BasePage } from 'pages/basePage';
+import { LoginPage } from 'pages/loginPage';
+import { AdminPage } from 'pages/adminPage';
+import { CustomerPage } from 'pages/customerPage';
+import { selector } from 'pages/selectors';
+import { data } from 'utils/testData';
+import { helpers } from 'utils/helpers';
 
 export class VendorPage extends BasePage {
 

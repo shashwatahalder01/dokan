@@ -1,8 +1,8 @@
 import { expect, type APIRequestContext, APIResponse, Request } from '@playwright/test';
 import { endPoints } from 'utils/apiEndPoints';
 import { payloads } from 'utils/payloads';
+import { helpers } from 'utils/helpers';
 import fs from 'fs';
-import { helpers } from './helpers';
 // import FormData from 'form-data';
 
 

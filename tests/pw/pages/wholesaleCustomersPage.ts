@@ -1,9 +1,9 @@
 import { Page, expect } from '@playwright/test';
 import { LoginPage } from 'pages/loginPage';
 import { AdminPage } from 'pages/adminPage';
-// import { CustomerPage } from './customerPage';
 import { selector } from 'pages/selectors';
 import { data } from 'utils/testData';
+import { customer } from 'utils/interfaces';
 
 
 export class WholesaleCustomersPage extends AdminPage {
@@ -51,7 +51,7 @@ export class WholesaleCustomersPage extends AdminPage {
 
 
 	// edit wholesale customer
-	async editWholesaleCustomer(wholesaleCustomer: any){
+	async editWholesaleCustomer(wholesaleCustomer: customer){
 		await this.searchWholesaleCustomer(wholesaleCustomer.username);
 		await this.hover(selector.admin.dokan.wholesaleCustomer.wholesaleCustomerCell(wholesaleCustomer.username));
 		await this.clickAndWaitForNavigation(selector.admin.dokan.wholesaleCustomer.wholesaleCustomerEdit);
@@ -182,7 +182,7 @@ export class WholesaleCustomersPage extends AdminPage {
 		else {
 			await this.toContainText(selector.customer.cDashboard.wholesaleRequestReturnMessage, data.wholesale.wholesaleRequestSendMessage);
 			await this.loginPage.switchUser(data.admin);
-			await this.updateWholesaleCustomer(currentUser!, 'enable'); //TODo: fix this
+			await this.updateWholesaleCustomer(currentUser as string, 'enable');
 		}
 	}
 

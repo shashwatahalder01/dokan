@@ -1,7 +1,8 @@
-import { Page, expect } from '@playwright/test';
+import { Page } from '@playwright/test';
 import { AdminPage } from 'pages/adminPage';
 import { selector } from 'pages/selectors';
 import { data } from 'utils/testData';
+import { requestForQuotation } from 'utils/interfaces';
 
 
 export class RequestForQuotationsPage extends AdminPage {
@@ -40,7 +41,7 @@ export class RequestForQuotationsPage extends AdminPage {
 
 
 	// update quote rule files
-	async updateQuoteRuleFields(rule: any){
+	async updateQuoteRuleFields(rule: requestForQuotation['quoteRule']){
 		await this.clearAndType(selector.admin.dokan.requestForQuotation.quoteRules.addNewQuoteRule.ruleTitle, rule.title);
 		await this.check(selector.admin.dokan.requestForQuotation.quoteRules.addNewQuoteRule.applyQuoteFor(rule.userRole));
 
@@ -68,7 +69,7 @@ export class RequestForQuotationsPage extends AdminPage {
 
 
 	// add quote rule
-	async addQuoteRule(rule: any){
+	async addQuoteRule(rule: requestForQuotation['quoteRule']){
 		await this.goIfNotThere(data.subUrls.backend.dokan.requestForQuoteRules);
 
 		// TODO: create a general function for below scenario on base page
@@ -83,7 +84,7 @@ export class RequestForQuotationsPage extends AdminPage {
 
 
 	// edit quote rule
-	async editQuoteRule(rule: any){
+	async editQuoteRule(rule: requestForQuotation['quoteRule']){
 		await this.goto(data.subUrls.backend.dokan.requestForQuoteRules);
 		// await this.goIfNotThere(data.subUrls.backend.dokan.requestForQuoteRules);//Todo: fix and apply this
 
@@ -172,7 +173,7 @@ export class RequestForQuotationsPage extends AdminPage {
 
 
 	// update quote fields
-	async updateQuoteFields(quote: any, action = 'create'){
+	async updateQuoteFields(quote: requestForQuotation['quote'], action = 'create'){
 
 		await this.clearAndType(selector.admin.dokan.requestForQuotation.quotesList.addNewQuote.quoteTitle, quote.title);
 
@@ -206,7 +207,7 @@ export class RequestForQuotationsPage extends AdminPage {
 
 
 	// add quote
-	async addQuote(quote: any){
+	async addQuote(quote: requestForQuotation['quote']){
 		await this.goIfNotThere(data.subUrls.backend.dokan.requestForQuote);
 
 		await this.click(selector.admin.dokan.requestForQuotation.quotesList.newQuote);
@@ -215,7 +216,7 @@ export class RequestForQuotationsPage extends AdminPage {
 
 
 	// edit quote
-	async editQuote(quote: any){
+	async editQuote(quote: requestForQuotation['quote']){
 		await this.goIfNotThere(data.subUrls.backend.dokan.requestForQuote);
 
 		await this.hover(selector.admin.dokan.requestForQuotation.quotesList.quoteCell(quote.title));

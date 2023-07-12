@@ -2,6 +2,7 @@ import { Page, expect } from '@playwright/test';
 import { AdminPage } from 'pages/adminPage';
 import { selector } from 'pages/selectors';
 import { data } from 'utils/testData';
+import { tax } from 'utils/interfaces';
 
 
 export class TaxPage extends AdminPage {
@@ -23,7 +24,7 @@ export class TaxPage extends AdminPage {
 
 
 	// Admin Add Standard Tax Rate
-	async addStandardTaxRate(tax: any) {
+	async addStandardTaxRate(tax: tax) {
 		await this.goToWooCommerceSettings();
 
 		// Enable Tax

@@ -15,6 +15,17 @@ export interface woocommerce {
 	}
 
 
+export interface adminDashboard {
+	summary: {
+		sales: { this_month: string; };
+		earning: { this_month: string; };
+		vendors: { this_month: string; inactive: string; };
+		products: { this_month: string; };
+		withdraw: { pending: string; };
+	}
+}
+
+
 //Product
 export interface product {
 	publishSuccessMessage:  string;
@@ -327,6 +338,7 @@ export interface	shipping {
 
 	shippingMethods: {
 		methods: string;
+
 		flatRate: {
 			shippingZone: string;
 			shippingCountry: string;
@@ -911,15 +923,8 @@ export interface	customer {
 // store category
 export interface storeCategory {
 
-	create:{
 		name: string;
 		description: string;
-	}
-
-	update:{
-		name: string;
-		description: string;
-	}
 
 }
 
@@ -1020,6 +1025,8 @@ export interface requestForQuotation {
 		offerProductQuantity: string;
 	}
 
+	//TODO: interface should be one, only quote, merge, update fields, trashed files if any
+
 	updateQuote:{
 		title: string;
 		user: string;
@@ -1076,7 +1083,7 @@ export interface sellerBadge {
 	trendingProductTopBestSellingProduct: string;
 
 	startingLevelValue: string;
-	maxLevel: string;
+	maxLevel: number;
 
 	verifiedSellerMethod: {
 		idVerification: string;
@@ -1111,6 +1118,7 @@ export interface announcement {
 	update:{
 		title: string;
 		content:  string;
+		receiver: string;
 	}
 
 }
