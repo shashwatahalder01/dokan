@@ -2,6 +2,7 @@ import { Page } from '@playwright/test';
 import { AdminPage } from 'pages/adminPage';
 import { selector } from 'pages/selectors';
 import { data } from 'utils/testData';
+import { plugin, wpSettings } from 'utils/interfaces';
 
 
 export class WpPage extends AdminPage {
@@ -14,23 +15,23 @@ export class WpPage extends AdminPage {
 	// wordpress site settings
 
 	// plugin activation check
-	async checkActivePlugins(plugins: any) {
+	async checkActivePlugins(plugins: plugin) {
 		await this.goIfNotThere(data.subUrls.backend.plugins);
-		for (const pluginSlug of plugins.pluginSlugList) {
+		for (const pluginSlug of plugins.pluginSlugs) {
 			await this.toHaveClass(selector.admin.plugins.plugin(pluginSlug), plugins.activeClass);
 		}
 	}
 
 
 	// admin set wordpress site settings
-	async setWpSettings(wpSettings: any) {
+	async setWpSettings(wpSettings: wpSettings) {
 		await this.setWpGeneralSettings(wpSettings.general);
 		await this.setPermalinkSettings(wpSettings.permalink);
 	}
 
 
 	// set wp general settings
-	async setWpGeneralSettings(general: any) {
+	async setWpGeneralSettings(general: wpSettings['general']) {
 		await this.goto(data.subUrls.backend.general);
 
 		// enable user registration
@@ -43,7 +44,7 @@ export class WpPage extends AdminPage {
 
 
 	// admin set permalink settings
-	async setPermalinkSettings(permalink: any) {
+	async setPermalinkSettings(permalink: wpSettings['permalink']) {
 		await this.goto(data.subUrls.backend.permalinks);
 
 		// set permalinks settings

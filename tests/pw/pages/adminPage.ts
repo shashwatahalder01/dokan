@@ -2,7 +2,7 @@ import { Page } from '@playwright/test';
 import { BasePage } from 'pages/basePage';
 import { selector } from 'pages/selectors';
 import { data } from 'utils/testData';
-import {  } from 'utils/interfaces';
+import { payment, dokanSetupWizard, woocommerce } from 'utils/interfaces';
 
 export class AdminPage extends BasePage {
 
@@ -29,23 +29,23 @@ export class AdminPage extends BasePage {
 	// Woocommerce Settings
 
 	// Admin Setup Woocommerce Settings
-	async setWoocommerceSettings(data: any) {
-		await this.enablePasswordInputField(data);
-		// await this.addStandardTaxRate(data.tax);
-		await this.setCurrencyOptions(data.currency);
-		// await this.addShippingMethod(data.shipping.shippingMethods.flatRate);
-		// await this.addShippingMethod(data.shipping.shippingMethods.flatRate);
-		// await this.addShippingMethod(data.shipping.shippingMethods.freeShipping);
-		// await this.addShippingMethod(data.shipping.shippingMethods.tableRateShipping);
-		// await this.addShippingMethod(data.shipping.shippingMethods.distanceRateShipping);
-		// await this.addShippingMethod(data.shipping.shippingMethods.vendorShipping);
-		// await this.deleteShippingMethod(data.shipping.shippingMethods.flatRate);
-		// await this.deleteShippingZone(data.shipping.shippingZone);
-	}
+	// async setWoocommerceSettings(data: any) {
+	// await this.enablePasswordInputField(data);
+	// await this.addStandardTaxRate(data.tax);
+	// await this.setCurrencyOptions(data.currency);
+	// await this.addShippingMethod(data.shipping.shippingMethods.flatRate);
+	// await this.addShippingMethod(data.shipping.shippingMethods.flatRate);
+	// await this.addShippingMethod(data.shipping.shippingMethods.freeShipping);
+	// await this.addShippingMethod(data.shipping.shippingMethods.tableRateShipping);
+	// await this.addShippingMethod(data.shipping.shippingMethods.distanceRateShipping);
+	// await this.addShippingMethod(data.shipping.shippingMethods.vendorShipping);
+	// await this.deleteShippingMethod(data.shipping.shippingMethods.flatRate);
+	// await this.deleteShippingZone(data.shipping.shippingZone);
+	// }
 
 
 	// Enable Password Field
-	async enablePasswordInputField(woocommerce: any) {
+	async enablePasswordInputField(woocommerce: woocommerce) {
 		await this.goToWooCommerceSettings();
 		await this.click(selector.admin.wooCommerce.settings.accounts);
 		await this.uncheck(selector.admin.wooCommerce.settings.automaticPasswordGeneration);
@@ -55,7 +55,7 @@ export class AdminPage extends BasePage {
 
 
 	// Admin Set Currency Options
-	async setCurrencyOptions(currency: any) {
+	async setCurrencyOptions(currency: payment['currency']) {
 		await this.goToWooCommerceSettings();
 
 		// Set Currency Options
@@ -69,7 +69,7 @@ export class AdminPage extends BasePage {
 
 
 	// Admin Set Currency
-	async setCurrency(currency: any) {
+	async setCurrency(currency: string) {
 		await this.goToWooCommerceSettings();
 		const currentCurrency = await this.getElementText(selector.admin.wooCommerce.settings.currency);
 		if (currentCurrency !== currency) {
@@ -124,7 +124,7 @@ export class AdminPage extends BasePage {
 	// Dokan Setup Wizard
 
 	// Admin Set Dokan Setup Wizard
-	async setDokanSetupWizard(dokanSetupWizard: any) {
+	async setDokanSetupWizard(dokanSetupWizard: dokanSetupWizard) {
 		// await this.hover(selector.admin.aDashboard.dokan)
 		// await this.click(selector.admin.dokan.toolsMenu)
 
@@ -200,7 +200,7 @@ export class AdminPage extends BasePage {
 
 		// dokan notice elements are visible
 		// eslint-disable-next-line @typescript-eslint/no-unused-vars
-		const { noticeDiv, ...notice } = selector.admin.dokan.notice; // TODO: conflicting locator if promo notice exists
+		// const { noticeDiv, ...notice } = selector.admin.dokan.notice; // TODO: conflicting locator if promo notice exists
 		// await this.multipleElementVisible(notice);
 	}
 

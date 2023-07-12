@@ -2,6 +2,7 @@ import { Page } from '@playwright/test';
 import { AdminPage } from 'pages/adminPage';
 import { selector } from 'pages/selectors';
 import { data } from 'utils/testData';
+import { payment } from 'utils/interfaces';
 
 
 export class PaymentsPage extends AdminPage {
@@ -13,7 +14,7 @@ export class PaymentsPage extends AdminPage {
 	// Payment Methods
 
 	// Admin Setup Basic Payment Methods
-	async setupBasicPaymentMethods(payment: any) {
+	async setupBasicPaymentMethods(payment: payment) {
 		await this.goToWooCommerceSettings();
 
 		await this.click(selector.admin.wooCommerce.settings.payments);
@@ -30,7 +31,7 @@ export class PaymentsPage extends AdminPage {
 
 
 	// Admin Setup Stripe
-	async setupStripeConnect(payment: any) {
+	async setupStripeConnect(payment: payment) {
 		await this.goToWooCommerceSettings();
 
 		await this.setCurrency(payment.currency.dollar);
@@ -64,7 +65,7 @@ export class PaymentsPage extends AdminPage {
 
 
 	// Admin Setup Dokan Paypal Marketplace
-	async setupPaypalMarketPlace(payment: any) {
+	async setupPaypalMarketPlace(payment: payment) {
 		await this.goToWooCommerceSettings();
 
 		await this.setCurrency(payment.currency.dollar);
@@ -96,7 +97,7 @@ export class PaymentsPage extends AdminPage {
 
 
 	// Admin Setup Mangopay
-	async setupMangoPay(payment: any) {
+	async setupMangoPay(payment: payment) {
 		await this.goToWooCommerceSettings();
 
 		await this.setCurrency(payment.currency.euro);
@@ -141,7 +142,7 @@ export class PaymentsPage extends AdminPage {
 
 
 	// Admin Setup Razorpay
-	async setupRazorpay(payment: any) {
+	async setupRazorpay(payment: payment) {
 		await this.goToWooCommerceSettings();
 
 		await this.setCurrency(payment.currency.rupee);
@@ -170,7 +171,7 @@ export class PaymentsPage extends AdminPage {
 
 
 	// Admin Setup Stripe Express
-	async setupStripeExpress(payment: any) {
+	async setupStripeExpress(payment: payment) {
 		await this.goToWooCommerceSettings();
 
 		await this.setCurrency(payment.currency.dollar);

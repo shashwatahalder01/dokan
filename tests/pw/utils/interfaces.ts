@@ -6,6 +6,7 @@ export interface admin {
 
 export interface plugin {
 	plugins: string[];
+	pluginSlugs: string[];
 	dokanPro:string[];
 	activeClass: string;
 }
@@ -312,7 +313,7 @@ export interface address {
 	state: string;
 }
 
-export interface	wpSettings {
+export interface wpSettings {
 	saveSuccessMessage: string;
 	general: {
 		timezone: string;
@@ -332,6 +333,7 @@ export interface	tax {
 }
 
 export interface	shipping {
+
 	enableShipping: string;
 	disableShipping: string;
 	shippingZone: string;
@@ -393,17 +395,21 @@ export interface	shipping {
 	saveSuccessMessage: string;
 }
 
-export interface	payment {
+
+export interface payment {
 	saveSuccessMessage: string;
+
 	currency: {
 		dollar: string;
 		euro: string;
 		rupee: string;
+
 		currencyOptions: {
 			thousandSeparator: string;
 			decimalSeparator: string;
 			numberOfDecimals: string;
 		}
+
 		saveSuccessMessage: string;
 	}
 
@@ -442,7 +448,7 @@ export interface	payment {
 		sandboxClientId: string;
 		sandBoxApiKey: string;
 		availableCreditCards: string;
-		availableDirectPaymentServices: string[];
+		availableDirectPaymentServices: string;
 		transferFunds: string;
 		typeOfVendors: string;
 		businessRequirement: string;
@@ -486,7 +492,7 @@ export interface	payment {
 
 
 // Dokan Setup Wizard
-export interface	dokanSetupWizard {
+export interface dokanSetupWizard {
 
 	vendorStoreURL: string;
 	shippingFeeRecipient: string;
@@ -1329,7 +1335,7 @@ export interface	dokanSettings {
 	}
 
 	// Spmv Settings
-	spm: {
+	spmv: {
 		sellItemButtonText:  string;
 		availableVendorDisplayAreaTitle:  string;
 		availableVendorSectionDisplayPosition:  string;

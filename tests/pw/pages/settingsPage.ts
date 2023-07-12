@@ -1,7 +1,8 @@
-import { Page, expect } from '@playwright/test';
+import { Page } from '@playwright/test';
 import { AdminPage } from 'pages/adminPage';
 import { selector } from 'pages/selectors';
 import { data } from 'utils/testData';
+import { dokanSettings } from 'utils/interfaces';
 
 
 export class SettingsPage extends AdminPage {
@@ -55,7 +56,7 @@ export class SettingsPage extends AdminPage {
 	// dokan settings
 
 	// admin set dokan general settings
-	async setDokanGeneralSettings(general: any) {
+	async setDokanGeneralSettings(general: dokanSettings['general']) {
 		await this.goToDokanSettings();
 		await this.click(selector.admin.dokan.settings.general);
 
@@ -77,7 +78,7 @@ export class SettingsPage extends AdminPage {
 
 
 	// admin set dokan selling settings
-	async setDokanSellingSettings(selling: any) {
+	async setDokanSellingSettings(selling: dokanSettings['selling']) {
 		await this.goToDokanSettings();
 		await this.click(selector.admin.dokan.settings.sellingOptions);
 
@@ -113,7 +114,7 @@ export class SettingsPage extends AdminPage {
 
 
 	// Admin Set Dokan Withdraw Settings
-	async setDokanWithdrawSettings(withdraw: any) {
+	async setDokanWithdrawSettings(withdraw: dokanSettings['withdraw']) {
 		await this.goToDokanSettings();
 		await this.click(selector.admin.dokan.settings.withdrawOptions);
 
@@ -159,7 +160,7 @@ export class SettingsPage extends AdminPage {
 
 
 	// Admin Set Dokan Reverse Withdraw Settings
-	async setDokanReverseWithdrawSettings(reverseWithdraw: any) {
+	async setDokanReverseWithdrawSettings(reverseWithdraw: dokanSettings['reverseWithdraw']) {
 		await this.goToDokanSettings();
 		await this.click(selector.admin.dokan.settings.reverseWithdrawal);
 
@@ -188,7 +189,7 @@ export class SettingsPage extends AdminPage {
 
 
 	// Admin Set Dokan Page Settings
-	async setPageSettings(page: any) {
+	async setPageSettings(page: dokanSettings['page']) {
 		await this.goToDokanSettings();
 		await this.click(selector.admin.dokan.settings.pageSettings);
 
@@ -201,7 +202,7 @@ export class SettingsPage extends AdminPage {
 
 
 	// Admin Set Dokan Appearance Settings
-	async setDokanAppearanceSettings(appearance: any) {
+	async setDokanAppearanceSettings(appearance: dokanSettings['appearance']) {
 		await this.goToDokanSettings();
 		await this.click(selector.admin.dokan.settings.appearance);
 
@@ -227,7 +228,7 @@ export class SettingsPage extends AdminPage {
 
 
 	// Admin Set Dokan Privacy Policy Settings
-	async setDokanPrivacyPolicySettings(privacyPolicy: any) {
+	async setDokanPrivacyPolicySettings(privacyPolicy: dokanSettings['privacyPolicy']) {
 		await this.goToDokanSettings();
 		await this.click(selector.admin.dokan.settings.privacyPolicy);
 
@@ -243,7 +244,7 @@ export class SettingsPage extends AdminPage {
 
 
 	// Admin Set Dokan Store Support Settings
-	async setDokanStoreSupportSettings(storeSupport: any) {
+	async setDokanStoreSupportSettings(storeSupport: dokanSettings['storeSupport']) {
 		await this.goToDokanSettings();
 		await this.click(selector.admin.dokan.settings.storeSupport);
 
@@ -260,7 +261,7 @@ export class SettingsPage extends AdminPage {
 
 
 	// Admin Set Dokan Rma Settings
-	async setDokanRmaSettings(rma: any) {
+	async setDokanRmaSettings(rma: dokanSettings['rma']) {
 		await this.goToDokanSettings();
 		await this.click(selector.admin.dokan.settings.rma);
 
@@ -284,7 +285,7 @@ export class SettingsPage extends AdminPage {
 
 
 	// Admin Set Dokan Wholesale Settings
-	async setDokanWholesaleSettings(wholesale: any) {
+	async setDokanWholesaleSettings(wholesale: dokanSettings['wholesale']) {
 		await this.goToDokanSettings();
 		await this.click(selector.admin.dokan.settings.wholesale);
 
@@ -300,7 +301,7 @@ export class SettingsPage extends AdminPage {
 
 
 	// Admin Set Dokan Eu Compliance Settings
-	async setDokanEuComplianceSettings(euCompliance: any) {
+	async setDokanEuComplianceSettings(euCompliance: dokanSettings['euCompliance']) {
 		await this.goToDokanSettings();
 		await this.click(selector.admin.dokan.settings.euComplianceFields);
 
@@ -325,7 +326,7 @@ export class SettingsPage extends AdminPage {
 
 
 	// Admin Set Dokan Delivery Time Settings
-	async setDokanDeliveryTimeSettings(deliveryTime: any) {
+	async setDokanDeliveryTimeSettings(deliveryTime: dokanSettings['deliveryTime']) {
 		await this.goToDokanSettings();
 		await this.click(selector.admin.dokan.settings.deliveryTime);
 
@@ -355,7 +356,7 @@ export class SettingsPage extends AdminPage {
 
 
 	// Admin Set Dokan Product Advertising Settings
-	async setDokanProductAdvertisingSettings(productAdvertising: any) {
+	async setDokanProductAdvertisingSettings(productAdvertising: dokanSettings['productAdvertising']) {
 		await this.goToDokanSettings();
 		await this.click(selector.admin.dokan.settings.productAdvertising);
 
@@ -376,7 +377,7 @@ export class SettingsPage extends AdminPage {
 
 
 	// Admin Set Dokan Geolocation Settings
-	async setDokanGeolocationSettings(geolocation: any) {
+	async setDokanGeolocationSettings(geolocation: dokanSettings['geolocation']) {
 		await this.goToDokanSettings();
 		await this.click(selector.admin.dokan.settings.geolocation);
 
@@ -403,7 +404,7 @@ export class SettingsPage extends AdminPage {
 
 
 	// Admin Set Dokan Product Report Abuse Settings
-	async setDokanProductReportAbuseSettings(productReportAbuse: any) {
+	async setDokanProductReportAbuseSettings(productReportAbuse: dokanSettings['productReportAbuse']) {
 		await this.goToDokanSettings();
 		await this.click(selector.admin.dokan.settings.productReportAbuse);
 
@@ -419,7 +420,7 @@ export class SettingsPage extends AdminPage {
 
 
 	// Admin Set Dokan Spmv Settings
-	async setDokanSpmvSettings(spmv: any) {
+	async setDokanSpmvSettings(spmv: dokanSettings['spmv']) {
 		await this.goToDokanSettings();
 		await this.click(selector.admin.dokan.settings.singleProductMultiVendor);
 
@@ -437,7 +438,7 @@ export class SettingsPage extends AdminPage {
 
 
 	// Admin Set Dokan Vendor Subscription Settings
-	async setDokanVendorSubscriptionSettings(subscription: any) {
+	async setDokanVendorSubscriptionSettings(subscription: dokanSettings['vendorSubscription']) {
 		await this.goToDokanSettings();
 		await this.click(selector.admin.dokan.settings.vendorSubscription);
 
@@ -461,7 +462,7 @@ export class SettingsPage extends AdminPage {
 
 
 	// disable dokan vendor subscription
-	async disableDokanVendorSubscription(subscription: any){
+	async disableDokanVendorSubscription(subscription: dokanSettings['vendorSubscription']){
 		await this.goToDokanSettings();
 		await this.click(selector.admin.dokan.settings.vendorSubscription);
 
