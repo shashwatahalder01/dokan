@@ -61,18 +61,18 @@ export class SettingsPage extends AdminPage {
 		await this.click(selector.admin.dokan.settings.menus.general);
 
 		// site options
-		await this.enableSwitcher(selector.admin.dokan.settings.adminAreaAccess);
-		await this.clearAndType(selector.admin.dokan.settings.vendorStoreUrl, general.vendorStoreUrl);
-		await this.click(selector.admin.dokan.settings.sellingProductTypes(general.sellingProductTypes));
+		await this.enableSwitcher(selector.admin.dokan.settings.general.adminAreaAccess);
+		await this.clearAndType(selector.admin.dokan.settings.general.vendorStoreUrl, general.vendorStoreUrl);
+		await this.click(selector.admin.dokan.settings.general.sellingProductTypes(general.sellingProductTypes));
 
 		// vendor store options
-		await this.enableSwitcher(selector.admin.dokan.settings.storeTermsAndConditions);
-		await this.clearAndType(selector.admin.dokan.settings.storeProductPerPage, general.storeProductPerPage);
-		await this.enableSwitcher(selector.admin.dokan.settings.enableTermsAndCondition);
-		await this.click(selector.admin.dokan.settings.storCategory(general.storCategory));
+		await this.enableSwitcher(selector.admin.dokan.settings.general.storeTermsAndConditions);
+		await this.clearAndType(selector.admin.dokan.settings.general.storeProductPerPage, general.storeProductPerPage);
+		await this.enableSwitcher(selector.admin.dokan.settings.general.enableTermsAndCondition);
+		await this.click(selector.admin.dokan.settings.general.storCategory(general.storCategory));
 
 		// save settings
-		await this.clickAndWaitForResponse(data.subUrls.ajax, selector.admin.dokan.settings.generalSaveChanges);
+		await this.clickAndWaitForResponse(data.subUrls.ajax, selector.admin.dokan.settings.general.generalSaveChanges);
 		await this.toContainText(selector.admin.dokan.settings.dokanUpdateSuccessMessage, general.saveSuccessMessage );
 	}
 
@@ -83,33 +83,33 @@ export class SettingsPage extends AdminPage {
 		await this.click(selector.admin.dokan.settings.menus.sellingOptions);
 
 		// commission settings
-		await this.selectByValue(selector.admin.dokan.settings.commissionType, selling.commissionType);
-		await this.clearAndType(selector.admin.dokan.settings.adminCommission, selling.adminCommission);
-		await this.click(selector.admin.dokan.settings.shippingFeeRecipient(selling.shippingFeeRecipient));
-		await this.click(selector.admin.dokan.settings.taxFeeRecipient(selling.taxFeeRecipient));
+		await this.selectByValue(selector.admin.dokan.settings.selling.commissionType, selling.commissionType);
+		await this.clearAndType(selector.admin.dokan.settings.selling.adminCommission, selling.adminCommission);
+		await this.click(selector.admin.dokan.settings.selling.shippingFeeRecipient(selling.shippingFeeRecipient));
+		await this.click(selector.admin.dokan.settings.selling.taxFeeRecipient(selling.taxFeeRecipient));
 
 		// vendor capability
-		await this.enableSwitcher(selector.admin.dokan.settings.newVendorProductUpload);
-		await this.enableSwitcher(selector.admin.dokan.settings.orderStatusChange);
-		await this.click(selector.admin.dokan.settings.newProductStatus(selling.newProductStatus));
-		await this.enableSwitcher(selector.admin.dokan.settings.duplicateProduct);
-		await this.enableSwitcher(selector.admin.dokan.settings.productMailNotification);
-		await this.click(selector.admin.dokan.settings.productCategorySelection(selling.productCategorySelection));
-		await this.enableSwitcher(selector.admin.dokan.settings.vendorsCanCreateTags);
-		await this.enableSwitcher(selector.admin.dokan.settings.orderDiscount);
-		await this.enableSwitcher(selector.admin.dokan.settings.productDiscount);
-		await this.enableSwitcher(selector.admin.dokan.settings.vendorProductReview);
-		await this.enableSwitcher(selector.admin.dokan.settings.guestProductEnquiry);
-		await this.enableSwitcher(selector.admin.dokan.settings.newVendorEnableAuction);
-		await this.enableSwitcher(selector.admin.dokan.settings.enableMinMaxQuantities);
-		await this.enableSwitcher(selector.admin.dokan.settings.enableMinMaxAmount);
+		await this.enableSwitcher(selector.admin.dokan.settings.selling.newVendorProductUpload);
+		await this.enableSwitcher(selector.admin.dokan.settings.selling.orderStatusChange);
+		await this.click(selector.admin.dokan.settings.selling.newProductStatus(selling.newProductStatus));
+		await this.enableSwitcher(selector.admin.dokan.settings.selling.duplicateProduct);
+		await this.enableSwitcher(selector.admin.dokan.settings.selling.productMailNotification);
+		await this.click(selector.admin.dokan.settings.selling.productCategorySelection(selling.productCategorySelection));
+		await this.enableSwitcher(selector.admin.dokan.settings.selling.vendorsCanCreateTags);
+		await this.enableSwitcher(selector.admin.dokan.settings.selling.orderDiscount);
+		await this.enableSwitcher(selector.admin.dokan.settings.selling.productDiscount);
+		await this.enableSwitcher(selector.admin.dokan.settings.selling.vendorProductReview);
+		await this.enableSwitcher(selector.admin.dokan.settings.selling.guestProductEnquiry);
+		await this.enableSwitcher(selector.admin.dokan.settings.selling.newVendorEnableAuction);
+		await this.enableSwitcher(selector.admin.dokan.settings.selling.enableMinMaxQuantities);
+		await this.enableSwitcher(selector.admin.dokan.settings.selling.enableMinMaxAmount);
 
 		// save settings
 		// TODO: fix or delete
-		// await this.clickAndWaitForResponse(data.subUrls.ajax, selector.admin.dokan.settings.sellingOptionsSaveChanges);
+		// await this.clickAndWaitForResponse(data.subUrls.ajax, selector.admin.dokan.settings.selling.sellingOptionsSaveChanges);
 		// await this.toContainText(selector.admin.dokan.settings.dokanUpdateSuccessMessage, selling.saveSuccessMessage );
-		await this.clickAndWaitForNavigation(selector.admin.dokan.settings.sellingOptionsSaveChanges);
-		await this.toHaveValue(selector.admin.dokan.settings.adminCommission, selling.adminCommission);
+		await this.clickAndWaitForNavigation(selector.admin.dokan.settings.selling.sellingOptionsSaveChanges);
+		await this.toHaveValue(selector.admin.dokan.settings.selling.adminCommission, selling.adminCommission);
 	}
 
 
@@ -119,42 +119,42 @@ export class SettingsPage extends AdminPage {
 		await this.click(selector.admin.dokan.settings.menus.withdrawOptions);
 
 		// Withdraw Options
-		await this.enableSwitcher(selector.admin.dokan.settings.withdrawMethodsPaypal);
-		await this.enableSwitcher(selector.admin.dokan.settings.withdrawMethodsBankTransfer);
-		await this.enableSwitcher(selector.admin.dokan.settings.withdrawMethodsDokanCustom);
-		await this.enableSwitcher(selector.admin.dokan.settings.withdrawMethodsSkrill);
-		await this.clearAndType(selector.admin.dokan.settings.customMethodName, withdraw.customMethodName);
-		await this.clearAndType(selector.admin.dokan.settings.customMethodType, withdraw.customMethodType);
-		await this.clearAndType(selector.admin.dokan.settings.minimumWithdrawAmount, withdraw.minimumWithdrawAmount);
-		await this.enableSwitcher(selector.admin.dokan.settings.orderStatusForWithdrawCompleted);
-		await this.enableSwitcher(selector.admin.dokan.settings.orderStatusForWithdrawProcessing);
-		await this.clearAndType(selector.admin.dokan.settings.withdrawThreshold, withdraw.withdrawThreshold);
+		await this.enableSwitcher(selector.admin.dokan.settings.withdraw.withdrawMethodsPaypal);
+		await this.enableSwitcher(selector.admin.dokan.settings.withdraw.withdrawMethodsBankTransfer);
+		await this.enableSwitcher(selector.admin.dokan.settings.withdraw.withdrawMethodsDokanCustom);
+		await this.enableSwitcher(selector.admin.dokan.settings.withdraw.withdrawMethodsSkrill);
+		await this.clearAndType(selector.admin.dokan.settings.withdraw.customMethodName, withdraw.customMethodName);
+		await this.clearAndType(selector.admin.dokan.settings.withdraw.customMethodType, withdraw.customMethodType);
+		await this.clearAndType(selector.admin.dokan.settings.withdraw.minimumWithdrawAmount, withdraw.minimumWithdrawAmount);
+		await this.enableSwitcher(selector.admin.dokan.settings.withdraw.orderStatusForWithdrawCompleted);
+		await this.enableSwitcher(selector.admin.dokan.settings.withdraw.orderStatusForWithdrawProcessing);
+		await this.clearAndType(selector.admin.dokan.settings.withdraw.withdrawThreshold, withdraw.withdrawThreshold);
 
 		// Disbursement Schedule Settings
-		await this.enableSwitcher(selector.admin.dokan.settings.withdrawDisbursementManual);
-		await this.enableSwitcher(selector.admin.dokan.settings.withdrawDisbursementAuto);
+		await this.enableSwitcher(selector.admin.dokan.settings.withdraw.withdrawDisbursementManual);
+		await this.enableSwitcher(selector.admin.dokan.settings.withdraw.withdrawDisbursementAuto);
 
 		// Disbursement Schedule
-		await this.enableSwitcher(selector.admin.dokan.settings.disburseMentQuarterlySchedule);
-		await this.enableSwitcher(selector.admin.dokan.settings.disburseMentMonthlySchedule);
-		await this.enableSwitcher(selector.admin.dokan.settings.disburseMentBiweeklySchedule);
-		await this.enableSwitcher(selector.admin.dokan.settings.disburseMentWeeklySchedule);
+		await this.enableSwitcher(selector.admin.dokan.settings.withdraw.disburseMentQuarterlySchedule);
+		await this.enableSwitcher(selector.admin.dokan.settings.withdraw.disburseMentMonthlySchedule);
+		await this.enableSwitcher(selector.admin.dokan.settings.withdraw.disburseMentBiweeklySchedule);
+		await this.enableSwitcher(selector.admin.dokan.settings.withdraw.disburseMentWeeklySchedule);
 
 		// Quarterly Schedule
-		await this.selectByValue(selector.admin.dokan.settings.quarterlyScheduleMonth, withdraw.quarterlyScheduleMonth);
-		await this.selectByValue(selector.admin.dokan.settings.quarterlyScheduleWeek, withdraw.quarterlyScheduleWeek);
-		await this.selectByValue(selector.admin.dokan.settings.quarterlyScheduleDay, withdraw.quarterlyScheduleDay);
+		await this.selectByValue(selector.admin.dokan.settings.withdraw.quarterlyScheduleMonth, withdraw.quarterlyScheduleMonth);
+		await this.selectByValue(selector.admin.dokan.settings.withdraw.quarterlyScheduleWeek, withdraw.quarterlyScheduleWeek);
+		await this.selectByValue(selector.admin.dokan.settings.withdraw.quarterlyScheduleDay, withdraw.quarterlyScheduleDay);
 		// Monthly Schedule
-		await this.selectByValue(selector.admin.dokan.settings.monthlyScheduleWeek, withdraw.monthlyScheduleWeek);
-		await this.selectByValue(selector.admin.dokan.settings.monthlyScheduleDay, withdraw.monthlyScheduleDay);
+		await this.selectByValue(selector.admin.dokan.settings.withdraw.monthlyScheduleWeek, withdraw.monthlyScheduleWeek);
+		await this.selectByValue(selector.admin.dokan.settings.withdraw.monthlyScheduleDay, withdraw.monthlyScheduleDay);
 		// Biweekly Schedule
-		await this.selectByValue(selector.admin.dokan.settings.biweeklyScheduleWeek, withdraw.biweeklyScheduleWeek);
-		await this.selectByValue(selector.admin.dokan.settings.biweeklyScheduleDay, withdraw.biweeklyScheduleDay);
+		await this.selectByValue(selector.admin.dokan.settings.withdraw.biweeklyScheduleWeek, withdraw.biweeklyScheduleWeek);
+		await this.selectByValue(selector.admin.dokan.settings.withdraw.biweeklyScheduleDay, withdraw.biweeklyScheduleDay);
 		// Weekly Schedule
-		await this.selectByValue(selector.admin.dokan.settings.weeklyScheduleDay, withdraw.weeklyScheduleDay);
+		await this.selectByValue(selector.admin.dokan.settings.withdraw.weeklyScheduleDay, withdraw.weeklyScheduleDay);
 
 		// save settings
-		await this.clickAndWaitForResponse(data.subUrls.ajax, selector.admin.dokan.settings.withdrawSaveChanges);
+		await this.clickAndWaitForResponse(data.subUrls.ajax, selector.admin.dokan.settings.withdraw.withdrawSaveChanges);
 		await this.toContainText(selector.admin.dokan.settings.dokanUpdateSuccessMessage, withdraw.saveSuccessMessage );
 	}
 
@@ -165,26 +165,26 @@ export class SettingsPage extends AdminPage {
 		await this.click(selector.admin.dokan.settings.menus.reverseWithdrawal);
 
 		// reverse withdraw options
-		await this.enableSwitcher(selector.admin.dokan.settings.enableReverseWithdrawal);
-		await this.enableSwitcher(selector.admin.dokan.settings.enableReverseWithdrawalForThisGateway);
+		await this.enableSwitcher(selector.admin.dokan.settings.reverseWithdraw.enableReverseWithdrawal);
+		await this.enableSwitcher(selector.admin.dokan.settings.reverseWithdraw.enableReverseWithdrawalForThisGateway);
 
-		await this.selectByValue(selector.admin.dokan.settings.billingType, reverseWithdraw.billingType);
-		await this.clearAndType(selector.admin.dokan.settings.reverseBalanceThreshold, reverseWithdraw.reverseBalanceThreshold);
-		await this.clearAndType(selector.admin.dokan.settings.gracePeriod, reverseWithdraw.gracePeriod);
+		await this.selectByValue(selector.admin.dokan.settings.reverseWithdraw.billingType, reverseWithdraw.billingType);
+		await this.clearAndType(selector.admin.dokan.settings.reverseWithdraw.reverseBalanceThreshold, reverseWithdraw.reverseBalanceThreshold);
+		await this.clearAndType(selector.admin.dokan.settings.reverseWithdraw.gracePeriod, reverseWithdraw.gracePeriod);
 
-		await this.enableSwitcher(selector.admin.dokan.settings.disableAddToCartButton);
-		await this.enableSwitcher(selector.admin.dokan.settings.hideWithdrawMenu);
-		await this.enableSwitcher(selector.admin.dokan.settings.MakeVendorStatusInactive);
+		await this.enableSwitcher(selector.admin.dokan.settings.reverseWithdraw.disableAddToCartButton);
+		await this.enableSwitcher(selector.admin.dokan.settings.reverseWithdraw.hideWithdrawMenu);
+		await this.enableSwitcher(selector.admin.dokan.settings.reverseWithdraw.MakeVendorStatusInactive);
 
-		await this.enableSwitcher(selector.admin.dokan.settings.displayNoticeDuringGracePeriod);
-		await this.enableSwitcher(selector.admin.dokan.settings.sendAnnouncement);
+		await this.enableSwitcher(selector.admin.dokan.settings.reverseWithdraw.displayNoticeDuringGracePeriod);
+		await this.enableSwitcher(selector.admin.dokan.settings.reverseWithdraw.sendAnnouncement);
 
 		// save settings
 		// TODO: fix or delete
-		// await this.clickAndWaitForResponse(data.subUrls.ajax, selector.admin.dokan.settings.reverseWithdrawSaveChanges);
+		// await this.clickAndWaitForResponse(data.subUrls.ajax, selector.admin.dokan.settings.reverseWithdraw.reverseWithdrawSaveChanges);
 		// await this.toContainText(selector.admin.dokan.settings.dokanUpdateSuccessMessage, reverseWithdraw.saveSuccessMessage );
-		await this.clickAndWaitForNavigation(selector.admin.dokan.settings.reverseWithdrawSaveChanges);
-		await this.toHaveValue(selector.admin.dokan.settings.reverseBalanceThreshold, reverseWithdraw.reverseBalanceThreshold);
+		await this.clickAndWaitForNavigation(selector.admin.dokan.settings.reverseWithdraw.reverseWithdrawSaveChanges);
+		await this.toHaveValue(selector.admin.dokan.settings.reverseWithdraw.reverseBalanceThreshold, reverseWithdraw.reverseBalanceThreshold);
 	}
 
 
@@ -193,10 +193,10 @@ export class SettingsPage extends AdminPage {
 		await this.goToDokanSettings();
 		await this.click(selector.admin.dokan.settings.menus.pageSettings);
 
-		await this.selectByLabel(selector.admin.dokan.settings.termsAndConditionsPage, page.termsAndConditionsPage);
+		await this.selectByLabel(selector.admin.dokan.settings.page.termsAndConditionsPage, page.termsAndConditionsPage);
 
 		// save settings
-		await this.clickAndWaitForResponse(data.subUrls.ajax, selector.admin.dokan.settings.pageSaveChanges);
+		await this.clickAndWaitForResponse(data.subUrls.ajax, selector.admin.dokan.settings.page.pageSaveChanges);
 		await this.toContainText(selector.admin.dokan.settings.dokanUpdateSuccessMessage, page.saveSuccessMessage );
 	}
 
@@ -207,23 +207,23 @@ export class SettingsPage extends AdminPage {
 		await this.click(selector.admin.dokan.settings.menus.appearance);
 
 		// Appearance Settings
-		await this.enableSwitcher(selector.admin.dokan.settings.showMapOnStorePage);
-		await this.click(selector.admin.dokan.settings.mapApiSourceGoogleMaps);
-		await this.clearAndType(selector.admin.dokan.settings.googleMapApiKey, appearance.googleMapApiKey);
-		await this.click(selector.admin.dokan.settings.storeHeaderTemplate2);
-		await this.click(selector.admin.dokan.settings.storeHeaderTemplate1);
-		await this.clearAndType(selector.admin.dokan.settings.storeBannerWidth, appearance.storeBannerWidth);
-		await this.clearAndType(selector.admin.dokan.settings.storeBannerHeight, appearance.storeBannerHeight);
-		await this.enableSwitcher(selector.admin.dokan.settings.storeOpeningClosingTimeWidget);
-		await this.enableSwitcher(selector.admin.dokan.settings.showVendorInfo);
+		await this.enableSwitcher(selector.admin.dokan.settings.appearance.showMapOnStorePage);
+		await this.click(selector.admin.dokan.settings.appearance.mapApiSourceGoogleMaps);
+		await this.clearAndType(selector.admin.dokan.settings.appearance.googleMapApiKey, appearance.googleMapApiKey);
+		await this.click(selector.admin.dokan.settings.appearance.storeHeaderTemplate2);
+		await this.click(selector.admin.dokan.settings.appearance.storeHeaderTemplate1);
+		await this.clearAndType(selector.admin.dokan.settings.appearance.storeBannerWidth, appearance.storeBannerWidth);
+		await this.clearAndType(selector.admin.dokan.settings.appearance.storeBannerHeight, appearance.storeBannerHeight);
+		await this.enableSwitcher(selector.admin.dokan.settings.appearance.storeOpeningClosingTimeWidget);
+		await this.enableSwitcher(selector.admin.dokan.settings.appearance.showVendorInfo);
 
 		// save settings
 		// TODO: fix or delete
-		// await this.clickAndWaitForResponse(data.subUrls.ajax, selector.admin.dokan.settings.appearanceSaveChanges);
+		// await this.clickAndWaitForResponse(data.subUrls.ajax, selector.admin.dokan.settings.appearance.appearanceSaveChanges);
 		await this.toContainText(selector.admin.dokan.settings.dokanUpdateSuccessMessage, appearance.saveSuccessMessage );
 
-		await this.clickAndWaitForNavigation(selector.admin.dokan.settings.appearanceSaveChanges);
-		await this.toHaveValue(selector.admin.dokan.settings.googleMapApiKey, appearance.googleMapApiKey);
+		await this.clickAndWaitForNavigation(selector.admin.dokan.settings.appearance.appearanceSaveChanges);
+		await this.toHaveValue(selector.admin.dokan.settings.appearance.googleMapApiKey, appearance.googleMapApiKey);
 	}
 
 
@@ -233,12 +233,12 @@ export class SettingsPage extends AdminPage {
 		await this.click(selector.admin.dokan.settings.menus.privacyPolicy);
 
 		// Privacy Policy Settings
-		await this.enableSwitcher(selector.admin.dokan.settings.enablePrivacyPolicy);
-		await this.selectByValue(selector.admin.dokan.settings.privacyPage, privacyPolicy.privacyPage);
-		await this.typeFrameSelector(selector.admin.dokan.settings.privacyPolicyIframe, selector.admin.dokan.settings.privacyPolicyHtmlBody, privacyPolicy.privacyPolicyHtmlBody);
+		await this.enableSwitcher(selector.admin.dokan.settings.privacyPolicy.enablePrivacyPolicy);
+		await this.selectByValue(selector.admin.dokan.settings.privacyPolicy.privacyPage, privacyPolicy.privacyPage);
+		await this.typeFrameSelector(selector.admin.dokan.settings.privacyPolicy.privacyPolicyIframe, selector.admin.dokan.settings.privacyPolicy.privacyPolicyHtmlBody, privacyPolicy.privacyPolicyHtmlBody);
 
 		// save settings
-		await this.clickAndWaitForResponse(data.subUrls.ajax, selector.admin.dokan.settings.privacyPolicySaveChanges);
+		await this.clickAndWaitForResponse(data.subUrls.ajax, selector.admin.dokan.settings.privacyPolicy.privacyPolicySaveChanges);
 		await this.toContainText(selector.admin.dokan.settings.dokanUpdateSuccessMessage, privacyPolicy.saveSuccessMessage );
 	}
 
@@ -249,13 +249,13 @@ export class SettingsPage extends AdminPage {
 		await this.click(selector.admin.dokan.settings.menus.storeSupport);
 
 		// Store Support Settings
-		await this.enableSwitcher(selector.admin.dokan.settings.displayOnOrderDetails);
-		await this.selectByValue(selector.admin.dokan.settings.displayOnSingleProductPage, storeSupport.displayOnSingleProductPage);
-		await this.clearAndType(selector.admin.dokan.settings.supportButtonLabel, storeSupport.supportButtonLabel);
-		await this.enableSwitcher(selector.admin.dokan.settings.supportTicketEmailNotification);
+		await this.enableSwitcher(selector.admin.dokan.settings.storeSupport.displayOnOrderDetails);
+		await this.selectByValue(selector.admin.dokan.settings.storeSupport.displayOnSingleProductPage, storeSupport.displayOnSingleProductPage);
+		await this.clearAndType(selector.admin.dokan.settings.storeSupport.supportButtonLabel, storeSupport.supportButtonLabel);
+		await this.enableSwitcher(selector.admin.dokan.settings.storeSupport.supportTicketEmailNotification);
 
 		// save settings
-		await this.clickAndWaitForResponse(data.subUrls.ajax, selector.admin.dokan.settings.storeSupportSaveChanges);
+		await this.clickAndWaitForResponse(data.subUrls.ajax, selector.admin.dokan.settings.storeSupport.storeSupportSaveChanges);
 		await this.toContainText(selector.admin.dokan.settings.dokanUpdateSuccessMessage, storeSupport.saveSuccessMessage );
 	}
 
@@ -266,20 +266,20 @@ export class SettingsPage extends AdminPage {
 		await this.click(selector.admin.dokan.settings.menus.rma);
 
 		// Rma Settings
-		await this.selectByValue(selector.admin.dokan.settings.orderStatus, rma.orderStatus);
-		await this.enableSwitcher(selector.admin.dokan.settings.enableRefundRequests);
-		await this.enableSwitcher(selector.admin.dokan.settings.enableCouponRequests);
+		await this.selectByValue(selector.admin.dokan.settings.rma.orderStatus, rma.orderStatus);
+		await this.enableSwitcher(selector.admin.dokan.settings.rma.enableRefundRequests);
+		await this.enableSwitcher(selector.admin.dokan.settings.rma.enableCouponRequests);
 
 		for (const rmaReason of rma.rmaReasons) {
-			await this.deleteIfExists(selector.admin.dokan.settings.reasonsForRmaSingle(rmaReason));
-			await this.clearAndType(selector.admin.dokan.settings.reasonsForRmaInput, rmaReason);
-			await this.click(selector.admin.dokan.settings.reasonsForRmaAdd);
+			await this.deleteIfExists(selector.admin.dokan.settings.rma.reasonsForRmaSingle(rmaReason));
+			await this.clearAndType(selector.admin.dokan.settings.rma.reasonsForRmaInput, rmaReason);
+			await this.click(selector.admin.dokan.settings.rma.reasonsForRmaAdd);
 		}
 
-		await this.typeFrameSelector(selector.admin.dokan.settings.refundPolicyIframe, selector.admin.dokan.settings.refundPolicyHtmlBody, rma.refundPolicyHtmlBody);
+		await this.typeFrameSelector(selector.admin.dokan.settings.rma.refundPolicyIframe, selector.admin.dokan.settings.rma.refundPolicyHtmlBody, rma.refundPolicyHtmlBody);
 
 		// save settings
-		await this.clickAndWaitForResponse(data.subUrls.ajax, selector.admin.dokan.settings.rmaSaveChanges);
+		await this.clickAndWaitForResponse(data.subUrls.ajax, selector.admin.dokan.settings.rma.rmaSaveChanges);
 		await this.toContainText(selector.admin.dokan.settings.dokanUpdateSuccessMessage, rma.saveSuccessMessage );
 	}
 
@@ -290,12 +290,12 @@ export class SettingsPage extends AdminPage {
 		await this.click(selector.admin.dokan.settings.menus.wholesale);
 
 		// Wholesale Settings
-		await this.click(selector.admin.dokan.settings.whoCanSeeWholesalePrice(wholesale.whoCanSeeWholesalePrice));
-		await this.enableSwitcher(selector.admin.dokan.settings.showWholesalePriceOnShopArchive);
-		await this.disableSwitcher(selector.admin.dokan.settings.needApprovalForCustomer);
+		await this.click(selector.admin.dokan.settings.wholesale.whoCanSeeWholesalePrice(wholesale.whoCanSeeWholesalePrice));
+		await this.enableSwitcher(selector.admin.dokan.settings.wholesale.showWholesalePriceOnShopArchive);
+		await this.disableSwitcher(selector.admin.dokan.settings.wholesale.needApprovalForCustomer);
 
 		// save settings
-		await this.clickAndWaitForResponse(data.subUrls.ajax, selector.admin.dokan.settings.wholesaleSaveChanges);
+		await this.clickAndWaitForResponse(data.subUrls.ajax, selector.admin.dokan.settings.wholesale.wholesaleSaveChanges);
 		await this.toContainText(selector.admin.dokan.settings.dokanUpdateSuccessMessage, wholesale.saveSuccessMessage );
 	}
 
@@ -306,21 +306,21 @@ export class SettingsPage extends AdminPage {
 		await this.click(selector.admin.dokan.settings.menus.euComplianceFields);
 
 		// Eu Compliance Settings
-		await this.enableSwitcher(selector.admin.dokan.settings.vendorExtraFieldsCompanyName);
-		await this.enableSwitcher(selector.admin.dokan.settings.vendorExtraFieldsCompanyIdOrEuidNumber);
-		await this.enableSwitcher(selector.admin.dokan.settings.vendorExtraFieldsVatOrTaxNumber);
-		await this.enableSwitcher(selector.admin.dokan.settings.vendorExtraFieldsNameOfBank);
-		await this.enableSwitcher(selector.admin.dokan.settings.vendorExtraFieldsBankIban);
-		await this.enableSwitcher(selector.admin.dokan.settings.displayInVendorRegistrationForm);
-		await this.enableSwitcher(selector.admin.dokan.settings.customerExtraFieldsCompanyIdOrEuidNumber);
-		await this.enableSwitcher(selector.admin.dokan.settings.customerExtraFieldsVatOrTaxNumber);
-		await this.enableSwitcher(selector.admin.dokan.settings.customerExtraFieldsNameOfBank);
-		await this.enableSwitcher(selector.admin.dokan.settings.customerExtraFieldsBankIban);
-		await this.enableSwitcher(selector.admin.dokan.settings.enableGermanizedSupportForVendors);
-		await this.enableSwitcher(selector.admin.dokan.settings.vendorsWillBeAbleToOverrideInvoiceNumber);
+		await this.enableSwitcher(selector.admin.dokan.settings.euCompliance.vendorExtraFieldsCompanyName);
+		await this.enableSwitcher(selector.admin.dokan.settings.euCompliance.vendorExtraFieldsCompanyIdOrEuidNumber);
+		await this.enableSwitcher(selector.admin.dokan.settings.euCompliance.vendorExtraFieldsVatOrTaxNumber);
+		await this.enableSwitcher(selector.admin.dokan.settings.euCompliance.vendorExtraFieldsNameOfBank);
+		await this.enableSwitcher(selector.admin.dokan.settings.euCompliance.vendorExtraFieldsBankIban);
+		await this.enableSwitcher(selector.admin.dokan.settings.euCompliance.displayInVendorRegistrationForm);
+		await this.enableSwitcher(selector.admin.dokan.settings.euCompliance.customerExtraFieldsCompanyIdOrEuidNumber);
+		await this.enableSwitcher(selector.admin.dokan.settings.euCompliance.customerExtraFieldsVatOrTaxNumber);
+		await this.enableSwitcher(selector.admin.dokan.settings.euCompliance.customerExtraFieldsNameOfBank);
+		await this.enableSwitcher(selector.admin.dokan.settings.euCompliance.customerExtraFieldsBankIban);
+		await this.enableSwitcher(selector.admin.dokan.settings.euCompliance.enableGermanizedSupportForVendors);
+		await this.enableSwitcher(selector.admin.dokan.settings.euCompliance.vendorsWillBeAbleToOverrideInvoiceNumber);
 
 		// save settings
-		await this.clickAndWaitForResponse(data.subUrls.ajax, selector.admin.dokan.settings.euComplianceFieldsSaveChanges);
+		await this.clickAndWaitForResponse(data.subUrls.ajax, selector.admin.dokan.settings.euCompliance.euComplianceFieldsSaveChanges);
 		await this.toContainText(selector.admin.dokan.settings.dokanUpdateSuccessMessage, euCompliance.saveSuccessMessage );
 	}
 
@@ -331,26 +331,26 @@ export class SettingsPage extends AdminPage {
 		await this.click(selector.admin.dokan.settings.menus.deliveryTime);
 
 		// Delivery Time Settings
-		await this.enableSwitcher(selector.admin.dokan.settings.allowVendorSettings);
-		await this.enableSwitcher(selector.admin.dokan.settings.homeDelivery);
-		await this.enableSwitcher(selector.admin.dokan.settings.storePickup);
-		await this.clearAndType(selector.admin.dokan.settings.deliveryDateLabel, deliveryTime.deliveryDateLabel);
-		await this.clearAndType(selector.admin.dokan.settings.deliveryBlockedBuffer, deliveryTime.deliveryBlockedBuffer);
-		await this.clearAndType(selector.admin.dokan.settings.timeSlot, deliveryTime.timeSlot);
-		await this.clearAndType(selector.admin.dokan.settings.orderPerSlot, deliveryTime.orderPerSlot);
-		await this.clearAndType(selector.admin.dokan.settings.deliveryBoxInfo, deliveryTime.deliveryBoxInfo);
-		await this.disableSwitcher(selector.admin.dokan.settings.requireDeliveryDateAndTime);
+		await this.enableSwitcher(selector.admin.dokan.settings.deliveryTime.allowVendorSettings);
+		await this.enableSwitcher(selector.admin.dokan.settings.deliveryTime.homeDelivery);
+		await this.enableSwitcher(selector.admin.dokan.settings.deliveryTime.storePickup);
+		await this.clearAndType(selector.admin.dokan.settings.deliveryTime.deliveryDateLabel, deliveryTime.deliveryDateLabel);
+		await this.clearAndType(selector.admin.dokan.settings.deliveryTime.deliveryBlockedBuffer, deliveryTime.deliveryBlockedBuffer);
+		await this.clearAndType(selector.admin.dokan.settings.deliveryTime.timeSlot, deliveryTime.timeSlot);
+		await this.clearAndType(selector.admin.dokan.settings.deliveryTime.orderPerSlot, deliveryTime.orderPerSlot);
+		await this.clearAndType(selector.admin.dokan.settings.deliveryTime.deliveryBoxInfo, deliveryTime.deliveryBoxInfo);
+		await this.disableSwitcher(selector.admin.dokan.settings.deliveryTime.requireDeliveryDateAndTime);
 		for (const day of deliveryTime.days) {
-			await this.enableSwitcher(selector.admin.dokan.settings.deliveryDay(day));
-			await this.click(selector.admin.dokan.settings.openingTime(day));
+			await this.enableSwitcher(selector.admin.dokan.settings.deliveryTime.deliveryDay(day));
+			await this.click(selector.admin.dokan.settings.deliveryTime.openingTime(day));
 			// await this.page.getByRole('listitem').filter({ hasText: 'Full day' }).click();
 			// comment below lines for full day
 			await this.page.getByRole('listitem').filter({ hasText: deliveryTime.openingTime }).click(); //TODO: convert by locator, also move this to base page
-			await this.click(selector.admin.dokan.settings.closingTime(day));
+			await this.click(selector.admin.dokan.settings.deliveryTime.closingTime(day));
 			await this.page.getByRole('listitem').filter({ hasText: deliveryTime.closingTime }).click();
 		}
 		// save settings
-		await this.clickAndWaitForResponse(data.subUrls.ajax, selector.admin.dokan.settings.deliveryTimeSaveChanges);
+		await this.clickAndWaitForResponse(data.subUrls.ajax, selector.admin.dokan.settings.deliveryTime.deliveryTimeSaveChanges);
 		await this.toContainText(selector.admin.dokan.settings.dokanUpdateSuccessMessage, deliveryTime.saveSuccessMessage );
 	}
 
@@ -361,17 +361,17 @@ export class SettingsPage extends AdminPage {
 		await this.click(selector.admin.dokan.settings.menus.productAdvertising);
 
 		// Product Advertising Settings
-		await this.clearAndType(selector.admin.dokan.settings.noOfAvailableSlot, productAdvertising.noOfAvailableSlot);
-		await this.clearAndType(selector.admin.dokan.settings.expireAfterDays, productAdvertising.expireAfterDays);
-		await this.enableSwitcher(selector.admin.dokan.settings.vendorCanPurchaseAdvertisement);
-		await this.clearAndType(selector.admin.dokan.settings.advertisementCost, productAdvertising.advertisementCost);
-		await this.enableSwitcher(selector.admin.dokan.settings.enableAdvertisementInSubscription);
-		await this.enableSwitcher(selector.admin.dokan.settings.markAdvertisedProductAsFeatured);
-		await this.enableSwitcher(selector.admin.dokan.settings.displayAdvertisedProductOnTop);
-		await this.enableSwitcher(selector.admin.dokan.settings.outOfStockVisibility);
+		await this.clearAndType(selector.admin.dokan.settings.productAdvertising.noOfAvailableSlot, productAdvertising.noOfAvailableSlot);
+		await this.clearAndType(selector.admin.dokan.settings.productAdvertising.expireAfterDays, productAdvertising.expireAfterDays);
+		await this.enableSwitcher(selector.admin.dokan.settings.productAdvertising.vendorCanPurchaseAdvertisement);
+		await this.clearAndType(selector.admin.dokan.settings.productAdvertising.advertisementCost, productAdvertising.advertisementCost);
+		await this.enableSwitcher(selector.admin.dokan.settings.productAdvertising.enableAdvertisementInSubscription);
+		await this.enableSwitcher(selector.admin.dokan.settings.productAdvertising.markAdvertisedProductAsFeatured);
+		await this.enableSwitcher(selector.admin.dokan.settings.productAdvertising.displayAdvertisedProductOnTop);
+		await this.enableSwitcher(selector.admin.dokan.settings.productAdvertising.outOfStockVisibility);
 
 		// save settings
-		await this.clickAndWaitForResponse(data.subUrls.ajax, selector.admin.dokan.settings.productAdvertisingSaveChanges);
+		await this.clickAndWaitForResponse(data.subUrls.ajax, selector.admin.dokan.settings.productAdvertising.productAdvertisingSaveChanges);
 		await this.toContainText(selector.admin.dokan.settings.dokanUpdateSuccessMessage, productAdvertising.saveSuccessMessage );
 	}
 
@@ -382,23 +382,23 @@ export class SettingsPage extends AdminPage {
 		await this.click(selector.admin.dokan.settings.menus.geolocation);
 
 		// Geolocation Settings
-		await this.click(selector.admin.dokan.settings.locationMapPosition(geolocation.locationMapPosition));
-		await this.click(selector.admin.dokan.settings.showMap(geolocation.showMap));
-		await this.enableSwitcher(selector.admin.dokan.settings.showFiltersBeforeLocationMap);
-		await this.enableSwitcher(selector.admin.dokan.settings.productLocationTab);
-		await this.click(selector.admin.dokan.settings.radiusSearchUnit(geolocation.radiusSearchUnit));
-		await this.clearAndType(selector.admin.dokan.settings.radiusSearchMinimumDistance, geolocation.radiusSearchMinimumDistance);
-		await this.clearAndType(selector.admin.dokan.settings.radiusSearchMaximumDistance, geolocation.radiusSearchMaximumDistance);
-		await this.clearAndType(selector.admin.dokan.settings.mapZoomLevel, geolocation.mapZoomLevel);
-		await this.focus(selector.admin.dokan.settings.defaultLocation);
-		await this.typeAndWaitForResponse(data.subUrls.gmap, selector.admin.dokan.settings.defaultLocation, geolocation.defaultLocation);
+		await this.click(selector.admin.dokan.settings.geolocation.locationMapPosition(geolocation.locationMapPosition));
+		await this.click(selector.admin.dokan.settings.geolocation.showMap(geolocation.showMap));
+		await this.enableSwitcher(selector.admin.dokan.settings.geolocation.showFiltersBeforeLocationMap);
+		await this.enableSwitcher(selector.admin.dokan.settings.geolocation.productLocationTab);
+		await this.click(selector.admin.dokan.settings.geolocation.radiusSearchUnit(geolocation.radiusSearchUnit));
+		await this.clearAndType(selector.admin.dokan.settings.geolocation.radiusSearchMinimumDistance, geolocation.radiusSearchMinimumDistance);
+		await this.clearAndType(selector.admin.dokan.settings.geolocation.radiusSearchMaximumDistance, geolocation.radiusSearchMaximumDistance);
+		await this.clearAndType(selector.admin.dokan.settings.geolocation.mapZoomLevel, geolocation.mapZoomLevel);
+		await this.focus(selector.admin.dokan.settings.geolocation.defaultLocation);
+		await this.typeAndWaitForResponse(data.subUrls.gmap, selector.admin.dokan.settings.geolocation.defaultLocation, geolocation.defaultLocation);
 		// await this.wait(2)
 		await this.press(data.key.arrowDown);
 		await this.press(data.key.enter); // TODO: map not saving
 		// await this.wait(2)
 
 		// save settings
-		await this.clickAndWaitForResponse(data.subUrls.ajax, selector.admin.dokan.settings.geolocationSaveChanges);
+		await this.clickAndWaitForResponse(data.subUrls.ajax, selector.admin.dokan.settings.geolocation.geolocationSaveChanges);
 		await this.toContainText(selector.admin.dokan.settings.dokanUpdateSuccessMessage, geolocation.saveSuccessMessage );
 	}
 
@@ -409,12 +409,12 @@ export class SettingsPage extends AdminPage {
 		await this.click(selector.admin.dokan.settings.menus.productReportAbuse);
 
 		// Product Report Abuse Settings
-		await this.deleteIfExists(selector.admin.dokan.settings.reasonsForAbuseReportSingle(productReportAbuse.reasonsForAbuseReport));
-		await this.clearAndType(selector.admin.dokan.settings.reasonsForAbuseReportInput, productReportAbuse.reasonsForAbuseReport);
-		await this.click(selector.admin.dokan.settings.reasonsForAbuseReportAdd);
+		await this.deleteIfExists(selector.admin.dokan.settings.productReportAbuse.reasonsForAbuseReportSingle(productReportAbuse.reasonsForAbuseReport));
+		await this.clearAndType(selector.admin.dokan.settings.productReportAbuse.reasonsForAbuseReportInput, productReportAbuse.reasonsForAbuseReport);
+		await this.click(selector.admin.dokan.settings.productReportAbuse.reasonsForAbuseReportAdd);
 
 		// save settings
-		await this.clickAndWaitForResponse(data.subUrls.ajax, selector.admin.dokan.settings.productReportAbuseSaveChanges);
+		await this.clickAndWaitForResponse(data.subUrls.ajax, selector.admin.dokan.settings.productReportAbuse.productReportAbuseSaveChanges);
 		await this.toContainText(selector.admin.dokan.settings.dokanUpdateSuccessMessage, productReportAbuse.saveSuccessMessage );
 	}
 
@@ -424,14 +424,14 @@ export class SettingsPage extends AdminPage {
 		await this.goToDokanSettings();
 		await this.click(selector.admin.dokan.settings.menus.singleProductMultiVendor);
 
-		await this.enableSwitcher(selector.admin.dokan.settings.enableSingleProductMultipleVendor);
-		await this.clearAndType(selector.admin.dokan.settings.sellItemButtonText, spmv.sellItemButtonText);
-		await this.clearAndType(selector.admin.dokan.settings.availableVendorDisplayAreaTitle, spmv.availableVendorDisplayAreaTitle);
-		await this.selectByValue(selector.admin.dokan.settings.availableVendorSectionDisplayPosition, spmv.availableVendorSectionDisplayPosition);
-		await this.selectByValue(selector.admin.dokan.settings.showSpmvProducts, spmv.showSpmvProducts);
+		await this.enableSwitcher(selector.admin.dokan.settings.spmv.enableSingleProductMultipleVendor);
+		await this.clearAndType(selector.admin.dokan.settings.spmv.sellItemButtonText, spmv.sellItemButtonText);
+		await this.clearAndType(selector.admin.dokan.settings.spmv.availableVendorDisplayAreaTitle, spmv.availableVendorDisplayAreaTitle);
+		await this.selectByValue(selector.admin.dokan.settings.spmv.availableVendorSectionDisplayPosition, spmv.availableVendorSectionDisplayPosition);
+		await this.selectByValue(selector.admin.dokan.settings.spmv.showSpmvProducts, spmv.showSpmvProducts);
 
 		// save settings
-		await this.clickAndWaitForResponse(data.subUrls.ajax, selector.admin.dokan.settings.singleProductMultiVendorSaveChanges);
+		await this.clickAndWaitForResponse(data.subUrls.ajax, selector.admin.dokan.settings.spmv.singleProductMultiVendorSaveChanges);
 		await this.toContainText(selector.admin.dokan.settings.dokanUpdateSuccessMessage, spmv.saveSuccessMessage );
 
 	}
@@ -443,19 +443,19 @@ export class SettingsPage extends AdminPage {
 		await this.click(selector.admin.dokan.settings.menus.vendorSubscription);
 
 		// Vendor Subscription Settings
-		await this.selectByValue(selector.admin.dokan.settings.subscription, subscription.displayPage);
-		await this.enableSwitcher(selector.admin.dokan.settings.enableProductSubscription);
-		await this.enableSwitcher(selector.admin.dokan.settings.enableSubscriptionInRegistrationForm);
-		await this.enableSwitcher(selector.admin.dokan.settings.enableEmailNotification);
-		await this.clearAndType(selector.admin.dokan.settings.noOfDays, subscription.noOfDays);
-		await this.selectByValue(selector.admin.dokan.settings.productStatus, subscription.productStatus);
-		await this.clearAndType(selector.admin.dokan.settings.cancellingEmailSubject, subscription.cancellingEmailSubject);
-		await this.clearAndType(selector.admin.dokan.settings.cancellingEmailBody, subscription.cancellingEmailBody);
-		await this.clearAndType(selector.admin.dokan.settings.alertEmailSubject, subscription.alertEmailSubject);
-		await this.clearAndType(selector.admin.dokan.settings.alertEmailBody, subscription.alertEmailBody);
+		await this.selectByValue(selector.admin.dokan.settings.vendorSubscriptions.subscription, subscription.displayPage);
+		await this.enableSwitcher(selector.admin.dokan.settings.vendorSubscriptions.enableProductSubscription);
+		await this.enableSwitcher(selector.admin.dokan.settings.vendorSubscriptions.enableSubscriptionInRegistrationForm);
+		await this.enableSwitcher(selector.admin.dokan.settings.vendorSubscriptions.enableEmailNotification);
+		await this.clearAndType(selector.admin.dokan.settings.vendorSubscriptions.noOfDays, subscription.noOfDays);
+		await this.selectByValue(selector.admin.dokan.settings.vendorSubscriptions.productStatus, subscription.productStatus);
+		await this.clearAndType(selector.admin.dokan.settings.vendorSubscriptions.cancellingEmailSubject, subscription.cancellingEmailSubject);
+		await this.clearAndType(selector.admin.dokan.settings.vendorSubscriptions.cancellingEmailBody, subscription.cancellingEmailBody);
+		await this.clearAndType(selector.admin.dokan.settings.vendorSubscriptions.alertEmailSubject, subscription.alertEmailSubject);
+		await this.clearAndType(selector.admin.dokan.settings.vendorSubscriptions.alertEmailBody, subscription.alertEmailBody);
 
 		// save settings
-		await this.clickAndWaitForResponse(data.subUrls.ajax, selector.admin.dokan.settings.vendorSubscriptionSaveChanges);
+		await this.clickAndWaitForResponse(data.subUrls.ajax, selector.admin.dokan.settings.vendorSubscriptions.vendorSubscriptionSaveChanges);
 		await this.toContainText(selector.admin.dokan.settings.dokanUpdateSuccessMessage, subscription.saveSuccessMessage );
 
 	}
@@ -467,10 +467,10 @@ export class SettingsPage extends AdminPage {
 		await this.click(selector.admin.dokan.settings.menus.vendorSubscription);
 
 		// Disabling Vendor Subscription
-		await this.disableSwitcher(selector.admin.dokan.settings.enableProductSubscription);
+		await this.disableSwitcher(selector.admin.dokan.settings.vendorSubscriptions.enableProductSubscription);
 
 		// save settings
-		await this.clickAndWaitForResponse(data.subUrls.ajax, selector.admin.dokan.settings.vendorSubscriptionSaveChanges);
+		await this.clickAndWaitForResponse(data.subUrls.ajax, selector.admin.dokan.settings.vendorSubscriptions.vendorSubscriptionSaveChanges);
 		await this.toContainText(selector.admin.dokan.settings.dokanUpdateSuccessMessage, subscription.saveSuccessMessage );
 
 	}

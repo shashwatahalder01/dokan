@@ -1688,189 +1688,234 @@ export const selector = {
 				},
 
 				// General
+				general: {
 				// Site Options
-				adminAreaAccess: '.admin_access .switch',
+					adminAreaAccess: '.admin_access .switch',
 
-				vendorStoreUrl: '#dokan_general\\[custom_store_url\\]', //TODO: for CSS selector [ ] needs escaped with double back slash \\
-				vendorSetupWizardLogo: '#dokan_general\\[setup_wizard_logo_url\\]',
-				disableWelcomeWizard: '#dokan_general\\[disable_welcome_wizard\\]',
-				sellingProductTypes: (type: string) => `//label[@for='dokan_general[global_digital_mode][${type}]']`,
-				logShipStationApiRequest: '#dokan_general\\[enable_shipstation_logging\\]',
-				dataClear: '#dokan_general\\[data_clear_on_uninstall\\]',
-				confirmDataClear: '.swal2-confirm',
-				cancelDataClear: '.swal2-cancel',
+					vendorStoreUrl: '#dokan_general\\[custom_store_url\\]', //TODO: for CSS selector [ ] needs escaped with double back slash \\
+					vendorSetupWizardLogo: '#dokan_general\\[setup_wizard_logo_url\\]',
+					disableWelcomeWizard: '#dokan_general\\[disable_welcome_wizard\\]',
+					sellingProductTypes: (type: string) => `//label[@for='dokan_general[global_digital_mode][${type}]']`,
+					logShipStationApiRequest: '#dokan_general\\[enable_shipstation_logging\\]',
+					dataClear: '#dokan_general\\[data_clear_on_uninstall\\]',
+					confirmDataClear: '.swal2-confirm',
+					cancelDataClear: '.swal2-cancel',
 
-				// Vendor Store Options
-				storeTermsAndConditions: '.seller_enable_terms_and_conditions .switch',
-				storeProductPerPage: '#dokan_general\\[store_products_per_page\\]',
-				enableTermsAndCondition: '.enable_tc_on_reg .switch',
-				enableSingSellerMode: '#dokan_general\\[enable_single_seller_mode\\]',
-				storCategory: (category: string) => `//label[@for='dokan_general[store_category_type][${category}]']`,
-				generalSaveChanges: '#submit',
+					// Vendor Store Options
+					storeTermsAndConditions: '.seller_enable_terms_and_conditions .switch',
+					storeProductPerPage: '#dokan_general\\[store_products_per_page\\]',
+					enableTermsAndCondition: '.enable_tc_on_reg .switch',
+					enableSingSellerMode: '#dokan_general\\[enable_single_seller_mode\\]',
+					storCategory: (category: string) => `//label[@for='dokan_general[store_category_type][${category}]']`,
+					generalSaveChanges: '#submit',
 
+				},
+
+				// Selling
+				selling: {
 				// Selling Options
 				// Commission
-				commissionType: '#dokan_selling\\[commission_type\\]',
-				adminCommission: '#dokan_selling\\[admin_percentage\\]',
-				shippingFeeRecipient: (feeReceiver: string) => `//label[@for='dokan_selling[shipping_fee_recipient][${feeReceiver}]']`,
-				taxFeeRecipient: (feeReceiver: string) => `//label[@for='dokan_selling[tax_fee_recipient][${feeReceiver}]']`,
-				processRefundViaAPI: '#dokan_selling\\[automatic_process_api_refund\\]',
+					commissionType: '#dokan_selling\\[commission_type\\]',
+					adminCommission: '#dokan_selling\\[admin_percentage\\]',
+					shippingFeeRecipient: (feeReceiver: string) => `//label[@for='dokan_selling[shipping_fee_recipient][${feeReceiver}]']`,
+					taxFeeRecipient: (feeReceiver: string) => `//label[@for='dokan_selling[tax_fee_recipient][${feeReceiver}]']`,
+					processRefundViaAPI: '#dokan_selling\\[automatic_process_api_refund\\]',
 
-				// Vendor Capability
-				newVendorProductUpload: '.new_seller_enable_selling .switch',
-				disableProductPopup: '.disable_product_popup .switch',
-				orderStatusChange: '.order_status_change .switch',
-				newProductStatus: (status: string) => `//label[@for='dokan_selling[product_status][${status}]']`,
-				duplicateProduct: '.vendor_duplicate_product .switch',
-				editedProductStatus: '.edited_product_status .switch',
-				productMailNotification: '.product_add_mail .switch',
-				productCategorySelection: (category: string) => `//label[@for='dokan_selling[product_category_style][${category}]']`,
-				vendorsCanCreateTags: '.product_vendors_can_create_tags .switch',
-				orderDiscount: '//div[contains(text(),"Order Discount")]//label[@class="switch tips"]',
-				productDiscount: '//div[contains(text(),"Product Discount")]//label[@class="switch tips"]',
+					// Vendor Capability
+					newVendorProductUpload: '.new_seller_enable_selling .switch',
+					disableProductPopup: '.disable_product_popup .switch',
+					orderStatusChange: '.order_status_change .switch',
+					newProductStatus: (status: string) => `//label[@for='dokan_selling[product_status][${status}]']`,
+					duplicateProduct: '.vendor_duplicate_product .switch',
+					editedProductStatus: '.edited_product_status .switch',
+					productMailNotification: '.product_add_mail .switch',
+					productCategorySelection: (category: string) => `//label[@for='dokan_selling[product_category_style][${category}]']`,
+					vendorsCanCreateTags: '.product_vendors_can_create_tags .switch',
+					orderDiscount: '//div[contains(text(),"Order Discount")]//label[@class="switch tips"]',
+					productDiscount: '//div[contains(text(),"Product Discount")]//label[@class="switch tips"]',
 
-				hideCustomerInfo: '.hide_customer_info .switch',
-				vendorProductReview: '.seller_review_manage .switch',
-				guestProductEnquiry: '.enable_guest_user_enquiry .switch',
-				newVendorEnableAuction: '.new_seller_enable_auction .switch',
-				enableMinMaxQuantities: '.enable_min_max_quantity .switch',
-				enableMinMaxAmount: '.enable_min_max_amount .switch',
-				disableShipping: '.disable_shipping_tab .switch',
-				sellingOptionsSaveChanges: '#submit',
+					hideCustomerInfo: '.hide_customer_info .switch',
+					vendorProductReview: '.seller_review_manage .switch',
+					guestProductEnquiry: '.enable_guest_user_enquiry .switch',
+					newVendorEnableAuction: '.new_seller_enable_auction .switch',
+					enableMinMaxQuantities: '.enable_min_max_quantity .switch',
+					enableMinMaxAmount: '.enable_min_max_amount .switch',
+					disableShipping: '.disable_shipping_tab .switch',
+					sellingOptionsSaveChanges: '#submit',
 
+				},
+
+
+				// Withdraw
+				withdraw: {
 				// Withdraw Options
-				withdrawMethodsPaypal: '//div[normalize-space(text())="PayPal"]',
-				withdrawMethodsBankTransfer: '//div[contains(text()," Bank Transfer")]//label',
-				withdrawMethodsWireCard: '//div[contains(text(),"Wirecard")]//label',
-				withdrawMethodsPaypalMarketplace: '#dokan_withdraw\\[withdraw_methods\\]\\[dokan-paypal-marketplace\\]',
-				withdrawMethodsDokanCustom: '//div[contains(text(),"Custom")]//label',
-				withdrawMethodsRazorpay: '#dokan_withdraw\\[withdraw_methods\\]\\[dokan_razorpay\\]',
-				withdrawMethodsMangoPay: '#dokan_withdraw\\[withdraw_methods\\]\\[dokan_mangopay\\]',
-				withdrawMethodsStripe: '//div[contains(text(),"Stripe")]//label',
-				withdrawMethodsStripeExpress: '#dokan_withdraw\\[withdraw_methods\\]\\[dokan_stripe_express\\]',
-				withdrawMethodsSkrill: '//div[contains(text(),"Skrill")]//label',
-				customMethodName: '#dokan_withdraw\\[withdraw_method_name\\]',
-				customMethodType: '#dokan_withdraw\\[withdraw_method_type\\]',
-				minimumWithdrawAmount: '#dokan_withdraw\\[withdraw_limit\\]',
-				orderStatusForWithdrawCompleted: '//div[contains(text(),"Completed")]//label',
-				orderStatusForWithdrawProcessing: '//div[contains(text(),"Processing")]//label',
-				orderStatusForWithdrawOnHold: '//div[contains(text(),"On-hold")]//label',
-				excludeCodPayments: '.exclude_cod_payment .switch',
-				withdrawThreshold: '#dokan_withdraw\\[withdraw_date_limit\\]',
-				hideWithdrawOption: '.hide_withdraw_option .switch',
-				// Disbursement Schedule Settings
-				withdrawDisbursementManual: '//div[contains(text(),"Manual Withdraw")]//label',
-				withdrawDisbursementAuto: '//div[contains(text(),"Schedule Disbursement")]//label',
-				disburseMentQuarterlySchedule: '//div[contains(text(),"Quarterly")]//label',
-				disburseMentMonthlySchedule: '//div[contains(text(),"Monthly")]//label',
-				disburseMentBiweeklySchedule: '//div[contains(text(),"Biweekly (Twice Per Month)")]//label',
-				disburseMentWeeklySchedule: '//div[contains(text(),"Weekly")]//label',
-				quarterlyScheduleMonth: 'select[name="dokan_withdraw[quarterly_schedule][month]"]',
-				quarterlyScheduleWeek: 'select[name="dokan_withdraw[quarterly_schedule][week]"]',
-				quarterlyScheduleDay: 'select[name="dokan_withdraw[quarterly_schedule][days]"]',
-				monthlyScheduleWeek: 'select[name="dokan_withdraw[monthly_schedule][week]"]',
-				monthlyScheduleDay: 'select[name="dokan_withdraw[monthly_schedule][days]"]',
-				biweeklyScheduleWeek: 'select[name="dokan_withdraw[biweekly_schedule][week]"]',
-				biweeklyScheduleDay: 'select[name="dokan_withdraw[biweekly_schedule][days]"]',
-				weeklyScheduleDay: 'select[name="dokan_withdraw[weekly_schedule]"]',
-				withdrawSaveChanges: '#submit',
+					withdrawMethodsPaypal: '//div[normalize-space(text())="PayPal"]',
+					withdrawMethodsBankTransfer: '//div[contains(text()," Bank Transfer")]//label',
+					withdrawMethodsWireCard: '//div[contains(text(),"Wirecard")]//label',
+					withdrawMethodsPaypalMarketplace: '#dokan_withdraw\\[withdraw_methods\\]\\[dokan-paypal-marketplace\\]',
+					withdrawMethodsDokanCustom: '//div[contains(text(),"Custom")]//label',
+					withdrawMethodsRazorpay: '#dokan_withdraw\\[withdraw_methods\\]\\[dokan_razorpay\\]',
+					withdrawMethodsMangoPay: '#dokan_withdraw\\[withdraw_methods\\]\\[dokan_mangopay\\]',
+					withdrawMethodsStripe: '//div[contains(text(),"Stripe")]//label',
+					withdrawMethodsStripeExpress: '#dokan_withdraw\\[withdraw_methods\\]\\[dokan_stripe_express\\]',
+					withdrawMethodsSkrill: '//div[contains(text(),"Skrill")]//label',
+					customMethodName: '#dokan_withdraw\\[withdraw_method_name\\]',
+					customMethodType: '#dokan_withdraw\\[withdraw_method_type\\]',
+					minimumWithdrawAmount: '#dokan_withdraw\\[withdraw_limit\\]',
+					orderStatusForWithdrawCompleted: '//div[contains(text(),"Completed")]//label',
+					orderStatusForWithdrawProcessing: '//div[contains(text(),"Processing")]//label',
+					orderStatusForWithdrawOnHold: '//div[contains(text(),"On-hold")]//label',
+					excludeCodPayments: '.exclude_cod_payment .switch',
+					withdrawThreshold: '#dokan_withdraw\\[withdraw_date_limit\\]',
+					hideWithdrawOption: '.hide_withdraw_option .switch',
+					// Disbursement Schedule Settings
+					withdrawDisbursementManual: '//div[contains(text(),"Manual Withdraw")]//label',
+					withdrawDisbursementAuto: '//div[contains(text(),"Schedule Disbursement")]//label',
+					disburseMentQuarterlySchedule: '//div[contains(text(),"Quarterly")]//label',
+					disburseMentMonthlySchedule: '//div[contains(text(),"Monthly")]//label',
+					disburseMentBiweeklySchedule: '//div[contains(text(),"Biweekly (Twice Per Month)")]//label',
+					disburseMentWeeklySchedule: '//div[contains(text(),"Weekly")]//label',
+					quarterlyScheduleMonth: 'select[name="dokan_withdraw[quarterly_schedule][month]"]',
+					quarterlyScheduleWeek: 'select[name="dokan_withdraw[quarterly_schedule][week]"]',
+					quarterlyScheduleDay: 'select[name="dokan_withdraw[quarterly_schedule][days]"]',
+					monthlyScheduleWeek: 'select[name="dokan_withdraw[monthly_schedule][week]"]',
+					monthlyScheduleDay: 'select[name="dokan_withdraw[monthly_schedule][days]"]',
+					biweeklyScheduleWeek: 'select[name="dokan_withdraw[biweekly_schedule][week]"]',
+					biweeklyScheduleDay: 'select[name="dokan_withdraw[biweekly_schedule][days]"]',
+					weeklyScheduleDay: 'select[name="dokan_withdraw[weekly_schedule]"]',
+					withdrawSaveChanges: '#submit',
+				},
 
 				// Reverse Withdraw Settings
-				enableReverseWithdrawal: '.enabled.dokan-settings-field-type-switcher .switch',
-				enableReverseWithdrawalForThisGateway: '.payment_gateways.dokan-settings-field-type-multicheck .switch',
-				billingType: '#dokan_reverse_withdrawal\\[billing_type\\]',
-				monthlyBillingDate: '#dokan_reverse_withdrawal\\[monthly_billing_day\\]',
-				reverseBalanceThreshold: '#dokan_reverse_withdrawal\\[reverse_balance_threshold\\]',
-				gracePeriod: '#dokan_reverse_withdrawal\\[due_period\\]',
-				disableAddToCartButton: '//div[contains(text(),"Disable Add to Cart Button")]//label',
-				hideWithdrawMenu: '//div[contains(text(),"Hide Withdraw Menu")]//label',
-				MakeVendorStatusInactive: '//div[contains(text(),"Make Vendor Status Inactive")]//label',
-				displayNoticeDuringGracePeriod: '.display_notice.dokan-settings-field-type-switcher .switch',
-				sendAnnouncement: '.send_announcement.dokan-settings-field-type-switcher .switch',
-				reverseWithdrawSaveChanges: '#submit',
+				reverseWithdraw:{
+				// Reverse Withdraw Settings
+					enableReverseWithdrawal: '.enabled.dokan-settings-field-type-switcher .switch',
+					enableReverseWithdrawalForThisGateway: '.payment_gateways.dokan-settings-field-type-multicheck .switch',
+					billingType: '#dokan_reverse_withdrawal\\[billing_type\\]',
+					monthlyBillingDate: '#dokan_reverse_withdrawal\\[monthly_billing_day\\]',
+					reverseBalanceThreshold: '#dokan_reverse_withdrawal\\[reverse_balance_threshold\\]',
+					gracePeriod: '#dokan_reverse_withdrawal\\[due_period\\]',
+					disableAddToCartButton: '//div[contains(text(),"Disable Add to Cart Button")]//label',
+					hideWithdrawMenu: '//div[contains(text(),"Hide Withdraw Menu")]//label',
+					MakeVendorStatusInactive: '//div[contains(text(),"Make Vendor Status Inactive")]//label',
+					displayNoticeDuringGracePeriod: '.display_notice.dokan-settings-field-type-switcher .switch',
+					sendAnnouncement: '.send_announcement.dokan-settings-field-type-switcher .switch',
+					reverseWithdrawSaveChanges: '#submit',
+				},
 
+
+				// Pages
+				page:{
 				// Page Settings
-				dashboard: '#dokan_pages\\[dashboard\\]',
-				myOrders: '#dokan_pages\\[my_orders\\]',
-				storeListing: '#dokan_pages\\[store_listing\\]',
-				termsAndConditionsPage: '#dokan_pages\\[reg_tc_page\\]',
-				pageSaveChanges: '#submit',
+					dashboard: '#dokan_pages\\[dashboard\\]',
+					myOrders: '#dokan_pages\\[my_orders\\]',
+					storeListing: '#dokan_pages\\[store_listing\\]',
+					termsAndConditionsPage: '#dokan_pages\\[reg_tc_page\\]',
+					pageSaveChanges: '#submit',
+				},
+
 
 				// Appearance
-				showMapOnStorePage: '.store_map .switch',
-				mapApiSourceGoogleMaps: '//div[@class="map_api_source dokan-settings-field-type-radio"] //label[@for="dokan_appearance[map_api_source][google_maps]"]',
-				mapApiSourceMapBox: '//div[@class="map_api_source dokan-settings-field-type-radio"] //label[@for="dokan_appearance[map_api_source][mapbox]"]',
-				googleMapApiKey: '#dokan_appearance\\[gmap_api_key\\]',
-				mapBoxAccessToken: '#dokan_appearance\\[mapbox_access_token\\]',
-				googleReCAPTCHA: '.recaptcha_validation_label .dashicons',
-				googleReCAPTCHAValidationSiteKey: '//h3[contains(text()," Site Key")]//..//..//input',
-				googleReCAPTCHAValidationSecretKey: '//h3[contains(text(),"Secret Key")]//..//..//input]',
-				showContactFormOnStorePage: '.contact_seller .switch',
-				storeHeaderTemplate1: '.radio-image:nth-child(1) .button',
-				storeHeaderTemplate2: '.radio-image:nth-child(2) .button',
-				storeHeaderTemplate3: '.radio-image:nth-child(3) .button',
-				storeHeaderTemplate4: '.radio-image:nth-child(4) .button',
-				storeBannerWidth: '#dokan_appearance\\[store_banner_width\\]',
-				storeBannerHeight: '#dokan_appearance\\[store_banner_height\\]',
-				storeOpeningClosingTimeWidget: '.store_open_close .switch',
-				enableStoreSidebarFromTheme: '.enable_theme_store_sidebar .switch',
-				showVendorInfo: '.show_vendor_info .switch',
-				hideVendorInfoEmailAddress: '//div[contains(text(),"Email Address")]//label[@class="switch tips"]',
-				hideVendorInfoPhoneNumber: '//div[contains(text(),"Phone Number")]//label[@class="switch tips"]',
-				hideVendorInfoStoreAddress: '//div[contains(text(),"Store Address")]//label[@class="switch tips"]',
-				appearanceSaveChanges: '#submit',
+				appearance: {
+				// Appearance
+					showMapOnStorePage: '.store_map .switch',
+					mapApiSourceGoogleMaps: '//div[@class="map_api_source dokan-settings-field-type-radio"] //label[@for="dokan_appearance[map_api_source][google_maps]"]',
+					mapApiSourceMapBox: '//div[@class="map_api_source dokan-settings-field-type-radio"] //label[@for="dokan_appearance[map_api_source][mapbox]"]',
+					googleMapApiKey: '#dokan_appearance\\[gmap_api_key\\]',
+					mapBoxAccessToken: '#dokan_appearance\\[mapbox_access_token\\]',
+					googleReCAPTCHA: '.recaptcha_validation_label .dashicons',
+					googleReCAPTCHAValidationSiteKey: '//h3[contains(text()," Site Key")]//..//..//input',
+					googleReCAPTCHAValidationSecretKey: '//h3[contains(text(),"Secret Key")]//..//..//input]',
+					showContactFormOnStorePage: '.contact_seller .switch',
+					storeHeaderTemplate1: '.radio-image:nth-child(1) .button',
+					storeHeaderTemplate2: '.radio-image:nth-child(2) .button',
+					storeHeaderTemplate3: '.radio-image:nth-child(3) .button',
+					storeHeaderTemplate4: '.radio-image:nth-child(4) .button',
+					storeBannerWidth: '#dokan_appearance\\[store_banner_width\\]',
+					storeBannerHeight: '#dokan_appearance\\[store_banner_height\\]',
+					storeOpeningClosingTimeWidget: '.store_open_close .switch',
+					enableStoreSidebarFromTheme: '.enable_theme_store_sidebar .switch',
+					showVendorInfo: '.show_vendor_info .switch',
+					hideVendorInfoEmailAddress: '//div[contains(text(),"Email Address")]//label[@class="switch tips"]',
+					hideVendorInfoPhoneNumber: '//div[contains(text(),"Phone Number")]//label[@class="switch tips"]',
+					hideVendorInfoStoreAddress: '//div[contains(text(),"Store Address")]//label[@class="switch tips"]',
+					appearanceSaveChanges: '#submit',
+				},
 
 				// Privacy Policy
-				enablePrivacyPolicy: '.enable_privacy .switch',
-				privacyPage: '#dokan_privacy\\[privacy_page\\]',
-				privacyPolicyIframe: 'iframe',
-				privacyPolicyHtmlBody: '#tinymce',
-				privacyPolicySaveChanges: '#submit',
+				privacyPolicy: {
+				// Privacy Policy
+					enablePrivacyPolicy: '.enable_privacy .switch',
+					privacyPage: '#dokan_privacy\\[privacy_page\\]',
+					privacyPolicyIframe: 'iframe',
+					privacyPolicyHtmlBody: '#tinymce',
+					privacyPolicySaveChanges: '#submit',
+				},
+
 
 				// Live Search
-				liveSearchOptions: '#dokan_live_search_setting\\[live_search_option\\]',
-				liveSearchSaveChanges: '#submit',
+				liveSearch:{
+					liveSearchOptions: '#dokan_live_search_setting\\[live_search_option\\]',
+					liveSearchSaveChanges: '#submit',
+				},
+
 
 				// Store Support
-				displayOnOrderDetails: '.enabled_for_customer_order .switch',
-				displayOnSingleProductPage: '#dokan_store_support_setting\\[store_support_product_page\\]',
-				supportButtonLabel: '#dokan_store_support_setting\\[support_button_label\\]',
-				supportTicketEmailNotification: '.dokan_admin_email_notification .switch',
-				storeSupportSaveChanges: '#submit',
+				storeSupport: {
+				// Store Support
+					displayOnOrderDetails: '.enabled_for_customer_order .switch',
+					displayOnSingleProductPage: '#dokan_store_support_setting\\[store_support_product_page\\]',
+					supportButtonLabel: '#dokan_store_support_setting\\[support_button_label\\]',
+					supportTicketEmailNotification: '.dokan_admin_email_notification .switch',
+					storeSupportSaveChanges: '#submit',
+				},
 
 				// Seller Verification
+				sellerVerifications:{
+				// Seller Verification
 				// Facebook
-				facebookAppId: '#dokan_verification\\[fb_app_id\\]',
-				facebookAppSecret: '#dokan_verification\\[fb_app_secret\\]',
-				// Twitter
-				consumerKey: '#dokan_verification\\[twitter_app_id\\]',
-				consumerSecret: '#dokan_verification\\[twitter_app_secret\\]',
-				// Google
-				googleClientId: '#dokan_verification\\[google_app_id\\]',
-				googleClientSecret: '#dokan_verification\\[google_app_secret\\]',
-				// Linkedin
-				linkedinClientId: '#dokan_verification\\[linkedin_app_id\\]',
-				linkedinClientSecret: '#dokan_verification\\[linkedin_app_secret\\]',
+					facebookAppId: '#dokan_verification\\[fb_app_id\\]',
+					facebookAppSecret: '#dokan_verification\\[fb_app_secret\\]',
+					// Twitter
+					consumerKey: '#dokan_verification\\[twitter_app_id\\]',
+					consumerSecret: '#dokan_verification\\[twitter_app_secret\\]',
+					// Google
+					googleClientId: '#dokan_verification\\[google_app_id\\]',
+					googleClientSecret: '#dokan_verification\\[google_app_secret\\]',
+					// Linkedin
+					linkedinClientId: '#dokan_verification\\[linkedin_app_id\\]',
+					linkedinClientSecret: '#dokan_verification\\[linkedin_app_secret\\]',
+				},
 
 				// Verification Sms Gateways
-				senderName: '#dokan_verification_sms_gateways\\[sender_name\\]',
-				smsText: '#dokan_verification_sms_gateways\\[sms_text\\]',
-				smsSentSuccess: '#dokan_verification_sms_gateways\\[sms_sent_msg\\]',
-				smsSentError: '#dokan_verification_sms_gateways\\[sms_sent_error\\]',
-				activeGateway: '#dokan_verification_sms_gateways\\[active_gateway\\]',
-				// Nexmo
-				apiKey: '#dokan_verification_sms_gateways\\[nexmo_username\\]',
-				apiSecret: '#dokan_verification_sms_gateways\\[nexmo_pass\\]',
+				verificationSmsGateway:{
+				// Verification Sms Gateways
+					senderName: '#dokan_verification_sms_gateways\\[sender_name\\]',
+					smsText: '#dokan_verification_sms_gateways\\[sms_text\\]',
+					smsSentSuccess: '#dokan_verification_sms_gateways\\[sms_sent_msg\\]',
+					smsSentError: '#dokan_verification_sms_gateways\\[sms_sent_error\\]',
+					activeGateway: '#dokan_verification_sms_gateways\\[active_gateway\\]',
+					// Nexmo
+					apiKey: '#dokan_verification_sms_gateways\\[nexmo_username\\]',
+					apiSecret: '#dokan_verification_sms_gateways\\[nexmo_pass\\]',
+				},
 
 				// Email Verification
-				enableEmailVerification: '#dokan_email_verification\\[enabled\\]',
-				registrationNotice: '#dokan_email_verification\\[registration_notice\\]',
-				loginNotice: '#dokan_email_verification\\[login_notice\\]',
-				emailVerificationSaveChanges: '#submit',
+				emailVerification:{
+				// Email Verification
+					enableEmailVerification: '#dokan_email_verification\\[enabled\\]',
+					registrationNotice: '#dokan_email_verification\\[registration_notice\\]',
+					loginNotice: '#dokan_email_verification\\[login_notice\\]',
+					emailVerificationSaveChanges: '#submit',
+				},
 
 				// Social API
-				enableSocialLogin: '#dokan_social_api\\[enabled\\]',
+				socialApi:{
+				// Social API
+					enableSocialLogin: '#dokan_social_api\\[enabled\\]',
+				},
 
+				// Shipping Status
 				// Shipping Status
 				allowShipmentTracking: '#dokan_shipping_status_setting\\[enabled\\]',
 				// Shipping Providers
@@ -1880,6 +1925,7 @@ export const selector = {
 				customShippingStatusAdd: '.dokan-repetable-add-item-btn',
 				shippingStatusSaveChanges: '#submit',
 
+				// Colors
 				// Colors
 				buttonTextColor: '.btn_text span',
 				buttonBackgroundColor: '.btn_primary span',
@@ -1892,6 +1938,7 @@ export const selector = {
 				dashboardNavigationBackground: '.dash_nav_bg span',
 				dashboardMenuBorder: '.dash_nav_border span',
 
+				// Live Chat
 				// Live Chat
 				enableLiveChat: '#dokan_live_chat\\[enable\\]',
 				chatProviderFacebookMessenger: '#dokan_live_chat\\[provider\\]\\[messenger\\]',
@@ -1912,110 +1959,137 @@ export const selector = {
 				liveChatSaveChanges: '#submit',
 
 				// Rma
-				orderStatus: '#dokan_rma\\[rma_order_status\\]',
-				enableRefundRequests: '.rma_enable_refund_request .switch',
-				enableCouponRequests: '.rma_enable_coupon_request .switch',
-				reasonsForRmaSingle: (reason: string) => `//li[contains(text(),'${reason}')]//span[@class="dashicons dashicons-no-alt remove-item"]`,
-				reasonsForRma: '.remove-item',
-				reasonsForRmaInput: '.regular-text',
-				reasonsForRmaAdd: '.dokan-repetable-add-item-btn',
-				refundPolicyIframe: 'iframe',
-				refundPolicyHtmlBody: '#tinymce',
-				rmaSaveChanges: '#submit',
+				rma: {
+				// Rma
+					orderStatus: '#dokan_rma\\[rma_order_status\\]',
+					enableRefundRequests: '.rma_enable_refund_request .switch',
+					enableCouponRequests: '.rma_enable_coupon_request .switch',
+					reasonsForRmaSingle: (reason: string) => `//li[contains(text(),'${reason}')]//span[@class="dashicons dashicons-no-alt remove-item"]`,
+					reasonsForRma: '.remove-item',
+					reasonsForRmaInput: '.regular-text',
+					reasonsForRmaAdd: '.dokan-repetable-add-item-btn',
+					refundPolicyIframe: 'iframe',
+					refundPolicyHtmlBody: '#tinymce',
+					rmaSaveChanges: '#submit',
+				},
+
 
 				// Wholesale
-				whoCanSeeWholesalePrice: (type: string) => `//div[@class='wholesale_price_display dokan-settings-field-type-radio'] //label[@for='dokan_wholesale[wholesale_price_display][${type}]']`,
-				showWholesalePriceOnShopArchive: '.display_price_in_shop_archieve .switch',
-				needApprovalForCustomer: '.need_approval_for_wholesale_customer .switch',
-				wholesaleSaveChanges: '#submit',
+				wholesale:{
+				// Wholesale
+					whoCanSeeWholesalePrice: (type: string) => `//div[@class='wholesale_price_display dokan-settings-field-type-radio'] //label[@for='dokan_wholesale[wholesale_price_display][${type}]']`,
+					showWholesalePriceOnShopArchive: '.display_price_in_shop_archieve .switch',
+					needApprovalForCustomer: '.need_approval_for_wholesale_customer .switch',
+					wholesaleSaveChanges: '#submit',
+				},
 
+				euCompliance:{
 				// Eu Compliance Fields
-				vendorExtraFieldsCompanyName: '//input[@value="dokan_company_name"]//..',
-				vendorExtraFieldsCompanyIdOrEuidNumber: '//input[@value="dokan_company_id_number"]//..',
-				vendorExtraFieldsVatOrTaxNumber: '//input[@value="dokan_vat_number"]//..',
-				vendorExtraFieldsNameOfBank: '//input[@value="dokan_bank_name"]//..',
-				vendorExtraFieldsBankIban: '//input[@value="dokan_bank_iban"]//..',
-				displayInVendorRegistrationForm: '.vendor_registration .switch',
-				customerExtraFieldsCompanyIdOrEuidNumber: '//input[@value="billing_dokan_company_id_number"]//..',
-				customerExtraFieldsVatOrTaxNumber: '//input[@value="billing_dokan_vat_number"]//..',
-				customerExtraFieldsNameOfBank: '//input[@value="billing_dokan_bank_name"]//..',
-				customerExtraFieldsBankIban: '//input[@value="billing_dokan_bank_iban"]//..',
-				enableGermanizedSupportForVendors: '.enabled_germanized .switch',
-				vendorsWillBeAbleToOverrideInvoiceNumber: '.override_invoice_number .switch',
-				euComplianceFieldsSaveChanges: '#submit',
+					vendorExtraFieldsCompanyName: '//input[@value="dokan_company_name"]//..',
+					vendorExtraFieldsCompanyIdOrEuidNumber: '//input[@value="dokan_company_id_number"]//..',
+					vendorExtraFieldsVatOrTaxNumber: '//input[@value="dokan_vat_number"]//..',
+					vendorExtraFieldsNameOfBank: '//input[@value="dokan_bank_name"]//..',
+					vendorExtraFieldsBankIban: '//input[@value="dokan_bank_iban"]//..',
+					displayInVendorRegistrationForm: '.vendor_registration .switch',
+					customerExtraFieldsCompanyIdOrEuidNumber: '//input[@value="billing_dokan_company_id_number"]//..',
+					customerExtraFieldsVatOrTaxNumber: '//input[@value="billing_dokan_vat_number"]//..',
+					customerExtraFieldsNameOfBank: '//input[@value="billing_dokan_bank_name"]//..',
+					customerExtraFieldsBankIban: '//input[@value="billing_dokan_bank_iban"]//..',
+					enableGermanizedSupportForVendors: '.enabled_germanized .switch',
+					vendorsWillBeAbleToOverrideInvoiceNumber: '.override_invoice_number .switch',
+					euComplianceFieldsSaveChanges: '#submit',
+				},
 
+				deliveryTime:{
 				// Delivery Time
-				allowVendorSettings: '.allow_vendor_override_settings .switch',
-				homeDelivery: '//div[contains(text(), "Home Delivery")]//label[@class="switch tips"]',
-				storePickup: '//div[contains(text(), "Store Pickup")]//label[@class="switch tips"]',
-				deliveryDateLabel: '#dokan_delivery_time\\[delivery_date_label\\]',
-				deliveryBlockedBuffer: '#dokan_delivery_time\\[preorder_date\\]',
-				timeSlot: '#dokan_delivery_time\\[time_slot_minutes\\]',
-				orderPerSlot: '#dokan_delivery_time\\[order_per_slot\\]',
-				deliveryBoxInfo: '#dokan_delivery_time\\[delivery_box_info\\]',
-				requireDeliveryDateAndTime: '.selection_required .switch',
-				deliveryDay: (day: string) => `//h3[contains(text(), '${day}')]/../..//label[@class='switch tips']`,
-				openingTime: (day: string) => `//input[@id="dokan_delivery_time[delivery_day_${day.toLowerCase()}][opening_time]"]/..`,
-				openingTimeDatePicker: (time: string) => `(//li[contains(text(),'${time}')])[2]`,
-				closingTime: (day: string) => `//input[@id="dokan_delivery_time[delivery_day_${day.toLowerCase()}][closing_time]"]/..`,
-				closingTimeDatePicker: (time: string) => `(//li[contains(text(),'${time}')])[1]`,
-				fullDay: 'li.fullDayClock',
-				deliveryTimeSaveChanges: '#submit',
+					allowVendorSettings: '.allow_vendor_override_settings .switch',
+					homeDelivery: '//div[contains(text(), "Home Delivery")]//label[@class="switch tips"]',
+					storePickup: '//div[contains(text(), "Store Pickup")]//label[@class="switch tips"]',
+					deliveryDateLabel: '#dokan_delivery_time\\[delivery_date_label\\]',
+					deliveryBlockedBuffer: '#dokan_delivery_time\\[preorder_date\\]',
+					timeSlot: '#dokan_delivery_time\\[time_slot_minutes\\]',
+					orderPerSlot: '#dokan_delivery_time\\[order_per_slot\\]',
+					deliveryBoxInfo: '#dokan_delivery_time\\[delivery_box_info\\]',
+					requireDeliveryDateAndTime: '.selection_required .switch',
+					deliveryDay: (day: string) => `//h3[contains(text(), '${day}')]/../..//label[@class='switch tips']`,
+					openingTime: (day: string) => `//input[@id="dokan_delivery_time[delivery_day_${day.toLowerCase()}][opening_time]"]/..`,
+					openingTimeDatePicker: (time: string) => `(//li[contains(text(),'${time}')])[2]`,
+					closingTime: (day: string) => `//input[@id="dokan_delivery_time[delivery_day_${day.toLowerCase()}][closing_time]"]/..`,
+					closingTimeDatePicker: (time: string) => `(//li[contains(text(),'${time}')])[1]`,
+					fullDay: 'li.fullDayClock',
+					deliveryTimeSaveChanges: '#submit',
+				},
 
 				// Product Advertising
-				noOfAvailableSlot: '#dokan_product_advertisement\\[total_available_slot\\]',
-				expireAfterDays: '#dokan_product_advertisement\\[expire_after_days\\]',
-				vendorCanPurchaseAdvertisement: '.per_product_enabled .switch',
-				advertisementCost: '#dokan_product_advertisement\\[cost\\]',
-				enableAdvertisementInSubscription: '.vendor_subscription_enabled .switch',
-				markAdvertisedProductAsFeatured: '.featured .switch',
-				displayAdvertisedProductOnTop: '.catalog_priority .switch',
-				outOfStockVisibility: '.hide_out_of_stock_items .switch',
-				productAdvertisingSaveChanges: '#submit',
+				productAdvertising:{
+				// Product Advertising
+					noOfAvailableSlot: '#dokan_product_advertisement\\[total_available_slot\\]',
+					expireAfterDays: '#dokan_product_advertisement\\[expire_after_days\\]',
+					vendorCanPurchaseAdvertisement: '.per_product_enabled .switch',
+					advertisementCost: '#dokan_product_advertisement\\[cost\\]',
+					enableAdvertisementInSubscription: '.vendor_subscription_enabled .switch',
+					markAdvertisedProductAsFeatured: '.featured .switch',
+					displayAdvertisedProductOnTop: '.catalog_priority .switch',
+					outOfStockVisibility: '.hide_out_of_stock_items .switch',
+					productAdvertisingSaveChanges: '#submit',
+				},
+
 
 				// Geolocation
-				locationMapPosition: (position: string) => `//label[@for='dokan_geolocation[show_locations_map][${position}]']`,
-				showMap: (type: string) => `//label[@for='dokan_geolocation[show_location_map_pages][${type}]']`,
-				showFiltersBeforeLocationMap: '.show_filters_before_locations_map .switch',
-				productLocationTab: '.show_product_location_in_wc_tab .switch',
-				radiusSearchUnit: (unit: string) => `//label[@for='dokan_geolocation[distance_unit][${unit}]']`,
-				radiusSearchMinimumDistance: '#dokan_geolocation\\[distance_min\\]',
-				radiusSearchMaximumDistance: '#dokan_geolocation\\[distance_max\\]',
-				mapZoomLevel: '#dokan_geolocation\\[map_zoom\\]',
-				defaultLocation: '.search-address',
-				geolocationSaveChanges: '#submit',
+				geolocation:{
+				// Geolocation
+					locationMapPosition: (position: string) => `//label[@for='dokan_geolocation[show_locations_map][${position}]']`,
+					showMap: (type: string) => `//label[@for='dokan_geolocation[show_location_map_pages][${type}]']`,
+					showFiltersBeforeLocationMap: '.show_filters_before_locations_map .switch',
+					productLocationTab: '.show_product_location_in_wc_tab .switch',
+					radiusSearchUnit: (unit: string) => `//label[@for='dokan_geolocation[distance_unit][${unit}]']`,
+					radiusSearchMinimumDistance: '#dokan_geolocation\\[distance_min\\]',
+					radiusSearchMaximumDistance: '#dokan_geolocation\\[distance_max\\]',
+					mapZoomLevel: '#dokan_geolocation\\[map_zoom\\]',
+					defaultLocation: '.search-address',
+					geolocationSaveChanges: '#submit',
+				},
 
+				productReportAbuse:{
 				// Product Report Abuse
-				reportedBy: '#dokan_report_abuse\\[reported_by_logged_in_users_only\\]',
-				reasonsForAbuseReportList: '.dokan-settings-repeatable-list li',
-				reasonsForAbuseReportSingle: (reason: string) => `//li[contains(text(),'${reason}')]//span[@class="dashicons dashicons-no-alt remove-item"]`,
-				reasonsForAbuseReportInput: '.regular-text',
-				reasonsForAbuseReportAdd: '.dokan-repetable-add-item-btn',
-				productReportAbuseSaveChanges: '#submit',
+					reportedBy: '#dokan_report_abuse\\[reported_by_logged_in_users_only\\]',
+					reasonsForAbuseReportList: '.dokan-settings-repeatable-list li',
+					reasonsForAbuseReportSingle: (reason: string) => `//li[contains(text(),'${reason}')]//span[@class="dashicons dashicons-no-alt remove-item"]`,
+					reasonsForAbuseReportInput: '.regular-text',
+					reasonsForAbuseReportAdd: '.dokan-repetable-add-item-btn',
+					productReportAbuseSaveChanges: '#submit',
+				},
 
 				// Single Product Multi Vendor
-				enableSingleProductMultipleVendor: '.enable_pricing .switch',
-				sellItemButtonText: '#dokan_spmv\\[sell_item_btn\\]',
-				availableVendorDisplayAreaTitle: '#dokan_spmv\\[available_vendor_list_title\\]',
-				availableVendorSectionDisplayPosition: '#dokan_spmv\\[available_vendor_list_position\\]',
-				showSpmvProducts: '#dokan_spmv\\[show_order\\]',
-				singleProductMultiVendorSaveChanges: '#submit',
+				spmv:{
+				// Single Product Multi Vendor
+					enableSingleProductMultipleVendor: '.enable_pricing .switch',
+					sellItemButtonText: '#dokan_spmv\\[sell_item_btn\\]',
+					availableVendorDisplayAreaTitle: '#dokan_spmv\\[available_vendor_list_title\\]',
+					availableVendorSectionDisplayPosition: '#dokan_spmv\\[available_vendor_list_position\\]',
+					showSpmvProducts: '#dokan_spmv\\[show_order\\]',
+					singleProductMultiVendorSaveChanges: '#submit',
+				},
 
-				// Vendor Analytics
-				vendorAnalyticsSaveChanges: '#submit',
-
+				vendorSubscriptions:{
 				// Vendor Subscription
-				subscription: '#dokan_product_subscription\\[subscription_pack\\]',
-				enableProductSubscription: '.enable_pricing .switch',
-				enableSubscriptionInRegistrationForm: '.enable_subscription_pack_in_reg .switch',
-				enableEmailNotification: '.notify_by_email .switch',
-				noOfDays: '#dokan_product_subscription\\[no_of_days_before_mail\\]',
-				productStatus: '#dokan_product_subscription\\[product_status_after_end\\]',
-				cancellingEmailSubject: '#dokan_product_subscription\\[cancelling_email_subject\\]',
-				cancellingEmailBody: '#dokan_product_subscription\\[cancelling_email_body\\]',
-				alertEmailSubject: '#dokan_product_subscription\\[alert_email_subject\\]',
-				alertEmailBody: '#dokan_product_subscription\\[alert_email_body\\]',
-				vendorSubscriptionSaveChanges: '#submit',
+					subscription: '#dokan_product_subscription\\[subscription_pack\\]',
+					enableProductSubscription: '.enable_pricing .switch',
+					enableSubscriptionInRegistrationForm: '.enable_subscription_pack_in_reg .switch',
+					enableEmailNotification: '.notify_by_email .switch',
+					noOfDays: '#dokan_product_subscription\\[no_of_days_before_mail\\]',
+					productStatus: '#dokan_product_subscription\\[product_status_after_end\\]',
+					cancellingEmailSubject: '#dokan_product_subscription\\[cancelling_email_subject\\]',
+					cancellingEmailBody: '#dokan_product_subscription\\[cancelling_email_body\\]',
+					alertEmailSubject: '#dokan_product_subscription\\[alert_email_subject\\]',
+					alertEmailBody: '#dokan_product_subscription\\[alert_email_body\\]',
+					vendorSubscriptionSaveChanges: '#submit',
+				},
+
+				vendorAnalytics:{
+					// Vendor Analytics
+					vendorAnalyticsSaveChanges: '#submit',
+				},
 
 				// Update Settings
 				dokanUpdateSuccessMessage: '#setting-message_updated > p > strong',

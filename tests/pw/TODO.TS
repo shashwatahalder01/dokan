@@ -266,8 +266,7 @@ const config = {
 //TODO: fix npm run error without npx
 //TODO: add last updated time on test summary
 
-// dokan lite and pro
-//TODO: Selectors: separate settings locator into more objects ***********
+
 
 //TODO: readme
 
