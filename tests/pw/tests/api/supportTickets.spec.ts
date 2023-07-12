@@ -54,7 +54,6 @@ test.describe('support ticket api test', () => {
 	});
 
 	test('delete a support ticket comment @pro', async () => {
-		console.log(supportTicketId);
 		// const supportTicketCommentId = await apiUtils.createSupportTicketComment('', payloads.createSupportTicketComment); //TODO: why failing for this
 		const supportTicketCommentId = await apiUtils.createSupportTicketComment(supportTicketId, payloads.createSupportTicketComment);
 		const [response, responseBody] = await apiUtils.delete(endPoints.deleteSupportTicketComment(supportTicketCommentId));

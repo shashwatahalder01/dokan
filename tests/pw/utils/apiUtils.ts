@@ -583,11 +583,7 @@ export class ApiUtils {
 	async createSupportTicketComment( supportTicketId = '', payload: object, auth? : auth): Promise<responseBody> { //TODO: update handle first parameter
 		if(!supportTicketId){
 			[supportTicketId,] = await this.getSupportTicketId(auth);
-			console.log('get existing id');
-
 		}
-		console.log(supportTicketId);
-
 		const [, responseBody] = await this.post(endPoints.createSupportTicketComment(supportTicketId), { data: payload, headers: auth });
 		return responseBody;
 

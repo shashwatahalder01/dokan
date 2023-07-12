@@ -42,7 +42,7 @@
 //TODO:
 //TODO: check data exists or not for all bulk actions
 
-
+//todo locator = selector.admin.dokan.settings; locator length can be shorten
 
 //TODO: make tests more independent where possible specially admin parts : use before-all , after-all, delete data in before-all or after-all to repeat each tests: test should be passed for repeat-each:5
 
