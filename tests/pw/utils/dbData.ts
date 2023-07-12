@@ -540,8 +540,6 @@ export const dbData = {
 			alert_email_body: 'Dear subscriber, Your subscription will be ending soon. Please renew your package in a timely'
 		},
 
-		//TODO:  vendorAnalyticsSettings:
-
 		//modules
 		modules: ['booking', 'color_scheme_customizer', 'delivery_time', 'elementor', 'export_import', 'follow_store', 'geolocation', 'germanized', 'live_chat', 'live_search', 'moip', 'dokan_paypal_ap', 'paypal_marketplace', 'product_addon', 'product_enquiry', 'report_abuse', 'rma', 'seller_vacation', 'shipstation', 'auction', 'spmv', 'store_reviews', 'store_support', 'stripe', 'product_advertising', 'product_subscription', 'vendor_analytics', 'vendor_staff', 'vsp', 'vendor_verification', 'wholesale', 'rank_math', 'table_rate_shipping', 'mangopay', 'order_min_max', 'razorpay', 'seller_badge', 'stripe_express', 'request_for_quotation'],
 

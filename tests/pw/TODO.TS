@@ -1,10 +1,9 @@
 
 //TODO ***** list all core tests and setup tests : plugins activated, wp settings, woocommerce settings, dokan modules activated , dokan settings for both e2e and api
+//TODO: make e2e tests independent specially admin tests
 //TODO: slack integration
 //TODO: working-directory: ./path/to/tests
 //TODO: update auth if expired instead of every-time
-//TODO: solve reporter path conflict
-//TODO: add color on git action
 //TODO: separate two junit report showing on simple git-action summary
 //TODO: separate everything for local & CI like: global setup, env, playwright config
 //TODO: implement fixture for lite pro issue handle
@@ -267,25 +266,11 @@ const config = {
 //TODO: fix npm run error without npx
 //TODO: add last updated time on test summary
 
-
-
-
-
-
-
-
-//TODO: check dokan pro activate or not via api and set env.dokanPro to separate code for******
 // dokan lite and pro
 //TODO: Selectors: separate settings locator into more objects ***********
-//TODO: 'pages/loginPage to 'pages/loginPage' for all file path
-
-
-
-
-
-
 
 //TODO: readme
+
 //TODO: add lite & pro config on readme
 //TODO: add emoji to readme
 //TODO: make readme follow readme guideline

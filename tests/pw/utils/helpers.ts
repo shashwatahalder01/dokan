@@ -67,9 +67,6 @@ export const helpers = {
 		return result.toLocaleDateString('en-CA');
 	},
 
-	// round to two decimal places
-	// roundToTwo(num: string | number) { return +(Math.round(num + 'e+2') + 'e-2') },  //TODO: update this number + string
-
 	roundToTwo(num: string | number) {
 		return Math.round((Number(num) + Number.EPSILON) * 100) / 100;
 	},
