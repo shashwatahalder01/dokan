@@ -19,38 +19,38 @@ test.beforeAll(async ({ request }) => {
 
 test.describe('attribute api test', () => {
 
-	test('get all attributes @lite', async () => {
+	test('get all attributes @lite @pro', async () => {
 		const [response, responseBody] = await apiUtils.get(endPoints.getAllAttributes);
 		expect(response.ok()).toBeTruthy();
 		expect(responseBody).toBeTruthy();
 	});
 
-	test('get single attribute @lite', async () => {
+	test('get single attribute @lite @pro', async () => {
 		const [response, responseBody] = await apiUtils.get(endPoints.getSingleAttribute(attributeId));
 		expect(response.ok()).toBeTruthy();
 		expect(responseBody).toBeTruthy();
 	});
 
-	test('create an attribute @lite', async () => {
+	test('create an attribute @lite @pro', async () => {
 		const [response, responseBody] = await apiUtils.post(endPoints.createAttribute, { data: payloads.createAttribute() });
 		expect(response.status()).toBe(201);
 		expect(response.ok()).toBeTruthy();
 		expect(responseBody).toBeTruthy();
 	});
 
-	test('update an attribute @lite', async () => {
+	test('update an attribute @lite @pro', async () => {
 		const [response, responseBody] = await apiUtils.put(endPoints.updateAttribute(attributeId), { data: payloads.updateAttribute() });
 		expect(response.ok()).toBeTruthy();
 		expect(responseBody).toBeTruthy();
 	});
 
-	test('delete an attribute @lite', async () => {
+	test('delete an attribute @lite @pro', async () => {
 		const [response, responseBody] = await apiUtils.delete(endPoints.deleteAttribute(attributeId));
 		expect(response.ok()).toBeTruthy();
 		expect(responseBody).toBeTruthy();
 	});
 
-	test('update batch attributes @lite', async () => {
+	test('update batch attributes @lite @pro', async () => {
 		const allAttributeIds = (await apiUtils.getAllAttributes()).map((a: { id: unknown }) => a.id);
 
 		const batchAttributes: object[] = [];
@@ -63,7 +63,7 @@ test.describe('attribute api test', () => {
 		expect(responseBody).toBeTruthy();
 	});
 
-	test('set default attribute @lite', async () => {
+	test('set default attribute @lite @pro', async () => {
 		const payload = {
 			id: attribute.id,
 			name: attribute.name,
@@ -75,7 +75,7 @@ test.describe('attribute api test', () => {
 		expect(responseBody).toBeTruthy();
 	});
 
-	test('update product attribute @lite', async () => {
+	test('update product attribute @lite @pro', async () => {
 		const payload = {
 			attributes: [
 				{

@@ -24,7 +24,7 @@ test.describe('Dokan pro feature promo test', () => {
 
 	// test.use({ storageState: data.auth.adminAuthFile });
 
-	test('dokan pro features promo @lite', async ( ) => {
+	test('dokan pro features promo @lite @pro', async ( ) => {
 		await apiUtils.updatePlugin('dokan-pro/dokan-pro', { status:'inactive' }, payloads.adminAuth);
 		await proPromoPage.dokanProPromo();
 		await apiUtils.updatePlugin('dokan-pro/dokan-pro', { status:'active' }, payloads.adminAuth);

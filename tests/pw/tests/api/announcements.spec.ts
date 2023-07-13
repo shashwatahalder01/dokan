@@ -43,7 +43,7 @@ test.describe('announcements api test', () => {
 		expect(responseBody).toBeTruthy();
 	});
 
-	test('restore a deleted announcement  @pro', async () => {
+	test('restore a deleted announcement @pro', async () => {
 		const [response, responseBody] = await apiUtils.put(endPoints.restoreDeletedAnnouncement(announcementId));
 		expect(response.ok()).toBeTruthy();
 		expect(responseBody).toBeTruthy();

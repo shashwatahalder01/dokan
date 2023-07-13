@@ -30,7 +30,7 @@ test.describe('report api test', () => {
 		expect(responseBody).toBeTruthy();
 	});
 
-	test('get top selling products report  @pro', async () => {
+	test('get top selling products report @pro', async () => {
 		const [response, responseBody] = await apiUtils.get(endPoints.getTopSellingProductsReport);
 		expect(response.ok()).toBeTruthy();
 		expect(responseBody).toBeTruthy();
