@@ -256,6 +256,7 @@ export class StoresPage extends AdminPage {
 			await this.enableSwitcher(selector.admin.dokan.vendors.editVendor.makeVendorFeature);
 
 			await this.clickAndWaitForResponse(data.subUrls.api.dokan.stores, selector.admin.dokan.vendors.editVendor.saveChanges);
+			await this.click(selector.admin.dokan.vendors.editVendor.confirmSaveChanges);
 
 		}
 	}

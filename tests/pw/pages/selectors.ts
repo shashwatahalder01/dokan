@@ -546,7 +546,7 @@ export const selector = {
 					saveChanges: '//div[contains(@class, "action-links footer")]//button[contains(text(),"Save Changes")]',
 					cancelEditOnTop: '//div[contains(@class, "profile-banner")]//button[contains(text(),"Cancel")]',
 					saveChangesOnTop: '//div[contains(@class, "profile-banner")]//button[contains(text(),"Save Changes")]',
-					confirmSaveChanges: '.swal2-confirm',
+					confirmSaveChanges: 'button.swal2-confirm',
 				},
 
 				storeCategory: {
