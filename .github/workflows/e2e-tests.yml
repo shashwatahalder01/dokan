@@ -181,15 +181,15 @@ jobs:
         timeout-minutes: 30
         run: |
           cd tests/pw 
-          npm run test:e2e
+          npm run test:e2e:lite
 
       #  cd tests/pw && npm run test setup.spec.ts
       - name: 🧪 Running the api tests
         if: always()
-        timeout-minutes: 30
+        timeout-minutes: 5
         run: |
           cd tests/pw 
-          npm run test:api
+          npm run test:api:lite
           
 
 
