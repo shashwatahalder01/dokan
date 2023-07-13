@@ -5010,7 +5010,7 @@ export const selector = {
 
 		cDokanSelector: {
 			dokanAlertSuccessMessage: '.white-popup.dokan-alert-success',
-			dokanAlertClose: '.mfp-close',
+			dokanAlertClose: 'button.icon-close',
 		},
 
 		cWooSelector: {
