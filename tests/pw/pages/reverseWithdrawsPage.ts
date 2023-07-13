@@ -16,8 +16,8 @@ export class ReverseWithdrawsPage extends AdminPage {
 	// regenerate reverse withdrawal payment product
 	async reCreateReverseWithdrawalPaymentViaSettingsSave(){
 		await this.goToDokanSettings();
-		await this.click(selector.admin.dokan.settings.reverseWithdrawal);
-		await this.clickAndWaitForNavigation(selector.admin.dokan.settings.reverseWithdrawSaveChanges);
+		await this.click(selector.admin.dokan.settings.menus.reverseWithdrawal);
+		await this.clickAndWaitForNavigation(selector.admin.dokan.settings.reverseWithdraw.reverseWithdrawSaveChanges);
 	}
 
 
