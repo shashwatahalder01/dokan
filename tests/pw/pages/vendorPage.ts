@@ -6,7 +6,7 @@ import { CustomerPage } from 'pages/customerPage';
 import { selector } from 'pages/selectors';
 import { data } from 'utils/testData';
 import { helpers } from 'utils/helpers';
-import { product, vendor, vendorSetupWizard,  } from 'utils/interfaces';
+import { product, vendor, vendorSetupWizard  } from 'utils/interfaces';
 
 export class VendorPage extends BasePage {
 

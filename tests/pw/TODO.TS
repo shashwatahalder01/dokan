@@ -28,7 +28,7 @@
 //TODO: theme is not activating fix this
 //TODO: test cli dont work
 //TODO: fix permalink issue 
-//TODO: replace click with check all suite
+//TODO: replace click with check for all check fields all suite
 //TODO:
 //TODO:
 //TODO:
@@ -37,7 +37,7 @@
 //TODO: add more ui assertions to all tests
 //TODO:
 //TODO:
-//TODO:
+//TODO: global setup & teardown can be converted to project setup
 //TODO:
 //TODO:
 //TODO: check data exists or not for all bulk actions

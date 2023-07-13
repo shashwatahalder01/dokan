@@ -47,9 +47,9 @@ setup.describe(' setup environment', () => {
 		await dbUtils.setDokanSettings(dbData.dokan.optionName.reverseWithdraw, dbData.dokan.reverseWithdrawSettings);
 	});
 
-	setup('get test environment info @lite @pro', async () => {
-		const [, summaryInfo] = await apiUtils.getSystemStatus();
-		helpers.writeFile('systemInfo.json', JSON.stringify(summaryInfo));
-	});
+	// setup('get test environment info @lite @pro', async () => { //TODO: move to global teardown
+	// 	const [, summaryInfo] = await apiUtils.getSystemStatus();
+	// 	helpers.writeFile('systemInfo.json', JSON.stringify(summaryInfo));
+	// });
 
 });
