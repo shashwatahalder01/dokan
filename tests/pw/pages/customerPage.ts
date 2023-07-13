@@ -7,6 +7,8 @@ import { helpers } from 'utils/helpers';
 import { data } from 'utils/testData';
 import { customer, product, store, paymentDetails, order } from 'utils/interfaces';
 
+const { DOKAN_PRO } = process.env;
+
 export class CustomerPage extends BasePage {
 
 	constructor(page: Page) {
@@ -178,21 +180,12 @@ export class CustomerPage extends BasePage {
 		}
 	}
 
-	// customer search store
-	async searchStore(storeName: string): Promise<void> {
-		await this.goToStoreList();
-		await this.click(selector.customer.cStoreList.filter);
-		await this.clearAndType(selector.customer.cStoreList.searchVendors, storeName);
-		await this.clickAndWaitForResponse(data.subUrls.frontend.storeListing, selector.customer.cStoreList.apply);
-		await this.toBeVisible(selector.customer.cStoreList.visitStore(storeName));
-	}
-
 	// customer follow vendor
 	async followStore(storeName: string, followLocation: string): Promise<void> {
 		let currentFollowStatus: boolean;
 		switch (followLocation) {
 
-		// shop page
+		// shop page //TODO: should be store list page
 		case 'shopPage' :
 			await this.searchStore(storeName);
 			currentFollowStatus = await this.hasText(selector.customer.cStoreList.currentFollowStatus(storeName), 'Following');
@@ -643,4 +636,137 @@ export class CustomerPage extends BasePage {
 		// expect(successMessage).toMatch(refund.refundSubmitSuccessMessage);
 		await this.toContainText(selector.customer.cWooSelector.wooCommerceSuccessMessage, refund.refundSubmitSuccessMessage);
 	}
+
+
+	// shop
+
+	// shop render properly
+	async shopRenderProperly(){
+		await this.goIfNotThere(data.subUrls.frontend.shop);
+
+		// store list text is visible
+		await this.toBeVisible(selector.customer.cShop.shopText);
+		//TODO:
+
+
+	}
+
+	//sort products
+	async sortProducts(sortBy: string){
+		await this.goIfNotThere(data.subUrls.frontend.shop);
+		await this.selectByValueAndWaitForResponse(data.subUrls.frontend.shop, selector.customer.cShop.sort, sortBy);
+	}
+
+
+	// single product page
+
+	// single product render properly
+	async singleProductRenderProperly(productName: string){
+		await this.goIfNotThere(data.subUrls.frontend.productDetails(helpers.slugify(productName)));
+
+		//TODO:
+	}
+
+	// single product vendor info
+	async productVendorInfo(productName: string){
+		await this.goIfNotThere(data.subUrls.frontend.productDetails(helpers.slugify(productName)));
+		//TODO:
+	}
+
+	// view similar product
+	async viewMoreProduct(productName: string){
+		await this.goIfNotThere(data.subUrls.frontend.productDetails(helpers.slugify(productName)));
+		//TODO:
+	}
+
+	// store list
+
+	// store list render properly
+	async storeListRenderProperly(){
+		await this.goIfNotThere(data.subUrls.frontend.storeListing);
+
+		// store list text is visible
+		await this.toBeVisible(selector.customer.cStoreList.storeListText);
+
+		// location map is visible
+		DOKAN_PRO && await this.toBeVisible(selector.customer.cStoreList.locationMap);
+
+		// store filter elements are visible
+		// eslint-disable-next-line @typescript-eslint/no-unused-vars
+		const { filterDetails, ...filters } = selector.customer.cStoreList.filter;
+		await this.multipleElementVisible(filters);
+
+		// click filter button to view filter details
+		await this.click(selector.customer.cStoreList.filter.filterButton);
+
+		// store filter detail elements are visible
+		if (!DOKAN_PRO){
+			await this.toBeVisible(selector.customer.cStoreList.filter.filterDetails.searchVendor);
+			await this.toBeVisible(selector.customer.cStoreList.filter.filterDetails.apply);
+		} else {
+			await this.multipleElementVisible(selector.customer.cStoreList.filter.filterDetails);
+		}
+
+		// store card elements are visible
+		await this.notToHaveCount(selector.customer.cStoreList.storeCard.storeCardDiv, 0);
+
+		// card header
+		await this.notToHaveCount(selector.customer.cStoreList.storeCard.storeCardHeader, 0);
+		await this.notToHaveCount(selector.customer.cStoreList.storeCard.storeBanner, 0);
+
+		// card content
+		await this.notToHaveCount(selector.customer.cStoreList.storeCard.storeCardContent, 0);
+		await this.notToHaveCount(selector.customer.cStoreList.storeCard.storeData, 0);
+
+		// card footer
+		await this.notToHaveCount(selector.customer.cStoreList.storeCard.storeCardFooter, 0);
+		await this.notToHaveCount(selector.customer.cStoreList.storeCard.storeAvatar, 0);
+		await this.notToHaveCount(selector.customer.cStoreList.storeCard.visitStore, 0);
+		DOKAN_PRO && await this.notToHaveCount(selector.customer.cStoreList.storeCard.followUnFollowButton, 0);
+
+	}
+
+	// sort store
+	async sortStores(sortBy: string){
+		await this.goIfNotThere(data.subUrls.frontend.storeListing);
+		await this.selectByValueAndWaitForResponse(data.subUrls.frontend.storeListing, selector.customer.cStoreList.filter.sortBy, sortBy);
+	}
+
+	// store view layout
+	async storeViewLayout(style: string){
+		await this.goIfNotThere(data.subUrls.frontend.storeListing);
+
+		switch (style) {
+
+		case 'grid' :
+			await this.click(selector.customer.cStoreList.filter.gridView);
+			break;
+
+		case 'list' :
+			await this.click(selector.customer.cStoreList.filter.listView);
+			break;
+
+		default :
+			break;
+		}
+		await this.toHaveClass(selector.customer.cStoreList.currentLayout, style);
+	}
+
+	// customer search store
+	async searchStore(storeName: string): Promise<void> {
+		await this.goIfNotThere(data.subUrls.frontend.storeListing);
+		await this.clearAndType(selector.customer.cStoreList.filter.filterDetails.searchVendor, storeName);
+		await this.clickAndWaitForResponse(data.subUrls.frontend.storeListing, selector.customer.cStoreList.filter.filterDetails.apply);
+		await this.toBeVisible(selector.customer.cStoreList.visitStore(storeName));
+	}
+
+	// single store render properly
+	async singleStoreRenderProperly(storeName: string){
+		await this.goIfNotThere(data.subUrls.frontend.vendorDetails(helpers.slugify(storeName)));
+
+		//TODO:
+
+
+	}
+
 }

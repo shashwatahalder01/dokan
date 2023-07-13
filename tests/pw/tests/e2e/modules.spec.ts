@@ -32,7 +32,7 @@ test.describe('Modules test', () => {
 		await modulesPage.filterModules(data.modules.moduleCategory.productManagement);
 	});
 
-	test('admin can deactivate module  @pro', async ( ) => {
+	test('admin can deactivate module @pro', async ( ) => {
 		await modulesPage.activateDeactivateModule(data.modules.modulesName.AuctionIntegration);
 	});
 

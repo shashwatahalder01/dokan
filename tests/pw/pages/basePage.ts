@@ -706,6 +706,14 @@ export class BasePage {
 		return await this.page.selectOption(selector, { index: value });
 	}
 
+	async selectByValueAndWaitForResponse(subUrl: string, selector: string, value: string, code = 200): Promise<Response> {
+		const [response] = await Promise.all([
+			this.page.waitForResponse((resp) => resp.url().includes(subUrl) && resp.status() === code),
+			this.page.selectOption(selector, { value })
+		]);
+		return response;
+	}
+
 	async selectByLabelAndWaitForResponse(subUrl: string, selector: string, value: string, code = 200): Promise<Response> {
 		const [response] = await Promise.all([
 			this.page.waitForResponse((resp) => resp.url().includes(subUrl) && resp.status() === code),

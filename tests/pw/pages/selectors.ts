@@ -4710,7 +4710,8 @@ export const selector = {
 
 		// Customer Shop Page
 		cShop: {
-			shopPageHeader: '.woocommerce-products-header__title',
+			shopText: '//h1[normalize-space()="Shop"]',
+
 			// Filter
 			searchProduct: '.dokan-form-control',
 			searchedProductName: '.woocommerce-loop-product__title',
@@ -4719,35 +4720,77 @@ export const selector = {
 			radiusSlider: '.dokan-range-slider',
 			selectCategory: '#product_cat',
 			radius: '.dokan-range-slider',
-			sorting: '.woocommerce-ordering .orderby',
+
+			sort: '.woocommerce-ordering .orderby', //popularity, rating, date, price, price-desc
+
 			search: '.dokan-btn',
+
 			// Cart
 			addToCart: 'a.add_to_cart_button',
 			viewCart: 'a.added_to_cart',
 			bidNow: '.button.product_type_auction',
+
 			// Pagination
 			previous: '.prev',
 			next: '.next',
 		},
 
-		// Customer Store Page
+		// Customer Store List Page
 		cStoreList: {
-			storeListPageHeader: '.entry-title',
-			// Search Vendor
-			searchVendors: '.store-search-input',
-			location: '.location-address input',
-			radiusSlider: '.dokan-range-slider',
-			// Filter
-			filter: '.dokan-store-list-filter-button',
-			featured: '#featured',
-			openNow: '#open-now',
-			rating: (star: string) => `.star-${star}`,
-			apply: '#apply-filter-btn',
-			// Sortby
-			sortBy: '#stores_orderby',
-			// View Style
-			gridView: '.dashicons-screenoptions',
-			listView: '.dashicons-menu-alt',
+			storeListText: '//h1[normalize-space()="Store List"]',
+
+			locationMap: '#dokan-geolocation-locations-map',
+			currentLayout: '.entry-content #dokan-seller-listing-wrap',
+
+			//Filters
+			filter:{
+				filterDiv:'div#dokan-store-listing-filter-wrap',
+
+				totalStoreCount: 'p.item.store-count',
+				filterButton: 'button.dokan-store-list-filter-button',
+
+				// Sortby
+				sortBy: '#stores_orderby', // most_recent, total_orders, random
+
+				// View Style
+				gridView: '.dashicons-screenoptions',
+				listView: '.dashicons-menu-alt',
+
+				filterDetails: {
+					searchVendor: '.store-search-input',
+					location: '.location-address input',
+					radiusSlider: 'input.dokan-range-slider',
+					categoryInput:'.category-input',
+					featured: '#featured',
+					openNow: '#open-now',
+					rating: (star: string) => `.star-${star}`,
+
+					apply: '#apply-filter-btn',
+				}
+
+			},
+
+			storeCard:{
+				storeCardDiv: 'div.store-wrapper',
+				storeCardHeader: 'div.store-header',
+				// header details
+				storeBanner: 'div.store-banner',
+				openCloseStatus: 'span.dokan-store-is-open-close-status',
+
+				storeCardContent: 'div.store-content',
+				// content details
+				featuredLabel: 'div.featured-label',
+				storeData: 'div.store-data',
+				storeAddress: 'p.store-address',
+				storePhone: 'p.store-phone',
+
+				storeCardFooter: 'div.store-footer',
+				// footer details
+				storeAvatar: 'div.seller-avatar',
+				visitStore: 'a[title="Visit Store"]',
+				followUnFollowButton: 'button.dokan-follow-store-button',
+
+			},
 
 			visitStore: (storeName: string) => `//a[text()='${storeName}']/../../../../..//a[@title='Visit Store']`,
 			followUnFollowStore: (storeName: string) => `//a[text()='${storeName}']/../../../../..//button[contains(@class,'dokan-follow-store-button')]`,
