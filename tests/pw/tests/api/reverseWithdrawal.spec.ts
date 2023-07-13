@@ -11,7 +11,7 @@ test.beforeAll(async ({ request }) => {
 	// check reverse withdrawal payment product exists //todo: add reverse withdraw check on setup
 	// await apiUtils.getReverseWithdrawalProductId(); //TODO: failed on git action. payment product not created
 	//TODO: add create product to admin after feature merged with pro
-	// await apiUtils.createOrderWithStatus(payloads.createProduct(), payloads.createOrderCod, 'wc-completed', payloads.vendorAuth);
+	await apiUtils.createOrderWithStatus(payloads.createProduct(), payloads.createOrderCod, 'wc-completed', payloads.vendorAuth);
 });
 
 test.describe('reverse withdrawal api test', () => {
