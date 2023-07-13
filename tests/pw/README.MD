@@ -136,15 +136,27 @@ Running tests involves executing the predefined test cases or scripts to evaluat
 ### :o: How to run test projects
 <br/>
 
-:radio_button: Run E2E test project
+:radio_button: Run E2E test project Lite
 
-    npx playwright test --project=e2e_tests --config=e2e.config.ts
+    npx playwright test --project=e2e_tests --grep @lite --config=e2e.config.ts
 <br/>
 
-:radio_button: Run API test project
+:radio_button: Run API test project Lite
+
+    npx playwright test --project=api_tests --grep @lite --config=api.config.ts 
+<br/>
+
+
+:radio_button: Run API test project Pro
 
     npx playwright test --project=api_tests --config=api.config.ts 
 <br/>
+
+:radio_button: Run API test project Pro
+
+    npx playwright test --project=api_tests --grep @lite --config=api.config.ts 
+<br/>
+
 
 ### :o: How to run tests
 <br/>
