@@ -1,6 +1,7 @@
 
 //TODO ***** list all core tests and setup tests : plugins activated, wp settings, woocommerce settings, dokan modules activated , dokan settings for both e2e and api
 //TODO: make e2e tests independent specially admin tests
+//TODO: GRAB CONSOLE ERROR, And PHP ERROR *****************
 //TODO: slack integration
 //TODO: working-directory: ./path/to/tests
 //TODO: update auth if expired instead of every-time
