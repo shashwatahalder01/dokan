@@ -659,6 +659,9 @@ export const data = {
 		frontend: {
 		// customer
 			myAccount: 'my-account',
+			myOrders: 'my-orders',
+			myOrderPay: 'checkout/order-pay',
+			myOrderCancel: 'cart/?cancel_order',
 			customerLogout: 'my-account/customer-logout',
 			productCustomerPage: 'product',
 			ordersCustomerPage: 'orders',
@@ -673,7 +676,7 @@ export const data = {
 			placeOrder: '?wc-ajax=checkout',
 			billingAddress: 'my-account/edit-address/billing',
 			shippingAddress: 'my-account/edit-address/shipping',
-			shippingAddressCheckout: '?wc-ajax=update_order_review',
+			shippingAddressCheckout: 'wc-ajax=update_order_review',
 			editAccountCustomer: 'my-account/edit-account',
 			becomeVendor: 'my-account/account-migration',
 			supportTickets: 'my-account/support-tickets',

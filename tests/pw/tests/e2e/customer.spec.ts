@@ -1,7 +1,9 @@
 import { test, Page } from '@playwright/test';
-import { data } from 'utils/testData';
 import { LoginPage } from 'pages/loginPage';
 import { CustomerPage } from 'pages/customerPage';
+import { ApiUtils } from 'utils/apiUtils';
+import { data } from 'utils/testData';
+import { payloads } from 'utils/payloads';
 
 test.describe('Customer user functionality test', () => {
 	test.use({ storageState: { cookies: [], origins: [] } });
@@ -47,11 +49,13 @@ test.describe('Customer functionality test', () => {
 
 	let customerPage: CustomerPage;
 	let page: Page;
+	let apiUtils: ApiUtils;
 
-	test.beforeAll(async ({ browser }) => {
+	test.beforeAll(async ({ browser, request }) => {
 		const context = await browser.newContext({});
 		page = await context.newPage();
 		customerPage = new CustomerPage(page);
+		apiUtils = new ApiUtils(request);
 	});
 
 	test.afterAll(async () => {
@@ -117,8 +121,6 @@ test.describe('Customer functionality test', () => {
 	// test('customer can ask for get support @pro', async ( ) => {
 	// 	await customerPage.askForGetSupport(data.predefined.vendorStores.vendor1, data.customer.customerInfo.getSupport);
 	// });
-
-
 
 	// // TODO:
 
@@ -233,5 +235,28 @@ test.describe('Customer functionality test', () => {
 	test('customer can edit store review @pro', async ( ) => {
 		await customerPage.reviewStore(data.predefined.vendorStores.vendor1, data.store);
 	});
+
+
+	// my orders
+
+	test('dokan my orders page is rendering properly @lite @pro', async ( ) => {
+		await customerPage.myOrdersRenderProperly();
+	});
+
+	test('customer can view order details @lite @pro', async ( ) => {
+		const [,, orderId, ] = await apiUtils.createOrderWithStatus(payloads.createProduct(), payloads.createOrder, data.order.orderStatus.completed, payloads.vendorAuth);
+		await customerPage.viewOrderDetails(orderId);
+	});
+
+	test('customer can pay pending payment order details @lite @pro', async ( ) => {
+		const [,, orderId, ] = await apiUtils.createOrderWithStatus(payloads.createProduct(), payloads.createOrder, data.order.orderStatus.pending, payloads.vendorAuth);
+		await customerPage.payPendingOrder(orderId); //TODO: add choose payment method option
+	});
+
+	test('customer can cancel order @lite @pro', async ( ) => {
+		const [,, orderId, ] = await apiUtils.createOrderWithStatus(payloads.createProduct(), payloads.createOrder, data.order.orderStatus.pending, payloads.vendorAuth);
+		await customerPage.cancelPendingOrder(orderId);
+	});
+
 
 });

@@ -4988,6 +4988,30 @@ export const selector = {
 
 		},
 
+		cMyOrders: {
+
+			myOrdersText: '//h1[normalize-space()="My Orders"]',
+			recentOrdersText: '//h2[normalize-space()="Recent Orders"]',
+
+			// Table
+			table : {
+				myOrdersTable: '.shop_table.my_account_orders.table',
+				orderColumn:'th.order-number',
+				dateColumn:'th.order-date',
+				statusColumn:'th.order-status',
+				totalColumn:'//span[normalize-space()="Total"]/..',
+				vendorColumn:'//span[normalize-space()="Vendor"]/..',
+				actionsColumn:'th.order-actions',
+			},
+
+			orderNumber: (orderNumber: string) => `//a[normalize-space()="${orderNumber}"]`,
+			orderView: (orderNumber: string) => `//a[normalize-space()="${orderNumber}"]/../..//a[@class="button view"]`,
+			orderPay: (orderNumber: string) => `//a[normalize-space()="${orderNumber}"]/../..//a[@class="button pay"]`,
+			orderCancel: (orderNumber: string) => `//a[normalize-space()="${orderNumber}"]/../..//a[@class="button cancel"]`,
+			orderRequestWarranty: (orderNumber: string) => `//a[normalize-space()="${orderNumber}"]/../..//a[@class="button request_warranty"]`,
+
+		},
+
 
 		// Customer Header Cart
 		cHeaderCart: {
@@ -5132,19 +5156,62 @@ export const selector = {
 			orderReceivedSuccessMessage: '.woocommerce-notice.woocommerce-notice--success.woocommerce-thankyou-order-received',
 
 			// Order Details
-			orderNumber: '.woocommerce-order-overview__order.order strong',
-			orderDate: '.woocommerce-order-overview__date.date strong',
-			email: '.woocommerce-order-overview__email.email strong',
-			total: '.woocommerce-order-overview__total.total strong',
-			paymentMethod: '.woocommerce-order-overview__payment-method.method strong',
+			orderDetails: {
 
-			subTotal: '//th[normalize-space()="Subtotal:"]//..//span',
-			shipping: '//th[normalize-space()="Shipping:"]//..//td', //TODO: delete this line when localhost gets fixed
-			shippingCost: '//th[normalize-space()="Shipping:"]/..//span',
-			shippingMethod: '//th[normalize-space()="Shipping:"]/..//small',
-			tax: '//th[normalize-space()="Tax:"]//..//span',
-			orderPaymentMethod: '//th[normalize-space()="Payment method:"]//..//td',
-			orderTotal: '//th[normalize-space()="Total:"]//..//span',
+				orderNumber: '.woocommerce-order-overview__order.order strong',
+				orderDate: '.woocommerce-order-overview__date.date strong',
+				email: '.woocommerce-order-overview__email.email strong',
+				total: '.woocommerce-order-overview__total.total strong',
+				paymentMethod: '.woocommerce-order-overview__payment-method.method strong',
+
+				subTotal: '//th[normalize-space()="Subtotal:"]//..//span',
+				shipping: '//th[normalize-space()="Shipping:"]//..//td', //TODO: delete this line when localhost gets fixed
+				shippingCost: '//th[normalize-space()="Shipping:"]/..//span',
+				shippingMethod: '//th[normalize-space()="Shipping:"]/..//small',
+				tax: '//th[normalize-space()="Tax:"]//..//span',
+				orderPaymentMethod: '//th[normalize-space()="Payment method:"]//..//td',
+				orderTotal: '//th[normalize-space()="Total:"]//..//span',
+			},
+
+		},
+
+		cOrderDetails: {
+
+			// Order Details
+			orderDetails: {
+				orderDetailsHeading: '.woocommerce-order-details',
+				orderDetailsTable: '.woocommerce-table--order-details',
+
+				orderNumber: '.order-number',
+				orderDate: '.order-date',
+				orderStatus: '.order-status',
+
+				//title
+				subTotalTitle: '//th[normalize-space()="Subtotal:"]',
+				paymentMethodTitle: '//th[normalize-space()="Payment method:"]',
+				orderTotalTitle: '//th[normalize-space()="Total:"]',
+
+				//values
+				subTotalValue: '//th[normalize-space()="Subtotal:"]//..//span',
+				paymentMethodValue: '//th[normalize-space()="Payment method:"]//..//td',
+				orderTotalValue: '//th[normalize-space()="Total:"]//..//span',
+
+				//TODO: add tax and shipping
+
+			},
+
+			// customer details
+			customerDetails:{
+				customerDetailsDiv: '.woocommerce-customer-details',
+
+				//Billing address
+				billingAddressHeading:'//h2[normalize-space()="Billing address"]',
+				billingAddress: '.woocommerce-customer-details  address',
+
+				// shipping address
+				//todo: shipping details
+			},
+
 		},
 
 		cDokanSelector: {
@@ -5155,6 +5222,7 @@ export const selector = {
 		cWooSelector: {
 			wooCommerceSuccessMessage: '.woocommerce-message',
 			wooCommerceError: '.woocommerce .woocommerce-error',
+			wooCommerceInfo: '.woocommerce .woocommerce-info',
 		},
 	},
 };

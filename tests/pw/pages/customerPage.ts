@@ -319,6 +319,7 @@ export class CustomerPage extends BasePage {
 	// customer place order
 	async placeOrder(paymentMethod = 'bank', getOrderDetails = false, billingDetails = false, shippingDetails = false): Promise<void | object> {
 		await this.goIfNotThere(data.subUrls.frontend.checkout);
+		//todo: move shipping from here, make separate fuction for payment
 		if (billingDetails) {
 			await this.addBillingAddressInCheckout(data.customer.customerInfo); //TODO: fill if empty
 		}
@@ -329,15 +330,12 @@ export class CustomerPage extends BasePage {
 		switch (paymentMethod) {
 		case 'bank' :
 			await this.click(selector.customer.cCheckout.directBankTransfer);
-			// await this.clickAndWaitForResponse(data.subUrls.frontend.placeOrder, selector.customer.cCheckout.placeOrder);
 			break;
 		case 'check' :
 			await this.click(selector.customer.cCheckout.checkPayments);
-			// await this.clickAndWaitForResponse(data.subUrls.frontend.placeOrder, selector.customer.cCheckout.placeOrder);
 			break;
 		case 'cod' :
 			await this.click(selector.customer.cCheckout.cashOnDelivery);
-			// await this.clickAndWaitForResponse(data.subUrls.frontend.placeOrder, selector.customer.cCheckout.placeOrder);
 			break;
 			// case 'stripe':
 			//     await this.payWithStripe(paymentDetails)
@@ -348,6 +346,7 @@ export class CustomerPage extends BasePage {
 		default :
 			break;
 		}
+
 		await this.clickAndWaitForResponse(data.subUrls.frontend.placeOrder, selector.customer.cCheckout.placeOrder); //todo:  remove from other places
 		await this.toBeVisible(selector.customer.cOrderReceived.orderReceivedSuccessMessage);
 
@@ -370,7 +369,6 @@ export class CustomerPage extends BasePage {
 	//     } else {
 	//         await this.click(selector.customer.cPayWithStripe.savedTestCard4242)
 	//     }
-	//     await this.clickAndWaitForResponse(data.subUrls.frontend.placeOrder, selector.customer.cCheckout.placeOrder);
 	// }
 
 	// // pay with stripe express
@@ -406,7 +404,6 @@ export class CustomerPage extends BasePage {
 	//     } else {
 	//         await this.click(selector.customer.cPayWithStripeExpress.savedTestCard4242)
 	//     }
-	//     await this.clickAndWaitForResponse(data.subUrls.frontend.placeOrder, selector.customer.cCheckout.placeOrder);
 	// }
 
 	// // get order details after purchase
@@ -855,5 +852,52 @@ export class CustomerPage extends BasePage {
 		await this.toBeVisible(selector.customer.cSingleStore.storeCoupon.coupon(couponCode));
 
 	}
+
+
+	// my orders
+
+	// my orders render properly
+	async myOrdersRenderProperly(){
+		await this.goIfNotThere(data.subUrls.frontend.myOrders);
+
+		// my orders text is visible
+		await this.toBeVisible(selector.customer.cMyOrders.myOrdersText);
+		// recent orders text is visible
+		await this.toBeVisible(selector.customer.cMyOrders.recentOrdersText);
+
+		// my orders table elements are visible
+		await this.multipleElementVisible(selector.customer.cMyOrders.table);
+	}
+
+	//  view order details
+	async viewOrderDetails(orderId: string){
+		await this.goIfNotThere(data.subUrls.frontend.myOrders);
+		await this.clickAndWaitForNavigation(selector.customer.cMyOrders.orderView(orderId));
+
+		// order details are visible
+		await this.multipleElementVisible(selector.customer.cOrderDetails.orderDetails);
+		await this.multipleElementVisible(selector.customer.cOrderDetails.customerDetails);
+	}
+
+	//  pay pending order
+	async payPendingOrder(orderId: string){
+		await this.goIfNotThere(data.subUrls.frontend.myOrders);
+		// await this.clickAndWaitForNavigation(selector.customer.cMyOrders.orderPay(orderNumber));
+		await this.clickAndWaitForResponse(data.subUrls.frontend.myOrderPay, selector.customer.cMyOrders.orderPay(orderId));
+
+		await this.click(selector.customer.cCheckout.directBankTransfer); //TODO: add choose payment method option
+		await this.clickAndWaitForResponse(data.subUrls.frontend.placeOrder, selector.customer.cCheckout.placeOrder);
+		await this.toBeVisible(selector.customer.cOrderReceived.orderReceivedSuccessMessage);
+
+	}
+
+	//  cancel order
+	async cancelPendingOrder(orderId: string){
+		await this.goIfNotThere(data.subUrls.frontend.myOrders);
+		// await this.clickAndWaitForNavigation(selector.customer.cMyOrders.orderCancel(orderNumber));
+		await this.clickAndWaitForResponse(data.subUrls.frontend.myOrderCancel, selector.customer.cMyOrders.orderCancel(orderId), 302);
+		await this.toContainText(selector.customer.cWooSelector.wooCommerceInfo, 'Your order was cancelled.');
+	}
+
 
 }
