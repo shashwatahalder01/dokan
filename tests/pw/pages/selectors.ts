@@ -4721,7 +4721,7 @@ export const selector = {
 			selectCategory: '#product_cat',
 			radius: '.dokan-range-slider',
 
-			sort: '.woocommerce-ordering .orderby', //popularity, rating, date, price, price-desc
+			sort: '.woocommerce-ordering .orderby', // popularity, rating, date, price, price-desc
 
 			search: '.dokan-btn',
 
@@ -4811,13 +4811,25 @@ export const selector = {
 		// Customer Single Store
 		cSingleStore: {
 
-			//store profile summary
-			storeProfileSummary: '.dokan-single-store .profile-info-summery',
+			// Store Profile Summary
+			storeProfile:{
+				storeProfileSummary: '.dokan-single-store .profile-info-summery',
 
-			profileInfoHead: 'profile-info-head',
+				storeBanner: '.profile-info-img',
 
-			profileInfo: '.profile-info',
+				profileInfoHead: 'profile-info-head',
+				profileImage: '.profile-img.profile-img-circle',
+				storeName: '.profile-info-head .store-name',
 
+				profileInfo: '.profile-info',
+				storeInfo: '.dokan-store-info',
+				storeAddress: '.dokan-store-address',
+				storePhone: '.dokan-store-phone',
+				storeEmail: '.dokan-store-email',
+				storeRating: '.dokan-store-rating',
+				storeOpenClose: '.dokan-store-open-close',
+				storeSocial: '.store-social',
+			},
 
 			// Store Tabs
 			storeTabs:{
@@ -4833,10 +4845,22 @@ export const selector = {
 			},
 
 			// Sorting
-			sortBy: '.orderby', //popularity, rating, date, price, price-desc
+			sortBy: '.orderby', // popularity, rating, date, price, price-desc
+
+			storeProducts: '.seller-items',
+
+			// Product Card
+			productCard:{
+				card: '.seller-items .product',
+				product: '.seller-items .product .woocommerce-LoopProduct-link',
+				productTitle: '.seller-items .product .woocommerce-loop-product__title',
+				productPrice: '.seller-items .product .price',
+				addToCartButton: '.seller-items .product .add_to_cart_button',
+			},
 
 			// Pagination
 			pagination: '.dokan-pagination',
+
 
 			writeAReview: '.add-review-btn',
 			editReview: '.edit-review-btn',
@@ -4865,6 +4889,7 @@ export const selector = {
 			linked: '.fa-linkedin',
 			pinterest: '.fa-pinterest',
 			mail: '.fa-at',
+
 			// Open Now
 			openNow: '.fa.fa-angle-down',
 
@@ -4872,6 +4897,7 @@ export const selector = {
 
 		// Customer Single Product
 		cSingleProduct: {
+
 			// Product Details
 			productTitle: '.product_title.entry-title',
 			quantity: '.quantity .qty',
@@ -4917,6 +4943,7 @@ export const selector = {
 			awaitingApprovalReview: (reviewMessage: string) => `//div[@class='comment_container']//div[@class='description']// p[text()='${reviewMessage}']/../..//p//em[@class='woocommerce-review__awaiting-approval']`,
 			duplicateCommentAlert: '#error-page .wp-die-message p',
 			backFromDuplicateCommentAlert: '//a[contains(text(),"« Back")]',
+
 			// Product Enquiry
 			enquiryMessage: '#dokan-enq-message',
 			submitEnquiry: 'input.dokan-btn-theme',

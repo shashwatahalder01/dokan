@@ -175,9 +175,20 @@ test.describe('Customer functionality test', () => {
 	// 	await customerPage.searchStore(data.predefined.vendorStores.vendor1); //TODO: update parameter
 	// });
 
+	// test('customer can view stores on map @lite @pro', async ( ) => {
+	// });
+
 	// // single store page
 
 	// test('dokan single store page is rendering properly @lite @pro @explo', async ( ) => {
+	// 	await customerPage.singleStoreRenderProperly();
+	// });
+
+	// test('dokan single store page is rendering properly @lite @pro @explo', async ( ) => {
+	// 	await customerPage.singleStoreRenderProperly();
+	// });
+
+	// test('customer can view store open close time @pro @explo', async ( ) => {
 	// 	await customerPage.singleStoreRenderProperly();
 	// });
 
