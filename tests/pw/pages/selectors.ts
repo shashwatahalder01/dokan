@@ -4810,10 +4810,34 @@ export const selector = {
 
 		// Customer Single Store
 		cSingleStore: {
-			// Products
-			products: '//div[@class="dokan-store-tabs"]//a[contains(text(),"Products")]',
-			// Reviews
-			reviews: '//div[@class="dokan-store-tabs"]//a[contains(text(),"Reviews")]',
+
+			//store profile summary
+			storeProfileSummary: '.dokan-single-store .profile-info-summery',
+
+			profileInfoHead: 'profile-info-head',
+
+			profileInfo: '.profile-info',
+
+
+			// Store Tabs
+			storeTabs:{
+				products: '//div[@class="dokan-store-tabs"]//a[contains(text(),"Products")]',
+				reviews: '//div[@class="dokan-store-tabs"]//a[contains(text(),"Reviews")]',
+				toc: '//div[@class="dokan-store-tabs"]//a[contains(text(),"Terms and Conditions")]',
+			},
+
+			// Search product
+			search:{
+				input: '.product-name-search',
+				button: '.search-store-products',
+			},
+
+			// Sorting
+			sortBy: '.orderby', //popularity, rating, date, price, price-desc
+
+			// Pagination
+			pagination: '.dokan-pagination',
+
 			writeAReview: '.add-review-btn',
 			editReview: '.edit-review-btn',
 			closeReviewPopup: '.mfp-close',
@@ -4822,8 +4846,10 @@ export const selector = {
 			reviewMessage: '#dokan-review-details',
 			submitReview: '#support-submit-btn',
 			submittedReview: (reviewMessage: string) => `//div[@class='review_comment_container']//div[@class='description']// p[text()='${reviewMessage}']`,
+
 			// Follow Store
 			follow: '.dokan-follow-store-button',
+
 			// Get Support
 			getSupport: '.dokan-store-support-btn',
 			closeGetSupportPopup: '.mfp-close',
@@ -4831,6 +4857,7 @@ export const selector = {
 			getSupportOrderId: '.dokan-select',
 			message: '#dokan-support-msg',
 			submitGetSupport: '#support-submit-btn',
+
 			// Share Store
 			share: '.dokan-share-btn',
 			facebook: '.fa-facebook',
@@ -4840,11 +4867,7 @@ export const selector = {
 			mail: '.fa-at',
 			// Open Now
 			openNow: '.fa.fa-angle-down',
-			// Search product
-			productName: '.product-name-search',
-			search: '.search-store-products',
-			// Sorting
-			sortBy: '.orderby',
+
 		},
 
 		// Customer Single Product

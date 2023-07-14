@@ -221,7 +221,7 @@ export class CustomerPage extends BasePage {
 	async reviewStore(storeName: string, store: store): Promise<void> {
 		await this.goIfNotThere(data.subUrls.frontend.vendorDetails(helpers.slugify(storeName)));
 		const reviewMessage = store.reviewMessage();
-		await this.clickAndWaitForNavigation(selector.customer.cSingleStore.reviews);
+		await this.clickAndWaitForNavigation(selector.customer.cSingleStore.storeTabs.reviews);
 
 		const writeAReviewIsVisible = await this.isVisible(selector.customer.cSingleStore.writeAReview);
 		writeAReviewIsVisible ? await this.click(selector.customer.cSingleStore.writeAReview) : await this.click(selector.customer.cSingleStore.editReview);
