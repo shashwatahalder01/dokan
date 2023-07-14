@@ -4735,6 +4735,64 @@ export const selector = {
 			next: '.next',
 		},
 
+		// Customer Single Product
+		cSingleProduct: {
+
+			// Product Details
+			productTitle: '.product_title.entry-title',
+			quantity: '.quantity .qty',
+			addToCart: '.single_add_to_cart_button',
+			viewCart: '.woocommerce-message > .button',
+
+			// Get Support
+			getSupport: '.dokan-store-support-btn-product',
+			closeGetSupportPopup: '.mfp-close',
+			subject: '#dokan-support-subject',
+			getSupportOrderId: '.dokan-select',
+			message: '#dokan-support-msg',
+			submitGetSupport: '#support-submit-btn',
+
+			// Report Abuse
+			reportAbuse: 'a.dokan-report-abuse-button',
+			reportReasonByNumber: (reasonNumber: string) => `li:nth-child(${reasonNumber}) input`, // By Number
+			reportReasonByName: (reasonName: string) => `//input[@value='${reasonName}']/..`, // By Name
+			reportDescription: '.dokan-form-control',
+			reportSubmit: '#dokan-report-abuse-form-submit-btn',
+			reportSubmitSuccessMessage: '#swal2-html-container',
+			confirmReportSubmit: '.swal2-confirm',
+
+			// Other Available Vendor
+			OtherAvailableVendorViewStore: '.fa-external-link-alt',
+			OtherAvailableVendorViewProduct: '.view',
+			OtherAvailableVendorAddToCart: '.fa-shopping-cart',
+
+			// Product Menus
+			description: '#tab-title-description a',
+			reviews: '#tab-title-reviews',
+			vendorInfo: '#tab-title-seller a',
+			location: '#tab-title-geolocation a',
+			moreProducts: '#tab-title-more_seller_product a',
+			warrantyPolicy: '#tab-title-refund_policy a',
+			productEnquiry: '#tab-title-seller_enquiry_form a',
+
+			// Product Reviews
+			rating: (star: string) => `.star-${star}`,
+			reviewMessage: '#comment',
+			submitReview: '#submit',
+			submittedReview: (reviewMessage: string) => `//div[@class='comment_container']//div[@class='description']// p[text()='${reviewMessage}']`,
+			awaitingApprovalReview: (reviewMessage: string) => `//div[@class='comment_container']//div[@class='description']// p[text()='${reviewMessage}']/../..//p//em[@class='woocommerce-review__awaiting-approval']`,
+			duplicateCommentAlert: '#error-page .wp-die-message p',
+			backFromDuplicateCommentAlert: '//a[contains(text(),"« Back")]',
+
+			// Product Enquiry
+			enquiryMessage: '#dokan-enq-message',
+			submitEnquiry: 'input.dokan-btn-theme',
+			submitEnquirySuccessMessage: '.alert.alert-success',
+
+			// Product addon
+			addOnSelect: '.wc-pao-addon-select',
+		},
+
 		// Customer Store List Page
 		cStoreList: {
 			storeListText: '//h1[normalize-space()="Store List"]',
@@ -4818,17 +4876,44 @@ export const selector = {
 				storeInfo: '.dokan-store-info',
 				storeAddress: '.dokan-store-address',
 				storePhone: '.dokan-store-phone',
-				storeEmail: '.dokan-store-email',
-				storeRating: '.dokan-store-rating',
-				storeOpenClose: '.dokan-store-open-close',
+				// storeEmail: '.dokan-store-email',
+				// storeRating: '.dokan-store-rating',
+				// storeOpenClose: '.dokan-store-open-close',
 				storeSocial: '.store-social',
+			},
+
+			// Store open close time
+			storeTime: {
+				storeTimeDropDown: '.store-open-close-notice',
+				storeTimeDiv: '#vendor-store-times',
+				storeTimeHeading: '.store-times-heading',
+				storeDays: '.store-days',
+				storeTimes: '.store-times',
+
+			},
+
+			// Social icons
+			storeSocialIcons: {
+				facebook: '.fa-facebook-square',
+				twitter: '.fa-twitter-square',
+				pinterest: '.fa-pinterest-square',
+				linked: '.fa-linkedin',
+				youtube: '.fa-youtube-square',
+				instagram: '.fa-instagram',
+				flickr: '.fa-flickr',
+
 			},
 
 			// Store Tabs
 			storeTabs:{
+				follow: '.dokan-follow-store-button',
+				getSupport: '.dokan-store-support-btn',
+				share: '.dokan-share-btn',
+
 				products: '//div[@class="dokan-store-tabs"]//a[contains(text(),"Products")]',
-				reviews: '//div[@class="dokan-store-tabs"]//a[contains(text(),"Reviews")]',
 				toc: '//div[@class="dokan-store-tabs"]//a[contains(text(),"Terms and Conditions")]',
+				reviews: '//div[@class="dokan-store-tabs"]//a[contains(text(),"Reviews")]',
+
 			},
 
 			// Search product
@@ -4837,7 +4922,9 @@ export const selector = {
 				button: '.search-store-products',
 			},
 
-			// Sorting
+			searchedProduct: '.woocommerce-loop-product__title',
+
+			// Sort
 			sortBy: '.orderby', // popularity, rating, date, price, price-desc
 
 			storeProducts: '.seller-items',
@@ -4854,97 +4941,53 @@ export const selector = {
 			// Pagination
 			pagination: '.dokan-pagination',
 
-
-			writeAReview: '.add-review-btn',
-			editReview: '.edit-review-btn',
-			closeReviewPopup: '.mfp-close',
-			rating: '.jq-ry-rated-group.jq-ry-group',
-			reviewTitle: '#dokan-review-title',
-			reviewMessage: '#dokan-review-details',
-			submitReview: '#support-submit-btn',
-			submittedReview: (reviewMessage: string) => `//div[@class='review_comment_container']//div[@class='description']// p[text()='${reviewMessage}']`,
-
-			// Follow Store
-			follow: '.dokan-follow-store-button',
+			// Review
+			review:{
+				close: 'button.icon-close',
+				write: '.add-review-btn',
+				edit: '.edit-review-btn',
+				rating: '.jq-ry-rated-group.jq-ry-group',
+				title: '#dokan-review-title',
+				message: '#dokan-review-details',
+				submit: '#support-submit-btn',
+				submittedReview: (reviewMessage: string) => `//div[@class='review_comment_container']//div[@class='description']// p[text()='${reviewMessage}']`,
+			},
 
 			// Get Support
-			getSupport: '.dokan-store-support-btn',
-			closeGetSupportPopup: '.mfp-close',
-			subject: '#dokan-support-subject',
-			getSupportOrderId: '.dokan-select',
-			message: '#dokan-support-msg',
-			submitGetSupport: '#support-submit-btn',
+			getSupport: {
+				// close: '.mfp-close', //TODO: this locator don't exits delete this from all
+				close: 'button.icon-close',
+				subject: '#dokan-support-subject',
+				orderId: '.dokan-select',
+				message: '#dokan-support-msg',
+				submit: '#support-submit-btn',
+			},
 
 			// Share Store
-			share: '.dokan-share-btn',
-			facebook: '.fa-facebook',
-			twitter: '.fa-twitter',
-			linked: '.fa-linkedin',
-			pinterest: '.fa-pinterest',
-			mail: '.fa-at',
+			sharePlatForms:{
+				facebook: '.fa-facebook',
+				twitter: '.fa-twitter',
+				linked: '.fa-linkedin',
+				pinterest: '.fa-pinterest',
+				mail: '.fa-at',
+			},
 
-			// Open Now
-			openNow: '.fa.fa-angle-down',
+			// terms and conditions
+			toc:{
+				tocContent:'#store-toc-wrapper #store-toc p',
+			},
+
+			// store coupon
+			storeCoupon: {
+				storeCouponDiv: '.store-coupon-wrap',
+				couponTitle: '.coupon-title',
+				couponBody: '.coupon-body',
+				couponCode: '..coupon-code',
+				coupon: (code: string) => `//span[@class="coupon-code"]//strong[normalize-space()="${code}"]`
+			}
 
 		},
 
-		// Customer Single Product
-		cSingleProduct: {
-
-			// Product Details
-			productTitle: '.product_title.entry-title',
-			quantity: '.quantity .qty',
-			addToCart: '.single_add_to_cart_button',
-			viewCart: '.woocommerce-message > .button',
-
-			// Get Support
-			getSupport: '.dokan-store-support-btn-product',
-			closeGetSupportPopup: '.mfp-close',
-			subject: '#dokan-support-subject',
-			getSupportOrderId: '.dokan-select',
-			message: '#dokan-support-msg',
-			submitGetSupport: '#support-submit-btn',
-
-			// Report Abuse
-			reportAbuse: 'a.dokan-report-abuse-button',
-			reportReasonByNumber: (reasonNumber: string) => `li:nth-child(${reasonNumber}) input`, // By Number
-			reportReasonByName: (reasonName: string) => `//input[@value='${reasonName}']/..`, // By Name
-			reportDescription: '.dokan-form-control',
-			reportSubmit: '#dokan-report-abuse-form-submit-btn',
-			reportSubmitSuccessMessage: '#swal2-html-container',
-			confirmReportSubmit: '.swal2-confirm',
-
-			// Other Available Vendor
-			OtherAvailableVendorViewStore: '.fa-external-link-alt',
-			OtherAvailableVendorViewProduct: '.view',
-			OtherAvailableVendorAddToCart: '.fa-shopping-cart',
-
-			// Product Menus
-			description: '#tab-title-description a',
-			reviews: '#tab-title-reviews',
-			vendorInfo: '#tab-title-seller a',
-			location: '#tab-title-geolocation a',
-			moreProducts: '#tab-title-more_seller_product a',
-			warrantyPolicy: '#tab-title-refund_policy a',
-			productEnquiry: '#tab-title-seller_enquiry_form a',
-
-			// Product Reviews
-			rating: (star: string) => `.star-${star}`,
-			reviewMessage: '#comment',
-			submitReview: '#submit',
-			submittedReview: (reviewMessage: string) => `//div[@class='comment_container']//div[@class='description']// p[text()='${reviewMessage}']`,
-			awaitingApprovalReview: (reviewMessage: string) => `//div[@class='comment_container']//div[@class='description']// p[text()='${reviewMessage}']/../..//p//em[@class='woocommerce-review__awaiting-approval']`,
-			duplicateCommentAlert: '#error-page .wp-die-message p',
-			backFromDuplicateCommentAlert: '//a[contains(text(),"« Back")]',
-
-			// Product Enquiry
-			enquiryMessage: '#dokan-enq-message',
-			submitEnquiry: 'input.dokan-btn-theme',
-			submitEnquirySuccessMessage: '.alert.alert-success',
-
-			// Product addon
-			addOnSelect: '.wc-pao-addon-select',
-		},
 
 		// Customer Header Cart
 		cHeaderCart: {

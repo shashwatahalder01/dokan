@@ -31,7 +31,7 @@
 //TODO: fix permalink issue 
 //TODO: replace click with check for all check fields all suite
 //TODO:
-//TODO:
+//TODO: TODO: remove not needed env variables from yml file, like slowmo, setup .........
 //TODO:
 //TODO:
 //TODO: add wait for navigation to add wait for responses or build a new one merging both *****************

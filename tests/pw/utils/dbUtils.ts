@@ -20,7 +20,7 @@ export const dbUtils = {
 	// execute db query
 	async dbQuery(query: string): Promise<any> {
 		const dbContext: DbContext = new DbContext(mySql);
-		return await dbContext.inTransactionAsync(async (dbContext) => {
+		return await dbContext.inTransactionAsync(async (dbContext) => { //TODO: grab connection failed actual reason, ambiguous error message
 			try{
 				const result = await dbContext.executeAsync(query);
 				const res = JSON.parse(JSON.stringify(result));

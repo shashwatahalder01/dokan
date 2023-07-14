@@ -180,82 +180,6 @@ export class CustomerPage extends BasePage {
 		}
 	}
 
-	// customer follow vendor
-	async followStore(storeName: string, followLocation: string): Promise<void> {
-		let currentFollowStatus: boolean;
-		switch (followLocation) {
-
-		// shop page //TODO: should be store list page
-		case 'shopPage' :
-			await this.searchStore(storeName);
-			currentFollowStatus = await this.hasText(selector.customer.cStoreList.currentFollowStatus(storeName), 'Following');
-			// unfollow if not already
-			if (currentFollowStatus) {
-				await this.clickAndWaitForResponse(data.subUrls.ajax, selector.customer.cStoreList.followUnFollowStore(storeName));
-				await this.toContainText(selector.customer.cStoreList.currentFollowStatus(storeName), 'Follow');
-			}
-			await this.clickAndWaitForResponse(data.subUrls.ajax, selector.customer.cStoreList.followUnFollowStore(storeName));
-			await this.toContainText(selector.customer.cStoreList.currentFollowStatus(storeName), 'Following');
-			break;
-
-		// store page
-		case 'storePage' :
-			await this.goIfNotThere(data.subUrls.frontend.vendorDetails(helpers.slugify(storeName)));
-			currentFollowStatus = await this.hasText(selector.customer.cStoreList.currentFollowStatusStorePage, 'Following');
-
-			// unfollow if not already
-			if (currentFollowStatus) {
-				await this.clickAndWaitForResponse(data.subUrls.ajax, selector.customer.cStoreList.followUnFollowStoreStorePage);
-				await this.toContainText(selector.customer.cStoreList.currentFollowStatusStorePage, 'Follow');
-			}
-			await this.clickAndWaitForResponse(data.subUrls.ajax, selector.customer.cStoreList.followUnFollowStoreStorePage);
-			await this.toContainText(selector.customer.cStoreList.currentFollowStatusStorePage, 'Following');
-			break;
-
-		default :
-			break;
-		}
-	}
-
-	// customer review store
-	async reviewStore(storeName: string, store: store): Promise<void> {
-		await this.goIfNotThere(data.subUrls.frontend.vendorDetails(helpers.slugify(storeName)));
-		const reviewMessage = store.reviewMessage();
-		await this.clickAndWaitForNavigation(selector.customer.cSingleStore.storeTabs.reviews);
-
-		const writeAReviewIsVisible = await this.isVisible(selector.customer.cSingleStore.writeAReview);
-		writeAReviewIsVisible ? await this.click(selector.customer.cSingleStore.writeAReview) : await this.click(selector.customer.cSingleStore.editReview);
-
-		await this.setAttributeValue(selector.customer.cSingleStore.rating, 'style', store.rating);
-		await this.clearAndType(selector.customer.cSingleStore.reviewTitle, store.reviewTitle);
-		await this.clearAndType(selector.customer.cSingleStore.reviewMessage, reviewMessage);
-		await this.clickAndWaitForResponse(data.subUrls.ajax, selector.customer.cSingleStore.submitReview);
-		await this.toContainText(selector.customer.cSingleStore.submittedReview(reviewMessage), reviewMessage);
-	}
-
-	// customer ask for get support
-	async askForGetSupport(storeName: string, getSupport: customer['customerInfo']['getSupport']): Promise<void> {
-		await this.goIfNotThere(data.subUrls.frontend.vendorDetails(helpers.slugify(storeName)));
-		await this.clickAndWaitForResponse(data.subUrls.ajax, selector.customer.cSingleStore.getSupport);
-		await this.clearAndType(selector.customer.cSingleStore.subject, getSupport.subject);
-		await this.clearAndType(selector.customer.cSingleStore.message, getSupport.message);
-		await this.clickAndWaitForResponse(data.subUrls.ajax, selector.customer.cSingleStore.submitGetSupport);
-		await this.toContainText(selector.customer.cDokanSelector.dokanAlertSuccessMessage, getSupport.supportSubmitSuccessMessage);
-		// close popup
-		await this.click(selector.customer.cDokanSelector.dokanAlertClose);
-	}
-
-	// customer add customer support ticket
-	async sendMessageCustomerSupportTicket(supportTicket: customer['supportTicket']): Promise<void> {
-		const message = supportTicket.message();
-		await this.goIfNotThere(data.subUrls.frontend.supportTickets);
-		await this.click(selector.customer.cSupportTickets.firstOpenTicket);
-		await this.clearAndType(selector.customer.cSupportTickets.addReply, message);
-		await this.clickAndWaitForResponse(data.subUrls.frontend.submitSupport, selector.customer.cSupportTickets.submitReply, 302);
-		await this.toBeVisible(selector.customer.cSupportTickets.chatText(message));
-	}
-
-
 	// customer rate & review product
 	async reviewProduct(productName: string, review: product['review']): Promise<void> {
 		await this.goIfNotThere(data.subUrls.frontend.productDetails(helpers.slugify(productName)));
@@ -726,11 +650,13 @@ export class CustomerPage extends BasePage {
 
 	}
 
+
 	// sort store
 	async sortStores(sortBy: string){
 		await this.goIfNotThere(data.subUrls.frontend.storeListing);
 		await this.selectByValueAndWaitForResponse(data.subUrls.frontend.storeListing, selector.customer.cStoreList.filter.sortBy, sortBy);
 	}
+
 
 	// store view layout
 	async storeViewLayout(style: string){
@@ -752,6 +678,7 @@ export class CustomerPage extends BasePage {
 		await this.toHaveClass(selector.customer.cStoreList.currentLayout, style);
 	}
 
+
 	// customer search store
 	async searchStore(storeName: string): Promise<void> {
 		await this.goIfNotThere(data.subUrls.frontend.storeListing);
@@ -760,12 +687,172 @@ export class CustomerPage extends BasePage {
 		await this.toBeVisible(selector.customer.cStoreList.visitStore(storeName));
 	}
 
+	// single store
+
 	// single store render properly
 	async singleStoreRenderProperly(storeName: string){
 		await this.goIfNotThere(data.subUrls.frontend.vendorDetails(helpers.slugify(storeName)));
 
-		//TODO:
+		// store profile elements are visible
+		await this.multipleElementVisible(selector.customer.cSingleStore.storeProfile);
 
+		// store tab elements are visible
+		if (!DOKAN_PRO){
+			await this.multipleElementVisible(selector.customer.cSingleStore.storeTabs.products);
+			// await this.multipleElementVisible(selector.customer.cSingleStore.storeTabs.toc); //TODO: enable toc on setup , get page id via api then user db // also need vendor toc
+		} else {
+			await this.multipleElementVisible(selector.customer.cSingleStore.storeTabs);
+		}
+
+		// search elements are visible
+		await this.multipleElementVisible(selector.customer.cSingleStore.search);
+
+		// sortby element is visible
+		await this.toBeVisible(selector.customer.cSingleStore.sortBy);
+
+		// store products are visible
+		await this.toBeVisible(selector.customer.cSingleStore.storeProducts);
+
+		// product card elements are visible
+		await this.notToHaveCount(selector.customer.cSingleStore.productCard.card, 0);
+		await this.notToHaveCount(selector.customer.cSingleStore.productCard.product, 0);
+		await this.notToHaveCount(selector.customer.cSingleStore.productCard.productTitle, 0);
+		await this.notToHaveCount(selector.customer.cSingleStore.productCard.productPrice, 0);
+		await this.notToHaveCount(selector.customer.cSingleStore.productCard.addToCartButton, 0);
+
+		// store social icons are visible
+		await this.multipleElementVisible(selector.customer.cSingleStore.storeSocialIcons);
+	}
+
+
+	// sort products on single store
+	async singleStoreSortProducts(storeName: string, sortBy: string){
+		await this.goIfNotThere(data.subUrls.frontend.vendorDetails(helpers.slugify(storeName)));
+		await this.selectByValueAndWaitForResponse(data.subUrls.frontend.vendorDetails(helpers.slugify(storeName)), selector.customer.cSingleStore.sortBy, sortBy);
+	}
+
+
+	// search product on single store
+	async singleStoreSearchProduct(storeName: string, productName: string): Promise<void> {
+		await this.goIfNotThere(data.subUrls.frontend.vendorDetails(helpers.slugify(storeName)));
+		await this.clearAndType(selector.customer.cSingleStore.search.input, productName);
+		await this.clickAndWaitForResponse(data.subUrls.frontend.vendorDetails(helpers.slugify(storeName)), selector.customer.cSingleStore.search.button);
+		await this.toContainText(selector.customer.cSingleStore.productCard.productTitle, productName);
+	}
+
+
+	// store terms and condition
+	async storeOpenCloseTime(storeName: string): Promise<void> {
+		await this.goIfNotThere(data.subUrls.frontend.vendorDetails(helpers.slugify(storeName)));
+		await this.hover(selector.customer.cSingleStore.storeTime.storeTimeDropDown);
+
+		await this.toBeVisible(selector.customer.cSingleStore.storeTime.storeTimeDiv);
+		await this.toBeVisible(selector.customer.cSingleStore.storeTime.storeTimeHeading);
+
+		await this.toHaveCount(selector.customer.cSingleStore.storeTime.storeDays, 7);
+		await this.toHaveCount(selector.customer.cSingleStore.storeTime.storeTimes, 7);
+	}
+
+	// customer follow vendor
+	async followStore(storeName: string, followLocation: string): Promise<void> {
+		let currentFollowStatus: boolean;
+		switch (followLocation) {
+
+		// shop page //TODO: should be store list page
+		case 'shopPage' :
+			await this.searchStore(storeName);
+			currentFollowStatus = await this.hasText(selector.customer.cStoreList.currentFollowStatus(storeName), 'Following');
+			// unfollow if not already
+			if (currentFollowStatus) {
+				await this.clickAndWaitForResponse(data.subUrls.ajax, selector.customer.cStoreList.followUnFollowStore(storeName));
+				await this.toContainText(selector.customer.cStoreList.currentFollowStatus(storeName), 'Follow');
+			}
+			await this.clickAndWaitForResponse(data.subUrls.ajax, selector.customer.cStoreList.followUnFollowStore(storeName));
+			await this.toContainText(selector.customer.cStoreList.currentFollowStatus(storeName), 'Following');
+			break;
+
+			// store page
+		case 'storePage' :
+			await this.goIfNotThere(data.subUrls.frontend.vendorDetails(helpers.slugify(storeName)));
+			currentFollowStatus = await this.hasText(selector.customer.cStoreList.currentFollowStatusStorePage, 'Following');
+
+			// unfollow if not already
+			if (currentFollowStatus) {
+				await this.clickAndWaitForResponse(data.subUrls.ajax, selector.customer.cStoreList.followUnFollowStoreStorePage);
+				await this.toContainText(selector.customer.cStoreList.currentFollowStatusStorePage, 'Follow');
+			}
+			await this.clickAndWaitForResponse(data.subUrls.ajax, selector.customer.cStoreList.followUnFollowStoreStorePage);
+			await this.toContainText(selector.customer.cStoreList.currentFollowStatusStorePage, 'Following');
+			break;
+
+		default :
+			break;
+		}
+	}
+
+
+	// store get support
+	async storeSupport(storeName: string, getSupport: customer['customerInfo']['getSupport']): Promise<void> {
+		await this.goIfNotThere(data.subUrls.frontend.vendorDetails(helpers.slugify(storeName)));
+		await this.clickAndWaitForResponse(data.subUrls.ajax, selector.customer.cSingleStore.storeTabs.getSupport);
+		await this.clearAndType(selector.customer.cSingleStore.getSupport.subject, getSupport.subject);
+		await this.clearAndType(selector.customer.cSingleStore.getSupport.message, getSupport.message);
+		await this.clickAndWaitForResponse(data.subUrls.ajax, selector.customer.cSingleStore.getSupport.submit);
+		await this.toContainText(selector.customer.cDokanSelector.dokanAlertSuccessMessage, getSupport.supportSubmitSuccessMessage);
+		// close popup
+		await this.click(selector.customer.cSingleStore.getSupport.close);
+	}
+
+
+	// customer add customer support ticket
+	async sendMessageCustomerSupportTicket(supportTicket: customer['supportTicket']): Promise<void> {
+		const message = supportTicket.message();
+		await this.goIfNotThere(data.subUrls.frontend.supportTickets);
+		await this.click(selector.customer.cSupportTickets.firstOpenTicket);
+		await this.clearAndType(selector.customer.cSupportTickets.addReply, message);
+		await this.clickAndWaitForResponse(data.subUrls.frontend.submitSupport, selector.customer.cSupportTickets.submitReply, 302);
+		await this.toBeVisible(selector.customer.cSupportTickets.chatText(message));
+	}
+
+
+	// store share
+	async storeShare(storeName: string, toc: string): Promise<void> {
+		await this.goIfNotThere(data.subUrls.frontend.vendorDetails(helpers.slugify(storeName)));
+		await this.click(selector.customer.cSingleStore.storeTabs.share);
+		await this.clickAndWaitForUrl(toc, selector.customer.cSingleStore.sharePlatForms.facebook);// TODO: fix
+	}
+
+
+	// store terms and condition
+	async storeTermsAndCondition(storeName: string, toc: string): Promise<void> {
+		await this.goIfNotThere(data.subUrls.frontend.vendorDetails(helpers.slugify(storeName)));
+		await this.clickAndWaitForResponse(data.subUrls.frontend.vendorDetails(helpers.slugify(storeName)), selector.customer.cSingleStore.storeTabs.toc);
+		await this.toContainText(selector.customer.cSingleStore.toc.tocContent, toc);
+	}
+
+
+	// customer review store
+	async reviewStore(storeName: string, store: store): Promise<void> {
+		await this.goIfNotThere(data.subUrls.frontend.vendorDetails(helpers.slugify(storeName)));
+		const reviewMessage = store.reviewMessage();
+		await this.clickAndWaitForNavigation(selector.customer.cSingleStore.storeTabs.reviews);
+
+		// write new or edit previous review
+		const writeAReviewIsVisible = await this.isVisible(selector.customer.cSingleStore.review.write);
+		writeAReviewIsVisible ? await this.click(selector.customer.cSingleStore.review.write) : await this.click(selector.customer.cSingleStore.review.edit);
+
+		await this.setAttributeValue(selector.customer.cSingleStore.review.rating, 'style', store.rating);
+		await this.clearAndType(selector.customer.cSingleStore.review.title, store.reviewTitle);
+		await this.clearAndType(selector.customer.cSingleStore.review.message, reviewMessage);
+		await this.clickAndWaitForResponse(data.subUrls.ajax, selector.customer.cSingleStore.review.submit);
+		await this.toContainText(selector.customer.cSingleStore.review.submittedReview(reviewMessage), reviewMessage);
+	}
+
+
+	// store coupon
+	async storeCoupon(storeName: string, couponCode:string){
+		await this.goIfNotThere(data.subUrls.frontend.vendorDetails(helpers.slugify(storeName)));
+		await this.toBeVisible(selector.customer.cSingleStore.storeCoupon.coupon(couponCode));
 
 	}
 

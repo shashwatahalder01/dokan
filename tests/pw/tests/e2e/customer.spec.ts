@@ -106,22 +106,19 @@ test.describe('Customer functionality test', () => {
 	});
 
 
-	test('customer can follow store @lite @pro', async ( ) => {
-		await customerPage.followStore(data.predefined.vendorStores.vendor1, data.predefined.vendorStores.followFromShopPage); //TODO: update parameter
-	});
+	// test('customer can follow store @lite @pro', async ( ) => {
+	// 	await customerPage.followStore(data.predefined.vendorStores.vendor1, data.predefined.vendorStores.followFromShopPage); //TODO: update parameter
+	// });
 
-	test('customer can review store @pro', async ( ) => {
-		await customerPage.reviewStore(data.predefined.vendorStores.vendor1, data.store);
-	});
+	// test('customer can review store @pro', async ( ) => {
+	// 	await customerPage.reviewStore(data.predefined.vendorStores.vendor1, data.store);
+	// });
 
-	test('customer can ask for get support @pro', async ( ) => {
-		await customerPage.askForGetSupport(data.predefined.vendorStores.vendor1, data.customer.customerInfo.getSupport);
-	});
+	// test('customer can ask for get support @pro', async ( ) => {
+	// 	await customerPage.askForGetSupport(data.predefined.vendorStores.vendor1, data.customer.customerInfo.getSupport);
+	// });
 
-	test('customer can send message to support ticket @pro', async ( ) => {
-		await customerPage.askForGetSupport(data.predefined.vendorStores.vendor1, data.customer.customerInfo.getSupport);
-		await customerPage.sendMessageCustomerSupportTicket(data.customer.supportTicket);
-	});
+
 
 	// // TODO:
 
@@ -143,6 +140,10 @@ test.describe('Customer functionality test', () => {
 	// test('customer can sort products @lite @pro', async ( ) => {
 	// 	await customerPage.sortProducts('price');
 	// });
+
+	test('customer can follow store @lite @pro', async ( ) => {
+		await customerPage.followStore(data.predefined.vendorStores.vendor1, data.predefined.vendorStores.followFromShopPage); //TODO: update parameter
+	});
 
 
 	// // single product page
@@ -184,16 +185,53 @@ test.describe('Customer functionality test', () => {
 
 	// // single store page
 
-	// test('dokan single store page is rendering properly @lite @pro @explo', async ( ) => {
-	// 	await customerPage.singleStoreRenderProperly();
-	// });
+	test('dokan single store page is rendering properly @lite @pro', async ( ) => {
+		await customerPage.singleStoreRenderProperly(data.predefined.vendorStores.vendor1);  //TODO: compatible with all four layout
+	});
 
-	// test('dokan single store page is rendering properly @lite @pro @explo', async ( ) => {
-	// 	await customerPage.singleStoreRenderProperly();
-	// });
+	test('customer can view store open-close time on single store@lite @pro', async ( ) => {
+		await customerPage.storeOpenCloseTime(data.predefined.vendorStores.vendor1);
+	});
 
-	// test('customer can view store open close time @pro @explo', async ( ) => {
-	// 	await customerPage.singleStoreRenderProperly();
-	// });
+	test('customer can view coupon on single store @pro', async ( ) => {
+		await customerPage.storeCoupon(data.predefined.vendorStores.vendor1, 'c1_v1');
+	});
+
+	test('customer can search product on single store @lite @pro', async ( ) => {
+		await customerPage.singleStoreSearchProduct(data.predefined.vendorStores.vendor1, data.predefined.simpleProduct.product1.name);
+	});
+
+	test('customer can sort products on single store @lite @pro', async ( ) => {
+		await customerPage.singleStoreSortProducts(data.predefined.vendorStores.vendor1, 'price');
+	});
+
+	test('customer can follow store on single store @lite @pro', async ( ) => {
+		await customerPage.followStore(data.predefined.vendorStores.vendor1, data.predefined.vendorStores.followFromStorePage); //TODO: update parameter
+	});
+
+	test('customer can ask for store support @pro', async ( ) => {
+		await customerPage.storeSupport(data.predefined.vendorStores.vendor1, data.customer.customerInfo.getSupport);
+	});
+
+	test('customer can send message to support ticket @pro', async ( ) => {
+		await customerPage.storeSupport(data.predefined.vendorStores.vendor1, data.customer.customerInfo.getSupport);
+		await customerPage.sendMessageCustomerSupportTicket(data.customer.supportTicket);
+	});
+
+	test('customer can share store @pro', async ( ) => {
+		await customerPage.storeShare(data.predefined.vendorStores.vendor1, data.customer.customerInfo.getSupport);
+	});
+
+	test('customer can view store terms and conditions @lite @pro', async ( ) => {
+		await customerPage.storeTermsAndCondition(data.predefined.vendorStores.vendor1, 'test Vendor terms and conditions');
+	});
+
+	test('customer can review store @pro', async ( ) => {
+		await customerPage.reviewStore(data.predefined.vendorStores.vendor1, data.store);
+	});
+
+	test('customer can edit store review @pro', async ( ) => {
+		await customerPage.reviewStore(data.predefined.vendorStores.vendor1, data.store);
+	});
 
 });
