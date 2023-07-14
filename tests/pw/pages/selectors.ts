@@ -4739,10 +4739,11 @@ export const selector = {
 		cStoreList: {
 			storeListText: '//h1[normalize-space()="Store List"]',
 
-			locationMap: '#dokan-geolocation-locations-map',
+			locationMap: '#dokan-geolocation-locations-map', //TODO: add more map locators
+
 			currentLayout: '.entry-content #dokan-seller-listing-wrap',
 
-			//Filters
+			// Filters
 			filter:{
 				filterDiv:'div#dokan-store-listing-filter-wrap',
 
@@ -4770,6 +4771,7 @@ export const selector = {
 
 			},
 
+			// Store card
 			storeCard:{
 				storeCardDiv: 'div.store-wrapper',
 				storeCardHeader: 'div.store-header',
@@ -4797,15 +4799,6 @@ export const selector = {
 			currentFollowStatus: (storeName: string) => `//a[text()='${storeName}']/../../../../..//button[contains(@class,'dokan-follow-store-button')]//span[@class='dokan-follow-store-button-label-current']`,
 			followUnFollowStoreStorePage: 'button.dokan-follow-store-button',
 			currentFollowStatusStorePage: 'span.dokan-follow-store-button-label-current'
-		},
-
-		// Customer Header Cart
-		cHeaderCart: {
-			// Cart Content
-			cartContent: '.cart-contents .woocommerce-Price-amount',
-			removeItem: '.remove',
-			viewCart: '//p[contains(@class,"woocommerce-mini-cart__buttons")]//a[contains(text(),"View cart")]',
-			checkout: '//p[contains(@class,"woocommerce-mini-cart__buttons")]//a[contains(text(),"Checkout")]',
 		},
 
 		// Customer Single Store
@@ -4952,6 +4945,16 @@ export const selector = {
 			// Product addon
 			addOnSelect: '.wc-pao-addon-select',
 		},
+
+		// Customer Header Cart
+		cHeaderCart: {
+			// Cart Content
+			cartContent: '.cart-contents .woocommerce-Price-amount',
+			removeItem: '.remove',
+			viewCart: '//p[contains(@class,"woocommerce-mini-cart__buttons")]//a[contains(text(),"View cart")]',
+			checkout: '//p[contains(@class,"woocommerce-mini-cart__buttons")]//a[contains(text(),"Checkout")]',
+		},
+
 
 		// Customer Cart
 		cCart: {

@@ -178,6 +178,10 @@ test.describe('Customer functionality test', () => {
 	// test('customer can view stores on map @lite @pro', async ( ) => {
 	// });
 
+	// test('customer can go to single store page from store list @lite @pro', async ( ) => {
+	// });
+
+
 	// // single store page
 
 	// test('dokan single store page is rendering properly @lite @pro @explo', async ( ) => {
