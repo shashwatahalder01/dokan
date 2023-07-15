@@ -862,6 +862,7 @@ export class CustomerPage extends BasePage {
 
 		// my orders text is visible
 		await this.toBeVisible(selector.customer.cMyOrders.myOrdersText);
+
 		// recent orders text is visible
 		await this.toBeVisible(selector.customer.cMyOrders.recentOrdersText);
 
@@ -876,7 +877,11 @@ export class CustomerPage extends BasePage {
 
 		// order details are visible
 		await this.multipleElementVisible(selector.customer.cOrderDetails.orderDetails);
+
+		// customer details are visible
 		await this.multipleElementVisible(selector.customer.cOrderDetails.customerDetails);
+
+		DOKAN_PRO && await this.toBeVisible(selector.customer.cOrderDetails.getSupport);
 	}
 
 	//  pay pending order

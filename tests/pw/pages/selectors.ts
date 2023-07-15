@@ -5153,11 +5153,13 @@ export const selector = {
 		},
 
 		cOrderReceived: {
+			orderReceivedHeading: '//h1[normalize-space()="Order received"]',
 			orderReceivedSuccessMessage: '.woocommerce-notice.woocommerce-notice--success.woocommerce-thankyou-order-received',
 
 			// Order Details
 			orderDetails: {
 
+				//basic info
 				orderNumber: '.woocommerce-order-overview__order.order strong',
 				orderDate: '.woocommerce-order-overview__date.date strong',
 				email: '.woocommerce-order-overview__email.email strong',
@@ -5165,13 +5167,25 @@ export const selector = {
 				paymentMethod: '.woocommerce-order-overview__payment-method.method strong',
 
 				subTotal: '//th[normalize-space()="Subtotal:"]//..//span',
-				shipping: '//th[normalize-space()="Shipping:"]//..//td', //TODO: delete this line when localhost gets fixed
-				shippingCost: '//th[normalize-space()="Shipping:"]/..//span',
 				shippingMethod: '//th[normalize-space()="Shipping:"]/..//small',
+				shippingCost: '//th[normalize-space()="Shipping:"]/..//span',
 				tax: '//th[normalize-space()="Tax:"]//..//span',
 				orderPaymentMethod: '//th[normalize-space()="Payment method:"]//..//td',
 				orderTotal: '//th[normalize-space()="Total:"]//..//span',
 			},
+
+			// customer details
+			customerDetails:{
+				customerDetailsDiv: '.woocommerce-customer-details',
+				//Billing address
+				billingAddressHeading:'//h2[normalize-space()="Billing address"]',
+				billingAddress: '.woocommerce-column--billing-address  address',
+				// shipping address
+				shippingAddressHeading:'//h2[normalize-space()="Shipping address"]',
+				shippingAddress: '.woocommerce-column--shipping-address  address',
+			},
+
+			getSupport: '.dokan-store-support-btn',
 
 		},
 
@@ -5188,29 +5202,32 @@ export const selector = {
 
 				//title
 				subTotalTitle: '//th[normalize-space()="Subtotal:"]',
+				shipping:'//th[normalize-space()="Shipping:"]',
 				paymentMethodTitle: '//th[normalize-space()="Payment method:"]',
 				orderTotalTitle: '//th[normalize-space()="Total:"]',
 
 				//values
 				subTotalValue: '//th[normalize-space()="Subtotal:"]//..//span',
+				shippingMethodValue: '//th[normalize-space()="Shipping:"]/..//small',
+				shippingCostValue: '//th[normalize-space()="Shipping:"]/..//span',
 				paymentMethodValue: '//th[normalize-space()="Payment method:"]//..//td',
 				orderTotalValue: '//th[normalize-space()="Total:"]//..//span',
 
-				//TODO: add tax and shipping
 
 			},
 
 			// customer details
 			customerDetails:{
 				customerDetailsDiv: '.woocommerce-customer-details',
-
 				//Billing address
 				billingAddressHeading:'//h2[normalize-space()="Billing address"]',
-				billingAddress: '.woocommerce-customer-details  address',
-
+				billingAddress: '.woocommerce-column--billing-address  address',
 				// shipping address
-				//todo: shipping details
+				shippingAddressHeading:'//h2[normalize-space()="Shipping address"]',
+				shippingAddress: '.woocommerce-column--shipping-address  address',
 			},
+
+			getSupport: '.dokan-store-support-btn',
 
 		},
 
