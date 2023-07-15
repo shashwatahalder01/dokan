@@ -5004,6 +5004,7 @@ export const selector = {
 				actionsColumn:'th.order-actions',
 			},
 
+			noOrdersFound: '.dokan-info',
 			orderNumber: (orderNumber: string) => `//a[normalize-space()="${orderNumber}"]`,
 			orderView: (orderNumber: string) => `//a[normalize-space()="${orderNumber}"]/../..//a[@class="button view"]`,
 			orderPay: (orderNumber: string) => `//a[normalize-space()="${orderNumber}"]/../..//a[@class="button pay"]`,
@@ -5166,17 +5167,17 @@ export const selector = {
 				total: '.woocommerce-order-overview__total.total strong',
 				paymentMethod: '.woocommerce-order-overview__payment-method.method strong',
 
-				subTotal: '//th[normalize-space()="Subtotal:"]//..//span',
+				subTotal: '//th[normalize-space()="Subtotal:"]//..//span[@class="woocommerce-Price-amount amount"]',
 				shippingMethod: '//th[normalize-space()="Shipping:"]/..//small',
-				shippingCost: '//th[normalize-space()="Shipping:"]/..//span',
+				shippingCost: '//th[normalize-space()="Shipping:"]/..//span[@class="woocommerce-Price-amount amount"]',
 				tax: '//th[normalize-space()="Tax:"]//..//span',
 				orderPaymentMethod: '//th[normalize-space()="Payment method:"]//..//td',
-				orderTotal: '//th[normalize-space()="Total:"]//..//span',
+				orderTotal: '//th[normalize-space()="Total:"]//..//span[@class="woocommerce-Price-amount amount"]',
 			},
 
 			// customer details
 			customerDetails:{
-				customerDetailsDiv: '.woocommerce-customer-details',
+				customerDetailsSection: '.woocommerce-customer-details .addresses',
 				//Billing address
 				billingAddressHeading:'//h2[normalize-space()="Billing address"]',
 				billingAddress: '.woocommerce-column--billing-address  address',
@@ -5207,18 +5208,18 @@ export const selector = {
 				orderTotalTitle: '//th[normalize-space()="Total:"]',
 
 				//values
-				subTotalValue: '//th[normalize-space()="Subtotal:"]//..//span',
+				subTotalValue: '//th[normalize-space()="Subtotal:"]//..//span[@class="woocommerce-Price-amount amount"]',
 				shippingMethodValue: '//th[normalize-space()="Shipping:"]/..//small',
-				shippingCostValue: '//th[normalize-space()="Shipping:"]/..//span',
+				shippingCostValue: '//th[normalize-space()="Shipping:"]/..//span[@class="woocommerce-Price-amount amount"]',
 				paymentMethodValue: '//th[normalize-space()="Payment method:"]//..//td',
-				orderTotalValue: '//th[normalize-space()="Total:"]//..//span',
+				orderTotalValue: '//th[normalize-space()="Total:"]//..//span[@class="woocommerce-Price-amount amount"]',
 
 
 			},
 
 			// customer details
 			customerDetails:{
-				customerDetailsDiv: '.woocommerce-customer-details',
+				customerDetailsSection: '.woocommerce-customer-details .addresses',
 				//Billing address
 				billingAddressHeading:'//h2[normalize-space()="Billing address"]',
 				billingAddress: '.woocommerce-column--billing-address  address',
@@ -5227,6 +5228,7 @@ export const selector = {
 				shippingAddress: '.woocommerce-column--shipping-address  address',
 			},
 
+			orderAgain:'.order-again .button',
 			getSupport: '.dokan-store-support-btn',
 
 		},

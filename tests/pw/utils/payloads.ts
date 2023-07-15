@@ -213,6 +213,7 @@ export const payloads = {
 		payment_method: 'bacs',
 		payment_method_title: 'Direct Bank Transfer',
 		set_paid: true,
+		customer_id: 0,
 		billing: {
 			first_name: 'customer1',
 			last_name: 'c1',
@@ -1274,7 +1275,7 @@ export const payloads = {
 			flickr: 'http://dokan.test',
 		},
 		phone: '0123456789',
-		show_email: false,
+		show_email: true, //TODO: don't work on lite
 		address: {
 			street_1: 'abc street',
 			street_2: 'xyz street',
@@ -1284,17 +1285,17 @@ export const payloads = {
 			country: 'US',
 		},
 		location: '40.7127753,-74.0059728',
-		banner: '',
+		banner: 0,
 		banner_id: 0,
-		gravatar: '',
+		gravatar: 0,
 		gravatar_id: 0,
 		products_per_page: 12,
 		show_more_product_tab: true,
-		toc_enabled: false,
-		store_toc: '',
+		toc_enabled: true,  //TODO: don't work on lite
+		store_toc: 'test Vendor terms and conditions',
 		featured: true,
 		rating: {
-			rating: '0.00',
+			rating: '4.00', //TODO: don't work on lite and how it works
 			count: 1,
 		},
 		enabled: true,
@@ -1316,11 +1317,53 @@ export const payloads = {
 			stripe: false,
 		},
 		trusted: true,
-		store_open_close: {
-			enabled: false,
-			time: [],
+		// store_open_close: {
+		// 	enabled: false,
+		// 	time: [],
+		// 	open_notice: 'Store is open',
+		// 	close_notice: 'Store is closed',
+		// },
+		store_open_close: {  //TODO: don't work on lite
+			enabled: true,
+			time: {
+				monday: {
+					status: 'open',  // 'close'
+					opening_time: ['12:00 am'], // []
+					closing_time: ['11:30 pm']  // []
+				},
+				tuesday: {
+					status: 'open',
+					opening_time: ['12:00 am'],
+					closing_time: ['11:30 pm']
+				},
+				wednesday: {
+					status: 'open',
+					opening_time: ['12:00 am'],
+					closing_time: ['11:30 pm']
+				},
+				thursday: {
+					status: 'open',
+					opening_time: ['12:00 am'],
+					closing_time: ['11:30 pm']
+				},
+				friday: {
+					status: 'open',
+					opening_time: ['12:00 am'],
+					closing_time: ['11:30 pm']
+				},
+				saturday: {
+					status: 'open',
+					opening_time: ['12:00 am'],
+					closing_time: ['11:30 pm']
+				},
+				sunday: {
+					status: 'open',
+					opening_time: ['12:00 am'],
+					closing_time: ['11:30 pm']
+				}
+			},
 			open_notice: 'Store is open',
-			close_notice: 'Store is closed',
+			close_notice: 'Store is closed'
 		},
 		company_name: '',
 		vat_number: '',
@@ -1342,13 +1385,13 @@ export const payloads = {
 	createCustomer1: {
 		email: process.env.CUSTOMER + '@yopmail.com',
 		first_name: 'customer1',
-		last_name: 'c1',
+		last_name: 'cus',
 		role: 'customer',
 		username: process.env.CUSTOMER,
 		password: process.env.USER_PASSWORD,
 		billing: {
 			first_name: process.env.CUSTOMER,
-			last_name: 'cus',
+			last_name: 'c1',
 			company: '',
 			address_1: 'abc street',
 			address_2: 'xyz street',

@@ -46,7 +46,6 @@ setup.describe('authenticate users & set permalink', () => {
 		const res = await apiUtils.pluginsActiveOrNot(data.plugin.dokanPro, payloads.adminAuth);
 		process.env.DOKAN_PRO = String(res);
 		expect(res).toBeTruthy();
-
 	});
 
 });

@@ -1270,7 +1270,7 @@ export class ApiUtils {
 	// order
 
 	// create order
-	async createOrder(product: object | string, orderPayload: any, auth?: auth): Promise<[APIResponse, responseBody, string, string]> {
+	async createOrder(product: string | object, orderPayload: any, auth?: auth): Promise<[APIResponse, responseBody, string, string]> {
 		let productId: string;
 		if (typeof(product) != 'string'){
 			[, productId] = await this.createProduct(product, auth);
@@ -1286,7 +1286,7 @@ export class ApiUtils {
 	}
 
 	// create complete order
-	async createOrderWithStatus(product: object, order: any, status: string, auth?: auth): Promise<[APIResponse, responseBody, string, string]> {
+	async createOrderWithStatus(product: string | object, order: any, status: string, auth?: auth): Promise<[APIResponse, responseBody, string, string]> {
 		//TODO: add feature for productID, creator of product(who will be the owner), create order auth, update order auth
 		const [response, responseBody, orderId, productId] = await this.createOrder(product, order, auth);
 		await this.updateOrderStatus(orderId, status, auth);

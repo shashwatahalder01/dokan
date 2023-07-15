@@ -660,8 +660,9 @@ export const data = {
 		// customer
 			myAccount: 'my-account',
 			myOrders: 'my-orders',
-			myOrderPay: 'checkout/order-pay',
-			myOrderCancel: 'cart/?cancel_order',
+			orderCancel: 'cart/?cancel_order',
+			orderPay: 'checkout/order-pay',
+			orderReceived: 'checkout/order-received',
 			customerLogout: 'my-account/customer-logout',
 			productCustomerPage: 'product',
 			ordersCustomerPage: 'orders',

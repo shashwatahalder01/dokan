@@ -125,8 +125,8 @@ setup.describe('setup  user settings', () => {
 
 		// create store product
 		const product = { ...payloads.createProduct(), name: data.predefined.simpleProduct.product1.name, };
-		await apiUtils.createProduct(product, payloads.vendorAuth);
-
+		const [, productId] = await apiUtils.createProduct(product, payloads.vendorAuth);
+		process.env.PRODUCT_ID = productId;
 	});
 
 	setup('add vendor coupon @pro', async ({ request }) => {
