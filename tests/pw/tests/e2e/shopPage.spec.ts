@@ -27,12 +27,25 @@ test.describe('Shop functionality test', () => {
 
 	// shop page
 
-	test.skip('dokan shop page is rendering properly @lite @pro', async ( ) => {
+
+	test('shop page is rendering properly @lite @pro', async ( ) => {
 		await shopPage.shopRenderProperly();
 	});
 
-	test.skip('customer can sort products @lite @pro', async ( ) => {
+	test('customer can sort products @lite @pro', async ( ) => {
 		await shopPage.sortProducts('price');
+	});
+
+	test('customer can search product @lite @pro', async ( ) => {
+		await shopPage.searchProduct(data.predefined.simpleProduct.product1.name);
+	});
+
+	test('customer can view products on map @pro', async ( ) => {
+		await shopPage.productOnMap(data.predefined.simpleProduct.product1.name);
+	});
+
+	test('customer can go to product details from shop @lite @pro', async ( ) => {
+		await shopPage.goToProductDetails(data.predefined.simpleProduct.product1.name);
 	});
 
 

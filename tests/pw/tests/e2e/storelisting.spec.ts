@@ -25,14 +25,14 @@ test.describe('Store listing functionality test', () => {
 	});
 
 
-	// store list page
+	// store listing
 
 
 	test('dokan store list page is rendering properly @lite @pro @explo', async ( ) => {
 		await storeListingPage.storeListRenderProperly();
 	});
 
-	test('customer can sort store @lite @pro', async ( ) => {
+	test('customer can sort stores @lite @pro', async ( ) => {
 		await storeListingPage.sortStores(data.storeList.sort);
 	});
 
@@ -44,7 +44,7 @@ test.describe('Store listing functionality test', () => {
 		await storeListingPage.searchStore(data.predefined.vendorStores.vendor1);
 	});
 
-	test('customer can view stores on map @lite @pro', async ( ) => {
+	test('customer can view stores on map @pro', async ( ) => {
 		await storeListingPage.storeOnMap(data.predefined.vendorStores.vendor1);
 	});
 

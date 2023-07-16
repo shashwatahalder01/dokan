@@ -3,7 +3,7 @@ import { CustomerPage } from 'pages/customerPage';
 import { selector } from 'pages/selectors';
 import { helpers } from 'utils/helpers';
 import { data } from 'utils/testData';
-import { customer, store, storeShare } from 'utils/interfaces';
+import { storeShare } from 'utils/interfaces';
 
 const { DOKAN_PRO } = process.env;
 
@@ -43,10 +43,10 @@ export class SingleStorePage extends CustomerPage {
 
 		// product card elements are visible
 		await this.notToHaveCount(selector.customer.cSingleStore.productCard.card, 0);
-		await this.notToHaveCount(selector.customer.cSingleStore.productCard.product, 0);
+		await this.notToHaveCount(selector.customer.cSingleStore.productCard.productDetailsLink, 0);
 		await this.notToHaveCount(selector.customer.cSingleStore.productCard.productTitle, 0);
 		await this.notToHaveCount(selector.customer.cSingleStore.productCard.productPrice, 0);
-		await this.notToHaveCount(selector.customer.cSingleStore.productCard.addToCartButton, 0);
+		await this.notToHaveCount(selector.customer.cSingleStore.productCard.addToCart, 0);
 
 		// store social icons are visible
 		await this.multipleElementVisible(selector.customer.cSingleStore.storeSocialIcons);

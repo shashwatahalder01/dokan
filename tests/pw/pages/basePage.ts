@@ -269,6 +269,14 @@ export class BasePage {
 		return response;
 	}
 
+	// type & wait for navigation
+	async pressAndWaitForNavigation(key: string,): Promise<void> {
+		await Promise.all([
+			this.waitForNavigation(),
+			this.press(key),
+		]);
+	}
+
 	// type & wait for response
 	async pressAndWaitForResponse(subUrl: string, key: string, code = 200): Promise<Response> {
 		const [response] = await Promise.all([

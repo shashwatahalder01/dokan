@@ -24,7 +24,7 @@ export class StoreListingPage extends CustomerPage {
 		// store list text is visible
 		await this.toBeVisible(selector.customer.cStoreList.storeListText);
 
-		// location map is visible
+		// map elements are visible
 		if(DOKAN_PRO){
 			// eslint-disable-next-line @typescript-eslint/no-unused-vars
 			const { storeOnMap, ...map } = selector.customer.cStoreList.map;
@@ -107,13 +107,6 @@ export class StoreListingPage extends CustomerPage {
 		await this.toBeVisible(selector.customer.cStoreList.visitStore(storeName));
 	}
 
-	// go to single store from store listing
-	async goToSingleStoreFromStoreListing(storeName: string): Promise<void> {
-		await this.searchStore(storeName);
-		await this.clickAndWaitForNavigation(selector.customer.cStoreList.storeCard.visitStore);
-		const cartUrl =  this.isCurrentUrl(data.subUrls.frontend.vendorDetails(helpers.slugify(storeName)));
-		expect(cartUrl).toBeTruthy();
-	}
 
 	// stores on map
 	async storeOnMap(storeName?: string){
@@ -121,6 +114,15 @@ export class StoreListingPage extends CustomerPage {
 		await this.click(selector.customer.cStoreList.map.storeOnMap.storePin);
 		await this.toBeVisible(selector.customer.cStoreList.map.storeOnMap.storeListPopup);
 		storeName && await this.toBeVisible(selector.customer.cStoreList.map.storeOnMap.storeOnList(storeName));
+	}
+
+
+	// go to single store from store listing
+	async goToSingleStoreFromStoreListing(storeName: string): Promise<void> {
+		await this.searchStore(storeName);
+		await this.clickAndWaitForNavigation(selector.customer.cStoreList.storeCard.visitStore);
+		const cartUrl =  this.isCurrentUrl(data.subUrls.frontend.vendorDetails(helpers.slugify(storeName)));
+		expect(cartUrl).toBeTruthy();
 	}
 
 

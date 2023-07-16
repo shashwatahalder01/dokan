@@ -212,27 +212,13 @@ export class CustomerPage extends BasePage {
 		await this.toContainText(selector.customer.cSingleProduct.submitEnquirySuccessMessage, enquiry.enquirySubmitSuccessMessage);
 	}
 
-	// customer search product
-	async searchProduct(productName: string): Promise<void> {
-		await this.goToShop();
-		await this.clearAndType(selector.customer.cShop.searchProduct, productName);
-		await this.click(selector.customer.cShop.search);
-		await this.toContainText(selector.customer.cShop.searchedProductName, productName);
-	}
-
-	// customer go to product(single) details
-	async goToProductDetails(productName: string): Promise<void> {
-		await this.searchProduct(productName);
-		await this.clickAndWaitForResponse(data.subUrls.frontend.productCustomerPage, selector.customer.cShop.productDetailsViewLink);
-		await this.toContainText(selector.customer.cSingleProduct.productTitle, productName );
-	}
 
 	// customer add product to cart from shop page
 	async addProductToCartFromShop(productName: string): Promise<void> {
 		await this.goToShop();
 		await this.searchProduct(productName);
-		await this.clickAndWaitForResponse(data.subUrls.frontend.addToCart, selector.customer.cShop.addToCart);
-		await this.toBeVisible(selector.customer.cShop.viewCart);
+		await this.clickAndWaitForResponse(data.subUrls.frontend.addToCart, selector.customer.cShop.productCard.addToCart);
+		await this.toBeVisible(selector.customer.cShop.productCard.viewCart);
 	}
 
 	// customer add product to cart from product details page
@@ -253,7 +239,7 @@ export class CustomerPage extends BasePage {
 
 	// go to cart from shop page
 	async goToCartFromShop(): Promise<void> {
-		await this.clickAndWaitForNavigation(selector.customer.cShop.viewCart);
+		await this.clickAndWaitForNavigation(selector.customer.cShop.productCard.viewCart);
 		const cartUrl = this.isCurrentUrl('cart');
 		expect(cartUrl).toBeTruthy();
 	}
@@ -319,7 +305,7 @@ export class CustomerPage extends BasePage {
 	// customer place order
 	async placeOrder(paymentMethod = 'bank', getOrderDetails = false, billingDetails = false, shippingDetails = false): Promise<void | object> {
 		await this.goIfNotThere(data.subUrls.frontend.checkout);
-		//todo: move shipping from here, make separate fuction for payment
+		//todo: move shipping from here, make separate function for payment
 		if (billingDetails) {
 			await this.addBillingAddressInCheckout(data.customer.customerInfo); //TODO: fill if empty
 		}
@@ -585,6 +571,21 @@ export class CustomerPage extends BasePage {
 		// expect(successMessage).toMatch(refund.refundSubmitSuccessMessage);
 		await this.toContainText(selector.customer.cWooSelector.wooCommerceSuccessMessage, refund.refundSubmitSuccessMessage);
 	}
+
+
+	// search product
+	async searchProduct(productName: string): Promise<void> {
+		if(!DOKAN_PRO){
+			await this.clearAndType(selector.customer.cShop.searchProductLite, productName);
+			await this.pressAndWaitForNavigation(data.key.enter);
+			await this.toContainText(selector.customer.cSingleProduct.productTitle, productName );
+		} else {
+			await this.clearAndType(selector.customer.cShop.filters.searchProduct, productName);
+			await this.click(selector.customer.cShop.filters.search);
+			await this.toContainText(selector.customer.cShop.productCard.productTitle, productName);
+		}
+	}
+
 
 	// search store
 	async searchStore(storeName: string): Promise<void> {

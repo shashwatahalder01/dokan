@@ -4710,29 +4710,55 @@ export const selector = {
 
 		// Customer Shop Page
 		cShop: {
+
 			shopText: '//h1[normalize-space()="Shop"]',
 
-			// Filter
-			searchProduct: '.dokan-form-control',
-			searchedProductName: '.woocommerce-loop-product__title',
-			productDetailsViewLink: '.woocommerce-LoopProduct-link.woocommerce-loop-product__link img',
-			location: '.location-address input',
-			radiusSlider: '.dokan-range-slider',
-			selectCategory: '#product_cat',
-			radius: '.dokan-range-slider',
+			map:{
+				locationMap: '#dokan-geolocation-locations-map',
+				map: '//button[normalize-space()="Map"]',
+				satellite: '//button[normalize-space()="Satellite"]',
+				fullScreenToggle: '//button[@title="Toggle fullscreen view"]',
+				pegman: '//button[@title="Drag Pegman onto the map to open Street View"]',
+				zoomIn: '//button[@title="Zoom in"]',
+				zoomOut: '//button[@title="Zoom out"]',
+				productOnMap:{
+					productPin : '//div[@id="dokan-geolocation-locations-map"]//img[contains(@src, "maps.gstatic.com/mapfiles/transparent.png")]/../..//div[@role="button"]',
+					productListPopup: '.dokan-geo-map-info-window',
+					productOnList: (productName: string) => `//h3[@class="info-title"]//a[contains(text(),"${productName}")]`
+				},
+			},
 
+			// Filter
+			filters:{
+				searchProduct: '.dokan-form-control',
+				location: '.location-address input',
+				selectCategory: '#product_cat',
+				radiusSlider: '.dokan-range-slider',
+				search: '.dokan-btn',
+			},
+
+			searchProductLite: '(//input[@class="search-field"])[1]',
+
+			// sort
 			sort: '.woocommerce-ordering .orderby', // popularity, rating, date, price, price-desc
 
-			search: '.dokan-btn',
-
-			// Cart
-			addToCart: 'a.add_to_cart_button',
-			viewCart: 'a.added_to_cart',
-			bidNow: '.button.product_type_auction',
+			// Product Card
+			productCard:{
+				card: '#main .products',
+				productDetailsLink: '#main .products .woocommerce-LoopProduct-link',
+				productTitle: '#main .products .woocommerce-loop-product__title',
+				productPrice: '#main .products .price',
+				addToCart: '#main .products a.add_to_cart_button',
+				viewCart: 'a.added_to_cart',
+				bidNow: '.button.product_type_auction',
+			},
 
 			// Pagination
-			previous: '.prev',
-			next: '.next',
+			pagination: {
+				pagination: '(//nav[@class="woocommerce-pagination"])[1]',
+				previous: '.prev',
+				next: '.next',
+			},
 		},
 
 		// Customer Single Product
@@ -4795,6 +4821,7 @@ export const selector = {
 
 		// Customer Store List Page
 		cStoreList: {
+
 			storeListText: '//h1[normalize-space()="Store List"]',
 
 			map:{
@@ -4808,7 +4835,7 @@ export const selector = {
 				storeOnMap:{
 					storePin : '//div[@id="dokan-geolocation-locations-map"]//img[contains(@src, "maps.gstatic.com/mapfiles/transparent.png")]/../..//div[@role="button"]',
 					storeListPopup: '.dokan-geo-map-info-window',
-					storeOnList: (store: string) => `//h3[@class="info-title"]//a[contains(text(),"${store}")]`
+					storeOnList: (storeName: string) => `//h3[@class="info-title"]//a[contains(text(),"${storeName}")]`
 				},
 			},
 
@@ -4946,10 +4973,10 @@ export const selector = {
 			// Product Card
 			productCard:{
 				card: '.seller-items .product',
-				product: '.seller-items .product .woocommerce-LoopProduct-link',
+				productDetailsLink: '.seller-items .product .woocommerce-LoopProduct-link',
 				productTitle: '.seller-items .product .woocommerce-loop-product__title',
 				productPrice: '.seller-items .product .price',
-				addToCartButton: '.seller-items .product .add_to_cart_button',
+				addToCart: '.seller-items .product .add_to_cart_button',
 			},
 
 			// Pagination

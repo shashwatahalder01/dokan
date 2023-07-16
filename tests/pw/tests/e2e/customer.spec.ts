@@ -74,9 +74,6 @@ test.describe('Customer functionality test', () => {
 	// 	await customerPage.addCustomerDetails(data.customer.customerInfo);
 	// });
 
-	// test('customer can search product @lite @pro', async ( ) => {
-	// 	await customerPage.searchProduct(data.predefined.simpleProduct.product1.name);
-	// });
 
 	// test('customer can review product @lite @pro', async ( ) => {
 	// 	await customerPage.reviewProduct(data.predefined.simpleProduct.product1.name, data.product.review);
@@ -110,18 +107,6 @@ test.describe('Customer functionality test', () => {
 	// });
 
 
-	// // test('customer can follow store @lite @pro', async ( ) => {
-	// // 	await customerPage.followStore(data.predefined.vendorStores.vendor1, data.predefined.vendorStores.followFromShopPage); //TODO: update parameter
-	// // });
-
-	// // test('customer can review store @pro', async ( ) => {
-	// // 	await customerPage.reviewStore(data.predefined.vendorStores.vendor1, data.store);
-	// // });
-
-	// // test('customer can ask for get support @pro', async ( ) => {
-	// // 	await customerPage.askForGetSupport(data.predefined.vendorStores.vendor1, data.customer.customerInfo.getSupport);
-	// // });
-
 	// // // TODO:
 
 	// // test('customer can order again @lite @pro', async ( ) => {
@@ -132,8 +117,6 @@ test.describe('Customer functionality test', () => {
 	// // test('customer can download downloadables @lite @pro', async ( ) => {
 	// // 	// pre: complete download product
 	// // });
-
-
 
 
 });
