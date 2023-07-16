@@ -8,6 +8,8 @@ import { dbUtils } from 'utils/dbUtils';
 import { dbData } from 'utils/dbData';
 import { data } from 'utils/testData';
 
+const { CUSTOMER_ID } = process.env;
+
 
 setup.describe('setup site & woocommerce & user settings', () => {
 
@@ -154,7 +156,7 @@ setup.describe('setup  user settings', () => {
 
 	setup('add test vendor orders @pro', async ({ request }) => {  //TODO: required for which test, might be replaced with create order with status
 		const apiUtils = new ApiUtils(request);
-		await apiUtils.createOrder(payloads.createProduct(), payloads.createOrder, payloads.vendorAuth);
+		await apiUtils.createOrder(payloads.createProduct(), { ...payloads.createOrder, customer_id: CUSTOMER_ID }, payloads.vendorAuth);
 	});
 
 });

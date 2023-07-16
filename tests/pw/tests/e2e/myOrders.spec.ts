@@ -4,7 +4,7 @@ import { ApiUtils } from 'utils/apiUtils';
 import { data } from 'utils/testData';
 import { payloads } from 'utils/payloads';
 
-const { CUSTOMER, PRODUCT_ID } = process.env;
+const { CUSTOMER_ID, PRODUCT_ID } = process.env;
 
 
 test.describe('My Orders functionality test', () => {
@@ -32,17 +32,17 @@ test.describe('My Orders functionality test', () => {
 	});
 
 	test('customer can view order details @lite @pro', async ( ) => {
-		const [,, orderId, ] = await apiUtils.createOrderWithStatus(PRODUCT_ID, { ...payloads.createOrder, customer_id: CUSTOMER }, data.order.orderStatus.completed, payloads.vendorAuth);
+		const [,, orderId, ] = await apiUtils.createOrderWithStatus(PRODUCT_ID, { ...payloads.createOrder, customer_id: CUSTOMER_ID }, data.order.orderStatus.completed, payloads.vendorAuth);
 		await myOrdersPage.viewOrderDetails(orderId);
 	});
 
 	test('customer can pay pending payment order @lite @pro', async ( ) => {
-		const [,, orderId, ] = await apiUtils.createOrderWithStatus(PRODUCT_ID, { ...payloads.createOrder, customer_id: CUSTOMER }, data.order.orderStatus.pending, payloads.vendorAuth);
+		const [,, orderId, ] = await apiUtils.createOrderWithStatus(PRODUCT_ID, { ...payloads.createOrder, customer_id: CUSTOMER_ID }, data.order.orderStatus.pending, payloads.vendorAuth);
 		await myOrdersPage.payPendingOrder(orderId, 'bank');
 	});
 
 	test('customer can cancel order @lite @pro', async ( ) => {
-		const [,, orderId, ] = await apiUtils.createOrderWithStatus(PRODUCT_ID, { ...payloads.createOrder, customer_id: CUSTOMER }, data.order.orderStatus.pending, payloads.vendorAuth);
+		const [,, orderId, ] = await apiUtils.createOrderWithStatus(PRODUCT_ID, { ...payloads.createOrder, customer_id: CUSTOMER_ID }, data.order.orderStatus.pending, payloads.vendorAuth);
 		await myOrdersPage.cancelPendingOrder(orderId);
 	});
 

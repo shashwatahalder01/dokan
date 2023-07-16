@@ -39,7 +39,10 @@ export class StoreListingPage extends CustomerPage {
 			await this.toBeVisible(selector.customer.cStoreList.filters.filterDetails.searchVendor);
 			await this.toBeVisible(selector.customer.cStoreList.filters.filterDetails.apply);
 		} else {
-			await this.multipleElementVisible(selector.customer.cStoreList.filters.filterDetails);
+			//TODO: remove every eslint comment before push
+			// eslint-disable-next-line @typescript-eslint/no-unused-vars
+			const { rating, ...filterDetails } = selector.customer.cStoreList.filters.filterDetails;
+			await this.multipleElementVisible(filterDetails);
 		}
 
 		// store card elements are visible

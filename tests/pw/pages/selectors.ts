@@ -4822,6 +4822,7 @@ export const selector = {
 					categoryInput:'.category-input',
 					featured: '#featured',
 					openNow: '#open-now',
+					ratings: '.store-ratings.item',
 					rating: (star: string) => `.star-${star}`,
 
 					apply: '#apply-filter-btn',
