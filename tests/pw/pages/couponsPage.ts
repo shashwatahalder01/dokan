@@ -1,6 +1,7 @@
 import { Page, expect } from '@playwright/test';
 import { AdminPage } from 'pages/adminPage';
 import { selector } from 'pages/selectors';
+import { helpers } from 'utils/helpers';
 import { data } from 'utils/testData';
 import{ coupon } from 'utils/interfaces';
 
@@ -42,5 +43,12 @@ export class CouponsPage extends AdminPage {
 		await this.clickAndWaitForResponse(data.subUrls.frontend.vDashboard.coupon, selector.vendor.vCoupon.createCoupon, 302);
 		await expect(this.page.getByText(selector.vendor.vCoupon.couponSaveSuccessMessage)).toBeVisible();
 		//todo: add more fields
+	}
+
+	// single store coupon
+	async storeCoupon(storeName: string, couponCode:string){
+		await this.goIfNotThere(data.subUrls.frontend.vendorDetails(helpers.slugify(storeName)));
+		await this.toBeVisible(selector.customer.cSingleStore.storeCoupon.coupon(couponCode));
+
 	}
 }
