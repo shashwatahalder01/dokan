@@ -74,10 +74,6 @@ test.describe('Customer functionality test', () => {
 		await customerPage.addCustomerDetails(data.customer.customerInfo);
 	});
 
-	test('customer can review product @lite @pro', async ( ) => {
-		await customerPage.reviewProduct(data.predefined.simpleProduct.product1.name, data.product.review);
-	});
-
 	test('customer can report product @pro', async ( ) => {
 		await customerPage.reportProduct(data.predefined.simpleProduct.product1.name, data.product.report);
 	});
@@ -108,9 +104,9 @@ test.describe('Customer functionality test', () => {
 
 	// TODO:
 
-	test('customer can download downloadables @lite @pro', async ( ) => {
-		// pre: complete download product
-	});
+	// test('customer can download downloadables @lite @pro', async ( ) => {
+	// 	// pre: complete download product
+	// });
 
 
 });

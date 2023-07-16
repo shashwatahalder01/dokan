@@ -4765,58 +4765,101 @@ export const selector = {
 		cSingleProduct: {
 
 			// Product Details
-			productTitle: '.product_title.entry-title',
-			quantity: '.quantity .qty',
-			addToCart: '.single_add_to_cart_button',
-			viewCart: '.woocommerce-message > .button',
+			productDetails: {
+				productImage: '.woocommerce-product-gallery__wrapper .wp-post-image',
+				productTitle: '.product_title.entry-title',
+				quantity: '.quantity .qty',
+				addToCart: '.single_add_to_cart_button',
+				viewCart: '.woocommerce-message > .button',
+				category: '.product_meta .posted_in',
+			},
 
-			// Get Support
-			getSupport: '.dokan-store-support-btn-product',
-			closeGetSupportPopup: '.mfp-close',
-			subject: '#dokan-support-subject',
-			getSupportOrderId: '.dokan-select',
-			message: '#dokan-support-msg',
-			submitGetSupport: '#support-submit-btn',
+			// Sub menus
+			menus: {
+				description: '#tab-title-description a',
+				shipping: '.tabs .shipping_tab a',
+				reviews: '.tabs .reviews_tab a',
+				vendorInfo: '.tabs .seller_tab a',
+				location: '.tabs .geolocation_tab a',
+				moreProducts: '.tabs .more_seller_product_tab a',
+				warrantyPolicy: '.tabs .refund_policy_tab a',
+				productEnquiry: '.tabs .seller_enquiry_form_tab a',
 
-			// Report Abuse
-			reportAbuse: 'a.dokan-report-abuse-button',
-			reportReasonByNumber: (reasonNumber: string) => `li:nth-child(${reasonNumber}) input`, // By Number
-			reportReasonByName: (reasonName: string) => `//input[@value='${reasonName}']/..`, // By Name
-			reportDescription: '.dokan-form-control',
-			reportSubmit: '#dokan-report-abuse-form-submit-btn',
-			reportSubmitSuccessMessage: '#swal2-html-container',
-			confirmReportSubmit: '.swal2-confirm',
-
-			// Other Available Vendor
-			OtherAvailableVendorViewStore: '.fa-external-link-alt',
-			OtherAvailableVendorViewProduct: '.view',
-			OtherAvailableVendorAddToCart: '.fa-shopping-cart',
-
-			// Product Menus
-			description: '#tab-title-description a',
-			reviews: '#tab-title-reviews',
-			vendorInfo: '#tab-title-seller a',
-			location: '#tab-title-geolocation a',
-			moreProducts: '#tab-title-more_seller_product a',
-			warrantyPolicy: '#tab-title-refund_policy a',
-			productEnquiry: '#tab-title-seller_enquiry_form a',
+				// description: '#tab-title-description a',
+				// reviews: '#tab-title-reviews',
+				// vendorInfo: '#tab-title-seller a',
+				// location: '#tab-title-geolocation a',
+				// moreProducts: '#tab-title-more_seller_product a',
+				// warrantyPolicy: '#tab-title-refund_policy a',
+				// productEnquiry: '#tab-title-seller_enquiry_form a',
+			},
 
 			// Product Reviews
-			rating: (star: string) => `.star-${star}`,
-			reviewMessage: '#comment',
-			submitReview: '#submit',
-			submittedReview: (reviewMessage: string) => `//div[@class='comment_container']//div[@class='description']// p[text()='${reviewMessage}']`,
-			awaitingApprovalReview: (reviewMessage: string) => `//div[@class='comment_container']//div[@class='description']// p[text()='${reviewMessage}']/../..//p//em[@class='woocommerce-review__awaiting-approval']`,
-			duplicateCommentAlert: '#error-page .wp-die-message p',
-			backFromDuplicateCommentAlert: '//a[contains(text(),"« Back")]',
+			reviews:{
+				ratings: '.comment-form-rating .stars',
+				rating: (star: string) => `.star-${star}`,
+				reviewMessage: '#comment',
+				submitReview: '#submit',
+				submittedReview: (reviewMessage: string) => `//div[@class='comment_container']//div[@class='description']// p[text()='${reviewMessage}']`,
+				awaitingApprovalReview: (reviewMessage: string) => `//div[@class='comment_container']//div[@class='description']// p[text()='${reviewMessage}']/../..//p//em[@class='woocommerce-review__awaiting-approval']`,
+				duplicateCommentAlert: '#error-page .wp-die-message p',
+				backFromDuplicateCommentAlert: '//a[contains(text(),"« Back")]',
+			},
+
+			// Product vendor info
+			vendorInfo: {
+				vendorInfo:'//h2[normalize-space()="Vendor Information"]',
+				storeName: '.store-name',
+				vendor: '.seller-name',
+				storeAddress: '.store-address',
+			},
+
+			// moreProducts
+			moreProducts:{
+				moreProductsDiv: '#tab-more_seller_product .products',
+				product:'#tab-more_seller_product .product',
+			},
+
+			// Get Support
+			getSupport:{
+				getSupport: '.dokan-store-support-btn-product',
+				closeGetSupportPopup: '.mfp-close',
+				subject: '#dokan-support-subject',
+				getSupportOrderId: '.dokan-select',
+				message: '#dokan-support-msg',
+				submitGetSupport: '#support-submit-btn',
+			},
+
+			// Report Abuse
+			reportAbuse:{
+				reportAbuse: 'a.dokan-report-abuse-button',
+				reportReasonByNumber: (reasonNumber: string) => `li:nth-child(${reasonNumber}) input`, // By Number
+				reportReasonByName: (reasonName: string) => `//input[@value='${reasonName}']/..`, // By Name
+				reportDescription: '.dokan-form-control',
+				reportSubmit: '#dokan-report-abuse-form-submit-btn',
+				reportSubmitSuccessMessage: '#swal2-html-container',
+				confirmReportSubmit: '.swal2-confirm',
+			},
+
+			// Other Available Vendor
+			otherAvailableVendor:{
+				OtherAvailableVendorViewStore: '.fa-external-link-alt',
+				OtherAvailableVendorViewProduct: '.view',
+				OtherAvailableVendorAddToCart: '.fa-shopping-cart',
+			},
 
 			// Product Enquiry
-			enquiryMessage: '#dokan-enq-message',
-			submitEnquiry: 'input.dokan-btn-theme',
-			submitEnquirySuccessMessage: '.alert.alert-success',
+			productEnquiry:{
+				enquiryMessage: '#dokan-enq-message',
+				submitEnquiry: 'input.dokan-btn-theme',
+				submitEnquirySuccessMessage: '.alert.alert-success',
+			},
 
 			// Product addon
-			addOnSelect: '.wc-pao-addon-select',
+			productAddon:{
+				addOnSelect: '.wc-pao-addon-select',
+			}
+
 		},
 
 		// Customer Store List Page

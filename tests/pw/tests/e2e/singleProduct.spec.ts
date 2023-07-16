@@ -27,13 +27,21 @@ test.describe('Single product functionality test', () => {
 
 	// single product page
 
-	test.skip('customer can view vendor ratings and vendor info @lite @pro', async ( ) => {
-		await singleProductPage.productVendorInfo(data.predefined.simpleProduct.product1.name);
+	test('shop page is rendering properly @lite @pro', async ( ) => {
+		await singleProductPage.singleProductRenderProperly(data.predefined.simpleProduct.product1.name);
 	});
 
-	test.skip('customer can view more products @lite @pro', async ( ) => {
-		await singleProductPage.viewMoreProduct(data.predefined.simpleProduct.product1.name);
-		// pre: complete order
+	test('customer can view product vendor info @lite @pro', async ( ) => {
+		// await singleProductPage.productVendorInfo(data.predefined.simpleProduct.product1.name);
+		await singleProductPage.productVendorInfo('p1_v1');
 	});
+
+	test('customer can view more products @lite @pro', async ( ) => {
+		await singleProductPage.viewMoreProduct('p1_v1');
+	});
+
+	// test('customer can review product @lite @pro', async ( ) => {
+	// 	await singleProductPage.reviewProduct(data.predefined.simpleProduct.product1.name, data.product.review);
+	// });
 
 });

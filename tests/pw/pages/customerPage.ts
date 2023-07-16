@@ -180,36 +180,27 @@ export class CustomerPage extends BasePage {
 		}
 	}
 
-	// customer rate & review product
-	async reviewProduct(productName: string, review: product['review']): Promise<void> {
-		await this.goIfNotThere(data.subUrls.frontend.productDetails(helpers.slugify(productName)));
-		const reviewMessage = review.reviewMessage();
-		await this.click(selector.customer.cSingleProduct.reviews);
-		await this.click(selector.customer.cSingleProduct.rating(review.rating));
-		await this.clearAndType(selector.customer.cSingleProduct.reviewMessage, reviewMessage);
-		await this.clickAndWaitForResponse(data.subUrls.frontend.productReview, selector.customer.cSingleProduct.submitReview, 302);
-		await this.toContainText(selector.customer.cSingleProduct.submittedReview(reviewMessage), reviewMessage);
-	}
 
 	// customer report product
 	async reportProduct(productName: string, report: product['report']): Promise<void> {
 		await this.goIfNotThere(data.subUrls.frontend.productDetails(helpers.slugify(productName)));
-		await this.clickAndWaitForResponse(data.subUrls.ajax, selector.customer.cSingleProduct.reportAbuse);
-		await this.click(selector.customer.cSingleProduct.reportReasonByName(report.reportReason));
-		await this.clearAndType(selector.customer.cSingleProduct.reportDescription, report.reportReasonDescription);
-		await this.clickAndWaitForResponse(data.subUrls.ajax, selector.customer.cSingleProduct.reportSubmit);
-		await this.toContainText(selector.customer.cSingleProduct.reportSubmitSuccessMessage, report.reportSubmitSuccessMessage);
+		await this.clickAndWaitForResponse(data.subUrls.ajax, selector.customer.cSingleProduct.reportAbuse.reportAbuse);
+		await this.click(selector.customer.cSingleProduct.reportAbuse.reportReasonByName(report.reportReason));
+		await this.clearAndType(selector.customer.cSingleProduct.reportAbuse.reportDescription, report.reportReasonDescription);
+		await this.clickAndWaitForResponse(data.subUrls.ajax, selector.customer.cSingleProduct.reportAbuse.reportSubmit);
+		await this.toContainText(selector.customer.cSingleProduct.reportAbuse.reportSubmitSuccessMessage, report.reportSubmitSuccessMessage);
 		// close popup
-		await this.click(selector.customer.cSingleProduct.confirmReportSubmit);
+		await this.click(selector.customer.cSingleProduct.reportAbuse.confirmReportSubmit);
 	}
+
 
 	// customer enquire product
 	async enquireProduct(productName: string, enquiry: product['enquiry']): Promise<void> {
 		await this.goIfNotThere(data.subUrls.frontend.productDetails(helpers.slugify(productName)));
-		await this.click(selector.customer.cSingleProduct.productEnquiry);
-		await this.clearAndType(selector.customer.cSingleProduct.enquiryMessage, enquiry.enquiryDetails);
-		await this.clickAndWaitForResponse(data.subUrls.ajax, selector.customer.cSingleProduct.submitEnquiry);
-		await this.toContainText(selector.customer.cSingleProduct.submitEnquirySuccessMessage, enquiry.enquirySubmitSuccessMessage);
+		await this.click(selector.customer.cSingleProduct.menus.productEnquiry);
+		await this.clearAndType(selector.customer.cSingleProduct.productEnquiry.enquiryMessage, enquiry.enquiryDetails);
+		await this.clickAndWaitForResponse(data.subUrls.ajax, selector.customer.cSingleProduct.productEnquiry.submitEnquiry);
+		await this.toContainText(selector.customer.cSingleProduct.productEnquiry.submitEnquirySuccessMessage, enquiry.enquirySubmitSuccessMessage);
 	}
 
 
@@ -221,21 +212,24 @@ export class CustomerPage extends BasePage {
 		await this.toBeVisible(selector.customer.cShop.productCard.viewCart);
 	}
 
+
 	// customer add product to cart from product details page
 	async addProductToCartFromSingleProductPage(productName: string): Promise<void> {
 		await this.goIfNotThere(data.subUrls.frontend.productDetails(helpers.slugify(productName)));
-		const addonIsVisible = await this.isVisible(selector.customer.cSingleProduct.addOnSelect);
+		const addonIsVisible = await this.isVisible(selector.customer.cSingleProduct.productAddon.addOnSelect);
 		if (addonIsVisible){
-			await this.selectByNumber(selector.customer.cSingleProduct.addOnSelect, 1);
+			await this.selectByNumber(selector.customer.cSingleProduct.productAddon.addOnSelect, 1);
 		}
-		await this.clickAndWaitForResponse(data.subUrls.frontend.productCustomerPage, selector.customer.cSingleProduct.addToCart);
+		await this.clickAndWaitForResponse(data.subUrls.frontend.productCustomerPage, selector.customer.cSingleProduct.productDetails.addToCart);
 		await this.toContainText(selector.customer.cWooSelector.wooCommerceSuccessMessage, `“${productName}” has been added to your cart.`);
 	}
+
 
 	// customer check whether product is on cart
 	async productIsOnCart(productName: string): Promise<void> {
 		await this.toBeVisible(selector.customer.cCart.cartItem(productName));
 	}
+
 
 	// go to cart from shop page
 	async goToCartFromShop(): Promise<void> {
@@ -244,12 +238,14 @@ export class CustomerPage extends BasePage {
 		expect(cartUrl).toBeTruthy();
 	}
 
+
 	// go to cart from product details page
 	async goToCartFromSingleProductPage(): Promise<void> {
-		await this.clickAndWaitForNavigation(selector.customer.cSingleProduct.viewCart);
+		await this.clickAndWaitForNavigation(selector.customer.cSingleProduct.productDetails.viewCart);
 		const cartUrl =  this.isCurrentUrl('cart');
 		expect(cartUrl).toBeTruthy();
 	}
+
 
 	// got to checkout from cart
 	async goToCheckoutFromCart(): Promise<void> {
@@ -257,6 +253,7 @@ export class CustomerPage extends BasePage {
 		const cartUrl = this.isCurrentUrl('checkout');
 		expect(cartUrl).toBeTruthy();
 	}
+
 
 	// clear cart
 	async clearCart(): Promise<void> {
@@ -272,6 +269,7 @@ export class CustomerPage extends BasePage {
 		}
 	}
 
+
 	// Update product quantity from cart
 	async updateProductQuantityOnCart(productName: string, quantity: string): Promise<void> {
 		await this.clearAndType(selector.customer.cCart.quantity(productName), quantity);
@@ -279,6 +277,7 @@ export class CustomerPage extends BasePage {
 		await this.toContainText(selector.customer.cWooSelector.wooCommerceSuccessMessage, 'Cart updated.');
 		await this.toHaveValue(selector.customer.cCart.quantity(productName), quantity );
 	}
+
 
 	// customer apply coupon
 	async applyCoupon(couponTitle: string): Promise<void> {
@@ -293,6 +292,7 @@ export class CustomerPage extends BasePage {
 		await this.toContainText(selector.customer.cWooSelector.wooCommerceSuccessMessage, 'Coupon code applied successfully.' );
 	}
 
+
 	async buyProduct(productName: string, couponCode: string, applyCoupon = false, getOrderDetails = false, paymentMethod = 'bank', paymentDetails: paymentDetails): Promise<void | object> {
 		// clear cart before buying
 		await this.clearCart();
@@ -301,6 +301,7 @@ export class CustomerPage extends BasePage {
 		applyCoupon && await this.applyCoupon(couponCode);
 		return await this.placeOrder(paymentMethod, getOrderDetails);
 	}
+
 
 	// customer place order
 	async placeOrder(paymentMethod = 'bank', getOrderDetails = false, billingDetails = false, shippingDetails = false): Promise<void | object> {
@@ -579,7 +580,7 @@ export class CustomerPage extends BasePage {
 		if(!DOKAN_PRO){
 			await this.clearAndType(selector.customer.cShop.searchProductLite, productName);
 			await this.pressAndWaitForNavigation(data.key.enter);
-			await this.toContainText(selector.customer.cSingleProduct.productTitle, productName );
+			await this.toContainText(selector.customer.cSingleProduct.productDetails.productTitle, productName );
 		} else {
 			await this.clearAndType(selector.customer.cShop.filters.searchProduct, productName);
 			await this.click(selector.customer.cShop.filters.search);
