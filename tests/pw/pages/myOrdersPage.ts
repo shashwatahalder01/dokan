@@ -58,7 +58,6 @@ export class MyOrdersPage extends CustomerPage {
 		await this.goIfNotThere(data.subUrls.frontend.myOrders);
 		await this.clickAndWaitForResponse(data.subUrls.frontend.orderPay, selector.customer.cMyOrders.orderPay(orderId));
 		await this.paymentOrder(paymentMethod);
-		await this.toBeVisible(selector.customer.cOrderReceived.orderReceivedSuccessMessage);
 	}
 
 
@@ -69,5 +68,15 @@ export class MyOrdersPage extends CustomerPage {
 		await this.toContainText(selector.customer.cWooSelector.wooCommerceInfo, 'Your order was cancelled.');
 	}
 
+
+	// order again
+	async orderAgain(orderId: string, paymentMethod = 'bank'){
+		await this.goIfNotThere(data.subUrls.frontend.myOrders);
+		await this.clickAndWaitForNavigation(selector.customer.cMyOrders.orderView(orderId));
+		await this.clickAndAcceptAndWaitForResponse(data.subUrls.frontend.orderAgain, selector.customer.cOrderDetails.orderAgain, 302);
+		await this.toContainText(selector.customer.cWooSelector.wooCommerceSuccessMessage, 'The cart has been filled with the items from your previous order.');
+		await this.goToCheckoutFromCart();
+		await this.paymentOrder(paymentMethod);
+	}
 
 }

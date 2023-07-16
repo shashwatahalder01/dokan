@@ -367,6 +367,7 @@ export class CustomerPage extends BasePage {
 
 		await this.clickAndWaitForResponse(data.subUrls.frontend.orderReceived, selector.customer.cCheckout.placeOrder);
 		await this.toBeVisible(selector.customer.cOrderReceived.orderReceivedSuccessMessage);
+
 	}
 
 	// // pay with stripe connect

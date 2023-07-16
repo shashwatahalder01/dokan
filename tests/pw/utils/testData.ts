@@ -687,6 +687,7 @@ export const data = {
 			myAccount: 'my-account',
 			myOrders: 'my-orders',
 			orderCancel: 'cart/?cancel_order',
+			orderAgain: 'cart/?order_again',
 			orderPay: 'checkout/order-pay',
 			orderReceived: 'checkout/order-received',
 			customerLogout: 'my-account/customer-logout',

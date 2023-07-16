@@ -46,5 +46,9 @@ test.describe('My Orders functionality test', () => {
 		await myOrdersPage.cancelPendingOrder(orderId);
 	});
 
+	test('customer can order again @lite @pro', async ( ) => {
+		const [,, orderId, ] = await apiUtils.createOrderWithStatus(PRODUCT_ID, { ...payloads.createOrder, customer_id: CUSTOMER_ID }, data.order.orderStatus.completed, payloads.vendorAuth);
+		await myOrdersPage.orderAgain(orderId);
+	});
 
 });
