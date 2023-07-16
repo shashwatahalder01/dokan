@@ -1,24 +1,22 @@
 import { test, Page } from '@playwright/test';
-import { CustomerPage } from 'pages/customerPage';
+import { SingleStorePage } from 'pages/singleStorePage';
 import { ApiUtils } from 'utils/apiUtils';
 import { data } from 'utils/testData';
-import { payloads } from 'utils/payloads';
-
-const { CUSTOMER, PRODUCT_ID } = process.env;
+// import { payloads } from 'utils/payloads';
 
 
-test.describe('My Orders functionality test', () => {
+test.describe('Single store functionality test', () => {
 
 	// test.use({ storageState: data.auth.customerAuthFile });
 
-	let customerPage: CustomerPage;
+	let singleStorePage: SingleStorePage;
 	let page: Page;
 	let apiUtils: ApiUtils;
 
 	test.beforeAll(async ({ browser, request }) => {
 		const customerContext = await browser.newContext({ storageState: data.auth.customerAuthFile });
 		page = await customerContext.newPage();
-		customerPage = new CustomerPage(page);
+		singleStorePage = new SingleStorePage(page);
 		apiUtils = new ApiUtils(request);
 	});
 
@@ -26,24 +24,33 @@ test.describe('My Orders functionality test', () => {
 		await page.close();
 	});
 
+	// single store page
 
-	test('dokan my orders page is rendering properly @lite @pro', async ( ) => {
-		await customerPage.myOrdersRenderProperly();
+	test.skip('dokan single store page is rendering properly @lite @pro', async ( ) => {
+		//TODO: need toc on store and admin settings
+		await singleStorePage.singleStoreRenderProperly(data.predefined.vendorStores.vendor1);  //TODO: compatible with all four layout
 	});
 
-	test('customer can view order details @lite @pro', async ( ) => {
-		const [,, orderId, ] = await apiUtils.createOrderWithStatus(PRODUCT_ID, { ...payloads.createOrder, customer_id: CUSTOMER }, data.order.orderStatus.completed, payloads.vendorAuth);
-		await customerPage.viewOrderDetails(orderId);
+	test.skip('customer can view store open-close time on single store @lite @pro', async ( ) => {
+		//TODO: need store open close
+		await singleStorePage.storeOpenCloseTime(data.predefined.vendorStores.vendor1);
 	});
 
-	test('customer can pay pending payment order @lite @pro', async ( ) => {
-		const [,, orderId, ] = await apiUtils.createOrderWithStatus(PRODUCT_ID, { ...payloads.createOrder, customer_id: CUSTOMER }, data.order.orderStatus.pending, payloads.vendorAuth);
-		await customerPage.payPendingOrder(orderId, 'bank');
+	test('customer can search product on single store @lite @pro', async ( ) => {
+		await singleStorePage.singleStoreSearchProduct(data.predefined.vendorStores.vendor1, data.predefined.simpleProduct.product1.name);
 	});
 
-	test('customer can cancel order @lite @pro', async ( ) => {
-		const [,, orderId, ] = await apiUtils.createOrderWithStatus(PRODUCT_ID, { ...payloads.createOrder, customer_id: CUSTOMER }, data.order.orderStatus.pending, payloads.vendorAuth);
-		await customerPage.cancelPendingOrder(orderId);
+	test('customer can sort products on single store @lite @pro', async ( ) => {
+		await singleStorePage.singleStoreSortProducts(data.predefined.vendorStores.vendor1, 'price');
+	});
+
+	test.skip('customer can view store terms and conditions @lite @pro', async ( ) => {
+		//TODO: need toc on store and admin settings
+		await singleStorePage.storeTermsAndCondition(data.predefined.vendorStores.vendor1, data.vendor.toc);
+	});
+
+	test.skip('customer can share store @pro', async ( ) => {
+		await singleStorePage.storeShare(data.predefined.vendorStores.vendor1, data.storeShare.facebook);  //todo: fix parameter
 	});
 
 
