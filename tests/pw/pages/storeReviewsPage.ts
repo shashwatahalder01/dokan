@@ -1,8 +1,9 @@
 import { Page } from '@playwright/test';
 import { AdminPage } from 'pages/adminPage';
 import { selector } from 'pages/selectors';
+import { helpers } from 'utils/helpers';
 import { data } from 'utils/testData';
-import{ storeReview } from 'utils/interfaces';
+import{ storeReview, store } from 'utils/interfaces';
 
 
 export class StoreReviewsPage extends AdminPage {
@@ -114,6 +115,24 @@ export class StoreReviewsPage extends AdminPage {
 		await this.click(selector.admin.dokan.storeReviews.bulkActions.selectAll);
 		await this.selectByValue(selector.admin.dokan.storeReviews.bulkActions.selectAction, action);
 		await this.clickAndWaitForResponse(data.subUrls.api.dokan.storeReviews, selector.admin.dokan.storeReviews.bulkActions.applyAction);
+	}
+
+
+	// customer review store
+	async reviewStore(storeName: string, store: store): Promise<void> {
+		await this.goIfNotThere(data.subUrls.frontend.vendorDetails(helpers.slugify(storeName)));
+		const reviewMessage = store.reviewMessage();
+		await this.clickAndWaitForNavigation(selector.customer.cSingleStore.storeTabs.reviews);
+
+		// write new or edit previous review
+		const writeAReviewIsVisible = await this.isVisible(selector.customer.cSingleStore.review.write);
+		writeAReviewIsVisible ? await this.click(selector.customer.cSingleStore.review.write) : await this.click(selector.customer.cSingleStore.review.edit);
+
+		await this.setAttributeValue(selector.customer.cSingleStore.review.rating, 'style', store.rating);
+		await this.clearAndType(selector.customer.cSingleStore.review.title, store.reviewTitle);
+		await this.clearAndType(selector.customer.cSingleStore.review.message, reviewMessage);
+		await this.clickAndWaitForResponse(data.subUrls.ajax, selector.customer.cSingleStore.review.submit);
+		await this.toContainText(selector.customer.cSingleStore.review.submittedReview(reviewMessage), reviewMessage);
 	}
 
 }
