@@ -90,14 +90,11 @@ export class SingleStorePage extends CustomerPage {
 	}
 
 
-	//*******************************************//
-
-
 	// store share
 	async storeShare(storeName: string, site: storeShare): Promise<void> {
 		await this.goIfNotThere(data.subUrls.frontend.vendorDetails(helpers.slugify(storeName)));
 		await this.click(selector.customer.cSingleStore.storeTabs.share);
-		await this.clickAndWaitForUrl(site.url, selector.customer.cSingleStore.sharePlatForms[site.name]);
+		await this.clickAndWaitForUrl(site.url, selector.customer.cSingleStore.sharePlatForms[site.name]); //TODO: fix this
 	}
 
 

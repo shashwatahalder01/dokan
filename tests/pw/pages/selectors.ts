@@ -4797,7 +4797,20 @@ export const selector = {
 		cStoreList: {
 			storeListText: '//h1[normalize-space()="Store List"]',
 
-			locationMap: '#dokan-geolocation-locations-map', //TODO: add more map locators
+			map:{
+				locationMap: '#dokan-geolocation-locations-map',
+				map: '//button[normalize-space()="Map"]',
+				satellite: '//button[normalize-space()="Satellite"]',
+				fullScreenToggle: '//button[@title="Toggle fullscreen view"]',
+				pegman: '//button[@title="Drag Pegman onto the map to open Street View"]',
+				zoomIn: '//button[@title="Zoom in"]',
+				zoomOut: '//button[@title="Zoom out"]',
+				storeOnMap:{
+					storePin : '//div[@id="dokan-geolocation-locations-map"]//img[contains(@src, "maps.gstatic.com/mapfiles/transparent.png")]/../..//div[@role="button"]',
+					storeListPopup: '.dokan-geo-map-info-window',
+					storeOnList: (store: string) => `//h3[@class="info-title"]//a[contains(text(),"${store}")]`
+				},
+			},
 
 			currentLayout: '.entry-content #dokan-seller-listing-wrap',
 

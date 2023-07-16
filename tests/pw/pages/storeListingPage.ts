@@ -1,6 +1,7 @@
-import { Page } from '@playwright/test';
+import { Page, expect } from '@playwright/test';
 import { CustomerPage } from 'pages/customerPage';
 import { selector } from 'pages/selectors';
+import { helpers } from 'utils/helpers';
 import { data } from 'utils/testData';
 
 const { DOKAN_PRO } = process.env;
@@ -24,7 +25,11 @@ export class StoreListingPage extends CustomerPage {
 		await this.toBeVisible(selector.customer.cStoreList.storeListText);
 
 		// location map is visible
-		DOKAN_PRO && await this.toBeVisible(selector.customer.cStoreList.locationMap);
+		if(DOKAN_PRO){
+			// eslint-disable-next-line @typescript-eslint/no-unused-vars
+			const { storeOnMap, ...map } = selector.customer.cStoreList.map;
+			await this.multipleElementVisible(map);
+		}
 
 		// store filter elements are visible
 		// eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -89,7 +94,7 @@ export class StoreListingPage extends CustomerPage {
 		default :
 			break;
 		}
-		await this.toHaveClass(selector.customer.cStoreList.currentLayout, style+ '-view'); //todo: '-view' move to test data
+		await this.toHaveClass(selector.customer.cStoreList.currentLayout, style+ '-view');
 	}
 
 
@@ -100,6 +105,22 @@ export class StoreListingPage extends CustomerPage {
 		await this.clearAndType(selector.customer.cStoreList.filters.filterDetails.searchVendor, storeName);
 		await this.clickAndWaitForResponse(data.subUrls.frontend.storeListing, selector.customer.cStoreList.filters.filterDetails.apply);
 		await this.toBeVisible(selector.customer.cStoreList.visitStore(storeName));
+	}
+
+	// go to single store from store listing
+	async goToSingleStoreFromStoreListing(storeName: string): Promise<void> {
+		await this.searchStore(storeName);
+		await this.clickAndWaitForNavigation(selector.customer.cStoreList.storeCard.visitStore);
+		const cartUrl =  this.isCurrentUrl(data.subUrls.frontend.vendorDetails(helpers.slugify(storeName)));
+		expect(cartUrl).toBeTruthy();
+	}
+
+	// stores on map
+	async storeOnMap(storeName?: string){
+		await this.goIfNotThere(data.subUrls.frontend.storeListing);
+		await this.click(selector.customer.cStoreList.map.storeOnMap.storePin);
+		await this.toBeVisible(selector.customer.cStoreList.map.storeOnMap.storeListPopup);
+		storeName && await this.toBeVisible(selector.customer.cStoreList.map.storeOnMap.storeOnList(storeName));
 	}
 
 

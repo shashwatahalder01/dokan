@@ -33,22 +33,23 @@ test.describe('Store listing functionality test', () => {
 	});
 
 	test('customer can sort store @lite @pro', async ( ) => {
-		await storeListingPage.sortStores('most_recent');
+		await storeListingPage.sortStores(data.storeList.sort);
 	});
 
 	test('customer can change store view layout @lite @pro', async ( ) => {
-		await storeListingPage.storeViewLayout('list');
+		await storeListingPage.storeViewLayout(data.storeList.layout.list);
 	});
 
 	test('customer can search store @lite @pro', async ( ) => {
 		await storeListingPage.searchStore(data.predefined.vendorStores.vendor1);
 	});
 
-	test.skip('customer can view stores on map @lite @pro', async ( ) => {
+	test('customer can view stores on map @lite @pro', async ( ) => {
+		await storeListingPage.storeOnMap(data.predefined.vendorStores.vendor1);
 	});
 
-
-	test.skip('customer can go to single store page from store list @lite @pro', async ( ) => {
+	test('customer can go to single store from store list @lite @pro', async ( ) => {
+		await storeListingPage.goToSingleStoreFromStoreListing(data.predefined.vendorStores.vendor1);
 	});
 
 

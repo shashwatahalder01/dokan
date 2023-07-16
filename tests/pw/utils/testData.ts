@@ -294,6 +294,15 @@ export const data = {
 		reviewMessage: () => faker.string.uuid(),
 	},
 
+	// store list
+	storeList: {
+		sort: 'most_recent',
+		layout: {
+			grid: 'grid',
+			list: 'list'
+		}
+	},
+
 	//order
 	order: {
 		orderStatus: {
