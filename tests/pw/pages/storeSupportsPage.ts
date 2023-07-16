@@ -1,7 +1,9 @@
 import { Page, expect } from '@playwright/test';
 import { AdminPage } from 'pages/adminPage';
 import { selector } from 'pages/selectors';
+import { helpers } from 'utils/helpers';
 import { data } from 'utils/testData';
+import { customer } from 'utils/interfaces';
 
 
 export class StoreSupportsPage extends AdminPage {
@@ -146,6 +148,30 @@ export class StoreSupportsPage extends AdminPage {
 		await this.selectByValue(selector.admin.dokan.storeSupport.bulkActions.selectAction, action);
 		await this.clickAndWaitForResponse(data.subUrls.api.dokan.storeSupport, selector.admin.dokan.storeSupport.bulkActions.applyAction);
 		//TODO: add assertion
+	}
+
+
+	// customer ask for store support
+	async storeSupport(storeName: string, getSupport: customer['customerInfo']['getSupport']): Promise<void> {
+		await this.goIfNotThere(data.subUrls.frontend.vendorDetails(helpers.slugify(storeName)));
+		await this.clickAndWaitForResponse(data.subUrls.ajax, selector.customer.cSingleStore.storeTabs.getSupport);
+		await this.clearAndType(selector.customer.cSingleStore.getSupport.subject, getSupport.subject);
+		await this.clearAndType(selector.customer.cSingleStore.getSupport.message, getSupport.message);
+		await this.clickAndWaitForResponse(data.subUrls.ajax, selector.customer.cSingleStore.getSupport.submit);
+		await this.toContainText(selector.customer.cDokanSelector.dokanAlertSuccessMessage, getSupport.supportSubmitSuccessMessage);
+		// close popup
+		await this.click(selector.customer.cSingleStore.getSupport.close);
+	}
+
+
+	// customer add customer support ticket
+	async sendMessageCustomerSupportTicket(supportTicket: customer['supportTicket']): Promise<void> {
+		const message = supportTicket.message();
+		await this.goIfNotThere(data.subUrls.frontend.supportTickets);
+		await this.click(selector.customer.cSupportTickets.firstOpenTicket);
+		await this.clearAndType(selector.customer.cSupportTickets.addReply, message);
+		await this.clickAndWaitForResponse(data.subUrls.frontend.submitSupport, selector.customer.cSupportTickets.submitReply, 302);
+		await this.toBeVisible(selector.customer.cSupportTickets.chatText(message));
 	}
 
 }

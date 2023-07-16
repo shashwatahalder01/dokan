@@ -4802,7 +4802,7 @@ export const selector = {
 			currentLayout: '.entry-content #dokan-seller-listing-wrap',
 
 			// Filters
-			filter:{
+			filters:{
 				filterDiv:'div#dokan-store-listing-filter-wrap',
 
 				totalStoreCount: 'p.item.store-count',
@@ -4855,8 +4855,8 @@ export const selector = {
 			visitStore: (storeName: string) => `//a[text()='${storeName}']/../../../../..//a[@title='Visit Store']`,
 			followUnFollowStore: (storeName: string) => `//a[text()='${storeName}']/../../../../..//button[contains(@class,'dokan-follow-store-button')]`,
 			currentFollowStatus: (storeName: string) => `//a[text()='${storeName}']/../../../../..//button[contains(@class,'dokan-follow-store-button')]//span[@class='dokan-follow-store-button-label-current']`,
-			followUnFollowStoreStorePage: 'button.dokan-follow-store-button',
-			currentFollowStatusStorePage: 'span.dokan-follow-store-button-label-current'
+			followUnFollowStoreSingleStore: 'button.dokan-follow-store-button',
+			currentFollowStatusSingleStore: 'span.dokan-follow-store-button-label-current'
 		},
 
 		// Customer Single Store
@@ -4868,7 +4868,7 @@ export const selector = {
 
 				storeBanner: '.profile-info-img',
 
-				profileInfoHead: 'profile-info-head',
+				profileInfoHead: '.profile-info-head',
 				profileImage: '.profile-img.profile-img-circle',
 				storeName: '.profile-info-head .store-name',
 
@@ -4887,8 +4887,8 @@ export const selector = {
 				storeTimeDropDown: '.store-open-close-notice',
 				storeTimeDiv: '#vendor-store-times',
 				storeTimeHeading: '.store-times-heading',
-				storeDays: '.store-days',
-				storeTimes: '.store-times',
+				storeDays: '#vendor-store-times .store-days',
+				storeTimes: '#vendor-store-times .store-times',
 
 			},
 

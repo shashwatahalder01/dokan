@@ -585,6 +585,23 @@ export const data = {
 		skrill: faker.internet.email(),
 	},
 
+	storeShare: {
+		facebook:{
+			name: 'facebook',
+			url: 'facebook.com'
+		},
+		twitter: {
+			name: '.fa-twitter',
+		},
+		linked:{
+			name: '.fa-linkedin',
+		},
+		pinterest: {
+			name: '.fa-pinterest',
+		},
+		mail: '.fa-at',
+	},
+
 	subUrls: {
 
 		ajax: '/admin-ajax.php',
@@ -1017,6 +1034,8 @@ export const data = {
 			companyRequestSubmitSuccessMessage: 'Your company verification request is sent and pending approval',
 			companyRequestSubmitCancel: 'Your company verification request is cancelled',
 		},
+
+		toc : 'test Vendor terms and conditions',
 
 		deliveryTime: {
 			deliveryBlockedBuffer: '0',
@@ -1666,8 +1685,8 @@ export const data = {
 		},
 
 		vendorStores: {
-			followFromShopPage: 'shopPage',
-			followFromStorePage: 'storePage',
+			followFromStoreListing: 'storeListing',
+			followFromSingleStore: 'singleStore',
 			vendor1: String(process.env.VENDOR) + 'store',
 			shopUrl: String(process.env.VENDOR) + 'store',
 		},

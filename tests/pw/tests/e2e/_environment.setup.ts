@@ -10,6 +10,7 @@ import { data } from 'utils/testData';
 
 
 setup.describe('setup site & woocommerce & user settings', () => {
+
 	setup.use({ extraHTTPHeaders: { Authorization: payloads.aAuth } });
 
 	setup('check active plugins @lite @pro', async ({ request }) => {

@@ -5,13 +5,14 @@ import { data } from 'utils/testData';
 
 const { DOKAN_PRO } = process.env;
 
-export class MyOrderPage extends CustomerPage {
+export class MyOrdersPage extends CustomerPage {
 
 	constructor(page: Page) {
 		super(page);
 	}
 
 	// my orders
+
 
 	// my orders render properly
 	async myOrdersRenderProperly(){
@@ -36,6 +37,7 @@ export class MyOrderPage extends CustomerPage {
 		}
 	}
 
+
 	//  view order details
 	async viewOrderDetails(orderId: string){
 		await this.goIfNotThere(data.subUrls.frontend.myOrders);
@@ -50,6 +52,7 @@ export class MyOrderPage extends CustomerPage {
 		DOKAN_PRO && await this.toBeVisible(selector.customer.cOrderDetails.getSupport);
 	}
 
+
 	//  pay pending order
 	async payPendingOrder(orderId: string, paymentMethod = 'bank'){
 		await this.goIfNotThere(data.subUrls.frontend.myOrders);
@@ -57,6 +60,7 @@ export class MyOrderPage extends CustomerPage {
 		await this.paymentOrder(paymentMethod);
 		await this.toBeVisible(selector.customer.cOrderReceived.orderReceivedSuccessMessage);
 	}
+
 
 	//  cancel order
 	async cancelPendingOrder(orderId: string){

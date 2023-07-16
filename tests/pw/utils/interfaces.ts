@@ -1483,6 +1483,11 @@ export interface predefined {
 	}
 }
 
+export interface storeShare {
+	name: string;
+	url: string;
+
+}
 
 // install wordpress
 export interface installWp {

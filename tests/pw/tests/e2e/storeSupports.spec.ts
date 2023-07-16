@@ -8,14 +8,21 @@ import { payloads } from 'utils/payloads';
 const { VENDOR_ID, CUSTOMER_ID } = process.env;
 
 
-let storeSupportsPage: StoreSupportsPage;
-let aPage: Page;
+let storeSupportsAdmin: StoreSupportsPage;
+let storeSupportsCustomer: StoreSupportsPage;
+let aPage: Page, cPage: Page;
 let apiUtils: ApiUtils;
 
 test.beforeAll(async ({ browser, request }) => {
 	const adminContext = await browser.newContext({ storageState: data.auth.adminAuthFile });
 	aPage = await adminContext.newPage();
-	storeSupportsPage = new StoreSupportsPage(aPage);
+	storeSupportsAdmin = new StoreSupportsPage(aPage);
+
+	const customerContext = await browser.newContext({ storageState: data.auth.customerAuthFile });
+	cPage = await customerContext.newPage();
+	storeSupportsCustomer = new StoreSupportsPage(cPage);
+
+
 	apiUtils = new ApiUtils(request);
 	await apiUtils.createSupportTicket({ ...payloads.createSupportTicket, author: CUSTOMER_ID, store_id: VENDOR_ID }, payloads.adminAuth );
 	const[, supportTicketId] = await apiUtils.createSupportTicket({ ...payloads.createSupportTicket, author: CUSTOMER_ID, store_id: VENDOR_ID }, payloads.adminAuth );
@@ -24,6 +31,7 @@ test.beforeAll(async ({ browser, request }) => {
 
 test.afterAll(async ( ) => {
 	await aPage.close();
+	await cPage.close();
 });
 
 test.describe('Store Support test', () => {
@@ -31,50 +39,60 @@ test.describe('Store Support test', () => {
 	// test.use({ storageState: data.auth.adminAuthFile });
 
 	test('dokan store support menu page is rendering properly @pro @explo', async ( ) => {
-		await storeSupportsPage.adminStoreSupportRenderProperly();
+		await storeSupportsAdmin.adminStoreSupportRenderProperly();
 	});
 
 	test('admin can search support ticket @pro', async ( ) => {
-		await storeSupportsPage.searchSupportTicket(data.storeSupport.title);
+		await storeSupportsAdmin.searchSupportTicket(data.storeSupport.title);
 	});
 
 	test('admin can filter store support by vendor @pro', async ( ) => {
-		await storeSupportsPage.filterStoreSupports(data.storeSupport.filter.byVendor, 'by-vendor');
+		await storeSupportsAdmin.filterStoreSupports(data.storeSupport.filter.byVendor, 'by-vendor');
 	});
 
 	test('admin can filter store support by customer @pro', async ( ) => {
-		await storeSupportsPage.filterStoreSupports(data.storeSupport.filter.byCustomer, 'by-customer');
+		await storeSupportsAdmin.filterStoreSupports(data.storeSupport.filter.byCustomer, 'by-customer');
 	});
 
 	test('admin can reply to support ticket as admin @pro', async ( ) => {
-		await storeSupportsPage.replySupportTicket(data.storeSupport.chatReply.asAdmin);
+		await storeSupportsAdmin.replySupportTicket(data.storeSupport.chatReply.asAdmin);
 	});
 
 	test('admin can reply to support ticket as vendor @pro', async ( ) => {
-		await storeSupportsPage.replySupportTicket(data.storeSupport.chatReply.asVendor);
+		await storeSupportsAdmin.replySupportTicket(data.storeSupport.chatReply.asVendor);
 	});
 
 	test('admin can disable support ticket email notification @pro', async ( ) => {
-		await storeSupportsPage.updateSupportTicketEmailNotification('disable');
+		await storeSupportsAdmin.updateSupportTicketEmailNotification('disable');
 	});
 
 	test('admin can enable support ticket email notification @pro', async ( ) => {
-		await storeSupportsPage.updateSupportTicketEmailNotification('enable');
+		await storeSupportsAdmin.updateSupportTicketEmailNotification('enable');
 	});
 
 	test('admin can close store support @pro', async ( ) => {
-		await storeSupportsPage.closeSupportTicket();
+		await storeSupportsAdmin.closeSupportTicket();
 	});
 
 	test('admin can reopen closed store support @pro', async ( ) => {
-		await storeSupportsPage.reopenSupportTicket();
+		await storeSupportsAdmin.reopenSupportTicket();
 	});
 
 	test('admin can perform store support bulk action @pro', async ( ) => {
-		await storeSupportsPage.storeSupportBulkAction('close');
+		await storeSupportsAdmin.storeSupportBulkAction('close');
 	});
 
 	//todo: filter store support by calendar
+
+
+	test('customer can ask for store support @pro', async ( ) => {
+		await storeSupportsCustomer.storeSupport(data.predefined.vendorStores.vendor1, data.customer.customerInfo.getSupport);
+	});
+
+	test('customer can send message to support ticket @pro', async ( ) => {
+		await storeSupportsCustomer.storeSupport(data.predefined.vendorStores.vendor1, data.customer.customerInfo.getSupport);
+		await storeSupportsCustomer.sendMessageCustomerSupportTicket(data.customer.supportTicket);
+	});
 
 
 });

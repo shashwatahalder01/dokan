@@ -196,7 +196,7 @@ export const payloads = {
 			},
 			{
 				key: 'show_on_store',
-				value: 'no'
+				value: 'yes'
 			}
 		]
 	}),

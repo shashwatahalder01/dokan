@@ -1,5 +1,5 @@
 import { test, Page } from '@playwright/test';
-import { CustomerPage } from 'pages/customerPage';
+import { MyOrdersPage } from 'pages/myOrdersPage';
 import { ApiUtils } from 'utils/apiUtils';
 import { data } from 'utils/testData';
 import { payloads } from 'utils/payloads';
@@ -11,14 +11,14 @@ test.describe('My Orders functionality test', () => {
 
 	// test.use({ storageState: data.auth.customerAuthFile });
 
-	let customerPage: CustomerPage;
+	let myOrdersPage: MyOrdersPage;
 	let page: Page;
 	let apiUtils: ApiUtils;
 
 	test.beforeAll(async ({ browser, request }) => {
 		const customerContext = await browser.newContext({ storageState: data.auth.customerAuthFile });
 		page = await customerContext.newPage();
-		customerPage = new CustomerPage(page);
+		myOrdersPage = new MyOrdersPage(page);
 		apiUtils = new ApiUtils(request);
 	});
 
@@ -28,22 +28,22 @@ test.describe('My Orders functionality test', () => {
 
 
 	test('dokan my orders page is rendering properly @lite @pro', async ( ) => {
-		await customerPage.myOrdersRenderProperly();
+		await myOrdersPage.myOrdersRenderProperly();
 	});
 
 	test('customer can view order details @lite @pro', async ( ) => {
 		const [,, orderId, ] = await apiUtils.createOrderWithStatus(PRODUCT_ID, { ...payloads.createOrder, customer_id: CUSTOMER }, data.order.orderStatus.completed, payloads.vendorAuth);
-		await customerPage.viewOrderDetails(orderId);
+		await myOrdersPage.viewOrderDetails(orderId);
 	});
 
 	test('customer can pay pending payment order @lite @pro', async ( ) => {
 		const [,, orderId, ] = await apiUtils.createOrderWithStatus(PRODUCT_ID, { ...payloads.createOrder, customer_id: CUSTOMER }, data.order.orderStatus.pending, payloads.vendorAuth);
-		await customerPage.payPendingOrder(orderId, 'bank');
+		await myOrdersPage.payPendingOrder(orderId, 'bank');
 	});
 
 	test('customer can cancel order @lite @pro', async ( ) => {
 		const [,, orderId, ] = await apiUtils.createOrderWithStatus(PRODUCT_ID, { ...payloads.createOrder, customer_id: CUSTOMER }, data.order.orderStatus.pending, payloads.vendorAuth);
-		await customerPage.cancelPendingOrder(orderId);
+		await myOrdersPage.cancelPendingOrder(orderId);
 	});
 
 
