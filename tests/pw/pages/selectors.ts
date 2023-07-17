@@ -4796,7 +4796,7 @@ export const selector = {
 
 			// Product description
 			description: {
-				descriptionHeading: '//h2[normalize-space()="Description"]',
+				// descriptionHeading: '//h2[normalize-space()="Description"]', //TODO: storefrontOnly
 				content: 'div[id="tab-description"] p',
 			},
 
@@ -4808,7 +4808,7 @@ export const selector = {
 
 			// Product Reviews
 			reviews:{
-				reviewsHeading: '//h2[normalize-space()="Reviews"]',
+				// reviewsHeading: '//h2[normalize-space()="Reviews"]', //TODO: storefrontOnly
 				noReviews: '.woocommerce-noreviews',
 				ratings: '.comment-form-rating .stars',
 				rating: (star: string) => `.star-${star}`,
@@ -4822,7 +4822,7 @@ export const selector = {
 
 			// Product vendor info
 			vendorInfo: {
-				vendorInfoHeading:'//h2[normalize-space()="Vendor Information"]',
+				// vendorInfoHeading:'//h2[normalize-space()="Vendor Information"]', //TODO: storefrontOnly
 				storeName: '.store-name',
 				vendor: '.seller-name',
 				storeAddress: '.store-address',
@@ -4830,7 +4830,7 @@ export const selector = {
 
 			// Product Location
 			location: {
-				locationHeading: '//h2[normalize-space()="Product Location"]',
+				// locationHeading: '//h2[normalize-space()="Product Location"]', //TODO: storefrontOnly
 				productLocation: 'div[id="tab-geolocation"] address',
 				map: '#dokan-geolocation-locations-map'
 
