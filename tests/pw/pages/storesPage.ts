@@ -335,7 +335,7 @@ export class StoresPage extends AdminPage {
 		// ensure row exists
 		await this.notToBeVisible(selector.admin.dokan.vendors.noRowsFound);
 
-		await this.click(selector.admin.dokan.vendors.bulkActions.selectAll);
+		await this.check(selector.admin.dokan.vendors.bulkActions.selectAll);
 		await this.selectByValue(selector.admin.dokan.vendors.bulkActions.selectAction, action);
 		await this.clickAndWaitForResponse(data.subUrls.api.dokan.stores, selector.admin.dokan.vendors.bulkActions.applyAction);
 	}

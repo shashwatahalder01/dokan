@@ -139,12 +139,13 @@ export class StoreSupportsPage extends AdminPage {
 
 	// store support bulk action
 	async storeSupportBulkAction(action: string){
-		await this.goIfNotThere(data.subUrls.backend.dokan.storeSupport);
+		// await this.goIfNotThere(data.subUrls.backend.dokan.storeSupport);
+		await this.goto(data.subUrls.backend.dokan.storeSupport);
 
 		// ensure row exists
 		await this.notToBeVisible(selector.admin.dokan.storeSupport.noRowsFound);
 
-		await this.click(selector.admin.dokan.storeSupport.bulkActions.selectAll);
+		await this.check(selector.admin.dokan.storeSupport.bulkActions.selectAll);
 		await this.selectByValue(selector.admin.dokan.storeSupport.bulkActions.selectAction, action);
 		await this.clickAndWaitForResponse(data.subUrls.api.dokan.storeSupport, selector.admin.dokan.storeSupport.bulkActions.applyAction);
 		//TODO: add assertion

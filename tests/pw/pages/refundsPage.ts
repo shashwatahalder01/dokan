@@ -81,7 +81,7 @@ export class RefundsPage extends AdminPage {
 		// ensure row exists
 		await this.notToBeVisible(selector.admin.dokan.refunds.noRowsFound);
 
-		await this.click(selector.admin.dokan.refunds.bulkActions.selectAll);
+		await this.check(selector.admin.dokan.refunds.bulkActions.selectAll);
 		await this.selectByValue(selector.admin.dokan.refunds.bulkActions.selectAction, action);
 		await this.clickAndWaitForResponse(data.subUrls.api.dokan.refunds, selector.admin.dokan.refunds.bulkActions.applyAction);
 	}

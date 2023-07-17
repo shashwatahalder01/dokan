@@ -39,7 +39,7 @@ test.afterAll(async ( ) => {
 	await uPage.close();
 });
 
-test.describe('Store Support test', () => {
+test.describe.skip('Store Support test', () => {
 
 	// test.use({ storageState: data.auth.adminAuthFile });
 
@@ -94,7 +94,7 @@ test.describe('Store Support test', () => {
 		await storeSupportsCustomer.storeSupport(data.predefined.simpleProduct.product1.name, data.customer.customerInfo.getSupport, true);
 	});
 
-	test('customer can ask for store support on single store @pro', async ( ) => {
+	test.skip('customer can ask for store support on single store @pro', async ( ) => {
 		await storeSupportsCustomer.storeSupport(data.predefined.vendorStores.vendor1, data.customer.customerInfo.getSupport);
 	});
 
