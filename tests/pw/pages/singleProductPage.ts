@@ -64,7 +64,7 @@ export class SingleProductPage extends CustomerPage {
 
 			// product shipping elements are visible
 			// await this.click(selector.customer.cSingleProduct.menus.shipping);
-			// await this.multipleElementVisible(selector.customer.cSingleProduct.shipping);  //TODO: need vendor shipping
+			// await this.multipleElementVisible(selector.customer.cSingleProduct.shipping);  //TODO: need vendor shipping, also add new test
 
 
 			// product location elements are visible
@@ -103,6 +103,24 @@ export class SingleProductPage extends CustomerPage {
 		await this.goIfNotThere(data.subUrls.frontend.productDetails(helpers.slugify(productName)));
 		await this.click(selector.customer.cSingleProduct.menus.vendorInfo);
 		await this.multipleElementVisible(selector.customer.cSingleProduct.vendorInfo);
+		//TODO: assert actual value i.e. vendor info
+	}
+
+
+	// product location
+	async productLocation(productName: string){
+		await this.goIfNotThere(data.subUrls.frontend.productDetails(helpers.slugify(productName)));
+		await this.click(selector.customer.cSingleProduct.menus.location);
+		await this.multipleElementVisible(selector.customer.cSingleProduct.location);
+		//TODO: assert actual value i.e. location
+	}
+
+	// product warranty policy
+	async productWarrantyPolicy(productName: string){
+		await this.goIfNotThere(data.subUrls.frontend.productDetails(helpers.slugify(productName)));
+		await this.click(selector.customer.cSingleProduct.menus.warrantyPolicy);
+		await this.multipleElementVisible(selector.customer.cSingleProduct.warrantyPolicy);
+		//TODO: assert actual value i.e. warranty policy
 	}
 
 
@@ -119,6 +137,13 @@ export class SingleProductPage extends CustomerPage {
 	async viewRelatedProducts(productName: string){
 		await this.goIfNotThere(data.subUrls.frontend.productDetails(helpers.slugify(productName)));
 		await this.multipleElementVisible(selector.customer.cSingleProduct.relatedProducts);
+	}
+
+	// view highlighted vendor info
+	async viewHighlightedVendorInfo(productName: string){
+		await this.goIfNotThere(data.subUrls.frontend.productDetails(helpers.slugify(productName)));
+		await this.multipleElementVisible(selector.customer.cSingleProduct.vendorHighlightedInfo);
+		//TODO: assert actual value i.e. vendor info
 	}
 
 

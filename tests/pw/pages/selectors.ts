@@ -4877,8 +4877,8 @@ export const selector = {
 
 			// Get Support
 			getSupport:{
-				getSupport: '.dokan-store-support-btn-product',
-				closeGetSupportPopup: '.mfp-close',
+				getSupport: '.dokan-store-support-btn',
+				closeGetSupportPopup: 'button.icon-close',
 				subject: '#dokan-support-subject',
 				getSupportOrderId: '.dokan-select',
 				message: '#dokan-support-msg',
@@ -5097,6 +5097,14 @@ export const selector = {
 				orderId: '.dokan-select',
 				message: '#dokan-support-msg',
 				submit: '#support-submit-btn',
+
+				//guest User
+				userName: '#login-name',
+				userPassword: '#login-password',
+				login: '#support-submit-btn',
+				createAccount: '.dokan-btn.dokan-btn-theme',
+
+
 			},
 
 			// Share Store

@@ -959,6 +959,9 @@ export interface	customer {
 			subject: string;
 			message: string;
 			supportSubmitSuccessMessage: string;
+
+			username: string;
+			userPassword: string;
 		}
 	}
 

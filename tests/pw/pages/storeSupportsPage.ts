@@ -152,15 +152,22 @@ export class StoreSupportsPage extends AdminPage {
 
 
 	// customer ask for store support
-	async storeSupport(storeName: string, getSupport: customer['customerInfo']['getSupport']): Promise<void> {
-		await this.goIfNotThere(data.subUrls.frontend.vendorDetails(helpers.slugify(storeName)));
+	async storeSupport(productOrStore: string, getSupport: customer['customerInfo']['getSupport'], singleProduct?: boolean): Promise<void> {
+		singleProduct ? await this.goIfNotThere(data.subUrls.frontend.productDetails(helpers.slugify(productOrStore))) : await this.goIfNotThere(data.subUrls.frontend.vendorDetails(helpers.slugify(productOrStore)));
 		await this.clickAndWaitForResponse(data.subUrls.ajax, selector.customer.cSingleStore.storeTabs.getSupport);
+		const isGuest = await this.isVisible(selector.customer.cSingleStore.getSupport.userName);
+		if(isGuest){
+			await this.clearAndType(selector.customer.cSingleStore.getSupport.userName, getSupport.username);
+			await this.clearAndType(selector.customer.cSingleStore.getSupport.userPassword, getSupport.userPassword);
+			await this.clickAndWaitForResponse(data.subUrls.ajax, selector.customer.cSingleStore.getSupport.login);
+		}
 		await this.clearAndType(selector.customer.cSingleStore.getSupport.subject, getSupport.subject);
 		await this.clearAndType(selector.customer.cSingleStore.getSupport.message, getSupport.message);
 		await this.clickAndWaitForResponse(data.subUrls.ajax, selector.customer.cSingleStore.getSupport.submit);
 		await this.toContainText(selector.customer.cDokanSelector.dokanAlertSuccessMessage, getSupport.supportSubmitSuccessMessage);
 		// close popup
 		await this.click(selector.customer.cSingleStore.getSupport.close);
+
 	}
 
 

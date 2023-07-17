@@ -1176,6 +1176,10 @@ export const data = {
 				subject: 'get Support Subject',
 				message: 'get Support Message',
 				supportSubmitSuccessMessage: 'Thank you. Your ticket has been submitted!',
+
+				username: String(process.env.CUSTOMER),
+				userPassword: String(process.env.USER_PASSWORD),
+
 			},
 		},
 

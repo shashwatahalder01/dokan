@@ -35,12 +35,24 @@ test.describe('Single product functionality test', () => {
 		await singleProductPage.productVendorInfo(data.predefined.simpleProduct.product1.name);
 	});
 
+	test('customer can view product location @pro', async ( ) => {
+		await singleProductPage.productLocation(data.predefined.simpleProduct.product1.name);
+	});
+
+	test('customer can view product warranty policy @pro', async ( ) => {
+		await singleProductPage.productWarrantyPolicy(data.predefined.simpleProduct.product1.name); //TODO: need warranty policy
+	});
+
 	test('customer can view more products @lite @pro', async ( ) => {
 		await singleProductPage.viewMoreProducts(data.predefined.simpleProduct.product1.name);
 	});
 
 	test('customer can view related products @lite @pro', async ( ) => {
 		await singleProductPage.viewRelatedProducts(data.predefined.simpleProduct.product1.name);
+	});
+
+	test.skip('customer can view highlighted vendor info @pro', async ( ) => {
+		await singleProductPage.viewHighlightedVendorInfo(data.predefined.simpleProduct.product1.name);
 	});
 
 	test('customer can review product @lite @pro', async ( ) => {
