@@ -18,25 +18,27 @@ export class VendorDashboardPage extends VendorPage {
 	async vendorDashboardRenderProperly(){
 		await this.goIfNotThere(data.subUrls.frontend.vDashboard.dashboard);
 
-		// dashboard text is visible
-		await this.toBeVisible(selector.admin.dokan.dashboard.dashboardText);
-
-		// header elements are visible
-		await this.multipleElementVisible(selector.admin.dokan.dashboard.header);
+		// profile progress elements are visible
+		await this.multipleElementVisible(selector.vendor.vDashboard.profileProgress);
 
 		// at a glance elements are visible
-		await this.multipleElementVisible(selector.admin.dokan.dashboard.atAGlance);
+		await this.multipleElementVisible(selector.vendor.vDashboard.atAGlance);
 
-		// overview elements are visible
-		await this.multipleElementVisible(selector.admin.dokan.dashboard.overview);
+		// graph elements are visible
+		await this.multipleElementVisible(selector.vendor.vDashboard.graph);
 
-		// dokan new update elements are visible
-		await this.multipleElementVisible(selector.admin.dokan.dashboard.dokanNewUpdates);
+		// orders elements are visible
+		await this.multipleElementVisible(selector.vendor.vDashboard.orders);
 
-		// Subscribe box elements are visible
-		// eslint-disable-next-line @typescript-eslint/no-unused-vars
-		const { thankYouMessage, ...subscribeBox } = selector.admin.dokan.dashboard.subscribeBox;
-		await this.multipleElementVisible(subscribeBox);
+		// reviews elements are visible
+		await this.multipleElementVisible(selector.vendor.vDashboard.reviews);
+
+		// products elements are visible
+		await this.multipleElementVisible(selector.vendor.vDashboard.products);
+
+		// announcement elements are visible
+		await this.multipleElementVisible(selector.vendor.vDashboard.announcement);
+
 	}
 
 

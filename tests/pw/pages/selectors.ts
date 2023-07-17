@@ -3040,11 +3040,104 @@ export const selector = {
 				editAccount: '.fa-user',
 			},
 
-			//overview
-			sales: '//div[@class="title" and contains(text(), "Sales")]/..//div[@class="count"]',
-			earning: '//div[@class="title" and contains(text(), "Earning")]/..//div[@class="count"]',
-			pageView: '//div[@class="title" and contains(text(), "Pageview")]/..//div[@class="count"]',
-			order: '//div[@class="title" and contains(text(), "Order")]/..//div[@class="count"]',
+
+			// profile Progress
+			profileProgress: {
+				profileProgressDiv: '.dokan-profile-completeness',
+				dokanProgressBar: '.dokan-progress',
+				dokanProgressBarText: '.dokan-progress-bar',
+				nextStep: '.dokan-alert.dokan-alert-info.dokan-panel-alert',
+			},
+
+			// At a Glance
+			atAGlance : {
+				atAGlanceDiv: '.dashboard-widget.big-counter',
+
+				netSalesTitle: '//div[normalize-space()="Net Sales"]',
+				earningTitle: '//div[normalize-space()="Earning"]',
+				pageviewTitle: '//div[normalize-space()="Pageview"]',
+				orderTitle: '//div[normalize-space()="Order"]',
+
+				salesValue: '//div[@class="title" and contains(text(), "Net Sales")]/..//div[@class="count"]',
+				earningValue: '//div[@class="title" and contains(text(), "Earning")]/..//div[@class="count"]',
+				pageViewValue: '//div[@class="title" and contains(text(), "Pageview")]/..//div[@class="count"]',
+				orderValue: '//div[@class="title" and contains(text(), "Order")]/..//div[@class="count"]',
+			},
+
+			// sells graph
+			graph: {
+				graphDiv: '.dashboard-widget.sells-graph',
+				widgetTitle: '.sells-graph .widget-title',
+				chart: '.chart-container',
+			},
+
+			// orders
+			orders: {
+				ordersDiv: '.dashboard-widget.orders',
+				widgetTitle: '.orders .widget-title',
+				totalTitle: '//div[@class="dashboard-widget orders"]//span[normalize-space()="Total"]',
+				completedTitle: '//div[@class="dashboard-widget orders"]//span[normalize-space()="Completed"]',
+				pendingTitle: '//div[@class="dashboard-widget orders"]//span[normalize-space()="Pending"]',
+				processingTitle: '//div[@class="dashboard-widget orders"]//span[normalize-space()="Processing"]',
+				cancelledTitle: '//div[@class="dashboard-widget orders"]//span[normalize-space()="Cancelled"]',
+				refundedTitle: '//div[@class="dashboard-widget orders"]//span[normalize-space()="Refunded"]',
+				onholdTitle: '//div[@class="dashboard-widget orders"]//span[normalize-space()="On hold"]',
+
+				totalValue: '//div[@class="dashboard-widget orders"]//span[normalize-space()="Total"]/..//span[@class="count"]',
+				completedValue: '//div[@class="dashboard-widget orders"]//span[normalize-space()="Completed"]/..//span[@class="count"]',
+				pendingValue: '//div[@class="dashboard-widget orders"]//span[normalize-space()="Pending"]/..//span[@class="count"]',
+				processingValue: '//div[@class="dashboard-widget orders"]//span[normalize-space()="Processing"]/..//span[@class="count"]',
+				cancelledValue: '//div[@class="dashboard-widget orders"]//span[normalize-space()="Cancelled"]/..//span[@class="count"]',
+				refundedValue: '//div[@class="dashboard-widget orders"]//span[normalize-space()="Refunded"]/..//span[@class="count"]',
+				onholdValue: '//div[@class="dashboard-widget orders"]//span[normalize-space()="On hold"]/..//span[@class="count"]',
+
+				pieChart: '#order-stats',
+			},
+
+			// reviews
+			reviews: {
+				reviewsDiv: '.dashboard-widget.reviews',
+				widgetTitle: '.reviews .widget-title',
+				allTitle: '//div[@class="dashboard-widget reviews"]//span[normalize-space()="All"]',
+				pendingTitle: '//div[@class="dashboard-widget reviews"]//span[normalize-space()="Pending"]',
+				spamTitle: '//div[@class="dashboard-widget reviews"]//span[normalize-space()="Spam"]',
+				trashTitle: '//div[@class="dashboard-widget reviews"]//span[normalize-space()="Trash"]',
+
+				allValue: '//div[@class="dashboard-widget reviews"]//span[normalize-space()="All"]/..//span[@class="count"]',
+				pendingValue: '//div[@class="dashboard-widget reviews"]//span[normalize-space()="Pending"]/..//span[@class="count"]',
+				spamValue: '//div[@class="dashboard-widget reviews"]//span[normalize-space()="Spam"]/..//span[@class="count"]',
+				trashValue: '//div[@class="dashboard-widget reviews"]//span[normalize-space()="Trash"]/..//span[@class="count"]',
+
+			},
+
+			// products
+			products: {
+				productsDiv: '.dashboard-widget.products',
+				addNewProduct: '//a[normalize-space()="+ Add new product"]',
+				widgetTitle: '.products .widget-title',
+				totalTitle: '//div[@class="dashboard-widget products"]//span[normalize-space()="Total"]',
+				liveTitle: '//div[@class="dashboard-widget products"]//span[normalize-space()="Live"]',
+				offlineTitle: '//div[@class="dashboard-widget products"]//span[normalize-space()="Offline"]',
+				pendingReviewTitle: '//div[@class="dashboard-widget products"]//span[normalize-space()="Pending Review"]',
+
+				totalValue: '//div[@class="dashboard-widget products"]//span[normalize-space()="Total"]/..//span[@class="count"]',
+				liveValue: '//div[@class="dashboard-widget products"]//span[normalize-space()="Live"]/..//span[@class="count"]',
+				offlineValue: '//div[@class="dashboard-widget products"]//span[normalize-space()="Offline"]/..//span[@class="count"]',
+				pendingReviewValue: '//div[@class="dashboard-widget products"]//span[normalize-space()="Pending Review"]/..//span[@class="count"]',
+
+			},
+
+			// announcement
+			announcement: {
+				announcementDiv: '.dashboard-widget.dokan-announcement-widget',
+				widgetTitle: '.dokan-announcement-widget .widget-title',
+				seeAll: '//a[normalize-space()="See All"]',
+
+				// announcementContent: '.dokan-dashboard-announce-content',
+				// announcementDate: '.dokan-dashboard-announce-date',
+			}
+
+
 		},
 
 		// Products

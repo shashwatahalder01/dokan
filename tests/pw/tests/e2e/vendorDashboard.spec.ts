@@ -5,7 +5,7 @@ import { data } from 'utils/testData';
 import { payloads } from 'utils/payloads';
 
 
-test.describe('Admin dashboard test', () => {
+test.describe('Vendor dashboard test', () => {
 
 
 	let vendorDashboardPage: VendorDashboardPage;
@@ -25,7 +25,7 @@ test.describe('Admin dashboard test', () => {
 
 	// test.use({ storageState: data.auth.adminAuthFile });
 
-	test.skip('vendor dashboard is rendering properly @lite @pro @explo', async ( ) => {
+	test('vendor dashboard is rendering properly @lite @pro @explo', async ( ) => {
 		await vendorDashboardPage.vendorDashboardRenderProperly();
 	});
 
