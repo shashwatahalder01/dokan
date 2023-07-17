@@ -28,7 +28,7 @@ export class VendorStaffPage extends VendorPage {
 
 		if (noStaff){
 			await this.toContainText(selector.vendor.vStaff.noRowsFound, 'No staff found');
-			console.log('No staff found on my staff page');
+			console.log('No staff found on staff page');
 
 		} else {
 

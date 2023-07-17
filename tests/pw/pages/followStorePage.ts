@@ -11,6 +11,21 @@ export class FollowStorePage extends CustomerPage {
 		super(page);
 	}
 
+	// vendor Followers
+
+
+	// vendor followers render properly
+	async vendorFollowersRenderProperly(){
+		await this.goIfNotThere(data.subUrls.frontend.vDashboard.followers);
+
+		// Store followers text is visible
+		await this.toBeVisible(selector.vendor.vFollowers.storeFollowersText);
+
+		// vendor followers table elements are visible
+		await this.multipleElementVisible(selector.vendor.vFollowers.table);
+
+	}
+
 
 	// follow vendor
 	async followStore(storeName: string, followLocation: string): Promise<void> {

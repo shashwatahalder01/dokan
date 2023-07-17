@@ -735,6 +735,7 @@ export const data = {
 				badges: 'dashboard/seller-badge/',
 				withdrawRequests: 'dashboard/withdraw-requests',
 				staff: 'dashboard/staffs',
+				followers: 'dashboard/followers',
 				auction: 'dashboard/auction',
 				booking: 'dashboard/booking',
 				settingsStore: 'dashboard/settings/store',

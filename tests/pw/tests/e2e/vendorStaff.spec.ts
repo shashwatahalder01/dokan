@@ -13,8 +13,8 @@ test.describe('Vendor staff test', () => {
 	let apiUtils: ApiUtils;
 
 	test.beforeAll(async ({ browser, request }) => {
-		const adminContext = await browser.newContext({ storageState: data.auth.vendorAuthFile });
-		vPage = await adminContext.newPage();
+		const vendorContext = await browser.newContext({ storageState: data.auth.vendorAuthFile });
+		vPage = await vendorContext.newPage();
 		vendorStaffPage = new VendorStaffPage(vPage);
 		apiUtils = new ApiUtils(request);
 	});
@@ -25,23 +25,23 @@ test.describe('Vendor staff test', () => {
 
 	// test.use({ storageState: data.auth.vendorAuthFile });
 
-	test('vendor staff is rendering properly @pro @explo', async ( ) => {
+	test('vendor staff menu page is rendering properly @pro @explo', async ( ) => {
 		await vendorStaffPage.vendorStaffRenderProperly();
 	});
 
-	test('vendor can add new staff @pro @explo', async ( ) => {
+	test('vendor can add new staff @pro', async ( ) => {
 		await vendorStaffPage.addStaff(data.staff);
 	});
 
-	test('vendor can edit staff @pro @explo', async ( ) => {
+	test('vendor can edit staff @pro', async ( ) => {
 		await vendorStaffPage.editStaff(data.staff);
 	});
 
-	test('vendor can manage staff permission @pro @explo', async ( ) => {
+	test('vendor can manage staff permission @pro', async ( ) => {
 		await vendorStaffPage.manageStaffPermission(data.staff.firstName);
 	});
 
-	test('vendor can delete staff @pro @explo', async ( ) => {
+	test('vendor can delete staff @pro', async ( ) => {
 		await vendorStaffPage.deleteStaff(data.staff.firstName);
 	});
 

@@ -3800,6 +3800,18 @@ export const selector = {
 			},
 		},
 
+		vFollowers: {
+			storeFollowersText: '//h3[normalize-space()="Store Followers"]',
+
+			table:{
+				followersTable: '.dokan-table.dokan-table-striped.product-listing-table.dokan-inline-editable-table',
+				nameColumn: '//th[normalize-space()="Name"]',
+				followedAtColumn: '//th[normalize-space()="Followed At"]',
+			},
+
+			noRowsFound: '//td[normalize-space()="Your store does not have any follower."]',
+		},
+
 		// Booking
 		vBooking: {
 			// Menus
