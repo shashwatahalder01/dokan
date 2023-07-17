@@ -35,7 +35,7 @@ export class RequestForQuotationsPage extends AdminPage {
 		// bulk action elements are visible
 		await this.multipleElementVisible(selector.admin.dokan.requestForQuotation.quoteRules.bulkActions);
 
-		// quote rules elements are visible
+		// quote rules table elements are visible
 		await this.multipleElementVisible(selector.admin.dokan.requestForQuotation.quoteRules.table);
 	}
 
@@ -139,7 +139,7 @@ export class RequestForQuotationsPage extends AdminPage {
 		// ensure row exists
 		await this.notToBeVisible(selector.admin.dokan.requestForQuotation.quoteRules.noRowsFound);
 
-		await this.check(selector.admin.dokan.requestForQuotation.quoteRules.bulkActions.selectAll);
+		await this.click(selector.admin.dokan.requestForQuotation.quoteRules.bulkActions.selectAll);
 		await this.selectByValue(selector.admin.dokan.requestForQuotation.quoteRules.bulkActions.selectAction, action);
 		await this.clickAndWaitForResponse(data.subUrls.api.dokan.quoteRules, selector.admin.dokan.requestForQuotation.quoteRules.bulkActions.applyAction);
 	}
@@ -273,7 +273,7 @@ export class RequestForQuotationsPage extends AdminPage {
 		// ensure row exists
 		await this.notToBeVisible(selector.admin.dokan.requestForQuotation.quotesList.noRowsFound);
 
-		await this.check(selector.admin.dokan.requestForQuotation.quotesList.bulkActions.selectAll);
+		await this.click(selector.admin.dokan.requestForQuotation.quotesList.bulkActions.selectAll);
 		await this.selectByValue(selector.admin.dokan.requestForQuotation.quotesList.bulkActions.selectAction, action);
 		await this.clickAndWaitForResponse(data.subUrls.api.dokan.quotes, selector.admin.dokan.requestForQuotation.quotesList.bulkActions.applyAction);
 	}

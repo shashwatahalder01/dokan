@@ -1,9 +1,7 @@
-import { Page, expect } from '@playwright/test';
+import { Page } from '@playwright/test';
 import { VendorPage } from 'pages/vendorPage';
 import { selector } from 'pages/selectors';
-import { helpers } from 'utils/helpers';
 import { data } from 'utils/testData';
-import { user, } from 'utils/interfaces';
 
 export class VendorDashboardPage extends VendorPage {
 
@@ -40,6 +38,5 @@ export class VendorDashboardPage extends VendorPage {
 		await this.multipleElementVisible(selector.vendor.vDashboard.announcement);
 
 	}
-
 
 }

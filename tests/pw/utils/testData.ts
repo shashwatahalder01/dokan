@@ -734,6 +734,7 @@ export const data = {
 				withdraw: 'dashboard/withdraw/',
 				badges: 'dashboard/seller-badge/',
 				withdrawRequests: 'dashboard/withdraw-requests',
+				staff: 'dashboard/staffs',
 				auction: 'dashboard/auction',
 				booking: 'dashboard/booking',
 				settingsStore: 'dashboard/settings/store',
@@ -1127,6 +1128,17 @@ export const data = {
 		},
 
 		registrationErrorMessage: 'Error: An account is already registered with your email address. Please log in.',
+	},
+
+
+	staff: {
+		firstName: 'staff1',
+		lastName: 's1',
+		fullName:  'staff1 s1',
+		email: 'staff1@g.com',
+		phone: '0123456789',
+		password: String(process.env.USER_PASSWORD),
+
 	},
 
 

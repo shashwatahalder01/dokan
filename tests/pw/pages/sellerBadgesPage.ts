@@ -243,7 +243,7 @@ export class SellerBadgesPage extends AdminPage {
 		// ensure row exists
 		await this.notToBeVisible(selector.admin.dokan.sellerBadge.noRowsFound);
 
-		await this.check(selector.admin.dokan.sellerBadge.bulkActions.selectAll);
+		await this.click(selector.admin.dokan.sellerBadge.bulkActions.selectAll);
 		await this.selectByValue(selector.admin.dokan.sellerBadge.bulkActions.selectAction, action);
 		await this.click( selector.admin.dokan.sellerBadge.bulkActions.applyAction);
 		await this.clickAndWaitForResponse(data.subUrls.api.dokan.sellerBadge, selector.admin.dokan.sellerBadge.confirmAction);

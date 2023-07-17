@@ -3650,23 +3650,154 @@ export const selector = {
 
 		// Staff
 		vStaff: {
+
+			staffText: '.dokan-staffs-content h1',
+
+			// Table
+			table : {
+				vendorStaffTable:  '.dokan-table.dokan-table-striped.vendor-staff-table',
+				nameColumn: '//th[normalize-space()="Name"]',
+				emailColumn: '//th[normalize-space()="Email"]',
+				phoneColumn: '//th[normalize-space()="Phone"]',
+				registeredDateColumn: '//th[normalize-space()="Registered Date"]',
+			},
+
+			noRowsFound: '//div[@class ="dokan-error" and normalize-space()="No staff found"]',
+			staffCell: (staffName: string) => `//td//a[contains(text(),"${staffName}")]/..`,
+
+
 			// Add Staff
-			addNewStuff: '.dokan-btn',
-			firstName: '#first_name',
-			lastName: '#last_name',
-			email: '#email',
-			phone: '#phone',
-			createStuff: '.dokan-btn',
-			editStuff: '.edit > a',
-			password: '#reg_password',
-			updateStuff: '.dokan-btn',
-			deleteStuff: '.delete > a',
-			okDelete: '.swal2-confirm',
-			cancelDelete: '.swal2-cancel',
+			addStaff: {
+				addNewStaff: '.dokan-btn',
+				firstName: '#first_name',
+				lastName: '#last_name',
+				email: '#email',
+				phone: '#phone',
+				createStaff: '.dokan-btn',
+			},
+
+			// Edit Staff
+			editStaff: {
+				editStaff: '.row-actions .edit',
+				password: '#reg_password',
+				updateStaff: '//input[@name="staff_creation"]/..',
+			},
+
+			deleteStaff: {
+				deleteStaff: '.row-actions .delete ',
+				okDelete: '.swal2-confirm',
+				cancelDelete: '.swal2-cancel',
+				deleteSuccessMessage: '.dokan-alert.dokan-alert-success',
+			},
 
 			// Manage Permission
-			managePermission: '.permission > a',
-			updateStuffPermission: '.dokan-btn',
+			managePermission: {
+				managePermission: '.row-actions .permission',
+
+				// Overview
+				overview:{
+					viewSalesOverview: '#dokan_view_sales_overview',
+					viewSalesReportChart: '#dokan_view_sales_report_chart',
+					viewAnnouncement: '#dokan_view_announcement',
+					viewOrderReport: '#dokan_view_order_report',
+					viewReviewReport: '#dokan_view_review_reports',
+					viewProductStatusReport: '#dokan_view_product_status_report',
+				},
+
+				// Order
+				order:{
+					viewOrder: '#dokan_view_order',
+					manageOrder: '#dokan_manage_order',
+					manageOrderNote: '#dokan_manage_order_note',
+					manageRefund: '#dokan_manage_refund',
+					exportOrder: '#dokan_export_order',
+				},
+
+				// Review
+				review:{
+					viewReviews: '#dokan_view_reviews',
+					manageReviews: '#dokan_manage_reviews',
+				},
+
+				// Product
+				product:{
+					addProduct: '#dokan_add_product',
+					editProduct: '#dokan_edit_product',
+					deleteProduct: '#dokan_delete_product',
+					viewProduct: '#dokan_view_product',
+					duplicateProduct: '#dokan_duplicate_product',
+					importProduct: '#dokan_import_product',
+					exportProduct: '#dokan_export_product',
+				},
+
+				// Booking
+				booking:{
+					manageBookingProducts: '#dokan_manage_booking_products',
+					manageBookingCalendar: '#dokan_manage_booking_calendar',
+					manageBookings: '#dokan_manage_bookings',
+					manageBookingResource: '#dokan_manage_booking_resource',
+					addBookingProduct: '#dokan_add_booking_product',
+					editBookingProduct: '#dokan_edit_booking_product',
+					deleteBookingProduct: '#dokan_delete_booking_product',
+				},
+
+				// Store Support
+				storeSupport:{
+					manageSupportTicket: '#dokan_manage_support_tickets',
+				},
+
+				// Report
+				report:{
+					viewOverviewReport: '#dokan_view_overview_report',
+					viewDailySalesReport: '#dokan_view_daily_sale_report',
+					viewTopSellingReport: '#dokan_view_top_selling_report',
+					viewTopEarningReport: '#dokan_view_top_earning_report',
+					viewStatementReport: '#dokan_view_statement_report',
+				},
+
+				// Coupon
+				coupon:{
+					addCoupon: '#dokan_add_coupon',
+					editCoupon: '#dokan_edit_coupon',
+					deleteCoupon: '#dokan_delete_coupon',
+				},
+
+				// Withdraw
+				withdraw:{
+					manageWithdraw: '#dokan_manage_withdraw',
+				},
+
+				// Menu
+				menu:{
+					viewOverviewMenu:'#dokan_view_overview_menu',
+					viewProductMenu:'#dokan_view_product_menu',
+					viewOrderMenu:'#dokan_view_order_menu',
+					viewCouponMenu:'#dokan_view_coupon_menu',
+					viewReportMenu:'#dokan_view_report_menu',
+					viewReviewMenu:'#dokan_view_review_menu',
+					viewWithdrawMenu:'#dokan_view_withdraw_menu',
+					viewStoreSettingsMenu:'#dokan_view_store_settings_menu',
+					viewPaymentSettingsMenu:'#dokan_view_store_payment_menu',
+					viewShippingSettingsMenu:'#dokan_view_store_shipping_menu',
+					viewSocialSettingsMenu:'#dokan_view_store_social_menu',
+					viewSeoSettingsMenu:'#dokan_view_store_seo_menu',
+					// viewBookingMenu:'#dokan_view_booking_menu', //TODO: add booking check
+					viewToolsMenu:'#dokan_view_tools_menu',
+					// viewAuctionMenu:'#dokan_view_auction_menu', //TODO: add auction check
+					viewVerificationSettingsMenu:'#dokan_view_store_verification_menu',
+
+				},
+
+				// Auction
+				auction:{
+					addAuctionProduct: '#dokan_add_auction_product',
+					editAuctionProduct: '#dokan_edit_auction_product',
+					deleteAuctionProduct: '#dokan_delete_auction_product',
+				},
+
+
+				updateStaffPermission: '.dokan-btn',
+			},
 		},
 
 		// Booking

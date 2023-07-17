@@ -145,7 +145,7 @@ export class StoreSupportsPage extends AdminPage {
 		// ensure row exists
 		await this.notToBeVisible(selector.admin.dokan.storeSupport.noRowsFound);
 
-		await this.check(selector.admin.dokan.storeSupport.bulkActions.selectAll);
+		await this.click(selector.admin.dokan.storeSupport.bulkActions.selectAll);
 		await this.selectByValue(selector.admin.dokan.storeSupport.bulkActions.selectAction, action);
 		await this.clickAndWaitForResponse(data.subUrls.api.dokan.storeSupport, selector.admin.dokan.storeSupport.bulkActions.applyAction);
 		//TODO: add assertion

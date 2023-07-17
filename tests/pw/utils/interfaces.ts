@@ -916,8 +916,19 @@ export interface vendor {
 }
 
 
+//staff
+export interface staff {
+	firstName: string;
+	lastName: string;
+	fullName: string;
+	email: string;
+	phone: string;
+	password: string;
+
+}
+
 //customer
-export interface	customer {
+export interface customer {
 	username: string;
 	password: string;
 	lastname: string;

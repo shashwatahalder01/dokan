@@ -108,7 +108,7 @@ export class AnnouncementsPage extends AdminPage {
 		// ensure row exists
 		await this.notToBeVisible(selector.admin.dokan.announcements.noRowsFound);
 
-		await this.check(selector.admin.dokan.announcements.bulkActions.selectAll);
+		await this.click(selector.admin.dokan.announcements.bulkActions.selectAll);
 		await this.selectByValue(selector.admin.dokan.announcements.bulkActions.selectAction, action);
 		await this.clickAndWaitForResponse(data.subUrls.api.dokan.announcements, selector.admin.dokan.announcements.bulkActions.applyAction);
 	}

@@ -23,7 +23,7 @@ test.describe('Vendor dashboard test', () => {
 		await vPage.close();
 	});
 
-	// test.use({ storageState: data.auth.adminAuthFile });
+	// test.use({ storageState: data.auth.vendorAuthFile });
 
 	test('vendor dashboard is rendering properly @lite @pro @explo', async ( ) => {
 		await vendorDashboardPage.vendorDashboardRenderProperly();

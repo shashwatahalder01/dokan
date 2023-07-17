@@ -154,7 +154,7 @@ export class ProductAdvertisingPage extends AdminPage {
 		// ensure row exists
 		await this.notToBeVisible(selector.admin.dokan.productAdvertising.noRowsFound);
 
-		await this.check(selector.admin.dokan.productAdvertising.bulkActions.selectAll);
+		await this.click(selector.admin.dokan.productAdvertising.bulkActions.selectAll);
 		await this.selectByValue(selector.admin.dokan.productAdvertising.bulkActions.selectAction, action);
 		await this.click(selector.admin.dokan.productAdvertising.bulkActions.applyAction);
 		await this.clickAndWaitForResponse(data.subUrls.api.dokan.productAdvertising, selector.admin.dokan.productAdvertising.confirmAction);

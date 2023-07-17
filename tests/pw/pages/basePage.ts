@@ -1245,9 +1245,15 @@ export class BasePage {
 	 * Extra methods
 	 */
 
+	async multipleElementCheck(selectors: any){
+		for (const selector in selectors ) {
+			await this.check(selectors[selector]);
+		}
+	}
+
 	async multipleElementVisible(selectors: any){
 
-		// TODO: can also be merge with isVisible method or this method should support single selector too
+		// TODO: can also be merge with isVisible method and this method should support single selector too
 		//TODO: implement for arrays
 		// selectors = Object.values(selectors);
 		// selectors.forEach( async (selector: string) => {

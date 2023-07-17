@@ -86,7 +86,7 @@ export class AbuseReportsPage extends AdminPage {
 		// ensure row exists
 		await this.notToBeVisible(selector.admin.dokan.abuseReports.noRowsFound);
 
-		await this.check(selector.admin.dokan.abuseReports.bulkActions.selectAll);
+		await this.click(selector.admin.dokan.abuseReports.bulkActions.selectAll);
 		await this.selectByValue(selector.admin.dokan.abuseReports.bulkActions.selectAction, action);
 		await this.clickAndAcceptAndWaitForResponse(data.subUrls.api.dokan.abuseReports, selector.admin.dokan.abuseReports.bulkActions.applyAction);
 	}
