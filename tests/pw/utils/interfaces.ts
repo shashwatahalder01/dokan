@@ -242,6 +242,9 @@ export interface product {
 		reportReason: string;
 		reportReasonDescription: string;
 		reportSubmitSuccessMessage: string;
+
+		guestName: () => string;
+		guestEmail: () => string;
 	}
 
 	// Enquiry

@@ -74,9 +74,6 @@ test.describe('Customer functionality test', () => {
 		await customerPage.addCustomerDetails(data.customer.customerInfo);
 	});
 
-	test('customer can report product @pro', async ( ) => {
-		await customerPage.reportProduct(data.predefined.simpleProduct.product1.name, data.product.report);
-	});
 
 	test('customer can enquire product @pro', async ( ) => {
 		await customerPage.enquireProduct(data.predefined.simpleProduct.product1.name, data.product.enquiry);

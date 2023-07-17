@@ -26,39 +26,63 @@ export class SingleProductPage extends CustomerPage {
 		const { viewCart, ...productDetails } = selector.customer.cSingleProduct.productDetails;
 		await this.multipleElementVisible(productDetails);
 
-		await this.click(selector.customer.cSingleProduct.menus.description); //TODO:
+		// description elements are visible
+		// await this.click(selector.customer.cSingleProduct.menus.description);
+		await this.multipleElementVisible(selector.customer.cSingleProduct.description);
 
-		// review infos are visible
+		// review elements are visible
 		await this.click(selector.customer.cSingleProduct.menus.reviews);
 
 		await this.toBeVisible(selector.customer.cSingleProduct.reviews.ratings);
 		await this.toBeVisible(selector.customer.cSingleProduct.reviews.reviewMessage);
 		await this.toBeVisible(selector.customer.cSingleProduct.reviews.submitReview);
 
-		// // vendor infos are visible
-		// await this.click(selector.customer.cSingleProduct.menus.vendorInfo);
+		// vendor info elements are visible
+		await this.click(selector.customer.cSingleProduct.menus.vendorInfo);
+		await this.multipleElementVisible(selector.customer.cSingleProduct.vendorInfo);
 
-		// await this.multipleElementVisible(selector.customer.cSingleProduct.vendorInfo);
+		// more products elements are visible
+		await this.click(selector.customer.cSingleProduct.menus.moreProducts);
+		await this.toBeVisible(selector.customer.cSingleProduct.moreProducts.moreProductsDiv);
+		await this.notToHaveCount(selector.customer.cSingleProduct.moreProducts.product, 0);
 
-		// // product location is visible
-		// await this.click(selector.customer.cSingleProduct.menus.location); //TODO:
+		// related products elements are visible
+		await this.multipleElementVisible(selector.customer.cSingleProduct.relatedProducts);
 
+		if(DOKAN_PRO){
 
-		// // more products are visible
-		// await this.click(selector.customer.cSingleProduct.menus.moreProducts);
+			// get support is visible
+			await this.toBeVisible(selector.customer.cSingleProduct.getSupport.getSupport);
 
-		// await this.toBeVisible(selector.customer.cSingleProduct.moreProducts.moreProductsDiv);
-		// await this.notToHaveCount(selector.customer.cSingleProduct.moreProducts.product, 0);
-
-		// // warranty policy is visible
-		// await this.click(selector.customer.cSingleProduct.menus.warrantyPolicy); //TODO:
-
-
-		// // enquiry is visible
-		// await this.click(selector.customer.cSingleProduct.menus.productEnquiry); //TODO:
+			// report abuse is visible
+			await this.toBeVisible(selector.customer.cSingleProduct.reportAbuse.reportAbuse);
 
 
-		//TODO:
+			// vendor highlighted info elements are visible
+			await this.multipleElementVisible(selector.customer.cSingleProduct.vendorHighlightedInfo);
+
+
+			// product shipping elements are visible
+			// await this.click(selector.customer.cSingleProduct.menus.shipping);
+			// await this.multipleElementVisible(selector.customer.cSingleProduct.shipping);  //TODO: need vendor shipping
+
+
+			// product location elements are visible
+			await this.click(selector.customer.cSingleProduct.menus.location);
+			await this.multipleElementVisible(selector.customer.cSingleProduct.location);
+
+
+			// // warranty policy is visible
+			// await this.click(selector.customer.cSingleProduct.menus.warrantyPolicy);
+			// await this.multipleElementVisible(selector.customer.cSingleProduct.warrantyPolicy); //TODO: need warranty policy
+
+
+			// product enquiry is visible
+			await this.click(selector.customer.cSingleProduct.menus.productEnquiry);
+			await this.multipleElementVisible(selector.customer.cSingleProduct.productEnquiry);
+
+		}
+
 	}
 
 
@@ -83,12 +107,18 @@ export class SingleProductPage extends CustomerPage {
 
 
 	// view vendor more product
-	async viewMoreProduct(productName: string){
+	async viewMoreProducts(productName: string){
 		await this.goIfNotThere(data.subUrls.frontend.productDetails(helpers.slugify(productName)));
 		await this.click(selector.customer.cSingleProduct.menus.moreProducts);
 
 		await this.toBeVisible(selector.customer.cSingleProduct.moreProducts.moreProductsDiv);
 		await this.notToHaveCount(selector.customer.cSingleProduct.moreProducts.product, 0);
+	}
+
+	// view vendor more product
+	async viewRelatedProducts(productName: string){
+		await this.goIfNotThere(data.subUrls.frontend.productDetails(helpers.slugify(productName)));
+		await this.multipleElementVisible(selector.customer.cSingleProduct.relatedProducts);
 	}
 
 

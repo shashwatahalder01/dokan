@@ -22,7 +22,6 @@ test.beforeAll(async ({ browser, request }) => {
 	cPage = await customerContext.newPage();
 	storeSupportsCustomer = new StoreSupportsPage(cPage);
 
-
 	apiUtils = new ApiUtils(request);
 	await apiUtils.createSupportTicket({ ...payloads.createSupportTicket, author: CUSTOMER_ID, store_id: VENDOR_ID }, payloads.adminAuth );
 	const[, supportTicketId] = await apiUtils.createSupportTicket({ ...payloads.createSupportTicket, author: CUSTOMER_ID, store_id: VENDOR_ID }, payloads.adminAuth );
@@ -85,7 +84,11 @@ test.describe('Store Support test', () => {
 	//todo: filter store support by calendar
 
 
-	test('customer can ask for store support @pro', async ( ) => {
+	// test('customer can ask for store support on single product @pro', async ( ) => { //TODO:
+	// 	// await storeSupportsCustomer.storeSupport(data.predefined.vendorStores.vendor1, data.customer.customerInfo.getSupport);
+	// });
+
+	test('customer can ask for store support on single store @pro', async ( ) => {
 		await storeSupportsCustomer.storeSupport(data.predefined.vendorStores.vendor1, data.customer.customerInfo.getSupport);
 	});
 
@@ -94,5 +97,8 @@ test.describe('Store Support test', () => {
 		await storeSupportsCustomer.sendMessageCustomerSupportTicket(data.customer.supportTicket);
 	});
 
+	// test('guest customer need to login before asking for store support @pro', async ( ) => { //TODO:
+	// 	// await storeSupportsCustomer.storeSupport(data.predefined.vendorStores.vendor1, data.customer.customerInfo.getSupport);
+	// });
 
 });

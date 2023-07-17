@@ -89,7 +89,7 @@ test.describe('Wholesale customers test', () => {
 	//TODO: all users can see wholesale price
 	//TODO: customer can purchase product at wholesale price
 	//TODO: vendor can see Wholesale Price on Shop Archive
-	//TODO: vendor can create wholesale product
+	//TODO: vendor can create wholesale product  via api
 
 
 });

@@ -4776,7 +4776,7 @@ export const selector = {
 
 			// Sub menus
 			menus: {
-				description: '#tab-title-description a',
+				description: '.tabs description_tab a',
 				shipping: '.tabs .shipping_tab a',
 				reviews: '.tabs .reviews_tab a',
 				vendorInfo: '.tabs .seller_tab a',
@@ -4794,8 +4794,22 @@ export const selector = {
 				// productEnquiry: '#tab-title-seller_enquiry_form a',
 			},
 
+			// Product description
+			description: {
+				descriptionHeading: '//h2[normalize-space()="Description"]',
+				content: 'div[id="tab-description"] p',
+			},
+
+			// Shipping
+			shipping:{
+				shippingCountryTitle: '#tab-shipping p',
+				shippingCountries: '#tab-shipping p strong',
+			},
+
 			// Product Reviews
 			reviews:{
+				reviewsHeading: '//h2[normalize-space()="Reviews"]',
+				noReviews: '.woocommerce-noreviews',
 				ratings: '.comment-form-rating .stars',
 				rating: (star: string) => `.star-${star}`,
 				reviewMessage: '#comment',
@@ -4808,16 +4822,52 @@ export const selector = {
 
 			// Product vendor info
 			vendorInfo: {
-				vendorInfo:'//h2[normalize-space()="Vendor Information"]',
+				vendorInfoHeading:'//h2[normalize-space()="Vendor Information"]',
 				storeName: '.store-name',
 				vendor: '.seller-name',
 				storeAddress: '.store-address',
 			},
 
-			// moreProducts
+			// Product Location
+			location: {
+				locationHeading: '//h2[normalize-space()="Product Location"]',
+				productLocation: 'div[id="tab-geolocation"] address',
+				map: '#dokan-geolocation-locations-map'
+
+			},
+
+			// More Products
 			moreProducts:{
 				moreProductsDiv: '#tab-more_seller_product .products',
 				product:'#tab-more_seller_product .product',
+			},
+
+			// warrantyPolicy
+			warrantyPolicy:{
+				content: 'div[id="tab-refund_policy"] p',
+			},
+
+			// Product Enquiry
+			productEnquiry:{
+				productEnquiryHeading: '//h3[normalize-space()="Product Enquiry"]',
+				enquiryMessage: '#dokan-enq-message',
+				submitEnquiry: 'input.dokan-btn-theme',
+				submitEnquirySuccessMessage: '.alert.alert-success',
+			},
+
+			// related product
+			relatedProducts: {
+				relatedProductHeading: '//h2[normalize-space()="Related products"]',
+				products:'.related.products .products',
+			},
+
+			// vendor highlighted info
+			vendorHighlightedInfo:{
+				vendorInfoDiv: '.dokan-vendor-info-wrap',
+				vendorImage: '.dokan-vendor-image',
+				vendorInfo: '.dokan-vendor-info',
+				vendorName: '.dokan-vendor-name',
+				vendorRating: '.dokan-vendor-rating',
 			},
 
 			// Get Support
@@ -4839,6 +4889,10 @@ export const selector = {
 				reportSubmit: '#dokan-report-abuse-form-submit-btn',
 				reportSubmitSuccessMessage: '#swal2-html-container',
 				confirmReportSubmit: '.swal2-confirm',
+
+				//guest user
+				guestName: '//input[@name="customer_name"]',
+				guestEmail: '//input[@name="customer_email"]',
 			},
 
 			// Other Available Vendor
@@ -4846,13 +4900,6 @@ export const selector = {
 				OtherAvailableVendorViewStore: '.fa-external-link-alt',
 				OtherAvailableVendorViewProduct: '.view',
 				OtherAvailableVendorAddToCart: '.fa-shopping-cart',
-			},
-
-			// Product Enquiry
-			productEnquiry:{
-				enquiryMessage: '#dokan-enq-message',
-				submitEnquiry: 'input.dokan-btn-theme',
-				submitEnquirySuccessMessage: '.alert.alert-success',
 			},
 
 			// Product addon

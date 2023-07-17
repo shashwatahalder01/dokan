@@ -1,8 +1,9 @@
 import { Page, expect } from '@playwright/test';
 import { AdminPage } from 'pages/adminPage';
 import { selector } from 'pages/selectors';
+import { helpers } from 'utils/helpers';
 import { data } from 'utils/testData';
-
+import { product } from 'utils/interfaces';
 
 export class AbuseReportsPage extends AdminPage {
 
@@ -88,6 +89,24 @@ export class AbuseReportsPage extends AdminPage {
 		await this.click(selector.admin.dokan.abuseReports.bulkActions.selectAll);
 		await this.selectByValue(selector.admin.dokan.abuseReports.bulkActions.selectAction, action);
 		await this.clickAndAcceptAndWaitForResponse(data.subUrls.api.dokan.abuseReports, selector.admin.dokan.abuseReports.bulkActions.applyAction);
+	}
+
+
+	// customer report product
+	async reportProduct(productName: string, report: product['report']): Promise<void> {
+		await this.goIfNotThere(data.subUrls.frontend.productDetails(helpers.slugify(productName)));
+		await this.clickAndWaitForResponse(data.subUrls.ajax, selector.customer.cSingleProduct.reportAbuse.reportAbuse);
+		await this.click(selector.customer.cSingleProduct.reportAbuse.reportReasonByName(report.reportReason));
+		await this.clearAndType(selector.customer.cSingleProduct.reportAbuse.reportDescription, report.reportReasonDescription);
+		const isGuest = await this.isVisible(selector.customer.cSingleProduct.reportAbuse.guestName);
+		if(isGuest){
+			await this.clearAndType(selector.customer.cSingleProduct.reportAbuse.guestName, report.guestName());
+			await this.clearAndType(selector.customer.cSingleProduct.reportAbuse.guestEmail, report.guestEmail());
+		}
+		await this.clickAndWaitForResponse(data.subUrls.ajax, selector.customer.cSingleProduct.reportAbuse.reportSubmit);
+		await this.toContainText(selector.customer.cSingleProduct.reportAbuse.reportSubmitSuccessMessage, report.reportSubmitSuccessMessage);
+		// close popup
+		await this.click(selector.customer.cSingleProduct.reportAbuse.confirmReportSubmit);
 	}
 
 

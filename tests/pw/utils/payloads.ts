@@ -85,6 +85,9 @@ export const payloads = {
 				// id: 48
 			},
 		],
+		featured: true,
+		description: '<p>test description</p>',
+		short_description: '<p>test short description</p>',
 
 	}),
 

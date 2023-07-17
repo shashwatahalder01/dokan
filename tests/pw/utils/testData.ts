@@ -278,6 +278,10 @@ export const data = {
 			reportReason: faker.helpers.arrayElement(['This content is spam', 'This content should marked as adult', 'This content is abusive', 'This content is violent', 'This content suggests the author might be risk of hurting themselves', 'This content infringes upon my copyright', 'This content contains my private information', 'Other']),
 			reportReasonDescription: 'report reason description',
 			reportSubmitSuccessMessage: 'Your report has been submitted. Thank you for your response.',
+
+			// guest user
+			guestName: () => faker.person.firstName('male'),
+			guestEmail: () => faker.person.firstName('male') + '@email.com'
 		},
 
 		// Enquiry

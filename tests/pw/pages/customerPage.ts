@@ -181,19 +181,6 @@ export class CustomerPage extends BasePage {
 	}
 
 
-	// customer report product
-	async reportProduct(productName: string, report: product['report']): Promise<void> {
-		await this.goIfNotThere(data.subUrls.frontend.productDetails(helpers.slugify(productName)));
-		await this.clickAndWaitForResponse(data.subUrls.ajax, selector.customer.cSingleProduct.reportAbuse.reportAbuse);
-		await this.click(selector.customer.cSingleProduct.reportAbuse.reportReasonByName(report.reportReason));
-		await this.clearAndType(selector.customer.cSingleProduct.reportAbuse.reportDescription, report.reportReasonDescription);
-		await this.clickAndWaitForResponse(data.subUrls.ajax, selector.customer.cSingleProduct.reportAbuse.reportSubmit);
-		await this.toContainText(selector.customer.cSingleProduct.reportAbuse.reportSubmitSuccessMessage, report.reportSubmitSuccessMessage);
-		// close popup
-		await this.click(selector.customer.cSingleProduct.reportAbuse.confirmReportSubmit);
-	}
-
-
 	// customer enquire product
 	async enquireProduct(productName: string, enquiry: product['enquiry']): Promise<void> {
 		await this.goIfNotThere(data.subUrls.frontend.productDetails(helpers.slugify(productName)));
