@@ -4853,6 +4853,11 @@ export const selector = {
 				enquiryMessage: '#dokan-enq-message',
 				submitEnquiry: 'input.dokan-btn-theme',
 				submitEnquirySuccessMessage: '.alert.alert-success',
+
+				//guest user
+				guestName: '#name',
+				guestEmail: '#dokan-product-enquiry #email',
+
 			},
 
 			// related product

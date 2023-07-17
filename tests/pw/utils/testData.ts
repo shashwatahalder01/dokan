@@ -288,6 +288,10 @@ export const data = {
 		enquiry: {
 			enquiryDetails: 'enquiry details',
 			enquirySubmitSuccessMessage: 'Email sent successfully!',
+
+			// guest user
+			guestName: () => faker.person.firstName('male'),
+			guestEmail: () => faker.person.firstName('male') + '@email.com'
 		},
 	},
 

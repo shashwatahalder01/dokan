@@ -251,6 +251,9 @@ export interface product {
 	enquiry: {
 		enquiryDetails: string;
 		enquirySubmitSuccessMessage: string;
+
+		guestName: () => string;
+		guestEmail: () => string;
 	}
 }
 

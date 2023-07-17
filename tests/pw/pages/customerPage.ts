@@ -5,7 +5,7 @@ import { AdminPage } from 'pages/adminPage';
 import { selector } from 'pages/selectors';
 import { helpers } from 'utils/helpers';
 import { data } from 'utils/testData';
-import { customer, product, paymentDetails, order } from 'utils/interfaces';
+import { customer, paymentDetails, order } from 'utils/interfaces';
 
 const { DOKAN_PRO } = process.env;
 
@@ -178,16 +178,6 @@ export class CustomerPage extends BasePage {
 			await this.clickAndWaitForResponse(data.subUrls.frontend.editAccountCustomer, selector.customer.cAccountDetails.saveChanges);
 			await this.toContainText(selector.customer.cWooSelector.wooCommerceSuccessMessage, data.customer.account.updateSuccessMessage);
 		}
-	}
-
-
-	// customer enquire product
-	async enquireProduct(productName: string, enquiry: product['enquiry']): Promise<void> {
-		await this.goIfNotThere(data.subUrls.frontend.productDetails(helpers.slugify(productName)));
-		await this.click(selector.customer.cSingleProduct.menus.productEnquiry);
-		await this.clearAndType(selector.customer.cSingleProduct.productEnquiry.enquiryMessage, enquiry.enquiryDetails);
-		await this.clickAndWaitForResponse(data.subUrls.ajax, selector.customer.cSingleProduct.productEnquiry.submitEnquiry);
-		await this.toContainText(selector.customer.cSingleProduct.productEnquiry.submitEnquirySuccessMessage, enquiry.enquirySubmitSuccessMessage);
 	}
 
 

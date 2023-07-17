@@ -36,6 +36,7 @@ test.beforeAll(async ({ browser, request }) => {
 test.afterAll(async ( ) => {
 	await aPage.close(); //TODO: close all pages at once instead of one by one
 	await cPage.close();
+	await uPage.close();
 });
 
 test.describe('Abuse report test', () => {
