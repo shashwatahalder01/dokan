@@ -44,13 +44,12 @@ export class VendorStaffPage extends VendorPage {
 	async addStaff(staff: staff){
 		await this.goIfNotThere(data.subUrls.frontend.vDashboard.staff);
 		await this.clickAndWaitForNavigation(selector.vendor.vStaff.addStaff.addNewStaff);
-
 		await this.clearAndType(selector.vendor.vStaff.addStaff.firstName, staff.firstName);
 		await this.clearAndType(selector.vendor.vStaff.addStaff.lastName, staff.lastName);
 		await this.clearAndType(selector.vendor.vStaff.addStaff.email, staff.email);
 		await this.clearAndType(selector.vendor.vStaff.addStaff.phone, staff.phone);
-		await this.clickAndWaitForResponse(data.subUrls.frontend.vDashboard.staff, selector.vendor.vStaff.addStaff.createStaff, 302);
-
+		await this.click(selector.vendor.vStaff.addStaff.createStaff);
+		await this.toBeVisible(selector.vendor.vStaff.staffCell(staff.firstName));
 	}
 
 
@@ -66,8 +65,7 @@ export class VendorStaffPage extends VendorPage {
 		await this.clearAndType(selector.vendor.vStaff.addStaff.phone, staff.phone);
 		await this.clearAndType(selector.vendor.vStaff.editStaff.password, staff.password);
 		await this.click(selector.vendor.vStaff.editStaff.updateStaff);
-		//TODO: add assertion
-
+		await this.toBeVisible(selector.vendor.vStaff.staffCell(staff.firstName));
 	}
 
 

@@ -88,6 +88,24 @@ export const payloads = {
 		featured: true,
 		description: '<p>test description</p>',
 		short_description: '<p>test short description</p>',
+		meta_data: [
+			{
+				key: 'dokan_geo_latitude',
+				value: '40.7127753'
+			},
+			{
+				key: 'dokan_geo_longitude',
+				value: '-74.0059728'
+			},
+			{
+				key: 'dokan_geo_public',
+				value: '1'
+			},
+			{
+				key: 'dokan_geo_address',
+				value: 'New York, NY, USA'
+			}
+		]
 
 	}),
 

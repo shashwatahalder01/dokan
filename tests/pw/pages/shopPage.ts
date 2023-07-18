@@ -69,7 +69,7 @@ export class ShopPage extends CustomerPage {
 	// products on map
 	async productOnMap(productName?: string){
 		await this.goIfNotThere(data.subUrls.frontend.shop);
-		await this.click(selector.customer.cShop.map.productOnMap.productPin);
+		await this.click(selector.customer.cShop.map.productOnMap.productPin); // TODO: geolocation & store has location but products don't show on map, find-out issue
 		await this.toBeVisible(selector.customer.cShop.map.productOnMap.productListPopup);
 		productName && await this.toBeVisible(selector.customer.cShop.map.productOnMap.productOnList(productName));
 	}

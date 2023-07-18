@@ -279,6 +279,10 @@ export const data = {
 			reportReasonDescription: 'report reason description',
 			reportSubmitSuccessMessage: 'Your report has been submitted. Thank you for your response.',
 
+			// non logged user
+			username: String(process.env.CUSTOMER),
+			password: String(process.env.USER_PASSWORD),
+
 			// guest user
 			guestName: () => faker.person.firstName('male'),
 			guestEmail: () => faker.person.firstName('male') + '@email.com'

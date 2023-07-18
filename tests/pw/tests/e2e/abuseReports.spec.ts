@@ -75,4 +75,9 @@ test.describe('Abuse report test', () => {
 		await unsignedUser.reportProduct(data.predefined.simpleProduct.product1.name, data.product.report);
 	});
 
+	test('only logged-in customer can report product @pro', async ( ) => {
+		await dbUtils.setDokanSettings(dbData.dokan.optionName.productReportAbuse, { ...dbData.dokan.productReportAbuseSettings, reported_by_logged_in_users_only: 'on' });
+		await abuseReportsCustomer.reportProduct(data.predefined.simpleProduct.product1.name, data.product.report);
+	});
+
 });

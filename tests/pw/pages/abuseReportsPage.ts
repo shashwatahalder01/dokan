@@ -96,8 +96,17 @@ export class AbuseReportsPage extends AdminPage {
 	async reportProduct(productName: string, report: product['report']): Promise<void> {
 		await this.goIfNotThere(data.subUrls.frontend.productDetails(helpers.slugify(productName)));
 		await this.clickAndWaitForResponse(data.subUrls.ajax, selector.customer.cSingleProduct.reportAbuse.reportAbuse);
+		// non logged user
+		const isNonLoggedUser = await this.isVisible(selector.customer.cSingleProduct.reportAbuse.nonLoggedUser.userName);
+		if(isNonLoggedUser){
+			await this.clearAndType(selector.customer.cSingleProduct.reportAbuse.nonLoggedUser.userName, report.username);
+			await this.clearAndType(selector.customer.cSingleProduct.reportAbuse.nonLoggedUser.userPassword, report.password);
+			await this.clickAndWaitForResponse(data.subUrls.ajax, selector.customer.cSingleProduct.reportAbuse.nonLoggedUser.login);
+		}
+
 		await this.click(selector.customer.cSingleProduct.reportAbuse.reportReasonByName(report.reportReason));
 		await this.clearAndType(selector.customer.cSingleProduct.reportAbuse.reportDescription, report.reportReasonDescription);
+		// is guest
 		const isGuest = await this.isVisible(selector.customer.cSingleProduct.reportAbuse.guestName);
 		if(isGuest){
 			await this.clearAndType(selector.customer.cSingleProduct.reportAbuse.guestName, report.guestName());

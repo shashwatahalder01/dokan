@@ -478,7 +478,7 @@ export const dbData = {
 		},
 
 		productReportAbuseSettings: {
-			reported_by_logged_in_users_only: 'on',
+			reported_by_logged_in_users_only: 'off',
 			abuse_reasons: [
 				{
 					id: 'report_as_spam',

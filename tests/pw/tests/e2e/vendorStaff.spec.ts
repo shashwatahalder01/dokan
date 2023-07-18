@@ -17,6 +17,16 @@ test.describe('Vendor staff test', () => {
 		vPage = await vendorContext.newPage();
 		vendorStaffPage = new VendorStaffPage(vPage);
 		apiUtils = new ApiUtils(request);
+		// const staff = {
+		// 	username: 'staff1',
+		// 	first_name: 'staff1',
+		// 	last_name: 's1',
+		// 	email: 's1@g.c',
+		// 	roles: 'vendor_staff',
+		// 	password: '01dokan01'
+		// };
+
+		// await apiUtils.createUser( staff, payloads.adminAuth);
 	});
 
 	test.afterAll(async ( ) => {
@@ -46,5 +56,6 @@ test.describe('Vendor staff test', () => {
 	});
 
 	//TODO: add tests for all permission group
+	//TODL : add tests for email template
 
 });

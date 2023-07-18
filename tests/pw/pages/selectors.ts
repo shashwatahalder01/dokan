@@ -5131,6 +5131,14 @@ export const selector = {
 				reportSubmitSuccessMessage: '#swal2-html-container',
 				confirmReportSubmit: '.swal2-confirm',
 
+				// non logged User
+				nonLoggedUser:{
+					userName: '#login-name',
+					userPassword: '#login-password',
+					login: '#support-submit-btn',
+					createAccount: '.dokan-btn.dokan-btn-theme',
+				},
+
 				//guest user
 				guestName: '//input[@name="customer_name"]',
 				guestEmail: '//input[@name="customer_email"]',

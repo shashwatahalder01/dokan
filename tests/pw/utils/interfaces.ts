@@ -243,6 +243,9 @@ export interface product {
 		reportReasonDescription: string;
 		reportSubmitSuccessMessage: string;
 
+		username: string;
+		password: string;
+
 		guestName: () => string;
 		guestEmail: () => string;
 	}
