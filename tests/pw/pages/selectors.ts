@@ -3036,7 +3036,7 @@ export const selector = {
 				auction: '.auction a',
 				support: '.support a',
 				settings: '.settings a',
-				visitStore: '.fa-external-link-alt',
+				visitStore: '//i[@class="fas fa-external-link-alt"]/..',
 				editAccount: '.fa-user',
 			},
 
@@ -3142,21 +3142,31 @@ export const selector = {
 
 		// Products
 		product: {
+
 			// Menus
-			all: '//ul[contains(@class,"subsubsub")]//a[contains(text(),"All")]',
-			online: '//ul[contains(@class,"subsubsub")]//a[contains(text(),"Online")]',
-			draft: '//ul[contains(@class,"subsubsub")]//a[contains(text(),"Draft")]',
-			pendingReview: '//ul[contains(@class,"subsubsub")]//a[contains(text(),"Pending Review")]',
-			inStock: '//ul[contains(@class,"subsubsub")]//a[contains(text(),"In stock")]',
+			menus:{
+				all: '//ul[contains(@class,"subsubsub")]//a[contains(text(),"All")]',
+				online: '//ul[contains(@class,"subsubsub")]//a[contains(text(),"Online")]',
+				draft: '//ul[contains(@class,"subsubsub")]//a[contains(text(),"Draft")]',
+				pendingReview: '//ul[contains(@class,"subsubsub")]//a[contains(text(),"Pending Review")]',
+				inStock: '//ul[contains(@class,"subsubsub")]//a[contains(text(),"In stock")]',
+			},
+
 			// Filter
-			filterByDate: '#filter-by-date',
-			filterByCategory: '#product_cat',
-			filterByType: '#filter-by-type',
-			filterByOther: '//select[@name="filter_by_other"]',
-			filter: '//button[@name="product_listing_filter"]',
+			filters:{
+				filterByDate: '#filter-by-date',
+				filterByCategory: '#product_cat',
+				filterByOther: '//select[@name="filter_by_other"]', // featured, top_rated, best_selling
+				filter: '//button[normalize-space()="Filter"]',
+			},
+
 			// Search product
-			searchProduct: '.dokan-w5 .dokan-form-control',
-			search: '.dokan-w5 > .dokan-btn',
+			search: {
+				searchInput: 'input[placeholder="Search Products"]',
+				searchBtn: 'button[name="product_listing_search"]',
+			},
+
+
 			// Bulk Action
 			bulkActions: {
 				selectAll: '#cb-select-all',
@@ -3168,13 +3178,15 @@ export const selector = {
 			import: '//span[@class="dokan-add-product-link"]//a[contains(text(),"Import")]',
 			export: '//span[@class="dokan-add-product-link"]//a[contains(text(),"Export")]',
 
+
 			// Product Sub Options
+			numberOfRows: '#dokan-product-list-table tbody tr th.dokan-product-select',
 			productLink: (productName: string) => `//a[contains(text(),'${productName}')]`,
-			editProduct: '.row-actions > .edit > a',
-			deletePermanently: '.row-actions > .delete > a',
-			view: '.row-actions > .view > a',
-			quickEdit: '.row-actions > .item-inline-edit > a',
-			duplicate: '.row-actions > .duplicate > a',
+			editProduct: '.row-actions .edit',
+			deletePermanently: '.row-actions .delete',
+			view: '.row-actions .view',
+			quickEdit: '.row-actions .item-inline-edit',
+			duplicate: '.row-actions .duplicate',
 
 			// Create Product
 			closeCreateProductPopup: '.mfp-close',

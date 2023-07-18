@@ -729,7 +729,8 @@ export const data = {
 			vDashboard:{
 				setupWizard: '?page=dokan-seller-setup',
 				dashboard: 'dashboard',
-				product: 'dashboard/products',
+				products: 'dashboard/products',
+				productSearch: 'products/?product_listing_search',
 				productAuction: 'dashboard/new-auction-product',
 				productBooking: 'dashboard/booking/new-product',
 				order: 'dashboard/orders',

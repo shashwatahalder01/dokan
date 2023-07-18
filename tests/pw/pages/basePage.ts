@@ -710,8 +710,8 @@ export class BasePage {
 	}
 
 	// select by number
-	async selectByNumber(selector: string, value: number): Promise<string[]> {
-		return await this.page.selectOption(selector, { index: value });
+	async selectByNumber(selector: string, value: number | string): Promise<string[]> {
+		return await this.page.selectOption(selector, { index: Number(value ) });
 	}
 
 	async selectByValueAndWaitForResponse(subUrl: string, selector: string, value: string, code = 200): Promise<Response> {
@@ -1132,9 +1132,11 @@ export class BasePage {
 		await locator.waitFor({ state: 'visible' });
 	}
 
+
 	/**
 	 * Dialog methods
 	 */
+
 
 	// accept alert
 	acceptAlert(): void {
@@ -1294,6 +1296,11 @@ export class BasePage {
 		await expect(this.page.locator(selector)).toHaveValue(value);
 	}
 
+	// assert element to have attribute
+	async toHaveAttribute(selector: string, attribute: string, value: string){
+		await expect(this.page.locator(selector)).toHaveAttribute(attribute, value);
+	}
+
 	// assert element to have class
 	async toHaveClass(selector: string, className: string){
 		await expect(this.page.locator(selector)).toHaveClass(className);
@@ -1317,6 +1324,11 @@ export class BasePage {
 	// assert element not to have value
 	async notToHaveValue(selector: string, value: string){
 		await expect(this.page.locator(selector)).not.toHaveValue(value);
+	}
+
+	// assert element not to have attribute
+	async notToHaveAttribute(selector: string, attribute: string, value: string){
+		await expect(this.page.locator(selector)).not.toHaveAttribute(attribute, value);
 	}
 
 	// assert element not to have class

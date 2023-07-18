@@ -147,7 +147,7 @@ export class VendorPage extends BasePage {
 
 	// vendor add simple product
 	async addSimpleProduct(product: product['simple'] | product['simpleSubscription'] | product['external']): Promise<void> {
-		await this.goIfNotThere(data.subUrls.frontend.vDashboard.product);
+		await this.goIfNotThere(data.subUrls.frontend.vDashboard.products);
 		const productName = product.productName();
 		// add new simple product
 		await this.click(selector.vendor.product.addNewProduct);
@@ -185,7 +185,7 @@ export class VendorPage extends BasePage {
 		// await this.waitForVisibleLocator(selector.vendor.product.variationPrice)
 		await this.type(selector.vendor.product.variationPrice, product.regularPrice());
 		await this.click(selector.vendor.product.okVariationPrice);
-		await this.clickAndWaitForResponse(data.subUrls.frontend.vDashboard.product, selector.vendor.product.saveProduct, 302);
+		await this.clickAndWaitForResponse(data.subUrls.frontend.vDashboard.products, selector.vendor.product.saveProduct, 302);
 		const productCreateSuccessMessage = await this.getElementText(selector.vendor.product.updatedSuccessMessage);
 		expect(productCreateSuccessMessage?.replace(/\s+/g, ' ').trim()).toMatch(product.saveSuccessMessage);
 	}
@@ -201,7 +201,7 @@ export class VendorPage extends BasePage {
 		await this.selectByValue(selector.vendor.product.expireAfter, product.expireAfter);
 		await this.type(selector.vendor.product.subscriptionTrialLength, product.subscriptionTrialLength);
 		await this.selectByValue(selector.vendor.product.subscriptionTrialPeriod, product.subscriptionTrialPeriod);
-		await this.clickAndWaitForResponse(data.subUrls.frontend.vDashboard.product, selector.vendor.product.saveProduct, 302);
+		await this.clickAndWaitForResponse(data.subUrls.frontend.vDashboard.products, selector.vendor.product.saveProduct, 302);
 		const productCreateSuccessMessage = await this.getElementText(selector.vendor.product.updatedSuccessMessage);
 		expect(productCreateSuccessMessage?.replace(/\s+/g, ' ').trim()).toMatch(product.saveSuccessMessage);
 	}
@@ -230,7 +230,7 @@ export class VendorPage extends BasePage {
 		await this.waitForVisibleLocator(selector.vendor.product.variationPrice);
 		await this.type(selector.vendor.product.variationPrice, product.regularPrice());
 		await this.click(selector.vendor.product.okVariationPrice); // todo : add waitForResponse with click
-		await this.clickAndWaitForResponse(data.subUrls.frontend.vDashboard.product, selector.vendor.product.saveProduct, 302);
+		await this.clickAndWaitForResponse(data.subUrls.frontend.vDashboard.products, selector.vendor.product.saveProduct, 302);
 
 		await this.waitForVisibleLocator(selector.vendor.product.updatedSuccessMessage);
 		const productCreateSuccessMessage = await this.getElementText(selector.vendor.product.updatedSuccessMessage);
@@ -246,7 +246,7 @@ export class VendorPage extends BasePage {
 		await this.type(selector.vendor.product.buttonText, product.buttonText);
 		await this.clearAndType(selector.vendor.product.price, product.regularPrice());
 
-		await this.clickAndWaitForResponse(data.subUrls.frontend.vDashboard.product, selector.vendor.product.saveProduct, 302);
+		await this.clickAndWaitForResponse(data.subUrls.frontend.vDashboard.products, selector.vendor.product.saveProduct, 302);
 		const productCreateSuccessMessage = await this.getElementText(selector.vendor.product.updatedSuccessMessage);
 		expect(productCreateSuccessMessage?.replace(/\s+/g, ' ').trim()).toMatch(product.saveSuccessMessage);
 	}
@@ -1088,19 +1088,11 @@ export class VendorPage extends BasePage {
 		await this.check(selector.vendor.product.enableBulkDiscount);
 		await this.clearAndType(selector.vendor.product.lotMinimumQuantity, minimumQuantity);
 		await this.clearAndType(selector.vendor.product.lotDiscountInPercentage, discountPercentage);
-		await this.clickAndWaitForResponse(data.subUrls.frontend.vDashboard.product, selector.vendor.product.saveProduct, 302);
+		await this.clickAndWaitForResponse(data.subUrls.frontend.vDashboard.products, selector.vendor.product.saveProduct, 302);
 		const productCreateSuccessMessage = await this.getElementText(selector.vendor.product.updatedSuccessMessage);
 		expect(productCreateSuccessMessage?.replace(/\s+/g, ' ').trim()).toMatch(data.product.createUpdateSaveSuccessMessage);
 	}
 
-	// vendor search product
-	async searchProduct(productName: string): Promise<void> {
-		await this.goIfNotThere(data.subUrls.frontend.vDashboard.product);
-		//search product
-		await this.clearAndType(selector.vendor.product.searchProduct, productName);
-		await this.click(selector.vendor.product.search);
-		await this.toBeVisible(selector.vendor.product.productLink(productName));
-	}
 
 	// vendor override rma settings
 	async overrideProductRmaSettings(productName: string, label: string, type: string, length: string, lengthValue: string, lengthDuration: string): Promise<void> {
@@ -1118,7 +1110,7 @@ export class VendorPage extends BasePage {
 		if (refundReasonIsVisible) {
 			// await this.clickAndWaitMultiple(selector.vendor.product.refundReasons)//TODO: update this
 		}
-		await this.clickAndWaitForResponse(data.subUrls.frontend.vDashboard.product, selector.vendor.product.saveProduct, 302);
+		await this.clickAndWaitForResponse(data.subUrls.frontend.vDashboard.products, selector.vendor.product.saveProduct, 302);
 		const productCreateSuccessMessage = await this.getElementText(selector.vendor.product.updatedSuccessMessage);
 		expect(productCreateSuccessMessage?.replace(/\s+/g, ' ').trim()).toMatch(data.product.createUpdateSaveSuccessMessage);
 	}
@@ -1198,6 +1190,61 @@ export class VendorPage extends BasePage {
 	// 	await this.goToVendorDashboard();
 	// 	return helpers.price(await this.getElementText(selector.vendor.vDashboard.earning));
 	// }
+
+
+	// visit store
+	async visitStore(storeName: string){
+		await this.goIfNotThere(data.subUrls.frontend.vDashboard.dashboard);
+		// ensure page suppose to open on new tab
+		await this.toHaveAttribute(selector.vendor.vDashboard.menus.visitStore, 'target', '_blank');
+		// force page to open on same tab
+		await this.setAttributeValue(selector.vendor.vDashboard.menus.visitStore, 'target', '_self' );
+		await this.click(selector.vendor.vDashboard.menus.visitStore);
+		expect(this.page).toHaveURL(data.subUrls.frontend.vendorDetails(helpers.slugify(storeName)) + '/');
+	}
+
+
+	//products
+
+	// vendor search product
+	async searchProduct(productName: string): Promise<void> {
+		await this.goIfNotThere(data.subUrls.frontend.vDashboard.products);
+		//search product
+		await this.clearAndType(selector.vendor.product.search.searchInput, productName);
+		await this.clickAndWaitForResponse(data.subUrls.frontend.vDashboard.products, selector.vendor.product.search.searchBtn);
+		await this.toBeVisible(selector.vendor.product.productLink(productName));
+	}
+
+	// vendor filter product
+	async filterProducts(filterType: string, value: string): Promise<void> {
+		await this.goIfNotThere(data.subUrls.frontend.vDashboard.products);
+
+		switch(filterType){
+
+		case 'by-date' :
+			await this.selectByNumber(selector.vendor.product.filters.filterByDate, value);
+			// await this.clickAndWaitForResponse(data.subUrls.frontend.vDashboard.products, selector.vendor.product.filters.filter);
+			await this.clickAndWaitForNavigation( selector.vendor.product.filters.filter);
+			break;
+
+		case 'by-category' :
+			await this.selectByLabel(selector.vendor.product.filters.filterByCategory, value);
+			// await this.clickAndWaitForResponse(data.subUrls.frontend.vDashboard.products, selector.vendor.product.filters.filter);
+			await this.clickAndWaitForNavigation( selector.vendor.product.filters.filter);
+			break;
+
+		case 'by-other' :
+			await this.selectByValue(selector.vendor.product.filters.filterByOther, value);
+			// await this.clickAndWaitForResponse(data.subUrls.frontend.vDashboard.products, selector.vendor.product.filters.filter);
+			await this.clickAndWaitForNavigation( selector.vendor.product.filters.filter);
+			break;
+
+		default :
+			break;
+		}
+		await this.notToHaveCount(selector.vendor.product.numberOfRows, 0);
+
+	}
 
 
 }

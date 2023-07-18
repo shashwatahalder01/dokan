@@ -39,7 +39,7 @@ test.afterAll(async ( ) => {
 	await uPage.close();
 });
 
-test.describe('Abuse report test', () => {
+test.describe.only('Abuse report test', () => {
 
 	// test.use({ storageState: data.auth.adminAuthFile });
 

@@ -177,4 +177,21 @@ test.describe('Vendor functionality test', () => {
 		await vendorPage.setRmaSettings(data.vendor.rma);
 	});
 
+	test('vendor can visit own Store @lite @pro', async ( ) => {
+		await vendorPage.visitStore(data.predefined.vendorStores.vendor1);
+	});
+
+	test.only('vendor can filter products by date @lit @pro', async ( ) => {
+		await vendorPage.filterProducts('by-date', '1');
+	});
+
+	test.only('vendor can filter products by category @pro', async ( ) => {
+		await vendorPage.filterProducts('by-category', 'Uncategorized');
+	});
+
+	test.only('vendor can filter products by other @pro', async ( ) => {
+		await vendorPage.filterProducts('by-other', 'featured');
+	});
+
+
 });
