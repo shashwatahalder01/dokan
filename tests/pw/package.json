@@ -63,7 +63,7 @@
   "dependencies": {
     "@faker-js/faker": "^8.0.2",
     "@playwright/test": "^1.36.1",
-    "@wordpress/env": "^8.3.0",
+    "@wordpress/env": "^4.2.1",
     "allure-playwright": "^2.4.0",
     "dotenv": "^16.3.1",
     "mysqlconnector": "^2.0.1",
