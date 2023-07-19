@@ -8,6 +8,10 @@ import { data } from 'utils/testData';
 import { helpers } from 'utils/helpers';
 import { product, vendor, vendorSetupWizard  } from 'utils/interfaces';
 
+
+const { DOKAN_PRO } = process.env;
+
+
 export class VendorPage extends BasePage {
 
 	constructor(page: Page) {
@@ -1117,13 +1121,13 @@ export class VendorPage extends BasePage {
 
 	// vendor change order status
 	async changeOrderStatus(orderNumber: string, orderStatus: string): Promise<void> {
-		await this.goIfNotThere(data.subUrls.frontend.vDashboard.order);
+		await this.goIfNotThere(data.subUrls.frontend.vDashboard.orders);
 		//change order status
-		await this.click(selector.vendor.vOrders.orderLink(orderNumber));
-		await this.click(selector.vendor.vOrders.edit);
-		await this.selectByValue(selector.vendor.vOrders.orderStatus, orderStatus);
-		await this.click(selector.vendor.vOrders.updateOrderStatus);
-		const currentOrderStatus = await this.getElementText(selector.vendor.vOrders.currentOrderStatus);
+		await this.click(selector.vendor.orders.orderLink(orderNumber));
+		await this.click(selector.vendor.orders.edit);
+		await this.selectByValue(selector.vendor.orders.orderStatus, orderStatus);
+		await this.click(selector.vendor.orders.updateOrderStatus);
+		const currentOrderStatus = await this.getElementText(selector.vendor.orders.currentOrderStatus);
 		expect(currentOrderStatus?.toLowerCase()).toMatch((orderStatus.replace(/(^wc)|(\W)/g, '')).toLowerCase());
 	}
 
@@ -1131,27 +1135,27 @@ export class VendorPage extends BasePage {
 	// async refundOrder(orderNumber: string, productName: string, partialRefund = false): Promise<void> {
 	// 	await this.goToVendorDashboard();
 	// 	await this.click(selector.vendor.vDashboard.orders);
-	// 	await this.click(selector.vendor.vOrders.orderLink(orderNumber));
+	// 	await this.click(selector.vendor.orders.orderLink(orderNumber));
 
 	// 	//request refund
-	// 	await this.click(selector.vendor.vOrders.requestRefund);
-	// 	const productQuantity = await this.getElementText(selector.vendor.vOrders.productQuantity(productName));
-	// 	const productCost = helpers.price(await this.getElementText(selector.vendor.vOrders.productCost(productName)));
-	// 	const productTax = helpers.price(await this.getElementText(selector.vendor.vOrders.productTax(productName)));
-	// 	await this.type(selector.vendor.vOrders.refundProductQuantity(productName), productQuantity);
+	// 	await this.click(selector.vendor.orders.requestRefund);
+	// 	const productQuantity = await this.getElementText(selector.vendor.orders.productQuantity(productName));
+	// 	const productCost = helpers.price(await this.getElementText(selector.vendor.orders.productCost(productName)));
+	// 	const productTax = helpers.price(await this.getElementText(selector.vendor.orders.productTax(productName)));
+	// 	await this.type(selector.vendor.orders.refundProductQuantity(productName), productQuantity);
 	// 	if (partialRefund) {
-	// 		await this.click(selector.vendor.vOrders.refundDiv);
-	// 		await this.clearAndType(selector.vendor.vOrders.refundProductCostAmount(productName), String(helpers.roundToTwo(productCost / 2)));
-	// 		await this.clearAndType(selector.vendor.vOrders.refundProductTaxAmount(productName), String(helpers.roundToTwo(productTax / 2)));
+	// 		await this.click(selector.vendor.orders.refundDiv);
+	// 		await this.clearAndType(selector.vendor.orders.refundProductCostAmount(productName), String(helpers.roundToTwo(productCost / 2)));
+	// 		await this.clearAndType(selector.vendor.orders.refundProductTaxAmount(productName), String(helpers.roundToTwo(productTax / 2)));
 	// 	}
-	// 	await this.type(selector.vendor.vOrders.refundReason, 'Defective product');
-	// 	await this.click(selector.vendor.vOrders.refundManually);
-	// 	await this.click(selector.vendor.vOrders.confirmRefund);
+	// 	await this.type(selector.vendor.orders.refundReason, 'Defective product');
+	// 	await this.click(selector.vendor.orders.refundManually);
+	// 	await this.click(selector.vendor.orders.confirmRefund);
 
-	// 	// const successMessage = await this.getElementText(selector.vendor.vOrders.refundRequestSuccessMessage);
+	// 	// const successMessage = await this.getElementText(selector.vendor.orders.refundRequestSuccessMessage);
 	// 	// expect(successMessage).toMatch('Refund request submitted.');
-	// await this.toContainText(selector.vendor.vOrders.refundRequestSuccessMessage, 'Refund request submitted.');
-	// 	await this.click(selector.vendor.vOrders.refundRequestSuccessMessageOk);
+	// await this.toContainText(selector.vendor.orders.refundRequestSuccessMessage, 'Refund request submitted.');
+	// 	await this.click(selector.vendor.orders.refundRequestSuccessMessageOk);
 	// }
 
 	// get order details vendor
@@ -1159,27 +1163,27 @@ export class VendorPage extends BasePage {
 	//     await this.goToVendorDashboard()
 	//     await this.click(selector.vendor.vDashboard.orders)
 	//     let vOrderDetails = {}
-	//     vOrderDetails.vendorEarning = helpers.price(await this.getElementText(selector.vendor.vOrders.vendorEarningTable(orderNumber)))
+	//     vOrderDetails.vendorEarning = helpers.price(await this.getElementText(selector.vendor.orders.vendorEarningTable(orderNumber)))
 
-	//     await this.click(selector.vendor.vOrders.orderLink(orderNumber))
-	//     vOrderDetails.orderNumber = (await this.getElementText(selector.vendor.vOrders.orderNumber)).split('#')[1]
-	//     let refundedOrderTotalIsVisible = await this.isVisible(selector.vendor.vOrders.orderTotalAfterRefund)
+	//     await this.click(selector.vendor.orders.orderLink(orderNumber))
+	//     vOrderDetails.orderNumber = (await this.getElementText(selector.vendor.orders.orderNumber)).split('#')[1]
+	//     let refundedOrderTotalIsVisible = await this.isVisible(selector.vendor.orders.orderTotalAfterRefund)
 	//     if (refundedOrderTotalIsVisible) {
-	//         vOrderDetails.orderTotalBeforeRefund = helpers.price(await this.getElementText(selector.vendor.vOrders.orderTotalBeforeRefund))
-	//         vOrderDetails.orderTotal = helpers.price(await this.getElementText(selector.vendor.vOrders.orderTotalAfterRefund))
+	//         vOrderDetails.orderTotalBeforeRefund = helpers.price(await this.getElementText(selector.vendor.orders.orderTotalBeforeRefund))
+	//         vOrderDetails.orderTotal = helpers.price(await this.getElementText(selector.vendor.orders.orderTotalAfterRefund))
 	//     } else {
-	//         vOrderDetails.orderTotal = helpers.price(await this.getElementText(selector.vendor.vOrders.orderTotal))
+	//         vOrderDetails.orderTotal = helpers.price(await this.getElementText(selector.vendor.orders.orderTotal))
 	//     }
-	//     vOrderDetails.orderStatus = (await this.getElementText(selector.vendor.vOrders.currentOrderStatus)).replace('-', ' ')
-	//     let orderDate = (await this.getElementText(selector.vendor.vOrders.orderDate)).split(':')[1].trim()
+	//     vOrderDetails.orderStatus = (await this.getElementText(selector.vendor.orders.currentOrderStatus)).replace('-', ' ')
+	//     let orderDate = (await this.getElementText(selector.vendor.orders.orderDate)).split(':')[1].trim()
 	//     vOrderDetails.orderDate = orderDate.substring(0, orderDate.indexOf(',', orderDate.indexOf(',') + 1))
-	//     vOrderDetails.discount = helpers.price(await this.getElementText(selector.vendor.vOrders.discount))
-	//     let shippingMethodIsVisible = await this.isVisible(selector.vendor.vOrders.shippingMethod)
-	//     if (shippingMethodIsVisible) vOrderDetails.shippingMethod = await this.getElementText(selector.vendor.vOrders.shippingMethod)
-	//     vOrderDetails.shippingCost = helpers.price(await this.getElementText(selector.vendor.vOrders.shippingCost))
-	//     let taxIsVisible = await this.isVisible(selector.vendor.vOrders.tax)
-	//     if (taxIsVisible) vOrderDetails.tax = helpers.price(await this.getElementText(selector.vendor.vOrders.tax))
-	//     vOrderDetails.refunded = helpers.price(await this.getElementText(selector.vendor.vOrders.refunded))
+	//     vOrderDetails.discount = helpers.price(await this.getElementText(selector.vendor.orders.discount))
+	//     let shippingMethodIsVisible = await this.isVisible(selector.vendor.orders.shippingMethod)
+	//     if (shippingMethodIsVisible) vOrderDetails.shippingMethod = await this.getElementText(selector.vendor.orders.shippingMethod)
+	//     vOrderDetails.shippingCost = helpers.price(await this.getElementText(selector.vendor.orders.shippingCost))
+	//     let taxIsVisible = await this.isVisible(selector.vendor.orders.tax)
+	//     if (taxIsVisible) vOrderDetails.tax = helpers.price(await this.getElementText(selector.vendor.orders.tax))
+	//     vOrderDetails.refunded = helpers.price(await this.getElementText(selector.vendor.orders.refunded))
 
 	//     return vOrderDetails
 	// }
@@ -1200,22 +1204,64 @@ export class VendorPage extends BasePage {
 		// force page to open on same tab
 		await this.setAttributeValue(selector.vendor.vDashboard.menus.visitStore, 'target', '_self' );
 		await this.click(selector.vendor.vDashboard.menus.visitStore);
-		expect(this.page).toHaveURL(data.subUrls.frontend.vendorDetails(helpers.slugify(storeName)) + '/');
+		await expect(this.page).toHaveURL(data.subUrls.frontend.vendorDetails(helpers.slugify(storeName)) + '/');
 	}
 
 
 	//products
 
-	// vendor search product
+
+	// products render properly
+	async vendorProductsRenderProperly(): Promise<void> {
+		await this.goIfNotThere(data.subUrls.frontend.vDashboard.products);
+
+		// product nav menus are visible
+		// eslint-disable-next-line @typescript-eslint/no-unused-vars
+		const { draft, pendingReview, ...menus } = selector.vendor.product.menus;
+		await this.multipleElementVisible(menus);
+
+		// add new product is visible
+		await this.toBeVisible(selector.vendor.product.addNewProduct);
+
+		// import export is visible
+		DOKAN_PRO && await this.multipleElementVisible(selector.vendor.product.importExport);
+
+		// product filters elements are visible
+		// await this.multipleElementVisible(selector.vendor.product.filters); //TODO: issue not fixed yet
+
+		// product search elements are visible
+		await this.multipleElementVisible(selector.vendor.product.search);
+
+		// bulk action elements are visible
+		await this.multipleElementVisible(selector.vendor.product.bulkActions);
+
+		// table elements are visible
+		await this.multipleElementVisible(selector.vendor.product.table);
+
+	}
+
+	//TODO: import product
+
+
+	// export product
+	async exportProducts(): Promise<void> {
+		await this.goIfNotThere(data.subUrls.frontend.vDashboard.products);
+		await this.clickAndAcceptAndWaitForResponse(data.subUrls.frontend.vDashboard.csvExport, selector.vendor.product.importExport.export );
+		//TODO:
+	}
+
+
+	// search product
 	async searchProduct(productName: string): Promise<void> {
 		await this.goIfNotThere(data.subUrls.frontend.vDashboard.products);
-		//search product
+
 		await this.clearAndType(selector.vendor.product.search.searchInput, productName);
 		await this.clickAndWaitForResponse(data.subUrls.frontend.vDashboard.products, selector.vendor.product.search.searchBtn);
 		await this.toBeVisible(selector.vendor.product.productLink(productName));
 	}
 
-	// vendor filter product
+
+	// filter products
 	async filterProducts(filterType: string, value: string): Promise<void> {
 		await this.goIfNotThere(data.subUrls.frontend.vDashboard.products);
 
@@ -1223,27 +1269,278 @@ export class VendorPage extends BasePage {
 
 		case 'by-date' :
 			await this.selectByNumber(selector.vendor.product.filters.filterByDate, value);
-			// await this.clickAndWaitForResponse(data.subUrls.frontend.vDashboard.products, selector.vendor.product.filters.filter);
-			await this.clickAndWaitForNavigation( selector.vendor.product.filters.filter);
 			break;
 
 		case 'by-category' :
 			await this.selectByLabel(selector.vendor.product.filters.filterByCategory, value);
-			// await this.clickAndWaitForResponse(data.subUrls.frontend.vDashboard.products, selector.vendor.product.filters.filter);
-			await this.clickAndWaitForNavigation( selector.vendor.product.filters.filter);
+			break;
+
+		case 'by-type' :
+			await this.selectByValue(selector.vendor.product.filters.filterByType, value);
 			break;
 
 		case 'by-other' :
 			await this.selectByValue(selector.vendor.product.filters.filterByOther, value);
-			// await this.clickAndWaitForResponse(data.subUrls.frontend.vDashboard.products, selector.vendor.product.filters.filter);
-			await this.clickAndWaitForNavigation( selector.vendor.product.filters.filter);
 			break;
 
 		default :
 			break;
 		}
+
+		// await this.clickAndWaitForResponse(data.subUrls.frontend.vDashboard.products, selector.vendor.product.filters.filter);
+		await this.clickAndWaitForNavigation( selector.vendor.product.filters.filter);
 		await this.notToHaveCount(selector.vendor.product.numberOfRows, 0);
 
+	}
+
+
+	// view product
+	async viewProduct(productName: string): Promise<void> {
+		await this.searchProduct(productName);
+		await this.hover(selector.vendor.product.productCell(productName));
+		await this.clickAndWaitForNavigation(selector.vendor.product.view);
+		await expect(this.page).toHaveURL(data.subUrls.frontend.productDetails(helpers.slugify(productName)) + '/');
+	}
+
+
+	// edit product
+	async editProduct(product: product['simple']): Promise<void> {
+		await this.searchProduct(product.editProduct);
+		await this.hover(selector.vendor.product.productCell(product.editProduct));
+		await this.clickAndWaitForNavigation(selector.vendor.product.editProduct);
+
+		await this.clearAndType(selector.vendor.product.title, product.productName());
+		await this.clearAndType(selector.vendor.product.price, product.regularPrice());
+		//TODO: add more fields
+
+		await this.clickAndWaitForResponse(data.subUrls.frontend.vDashboard.products, selector.vendor.product.saveProduct, 302);
+		await this.toContainText(selector.vendor.product.dokanMessage, 'The product has been saved successfully. ');
+	}
+
+
+	// quick edit product
+	async quickEditProduct(product: product['simple']): Promise<void> {
+		await this.searchProduct(product.editProduct);
+		await this.hover(selector.vendor.product.productCell(product.editProduct));
+		await this.click(selector.vendor.product.quickEdit);
+
+		await this.clearAndType(selector.vendor.product.title, product.productName());
+		//TODO: add more fields
+
+		await this.clickAndWaitForResponse(data.subUrls.ajax, selector.vendor.product.saveProduct);
+
+	}
+
+
+	// duplicate product
+	async duplicateProduct(productName: string): Promise<void> {
+		await this.searchProduct(productName);
+		await this.hover(selector.vendor.product.productCell(productName));
+		await this.clickAndWaitForNavigation(selector.vendor.product.duplicate);
+		await this.toContainText(selector.vendor.product.dokanSuccessMessage, 'Product succesfully duplicated');
+
+	}
+
+
+	// permanently delete product
+	async permanentlyDeleteProduct(productName: string): Promise<void> {
+		await this.searchProduct(productName);
+		await this.hover(selector.vendor.product.productCell(productName));
+		await this.click(selector.vendor.product.permanentlyDelete);
+		await this.clickAndWaitForNavigation(selector.vendor.product.confirmAction);
+		await this.toContainText(selector.vendor.product.dokanSuccessMessage, 'Product successfully deleted');
+
+	}
+
+
+	// product bulk action
+	async productBulkAction(action: string, productName?: string): Promise<void> {
+		if(productName){
+			await this.searchProduct(productName);  //TODO: use search like this for all
+		} else {
+			await this.goIfNotThere(data.subUrls.frontend.vDashboard.products);
+		}
+
+		await this.click(selector.vendor.product.bulkActions.selectAll);
+		switch(action){
+
+		case 'edit' :
+			await this.selectByValue(selector.vendor.product.bulkActions.selectAction, 'edit');
+			//TODO:
+			break;
+
+		case 'permanently-delete' :
+			await this.selectByValue(selector.vendor.product.bulkActions.selectAction, 'permanently-delete');
+			break;
+
+		case 'publish' :
+			await this.selectByValue(selector.vendor.product.bulkActions.selectAction, 'publish');
+			break;
+
+		default :
+			break;
+		}
+
+		await this.clickAndAcceptAndWaitForResponse(data.subUrls.frontend.vDashboard.products, selector.vendor.product.bulkActions.applyAction);
+		//TODO:
+	}
+
+
+	// orders
+
+
+	// orders render properly
+	async vendorOrdersRenderProperly(): Promise<void> {
+		await this.goIfNotThere(data.subUrls.frontend.vDashboard.orders);
+
+		// order nav menus are visible
+		await this.multipleElementVisible(selector.vendor.orders.menus);
+
+		// export elements are visible
+		await this.multipleElementVisible(selector.vendor.orders.export);
+
+		// order filters elements are visible
+		// eslint-disable-next-line @typescript-eslint/no-unused-vars
+		const { filterByCustomer,  ...filters } = selector.vendor.orders.filters;
+		await this.multipleElementVisible(filters); //todo: add dropdown selector
+
+		// order search elements are visible
+		await this.multipleElementVisible(selector.vendor.orders.search);
+
+		// bulk action elements are visible
+		await this.multipleElementVisible(selector.vendor.orders.bulkActions);
+
+		// table elements are visible
+		await this.multipleElementVisible(selector.vendor.orders.table);
+	}
+
+
+	// export product
+	async exportOrders(type: string): Promise<void> {
+		await this.goIfNotThere(data.subUrls.frontend.vDashboard.orders);
+
+		switch(type){
+
+		case 'all' :
+			await this.clickAndAcceptAndWaitForResponse(data.subUrls.frontend.vDashboard.orders, selector.vendor.orders.export.exportAll );
+			break;
+
+		case 'filtered' :
+			await this.clickAndAcceptAndWaitForResponse(data.subUrls.frontend.vDashboard.orders, selector.vendor.orders.export.exportFiltered );
+			break;
+
+		default :
+			break;
+		}
+	}
+
+
+	// search order
+	async searchOrder(orderNumber: string): Promise<void> {
+		await this.goIfNotThere(data.subUrls.frontend.vDashboard.orders);
+
+		await this.clearAndType(selector.vendor.orders.search.searchInput, orderNumber);
+		await this.clickAndWaitForResponse(data.subUrls.frontend.vDashboard.orders, selector.vendor.orders.search.searchBtn);
+		await this.toBeVisible(selector.vendor.orders.orderLink(orderNumber));
+	}
+
+
+	// filter orders
+	async filterOrders(filterType: string, value: string): Promise<void> {
+		await this.goIfNotThere(data.subUrls.frontend.vDashboard.orders);
+
+		switch(filterType){
+
+		case 'by-customer' :
+			await this.click(selector.vendor.orders.filters.filterByCustomer.dropDown);
+			await this.typeAndWaitForResponse(data.subUrls.ajax, selector.vendor.orders.filters.filterByCustomer.input, value);
+			await this.click(selector.vendor.orders.filters.filterByCustomer.searchedResult);
+			break;
+
+		case 'by-date' :
+			// await this.selectByLabel(selector.vendor.orders.filters.filterByDate, value); //TODO
+			break;
+
+		default :
+			break;
+		}
+
+		// await this.clickAndWaitForResponse(data.subUrls.frontend.vDashboard.products, selector.vendor.product.filters.filter);
+		await this.clickAndWaitForNavigation( selector.vendor.orders.filters.filter);
+		await this.notToHaveCount(selector.vendor.orders.numberOfRows, 0);
+
+	}
+
+
+	// view order
+	async viewOrder(orderNumber: string): Promise<void> {
+		await this.searchOrder(orderNumber);
+		await this.clickAndWaitForNavigation(selector.vendor.orders.view(orderNumber));
+		await this.toContainText(selector.vendor.orders.orderNumber, orderNumber);
+	}
+
+
+	// update order status
+	async updateOrderStatusOnTable(orderNumber: string, status: string): Promise<void> {
+		await this.searchOrder(orderNumber);
+		switch(status){
+
+		case 'processing' :
+			await this.clickAndAcceptAndWaitForResponse(data.subUrls.ajax, selector.vendor.orders.processing(orderNumber), 302);
+			await this.notToBeVisible(selector.vendor.orders.processing(orderNumber));
+			break;
+
+		case 'complete' :
+			await this.clickAndAcceptAndWaitForResponse(data.subUrls.ajax, selector.vendor.orders.complete(orderNumber), 302);
+			await this.notToBeVisible(selector.vendor.orders.complete(orderNumber));
+			break;
+
+		default :
+			break;
+		}
+	}
+
+
+	// update order status
+	async updateOrderStatus(orderNumber: string, status: string): Promise<void> {
+		await this.viewOrder(orderNumber);
+		await this.click(selector.vendor.orders.edit);
+		await this.selectByValue(selector.vendor.orders.orderStatus, status);
+		await this.clickAndAcceptAndWaitForResponse(data.subUrls.ajax, selector.vendor.orders.updateOrderStatus);
+		const currentStatus = await this.getElementText( selector.vendor.orders.currentOrderStatus);
+		expect(currentStatus?.toLowerCase()).toBe(status.split('-').pop());
+	}
+
+
+	// order bulk action
+	async orderBulkAction(action: string, orderNumber?: string): Promise<void> {
+		if(orderNumber){
+			await this.searchOrder(orderNumber);  //TODO: use search like this for all
+		} else {
+			await this.goIfNotThere(data.subUrls.frontend.vDashboard.orders);
+		}
+
+		await this.click(selector.vendor.orders.bulkActions.selectAll);
+		switch(action){
+
+		case 'onhold' :
+			await this.selectByValue(selector.vendor.orders.bulkActions.selectAction, 'wc-on-hold');
+			break;
+
+		case 'processing' :
+			await this.selectByValue(selector.vendor.orders.bulkActions.selectAction, 'wc-processing');
+			break;
+
+		case 'completed' :
+			await this.selectByValue(selector.vendor.orders.bulkActions.selectAction, 'wc-completed');
+			break;
+
+		default :
+			break;
+		}
+
+		await this.clickAndAcceptAndWaitForResponse(data.subUrls.frontend.vDashboard.orders, selector.vendor.orders.bulkActions.applyAction);
+		//TODO:
 	}
 
 

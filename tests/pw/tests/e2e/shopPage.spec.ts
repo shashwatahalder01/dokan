@@ -28,7 +28,7 @@ test.describe('Shop functionality test', () => {
 	// shop page
 
 
-	test('shop page is rendering properly @lite @pro', async ( ) => {
+	test('shop page is rendering properly @lite @pro @explo', async ( ) => {
 		await shopPage.shopRenderProperly();
 	});
 

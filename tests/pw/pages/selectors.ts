@@ -3152,10 +3152,17 @@ export const selector = {
 				inStock: '//ul[contains(@class,"subsubsub")]//a[contains(text(),"In stock")]',
 			},
 
+			// Import Export Product
+			importExport:{
+				import: '//span[@class="dokan-add-product-link"]//a[contains(text(),"Import")]',
+				export: '//span[@class="dokan-add-product-link"]//a[contains(text(),"Export")]',
+			},
+
 			// Filter
 			filters:{
 				filterByDate: '#filter-by-date',
 				filterByCategory: '#product_cat',
+				filterByType: '#filter-by-type', // simple, ... //tODO:
 				filterByOther: '//select[@name="filter_by_other"]', // featured, top_rated, best_selling
 				filter: '//button[normalize-space()="Filter"]',
 			},
@@ -3170,20 +3177,32 @@ export const selector = {
 			// Bulk Action
 			bulkActions: {
 				selectAll: '#cb-select-all',
-				selectAction: '#bulk-product-action-selector',
+				selectAction: '#bulk-product-action-selector', // edit, delete, publish
 				applyAction: '#bulk-product-action',
 			},
 
-			// Import Export Product
-			import: '//span[@class="dokan-add-product-link"]//a[contains(text(),"Import")]',
-			export: '//span[@class="dokan-add-product-link"]//a[contains(text(),"Export")]',
+			// Table
+			table: {
+				productTable: '#dokan-product-list-table',
+				imageColumn: '//th[normalize-space()="Image"]',
+				nameColumn: '//th[normalize-space()="Name"]',
+				statusColumn: '//th[normalize-space()="Status"]',
+				productAdvertisementColumn: '//th[@class="product-advertisement-th"]',
+				skuColumn: '//th[normalize-space()="SKU"]',
+				stockColumn: '//th[normalize-space()="Stock"]',
+				priceColumn: '//th[normalize-space()="Price"]',
+				typeColumn: '//th[normalize-space()="Type"]',
+				viewsColumn: '//th[normalize-space()="Views"]',
+				dateColumn: '//th[normalize-space()="Date"]',
+			},
 
 
 			// Product Sub Options
 			numberOfRows: '#dokan-product-list-table tbody tr th.dokan-product-select',
+			productCell: (productName: string) => `//a[contains(text(),'${productName}')]/../..`,
 			productLink: (productName: string) => `//a[contains(text(),'${productName}')]`,
 			editProduct: '.row-actions .edit',
-			deletePermanently: '.row-actions .delete',
+			permanentlyDelete: '.row-actions .delete',
 			view: '.row-actions .view',
 			quickEdit: '.row-actions .item-inline-edit',
 			duplicate: '.row-actions .duplicate',
@@ -3367,12 +3386,25 @@ export const selector = {
 			// Save Product
 			saveProduct: '.dokan-btn-lg',
 			updatedSuccessMessage: '.dokan-message',
+
+			quickEditProduct: {
+				title: '(//tr[@class="dokan-product-list-inline-edit-form"]//input[@class="dokan-form-control"])[1]',
+				update: '(//button[@type="button"][normalize-space()="Update"])[1]',
+			},
+
+
+			confirmAction: '.swal2-actions .swal2-confirm',
+			cancelAction: '.swal2-actions .swal2-cancel',
+			successMessage: '.swal2-actions .swal2-confirm',
+			dokanMessage: '.dokan-message',
+			dokanSuccessMessage: '.dokan-alert.dokan-alert-success',
 		},
 
 		// Orders
-		vOrders: {
+		orders: {
+
 			// Menus
-			menu: {
+			menus: {
 				all: '//ul[contains(@class,"order-statuses-filter")]//a[contains(text(), "All")]',
 				completed: '//ul[contains(@class,"order-statuses-filter")]//a[contains(text(), "Completed")]',
 				processing: '//ul[contains(@class,"order-statuses-filter")]//a[contains(text(), "Processing")]',
@@ -3382,22 +3414,60 @@ export const selector = {
 				refunded: '//ul[contains(@class,"order-statuses-filter")]//a[contains(text(), "Refunded")]',
 				failed: '//ul[contains(@class,"order-statuses-filter")]//a[contains(text(), "Failed")]',
 			},
+
 			// Export Order
-			exportAll: '//input[@name="dokan_order_export_all"]',
-			exportFiltered: '//input[@name="dokan_order_export_filtered"]',
+			export: {
+				exportAll: '//input[@name="dokan_order_export_all"]',
+				exportFiltered: '//input[@name="dokan_order_export_filtered"]',
+			},
+
 			// Filter
-			filterByDate: '#order_date_filter',
-			filterByRegisteredCustomer: '.page-template-default',
-			filter: '.dokan-left .dokan-btn',
+			filters: {
+				filterByCustomer: {
+					dropDown: '.select2-selection .select2-selection__arrow',
+					input: '.select2-search__field',
+					searchedResult: '.select2-results__option--highlighted',
+				},
+
+				filterByDate: '#order_filter_date_range',
+				filter: '//button[normalize-space()="Filter"]',
+				reset: '//a[normalize-space()="Reset"]',
+			},
+
+			search: {
+				searchInput: '//input[@placeholder="Search Orders"]',
+				searchBtn: '//button[normalize-space()="Filter"]',
+			},
+
 			// Bulk Actions
-			selectAll: '#cb-select-all',
-			selectBulkOrderAction: '#bulk-order-action-selector',
-			applyBulkOrder: '#bulk-order-action',
+			bulkActions: {
+				selectAll: '#cb-select-all',
+				selectAction: '#bulk-order-action-selector', // wc-on-hold, wc-processing, wc-completed
+				applyAction: '#bulk-order-action',
+			},
+
+
+			// Table
+			table: {
+				orderTable: '.dokan-table.dokan-table-striped',
+				orderColumn: '//th[normalize-space()="Order"]',
+				totalColumn: '//th[normalize-space()="Order Total"]',
+				earningColumn: '//th[normalize-space()="Earning"]',
+				statusColumn: '//th[normalize-space()="Status"]',
+				customerColumn: '//th[normalize-space()="Customer"]',
+				dateColumn: '//th[normalize-space()="Date"]',
+				shipmentColumn: '//th[normalize-space()="Shipment"]',
+				actionColumn: '//th[normalize-space()="Action"]',
+			},
+
+
+			numberOfRows: '.dokan-table.dokan-table tbody tr th.dokan-order-select',
 			// Order Details from Table
 			orderTotalTable: (orderNumber: string) => `//strong[contains(text(),'Order ${orderNumber}')]/../../..//td[@class='dokan-order-total']//bdi`,
 			orderTotalAfterRefundTable: (orderNumber: string) => `///strong[contains(text(),'Order ${orderNumber}')]/../../..//td[@class='dokan-order-total']//ins//bdi`,
 			vendorEarningTable: (orderNumber: string) => `//strong[contains(text(),'Order ${orderNumber}')]/../../..//td[@class='dokan-order-earning']//span`,
 			orderStatusTable: (orderNumber: string) => `//strong[contains(text(),'Order ${orderNumber}')]/../../..//td[@class='dokan-order-status']//span`,
+
 			// Order Sub-Actions
 			orderLink: (orderNumber: string) => `//strong[contains(text(),'Order ${orderNumber}')]/..`,
 			processing: (orderNumber: string) => `//strong[contains(text(),'Order ${orderNumber}')]/../../..//a[@data-original-title='Processing']`,
@@ -3408,11 +3478,11 @@ export const selector = {
 			currentOrderStatus: '.order-status .dokan-label',
 			selectedOrderStatus: '//select[@id="order_status"]//option[@selected="selected"]',
 			edit: '.dokan-edit-status',
-			orderStatus: '#order_status',
+			orderStatus: '#order_status',  // wc-pending, wc-processing, wc-completed, wc-cancelled, wc-refunded, wc-failed, wc-checkout-draft
 			updateOrderStatus: '//input[@name="dokan_change_status"]',
 
 			// Order Details
-			orderNumber: '.dokan-panel-heading strong',
+			orderNumber: '//strong[contains(text(),"Order#")]',
 			orderDate: '//span[contains(text(),"Order Date:")]/..',
 			orderTotal: '//td[contains(text(),"Order Total:")]/..//bdi',
 			orderTotalBeforeRefund: '//td[contains(text(),"Order Total:")]/..//del',
@@ -5635,6 +5705,7 @@ export const selector = {
 
 		cDokanSelector: {
 			dokanAlertSuccessMessage: '.white-popup.dokan-alert-success',
+			dokanSuccessMessage: '.dokan-alert.dokan-alert-success',
 			dokanAlertClose: 'button.icon-close',
 		},
 

@@ -26,7 +26,7 @@ test.describe('Single store functionality test', () => {
 
 	// single store page
 
-	test.skip('dokan single store page is rendering properly @lite @pro', async ( ) => {
+	test.skip('dokan single store page is rendering properly @lite @pro @explo', async ( ) => {
 		//TODO: need toc on store and admin settings
 		await singleStorePage.singleStoreRenderProperly(data.predefined.vendorStores.vendor1);  //TODO: compatible with all four layout
 	});

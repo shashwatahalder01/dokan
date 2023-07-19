@@ -39,7 +39,7 @@ test.describe('Request for quotation test', () => {
 	});
 
 	test('admin can trash quote rule @pro', async ( ) => {
-		await requestForQuotationsPage.updateQuoteRule(data.requestForQuotation.quoteRule.title, 'trash'); 
+		await requestForQuotationsPage.updateQuoteRule(data.requestForQuotation.quoteRule.title, 'trash');
 	});
 
 	test('admin can restore quote rule @pro', async ( ) => {

@@ -256,10 +256,11 @@ export class ApiUtils {
 	}
 
 	// create product
-	async createProduct(payload: object, auth? : auth): Promise<[responseBody, string]> {
+	async createProduct(payload: object, auth? : auth): Promise<[responseBody, string, string]> {
 		const [, responseBody] = await this.post(endPoints.createProduct, { data: payload, headers: auth });
 		const productId = responseBody.id;
-		return [responseBody, productId];
+		const productName = responseBody.name;
+		return [responseBody, productId, productName];
 	}
 
 	// delete product

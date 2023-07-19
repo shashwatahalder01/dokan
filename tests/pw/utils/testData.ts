@@ -145,6 +145,7 @@ export const data = {
 			storeName: String(process.env.VENDOR) + 'store',
 			status: 'publish',
 			stockStatus: false,
+			editProduct: ''
 		},
 
 		variable: {
@@ -733,7 +734,7 @@ export const data = {
 				productSearch: 'products/?product_listing_search',
 				productAuction: 'dashboard/new-auction-product',
 				productBooking: 'dashboard/booking/new-product',
-				order: 'dashboard/orders',
+				orders: 'dashboard/orders',
 				coupon: 'dashboard/coupons',
 				reviews: 'dashboard/reviews/',
 				withdraw: 'dashboard/withdraw/',
@@ -741,6 +742,8 @@ export const data = {
 				withdrawRequests: 'dashboard/withdraw-requests',
 				staff: 'dashboard/staffs',
 				followers: 'dashboard/followers',
+				tools: 'dashboard/tools',
+				csvExport: 'dashboard/tools/csv-export',
 				auction: 'dashboard/auction',
 				booking: 'dashboard/booking',
 				settingsStore: 'dashboard/settings/store',

@@ -15,7 +15,7 @@ test.beforeAll(async ({ browser, request }) => {
 	aPage = await adminContext.newPage();
 	requestForQuotationsPage = new RequestForQuotationsPage(aPage);
 	apiUtils = new ApiUtils(request);
-	const [, pId] = await apiUtils.createProduct(payloads.createProduct(), payloads.vendorAuth);
+	const [, pId,] = await apiUtils.createProduct(payloads.createProduct(), payloads.vendorAuth);
 	productId.push(pId);
 });
 

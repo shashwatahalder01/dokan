@@ -12,7 +12,7 @@ let attributeTermId: string;
 
 test.beforeAll(async ({ request }) => {
 	apiUtils = new ApiUtils(request);
-	[, productId] = await apiUtils.createProduct(payloads.createProduct());
+	[, productId,] = await apiUtils.createProduct(payloads.createProduct());
 	[attributeTerm, attributeId, attributeTermId] = await apiUtils.createAttributeTerm(payloads.createAttribute(), payloads.createAttributeTerm());
 	attribute = await apiUtils.getSingleAttribute(attributeId);
 });

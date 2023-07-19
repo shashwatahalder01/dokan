@@ -8,7 +8,7 @@ let productId: string;
 
 test.beforeAll(async ({ request }) => {
 	apiUtils = new ApiUtils(request);
-	[, productId] = await apiUtils.createProduct(payloads.createProduct());
+	[, productId,] = await apiUtils.createProduct(payloads.createProduct());
 });
 
 const versions = ['v1', 'v2'];

@@ -27,7 +27,7 @@ test.describe('Single product functionality test', () => {
 
 	// single product page
 
-	test('single product is rendering properly @lite @pro', async ( ) => {
+	test('single product is rendering properly @lite @pro @explo', async ( ) => {
 		await singleProductPage.singleProductRenderProperly(data.predefined.simpleProduct.product1.name);
 	});
 

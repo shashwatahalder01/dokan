@@ -1283,7 +1283,7 @@ export class BasePage {
 
 	// assert element to contain text
 	async toContainText(selector: string, text: string){
-		await expect(this.page.locator(selector)).toContainText(text);
+		await expect(this.page.locator(selector)).toContainText(text.toLowerCase());
 	}
 
 	// assert element to have count
@@ -1313,7 +1313,7 @@ export class BasePage {
 
 	// assert element not to contain text
 	async notToContainText(selector: string, text: string){
-		await expect(this.page.locator(selector)).not.toContainText(text);
+		await expect(this.page.locator(selector)).not.toContainText(text.toLowerCase());
 	}
 
 	// assert element not to have count

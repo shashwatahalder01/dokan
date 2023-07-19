@@ -120,17 +120,14 @@ jobs:
 
       - name: Activate theme:Storefront
         run: |
-          cd tests/pw 
-          # npm run activate:theme
+          cd tests/pw
           npm run wp-env run tests-cli "wp theme activate storefront"
 
       - name: Set Permalink structure
         run: |
           cd tests/pw 
-          # npm run wp-env run tests-cli 'wp rewrite structure /%postname%/'
           npm run wp-env run tests-cli "wp rewrite structure /%postname%/"
-
-          curl http://localhost:9999/wp-json/wp/v2 
+          # curl http://localhost:9999/wp-json/wp/v2 
 
       # - name: Setup for e2e tests
       #   run: |

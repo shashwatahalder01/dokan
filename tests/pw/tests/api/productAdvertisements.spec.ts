@@ -27,7 +27,7 @@ test.describe('product advertisement api test', () => {
 	});
 
 	test('create a product advertisement @pro', async () => {
-		const [body, productId] = await apiUtils.createProduct(payloads.createProduct());
+		const [body, productId,] = await apiUtils.createProduct(payloads.createProduct());
 		const sellerId = body.store.id;
 		const [response, responseBody] = await apiUtils.post(endPoints.createProductAdvertisement, { data: { vendor_id: sellerId, product_id: productId } });
 		expect(response.ok()).toBeTruthy();

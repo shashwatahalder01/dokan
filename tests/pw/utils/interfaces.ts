@@ -111,6 +111,7 @@ export interface product {
 		storeName: string;
 		status: string;
 		stockStatus: boolean;
+		editProduct: string;
 	}
 
 	variable: {
