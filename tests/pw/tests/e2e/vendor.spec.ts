@@ -207,7 +207,7 @@ test.describe('Vendor functionality test 2', () => {
 		vPage = await vendorContext.newPage();
 		vendorPage = new VendorPage(vPage);
 		apiUtils = new ApiUtils(request);
-		// [,, productName] = await apiUtils.createProduct(payloads.createProduct(), payloads. vendorAuth);
+		[,, productName] = await apiUtils.createProduct(payloads.createProduct(), payloads. vendorAuth);
 		[,, orderId, ] = await apiUtils.createOrderWithStatus(PRODUCT_ID, { ...payloads.createOrder, customer_id: CUSTOMER_ID }, data.order.orderStatus.onhold, payloads.vendorAuth);
 		// const [,, orderId, ] = await apiUtils.createOrderWithStatus(PRODUCT_ID, { ...payloads.createOrder, customer_id: CUSTOMER_ID }, data.order.orderStatus.completed, payloads.vendorAuth);
 	});

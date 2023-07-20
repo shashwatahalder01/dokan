@@ -5,7 +5,7 @@ import { data } from 'utils/testData';
 import { payloads } from 'utils/payloads';
 
 
-const { VENDOR_ID, CUSTOMER_ID } = process.env;
+const { PRODUCT_ID, VENDOR_ID, CUSTOMER_ID } = process.env;
 // const  CUSTOMER_ID  = '2';
 // const VENDOR_ID = '3';
 
@@ -91,6 +91,7 @@ test.describe('Store Support test', () => {
 		await storeSupportsAdmin.storeSupportBulkAction('close');
 	});
 
+
 	//todo: filter store support by calendar
 
 
@@ -99,8 +100,11 @@ test.describe('Store Support test', () => {
 	});
 
 	test('customer can ask for store support on order details @pro', async ( ) => {
-		await storeSupportsCustomer.storeSupport(data.predefined.simpleProduct.product1.name, data.customer.customerInfo.getSupport, 'order');
+		const [,, orderId, ] = await apiUtils.createOrderWithStatus(PRODUCT_ID, { ...payloads.createOrder, customer_id: CUSTOMER_ID }, data.order.orderStatus.completed, payloads.vendorAuth);
+		await storeSupportsCustomer.storeSupport(orderId, data.customer.customerInfo.getSupport, 'order');
 	});
+
+
 	// TODO: order received
 
 	test('customer can ask for store support on single store @pro', async ( ) => {
