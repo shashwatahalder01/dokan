@@ -34,7 +34,7 @@ test.beforeAll(async ({ browser, request }) => {
 	const[, supportTicketId2] = await apiUtils.createSupportTicket({ ...payloads.createSupportTicket, author: CUSTOMER_ID, store_id: VENDOR_ID }, payloads.adminAuth );
 	// console.log(supportTicketId1, supportTicketId2);
 	// const[,supportTicketId3,] = await apiUtils.updateSupportTicketStatus(supportTicketId2, 'close', payloads.adminAuth);
-	// console.log(supportTicketId3); 
+	// console.log(supportTicketId3);
 });
 
 test.afterAll(async ( ) => {
@@ -94,13 +94,14 @@ test.describe('Store Support test', () => {
 	//todo: filter store support by calendar
 
 
-	test.skip('customer can ask for store support on single product @pro', async ( ) => {
+	test('customer can ask for store support on single product @pro', async ( ) => {
 		await storeSupportsCustomer.storeSupport(data.predefined.simpleProduct.product1.name, data.customer.customerInfo.getSupport, 'product');
 	});
 
-	test.skip('customer can ask for store support on order details @pro', async ( ) => {
+	test('customer can ask for store support on order details @pro', async ( ) => {
 		await storeSupportsCustomer.storeSupport(data.predefined.simpleProduct.product1.name, data.customer.customerInfo.getSupport, 'order');
 	});
+	// TODO: order received
 
 	test('customer can ask for store support on single store @pro', async ( ) => {
 		await storeSupportsCustomer.storeSupport(data.predefined.vendorStores.vendor1, data.customer.customerInfo.getSupport, 'store');
