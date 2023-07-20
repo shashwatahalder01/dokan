@@ -5173,8 +5173,10 @@ export const selector = {
 				submitEnquirySuccessMessage: '.alert.alert-success',
 
 				//guest user
-				guestName: '#name',
-				guestEmail: '#dokan-product-enquiry #email',
+				guest: {
+					guestName: '#name',
+					guestEmail: '#dokan-product-enquiry #email',
+				},
 
 			},
 

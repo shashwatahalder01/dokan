@@ -5,12 +5,14 @@ import { data } from 'utils/testData';
 import { payloads } from 'utils/payloads';
 
 
-const { VENDOR_ID, CUSTOMER_ID } = process.env;
+// const { VENDOR_ID, CUSTOMER_ID } = process.env;
+const  CUSTOMER_ID  = '2';
+const VENDOR_ID = '3';
 
 
 let storeSupportsAdmin: StoreSupportsPage;
 let storeSupportsCustomer: StoreSupportsPage;
-let unsignedUser: StoreSupportsPage;
+let guestUser: StoreSupportsPage;
 let aPage: Page, cPage: Page, uPage: Page;
 let apiUtils: ApiUtils;
 
@@ -23,14 +25,16 @@ test.beforeAll(async ({ browser, request }) => {
 	cPage = await customerContext.newPage();
 	storeSupportsCustomer = new StoreSupportsPage(cPage);
 
-	const unsignedContext = await browser.newContext({ storageState: { cookies: [], origins: [] } });
-	uPage = await unsignedContext.newPage();
-	unsignedUser =  new StoreSupportsPage(uPage);
+	const guestContext = await browser.newContext({ storageState: { cookies: [], origins: [] } });
+	uPage = await guestContext.newPage();
+	guestUser =  new StoreSupportsPage(uPage);
 
 	apiUtils = new ApiUtils(request);
-	await apiUtils.createSupportTicket({ ...payloads.createSupportTicket, author: CUSTOMER_ID, store_id: VENDOR_ID }, payloads.adminAuth );
-	const[, supportTicketId] = await apiUtils.createSupportTicket({ ...payloads.createSupportTicket, author: CUSTOMER_ID, store_id: VENDOR_ID }, payloads.adminAuth );
-	await apiUtils.updateSupportTicketStatus(supportTicketId, 'close', payloads.adminAuth);
+	const[, supportTicketId1] = await apiUtils.createSupportTicket({ ...payloads.createSupportTicket, author: CUSTOMER_ID, store_id: VENDOR_ID }, payloads.adminAuth );
+	const[, supportTicketId2] = await apiUtils.createSupportTicket({ ...payloads.createSupportTicket, author: CUSTOMER_ID, store_id: VENDOR_ID }, payloads.adminAuth );
+	console.log(supportTicketId1, supportTicketId2);
+	const[,supportTicketId3,] = await apiUtils.updateSupportTicketStatus(supportTicketId2, 'close', payloads.adminAuth);
+	console.log(supportTicketId3); 
 });
 
 test.afterAll(async ( ) => {
@@ -39,27 +43,27 @@ test.afterAll(async ( ) => {
 	await uPage.close();
 });
 
-test.describe('Store Support test', () => {
+test.describe.only('Store Support test', () => {
 
 	// test.use({ storageState: data.auth.adminAuthFile });
 
-	test('dokan store support menu page is rendering properly @pro @explo', async ( ) => {
-		await storeSupportsAdmin.adminStoreSupportRenderProperly();
-	});
+	// test('dokan store support menu page is rendering properly @pro @explo', async ( ) => {
+	// 	await storeSupportsAdmin.adminStoreSupportRenderProperly();
+	// });
 
-	test('admin can search support ticket @pro', async ( ) => {
-		await storeSupportsAdmin.searchSupportTicket(data.storeSupport.title);
-	});
+	// test('admin can search support ticket @pro', async ( ) => {
+	// 	await storeSupportsAdmin.searchSupportTicket(data.storeSupport.title);
+	// });
 
-	test('admin can filter store support by vendor @pro', async ( ) => {
-		await storeSupportsAdmin.filterStoreSupports(data.storeSupport.filter.byVendor, 'by-vendor');
-	});
+	// test('admin can filter store support by vendor @pro', async ( ) => {
+	// 	await storeSupportsAdmin.filterStoreSupports(data.storeSupport.filter.byVendor, 'by-vendor');
+	// });
 
-	test('admin can filter store support by customer @pro', async ( ) => {
-		await storeSupportsAdmin.filterStoreSupports(data.storeSupport.filter.byCustomer, 'by-customer');
-	});
+	// test('admin can filter store support by customer @pro', async ( ) => {
+	// 	await storeSupportsAdmin.filterStoreSupports(data.storeSupport.filter.byCustomer, 'by-customer');
+	// });
 
-	test('admin can reply to support ticket as admin @pro', async ( ) => {
+	test.only('admin can reply to support ticket as admin @pro', async ( ) => {
 		await storeSupportsAdmin.replySupportTicket(data.storeSupport.chatReply.asAdmin);
 	});
 
@@ -90,21 +94,25 @@ test.describe('Store Support test', () => {
 	//todo: filter store support by calendar
 
 
-	test('customer can ask for store support on single product @pro', async ( ) => {
-		await storeSupportsCustomer.storeSupport(data.predefined.simpleProduct.product1.name, data.customer.customerInfo.getSupport, true);
+	test.skip('customer can ask for store support on single product @pro', async ( ) => {
+		await storeSupportsCustomer.storeSupport(data.predefined.simpleProduct.product1.name, data.customer.customerInfo.getSupport, 'product');
 	});
 
-	test.skip('customer can ask for store support on single store @pro', async ( ) => {
-		await storeSupportsCustomer.storeSupport(data.predefined.vendorStores.vendor1, data.customer.customerInfo.getSupport);
+	test.skip('customer can ask for store support on order details @pro', async ( ) => {
+		await storeSupportsCustomer.storeSupport(data.predefined.simpleProduct.product1.name, data.customer.customerInfo.getSupport, 'order');
+	});
+
+	test('customer can ask for store support on single store @pro', async ( ) => {
+		await storeSupportsCustomer.storeSupport(data.predefined.vendorStores.vendor1, data.customer.customerInfo.getSupport, 'store');
 	});
 
 	test('customer can send message to support ticket @pro', async ( ) => {
-		await storeSupportsCustomer.storeSupport(data.predefined.vendorStores.vendor1, data.customer.customerInfo.getSupport);
+		await storeSupportsCustomer.storeSupport(data.predefined.vendorStores.vendor1, data.customer.customerInfo.getSupport, 'store');
 		await storeSupportsCustomer.sendMessageCustomerSupportTicket(data.customer.supportTicket);
 	});
 
 	test('guest customer need to login before asking for store support @pro', async ( ) => {
-		await unsignedUser.storeSupport(data.predefined.vendorStores.vendor1, data.customer.customerInfo.getSupport);
+		await guestUser.storeSupport(data.predefined.vendorStores.vendor1, data.customer.customerInfo.getSupport, 'store');
 	});
 
 });

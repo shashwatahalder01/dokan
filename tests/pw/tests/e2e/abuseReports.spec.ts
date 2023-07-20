@@ -11,7 +11,7 @@ const { VENDOR_ID, CUSTOMER_ID } = process.env;
 
 let abuseReportsAdmin: AbuseReportsPage;
 let abuseReportsCustomer: AbuseReportsPage;
-let unsignedUser: AbuseReportsPage;
+let guestUser: AbuseReportsPage;
 let aPage: Page, cPage: Page, uPage: Page;
 let apiUtils: ApiUtils;
 
@@ -24,9 +24,9 @@ test.beforeAll(async ({ browser, request }) => {
 	cPage = await customerContext.newPage();
 	abuseReportsCustomer = new AbuseReportsPage(cPage);
 
-	const unsignedContext = await browser.newContext({ storageState: { cookies: [], origins: [] } });
-	uPage = await unsignedContext.newPage();
-	unsignedUser =  new AbuseReportsPage(uPage);
+	const guestContext = await browser.newContext({ storageState: { cookies: [], origins: [] } });
+	uPage = await guestContext.newPage();
+	guestUser =  new AbuseReportsPage(uPage);
 
 	apiUtils = new ApiUtils(request);
 	const productId = await apiUtils.getProductId(data.predefined.simpleProduct.product1.name, payloads.vendorAuth);
@@ -72,7 +72,7 @@ test.describe('Abuse report test', () => {
 	});
 
 	test('guest customer can report product @pro', async ( ) => {
-		await unsignedUser.reportProduct(data.predefined.simpleProduct.product1.name, data.product.report);
+		await guestUser.reportProduct(data.predefined.simpleProduct.product1.name, data.product.report);
 	});
 
 	test('only logged-in customer can report product @pro', async ( ) => {

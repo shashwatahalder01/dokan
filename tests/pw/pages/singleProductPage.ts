@@ -3,7 +3,7 @@ import { CustomerPage } from 'pages/customerPage';
 import { selector } from 'pages/selectors';
 import { helpers } from 'utils/helpers';
 import { data } from 'utils/testData';
-import { customer, product, paymentDetails, order } from 'utils/interfaces';
+import {  product } from 'utils/interfaces';
 
 const { DOKAN_PRO } = process.env;
 
@@ -79,7 +79,9 @@ export class SingleProductPage extends CustomerPage {
 
 			// product enquiry is visible
 			await this.click(selector.customer.cSingleProduct.menus.productEnquiry);
-			await this.multipleElementVisible(selector.customer.cSingleProduct.productEnquiry);
+			// eslint-disable-next-line @typescript-eslint/no-unused-vars
+			const { submitEnquirySuccessMessage, guest, ...productEnquiry } = selector.customer.cSingleProduct.productEnquiry;
+			await this.multipleElementVisible(productEnquiry);
 
 		}
 

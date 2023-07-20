@@ -723,6 +723,7 @@ export const data = {
 			supportTickets: 'my-account/support-tickets',
 			productDetails: (productName: string) => `product/${productName}`,
 			vendorDetails: (storeName: string) => `store/${storeName}`,
+			myOrderDetails: (orderId: string) => `my-account/view-order/${orderId}`,
 			productReview: 'wp-comments-post.php',
 			submitSupport: 'wp-comments-post.php',
 

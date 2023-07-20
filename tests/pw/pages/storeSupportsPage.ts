@@ -153,8 +153,27 @@ export class StoreSupportsPage extends AdminPage {
 
 
 	// customer ask for store support
-	async storeSupport(productOrStore: string, getSupport: customer['customerInfo']['getSupport'], singleProduct?: boolean): Promise<void> {
-		singleProduct ? await this.goIfNotThere(data.subUrls.frontend.productDetails(helpers.slugify(productOrStore))) : await this.goIfNotThere(data.subUrls.frontend.vendorDetails(helpers.slugify(productOrStore)));
+	async storeSupport(input: string, getSupport: customer['customerInfo']['getSupport'], action: string): Promise<void> {
+
+		switch(action){
+
+		case 'store' :
+			await this.goIfNotThere(data.subUrls.frontend.vendorDetails(helpers.slugify(input)));
+			break;
+
+		case 'product' :
+			await this.goIfNotThere(data.subUrls.frontend.productDetails(helpers.slugify(input)));
+			break;
+
+		case 'order' :
+			await this.goIfNotThere(data.subUrls.frontend.myOrderDetails(input));
+			break;
+
+		default :
+			break;
+
+		}
+
 		await this.clickAndWaitForResponse(data.subUrls.ajax, selector.customer.cSingleStore.storeTabs.getSupport);
 		const isGuest = await this.isVisible(selector.customer.cSingleStore.getSupport.userName);
 		if(isGuest){

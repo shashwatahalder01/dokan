@@ -20,10 +20,10 @@ export class ProductEnquiryPage extends CustomerPage {
 	async enquireProduct(productName: string, enquiry: product['enquiry']): Promise<void> {
 		await this.goIfNotThere(data.subUrls.frontend.productDetails(helpers.slugify(productName)));
 		await this.click(selector.customer.cSingleProduct.menus.productEnquiry);
-		const isGuest = await this.isVisible(selector.customer.cSingleProduct.productEnquiry.guestName);
+		const isGuest = await this.isVisible(selector.customer.cSingleProduct.productEnquiry.guest.guestName);
 		if(isGuest){
-			await this.clearAndType(selector.customer.cSingleProduct.productEnquiry.guestName, enquiry.guestName());
-			await this.clearAndType(selector.customer.cSingleProduct.productEnquiry.guestEmail, enquiry.guestEmail());
+			await this.clearAndType(selector.customer.cSingleProduct.productEnquiry.guest.guestName, enquiry.guestName());
+			await this.clearAndType(selector.customer.cSingleProduct.productEnquiry.guest.guestEmail, enquiry.guestEmail());
 		}
 		await this.clearAndType(selector.customer.cSingleProduct.productEnquiry.enquiryMessage, enquiry.enquiryDetails);
 		await this.clickAndWaitForResponse(data.subUrls.ajax, selector.customer.cSingleProduct.productEnquiry.submitEnquiry);
