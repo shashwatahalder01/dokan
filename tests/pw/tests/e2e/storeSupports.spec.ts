@@ -5,9 +5,9 @@ import { data } from 'utils/testData';
 import { payloads } from 'utils/payloads';
 
 
-// const { VENDOR_ID, CUSTOMER_ID } = process.env;
-const  CUSTOMER_ID  = '2';
-const VENDOR_ID = '3';
+const { VENDOR_ID, CUSTOMER_ID } = process.env;
+// const  CUSTOMER_ID  = '2';
+// const VENDOR_ID = '3';
 
 
 let storeSupportsAdmin: StoreSupportsPage;
@@ -32,9 +32,9 @@ test.beforeAll(async ({ browser, request }) => {
 	apiUtils = new ApiUtils(request);
 	const[, supportTicketId1] = await apiUtils.createSupportTicket({ ...payloads.createSupportTicket, author: CUSTOMER_ID, store_id: VENDOR_ID }, payloads.adminAuth );
 	const[, supportTicketId2] = await apiUtils.createSupportTicket({ ...payloads.createSupportTicket, author: CUSTOMER_ID, store_id: VENDOR_ID }, payloads.adminAuth );
-	console.log(supportTicketId1, supportTicketId2);
-	const[,supportTicketId3,] = await apiUtils.updateSupportTicketStatus(supportTicketId2, 'close', payloads.adminAuth);
-	console.log(supportTicketId3); 
+	// console.log(supportTicketId1, supportTicketId2);
+	// const[,supportTicketId3,] = await apiUtils.updateSupportTicketStatus(supportTicketId2, 'close', payloads.adminAuth);
+	// console.log(supportTicketId3); 
 });
 
 test.afterAll(async ( ) => {
@@ -43,27 +43,27 @@ test.afterAll(async ( ) => {
 	await uPage.close();
 });
 
-test.describe.only('Store Support test', () => {
+test.describe('Store Support test', () => {
 
 	// test.use({ storageState: data.auth.adminAuthFile });
 
-	// test('dokan store support menu page is rendering properly @pro @explo', async ( ) => {
-	// 	await storeSupportsAdmin.adminStoreSupportRenderProperly();
-	// });
+	test('dokan store support menu page is rendering properly @pro @explo', async ( ) => {
+		await storeSupportsAdmin.adminStoreSupportRenderProperly();
+	});
 
-	// test('admin can search support ticket @pro', async ( ) => {
-	// 	await storeSupportsAdmin.searchSupportTicket(data.storeSupport.title);
-	// });
+	test('admin can search support ticket @pro', async ( ) => {
+		await storeSupportsAdmin.searchSupportTicket(data.storeSupport.title);
+	});
 
-	// test('admin can filter store support by vendor @pro', async ( ) => {
-	// 	await storeSupportsAdmin.filterStoreSupports(data.storeSupport.filter.byVendor, 'by-vendor');
-	// });
+	test('admin can filter store support by vendor @pro', async ( ) => {
+		await storeSupportsAdmin.filterStoreSupports(data.storeSupport.filter.byVendor, 'by-vendor');
+	});
 
-	// test('admin can filter store support by customer @pro', async ( ) => {
-	// 	await storeSupportsAdmin.filterStoreSupports(data.storeSupport.filter.byCustomer, 'by-customer');
-	// });
+	test('admin can filter store support by customer @pro', async ( ) => {
+		await storeSupportsAdmin.filterStoreSupports(data.storeSupport.filter.byCustomer, 'by-customer');
+	});
 
-	test.only('admin can reply to support ticket as admin @pro', async ( ) => {
+	test('admin can reply to support ticket as admin @pro', async ( ) => {
 		await storeSupportsAdmin.replySupportTicket(data.storeSupport.chatReply.asAdmin);
 	});
 
