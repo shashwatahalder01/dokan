@@ -398,18 +398,48 @@ export class ApiUtils {
 	}
 
 	// create coupon
-	async createCoupon(productIds: string[], coupon: coupon, auth?: auth ): Promise<[responseBody, string]> { // TODO: need to update; handle productIds can be empty
+	async createCoupon(productIds: string[], coupon: coupon, auth?: auth ): Promise<[responseBody, string, string]> { // TODO: need to update; handle productIds can be empty
 		const response = await this.request.post(endPoints.createCoupon, { data: { ...coupon, product_ids: productIds }, headers: auth });
 		const responseBody = await this.getResponseBody(response, false);
 		let couponId: string;
+		let couponCode: string;
 		if (responseBody.code === 'woocommerce_rest_coupon_code_already_exists'){
 			expect(response.status()).toBe(400);
 			couponId = await this.getCouponId(coupon.code, auth);
+			couponCode = coupon.code;
 		} else {
 			expect(response.ok()).toBeTruthy();
 			couponId = responseBody.id;
+			couponCode = responseBody.code;
 		}
-		return [responseBody, couponId];
+		return [responseBody, couponId, couponCode];
+	}
+
+
+	// get market couponId
+	async getMarketPlaceCouponId(couponCode: string, auth? : auth): Promise<string> {
+		const [, allCoupons] = await this.get(endPoints.wc.getAllCoupons, { params: { per_page:100 }, headers: auth });
+		const couponId = couponCode ? (allCoupons.find((o: { code: unknown; }) => o.code === couponCode)).id : allCoupons[0].id;
+		return couponId;
+	}
+
+
+	// create market coupon
+	async createMarketPlaceCoupon(coupon: coupon, auth?: auth ): Promise<[responseBody, string, string]> {
+		const response = await this.request.post(endPoints.wc.createCoupon, { data: coupon, headers: payloads.adminAuth });
+		const responseBody = await this.getResponseBody(response, false);
+		let couponId: string;
+		let couponCode: string;
+		if (responseBody.code === 'woocommerce_rest_coupon_code_already_exists'){
+			expect(response.status()).toBe(400);
+			couponId = await this.getMarketPlaceCouponId(coupon.code, auth);
+			couponCode = coupon.code;
+		} else {
+			expect(response.ok()).toBeTruthy();
+			couponId = responseBody.id;
+			couponCode = responseBody.code;
+		}
+		return [responseBody, couponId, couponCode];
 	}
 
 	// update coupon

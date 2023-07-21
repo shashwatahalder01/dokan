@@ -202,10 +202,10 @@ export const payloads = {
 
 	createCoupon: () => ({
 		code: 'VC_' + faker.string.uuid(),
-		amount: faker.number.int({ min: 1, max: 10 }).toString(),
 		discount_type: faker.helpers.arrayElement(['percent', 'fixed_product']),
+		amount: faker.number.int({ min: 1, max: 10 }).toString(),
 		product_ids: [15],
-		individual_use: false, // TODO: why true in e2e
+		individual_use: false,
 		meta_data: [
 			{
 				key: 'apply_before_tax',
@@ -217,6 +217,32 @@ export const payloads = {
 			},
 			{
 				key: 'show_on_store',
+				value: 'yes'
+			}
+		]
+	}),
+
+	createMarketPlaceCoupon: () => ({
+		code: 'VC_' + faker.string.uuid(),
+		discount_type: faker.helpers.arrayElement(['percent', 'fixed_product']),
+		amount: faker.number.int({ min: 1, max: 10 }).toString(),
+		product_ids: [],
+		individual_use: false,
+		meta_data: [
+			{
+				key: 'admin_coupons_enabled_for_vendor',
+				value: 'yes'
+			},
+			{
+				key: 'coupon_commissions_type',
+				value: 'default'
+			},
+			{
+				key: 'admin_coupons_show_on_stores',
+				value: 'yes'
+			},
+			{
+				key: 'admin_coupons_send_notify_to_vendors', // TODO: dont' work
 				value: 'yes'
 			}
 		]

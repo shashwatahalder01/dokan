@@ -383,6 +383,7 @@ export const data = {
 		discountType: 'percent',
 		description:'Coupon description',
 		existingCouponErrorMessage: 'Coupon title already exists',
+		editCoupon: '',
 	},
 
 	// address
@@ -736,7 +737,7 @@ export const data = {
 				productAuction: 'dashboard/new-auction-product',
 				productBooking: 'dashboard/booking/new-product',
 				orders: 'dashboard/orders',
-				coupon: 'dashboard/coupons',
+				coupons: 'dashboard/coupons',
 				reviews: 'dashboard/reviews/',
 				withdraw: 'dashboard/withdraw/',
 				badges: 'dashboard/seller-badge/',

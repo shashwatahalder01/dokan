@@ -3302,6 +3302,7 @@ export const selector = {
 				expandAll: '.wc-pao-expand-all',
 				closeAll: '.wc-pao-close-all',
 			},
+
 			// Add-Ons Option
 			enterAnOption: '.wc-pao-addon-content-label > input',
 			optionPriceType: '.wc-pao-addon-option-price-type',
@@ -3552,6 +3553,31 @@ export const selector = {
 
 		// Coupons
 		vCoupon: {
+			couponText: '.dokan-dashboard-header .left-header-content .entry-title',
+
+			// Menus
+			menus:{
+				myCoupons: '//a[normalize-space()="My Coupons"]',
+				marketplaceCoupons: '//a[normalize-space()="Marketplace Coupons"]',
+
+			},
+
+			// Table
+			table : {
+				couponsTable:  '#vendor-own-coupon .dokan-table',
+				codeColumn: '//th[normalize-space()="Code"]',
+				couponTypeColumn: '//th[normalize-space()="Coupon type"]',
+				couponAmountColumn: '//th[normalize-space()="Coupon amount"]',
+				productIdsColumn: '//th[normalize-space()="Product IDs"]',
+				usageOrLimitColumn: '//th[normalize-space()="Usage / Limit"]',
+				expiryDateColumn: '//th[normalize-space()="Expiry date"]',
+			},
+
+			couponCell: (couponCode: string) => `//span[normalize-space()="${couponCode}"]/../../../../..`,
+			couponLink: (couponCode: string) => `//span[normalize-space()="${couponCode}"]/..`,
+			couponEdit: (couponCode: string) => `//span[normalize-space()="${couponCode}"]/../../../..//div[@class="row-actions"]//span[@class="edit"]`,
+			couponDelete: (couponCode: string) => `//span[normalize-space()="${couponCode}"]/../../../..//div[@class="row-actions"]//span[@class="delete"]`,
+
 			// Create Coupon
 			addNewCoupon: '.dokan-btn',
 			couponTitle: '#title',
@@ -3572,13 +3598,12 @@ export const selector = {
 			showOnStore: '#checkboxes-3',
 			createCoupon: '.dokan-btn-danger',
 
-			// Menus
-			myCoupons: '//ul[@class="dokan_tabs"]//a[contains(text(), "My Coupons")]',
-			marketplaceCoupons: '//ul[@class="dokan_tabs"]//a[contains(text(), "Marketplace Coupons")]',
-
 			// Coupon Dashboard
 			createdCoupon: '.coupon-code.column-primary strong span',
 			couponSaveSuccessMessage: 'Coupon has been saved successfully!',
+
+
+			dokanMessage: '.dokan-message',
 
 			// Coupon Error
 			couponError: '.dokan-alert.dokan-alert-danger',

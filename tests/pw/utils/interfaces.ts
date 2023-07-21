@@ -313,6 +313,7 @@ export interface coupon {
 	discountType: string;
 	description: string;
 	existingCouponErrorMessage: string;
+	editCoupon: string;
 }
 
 // address
