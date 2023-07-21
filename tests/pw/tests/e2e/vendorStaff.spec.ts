@@ -22,8 +22,14 @@ test.describe('Vendor staff test', () => {
 		// 	first_name: 'staff1',
 		// 	last_name: 's1',
 		// 	email: 's1@g.c',
-		// 	roles: 'vendor_staff',
+		// 	roles: ['vendor_staff'],
 		// 	password: '01dokan01'
+		// 	meta:[
+		// 		{
+		// 			key: '_vendor_id'
+		// 			value: 
+		// 		}
+		// 	]
 		// };
 
 		// await apiUtils.createUser( staff, payloads.adminAuth);
