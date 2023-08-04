@@ -39,4 +39,6 @@ test.describe('Vendor delivery time test', () => {
 		await vendor.viewProductSubscription(data.customer.username);
 	});
 
+	//todo: add customer can cancel subscription, change address, change payment, renew now
+
 });

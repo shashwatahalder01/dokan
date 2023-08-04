@@ -296,7 +296,7 @@ export interface order {
 	}
 
 	// Refund
-	refund: {
+	requestWarranty: {
 		itemQuantity: string;
 		refundRequestType: string;
 		refundRequestReasons: string;

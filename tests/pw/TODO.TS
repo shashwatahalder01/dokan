@@ -234,13 +234,7 @@ export const installPluginThruWpCli = async ( pluginPath ) => {
 //todo: 
 //todo: 
 //todo: 
-//todo: debug display is commencted, because of issue while create vendor staff *************************************
-"config": {
-	"WP_DEBUG": "true",
-	"SCRIPT_DEBUG": "true",
-	"WP_DEBUG_LOG": "true",
-	// "WP_DEBUG_DISPLAY": "true"
-  },
+//todo: add render properly tests for rma requests, rfq, my subscriptions, vedors, seller support ticket, bookings, auction settings, 
 
 
 // TODO: ********************api suite******************

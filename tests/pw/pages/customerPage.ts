@@ -5,7 +5,7 @@ import { AdminPage } from 'pages/adminPage';
 import { selector } from 'pages/selectors';
 import { helpers } from 'utils/helpers';
 import { data } from 'utils/testData';
-import { customer, paymentDetails, order } from 'utils/interfaces';
+import { customer, paymentDetails } from 'utils/interfaces';
 
 const { DOKAN_PRO } = process.env;
 
@@ -113,14 +113,14 @@ export class CustomerPage extends BasePage {
 		await this.clearAndType(selector.customer.cAddress.billingStreetAddress, billingInfo.street1);
 		await this.clearAndType(selector.customer.cAddress.billingStreetAddress2, billingInfo.street2);
 		await this.clearAndType(selector.customer.cAddress.billingTownCity, billingInfo.city);
-		await this.focus(selector.customer.cAddress.billingZipCode); //todo:  remove if found alternative soln.
+		await this.focus(selector.customer.cAddress.billingZipCode);
 		await this.click(selector.customer.cAddress.billingState);
 		await this.clearAndType(selector.customer.cAddress.billingStateInput, billingInfo.state);
 		await this.press(data.key.enter);
 		await this.clearAndType(selector.customer.cAddress.billingZipCode, billingInfo.zipCode);
 		await this.clearAndType(selector.customer.cAddress.billingPhone, billingInfo.phone);
 		await this.clearAndType(selector.customer.cAddress.billingEmailAddress, billingInfo.email());
-		await this.clickAndWaitForResponse(data.subUrls.frontend.billingAddress, selector.customer.cAddress.billingSaveAddress, 302);
+		await this.clickAndAcceptAndWaitForResponseAndLoadState(data.subUrls.frontend.billingAddress, selector.customer.cAddress.billingSaveAddress, 302);
 		await this.toContainText(selector.customer.cWooSelector.wooCommerceSuccessMessage, data.customer.customerInfo.addressChangeSuccessMessage);
 	}
 
@@ -145,16 +145,6 @@ export class CustomerPage extends BasePage {
 		await this.clearAndType(selector.customer.cAddress.shippingZipCode, shippingInfo.zipCode);
 		await this.clickAndWaitForResponse(data.subUrls.frontend.shippingAddress, selector.customer.cAddress.shippingSaveAddress, 302);
 		await this.toContainText(selector.customer.cWooSelector.wooCommerceSuccessMessage, data.customer.customerInfo.addressChangeSuccessMessage );
-	}
-
-
-	// customer Send Rma Request
-	async sendRmaMessage(message: string): Promise<void> {
-		await this.click(selector.customer.cMyAccount.rmaRequests);
-		await this.clearAndType(selector.customer.cRma.message, message);
-		await this.click(selector.customer.cRma.sendMessage); //todo:  add ajax is exists soln. below line
-		// await this.clickAndWaitForResponse(data.subUrls.ajax, selector.customer.cRma.sendMessage); //todo:  add ajax is exists
-		await this.toContainText(selector.customer.cWooSelector.wooCommerceSuccessMessage, data.customer.rma.sendMessage);
 	}
 
 
@@ -332,7 +322,7 @@ export class CustomerPage extends BasePage {
 
 
 	// customer place order
-	async paymentOrder(paymentMethod = 'bank'): Promise<void > {
+	async paymentOrder(paymentMethod = 'bank'): Promise<string>{
 
 		switch (paymentMethod) {
 		case 'bank' :
@@ -361,7 +351,7 @@ export class CustomerPage extends BasePage {
 
 		await this.clickAndWaitForResponse(data.subUrls.frontend.orderReceived, selector.customer.cCheckout.placeOrder);
 		await this.toBeVisible(selector.customer.cOrderReceived.orderReceivedSuccessMessage);
-
+		return (await this.getElementText(selector.customer.cOrderReceived.orderDetails.orderNumber)) as string; //remove after solving api issue, return request before all
 	}
 
 
@@ -553,24 +543,6 @@ export class CustomerPage extends BasePage {
 		await this.clearAndType(selector.customer.cAddress.shippingStateInput, shippingInfo.state);
 		await this.press(data.key.enter);
 		await this.clearAndType(selector.customer.cAddress.shippingZipCode, shippingInfo.zipCode);
-	}
-
-
-	// customer ask for warranty
-	async sendWarrantyRequest(orderNumber: string, productName: string, refund: order['refund']): Promise<void> {
-		// await this.goToMyAccount();
-		// await this.click(selector.customer.cMyAccount.orders);
-		await this.goIfNotThere(data.subUrls.frontend.ordersCustomerPage);
-		await this.click(selector.customer.cOrders.ordersWarrantyRequest(orderNumber));
-		await this.click(selector.customer.cOrders.warrantyRequestItemCheckbox(productName));
-		// await this.clearAndType(selector.customer.cOrders.warrantyRequestItemQuantity(productName), refund.itemQuantity)
-		await this.selectByLabel(selector.customer.cOrders.warrantyRequestType, refund.refundRequestType);
-		// await this.select(selector.customer.cOrders.warrantyRequestReason, refund.refundRequestReasons)
-		await this.clearAndType(selector.customer.cOrders.warrantyRequestDetails, refund.refundRequestDetails);
-		await this.click(selector.customer.cOrders.warrantySubmitRequest);
-		// const successMessage = await this.getElementText(selector.customer.cWooSelector.wooCommerceSuccessMessage);
-		// expect(successMessage).toMatch(refund.refundSubmitSuccessMessage);
-		await this.toContainText(selector.customer.cWooSelector.wooCommerceSuccessMessage, refund.refundSubmitSuccessMessage);
 	}
 
 

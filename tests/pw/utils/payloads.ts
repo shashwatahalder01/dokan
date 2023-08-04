@@ -104,6 +104,29 @@ export const payloads = {
 			{
 				key: 'dokan_geo_address',
 				value: 'New York, NY, USA'
+			},
+			{
+				key: '_dokan_geolocation_use_store_settings',
+				value: 'yes'
+			},
+			{
+				key: '_dokan_rma_override_product',
+				value: 'yes'
+			},
+			{
+				key: '_dokan_rma_settings',
+				value: {
+					label: 'Warranty',
+					type: 'included_warranty',
+					policy: 'test refund policy',
+					reasons: [
+						'defective'
+					],
+					length: 'lifetime',
+					length_value: '',
+					length_duration: '',
+					addon_settings: []
+				}
 			}
 		]
 

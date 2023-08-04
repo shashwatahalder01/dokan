@@ -338,14 +338,6 @@ export const data = {
 			failed: 'wc-failed',
 		},
 
-		// Refund
-		refund: {
-			itemQuantity: '1',
-			refundRequestType: 'refund',
-			refundRequestReasons: 'defective',
-			refundRequestDetails: 'I would like to return this product',
-			refundSubmitSuccessMessage: 'Request has been successfully submitted',
-		},
 	},
 
 	// order  Note
@@ -369,6 +361,7 @@ export const data = {
 		dateShipped: 'July 4, 2023' //todo:   f y, j
 	},
 
+
 	// order Shipment Details
 	orderShipmentDetails: {
 		shipmentOrderItem: 'p1_v1 (simple)',
@@ -380,6 +373,17 @@ export const data = {
 		comments: 'test shipment comment'
 	},
 
+	rma: {
+
+		// requestWarranty
+		requestWarranty: {
+			itemQuantity: '1',
+			refundRequestType: 'refund',
+			refundRequestReasons: 'defective',
+			refundRequestDetails: 'I would like to return this product',
+			refundSubmitSuccessMessage: 'Request has been successfully submitted',
+		},
+	},
 
 	// card
 	card: {
@@ -740,6 +744,9 @@ export const data = {
 			orderPay: 'checkout/order-pay',
 			orderReceived: 'checkout/order-received',
 			customerLogout: 'my-account/customer-logout',
+			rmaRequests: 'my-account/rma-requests',
+			viewRmaRequests: 'my-account/view-rma-requests',
+			requestWarranty: 'my-account/request-warranty',
 			productCustomerPage: 'product',
 			ordersCustomerPage: 'orders',
 			shop: 'shop',

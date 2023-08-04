@@ -1229,9 +1229,9 @@ export const selector = {
 
 					// Order Details
 					numberOfRowsFound: '.tablenav.top .displaying-num',
-					orderIdRow: (orderId: string) => `//a[normalize-space()='#${orderId}']/..//..`,
-					orderIdCell: (orderId: string) => `//a[normalize-space()='#${orderId}']/..`,
-					orderIdOrderTotal: (orderId: string) => `//a[normalize-space()='#${orderId}']/..//..//td[@class="column order_total"]//div`,
+					orderIdRow: (orderNumber: string) => `//a[normalize-space()='#${orderNumber}']/..//..`,
+					orderIdCell: (orderNumber: string) => `//a[normalize-space()='#${orderNumber}']/..`,
+					orderIdOrderTotal: (orderNumber: string) => `//a[normalize-space()='#${orderNumber}']/..//..//td[@class="column order_total"]//div`,
 
 					orderDetails:{
 						orderId: '.column.order_id > a',
@@ -1527,7 +1527,7 @@ export const selector = {
 					productNameColumn: 'thead th.product_title',
 					storeNameColumn: 'thead th.store',
 					createdViaColumn: 'thead th.created_via',
-					orderIDColumn: 'thead th.order_id',
+					orderIdColumn: 'thead th.order_id',
 					costColumn: 'thead th.price',
 					expiresColumn: 'thead th.expires_at',
 					dateColumn: 'thead th.added',
@@ -1536,7 +1536,7 @@ export const selector = {
 				numberOfRowsFound: '.tablenav.top .displaying-num',
 				noRowsFound: '//td[normalize-space()="No advertisement found."]',
 				advertisedProductCell: (productName: string) => `//a[normalize-space()="${productName}"]/../..`,
-				advertisedProductOrderIdCell: (orderId: number) => `//a[normalize-space()="${orderId}"]/../..`,
+				advertisedProductOrderIdCell: (orderNumber: number) => `//a[normalize-space()="${orderNumber}"]/../..`,
 				advertisedProductExpire: (productName: string) => `//a[normalize-space()="${productName}"]/../..//span[@class="expire"]`,
 				advertisedProductDelete: (productName: string) => `//a[normalize-space()="${productName}"]/../..//span[@class="delete"]`,
 
@@ -3935,6 +3935,7 @@ export const selector = {
 			// Menus
 			menus:{
 				all: '//ul[contains(@class,"request-statuses-filter")]//a[contains(text(),"All")]',
+				new: '//ul[contains(@class,"request-statuses-filter")]//a[contains(text(),"New")]',
 				completed: '//ul[contains(@class,"request-statuses-filter")]//a[contains(text(),"Completed")]',
 				processing: '//ul[contains(@class,"request-statuses-filter")]//a[contains(text(),"Processing")]',
 			},
@@ -3953,26 +3954,34 @@ export const selector = {
 			noRowsFound: '//td[normalize-space()="No request found"]',
 
 
-			// Refund Request Actions
+			// Refund Request table Actions
 			returnRequestCell: (orderNumber: string) => `//strong[contains(text(),'Order ${orderNumber}')]/../..`,
 			manage: (orderNumber: string) => `//strong[contains(text(),'Order ${orderNumber}')]/../..//a[@class='request-manage']`,
 			delete: (orderNumber: string) => `//strong[contains(text(),'Order ${orderNumber}')]/../..//a[@class='request-delete']`,
 			view: (orderNumber: string) => `//strong[contains(text(),'Order ${orderNumber}')]/../../..//i[@class='far fa-eye']`,
-			// Return Request
-			backToList: '.left-header-content > a',
-			changeOrderStatus: '#status',
-			updateOrderStatus: '//input[@value="Update"]', //invokes default js alert
-			sendRefund: '.dokan-send-refund-request',
-			taxAmount: (productName: string) => `(//a[contains(text(),'${productName}')]/../..//bdi)[1]`,
-			subTotal: (productName: string) => `(//a[contains(text(),'${productName}')]/../..//bdi)[2]`,
-			taxRefund: '//input[contains(@name,"refund_tax")]',
-			subTotalRefund: '//input[contains(@name,"refund_amount")]',
-			sendRequest: '//input[@name="dokan_refund_submit"]',
-			sendRequestSuccessMessage: '.dokan-alert.dokan-alert-info',
 
-			// Conversations
-			message: '#message',
-			sendMessage: '.woocommerce-button',
+			// Return Request
+			returnRequestDetails: {
+				backToList: '.left-header-content a',
+				changeStatus: 'select#status', // new, processing, completed, rejected, reviewing
+				update: '//input[@value="Update"]',
+				sendRefund: '.dokan-send-refund-request',
+
+				taxRefundColumn: '//div[@class="iziModal-content"]//th[contains(text(),"Tax Refund")]',
+				subTotalRefundColumn: '//div[@class="iziModal-content"]//th[contains(text(),"Subtotal Refund")]',
+
+
+				taxAmount: (productName: string) => `(//a[contains(text(),'${productName}')]/../..//bdi)[1]`,
+				subTotal: (productName: string) => `(//a[contains(text(),'${productName}')]/../..//bdi)[2]`,
+				taxRefund: (productName: string) => `//div[@class="iziModal-content"]//td//a[contains(text(),'${productName}')]/../..//input[contains(@name,"refund_tax")]`,
+				subTotalRefund: (productName: string) => `//div[@class="iziModal-content"]//td//a[contains(text(),'${productName}')]/../..//input[contains(@name,"refund_amount")]`,
+				sendRequest: '//input[@name="dokan_refund_submit"]',
+				sendRequestSuccessMessage: '.dokan-alert.dokan-alert-info',
+
+				// Conversations
+				message: '#message',
+				sendMessage: 'input[name="dokan_rma_send_message"]',
+			}
 		},
 
 		// Staff
@@ -5531,16 +5540,21 @@ export const selector = {
 
 		// Customer Orders
 		cOrders: {
+
 			// Request Warranty
-			view: (orderNumber: string) => `//a[contains(text(),'${orderNumber}')]/../..//a[contains(@class,'woocommerce-button button view')]`,
-			recentOrdersWarrantyRequest: (orderNumber: string) => `//td[@class='${orderNumber}']/..//a[@class='button request_warranty']`,
-			ordersWarrantyRequest: (orderNumber: string) => `//a[contains(text(),'#${orderNumber}')]/../..//a[@class='woocommerce-button button request_warranty']`,
-			warrantyRequestItemCheckbox: (productName: string) => `//a[contains(text(),'${productName}')]/../..//input[@type='checkbox' and contains(@name,'request_item')]`,
-			warrantyRequestItemQuantity: (productName: string) => `//a[contains(text(),'${productName}')]/../..//select[contains(@name,'request_item_qty')]`,
-			warrantyRequestType: '#type',
-			warrantyRequestReason: '#reasons',
-			warrantyRequestDetails: '#warranty_request_details',
-			warrantySubmitRequest: '.dokan-btn',
+			requestWarranty:{
+				view: (orderNumber: string) => `//a[contains(text(),'${orderNumber}')]/../..//a[contains(@class,'woocommerce-button button view')]`,
+				recentOrdersWarrantyRequest: (orderNumber: string) => `//td[@class='${orderNumber}']/..//a[@class='button request_warranty']`,
+
+				ordersWarrantyRequest: (orderNumber: string) => `//a[contains(text(),'#${orderNumber}')]/../..//a[@class='woocommerce-button button request_warranty']`,
+				warrantyRequestItemCheckbox: (productName: string) => `//a[contains(text(),'${productName}')]/../..//input[@type='checkbox' and contains(@name,'request_item')]`,
+				warrantyRequestItemQuantity: (productName: string) => `//a[contains(text(),'${productName}')]/../..//select[contains(@name,'request_item_qty')]`,
+				warrantyRequestType: '#type', // replace, refund, coupon
+				warrantyRequestReason: '#reasons',
+				warrantyRequestDetails: '#warranty_request_details',
+				warrantySubmitRequest: 'input[name="warranty_submit_request"]',
+
+			},
 
 			// Order Details
 			OrderDetailsLInk: (orderNumber: string) => `//a[contains(text(), '#${orderNumber}')]/../..//a[contains(text(), 'View')]`,
