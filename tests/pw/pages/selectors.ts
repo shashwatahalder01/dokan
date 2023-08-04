@@ -3482,7 +3482,7 @@ export const selector = {
 			},
 
 
-			numberOfRows: '.dokan-table.dokan-table tbody tr th.dokan-order-select',
+			numberOfRows: '.dokan-table.dokan-table tbody tr',
 			// Order Details from Table
 			orderTotalTable: (orderNumber: string) => `//strong[contains(text(),'Order ${orderNumber}')]/../../..//td[@class='dokan-order-total']//bdi`,
 			orderTotalAfterRefundTable: (orderNumber: string) => `///strong[contains(text(),'Order ${orderNumber}')]/../../..//td[@class='dokan-order-total']//ins//bdi`,
@@ -3582,15 +3582,30 @@ export const selector = {
 
 		// User Subscriptions
 		vUserSubscriptions: {
+
 			// Filter
 			filters: {
 				filterByCustomer: '//select[@id="dokan-filter-customer"]/..//span[@class="select2-selection__arrow"]',
 				filterByCustomerInput: '.select2-search__field',
 				filterByDate: '#order_date_filter',
 				filter: '.dokan-btn',
+				result: '.select2-results__option.select2-results__option--highlighted',
+			},
+
+			//table
+			table: {
+				table: '.dokan-user-subscription-content table',
+				statusColumn: '//th[normalize-space()="Status"]',
+				subscriptionColumn: '//th[normalize-space()="Subscription"]',
+				itemColumn: '//th[normalize-space()="Item"]',
+				totalColumn: '//th[normalize-space()="Total"]',
+				startColumn: '//th[normalize-space()="Start"]',
+				nextPaymentColumn: '//th[normalize-space()="Next Payment"]',
+				endColumn: '//th[normalize-space()="End"]',
 			},
 
 			noSubscriptionsFound: '//div[@class="dokan-error" and contains(text(), "No subscription found")]',
+			numberOfRows: '.dokan-table.dokan-table tbody tr',
 
 			// Edit Subscription
 			subscription: 'td a strong',

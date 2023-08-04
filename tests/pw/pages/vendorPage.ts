@@ -959,20 +959,6 @@ export class VendorPage extends BasePage {
 
 	//todo: new tests
 
-	// vendor return request render properly
-	async vendorUserSubscriptionsRenderProperly(){
-		await this.goIfNotThere(data.subUrls.frontend.vDashboard.userSubscriptions);
-
-		// filter
-		// eslint-disable-next-line @typescript-eslint/no-unused-vars
-		const { filterByCustomerInput,  ...filters } = selector.vendor.vUserSubscriptions.filters;
-		await this.multipleElementVisible(filters);
-
-		await this.toBeVisible(selector.vendor.vUserSubscriptions.noSubscriptionsFound);
-		//todo: add table data
-
-	}
-
 
 	// vendor analytics render properly
 	async vendorAnalyticsRenderProperly(){

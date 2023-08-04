@@ -103,10 +103,6 @@ test.describe('Vendor functionality test', () => {
 	});
 
 
-	test('vendor user subscriptions menu page is rendering properly @pro @explo', async ( ) => {
-		await vendor.vendorUserSubscriptionsRenderProperly();
-	});
-
 	test('vendor analytics menu page is rendering properly @pro @explo', async ( ) => {
 		await vendor.vendorAnalyticsRenderProperly();
 	});
