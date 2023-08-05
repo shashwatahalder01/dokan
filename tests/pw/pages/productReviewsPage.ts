@@ -94,7 +94,7 @@ export class ProductReviewsPage extends VendorPage {
 
 
 	// product review bulk action
-	async productReviewsBulkAuction(action: string){
+	async productReviewsBulkActions(action: string){
 		await this.goIfNotThere(data.subUrls.frontend.vDashboard.reviews);
 
 		// ensure row exists

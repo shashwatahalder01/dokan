@@ -3,8 +3,6 @@ import { LoginPage } from 'pages/loginPage';
 import { CustomerPage } from 'pages/customerPage';
 // import { ApiUtils } from 'utils/apiUtils';
 import { data } from 'utils/testData';
-import { on } from 'process';
-import { only } from 'node:test';
 // import { payloads } from 'utils/payloads';
 
 test.describe('Customer user functionality test', () => {
