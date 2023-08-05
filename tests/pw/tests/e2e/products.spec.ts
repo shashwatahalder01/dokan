@@ -36,15 +36,15 @@ test.describe('Product functionality test', () => {
 	});
 
 
-	test('admin can add product category @lite @pro', async ( ) => {
+	test('admin can add product category @lite', async ( ) => {
 		await admin.addCategory(data.product.category.randomCategory());
 	});
 
-	test('admin can add product attribute @lite @pro', async ( ) => {
+	test('admin can add product attribute @lite', async ( ) => {
 		await admin.addAttribute(data.product.attribute.randomAttribute());
 	});
 
-	test('admin can add simple product @lite @pro', async ( ) => {
+	test('admin can add simple product @lite', async ( ) => {
 		await admin.addSimpleProduct(data.product.simple);
 	});
 
@@ -60,7 +60,7 @@ test.describe('Product functionality test', () => {
 	// 	// await admin.addVariableSubscription(data.product.variableSubscription);
 	// });
 
-	test('admin can add external product @lite @pro', async ( ) => {
+	test('admin can add external product @lite', async ( ) => {
 		await admin.addExternalProduct(data.product.external);
 	});
 
@@ -72,7 +72,7 @@ test.describe('Product functionality test', () => {
 	//vendors
 
 
-	test('vendor product menu page is rendering properly @lite @pro @explo', async ( ) => {
+	test('vendor product menu page is rendering properly @lite @explo', async ( ) => {
 		await vendor.vendorProductsRenderProperly();
 	});
 
@@ -80,19 +80,19 @@ test.describe('Product functionality test', () => {
 		await vendor.exportProducts();
 	});
 
-	test('vendor can search product @lite @pro', async ( ) => {
+	test('vendor can search product @lite', async ( ) => {
 		await vendor.searchProduct(data.predefined.simpleProduct.product1.name);
 	});
 
-	test('vendor can filter products by date @lite @pro', async ( ) => {
+	test('vendor can filter products by date @lite', async ( ) => {
 		await vendor.filterProducts('by-date', '1');
 	});
 
-	test('vendor can filter products by category @lite @pro', async ( ) => {
+	test('vendor can filter products by category @lite', async ( ) => {
 		await vendor.filterProducts('by-category', 'Uncategorized');
 	});
 
-	test('vendor can filter products by type @lite @pro', async ( ) => {
+	test('vendor can filter products by type @lite', async ( ) => {
 		test.skip(!!process.env.CI, 'Filter gets removed if booking module is enabled!');
 		await vendor.filterProducts('by-other', 'simple');
 	});
@@ -101,7 +101,7 @@ test.describe('Product functionality test', () => {
 		await vendor.filterProducts('by-other', 'featured');
 	});
 
-	test('vendor can view product @lite @pro', async ( ) => {
+	test('vendor can view product @lite', async ( ) => {
 		await vendor.viewProduct(data.predefined.simpleProduct.product1.name);
 	});
 
@@ -109,7 +109,7 @@ test.describe('Product functionality test', () => {
 		await vendor.cantBuyOwnProduct(productName);
 	});
 
-	test('vendor can edit product @lite @pro', async ( ) => {
+	test('vendor can edit product @lite', async ( ) => {
 		await vendor.editProduct({ ...data.product.simple, editProduct: productName });
 	});
 
@@ -121,11 +121,10 @@ test.describe('Product functionality test', () => {
 		await vendor.duplicateProduct(productName);
 	});
 
-	test('vendor can permanently delete product @lite @pro', async ( ) => {
+	test('vendor can permanently delete product @lite', async ( ) => {
 		const [,, productName] = await apiUtils.createProduct(payloads.createProduct(), payloads. vendorAuth);
 		await vendor.permanentlyDeleteProduct(productName);
 	});
-
 
 
 });

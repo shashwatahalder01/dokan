@@ -28,7 +28,7 @@ test.describe('Vendor settings test', () => {
 	});
 
 
-	test('vendor store settings menu page is rendering properly @lite @pro @explo', async ( ) => {
+	test('vendor store settings menu page is rendering properly @lite @explo', async ( ) => {
 		await vendor.vendorStoreSettingsRenderProperly();
 	});
 
@@ -59,7 +59,7 @@ test.describe('Vendor settings test', () => {
 
 	// store settings
 
-	test('vendor can set store settings @lite @pro', async ( ) => {
+	test('vendor can set store settings @lite', async ( ) => {
 		await vendor.setStoreSettings(data.vendor.vendorInfo);
 	});
 

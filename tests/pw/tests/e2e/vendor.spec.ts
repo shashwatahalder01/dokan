@@ -28,15 +28,15 @@ test.describe('Vendor user functionality test1', () => {
 	});
 
 
-	test('vendor can register @lite @pro', async ( ) => {
+	test('vendor can register @lite', async ( ) => {
 		await vendorPage.vendorRegister(data.vendor.vendorInfo, { ...data.vendorSetupWizard, choice:false });
 	});
 
-	test('vendor can login @lite @pro', async ( ) => {
+	test('vendor can login @lite', async ( ) => {
 		await loginPage.login(data.vendor);
 	});
 
-	test('vendor can logout @lite @pro', async ( ) => {
+	test('vendor can logout @lite', async ( ) => {
 		await loginPage.login(data.vendor);
 		await loginPage.logout();
 	});
@@ -65,24 +65,24 @@ test.describe('Vendor functionality test', () => {
 	});
 
 
-	test('vendor can setup setup-wizard @lite @pro', async ( ) => {
+	test('vendor can setup setup-wizard @lite', async ( ) => {
 		await vendor.vendorSetupWizard(data.vendorSetupWizard);
 	});
 
-	test('vendor can visit own Store @lite @pro', async ( ) => {
+	test('vendor can visit own Store @lite', async ( ) => {
 		await vendor.visitStore(data.predefined.vendorStores.vendor1);
 	});
 
-	test('vendor account details menu page is rendering properly @lite @pro @explo', async ( ) => {
+	test('vendor account details menu page is rendering properly @lite @explo', async ( ) => {
 		await vendor.vendorAccountDetailsRenderProperly();
 	});
 
-	test('vendor update account details @lite @pro', async ( ) => {
+	test('vendor update account details @lite', async ( ) => {
 		await vendor.setVendorDetails(data.vendor.vendorInfo);
 	});
 
 
-	test('vendor can add simple product @lite @pro', async ( ) => {
+	test('vendor can add simple product @lite', async ( ) => {
 		await vendor.vendorAddSimpleProduct(data.product.simple);
 	});
 

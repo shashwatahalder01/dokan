@@ -30,7 +30,6 @@
 //todo:  Reporter: add os and browsers in env info
 //todo:  ***************** Test-data: use unique value for create and update for store categories, rfq name, rules.........baseURL..
 //todo:  ***************** Interface: interface should be one, no separate for create, update ....
-//todo:  add tag @explo to every view test and remove "@pro" form "@lite @pro" tests
 //todo:  
 //todo:  
 //todo:  
@@ -361,7 +360,7 @@ api env
 // setup.describe(' setup environment', () => {
 
 // 	//todo:  remove this after : replacing admin as vendor
-// 	setup('setup store settings @lite @pro', async () => {
+// 	setup('setup store settings @lite', async () => {
 // 		const [response, ] = await apiUtils.put(endPoints.updateSettings, { data: payloads.setupStore });
 // 		expect(response.ok()).toBeTruthy();
 // 	});
