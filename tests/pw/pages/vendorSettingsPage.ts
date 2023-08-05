@@ -131,7 +131,6 @@ export class VendorSettingsPage extends VendorPage {
 		await this.multipleElementVisible(previousShipping);
 
 		// await this.goBack();
-
 	}
 
 
@@ -174,6 +173,30 @@ export class VendorSettingsPage extends VendorPage {
 
 		// update settings is visible
 		await this.toBeVisible(selector.vendor.vSocialProfileSettings.updateSettings);
+	}
+
+
+	// vendor rma render properly
+	async vendorRmaSettingsRenderProperly(){
+		await this.goIfNotThere(data.subUrls.frontend.vDashboard.settingsRma);
+
+		// return and warranty text is visible
+		await this.toBeVisible(selector.vendor.vRmaSettings.returnAndWarrantyText);
+
+		// visit store link is visible
+		await this.toBeVisible(selector.vendor.vRmaSettings.visitStore);
+
+		// rma label input is visible
+		await this.toBeVisible(selector.vendor.vRmaSettings.label);
+
+		// rma type input is visible
+		await this.toBeVisible(selector.vendor.vRmaSettings.type);
+
+		// rma policy input is visible
+		await this.toBeVisible(selector.vendor.vRmaSettings.refundPolicyIframe);
+
+		// save changes is visible
+		await this.toBeVisible(selector.vendor.vRmaSettings.saveChanges);
 	}
 
 

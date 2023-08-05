@@ -302,7 +302,7 @@ export class ProductsPage extends AdminPage {
 		}
 
 		await this.clickAndWaitForResponseAndLoadState(data.subUrls.frontend.vDashboard.products,  selector.vendor.product.filters.filter);
-		await this.notToHaveCount(selector.vendor.product.numberOfRows, 0);
+		await this.notToHaveCount(selector.vendor.product.numberOfRowsFound, 0);
 
 	}
 

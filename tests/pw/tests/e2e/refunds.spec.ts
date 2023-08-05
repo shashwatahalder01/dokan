@@ -56,5 +56,7 @@ test.describe('refunds test', () => {
 		await admin.refundRequestsBulkAction('completed');
 	});
 
+	//todo: add vendor refund tests
+
 
 });

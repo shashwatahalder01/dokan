@@ -48,6 +48,10 @@ test.describe('Vendor settings test', () => {
 		await vendor.vendorSocialProfileSettingsRenderProperly();
 	});
 
+	test('vendor rma settings menu page is rendering properly @pro @explo', async ( ) => {
+		await vendor.vendorRmaSettingsRenderProperly();
+	});
+
 	test('vendor store seo settings menu page is rendering properly @pro @explo', async ( ) => {
 		await vendor.vendorStoreSeoSettingsRenderProperly();
 	});
@@ -101,6 +105,10 @@ test.describe('Vendor settings test', () => {
 
 	test('vendor can set social profile settings @pro', async ( ) => {
 		await vendor.setSocialProfile(data.vendor.socialProfileUrls);
+	});
+
+	test('vendor can set rma settings @pro', async ( ) => {
+		await vendor.setRmaSettings(data.vendor.rma);
 	});
 
 

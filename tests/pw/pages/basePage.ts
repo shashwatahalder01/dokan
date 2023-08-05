@@ -891,7 +891,7 @@ export class BasePage {
 
 
 	/**
-	 * Files & Media methods¸¸
+	 * Files & Media methods
 	 */
 
 

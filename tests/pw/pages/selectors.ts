@@ -2622,7 +2622,7 @@ export const selector = {
 				adminCommissionCombined: '.additional_fee > .input-text',
 				// Vendor
 				// storeName: '#dokan_product_author_override',
-				// storeName: 'div#sellerdiv span.select2-selection__arrow', //todo: dokansellerdiv on gitaction nd sellerdiv on local why
+				// storeName: 'div#sellerdiv span.select2-selection__arrow', //todo: dokansellerdiv on git action nd sellerdiv on local why
 				storeName: '//div[contains(@id, "sellerdiv")]//span[@class="select2-selection__arrow"]',
 				// storeNameOptions: '#dokan_product_author_override option',
 				storeNameInput: '.select2-search.select2-search--dropdown .select2-search__field',
@@ -3217,7 +3217,7 @@ export const selector = {
 
 
 			// Product Sub Options
-			numberOfRows: '#dokan-product-list-table tbody tr',
+			numberOfRowsFound: '#dokan-product-list-table tbody tr',
 			productCell: (productName: string) => `//a[contains(text(),'${productName}')]/../..`,
 			productLink: (productName: string) => `//a[contains(text(),'${productName}')]`,
 			editProduct: (productName: string) => `//a[contains(text(),'${productName}')]/../..//span[@class="edit"]//a`,
@@ -3482,7 +3482,7 @@ export const selector = {
 			},
 
 
-			numberOfRows: '.dokan-table.dokan-table tbody tr',
+			numberOfRowsFound: '.dokan-table.dokan-table tbody tr',
 			// Order Details from Table
 			orderTotalTable: (orderNumber: string) => `//strong[contains(text(),'Order ${orderNumber}')]/../../..//td[@class='dokan-order-total']//bdi`,
 			orderTotalAfterRefundTable: (orderNumber: string) => `///strong[contains(text(),'Order ${orderNumber}')]/../../..//td[@class='dokan-order-total']//ins//bdi`,
@@ -3605,7 +3605,7 @@ export const selector = {
 			},
 
 			noSubscriptionsFound: '//div[@class="dokan-error" and contains(text(), "No subscription found")]',
-			numberOfRows: '.dokan-table.dokan-table tbody tr',
+			numberOfRowsFound: '.dokan-table.dokan-table tbody tr',
 
 			// Edit Subscription
 			subscription: 'td a strong',
@@ -3952,7 +3952,7 @@ export const selector = {
 			},
 
 			noRowsFound: '//td[normalize-space()="No request found"]',
-
+			numberOfRowsFound:'.rma-request-listing-table tbody tr',
 
 			// Refund Request table Actions
 			returnRequestCell: (orderNumber: string) => `//strong[contains(text(),'Order ${orderNumber}')]/../..`,
@@ -3960,27 +3960,56 @@ export const selector = {
 			delete: (orderNumber: string) => `//strong[contains(text(),'Order ${orderNumber}')]/../..//a[@class='request-delete']`,
 			view: (orderNumber: string) => `//strong[contains(text(),'Order ${orderNumber}')]/../../..//i[@class='far fa-eye']`,
 
-			// Return Request
+			//return request details
 			returnRequestDetails: {
+
 				backToList: '.left-header-content a',
-				changeStatus: 'select#status', // new, processing, completed, rejected, reviewing
-				update: '//input[@value="Update"]',
-				sendRefund: '.dokan-send-refund-request',
 
-				taxRefundColumn: '//div[@class="iziModal-content"]//th[contains(text(),"Tax Refund")]',
-				subTotalRefundColumn: '//div[@class="iziModal-content"]//th[contains(text(),"Subtotal Refund")]',
+				basicDetails: {
+					basicDetails: '//div[normalize-space()="Details"]/..',
+					orderId: '//strong[normalize-space()="Order ID :"]',
+					customerName: '//strong[normalize-space()="Customer Name :"]',
+					requestType: '//strong[normalize-space()="Request Type :"]',
+					products: '//strong[normalize-space()="Products :"]',
 
+				},
 
-				taxAmount: (productName: string) => `(//a[contains(text(),'${productName}')]/../..//bdi)[1]`,
-				subTotal: (productName: string) => `(//a[contains(text(),'${productName}')]/../..//bdi)[2]`,
-				taxRefund: (productName: string) => `//div[@class="iziModal-content"]//td//a[contains(text(),'${productName}')]/../..//input[contains(@name,"refund_tax")]`,
-				subTotalRefund: (productName: string) => `//div[@class="iziModal-content"]//td//a[contains(text(),'${productName}')]/../..//input[contains(@name,"refund_amount")]`,
-				sendRequest: '//input[@name="dokan_refund_submit"]',
-				sendRequestSuccessMessage: '.dokan-alert.dokan-alert-info',
+				additionalDetails: {
+					additionalDetailsDiv: '.additional-details',
+					reason: '//p[normalize-space()="Reason"]/..//p[@class="details-value"]',
+					reasonDetails: '//p[normalize-space()="Reason Details"]/..//p[@class="details-value"]',
+				},
 
-				// Conversations
-				message: '#message',
-				sendMessage: 'input[name="dokan_rma_send_message"]',
+				//status
+				status:{
+					statusDiv: '//div[normalize-space()="Status"]/..',
+					lastUpdated: '//strong[normalize-space()="Last Updated"]',
+					changeStatus: 'select#status', // new, processing, completed, rejected, reviewing
+					update: '//input[@value="Update"]',
+					sendRefund: '.dokan-send-refund-request',
+
+				},
+
+				//conversations
+				conversations:{
+					conversationsDiv: '//div[normalize-space()="Conversations"]/..',
+					message: '#message',
+					sendMessage: 'input[name="dokan_rma_send_message"]',
+				},
+
+				modal: {
+
+					taxRefundColumn: '//div[@class="iziModal-content"]//th[contains(text(),"Tax Refund")]',
+					subTotalRefundColumn: '//div[@class="iziModal-content"]//th[contains(text(),"Subtotal Refund")]',
+
+					taxAmount: (productName: string) => `(//a[contains(text(),'${productName}')]/../..//bdi)[1]`,
+					subTotal: (productName: string) => `(//a[contains(text(),'${productName}')]/../..//bdi)[2]`,
+					taxRefund: (productName: string) => `//div[@class="iziModal-content"]//td//a[contains(text(),'${productName}')]/../..//input[contains(@name,"refund_tax")]`,
+					subTotalRefund: (productName: string) => `//div[@class="iziModal-content"]//td//a[contains(text(),'${productName}')]/../..//input[contains(@name,"refund_amount")]`,
+
+					sendRequest: '//div[@class="iziModal-content"]//input[@name="dokan_refund_submit"]',
+					sendRequestSuccessMessage: '.dokan-alert.dokan-alert-info',
+				}
 			}
 		},
 
@@ -4196,7 +4225,7 @@ export const selector = {
 			},
 
 			noProductFound: '//td[normalize-space()="No product found"]',
-			numberOfRows: '.product-listing-table tbody tr',
+			numberOfRowsFound: '.product-listing-table tbody tr',
 			productCell: (name: string) =>  `//a[normalize-space()="${name}"]/../..`,
 			edit: (name: string) =>  `//a[normalize-space()="${name}"]/../..//span[@class="edit"]`,
 			permanentlyDelete:(name: string) =>   `//a[normalize-space()="${name}"]/../..//span[@class="delete"]`,

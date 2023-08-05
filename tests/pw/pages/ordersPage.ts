@@ -95,7 +95,7 @@ export class OrdersPage extends VendorPage {
 		}
 
 		await this.clickAndWaitForLoadState(selector.vendor.orders.filters.filter);
-		await this.notToHaveCount(selector.vendor.orders.numberOfRows, 0);
+		await this.notToHaveCount(selector.vendor.orders.numberOfRowsFound, 0);
 
 	}
 

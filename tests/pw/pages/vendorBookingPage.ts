@@ -234,7 +234,7 @@ export class BookingPage extends VendorPage {
 		}
 
 		await this.clickAndWaitForResponseAndLoadState(data.subUrls.frontend.vDashboard.booking,  selector.vendor.vBooking.filters.filter);
-		await this.notToHaveCount(selector.vendor.vBooking.numberOfRows, 0);
+		await this.notToHaveCount(selector.vendor.vBooking.numberOfRowsFound, 0);
 
 	}
 

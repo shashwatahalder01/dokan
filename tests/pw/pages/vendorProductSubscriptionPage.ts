@@ -53,7 +53,7 @@ export class VendorProductSubscriptionPage extends VendorPage {
 		}
 
 		await this. clickAndWaitForResponseAndLoadState(data.subUrls.frontend.vDashboard.userSubscriptions, selector.vendor.vUserSubscriptions.filters.filter );
-		await this.notToHaveCount(selector.vendor.vUserSubscriptions.numberOfRows, 0);
+		await this.notToHaveCount(selector.vendor.vUserSubscriptions.numberOfRowsFound, 0);
 	}
 
 
