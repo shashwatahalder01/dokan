@@ -10,7 +10,7 @@ test.describe('Customer user functionality test', () => {
 	test.use({ storageState: { cookies: [], origins: [] } });
 
 	let loginPage: LoginPage;
-	let customerPage: CustomerPage;
+	let customer: CustomerPage;
 	let page: Page;
 
 
@@ -18,7 +18,7 @@ test.describe('Customer user functionality test', () => {
 		const context = await browser.newContext();
 		page = await context.newPage();
 		loginPage = new LoginPage(page);
-		customerPage = new CustomerPage(page);
+		customer = new CustomerPage(page);
 	});
 
 
@@ -28,7 +28,7 @@ test.describe('Customer user functionality test', () => {
 
 
 	test('customer can register @lite @pro', async () => {
-		await customerPage.customerRegister(data.customer.customerInfo);
+		await customer.customerRegister(data.customer.customerInfo);
 	});
 
 	test('customer can login @lite @pro', async () => {
@@ -41,8 +41,8 @@ test.describe('Customer user functionality test', () => {
 	});
 
 	test('customer can become a vendor @lite @pro', async () => {
-		await customerPage.customerRegister(data.customer.customerInfo);
-		await customerPage.customerBecomeVendor(data.customer.customerInfo);
+		await customer.customerRegister(data.customer.customerInfo);
+		await customer.customerBecomeVendor(data.customer.customerInfo);
 	});
 
 });
@@ -51,14 +51,14 @@ test.describe('Customer user functionality test', () => {
 test.describe('Customer functionality test', () => {
 
 
-	let customerPage: CustomerPage;
+	let customer: CustomerPage;
 	let cPage: Page;
 	// let apiUtils: ApiUtils;
 
 	test.beforeAll(async ({ browser,  }) => {
 		const customerContext = await browser.newContext({ storageState: data.auth.customerAuthFile });
 		cPage = await customerContext.newPage();
-		customerPage = new CustomerPage(cPage);
+		customer = new CustomerPage(cPage);
 		// apiUtils = new ApiUtils(request);
 	});
 
@@ -67,36 +67,36 @@ test.describe('Customer functionality test', () => {
 	});
 
 	test('customer can add billing details @lite @pro', async ( ) => {
-		await customerPage.addBillingAddress(data.customer.customerInfo);
+		await customer.addBillingAddress(data.customer.customerInfo.billing);
 	});
 
 	test('customer can add shipping details @lite @pro', async ( ) => {
-		await customerPage.addShippingAddress(data.customer.customerInfo);
+		await customer.addShippingAddress(data.customer.customerInfo.shipping);
 	});
 
 	test('customer can add customer details @lite @pro', async ( ) => {
-		await customerPage.addCustomerDetails(data.customer);
-	});
-
-	test('customer can buy product @lite @pro', async ( ) => {
-		await customerPage.clearCart();
-		await customerPage.addProductToCartFromSingleProductPage(data.predefined.simpleProduct.product1.name);
-		await customerPage.placeOrder();
+		await customer.addCustomerDetails(data.customer);
 	});
 
 	test('customer can add product to cart @lite @pro', async ( ) => {
-		await customerPage.clearCart();
-		await customerPage.addProductToCartFromSingleProductPage(data.predefined.simpleProduct.product1.name);
-		await customerPage.goToCartFromSingleProductPage();
+		const productName = data.predefined.simpleProduct.product1.name;
+		await customer.addProductToCart(productName, 'single-product');
+		await customer.productIsOnCart(productName);
 	});
 
 	test('customer can apply coupon @pro', async ( ) => {
-		await customerPage.clearCart();
-		await customerPage.addProductToCartFromSingleProductPage(data.predefined.simpleProduct.product1.name);
-		await customerPage.goToCartFromSingleProductPage();
-		await customerPage.applyCoupon(data.predefined.coupon.couponCode);
+		await customer.addProductToCart(data.predefined.simpleProduct.product1.name, 'single-product');
+		await customer.applyCoupon(data.predefined.coupon.couponCode);
 	});
 
+	test.only('customer can buy product @lite @pro', async ( ) => {
+		// await customer.addProductToCart(data.predefined.simpleProduct.product1.name, 'single-product');
+		// await customer.placeOrder();
+		console.log(
+			await customer.getOrderDetails('1027'));
+	});
+
+	//customer can buy product with applied coupon
 
 	// test.skip('customer can download downloadables @lite @pro', async ( ) => {
 	// 	// pre: complete download product

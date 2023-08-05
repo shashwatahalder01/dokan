@@ -29,6 +29,10 @@ export class VendorPage extends BasePage {
 		await this.goIfNotThere(data.subUrls.frontend.vDashboard.dashboard);
 	}
 
+	async goToProductDetails(productName: string): Promise<void> {
+		await this.goIfNotThere(data.subUrls.frontend.productDetails(helpers.slugify(productName)));
+	}
+
 	// setup wizard
 
 	// vendor registration

@@ -449,7 +449,7 @@ single product
 
 	// product vendor info
 	async productVendorInfo(productName: string){
-		await this.goIfNotThere(data.subUrls.frontend.productDetails(helpers.slugify(productName)));
+		await this.goToProductDetails(productName);
 		await this.click(selector.customer.cSingleProduct.menus.vendorInfo);
 		await this.multipleElementVisible(selector.customer.cSingleProduct.vendorInfo);
 		//todo:  assert actual value i.e. vendor info
@@ -458,7 +458,7 @@ single product
 
 	// product location
 	async productLocation(productName: string){
-		await this.goIfNotThere(data.subUrls.frontend.productDetails(helpers.slugify(productName)));
+		await this.goToProductDetails(productName);
 		await this.click(selector.customer.cSingleProduct.menus.location);
 		await this.multipleElementVisible(selector.customer.cSingleProduct.location);
 		//todo:  assert actual value i.e. location
@@ -466,14 +466,14 @@ single product
 
 	// product warranty policy
 	async productWarrantyPolicy(productName: string){
-		await this.goIfNotThere(data.subUrls.frontend.productDetails(helpers.slugify(productName)));
+		await this.goToProductDetails(productName);
 		await this.click(selector.customer.cSingleProduct.menus.warrantyPolicy);
 		await this.multipleElementVisible(selector.customer.cSingleProduct.warrantyPolicy);
 		//todo:  assert actual value i.e. warranty policy
 	}
 
 	async viewHighlightedVendorInfo(productName: string){
-		await this.goIfNotThere(data.subUrls.frontend.productDetails(helpers.slugify(productName)));
+		await this.goToProductDetails(productName);
 		await this.multipleElementVisible(selector.customer.cSingleProduct.vendorHighlightedInfo);
 		//todo:  assert actual value i.e. vendor info
 	}

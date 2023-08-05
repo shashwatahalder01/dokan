@@ -204,7 +204,7 @@ export class BookingPage extends VendorPage {
 
 	// vendor can't buy own booking product
 	async cantBuyOwnBookingProduct(productName: string){
-		await this.goIfNotThere(data.subUrls.frontend.productDetails(helpers.slugify(productName)));
+		await this.goToProductDetails(productName);
 		await this.notToBeVisible(selector.vendor.vBooking.viewBooking.bookingCalendar);
 		await this.notToBeVisible(selector.vendor.vBooking.viewBooking.bookNow);
 	}

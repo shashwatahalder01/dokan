@@ -1328,7 +1328,7 @@ export const payloads = {
 		body: 'Test email body',
 	},
 
-	createStore1: {
+	createStore1: { //todo: create and update data should be same
 		user_login: process.env.VENDOR,
 		user_pass: process.env.USER_PASSWORD,
 		user_nicename: process.env.VENDOR + 'store',
@@ -1336,7 +1336,7 @@ export const payloads = {
 		email: process.env.VENDOR + '@yopmail.com',
 		store_name: process.env.VENDOR + 'store',
 		first_name: process.env.VENDOR,
-		last_name: 'ven',
+		last_name: 'v1',
 		social: {
 			fb: 'http://dokan.test',
 			youtube: 'http://dokan.test',
@@ -1476,7 +1476,7 @@ export const payloads = {
 		},
 		shipping: {
 			first_name: process.env.CUSTOMER,
-			last_name: 'cus',
+			last_name: 'c1',
 			company: '',
 			address_1: 'abc street',
 			address_2: 'xyz street',
@@ -1486,6 +1486,11 @@ export const payloads = {
 			state: 'NY',
 			phone: '0123456789',
 		},
+	},
+
+	// update password
+	updatePassword: {
+		password: '01dokan01'
 	},
 
 	// quote rule

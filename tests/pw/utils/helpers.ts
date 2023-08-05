@@ -41,6 +41,8 @@ export const helpers = {
 		return res[1] as string;
 	},
 
+	stringToRegex:(str: string): RegExp => new RegExp( str), //todo: need to update, multiple cases unhandled
+
 	// convert string to price format
 	price: (str: string): number => parseFloat(str.replace(/[^\d\-.,]/g, '').replace(/,/g, '.').replace(/\.(?=.*\.)/g, '')),
 

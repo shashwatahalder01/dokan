@@ -5507,7 +5507,7 @@ export const selector = {
 		cRegistration: {
 			regEmail: '#reg_email',
 			regPassword: '#reg_password',
-			regCustomer: '//input[@value="customer"]',
+			regAsCustomer: '//input[@value="customer"]',
 			regCustomerWelcomeMessage: '//div[@class="woocommerce-MyAccount-content"]//p[contains(text(),"Hello")]',
 			// Register Button
 			register: '.woocommerce-Button',
@@ -5586,20 +5586,21 @@ export const selector = {
 			},
 
 			// Order Details
-			OrderDetailsLInk: (orderNumber: string) => `//a[contains(text(), '#${orderNumber}')]/../..//a[contains(text(), 'View')]`,
-			orderNumber: '//div[@class="woocommerce-MyAccount-content"]//p//mark[@class="order-number"]',
-			orderDate: '//div[@class="woocommerce-MyAccount-content"]//p//mark[@class="order-date"]',
-			orderStatus: '//div[@class="woocommerce-MyAccount-content"]//p//mark[@class="order-status"]',
-			subTotal: '//th[contains(text(),"Subtotal:")]/..//span',
-			orderDiscount: '//th[contains(text(),"Order Discount:")]/..//span',
-			quantityDiscount: '//th[contains(text(),"Quantity Discount:")]/..//span',
-			discount: '//th[text()="Discount:"]/..//span',
-			shipping: '//th[contains(text(),"Shipping:")]/..//td', //todo: delete this when shipping method is fixed
-			shippingCost: '//th[contains(text(),"Shipping:")]/..//span',
-			shippingMethod: '//th[contains(text(),"Shipping:")]/..//small',
-			tax: '//th[contains(text(),"Tax:")]/..//span',
-			paymentMethod: '//th[contains(text(),"Payment method:")]/..//td',
-			orderTotal: '//th[contains(text(),"Total:")]/..//span',
+			orderDetails:{
+				orderDetailsLInk: (orderNumber: string) => `//a[contains(text(), '#${orderNumber}')]/../..//a[contains(text(), 'View')]`,
+				orderNumber: '//div[@class="woocommerce-MyAccount-content"]//p//mark[@class="order-number"]',
+				orderDate: '//div[@class="woocommerce-MyAccount-content"]//p//mark[@class="order-date"]',
+				orderStatus: '//div[@class="woocommerce-MyAccount-content"]//p//mark[@class="order-status"]',
+				subTotal: '//th[contains(text(),"Subtotal:")]/..//span[@class="woocommerce-Price-amount amount"]',
+				orderDiscount: '//th[contains(text(),"Order Discount:")]/..//span[@class="woocommerce-Price-amount amount"]',
+				quantityDiscount: '//th[contains(text(),"Quantity Discount:")]/..//span[@class="woocommerce-Price-amount amount"]',
+				discount: '//th[text()="Discount:"]/..//span[@class="woocommerce-Price-amount amount"]',
+				shippingMethod: '//th[contains(text(),"Shipping:")]/..//small',
+				shippingCost: '//th[contains(text(),"Shipping:")]/..//span[@class="woocommerce-Price-amount amount"]',
+				tax: '//th[contains(text(),"Tax:")]/..//span[@class="woocommerce-Price-amount amount"]',
+				paymentMethod: '//th[contains(text(),"Payment method:")]/..//td',
+				orderTotal: '//th[contains(text(),"Total:")]/..//span[@class="woocommerce-Price-amount amount"]',
+			}
 		},
 
 		// Customer Subscription
@@ -5614,52 +5615,60 @@ export const selector = {
 
 		// Customer Address
 		cAddress: {
+
 			// Billing Address
-			editBillingAddress: '//h3[contains(text(),"Billing address")]/..//a[@class="edit"]',
-			billingFirstName: '#billing_first_name',
-			billingLastName: '#billing_last_name',
-			billingCompanyName: '#billing_company',
-			billingCompanyID: '#billing_dokan_company_id_number',
-			billingVatOrTaxNumber: '#billing_dokan_vat_number',
-			billingNameOfBank: '#billing_dokan_bank_name',
-			billingBankIban: '#billing_dokan_bank_iban',
-			// billingCountryOrRegion: "#select2-billing_country-container",
-			billingCountryOrRegion: '(//span[@class="select2-selection__arrow"])[1]',
-			billingCountryOrRegionInput: '.select2-search.select2-search--dropdown .select2-search__field',
-			billingCountryOrRegionValues: '.select2-results ul li',
-			billingStreetAddress: '#billing_address_1',
-			billingStreetAddress2: '#billing_address_2',
-			billingTownCity: '#billing_city',
-			// billingState: "#select2-billing_state-container",
-			billingState: '(//span[@class="select2-selection__arrow"])[2]',
-			billingStateInput: '.select2-search.select2-search--dropdown .select2-search__field',
-			billingStateValues: '.select2-results ul li',
-			billingZipCode: '#billing_postcode',
-			billingPhone: '#billing_phone',
-			billingEmailAddress: '#billing_email',
-			billingSaveAddress: '//button[@name="save_address"]',
+			billing: {
+				editBillingAddress: '//h3[contains(text(),"Billing address")]/..//a[@class="edit"]',
+				billingFirstName: '#billing_first_name',
+				billingLastName: '#billing_last_name',
+				billingCompanyName: '#billing_company',
+				billingCompanyID: '#billing_dokan_company_id_number',
+				billingVatOrTaxNumber: '#billing_dokan_vat_number',
+				billingNameOfBank: '#billing_dokan_bank_name',
+				billingBankIban: '#billing_dokan_bank_iban',
+				// billingCountryOrRegion: "#select2-billing_country-container",
+				billingCountryOrRegion: '(//span[@class="select2-selection__arrow"])[1]',
+				billingCountryOrRegionInput: '.select2-search.select2-search--dropdown .select2-search__field',
+				billingCountryOrRegionValues: '.select2-results ul li',
+				billingStreetAddress: '#billing_address_1',
+				billingStreetAddress2: '#billing_address_2',
+				billingTownCity: '#billing_city',
+				// billingState: "#select2-billing_state-container",
+				billingState: '(//span[@class="select2-selection__arrow"])[2]',
+				billingStateInput: '.select2-search.select2-search--dropdown .select2-search__field',
+				billingStateValues: '.select2-results ul li',
+				billingZipCode: '#billing_postcode',
+				billingPhone: '#billing_phone',
+				billingEmailAddress: '#billing_email',
+				billingSaveAddress: '//button[@name="save_address"]',
+				// Success Message
+				successMessage: '.woocommerce-message',
+			},
 
 			// Shipping Address
-			editShippingAddress: '//h3[contains(text(),"Shipping address")]/..//a[@class="edit"]',
-			shippingFirstName: '#shipping_first_name',
-			shippingLastName: '#shipping_last_name',
-			shippingCompanyName: '#shipping_company',
-			// shippingCountryOrRegion: "#select2-shipping_country-container",
-			shippingCountryOrRegion: '(//span[@class="select2-selection__arrow"])[1]',
-			shippingCountryOrRegionInput: '.select2-search.select2-search--dropdown .select2-search__field',
-			shippingCountryOrRegionValues: '.select2-results ul li',
-			shippingStreetAddress: '#shipping_address_1',
-			shippingStreetAddress2: '#shipping_address_2',
-			shippingTownCity: '#shipping_city',
-			// shippingState: "#select2-shipping_state-container",
-			shippingState: '(//span[@class="select2-selection__arrow"])[2]',
-			shippingStateInput: '.select2-search.select2-search--dropdown .select2-search__field',
-			shippingStateValues: '.select2-results ul li',
-			shippingZipCode: '#shipping_postcode',
-			shippingSaveAddress: '//button[@name="save_address"]',
+			shipping:{
+				editShippingAddress: '//h3[contains(text(),"Shipping address")]/..//a[@class="edit"]',
+				shippingFirstName: '#shipping_first_name',
+				shippingLastName: '#shipping_last_name',
+				shippingCompanyName: '#shipping_company',
+				// shippingCountryOrRegion: "#select2-shipping_country-container",
+				shippingCountryOrRegion: '(//span[@class="select2-selection__arrow"])[1]',
+				shippingCountryOrRegionInput: '.select2-search.select2-search--dropdown .select2-search__field',
+				shippingCountryOrRegionValues: '.select2-results ul li',
+				shippingStreetAddress: '#shipping_address_1',
+				shippingStreetAddress2: '#shipping_address_2',
+				shippingTownCity: '#shipping_city',
+				// shippingState: "#select2-shipping_state-container",
+				shippingState: '(//span[@class="select2-selection__arrow"])[2]',
+				shippingStateInput: '.select2-search.select2-search--dropdown .select2-search__field',
+				shippingStateValues: '.select2-results ul li',
+				shippingZipCode: '#shipping_postcode',
+				shippingSaveAddress: '//button[@name="save_address"]',
 
-			// Success Message
-			successMessage: '.woocommerce-message',
+				// Success Message
+				successMessage: '.woocommerce-message',
+			},
+
 		},
 
 		// Customer Rma Requests
@@ -6290,7 +6299,7 @@ export const selector = {
 			checkPayments: '.payment_method_cheque label',
 			cashOnDelivery: '.payment_method_cod label',
 			paypalAdaptive: '.payment_method_dokan_paypal_adaptive label',
-			stripeConnect: '.wc_payment_method.payment_method_dokan-stripe-connect label',
+			stripeConnect: '.wc_payment_method.payment_method_dokan-stripe-connect label[for="payment_method_dokan-stripe-connect"]',
 			wireCardCreditCard: '.payment_method_dokan-moip-connect label',
 			paypalMarketPlace: '.wc_payment_method.payment_method_dokan_paypal_marketplace label',
 			stripeExpress: '.wc_payment_method.payment_method_dokan_stripe_express label',
@@ -6302,11 +6311,11 @@ export const selector = {
 			strip: '#payment_method_dokan-stripe-connect',
 			savedTestCard4242: '//label[contains(text(),"Visa ending in 4242")]/..//input',
 			userNewPaymentMethod: '#wc-dokan-stripe-connect-payment-token-new',
-			stripeConnectIframe: '#dokan-stripe-express-element iframe',
+			stripeConnectIframe: 'div#dokan-stripe-card-element iframe[title="Secure card payment input frame"]',
 			creditCard: '#card-tab',
-			cardNumber: '//input[@name="cardnumber"]',
-			expDate: '//input[@name="exp-date"]',
-			cvc: '//input[@name="cvc"]',
+			cardNumber: 'input[name="cardnumber"]',
+			expDate: 'input[name="exp-date"]',
+			cvc: 'input[name="cvc"]',
 			savePaymentInformation: '#wc-dokan-stripe-connect-new-payment-method',
 		},
 
@@ -6351,7 +6360,6 @@ export const selector = {
 
 			// Order Details
 			orderDetails: {
-
 				//basic info
 				orderNumber: '.woocommerce-order-overview__order.order strong',
 				orderDate: '.woocommerce-order-overview__date.date strong',
@@ -6362,7 +6370,7 @@ export const selector = {
 				subTotal: '//th[normalize-space()="Subtotal:"]//..//span[@class="woocommerce-Price-amount amount"]',
 				shippingMethod: '//th[normalize-space()="Shipping:"]/..//small',
 				shippingCost: '//th[normalize-space()="Shipping:"]/..//span[@class="woocommerce-Price-amount amount"]',
-				tax: '//th[normalize-space()="Tax:"]//..//span',
+				tax: '//th[normalize-space()="Tax:"]//..//span[@class="woocommerce-Price-amount amount"]',
 				orderPaymentMethod: '//th[normalize-space()="Payment method:"]//..//td',
 				orderTotal: '//th[normalize-space()="Total:"]//..//span[@class="woocommerce-Price-amount amount"]',
 			},

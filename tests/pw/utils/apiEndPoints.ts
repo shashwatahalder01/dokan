@@ -473,7 +473,7 @@ export const endPoints = {
 		getCurrentUser: `${SERVER_URL}/wp/v2/users/me`,
 		getUserById: (userId: string) => `${SERVER_URL}/wp/v2/users/${userId}`,
 		createUser: `${SERVER_URL}/wp/v2/users`,
-		updateUser: `${SERVER_URL}/wp/v2/users`,
+		updateUser: (userId: string) => `${SERVER_URL}/wp/v2/users/${userId}`,
 		deleteUser: (userId: string) => `${SERVER_URL}/wp/v2/users/${userId}`,
 
 		//plugins

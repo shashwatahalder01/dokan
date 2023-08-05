@@ -385,11 +385,13 @@ export const data = {
 		},
 	},
 
-	// card
-	card: {
+
+	paymentDetails: {
+
 		strip: {
 			striptNon3D: '4242424242424242',
 			stript3D: '4000002500003155',
+			cardNumber: '4242424242424242',
 			expiryMonth: '12',
 			expiryYear: '50',
 			number: '4000002500003155',
@@ -403,9 +405,7 @@ export const data = {
 			expiryYear: '50',
 			cvc: '111',
 		},
-	},
 
-	paymentDetails: {
 		stripExpress: {
 			paymentMethod: 'card',
 			cardInfo: {
@@ -739,6 +739,7 @@ export const data = {
 		// customer
 			myAccount: 'my-account',
 			myOrders: 'my-orders',
+			accountMigration: 'my-account/account-migration',
 			orderCancel: 'cart/?cancel_order',
 			orderAgain: 'cart/?order_again',
 			orderPay: 'checkout/order-pay',
@@ -757,6 +758,7 @@ export const data = {
 			checkout: 'checkout',
 			addToCart: '?wc-ajax=add_to_cart',
 			applyCoupon: '?wc-ajax=apply_coupon',
+			removeCoupon: '?wc-ajax=remove_coupon',
 			placeOrder: '?wc-ajax=checkout',
 			billingAddress: 'my-account/edit-address/billing',
 			shippingAddress: 'my-account/edit-address/shipping',
@@ -765,9 +767,10 @@ export const data = {
 			becomeVendor: 'my-account/account-migration',
 			supportTickets: 'my-account/support-tickets',
 			productDetails: (productName: string) => `product/${productName}`,
+			orderDetails: (orderId: string) => `my-account/view-order/${orderId}`,
 			vendorDetails: (storeName: string) => `store/${storeName}`,
 			storeReviews: (storeName: string) => `store/${storeName}/reviews`,
-			myOrderDetails: (orderId: string) => `my-account/view-order/${orderId}`,
+
 			productReview: 'wp-comments-post.php',
 			submitSupport: 'wp-comments-post.php',
 
@@ -1224,24 +1227,23 @@ export const data = {
 	customer: {
 		username: String(process.env.CUSTOMER),
 		password: String(process.env.USER_PASSWORD),
-		lastname: String(process.env.CUSTOMER)[0] as string + String(process.env.CUSTOMER)[String(process.env.CUSTOMER).length-1], 		// lastname1: ( name = process.env.CUSTOMER) => {  name[0] + name[name.length - 1]; },
+		lastname: String(process.env.CUSTOMER)[0] as string + String(process.env.CUSTOMER)[String(process.env.CUSTOMER).length-1],
 
 		customerInfo: {
-			// emailDomain: '_' + faker.string.alphanumeric(5) + '@email.com',
 			emailDomain: '@email.com',
 			email: () => faker.internet.email(),
 			password: String(process.env.USER_PASSWORD),
 			password1: String(process.env.USER_PASSWORD) + '1',
 			firstName: () => faker.person.firstName('male'),
 			lastName: () => faker.person.lastName('male'),
-			// username: () => this.customer.customerInfo.firstName,
-			// storename: () => this.customer.customerInfo.firstName + 'store',
-			role: 'customer',
 			username: () => faker.person.firstName('male'),
-			storename: () => faker.person.firstName('male') + 'store',
+			shopName: () => faker.person.firstName('male') + 'store',
+			role: 'customer',
 			companyName: faker.company.name(),
 			companyId: faker.string.alphanumeric(5),
 			vatNumber: faker.string.alphanumeric(10),
+			bankName: 'bankName',
+			bankAddress: 'bankAddress',
 			bankIban: faker.finance.iban(),
 			phone: faker.phone.number('(###) ###-####'),
 			street1: 'abc street',
@@ -1254,22 +1256,52 @@ export const data = {
 			state: 'New York',
 			accountName: 'accountName',
 			accountNumber: faker.string.alphanumeric(10),
-			bankName: 'bankName',
-			bankAddress: 'bankAddress',
 			routingNumber: faker.string.alphanumeric(10),
 			swiftCode: faker.string.alphanumeric(10),
 			iban: faker.string.alphanumeric(10),
 			biography: 'Customer biography',
-			addressChangeSuccessMessage: 'Address changed successfully.',
-			getSupport: {
-				subject: 'get Support Subject',
-				message: 'get Support Message',
-				supportSubmitSuccessMessage: 'Thank you. Your ticket has been submitted!',
-
-				username: String(process.env.CUSTOMER),
-				userPassword: String(process.env.USER_PASSWORD),
-
+			billing: {
+				firstName: process.env.CUSTOMER,
+				lastName: 'c1',
+				companyName: faker.company.name(),
+				companyId: faker.string.alphanumeric(5),
+				vatNumber: faker.string.alphanumeric(10),
+				bankName: 'bankName',
+				bankIban: faker.finance.iban(),
+				street1: 'abc street',
+				street2: 'xyz street',
+				city: 'New York',
+				zipCode: '10003',
+				country: 'United States (US)',
+				state: 'New York',
+				email: process.env.CUSTOMER + '@yopmail.com',
+				phone: '0123456789',
 			},
+			shipping: {
+				firstName: process.env.CUSTOMER,
+				lastName: 'c1',
+				companyName: faker.company.name(),
+				street1: 'abc street',
+				street2: 'xyz street',
+				city: 'New York',
+				zipCode: '10003',
+				country: 'United States (US)',
+				state: 'New York',
+				phone: '0123456789',
+			},
+		},
+
+		getSupport: {
+			subject: 'get Support Subject',
+			message: 'get Support Message',
+			supportSubmitSuccessMessage: 'Thank you. Your ticket has been submitted!',
+			username: String(process.env.CUSTOMER),
+			userPassword: String(process.env.USER_PASSWORD),
+
+		},
+
+		supportTicket: {
+			message: () => faker.string.uuid(),
 		},
 
 		rma: {
@@ -1284,10 +1316,13 @@ export const data = {
 			following: 'Following',
 		},
 
-		supportTicket: {
-			message: () => faker.string.uuid(),
+		address: {
+			addressChangeSuccessMessage: 'Address changed successfully.',
 		},
-		registrationErrorMessage: 'Error: An account is already registered with your email address. Please log in.',
+
+		registration:{
+			registrationErrorMessage: 'Error: An account is already registered with your email address. Please log in.',
+		},
 	},
 
 

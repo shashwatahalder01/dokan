@@ -234,8 +234,8 @@ export class BasePage {
 	// click & wait for load state to complete
 	async clickAndWaitForLoadState(selector: string): Promise<void> {
 		await Promise.all([
-			// this.page.waitForLoadState( 'networkidle' ),
-			this.page.waitForLoadState( 'domcontentloaded' ),
+			this.page.waitForLoadState( 'networkidle' ),
+			// this.page.waitForLoadState( 'domcontentloaded' ),
 			this.page.locator(selector).click()
 		]);
 	}
@@ -348,10 +348,10 @@ export class BasePage {
 	}
 
 
-	// type & wait for navigation
-	async pressAndWaitForNavigation(key: string,): Promise<void> {
+	// type & wait for load state
+	async pressAndWaitForLoadState(key: string,): Promise<void> {
 		await Promise.all([
-			this.waitForNavigation(),
+			this.waitForLoadState(),
 			this.press(key),
 		]);
 	}
@@ -536,6 +536,14 @@ export class BasePage {
 	async getElementText(selector: string): Promise<string | null> {
 		return await this.textContentOfLocator(selector);
 		// return await this.page.textContent(selector);
+	}
+
+	// get element text if visible
+	async getElementTextVisible(selector: string): Promise<void |string | null> {
+		const isVisible = await this.isVisible(selector);
+		if (isVisible) {
+			return await this.getElementText(selector);
+		}
 	}
 
 

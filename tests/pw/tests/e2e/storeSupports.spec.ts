@@ -100,25 +100,25 @@ test.describe('Store Support test', () => {
 
 
 	test('customer can ask for store support on single product @pro', async ( ) => {
-		await customer.storeSupport(data.predefined.simpleProduct.product1.name, data.customer.customerInfo.getSupport, 'product');
+		await customer.storeSupport(data.predefined.simpleProduct.product1.name, data.customer.getSupport, 'product');
 	});
 
 	test('customer can ask for store support on order details @pro', async ( ) => {
 		const [,, orderId, ] = await apiUtils.createOrderWithStatus(PRODUCT_ID, { ...payloads.createOrder, customer_id: CUSTOMER_ID }, data.order.orderStatus.completed, payloads.vendorAuth);
-		await customer.storeSupport(orderId, data.customer.customerInfo.getSupport, 'order');
+		await customer.storeSupport(orderId, data.customer.getSupport, 'order');
 	});
 
 	test('customer can ask for store support on single store @pro', async ( ) => {
-		await customer.storeSupport(data.predefined.vendorStores.vendor1, data.customer.customerInfo.getSupport, 'store');
+		await customer.storeSupport(data.predefined.vendorStores.vendor1, data.customer.getSupport, 'store');
 	});
 
 	test('customer can send message to support ticket @pro', async ( ) => {
-		await customer.storeSupport(data.predefined.vendorStores.vendor1, data.customer.customerInfo.getSupport, 'store');
+		await customer.storeSupport(data.predefined.vendorStores.vendor1, data.customer.getSupport, 'store');
 		await customer.sendMessageCustomerSupportTicket(data.customer.supportTicket);
 	});
 
 	test('guest customer need to login before asking for store support @pro', async ( ) => {
-		await guest.storeSupport(data.predefined.vendorStores.vendor1, data.customer.customerInfo.getSupport, 'store');
+		await guest.storeSupport(data.predefined.vendorStores.vendor1, data.customer.getSupport, 'store');
 	});
 
 
