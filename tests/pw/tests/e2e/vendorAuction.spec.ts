@@ -58,7 +58,7 @@ test.describe('Auction Product test', () => {
 	});
 
 	test('vendor can edit auction product @pro', async ( ) => {
-		await vendor.editAuctionProduct({ ...data.product.auction, name: 'Awesome Rubber Chicken (Auction)' });
+		await vendor.editAuctionProduct({ ...data.product.auction, name: auctionProductName });
 	});
 
 	test('vendor can view auction product @pro', async ( ) => {
