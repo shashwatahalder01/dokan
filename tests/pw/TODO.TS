@@ -70,9 +70,7 @@
 
 // TODO: woocommerce
 
-// TODO: implement this for checkbox assert
-		// Verify changes have been saved
-		await expect( page.locator( '#woocommerce_calc_taxes' ) ).toBeChecked();
+// TODO: implement this for checkbox assert await expect( page.locator( '#woocommerce_calc_taxes' ) ).toBeChecked();
 
 // TODO:  reconsider that you need multiple assertion or not
 		// Verify that settings have been saved
@@ -94,9 +92,6 @@ const { stateDir, baseURL, userAgent } = config.projects[ 0 ].use;
 console.log( `State Dir: ${ stateDir }` );
 console.log( `Base URL: ${ baseURL }` );
 
-
-//todo:  try this for wait for navigation
-// await page.waitForLoadState( 'networkidle' );
 
 
 //todo:  file upload : plugin
@@ -196,11 +191,6 @@ export const installPluginThruWpCli = async ( pluginPath ) => {
 
 
 
-//todo:  why waitUntil on goto , what is the default value
-    await page.goto(
-        'wp-admin/admin.php?page=wc-settings&tab=shipping&zone_id=new',
-        { waitUntil: 'networkidle' }
-    );
 
 //todo:  ensure empty cart like this , try to use both clearCookies to clear cart & storagejson for authenticate user
 // check clearcookies clear storagejson or not

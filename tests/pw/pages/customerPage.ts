@@ -265,12 +265,17 @@ export class CustomerPage extends BasePage {
 
 	// clear cart
 	async clearCart(): Promise<void> {
+		await this.clearCookies();
+	}
+
+	// clear cart
+	async clearCartManually(): Promise<void> {
 		await this.goToCart();
 		const cartProductIsVisible = await this.isVisible(selector.customer.cCart.firstProductCrossIcon);
 		if (cartProductIsVisible) {
 			await this.clickAndWaitForResponseAndLoadState(data.subUrls.frontend.cart, selector.customer.cCart.firstProductCrossIcon);
 			await this.toContainText(selector.customer.cWooSelector.wooCommerceSuccessMessage, 'removed. Undo?');
-			await this.clearCart(); //Todo: avoid recursion
+			await this.clearCart();
 		}
 		else {
 			await this.toContainText(selector.customer.cCart.cartEmptyMessage, 'Your cart is currently empty.');

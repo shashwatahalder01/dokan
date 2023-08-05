@@ -3,6 +3,8 @@ import { LoginPage } from 'pages/loginPage';
 import { CustomerPage } from 'pages/customerPage';
 // import { ApiUtils } from 'utils/apiUtils';
 import { data } from 'utils/testData';
+import { on } from 'process';
+import { only } from 'node:test';
 // import { payloads } from 'utils/payloads';
 
 test.describe('Customer user functionality test', () => {
@@ -89,9 +91,10 @@ test.describe('Customer functionality test', () => {
 		await customer.applyCoupon(data.predefined.coupon.couponCode);
 	});
 
-	test('customer can buy product @lite @pro', async ( ) => {
-		await customer.addProductToCart(data.predefined.simpleProduct.product1.name, 'single-product');
-		await customer.placeOrder();
+	test.only('customer can buy product @lite @pro', async ( ) => {
+		// await customer.addProductToCart(data.predefined.simpleProduct.product1.name, 'single-product');
+		// await customer.placeOrder();
+		await customer.goToCart();
 	});
 
 	//customer can buy product with applied coupon

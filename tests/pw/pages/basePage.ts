@@ -56,10 +56,7 @@ export class BasePage {
 
 	// goto subUrl
 	async goto(subPath: string): Promise<void> {
-		// let subPath1: string = await this.createUrl(subPath)
-		// await this.page.goto(subPath);
 		await this.page.goto(subPath, { waitUntil: 'networkidle' });
-		// await this.page.goto(subPath, { waitUntil: 'domcontentloaded' });
 	}
 
 
@@ -1416,13 +1413,18 @@ export class BasePage {
 
 
 	// get cookies
-	async getCookie(): Promise<Cookie[]> {
+	async getCookies(): Promise<Cookie[]> {
 		return await this.page.context().cookies();
+	}
+
+	// get cookies
+	async clearCookies(): Promise<void> {
+		await this.page.context().clearCookies();
 	}
 
 	// get wp current user
 	async getCurrentUser(): Promise<string | undefined> {
-		const cookies = await this.page.context().cookies();
+		const cookies = await this.getCookies();
 		const cookie = cookies.find((c) => {
 			let _c$name: string;
 			return !!(
