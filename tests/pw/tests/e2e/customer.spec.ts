@@ -97,7 +97,7 @@ test.describe('Customer functionality test', () => {
 	//customer can buy product with applied coupon
 
 	// test.skip('customer can download downloadables @lite', async ( ) => {
-	// 	// pre: complete download product
+	// pre: complete download product
 	// });
 
 

@@ -89,11 +89,11 @@ export class VendorReturnRequestPage extends VendorPage {
 		await this.clickAndWaitForResponse(data.subUrls.ajax, selector.vendor.vReturnRequest.returnRequestDetails.status.sendRefund);
 		const taxIsVisible = await this.isVisible(selector.vendor.vReturnRequest.returnRequestDetails.modal.taxRefundColumn);
 		if (taxIsVisible) {
-			const tax = helpers.price(await this.getElementText(selector.vendor.vReturnRequest.returnRequestDetails.modal.taxAmount(productName)) as string);
-			await this.type(selector.vendor.vReturnRequest.returnRequestDetails.modal.taxRefund(productName), String(tax));
+			const tax = await this.getElementText(selector.vendor.vReturnRequest.returnRequestDetails.modal.taxAmount(productName)) as string;
+			await this.type(selector.vendor.vReturnRequest.returnRequestDetails.modal.taxRefund(productName), helpers.removeDollarSign(tax));
 		}
-		const subtotal = helpers.price(await this.getElementText(selector.vendor.vReturnRequest.returnRequestDetails.modal.subTotal(productName)) as string);
-		await this.type(selector.vendor.vReturnRequest.returnRequestDetails.modal.subTotalRefund(productName), String(subtotal));
+		const subtotal = await this.getElementText(selector.vendor.vReturnRequest.returnRequestDetails.modal.subTotal(productName)) as string;
+		await this.type(selector.vendor.vReturnRequest.returnRequestDetails.modal.subTotalRefund(productName), helpers.removeDollarSign(subtotal));
 		await this.clickAndWaitForResponseAndLoadState(data.subUrls.ajax, selector.vendor.vReturnRequest.returnRequestDetails.modal.sendRequest);
 		await this.toContainText(selector.vendor.vReturnRequest.returnRequestDetails.modal.sendRequestSuccessMessage, 'Already send refund request. Wait for admin approval');
 	}

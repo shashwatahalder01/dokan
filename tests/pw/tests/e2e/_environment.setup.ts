@@ -55,7 +55,6 @@ setup.describe('setup site & woocommerce & user settings', () => {
 	});
 
 	setup('set tax rate @lite', async () => {
-
 		await apiUtils.setUpTaxRate(payloads.enableTaxRate, payloads.createTaxRate);
 	});
 

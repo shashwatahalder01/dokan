@@ -24,6 +24,7 @@ export const helpers = {
 	// remove array element
 	removeItem: (arr: any[], removeItem: any) => arr.filter((item) => item !== removeItem),
 
+	// is sub array
 	isSubArray: (parentArray: any[], subArray: any[]) => subArray.every(el => parentArray.includes(el)),
 
 	// check if object is empty
@@ -41,10 +42,14 @@ export const helpers = {
 		return res[1] as string;
 	},
 
+	// convert string to regex
 	stringToRegex:(str: string): RegExp => new RegExp( str), //todo: need to update, multiple cases unhandled
 
 	// convert string to price format
 	price: (str: string): number => parseFloat(str.replace(/[^\d\-.,]/g, '').replace(/,/g, '.').replace(/\.(?=.*\.)/g, '')),
+
+	// remove dollar sign
+	removeDollarSign: (str: string): string => str.replace('$', ''),
 
 	// current year
 	currentYear: new Date().getFullYear(),
@@ -75,6 +80,7 @@ export const helpers = {
 		return result.toLocaleDateString('en-CA');
 	},
 
+	// round to two decimal
 	roundToTwo(num: string | number) {
 		return Math.round((Number(num) + Number.EPSILON) * 100) / 100;
 	},
@@ -91,7 +97,7 @@ export const helpers = {
 
 	// subtotal
 	subtotal(price: number[], quantity: number[]) {
-		const subtotal = price.map((e, index) => e * quantity[index]);
+		const subtotal = price.map((e, index) => e * quantity[index]!);
 		return subtotal.reduce((a, b) => a + b, 0);
 	},
 
