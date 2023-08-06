@@ -75,7 +75,7 @@ export class AuctionsPage extends VendorPage {
 	// update auction product fields
 	async updateAuctionProductFields(product: product['auction']){
 		await this.clearAndType(selector.vendor.vAuction.auction.productName, product.name);
-		// await this.addCategory(product.category);
+		// await this.addProductCategory(product.category);
 		await this.selectByValue(selector.vendor.vAuction.auction.itemCondition, product.itemCondition);
 		await this.selectByValue(selector.vendor.vAuction.auction.auctionType, product.auctionType);
 		await this.clearAndType(selector.vendor.vAuction.auction.startPrice, product.regularPrice());

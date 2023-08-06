@@ -104,14 +104,14 @@ export class OrdersPage extends VendorPage {
 	async goToOrderDetails(orderNumber: string): Promise<void> {
 		await this.searchOrder(orderNumber);
 		await this.clickAndWaitForLoadState(selector.vendor.orders.view(orderNumber));
-		await this.toContainText(selector.vendor.orders.orderNumber, orderNumber);
+		await this.toContainText(selector.vendor.orders.orderDetails.orderNumber, orderNumber);
 	}
 
 
 	// view order details
 	async viewOrderDetails(orderNumber: string): Promise<void> {
 		await this.goToOrderDetails(orderNumber);
-		//todo:  add more files to assert
+		//todo:  add more fields to assert
 	}
 
 
@@ -139,10 +139,10 @@ export class OrdersPage extends VendorPage {
 	// update order status
 	async updateOrderStatus(orderNumber: string, status: string): Promise<void> {
 		await this.goToOrderDetails(orderNumber);
-		await this.click(selector.vendor.orders.edit);
-		await this.selectByValue(selector.vendor.orders.orderStatus, status);
-		await this.clickAndAcceptAndWaitForResponse(data.subUrls.ajax, selector.vendor.orders.updateOrderStatus);
-		const currentStatus = await this.getElementText( selector.vendor.orders.currentOrderStatus);
+		await this.click(selector.vendor.orders.status.edit);
+		await this.selectByValue(selector.vendor.orders.status.orderStatus, status);
+		await this.clickAndAcceptAndWaitForResponse(data.subUrls.ajax, selector.vendor.orders.status.updateOrderStatus);
+		const currentStatus = await this.getElementText( selector.vendor.orders.status.currentOrderStatus);
 		expect(currentStatus?.toLowerCase()).toBe(status.split('-').pop());
 		// expect(currentOrderStatus?.toLowerCase()).toMatch((orderStatus.replace(/(^wc)|(\W)/g, '')).toLowerCase());
 	}

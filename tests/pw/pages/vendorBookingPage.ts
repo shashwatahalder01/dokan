@@ -2,7 +2,6 @@ import { Page } from '@playwright/test';
 import { VendorPage } from 'pages/vendorPage';
 import { selector } from 'pages/selectors';
 import { data } from 'utils/testData';
-import { helpers } from 'utils/helpers';
 import { product, bookingResource } from 'utils/interfaces';
 
 
@@ -145,7 +144,7 @@ export class BookingPage extends VendorPage {
 	// update booking product fields
 	async updateBookingProductFields(product: product['booking']){
 		await this.clearAndType(selector.vendor.vBooking.booking.productName, product.name);
-		// await this.addCategory(product.category);
+		// await this.addProductCategory(product.category);
 		// general booking options
 		await this.selectByValue(selector.vendor.vBooking.booking.bookingDurationType, product.bookingDurationType);
 		await this.clearAndType(selector.vendor.vBooking.booking.bookingDurationMax, product.bookingDurationMax);

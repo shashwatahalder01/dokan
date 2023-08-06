@@ -201,7 +201,7 @@ export class BasePage {
 
 	//  click on element by Running the js element.Click() method
 	async clickJs(selector: string): Promise<void> {
-		const element = this.page.locator(selector);
+		const element = this.getElement(selector);
 		await element.click();
 	}
 
@@ -536,7 +536,7 @@ export class BasePage {
 	}
 
 	// get element text if visible
-	async getElementTextVisible(selector: string): Promise<void |string | null> {
+	async getElementTextIfVisible(selector: string): Promise<void |string | null> {
 		const isVisible = await this.isVisible(selector);
 		if (isVisible) {
 			return await this.getElementText(selector);
@@ -554,16 +554,6 @@ export class BasePage {
 	async hasText(selector: string, text: string): Promise<boolean> {
 		const elementText = await this.textContentOfLocator(selector);
 		return elementText?.trim() === text ? true : false;
-	}
-
-
-	// get element text content
-	async getElementTextIfVisible(selector: string): Promise<string | null> {
-		const isVisible = await this.isVisible(selector);
-		if (isVisible) {
-			return await this.getElementText(selector);
-		}
-		return null;
 	}
 
 
@@ -593,7 +583,7 @@ export class BasePage {
 
 	//get element has class or not
 	async hasClass(selector: string, className: string): Promise<boolean> {
-		const element = this.page.locator(selector);
+		const element = this.getElement(selector);
 		const hasClass = await element.evaluate((element, className) => element.classList.contains(className), className,);
 		return hasClass;
 	}
@@ -607,7 +597,7 @@ export class BasePage {
 
 	// has attribute
 	async hasAttribute(selector: string, attribute: string): Promise<boolean> {
-		const element = this.page.locator(selector);
+		const element = this.getElement(selector);
 		const hasAttribute = await element.evaluate(
 			(element, attribute) => element.hasAttribute(attribute),
 			attribute,
@@ -618,14 +608,14 @@ export class BasePage {
 
 	// set attribute/class value
 	async setAttributeValue(selector: string, attribute: string, value: string): Promise<void> {
-		const element = this.page.locator(selector);
+		const element = this.getElement(selector);
 		await element.evaluate((element, [attribute, value]) => element.setAttribute(attribute as string, value as string), [attribute, value],);
 	}
 
 
 	// remove element attribute
 	async removeAttribute(selector: string, attribute: string): Promise<void> {
-		const element = this.page.locator(selector);
+		const element = this.getElement(selector);
 		await element.evaluate(
 			(element, attribute) => element.removeAttribute(attribute),
 			attribute,
@@ -635,7 +625,7 @@ export class BasePage {
 
 	// get element property value: background color
 	async getElementBackgroundColor(selector: string): Promise<string> {
-		const element = this.page.locator(selector);
+		const element = this.getElement(selector);
 		const value = await element.evaluate((element) =>
 			window.getComputedStyle(element).getPropertyValue('background-color'),
 		);
@@ -646,7 +636,7 @@ export class BasePage {
 
 	// get element property value: background color
 	async getElementColor(selector: string): Promise<string> {
-		const element = this.page.locator(selector);
+		const element = this.getElement(selector);
 		const value = await element.evaluate((element) => window.getComputedStyle(element).getPropertyValue('color'),);
 		// console.log(value)
 		return value;
@@ -667,12 +657,12 @@ export class BasePage {
 
 
 	// get multiple element texts
-	async getMultipleElementTexts(selector: string): Promise<(string | null)[]> {
-		const texts = await this.page.$$eval(selector, (elements) =>
-			elements.map((item) => item.textContent),
-		);
-		// console.log(texts)
-		return texts;
+	async getMultipleElementTexts(selector: string): Promise<string[]> {
+		// const texts = await this.page.$$eval(selector, (elements) => elements.map((item) => item.textContent));
+		const element =  this.getElement(selector);
+		const allTexts = await element.allTextContents();
+		console.log(allTexts);
+		return allTexts;
 	}
 
 
@@ -1417,10 +1407,12 @@ export class BasePage {
 		return await this.page.context().cookies();
 	}
 
+
 	// get cookies
 	async clearCookies(): Promise<void> {
 		await this.page.context().clearCookies();
 	}
+
 
 	// get wp current user
 	async getCurrentUser(): Promise<string | undefined> {
@@ -1737,7 +1729,7 @@ export class BasePage {
 	async deleteIfExists(selector: string): Promise<void> {
 		const elementExists = await this.isVisible(selector);
 		if (elementExists) {
-			const element = this.page.locator(selector);
+			const element = this.getElement(selector);
 			await element.click();
 		}
 	}

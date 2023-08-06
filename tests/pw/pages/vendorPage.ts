@@ -1,12 +1,13 @@
 import { Page, expect } from '@playwright/test';
 import { BasePage } from 'pages/basePage';
 import { LoginPage } from 'pages/loginPage';
-import { AdminPage } from 'pages/adminPage';
 import { CustomerPage } from 'pages/customerPage';
 import { selector } from 'pages/selectors';
 import { data } from 'utils/testData';
 import { helpers } from 'utils/helpers';
 import { product, vendor, vendorSetupWizard } from 'utils/interfaces';
+
+const { DOKAN_PRO } = process.env;
 
 
 export class VendorPage extends BasePage {
@@ -15,9 +16,9 @@ export class VendorPage extends BasePage {
 		super(page);
 	}
 
+
 	loginPage = new LoginPage(this.page);
-	customerPage = new CustomerPage(this.page);
-	adminPage = new AdminPage(this.page);
+	customer = new CustomerPage(this.page);
 
 	// navigation
 
@@ -33,27 +34,41 @@ export class VendorPage extends BasePage {
 		await this.goIfNotThere(data.subUrls.frontend.productDetails(helpers.slugify(productName)));
 	}
 
-	// setup wizard
+
+	// go to order details
+	async goToOrderDetails(orderNumber: string): Promise<void> {
+		await this.searchOrder(orderNumber);
+		await this.clickAndWaitForLoadState(selector.vendor.orders.view(orderNumber));
+		await this.toContainText(selector.vendor.orders.orderDetails.orderNumber, orderNumber);
+	}
+
+
+	// go to product edit
+	async goToProductEdit(productName: string): Promise<void> {
+		await this.searchProduct(productName);
+		await this.hover(selector.vendor.product.productCell(productName));
+		await this.clickAndWaitForResponseAndLoadState(data.subUrls.frontend.vDashboard.products, selector.vendor.product.editProduct(productName));
+
+	}
+
 
 	// vendor registration
-	async vendorRegister(vendorInfo: any, setupWizardData: vendorSetupWizard ): Promise<void> {
+	async vendorRegister(vendorInfo: vendor['vendorInfo'], setupWizardData: vendorSetupWizard ): Promise<void> {
+		const username = vendorInfo.firstName() + vendorInfo.lastName().replace('\'', '');
+
 		await this.goToMyAccount();
-		const loginIsVisible = await this.isVisible(selector.customer.cRegistration.regEmail);
-		if (!loginIsVisible) {
-			await this.loginPage.logout();
-		}
-		const username = vendorInfo.firstName() + vendorInfo.lastName();
+		const regIsVisible = await this.isVisible(selector.customer.cRegistration.regEmail);
+		!regIsVisible && await this.loginPage.logout();
 		await this.clearAndType(selector.vendor.vRegistration.regEmail, username + data.vendor.vendorInfo.emailDomain);
 		await this.clearAndType(selector.vendor.vRegistration.regPassword, vendorInfo.password);
 		await this.focusAndClick(selector.vendor.vRegistration.regVendor);
-		await this.waitForVisibleLocator(selector.vendor.vRegistration.firstName);
+		// await this.waitForVisibleLocator(selector.vendor.vRegistration.firstName);
 		await this.clearAndType(selector.vendor.vRegistration.firstName, username);
 		await this.clearAndType(selector.vendor.vRegistration.lastName, vendorInfo.lastName());
 		await this.clearAndType(selector.vendor.vRegistration.shopName, vendorInfo.shopName);
-		// await this.clearAndType(selector.vendor.shopUrl, shopUrl)
 		await this.click(selector.vendor.vRegistration.shopUrl);
 
-		// fill address if enabled
+		// fill address if enabled on registration
 		const addressInputIsVisible = await this.isVisible(selector.vendor.vRegistration.street1);
 		if (addressInputIsVisible) {
 			await this.clearAndType(selector.vendor.vRegistration.street1, vendorInfo.street1);
@@ -63,31 +78,28 @@ export class VendorPage extends BasePage {
 			await this.selectByValue(selector.vendor.vRegistration.country, vendorInfo.countrySelectValue);
 			await this.selectByValue(selector.vendor.vRegistration.state, vendorInfo.stateSelectValue);
 		}
-		await this.clearAndType(selector.vendor.vRegistration.companyName, vendorInfo.companyName);
-		await this.clearAndType(selector.vendor.vRegistration.companyId, vendorInfo.companyId);
-		await this.clearAndType(selector.vendor.vRegistration.vatNumber, vendorInfo.vatNumber);
-		await this.clearAndType(selector.vendor.vRegistration.bankName, vendorInfo.bankName);
-		await this.clearAndType(selector.vendor.vRegistration.bankIban, vendorInfo.bankIban);
+		if (DOKAN_PRO){
+			await this.clearAndType(selector.vendor.vRegistration.companyName, vendorInfo.companyName);
+			await this.clearAndType(selector.vendor.vRegistration.companyId, vendorInfo.companyId);
+			await this.clearAndType(selector.vendor.vRegistration.vatNumber, vendorInfo.vatNumber);
+			await this.clearAndType(selector.vendor.vRegistration.bankName, vendorInfo.bankName);
+			await this.clearAndType(selector.vendor.vRegistration.bankIban, vendorInfo.bankIban);
+		}
 		await this.clearAndType(selector.vendor.vRegistration.phone, vendorInfo.phoneNumber);
 		await this.checkIfVisible(selector.customer.cDashboard.termsAndConditions);
 		const subscriptionPackIsVisible = await this.isVisible(selector.vendor.vRegistration.subscriptionPack);
-		if (subscriptionPackIsVisible) {
-			await this.selectByLabel(selector.vendor.vRegistration.subscriptionPack, data.predefined.vendorSubscription.nonRecurring);
-		}
-		await this.click(selector.vendor.vRegistration.register);
+		subscriptionPackIsVisible && await this.selectByLabel(selector.vendor.vRegistration.subscriptionPack, data.predefined.vendorSubscription.nonRecurring);
+		await this.clickAndWaitForResponseAndLoadState(data.subUrls.frontend.myAccount, selector.vendor.vRegistration.register,  302);
 		const registrationErrorIsVisible = await this.isVisible(selector.customer.cWooSelector.wooCommerceError);
 		if (registrationErrorIsVisible) {
-			const errorMessage = await this.hasText(selector.customer.cWooSelector.wooCommerceError, data.customer.registrationErrorMessage);
-			if (errorMessage) {
-				return; //todo:  Throw error message instead of return
+			const hasError = await this.hasText(selector.customer.cWooSelector.wooCommerceError, data.customer.registration.registrationErrorMessage);
+			if (hasError) {
+				console.log('User already exists!!');
+				return;
 			}
 		}
-		if (subscriptionPackIsVisible) {
-			await this.customerPage.placeOrder('bank', false, true, false);
-		}
-		if(setupWizardData.choice){
-			await this.vendorSetupWizard(setupWizardData);
-		}
+		subscriptionPackIsVisible && await this.customer.placeOrder('bank', false, true, false);
+		await this.vendorSetupWizard(setupWizardData);
 	}
 
 
@@ -103,9 +115,26 @@ export class VendorPage extends BasePage {
 			await this.clearAndType(selector.vendor.vSetup.zipCode, setupWizardData.zipCode);
 			await this.click(selector.vendor.vSetup.country);
 			await this.type(selector.vendor.vSetup.countryInput, setupWizardData.country);
+			await this.toContainText(selector.vendor.vSetup.highlightedResult, setupWizardData.country);
 			await this.press(data.key.enter);
-			await this.type(selector.vendor.vSetup.state, setupWizardData.state);
+			await this.click(selector.vendor.vSetup.state);
+			await this.type(selector.vendor.vSetup.stateInput, setupWizardData.state);
+			await this.toContainText(selector.vendor.vSetup.highlightedResult, setupWizardData.state);
 			await this.press(data.key.enter);
+
+			// store categories
+			const storeCategoriesEnabled = await this.isVisible(selector.vendor.vSetup.storeCategories);
+			if (storeCategoriesEnabled){
+				const allStoreCategories = await this.getMultipleElementTexts(selector.vendor.vSetup.selectedStoreCategories);
+				const categoryIsSelected = allStoreCategories.includes('×'+ setupWizardData.storeCategory);
+				if (!categoryIsSelected){
+					await this.click(selector.vendor.vSetup.storeCategories);
+					await this.type(selector.vendor.vSetup.storeCategoriesInput, setupWizardData.storeCategory);
+					await this.toContainText(selector.vendor.vSetup.highlightedResult, setupWizardData.storeCategory);
+					await this.click(selector.vendor.vSetup.highlightedResult);
+				}
+			}
+
 			// map
 			const geoLocationEnabled = await this.isVisible(selector.vendor.vSetup.map);
 			if (geoLocationEnabled) {
@@ -116,6 +145,9 @@ export class VendorPage extends BasePage {
 
 			await this.check(selector.vendor.vSetup.email);
 			await this.click(selector.vendor.vSetup.continueStoreSetup);
+
+			// payment
+
 			// paypal
 			await this.clearAndType(selector.vendor.vSetup.paypal, setupWizardData.paypal());
 			// bank transfer
@@ -133,16 +165,18 @@ export class VendorPage extends BasePage {
 			// skrill
 			await this.typeIfVisible(selector.vendor.vSetup.skrill, setupWizardData.skrill);
 			await this.click(selector.vendor.vSetup.continuePaymentSetup);
-			await this.clickAndWaitForResponse(data.subUrls.frontend.vDashboard.dashboard, selector.vendor.vSetup.goToStoreDashboard);
+			await this.clickAndWaitForResponseAndLoadState(data.subUrls.frontend.vDashboard.dashboard, selector.vendor.vSetup.goToStoreDashboard);
 		} else {
-			await this.clickAndWaitForResponse(data.subUrls.frontend.vDashboard.dashboard, selector.vendor.vSetup.notRightNow);
+			await this.clickAndWaitForResponseAndLoadState(data.subUrls.frontend.vDashboard.dashboard, selector.vendor.vSetup.notRightNow);
 		}
 		await this.toBeVisible(selector.vendor.vDashboard.menus.dashboard);
 	}
 
 
+	//todo: fixed above functions
+
 	// vendor add product category
-	async addCategory(category: string): Promise<void> {
+	async addProductCategory(category: string): Promise<void> {
 		await this.click(selector.vendor.product.productCategoryModal);
 		await this.waitForVisibleLocator(selector.vendor.product.productCategorySearchInput);
 		await this.type(selector.vendor.product.productCategorySearchInput, category);
@@ -168,7 +202,7 @@ export class VendorPage extends BasePage {
 		await this.waitForVisibleLocator(selector.vendor.product.productName);
 		await this.type(selector.vendor.product.productName, productName);
 		await this.type(selector.vendor.product.productPrice, product.regularPrice());
-		await this.addCategory(product.category); //todo:  split in separate test
+		await this.addProductCategory(product.category); //todo:  split in separate test
 		await this.clickAndWaitForResponse(data.subUrls.ajax, selector.vendor.product.createProduct);
 		const createdProduct = await this.getElementValue(selector.vendor.product.title);
 		expect(createdProduct.toLowerCase()).toBe(productName.toLowerCase());
@@ -182,27 +216,28 @@ export class VendorPage extends BasePage {
 		// edit product
 		await this.selectByValue(selector.vendor.product.productType, product.productType);
 		// add variation
-		await this.selectByValue(selector.vendor.product.customProductAttribute, `pa_${product.attribute}`);
-		await this.click(selector.vendor.product.addAttribute);
-		await this.waitForVisibleLocator(selector.vendor.product.selectAll);
-		await this.click(selector.vendor.product.selectAll);
-		await this.click(selector.vendor.product.usedForVariations);
-		await this.waitForVisibleLocator(selector.vendor.product.saveAttributes);
-		await this.click(selector.vendor.product.saveAttributes);
-		await this.waitForVisibleLocator(selector.vendor.product.addVariations);
-		await this.selectByValue(selector.vendor.product.addVariations, product.variations.linkAllVariation);
-		await this.click(selector.vendor.product.go);
-		await this.waitForVisibleLocator(selector.vendor.product.confirmGo);
-		await this.click(selector.vendor.product.confirmGo);
-		await this.click(selector.vendor.product.okSuccessAlertGo);
-		await this.selectByValue(selector.vendor.product.addVariations, product.variations.variableRegularPrice);
-		await this.click(selector.vendor.product.go);
-		// await this.waitForVisibleLocator(selector.vendor.product.variationPrice)
-		await this.type(selector.vendor.product.variationPrice, product.regularPrice());
-		await this.click(selector.vendor.product.okVariationPrice);
-		await this.clickAndWaitForResponse(data.subUrls.frontend.vDashboard.products, selector.vendor.product.saveProduct, 302);
-		const productCreateSuccessMessage = await this.getElementText(selector.vendor.product.updatedSuccessMessage);
-		expect(productCreateSuccessMessage?.replace(/\s+/g, ' ').trim()).toMatch(product.saveSuccessMessage);
+		await this.selectByValue(selector.vendor.product.attribute.customProductAttribute, `pa_${product.attribute}`);
+		await this.click(selector.vendor.product.attribute.addAttribute);
+		await this.waitForVisibleLocator(selector.vendor.product.attribute.selectAll);
+		await this.click(selector.vendor.product.attribute.selectAll);
+		await this.click(selector.vendor.product.attribute.usedForVariations);
+		await this.waitForVisibleLocator(selector.vendor.product.attribute.saveAttributes);
+		await this.click(selector.vendor.product.attribute.saveAttributes);
+		await this.waitForVisibleLocator(selector.vendor.product.attribute.addVariations);
+		await this.selectByValue(selector.vendor.product.attribute.addVariations, product.variations.linkAllVariation);
+		await this.click(selector.vendor.product.attribute.go);
+		await this.waitForVisibleLocator(selector.vendor.product.attribute.confirmGo);
+		await this.click(selector.vendor.product.attribute.confirmGo);
+		await this.click(selector.vendor.product.attribute.okSuccessAlertGo);
+		await this.selectByValue(selector.vendor.product.attribute.addVariations, product.variations.variableRegularPrice);
+		await this.click(selector.vendor.product.attribute.go);
+		// await this.waitForVisibleLocator(selector.vendor.product.attribute.variationPrice)
+		await this.type(selector.vendor.product.attribute.variationPrice, product.regularPrice());
+		await this.click(selector.vendor.product.attribute.okVariationPrice);
+		await this.clickAndWaitForResponseAndLoadState(data.subUrls.frontend.vDashboard.products, selector.vendor.product.saveProduct, 302);
+		// const productCreateSuccessMessage = await this.getElementText(selector.vendor.product.updatedSuccessMessage);
+		// expect(productCreateSuccessMessage?.replace(/\s+/g, ' ').trim()).toMatch(product.saveSuccessMessage);
+		await this.toContainText(selector.vendor.product.updatedSuccessMessage, product.saveSuccessMessage);
 	}
 
 
@@ -217,9 +252,10 @@ export class VendorPage extends BasePage {
 		await this.selectByValue(selector.vendor.product.expireAfter, product.expireAfter);
 		await this.type(selector.vendor.product.subscriptionTrialLength, product.subscriptionTrialLength);
 		await this.selectByValue(selector.vendor.product.subscriptionTrialPeriod, product.subscriptionTrialPeriod);
-		await this.clickAndWaitForResponse(data.subUrls.frontend.vDashboard.products, selector.vendor.product.saveProduct, 302);
-		const productCreateSuccessMessage = await this.getElementText(selector.vendor.product.updatedSuccessMessage);
-		expect(productCreateSuccessMessage?.replace(/\s+/g, ' ').trim()).toMatch(product.saveSuccessMessage);
+		await this.clickAndWaitForResponseAndLoadState(data.subUrls.frontend.vDashboard.products, selector.vendor.product.saveProduct, 302);
+		// const productCreateSuccessMessage = await this.getElementText(selector.vendor.product.updatedSuccessMessage);
+		// expect(productCreateSuccessMessage?.replace(/\s+/g, ' ').trim()).toMatch(product.saveSuccessMessage);
+		await this.toContainText(selector.vendor.product.updatedSuccessMessage, product.saveSuccessMessage);
 	}
 
 
@@ -229,29 +265,30 @@ export class VendorPage extends BasePage {
 		// edit product
 		await this.selectByValue(selector.vendor.product.productType, product.productType);
 		// add variation
-		await this.selectByValue(selector.vendor.product.customProductAttribute, `pa_${product.attribute}`);
-		await this.click(selector.vendor.product.addAttribute);
-		await this.waitForVisibleLocator(selector.vendor.product.selectAll);
-		await this.click(selector.vendor.product.selectAll);
-		await this.click(selector.vendor.product.usedForVariations);
-		await this.waitForVisibleLocator(selector.vendor.product.saveAttributes);
-		await this.click(selector.vendor.product.saveAttributes);
-		await this.waitForVisibleLocator(selector.vendor.product.addVariations);
-		await this.selectByValue(selector.vendor.product.addVariations, product.variations.linkAllVariation);
-		await this.click(selector.vendor.product.go);
-		await this.waitForVisibleLocator(selector.vendor.product.confirmGo);
-		await this.click(selector.vendor.product.confirmGo);
-		await this.click(selector.vendor.product.okSuccessAlertGo);
-		await this.selectByValue(selector.vendor.product.addVariations, product.variations.variableRegularPrice);
-		await this.click(selector.vendor.product.go);
-		await this.waitForVisibleLocator(selector.vendor.product.variationPrice);
-		await this.type(selector.vendor.product.variationPrice, product.regularPrice());
-		await this.click(selector.vendor.product.okVariationPrice); // todo : add waitForResponse with click
-		await this.clickAndWaitForResponse(data.subUrls.frontend.vDashboard.products, selector.vendor.product.saveProduct, 302);
+		await this.selectByValue(selector.vendor.product.attribute.customProductAttribute, `pa_${product.attribute}`);
+		await this.click(selector.vendor.product.attribute.addAttribute);
+		await this.waitForVisibleLocator(selector.vendor.product.attribute.selectAll);
+		await this.click(selector.vendor.product.attribute.selectAll);
+		await this.click(selector.vendor.product.attribute.usedForVariations);
+		await this.waitForVisibleLocator(selector.vendor.product.attribute.saveAttributes);
+		await this.click(selector.vendor.product.attribute.saveAttributes);
+		await this.waitForVisibleLocator(selector.vendor.product.attribute.addVariations);
+		await this.selectByValue(selector.vendor.product.attribute.addVariations, product.variations.linkAllVariation);
+		await this.click(selector.vendor.product.attribute.go);
+		await this.waitForVisibleLocator(selector.vendor.product.attribute.confirmGo);
+		await this.click(selector.vendor.product.attribute.confirmGo);
+		await this.click(selector.vendor.product.attribute.okSuccessAlertGo);
+		await this.selectByValue(selector.vendor.product.attribute.addVariations, product.variations.variableRegularPrice);
+		await this.click(selector.vendor.product.attribute.go);
+		await this.waitForVisibleLocator(selector.vendor.product.attribute.variationPrice);
+		await this.type(selector.vendor.product.attribute.variationPrice, product.regularPrice());
+		await this.click(selector.vendor.product.attribute.okVariationPrice); // todo : add waitForResponse with click
+		await this.clickAndWaitForResponseAndLoadState(data.subUrls.frontend.vDashboard.products, selector.vendor.product.saveProduct, 302);
 
 		await this.waitForVisibleLocator(selector.vendor.product.updatedSuccessMessage);
-		const productCreateSuccessMessage = await this.getElementText(selector.vendor.product.updatedSuccessMessage);
-		expect(productCreateSuccessMessage?.replace(/\s+/g, ' ').trim()).toMatch(product.saveSuccessMessage);
+		// const productCreateSuccessMessage = await this.getElementText(selector.vendor.product.updatedSuccessMessage);
+		// expect(productCreateSuccessMessage?.replace(/\s+/g, ' ').trim()).toMatch(product.saveSuccessMessage);
+		await this.toContainText(selector.vendor.product.updatedSuccessMessage, product.saveSuccessMessage);
 	}
 
 
@@ -264,19 +301,10 @@ export class VendorPage extends BasePage {
 		await this.type(selector.vendor.product.buttonText, product.buttonText);
 		await this.clearAndType(selector.vendor.product.price, product.regularPrice());
 
-		await this.clickAndWaitForResponse(data.subUrls.frontend.vDashboard.products, selector.vendor.product.saveProduct, 302);
-		const productCreateSuccessMessage = await this.getElementText(selector.vendor.product.updatedSuccessMessage);
-		expect(productCreateSuccessMessage?.replace(/\s+/g, ' ').trim()).toMatch(product.saveSuccessMessage);
-	}
-
-
-	// vendor search similar product
-	async searchSimilarProduct(productName: string): Promise<void> {
-		await this.click(selector.vendor.vSearchSimilarProduct.search);
-		await this.type(selector.vendor.vSearchSimilarProduct.search, productName);
-		await this.click(selector.vendor.vSearchSimilarProduct.search);
-		await this.click(selector.vendor.vSearchSimilarProduct.search);
-		//todo:  add assertion
+		await this.clickAndWaitForResponseAndLoadState(data.subUrls.frontend.vDashboard.products, selector.vendor.product.saveProduct, 302);
+		// const productCreateSuccessMessage = await this.getElementText(selector.vendor.product.updatedSuccessMessage);
+		// expect(productCreateSuccessMessage?.replace(/\s+/g, ' ').trim()).toMatch(product.saveSuccessMessage);
+		await this.toContainText(selector.vendor.product.updatedSuccessMessage, product.saveSuccessMessage);
 	}
 
 
@@ -768,175 +796,157 @@ export class VendorPage extends BasePage {
 	}
 
 
-	// vendor set social profile settings
-	async setSocialProfile(urls: vendor['socialProfileUrls']): Promise<void> {
-		await this.goIfNotThere(data.subUrls.frontend.vDashboard.settingsSocialProfile);
-		await this.clearAndType(selector.vendor.vSocialProfileSettings.platforms.facebook, urls.facebook);
-		await this.clearAndType(selector.vendor.vSocialProfileSettings.platforms.twitter, urls.twitter);
-		await this.clearAndType(selector.vendor.vSocialProfileSettings.platforms.pinterest, urls.pinterest);
-		await this.clearAndType(selector.vendor.vSocialProfileSettings.platforms.linkedin, urls.linkedin);
-		await this.clearAndType(selector.vendor.vSocialProfileSettings.platforms.youtube, urls.youtube);
-		await this.clearAndType(selector.vendor.vSocialProfileSettings.platforms.instagram, urls.instagram);
-		await this.clearAndType(selector.vendor.vSocialProfileSettings.platforms.flickr, urls.flickr);
-		await this.keyPressOnLocator(selector.vendor.vSocialProfileSettings.updateSettings, data.key.enter);
-		await this.toContainText(selector.vendor.vSocialProfileSettings.updateSettingsSuccessMessage, urls.saveSuccessMessage);
+	// spmv
+
+	// vendor search similar product
+	async searchSimilarProduct(productName: string): Promise<void> {
+		await this.click(selector.vendor.vSearchSimilarProduct.search);
+		await this.type(selector.vendor.vSearchSimilarProduct.search, productName);
+		await this.click(selector.vendor.vSearchSimilarProduct.search);
+		await this.click(selector.vendor.vSearchSimilarProduct.search);
+		//todo:  add assertion
 	}
 
-	// vendor set rma settings
-	async setRmaSettings(rma: vendor['rma']): Promise<void> {
-		await this.goIfNotThere(data.subUrls.frontend.vDashboard.settingsRma);
-		await this.clearAndType(selector.vendor.vRmaSettings.label, rma.label);
-		await this.selectByValue(selector.vendor.vRmaSettings.type, rma.type);
-		await this.selectByValue(selector.vendor.vRmaSettings.length, rma.rmaLength);
-		await this.clearAndType(selector.vendor.vRmaSettings.lengthValue, rma.lengthValue);
-		await this.selectByValue(selector.vendor.vRmaSettings.lengthDuration, rma.lengthDuration);
-		// check if refund reason exists
-		const refundReasonIsVisible = await this.isVisible(selector.vendor.vRmaSettings.refundReasonsFirst);
-		if (refundReasonIsVisible) {
-			await this.checkMultiple(selector.vendor.vRmaSettings.refundReasons);
-		}
-		await this.typeFrameSelector(selector.vendor.vRmaSettings.refundPolicyIframe, selector.vendor.vRmaSettings.refundPolicyHtmlBody, rma.refundPolicyHtmlBody);
-		await this.clickAndWaitForResponseAndLoadState(data.subUrls.frontend.vDashboard.settingsRma, selector.vendor.vRmaSettings.saveChanges, 302);
-		await expect(this.page.getByText(rma.saveSuccessMessage)).toBeVisible(); //todo: update this, with toBeVisible()
-	}
+	// product update
 
-
-	// vendor functions
-
-	// vendor approve return request
-	async approveReturnRequest(orderId: string, productName: string): Promise<void> {
-		await this.goToVendorDashboard();
-		await this.click(selector.vendor.vDashboard.menus.returnRequest);
-		await this.click(selector.vendor.vReturnRequest.view(orderId));
-		// change order status to refund
-		await this.selectByValue(selector.vendor.vReturnRequest.changeOrderStatus, 'processing');
-		// await this.alert('accept')
-		await this.acceptAlert();
-		await this.click(selector.vendor.vReturnRequest.updateOrderStatus);
-		// refund request
-		await this.click(selector.vendor.vReturnRequest.sendRefund);
-		const tax = String(helpers.price(await this.getElementText(selector.vendor.vReturnRequest.taxAmount(productName)) as string));
-		const subTotal = String(helpers.price(await this.getElementText(selector.vendor.vReturnRequest.subTotal(productName)) as string));
-		await this.type(selector.vendor.vReturnRequest.taxRefund, tax);
-		await this.type(selector.vendor.vReturnRequest.subTotalRefund, subTotal);
-		await this.click(selector.vendor.vReturnRequest.sendRequest);
-
-		// const successMessage = await this.getElementText(selector.vendor.vReturnRequest.sendRequestSuccessMessage);
-		// expect(successMessage).toMatch('Already send refund request. Wait for admin approval');
-		await this.toContainText(selector.vendor.vReturnRequest.sendRequestSuccessMessage, 'Already send refund request. Wait for admin approval' );
-	}
-
-
-	// delete return request
-	async deleteReturnRequest(orderId: string): Promise<void> {
-		await this.goToVendorDashboard();
-		await this.click(selector.vendor.vDashboard.menus.returnRequest);
-		await this.hover(selector.vendor.vReturnRequest.returnRequestCell(orderId));
-		await this.click(selector.vendor.vReturnRequest.delete(orderId));
-		const successMessage = await this.getElementText(selector.customer.cWooSelector.wooCommerceSuccessMessage);
-		expect(successMessage).toMatch('Return Request has been deleted successfully');
-	}
-
-
-	// add quantity discount
-	async addQuantityDiscount(productName: string, minimumQuantity: string, discountPercentage: string): Promise<void> {
-		await this.searchProduct(productName);
-		await this.click(selector.vendor.product.productLink(productName));
+	// add product quantity discount
+	async addProductQuantityDiscount(productName: string, minimumQuantity: string, discountPercentage: string): Promise<void> {
+		await this.goToProductEdit(productName);
 		// add quantity discount
-		await this.check(selector.vendor.product.enableBulkDiscount);
-		await this.clearAndType(selector.vendor.product.lotMinimumQuantity, minimumQuantity);
-		await this.clearAndType(selector.vendor.product.lotDiscountInPercentage, discountPercentage);
-		await this.clickAndWaitForResponse(data.subUrls.frontend.vDashboard.products, selector.vendor.product.saveProduct, 302);
-		const productCreateSuccessMessage = await this.getElementText(selector.vendor.product.updatedSuccessMessage);
-		expect(productCreateSuccessMessage?.replace(/\s+/g, ' ').trim()).toMatch(data.product.createUpdateSaveSuccessMessage);
+		await this.check(selector.vendor.product.discount.enableBulkDiscount);
+		await this.clearAndType(selector.vendor.product.discount.lotMinimumQuantity, minimumQuantity);
+		await this.clearAndType(selector.vendor.product.discount.lotDiscountInPercentage, discountPercentage);
+		await this.clickAndWaitForResponseAndLoadState(data.subUrls.frontend.vDashboard.products, selector.vendor.product.saveProduct, 302);
+		await this.toContainText(selector.vendor.product.updatedSuccessMessage, data.product.createUpdateSaveSuccessMessage);
 	}
 
 
-	// vendor override rma settings
-	async overrideProductRmaSettings(productName: string, label: string, type: string, length: string, lengthValue: string, lengthDuration: string): Promise<void> {
-		await this.searchProduct(productName);
-		await this.click(selector.vendor.product.productLink(productName));
-		// override rma settings
-		await this.check(selector.vendor.product.overrideYourDefaultRmaSettingsForThisProduct);
-		await this.clearAndType(selector.vendor.product.rmaLabel, label);
-		await this.selectByValue(selector.vendor.product.rmaType, type);
-		await this.selectByValue(selector.vendor.product.rmaLength, length);
-		await this.clearAndType(selector.vendor.product.rmaLengthValue, lengthValue);
-		await this.selectByValue(selector.vendor.product.rmaLengthDuration, lengthDuration);
+	// vendor add product rma settings
+	async addProductRmaSettings(productName: string, label: string, type: string, length: string, lengthValue: string, lengthDuration: string): Promise<void> {
+		await this.goToProductEdit(productName);
+		// add rma settings
+		await this.check(selector.vendor.product.rma.overrideYourDefaultRmaSettingsForThisProduct);
+		await this.clearAndType(selector.vendor.product.rma.rmaLabel, label);
+		await this.selectByValue(selector.vendor.product.rma.rmaType, type);
+		await this.selectByValue(selector.vendor.product.rma.rmaLength, length);
+		await this.clearAndType(selector.vendor.product.rma.rmaLengthValue, lengthValue);
+		await this.selectByValue(selector.vendor.product.rma.rmaLengthDuration, lengthDuration);
 
-		const refundReasonIsVisible = await this.isVisible(selector.vendor.product.refundReasons);
+		const refundReasonIsVisible = await this.isVisible(selector.vendor.product.rma.refundReasons);
 		if (refundReasonIsVisible) {
-			// await this.clickAndWaitMultiple(selector.vendor.product.refundReasons)//todo:  update this
+			await this.checkMultiple(selector.vendor.product.rma.refundReasons); //todo:  update this
 		}
-		await this.clickAndWaitForResponse(data.subUrls.frontend.vDashboard.products, selector.vendor.product.saveProduct, 302);
-		const productCreateSuccessMessage = await this.getElementText(selector.vendor.product.updatedSuccessMessage);
-		expect(productCreateSuccessMessage?.replace(/\s+/g, ' ').trim()).toMatch(data.product.createUpdateSaveSuccessMessage);
+		await this.clickAndWaitForResponseAndLoadState(data.subUrls.frontend.vDashboard.products, selector.vendor.product.saveProduct, 302);
+		await this.toContainText(selector.vendor.product.updatedSuccessMessage, data.product.createUpdateSaveSuccessMessage);
 	}
 
 
-	// // vendor refund order
-	// async refundOrder(orderNumber: string, productName: string, partialRefund = false): Promise<void> {
-	// 	await this.goToVendorDashboard();
-	// 	await this.click(selector.vendor.vDashboard.orders);
-	// 	await this.click(selector.vendor.orders.orderLink(orderNumber));
+	//refund
 
-	// 	//request refund
-	// 	await this.click(selector.vendor.orders.requestRefund);
-	// 	const productQuantity = await this.getElementText(selector.vendor.orders.productQuantity(productName));
-	// 	const productCost = helpers.price(await this.getElementText(selector.vendor.orders.productCost(productName)));
-	// 	const productTax = helpers.price(await this.getElementText(selector.vendor.orders.productTax(productName)));
-	// 	await this.type(selector.vendor.orders.refundProductQuantity(productName), productQuantity);
-	// 	if (partialRefund) {
-	// 		await this.click(selector.vendor.orders.refundDiv);
-	// 		await this.clearAndType(selector.vendor.orders.refundProductCostAmount(productName), String(helpers.roundToTwo(productCost / 2)));
-	// 		await this.clearAndType(selector.vendor.orders.refundProductTaxAmount(productName), String(helpers.roundToTwo(productTax / 2)));
-	// 	}
-	// 	await this.type(selector.vendor.orders.refundReason, 'Defective product');
-	// 	await this.click(selector.vendor.orders.refundManually);
-	// 	await this.click(selector.vendor.orders.confirmRefund);
+	// vendor refund order
+	async refundOrder(orderNumber: string, productName: string, partialRefund = false): Promise<void> {
+		await this.goToOrderDetails(orderNumber);
 
-	// 	// const successMessage = await this.getElementText(selector.vendor.orders.refundRequestSuccessMessage);
-	// 	// expect(successMessage).toMatch('Refund request submitted.');
-	// await this.toContainText(selector.vendor.orders.refundRequestSuccessMessage, 'Refund request submitted.');
-	// 	await this.click(selector.vendor.orders.refundRequestSuccessMessageOk);
-	// }
+		//request refund
+		await this.click(selector.vendor.orders.refund.requestRefund);
+		const productQuantity = await this.getElementText(selector.vendor.orders.refund.productQuantity(productName)) as string;
+		const productCost = helpers.price(await this.getElementText(selector.vendor.orders.refund.productCost(productName)) as string);
+		const productTax = helpers.price(await this.getElementText(selector.vendor.orders.refund.productTax(productName)) as string);
+		await this.type(selector.vendor.orders.refund.refundProductQuantity(productName), productQuantity);
+		if (partialRefund) {
+			await this.click(selector.vendor.orders.refund.refundDiv);
+			await this.clearAndType(selector.vendor.orders.refund.refundProductCostAmount(productName), String(helpers.roundToTwo(productCost / 2)));
+			await this.clearAndType(selector.vendor.orders.refund.refundProductTaxAmount(productName), String(helpers.roundToTwo(productTax / 2)));
+		}
+		await this.type(selector.vendor.orders.refund.refundReason, 'Defective product');
+		await this.click(selector.vendor.orders.refund.refundManually);
+		await this.click(selector.vendor.orders.refund.confirmRefund);
 
-	// get order details vendor
-	// async getOrderDetails(orderNumber): Promise<object> {
-	//     await this.goToVendorDashboard()
-	//     await this.click(selector.vendor.vDashboard.orders)
-	//     let vOrderDetails = {}
-	//     vOrderDetails.vendorEarning = helpers.price(await this.getElementText(selector.vendor.orders.vendorEarningTable(orderNumber)))
+		await this.toContainText(selector.vendor.orders.refund.refundRequestSuccessMessage, 'Refund request submitted.');
+		await this.click(selector.vendor.orders.refund.refundRequestSuccessMessageOk);
+	}
 
-	//     await this.click(selector.vendor.orders.orderLink(orderNumber))
-	//     vOrderDetails.orderNumber = (await this.getElementText(selector.vendor.orders.orderNumber)).split('#')[1]
-	//     let refundedOrderTotalIsVisible = await this.isVisible(selector.vendor.orders.orderTotalAfterRefund)
-	//     if (refundedOrderTotalIsVisible) {
-	//         vOrderDetails.orderTotalBeforeRefund = helpers.price(await this.getElementText(selector.vendor.orders.orderTotalBeforeRefund))
-	//         vOrderDetails.orderTotal = helpers.price(await this.getElementText(selector.vendor.orders.orderTotalAfterRefund))
-	//     } else {
-	//         vOrderDetails.orderTotal = helpers.price(await this.getElementText(selector.vendor.orders.orderTotal))
-	//     }
-	//     vOrderDetails.orderStatus = (await this.getElementText(selector.vendor.orders.currentOrderStatus)).replace('-', ' ')
-	//     let orderDate = (await this.getElementText(selector.vendor.orders.orderDate)).split(':')[1].trim()
-	//     vOrderDetails.orderDate = orderDate.substring(0, orderDate.indexOf(',', orderDate.indexOf(',') + 1))
-	//     vOrderDetails.discount = helpers.price(await this.getElementText(selector.vendor.orders.discount))
-	//     let shippingMethodIsVisible = await this.isVisible(selector.vendor.orders.shippingMethod)
-	//     if (shippingMethodIsVisible) vOrderDetails.shippingMethod = await this.getElementText(selector.vendor.orders.shippingMethod)
-	//     vOrderDetails.shippingCost = helpers.price(await this.getElementText(selector.vendor.orders.shippingCost))
-	//     let taxIsVisible = await this.isVisible(selector.vendor.orders.tax)
-	//     if (taxIsVisible) vOrderDetails.tax = helpers.price(await this.getElementText(selector.vendor.orders.tax))
-	//     vOrderDetails.refunded = helpers.price(await this.getElementText(selector.vendor.orders.refunded))
 
-	//     return vOrderDetails
-	// }
+	//todo: fixed below functions
 
 	// get total vendor earnings
+	async getTotalVendorEarning(): Promise<number> {
+		await this.goToVendorDashboard();
+		return helpers.price(await this.getElementText(selector.vendor.vDashboard.atAGlance.earningValue) as string);
+	}
 
-	// async getTotalVendorEarning(): Promise<number> {
-	// 	await this.goToVendorDashboard();
-	// 	return helpers.price(await this.getElementText(selector.vendor.vDashboard.earning));
-	// }
+
+	// get order details vendor
+	async getOrderDetails(orderNumber: string): Promise<object> {
+		await this.searchOrder(orderNumber);
+
+		const orderDetails = {
+			vendorEarning: 0,
+			orderNumber: '',
+			orderTotalBeforeRefund: 0,
+			orderTotal: 0,
+			orderStatus: '',
+			orderDate: '',
+			discount: 0,
+			shippingMethod: '',
+			shippingCost: 0,
+			tax: 0,
+			refunded: 0,
+
+		};
+
+		orderDetails.vendorEarning = helpers.price(await this.getElementText(selector.vendor.orders.vendorEarningTable(orderNumber)) as string);
+		await this.clickAndWaitForLoadState(selector.vendor.orders.view(orderNumber));
+
+		orderDetails.orderNumber = (await this.getElementText(selector.vendor.orders.orderDetails.orderNumber)  as string).split('#')[1]  as string;
+
+		const refundedOrderTotalIsVisible = await this.isVisible(selector.vendor.orders.orderDetails.orderTotalAfterRefund);
+		if (refundedOrderTotalIsVisible) {
+			orderDetails.orderTotalBeforeRefund = helpers.price(await this.getElementText(selector.vendor.orders.orderDetails.orderTotalBeforeRefund) as string);
+			orderDetails.orderTotal = helpers.price(await this.getElementText(selector.vendor.orders.orderDetails.orderTotalAfterRefund) as string);
+		} else {
+			orderDetails.orderTotal = helpers.price(await this.getElementText(selector.vendor.orders.orderDetails.orderTotal) as string);
+		}
+
+		orderDetails.orderStatus = (await this.getElementText(selector.vendor.orders.status.currentOrderStatus) as string).replace('-', ' ');
+
+		const orderDate = (await this.getElementText(selector.vendor.orders.orderDetails.orderDate) as string)?.split(':')[1]?.trim();
+		orderDetails.orderDate = orderDate?.substring(0, orderDate.indexOf(',', orderDate.indexOf(',') + 1));
+
+		const discountIsVisible = await this.isVisible(selector.vendor.orders.orderDetails.discount);
+		if (discountIsVisible){
+			orderDetails.discount = helpers.price(await this.getElementText(selector.vendor.orders.orderDetails.discount) as string);
+		}
+
+		const shippingMethodIsVisible = await this.isVisible(selector.vendor.orders.orderDetails.shippingMethod);
+		if (shippingMethodIsVisible) {
+			orderDetails.shippingCost = helpers.price(await this.getElementText(selector.vendor.orders.orderDetails.shippingCost) as string);
+		}
+
+		const taxIsVisible = await this.isVisible(selector.vendor.orders.orderDetails.tax);
+		if (taxIsVisible){
+			orderDetails.tax = helpers.price(await this.getElementText(selector.vendor.orders.orderDetails.tax) as string);
+		}
+
+		const refundIsVisible = await this.isVisible(selector.vendor.orders.orderDetails.refunded);
+		if (refundIsVisible){
+			orderDetails.refunded = helpers.price(await this.getElementText(selector.vendor.orders.orderDetails.refunded) as string);
+		}
+
+		console.log(orderDetails);
+		return orderDetails;
+	}
+
+
+	// vendor account details render properly
+	async vendorAccountDetailsRenderProperly(){
+		await this.goIfNotThere(data.subUrls.frontend.vDashboard.editAccountVendor);
+
+		// eslint-disable-next-line @typescript-eslint/no-unused-vars
+		const { saveSuccessMessage, ...accountDetails } = selector.vendor.vAccountDetails;
+		await this.multipleElementVisible(accountDetails);
+
+	}
 
 
 	// visit store
@@ -961,7 +971,14 @@ export class VendorPage extends BasePage {
 	}
 
 
-	//todo: new tests
+	// search order
+	async searchOrder(orderNumber: string): Promise<void> {
+		await this.goIfNotThere(data.subUrls.frontend.vDashboard.orders);
+
+		await this.clearAndType(selector.vendor.orders.search.searchInput, orderNumber);
+		await this.clickAndWaitForResponse(data.subUrls.frontend.vDashboard.orders, selector.vendor.orders.search.searchBtn);
+		await this.toBeVisible(selector.vendor.orders.orderLink(orderNumber));
+	}
 
 
 	// vendor analytics render properly
@@ -988,17 +1005,6 @@ export class VendorPage extends BasePage {
 
 		await this.clickAndWaitForLoadState(selector.vendor.vAnalytics.menus.keyword);
 		await this.toBeVisible(selector.vendor.vAnalytics.noAnalytics);
-
-	}
-
-
-	// vendor store seo render properly
-	async vendorAccountDetailsRenderProperly(){
-		await this.goIfNotThere(data.subUrls.frontend.vDashboard.editAccountVendor);
-
-		// eslint-disable-next-line @typescript-eslint/no-unused-vars
-		const { saveSuccessMessage, ...accountDetails } = selector.vendor.vAccountDetails;
-		await this.multipleElementVisible(accountDetails);
 
 	}
 

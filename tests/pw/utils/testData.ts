@@ -642,6 +642,7 @@ export const data = {
 		city: 'New York',
 		zipCode: '10006',
 		state: 'New York',
+		storeCategory: 'Uncategorized',
 		mapLocation: 'New York',
 		paypal: () => faker.internet.email(),
 		bankAccountName: 'accountName',

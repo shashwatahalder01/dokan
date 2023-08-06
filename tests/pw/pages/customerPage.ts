@@ -70,7 +70,7 @@ export class CustomerPage extends BasePage {
 
 	// customer register
 	async customerRegister(customerInfo: customer['customerInfo']): Promise<void> {
-		const username: string = (customerInfo.firstName() + customerInfo.lastName()).replace('\'', '');
+		const username = (customerInfo.firstName() + customerInfo.lastName()).replace('\'', '');
 		await this.goToMyAccount();
 		const regIsVisible = await this.isVisible(selector.customer.cRegistration.regEmail);
 		!regIsVisible && await this.loginPage.logout();
@@ -94,6 +94,7 @@ export class CustomerPage extends BasePage {
 	// customer become vendor
 	async customerBecomeVendor(customerInfo: customer['customerInfo']): Promise<void> {
 		const firstName = customerInfo.firstName();
+
 		await this.goIfNotThere(data.subUrls.frontend.myAccount);
 		await this.clickAndWaitForResponseAndLoadState(data.subUrls.frontend.accountMigration, selector.customer.cDashboard.becomeVendor);
 		// vendor registration form
@@ -115,13 +116,11 @@ export class CustomerPage extends BasePage {
 		const subscriptionPackIsVisible = await this.isVisible(selector.customer.cDashboard.subscriptionPack);
 		subscriptionPackIsVisible && await this.selectByLabel(selector.vendor.vRegistration.subscriptionPack, data.predefined.vendorSubscription.nonRecurring);
 		await this.clickAndWaitForResponseAndLoadState(data.subUrls.frontend.becomeVendor, selector.customer.cDashboard.becomeAVendor, 302);
-		if (subscriptionPackIsVisible) {
-			await this.placeOrder('bank', false, true, false);
+		subscriptionPackIsVisible && await this.placeOrder('bank', false, true, false);
 
-			// skip vendor setup wizard
-			await this.clickAndWaitForResponseAndLoadState(data.subUrls.frontend.vDashboard.dashboard, selector.vendor.vSetup.notRightNow);
-			await this.toBeVisible(selector.vendor.vDashboard.menus.dashboard);
-		}
+		// skip vendor setup wizard
+		await this.clickAndWaitForResponseAndLoadState(data.subUrls.frontend.vDashboard.dashboard, selector.vendor.vSetup.notRightNow);
+		await this.toBeVisible(selector.vendor.vDashboard.menus.dashboard);
 
 	}
 
@@ -356,8 +355,7 @@ export class CustomerPage extends BasePage {
 		await this.toBeVisible(selector.customer.cOrderReceived.orderReceivedSuccessMessage);
 
 		if (getOrderDetails) {
-			// return await this.getOrderDetailsAfterPlaceOrder();
-			console.log(await this.getOrderDetailsAfterPlaceOrder());
+			return await this.getOrderDetailsAfterPlaceOrder();
 		}
 
 		return (await this.getElementText(selector.customer.cOrderReceived.orderDetails.orderNumber)) as string; //remove after solving api issue in -> return request before all
@@ -538,6 +536,8 @@ export class CustomerPage extends BasePage {
 
 		orderDetails.paymentMethod = await this.getElementText(selector.customer.cOrders.orderDetails.paymentMethod) as string;
 		orderDetails.orderTotal = helpers.price(await this.getElementText(selector.customer.cOrders.orderDetails.orderTotal) as string);
+
+		console.log(orderDetails);
 		return orderDetails;
 	}
 

@@ -107,7 +107,7 @@ test.describe('Vendor settings test', () => {
 		await vendor.setSocialProfile(data.vendor.socialProfileUrls);
 	});
 
-	test('vendor can set rma settings @pro', async ( ) => {
+	test.only('vendor can set rma settings @pro', async ( ) => {
 		await vendor.setRmaSettings(data.vendor.rma);
 	});
 

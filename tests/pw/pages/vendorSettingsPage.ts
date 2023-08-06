@@ -2,6 +2,8 @@ import { Page } from '@playwright/test';
 import { VendorPage } from 'pages/vendorPage';
 import { selector } from 'pages/selectors';
 import { data } from 'utils/testData';
+import { vendor } from 'utils/interfaces';
+
 
 const { DOKAN_PRO } = process.env;
 
@@ -227,6 +229,39 @@ export class VendorSettingsPage extends VendorPage {
 
 		// save changes is visible
 		await this.toBeVisible(selector.vendor.vStoreSeoSettings.saveChanges);
+	}
+
+
+	// vendor set social profile settings
+	async setSocialProfile(urls: vendor['socialProfileUrls']): Promise<void> {
+		await this.goIfNotThere(data.subUrls.frontend.vDashboard.settingsSocialProfile);
+		await this.clearAndType(selector.vendor.vSocialProfileSettings.platforms.facebook, urls.facebook);
+		await this.clearAndType(selector.vendor.vSocialProfileSettings.platforms.twitter, urls.twitter);
+		await this.clearAndType(selector.vendor.vSocialProfileSettings.platforms.pinterest, urls.pinterest);
+		await this.clearAndType(selector.vendor.vSocialProfileSettings.platforms.linkedin, urls.linkedin);
+		await this.clearAndType(selector.vendor.vSocialProfileSettings.platforms.youtube, urls.youtube);
+		await this.clearAndType(selector.vendor.vSocialProfileSettings.platforms.instagram, urls.instagram);
+		await this.clearAndType(selector.vendor.vSocialProfileSettings.platforms.flickr, urls.flickr);
+		await this.keyPressOnLocator(selector.vendor.vSocialProfileSettings.updateSettings, data.key.enter);
+		await this.toContainText(selector.vendor.vSocialProfileSettings.updateSettingsSuccessMessage, urls.saveSuccessMessage);
+	}
+
+	// vendor set rma settings
+	async setRmaSettings(rma: vendor['rma']): Promise<void> {
+		await this.goIfNotThere(data.subUrls.frontend.vDashboard.settingsRma);
+		await this.clearAndType(selector.vendor.vRmaSettings.label, rma.label);
+		await this.selectByValue(selector.vendor.vRmaSettings.type, rma.type);
+		await this.selectByValue(selector.vendor.vRmaSettings.length, rma.rmaLength);
+		await this.clearAndType(selector.vendor.vRmaSettings.lengthValue, rma.lengthValue);
+		await this.selectByValue(selector.vendor.vRmaSettings.lengthDuration, rma.lengthDuration);
+		// check if refund reason exists
+		const refundReasonIsVisible = await this.isVisible(selector.vendor.vRmaSettings.refundReasonsFirst);
+		if (refundReasonIsVisible) {
+			await this.checkMultiple(selector.vendor.vRmaSettings.refundReasons);
+		}
+		await this.typeFrameSelector(selector.vendor.vRmaSettings.refundPolicyIframe, selector.vendor.vRmaSettings.refundPolicyHtmlBody, rma.refundPolicyHtmlBody);
+		await this.clickAndWaitForResponseAndLoadState(data.subUrls.frontend.vDashboard.settingsRma, selector.vendor.vRmaSettings.saveChanges, 302);
+		await this.toContainText(selector.vendor.vRmaSettings.updateSettingsSuccessMessage, rma.saveSuccessMessage);
 	}
 
 

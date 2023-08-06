@@ -2993,8 +2993,15 @@ export const selector = {
 			city: '#address\\[city\\]',
 			zipCode: '#address\\[zip\\]',
 			country: '#select2-addresscountry-container',
-			countryInput: '.select2-search__field',
-			state: '#calc_shipping_state',
+			countryInput: '//input[@class="select2-search__field" and @aria-owns="select2-addresscountry-results"]',
+			state: '#select2-calc_shipping_state-container',
+			// state: '//span[@id="select2-calc_shipping_state-container"]/..//span[@class="select2-selection__arrow"]',
+			stateInput: '//input[@class="select2-search__field" and @aria-owns="select2-calc_shipping_state-results"]',
+			// state: '#calc_shipping_state',
+			storeCategories: '//select[contains(@id,"dokan_store_categories")]/..//span[@class="select2-selection select2-selection--multiple"]',
+			storeCategoriesInput: '//input[@class="select2-search__field" and @aria-owns="select2-dokan_store_categories-results"]',
+			highlightedResult: '.select2-results__option.select2-results__option--highlighted',
+			selectedStoreCategories: '//select[contains(@id,"dokan_store_categories")]/..//li[@class="select2-selection__choice"]',
 			map: 'input#dokan-map-add',
 			email: '//input[@id="show_email"]/..//label',
 			continueStoreSetup: '.store-step-continue',
@@ -3254,10 +3261,12 @@ export const selector = {
 			// Edit Product
 			viewProduct: '.dokan-right .dokan-btn',
 			title: '#post_title',
+
 			// Permalink
 			permalinkEdit: '.edit-slug',
 			confirmPermalinkEdit: '.cancel',
 			cancelPermalinkEdit: '.save',
+
 			// Image
 			addProductImage: '.dokan-feat-image-btn',
 			uploadedProductImage: '.image-wrap img',
@@ -3265,6 +3274,7 @@ export const selector = {
 			addGalleryImage: '.fa-plus',
 			uploadGalleryImage: '#dokan-product-images .image',
 			removeGalleryImage: '.action-delete',
+
 			// Product Type
 			productType: '#product_type',
 			downloadable: '#\\_downloadable',
@@ -3277,9 +3287,11 @@ export const selector = {
 			scheduleCancel: '.cancel_sale_schedule',
 			category: '#select2-product_cat-container',
 			tags: '.select2-search__field',
+
 			// External Product
 			productUrl: '#\\_product_url',
 			buttonText: '#\\_button_text',
+
 			// Simple Subscription
 			subscriptionPrice: '#\\_subscription_price',
 			subscriptionPeriodInterval: '#\\_subscription_period_interval',
@@ -3288,23 +3300,36 @@ export const selector = {
 			signUpFee: '#\\_subscription_sign_up_fee',
 			subscriptionTrialLength: '#\\_subscription_trial_length',
 			subscriptionTrialPeriod: '#\\_subscription_trial_period',
+
 			// Short Description
-			shortDescriptionIframe: '.dokan-product-short-description iframe',
-			shortDescriptionHtmlBody: '#tinymce',
+			shortDescription:{
+				shortDescriptionIframe: '.dokan-product-short-description iframe',
+				shortDescriptionHtmlBody: '#tinymce',
+			},
+
 			// Description
-			descriptionIframe: '.dokan-product-description iframe',
-			descriptionHtmlBody: '#tinymce',
+			description:{
+				descriptionIframe: '.dokan-product-description iframe',
+				descriptionHtmlBody: '#tinymce',
+			},
+
 			// Inventory
-			sku: '#\\_sku',
-			stockStatus: '#\\_stock_status',
-			enableProductStockManagement: '#\\_manage_stock',
-			stockQuantity: '//input[@name="_stock"]',
-			lowStockThreshold: '//input[@name="_low_stock_amount"]',
-			allowBackOrders: '#\\_backorders',
-			allowOnlyOneQuantityOfThisProductToBeBoughtInASingleOrder: '#\\_sold_individually',
+			inventory:{
+				sku: '#\\_sku',
+				stockStatus: '#\\_stock_status',
+				enableProductStockManagement: '#\\_manage_stock',
+				stockQuantity: '//input[@name="_stock"]',
+				lowStockThreshold: '//input[@name="_low_stock_amount"]',
+				allowBackOrders: '#\\_backorders',
+				allowOnlyOneQuantityOfThisProductToBeBoughtInASingleOrder: '#\\_sold_individually',
+			},
+
 			// Geolocation
-			sameAsStore: '#\\_dokan_geolocation_use_store_settings',
-			productLocation: '#\\_dokan_geolocation_product_location',
+			geolocation:{
+				sameAsStore: '#\\_dokan_geolocation_use_store_settings',
+				productLocation: '#\\_dokan_geolocation_product_location',
+			},
+
 			// Add-Ons
 			addOns: {
 				addField: '.wc-pao-add-field',
@@ -3320,89 +3345,122 @@ export const selector = {
 				excludeAddons: '\\_product_addons_exclude_global',
 				expandAll: '.wc-pao-expand-all',
 				closeAll: '.wc-pao-close-all',
+
+				// Add-Ons Option
+				options:{
+					enterAnOption: '.wc-pao-addon-content-label > input',
+					optionPriceType: '.wc-pao-addon-option-price-type',
+					optionPrice: '.wc-pao-addon-content-price input',
+					addOption: '.wc-pao-add-option',
+					removeOptionCrossIcon: '.wc-pao-addon-content-remove > .button',
+					cancelRemoveOption: '.swal2-cancel',
+					okRemoveOption: '.swal2-confirm',
+				},
+
 			},
 
-			// Add-Ons Option
-			enterAnOption: '.wc-pao-addon-content-label > input',
-			optionPriceType: '.wc-pao-addon-option-price-type',
-			optionPrice: '.wc-pao-addon-content-price input',
-			addOption: '.wc-pao-add-option',
-			removeOptionCrossIcon: '.wc-pao-addon-content-remove > .button',
-			cancelRemoveOption: '.swal2-cancel',
-			okRemoveOption: '.swal2-confirm',
+
 			// Shipping
-			thisProductRequiresShipping: '#\\_disable_shipping',
-			weight: '#\\_weight',
-			length: '#\\_length',
-			width: '#\\_width',
-			height: '#\\_height',
-			shippingClass: '#product_shipping_class',
-			shippingSettings: '.help-block > a',
+			shipping:{
+				thisProductRequiresShipping: '#\\_disable_shipping',
+				weight: '#\\_weight',
+				length: '#\\_length',
+				width: '#\\_width',
+				height: '#\\_height',
+				shippingClass: '#product_shipping_class',
+				shippingSettings: '.help-block > a',
+			},
+
 			// Tax
-			taxStatus: '#\\_tax_status',
-			taxClass: '#\\_tax_class',
+			tax:{
+				taxStatus: '#\\_tax_status',
+				taxClass: '#\\_tax_class',
+			},
+
 			// Linked Products
-			upSells: '//label[contains(text(),"Upsells")]/..//input[@class="select2-search__field"]',
-			crossSells: '//label[contains(text(),"Cross-sells ")]/..//input[@class="select2-search__field"]',
+			linkedProduct:{
+				upSells: '//label[contains(text(),"Upsells")]/..//input[@class="select2-search__field"]',
+				crossSells: '//label[contains(text(),"Cross-sells ")]/..//input[@class="select2-search__field"]',
+			},
+
 			// Attribute
-			customProductAttribute: '#predefined_attribute',
-			addAttribute: '.add_new_attribute',
-			visibleOnTheProductPage: '//input[contains(@name, "attribute_visibility")]',
-			usedForVariations: '//input[contains(@name, "attribute_variation")]',
-			selectTerms: '.dokan-attribute-values .select2-search__field',
-			selectAll: '.plus',
-			selectNone: '.minus',
-			removeAttribute: '.dokan-product-remove-attribute',
-			confirmRemoveAttribute: '.swal2-confirm',
-			cancelRemoveAttribute: '.swal2-cancel',
-			saveAttributes: '.dokan-save-attribute',
-			addVariations: '#field_to_edit',
-			go: '.do_variation_action',
-			confirmGo: '.swal2-confirm',
-			okSuccessAlertGo: '.swal2-confirm',
-			cancelGo: '.swal2-cancel.swal2-styled',
-			variationPrice: '.swal2-input',
-			okVariationPrice: '.swal2-confirm',
-			cancelVariationPrice: '.swal2-cancel',
-			saveVariationChanges: '.save-variation-changes',
-			cancelVariationChanges: '.cancel-variation-changes',
-			defaultAttribute: '.dokan-variation-default-select > .dokan-form-control',
+			attribute:{
+				customProductAttribute: '#predefined_attribute',
+				addAttribute: '.add_new_attribute',
+				visibleOnTheProductPage: '//input[contains(@name, "attribute_visibility")]',
+				usedForVariations: '//input[contains(@name, "attribute_variation")]',
+				selectTerms: '.dokan-attribute-values .select2-search__field',
+				selectAll: '.plus',
+				selectNone: '.minus',
+				removeAttribute: '.dokan-product-remove-attribute',
+				confirmRemoveAttribute: '.swal2-confirm',
+				cancelRemoveAttribute: '.swal2-cancel',
+				saveAttributes: '.dokan-save-attribute',
+				addVariations: '#field_to_edit',
+				go: '.do_variation_action',
+				confirmGo: '.swal2-confirm',
+				okSuccessAlertGo: '.swal2-confirm',
+				cancelGo: '.swal2-cancel.swal2-styled',
+				variationPrice: '.swal2-input',
+				okVariationPrice: '.swal2-confirm',
+				cancelVariationPrice: '.swal2-cancel',
+				saveVariationChanges: '.save-variation-changes',
+				cancelVariationChanges: '.cancel-variation-changes',
+				defaultAttribute: '.dokan-variation-default-select > .dokan-form-control',
+			},
+
 			// Discount Options
-			enableBulkDiscount: '#\\_is_lot_discount',
-			lotMinimumQuantity: '#\\_lot_discount_quantity',
-			lotDiscountInPercentage: '#\\_lot_discount_amount',
+			discount:{
+				enableBulkDiscount: '#\\_is_lot_discount',
+				lotMinimumQuantity: '#\\_lot_discount_quantity',
+				lotDiscountInPercentage: '#\\_lot_discount_amount',
+			},
+
 			// Rma Options
-			overrideYourDefaultRmaSettingsForThisProduct: '#dokan_rma_product_override',
-			rmaLabel: '#dokan-rma-label',
-			rmaType: '#dokan-warranty-type',
-			rmaLength: '#dokan-warranty-length',
-			rmaLengthValue: '//input[@name="warranty_length_value"]',
-			rmaLengthDuration: '#dokan-warranty-length-duration',
-			refundReasons: '.checkbox input',
-			rmaPolicyIframe: '#wp-warranty_policy-wrap iframe',
-			rmaPolicyHtmlBody: '#tinymce',
+			rma: {
+				overrideYourDefaultRmaSettingsForThisProduct: '#dokan_rma_product_override',
+				rmaLabel: '#dokan-rma-label',
+				rmaType: '#dokan-warranty-type',
+				rmaLength: '#dokan-warranty-length',
+				rmaLengthValue: '//input[@name="warranty_length_value"]',
+				rmaLengthDuration: '#dokan-warranty-length-duration',
+				refundReasons: '.checkbox input',
+				rmaPolicyIframe: '#wp-warranty_policy-wrap iframe',
+				rmaPolicyHtmlBody: '#tinymce',
+			},
+
 			// Wholesale Options
-			enableWholeSaleForThisProduct: '#wholesale\\[enable_wholesale\\]',
-			wholesalePrice: '#dokan-wholesale-price',
-			minimumQuantityForWholesale: '#dokan-wholesale-qty',
+			wholesale:{
+				enableWholeSaleForThisProduct: '#wholesale\\[enable_wholesale\\]',
+				wholesalePrice: '#dokan-wholesale-price',
+				minimumQuantityForWholesale: '#dokan-wholesale-qty',
+			},
+
 			// Min-Max Options
-			enableMinMaxRulesThisProduct: '#product_wise_activation',
-			minimumQuantity: '#min_quantity',
-			maximumQuantity: '#max_quantity',
-			minimumAmount: '#min_amount',
-			maximumAmount: '#max_amount',
-			orderRulesDoNotCount: '#\\_donot_count',
-			categoryRulesExclude: '#ignore_from_cat',
+			minMax:{
+				enableMinMaxRulesThisProduct: '#product_wise_activation',
+				minimumQuantity: '#min_quantity',
+				maximumQuantity: '#max_quantity',
+				minimumAmount: '#min_amount',
+				maximumAmount: '#max_amount',
+				orderRulesDoNotCount: '#\\_donot_count',
+				categoryRulesExclude: '#ignore_from_cat',
+			},
+
 			// Other Options
 			productStatus: '#post_status',
 			visibility: '#\\_visibility',
 			purchaseNote: '#\\_purchase_note',
 			enableProductReviews: '#\\_enable_reviews',
+
 			// Advertise Product
-			advertiseThisProduct: '#dokan_advertise_single_product',
-			confirmAdvertiseThisProduct: '.swal2-confirm',
-			okSuccessAlertAdvertiseThisProduct: '.swal2-confirm',
-			cancelAdvertiseThisProduct: '.swal2-cancel',
+			advertisement:{
+				advertiseThisProduct: '#dokan_advertise_single_product',
+				confirmAdvertiseThisProduct: '.swal2-confirm',
+				okSuccessAlertAdvertiseThisProduct: '.swal2-confirm',
+				cancelAdvertiseThisProduct: '.swal2-cancel',
+			},
+
 			// Save Product
 			saveProduct: '.dokan-btn-lg',
 			updatedSuccessMessage: '.dokan-message',
@@ -3486,7 +3544,7 @@ export const selector = {
 			// Order Details from Table
 			orderTotalTable: (orderNumber: string) => `//strong[contains(text(),'Order ${orderNumber}')]/../../..//td[@class='dokan-order-total']//bdi`,
 			orderTotalAfterRefundTable: (orderNumber: string) => `///strong[contains(text(),'Order ${orderNumber}')]/../../..//td[@class='dokan-order-total']//ins//bdi`,
-			vendorEarningTable: (orderNumber: string) => `//strong[contains(text(),'Order ${orderNumber}')]/../../..//td[@class='dokan-order-earning']//span`,
+			vendorEarningTable: (orderNumber: string) => `//strong[contains(text(),'Order ${orderNumber}')]/../../..//td[@class='dokan-order-earning']//span[@class="woocommerce-Price-amount amount"]`,
 			orderStatusTable: (orderNumber: string) => `//strong[contains(text(),'Order ${orderNumber}')]/../../..//td[@class='dokan-order-status']//span`,
 
 			// Order Sub-Actions
@@ -3496,44 +3554,50 @@ export const selector = {
 			view: (orderNumber: string) => `//strong[contains(text(),'Order ${orderNumber}')]/../../..//a[@data-original-title='View']`,
 
 
-			// Edit Order Status
-			currentOrderStatus: '.order-status .dokan-label',
-			selectedOrderStatus: '//select[@id="order_status"]//option[@selected="selected"]',
-			edit: '.dokan-edit-status',
-			orderStatus: '#order_status',  // wc-pending, wc-processing, wc-completed, wc-cancelled, wc-refunded, wc-failed, wc-checkout-draft
-			updateOrderStatus: '//input[@name="dokan_change_status"]',
+			// status
+			status:{
+				currentOrderStatus: '.order-status .dokan-label',
+				selectedOrderStatus: '//select[@id="order_status"]//option[@selected="selected"]',
+				edit: '.dokan-edit-status',
+				orderStatus: '#order_status',  // wc-pending, wc-processing, wc-completed, wc-cancelled, wc-refunded, wc-failed, wc-checkout-draft
+				updateOrderStatus: '//input[@name="dokan_change_status"]',
+			},
 
-			// Order Details
-			orderNumber: '//strong[contains(text(),"Order#")]',
-			orderDate: '//span[contains(text(),"Order Date:")]/..',
-			orderTotal: '//td[contains(text(),"Order Total:")]/..//bdi',
-			orderTotalBeforeRefund: '//td[contains(text(),"Order Total:")]/..//del',
-			orderTotalAfterRefund: '//td[contains(text(),"Order Total:")]/..//ins//bdi',
-			discount: '//td[contains(text(),"Discount")]/..//bdi',
-			shippingMethod: '//tr[contains(@class,"shipping")]//div[@class="view"]',
-			shippingCost: '//td[contains(text(),"Shipping")]/..//bdi',
-			tax: '//td[contains(text(),"Tax")]/..//bdi',
-			refunded: '.total.refunded-total bdi',
+			// order details
+			orderDetails:{
+				orderNumber: '//strong[contains(text(),"Order#")]',
+				orderDate: '//span[contains(text(),"Order Date:")]/..',
+				orderTotal: '//td[contains(text(),"Order Total:")]/..//bdi',
+				orderTotalBeforeRefund: '//td[contains(text(),"Order Total:")]/..//del',
+				orderTotalAfterRefund: '//td[contains(text(),"Order Total:")]/..//ins//bdi',
+				discount: '//td[contains(text(),"Discount")]/..//bdi',
+				shippingMethod: '//tr[contains(@class,"shipping")]//td[@class="name"]//div[@class="view"]',
+				shippingCost: '//td[contains(text(),"Shipping")]/..//bdi',
+				tax: '//td[contains(text(),"Tax")]/..//bdi',
+				refunded: '.total.refunded-total bdi',
+			},
 
-			// Refund Order
-			refundDiv: '#woocommerce-order-items',
-			requestRefund: '.dokan-btn.refund-items',
-			productQuantity: (productName: string) => `//td[@class='name' and @data-sort-value='${productName}']/..//td[@class='quantity']//div`,
-			productCost: (productName: string) => `//td[@class='name' and @data-sort-value='${productName}']/..//td[@class='line_cost']//div`,
-			productTax: (productName: string) => `//td[@class='name' and @data-sort-value='${productName}']/..//td[@class='line_tax']//div`,
-			refundProductQuantity: (productName: string) => `//td[@class='name' and @data-sort-value='${productName}']/..//td[@class='quantity']//div[@class='refund']//input`,
-			refundProductCostAmount: (productName: string) => `//td[@class='name' and @data-sort-value='${productName}']/..//input[@class='refund_line_total wc_input_price']`,
-			refundProductTaxAmount: (productName: string) => `//td[@class='name' and @data-sort-value='${productName}']/..//input[@class='refund_line_tax wc_input_price']`,
-			// shippingCost: (shippingName) => ``, //todo: add locator
-			refundShippingAmount: (shippingName: string) => `//div[@class='view' and contains(text(),'${shippingName}')]/../../..//input[@class='refund_line_total wc_input_price']`,
-			refundShippingTaxAmount: (shippingName: string) => `//div[@class='view' and contains(text(),'${shippingName}')]/../../..//input[@class='refund_line_tax wc_input_price']`,
+			// Refund
+			refund: {
+				refundDiv: '#woocommerce-order-items',
+				requestRefund: '.dokan-btn.refund-items',
+				productQuantity: (productName: string) => `//td[@class='name' and @data-sort-value='${productName}']/..//td[@class='quantity']//div`,
+				productCost: (productName: string) => `//td[@class='name' and @data-sort-value='${productName}']/..//td[@class='line_cost']//div`,
+				productTax: (productName: string) => `//td[@class='name' and @data-sort-value='${productName}']/..//td[@class='line_tax']//div`,
+				refundProductQuantity: (productName: string) => `//td[@class='name' and @data-sort-value='${productName}']/..//td[@class='quantity']//div[@class='refund']//input`,
+				refundProductCostAmount: (productName: string) => `//td[@class='name' and @data-sort-value='${productName}']/..//input[@class='refund_line_total wc_input_price']`,
+				refundProductTaxAmount: (productName: string) => `//td[@class='name' and @data-sort-value='${productName}']/..//input[@class='refund_line_tax wc_input_price']`,
+				// shippingCost: (shippingName) => ``, //todo: add locator
+				refundShippingAmount: (shippingName: string) => `//div[@class='view' and contains(text(),'${shippingName}')]/../../..//input[@class='refund_line_total wc_input_price']`,
+				refundShippingTaxAmount: (shippingName: string) => `//div[@class='view' and contains(text(),'${shippingName}')]/../../..//input[@class='refund_line_tax wc_input_price']`,
 
-			refundReason: '#refund_reason',
-			refundManually: '.dokan-btn.do-manual-refund',
-			confirmRefund: '.swal2-confirm.swal2-styled.swal2-default-outline',
-			refundRequestSuccessMessage: '#swal2-html-container',
-			refundRequestSuccessMessageOk: '.swal2-confirm.swal2-styled.swal2-default-outline',
-			cancelRefund: '.dokan-btn.cancel-action',
+				refundReason: '#refund_reason',
+				refundManually: '.dokan-btn.do-manual-refund',
+				confirmRefund: '.swal2-confirm.swal2-styled.swal2-default-outline',
+				refundRequestSuccessMessage: '#swal2-html-container',
+				refundRequestSuccessMessageOk: '.swal2-confirm.swal2-styled.swal2-default-outline',
+				cancelRefund: '.dokan-btn.cancel-action',
+			},
 
 			// add note
 			orderNote: {
@@ -3567,18 +3631,17 @@ export const selector = {
 				cancelCreateShipment: '#cancel-tracking-status-details',
 			},
 
+			// downloadable product permission
 			downloadableProductPermission: {
 				downloadableProductInput: '.select2-search__field',
 				grantAccess: '.grant_access',
 				revokeAccess: '.revoke_access',
-
 				confirmAction: '.swal2-actions .swal2-confirm',
 				cancelAction: '.swal2-actions .swal2-cancel',
-
 			},
 
-
 		},
+
 
 		// User Subscriptions
 		vUserSubscriptions: {

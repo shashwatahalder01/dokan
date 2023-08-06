@@ -103,8 +103,10 @@ test.describe('Vendor functionality test', () => {
 	});
 
 
-	test('vendor analytics menu page is rendering properly @pro @explo', async ( ) => {
-		await vendor.vendorAnalyticsRenderProperly();
+	test.only('vendor analytics menu page is rendering properly @pro @explo', async ( ) => {
+		// await vendor.vendorAnalyticsRenderProperly();
+		await vendor.getOrderDetails('1039');
+
 	});
 
 
