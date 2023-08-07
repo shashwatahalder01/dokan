@@ -4,7 +4,7 @@ import { PaymentsPage } from 'pages/paymentsPage';
 import { data } from 'utils/testData';
 
 
-test.describe('Vendor functionality test', () => {
+test.describe('Payments test', () => {
 
 
 	// let admin: PaymentsPage;

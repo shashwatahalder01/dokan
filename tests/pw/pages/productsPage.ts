@@ -4,7 +4,7 @@ import { AdminPage } from 'pages/adminPage';
 import { selector } from 'pages/selectors';
 import { data } from 'utils/testData';
 import { helpers } from 'utils/helpers';
-import { product } from 'utils/interfaces';
+import { product, vendor } from 'utils/interfaces';
 
 
 const { DOKAN_PRO } = process.env;
@@ -261,7 +261,7 @@ export class ProductsPage extends AdminPage {
 
 
 	// vendor add simple product
-	async vendorAddSimpleProduct(product: product['simple'] | product['simpleSubscription'] | product['external']): Promise<void> {
+	async vendorAddSimpleProduct(product: product['simple'] |  product['variable'] | product['simpleSubscription'] | product['external']): Promise<void> {
 		const productName = product.productName();
 		await this.goIfNotThere(data.subUrls.frontend.vDashboard.products);
 		await this.click(selector.vendor.product.create.addNewProduct);
@@ -377,7 +377,7 @@ export class ProductsPage extends AdminPage {
 			await this.click(selector.vendor.product.category.productCategoryAlreadySelectedPopup);
 			await this.click(selector.vendor.product.category.productCategoryModalClose);
 		}
-		//todo: add multiple category selection with assertion
+		//todo: add multiple category selection
 	}
 
 
@@ -449,7 +449,6 @@ export class ProductsPage extends AdminPage {
 		// eslint-disable-next-line @typescript-eslint/no-unused-vars
 		const { quantity, addToCart, viewCart, ...productDetails } = selector.customer.cSingleProduct.productDetails;
 		await this.multipleElementVisible(productDetails);
-		//todo: actual value can be asserted
 	}
 
 
@@ -463,9 +462,7 @@ export class ProductsPage extends AdminPage {
 
 	// edit product
 	async editProduct(product: product['simple']): Promise<void> {
-		await this.searchProduct(product.editProduct);
-		await this.hover(selector.vendor.product.productCell(product.editProduct));
-		await this.clickAndWaitForResponseAndLoadState(data.subUrls.frontend.vDashboard.products, selector.vendor.product.editProduct(product.editProduct));
+		await this.goToProductEdit(product.editProduct);
 
 		await this.clearAndType(selector.vendor.product.edit.title, product.editProduct); // don't update name below test needs same product
 		await this.clearAndType(selector.vendor.product.edit.price, product.regularPrice());
@@ -473,6 +470,41 @@ export class ProductsPage extends AdminPage {
 
 		await this.clickAndWaitForResponse(data.subUrls.frontend.vDashboard.products, selector.vendor.product.saveProduct, 302);
 		await this.toContainText(selector.vendor.product.dokanMessage, 'The product has been saved successfully. ');
+	}
+
+
+	// product edit
+
+
+	// add product quantity discount
+	async addProductQuantityDiscount(productName: string, quantityDiscount: vendor['vendorInfo']['quantityDiscount']): Promise<void> {
+		await this.goToProductEdit(productName);
+		await this.check(selector.vendor.product.discount.enableBulkDiscount);
+		await this.clearAndType(selector.vendor.product.discount.lotMinimumQuantity, quantityDiscount.minimumQuantity);
+		await this.clearAndType(selector.vendor.product.discount.lotDiscountInPercentage, quantityDiscount.discountPercentage);
+		await this.clickAndWaitForResponseAndLoadState(data.subUrls.frontend.vDashboard.products, selector.vendor.product.saveProduct, 302);
+		await this.toContainText(selector.vendor.product.updatedSuccessMessage, data.product.createUpdateSaveSuccessMessage);
+	}
+
+
+	// vendor add product rma settings
+	async addProductRmaSettings(productName: string, rma: vendor['rma']): Promise<void> {
+		await this.goToProductEdit(productName);
+		await this.check(selector.vendor.product.rma.overrideYourDefaultRmaSettingsForThisProduct);
+		await this.clearAndType(selector.vendor.product.rma.label, rma.label);
+		await this.selectByValue(selector.vendor.product.rma.type, rma.type);
+		await this.selectByValue(selector.vendor.product.rma.length, rma.rmaLength);
+		//todo: add rma as addon
+		if (rma.rmaLength === 'limited'){
+			await this.clearAndType(selector.vendor.product.rma.lengthValue, rma.lengthValue);
+			await this.selectByValue(selector.vendor.product.rma.lengthDuration, rma.lengthDuration);
+		}
+		const refundReasonIsVisible = await this.isVisible(selector.vendor.product.rma.refundReasonsFirst);
+		if (refundReasonIsVisible) {
+			await this.checkMultiple(selector.vendor.product.rma.refundReasons); //todo:  update this
+		}
+		await this.clickAndWaitForResponseAndLoadState(data.subUrls.frontend.vDashboard.products, selector.vendor.product.saveProduct, 302);
+		await this.toContainText(selector.vendor.product.updatedSuccessMessage, data.product.createUpdateSaveSuccessMessage);
 	}
 
 

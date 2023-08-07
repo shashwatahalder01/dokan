@@ -6,7 +6,8 @@ import { payloads } from 'utils/payloads';
 import { dbUtils } from 'utils/dbUtils';
 import { dbData } from 'utils/dbData';
 import { data } from 'utils/testData';
-import { VendorPage } from 'pages/vendorPage';
+import { VendorSettingsPage } from 'pages/vendorSettingsPage';
+
 
 const { CUSTOMER_ID, DOKAN_PRO } = process.env;
 
@@ -49,7 +50,6 @@ setup.describe('setup site & woocommerce & user settings', () => {
 	// });
 
 	setup('set wc settings @lite', async () => {
-
 		await apiUtils.updateBatchWcSettingsOptions('general', payloads.general);
 		await apiUtils.updateBatchWcSettingsOptions('account', payloads.account);
 	});
@@ -252,7 +252,7 @@ setup.describe('setup dokan settings e2e', () => {
 
 	let productAdvertisingPage: ProductAdvertisingPage;
 	let reverseWithdrawsPage: ReverseWithdrawsPage;
-	let vendorPage: VendorPage;
+	let vendorPage: VendorSettingsPage;
 	let aPage: Page, vPage: Page;
 	let apiUtils: ApiUtils;
 
@@ -265,7 +265,7 @@ setup.describe('setup dokan settings e2e', () => {
 
 		const vendorContext = await browser.newContext({ storageState: data.auth.vendorAuthFile });
 		vPage = await vendorContext.newPage();
-		vendorPage = new VendorPage(vPage);
+		vendorPage = new VendorSettingsPage(vPage);
 
 		apiUtils = new ApiUtils(request);
 

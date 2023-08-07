@@ -1,24 +1,24 @@
 import { test, Page } from '@playwright/test';
 import { VendorProductSubscriptionPage } from 'pages/vendorProductSubscriptionPage';
-import { ApiUtils } from 'utils/apiUtils';
+// import { ApiUtils } from 'utils/apiUtils';
 import { data } from 'utils/testData';
-import { payloads } from 'utils/payloads';
+// import { payloads } from 'utils/payloads';
 
 
-test.describe('Vendor delivery time test', () => {
+test.describe('Product subscriptions test', () => {
 
 
 	let vendor: VendorProductSubscriptionPage;
 	let vPage: Page;
-	let apiUtils: ApiUtils;
+	// let apiUtils: ApiUtils;
 
 
-	test.beforeAll(async ({ browser, request }) => {
+	test.beforeAll(async ({ browser, }) => {
 		const vendorContext = await browser.newContext({ storageState: data.auth.vendorAuthFile });
 		vPage = await vendorContext.newPage();
 		vendor = new VendorProductSubscriptionPage(vPage);
 
-		apiUtils = new ApiUtils(request);
+		// apiUtils = new ApiUtils(request);
 
 	});
 

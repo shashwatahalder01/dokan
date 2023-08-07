@@ -807,6 +807,7 @@ export const data = {
 				bookingCalendar: 'dashboard/booking/calendar',
 				manageResources: 'dashboard/booking/resources',
 				storeSupport: 'dashboard/support',
+				spmv: 'dashboard/products-search',
 				settingsStore: 'dashboard/settings/store',
 				settingsAddon: 'dashboard/settings/product-addon',
 				settingsPayment: 'dashboard/settings/payment',
@@ -938,13 +939,16 @@ export const data = {
 
 			openingClosingTime: {
 				days: ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'],
-				openingTime: '06:00 am',
-				closingTime: '12:00 pm',
+				openingTime: '12:00 am',
+				closingTime: '11:30 pm',
 				storeOpenNotice: 'Store is open',
 				storeCloseNotice: 'Store is closed',
 			},
 
 			vacation: {
+
+				closingStyle:  'datewise',
+
 				instantly: {
 					closingStyle: 'instantly',
 					vacationMessage: 'We are currently out of order',
@@ -958,9 +962,14 @@ export const data = {
 				}
 			},
 
-			discount: {
+			amountDiscount: {
 				minimumOrderAmount: '200',
-				minimumOrderAmountPercentage: '10',
+				discountPercentage: '10',
+			},
+
+			quantityDiscount: {
+				minimumQuantity: '10',
+				discountPercentage: '10',
 			},
 
 			minMax: {
@@ -970,6 +979,7 @@ export const data = {
 				maximumAmount: '1000000',
 				category: 'Uncategorized',
 			},
+
 			storeSettingsSaveSuccessMessage: 'Your information has been saved successfully',
 
 			socialProfileUrls: {
@@ -1164,7 +1174,7 @@ export const data = {
 		rma: {
 			label: 'Warranty',
 			type: 'included_warranty', // 'no_warranty', 'included_warranty', 'addon_warranty'
-			rmaLength: 'limited', // 'limited', 'lifetime'
+			rmaLength: 'lifetime', // 'limited', 'lifetime'
 			lengthValue: '1',
 			lengthDuration: 'weeks', // 'days', 'weeks', 'months', 'years'
 			refundPolicyHtmlBody: 'Refund Policy Vendor',
@@ -1843,6 +1853,11 @@ export const data = {
 
 		coupon: {
 			couponCode: 'c1_v1',
+		},
+
+		spmv: {
+			productName: () => 'spmv_' +  faker.string.uuid(),
+			product1: 'spmv_a1'
 		},
 
 		vendorInfo: {

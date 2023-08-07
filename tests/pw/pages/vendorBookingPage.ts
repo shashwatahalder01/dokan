@@ -169,7 +169,7 @@ export class BookingPage extends VendorPage {
 	// vendor add booking product
 	async addBookingProduct(product: product['booking']): Promise<void> {
 		await this.goIfNotThere(data.subUrls.frontend.vDashboard.booking);
-		await this.click(selector.vendor.vBooking.addNewBookingProduct);
+		await this.clickAndWaitForLoadState(selector.vendor.vBooking.addNewBookingProduct);
 		await this.updateBookingProductFields(product);
 		await this.clickAndWaitForResponseAndLoadState(data.subUrls.frontend.vDashboard.productBooking, selector.vendor.vBooking.booking.saveProduct, 302);
 		await this.toContainText(selector.vendor.product.updatedSuccessMessage, product.saveSuccessMessage);

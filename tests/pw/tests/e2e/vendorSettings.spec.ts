@@ -59,9 +59,62 @@ test.describe('Vendor settings test', () => {
 
 	// store settings
 
-	test('vendor can set store settings @lite', async ( ) => {
-		await vendor.setStoreSettings(data.vendor.vendorInfo);
+	//todo: add test tags
+
+	test('vendor can set store basic settings @lite', async ( ) => {
+		await vendor.setStoreSettings(data.vendor.vendorInfo, 'basic');
 	});
+
+	test('vendor can set store address settings @lite', async ( ) => {
+		await vendor.setStoreSettings(data.vendor.vendorInfo, 'address');
+	});
+
+	test('vendor can set company info settings @pro', async ( ) => {
+		await vendor.setStoreSettings(data.vendor.vendorInfo, 'company-info');
+	});
+
+	test('vendor can set map settings @lite', async ( ) => {
+		await vendor.setStoreSettings(data.vendor.vendorInfo, 'map');
+	});
+
+	test('vendor can set terms and conditions settings @lite', async ( ) => {
+		//todo: toc
+		await vendor.setStoreSettings(data.vendor.vendorInfo, 'toc');
+	});
+
+	test('vendor can set open-close settings @lite', async ( ) => {
+		await vendor.setStoreSettings(data.vendor.vendorInfo, 'open-close');
+	});
+
+	test('vendor can set vacation settings @pro', async ( ) => {
+		await vendor.setStoreSettings(data.vendor.vendorInfo, 'vacation');
+	});
+
+	test('vendor can set catalog settings @lite', async ( ) => {
+		//todo: enable catalog
+		await vendor.setStoreSettings(data.vendor.vendorInfo, 'catalog');
+		//todo: disable catalog
+	});
+
+	test('vendor can set discount settings @pro', async ( ) => {
+		await vendor.setStoreSettings(data.vendor.vendorInfo, 'discount');
+	});
+
+	test('vendor can set biography settings @pro', async ( ) => {
+		await vendor.setStoreSettings(data.vendor.vendorInfo, 'biography');
+	});
+
+	test('vendor can set store support settings @pro', async ( ) => {
+		await vendor.setStoreSettings(data.vendor.vendorInfo, 'store-support');
+	});
+
+	test('vendor can set min-max settings @pro', async ( ) => {
+		await vendor.setStoreSettings(data.vendor.vendorInfo, 'min-max');
+		// todo: disable min-max
+	});
+
+	//todo: ensure which settings need to reset, and test data should be what
+
 
 	// test.skip('vendor can send id verification request @pro', async ( )=> {
 	// 	await vendor.sendIdVerificationRequest(data.vendor.verification);
@@ -74,6 +127,7 @@ test.describe('Vendor settings test', () => {
 	// test.skip('vendor can send company verification request @pro', async ( )=> {
 	// 	await vendor.sendCompanyVerificationRequest(data.vendor.verification);
 	// });
+
 
 	test('vendor can set delivery time settings @pro', async ( ) => {
 		await vendor.setDeliveryTimeSettings(data.vendor.deliveryTime);
@@ -115,6 +169,10 @@ test.describe('Vendor settings test', () => {
 
 	test('vendor can set rma settings @pro', async ( ) => {
 		await vendor.setRmaSettings(data.vendor.rma);
+	});
+
+	test.skip('vendor can set store seo settings @pro', async ( ) => {
+		// await vendor.setStoreSeo(data.vendor.seo); 	//todo: store seo
 	});
 
 

@@ -66,7 +66,7 @@ test.describe('Customer functionality test', () => {
 		await cPage.close();
 	});
 
-	test.only('customer can add billing details @lite', async ( ) => {
+	test('customer can add billing details @lite', async ( ) => {
 		await customer.addBillingAddress(data.customer.customerInfo.billing);
 	});
 
@@ -89,7 +89,7 @@ test.describe('Customer functionality test', () => {
 		await customer.applyCoupon(data.predefined.coupon.couponCode);
 	});
 
-	test.only('customer can buy product @lite', async ( ) => {
+	test('customer can buy product @lite', async ( ) => {
 		await customer.addProductToCart(data.predefined.simpleProduct.product1.name, 'single-product');
 		await customer.placeOrder();
 	});

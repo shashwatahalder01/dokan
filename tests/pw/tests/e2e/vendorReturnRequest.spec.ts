@@ -10,7 +10,7 @@ import { data } from 'utils/testData';
 // const { CUSTOMER_ID, PRODUCT_ID } = process.env;
 
 
-test.describe('Vendor rma test', () => {
+test.describe('Vendor RMA test', () => {
 
 
 	let vendor: VendorReturnRequestPage;

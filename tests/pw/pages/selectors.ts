@@ -3434,12 +3434,13 @@ export const selector = {
 			// Rma Options
 			rma: {
 				overrideYourDefaultRmaSettingsForThisProduct: '#dokan_rma_product_override',
-				rmaLabel: '#dokan-rma-label',
-				rmaType: '#dokan-warranty-type',
-				rmaLength: '#dokan-warranty-length',
-				rmaLengthValue: '//input[@name="warranty_length_value"]',
-				rmaLengthDuration: '#dokan-warranty-length-duration',
-				refundReasons: '.checkbox input',
+				label: '#dokan-rma-label',
+				type: '#dokan-warranty-type',
+				length: '#dokan-warranty-length',
+				lengthValue: '//input[@name="warranty_length_value"]',
+				lengthDuration: '#dokan-warranty-length-duration',
+				refundReasonsFirst: '(//label[normalize-space()="Refund Reasons:"]/..//input)[1]',
+				refundReasons: '//label[normalize-space()="Refund Reasons:"]/..//input',
 				rmaPolicyIframe: '#wp-warranty_policy-wrap iframe',
 				rmaPolicyHtmlBody: '#tinymce',
 			},
@@ -4936,16 +4937,33 @@ export const selector = {
 		},
 
 		// Search Similar Product
-		vSearchSimilarProduct: {
+		vSpmv: {
+
 			// Search similar product spmv
-			openSearchField: '.fa-caret-down',
-			closeSearchField: '.fa-caret-up',
-			searchProduct: '.input-group-center > .dokan-form-control',
-			search: '.dokan-btn-search',
-			orCreateNewProduct: '.footer-create-new-section > a',
-			sortProduct: '.orderby',
-			editProduct: 'td > .dokan-btn',
-			addToStore: '.dokan-spmv-clone-product',
+			search: {
+				searchDiv: '.dokan-spmv-add-new-product-search-box-area',
+				subHeader: '//p[@class="sub-header"]',
+				toggleBtn: '#dokan-spmv-area-toggle-button',
+				searchInput: 'input[name="search"]',
+				search: 'input.dokan-btn-search',
+				orCreateNew: 'a.dokan-add-new-product',
+			},
+
+			// table
+			table: {
+				table: '#dokan-spmv-product-list-table',
+				productNameColumn: '//th[normalize-space()="Product Name"]',
+				priceColumn: '//th[normalize-space()="Price"]',
+				vendorColumn: '//th[normalize-space()="Vendor"]',
+				actionsColumn: '//th[normalize-space()="Actions"]',
+			},
+
+			noProductsFound: '//td[normalize-space()="No product found."]',
+			numberOfRowsFound: '#dokan-spmv-product-list-table tbody tr',
+			resultCount: '.woocommerce-result-count',
+			sortProduct: 'select.orderby', // popularity, rating, date, price, price-desc, bid_asc, bid_desc, auction_end, auction_started, auction_activity
+			editProduct: (productName: string) => `//a[normalize-space()="${productName}"]/../../..//a[@class="dokan-btn"]`,
+			addToStore: 'button.dokan-spmv-clone-product',
 		},
 
 		// Settings
@@ -5068,6 +5086,7 @@ export const selector = {
 
 			//catalog mode
 			removeAddToCartButton: 'input#catalog_mode_hide_add_to_cart_button',
+			hideProductPrice: 'input#catalog_mode_hide_product_price',
 			enableRequestQuoteSupport: 'input#catalog_mode_request_a_quote_support',
 
 			// Discount

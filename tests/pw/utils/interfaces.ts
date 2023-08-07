@@ -675,6 +675,8 @@ export interface vendor {
 		}
 
 		vacation: {
+			closingStyle: string;
+
 			instantly: {
 				closingStyle: string;
 				vacationMessage: string;
@@ -688,10 +690,17 @@ export interface vendor {
 			}
 		},
 
-		discount: {
+		amountDiscount: {
 			minimumOrderAmount: string;
-			minimumOrderAmountPercentage: string;
-		}
+			discountPercentage: string;
+		},
+
+
+		quantityDiscount: {
+			minimumQuantity: string,
+			discountPercentage: string,
+		},
+
 
 		minMax: {
 			minimumProductQuantity: string;

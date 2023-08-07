@@ -81,8 +81,5 @@ test.describe('Vendor functionality test', () => {
 		await vendor.visitStore(data.predefined.vendorStores.vendor1);
 	});
 
-	test('vendor analytics menu page is rendering properly @pro @explo', async ( ) => {
-		await vendor.vendorAnalyticsRenderProperly();
-	});
 
 });
