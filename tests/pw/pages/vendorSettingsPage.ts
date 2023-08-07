@@ -1,4 +1,4 @@
-import { Page } from '@playwright/test';
+import { Page, expect } from '@playwright/test';
 import { VendorPage } from 'pages/vendorPage';
 import { selector } from 'pages/selectors';
 import { data } from 'utils/testData';
@@ -150,7 +150,7 @@ export class VendorSettingsPage extends VendorPage {
 		await this.toBeVisible(selector.vendor.vShipStationSettings.authenticationKey);
 
 		// export order statuses is visible
-		await this.toBeVisible(selector.vendor.vShipStationSettings.exportOrderStatuses);
+		await this.toBeVisible(selector.vendor.vShipStationSettings.exportOrderStatusesInput);
 
 		// Shipped Order Status is visible
 		await this.toBeVisible(selector.vendor.vShipStationSettings.shippedOrderStatusDropdown);
@@ -255,6 +255,120 @@ export class VendorSettingsPage extends VendorPage {
 		}
 		await this.clickAndWaitForResponseAndLoadState(data.subUrls.frontend.vDashboard.settingsDeliveryTime, selector.vendor.vDeliveryTimeSettings.updateSettings, 302);
 		await this.toContainText(selector.vendor.vDeliveryTimeSettings.settingsSuccessMessage, deliveryTime.saveSuccessMessage);
+	}
+
+
+	// vendor shipping settings
+
+	// vendor set all shipping settings
+	// async setAllShippingSettings(): Promise<void> {
+	// 	await this.setShippingSettings(data.vendor.shipping.shippingMethods.flatRate);
+	// 	await this.setShippingSettings(data.vendor.shipping.shippingMethods.freeShipping);
+	// 	await this.setShippingSettings(data.vendor.shipping.shippingMethods.localPickup);
+	// 	await this.setShippingSettings(data.vendor.shipping.shippingMethods.tableRateShipping);
+	// 	await this.setShippingSettings(data.vendor.shipping.shippingMethods.distanceRateShipping);
+	// }
+
+
+	// set shipping policies
+	async setShippingPolicies(shippingPolicy: vendor['shipping']['shippingPolicy']): Promise<void> {
+		await this.goIfNotThere(data.subUrls.frontend.vDashboard.settingsShipping);
+		await this.click(selector.vendor.vShippingSettings.shippingPolicies.clickHereToAddShippingPolicies);
+		await this.selectByValue(selector.vendor.vShippingSettings.shippingPolicies.processingTime, shippingPolicy.processingTime);
+		await this.clearAndType(selector.vendor.vShippingSettings.shippingPolicies.shippingPolicy, shippingPolicy.shippingPolicy);
+		await this.clearAndType(selector.vendor.vShippingSettings.shippingPolicies.refundPolicy, shippingPolicy.refundPolicy);
+		await this.clickAndWaitForResponse(data.subUrls.ajax, selector.vendor.vShippingSettings.shippingPolicies.saveSettings);
+		await this.toContainText(selector.vendor.vShippingSettings.updateSettingsSuccessMessage, shippingPolicy.saveSuccessMessage);
+	}
+
+
+	// vendor set shipping settings
+	async setShippingSettings(shipping: any): Promise<void> {
+		await this.goIfNotThere(data.subUrls.frontend.vDashboard.settingsShipping);
+		// edit shipping zone
+		await this.hover(selector.vendor.vShippingSettings.shippingZoneCell(shipping.shippingZone));
+		await this.clickAndWaitForResponseAndLoadState(data.subUrls.ajax, selector.vendor.vShippingSettings.editShippingZone(shipping.shippingZone));
+
+		// add shipping method if not available
+		const methodIsVisible = await this.isVisible(selector.vendor.vShippingSettings.shippingMethodCell(shipping.shippingMethod));
+		if (!methodIsVisible) {
+			await this.click(selector.vendor.vShippingSettings.addShippingMethod);
+			await this.selectByValue(selector.vendor.vShippingSettings.shippingMethod, shipping.selectShippingMethod);
+			await this.clickAndWaitForResponseAndLoadState(data.subUrls.ajax, selector.vendor.vShippingSettings.shippingMethodPopupAddShippingMethod);
+			await expect(this.page.getByText(shipping.shippingMethodSaveSuccessMessage)).toBeVisible();
+			await expect(this.page.getByText(shipping.zoneSaveSuccessMessage)).toBeVisible();
+		}
+
+		// edit shipping method
+		await this.hover(selector.vendor.vShippingSettings.shippingMethodCell(shipping.shippingMethod));
+		await this.click(selector.vendor.vShippingSettings.editShippingMethod(shipping.shippingMethod));
+
+		switch (shipping.selectShippingMethod) {
+		// flat rate
+		case 'flat_rate' :
+			await this.clearAndType(selector.vendor.vShippingSettings.flatRateMethodTitle, shipping.shippingMethod);
+			await this.clearAndType(selector.vendor.vShippingSettings.flatRateCost, shipping.shippingCost);
+			await this.selectByValue(selector.vendor.vShippingSettings.flatRateTaxStatus, shipping.taxStatus);
+			await this.clearAndType(selector.vendor.vShippingSettings.flatRateDescription, shipping.description);
+			await this.selectByValue(selector.vendor.vShippingSettings.flatRateCalculationType, shipping.calculationType);
+			break;
+
+			// free shipping
+		case 'free_shipping' :
+			await this.clearAndType(selector.vendor.vShippingSettings.freeShippingTitle, shipping.shippingMethod);
+			await this.clearAndType(selector.vendor.vShippingSettings.freeShippingMinimumOrderAmount, shipping.freeShippingMinimumOrderAmount);
+			break;
+
+			// local pickup
+		case 'local_pickup' :
+			await this.clearAndType(selector.vendor.vShippingSettings.localPickupTitle, shipping.shippingMethod);
+			await this.clearAndType(selector.vendor.vShippingSettings.localPickupCost, shipping.shippingCost);
+			await this.selectByValue(selector.vendor.vShippingSettings.localPickupTaxStatus, shipping.taxStatus);
+			await this.clearAndType(selector.vendor.vShippingSettings.flatRateDescription, shipping.description);
+			break;
+
+			// dokan table rate shipping
+		case 'dokan_table_rate_shipping' :
+			await this.clearAndType(selector.vendor.vShippingSettings.tableRateShippingMethodTitle, shipping.shippingMethod);
+			await this.selectByValue(selector.vendor.vShippingSettings.tableRateShippingTaxStatus, shipping.taxStatus);
+			await this.selectByValue(selector.vendor.vShippingSettings.tableRateShippingTaxIncludedInShippingCosts, shipping.taxIncludedInShippingCosts);
+			await this.clearAndType(selector.vendor.vShippingSettings.tableRateShippingHandlingFee, shipping.handlingFee);
+			await this.clearAndType(selector.vendor.vShippingSettings.tableRateShippingMaximumShippingCost, shipping.maximumShippingCost);
+			// rates
+			// await this.selectByValue(selector.vendor.vShippingSettings.tableRateShippingCalculationType,  shipping.calculationType)
+			await this.clearAndType(selector.vendor.vShippingSettings.tableRateShippingHandlingFeePerOrder, shipping.handlingFeePerOrder);
+			await this.clearAndType(selector.vendor.vShippingSettings.tableRateShippingMinimumCostPerOrder, shipping.minimumCostPerOrder);
+			await this.clearAndType(selector.vendor.vShippingSettings.tableRateShippingMaximumCostPerOrder, shipping.maximumCostPerOrder);
+			await this.click(selector.vendor.vShippingSettings.tableRateShippingUpdateSettings);
+			await this.toContainText(selector.vendor.vShippingSettings.tableRateShippingUpdateSettingsSuccessMessage, shipping.tableRateSaveSuccessMessage);
+			return;
+
+			// dokan distance rate shipping
+		case 'dokan_distance_rate_shipping' :
+			await this.clearAndType(selector.vendor.vShippingSettings.distanceRateShippingMethodTitle, shipping.shippingMethod);
+			await this.selectByValue(selector.vendor.vShippingSettings.distanceRateShippingTaxStatus, shipping.taxStatus);
+			await this.selectByValue(selector.vendor.vShippingSettings.distanceRateShippingTransportationMode, shipping.transportationMode);
+			await this.selectByValue(selector.vendor.vShippingSettings.distanceRateShippingAvoid, shipping.avoid);
+			await this.selectByValue(selector.vendor.vShippingSettings.distanceRateShippingDistanceUnit, shipping.distanceUnit);
+			await this.check(selector.vendor.vShippingSettings.distanceRateShippingShowDistance);
+			await this.check(selector.vendor.vShippingSettings.distanceRateShippingShowDuration);
+			// shipping address
+			await this.clearAndType(selector.vendor.vShippingSettings.distanceRateShippingAddress1, shipping.street1);
+			await this.clearAndType(selector.vendor.vShippingSettings.distanceRateShippingAddress2, shipping.street2);
+			await this.clearAndType(selector.vendor.vShippingSettings.distanceRateShippingCity, shipping.city);
+			await this.clearAndType(selector.vendor.vShippingSettings.distanceRateShippingZipOrPostalCode, shipping.zipCode);
+			await this.clearAndType(selector.vendor.vShippingSettings.distanceRateShippingStateOrProvince, shipping.state);
+			await this.selectByValue(selector.vendor.vShippingSettings.distanceRateShippingCountry, shipping.country);
+			await this.click(selector.vendor.vShippingSettings.distanceRateShippingUpdateSettings);
+			await this.toContainText(selector.vendor.vShippingSettings.distanceRateShippingUpdateSettingsSuccessMessage, shipping.distanceRateSaveSuccessMessage);
+			return;
+
+		default :
+			break;
+		}
+		await this.clickAndWaitForResponseAndLoadState(data.subUrls.ajax, selector.vendor.vShippingSettings.shippingSettingsSaveSettings);
+		await this.clickAndWaitForResponseAndLoadState(data.subUrls.ajax, selector.vendor.vShippingSettings.saveChanges);
+		await this.toContainText(selector.vendor.vShippingSettings.updateSettingsSuccessMessage, shipping.saveSuccessMessage);
 	}
 
 

@@ -103,6 +103,8 @@ test.describe('Vendor settings test', () => {
 		await vendor.setShippingSettings(data.vendor.shipping.shippingMethods.distanceRateShipping);
 	});
 
+	//todo: vendor can edit, delete shipping method, move to separate file
+
 	test('vendor can set shipStation settings @pro', async ( ) => {
 		await vendor.setShipStation(data.vendor.shipStation);
 	});

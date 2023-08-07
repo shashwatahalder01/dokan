@@ -3235,127 +3235,141 @@ export const selector = {
 			duplicate: (productName: string) => `//a[contains(text(),'${productName}')]/../..//span[@class="duplicate"]//a`,
 
 			// Create Product
-			closeCreateProductPopup: '.mfp-close', //todo: need to update, everywhere
-			addNewProduct: '.dokan-add-new-product',
-			productName: '//input[@name="post_title"]',
-			productImage: '.dokan-feat-image-btn',
-			productAddGalleryImage: '.fa-plus',
-			productPrice: '#_regular_price',
-			productDiscountedPrice: '#_sale_price',
-			productDiscountedPriceSchedule: '.sale_schedule',
-			productScheduleFrom: '.dokan-start-date',
-			productScheduleTo: '.dokan-end-date',
-			productScheduleCancel: '.cancel_sale_schedule.dokan-hide',
-			productCategoryModal: '#dokan-add-new-product-form  #dokan-category-open-modal',
-			productCategory: '#select2-product_cat-container',
-			productCategorySearchInput: '#dokan-single-cat-search-input',
-			productCategorySearchResult: '#dokan-cat-search-res-ul li',
-			productCategoryDone: '#dokan-single-cat-select-btn',
-			productCategoryAlreadySelectedPopup: '.swal2-confirm',
-			productCategoryModalClose: '#dokan-category-close-modal',
-			productCategoryValues: '.select2-results ul li',
-			productTags: '.select2-search__field',
-			productDescription: 'textarea[placeholder="Enter some short description about this product..."]',
-			createProduct: '#dokan-create-new-product-btn',
-			createAndNewProduct: '#dokan-create-and-add-new-product-btn',
+			create:{
+				closeCreateProductPopup: 'a.iziModal-button-close', //todo: need to update, everywhere
+				addNewProduct: '.dokan-add-new-product',
+				productPopup: '#dokan-add-product-popup',
+				productName: '//input[@name="post_title"]',
+				productImage: '.dokan-feat-image-btn',
+				productAddGalleryImage: '.fa-plus',
+				productPrice: '#_regular_price',
+				productDiscountedPrice: '#_sale_price',
+				productDiscountedPriceSchedule: '.sale_schedule',
+				productScheduleFrom: '.dokan-start-date',
+				productScheduleTo: '.dokan-end-date',
+				productScheduleCancel: '.cancel_sale_schedule.dokan-hide',
+				productTags: '.select2-search__field',
+				productDescription: 'textarea[placeholder="Enter some short description about this product..."]',
+				createProduct: '#dokan-create-new-product-btn',
+				createAndNewProduct: '#dokan-create-and-add-new-product-btn',
+			},
+
+			// category
+			category:{
+				productCategoryModalOnProductPopup: '#dokan-add-new-product-form  #dokan-category-open-modal',
+				productCategoryModal: '.dokan-select-product-category.dokan-category-open-modal',
+				productCategory: '#select2-product_cat-container',
+				productCategorySearchInput: '#dokan-single-cat-search-input',
+				productCategorySearchResult: '#dokan-cat-search-res-ul li',
+				searchedResultText:'.dokan-cat-search-res-item',
+				productCategoryDone: '#dokan-single-cat-select-btn',
+				productCategoryAlreadySelectedPopup: '.swal2-confirm',
+				productCategoryModalClose: '#dokan-category-close-modal',
+				productCategoryValues: '.select2-results ul li',
+			},
 
 			// Edit Product
-			viewProduct: '.dokan-right .dokan-btn',
-			title: '#post_title',
+			edit:{
+				productEditContainer: '.product-edit-new-container.product-edit-container',
 
-			// Permalink
-			permalinkEdit: '.edit-slug',
-			confirmPermalinkEdit: '.cancel',
-			cancelPermalinkEdit: '.save',
+				viewProduct: '.dokan-right .dokan-btn',
+				title: '#post_title',
 
-			// Image
-			addProductImage: '.dokan-feat-image-btn',
-			uploadedProductImage: '.image-wrap img',
-			removeProductImage: '.close.dokan-remove-feat-image',
-			addGalleryImage: '.fa-plus',
-			uploadGalleryImage: '#dokan-product-images .image',
-			removeGalleryImage: '.action-delete',
+				// Permalink
+				permalinkEdit: '.edit-slug',
+				confirmPermalinkEdit: '.cancel',
+				cancelPermalinkEdit: '.save',
 
-			// Product Type
-			productType: '#product_type',
-			downloadable: '#\\_downloadable',
-			virtual: '#\\_virtual',
-			price: '#\\_regular_price',
-			discountedPrice: '#\\_sale_price',
-			discountedPriceSchedule: '.sale_schedule',
-			scheduleFrom: '.dokan-start-date',
-			scheduleTo: '.dokan-end-date',
-			scheduleCancel: '.cancel_sale_schedule',
-			category: '#select2-product_cat-container',
-			tags: '.select2-search__field',
+				// Image
+				addProductImage: '.dokan-feat-image-btn',
+				uploadedProductImage: '.image-wrap img',
+				removeProductImage: '.close.dokan-remove-feat-image',
+				addGalleryImage: '.fa-plus',
+				uploadGalleryImage: '#dokan-product-images .image',
+				removeGalleryImage: '.action-delete',
 
-			// External Product
-			productUrl: '#\\_product_url',
-			buttonText: '#\\_button_text',
+				// Product Type
+				productType: '#product_type',
+				downloadable: '#\\_downloadable',
+				virtual: '#\\_virtual',
+				price: '#\\_regular_price',
+				discountedPrice: '#\\_sale_price',
+				discountedPriceSchedule: '.sale_schedule',
+				scheduleFrom: '.dokan-start-date',
+				scheduleTo: '.dokan-end-date',
+				scheduleCancel: '.cancel_sale_schedule',
+				category: '#select2-product_cat-container',
+				tags: '.select2-search__field',
 
-			// Simple Subscription
-			subscriptionPrice: '#\\_subscription_price',
-			subscriptionPeriodInterval: '#\\_subscription_period_interval',
-			subscriptionPeriod: '#\\_subscription_period',
-			expireAfter: '#\\_subscription_length',
-			signUpFee: '#\\_subscription_sign_up_fee',
-			subscriptionTrialLength: '#\\_subscription_trial_length',
-			subscriptionTrialPeriod: '#\\_subscription_trial_period',
+				// External Product
+				productUrl: '#\\_product_url',
+				buttonText: '#\\_button_text',
 
-			// Short Description
-			shortDescription:{
-				shortDescriptionIframe: '.dokan-product-short-description iframe',
-				shortDescriptionHtmlBody: '#tinymce',
-			},
+				// Simple Subscription
+				subscriptionPrice: '#\\_subscription_price',
+				subscriptionPeriodInterval: '#\\_subscription_period_interval',
+				subscriptionPeriod: '#\\_subscription_period',
+				expireAfter: '#\\_subscription_length',
+				signUpFee: '#\\_subscription_sign_up_fee',
+				subscriptionTrialLength: '#\\_subscription_trial_length',
+				subscriptionTrialPeriod: '#\\_subscription_trial_period',
 
-			// Description
-			description:{
-				descriptionIframe: '.dokan-product-description iframe',
-				descriptionHtmlBody: '#tinymce',
-			},
+				// Short Description
+				shortDescription:{
+					shortDescriptionIframe: '.dokan-product-short-description iframe',
+					shortDescriptionHtmlBody: '#tinymce',
+				},
 
-			// Inventory
-			inventory:{
-				sku: '#\\_sku',
-				stockStatus: '#\\_stock_status',
-				enableProductStockManagement: '#\\_manage_stock',
-				stockQuantity: '//input[@name="_stock"]',
-				lowStockThreshold: '//input[@name="_low_stock_amount"]',
-				allowBackOrders: '#\\_backorders',
-				allowOnlyOneQuantityOfThisProductToBeBoughtInASingleOrder: '#\\_sold_individually',
-			},
+				// Description
+				description:{
+					descriptionIframe: '.dokan-product-description iframe',
+					descriptionHtmlBody: '#tinymce',
+				},
 
-			// Geolocation
-			geolocation:{
-				sameAsStore: '#\\_dokan_geolocation_use_store_settings',
-				productLocation: '#\\_dokan_geolocation_product_location',
-			},
+				// Inventory
+				inventory:{
+					sku: '#\\_sku',
+					stockStatus: '#\\_stock_status',
+					enableProductStockManagement: '#\\_manage_stock',
+					stockQuantity: '//input[@name="_stock"]',
+					lowStockThreshold: '//input[@name="_low_stock_amount"]',
+					allowBackOrders: '#\\_backorders',
+					allowOnlyOneQuantityOfThisProductToBeBoughtInASingleOrder: '#\\_sold_individually',
+				},
 
-			// Add-Ons
-			addOns: {
-				addField: '.wc-pao-add-field',
-				type: '#wc-pao-addon-content-type-0',
-				displayAs: '#wc-pao-addon-content-display-0',
-				titleRequired: '#wc-pao-addon-content-name-0',
-				formatTitle: '#wc-pao-addon-content-title-format',
-				enableDescription: 'wc-pao-addon-description-enable-0',
-				addDescription: '#wc-pao-addon-description-0',
-				requiredField: '#wc-pao-addon-required-0',
-				import: '.wc-pao-import-addons',
-				export: '.wc-pao-export-addons',
-				excludeAddons: '\\_product_addons_exclude_global',
-				expandAll: '.wc-pao-expand-all',
-				closeAll: '.wc-pao-close-all',
+				// Geolocation
+				geolocation:{
+					sameAsStore: '#\\_dokan_geolocation_use_store_settings',
+					productLocation: '#\\_dokan_geolocation_product_location',
+				},
 
-				// Add-Ons Option
-				options:{
-					enterAnOption: '.wc-pao-addon-content-label > input',
-					optionPriceType: '.wc-pao-addon-option-price-type',
-					optionPrice: '.wc-pao-addon-content-price input',
-					addOption: '.wc-pao-add-option',
-					removeOptionCrossIcon: '.wc-pao-addon-content-remove > .button',
-					cancelRemoveOption: '.swal2-cancel',
-					okRemoveOption: '.swal2-confirm',
+				// Add-Ons
+				addOns: {
+					addField: '.wc-pao-add-field',
+					type: '#wc-pao-addon-content-type-0',
+					displayAs: '#wc-pao-addon-content-display-0',
+					titleRequired: '#wc-pao-addon-content-name-0',
+					formatTitle: '#wc-pao-addon-content-title-format',
+					enableDescription: 'wc-pao-addon-description-enable-0',
+					addDescription: '#wc-pao-addon-description-0',
+					requiredField: '#wc-pao-addon-required-0',
+					import: '.wc-pao-import-addons',
+					export: '.wc-pao-export-addons',
+					excludeAddons: '\\_product_addons_exclude_global',
+					expandAll: '.wc-pao-expand-all',
+					closeAll: '.wc-pao-close-all',
+
+					// Add-Ons Option
+					options:{
+						enterAnOption: '.wc-pao-addon-content-label > input',
+						optionPriceType: '.wc-pao-addon-option-price-type',
+						optionPrice: '.wc-pao-addon-content-price input',
+						addOption: '.wc-pao-add-option',
+						removeOptionCrossIcon: '.wc-pao-addon-content-remove > .button',
+						cancelRemoveOption: '.swal2-cancel',
+						okRemoveOption: '.swal2-confirm',
+					},
+
 				},
 
 			},
@@ -3945,7 +3959,7 @@ export const selector = {
 			autoWithdrawDisbursement: {
 				enableSchedule: '//input[@id="dokan-schedule-enabler-switch"]/..',
 				editSchedule: '#dokan-withdraw-display-schedule-popup',
-				closeModal: '.mfp-close',
+				closeModal: '.mfp-close', //todo: need to update, everywhere
 				preferredPaymentMethod: '#preferred-payment-method',
 				preferredSchedule: (schedule: string) => `#withdraw-schedule-${schedule}\\>`,
 				onlyWhenBalanceIs: '#minimum-withdraw-amount',
@@ -5197,7 +5211,7 @@ export const selector = {
 
 			// Razorpay
 			rzSignup: '.vendor_razorpay_connect',
-			rzClosePopup: '.mfp-close',
+			rzClosePopup: '.mfp-close', //todo: need to update, everywhere
 			// Existing Account Info
 			rzIHaveAlreadyAnAccount: '#dokan_razorpay_existing_user_chekbox',
 			rzAccountId: '#dokan_razorpay_account_id',
@@ -5497,7 +5511,6 @@ export const selector = {
 			exportOrderStatusesInput: '//label[normalize-space()="Export Order Statuses"]/..//span[@class="select2-selection select2-selection--multiple"]//input[@class="select2-search__field"]',
 			shippedOrderStatusDropdown: '.select2-selection__arrow',
 			shippedOrderStatusInput: '(//input[@class="select2-search__field"])[2]',
-
 			result: '.select2-results__option.select2-results__option--highlighted',
 
 			saveChanges: '#dokan-store-shipstation-form-submit',

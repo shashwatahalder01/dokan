@@ -207,7 +207,7 @@ export const data = {
 			subscriptionTrialPeriod: 'day',
 			storeName: String(process.env.VENDOR) + 'store',
 			status: 'publish',
-			attribute: 'size',
+			attribute: 'sizes',
 			attributeTerms: ['s', 'l', 'm'],
 			variations: {
 				linkAllVariation: 'link_all_variations',

@@ -57,7 +57,7 @@ test.describe('Product functionality test', () => {
 	});
 
 	// test.skip('admin can add variable subscription @pro', async ( ) => {
-	// 	// await admin.addVariableSubscription(data.product.variableSubscription);
+	// await admin.addVariableSubscription(data.product.variableSubscription);
 	// });
 
 	test('admin can add external product @lite', async ( ) => {
@@ -69,7 +69,31 @@ test.describe('Product functionality test', () => {
 	});
 
 
-	//vendors
+	//vendors   //todo: move create product in separate files, or product functionality to another page
+
+	test('vendor can add simple product @lite', async ( ) => {
+		await vendor.vendorAddSimpleProduct(data.product.simple);
+	});
+
+	test('vendor can add variable product @pro', async ( ) => {
+		await vendor.vendorAddVariableProduct(data.product.variable); //todo: variation price not saving dokan issue
+	});
+
+	test('vendor can add simple subscription product @pro', async ( ) => {
+		await vendor.vendorAddSimpleSubscription(data.product.simpleSubscription);
+	});
+
+	test('vendor can add variable subscription product @pro', async ( ) => {
+		await vendor.vendorAddVariableSubscription(data.product.variableSubscription); //todo: variation price not saving dokan issue
+	});
+
+	test('vendor can add external product @pro', async ( ) => {
+		await vendor.vendorAddExternalProduct(data.product.external);
+	});
+
+	test('vendor can add product product category @lite', async ( ) => {
+		await vendor.vendorAddProductCategory(data.predefined.simpleProduct.product1.name, data.product.category.unCategorized);
+	});
 
 
 	test('vendor product menu page is rendering properly @lite @explo', async ( ) => {

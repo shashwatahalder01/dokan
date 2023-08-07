@@ -69,10 +69,6 @@ test.describe('Vendor functionality test', () => {
 		await vendor.vendorSetupWizard(data.vendorSetupWizard);
 	});
 
-	test('vendor can visit own Store @lite', async ( ) => {
-		await vendor.visitStore(data.predefined.vendorStores.vendor1);
-	});
-
 	test('vendor account details menu page is rendering properly @lite @explo', async ( ) => {
 		await vendor.vendorAccountDetailsRenderProperly();
 	});
@@ -81,32 +77,12 @@ test.describe('Vendor functionality test', () => {
 		await vendor.addVendorDetails(data.vendor);
 	});
 
-
-	test('vendor can add simple product @lite', async ( ) => {
-		await vendor.vendorAddSimpleProduct(data.product.simple);
+	test('vendor can visit own Store @lite', async ( ) => {
+		await vendor.visitStore(data.predefined.vendorStores.vendor1);
 	});
-
-	// test.skip('vendor can add variable product @pro', async ( ) => {
-	// 	await vendor.addVariableProduct(data.product.variable);
-	// });
-
-	test('vendor can add simple subscription product @pro', async ( ) => {
-		await vendor.vendorAddSimpleSubscription(data.product.simpleSubscription);
-	});
-
-	// test.skip('vendor can add variable subscription product @pro', async ( ) => {
-	// 	await vendor.addVariableSubscription(data.product.variableSubscription);
-	// });
-
-	test('vendor can add external product @pro', async ( ) => {
-		await vendor.vendorAddExternalProduct(data.product.external);
-	});
-
 
 	test('vendor analytics menu page is rendering properly @pro @explo', async ( ) => {
 		await vendor.vendorAnalyticsRenderProperly();
-
 	});
-
 
 });
