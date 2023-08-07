@@ -9,6 +9,9 @@ export const helpers = {
 	// replace '_' to space & capitalize first letter of each word
 	replaceAndCapitalizeEachWord: (str: string) => str.replace('_', ' ').replace(/(^\w{1})|(\s+\w{1})/g, (letter: string) => letter.toUpperCase()),
 
+	// capitalize
+	capitalize: (word: string) => word[0].toUpperCase() + word.substring(1).toLowerCase(),
+
 	// returns a random number between min (inclusive) and max (exclusive)
 	getRandomArbitrary: (min: number, max: number) => Math.random() * (max - min) + min,
 

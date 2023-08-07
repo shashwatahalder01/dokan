@@ -78,7 +78,7 @@ test.describe('Vendor functionality test', () => {
 	});
 
 	test('vendor update account details @lite', async ( ) => {
-		await vendor.setVendorDetails(data.vendor.vendorInfo);
+		await vendor.addVendorDetails(data.vendor);
 	});
 
 
@@ -103,9 +103,8 @@ test.describe('Vendor functionality test', () => {
 	});
 
 
-	test.only('vendor analytics menu page is rendering properly @pro @explo', async ( ) => {
-		// await vendor.vendorAnalyticsRenderProperly();
-		await vendor.getOrderDetails('1039');
+	test('vendor analytics menu page is rendering properly @pro @explo', async ( ) => {
+		await vendor.vendorAnalyticsRenderProperly();
 
 	});
 

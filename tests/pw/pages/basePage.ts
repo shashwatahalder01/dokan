@@ -661,7 +661,7 @@ export class BasePage {
 		// const texts = await this.page.$$eval(selector, (elements) => elements.map((item) => item.textContent));
 		const element =  this.getElement(selector);
 		const allTexts = await element.allTextContents();
-		console.log(allTexts);
+		// console.log(allTexts);
 		return allTexts;
 	}
 
@@ -1693,10 +1693,7 @@ export class BasePage {
 
 	// enable switch or checkbox: vendor dashboard delivery time
 	async enableSwitcherDeliveryTime(selector: string): Promise<void> {
-		const value = await this.hasClass(
-			(selector += '//div[contains(@class,"minitoggle")]'),
-			'active',
-		);
+		const value = await this.hasClass((selector += '//div[contains(@class,"minitoggle")]'), 'active',);
 		if (!value) {
 			await this.click(selector);
 		}

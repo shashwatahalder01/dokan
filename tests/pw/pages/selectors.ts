@@ -1,3 +1,4 @@
+import { helpers } from 'utils/helpers';
 
 export const selector = {
 
@@ -5372,6 +5373,9 @@ export const selector = {
 			closingTime: (day: string) => `input#delivery-closing-time-${day}`,
 			closingTimeHiddenInput: (day: string) => `//input[@name='delivery_closing_time[${day}][]']`,
 
+			closeDeliveryTime:(day: string) => `//label[normalize-space()="${helpers.capitalize(day)}" and @for="working-days"]/..//a[@class="remove-store-closing-time"]`,
+			addHours:(day: string) => `//label[normalize-space()="${helpers.capitalize(day)}" and @for="working-days"]/..//a[@class="added-store-opening-time "]`,
+
 			updateSettings: '.dokan-btn.dokan-btn-danger.dokan-btn-theme',
 			settingsSuccessMessage: '.dokan-message strong',
 		},
@@ -5489,11 +5493,17 @@ export const selector = {
 			visitStore: '//a[normalize-space()="Visit Store"]',
 
 			authenticationKey: '//label[normalize-space()="Authentication Key"]/..//code',
-			exportOrderStatuses: '//label[normalize-space()="Export Order Statuses"]/..//span[@class="select2-selection select2-selection--multiple"]',
+			selectedStatus: '//label[@for="dokan-shipstation-export-statuses"]/..//li[@class="select2-selection__choice"]',
+			exportOrderStatusesInput: '//label[normalize-space()="Export Order Statuses"]/..//span[@class="select2-selection select2-selection--multiple"]//input[@class="select2-search__field"]',
 			shippedOrderStatusDropdown: '.select2-selection__arrow',
-			shippedOrderStatusInput: '.select2-search__field',
+			shippedOrderStatusInput: '(//input[@class="select2-search__field"])[2]',
+
+			result: '.select2-results__option.select2-results__option--highlighted',
 
 			saveChanges: '#dokan-store-shipstation-form-submit',
+			saveSuccessMessage: '#swal2-html-container',
+			successOk: '.swal2-confirm',
+
 		},
 
 		// social profile settings

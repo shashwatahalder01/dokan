@@ -232,6 +232,55 @@ export class VendorSettingsPage extends VendorPage {
 	}
 
 
+	// vendor set delivery settings
+	async setDeliveryTimeSettings(deliveryTime: vendor['deliveryTime']): Promise<void> {
+		await this.goIfNotThere(data.subUrls.frontend.vDashboard.settingsDeliveryTime);
+		// delivery support
+		await this.check(selector.vendor.vDeliveryTimeSettings.homeDelivery);
+		await this.check(selector.vendor.vDeliveryTimeSettings.storePickup);
+		await this.clearAndType(selector.vendor.vDeliveryTimeSettings.deliveryBlockedBuffer, deliveryTime.deliveryBlockedBuffer);
+		await this.clearAndType(selector.vendor.vDeliveryTimeSettings.timeSlot, deliveryTime.timeSlot);
+		await this.clearAndType(selector.vendor.vDeliveryTimeSettings.orderPerSlot, deliveryTime.orderPerSlot);
+		for (const day of deliveryTime.days) {
+			await this.enableSwitcherDeliveryTime(selector.vendor.vDeliveryTimeSettings.deliveryDaySwitch(day));
+			if (deliveryTime.choice === 'full-day'){
+				await this.click(selector.vendor.vDeliveryTimeSettings.openingTime(day));
+				await this.page.getByRole('listitem').filter({ hasText: 'Full day' }).click();
+			} else {
+				await this.setAttributeValue(selector.vendor.vDeliveryTimeSettings.openingTime(day), 'value', deliveryTime.openingTime);
+				await this.setAttributeValue(selector.vendor.vDeliveryTimeSettings.openingTimeHiddenInput(day), 'value', deliveryTime.openingTime);
+				await this.setAttributeValue(selector.vendor.vDeliveryTimeSettings.closingTime(day), 'value', deliveryTime.closingTime);
+				await this.setAttributeValue(selector.vendor.vDeliveryTimeSettings.closingTimeHiddenInput(day), 'value', deliveryTime.closingTime);
+			}
+		}
+		await this.clickAndWaitForResponseAndLoadState(data.subUrls.frontend.vDashboard.settingsDeliveryTime, selector.vendor.vDeliveryTimeSettings.updateSettings, 302);
+		await this.toContainText(selector.vendor.vDeliveryTimeSettings.settingsSuccessMessage, deliveryTime.saveSuccessMessage);
+	}
+
+
+	// vendor set shipstation settings
+	async setShipStation(shipStation: vendor['shipStation']): Promise<void> {
+		await this.goIfNotThere(data.subUrls.frontend.vDashboard.settingsShipstation);
+
+		const allStatus = await this.getMultipleElementTexts(selector.vendor.vShipStationSettings.selectedStatus);
+		const statusIsSelected = allStatus.includes('×'+ shipStation.status);
+		if (!statusIsSelected){
+			await this.clearAndType(selector.vendor.vShipStationSettings.exportOrderStatusesInput, shipStation.status);
+			await this.toContainText(selector.vendor.vShipStationSettings.result, shipStation.status);
+			await this.press(data.key.enter);
+		}
+
+		await this.click(selector.vendor.vShipStationSettings.shippedOrderStatusDropdown);
+		await this.clearAndType(selector.vendor.vShipStationSettings.shippedOrderStatusInput, shipStation.status);
+		await this.toContainText(selector.vendor.vShipStationSettings.result, shipStation.status);
+		await this.press(data.key.enter);
+
+		await this.clickAndAcceptAndWaitForResponse(data.subUrls.ajax, selector.vendor.vShipStationSettings.saveChanges);
+		await this.toContainText(selector.vendor.vShipStationSettings.saveSuccessMessage, 'Your changes has been updated!');
+		await this.click(selector.vendor.vShipStationSettings.successOk);
+	}
+
+
 	// vendor set social profile settings
 	async setSocialProfile(urls: vendor['socialProfileUrls']): Promise<void> {
 		await this.goIfNotThere(data.subUrls.frontend.vDashboard.settingsSocialProfile);
@@ -243,8 +292,10 @@ export class VendorSettingsPage extends VendorPage {
 		await this.clearAndType(selector.vendor.vSocialProfileSettings.platforms.instagram, urls.instagram);
 		await this.clearAndType(selector.vendor.vSocialProfileSettings.platforms.flickr, urls.flickr);
 		await this.keyPressOnLocator(selector.vendor.vSocialProfileSettings.updateSettings, data.key.enter);
+		await this.clickAndWaitForResponseAndLoadState(data.subUrls.frontend.vDashboard.settingsRma, selector.vendor.vRmaSettings.saveChanges, 302);
 		await this.toContainText(selector.vendor.vSocialProfileSettings.updateSettingsSuccessMessage, urls.saveSuccessMessage);
 	}
+
 
 	// vendor set rma settings
 	async setRmaSettings(rma: vendor['rma']): Promise<void> {

@@ -173,23 +173,35 @@ export class VendorPage extends BasePage {
 	}
 
 
+	// vendor add vendor details
+	async addVendorDetails(vendor: vendor): Promise<void> {
+		await this.goIfNotThere(data.subUrls.frontend.vDashboard.editAccountVendor);
+		await this.clearAndType(selector.vendor.vAccountDetails.firstName, vendor.username);
+		await this.clearAndType(selector.vendor.vAccountDetails.lastName, vendor.lastname);
+		await this.clearAndType(selector.vendor.vAccountDetails.email,  vendor.username + vendor.vendorInfo.emailDomain);
+		// await this.updatePassword(vendor.vendorInfo.password, vendor.vendorInfo.password1);
+		await this.clickAndWaitForResponseAndLoadState(data.subUrls.frontend.vDashboard.editAccountVendor, selector.vendor.vAccountDetails.saveChanges, 302);
+		await expect(this.page.getByText(selector.vendor.vAccountDetails.saveSuccessMessage)).toBeVisible();
+		await this.toContainText(selector.customer.cWooSelector.wooCommerceSuccessMessage, data.vendor.vendorInfo.account.updateSuccessMessage);
+
+		// cleanup: reset password
+		// await this.updatePassword(vendor.vendorInfo.password1, vendor.vendorInfo.password, true);
+	}
+
+	// vendor update password
+	async updatePassword(currentPassword: string, newPassword: string, saveChanges = false): Promise<void> {
+		await this.type(selector.vendor.vAccountDetails.currentPassword, currentPassword);
+		await this.type(selector.vendor.vAccountDetails.NewPassword, newPassword);
+		await this.type(selector.vendor.vAccountDetails.confirmNewPassword, newPassword);
+		if (saveChanges){
+			await this.clickAndWaitForResponse(data.subUrls.frontend.vDashboard.editAccountVendor, selector.vendor.vAccountDetails.saveChanges, 302);
+			await expect(this.page.getByText(selector.vendor.vAccountDetails.saveSuccessMessage)).toBeVisible();
+		}
+	}
+
+
 	//todo: fixed above functions
 
-	// vendor add product category
-	async addProductCategory(category: string): Promise<void> {
-		await this.click(selector.vendor.product.productCategoryModal);
-		await this.waitForVisibleLocator(selector.vendor.product.productCategorySearchInput);
-		await this.type(selector.vendor.product.productCategorySearchInput, category);
-		await this.click(selector.vendor.product.productCategorySearchResult);
-		await this.click(selector.vendor.product.productCategoryDone);
-
-		const categoryAlreadySelectedPopup = await this.isVisible(selector.vendor.product.productCategoryAlreadySelectedPopup);
-		if (categoryAlreadySelectedPopup) {
-			await this.click(selector.vendor.product.productCategoryAlreadySelectedPopup);
-			await this.click(selector.vendor.product.productCategoryModalClose);
-		}
-		//todo:  handle multiple category selection with assertion
-	}
 
 	// products
 
@@ -308,30 +320,92 @@ export class VendorPage extends BasePage {
 	}
 
 
-	// vendor add vendor details
-	async setVendorDetails(vendorInfo: any): Promise<void> {
-		await this.goIfNotThere(data.subUrls.frontend.vDashboard.editAccountVendor);
-		await this.clearAndType(selector.vendor.vAccountDetails.firstName, vendorInfo.firstName());
-		await this.clearAndType(selector.vendor.vAccountDetails.lastName, vendorInfo.lastName());
-		// await this.clearAndType(selector.vendor.vAccountDetails.email, vendorInfo.email());
-		// await this.updatePassword(vendorInfo.password, vendorInfo.password1);
-		await this.clickAndWaitForResponse(data.subUrls.frontend.vDashboard.editAccountVendor, selector.vendor.vAccountDetails.saveChanges, 302);
-		await expect(this.page.getByText(selector.vendor.vAccountDetails.saveSuccessMessage)).toBeVisible();
+	// vendor add product category
+	async addProductCategory(category: string): Promise<void> {
+		await this.click(selector.vendor.product.productCategoryModal);
+		await this.waitForVisibleLocator(selector.vendor.product.productCategorySearchInput);
+		await this.type(selector.vendor.product.productCategorySearchInput, category);
+		await this.click(selector.vendor.product.productCategorySearchResult);
+		await this.click(selector.vendor.product.productCategoryDone);
 
-		// cleanup
-		// await this.updatePassword(vendorInfo.password, vendorInfo.password1, true);
+		const categoryAlreadySelectedPopup = await this.isVisible(selector.vendor.product.productCategoryAlreadySelectedPopup);
+		if (categoryAlreadySelectedPopup) {
+			await this.click(selector.vendor.product.productCategoryAlreadySelectedPopup);
+			await this.click(selector.vendor.product.productCategoryModalClose);
+		}
+		//todo:  handle multiple category selection with assertion
 	}
 
 
-	// vendor update password
-	async updatePassword(currentPassword: string, newPassword: string, saveChanges = false): Promise<void> {
-		await this.type(selector.vendor.vAccountDetails.currentPassword, currentPassword);
-		await this.type(selector.vendor.vAccountDetails.NewPassword, newPassword);
-		await this.type(selector.vendor.vAccountDetails.confirmNewPassword, newPassword);
-		if (saveChanges){
-			await this.clickAndWaitForResponse(data.subUrls.frontend.vDashboard.editAccountVendor, selector.vendor.vAccountDetails.saveChanges, 302);
-			await expect(this.page.getByText(selector.vendor.vAccountDetails.saveSuccessMessage)).toBeVisible();
+	// product update
+
+	// add product quantity discount
+	async addProductQuantityDiscount(productName: string, minimumQuantity: string, discountPercentage: string): Promise<void> {
+		await this.goToProductEdit(productName);
+		// add quantity discount
+		await this.check(selector.vendor.product.discount.enableBulkDiscount);
+		await this.clearAndType(selector.vendor.product.discount.lotMinimumQuantity, minimumQuantity);
+		await this.clearAndType(selector.vendor.product.discount.lotDiscountInPercentage, discountPercentage);
+		await this.clickAndWaitForResponseAndLoadState(data.subUrls.frontend.vDashboard.products, selector.vendor.product.saveProduct, 302);
+		await this.toContainText(selector.vendor.product.updatedSuccessMessage, data.product.createUpdateSaveSuccessMessage);
+	}
+
+
+	// vendor add product rma settings
+	async addProductRmaSettings(productName: string, label: string, type: string, length: string, lengthValue: string, lengthDuration: string): Promise<void> {
+		await this.goToProductEdit(productName);
+		// add rma settings
+		await this.check(selector.vendor.product.rma.overrideYourDefaultRmaSettingsForThisProduct);
+		await this.clearAndType(selector.vendor.product.rma.rmaLabel, label);
+		await this.selectByValue(selector.vendor.product.rma.rmaType, type);
+		await this.selectByValue(selector.vendor.product.rma.rmaLength, length);
+		await this.clearAndType(selector.vendor.product.rma.rmaLengthValue, lengthValue);
+		await this.selectByValue(selector.vendor.product.rma.rmaLengthDuration, lengthDuration);
+
+		const refundReasonIsVisible = await this.isVisible(selector.vendor.product.rma.refundReasons);
+		if (refundReasonIsVisible) {
+			await this.checkMultiple(selector.vendor.product.rma.refundReasons); //todo:  update this
 		}
+		await this.clickAndWaitForResponseAndLoadState(data.subUrls.frontend.vDashboard.products, selector.vendor.product.saveProduct, 302);
+		await this.toContainText(selector.vendor.product.updatedSuccessMessage, data.product.createUpdateSaveSuccessMessage);
+	}
+
+
+	// spmv
+
+	// vendor search similar product
+	async searchSimilarProduct(productName: string): Promise<void> {
+		await this.click(selector.vendor.vSearchSimilarProduct.search);
+		await this.type(selector.vendor.vSearchSimilarProduct.search, productName);
+		await this.click(selector.vendor.vSearchSimilarProduct.search);
+		await this.click(selector.vendor.vSearchSimilarProduct.search);
+		//todo:  add assertion
+	}
+
+
+	//refund
+
+	// vendor refund order
+	async refundOrder(orderNumber: string, productName: string, partialRefund = false): Promise<void> {
+		await this.goToOrderDetails(orderNumber);
+
+		//request refund
+		await this.click(selector.vendor.orders.refund.requestRefund);
+		const productQuantity = await this.getElementText(selector.vendor.orders.refund.productQuantity(productName)) as string;
+		const productCost = helpers.price(await this.getElementText(selector.vendor.orders.refund.productCost(productName)) as string);
+		const productTax = helpers.price(await this.getElementText(selector.vendor.orders.refund.productTax(productName)) as string);
+		await this.type(selector.vendor.orders.refund.refundProductQuantity(productName), productQuantity);
+		if (partialRefund) {
+			await this.click(selector.vendor.orders.refund.refundDiv);
+			await this.clearAndType(selector.vendor.orders.refund.refundProductCostAmount(productName), String(helpers.roundToTwo(productCost / 2)));
+			await this.clearAndType(selector.vendor.orders.refund.refundProductTaxAmount(productName), String(helpers.roundToTwo(productTax / 2)));
+		}
+		await this.type(selector.vendor.orders.refund.refundReason, 'Defective product');
+		await this.click(selector.vendor.orders.refund.refundManually);
+		await this.click(selector.vendor.orders.refund.confirmRefund);
+
+		await this.toContainText(selector.vendor.orders.refund.refundRequestSuccessMessage, 'Refund request submitted.');
+		await this.click(selector.vendor.orders.refund.refundRequestSuccessMessageOk);
 	}
 
 
@@ -661,26 +735,7 @@ export class VendorPage extends BasePage {
 	}
 
 
-	// vendor set delivery settings
-	async setDeliveryTimeSettings(deliveryTime: vendor['deliveryTime']): Promise<void> {
-		await this.goIfNotThere(data.subUrls.frontend.vDashboard.settingsDeliveryTime);
-		// delivery support
-		await this.check(selector.vendor.vDeliveryTimeSettings.homeDelivery);
-		await this.check(selector.vendor.vDeliveryTimeSettings.storePickup);
-		await this.clearAndType(selector.vendor.vDeliveryTimeSettings.deliveryBlockedBuffer, deliveryTime.deliveryBlockedBuffer);
-		await this.clearAndType(selector.vendor.vDeliveryTimeSettings.deliveryBlockedBuffer, deliveryTime.orderPerSlot);
-		await this.clearAndType(selector.vendor.vDeliveryTimeSettings.timeSlot, deliveryTime.timeSlot);
-		await this.clearAndType(selector.vendor.vDeliveryTimeSettings.orderPerSlot, deliveryTime.orderPerSlot);
-		for (const day of deliveryTime.days) {
-			await this.enableSwitcherDeliveryTime(selector.vendor.vDeliveryTimeSettings.deliveryDaySwitch(day));
-			await this.setAttributeValue(selector.vendor.vDeliveryTimeSettings.openingTime(day), 'value', deliveryTime.openingTime);
-			await this.setAttributeValue(selector.vendor.vDeliveryTimeSettings.openingTimeHiddenInput(day), 'value', deliveryTime.openingTime);
-			await this.setAttributeValue(selector.vendor.vDeliveryTimeSettings.closingTime(day), 'value', deliveryTime.closingTime);
-			await this.setAttributeValue(selector.vendor.vDeliveryTimeSettings.closingTimeHiddenInput(day), 'value', deliveryTime.closingTime);
-		}
-		await this.click(selector.vendor.vDeliveryTimeSettings.updateSettings);
-		await this.toContainText(selector.vendor.vDeliveryTimeSettings.settingsSuccessMessage, deliveryTime.saveSuccessMessage);
-	}
+
 
 
 	// vendor shipping settings
@@ -793,77 +848,6 @@ export class VendorPage extends BasePage {
 		await this.clickAndWaitForResponse(data.subUrls.ajax, selector.vendor.vShippingSettings.shippingSettingsSaveSettings);
 		await this.clickAndWaitForResponse(data.subUrls.ajax, selector.vendor.vShippingSettings.saveChanges);
 		await this.toContainText(selector.vendor.vShippingSettings.updateSettingsSuccessMessage, shipping.saveSuccessMessage);
-	}
-
-
-	// spmv
-
-	// vendor search similar product
-	async searchSimilarProduct(productName: string): Promise<void> {
-		await this.click(selector.vendor.vSearchSimilarProduct.search);
-		await this.type(selector.vendor.vSearchSimilarProduct.search, productName);
-		await this.click(selector.vendor.vSearchSimilarProduct.search);
-		await this.click(selector.vendor.vSearchSimilarProduct.search);
-		//todo:  add assertion
-	}
-
-	// product update
-
-	// add product quantity discount
-	async addProductQuantityDiscount(productName: string, minimumQuantity: string, discountPercentage: string): Promise<void> {
-		await this.goToProductEdit(productName);
-		// add quantity discount
-		await this.check(selector.vendor.product.discount.enableBulkDiscount);
-		await this.clearAndType(selector.vendor.product.discount.lotMinimumQuantity, minimumQuantity);
-		await this.clearAndType(selector.vendor.product.discount.lotDiscountInPercentage, discountPercentage);
-		await this.clickAndWaitForResponseAndLoadState(data.subUrls.frontend.vDashboard.products, selector.vendor.product.saveProduct, 302);
-		await this.toContainText(selector.vendor.product.updatedSuccessMessage, data.product.createUpdateSaveSuccessMessage);
-	}
-
-
-	// vendor add product rma settings
-	async addProductRmaSettings(productName: string, label: string, type: string, length: string, lengthValue: string, lengthDuration: string): Promise<void> {
-		await this.goToProductEdit(productName);
-		// add rma settings
-		await this.check(selector.vendor.product.rma.overrideYourDefaultRmaSettingsForThisProduct);
-		await this.clearAndType(selector.vendor.product.rma.rmaLabel, label);
-		await this.selectByValue(selector.vendor.product.rma.rmaType, type);
-		await this.selectByValue(selector.vendor.product.rma.rmaLength, length);
-		await this.clearAndType(selector.vendor.product.rma.rmaLengthValue, lengthValue);
-		await this.selectByValue(selector.vendor.product.rma.rmaLengthDuration, lengthDuration);
-
-		const refundReasonIsVisible = await this.isVisible(selector.vendor.product.rma.refundReasons);
-		if (refundReasonIsVisible) {
-			await this.checkMultiple(selector.vendor.product.rma.refundReasons); //todo:  update this
-		}
-		await this.clickAndWaitForResponseAndLoadState(data.subUrls.frontend.vDashboard.products, selector.vendor.product.saveProduct, 302);
-		await this.toContainText(selector.vendor.product.updatedSuccessMessage, data.product.createUpdateSaveSuccessMessage);
-	}
-
-
-	//refund
-
-	// vendor refund order
-	async refundOrder(orderNumber: string, productName: string, partialRefund = false): Promise<void> {
-		await this.goToOrderDetails(orderNumber);
-
-		//request refund
-		await this.click(selector.vendor.orders.refund.requestRefund);
-		const productQuantity = await this.getElementText(selector.vendor.orders.refund.productQuantity(productName)) as string;
-		const productCost = helpers.price(await this.getElementText(selector.vendor.orders.refund.productCost(productName)) as string);
-		const productTax = helpers.price(await this.getElementText(selector.vendor.orders.refund.productTax(productName)) as string);
-		await this.type(selector.vendor.orders.refund.refundProductQuantity(productName), productQuantity);
-		if (partialRefund) {
-			await this.click(selector.vendor.orders.refund.refundDiv);
-			await this.clearAndType(selector.vendor.orders.refund.refundProductCostAmount(productName), String(helpers.roundToTwo(productCost / 2)));
-			await this.clearAndType(selector.vendor.orders.refund.refundProductTaxAmount(productName), String(helpers.roundToTwo(productTax / 2)));
-		}
-		await this.type(selector.vendor.orders.refund.refundReason, 'Defective product');
-		await this.click(selector.vendor.orders.refund.refundManually);
-		await this.click(selector.vendor.orders.refund.confirmRefund);
-
-		await this.toContainText(selector.vendor.orders.refund.refundRequestSuccessMessage, 'Refund request submitted.');
-		await this.click(selector.vendor.orders.refund.refundRequestSuccessMessageOk);
 	}
 
 

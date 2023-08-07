@@ -124,6 +124,35 @@ export class CustomerPage extends BasePage {
 
 	}
 
+
+	// customer add customer details
+	async addCustomerDetails(customer: customer): Promise<void> {
+		await this.goIfNotThere(data.subUrls.frontend.editAccountCustomer);
+		await this.clearAndType(selector.customer.cAccountDetails.firstName, customer.username);
+		await this.clearAndType(selector.customer.cAccountDetails.lastName, customer.lastname);
+		await this.clearAndType(selector.customer.cAccountDetails.displayName, customer.username);
+		await this.clearAndType(selector.customer.cAccountDetails.email, customer.username + customer.customerInfo.emailDomain);
+		// await this.updatePassword(customer.customerInfo.password, customer.customerInfo.password1);
+		await this.clickAndWaitForResponseAndLoadState(data.subUrls.frontend.editAccountCustomer, selector.customer.cAccountDetails.saveChanges, 302);
+		await this.toContainText(selector.customer.cWooSelector.wooCommerceSuccessMessage, data.customer.account.updateSuccessMessage);
+
+		// cleanup: reset password
+		// await this.updatePassword(customer.customerInfo.password1, customer.customerInfo.password, true);
+	}
+
+
+	// customer update password
+	async updatePassword(currentPassword: string, newPassword: string, saveChanges = false): Promise<void> {
+		await this.clearAndType(selector.customer.cAccountDetails.currentPassword, currentPassword);
+		await this.clearAndType(selector.customer.cAccountDetails.NewPassword, newPassword);
+		await this.clearAndType(selector.customer.cAccountDetails.confirmNewPassword, newPassword);
+		if (saveChanges){
+			await this.clickAndWaitForResponseAndLoadState(data.subUrls.frontend.editAccountCustomer, selector.customer.cAccountDetails.saveChanges);
+			await this.toContainText(selector.customer.cWooSelector.wooCommerceSuccessMessage, data.customer.account.updateSuccessMessage);
+		}
+	}
+
+
 	// update billing fields
 	async updateBillingFields(billingInfo: customer['customerInfo']['billing']){
 		await this.clearAndType(selector.customer.cAddress.billing.billingFirstName, billingInfo.firstName);
@@ -185,34 +214,6 @@ export class CustomerPage extends BasePage {
 		await this.updateShippingFields(shippingInfo);
 		await this.clickAndWaitForResponseAndLoadState(data.subUrls.frontend.shippingAddress, selector.customer.cAddress.shipping.shippingSaveAddress, 302);
 		await this.toContainText(selector.customer.cWooSelector.wooCommerceSuccessMessage, data.customer.address.addressChangeSuccessMessage );
-	}
-
-
-	// customer add customer details
-	async addCustomerDetails(customer: customer): Promise<void> {
-		await this.goIfNotThere(data.subUrls.frontend.editAccountCustomer);
-		await this.clearAndType(selector.customer.cAccountDetails.firstName, customer.username);
-		await this.clearAndType(selector.customer.cAccountDetails.lastName, customer.lastname);
-		await this.clearAndType(selector.customer.cAccountDetails.displayName, customer.username);
-		await this.clearAndType(selector.customer.cAccountDetails.email, customer.username + customer.customerInfo.emailDomain);
-		// await this.updatePassword(customer.customerInfo.password, customer.customerInfo.password1);
-		await this.clickAndWaitForResponseAndLoadState(data.subUrls.frontend.editAccountCustomer, selector.customer.cAccountDetails.saveChanges);
-		await this.toContainText(selector.customer.cWooSelector.wooCommerceSuccessMessage, data.customer.account.updateSuccessMessage);
-
-		// cleanup: reset password
-		// await this.updatePassword(customer.customerInfo.password1, customer.customerInfo.password, true);
-	}
-
-
-	// customer update password
-	async updatePassword(currentPassword: string, newPassword: string, saveChanges = false): Promise<void> {
-		await this.clearAndType(selector.customer.cAccountDetails.currentPassword, currentPassword);
-		await this.clearAndType(selector.customer.cAccountDetails.NewPassword, newPassword);
-		await this.clearAndType(selector.customer.cAccountDetails.confirmNewPassword, newPassword);
-		if (saveChanges){
-			await this.clickAndWaitForResponseAndLoadState(data.subUrls.frontend.editAccountCustomer, selector.customer.cAccountDetails.saveChanges);
-			await this.toContainText(selector.customer.cWooSelector.wooCommerceSuccessMessage, data.customer.account.updateSuccessMessage);
-		}
 	}
 
 

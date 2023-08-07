@@ -75,9 +75,9 @@ test.describe('Vendor settings test', () => {
 	// 	await vendor.sendCompanyVerificationRequest(data.vendor.verification);
 	// });
 
-	// test.skip('vendor can set delivery time settings @pro', async ( )=> {
-	// 	await vendor.setDeliveryTimeSettings(data.vendor.deliveryTime);
-	// });
+	test('vendor can set delivery time settings @pro', async ( ) => {
+		await vendor.setDeliveryTimeSettings(data.vendor.deliveryTime);
+	});
 
 	test('vendor can set shipping policy @pro', async ( ) => {
 		await vendor.setShippingPolicies(data.vendor.shipping.shippingPolicy);
@@ -103,11 +103,15 @@ test.describe('Vendor settings test', () => {
 		await vendor.setShippingSettings(data.vendor.shipping.shippingMethods.distanceRateShipping);
 	});
 
+	test('vendor can set shipStation settings @pro', async ( ) => {
+		await vendor.setShipStation(data.vendor.shipStation);
+	});
+
 	test('vendor can set social profile settings @pro', async ( ) => {
 		await vendor.setSocialProfile(data.vendor.socialProfileUrls);
 	});
 
-	test.only('vendor can set rma settings @pro', async ( ) => {
+	test('vendor can set rma settings @pro', async ( ) => {
 		await vendor.setRmaSettings(data.vendor.rma);
 	});
 

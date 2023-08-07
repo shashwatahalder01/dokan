@@ -931,6 +931,11 @@ export const data = {
 			biography: 'Vendor biography',
 			supportButtonText: 'Get Support',
 
+
+			account: {
+				updateSuccessMessage: 'Account details changed successfully.',
+			},
+
 			openingClosingTime: {
 				days: ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'],
 				openingTime: '06:00 am',
@@ -1130,13 +1135,18 @@ export const data = {
 
 		deliveryTime: {
 			deliveryBlockedBuffer: '0',
-			days: ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'],
-			openingTime: '06:00 am',
-			closingTime: '11:30 pm',
-			fullDay: 'Full day',
 			timeSlot: '30',
 			orderPerSlot: '100',
+			days: ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'],
+			choice: 'full-day',
+			openingTime: '12:00 am',
+			closingTime: '11:30 pm',
+			fullDay: 'Full day',
 			saveSuccessMessage: 'Delivery settings has been saved successfully!',
+		},
+
+		shipStation: {
+			status: 'Processing',
 		},
 
 		socialProfileUrls: {

@@ -906,14 +906,20 @@ export interface vendor {
 
 	deliveryTime: {
 		deliveryBlockedBuffer: string;
-		days: string;
+		timeSlot: string;
+		orderPerSlot: string;
+		days: string [];
+		choice: string;
 		openingTime: string;
 		closingTime: string;
 		fullDay: string;
-		timeSlot: string;
-		orderPerSlot: string;
 		saveSuccessMessage: string;
 	}
+
+
+	shipStation: {
+		status: string;
+	},
 
 	socialProfileUrls: {
 		facebook: string;
