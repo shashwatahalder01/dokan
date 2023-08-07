@@ -171,8 +171,8 @@ test.describe('Vendor settings test', () => {
 		await vendor.setRmaSettings(data.vendor.rma);
 	});
 
-	test.skip('vendor can set store seo settings @pro', async ( ) => {
-		// await vendor.setStoreSeo(data.vendor.seo); 	//todo: store seo
+	test('vendor can set store seo settings @pro', async ( ) => {
+		await vendor.setStoreSeo(data.vendor.seo);
 	});
 
 

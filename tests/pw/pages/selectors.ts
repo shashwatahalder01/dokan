@@ -5601,6 +5601,7 @@ export const selector = {
 			},
 
 			saveChanges: '#dokan-store-seo-form-submit',
+			updateSettingsSuccessMessage: '.dokan-alert.dokan-alert-success',
 		},
 	},
 

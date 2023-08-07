@@ -2,7 +2,7 @@ import { Page, expect } from '@playwright/test';
 import { VendorPage } from 'pages/vendorPage';
 import { selector } from 'pages/selectors';
 import { data } from 'utils/testData';
-import { vendor, shipping } from 'utils/interfaces';
+import { vendor, } from 'utils/interfaces';
 
 
 const { DOKAN_PRO } = process.env;
@@ -693,6 +693,24 @@ export class VendorSettingsPage extends VendorPage {
 		await this.typeFrameSelector(selector.vendor.vRmaSettings.refundPolicyIframe, selector.vendor.vRmaSettings.refundPolicyHtmlBody, rma.refundPolicyHtmlBody);
 		await this.clickAndWaitForResponseAndLoadState(data.subUrls.frontend.vDashboard.settingsRma, selector.vendor.vRmaSettings.saveChanges, 302);
 		await this.toContainText(selector.vendor.vRmaSettings.updateSettingsSuccessMessage, rma.saveSuccessMessage);
+	}
+
+	// vendor set seo settings
+	async setStoreSeo(seo: vendor['seo']): Promise<void> {
+		await this.goIfNotThere(data.subUrls.frontend.vDashboard.settingsSeo);
+
+		await this.clearAndType(selector.vendor.vStoreSeoSettings.seoTitle, seo.seoTitle);
+		await this.clearAndType(selector.vendor.vStoreSeoSettings.metaDescription, seo.metaDescription);
+		await this.clearAndType(selector.vendor.vStoreSeoSettings.metaKeywords, seo.metaKeywords);
+
+		await this.clearAndType(selector.vendor.vStoreSeoSettings.facebook.facebookTitle, seo.facebookTitle);
+		await this.clearAndType(selector.vendor.vStoreSeoSettings.facebook.facebookDescription, seo.facebookDescription);
+
+		await this.clearAndType(selector.vendor.vStoreSeoSettings.twitter.twitterTitle, seo.twitterTitle);
+		await this.clearAndType(selector.vendor.vStoreSeoSettings.twitter.twitterDescription, seo.twitterDescription);
+
+		await this.clickAndWaitForResponseAndLoadState(data.subUrls.ajax, selector.vendor.vStoreSeoSettings.saveChanges);
+		await this.toContainText(selector.vendor.vStoreSeoSettings.updateSettingsSuccessMessage, 'Your changes has been updated!');
 	}
 
 

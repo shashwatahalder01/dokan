@@ -952,6 +952,16 @@ export interface vendor {
 		saveSuccessMessage: string;
 	}
 
+	seo: {
+		seoTitle: string;
+		metaDescription: string;
+		metaKeywords: string;
+		facebookTitle: string;
+		facebookDescription: string;
+		twitterTitle: string;
+		twitterDescription: string;
+	},
+
 	withdraw: {
 
 		withdrawMethod: {

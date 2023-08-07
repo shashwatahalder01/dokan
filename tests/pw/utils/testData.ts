@@ -1181,6 +1181,16 @@ export const data = {
 			saveSuccessMessage: 'Settings saved successfully',
 		},
 
+		seo: {
+			seoTitle: 'test seo title',
+			metaDescription: 'test meta description',
+			metaKeywords: 'test meta keywords',
+			facebookTitle: 'test facebook title',
+			facebookDescription: 'test facebook description',
+			twitterTitle: 'test twitter title',
+			twitterDescription: 'test twitter description',
+		},
+
 		withdraw: {
 
 			withdrawMethod: {
