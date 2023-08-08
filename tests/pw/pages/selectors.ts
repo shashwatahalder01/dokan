@@ -3405,8 +3405,9 @@ export const selector = {
 				visibleOnTheProductPage: '//input[contains(@name, "attribute_visibility")]',
 				usedForVariations: '//input[contains(@name, "attribute_variation")]',
 				selectTerms: '.dokan-attribute-values .select2-search__field',
-				selectAll: 'button.plus',
-				selectNone: 'button.minus',
+				selectAll: 'button.dokan-select-all-attributes',
+				selectNone: 'button.dokan-select-no-attributes',
+				addNew: 'button.dokan-add-new-attribute',
 				removeAttribute: '.dokan-product-remove-attribute',
 				confirmRemoveAttribute: '.swal2-confirm',
 				cancelRemoveAttribute: '.swal2-cancel',
@@ -3426,9 +3427,9 @@ export const selector = {
 
 			// Discount Options
 			discount:{
-				enableBulkDiscount: '#\\_is_lot_discount',
-				lotMinimumQuantity: '#\\_lot_discount_quantity',
-				lotDiscountInPercentage: '#\\_lot_discount_amount',
+				enableBulkDiscount: 'input#\\_is_lot_discount',
+				lotMinimumQuantity: 'input#\\_lot_discount_quantity',
+				lotDiscountInPercentage: 'input#\\_lot_discount_amount',
 			},
 
 			// Rma Options
