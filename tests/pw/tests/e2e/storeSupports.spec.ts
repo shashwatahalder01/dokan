@@ -95,6 +95,8 @@ test.describe('Store Support test', () => {
 		await admin.storeSupportBulkAction('close', supportTicketId);
 	});
 
+	//todo:count decrease for viewing a support ticket
+
 
 	// customer
 
@@ -111,6 +113,10 @@ test.describe('Store Support test', () => {
 	test('customer can ask for store support on single store @pro', async ( ) => {
 		await customer.storeSupport(data.predefined.vendorStores.vendor1, data.customer.getSupport, 'store');
 	});
+
+	//todo: customer can ask for store support for order id
+	//todo: customer can ask for store support on order received page
+	//todo: customer can view support ticket closed message/ cant send message to closed ticket
 
 	test('customer can send message to support ticket @pro', async ( ) => {
 		await customer.storeSupport(data.predefined.vendorStores.vendor1, data.customer.getSupport, 'store');

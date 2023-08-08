@@ -164,7 +164,7 @@ test.describe('Vendor settings test', () => {
 	});
 
 	test('vendor can set social profile settings @pro', async ( ) => {
-		await vendor.setSocialProfile(data.vendor.socialProfileUrls);
+		await vendor.setSocialProfile(data.vendor.socialProfileUrls);  //todo: add user can share store, provide valid link and test only gotourl is successed
 	});
 
 	test('vendor can set rma settings @pro', async ( ) => {
