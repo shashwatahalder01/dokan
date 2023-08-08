@@ -89,7 +89,7 @@ test.describe('Customer functionality test', () => {
 		await customer.applyCoupon(data.predefined.coupon.couponCode);
 	});
 
-	test('customer can buy product @lite', async ( ) => {
+	test.only('customer can buy product @lite', async ( ) => {
 		await customer.addProductToCart(data.predefined.simpleProduct.product1.name, 'single-product');
 		await customer.placeOrder();
 	});

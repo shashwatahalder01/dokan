@@ -242,7 +242,8 @@ export class CustomerPage extends BasePage {
 	// add product to cart
 	async addProductToCart(productName: string, from:string ){
 		// clear cart
-		await this.clearCart();
+		// await this.clearCart(); //todo: sign-out user fix this
+		await this.clearCartManually();
 		switch(from){
 		case 'shop' :
 			await this.addProductToCartFromShop(productName);

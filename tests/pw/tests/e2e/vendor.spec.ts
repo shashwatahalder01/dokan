@@ -82,4 +82,6 @@ test.describe('Vendor functionality test', () => {
 	});
 
 
+	//todo: vendor can export statement
+
 });
