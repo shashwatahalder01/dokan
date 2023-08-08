@@ -5,7 +5,7 @@ import { data } from 'utils/testData';
 import { payloads } from 'utils/payloads';
 
 
-test.describe.only('Vendor SPMV test', () => {
+test.describe('Vendor SPMV test', () => {
 
 
 	let vendor: VendorSpmvPage;
