@@ -1907,4 +1907,9 @@ export const data = {
 		adminEmail: 'shashwata@wedevs.com',
 
 	},
+
+	cssStyle:{
+		visibleStyle: 'visibility:visible;',
+
+	}
 };
