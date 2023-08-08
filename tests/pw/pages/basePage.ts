@@ -269,10 +269,9 @@ export class BasePage {
 
 	// click & wait for response
 	async clickAndWaitForResponseAndLoadState(subUrl: string, selector: string, code = 200): Promise<Response> {
-		const [response] = await Promise.all([
-			this.page.waitForResponse((resp) => resp.url().includes(subUrl) && resp.status() === code),
+		const [, response] = await Promise.all([
 			this.page.waitForLoadState( 'networkidle'),
-			// this.page.waitForLoadState( 'domcontentloaded'),
+			this.page.waitForResponse((resp) => resp.url().includes(subUrl) && resp.status() === code),
 			this.page.locator(selector).click()
 		]);
 		expect(response.status()).toBe(code);

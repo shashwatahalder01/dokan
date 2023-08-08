@@ -168,6 +168,13 @@ setup.describe('setup  user settings', () => {
 
 setup.describe('setup dokan settings', () => {
 
+	let apiUtils: ApiUtils;
+
+	// eslint-disable-next-line require-await
+	setup.beforeAll(async ({ request }) => {
+		apiUtils = new ApiUtils(request);
+	});
+
 	setup('set dokan general settings @lite', async () => {
 		await dbUtils.setDokanSettings(dbData.dokan.optionName.general, dbData.dokan.generalSettings);
 	});
@@ -183,6 +190,13 @@ setup.describe('setup dokan settings', () => {
 	setup('admin set dokan reverse withdraw settings @lite', async () => {
 		await dbUtils.setDokanSettings(dbData.dokan.optionName.reverseWithdraw, dbData.dokan.reverseWithdrawSettings);
 	});
+
+	// setup('admin set dokan page settings @lite', async () => {
+	// 	const pageId = await apiUtils.getPageId('sample-page', payloads.adminAuth);
+	// 	const pageSettings = await dbUtils.getDokanSettings(dbData.dokan.optionName.page);
+	// 	pageSettings['reg_tc_page'] = pageId;
+	// 	await dbUtils.setDokanSettings(dbData.dokan.optionName.page, dbData.dokan.pageSettings);
+	// });
 
 	setup('admin set dokan appearance settings @lite', async () => {
 		await dbUtils.setDokanSettings(dbData.dokan.optionName.appearance, dbData.dokan.appearanceSettings);

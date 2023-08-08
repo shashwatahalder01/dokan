@@ -3571,15 +3571,6 @@ export const selector = {
 			view: (orderNumber: string) => `//strong[contains(text(),'Order ${orderNumber}')]/../../..//a[@data-original-title='View']`,
 
 
-			// status
-			status:{
-				currentOrderStatus: '.order-status .dokan-label',
-				selectedOrderStatus: '//select[@id="order_status"]//option[@selected="selected"]',
-				edit: '.dokan-edit-status',
-				orderStatus: '#order_status',  // wc-pending, wc-processing, wc-completed, wc-cancelled, wc-refunded, wc-failed, wc-checkout-draft
-				updateOrderStatus: '//input[@name="dokan_change_status"]',
-			},
-
 			// order details
 			orderDetails:{
 				orderNumber: '//strong[contains(text(),"Order#")]',
@@ -3593,6 +3584,24 @@ export const selector = {
 				tax: '//td[contains(text(),"Tax")]/..//bdi',
 				refunded: '.total.refunded-total bdi',
 			},
+
+			//general details
+			generalDetails: {
+				generalDetailsDiv: '//strong[normalize-space()="General Details"]/../..',
+				orderDetails: '.list-unstyled.order-status',
+				customerDetails: '.list-unstyled.customer-details',
+			},
+
+
+			// status
+			status:{
+				currentOrderStatus: '.order-status .dokan-label',
+				selectedOrderStatus: '//select[@id="order_status"]//option[@selected="selected"]',
+				edit: '.dokan-edit-status',
+				orderStatus: '#order_status',  // wc-pending, wc-processing, wc-completed, wc-cancelled, wc-refunded, wc-failed, wc-checkout-draft
+				updateOrderStatus: '//input[@name="dokan_change_status"]',
+			},
+
 
 			// Refund
 			refund: {
@@ -3618,6 +3627,7 @@ export const selector = {
 
 			// add note
 			orderNote: {
+				orderNoteDiv: '//strong[normalize-space()="Order Notes"]/../..',
 				orderNoteInput: '#add-note-content',
 				orderNoteType: '#order_note_type', // Customer note, Private note
 				addNote: 'input[value="Add Note"]',
@@ -3635,6 +3645,7 @@ export const selector = {
 
 			//shipment
 			shipment:{
+				shipmentDiv:'//strong[normalize-space()="Shipments"]/../..',
 				createNewShipment: '#create-tracking-status-action',
 				shipmentOrderItem: (productName: string) => `//div[@id="dokan-order-shipping-status-tracking-panel"]//td//a[contains( text(),"${productName}")]/../..//input[@name="shipment_order_item_select"]`,
 				shipmentOrderItemQty: (productName: string) => `//div[@id="dokan-order-shipping-status-tracking-panel"]//td//a[contains( text(),"${productName}")]/../..//input[@class="shipping_order_item_qty"]`,
@@ -3650,6 +3661,7 @@ export const selector = {
 
 			// downloadable product permission
 			downloadableProductPermission: {
+				downloadableProductPermissionDiv: '//strong[normalize-space()="Downloadable Product Permission"]/../..',
 				downloadableProductInput: '.select2-search__field',
 				grantAccess: '.grant_access',
 				revokeAccess: '.revoke_access',
@@ -3856,7 +3868,7 @@ export const selector = {
 			},
 
 			noReviewsFound: '//td[normalize-space()="No Results Found"]',
-
+			numberOfRowsFound:'.dokan-reviews-content tbody tr',
 
 			// Review Actions
 			reviewRow: (reviewMessage: string) => `//div[contains(text(),'${reviewMessage}')]/../..`,

@@ -32,7 +32,8 @@ export class ProductReviewsPage extends VendorPage {
 		if (noReviewsFound){
 			return;
 		}
-		//todo: add more fields
+
+		await this.notToHaveCount(selector.vendor.vReviews.numberOfRowsFound, 0);
 
 	}
 

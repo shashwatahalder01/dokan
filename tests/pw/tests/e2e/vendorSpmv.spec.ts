@@ -20,10 +20,7 @@ test.describe('Vendor SPMV test', () => {
 		vendor = new VendorSpmvPage(vPage);
 
 		apiUtils = new ApiUtils(request);
-		const [responseBody, sellerId, storeName] = await apiUtils.createStore (payloads.createStore2, payloads.adminAuth);
-		console.log(responseBody);
-		console.log(sellerId);
-		console.log(storeName);
+		await apiUtils.createStore (payloads.createStore2, payloads.adminAuth);
 		[,, productName] = await apiUtils.createProduct({ ...payloads.createProduct(), name: data.predefined.spmv.productName() }, payloads.vendor2Auth);
 		//todo: might need to delete user: delete user wp api
 	});
