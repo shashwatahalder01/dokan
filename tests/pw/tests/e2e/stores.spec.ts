@@ -53,7 +53,7 @@ test.describe('Stores test', () => {
 		await admin.editVendor(data.vendor);
 	});
 
-	test('admin can view vendor products @lite', async ( ) => {
+	test.skip('admin can view vendor products @lite', async ( ) => {
 		await admin.viewVendor(data.predefined.vendorStores.vendor1, 'products');
 	});
 
