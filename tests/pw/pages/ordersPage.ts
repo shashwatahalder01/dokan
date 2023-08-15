@@ -28,7 +28,8 @@ export class OrdersPage extends VendorPage {
 		// order filters elements are visible
 		// eslint-disable-next-line @typescript-eslint/no-unused-vars
 		const { filterByCustomer,  ...filters } = selector.vendor.orders.filters;
-		await this.multipleElementVisible(filters); //todo: add dropdown selector
+		await this.toBeVisible(selector.vendor.orders.filters.filterByCustomer.dropDown);
+		await this.multipleElementVisible(filters);
 
 		// order search elements are visible
 		await this.multipleElementVisible(selector.vendor.orders.search);

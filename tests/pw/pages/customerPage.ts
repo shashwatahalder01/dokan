@@ -318,7 +318,7 @@ export class CustomerPage extends BasePage {
 	// place order
 	async placeOrder(paymentMethod = 'bank', getOrderDetails = false, billingAddress = false, shippingAddress = false): Promise< string | object> {
 		await this.goToCheckout();
-		billingAddress && await this.addBillingAddressInCheckout(data.customer.customerInfo.billing); 		//todo: move shipping from here
+		billingAddress && await this.addBillingAddressInCheckout(data.customer.customerInfo.billing);
 		shippingAddress && await this.addShippingAddressInCheckout(data.customer.customerInfo.shipping);
 
 		switch (paymentMethod) {
@@ -433,17 +433,10 @@ export class CustomerPage extends BasePage {
 
 			case 'gPay' :
 				await this.clickFrameSelector(selector.customer.cPayWithStripeExpress.stripeExpressIframe, selector.customer.cPayWithStripeExpress.gPay);
-				//todo:
-				return;
-
-			case 'applePay' :
-				await this.clickFrameSelector(selector.customer.cPayWithStripeExpress.stripeExpressIframe, selector.customer.cPayWithStripeExpress.gPay);
-				//todo:
 				return;
 
 			case 'iDeal' :
 				await this.clickFrameSelector(selector.customer.cPayWithStripeExpress.stripeExpressIframe, selector.customer.cPayWithStripeExpress.iDeal);
-				//todo:
 				break;
 
 			default :

@@ -254,7 +254,7 @@ export class VendorPage extends BasePage {
 
 		orderDetails.orderStatus = (await this.getElementText(selector.vendor.orders.status.currentOrderStatus) as string).replace('-', ' ');
 
-		const orderDate = (await this.getElementText(selector.vendor.orders.orderDetails.orderDate) as string)?.split(':')[1]?.trim();
+		const orderDate = (await this.getElementText(selector.vendor.orders.orderDetails.orderDate) as string)?.split(':')[1]?.trim() as string;
 		orderDetails.orderDate = orderDate?.substring(0, orderDate.indexOf(',', orderDate.indexOf(',') + 1));
 
 		const discountIsVisible = await this.isVisible(selector.vendor.orders.orderDetails.discount);

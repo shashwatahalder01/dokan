@@ -2059,6 +2059,7 @@ export const selector = {
 					radiusSearchMaximumDistance: '#dokan_geolocation\\[distance_max\\]',
 					mapZoomLevel: '#dokan_geolocation\\[map_zoom\\]',
 					defaultLocation: '.search-address',
+					mapResultFirst: '(//div[contains(@class,"pac-container")]//div[@class="pac-item"])[1]',
 					geolocationSaveChanges: '#submit',
 				},
 
@@ -3191,7 +3192,7 @@ export const selector = {
 			filters:{
 				filterByDate: '#filter-by-date',
 				filterByCategory: '#product_cat',
-				filterByType: '#filter-by-type', // simple, ... //todo:
+				filterByType: '#filter-by-type', // simple, variable, external, grouped, subscription, variable-subscription
 				filterByOther: '//select[@name="filter_by_other"]', // featured, top_rated, best_selling
 				filter: '//button[normalize-space()="Filter"]',
 			},

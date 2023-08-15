@@ -388,8 +388,9 @@ export class SettingsPage extends AdminPage {
 		await this.clearAndType(selector.admin.dokan.settings.geolocation.mapZoomLevel, geolocation.mapZoomLevel);
 		await this.focus(selector.admin.dokan.settings.geolocation.defaultLocation);
 		await this.typeAndWaitForResponse(data.subUrls.gmap, selector.admin.dokan.settings.geolocation.defaultLocation, geolocation.defaultLocation);
-		await this.press(data.key.arrowDown);
-		await this.press(data.key.enter); //todo:  map not saving
+		// await this.press(data.key.arrowDown);
+		// await this.press(data.key.enter);
+		await this.click(selector.admin.dokan.settings.geolocation.mapResultFirst);
 
 		// save settings
 		await this.clickAndWaitForResponseAndLoadState(data.subUrls.ajax, selector.admin.dokan.settings.geolocation.geolocationSaveChanges);

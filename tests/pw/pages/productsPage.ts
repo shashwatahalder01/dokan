@@ -479,7 +479,7 @@ export class ProductsPage extends AdminPage {
 	// add product quantity discount
 	async addProductQuantityDiscount(productName: string, quantityDiscount: vendor['vendorInfo']['quantityDiscount']): Promise<void> {
 		await this.goToProductEdit(productName);
-		// await this.check(selector.vendor.product.discount.enableBulkDiscount); //todo: need to fix
+		await this.check(selector.vendor.product.discount.enableBulkDiscount); //todo: need to fix
 		await this.clearAndType(selector.vendor.product.discount.lotMinimumQuantity, quantityDiscount.minimumQuantity);
 		await this.clearAndType(selector.vendor.product.discount.lotDiscountInPercentage, quantityDiscount.discountPercentage);
 		await this.clickAndWaitForResponseAndLoadState(data.subUrls.frontend.vDashboard.products, selector.vendor.product.saveProduct, 302);
