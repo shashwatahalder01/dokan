@@ -54,8 +54,6 @@ jobs:
     steps:
       - name: Checkout testing repo
         uses: actions/checkout@v3
-        with:
-         ref: "develop"
 
       - name: Use desired version of NodeJS
         uses: actions/setup-node@v3
