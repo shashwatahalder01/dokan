@@ -65,7 +65,7 @@ export class VendorPage extends BasePage {
 		await this.waitForVisibleLocator(selector.vendor.vRegistration.firstName);
 		await this.clearAndType(selector.vendor.vRegistration.firstName, username);
 		await this.clearAndType(selector.vendor.vRegistration.lastName, vendorInfo.lastName());
-		await this.clearAndType(selector.vendor.vRegistration.shopName, vendorInfo.shopName);
+		await this.clearAndType(selector.vendor.vRegistration.shopName, vendorInfo.shopName());
 		await this.click(selector.vendor.vRegistration.shopUrl);
 
 		// fill address if enabled on registration
@@ -89,7 +89,7 @@ export class VendorPage extends BasePage {
 		await this.checkIfVisible(selector.customer.cDashboard.termsAndConditions);
 		const subscriptionPackIsVisible = await this.isVisible(selector.vendor.vRegistration.subscriptionPack);
 		subscriptionPackIsVisible && await this.selectByLabel(selector.vendor.vRegistration.subscriptionPack, data.predefined.vendorSubscription.nonRecurring);
-		await this.clickAndWaitForResponseAndLoadState(data.subUrls.frontend.myAccount, selector.vendor.vRegistration.register,  302);
+		await this.clickAndWaitForResponseAndLoadState(data.subUrls.frontend.vDashboard.setupWizard, selector.vendor.vRegistration.register);
 		const registrationErrorIsVisible = await this.isVisible(selector.customer.cWooSelector.wooCommerceError);
 		if (registrationErrorIsVisible) {
 			const hasError = await this.hasText(selector.customer.cWooSelector.wooCommerceError, data.customer.registration.registrationErrorMessage);

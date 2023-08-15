@@ -631,8 +631,8 @@ export interface vendor {
 		firstName: () => string;
 		lastName: () => string;
 		userName: string;
-		shopName: string;
-		shopUrl: string;
+		shopName: () => string;
+		shopUrl: () => string;
 		companyName: string;
 		companyId: string;
 		vatNumber: string;
@@ -1443,7 +1443,10 @@ export interface	dokanSettings {
 
 	// Pages
 	page: {
-		termsAndConditionsPage:  string;
+		dashboard:  string;
+		myOrders:  string;
+		storeListing:  string;
+		termsAndConditions:  string;
 		saveSuccessMessage:  string;
 	}
 

@@ -240,10 +240,9 @@ export class CustomerPage extends BasePage {
 
 
 	// add product to cart
-	async addProductToCart(productName: string, from:string ){
+	async addProductToCart(productName: string, from:string, clearCart = true ){
 		// clear cart
-		// await this.clearCart(); //todo: sign-out user fix this
-		await this.clearCartManually();
+		clearCart && await this.clearCart();
 		switch(from){
 		case 'shop' :
 			await this.addProductToCartFromShop(productName);
@@ -266,11 +265,6 @@ export class CustomerPage extends BasePage {
 
 	// clear cart
 	async clearCart(): Promise<void> {
-		await this.clearCookies();
-	}
-
-	// clear cart
-	async clearCartManually(): Promise<void> {
 		await this.goToCart();
 		const cartProductIsVisible = await this.isVisible(selector.customer.cCart.firstProductCrossIcon);
 		if (cartProductIsVisible) {
@@ -354,9 +348,13 @@ export class CustomerPage extends BasePage {
 		}
 
 		// await this.clickAndWaitForResponseAndLoadState(data.subUrls.frontend.placeOrder, selector.customer.cCheckout.placeOrder);
-		// await this.clickAndWaitForResponseAndLoadState(data.subUrls.frontend.orderReceived, selector.customer.cCheckout.placeOrder);
-		await this.clickAndWaitForResponse(data.subUrls.frontend.orderReceived, selector.customer.cCheckout.placeOrder);
+		await this.clickAndWaitForResponseAndLoadState(data.subUrls.frontend.orderReceived, selector.customer.cCheckout.placeOrder);
 		await this.toBeVisible(selector.customer.cOrderReceived.orderReceivedSuccessMessage);
+
+		const ifMultiVendorOrder  = await this.isVisible(selector.customer.cOrderReceived.orderDetails.subOrders.subOrders);
+		if (ifMultiVendorOrder){
+			await this.multipleElementVisible(selector.customer.cOrderReceived.orderDetails.subOrders);
+		}
 
 		if (getOrderDetails) {
 			return await this.getOrderDetailsAfterPlaceOrder();

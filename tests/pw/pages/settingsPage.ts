@@ -187,7 +187,10 @@ export class SettingsPage extends AdminPage {
 		await this.goToDokanSettings();
 		await this.click(selector.admin.dokan.settings.menus.pageSettings);
 
-		await this.selectByLabel(selector.admin.dokan.settings.page.termsAndConditionsPage, page.termsAndConditionsPage);
+		await this.selectByLabel(selector.admin.dokan.settings.page.dashboard, page.dashboard);
+		await this.selectByLabel(selector.admin.dokan.settings.page.myOrders, page.myOrders);
+		await this.selectByLabel(selector.admin.dokan.settings.page.storeListing, page.storeListing);
+		await this.selectByLabel(selector.admin.dokan.settings.page.termsAndConditions, page.termsAndConditions);
 
 		// save settings
 		await this.clickAndWaitForResponseAndLoadState(data.subUrls.ajax, selector.admin.dokan.settings.page.pageSaveChanges);

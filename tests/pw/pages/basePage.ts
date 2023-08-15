@@ -1406,6 +1406,11 @@ export class BasePage {
 		return await this.page.context().cookies();
 	}
 
+	// add cookies
+	async addCookies(browserContext: BrowserContext, cookies: { name: string; value: string; url?: string | undefined; domain?: string | undefined; path?: string | undefined; expires?: number | undefined; httpOnly?: boolean | undefined; secure?: boolean | undefined; sameSite?: 'Strict' | 'Lax' | 'None' | undefined; }[]): Promise<void> {
+		await browserContext.addCookies(cookies);
+	}
+
 
 	// get cookies
 	async clearCookies(): Promise<void> {

@@ -18,8 +18,19 @@ export const payloads = {
 		alt_text: 'avatar_img',
 		status: 'publish',
 		post: '1'
-
 	},
+
+	createPage:() => ({
+		title: 'test-page_' + faker.string.uuid(),
+		status: 'publish'
+
+	}),
+
+	tocPage:{
+		title: 'Terms And Conditions',
+		status: 'publish'
+	},
+
 
 	mediaAttributes: {
 		title: 'avatar',

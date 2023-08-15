@@ -125,8 +125,7 @@ setup.describe('setup  user settings', () => {
 
 
 	// Vendor Details
-	setup('add vendor product @lite', async () => {
-
+	setup('add vendor1 product @lite', async () => {
 
 		// delete previous store products with predefined name if any
 		await apiUtils.deleteAllProducts(data.predefined.simpleProduct.product1.name, payloads.vendorAuth);
@@ -135,6 +134,16 @@ setup.describe('setup  user settings', () => {
 		const product = { ...payloads.createProduct(), name: data.predefined.simpleProduct.product1.name, };
 		const [, productId,] = await apiUtils.createProduct(product, payloads.vendorAuth);
 		process.env.PRODUCT_ID = productId;
+	});
+
+	setup('add vendor2 product @lite', async () => {
+
+		// delete previous store products with predefined name if any
+		await apiUtils.deleteAllProducts(data.predefined.vendor2.simpleProduct.product1.name, payloads.vendor2Auth);
+
+		// create store product
+		const product = { ...payloads.createProduct(), name: data.predefined.vendor2.simpleProduct.product1.name, };
+		apiUtils.createProduct(product, payloads.vendor2Auth);
 	});
 
 	setup('add vendor coupon @pro', async () => {
@@ -191,12 +200,12 @@ setup.describe('setup dokan settings', () => {
 		await dbUtils.setDokanSettings(dbData.dokan.optionName.reverseWithdraw, dbData.dokan.reverseWithdrawSettings);
 	});
 
-	// setup('admin set dokan page settings @lite', async () => {
-	// 	const pageId = await apiUtils.getPageId('sample-page', payloads.adminAuth);
-	// 	const pageSettings = await dbUtils.getDokanSettings(dbData.dokan.optionName.page);
-	// 	pageSettings['reg_tc_page'] = pageId;
-	// 	await dbUtils.setDokanSettings(dbData.dokan.optionName.page, dbData.dokan.pageSettings);
-	// });
+	setup('admin set dokan page settings @lite', async () => {
+		const [, pageId] = await apiUtils.createPage(payloads.tocPage, payloads.adminAuth);
+		const pageSettings = await dbUtils.getDokanSettings(dbData.dokan.optionName.page);
+		pageSettings['reg_tc_page'] = String(pageId);
+		await dbUtils.setDokanSettings(dbData.dokan.optionName.page, pageSettings);
+	});
 
 	setup('admin set dokan appearance settings @lite', async () => {
 		await dbUtils.setDokanSettings(dbData.dokan.optionName.appearance, dbData.dokan.appearanceSettings);

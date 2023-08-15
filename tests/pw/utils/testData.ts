@@ -897,8 +897,8 @@ export const data = {
 			firstName: () => faker.person.firstName('male'),
 			lastName: () => faker.person.lastName('male'),
 			userName: faker.person.firstName('male'),
-			shopName: faker.company.name(),
-			shopUrl: faker.company.name(),
+			shopName: () => faker.company.name(),
+			shopUrl: () => faker.company.name(),
 			companyName: faker.company.name(),
 			companyId: faker.string.alphanumeric(5),
 			vatNumber: faker.string.alphanumeric(10),
@@ -1701,7 +1701,10 @@ export const data = {
 
 		// Pages
 		page: {
-			termsAndConditionsPage: 'Sample Page',
+			dashboard:'Dashboard',
+			myOrders:'My Orders',
+			storeListing:'Store List',
+			termsAndConditions: 'Terms And Conditions',
 			saveSuccessMessage: 'Setting has been saved successfully.',
 		},
 
@@ -1819,6 +1822,16 @@ export const data = {
 
 	// predefined  test data
 	predefined: {
+
+		vendor2:{
+			simpleProduct: {
+				product1: {
+					name: 'p1_v2 (simple)',
+					productName: () => 'p1_v2 (simple)',
+				},
+			}
+		},
+
 		simpleProduct: {
 			product1: {
 				name: 'p1_v1 (simple)',
@@ -1828,6 +1841,7 @@ export const data = {
 			productFrac1: 'p1_F1_v1 (simple)',
 			productFrac2: 'p2_F2_v1 (simple)',
 		},
+
 
 		variableProduct: {
 			product1: 'p1_v1 (variable)',

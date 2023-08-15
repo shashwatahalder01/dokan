@@ -1822,7 +1822,7 @@ export const selector = {
 					dashboard: '#dokan_pages\\[dashboard\\]',
 					myOrders: '#dokan_pages\\[my_orders\\]',
 					storeListing: '#dokan_pages\\[store_listing\\]',
-					termsAndConditionsPage: '#dokan_pages\\[reg_tc_page\\]',
+					termsAndConditions: '#dokan_pages\\[reg_tc_page\\]',
 					pageSaveChanges: '#submit',
 				},
 
@@ -6494,6 +6494,14 @@ export const selector = {
 				tax: '//th[normalize-space()="Tax:"]//..//span[@class="woocommerce-Price-amount amount"]',
 				orderPaymentMethod: '//th[normalize-space()="Payment method:"]//..//td',
 				orderTotal: '//th[normalize-space()="Total:"]//..//span[@class="woocommerce-Price-amount amount"]',
+
+				subOrders:{
+					subOrders: '//h2[normalize-space()="Sub Orders"]',
+					multiVendorNote: '.dokan-info',
+					multiOrders: '.my_account_orders',
+					// note: 'This order has products from multiple vendors. So we divided this order into multiple vendor orders. Each order will be handled by their respective vendor independently.'
+				},
+
 			},
 
 			// customer details

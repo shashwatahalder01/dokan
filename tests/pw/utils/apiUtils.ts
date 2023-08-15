@@ -222,8 +222,8 @@ export class ApiUtils {
 			storeName = payload.store_name;
 		} else {
 			expect(response.ok()).toBeTruthy();
-			sellerId = responseBody.id;
-			storeName = responseBody.store_name;
+			sellerId = String(responseBody.id);
+			storeName = String(responseBody.store_name);
 		}
 		return [responseBody, sellerId, storeName];
 	}
@@ -231,7 +231,7 @@ export class ApiUtils {
 	// create store review
 	async createStoreReview(sellerId: string, payload: object, auth? : auth): Promise<[responseBody, string]> {
 		const [, responseBody] = await this.post(endPoints.createStoreReview(sellerId), { data: payload, headers: auth });
-		const reviewId = responseBody.id;
+		const reviewId = String(responseBody.id);
 		return [responseBody, reviewId];
 	}
 
@@ -266,8 +266,8 @@ export class ApiUtils {
 	// create product
 	async createProduct(payload: object, auth? : auth): Promise<[responseBody, string, string]> {
 		const [, responseBody] = await this.post(endPoints.createProduct, { data: payload, headers: auth });
-		const productId = responseBody.id;
-		const productName = responseBody.name;
+		const productId = String(responseBody.id);
+		const productName = String(responseBody.name);
 		return [responseBody, productId, productName];
 	}
 
@@ -306,7 +306,7 @@ export class ApiUtils {
 	// create product
 	async createProductVariation(productId: string, payload: object, auth? : auth) : Promise<[responseBody, string]> {
 		const [, responseBody] = await this.post(endPoints.createProductVariation(productId), { data: payload, headers: auth });
-		const variationId = responseBody.id;
+		const variationId = String(responseBody.id);
 		return [responseBody, variationId];
 	}
 
@@ -314,7 +314,7 @@ export class ApiUtils {
 	async getVariationId(productName: string, auth? : auth): Promise<[string, string]> {
 		const productId = await this.getProductId(productName, auth);
 		const [, responseBody] = await this.get(endPoints.getAllProductVariations(productId), { headers: auth });
-		const variationId = responseBody[0].id;
+		const variationId = String(responseBody[0].id);
 		return [productId, variationId];
 	}
 
@@ -353,7 +353,7 @@ export class ApiUtils {
 	// create attribute
 	async createAttribute(payload: object, auth? : auth): Promise<[responseBody, string]> {
 		const [, responseBody] = await this.post(endPoints.createAttribute, { data: payload, headers: auth });
-		const attributeId = responseBody.id;
+		const attributeId = String(responseBody.id);
 		return [responseBody, attributeId];
 	}
 
@@ -384,7 +384,7 @@ export class ApiUtils {
 		let attributeId: string;
 		typeof (attribute) === 'object' ? [, attributeId] = await this.createAttribute(attribute, auth) : attributeId = attribute;
 		const [, responseBody] = await this.post(endPoints.createAttributeTerm(attributeId), { data: attributeTerm, headers: auth });
-		const attributeTermId = responseBody.id;
+		const attributeTermId = String(responseBody.id);
 		return [responseBody, attributeId, attributeTermId];
 	}
 
@@ -417,8 +417,8 @@ export class ApiUtils {
 			couponCode = coupon.code;
 		} else {
 			expect(response.ok()).toBeTruthy();
-			couponId = responseBody.id;
-			couponCode = responseBody.code;
+			couponId = String(responseBody.id);
+			couponCode = String(responseBody.code);
 		}
 		return [responseBody, couponId, couponCode];
 	}
@@ -444,8 +444,8 @@ export class ApiUtils {
 			couponCode = coupon.code;
 		} else {
 			expect(response.ok()).toBeTruthy();
-			couponId = responseBody.id;
-			couponCode = responseBody.code;
+			couponId = String(responseBody.id);
+			couponCode = String(responseBody.code);
 		}
 		return [responseBody, couponId, couponCode];
 	}
@@ -492,7 +492,7 @@ export class ApiUtils {
 	async createWithdraw(payload: object, auth? : auth): Promise<[responseBody, string]> {
 		const response = await this.request.post(endPoints.createWithdraw, { data: payload, headers: auth }); //todo: return withdrawId if already exists
 		const responseBody = await this.getResponseBody(response, false); //todo:  test if false is necessary there was false which is removed for testing
-		const withdrawId = responseBody.id;
+		const withdrawId = String(responseBody.id);
 		return [responseBody, withdrawId];
 	}
 
@@ -544,7 +544,7 @@ export class ApiUtils {
 	async createOrderNote(product: object, order: object, orderNote: object, auth? : auth): Promise<[responseBody, string, string]> {
 		const [,, orderId] = await this.createOrder(product, order, auth);
 		const [, responseBody] = await this.post(endPoints.createOrderNote(orderId), { data: orderNote, headers: auth });
-		const orderNoteId = responseBody.id;
+		const orderNoteId = String(responseBody.id);
 		return [responseBody, orderId, orderNoteId];
 	}
 
@@ -725,7 +725,7 @@ export class ApiUtils {
 			customerId = await this.getCustomerId(payload.username, auth);
 		} else {
 			expect(response.ok()).toBeTruthy();
-			customerId = responseBody.id;
+			customerId = String(responseBody.id);
 		}
 		return [responseBody, customerId];
 	}
@@ -769,7 +769,7 @@ export class ApiUtils {
 		const [body, productId] = await this.createProduct(product, auth);
 		const sellerId = body.store.id;									//todo:  hardcoding admin auth will hinder negative testing : test with invalid user
 		const [, responseBody] = await this.post(endPoints.createProductAdvertisement, { data: { vendor_id: sellerId, product_id: productId }, headers: payloads.adminAuth });
-		const productAdvertisementId = responseBody.id;
+		const productAdvertisementId = String(responseBody.id);
 		return [responseBody, productAdvertisementId];
 	}
 
@@ -803,8 +803,8 @@ export class ApiUtils {
 	// create announcement
 	async createAnnouncement(payload: object, auth? : auth): Promise<[responseBody, string, string]> {
 		const [, responseBody] = await this.post(endPoints.createAnnouncement, { data: payload, headers: auth });
-		const announcementId = responseBody.id;
-		const announcementTitle = responseBody.title;
+		const announcementId = String(responseBody.id);
+		const announcementTitle = String(responseBody.title);
 		return [responseBody, announcementId, announcementTitle];
 	}
 
@@ -889,15 +889,15 @@ export class ApiUtils {
 	// create store category
 	async createStoreCategory(payload: object, auth? : auth): Promise<[responseBody, string, string]> {
 		const [, responseBody] = await this.post(endPoints.createStoreCategory, { data: payload, headers: auth });
-		const categoryId = responseBody.id;
-		const categoryName = responseBody.name;
+		const categoryId = String(responseBody.id);
+		const categoryName = String(responseBody.name);
 		return [responseBody, categoryId, categoryName];
 	}
 
 	// get default store category
 	async getDefaultStoreCategory(auth? : auth): Promise<[responseBody, string]> {
 		const [, responseBody] = await this.get(endPoints.getDefaultStoreCategory, { headers: auth });
-		const categoryId = responseBody.id;
+		const categoryId = String(responseBody.id);
 		return [responseBody, categoryId];
 	}
 
@@ -923,7 +923,7 @@ export class ApiUtils {
 	// create quote rule
 	async createQuoteRule(payload: object, auth? : auth): Promise<[responseBody, string]> {
 		const [, responseBody] = await this.post(endPoints.createQuoteRule, { data: payload, headers: auth });
-		const quoteRuleId = responseBody.id;
+		const quoteRuleId = String(responseBody.id);
 		return [responseBody, quoteRuleId];
 	}
 
@@ -954,7 +954,7 @@ export class ApiUtils {
 	// create quote rule
 	async createRequestQuote(payload: object, auth? : auth): Promise<[responseBody, string]> {
 		const [, responseBody] = await this.post(endPoints.createRequestQuote, { data: payload, headers: auth });
-		const quoteRuleId = responseBody[0].data.id;
+		const quoteRuleId = String(responseBody[0].data.id);
 		return [responseBody, quoteRuleId];
 	}
 
@@ -1068,7 +1068,7 @@ export class ApiUtils {
 	// get current user
 	async getCurrentUser(auth? : auth): Promise<[responseBody, string]> {
 		const [, responseBody] = await this.get(endPoints.wp.getCurrentUser, { headers: auth });
-		const userId = responseBody.id;
+		const userId = String(responseBody.id);
 		return [responseBody, userId];
 	}
 
@@ -1151,7 +1151,7 @@ export class ApiUtils {
 		};
 		const response = await this.request.post(endPoints.wp.createMediaItem, payload);
 		const responseBody = await this.getResponseBody(response);
-		const mediaId = responseBody.id;
+		const mediaId = String(responseBody.id);
 		return [responseBody, mediaId];
 	}
 
@@ -1203,7 +1203,7 @@ export class ApiUtils {
 		// const response = await this.request.post(endPoints.wp.createMediaItem, payload);
 		const response = await this.request.post(endPoints.wp.createMediaItem, { form: form, headers: headers });  //todo:  update all request.post to this.post/get/put/delete
 		const responseBody = await this.getResponseBody(response);
-		const mediaId = responseBody.id;
+		const mediaId = String(responseBody.id);
 		return [responseBody, mediaId];
 	}
 
@@ -1214,7 +1214,7 @@ export class ApiUtils {
 		const headers = { 'content-disposition': `attachment; filename=${String((filePath.split('/')).pop())}` };
 		const response = await this.request.post(endPoints.wp.createMediaItem, { data: payload, headers });
 		const responseBody = await this.getResponseBody(response);
-		const mediaId = responseBody.id;
+		const mediaId = String(responseBody.id);
 		return [responseBody, mediaId];
 	}
 
@@ -1233,7 +1233,7 @@ export class ApiUtils {
 
 	// create post
 	async createPost(payload: object, auth? : auth): Promise<responseBody> {
-		const [, responseBody] = await this.put(endPoints.wp.createPost, { data: payload, headers: auth });
+		const [, responseBody] = await this.post(endPoints.wp.createPost, { data: payload, headers: auth });
 		return responseBody;
 	}
 
@@ -1249,8 +1249,10 @@ export class ApiUtils {
 		return pageId;
 	}
 
-	async createPage(){
-		//todo: imp***** create page with only req parameters, crate page assign to sample page/ subscription shortCode or other shortCode test
+	async createPage(payload: object, auth? : auth): Promise<[responseBody, string]>{
+		const [, responseBody] = await this.post(endPoints.wp.createPage, { data: payload, headers: auth });
+		const pageId = String(responseBody.id);
+		return [responseBody, pageId];
 	}
 
 	/**
@@ -1294,8 +1296,8 @@ export class ApiUtils {
 			productId = product;
 		}
 		const [, responseBody] = await this.post(endPoints.wc.createReview, { data: { ...review, product_id: productId }, headers: auth });
-		const reviewId = responseBody.id;
-		const reviewMessage = responseBody.review;
+		const reviewId = String(responseBody.id);
+		const reviewMessage = String(responseBody.review);
 		return [responseBody, reviewId, reviewMessage];
 	}
 
@@ -1323,7 +1325,7 @@ export class ApiUtils {
 	// create category
 	async createCategory(payload: object, auth? : auth): Promise<[responseBody, string]> {
 		const [, responseBody] = await this.post(endPoints.wc.createCategory, { data: payload, headers: auth });
-		const categoryId = responseBody.id;
+		const categoryId = String(responseBody.id);
 		return [responseBody, categoryId];
 	}
 
@@ -1359,7 +1361,7 @@ export class ApiUtils {
 		payload.line_items[0].product_id = productId;
 		const response = await this.request.post(endPoints.wc.createOrder, { data: payload, headers: payloads.adminAuth });
 		const responseBody = await this.getResponseBody(response);
-		const orderId = String(responseBody.id); //todo:  need to cast everywhere [any values assigned from type any, here responseBody type is any, sending order-id as string, but actually it sending it as number], some test might need it to be number look for it and update accordingly
+		const orderId = String(responseBody.id);
 		return [response, responseBody, orderId, productId];
 	}
 
@@ -1376,7 +1378,7 @@ export class ApiUtils {
 	// create refund
 	async createRefund(orderId: string, refund: object, auth? : auth): Promise<[responseBody, string]> {
 		const [, responseBody] = await this.post(endPoints.wc.createRefund(orderId), { data: refund, headers: auth });
-		const refundId = responseBody.id;
+		const refundId = String(responseBody.id);
 		return [responseBody, refundId];
 	}
 
@@ -1435,7 +1437,7 @@ export class ApiUtils {
 	// create shipping zone
 	async createShippingZone(payload: object, auth? : auth): Promise<[responseBody, string]> {
 		const [, responseBody] = await this.post(endPoints.wc.createShippingZone, { data: payload, headers: auth });
-		const shippingZoneId = responseBody.id;
+		const shippingZoneId = String(responseBody.id);
 		return [responseBody, shippingZoneId];
 	}
 

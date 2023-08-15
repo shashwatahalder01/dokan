@@ -200,12 +200,13 @@ export const helpers = {
 		return fs.readFileSync(filePath, 'utf8');
 	},
 
+	readJson(filePath: string){
+		return JSON.parse(this.readFile(filePath));
+	},
+
 	// write file
 	writeFile(filePath: string, content: string) {
 		fs.writeFileSync(filePath, content,  { encoding: 'utf8' } );
-		// fs.writeFile(filePath, content, (err) => {
-		// 	if (err) throw err;
-		// });
 	},
 
 
