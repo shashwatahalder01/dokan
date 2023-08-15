@@ -94,8 +94,8 @@ export const dbData = {
 
 			// catalog mode
 			catalog_mode_settings: '',
-			catalog_mode_hide_add_to_cart_button: 'off',
-			catalog_mode_hide_product_price: 'off',
+			catalog_mode_hide_add_to_cart_button: 'on',
+			catalog_mode_hide_product_price: 'on',
 		},
 
 		withdrawSettings: {
