@@ -275,12 +275,6 @@ export interface product {
 	}
 }
 
-// store
-export interface store {
-	rating: string;
-	reviewTitle: string;
-	reviewMessage: () => string;
-}
 
 //order
 export interface order {
@@ -1132,28 +1126,19 @@ export interface customer {
 
 // store category
 export interface storeCategory {
-
 		name: string;
 		description: string;
-
 }
 
 
 // store review
 export interface storeReview {
-
-	create:{
-		rating: string;
-		title: string;
-		content: string;
-	}
-
-	update:{
-		rating: string;
-		title: string;
-		content: string;
-	}
-
+	review: {
+	rating: string;
+	ratingByWidth: string;
+	title: string;
+	content: string;
+	},
 	filter: {
 		byVendor: string;
 	}

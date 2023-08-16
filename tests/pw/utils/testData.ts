@@ -1358,36 +1358,20 @@ export const data = {
 
 
 	// store category
-	storeCategory:{
-
-		create:{
-			name: 'test store category',
-			description: 'test store category description',
-		},
-
-		update:{
-			name: 'test store category',
-			description: 'updated test store category description',
-		},
-
-	},
+	storeCategory: () => ({
+		name: 'test category_'  + faker.string.uuid(),
+		description: 'test category description',
+	}),
 
 
 	// store review
 	storeReview:{
-
-		create:{
-			rating: '2',
-			title: 'test store review title',
-			content: 'test store review content',
-		},
-
-		update:{
+		review: () => ({
 			rating: '4',
-			title: 'updated test store review title',
-			content: 'updated test store review content',
-		},
-
+			ratingByWidth: faker.helpers.arrayElement(['width: 20%', 'width: 40%', 'width: 60%', 'width: 80%', 'width: 100%']),
+			title: 'test title_' + faker.string.uuid(),
+			content: 'test content_' + faker.string.uuid(),
+		}),
 		filter: {
 			byVendor: String(process.env.VENDOR) + 'store',
 		}
@@ -1801,7 +1785,7 @@ export const data = {
 
 		// Vendor Subscription Settings
 		vendorSubscription: {
-			displayPage: '2', // '2', '4', '5', '6', '8', '9', '10', '11', '15', '-1'
+			displayPage: 'Sample Page', // '2', '4', '5', '6', '8', '9', '10', '11', '15', '-1'
 			noOfDays: '2',
 			productStatus: 'draft', // 'publish', 'pending', 'draft'
 			cancellingEmailSubject: 'Subscription Package Cancel notification',

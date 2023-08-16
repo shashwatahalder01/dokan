@@ -1,5 +1,7 @@
 import { test, Page } from '@playwright/test';
 import { SettingsPage } from 'pages/settingsPage';
+import { dbData } from 'utils/dbData';
+import { dbUtils } from 'utils/dbUtils';
 import { data } from 'utils/testData';
 
 
@@ -102,7 +104,7 @@ test.describe('Settings test', () => {
 
 	test('admin can set dokan vendor subscription settings @pro', async ( ) => {
 		await settingsPage.setDokanVendorSubscriptionSettings(data.dokanSettings.vendorSubscription);
-		await settingsPage.disableDokanVendorSubscription(data.dokanSettings.vendorSubscription);
+		await dbUtils.setDokanSettings(dbData.dokan.optionName.vendorSubscription, dbData.dokan.vendorSubscriptionSettings);
 	});
 
 

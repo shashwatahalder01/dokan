@@ -12,6 +12,7 @@ test.describe('Product Advertising test', () => {
 	let vendor: VendorPage;
 	let aPage: Page, vPage: Page;
 	let apiUtils: ApiUtils;
+	let productName: string;
 
 
 	test.beforeAll(async ({ browser, request }) => {
@@ -24,6 +25,7 @@ test.describe('Product Advertising test', () => {
 		vendor = new VendorPage(vPage);
 
 		apiUtils = new ApiUtils(request);
+		[, , productName] = await apiUtils.createProduct(payloads.createProduct(), payloads.vendorAuth);
 		await apiUtils.createProductAdvertisement(payloads.createProduct(), payloads.vendorAuth);
 
 	});
@@ -40,11 +42,11 @@ test.describe('Product Advertising test', () => {
 	});
 
 	test('admin can add product advertisement @pro', async ( ) => {
-		await admin.addNewProductAdvertisement(data.productAdvertisement);
+		await admin.addNewProductAdvertisement({ ...data.productAdvertisement, advertisedProduct : productName });
 	});
 
 	test('admin can search advertised product @pro', async ( ) => {
-		await admin.searchAdvertisedProduct(data.productAdvertisement.advertisedProduct);
+		await admin.searchAdvertisedProduct(productName);
 	});
 
 	test('admin can filter advertised product by stores @pro', async ( ) => {
@@ -56,11 +58,11 @@ test.describe('Product Advertising test', () => {
 	});
 
 	test('admin can expire advertised product @pro', async ( ) => {
-		await admin.updateAdvertisedProduct(data.productAdvertisement.advertisedProduct, 'expire');
+		await admin.updateAdvertisedProduct(productName, 'expire');
 	});
 
 	test('admin can delete advertised product @pro', async ( ) => {
-		await admin.updateAdvertisedProduct(data.productAdvertisement.advertisedProduct, 'delete');
+		await admin.updateAdvertisedProduct(productName, 'delete');
 	});
 
 	test('admin can perform product advertising bulk action @pro', async ( ) => {

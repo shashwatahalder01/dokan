@@ -65,10 +65,12 @@ export class ProductAdvertisingPage extends AdminPage {
 
 		await this.click(selector.admin.dokan.productAdvertising.addNewAdvertisement.selectStoreDropdown);
 		await this.typeAndWaitForResponse(data.subUrls.api.dokan.stores, selector.admin.dokan.productAdvertising.addNewAdvertisement.selectStoreInput, advertising.advertisedProductStore);
+		await this.toContainText(selector.admin.dokan.productAdvertising.addNewAdvertisement.selectedStore, advertising.advertisedProductStore);
 		await this.press(data.key.enter);
 
 		await this.click(selector.admin.dokan.productAdvertising.addNewAdvertisement.selectProductDropdown);
 		await this.typeAndWaitForResponse(data.subUrls.api.dokan.products, selector.admin.dokan.productAdvertising.addNewAdvertisement.selectProductInput, advertising.advertisedProduct);
+		await this.toContainText(selector.admin.dokan.productAdvertising.addNewAdvertisement.selectedProduct, advertising.advertisedProduct);
 		await this.press(data.key.enter);
 
 		await this.clickAndWaitForResponse(data.subUrls.api.dokan.productAdvertising, selector.admin.dokan.productAdvertising.addNewAdvertisement.addNew);

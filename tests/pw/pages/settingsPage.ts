@@ -438,7 +438,7 @@ export class SettingsPage extends AdminPage {
 		await this.click(selector.admin.dokan.settings.menus.vendorSubscription);
 
 		// Vendor Subscription Settings
-		await this.selectByValue(selector.admin.dokan.settings.vendorSubscriptions.subscription, subscription.displayPage);
+		await this.selectByLabel(selector.admin.dokan.settings.vendorSubscriptions.subscription, subscription.displayPage);
 		await this.enableSwitcher(selector.admin.dokan.settings.vendorSubscriptions.enableProductSubscription);
 		await this.enableSwitcher(selector.admin.dokan.settings.vendorSubscriptions.enableSubscriptionInRegistrationForm);
 		await this.enableSwitcher(selector.admin.dokan.settings.vendorSubscriptions.enableEmailNotification);

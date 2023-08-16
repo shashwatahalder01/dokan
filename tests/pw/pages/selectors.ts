@@ -1548,8 +1548,10 @@ export const selector = {
 					closeModal: '.modal-header button',
 					selectStoreDropdown: '//label[normalize-space()="Select Store"]/..//div[@class="multiselect__select"]',
 					selectStoreInput: '#filter-vendors',
+					selectedStore: '//label[normalize-space()="Select Store"]/..//span[@class="multiselect__option multiselect__option--highlight"]//span',
 					selectProductDropdown: '//label[normalize-space()="Select Product"]/..//div[@class="multiselect__select"]',
 					selectProductInput: '#filter-products',
+					selectedProduct: '//label[normalize-space()="Select Product"]/..//span[@class="multiselect__option multiselect__option--highlight"]//span',
 					addReverseWithdrawalEntry:'#reverse-withdrawal-entry',
 					addNew: '.modal-footer button',
 				},
@@ -5027,7 +5029,9 @@ export const selector = {
 
 			// store categories
 			storeCategories:{
-				storeCategoriesInput: '//label[normalize-space()="Store Categories"]/..//input[@class="select2-search__field"]',
+				storeCategoryDropDown: '//label[contains(text(), "Store Category")]/..//span[@class="select2-selection__arrow"]',
+				storeCategoryInput: '//span[@class="select2-search select2-search--dropdown"]//input[@role="searchbox"]',
+				storeCategoriesInput: '//label[contains(text(), "Store Categories")]/..//input[@class="select2-search__field"]',
 				result: '.select2-results__option.select2-results__option--highlighted',
 			},
 
@@ -6269,6 +6273,15 @@ export const selector = {
 				message: '#dokan-review-details',
 				submit: '#support-submit-btn',
 				submittedReview: (reviewMessage: string) => `//div[@class='review_comment_container']//div[@class='description']// p[text()='${reviewMessage}']`,
+
+				reviewDetails:{
+					yourReview: '//h3[normalize-space()="Your Review"]',
+					author: '#dokan-store-review-single p strong[itemprop="author"]',
+					rating: '#dokan-store-review-single .dokan-rating div',
+					title: '#dokan-store-review-single .description h4',
+					content: '#dokan-store-review-single .description p',
+					edit: '.edit-review-btn',
+				},
 			},
 
 			// Get Support
