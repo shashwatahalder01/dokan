@@ -60,6 +60,7 @@ export class SellerBadgesPage extends AdminPage {
 		await this.click(selector.admin.dokan.sellerBadge.badgeDetails.badgeEventDropdown);
 		const isPublished = await this.isVisible(selector.admin.dokan.sellerBadge.badgeDetails.badgePublishedStatus(badge.badgeName));
 		if (isPublished){
+			console.log('Badge is already published');
 			test.skip();
 			// throw new Error('Badge is already published'); //todo: skip or fail test
 		}

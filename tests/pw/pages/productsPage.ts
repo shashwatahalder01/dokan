@@ -99,7 +99,6 @@ export class ProductsPage extends AdminPage {
 		// name
 		await this.type(selector.admin.products.product.productName, product.productName());
 		await this.selectByValue(selector.admin.products.product.productType, product.productType);
-		await this.click(selector.admin.products.product.general);
 
 		// add attributes
 		await this.click(selector.admin.products.product.attributes);
@@ -114,19 +113,15 @@ export class ProductsPage extends AdminPage {
 		}
 
 		await this.clickAndWaitForResponse(data.subUrls.backend.wc.taxonomyTerms, selector.admin.products.product.selectAll);
-		// await this.click(selector.admin.products.product.usedForVariations)
+		await this.check(selector.admin.products.product.usedForVariations);
 		await this.clickAndWaitForResponse(data.subUrls.ajax, selector.admin.products.product.saveAttributes);
-		await this.wait(2);
+		// await this.wait(2);
 
 		// add variations
 		await this.click(selector.admin.products.product.variations);
-		await this.selectByValue(selector.admin.products.product.addVariations, product.variations.linkAllVariation);
-		//this.fillAlert('120')
-		await this.click(selector.admin.products.product.go);
-
+		await this.clickAndAcceptAndWaitForResponse(data.subUrls.ajax, selector.admin.products.product.generateVariations);
+		this.fillAlert('100');
 		await this.selectByValue(selector.admin.products.product.addVariations, product.variations.variableRegularPrice);
-		this.fillAlert('120');
-		await this.click(selector.admin.products.product.go);
 
 		// category
 		await this.click(selector.admin.products.product.category(product.category));
@@ -166,6 +161,50 @@ export class ProductsPage extends AdminPage {
 		// Publish
 		await this.clickAndWaitForResponseAndLoadState(data.subUrls.post, selector.admin.products.product.publish, 302);
 
+		await this.toContainText(selector.admin.products.product.updatedSuccessMessage, data.product.publishSuccessMessage);
+	}
+
+
+	// admin add variable product
+	async addVariableSubscription(product: product['variableSubscription']) {
+		await this.goIfNotThere(data.subUrls.backend.wc.addNewProducts);
+
+		// name
+		await this.type(selector.admin.products.product.productName, product.productName());
+		await this.selectByValue(selector.admin.products.product.productType, product.productType);
+
+		// add attributes
+		await this.click(selector.admin.products.product.attributes);
+
+		if (await this.isVisibleLocator(selector.admin.products.product.customProductAttribute)) {
+			await this.selectByValue(selector.admin.products.product.customProductAttribute, `pa_${product.attribute}`);
+			await this.click(selector.admin.products.product.addAttribute);
+		} else {
+			await this.clickAndWaitForResponse(data.subUrls.backend.wc.searchAttribute, selector.admin.products.product.addExistingAttribute);
+			await this.typeAndWaitForResponse(data.subUrls.backend.wc.term, selector.admin.products.product.addExistingAttributeInput, product.attribute);
+			await this.pressAndWaitForResponse(data.subUrls.ajax, data.key.enter);
+		}
+
+		await this.clickAndWaitForResponse(data.subUrls.backend.wc.taxonomyTerms, selector.admin.products.product.selectAll);
+		await this.check(selector.admin.products.product.usedForVariations);
+		await this.clickAndWaitForResponse(data.subUrls.ajax, selector.admin.products.product.saveAttributes);
+		// await this.wait(2);
+
+		// add variations
+		await this.click(selector.admin.products.product.variations);
+		await this.clickAndAcceptAndWaitForResponse(data.subUrls.ajax, selector.admin.products.product.generateVariations);
+		this.fillAlert('100');
+		await this.selectByValue(selector.admin.products.product.addVariations, product.variations.variableRegularPrice);
+
+		// category
+		await this.click(selector.admin.products.product.category(product.category));
+
+		// Vendor Store Name
+		await this.select2ByText(selector.admin.products.product.storeName, selector.admin.products.product.storeNameInput, product.storeName);
+		await this.scrollToTop();
+
+		// Publish
+		await this.clickAndWaitForResponseAndLoadState(data.subUrls.post, selector.admin.products.product.publish, 302);
 		await this.toContainText(selector.admin.products.product.updatedSuccessMessage, data.product.publishSuccessMessage);
 	}
 

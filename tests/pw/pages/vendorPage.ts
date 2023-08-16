@@ -1,4 +1,4 @@
-import { Page, expect } from '@playwright/test';
+import { Page, expect, test } from '@playwright/test';
 import { BasePage } from 'pages/basePage';
 import { LoginPage } from 'pages/loginPage';
 import { CustomerPage } from 'pages/customerPage';
@@ -311,6 +311,22 @@ export class VendorPage extends BasePage {
 		await this.clearAndType(selector.vendor.orders.search.searchInput, orderNumber);
 		await this.clickAndWaitForResponse(data.subUrls.frontend.vDashboard.orders, selector.vendor.orders.search.searchBtn);
 		await this.toBeVisible(selector.vendor.orders.orderLink(orderNumber));
+	}
+
+
+	async buyProductAdvertising(productName: string){
+		await this.searchProduct(productName);
+		const advertisementStatus = await this.hasColor(selector.vendor.product.advertisementStatus(productName), 'rgb(255, 99, 71)');
+		if (advertisementStatus){
+			console.log('Product advertisement is currently ongoing.');
+			test.skip();
+			// throw new Error('Product advertisement is currently ongoing.'); //todo: skip or fail test
+		}
+		await this.clickAndWaitForResponse(data.subUrls.ajax, selector.vendor.product.buyAdvertisement(productName));
+		await this.clickAndWaitForResponse(data.subUrls.ajax, selector.vendor.product.confirmAction);
+		await this.click(selector.vendor.product.successMessage);
+		const orderId = await this.customer.paymentOrder();
+		return orderId;
 	}
 
 

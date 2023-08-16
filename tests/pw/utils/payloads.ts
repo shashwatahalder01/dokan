@@ -1630,6 +1630,34 @@ export const payloads = {
 		},
 	},
 
+	updateAddress: {
+		billing: {
+			first_name: faker.person.firstName(),
+			last_name: 'c1',
+			company: '',
+			address_1: 'abc street',
+			address_2: 'xyz street',
+			city: 'New York',
+			postcode: '10003',
+			country: 'US',
+			state: 'NY',
+			email: faker.person.firstName()  + '@yopmail.com',
+			phone: '0123456789',
+		},
+		shipping: {
+			first_name: faker.person.firstName(),
+			last_name: 'c1',
+			company: '',
+			address_1: 'abc street',
+			address_2: 'xyz street',
+			city: 'New York',
+			postcode: '10003',
+			country: 'US',
+			state: 'NY',
+			phone: '0123456789',
+		},
+	},
+
 	// update password
 	updatePassword: {
 		password: '01dokan01'

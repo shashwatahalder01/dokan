@@ -134,7 +134,15 @@ export class RequestForQuotationsPage extends AdminPage {
 		// ensure row exists
 		await this.notToBeVisible(selector.admin.dokan.requestForQuotation.quoteRules.noRowsFound);
 
-		await this.click(selector.admin.dokan.requestForQuotation.quoteRules.bulkActions.selectAll);
+		await this.check(selector.admin.dokan.requestForQuotation.quoteRules.bulkActions.selectAll);
+
+		// only to remove flakiness
+		const isDisabled = await this.hasAttribute(selector.admin.dokan.requestForQuotation.quoteRules.bulkActions.applyAction, 'disabled');
+		if(isDisabled){
+			await this.uncheck(selector.admin.dokan.requestForQuotation.quoteRules.bulkActions.selectAll);
+			await this.check(selector.admin.dokan.requestForQuotation.quoteRules.bulkActions.selectAll);
+		}
+
 		await this.selectByValue(selector.admin.dokan.requestForQuotation.quoteRules.bulkActions.selectAction, action);
 		await this.clickAndWaitForResponse(data.subUrls.api.dokan.quoteRules, selector.admin.dokan.requestForQuotation.quoteRules.bulkActions.applyAction);
 	}

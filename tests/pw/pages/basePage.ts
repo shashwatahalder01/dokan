@@ -512,7 +512,7 @@ export class BasePage {
 	async hover(selector: string): Promise<void> {
 		await this.page.locator(selector).hover();
 		// await this.page.hover(selector);
-		await this.wait(0.5);
+		await this.wait(0.2);
 	}
 
 
@@ -597,10 +597,7 @@ export class BasePage {
 	// has attribute
 	async hasAttribute(selector: string, attribute: string): Promise<boolean> {
 		const element = this.getElement(selector);
-		const hasAttribute = await element.evaluate(
-			(element, attribute) => element.hasAttribute(attribute),
-			attribute,
-		);
+		const hasAttribute = await element.evaluate((element, attribute) => element.hasAttribute(attribute), attribute);
 		return hasAttribute;
 	}
 
@@ -625,20 +622,26 @@ export class BasePage {
 	// get element property value: background color
 	async getElementBackgroundColor(selector: string): Promise<string> {
 		const element = this.getElement(selector);
-		const value = await element.evaluate((element) =>
-			window.getComputedStyle(element).getPropertyValue('background-color'),
-		);
+		const value = await element.evaluate((element) => window.getComputedStyle(element).getPropertyValue('background-color'),);
 		// console.log(value)
 		return value;
 	}
 
 
-	// get element property value: background color
+	// get element property value: color
 	async getElementColor(selector: string): Promise<string> {
 		const element = this.getElement(selector);
 		const value = await element.evaluate((element) => window.getComputedStyle(element).getPropertyValue('color'),);
 		// console.log(value)
 		return value;
+	}
+
+
+	// has color
+	async hasColor(selector: string, color: string): Promise<boolean> {
+		const elementColor = await this.getElementColor(selector);
+		// console.log(elementColor);
+		return elementColor === color ? true : false;
 	}
 
 
@@ -1351,19 +1354,24 @@ export class BasePage {
 
 	// accept alert
 	acceptAlert(): void {
-		this.page.on('dialog', (dialog) => { dialog.accept(); });
+		this.page.once('dialog', (dialog) => { // page.once is used avoid future alerts to be accepted
+			dialog.accept();
+		});
 	}
 
 
 	// dismiss alert
 	dismissAlert(): void {
-		this.page.on('dialog', (dialog) => { dialog.dismiss(); });
+		this.page.once('dialog', (dialog) => { // page.once is used avoid future alerts to be dismissed
+			dialog.dismiss(); });
 	}
 
 
 	// type on prompt box/alert
 	fillAlert(value: string): void {
-		this.page.on('dialog', (dialog) => { dialog.accept(value); });
+		this.page.once('dialog', (dialog) => { // page.once is used avoid future prompts to be filled
+			dialog.accept(value);
+		});
 	}
 
 
@@ -1447,7 +1455,7 @@ export class BasePage {
 		for (const element of elements) {
 			const text = element.evaluate((element) => element.textContent, element);
 			// console.log(text)
-			if (value.toLowerCase() == text.trim().toLowerCase()) {
+			if (value.toLowerCase() == text?.trim().toLowerCase()) {
 				// console.log(text)
 				await element.click();
 			}

@@ -1,5 +1,6 @@
 import { test, Page } from '@playwright/test';
 import { ProductAdvertisingPage } from 'pages/productAdvertisingPage';
+import { VendorPage } from 'pages/vendorPage';
 import { ApiUtils } from 'utils/apiUtils';
 import { data } from 'utils/testData';
 import { payloads } from 'utils/payloads';
@@ -8,7 +9,8 @@ import { payloads } from 'utils/payloads';
 test.describe('Product Advertising test', () => {
 
 	let admin: ProductAdvertisingPage;
-	let aPage: Page;
+	let vendor: VendorPage;
+	let aPage: Page, vPage: Page;
 	let apiUtils: ApiUtils;
 
 
@@ -17,13 +19,19 @@ test.describe('Product Advertising test', () => {
 		aPage = await adminContext.newPage();
 		admin = new ProductAdvertisingPage(aPage);
 
+		const vendorContext = await browser.newContext({ storageState: data.auth.vendorAuthFile });
+		vPage = await vendorContext.newPage();
+		vendor = new VendorPage(vPage);
+
 		apiUtils = new ApiUtils(request);
 		await apiUtils.createProductAdvertisement(payloads.createProduct(), payloads.vendorAuth);
+
 	});
 
 
 	test.afterAll(async () => {
 		await aPage.close();
+		await vPage.close();
 	});
 
 
@@ -60,9 +68,10 @@ test.describe('Product Advertising test', () => {
 		await admin.productAdvertisingBulkAction('delete');
 	});
 
-	// test.skip('vendor can buy product advertising @pro', async ( ) => {
-	// // await vendor.buyProductAdvertising(data.productAdvertisement.advertisedProduct);
-	// });
+	test('vendor can buy product advertising @pro', async ( ) => {
+		const orderId = await vendor.buyProductAdvertising(data.productAdvertisement.advertisedProduct);
+		await apiUtils.updateOrderStatus(orderId, 'wc-completed', payloads.adminAuth);
+	});
 
 
 });

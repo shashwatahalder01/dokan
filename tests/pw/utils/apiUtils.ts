@@ -731,6 +731,13 @@ export class ApiUtils {
 	}
 
 
+	// update customer
+	async updateCustomer(customerId: string, payload: object, auth? : auth): Promise<responseBody>{
+		const [, responseBody] = await this.put(endPoints.wc.updateCustomer(customerId), { data: payload, headers: auth });
+		return responseBody;
+	}
+
+
 	// delete customer
 	async deleteCustomer(userId: string, auth? : auth): Promise<responseBody> {
 		const [, responseBody] = await this.delete(endPoints.wc.deleteCustomer(userId), { headers: auth });

@@ -181,6 +181,7 @@ export class WithdrawsPage extends AdminPage {
 			await this.clickAndWaitForResponseAndLoadState(data.subUrls.ajax, selector.vendor.vWithdraw.manualWithdrawRequest.submitRequest);
 			// await expect(this.page.getByText(selector.vendor.vWithdraw.manualWithdrawRequest.withdrawRequestSaveSuccessMessage)).toBeVisible(); //todo
 		} else {
+			console.log('Vendor balance is less than minimum withdraw amount');
 			test.skip();
 			// throw new Error('Vendor balance is less than minimum withdraw amount'); //todo: skip or fail test
 		}

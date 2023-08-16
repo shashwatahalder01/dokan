@@ -30,12 +30,14 @@ setup.describe('authenticate users & set permalink', () => {
 	setup('add vendor1 @lite', async ({ request }) => {
 		const apiUtils = new ApiUtils(request);
 		const [, sellerId,] = await apiUtils.createStore (payloads.createStore1, payloads.adminAuth);
+		await apiUtils.updateCustomer(sellerId, payloads.updateAddress, payloads.adminAuth);
 		process.env.VENDOR_ID = sellerId;
 	});
 
 	setup('add vendor2 @lite', async ({ request }) => {
 		const apiUtils = new ApiUtils(request);
 		const [, sellerId,] = await apiUtils.createStore (payloads.createStore2, payloads.adminAuth);
+		await apiUtils.updateCustomer(sellerId, payloads.updateAddress, payloads.adminAuth);
 		process.env.VENDOR2_ID = sellerId;
 	});
 

@@ -46,14 +46,15 @@ export class StoresPage extends AdminPage {
 
 		const firstName = vendorInfo.firstName();
 		const email = vendorInfo.email();
+		const shopName = vendorInfo.shopName();
 
 		// add new vendor
 		await this.click(selector.admin.dokan.vendors.addNewVendor);
 		// account info
 		await this.type(selector.admin.dokan.vendors.newVendor.firstName, firstName);
 		await this.type(selector.admin.dokan.vendors.newVendor.lastName, vendorInfo.lastName());
-		await this.type(selector.admin.dokan.vendors.newVendor.storeName, vendorInfo.shopName);
-		await this.typeAndWaitForResponse(data.subUrls.api.dokan.stores, selector.admin.dokan.vendors.newVendor.storeUrl, vendorInfo.shopName);
+		await this.type(selector.admin.dokan.vendors.newVendor.storeName, shopName);
+		await this.typeAndWaitForResponse(data.subUrls.api.dokan.stores, selector.admin.dokan.vendors.newVendor.storeUrl, shopName);
 		await this.type(selector.admin.dokan.vendors.newVendor.phoneNumber, vendorInfo.phoneNumber);
 		await this.typeAndWaitForResponse(data.subUrls.api.dokan.stores, selector.admin.dokan.vendors.newVendor.email, email);
 		await this.click(selector.admin.dokan.vendors.newVendor.generatePassword);
