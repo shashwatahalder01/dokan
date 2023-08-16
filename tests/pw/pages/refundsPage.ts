@@ -1,6 +1,7 @@
 import { Page, expect } from '@playwright/test';
 import { AdminPage } from 'pages/adminPage';
 import { selector } from 'pages/selectors';
+import { helpers } from 'utils/helpers';
 import { data } from 'utils/testData';
 
 
@@ -84,6 +85,71 @@ export class RefundsPage extends AdminPage {
 		await this.click(selector.admin.dokan.refunds.bulkActions.selectAll);
 		await this.selectByValue(selector.admin.dokan.refunds.bulkActions.selectAction, action);
 		await this.clickAndWaitForResponse(data.subUrls.api.dokan.refunds, selector.admin.dokan.refunds.bulkActions.applyAction);
+	}
+
+
+	// vendor
+
+
+	// search order
+	async searchOrder(orderNumber: string): Promise<void> {
+		await this.goIfNotThere(data.subUrls.frontend.vDashboard.orders);
+
+		await this.clearAndType(selector.vendor.orders.search.searchInput, orderNumber);
+		await this.clickAndWaitForResponse(data.subUrls.frontend.vDashboard.orders, selector.vendor.orders.search.searchBtn);
+		await this.toBeVisible(selector.vendor.orders.orderLink(orderNumber));
+	}
+
+
+	// go to order details
+	async goToOrderDetails(orderNumber: string): Promise<void> {
+		await this.searchOrder(orderNumber);
+		await this.clickAndWaitForLoadState(selector.vendor.orders.view(orderNumber));
+		await this.toContainText(selector.vendor.orders.orderDetails.orderNumber, orderNumber);
+	}
+
+	// vendor refund order
+	async refundOrder(orderNumber: string, productName: string, partialRefund = false): Promise<void> {
+		await this.goToOrderDetails(orderNumber);
+
+		//request refund
+		await this.click(selector.vendor.orders.refund.requestRefund);
+		const productQuantity = (await this.getElementText(selector.vendor.orders.refund.productQuantity(productName)) as string).trim();
+		const productCost = helpers.price(await this.getElementText(selector.vendor.orders.refund.productCost(productName)) as string);
+		const productTax = helpers.price(await this.getElementText(selector.vendor.orders.refund.productTax(productName)) as string);
+		const isShipping = await this.isVisible(selector.vendor.orders.refund.shippingCost);
+
+		let shippingCost = 0;
+		let shippingTax = 0;
+		if (isShipping){
+			shippingCost = helpers.price(await this.getElementText(selector.vendor.orders.refund.shippingCost) as string);
+			shippingTax = helpers.price(await this.getElementText(selector.vendor.orders.refund.shippingTax) as string);
+		}
+		await this.clearAndType(selector.vendor.orders.refund.refundProductQuantity(productName), productQuantity);
+		await this.click(selector.vendor.orders.refund.refundDiv);
+		if (partialRefund) {
+			await this.clearAndType(selector.vendor.orders.refund.refundProductCostAmount(productName), String(helpers.roundToTwo(productCost / 2)));
+			await this.clearAndType(selector.vendor.orders.refund.refundProductTaxAmount(productName), String(helpers.roundToTwo(productTax / 2)));
+			if (isShipping){
+				await this.clearAndType(selector.vendor.orders.refund.refundShippingAmount, String(helpers.roundToTwo(shippingCost / 2)));
+				await this.clearAndType(selector.vendor.orders.refund.refundShippingTaxAmount, String(helpers.roundToTwo(shippingTax / 2)));
+			}
+		} else {
+			await this.clearAndType(selector.vendor.orders.refund.refundProductCostAmount(productName), String(productCost));
+			await this.clearAndType(selector.vendor.orders.refund.refundProductTaxAmount(productName), String(productTax));
+			if (isShipping){
+				await this.clearAndType(selector.vendor.orders.refund.refundShippingAmount, String(shippingCost));
+				await this.clearAndType(selector.vendor.orders.refund.refundShippingTaxAmount, String(shippingTax));
+			}
+
+		}
+
+		await this.clearAndType(selector.vendor.orders.refund.refundReason, 'Defective product');
+		await this.click(selector.vendor.orders.refund.refundManually);
+		await this.click(selector.vendor.orders.refund.confirmRefund);
+
+		await this.toContainText(selector.vendor.orders.refund.refundRequestSuccessMessage, 'Refund request submitted.');
+		await this.click(selector.vendor.orders.refund.refundRequestSuccessMessageOk);
 	}
 
 

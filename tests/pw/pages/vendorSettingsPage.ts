@@ -442,6 +442,14 @@ export class VendorSettingsPage extends VendorPage {
 		}
 	}
 
+	// reset catalog
+	async resetCatalog(): Promise<void> {
+		await this.uncheck(selector.vendor.vStoreSettings.removeAddToCartButton);
+		// update settings
+		await this.clickAndWaitForResponseAndLoadState(data.subUrls.ajax, selector.vendor.vStoreSettings.updateSettings);
+		await this.toContainText(selector.vendor.vStoreSettings.updateSettingsSuccessMessage, data.vendor.vendorInfo.storeSettingsSaveSuccessMessage);
+	}
+
 
 	// vendor set discount settings
 	async discountSettings(amountDiscount: vendor['vendorInfo']['amountDiscount']): Promise<void> {

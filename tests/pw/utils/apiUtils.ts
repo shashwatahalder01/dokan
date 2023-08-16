@@ -228,6 +228,14 @@ export class ApiUtils {
 		return [responseBody, sellerId, storeName];
 	}
 
+	// update store
+	async updateStore(storeId: string, payload: object, auth? : auth): Promise<responseBody> {
+		const [, responseBody] = await this.put(endPoints.updateStore(storeId), { data: payload, headers: auth });
+		console.log(responseBody);
+
+		return responseBody;
+	}
+
 	// create store review
 	async createStoreReview(sellerId: string, payload: object, auth? : auth): Promise<[responseBody, string]> {
 		const [, responseBody] = await this.post(endPoints.createStoreReview(sellerId), { data: payload, headers: auth });

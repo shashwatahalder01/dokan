@@ -58,20 +58,10 @@ export class ToolsPage extends AdminPage {
 
 	}
 
-
-	// regenerate order sync table
-	async regenerateOrderSyncTable(){
-		await this.goIfNotThere(data.subUrls.backend.dokan.tools);
-		await this.clickAndWaitForResponse(data.subUrls.ajax, selector.admin.dokan.tools.regenerateOrderSyncTable.reBuild);
-		//todo:  add assertion
-	}
-
-
 	// check for duplicate order
 	async checkForDuplicateOrders(){
 		await this.goIfNotThere(data.subUrls.backend.dokan.tools);
 		await this.clickAndWaitForResponse(data.subUrls.ajax, selector.admin.dokan.tools.checkForDuplicateOrders.checkOrders);
-		//todo:  add assertion
 	}
 
 
@@ -79,7 +69,6 @@ export class ToolsPage extends AdminPage {
 	async regenerateVariableProductVariationsAuthorIds(){
 		await this.goIfNotThere(data.subUrls.backend.dokan.tools);
 		await this.clickAndWaitForResponse(data.subUrls.ajax, selector.admin.dokan.tools.regenerateVariableProductVariationsAuthorIds.regenerate);
-		//todo:  add assertion
 	}
 
 

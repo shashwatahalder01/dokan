@@ -115,7 +115,6 @@ export class ProductsPage extends AdminPage {
 		await this.clickAndWaitForResponse(data.subUrls.backend.wc.taxonomyTerms, selector.admin.products.product.selectAll);
 		await this.check(selector.admin.products.product.usedForVariations);
 		await this.clickAndWaitForResponse(data.subUrls.ajax, selector.admin.products.product.saveAttributes);
-		// await this.wait(2);
 
 		// add variations
 		await this.click(selector.admin.products.product.variations);

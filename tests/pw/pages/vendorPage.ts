@@ -333,29 +333,10 @@ export class VendorPage extends BasePage {
 	//todo: fixed above functions
 
 
-	//refund
-
-	// vendor refund order
-	async refundOrder(orderNumber: string, productName: string, partialRefund = false): Promise<void> {
-		await this.goToOrderDetails(orderNumber);
-
-		//request refund
-		await this.click(selector.vendor.orders.refund.requestRefund);
-		const productQuantity = await this.getElementText(selector.vendor.orders.refund.productQuantity(productName)) as string;
-		const productCost = helpers.price(await this.getElementText(selector.vendor.orders.refund.productCost(productName)) as string);
-		const productTax = helpers.price(await this.getElementText(selector.vendor.orders.refund.productTax(productName)) as string);
-		await this.type(selector.vendor.orders.refund.refundProductQuantity(productName), productQuantity);
-		if (partialRefund) {
-			await this.click(selector.vendor.orders.refund.refundDiv);
-			await this.clearAndType(selector.vendor.orders.refund.refundProductCostAmount(productName), String(helpers.roundToTwo(productCost / 2)));
-			await this.clearAndType(selector.vendor.orders.refund.refundProductTaxAmount(productName), String(helpers.roundToTwo(productTax / 2)));
-		}
-		await this.type(selector.vendor.orders.refund.refundReason, 'Defective product');
-		await this.click(selector.vendor.orders.refund.refundManually);
-		await this.click(selector.vendor.orders.refund.confirmRefund);
-
-		await this.toContainText(selector.vendor.orders.refund.refundRequestSuccessMessage, 'Refund request submitted.');
-		await this.click(selector.vendor.orders.refund.refundRequestSuccessMessageOk);
+	// vendor export statement
+	async exportStatement(): Promise<void> {
+		await this.goIfNotThere(data.subUrls.frontend.vDashboard.statement);
+		await this.clickAndWaitForDownload(selector.vendor.vReports.exportStatements);
 	}
 
 

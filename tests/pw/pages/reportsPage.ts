@@ -87,7 +87,7 @@ export class ReportsPage extends AdminPage {
 
 		await this.click(selector.admin.dokan.reports.allLogs.filters.filterByStore);
 		await this.typeAndWaitForResponse(data.subUrls.api.dokan.stores, selector.admin.dokan.reports.allLogs.filters.filterByStoreInput, storeName);
-		// await this.press(data.key.arrowDown);
+		await this.press(data.key.arrowDown);
 		// await this.toContainText(selector.admin.dokan.reports.allLogs.filters.searchedResult, (storeName));
 		await this.pressAndWaitForResponse(data.subUrls.api.dokan.logs, data.key.enter);
 

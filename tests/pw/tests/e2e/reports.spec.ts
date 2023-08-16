@@ -49,7 +49,6 @@ test.describe('Reports test', () => {
 	});
 
 	test('admin can filter all logs by store name @pro', async ( ) => {
-		test.skip(!!process.env.CI, 'dokan issue searched item doesn\'t get highlighted');
 		await admin.filterAllLogsByStore(data.predefined.vendorStores.vendor1);
 	});
 

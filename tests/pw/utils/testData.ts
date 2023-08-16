@@ -786,6 +786,7 @@ export const data = {
 				orders: 'dashboard/orders',
 				userSubscriptions: 'dashboard/user-subscription',
 				coupons: 'dashboard/coupons',
+				statement: 'dashboard/reports/?chart=sales_statement',
 				deliveryTime: 'dashboard/delivery-time-dashboard',
 				reviews: 'dashboard/reviews',
 				withdraw: 'dashboard/withdraw',

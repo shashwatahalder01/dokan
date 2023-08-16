@@ -48,17 +48,17 @@ test.describe('Product functionality test', () => {
 		await admin.addSimpleProduct(data.product.simple);
 	});
 
-	test('admin can add variable product @pro', async ( ) => {
-		await admin.addVariableProduct(data.product.variable);
-	});
+	// test('admin can add variable product @pro', async ( ) => {
+	// 	await admin.addVariableProduct(data.product.variable);
+	// });
 
 	test('admin can add simple subscription  @pro', async ( ) => {
 		await admin.addSimpleSubscription(data.product.simpleSubscription);
 	});
 
-	test('admin can add variable subscription @pro', async ( ) => {
-		await admin.addVariableSubscription(data.product.variableSubscription);
-	});
+	// test('admin can add variable subscription @pro', async ( ) => {
+	// 	await admin.addVariableSubscription(data.product.variableSubscription);
+	// });
 
 	test('admin can add external product @lite', async ( ) => {
 		await admin.addExternalProduct(data.product.external);

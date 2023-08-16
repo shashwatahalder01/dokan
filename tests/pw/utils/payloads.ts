@@ -1470,7 +1470,7 @@ export const payloads = {
 	},
 
 
-	createStore2: { //todo: create and update data should be same
+	createStore2: {
 		user_login: process.env.VENDOR2,
 		user_pass: process.env.USER_PASSWORD,
 		user_nicename: process.env.VENDOR2 + 'store',

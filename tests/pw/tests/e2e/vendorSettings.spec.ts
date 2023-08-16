@@ -59,7 +59,6 @@ test.describe('Vendor settings test', () => {
 
 	// store settings
 
-	//todo: add test tags
 
 	test('vendor can set store basic settings @lite', async ( ) => {
 		await vendor.setStoreSettings(data.vendor.vendorInfo, 'basic');
@@ -78,7 +77,6 @@ test.describe('Vendor settings test', () => {
 	});
 
 	test('vendor can set terms and conditions settings @lite', async ( ) => {
-		//todo: toc
 		await vendor.setStoreSettings(data.vendor.vendorInfo, 'toc');
 	});
 
@@ -90,10 +88,9 @@ test.describe('Vendor settings test', () => {
 		await vendor.setStoreSettings(data.vendor.vendorInfo, 'vacation');
 	});
 
-	test.skip('vendor can set catalog settings @lite', async ( ) => {
-		//todo: enable catalog
+	test('vendor can set catalog settings @lite', async ( ) => {
 		await vendor.setStoreSettings(data.vendor.vendorInfo, 'catalog');
-		//todo: disable catalog
+		await vendor.resetCatalog();
 	});
 
 	test('vendor can set discount settings @pro', async ( ) => {

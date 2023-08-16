@@ -3615,15 +3615,16 @@ export const selector = {
 			refund: {
 				refundDiv: '#woocommerce-order-items',
 				requestRefund: '.dokan-btn.refund-items',
-				productQuantity: (productName: string) => `//td[@class='name' and @data-sort-value='${productName}']/..//td[@class='quantity']//div`,
-				productCost: (productName: string) => `//td[@class='name' and @data-sort-value='${productName}']/..//td[@class='line_cost']//div`,
-				productTax: (productName: string) => `//td[@class='name' and @data-sort-value='${productName}']/..//td[@class='line_tax']//div`,
+				productQuantity: (productName: string) => `//td[@class='name' and @data-sort-value='${productName}']/..//td[@class='quantity']//div[@class="view"]`,
+				productCost: (productName: string) => `//td[@class='name' and @data-sort-value='${productName}']/..//td[@class='line_cost']//div[@class="view"]`,
+				productTax: (productName: string) => `//td[@class='name' and @data-sort-value='${productName}']/..//td[@class='line_tax']//div[@class="view"]`,
 				refundProductQuantity: (productName: string) => `//td[@class='name' and @data-sort-value='${productName}']/..//td[@class='quantity']//div[@class='refund']//input`,
 				refundProductCostAmount: (productName: string) => `//td[@class='name' and @data-sort-value='${productName}']/..//input[@class='refund_line_total wc_input_price']`,
 				refundProductTaxAmount: (productName: string) => `//td[@class='name' and @data-sort-value='${productName}']/..//input[@class='refund_line_tax wc_input_price']`,
-				// shippingCost: (shippingName) => ``, //todo: add locator
-				refundShippingAmount: (shippingName: string) => `//div[@class='view' and contains(text(),'${shippingName}')]/../../..//input[@class='refund_line_total wc_input_price']`,
-				refundShippingTaxAmount: (shippingName: string) => `//div[@class='view' and contains(text(),'${shippingName}')]/../../..//input[@class='refund_line_tax wc_input_price']`,
+				shippingCost: '//tbody[@id="order_shipping_line_items"]//td[@class="line_cost"]//div[@class="view"]',
+				shippingTax:  '//tbody[@id="order_shipping_line_items"]//td[@class="line_tax"]//div[@class="view"]',
+				refundShippingAmount: '//tbody[@id="order_shipping_line_items"]//td[@class="line_cost"]//input[@class="refund_line_total wc_input_price"]',
+				refundShippingTaxAmount:  '//tbody[@id="order_shipping_line_items"]//td[@class="line_tax"]//input[@class="refund_line_tax wc_input_price"]',
 
 				refundReason: '#refund_reason',
 				refundManually: '.dokan-btn.do-manual-refund',
