@@ -83,7 +83,8 @@ export class RequestForQuotationsPage extends AdminPage {
 
 	// edit quote rule
 	async editQuoteRule(rule: requestForQuotation['quoteRule']){
-		await this.goto(data.subUrls.backend.dokan.requestForQuoteRules);
+		await this.goIfNotThere(data.subUrls.backend.dokan.requestForQuoteRules);
+		// await this.goto(data.subUrls.backend.dokan.requestForQuoteRules);
 
 		await this.hover(selector.admin.dokan.requestForQuotation.quoteRules.quoteRulesCell(rule.title));
 
@@ -99,7 +100,8 @@ export class RequestForQuotationsPage extends AdminPage {
 
 	// update quote rule
 	async updateQuoteRule(quoteTitle: string, action: string){
-		await this.goto(data.subUrls.backend.dokan.requestForQuoteRules);
+		await this.goIfNotThere(data.subUrls.backend.dokan.requestForQuoteRules);
+		// await this.goto(data.subUrls.backend.dokan.requestForQuoteRules);
 
 		switch (action) {
 
@@ -129,19 +131,20 @@ export class RequestForQuotationsPage extends AdminPage {
 
 	// quote rules bulk action
 	async quoteRulesBulkAction(action: string){
-		await this.goto(data.subUrls.backend.dokan.requestForQuoteRules);
+		await this.goIfNotThere(data.subUrls.backend.dokan.requestForQuoteRules);
+		// await this.goto(data.subUrls.backend.dokan.requestForQuoteRules);
 
 		// ensure row exists
 		await this.notToBeVisible(selector.admin.dokan.requestForQuotation.quoteRules.noRowsFound);
 
-		await this.check(selector.admin.dokan.requestForQuotation.quoteRules.bulkActions.selectAll);
+		await this.click(selector.admin.dokan.requestForQuotation.quoteRules.bulkActions.selectAll);
 
 		// only to remove flakiness
-		const isDisabled = await this.hasAttribute(selector.admin.dokan.requestForQuotation.quoteRules.bulkActions.applyAction, 'disabled');
-		if(isDisabled){
-			await this.uncheck(selector.admin.dokan.requestForQuotation.quoteRules.bulkActions.selectAll);
-			await this.check(selector.admin.dokan.requestForQuotation.quoteRules.bulkActions.selectAll);
-		}
+		// const isDisabled = await this.hasAttribute(selector.admin.dokan.requestForQuotation.quoteRules.bulkActions.applyAction, 'disabled');
+		// if(isDisabled){
+		// 	await this.uncheck(selector.admin.dokan.requestForQuotation.quoteRules.bulkActions.selectAll);
+		// 	await this.check(selector.admin.dokan.requestForQuotation.quoteRules.bulkActions.selectAll);
+		// }
 
 		await this.selectByValue(selector.admin.dokan.requestForQuotation.quoteRules.bulkActions.selectAction, action);
 		await this.clickAndWaitForResponse(data.subUrls.api.dokan.quoteRules, selector.admin.dokan.requestForQuotation.quoteRules.bulkActions.applyAction);
@@ -177,7 +180,6 @@ export class RequestForQuotationsPage extends AdminPage {
 
 	// update quote fields
 	async updateQuoteFields(quote: requestForQuotation['quote'], action = 'create'){
-
 		await this.clearAndType(selector.admin.dokan.requestForQuotation.quotesList.addNewQuote.quoteTitle, quote.title);
 
 		// customer information

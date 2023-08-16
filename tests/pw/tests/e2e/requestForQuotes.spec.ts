@@ -12,6 +12,7 @@ test.describe('Request for quotation test', () => {
 	let aPage: Page;
 	let apiUtils: ApiUtils;
 	const productId: string[] = [];
+	const quoteTitle = data.requestForQuotation.quote.title();
 
 
 	test.beforeAll(async ({ browser, request }) => {
@@ -21,6 +22,7 @@ test.describe('Request for quotation test', () => {
 		apiUtils = new ApiUtils(request);
 		const [, pId,] = await apiUtils.createProduct(payloads.createProduct(), payloads.vendorAuth);
 		productId.push(pId);
+		await apiUtils.createRequestQuote({ ...payloads.createRequestQuote(), product_ids: productId, quote_title: quoteTitle }, payloads.adminAuth);
 	});
 
 
@@ -35,19 +37,19 @@ test.describe('Request for quotation test', () => {
 	});
 
 	test('admin can add quote @pro', async ( ) => {
-		await admin.addQuote(data.requestForQuotation.quote);
+		await admin.addQuote({ ...data.requestForQuotation.quote, title: data.requestForQuotation.quote.title() });
 	});
 
 	test('admin can edit quote @pro', async ( ) => {
-		await admin.editQuote(data.requestForQuotation.updateQuote);
+		await admin.editQuote({ ...data.requestForQuotation.quote, title: quoteTitle });
 	});
 
 	test('admin can trash quote @pro', async ( ) => {
-		await admin.updateQuote(data.requestForQuotation.quote.title, 'trash');
+		await admin.updateQuote(quoteTitle, 'trash');
 	});
 
 	test('admin can restore quote @pro', async ( ) => {
-		await admin.updateQuote(data.requestForQuotation.quote.title, 'restore');
+		await admin.updateQuote(quoteTitle, 'restore');
 	});
 
 	test('admin can permanently delete quote @pro', async ( ) => {

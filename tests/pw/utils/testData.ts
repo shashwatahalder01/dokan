@@ -1428,8 +1428,8 @@ export const data = {
 
 
 		quoteRule: {
-			title: 'test quote rule',
-			userRole: '',
+			title: () => 'test rule_' + faker.string.uuid(),
+			userRole: 'customer',
 			product: 'p1_v1 (simple)',
 			category: 'Uncategorized',
 			hidePrice: '1',
@@ -1439,26 +1439,13 @@ export const data = {
 			order: '0',
 		},
 
-
-		updateQuoteRule: {
-			title: 'test quote rule',
-			userRole: '',
-			product: 'p1_v1 (simple)',
-			category: 'Uncategorized',
-			hidePrice: '0',
-			hidePriceText: 'Price is hidden',
-			hideAddToCartButton: 'replace', // replace, keep_and_add_new
-			customButtonLabel: 'Add to quote',
-			order: '1',
-		},
-
 		trashedQuoteRule:{
 			title: 'trashed quote rule ',
 			status: 'trash'
 		},
 
 		quote:{
-			title: 'test quote',
+			title: () => 'test quote_' + faker.string.uuid(),
 			user: 'customer1',
 			fullName: 'Jhon Doe',
 			email: 'customer1@g.com',
@@ -1468,19 +1455,6 @@ export const data = {
 			quantity: '5',
 			offerPrice: '80',
 			offerProductQuantity: '10',
-		},
-
-		updateQuote:{
-			title: 'test quote',
-			user: 'customer1',
-			fullName: 'Jhon Doe',
-			email: 'customer1@g.com',
-			companyName: 'abc',
-			phoneNumber: '0123456789',
-			product: 'p1_v1 (simple)',
-			quantity: '',
-			offerPrice: '70',
-			offerProductQuantity: '20',
 		},
 
 		trashedQuote:{
