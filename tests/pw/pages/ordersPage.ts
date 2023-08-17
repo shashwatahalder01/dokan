@@ -240,7 +240,7 @@ export class OrdersPage extends VendorPage {
 
 	// add Downloadable Product
 	async removeDownloadableProduct(orderNumber: string, downloadableProductName: string): Promise<void> {
-		await this.addDownloadableProduct(orderNumber, downloadableProductName); // todo: do it via api
+		await this.addDownloadableProduct(orderNumber, downloadableProductName); //todo: do it via api
 		await this.click(selector.vendor.orders.downloadableProductPermission.revokeAccess);
 		await this.clickAndAcceptAndWaitForResponse(data.subUrls.ajax, selector.vendor.orders.downloadableProductPermission.confirmAction);
 	}

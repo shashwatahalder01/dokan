@@ -107,7 +107,7 @@ test.describe('Vendor settings test', () => {
 
 	test('vendor can set min-max settings @pro', async ( ) => {
 		await vendor.setStoreSettings(data.vendor.vendorInfo, 'min-max');
-		// todo: disable min-max
+		//todo: disable min-max
 	});
 
 	//todo: ensure which settings need to reset, and test data should be what
