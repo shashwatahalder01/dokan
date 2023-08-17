@@ -90,10 +90,10 @@ export class VendorReturnRequestPage extends VendorPage {
 		const taxIsVisible = await this.isVisible(selector.vendor.vReturnRequest.returnRequestDetails.modal.taxRefundColumn);
 		if (taxIsVisible) {
 			const tax = await this.getElementText(selector.vendor.vReturnRequest.returnRequestDetails.modal.taxAmount(productName)) as string;
-			await this.type(selector.vendor.vReturnRequest.returnRequestDetails.modal.taxRefund(productName), helpers.removeDollarSign(tax));
+			await this.type(selector.vendor.vReturnRequest.returnRequestDetails.modal.taxRefund(productName), helpers.removeCurrencySign(tax));
 		}
 		const subtotal = await this.getElementText(selector.vendor.vReturnRequest.returnRequestDetails.modal.subTotal(productName)) as string;
-		await this.type(selector.vendor.vReturnRequest.returnRequestDetails.modal.subTotalRefund(productName), helpers.removeDollarSign(subtotal));
+		await this.type(selector.vendor.vReturnRequest.returnRequestDetails.modal.subTotalRefund(productName), helpers.removeCurrencySign(subtotal));
 		await this.clickAndWaitForResponseAndLoadState(data.subUrls.ajax, selector.vendor.vReturnRequest.returnRequestDetails.modal.sendRequest);
 		await this.toContainText(selector.vendor.vReturnRequest.returnRequestDetails.modal.sendRequestSuccessMessage, 'Already send refund request. Wait for admin approval');
 	}

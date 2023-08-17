@@ -49,10 +49,13 @@ export const helpers = {
 	stringToRegex:(str: string): RegExp => new RegExp( str), //todo: need to update, multiple cases unhandled
 
 	// convert string to price format
-	price: (str: string): number => parseFloat(str.replace(/[^\d\-.,]/g, '').replace(/,/g, '.').replace(/\.(?=.*\.)/g, '')),
+	price: (str: string): number => parseFloat(str.replace(/[^\d\-.,\\s]/g, '').replace(/,/g, '.').replace(/\.(?=.*\.)/g, '')),
+
+	// price as string
+	priceString: (num: number, choice: string): string => choice === 'US' ? Number(num).toLocaleString('es-US' ) : Number(num).toLocaleString('es-ES' ),
 
 	// remove dollar sign
-	removeDollarSign: (str: string): string => str.replace('$', ''),
+	removeCurrencySign: (str: string): string => str.replace(/[^\d\-.,\\s]/g, ''),
 
 	// current year
 	currentYear: new Date().getFullYear(),

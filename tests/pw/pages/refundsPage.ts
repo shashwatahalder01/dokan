@@ -130,11 +130,11 @@ export class RefundsPage extends AdminPage {
 		await this.clearAndType(selector.vendor.orders.refund.refundProductQuantity(productName), productQuantity);
 		await this.click(selector.vendor.orders.refund.refundDiv);
 		if (partialRefund) {
-			await this.clearAndType(selector.vendor.orders.refund.refundProductCostAmount(productName), String(helpers.roundToTwo(productCost / 2)));
-			await this.clearAndType(selector.vendor.orders.refund.refundProductTaxAmount(productName), String(helpers.roundToTwo(productTax / 2)));
+			await this.clearAndType(selector.vendor.orders.refund.refundProductCostAmount(productName), helpers.priceString(helpers.roundToTwo(productCost/2), 'ES')); //todo: price style is fixed, make it dynamic
+			await this.clearAndType(selector.vendor.orders.refund.refundProductTaxAmount(productName), helpers.priceString(helpers.roundToTwo(productTax/2), 'ES'));
 			if (isShipping){
-				await this.clearAndType(selector.vendor.orders.refund.refundShippingAmount, String(helpers.roundToTwo(shippingCost / 2)));
-				await this.clearAndType(selector.vendor.orders.refund.refundShippingTaxAmount, String(helpers.roundToTwo(shippingTax / 2)));
+				await this.clearAndType(selector.vendor.orders.refund.refundShippingAmount, helpers.priceString(helpers.roundToTwo(shippingCost/2), 'ES'));
+				await this.clearAndType(selector.vendor.orders.refund.refundShippingTaxAmount, helpers.priceString(helpers.roundToTwo(shippingTax/2), 'ES'));
 			}
 		} else {
 			await this.clearAndType(selector.vendor.orders.refund.refundProductCostAmount(productName), String(productCost));

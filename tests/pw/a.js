@@ -20,6 +20,26 @@
 // console.log(a);
 
 
-let c = Number('99,999.99').toLocaleString('es-ES', );
+// let c = Number(99999.99).toLocaleString('es-ES' );
+// let c = Number(99999.99).toLocaleString('es-US' );
 
-console.log(c);
+// console.log(c);
+
+
+// const currency = require('currency.js');
+
+
+// console.log(currency('999.999,99'));
+
+let s3 = '$$-100,0                   0';
+// let s3 = '999,999,999.99';
+// let s4 = '999.999.999,99';
+
+const a = parseFloat(s3.replace(/[^\d\-.,]/g, '').replace(/,/g, '.').replace(/\.(?=.*\.)/g, ''));
+// const b = s4.replace(/[^\d\-.,]/g, '').replace(/,/g, '.').replace(/\.(?=.*\.)/g, '');
+// // // const b = parseFloat(str.replace(/[^\d\-.,]/g, '').replace(/,/g, '.').replace(/\.(?=.*\.)/g, ''));
+console.log(a);
+// console.log(b);
+
+
+console.log(s3.replace(/[^\d\-.,\\s]/g, ''));
