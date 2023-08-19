@@ -146,8 +146,8 @@ test.describe('Store Support test vendor', () => {
 		vendor = new StoreSupportsPage(vPage);
 
 		apiUtils = new ApiUtils(request);
-		[, supportTicketId] = await apiUtils.createSupportTicket({ ...payloads.createSupportTicket, author: CUSTOMER_ID, meta: { store_id : VENDOR_ID } } );
-		await apiUtils.createSupportTicket({ ...payloads.createSupportTicket, status: 'closed', author: CUSTOMER_ID, meta: { store_id : VENDOR_ID } } );
+		// [, supportTicketId] = await apiUtils.createSupportTicket({ ...payloads.createSupportTicket, author: CUSTOMER_ID, meta: { store_id : VENDOR_ID } } );
+		// await apiUtils.createSupportTicket({ ...payloads.createSupportTicket, status: 'closed', author: CUSTOMER_ID, meta: { store_id : VENDOR_ID } } );
 
 	});
 
@@ -163,8 +163,12 @@ test.describe('Store Support test vendor', () => {
 		await vendor.vendorStoreSupportRenderProperly();
 	});
 
-	test('vendor can filter support tickets @pro', async ( ) => {
-		await vendor.vendorFilterSupportTickets(data.storeSupport.filter.byCustomer, 'by-customer');
+	test('vendor can filter support tickets by customer @pro', async ( ) => {
+		await vendor.vendorFilterSupportTickets('by-customer', data.storeSupport.filter.byCustomer );
+	});
+
+	test('vendor can filter support tickets by date range @pro', async ( ) => {
+		await vendor.vendorFilterSupportTickets('by-date', data.date.dateRange);
 	});
 
 	test('vendor can search support ticket @pro', async ( ) => {

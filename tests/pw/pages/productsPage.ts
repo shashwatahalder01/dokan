@@ -447,10 +447,10 @@ export class ProductsPage extends AdminPage {
 
 
 	// filter products
-	async filterProducts(filterType: string, value: string): Promise<void> {
+	async filterProducts(filterBy: string, value: string): Promise<void> {
 		await this.goIfNotThere(data.subUrls.frontend.vDashboard.products);
 
-		switch(filterType){
+		switch(filterBy){
 
 		case 'by-date' :
 			await this.selectByNumber(selector.vendor.product.filters.filterByDate, value);

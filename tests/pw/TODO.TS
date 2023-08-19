@@ -762,3 +762,37 @@ const config = {
   Run it like this:
   
   MODE=production npx playwright test
+
+
+
+
+
+
+
+
+
+
+
+
+//todo: replace simple switch with below soln.
+
+  40
+
+Neither, because both are quite verbose for a very simple task. You can just do:
+
+const result = ({
+  1: 'One',
+  2: 'Two',
+  3: 'Three'
+})[opt] ?? 'Default'  // opt can be 1, 2, 3 or anything (default)
+This, of course, also works with strings, a mix of both or without a default case:
+
+const result = ({
+  first: 'One',
+  'sec-ond': 'Two',
+  3: 'Three'
+})[opt]  // opt can be 'first', 'sec-ond' or 3
+Explanation:
+It works by creating an object where the options/cases are the keys and the results are the values. By putting the option into the brackets you access the value of the key that matches the expression via the bracket notation.
+
+This returns undefined if the expression inside the brackets is not a valid key. We can detect this undefined-case by using the nullish coalescing operator ?? and return a default value.

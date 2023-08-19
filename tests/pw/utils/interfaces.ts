@@ -1093,7 +1093,6 @@ export interface customer {
 		subject: string;
 		message: string;
 		supportSubmitSuccessMessage: string;
-
 		username: string;
 		userPassword: string;
 	},
@@ -1123,11 +1122,30 @@ export interface customer {
 	},
 }
 
+//date
+export interface date {
+
+	previousDate: string;
+	currentDate: string;
+	nextDay: string;
+
+	dateRange: {
+		startDate: string;
+		endDate: string;
+	}
+
+	dateRangeFull: {
+		startDate: string;
+		endDate: string;
+	}
+
+}
+
 
 // store category
 export interface storeCategory {
-		name: string;
-		description: string;
+	name: string;
+	description: string;
 }
 
 

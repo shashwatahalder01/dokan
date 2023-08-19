@@ -181,7 +181,7 @@ export class AuctionsPage extends VendorPage {
 		await this.goIfNotThere(data.subUrls.frontend.vDashboard.auctionActivity);
 		await this.clearAndType(selector.vendor.vAuction.actionActivity.search.searchInput, input);
 		await this.clickAndWaitForResponseAndLoadState(data.subUrls.frontend.vDashboard.auctionActivity, selector.vendor.vAuction.actionActivity.search.search );
-		await this.notToHaveCount(selector.vendor.vAuction.actionActivity.rowsFound, 0);
+		await this.notToHaveCount(selector.vendor.vAuction.actionActivity.numOfRowsFound, 0);
 	}
 
 

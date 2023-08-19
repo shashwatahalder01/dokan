@@ -141,11 +141,11 @@ test.describe('Product functionality test', () => {
 		await vendor.quickEditProduct({ ...data.product.simple, editProduct: productName });
 	});
 
-	// test('vendor can add product quantity discount @pro @explo', async ( ) => {
+	// test('vendor can add product quantity discount @pro', async ( ) => {
 	// 	await vendor.addProductQuantityDiscount(data.predefined.simpleProduct.product1.name, data.vendor.vendorInfo.quantityDiscount);
 	// });
 
-	test('vendor can add product rma settings @pro @explo', async ( ) => {
+	test('vendor can add product rma settings @pro', async ( ) => {
 		await vendor.addProductRmaSettings(data.predefined.simpleProduct.product1.name, data.vendor.rma);
 	});
 

@@ -2,7 +2,7 @@ import { Page, expect } from '@playwright/test';
 import { VendorPage } from 'pages/vendorPage';
 import { selector } from 'pages/selectors';
 import { data } from 'utils/testData';
-import { orderNote, orderTrackingDetails, orderShipmentDetails } from 'utils/interfaces';
+import { orderNote, orderTrackingDetails, orderShipmentDetails, date } from 'utils/interfaces';
 
 
 export class OrdersPage extends VendorPage {
@@ -27,8 +27,9 @@ export class OrdersPage extends VendorPage {
 
 		// order filters elements are visible
 		// eslint-disable-next-line @typescript-eslint/no-unused-vars
-		const { filterByCustomer,  ...filters } = selector.vendor.orders.filters;
+		const { filterByCustomer, filterByDate, ...filters } = selector.vendor.orders.filters;
 		await this.toBeVisible(selector.vendor.orders.filters.filterByCustomer.dropDown);
+		await this.toBeVisible(selector.vendor.orders.filters.filterByDate.dateRangeInput);
 		await this.multipleElementVisible(filters);
 
 		// order search elements are visible
@@ -77,19 +78,21 @@ export class OrdersPage extends VendorPage {
 
 
 	// filter orders
-	async filterOrders(filterType: string, value: string): Promise<void> {
+	async filterOrders(filterBy: string, inputValue: string | date['dateRange']): Promise<void> {
 		await this.goIfNotThere(data.subUrls.frontend.vDashboard.orders);
 
-		switch(filterType){
+		switch(filterBy){
 
 		case 'by-customer' :
 			await this.click(selector.vendor.orders.filters.filterByCustomer.dropDown);
-			await this.typeAndWaitForResponse(data.subUrls.ajax, selector.vendor.orders.filters.filterByCustomer.input, value);
+			await this.typeAndWaitForResponse(data.subUrls.ajax, selector.vendor.orders.filters.filterByCustomer.input, inputValue as string);
 			await this.click(selector.vendor.orders.filters.filterByCustomer.searchedResult);
 			break;
 
 		case 'by-date' :
-			//todo:
+			// await this.setAttributeValue(selector.vendor.orders.filters.filterByDate.dateRangeInput, 'value', inputValue.startDate + ' - ' + inputValue.endDate); //todo: based on site time settings
+			await this.setAttributeValue(selector.vendor.orders.filters.filterByDate.startDateInput, 'value', inputValue.startDate); //todo: resolve this
+			await this.setAttributeValue(selector.vendor.orders.filters.filterByDate.endDateInput, 'value', inputValue.endDate);
 			break;
 
 		default :

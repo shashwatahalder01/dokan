@@ -60,31 +60,36 @@ export const helpers = {
 	// current year
 	currentYear: new Date().getFullYear(),
 
-	// current day
+	// current day [2023-06-02]
 	currentDate: new Date().toLocaleDateString('en-CA'),
 
-	// current date-time [2023-06-02, 00:33]
-	currentDateTime: new Date().toLocaleString('en-CA', { year: 'numeric', month: 'numeric', day: 'numeric', hourCycle: 'h23', hour: 'numeric', minute: 'numeric', }),
+	// current date-time [2023-06-02 00:33]
+	currentDateTime: new Date().toLocaleString('en-CA', { year: 'numeric', month: 'numeric', day: 'numeric', hourCycle: 'h23', hour: 'numeric', minute: 'numeric', }).replace(',', ''),
 
 	// current date-time [2023-06-02 00:46:11]
-	currentDateTime1: new Date().toLocaleString('en-CA', { year: 'numeric', month: 'numeric', day: 'numeric', hourCycle: 'h23', hour: 'numeric', minute: 'numeric', second: 'numeric', }).replace(',', ''),
+	currentDateTimeFullFormat: new Date().toLocaleString('en-CA', { year: 'numeric', month: 'numeric', day: 'numeric', hourCycle: 'h23', hour: 'numeric', minute: 'numeric', second: 'numeric', }).replace(',', ''),
 
 	currentDateTime2: () =>  new Date().toLocaleString('en-CA', { year: 'numeric', month: 'numeric', day: 'numeric', hourCycle: 'h23', hour: 'numeric', minute: 'numeric', second: 'numeric', }).replace(',', ''),
 
 
 	// add two input days
-	addDays(date: string | number | Date, days: number) {
+	addDays(date: string | number | Date, days: number, format: string) {
 		const result = new Date(date);
 		result.setDate(result.getDate() + days);
-		return result.toLocaleDateString('en-CA', { year: 'numeric', month: 'numeric', day: 'numeric', hourCycle: 'h23', hour: 'numeric', minute: 'numeric' });
+
+		if (format === 'full'){
+			// [2023-06-02, 00:33]
+			return result.toLocaleDateString('en-CA', { year: 'numeric', month: 'numeric', day: 'numeric', hourCycle: 'h23', hour: 'numeric', minute: 'numeric' }).replace(/,/g, '');
+		} else if (format === 'complete'){
+			//[2023-06-02 00:46:11]
+			return result.toLocaleDateString('en-CA', { year: 'numeric', month: 'numeric', day: 'numeric', hourCycle: 'h23', hour: 'numeric', minute: 'numeric', second: 'numeric' }).replace(/,/g, '');
+		} else {
+			// [2023-06-02]
+			return result.toLocaleDateString('en-CA');
+		}
+
 	},
 
-	// add two days
-	addDays1(date: string | number | Date, days: number) {
-		const result = new Date(date);
-		result.setDate(result.getDate() + days);
-		return result.toLocaleDateString('en-CA');
-	},
 
 	// round to two decimal
 	roundToTwo(num: string | number) {

@@ -32,20 +32,20 @@ export class VendorProductSubscriptionPage extends VendorPage {
 
 
 	// filter product subscriptions
-	async filterProductSubscriptions(filterType: string, value: string): Promise<void> {
+	async filterProductSubscriptions(filterBy: string, inputValue: string): Promise<void> {
 		await this.goIfNotThere(data.subUrls.frontend.vDashboard.userSubscriptions);
 
-		switch(filterType){
+		switch(filterBy){
 
 		case 'by-customer' :
 			await this.click(selector.vendor.vUserSubscriptions.filters.filterByCustomer);
-			await this.typeAndWaitForResponse(data.subUrls.ajax, selector.vendor.vUserSubscriptions.filters.filterByCustomerInput, value);
-			await this.toContainText(selector.vendor.vUserSubscriptions.filters.result, value);
+			await this.typeAndWaitForResponse(data.subUrls.ajax, selector.vendor.vUserSubscriptions.filters.filterByCustomerInput, inputValue);
+			await this.toContainText(selector.vendor.vUserSubscriptions.filters.result, inputValue);
 			await this.press(data.key.enter);
 			break;
 
 		case 'by-date' :
-			//todo:
+			await this.setAttributeValue(selector.vendor.vUserSubscriptions.filters.filterByDate, 'value', inputValue);
 			break;
 
 		default :

@@ -373,6 +373,8 @@ export const selector = {
 					selectProductInput: '//input[@placeholder="Search product"]',
 					selectOrderDropdown: '//span[normalize-space()="Search order"]/../..//div[@class="multiselect__select"]',
 					selectOrderInput: '//input[@placeholder="Search order"]',
+					selectOption: (value: string) => `//div[@class="dokan-modal"]//li//span[contains(text(), "${value}")]/..`,
+					searchedResult: 'span.multiselect__option.multiselect__option--highlight',
 					withdrawalBalanceType: (type: string) => `//input[@value="${type}"]/..`, //debit, credit
 					reverseWithdrawalAmount: 'input.regular-text.wc_input_decimal',
 					note: '//textarea[@placeholder="Write reverse withdrawal note"]',
@@ -3533,7 +3535,12 @@ export const selector = {
 					searchedResult: '.select2-results__option--highlighted',
 				},
 
-				filterByDate: '#order_filter_date_range',
+				filterByDate: {
+					dateRangeInput: 'input#order_filter_date_range',
+					startDateInput: 'input#order_filter_start_date',
+					endDateInput: 'input#order_filter_end_date'
+				},
+
 				filter: '//button[normalize-space()="Filter"]',
 				reset: '//a[normalize-space()="Reset"]',
 			},
@@ -3688,7 +3695,7 @@ export const selector = {
 			filters: {
 				filterByCustomer: '//select[@id="dokan-filter-customer"]/..//span[@class="select2-selection__arrow"]',
 				filterByCustomerInput: '.select2-search__field',
-				filterByDate: '#order_date_filter',
+				filterByDate: 'input#order_date_filter',
 				filter: '.dokan-btn',
 				result: '.select2-results__option.select2-results__option--highlighted',
 			},
@@ -3996,7 +4003,6 @@ export const selector = {
 		},
 
 		//badges
-
 		vBadges:{
 
 			badgesText: '#dokan-seller-badge .entry-title',
@@ -4031,8 +4037,58 @@ export const selector = {
 
 		},
 
+		// reverse withdrawal
+		vReverseWithdrawal:{
+
+			reverseWithdrawalText: '//h1[normalize-space()="Reverse Withdrawal"]',
+
+			reverseWithdrawalNotice:{
+				noticeDiv: 'div.dokan-alert.dokan-alert-danger',
+				noticeText: 'div.dokan-alert.dokan-alert-danger strong'
+
+			},
+
+			reverseBalanceSection:{
+				reverseBalanceSection: 'div.reverse-balance-section',
+				reversePayBalance: 'div.reverse-balance',
+				reversePayBalanceAmount: 'div.reverse-balance .woocommerce-Price-amount.amount',
+				reverseThreshold: 'div.reverse-threshold',
+				reverseThresholdAmount: 'div.reverse-threshold .woocommerce-Price-amount.amount'
+			},
+
+			payNow: 'input#reverse_pay',
+			confirmAction: '.swal2-actions .swal2-confirm',
+
+			filters:{
+				dateRangeInput: 'input#trn_date_filter',
+				startDateInput: 'input#trn_date_form_filter_alt',
+				endDateInput: 'input#trn_date_to_filter_alt',
+				filter: '//input[@value="Filter"]',
+			},
+
+			table:{
+				reverseWithdrawalTable: '.dokan-table.dokan-table-striped',
+				transactionIdColumn: '//th[normalize-space()="Transaction ID"]',
+				dateColumn: '//th[normalize-space()="Date"]',
+				transactionTypeColumn: '//th[normalize-space()="Transaction Type"]',
+				noteColumn: '//th[normalize-space()="Note"]',
+				debitColumn: '//th[normalize-space()="Debit"]',
+				creditColumn: '//th[normalize-space()="Credit"]',
+				balanceColumn: '//th[normalize-space()="Balance"]',
+
+			},
+
+			noRowsFound: '//td[normalize-space()="No transactions found!"]',
+			numberOfRowsFound:'.dokan-table.dokan-table-striped tbody tr',
+			openingBalanceRow: '//td[normalize-space()="Opening Balance"]/..',
+			totalBalanceRow: '//b[normalize-space()="Balance:"]/../..',
+
+
+		},
+
 		// Return Request
 		vReturnRequest: {
+
 			// Menus
 			menus:{
 				all: '//ul[contains(@class,"request-statuses-filter")]//a[contains(text(),"All")]',
@@ -4656,6 +4712,7 @@ export const selector = {
 			removeAnnouncement: '.remove_announcement',
 
 			announcementLink: (title: string) => `//div[@class="dokan-announcement-heading"]//h3[contains(text(),"${title}")]/..`,
+			firstAnnouncementLink: (title: string) => `(//div[@class="dokan-announcement-heading"]//h3[contains(text(),"${title}")]/..)[1]`,
 			deleteAnnouncement: (title: string) => `//div[@class="dokan-announcement-heading"]//h3[contains(text(),"${title}")]/../../../..//a[@class="remove_announcement"]`,
 			confirmDeleteAnnouncement: '.swal2-confirm',
 			cancelDeleteAnnouncement: '.swal2-cancel',
@@ -4886,7 +4943,7 @@ export const selector = {
 				},
 
 				noActivityFound: '//td[normalize-space()="No Auctions Activity Found!"]',
-				rowsFound: '.dokan-table.product-listing-table tbody tr',
+				numOfRowsFound: '.dokan-table.product-listing-table tbody tr',
 			},
 
 		},
@@ -4905,7 +4962,14 @@ export const selector = {
 			filters: {
 				filterByCustomer: '//select[@id="dokan-search-support-customers"]/..//span[@class="select2-selection__arrow"]',
 				filterByCustomerInput: '.select2-search__field',
-				ticketDateFilter: '#support_ticket_date_filter',
+				ticketDateFilter: 'input#support_ticket_date_filter',
+
+				filterByDate: {
+					dateRangeInput: 'input#support_ticket_date_filter',
+					startDateInput: 'input#support_ticket_start_date_filter_alt',
+					endDateInput: 'input#support_ticket_end_date_filter_alt'
+				},
+
 				tickedIdOrKeyword: '#dokan-support-ticket-search-input',
 				search: '//input[@class="dokan-btn" and @value="Search"]',
 				result: '.select2-results__option.select2-results__option--highlighted',
@@ -4922,6 +4986,7 @@ export const selector = {
 				ActionColumn: '//th[normalize-space()="Action"]',
 			},
 
+			numOfRowsFound: 'table.dokan-support-table tbody tr',
 			noSupportTicketFound: '//div[@class="dokan-error" and contains(text(), "No tickets found!")]',
 			storeSupportLink: (id: string) => `//strong[normalize-space()="#${id}"]/..`,
 			storeSupportCellById: (id: string) => `//strong[normalize-space()="#${id}"]/../..`,

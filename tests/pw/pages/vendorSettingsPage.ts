@@ -393,15 +393,17 @@ export class VendorSettingsPage extends VendorPage {
 			await this.selectByValue(selector.vendor.vStoreSettings.closingStyle, vacation.closingStyle);
 
 			switch (vacation.closingStyle) {
+
 			// instantly close
 			case 'instantly' :
 				await this.clearAndType(selector.vendor.vStoreSettings.setVacationMessageInstantly, vacation.instantly.vacationMessage);
 				break;
 
-				// datewise close
+			// datewise close
 			case 'datewise' :{
-				const vacationDayFrom = (vacation.datewise.vacationDayFrom()).split(',')[0] as string;
-				const vacationDayTo = (vacation.datewise.vacationDayTo(vacationDayFrom)).split(',')[0] as string;
+				const vacationDayFrom = (vacation.datewise.vacationDayFrom());
+				const vacationDayTo = (vacation.datewise.vacationDayTo(vacationDayFrom));
+				// await this.setAttributeValue(selector.vendor.vStoreSettings.vacationDateRange, 'value', vacationDayFrom + ' - ' + vacationDayTo ); //todo: update according to site settings
 				await this.setAttributeValue(selector.vendor.vStoreSettings.vacationDateRangeFrom, 'value', vacationDayFrom);
 				await this.setAttributeValue(selector.vendor.vStoreSettings.vacationDateRangeTo, 'value', vacationDayTo);
 				await this.clearAndType(selector.vendor.vStoreSettings.setVacationMessageDatewise, vacation.datewise.vacationMessage);

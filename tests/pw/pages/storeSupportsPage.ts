@@ -3,7 +3,7 @@ import { AdminPage } from 'pages/adminPage';
 import { selector } from 'pages/selectors';
 import { helpers } from 'utils/helpers';
 import { data } from 'utils/testData';
-import { customer } from 'utils/interfaces';
+import { customer, date } from 'utils/interfaces';
 
 
 export class StoreSupportsPage extends AdminPage {
@@ -182,7 +182,7 @@ export class StoreSupportsPage extends AdminPage {
 
 
 	// vendor filter support tickets
-	async vendorFilterSupportTickets(input: string, filterBy:string, ){
+	async vendorFilterSupportTickets( filterBy:string, inputValue: string | date['dateRange'] ){
 		await this.goIfNotThere(data.subUrls.frontend.vDashboard.storeSupport);
 
 		switch(filterBy){
@@ -190,18 +190,23 @@ export class StoreSupportsPage extends AdminPage {
 		case 'by-customer' :
 			await this.click(selector.vendor.vSupport.filters.filterByCustomer);
 			// await this.clearAndType(selector.vendor.vSupport.filters.filterByCustomerInput, input);
-			await this.typeAndWaitForResponse(data.subUrls.ajax, selector.vendor.vSupport.filters.filterByCustomerInput, input);
-			await this.toContainText(selector.vendor.vSupport.filters.result, input);
+			await this.typeAndWaitForResponse(data.subUrls.ajax, selector.vendor.vSupport.filters.filterByCustomerInput, inputValue as string);
+			await this.toContainText(selector.vendor.vSupport.filters.result, inputValue as string);
 			await this.clickAndWaitForLoadState(selector.vendor.vSupport.filters.search);
-			await this.notToHaveCount(selector.vendor.vSupport.storeSupportsCellByCustomer(input), 0);
+			await this.notToHaveCount(selector.vendor.vSupport.storeSupportsCellByCustomer(inputValue as string), 0);
 			break;
 
 		case 'by-date' :
+			// await this.setAttributeValue(selector.vendor.vSupport.filters.filterByDate.dateRangeInput, 'value', inputValue.startDate + ' - ' + inputValue.endDate); //todo: based on site time settings
+			await this.setAttributeValue(selector.vendor.vSupport.filters.filterByDate.startDateInput, 'value', inputValue.startDate); //todo: resolve this
+			await this.setAttributeValue(selector.vendor.vSupport.filters.filterByDate.endDateInput, 'value', inputValue.endDate);
+			await this.clickAndWaitForLoadState(selector.vendor.vSupport.filters.search);
 			break;
 
 		default :
 			break;
 		}
+		await this.notToHaveCount(selector.vendor.vSupport.numOfRowsFound, 0);
 
 	}
 
@@ -287,7 +292,7 @@ export class StoreSupportsPage extends AdminPage {
 
 
 	// customer ask for store support
-	async storeSupport(input: string, getSupport: customer['customerInfo']['getSupport'], action: string): Promise<void> {
+	async storeSupport(input: string, getSupport: customer['getSupport'], action: string): Promise<void> { //todo: resolve it
 
 		switch(action){
 

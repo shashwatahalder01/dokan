@@ -169,7 +169,7 @@ export const data = {
 		external: {
 			productType: 'external',
 			productName: () => faker.commerce.productName() + (' (External)'),
-			productUrl: '/product/p1_v1/',
+			productUrl: '/product/p1_v1-simple/',
 			buttonText: 'Buy product',
 			category: 'Uncategorized',
 			regularPrice: () => (faker.finance.amount(100, 200, faker.helpers.arrayElement([1, 2]))).replace('.', ','),
@@ -271,8 +271,8 @@ export const data = {
 			bidIncrement: () => (faker.finance.amount(40, 50, faker.helpers.arrayElement([1, 2]))).replace('.', ','),
 			reservedPrice: () => (faker.finance.amount(400, 500, faker.helpers.arrayElement([1, 2]))).replace('.', ','),
 			buyItNowPrice: () => (faker.finance.amount(900, 1000, faker.helpers.arrayElement([1, 2]))).replace('.', ','),
-			startDate: helpers.currentDateTime.replace(/,/g, ''),
-			endDate: helpers.addDays(helpers.currentDateTime, 1).replace(/,/g, ''),
+			startDate: helpers.currentDateTime,
+			endDate: helpers.addDays(helpers.currentDateTime, 1, 'full'),
 			storeName: String(process.env.VENDOR) + 'store',
 			// saveSuccessMessage: '× Success! The product has been updated successfully. View Product →',
 			saveSuccessMessage: 'Success! The product has been updated successfully.',
@@ -792,6 +792,7 @@ export const data = {
 				withdraw: 'dashboard/withdraw',
 				withdrawRequests: 'dashboard/withdraw-requests',
 				badges: 'dashboard/seller-badge',
+				reverseWithdrawal: 'dashboard/reverse-withdrawal',
 				returnRequest: 'dashboard/return-request',
 				staff: 'dashboard/staffs',
 				followers: 'dashboard/followers',
@@ -956,8 +957,8 @@ export const data = {
 				},
 
 				datewise: {
-					vacationDayFrom: () => helpers.addDays(helpers.currentDate, helpers.getRandomArbitraryInteger(31, 100)),
-					vacationDayTo: (from: string) => helpers.addDays(from, 31),
+					vacationDayFrom: () => helpers.addDays(helpers.currentDate, helpers.getRandomArbitraryInteger(31, 100), 'compact'),
+					vacationDayTo: (from: string) => helpers.addDays(from, 31, 'compact'),
 					closingStyle: 'datewise',
 					vacationMessage: 'We are currently out of order',
 				}
@@ -1358,6 +1359,28 @@ export const data = {
 	},
 
 
+	// date
+	date:{
+
+		previousDate: helpers.addDays(helpers.currentDate, -1, 'compact'),
+		currentDate: helpers.currentDate,
+		nextDay: helpers.addDays(helpers.currentDate, 1, 'compact'),
+
+		// dateRange compact formate
+		dateRange: {
+			startDate: helpers.currentDate,
+			endDate:  helpers.addDays(helpers.currentDate, 1, 'compact'),
+		},
+
+		// dateRange full format
+		dateRangeFull: {
+			startDate: helpers.currentDateTimeFullFormat,
+			endDate:  helpers.addDays(helpers.currentDateTimeFullFormat, 1, 'complete'),
+		}
+
+	},
+
+
 	// store category
 	storeCategory: () => ({
 		name: 'test category_'  + faker.string.uuid(),
@@ -1402,9 +1425,9 @@ export const data = {
 	reverseWithdraw: {
 		store: String(process.env.VENDOR) + 'store',
 		transactionType: 'manual_product', //manual_product, manual_order, other
-		product: 'p1_v1',
-		withdrawalBalanceType: 'credit', //debit, credit
-		amount: '100',
+		product: 'p1_v1 (simple)',
+		withdrawalBalanceType: 'debit', //debit, credit
+		amount: '500',
 		note: 'test reverse withdraw note',
 		saveSuccessMessage: 'Reverse withdrawal created successfully.',
 	},

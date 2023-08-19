@@ -51,8 +51,12 @@ test.describe('Order functionality test', () => {
 		await vendor.searchOrder(orderId);
 	});
 
-	test('vendor can filter orders by customers @lite', async ( ) => {
+	test('vendor can filter orders by customer @lite', async ( ) => {
 		await vendor.filterOrders('by-customer', data.customer.username);
+	});
+
+	test('vendor can filter orders by date range @lite', async ( ) => {
+		await vendor.filterOrders('by-date', data.date.dateRange);
 	});
 
 	test('vendor can view order details @lite', async ( ) => {
@@ -60,11 +64,11 @@ test.describe('Order functionality test', () => {
 	});
 
 	test('vendor can update order status on table @lite', async ( ) => {
-		await vendor.updateOrderStatusOnTable(orderId, 'processing');
+		await vendor.updateOrderStatusOnTable(orderId, data.order.orderStatus.processing);
 	});
 
 	test('vendor can update order status on order details @lite', async ( ) => {
-		await vendor.updateOrderStatus(orderId, 'wc-completed');
+		await vendor.updateOrderStatus(orderId, data.order.orderStatus.completed);
 	});
 
 	test('vendor can add order note @lite', async ( ) => {

@@ -35,33 +35,33 @@ test.describe('Vendor SPMV test', () => {
 		await vendor.vendorSpmvRenderProperly();
 	});
 
-	test('vendor can search similar product on spmv page @pro @explo', async ( ) => {
+	test('vendor can search similar product on spmv page @pro ', async ( ) => {
 		await vendor.searchSimilarProduct(productName, 'spmv');
 	});
 
-	test('vendor can search similar product on product popup @pro @explo', async ( ) => {
+	test('vendor can search similar product on product popup @pro', async ( ) => {
 		await vendor.searchSimilarProduct(productName, 'popup');
 	});
 
-	// test('vendor can search similar booking product @pro @explo', async ( ) => {
+	// test('vendor can search similar booking product @pro', async ( ) => {
 	//todo: need admin booking product via api
 	// 	await vendor.searchSimilarProduct(productName, 'booking');
 	// });
 
-	// test('vendor can search similar auction product @pro @explo', async ( ) => {
+	// test('vendor can search similar auction product @pro', async ( ) => {
 	//todo: need admin auction product via api
 	// 	await vendor.searchSimilarProduct(productName, 'auction');
 	// });
 
-	test('vendor can go to product edit from spmv @pro @explo', async ( ) => {
+	test('vendor can go to product edit from spmv @pro', async ( ) => {
 		await vendor.goToProductEditFromSPMV(data.predefined.simpleProduct.product1.name);
 	});
 
-	test('vendor can sort spmv products @pro @explo', async ( ) => {
+	test('vendor can sort spmv products @pro', async ( ) => {
 		await vendor.sortSpmvProduct('price');
 	});
 
-	test('vendor can clone product @pro @explo', async ( ) => {
+	test('vendor can clone product @pro', async ( ) => {
 		await vendor.cloneProduct(productName);
 	});
 

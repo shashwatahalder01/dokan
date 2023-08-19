@@ -210,10 +210,10 @@ export class BookingPage extends VendorPage {
 
 
 	// filter products
-	async filterBookingProducts(filterType: string, value: string): Promise<void> {
+	async filterBookingProducts(filterBy: string, value: string): Promise<void> {
 		await this.goIfNotThere(data.subUrls.frontend.vDashboard.booking);
 
-		switch(filterType){
+		switch(filterBy){
 
 		case 'by-date' :
 			await this.selectByNumber(selector.vendor.vBooking.filters.filterByDate, value);
