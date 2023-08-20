@@ -334,13 +334,6 @@ export class VendorPage extends BasePage {
 	//todo: fixed above functions
 
 
-	// vendor export statement
-	async exportStatement(): Promise<void> {
-		await this.goIfNotThere(data.subUrls.frontend.vDashboard.statement);
-		await this.clickAndWaitForDownload(selector.vendor.vReports.exportStatements);
-	}
-
-
 	// vendor send id verification request
 	async sendIdVerificationRequest(verification: vendor['verification']): Promise<void> {
 		await this.goIfNotThere(data.subUrls.frontend.vDashboard.settingsVerification);

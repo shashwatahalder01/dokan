@@ -292,4 +292,76 @@ export class RequestForQuotationsPage extends AdminPage {
 		await this.clickAndWaitForResponse(data.subUrls.api.dokan.quotes, selector.admin.dokan.requestForQuotation.quotesList.bulkActions.applyAction);
 	}
 
+
+	// vendor
+
+
+	// vendor request quotes render properly
+	async vendorRequestQuotesRenderProperly(): Promise<void>{
+		await this.goIfNotThere(data.subUrls.frontend.vDashboard.requestQuotes);
+
+		// request quotes text is visible
+		await this.toBeVisible(selector.vendor.vRequestQuotes.requestQuotesText);
+
+		const noQuoteRequests = await this.isVisible(selector.vendor.vRequestQuotes.noQuoteMessage);
+
+		if (noQuoteRequests){
+			// go to shop is visible
+			await this.toBeVisible(selector.vendor.vRequestQuotes.goToShop);
+
+		} else {
+			// request quote table elements are visible
+			await this.multipleElementVisible(selector.vendor.vRequestQuotes.table);
+		}
+
+	}
+
+
+	// vendor view request quote details
+	async vendorViewQuoteDetails(quoteTitle: string): Promise<void>{
+		await this.goIfNotThere(data.subUrls.frontend.vDashboard.requestQuotes);
+		await this.clickAndWaitForLoadState(selector.vendor.vRequestQuotes.viewQuoteDetails(quoteTitle));
+
+		// quote basic details elements are visible
+		await this.multipleElementVisible(selector.vendor.vRequestQuotes.quoteDetails.basicDetails);
+
+		// quote item details elements are visible
+		// eslint-disable-next-line @typescript-eslint/no-unused-vars
+		const { table, ...quoteItemDetails } = selector.vendor.vRequestQuotes.quoteDetails.quoteItemDetails;
+		await this.multipleElementVisible(table);
+		await this.multipleElementVisible(quoteItemDetails);
+
+		// quote total details elements are visible
+		await this.multipleElementVisible(selector.vendor.vRequestQuotes.quoteDetails.quoteTotals);
+
+	}
+
+
+	// update quote
+	async vendorUpdateQuoteRequest(quoteId: string, quote: requestForQuotation ['vendorUpdateQuote']){
+		await this.goIfNotThere(data.subUrls.frontend.vDashboard.quoteDetails(quoteId));
+		await this.clearAndType(selector.vendor.vRequestQuotes.quoteDetails.offeredPriceInput(quote.productName), quote.offeredPrice);
+		await this.clearAndType(selector.vendor.vRequestQuotes.quoteDetails.quantityInput(quote.productName), quote.quantity);
+		await this.clickAndWaitForResponseAndLoadState(data.subUrls.frontend.vDashboard.quoteDetails(quoteId), selector.vendor.vRequestQuotes.quoteDetails.updateQuote);
+		await this.toContainText(selector.vendor.vRequestQuotes.quoteDetails.message, 'Your quote has been successfully updated.');
+	}
+
+
+	// approve quote
+	async vendorApproveQuoteRequest(quoteId: string){
+		await this.goIfNotThere(data.subUrls.frontend.vDashboard.quoteDetails(quoteId));
+		await this.clickAndWaitForResponseAndLoadState(data.subUrls.frontend.vDashboard.quoteDetails(quoteId), selector.vendor.vRequestQuotes.quoteDetails.approveThisQuote);
+		await this.toContainText(selector.vendor.vRequestQuotes.quoteDetails.message, 'Your quote has been successfully updated.');
+	}
+
+
+	// convert quote to order
+	async vendorConvertQuoteToOrder(quoteId: string){
+		await this.goIfNotThere(data.subUrls.frontend.vDashboard.quoteDetails(quoteId));
+		const needApproval = await this.isVisible(selector.vendor.vRequestQuotes.quoteDetails.approveThisQuote);
+		needApproval && await this.vendorApproveQuoteRequest(quoteId);
+		await this.clickAndWaitForResponseAndLoadState(data.subUrls.frontend.vDashboard.quoteDetails(quoteId), selector.vendor.vRequestQuotes.quoteDetails.convertToOrder);
+		await this.toContainText(selector.vendor.vRequestQuotes.quoteDetails.message, `our Quote# ${quoteId} has been converted to Order#`);
+	}
+
 }

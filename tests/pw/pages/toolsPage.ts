@@ -23,9 +23,6 @@ export class ToolsPage extends AdminPage {
 		// Page Installation elements are visible
 		await this.multipleElementVisible(selector.admin.dokan.tools.pageInstallation);
 
-		// // Regenerate Order Sync Tab elements are visible
-		// await this.multipleElementVisible(selector.admin.dokan.tools.regenerateOrderSyncTable); //todo:removed from dokan
-
 		// Check For Duplicate Orders are visible
 		await this.multipleElementVisible(selector.admin.dokan.tools.checkForDuplicateOrders);
 

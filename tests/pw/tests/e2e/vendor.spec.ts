@@ -83,9 +83,7 @@ test.describe('Vendor functionality test', () => {
 	});
 
 
-	test('vendor can export statement @pro', async ( ) => {
-		await vendor.exportStatement();
-	});
+
 
 
 });

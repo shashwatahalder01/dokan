@@ -92,4 +92,8 @@ export class VerificationsPage extends AdminPage {
 
 	}
 
+
+	//todo: add vendor tests
+
+
 }

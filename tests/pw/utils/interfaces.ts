@@ -1269,6 +1269,14 @@ export interface requestForQuotation {
 		title: string;
 	}
 
+
+	vendorUpdateQuote:{
+		productName: string;
+		offeredPrice: string;
+		quantity: string;
+
+	}
+
 }
 
 

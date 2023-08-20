@@ -292,7 +292,7 @@ export class StoreSupportsPage extends AdminPage {
 
 
 	// customer ask for store support
-	async storeSupport(input: string, getSupport: customer['getSupport'], action: string): Promise<void> { //todo: resolve it
+	async storeSupport(input: string, getSupport: customer['getSupport'], action: string): Promise<void> { 
 
 		switch(action){
 

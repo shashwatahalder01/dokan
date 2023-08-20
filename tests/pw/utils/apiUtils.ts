@@ -966,11 +966,11 @@ export class ApiUtils {
 		return responseBody;
 	}
 
-	// create quote rule
+	// create quote request
 	async createRequestQuote(payload: object, auth? : auth): Promise<[responseBody, string]> {
 		const [, responseBody] = await this.post(endPoints.createRequestQuote, { data: payload, headers: auth });
-		const quoteRuleId = String(responseBody[0].data.id);
-		return [responseBody, quoteRuleId];
+		const quoteId = String(responseBody[0].data.id);
+		return [responseBody, quoteId];
 	}
 
 	// delete store review

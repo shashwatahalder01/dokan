@@ -821,7 +821,7 @@ export const selector = {
 
 					numberOfRowsFound: '.tablenav.top .displaying-num',
 					noRowsFound: '//td[normalize-space()="No quote found."]',
-					quoteCell:  (title: string) => `//strong[contains(text(),'${title}')]/../..//td[@class='column sl']`, //todo: flaky because of this, not because of this, need unique test data
+					quoteCell:  (title: string) => `//strong[contains(text(),'${title}')]/../..//td[@class='column sl']`,
 					quoteEdit: (title: string) => `//strong[contains(text(),'${title}')]/../..//td[@class='column sl']//span[@class="edit"]`,
 					quoteTrash: (title: string) => `//strong[contains(text(),'${title}')]/../..//td[@class='column sl']//span[@class="trash"]`,
 					quotePermanentlyDelete: (title: string) => `//strong[contains(text(),'${title}')]/../..//span[@class="delete"]`,
@@ -2799,7 +2799,7 @@ export const selector = {
 			},
 
 			// Edit User info
-			userInfo: { //todo:  userinfo/userDetails/editUser
+			userInfo: {
 
 				// Personal Info
 				role: '#role',
@@ -3749,6 +3749,85 @@ export const selector = {
 
 		},
 
+		vRequestQuotes: {
+
+			requestQuotesText: '//h3[normalize-space()="Request Quotes"]',
+			noQuoteMessage: '//div[contains(@class, "woocommerce-message woocommerce-message--info")]',
+			goToShop: '//a[normalize-space()="Go to shop"]',
+
+			// table
+			table: {
+				quoteTable: 'table.my_account_quotes',
+				quoteColumn: '//th[normalize-space()="Quote #"]',
+				quoteNameColumn: '//th[normalize-space()="Quote Name"]',
+				statusColumn: '//th[normalize-space()="Status"]',
+				dateColumn: '//th[normalize-space()="Date"]',
+				actionColumn: '//th[normalize-space()="Action"]',
+
+			},
+
+
+			viewQuoteDetails: (quoteTitle: string) => `//td[normalize-space()="${quoteTitle}"]/..//a[@class="woocommerce-button button view"]`,
+			quoteDetails: {
+
+				basicDetails:{
+					requestQuotesText: '//h3[normalize-space()="Request Quotes"]',
+
+					basicDetailsTable:'//table[contains(@class,"quote_details") and not(contains(@class,"cart"))]',
+					quoteNumberText: '//th[@class="quote-number"]',
+					customerNameText: '//th[@class="customer-name"]',
+					customerEmailText: '//th[@class="customer-email"]',
+					quoteDateText: '//th[@class="quote-date"]',
+					quoteStatusText: '//th[@class="quote-status"]',
+
+					quoteNumberValue: '//td[@class="quote-number"]',
+					customerNameValue: '//td[@class="customer-name"]',
+					customerEmailValue: '//td[@class="customer-email"]',
+					quoteDateValue: '//td[@class="quote-date"]',
+					quoteStatusValue: '//th[@class="quote-status"]/..//td',
+				},
+
+				quoteItemDetails:{
+					quoteDetailsText:'//h2[normalize-space()="Quote Details"]',
+
+					table:{
+						quoteDetailsTable: '//table[contains(@class,"quote_details") and contains(@class,"cart")]',
+						productColumn: '//th[@class="product-name"]',
+						priceColumn: '//th[normalize-space()="Price"]',
+						offeredPriceColumn: '//th[normalize-space()="Offered Price"]',
+						quantityColumn: '//th[@class="product-quantity"]',
+						subtotalColumn: '//th[normalize-space()="Subtotal"]',
+						offeredSubtotalColumn: '//th[normalize-space()="Offered Subtotal"]',
+					},
+
+				},
+
+
+				quoteTotals:{
+					quoteTotalsTitle: '//h2[normalize-space()="Quote totals"]',
+					quoteTotalsDiv: '.cart_totals',
+					quoteTotalsTable: '//table[contains(@class,"table_quote_totals")]',
+
+					subTotalText: '//tr[@class="cart-subtotal"]',
+					offeredPriceSubtotalText: '//tr[@class="cart-subtotal offered"]',
+
+					subTotalValue: '//td[@data-title="Subtotal (standard)"]',
+					offeredPriceSubtotalValue: '//td[@data-title="Offered Price Subtotal"]',
+				},
+
+				offeredPriceInput: (productName: string) => `//a[normalize-space()="${productName}"]/../..//input[@class="input-text offered-price-input text"]`,
+				quantityInput: (productName: string) => `//a[normalize-space()="${productName}"]/../..//div[@class="quantity"]//input`,
+
+				updateQuote: 'button[name="dokan_update_quote"]',
+				approveThisQuote: 'button[name="approved_by_vendor_button"]',
+				convertToOrder: 'button[name="dokan_convert_to_order_customer"]',
+
+				message: '.woocommerce-message',
+
+			},
+
+		},
+
 		// Coupons
 		vCoupon: {
 			couponText: '.dokan-dashboard-header .left-header-content .entry-title',
@@ -3816,17 +3895,78 @@ export const selector = {
 
 		// Reports
 		vReports: {
+
+			reportsText: '//h1[normalize-space()="Reports"]',
+
 			// Menus
-			overview: '//ul[@class="dokan_tabs"]//a[contains(text(), "Overview")]',
-			salesByDay: '//ul[@class="dokan_tabs"]//a[contains(text(), "Sales by day")]',
-			topSelling: '//ul[@class="dokan_tabs"]//a[contains(text(), "Top selling")]',
-			topEarning: '//ul[@class="dokan_tabs"]//a[contains(text(), "Top earning")]',
-			statement: '//ul[@class="dokan_tabs"]//a[contains(text(), "Statement")]',
-			exportStatements: '.dokan-right',
-			// Filter
-			startDate: '#from',
-			endDate: '#to',
-			show: '.dokan-btn',
+			menus: {
+				overview: '//ul[@class="dokan_tabs"]//a[contains(text(), "Overview")]',
+				salesByDay: '//ul[@class="dokan_tabs"]//a[contains(text(), "Sales by day")]',
+				topSelling: '//ul[@class="dokan_tabs"]//a[contains(text(), "Top selling")]',
+				topEarning: '//ul[@class="dokan_tabs"]//a[contains(text(), "Top earning")]',
+				statement: '//ul[@class="dokan_tabs"]//a[contains(text(), "Statement")]',
+			},
+
+			// chart
+			chart: {
+				legendDetails: '.dokan-reports-sidebar ul.chart-legend',
+				chartDiv: 'div.chart-container',
+				chartLegend: 'div.chart.chart-legend-container',
+				chart: 'div.chart-placeholder.main',
+			},
+
+			// date picker
+			datePicker: {
+				from: '#from',
+				to: '#to',
+				show: 'input[value="Show"]',
+			},
+
+			topSelling:{
+
+				//table
+				table: {
+					topSellingTable: '.table.table-striped',
+					productColumn: '//th[normalize-space()="Product"]',
+					salesColumn: '//th[normalize-space()="Sales"]',
+				},
+
+				noProductsFound:'//td[normalize-space()="No products found in given range."]',
+
+			},
+
+			topEarning:{
+
+				//table
+				table: {
+					topEarningTable: '.table.table-striped',
+					productColumn: '//th[normalize-space()="Product"]',
+					salesColumn: '//th[normalize-space()="Sales"]',
+					earningColumn: '//th[normalize-space()="Earning"]',
+				},
+
+				noProductsFound:'//td[normalize-space()="No products found in given range."]',
+
+			},
+
+			statement: {
+				exportStatements: '.dokan-right',
+
+				//table
+				table: {
+					statementsTable: '.table.table-striped',
+					balanceDateColumn: '//th[normalize-space()="Balance Date"]',
+					trnDateColumn: '//th[normalize-space()="Trn Date"]',
+					idColumn: '//th[normalize-space()="ID"]',
+					typeColumn: '//th[normalize-space()="Type"]',
+					debitColumn: '//th[normalize-space()="Debit"]',
+					creditColumn: '//th[normalize-space()="Credit"]',
+					balanceColumn: '//th[normalize-space()="Balance"]',
+				},
+
+
+				noStatementsFound: '//td[normalize-space()="No Result found!"]',
+			},
 		},
 
 		// Deliverytime
@@ -4680,6 +4820,8 @@ export const selector = {
 		// Analytics
 		vAnalytics: {
 
+			analyticsText: '//h1[normalize-space()="Analytics"]',
+
 			// Menus
 			menus: {
 				general: '//a[normalize-space()="General"]',
@@ -4696,7 +4838,7 @@ export const selector = {
 				show: 'input[value="Show"]',
 			},
 
-			noAnalytics:'//div[contains(text(), "There is no analytics found for your store.")]',
+			noAnalyticsFound:'//div[contains(text(), "There is no analytics found for your store.")]',
 
 		},
 

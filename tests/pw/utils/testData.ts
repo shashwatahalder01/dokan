@@ -785,7 +785,10 @@ export const data = {
 				productBooking: 'dashboard/booking/new-product',
 				orders: 'dashboard/orders',
 				userSubscriptions: 'dashboard/user-subscription',
+				requestQuotes: 'dashboard/requested-quotes',
+				quoteDetails: (quotId: string) => `dashboard/requested-quotes/${quotId}`,
 				coupons: 'dashboard/coupons',
+				reports: 'dashboard/reports',
 				statement: 'dashboard/reports/?chart=sales_statement',
 				deliveryTime: 'dashboard/delivery-time-dashboard',
 				reviews: 'dashboard/reviews',
@@ -1488,8 +1491,14 @@ export const data = {
 
 		convertedQuote:{
 			title: 'converted quote ' + faker.string.uuid(),
-		}
+		},
 
+		vendorUpdateQuote:{
+			productName: '',
+			offeredPrice: '80',
+			quantity:'20'
+
+		}
 	},
 
 
