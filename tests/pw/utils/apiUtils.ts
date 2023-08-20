@@ -986,6 +986,12 @@ export class ApiUtils {
 		return responseBody;
 	}
 
+	// convert quote to order
+	async convertQuoteToOrder(quoteId:string,  auth? : auth): Promise<responseBody> {
+		const [, responseBody] = await this.post(endPoints.convertRequestQuoteToOrder, { data: { status: 'converted', quote_id: quoteId }, headers : auth  });
+		return responseBody;
+	}
+
 	/**
 	 * order downloads  api methods
 	 */

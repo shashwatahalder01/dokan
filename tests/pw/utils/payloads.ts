@@ -1666,7 +1666,7 @@ export const payloads = {
 	// quote rule
 
 	createQuoteRule: () => ({
-		rule_name: 'QR_' + faker.string.alphanumeric(5),
+		rule_name: 'QR_' + faker.string.uuid(),
 		selected_user_role: ['customer'],
 		category_ids: [],
 		product_ids: [],
@@ -1706,20 +1706,19 @@ export const payloads = {
 		status: 'pending'
 	}),
 
-	// updateRequestQuote: {
-	// 	quote_title: 'updated_QT_' + faker.string.alphanumeric(5),
-	// 	customer_info: {
-	// 		name_field: 'customer1',
-	// 		email_field: 'customer1@yopmail.com',
-	// 		company_field: 'c1',
-	// 		phone_field: '0987654321',
-	// 	},
-	// 	user_id: '2',
-	// 	product_ids: [''],
-	// 	offer_price: ['30'],
-	// 	offer_product_quantity: ['20'],
-
-	// },
+	updateRequestQuote: {
+		quote_title: 'updated_QT_' + faker.string.alphanumeric(5),
+		customer_info: {
+			name_field: 'customer1',
+			email_field: 'customer1@yopmail.com',
+			company_field: 'c1',
+			phone_field: '0987654321',
+		},
+		user_id: '2',
+		product_ids: [''],
+		offer_price: ['30'],
+		offer_product_quantity: ['20'],
+	},
 
 	convertToOrder: {
 		quote_id: '',

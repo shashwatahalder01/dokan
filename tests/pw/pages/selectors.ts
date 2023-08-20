@@ -3768,6 +3768,7 @@ export const selector = {
 
 
 			viewQuoteDetails: (quoteTitle: string) => `//td[normalize-space()="${quoteTitle}"]/..//a[@class="woocommerce-button button view"]`,
+
 			quoteDetails: {
 
 				basicDetails:{
@@ -3808,8 +3809,8 @@ export const selector = {
 					quoteTotalsDiv: '.cart_totals',
 					quoteTotalsTable: '//table[contains(@class,"table_quote_totals")]',
 
-					subTotalText: '//tr[@class="cart-subtotal"]',
-					offeredPriceSubtotalText: '//tr[@class="cart-subtotal offered"]',
+					subTotalText: '//tr[@class="cart-subtotal"]//th',
+					offeredPriceSubtotalText: '//tr[@class="cart-subtotal offered"]//th',
 
 					subTotalValue: '//td[@data-title="Subtotal (standard)"]',
 					offeredPriceSubtotalValue: '//td[@data-title="Offered Price Subtotal"]',
@@ -5852,15 +5853,16 @@ export const selector = {
 
 		// Customer Home Menus
 		cHomeMenus: {
-			home: '//a[contains(text(),"Home")]',
-			cart: '//a[contains(text(),"Cart")]',
-			checkout: '//a[contains(text(),"Checkout")]',
-			dashboard: '//a[contains(text(),"Dashboard")]',
-			myAccount: '//a[contains(text(),"My account")]',
-			myOrders: '//a[contains(text(),"My Orders")]',
-			samplePage: '//a[contains(text(),"Sample Page")]',
-			shop: '//a[contains(text(),"Shop")]',
-			storeList: '//a[contains(text(),"Store List")]',
+			home: '//ul[@class="nav-menu"]//a[contains(text(),"Home")]',
+			cart: '//ul[@class="nav-menu"]//a[contains(text(),"Cart")]',
+			checkout: '//ul[@class="nav-menu"]//a[contains(text(),"Checkout")]',
+			dashboard: '//ul[@class="nav-menu"]//a[contains(text(),"Dashboard")]',
+			myAccount: '//ul[@class="nav-menu"]//a[contains(text(),"My account")]',
+			myOrders: '//ul[@class="nav-menu"]//a[contains(text(),"My Orders")]',
+			requestForQuote: '//ul[@class="nav-menu"]//a[contains(text(),"Request for Quote")]',
+			samplePage: '//ul[@class="nav-menu"]//a[contains(text(),"Sample Page")]',
+			shop: '//ul[@class="nav-menu"]//a[contains(text(),"Shop")]',
+			storeList: '//ul[@class="nav-menu"]//a[contains(text(),"Store List")]',
 		},
 
 		// Customer My Account
@@ -6560,6 +6562,113 @@ export const selector = {
 
 		},
 
+		cRequestForQuote:{
+
+			singleProductDetails:{
+				addToQuote: 'a.dokan_request_button',
+				viewQuote: '.added_to_quote',
+			},
+
+			orderDetails:{
+				quoteNoteOnOrderDetails: '//td[normalize-space()="Created by converting quote to order."]',
+			},
+
+
+			// requestForQuoteText
+
+			requestForQuoteText: '//h1[normalize-space()="Request for Quote"]',
+			noQuotesFound: '//p[@class="cart-empty"]',
+			returnToShop: '//a[normalize-space()="Return To Shop"]',
+
+			quoteItemDetails:{
+				quoteDetailsText:'//h2[normalize-space()="Quote Details"]',
+
+				table:{
+					quoteDetailsTable: '//table[contains(@class,"quote_details") and contains(@class,"cart")]',
+					productColumn: '//th[@class="product-name"]',
+					priceColumn: '//th[normalize-space()="Price"]',
+					offeredPriceColumn: '//th[normalize-space()="Offered Price"]',
+					quantityColumn: '//th[@class="product-quantity"]',
+					subtotalColumn: '//th[normalize-space()="Subtotal"]',
+					offeredSubtotalColumn: '//th[normalize-space()="Offered Subtotal"]',
+				},
+
+			},
+
+			quoteTotals:{
+				quoteTotalsTitle: '//h2[normalize-space()="Quote totals"]',
+				quoteTotalsDiv: '.cart_totals',
+				quoteTotalsTable: '//table[contains(@class,"table_quote_totals")]',
+
+				subTotalText: '//tr[@class="cart-subtotal"]',
+				offeredPriceSubtotalText: '//tr[@class="cart-subtotal offered"]//th',
+
+				subTotalValue: '//td[@data-title="Subtotal (standard)"]',
+				offeredPriceSubtotalValue: '//td[@data-title="Offered Price Subtotal"]',
+			},
+
+			offeredPriceInput: (productName: string) => `//a[normalize-space()="${productName}"]/../..//input[@class="input-text offered-price-input text"]`,
+			quantityInput: (productName: string) => `//a[normalize-space()="${productName}"]/../..//div[@class="quantity"]//input`,
+
+			updateQuote: 'button#dokan_update_quote_btn',
+			placeQuote: 'button[name="dokan_checkout_place_quote"]',
+
+			guest:{
+				fullName: 'input[name="name_field"]',
+				email: 'input[name="email_field"]',
+				companyName: 'input[name="company_field"]',
+				phoneNumber: 'input[name="phone_field"]',
+			},
+
+			message: '.woocommerce-message',
+
+
+			// requested quote
+
+			requestedQuote: {
+				requestedQuoteText: '//h1[normalize-space()="Requested Quotes"]',
+
+				noQuoteMessage: '//div[contains(@class, "woocommerce-message woocommerce-message--info")]',
+				goToShop: '//a[normalize-space()="Go to shop"]',
+
+				// table
+				table: {
+					quoteTable: 'table.my_account_quotes',
+					quoteColumn: '//th[normalize-space()="Quote #"]',
+					quoteNameColumn: '//th[normalize-space()="Quote Name"]',
+					statusColumn: '//th[normalize-space()="Status"]',
+					dateColumn: '//th[normalize-space()="Date"]',
+					actionColumn: '//th[normalize-space()="Action"]',
+
+				},
+
+				pagination: 'ul.pagination',
+
+				viewQuoteDetails: (quoteId: string) => `//td[normalize-space()="Quote ${quoteId}"]/..//a[@class="woocommerce-button button view"]`,
+
+				requestedQuoteDetails: {
+					requestedQuoteText: '//h3[normalize-space()="Requested Quotes"]',
+
+					basicDetails:{
+						basicDetailsTable:'(//table[@class="shop_table shop_table_responsive table_quote_totals dokan-table order-items"])[1]',
+						quoteNumberText: '//th[normalize-space()="Quote #"]',
+						quoteDateText: '//th[normalize-space()="Quote Date"]',
+						quoteStatusText: '//th[normalize-space()="Current Status"]',
+
+						quoteNumberValue: '//th[normalize-space()="Quote #"]/..//td',
+						quoteDateValue: '//th[normalize-space()="Quote Date"]/..//td',
+						quoteStatusValue: '//th[normalize-space()="Current Status"]/..//td',
+					},
+
+					viewOrder: '//a[normalize-space()="View Order"]',
+
+				},
+
+			},
+
+
+		},
+
 
 		// Customer Header Cart
 		cHeaderCart: {
@@ -6767,7 +6876,6 @@ export const selector = {
 				shippingCostValue: '//th[normalize-space()="Shipping:"]/..//span[@class="woocommerce-Price-amount amount"]',
 				paymentMethodValue: '//th[normalize-space()="Payment method:"]//..//td',
 				orderTotalValue: '//th[normalize-space()="Total:"]//..//span[@class="woocommerce-Price-amount amount"]',
-
 
 			},
 

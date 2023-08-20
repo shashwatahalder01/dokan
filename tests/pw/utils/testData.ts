@@ -740,6 +740,8 @@ export const data = {
 		// customer
 			myAccount: 'my-account',
 			myOrders: 'my-orders',
+			requestForQuote: 'request-quote',
+			requestedQuote: 'my-account/request-a-quote',
 			accountMigration: 'my-account/account-migration',
 			orderCancel: 'cart/?cancel_order',
 			orderAgain: 'cart/?order_again',
@@ -771,6 +773,7 @@ export const data = {
 			orderDetails: (orderId: string) => `my-account/view-order/${orderId}`,
 			vendorDetails: (storeName: string) => `store/${storeName}`,
 			storeReviews: (storeName: string) => `store/${storeName}/reviews`,
+			quoteDetails: (quotId: string) => `my-account/request-a-quote/${quotId}`,
 
 			productReview: 'wp-comments-post.php',
 			submitSupport: 'wp-comments-post.php',
@@ -1498,7 +1501,20 @@ export const data = {
 			offeredPrice: '80',
 			quantity:'20'
 
-		}
+		},
+
+		customerQuoteProduct:{
+			productName: '',
+			offeredPrice: '50',
+			quantity:'10'
+		},
+
+		guest: () => ({
+			fullName: faker.person.fullName({ sex:'male' }),
+			email: faker.person.firstName('male') + '@email.com',
+			companyName: faker.company.name(),
+			phoneNumber: faker.phone.number('(###) ###-####'),
+		}),
 	},
 
 

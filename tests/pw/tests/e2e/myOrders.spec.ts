@@ -28,7 +28,7 @@ test.describe('My Orders functionality test', () => {
 	});
 
 
-	test('dokan my orders page is rendering properly @lite', async ( ) => {
+	test('customer my orders page is rendering properly @lite', async ( ) => {
 		await customer.myOrdersRenderProperly();
 	});
 

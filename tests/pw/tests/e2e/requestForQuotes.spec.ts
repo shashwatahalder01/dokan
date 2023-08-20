@@ -5,7 +5,7 @@ import { data } from 'utils/testData';
 import { payloads } from 'utils/payloads';
 
 
-test.describe('Request for quotation test', () => {
+test.describe('Request for quotation test admin', () => {
 
 	let admin: RequestForQuotationsPage;
 	let aPage: Page;
@@ -76,7 +76,7 @@ test.describe('Request for quotation test', () => {
 });
 
 
-test.describe('Request for quotation test', () => {
+test.describe('Request for quotation test vendor', () => {
 
 	let vendor: RequestForQuotationsPage;
 	let vPage:Page;
@@ -126,6 +126,80 @@ test.describe('Request for quotation test', () => {
 		// const [, quoteId] = await apiUtils.createRequestQuote({ ...payloads.createRequestQuote(), product_ids: productId, quote_title: quoteTitle, status: 'approve' }, payloads.adminAuth);
 		await vendor.vendorConvertQuoteToOrder(quoteId);
 	});
+
+
+});
+
+
+test.describe('Request for quotation test customer', () => {
+
+	let customer: RequestForQuotationsPage;
+	let guest: RequestForQuotationsPage;
+	let cPage:Page, uPage:Page;
+	let apiUtils: ApiUtils;
+	const productId: string[] = [];
+	const quoteTitle = data.requestForQuotation.quote.title();
+	let productName: string;
+	let pId: string;
+	let quoteId: string;
+
+
+	test.beforeAll(async ({ browser, request }) => {
+
+		const customerContext = await browser.newContext({ storageState: data.auth.customerAuthFile });
+		cPage = await customerContext.newPage();
+		customer = new RequestForQuotationsPage(cPage);
+
+		// const guestContext = await browser.newContext({ storageState: { cookies: [], origins: [] } });
+		// uPage = await guestContext.newPage();
+		// guest =  new RequestForQuotationsPage(uPage);
+
+		apiUtils = new ApiUtils(request);
+
+		[, pId, productName] = await apiUtils.createProduct(payloads.createProduct(), payloads.vendorAuth);
+		productId.push(pId);
+		await apiUtils.createQuoteRule({ ...payloads.createQuoteRule(), product_ids: productId, apply_on_all_product: '0', }, payloads.adminAuth);
+		[, quoteId] = await apiUtils.createRequestQuote({ ...payloads.createRequestQuote(), product_ids: productId, quote_title: quoteTitle }, payloads.adminAuth);
+
+		// console.log(productName, quoteId);
+
+	});
+
+
+	test.afterAll(async () => {
+		await cPage.close();
+		// await uPage.close();
+	});
+
+
+	test.only('customer request for quote menu page is rendering properly @pro @explo', async ( ) => {
+		await customer.requestForQuoteRenderProperly();
+	});
+
+	test.only('customer requested quote page is rendering properly @pro @explo', async ( ) => {
+		await customer.requestedQuotesRenderProperly();
+	});
+
+	test.only('customer can view requested quote details @pro @explo', async ( ) => {
+		await customer.customerViewQuoteDetails(quoteTitle);
+	});
+
+	test.only('customer can update quote request @pro', async ( ) => {
+		await customer.customerUpdateQuoteRequest(quoteId, { ...data.requestForQuotation.customerQuoteProduct, productName:productName });
+	});
+
+	test.only('customer can pay order converted from quote request @pro', async ( ) => {
+		await apiUtils.convertQuoteToOrder(quoteId, payloads.adminAuth);
+		await customer.payConvertedQuote(quoteId);
+	});
+
+	test.only('customer can quote product @pro @explo', async ( ) => {
+		await customer.customerQuoteProduct({ ...data.requestForQuotation.customerQuoteProduct, productName:productName });
+	});
+
+	// test.only('guest customer can quote product @pro @explo', async ( ) => {
+	// 	await guest.customerQuoteProduct({ ...data.requestForQuotation.customerQuoteProduct, productName:productName }, data.requestForQuotation.guest());
+	// });
 
 
 });

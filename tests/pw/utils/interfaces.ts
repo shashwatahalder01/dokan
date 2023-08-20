@@ -1270,11 +1270,18 @@ export interface requestForQuotation {
 	}
 
 
-	vendorUpdateQuote:{
+	userQuote:{
 		productName: string;
 		offeredPrice: string;
 		quantity: string;
 
+	}
+
+	guest:{
+		fullName: string;
+		email: string;
+		companyName: string;
+		phoneNumber: string;
 	}
 
 }
