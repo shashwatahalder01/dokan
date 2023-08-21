@@ -748,11 +748,13 @@ export const data = {
 			orderPay: 'checkout/order-pay',
 			orderReceived: 'checkout/order-received',
 			customerLogout: 'my-account/customer-logout',
+
 			rmaRequests: 'my-account/rma-requests',
 			viewRmaRequests: 'my-account/view-rma-requests',
 			requestWarranty: 'my-account/request-warranty',
 			vendors: 'my-account/following',
 			supportTickets: 'my-account/support-tickets',
+
 			productCustomerPage: 'product',
 			ordersCustomerPage: 'orders',
 			shop: 'shop',

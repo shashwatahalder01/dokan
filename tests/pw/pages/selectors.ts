@@ -6070,8 +6070,35 @@ export const selector = {
 
 		// Customer Followed Vendors
 		cVendors: {
-			visitStore: (storeName: string) => `//a[contains(text(),'${storeName}')]/../../../../..//a[@title='Visit Store']`,
-			followUnFollowStore: (storeName: string) => `//a[contains(text(),'${storeName}')]/../../../../..//button[contains(@class,'dokan-follow-store-button')]`,
+
+			noVendorFound: '.dokan-error',
+
+			// Store card
+			storeCard:{
+				storeCardDiv: 'div.store-wrapper',
+				storeCardHeader: 'div.store-header',
+				// header details
+				storeBanner: 'div.store-banner',
+				openCloseStatus: 'span.dokan-store-is-open-close-status',
+
+				storeCardContent: 'div.store-content',
+				// content details
+				featuredLabel: 'div.featured-label',
+				storeData: 'div.store-data',
+				storeAddress: 'p.store-address',
+				storePhone: 'p.store-phone',
+
+				storeCardFooter: 'div.store-footer',
+				// footer details
+				storeAvatar: 'div.seller-avatar',
+				visitStore: 'a[title="Visit Store"]',
+				followUnFollowButton: 'button.dokan-follow-store-button',
+
+			},
+
+			visitStore: (storeName: string) => `//a[text()='${storeName}']/../../../../..//a[@title='Visit Store']`,
+			followUnFollowStore: (storeName: string) => `//a[text()='${storeName}']/../../../../..//button[contains(@class,'dokan-follow-store-button')]`,
+			currentFollowStatus: (storeName: string) => `//a[text()='${storeName}']/../../../../..//button[contains(@class,'dokan-follow-store-button')]//span[@class='dokan-follow-store-button-label-current']`,
 		},
 
 		// Customer Support Tickets

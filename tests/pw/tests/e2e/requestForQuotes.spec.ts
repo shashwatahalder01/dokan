@@ -124,7 +124,7 @@ test.describe('Request for quotation test vendor', () => {
 		await vendor.vendorApproveQuoteRequest(quoteId);
 	});
 
-	test.only('vendor can convert quote request to order @pro', async ( ) => {
+	test('vendor can convert quote request to order @pro', async ( ) => {
 		// const [, quoteId] = await apiUtils.createRequestQuote({ ...payloads.createRequestQuote(), product_ids: productId, quote_title: quoteTitle, status: 'approve', user_id: CUSTOMER_ID }, payloads.adminAuth);
 		await vendor.vendorConvertQuoteToOrder(quoteId);
 	});

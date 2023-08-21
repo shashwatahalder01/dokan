@@ -27,6 +27,20 @@ export class FollowStorePage extends CustomerPage {
 	}
 
 
+	async customerFollowedVendorsRenderProperly(){
+		await this.goIfNotThere(data.subUrls.frontend.vendors);
+
+		const noVendorsFound = await this.isVisible(selector.customer.cVendors.noVendorFound);
+		if (noVendorsFound){
+			await this.toContainText(selector.customer.cVendors.noVendorFound, 'No vendor found!');
+			return;
+		}
+
+		await this.notToHaveCount(selector.customer.cVendors.storeCard.storeCardDiv, 0);
+
+	}
+
+
 	// follow vendor
 	async followStore(storeName: string, followLocation: string): Promise<void> {
 		let currentFollowStatus: boolean;

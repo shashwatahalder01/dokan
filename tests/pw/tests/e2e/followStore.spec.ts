@@ -36,6 +36,9 @@ test.describe('Follow stores functionality test', () => {
 
 	// follow store
 
+	test('customer followed vendors menu page is rendering properly @pro @explo', async ( ) => {
+		await customer.customerFollowedVendorsRenderProperly();
+	});
 
 	test('customer can follow store on store listing @pro', async ( ) => {
 		await customer.followStore(data.predefined.vendorStores.vendor1, data.predefined.vendorStores.followFromStoreListing);
