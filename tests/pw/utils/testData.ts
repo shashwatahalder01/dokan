@@ -751,6 +751,8 @@ export const data = {
 			rmaRequests: 'my-account/rma-requests',
 			viewRmaRequests: 'my-account/view-rma-requests',
 			requestWarranty: 'my-account/request-warranty',
+			vendors: 'my-account/following',
+			supportTickets: 'my-account/support-tickets',
 			productCustomerPage: 'product',
 			ordersCustomerPage: 'orders',
 			shop: 'shop',
@@ -768,7 +770,6 @@ export const data = {
 			shippingAddressCheckout: 'wc-ajax=update_order_review',
 			editAccountCustomer: 'my-account/edit-account',
 			becomeVendor: 'my-account/account-migration',
-			supportTickets: 'my-account/support-tickets',
 			productDetails: (productName: string) => `product/${productName}`,
 			orderDetails: (orderId: string) => `my-account/view-order/${orderId}`,
 			vendorDetails: (storeName: string) => `store/${storeName}`,
@@ -811,6 +812,7 @@ export const data = {
 				auction: 'dashboard/auction',
 				auctionActivity: 'dashboard/auction-activity',
 				booking: 'dashboard/booking',
+				addBooking: 'dashboard/booking/add-booking',
 				manageBooking: 'dashboard/booking/my-bookings',
 				bookingCalendar: 'dashboard/booking/calendar',
 				manageResources: 'dashboard/booking/resources',
@@ -1505,8 +1507,8 @@ export const data = {
 
 		customerQuoteProduct:{
 			productName: '',
-			offeredPrice: '50',
-			quantity:'10'
+			offeredPrice: '30',
+			quantity:'20'
 		},
 
 		guest: () => ({

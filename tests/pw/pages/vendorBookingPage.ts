@@ -298,4 +298,25 @@ export class BookingPage extends VendorPage {
 	}
 
 
+	// add booking
+	async addBooking(){
+		await this.goIfNotThere(data.subUrls.frontend.vDashboard.addBooking);
+		// await this.clickAndWaitForLoadState(selector.vendor.vBooking.addBookingBtn);
+
+		await this.click(selector.vendor.vBooking.addBooking.selectCustomerDropdown);
+		await this.typeAndWaitForResponse(data.subUrls.ajax, selector.vendor.vBooking.addBooking.selectCustomerInput, '');
+		await this.toContainText(selector.vendor.vBooking.addBooking.searchedResult, '');
+		await this.press(data.key.arrowDown);
+		await this.press(data.key.enter);
+
+		await this.click(selector.vendor.vBooking.addBooking.selectABookableProductDropdown);
+		await this.click(selector.vendor.vBooking.addBooking.selectABookableProduct('productName'));
+
+		await this.click(selector.vendor.vBooking.addBooking.createANewCorrespondingOrderForThisNewBooking);
+		await this.clickAndWaitForResponseAndLoadState(data.subUrls.frontend.vDashboard.addBooking, selector.vendor.vBooking.addBooking.next);
+
+		await this.click(selector.vendor.vBooking.addBooking.addBooking);
+	}
+
+
 }

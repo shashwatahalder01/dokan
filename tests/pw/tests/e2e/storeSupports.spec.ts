@@ -98,8 +98,9 @@ test.describe('Store Support test', () => {
 	//todo:count decrease for viewing a support ticket
 
 
-	// customer
-
+	test('customer store support menu page is rendering properly @pro @explo', async ( ) => {
+		await customer.customerStoreSupportRenderProperly();
+	});
 
 	test('customer can ask for store support on single product @pro', async ( ) => {
 		await customer.storeSupport(data.predefined.simpleProduct.product1.name, data.customer.getSupport, 'product');

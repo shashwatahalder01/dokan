@@ -121,6 +121,15 @@ test.describe('Booking Product test', () => {
 		await vendor.deleteBookingResource(bookingResourceName);
 	});
 
+	//todo: vendor can add booking resource to booking product
+
+	//todo: add vendor can add booking both customer and guest
 	//todo: add customer tests
+
+
+	// test('vendor can add booking @pro', async ( ) => {
+	// 	await vendor.addBooking();
+	// });
+
 
 });

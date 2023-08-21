@@ -291,6 +291,22 @@ export class StoreSupportsPage extends AdminPage {
 
 	// customer
 
+	async customerStoreSupportRenderProperly(){
+		await this.goIfNotThere(data.subUrls.frontend.supportTickets);
+
+		// menu elements are visible
+		await this.multipleElementVisible(selector.customer.cSupportTickets.menus);
+		const noSupportTicket =  await this.isVisible(selector.customer.cSupportTickets.noSupportTicketFound);
+		if (noSupportTicket) {
+			console.log('No Support Tickets Found!!');
+			return;
+		}
+
+		// store support table elements are visible
+		await this.multipleElementVisible(selector.customer.cSupportTickets.table);
+
+	}
+
 
 	// customer ask for store support
 	async storeSupport(input: string, getSupport: customer['getSupport'], action: string): Promise<void> {

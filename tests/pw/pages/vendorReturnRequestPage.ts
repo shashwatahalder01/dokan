@@ -26,8 +26,8 @@ export class VendorReturnRequestPage extends VendorPage {
 		// return request table elements are visible
 		await this.multipleElementVisible(selector.vendor.vReturnRequest.table);
 
-		const noBookingsFound = await this.isVisible(selector.vendor.vReturnRequest.noRowsFound);
-		if (noBookingsFound){
+		const noRequestsFound = await this.isVisible(selector.vendor.vReturnRequest.noRowsFound);
+		if (noRequestsFound){
 			return;
 		}
 
@@ -109,6 +109,26 @@ export class VendorReturnRequestPage extends VendorPage {
 
 
 	// customer
+
+	// customer return request render properly
+	async customerReturnRequestRenderProperly(){
+		await this.goIfNotThere(data.subUrls.frontend.rmaRequests);
+
+		// allRequestText is  visible
+		await this.toBeVisible(selector.customer.cRma.allRequestText);
+
+		// return request table elements are visible
+		await this.multipleElementVisible(selector.customer.cRma.table);
+
+		const noRequestsFound = await this.isVisible(selector.customer.cRma.noRowsFound);
+		if (noRequestsFound){
+			console.log('No request found');
+			return;
+		}
+
+		await this.notToHaveCount(selector.customer.cRma.numberOfRowsFound, 0);
+
+	}
 
 
 	// customer request warranty

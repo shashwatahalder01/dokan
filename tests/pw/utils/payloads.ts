@@ -1667,7 +1667,7 @@ export const payloads = {
 
 	createQuoteRule: () => ({
 		rule_name: 'QR_' + faker.string.uuid(),
-		selected_user_role: ['customer'],
+		selected_user_role: ['customer', 'guest'],
 		category_ids: [],
 		product_ids: [],
 		hide_price: '1',
@@ -1680,7 +1680,7 @@ export const payloads = {
 	}),
 
 	updateQuoteRule: {
-		rule_name: 'updated_QR_' + faker.string.alphanumeric(5),
+		rule_name: 'updated_QR_' + faker.string.uuid(),
 		selected_user_role: ['customer'],
 		hide_price: '0',
 		hide_price_text: 'Price is covered',
@@ -1693,7 +1693,8 @@ export const payloads = {
 	// request quote
 
 	createRequestQuote: () => ({
-		quote_title: 'QT_' + faker.string.alphanumeric(5),
+		quote_title: 'QT_' + faker.string.uuid(),
+		// user_id: '',
 		customer_info: {
 			name_field: 'customer1',
 			email_field: 'customer1@yopmail.com',
@@ -1707,14 +1708,14 @@ export const payloads = {
 	}),
 
 	updateRequestQuote: {
-		quote_title: 'updated_QT_' + faker.string.alphanumeric(5),
+		quote_title: 'updated_QT_' + faker.string.uuid(),
+		// user_id: '',
 		customer_info: {
 			name_field: 'customer1',
 			email_field: 'customer1@yopmail.com',
 			company_field: 'c1',
 			phone_field: '0987654321',
 		},
-		user_id: '2',
 		product_ids: [''],
 		offer_price: ['30'],
 		offer_product_quantity: ['20'],

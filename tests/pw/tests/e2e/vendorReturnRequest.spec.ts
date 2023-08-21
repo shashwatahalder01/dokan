@@ -82,6 +82,13 @@ test.describe('Vendor RMA test', () => {
 		await vendor.vendorDeleteRmaRequest(orderId);
 	});
 
+
+	// customer
+
+	test('customer return request menu page is rendering properly @pro @explo', async ( ) => {
+		await customer.customerReturnRequestRenderProperly();
+	});
+
 	test('customer can request warranty @pro', async ( ) => {
 		await customer1.addProductToCartFromSingleProductPage(data.predefined.simpleProduct.product1.name);
 		await customer1.goToCheckout();

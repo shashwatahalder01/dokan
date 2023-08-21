@@ -3807,7 +3807,7 @@ export const selector = {
 				quoteTotals:{
 					quoteTotalsTitle: '//h2[normalize-space()="Quote totals"]',
 					quoteTotalsDiv: '.cart_totals',
-					quoteTotalsTable: '//table[contains(@class,"table_quote_totals")]',
+					quoteTotalsTable: '//div[@class="cart_totals"]//table[contains(@class,"table_quote_totals")]',
 
 					subTotalText: '//tr[@class="cart-subtotal"]//th',
 					offeredPriceSubtotalText: '//tr[@class="cart-subtotal offered"]//th',
@@ -4725,13 +4725,19 @@ export const selector = {
 
 			// Add Booking
 			addBooking: {
-				customerId: '#select2-customer_id-container',
-				selectABookableProduct: '#select2-bookable_product_id-container',
+				selectCustomerDropdown: '//span[@id="select2-customer_id-container"]/..//span[@class="select2-selection__arrow"]',
+				selectCustomerInput: '.select2-search__field',
+				searchedResult:'.select2-results__option.select2-results__option--highlighted',
+				selectABookableProductDropdown: '//span[@id="select2-bookable_product_id-container"]/..//span[@class="select2-selection__arrow"]',
+				selectABookableProduct: (productName: string) => `//li[contains(@class,"select2-results__option") and contains(text(), '${productName}')]`,
+
 				createANewCorrespondingOrderForThisNewBooking: '//input[@name="booking_order" and @value="new"]',
 				assignThisBookingToAnExistingOrderWithThisId: '//input[@name="booking_order" and @value="existing"]',
 				bookingOrderId: '.text',
 				dontCreateAnOrderForThisBooking: '//label[normalize-space()="Don"t create an order for this booking."]/..//input',
 				next: '.button-primary',
+
+				addBooking: 'input[value="Add Booking"][type="submit"]',
 			},
 
 
@@ -5120,12 +5126,12 @@ export const selector = {
 			//table
 			table:{
 				table: '.dokan-support-table',
-				TopicColumn: '//th[normalize-space()="Topic"]',
-				TitleColumn: '//th[normalize-space()="Title"]',
-				CustomerColumn: '//th[normalize-space()="Customer"]',
-				StatusColumn: '//th[normalize-space()="Status"]',
-				DateColumn: '//th[normalize-space()="Date"]',
-				ActionColumn: '//th[normalize-space()="Action"]',
+				topicColumn: '//th[normalize-space()="Topic"]',
+				titleColumn: '//th[normalize-space()="Title"]',
+				customerColumn: '//th[normalize-space()="Customer"]',
+				statusColumn: '//th[normalize-space()="Status"]',
+				dateColumn: '//th[normalize-space()="Date"]',
+				actionColumn: '//th[normalize-space()="Action"]',
 			},
 
 			numOfRowsFound: 'table.dokan-support-table tbody tr',
@@ -6011,6 +6017,23 @@ export const selector = {
 
 		// Customer Rma Requests
 		cRma: {
+
+			allRequestText: '//h2[normalize-space()="All Requests"]',
+
+			// table
+			table: {
+				rmaRequestsTable: 'table.my_account_orders.table.table-striped',
+				orderIdColumn: '//th[@class="rma-order-id"]',
+				vendor: '//th[@class="rma-vendor"]',
+				type: '//th[@class="rma-details"]',
+				status: '//th[@class="rma-status"]',
+
+			},
+
+			noRowsFound: '//td[normalize-space()="No request found"]',
+			numberOfRowsFound: 'table tbody tr.order',
+
+
 			view: (orderNumber: string) => `//a[contains(text(),'Order #${orderNumber}')]/../..//a[@class="woocommerce-button button view"]`,
 			// Conversations
 			message: '#message',
@@ -6053,11 +6076,26 @@ export const selector = {
 
 		// Customer Support Tickets
 		cSupportTickets: {
-			// Menus
-			allTickets: '//ul[contains(@class,"subsubsub")]//a[contains(text(),"All Tickets")]',
-			openTickets: '//ul[contains(@class,"subsubsub")]//a[contains(text(),"Open Tickets")]',
-			closedTickets: '//ul[contains(@class,"subsubsub")]//a[contains(text(),"Closed Tickets")]',
 
+			// Menus
+			menus:{
+				allTickets: '//ul[contains(@class,"subsubsub")]//a[contains(text(),"All Tickets")]',
+				openTickets: '//ul[contains(@class,"subsubsub")]//a[contains(text(),"Open Tickets")]',
+				closedTickets: '//ul[contains(@class,"subsubsub")]//a[contains(text(),"Closed Tickets")]',
+			},
+
+
+			//table
+			table:{
+				table: '.dokan-support-table',
+				topicColumn: '//th[normalize-space()="Topic"]',
+				storeNameColumn: '//th[normalize-space()="Store Name"]',
+				titleColumn: '//th[normalize-space()="Title"]',
+				statusColumn: '//th[normalize-space()="Status"]',
+				dateColumn: '//th[normalize-space()="Date"]',
+			},
+
+			noSupportTicketFound: '//div[@class="dokan-error" and contains(text(), "No tickets found!")]',
 			firstOpenTicket: '(//div[@class="dokan-support-topics-list"]//tr//td//a)[1]',
 
 			chatText: (text: string) => `//div[contains(@class, 'dokan-chat-text')]//p[contains(text(),'${text}')]`,
@@ -6564,7 +6602,7 @@ export const selector = {
 		cRequestForQuote:{
 
 			singleProductDetails:{
-				addToQuote: 'a.dokan_request_button',
+				addToQuote: '.cart a.dokan_request_button',
 				viewQuote: '.added_to_quote',
 			},
 
@@ -6573,57 +6611,57 @@ export const selector = {
 			},
 
 
-			// requestForQuoteText
+			// request for quote
+			requestForQuote:{
 
-			requestForQuoteText: '//h1[normalize-space()="Request for Quote"]',
-			noQuotesFound: '//p[@class="cart-empty"]',
-			returnToShop: '//a[normalize-space()="Return To Shop"]',
+				requestForQuoteText: '//h1[normalize-space()="Request for Quote"]',
+				noQuotesFound: '//p[@class="cart-empty"]',
+				returnToShop: '//a[normalize-space()="Return To Shop"]',
 
-			quoteItemDetails:{
-				quoteDetailsText:'//h2[normalize-space()="Quote Details"]',
+				quoteItemDetails:{
+					quoteDetailsText:'//h2[normalize-space()="Quote Details"]',
 
-				table:{
-					quoteDetailsTable: '//table[contains(@class,"quote_details") and contains(@class,"cart")]',
-					productColumn: '//th[@class="product-name"]',
-					priceColumn: '//th[normalize-space()="Price"]',
-					offeredPriceColumn: '//th[normalize-space()="Offered Price"]',
-					quantityColumn: '//th[@class="product-quantity"]',
-					subtotalColumn: '//th[normalize-space()="Subtotal"]',
-					offeredSubtotalColumn: '//th[normalize-space()="Offered Subtotal"]',
+					table:{
+						quoteDetailsTable: '//table[contains(@class,"quote_details") and contains(@class,"cart")]',
+						productColumn: '//th[@class="product-name"]',
+						priceColumn: '//th[normalize-space()="Price"]',
+						offeredPriceColumn: '//th[normalize-space()="Offered Price"]',
+						quantityColumn: '//th[@class="product-quantity"]',
+						subtotalColumn: '//th[normalize-space()="Subtotal"]',
+						offeredSubtotalColumn: '//th[normalize-space()="Offered Subtotal"]',
+					},
 				},
 
+				quoteTotals:{
+					quoteTotalsTitle: '//h2[normalize-space()="Quote totals"]',
+					quoteTotalsDiv: '.cart_totals',
+					quoteTotalsTable: '//div[@class="cart_totals"]//table[contains(@class,"table_quote_totals")]',
+
+					subTotalText: '//tr[@class="cart-subtotal"]',
+					offeredPriceSubtotalText: '//tr[@class="cart-subtotal offered"]//th',
+
+					subTotalValue: '//td[@data-title="Subtotal (standard)"]',
+					offeredPriceSubtotalValue: '//td[@data-title="Offered Price Subtotal"]',
+				},
+
+				offeredPriceInput: (productName: string) => `//a[normalize-space()="${productName}"]/../..//input[@class="input-text offered-price-input text"]`,
+				quantityInput: (productName: string) => `//a[normalize-space()="${productName}"]/../..//div[@class="quantity"]//input`,
+
+				updateQuote: 'button#dokan_update_quote_btn',
+				placeQuote: 'button[name="dokan_checkout_place_quote"]',
+
+				guest:{
+					fullName: 'input[name="name_field"]',
+					email: 'input[name="email_field"]',
+					companyName: 'input[name="company_field"]',
+					phoneNumber: 'input[name="phone_field"]',
+				},
+
+				message: '.woocommerce-message',
 			},
-
-			quoteTotals:{
-				quoteTotalsTitle: '//h2[normalize-space()="Quote totals"]',
-				quoteTotalsDiv: '.cart_totals',
-				quoteTotalsTable: '//table[contains(@class,"table_quote_totals")]',
-
-				subTotalText: '//tr[@class="cart-subtotal"]',
-				offeredPriceSubtotalText: '//tr[@class="cart-subtotal offered"]//th',
-
-				subTotalValue: '//td[@data-title="Subtotal (standard)"]',
-				offeredPriceSubtotalValue: '//td[@data-title="Offered Price Subtotal"]',
-			},
-
-			offeredPriceInput: (productName: string) => `//a[normalize-space()="${productName}"]/../..//input[@class="input-text offered-price-input text"]`,
-			quantityInput: (productName: string) => `//a[normalize-space()="${productName}"]/../..//div[@class="quantity"]//input`,
-
-			updateQuote: 'button#dokan_update_quote_btn',
-			placeQuote: 'button[name="dokan_checkout_place_quote"]',
-
-			guest:{
-				fullName: 'input[name="name_field"]',
-				email: 'input[name="email_field"]',
-				companyName: 'input[name="company_field"]',
-				phoneNumber: 'input[name="phone_field"]',
-			},
-
-			message: '.woocommerce-message',
 
 
 			// requested quote
-
 			requestedQuote: {
 				requestedQuoteText: '//h1[normalize-space()="Requested Quotes"]',
 
@@ -6645,8 +6683,10 @@ export const selector = {
 
 				viewQuoteDetails: (quoteId: string) => `//td[normalize-space()="Quote ${quoteId}"]/..//a[@class="woocommerce-button button view"]`,
 
+
+				// requested quote details
 				requestedQuoteDetails: {
-					requestedQuoteText: '//h3[normalize-space()="Requested Quotes"]',
+					requestedQuoteText: '//h1[normalize-space()="Requested Quotes"]',
 
 					basicDetails:{
 						basicDetailsTable:'(//table[@class="shop_table shop_table_responsive table_quote_totals dokan-table order-items"])[1]',
@@ -6660,6 +6700,41 @@ export const selector = {
 					},
 
 					viewOrder: '//a[normalize-space()="View Order"]',
+
+
+					quoteItemDetails:{
+						quoteDetailsText:'//h2[normalize-space()="Quote Details"]',
+
+						table:{
+							quoteDetailsTable: '//table[contains(@class,"quote_details") and contains(@class,"cart")]',
+							productColumn: '//th[@class="product-name"]',
+							priceColumn: '//th[normalize-space()="Price"]',
+							offeredPriceColumn: '//th[normalize-space()="Offered Price"]',
+							quantityColumn: '//th[@class="product-quantity"]',
+							subtotalColumn: '//th[normalize-space()="Subtotal"]',
+							offeredSubtotalColumn: '//th[normalize-space()="Offered Subtotal"]',
+						},
+
+					},
+
+					quoteTotals:{
+						quoteTotalsTitle: '//h2[normalize-space()="Quote totals"]',
+						quoteTotalsDiv: '.cart_totals',
+						quoteTotalsTable: '//div[@class="cart_totals"]//table[contains(@class,"table_quote_totals")]',
+
+						subTotalText: '//tr[@class="cart-subtotal"]',
+						offeredPriceSubtotalText: '//tr[@class="cart-subtotal offered"]//th',
+
+						subTotalValue: '//td[@data-title="Subtotal (standard)"]',
+						offeredPriceSubtotalValue: '//td[@data-title="Offered Price Subtotal"]',
+					},
+
+					offeredPriceInput: (productName: string) => `//a[normalize-space()="${productName}"]/../..//input[@class="input-text offered-price-input text"]`,
+					quantityInput: (productName: string) => `//a[normalize-space()="${productName}"]/../..//div[@class="quantity"]//input`,
+
+					updateQuote: 'button[name="dokan_update_quote"]',
+
+					message: '.woocommerce-message',
 
 				},
 

@@ -368,7 +368,7 @@ export class RequestForQuotationsPage extends AdminPage {
 		const needApproval = await this.isVisible(selector.vendor.vRequestQuotes.quoteDetails.approveThisQuote);
 		needApproval && await this.vendorApproveQuoteRequest(quoteId);
 		await this.clickAndWaitForResponseAndLoadState(data.subUrls.frontend.vDashboard.quoteDetails(quoteId), selector.vendor.vRequestQuotes.quoteDetails.convertToOrder);
-		await this.toContainText(selector.vendor.vRequestQuotes.quoteDetails.message, `our Quote# ${quoteId} has been converted to Order#`);
+		await this.toContainText(selector.vendor.vRequestQuotes.quoteDetails.message, `Your Quote# ${quoteId} has been converted to Order#`);
 	}
 
 
@@ -379,28 +379,27 @@ export class RequestForQuotationsPage extends AdminPage {
 	async requestForQuoteRenderProperly(){
 		await this.goIfNotThere(data.subUrls.frontend.requestForQuote);
 
-		await this.toBeVisible(selector.customer.cRequestForQuote.requestForQuoteText);
+		await this.toBeVisible(selector.customer.cRequestForQuote.requestForQuote.requestForQuoteText);
 
-		const noQuote = await this.isVisible(selector.customer.cRequestForQuote.noQuotesFound);
+		const noQuote = await this.isVisible(selector.customer.cRequestForQuote.requestForQuote.noQuotesFound);
 
 		if (noQuote){
-			await this.toContainText(selector.customer.cRequestForQuote.noQuotesFound, 'Your quote is currently empty.');
+			await this.toContainText(selector.customer.cRequestForQuote.requestForQuote.noQuotesFound, 'Your quote is currently empty.');
 			console.log('No quotes found on request for quote page');
-
-			await this.toBeVisible(selector.customer.cRequestForQuote.returnToShop);
+			await this.toBeVisible(selector.customer.cRequestForQuote.requestForQuote.returnToShop);
 
 		} else {
 
 			// quote item table details elements are visible
-			await this.multipleElementVisible(selector.customer.cRequestForQuote.quoteItemDetails.table);
+			await this.multipleElementVisible(selector.customer.cRequestForQuote.requestForQuote.quoteItemDetails.table);
 
 
 			// quote total details elements are visible
-			await this.multipleElementVisible(selector.customer.cRequestForQuote.quoteTotals);
+			await this.multipleElementVisible(selector.customer.cRequestForQuote.requestForQuote.quoteTotals);
 
 
 			// update quote is visible
-			await this.toBeVisible(selector.customer.cRequestForQuote.updateQuote);
+			await this.toBeVisible(selector.customer.cRequestForQuote.requestForQuote.updateQuote);
 
 		}
 
@@ -432,7 +431,7 @@ export class RequestForQuotationsPage extends AdminPage {
 
 
 	// customer view requested quote details
-	async customerViewQuoteDetails(quoteTitle: string): Promise<void>{
+	async customerViewRequestedQuoteDetails(quoteTitle: string): Promise<void>{
 		await this.goIfNotThere(data.subUrls.frontend.requestedQuote);
 
 		await this.clickAndWaitForLoadState(selector.customer.cRequestForQuote.requestedQuote.viewQuoteDetails(quoteTitle));
@@ -441,61 +440,63 @@ export class RequestForQuotationsPage extends AdminPage {
 		await this.multipleElementVisible(selector.customer.cRequestForQuote.requestedQuote.requestedQuoteDetails.basicDetails);
 
 		// quote item details elements are visible
-		await this.toBeVisible(selector.customer.cRequestForQuote.quoteItemDetails.quoteDetailsText);
-		await this.multipleElementVisible(selector.customer.cRequestForQuote.quoteItemDetails.table);
+		await this.toBeVisible(selector.customer.cRequestForQuote.requestedQuote.requestedQuoteDetails.quoteItemDetails.quoteDetailsText);
+		await this.multipleElementVisible(selector.customer.cRequestForQuote.requestedQuote.requestedQuoteDetails.quoteItemDetails.table);
 
 		// quote total details elements are visible
-		await this.multipleElementVisible(selector.customer.cRequestForQuote.quoteTotals);
+		await this.multipleElementVisible(selector.customer.cRequestForQuote.requestedQuote.requestedQuoteDetails.quoteTotals);
 
 		// update quote is visible
-		await this.toBeVisible(selector.customer.cRequestForQuote.updateQuote);
+		await this.toBeVisible(selector.customer.cRequestForQuote.requestedQuote.requestedQuoteDetails.updateQuote);
 
 	}
 
 
-	// customer quote product
-	async customerQuoteProduct( quote: requestForQuotation ['userQuote'], guest?: requestForQuotation['guest'] ): Promise<string> {
-		await this.customerPage.goToProductDetails(quote.productName);
-
-		await this.clickAndWaitForResponse(data.subUrls.ajax, selector.customer.cRequestForQuote.singleProductDetails.addToQuote);
-		await this.clickAndWaitForResponseAndLoadState(data.subUrls.frontend.requestForQuote, selector.customer.cRequestForQuote.singleProductDetails.viewQuote);
-		await this.clearAndType(selector.customer.cRequestForQuote.offeredPriceInput(quote.productName), quote.offeredPrice);
-		await this.clearAndType(selector.customer.cRequestForQuote.quantityInput(quote.productName), quote.quantity);
-		await this.clickAndWaitForResponseAndLoadState(data.subUrls.ajax, selector.customer.cRequestForQuote.updateQuote);
-		await this.toContainText(selector.customer.cRequestForQuote.message, 'Quote updated');
-
-		if (guest){
-			await this.clearAndType(selector.customer.cRequestForQuote.guest.fullName, guest.fullName);
-			await this.clearAndType(selector.customer.cRequestForQuote.guest.email, guest.email);
-			await this.clearAndType(selector.customer.cRequestForQuote.guest.companyName, guest.companyName);
-			await this.clearAndType(selector.customer.cRequestForQuote.guest.phoneNumber, guest.phoneNumber);
-		}
-
-		await this.clickAndWaitForResponseAndLoadState(data.subUrls.frontend.requestForQuote, selector.customer.cRequestForQuote.placeQuote, 302);
-		await this.toBeVisible(selector.customer.cRequestForQuote.requestedQuote.requestedQuoteDetails.requestedQuoteText);
-		const quoteId = await this.getElementText(selector.customer.cRequestForQuote.requestedQuote.requestedQuoteDetails.basicDetails.quoteNumberText) as string;
-		return quoteId?.trim();
-	}
-
-
-	// customer update quote request
-	async customerUpdateQuoteRequest(quoteId: string, quote: requestForQuotation ['userQuote']){
+	// customer update requested quote
+	async customerUpdateRequestedQuote(quoteId: string, quote: requestForQuotation ['userQuote']){
 		await this.goIfNotThere(data.subUrls.frontend.quoteDetails(quoteId));
-		await this.clearAndType(selector.customer.cRequestForQuote.offeredPriceInput(quote.productName), quote.offeredPrice);
-		await this.clearAndType(selector.customer.cRequestForQuote.quantityInput(quote.productName), quote.quantity);
-		await this.clickAndWaitForResponseAndLoadState(data.subUrls.ajax, selector.customer.cRequestForQuote.updateQuote);
-		await this.toContainText(selector.customer.cRequestForQuote.message, 'Quote updated');
+		await this.clearAndType(selector.customer.cRequestForQuote.requestedQuote.requestedQuoteDetails.offeredPriceInput(quote.productName), quote.offeredPrice);
+		await this.clearAndType(selector.customer.cRequestForQuote.requestedQuote.requestedQuoteDetails.quantityInput(quote.productName), quote.quantity);
+		await this.clickAndWaitForResponseAndLoadState(data.subUrls.frontend.quoteDetails(quoteId), selector.customer.cRequestForQuote.requestedQuote.requestedQuoteDetails.updateQuote);
+		await this.toContainText(selector.customer.cRequestForQuote.requestedQuote.requestedQuoteDetails.message, 'Your quote has been successfully updated.');
 	}
 
 
 	// customer pay converted quote
 	async payConvertedQuote(quoteId: string){
-		await this.goIfNotThere(data.subUrls.frontend.quoteDetails(quoteId));
+		await this.goto(data.subUrls.frontend.quoteDetails(quoteId));
 		await this.clickAndWaitForLoadState(selector.customer.cRequestForQuote.requestedQuote.requestedQuoteDetails.viewOrder);
 		await this.toBeVisible(selector.customer.cRequestForQuote.orderDetails.quoteNoteOnOrderDetails);
 		const orderId = await this.getElementText(selector.customer.cOrderDetails.orderDetails.orderNumber) as string;
 		await this.customerMyOrders.payPendingOrder(orderId, 'bank');
+	}
 
+
+	// customer quote product
+	async customerQuoteProduct( quote: requestForQuotation ['userQuote'], guest?: requestForQuotation['guest'] ): Promise<string | void>{
+		await this.customerPage.goToProductDetails(quote.productName);
+
+		await this.clickAndWaitForResponse(data.subUrls.ajax, selector.customer.cRequestForQuote.singleProductDetails.addToQuote);
+		await this.clickAndWaitForResponseAndLoadState(data.subUrls.frontend.requestForQuote, selector.customer.cRequestForQuote.singleProductDetails.viewQuote);
+		await this.clearAndType(selector.customer.cRequestForQuote.requestForQuote.offeredPriceInput(quote.productName), quote.offeredPrice);
+		await this.clearAndType(selector.customer.cRequestForQuote.requestForQuote.quantityInput(quote.productName), quote.quantity);
+		await this.clickAndWaitForResponseAndLoadState(data.subUrls.ajax, selector.customer.cRequestForQuote.requestForQuote.updateQuote);
+		await this.toContainText(selector.customer.cRequestForQuote.requestForQuote.message, 'Quote updated');
+
+		if (guest){
+			await this.clearAndType(selector.customer.cRequestForQuote.requestForQuote.guest.fullName, guest.fullName);
+			await this.clearAndType(selector.customer.cRequestForQuote.requestForQuote.guest.email, guest.email);
+			await this.clearAndType(selector.customer.cRequestForQuote.requestForQuote.guest.companyName, guest.companyName);
+			await this.clearAndType(selector.customer.cRequestForQuote.requestForQuote.guest.phoneNumber, guest.phoneNumber);
+		}
+
+		await this.clickAndWaitForResponseAndLoadState(data.subUrls.frontend.requestForQuote, selector.customer.cRequestForQuote.requestForQuote.placeQuote, 302);
+		await this.toBeVisible(selector.customer.cRequestForQuote.requestedQuote.requestedQuoteDetails.requestedQuoteText);
+
+		if(! guest){
+			const quoteId = (await this.getElementText(selector.customer.cRequestForQuote.requestedQuote.requestedQuoteDetails.basicDetails.quoteNumberValue))?.trim() as string;
+			return quoteId;
+		}
 	}
 
 
