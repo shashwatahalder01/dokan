@@ -6178,6 +6178,8 @@ export const selector = {
 				search: '.dokan-btn',
 			},
 
+			mapResultFirst: '(//div[contains(@class,"pac-container")]//div[@class="pac-item"])[1]',
+
 			searchProductLite: '(//input[@class="search-field"])[1]',
 
 			// sort
@@ -6422,6 +6424,10 @@ export const selector = {
 				}
 
 			},
+
+			category: (category: string) => `//div[@class="category-box store_category"]//ul//li[contains(text(), '${category}')]`,
+			categoryFirst: '(//div[@class="category-box store_category"]//ul//li)[1]',
+			mapResultFirst: '(//div[contains(@class,"pac-container")]//div[@class="pac-item"])[1]',
 
 			// Store card
 			storeCard:{

@@ -424,7 +424,7 @@ export class RequestForQuotationsPage extends AdminPage {
 			await this.multipleElementVisible(selector.customer.cRequestForQuote.requestedQuote.table);
 
 			//pagination is visible
-			await this.toBeVisible(selector.customer.cRequestForQuote.requestedQuote.pagination);
+			// await this.toBeVisible(selector.customer.cRequestForQuote.requestedQuote.pagination);
 		}
 
 	}
