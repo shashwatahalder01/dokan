@@ -146,8 +146,8 @@ test.describe('Store Support test vendor', () => {
 		vendor = new StoreSupportsPage(vPage);
 
 		apiUtils = new ApiUtils(request);
-		// [, supportTicketId] = await apiUtils.createSupportTicket({ ...payloads.createSupportTicket, author: CUSTOMER_ID, meta: { store_id : VENDOR_ID } } );
-		// await apiUtils.createSupportTicket({ ...payloads.createSupportTicket, status: 'closed', author: CUSTOMER_ID, meta: { store_id : VENDOR_ID } } );
+		[, supportTicketId] = await apiUtils.createSupportTicket({ ...payloads.createSupportTicket, author: CUSTOMER_ID, meta: { store_id : VENDOR_ID } } );
+		await apiUtils.createSupportTicket({ ...payloads.createSupportTicket, status: 'closed', author: CUSTOMER_ID, meta: { store_id : VENDOR_ID } } );
 
 	});
 

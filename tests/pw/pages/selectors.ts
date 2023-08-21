@@ -362,7 +362,7 @@ export const selector = {
 
 				numberOfRowsFound: '.tablenav.top .displaying-num',
 				noRowsFound: '//td[normalize-space()="No transaction found."]',
-				revereWithdrawCell: (storeName: string) => `//td//a[contains(text(), '${storeName}')]/../..`,
+				reverseWithdrawCell: (storeName: string) => `//td//a[contains(text(), '${storeName}')]/../..`,
 
 				addReverseWithdrawal:{
 					closeModal: '.modal-close.modal-close-link',
@@ -5105,7 +5105,6 @@ export const selector = {
 			filters: {
 				filterByCustomer: '//select[@id="dokan-search-support-customers"]/..//span[@class="select2-selection__arrow"]',
 				filterByCustomerInput: '.select2-search__field',
-				ticketDateFilter: 'input#support_ticket_date_filter',
 
 				filterByDate: {
 					dateRangeInput: 'input#support_ticket_date_filter',

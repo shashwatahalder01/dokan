@@ -165,7 +165,8 @@ export class StoreSupportsPage extends AdminPage {
 
 
 		// eslint-disable-next-line @typescript-eslint/no-unused-vars
-		const { filterByCustomerInput, result,  ...filters } = selector.vendor.vSupport.filters;
+		const { filterByCustomerInput, filterByDate, result,  ...filters } = selector.vendor.vSupport.filters;
+		await this.toBeVisible(selector.vendor.vSupport.filters.filterByDate.dateRangeInput);
 		await this.multipleElementVisible(filters);
 
 
@@ -292,7 +293,7 @@ export class StoreSupportsPage extends AdminPage {
 
 
 	// customer ask for store support
-	async storeSupport(input: string, getSupport: customer['getSupport'], action: string): Promise<void> { 
+	async storeSupport(input: string, getSupport: customer['getSupport'], action: string): Promise<void> {
 
 		switch(action){
 

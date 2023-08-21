@@ -67,7 +67,7 @@ jobs:
           repository: weDevsOfficial/dokan-pro
           token: ${{ secrets.ACCESS_TOKEN }}
           path: "plugins/dokan-pro"
-          ref: "cefaf11564980fea96c9892b3129701564bb3938"
+          ref: "develop"
 
 
       - name: Install latest npm

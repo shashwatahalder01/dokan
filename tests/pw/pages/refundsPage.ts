@@ -119,10 +119,11 @@ export class RefundsPage extends AdminPage {
 		const productQuantity = (await this.getElementText(selector.vendor.orders.refund.productQuantity(productName)) as string).trim();
 		const productCost = helpers.price(await this.getElementText(selector.vendor.orders.refund.productCost(productName)) as string);
 		const productTax = helpers.price(await this.getElementText(selector.vendor.orders.refund.productTax(productName)) as string);
-		const isShipping = await this.isVisible(selector.vendor.orders.refund.shippingCost);
+		console.log(productCost, productTax);
 
 		let shippingCost = 0;
 		let shippingTax = 0;
+		const isShipping = await this.isVisible(selector.vendor.orders.refund.shippingCost);
 		if (isShipping){
 			shippingCost = helpers.price(await this.getElementText(selector.vendor.orders.refund.shippingCost) as string);
 			shippingTax = helpers.price(await this.getElementText(selector.vendor.orders.refund.shippingTax) as string);
@@ -137,11 +138,11 @@ export class RefundsPage extends AdminPage {
 				await this.clearAndType(selector.vendor.orders.refund.refundShippingTaxAmount, helpers.priceString(helpers.roundToTwo(shippingTax/2), 'ES'));
 			}
 		} else {
-			await this.clearAndType(selector.vendor.orders.refund.refundProductCostAmount(productName), String(productCost));
-			await this.clearAndType(selector.vendor.orders.refund.refundProductTaxAmount(productName), String(productTax));
+			await this.clearAndType(selector.vendor.orders.refund.refundProductCostAmount(productName), helpers.priceString(productCost, 'ES'));
+			await this.clearAndType(selector.vendor.orders.refund.refundProductTaxAmount(productName), helpers.priceString(productTax, 'ES'));
 			if (isShipping){
-				await this.clearAndType(selector.vendor.orders.refund.refundShippingAmount, String(shippingCost));
-				await this.clearAndType(selector.vendor.orders.refund.refundShippingTaxAmount, String(shippingTax));
+				await this.clearAndType(selector.vendor.orders.refund.refundShippingAmount, helpers.priceString(shippingCost, 'ES'));
+				await this.clearAndType(selector.vendor.orders.refund.refundShippingTaxAmount, helpers.priceString(shippingTax, 'ES'));
 			}
 
 		}
