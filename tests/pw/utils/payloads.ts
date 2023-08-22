@@ -387,6 +387,12 @@ export const payloads = {
 		note: 'test order note',
 	},
 
+	createOrderNoteForCustomer: {
+		status: 'processing',
+		note: 'test order note' + faker.string.uuid(),
+		customer_note: 'true'
+	},
+
 	// refund
 
 	createRefund: {

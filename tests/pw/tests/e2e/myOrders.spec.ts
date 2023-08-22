@@ -37,6 +37,18 @@ test.describe('My Orders functionality test', () => {
 		await customer.viewOrderDetails(orderId);
 	});
 
+	// test.only('customer can view order note @lite', async () => { //todo: should be on orders spec or not  //todo: fix this
+	// 	const orderNote = data.orderNote.note();
+	// 	const [, orderId, ] = await apiUtils.createOrderNote(payloads.createProduct(), payloads.createOrder, { ...payloads.createOrderNoteForCustomer, note: orderNote }, payloads.vendorAuth);
+	// 	// const [, responseBody] = await apiUtils.post(endPoints.createOrderNote(orderId), { data: payloads.createOrderNoteForCustomer, headers: payloads.vendorAuth });
+	// 	// const [, responseBody] = await apiUtils.post(endPoints.createOrderNote('2032'), { data: { ...payloads.createOrderNoteForCustomer, note: orderNote }, headers: payloads.vendorAuth });
+	// 	// console.log(responseBody);
+	// 	console.log(orderId, orderNote);
+
+	// 	await customer.viewOrderNote(orderId, orderNote);
+	// });
+
+
 	test('customer can pay pending payment order @lite', async ( ) => {
 		const [,, orderId, ] = await apiUtils.createOrderWithStatus(PRODUCT_ID, { ...payloads.createOrder, customer_id: CUSTOMER_ID }, data.order.orderStatus.pending, payloads.vendorAuth);
 		await customer.payPendingOrder(orderId, 'bank');

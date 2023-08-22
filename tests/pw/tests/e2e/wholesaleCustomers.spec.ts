@@ -83,5 +83,5 @@ test.describe('Wholesale customers test', () => {
 		await customer.customerRequestForBecomeWholesaleCustomer();
 	});
 
-
+	//todo:customer can buy whosaleproduct
 });

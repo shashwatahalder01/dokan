@@ -351,6 +351,7 @@ export const data = {
 			noteType: 'Private note',
 		},
 
+		note: () => 'test order note' + faker.string.uuid(),
 	},
 
 

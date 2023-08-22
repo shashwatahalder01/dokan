@@ -548,8 +548,9 @@ export class ApiUtils {
 	 * order notes api methods
 	 */
 
-	// create attribute term
+	// create order note term
 	async createOrderNote(product: object, order: object, orderNote: object, auth? : auth): Promise<[responseBody, string, string]> {
+		//todo: update for only orderId
 		const [,, orderId] = await this.createOrder(product, order, auth);
 		const [, responseBody] = await this.post(endPoints.createOrderNote(orderId), { data: orderNote, headers: auth });
 		const orderNoteId = String(responseBody.id);

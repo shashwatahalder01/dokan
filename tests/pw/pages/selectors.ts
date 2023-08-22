@@ -7020,6 +7020,14 @@ export const selector = {
 
 			},
 
+			// order update  [shows when order note exists]
+			orderUpdates:{
+				orderReceivedHeading: '//h2[normalize-space()="Order updates"]',
+				allOrderNotes: 'ol.woocommerce-OrderUpdates.commentlist.notes',
+				singleOrderNote: 'div.woocommerce-OrderUpdate-description.description p',
+				orderNote: (note: string) => `//div[@class="woocommerce-OrderUpdate-description description"]//p[contains(text(),"${note}")]`
+			},
+
 			// customer details
 			customerDetails:{
 				customerDetailsSection: '.woocommerce-customer-details .addresses',
