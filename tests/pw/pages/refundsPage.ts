@@ -119,7 +119,6 @@ export class RefundsPage extends AdminPage {
 		const productQuantity = (await this.getElementText(selector.vendor.orders.refund.productQuantity(productName)) as string).trim();
 		const productCost = helpers.price(await this.getElementText(selector.vendor.orders.refund.productCost(productName)) as string);
 		const productTax = helpers.price(await this.getElementText(selector.vendor.orders.refund.productTax(productName)) as string);
-		console.log(productCost, productTax);
 
 		let shippingCost = 0;
 		let shippingTax = 0;

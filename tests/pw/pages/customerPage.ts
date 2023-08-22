@@ -559,4 +559,5 @@ export class CustomerPage extends BasePage {
 		await this.toBeVisible(selector.customer.cStoreList.visitStore(storeName));
 	}
 
+
 }

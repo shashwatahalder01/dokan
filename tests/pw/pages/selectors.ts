@@ -3976,7 +3976,7 @@ export const selector = {
 
 			// Filter
 			filter:{
-				deliveryTimeFilter: '#delivery-type-filter',
+				deliveryTimeFilter: '#delivery-type-filter', // delivery, store-pickup
 				filter: '//button[normalize-space()="Filter"]',
 			},
 
@@ -6824,7 +6824,7 @@ export const selector = {
 			billingCountryOrRegion: '.select2-selection__arrow',
 			billingCountryOrRegionValues: '.select2-results ul li',
 			billingStreetAddress: '#billing_address_1',
-			billingStreetAddress2: '#billing_address_2',
+			billingStreetAddress2: '#billing_address_2', //todo: group locators
 			billingTownCity: '#billing_city',
 			billingPhone: '#billing_phone',
 			billingEmailAddress: '#billing_email',
@@ -6868,6 +6868,7 @@ export const selector = {
 			// Place Order
 			placeOrder: '#place_order',
 		},
+
 
 		cPayWithStripe: {
 			strip: '#payment_method_dokan-stripe-connect',
@@ -6914,6 +6915,39 @@ export const selector = {
 			cardNumber: '#Field-numberInput',
 			expDate: '#Field-expiryInput',
 			cvc: '#Field-cvcInput',
+		},
+
+
+		cDeliveryTime:{
+			deliveryTimeDiv: 'div#dokan-delivery-time-box',
+
+			deliveryDetailsText: '//h3[normalize-space()="Delivery details"]',
+			deliveryTimeZone:'div.delivery-timezone.dokan-delivery-time-tooltip',
+
+			deliveryTimeBody:'div.delivery-time-body',
+			vendorInfo: 'div.delivery-time-body .vendor-info',
+
+			delivery:'//div[@class="dokan-store-location-selector"]//div[@data-selector="delivery"]',
+			storePickup: '//div[@class="dokan-store-location-selector"]//div[@data-selector="store-pickup"]',
+
+
+			deliveryTimeInput: '//input[@class="delivery-time-date-picker form-control input"]',
+			deliveryTimeInputHidden: '//input[@class="delivery-time-date-picker flatpickr-input"]',
+			deliveryDate: (date: string) => `//div[contains(@class,"flatpickr-calendar")]//div[@class="dayContainer"]//span[contains(@class,"flatpickr-day") and @aria-label="${date}"]`,
+
+			timePicker: 'select.delivery-time-slot-picker',
+			locationPicker: 'select.delivery-store-location-picker',
+
+
+			orderDetails: {
+				deliveryTimeDetails: 'div#dokan-delivery-time-slot-order-details',
+				storePickupDetails: 'div#dokan-store-location-order-details',
+				deliveryTimeTitle: 'div#dokan-delivery-time-slot-order-details .main strong',
+				storePickupTitle: 'div#dokan-store-location-order-details .main strong',
+
+			}
+
+
 		},
 
 		cOrderReceived: {

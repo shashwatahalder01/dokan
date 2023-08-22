@@ -1830,6 +1830,10 @@ export const data = {
 
 	},
 
+	deliveryTime:{
+		date: helpers.currentDateFJY
+	},
+
 
 	// predefined  test data
 	predefined: {
@@ -1934,6 +1938,7 @@ export const data = {
 	},
 
 	cssStyle:{
+		inlineBlock:'display: inline-block;',
 		visibleStyle: 'visibility:visible;',
 		// style="visibility:visible;"
 		// style="display: block;"

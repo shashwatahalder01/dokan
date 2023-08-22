@@ -63,6 +63,9 @@ export const helpers = {
 	// current day [2023-06-02]
 	currentDate: new Date().toLocaleDateString('en-CA'),
 
+	// current day [August 22, 2023]
+	currentDateFJY: new Date().toLocaleDateString('en-CA', { year: 'numeric', month: 'long', day: 'numeric' }),
+
 	// current date-time [2023-06-02 00:33]
 	currentDateTime: new Date().toLocaleString('en-CA', { year: 'numeric', month: 'numeric', day: 'numeric', hourCycle: 'h23', hour: 'numeric', minute: 'numeric', }).replace(',', ''),
 

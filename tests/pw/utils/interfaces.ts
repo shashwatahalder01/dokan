@@ -460,6 +460,10 @@ export interface shipping {
 }
 
 
+export interface deliveryTime {
+	date: string
+}
+
 export interface payment {
 	saveSuccessMessage: string;
 
