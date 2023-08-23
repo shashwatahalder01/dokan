@@ -5069,10 +5069,17 @@ export const selector = {
 
 				// Filter
 				filters:{
-					dateRange: 'input#auction-activity-datetime-range',
+
+					filterByDate: {
+						dateRangeInput: 'input#auction-activity-datetime-range',
+						startDateInput: 'input#_auction_dates_from',
+						endDateInput: 'input#_auction_dates_to'
+					},
+
 					filter: 'button[name="auction_activity_date_filter"]',
 					filterReset: 'button#auction-clear-filter-button',
 				},
+
 
 				// Search
 				search:{

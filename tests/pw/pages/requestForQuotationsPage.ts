@@ -339,7 +339,7 @@ export class RequestForQuotationsPage extends AdminPage {
 
 		// update quote is visible
 		await this.toBeVisible(selector.vendor.vRequestQuotes.quoteDetails.updateQuote);
-		//todo: add either approve quote or convert to order button is visible
+		await this.toBeVisibleAnyOfThem([selector.vendor.vRequestQuotes.quoteDetails.approveThisQuote, selector.vendor.vRequestQuotes.quoteDetails.convertToOrder]);
 
 	}
 

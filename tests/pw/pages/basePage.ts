@@ -1522,6 +1522,7 @@ export class BasePage {
 
 	// assert any element to be visible
 	async toBeVisibleAnyOfThem(selectors: string[],){
+		// todo: extend nd improve this method
 		const res = [];
 		for (const selector of selectors) {
 			res.push(await this.isVisible(selector));

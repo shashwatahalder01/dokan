@@ -83,7 +83,9 @@ test.describe('Auction Product test', () => {
 		await vendor.vendorAuctionActivityRenderProperly();
 	});
 
-	//todo: filter auction activity
+	test('vendor can filter auction activity @pro', async ( ) => {
+		await vendor.filterAuctionActivity(data.date.dateRange);
+	});
 
 	test('vendor can search auction activity @pro', async ( ) => {
 		await vendor.searchAuctionActivity(data.customer.username);

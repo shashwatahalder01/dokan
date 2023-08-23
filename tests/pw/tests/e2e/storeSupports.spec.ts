@@ -95,7 +95,7 @@ test.describe('Store Support test', () => {
 		await admin.storeSupportBulkAction('close', supportTicketId);
 	});
 
-	//todo:count decrease for viewing a support ticket
+	//todo: count decrease for viewing a support ticket
 
 
 	test('customer store support menu page is rendering properly @pro @explo', async ( ) => {
@@ -174,7 +174,7 @@ test.describe('Store Support test vendor', () => {
 
 	test('vendor can search support ticket @pro', async ( ) => {
 		await vendor.vendorSearchSupportTicket('id', supportTicketId);
-		// await vendor.vendorSearchSupportTicket('title', data.storeSupport.title); //todo: separate or same
+		// await vendor.vendorSearchSupportTicket('title', data.storeSupport.title); //todo: separate or in same test
 	});
 
 	test('vendor can reply to support ticket @pro', async ( ) => {

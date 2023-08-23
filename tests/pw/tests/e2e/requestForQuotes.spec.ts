@@ -133,7 +133,7 @@ test.describe('Request for quotation test vendor', () => {
 });
 
 
-test.describe.only('Request for quotation test customer', () => {
+test.describe('Request for quotation test customer', () => {
 
 	let customer: RequestForQuotationsPage;
 	let guest: RequestForQuotationsPage;
