@@ -477,7 +477,12 @@ export class RequestForQuotationsPage extends AdminPage {
 		await this.customerPage.goToProductDetails(quote.productName);
 
 		await this.clickAndWaitForResponse(data.subUrls.ajax, selector.customer.cRequestForQuote.singleProductDetails.addToQuote);
-		await this.clickAndWaitForResponseAndLoadState(data.subUrls.frontend.requestForQuote, selector.customer.cRequestForQuote.singleProductDetails.viewQuote);
+		const viewQuoteIsVisible = await this.isVisible(selector.customer.cRequestForQuote.singleProductDetails.viewQuote);
+		if(viewQuoteIsVisible){
+			await this.clickAndWaitForResponseAndLoadState(data.subUrls.frontend.requestForQuote, selector.customer.cRequestForQuote.singleProductDetails.viewQuote);
+		} else {
+			await this.goIfNotThere(data.subUrls.frontend.requestForQuote);
+		}
 		await this.clearAndType(selector.customer.cRequestForQuote.requestForQuote.offeredPriceInput(quote.productName), quote.offeredPrice);
 		await this.clearAndType(selector.customer.cRequestForQuote.requestForQuote.quantityInput(quote.productName), quote.quantity);
 		await this.clickAndWaitForResponseAndLoadState(data.subUrls.ajax, selector.customer.cRequestForQuote.requestForQuote.updateQuote);

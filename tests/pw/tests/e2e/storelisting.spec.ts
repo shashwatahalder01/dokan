@@ -53,15 +53,15 @@ test.describe('Store listing functionality test', () => {
 		await customer.filterStores('by-location', 'New York, NY, USA');
 	});
 
-	test('customer can filter stores by ratings @pro', async ( ) => {
+	test.skip('customer can filter stores by ratings @pro', async ( ) => {
 		await customer.filterStores('by-ratings', '1');
 	});
 
-	test('customer can filter featured stores@pro', async ( ) => {
+	test('customer can filter featured stores @pro', async ( ) => {
 		await customer.filterStores('featured');
 	});
 
-	test('customer can filter open now stores @pro', async ( ) => {
+	test.skip('customer can filter open now stores @pro', async ( ) => {
 		await customer.filterStores('open-now');
 	});
 

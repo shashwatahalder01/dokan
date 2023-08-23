@@ -133,7 +133,7 @@ test.describe('Request for quotation test vendor', () => {
 });
 
 
-test.describe('Request for quotation test customer', () => {
+test.describe.only('Request for quotation test customer', () => {
 
 	let customer: RequestForQuotationsPage;
 	let guest: RequestForQuotationsPage;
@@ -160,7 +160,9 @@ test.describe('Request for quotation test customer', () => {
 
 		[, pId, productName] = await apiUtils.createProduct(payloads.createProduct(), payloads.vendorAuth);
 		productId.push(pId);
-		await apiUtils.createQuoteRule({ ...payloads.createQuoteRule(), product_ids: productId, apply_on_all_product: '0' }, payloads.adminAuth);
+		const [responseBody, ] = await apiUtils.createQuoteRule({ ...payloads.createQuoteRule(), product_ids: productId, apply_on_all_product: '0' }, payloads.adminAuth);
+		console.log(responseBody);
+		console.log(productName);
 		[, quoteId] = await apiUtils.createRequestQuote({ ...payloads.createRequestQuote(), product_ids: productId, quote_title: quoteTitle, user_id: CUSTOMER_ID, }, payloads.adminAuth);
 
 	});

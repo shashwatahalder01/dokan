@@ -1,5 +1,7 @@
 import { test, Page } from '@playwright/test';
 import { VendorDeliveryTimePage } from 'pages/vendorDeliveryTimePage';
+import { dbData } from 'utils/dbData';
+import { dbUtils } from 'utils/dbUtils';
 // import { ApiUtils } from 'utils/apiUtils';
 import { data } from 'utils/testData';
 // import { payloads } from 'utils/payloads';
@@ -22,6 +24,8 @@ test.describe('Vendor delivery time test', () => {
 		const customerContext = await browser.newContext({ storageState: data.auth.customerAuthFile });
 		cPage = await customerContext.newPage();
 		customer = new VendorDeliveryTimePage(cPage);
+
+		await dbUtils.setDokanSettings(dbData.dokan.optionName.deliveryTime, dbData.dokan.deliveryTimeSettings); 		//todo: added , previous test is disable store pickup somehow fix it
 
 		// apiUtils = new ApiUtils(request);
 
@@ -51,7 +55,7 @@ test.describe('Vendor delivery time test', () => {
 	});
 
 
-	//todo: add vendor delivery time setup
+	//todo: add vendor delivery time setup from vendor settings
 
 	test('customer can buy product with delivery time @pro', async ( ) => {
 		await customer.addProductToCart(data.predefined.simpleProduct.product1.name, 'single-product');

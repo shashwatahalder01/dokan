@@ -197,7 +197,6 @@ export class OrdersPage extends VendorPage {
 		await this.clearAndType(selector.vendor.orders.orderNote.orderNoteInput, orderNote.note);
 		await this.selectByLabel(selector.vendor.orders.orderNote.orderNoteType, orderNote.noteType);
 		await this.clickAndAcceptAndWaitForResponse(data.subUrls.ajax, selector.vendor.orders.orderNote.addNote);
-		//todo:  add -> new test customer can view order note
 	}
 
 

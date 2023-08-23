@@ -549,8 +549,7 @@ export class ApiUtils {
 	 */
 
 	// create order note term
-	async createOrderNote(product: object, order: object, orderNote: object, auth? : auth): Promise<[responseBody, string, string]> {
-		//todo: update for only orderId
+	async createOrderNote(product: string | object, order: object, orderNote: object, auth? : auth): Promise<[responseBody, string, string]> {
 		const [,, orderId] = await this.createOrder(product, order, auth);
 		const [, responseBody] = await this.post(endPoints.createOrderNote(orderId), { data: orderNote, headers: auth });
 		const orderNoteId = String(responseBody.id);
