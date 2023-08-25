@@ -165,7 +165,9 @@ export class AuctionsPage extends VendorPage {
 		await this.toBeVisible(selector.vendor.vAuction.actionActivity.backToActions);
 
 		// filter elements are visible
-		await this.multipleElementVisible(selector.vendor.vAuction.actionActivity.filters);
+		const { filterByDate, ...filters } = selector.vendor.vAuction.actionActivity.filters;
+		await this.multipleElementVisible(filters);
+		await this.toBeVisible(filterByDate.dateRangeInput);
 
 		// search elements are visible
 		await this.multipleElementVisible(selector.vendor.vAuction.actionActivity.search);

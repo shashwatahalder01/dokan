@@ -76,7 +76,7 @@ test.describe('Product functionality test', () => {
 	});
 
 	test('vendor can add variable product @pro', async ( ) => {
-		await vendor.vendorAddVariableProduct(data.product.variable); //todo: variation price not saving dokan issue
+		await vendor.vendorAddVariableProduct(data.product.variable);
 	});
 
 	test('vendor can add simple subscription product @pro', async ( ) => {
@@ -84,7 +84,7 @@ test.describe('Product functionality test', () => {
 	});
 
 	test('vendor can add variable subscription product @pro', async ( ) => {
-		await vendor.vendorAddVariableSubscription(data.product.variableSubscription); //todo: variation price not saving dokan issue
+		await vendor.vendorAddVariableSubscription(data.product.variableSubscription);
 	});
 
 	test('vendor can add external product @pro', async ( ) => {

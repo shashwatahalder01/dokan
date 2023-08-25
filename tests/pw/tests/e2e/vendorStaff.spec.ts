@@ -6,7 +6,6 @@ import { data } from 'utils/testData';
 
 
 test.describe('Vendor staff test', () => {
-	test.skip(!!process.env.CI, 'dokan issue while creating vendor staff');
 
 	let vendor: VendorStaffPage;
 	let vPage: Page;

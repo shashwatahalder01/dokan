@@ -424,28 +424,28 @@ export const dbData = {
 				closing_time: '11:59 pm'
 			},
 			delivery_day_wednesday: {
-				delivery_status: '',
+				delivery_status: 'wednesday',
 				opening_time: '12:00 am',
 				closing_time: '11:59 pm'
 			},
 			delivery_day_thursday: {
-				delivery_status: '',
+				delivery_status: 'thursday',
 				opening_time: '12:00 am',
 				closing_time: '11:59 pm'
 			},
 			delivery_day_friday: {
-				delivery_status: '',
+				delivery_status: 'friday',
 				opening_time: '12:00 am',
 				closing_time: '11:59 pm'
 			},
 			delivery_day_saturday: {
-				delivery_status: '',
+				delivery_status: 'saturday',
 				opening_time: '12:00 am',
 				closing_time: '11:59 pm'
 			},
 			delivery_day_sunday: {
-				delivery_status: '',
-				opening_time: '',
+				delivery_status: 'sunday',
+				opening_time: '12:00 am',
 				closing_time: '11:59 pm'
 			}
 		},

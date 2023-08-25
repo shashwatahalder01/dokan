@@ -31,17 +31,17 @@ test.describe('Product subscriptions test', () => {
 		await vendor.vendorUserSubscriptionsRenderProperly();
 	});
 
-	test.skip('vendor can filter user subscriptions by customer @pro', async ( ) => {
-		await vendor.filterProductSubscriptions('by-customer', data.customer.username);
-	});
+	// test.skip('vendor can filter user subscriptions by customer @pro', async ( ) => {
+	// 	await vendor.filterProductSubscriptions('by-customer', data.customer.username);
+	// });
 
-	test.skip('vendor can filter user subscriptions by date @pro', async ( ) => {
-		await vendor.filterProductSubscriptions('by-date', data.date.previousDate);
-	});
+	// test.skip('vendor can filter user subscriptions by date @pro', async ( ) => {
+	// 	await vendor.filterProductSubscriptions('by-date', data.date.previousDate);
+	// });
 
-	test.skip('vendor can view user subscription @pro', async ( ) => {
-		await vendor.viewProductSubscription(data.customer.username);
-	});
+	// test.skip('vendor can view user subscription @pro', async ( ) => {
+	// 	await vendor.viewProductSubscription(data.customer.username);
+	// });
 
 	//todo: add customer can cancel subscription, change address, change payment, renew now
 

@@ -25,20 +25,20 @@ test.describe('Verifications test', () => {
 		await admin.adminVerificationsRenderProperly();
 	});
 
-	test.skip('admin can approve ID verification request @pro', async ( ) => {
-		await admin.idVerificationRequest(data.predefined.vendorInfo.username, 'approve');
-	});
+	// test.skip('admin can approve ID verification request @pro', async ( ) => {
+	// 	await admin.idVerificationRequest(data.predefined.vendorInfo.username, 'approve');
+	// });
 
-	test.skip('admin can approve address verification request @pro', async ( ) => {
-		await admin.addressVerificationRequest(data.predefined.vendorInfo.username, 'approve');
-	});
+	// test.skip('admin can approve address verification request @pro', async ( ) => {
+	// 	await admin.addressVerificationRequest(data.predefined.vendorInfo.username, 'approve');
+	// });
 
-	test.skip('admin can approve company verification request @pro', async ( ) => {
-		await admin.companyVerificationRequest(data.predefined.vendorInfo.username, 'approve');
-	});
+	// test.skip('admin can approve company verification request @pro', async ( ) => {
+	// 	await admin.companyVerificationRequest(data.predefined.vendorInfo.username, 'approve');
+	// });
 
-	test.skip('admin can approve phone verification request @pro', async ( ) => {
-		// await admin.phoneVerificationRequest(data.predefined.vendorInfo.username,'approve');
-	});
+	// test.skip('admin can approve phone verification request @pro', async ( ) => {
+	// 	// await admin.phoneVerificationRequest(data.predefined.vendorInfo.username,'approve');
+	// });
 
 });

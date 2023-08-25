@@ -332,7 +332,7 @@ export class ProductsPage extends AdminPage {
 		await this.selectByValue(selector.vendor.product.attribute.addVariations, product.variations.variableRegularPrice);
 		await this.click(selector.vendor.product.attribute.go);
 		await this.type(selector.vendor.product.attribute.variationPrice, product.regularPrice());
-		await this.click(selector.vendor.product.attribute.okVariationPrice); //todo: variation price not saving dokan issue
+		await this.click(selector.vendor.product.attribute.okVariationPrice);
 		await this.clickAndWaitForResponseAndLoadState(data.subUrls.frontend.vDashboard.products, selector.vendor.product.saveProduct, 302);
 		await this.toContainText(selector.vendor.product.updatedSuccessMessage, product.saveSuccessMessage);
 	}
@@ -372,7 +372,7 @@ export class ProductsPage extends AdminPage {
 		await this.selectByValue(selector.vendor.product.attribute.addVariations, product.variations.variableRegularPrice);
 		await this.click(selector.vendor.product.attribute.go);
 		await this.type(selector.vendor.product.attribute.variationPrice, product.regularPrice());
-		await this.click(selector.vendor.product.attribute.okVariationPrice); //todo: variation price not saving dokan issue
+		await this.click(selector.vendor.product.attribute.okVariationPrice);
 		await this.clickAndWaitForResponseAndLoadState(data.subUrls.frontend.vDashboard.products, selector.vendor.product.saveProduct, 302);
 		await this.toContainText(selector.vendor.product.updatedSuccessMessage, product.saveSuccessMessage);
 	}
@@ -539,7 +539,7 @@ export class ProductsPage extends AdminPage {
 		}
 		const refundReasonIsVisible = await this.isVisible(selector.vendor.product.rma.refundReasonsFirst);
 		if (refundReasonIsVisible) {
-			await this.checkMultiple(selector.vendor.product.rma.refundReasons); //todo:  update this
+			await this.checkMultiple(selector.vendor.product.rma.refundReasons);
 		}
 		await this.clickAndWaitForResponseAndLoadState(data.subUrls.frontend.vDashboard.products, selector.vendor.product.saveProduct, 302);
 		await this.toContainText(selector.vendor.product.updatedSuccessMessage, data.product.createUpdateSaveSuccessMessage);

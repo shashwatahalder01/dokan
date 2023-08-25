@@ -62,7 +62,6 @@ test.describe('Store Support test', () => {
 	});
 
 	test('admin can filter support tickets by customer @pro', async ( ) => {
-		test.skip(!!process.env.CI, 'Search by customer on api not working dokan api!');
 		await admin.filterSupportTickets(data.storeSupport.filter.byCustomer, 'by-customer');
 	});
 
