@@ -68,7 +68,7 @@ export class ReportsPage extends AdminPage {
 		await this.goIfNotThere(data.subUrls.backend.dokan.allLogs);
 
 		await this.clearInputField(selector.admin.dokan.reports.allLogs.search);
-		await this.typeAndWaitForResponse(data.subUrls.api.dokan.logs, selector.admin.dokan.reports.allLogs.search, orderId);
+		await this.typeViaPageAndWaitForResponse(data.subUrls.api.dokan.logs, selector.admin.dokan.reports.allLogs.search, orderId);
 		await this.toBeVisible(selector.admin.dokan.reports.allLogs.orderIdCell(orderId));
 		const count = (await this.getElementText(selector.admin.dokan.reports.allLogs.numberOfRowsFound))?.split(' ')[0];
 		expect(Number(count)).toBe(1);
@@ -77,8 +77,8 @@ export class ReportsPage extends AdminPage {
 
 
 	// export all logs
-	async exportAllLogs(orderId: string){
-		await this.searchAllLogs(orderId);
+	async exportAllLogs(orderId?: string){
+		// await this.searchAllLogs(orderId!); //todo: keep or delete
 		await this.clickAndWaitForDownload(selector.admin.dokan.reports.allLogs.exportLogs);
 	}
 

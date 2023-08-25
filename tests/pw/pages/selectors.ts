@@ -6342,7 +6342,7 @@ export const selector = {
 				reportAbuse: 'a.dokan-report-abuse-button',
 				reportReasonByNumber: (reasonNumber: string) => `li:nth-child(${reasonNumber}) input`, // By Number
 				reportReasonByName: (reasonName: string) => `//input[@value='${reasonName}']/..`, // By Name
-				reportDescription: '.dokan-form-control',
+				reportDescription: 'textarea[name="description"]',
 				reportSubmit: '#dokan-report-abuse-form-submit-btn',
 				reportSubmitSuccessMessage: '#swal2-html-container',
 				confirmReportSubmit: '.swal2-confirm',

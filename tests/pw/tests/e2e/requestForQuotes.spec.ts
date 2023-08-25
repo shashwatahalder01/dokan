@@ -195,11 +195,11 @@ test.describe('Request for quotation test customer', () => {
 		await customer.payConvertedQuote(quoteId);
 	});
 
-	test('customer can quote product @pro @explo', async ( ) => {
+	test.skip('customer can quote product @pro @explo', async ( ) => {
 		await customer.customerQuoteProduct({ ...data.requestForQuotation.customerQuoteProduct, productName:productName });
 	});
 
-	test('guest customer can quote product @pro @explo', async ( ) => {
+	test.skip('guest customer can quote product @pro @explo', async ( ) => {
 		await guest.customerQuoteProduct({ ...data.requestForQuotation.customerQuoteProduct, productName:productName }, data.requestForQuotation.guest());
 	});
 

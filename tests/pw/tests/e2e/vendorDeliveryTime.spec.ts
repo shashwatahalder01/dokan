@@ -62,7 +62,7 @@ test.describe('Vendor delivery time test', () => {
 
 
 	test('customer can buy product with store pickup @pro', async ( ) => {
-		await dbUtils.setDokanSettings(dbData.dokan.optionName.deliveryTime, { ...dbData.dokan.deliveryTimeSettings, allow_vendor_override_settings: 'on' }); //todo: added , previous test is disable store pickup somehow fix it
+		await dbUtils.setDokanSettings(dbData.dokan.optionName.deliveryTime, { ...dbData.dokan.deliveryTimeSettings, allow_vendor_override_settings: 'off' }); //todo: added , previous test is disable store pickup somehow fix it
 		await customer.addProductToCart(data.predefined.simpleProduct.product1.name, 'single-product');
 		await customer.placeOrderWithDeliverTimeStorePickup('store-pickup', data.deliveryTime);
 	});
