@@ -43,6 +43,9 @@ test.describe('Vendor delivery time test', () => {
 		await vendor.vendorDeliveryTimeSettingsRenderProperly();
 	});
 
+	test('vendor can set delivery time settings @pro', async ( ) => {
+		await vendor.setDeliveryTimeSettings(data.vendor.deliveryTime);
+	});
 
 	test('vendor can filter delivery time @pro', async ( ) => {
 		await vendor.filterDeliveryTime('delivery');
@@ -52,17 +55,13 @@ test.describe('Vendor delivery time test', () => {
 		await vendor.updateCalendarView('week');
 	});
 
-
-	//todo: add vendor delivery time setup from vendor settings
-
 	test('customer can buy product with delivery time @pro', async ( ) => {
 		await customer.addProductToCart(data.predefined.simpleProduct.product1.name, 'single-product');
 		await customer.placeOrderWithDeliverTimeStorePickup('delivery-time', data.deliveryTime);
 	});
 
-
 	test('customer can buy product with store pickup @pro', async ( ) => {
-		await dbUtils.setDokanSettings(dbData.dokan.optionName.deliveryTime, { ...dbData.dokan.deliveryTimeSettings, allow_vendor_override_settings: 'off' }); //todo: added , previous test is disable store pickup somehow fix it
+		await dbUtils.setDokanSettings(dbData.dokan.optionName.deliveryTime, { ...dbData.dokan.deliveryTimeSettings, allow_vendor_override_settings: 'off' }); //todo: added for:, previous test is disable store pickup somehow fix it
 		await customer.addProductToCart(data.predefined.simpleProduct.product1.name, 'single-product');
 		await customer.placeOrderWithDeliverTimeStorePickup('store-pickup', data.deliveryTime);
 	});

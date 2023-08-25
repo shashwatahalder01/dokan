@@ -82,7 +82,8 @@ export class VendorReturnRequestPage extends VendorPage {
 
 	// vendor send rma refund
 	async vendorRmaRefund(orderNumber: string, productName: string, status: string){
-		await this.goIfNotThere(data.subUrls.frontend.vDashboard.returnRequest);
+		// await this.goIfNotThere(data.subUrls.frontend.vDashboard.returnRequest); //todo:
+		await this.goto(data.subUrls.frontend.vDashboard.returnRequest);
 		await this.clickAndWaitForResponseAndLoadState(data.subUrls.frontend.vDashboard.returnRequest, selector.vendor.vReturnRequest.view(orderNumber));
 		const sendRefundIsVisible = await this.isVisible(selector.vendor.vReturnRequest.returnRequestDetails.status.sendRefund);
 		!sendRefundIsVisible && await this.vendorUpdateRmaStatus(orderNumber, status);
@@ -101,7 +102,8 @@ export class VendorReturnRequestPage extends VendorPage {
 
 	// vendor delete rma request
 	async vendorDeleteRmaRequest(orderNumber: string){
-		await this.goIfNotThere(data.subUrls.frontend.vDashboard.returnRequest);
+		// await this.goIfNotThere(data.subUrls.frontend.vDashboard.returnRequest); //todo:
+		await this.goto(data.subUrls.frontend.vDashboard.returnRequest);
 		await this.hover(selector.vendor.vReturnRequest.returnRequestCell(orderNumber));
 		await this.clickAndWaitForResponseAndLoadState(data.subUrls.frontend.vDashboard.returnRequest, selector.vendor.vReturnRequest.delete(orderNumber));
 		await this.toContainText(selector.customer.cWooSelector.wooCommerceSuccessMessage, 'Return Request has been deleted successfully');

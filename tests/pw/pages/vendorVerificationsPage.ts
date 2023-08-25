@@ -4,7 +4,7 @@ import { selector } from 'pages/selectors';
 import { data } from 'utils/testData';
 
 
-export class VerificationsPage extends AdminPage {
+export class vendorVerificationsPage extends AdminPage {
 
 	constructor(page: Page) {
 		super(page);

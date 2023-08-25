@@ -73,7 +73,7 @@ test.describe('Vendor RMA test', () => {
 		await vendor.vendorUpdateRmaStatus(orderId, 'processing');
 	});
 
-	test.skip('vendor can rma refund @pro', async ( ) => {
+	test('vendor can rma refund @pro', async ( ) => {
 		await vendor.vendorRmaRefund(orderId, data.predefined.simpleProduct.product1.name, 'processing');
 	});
 

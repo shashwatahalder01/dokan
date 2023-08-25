@@ -36,10 +36,6 @@ test.describe('Vendor settings test', () => {
 		await vendor.vendorVerificationsSettingsRenderProperly();
 	});
 
-	test('vendor shipping settings menu page is rendering properly @pro @explo', async ( ) => {
-		await vendor.vendorShippingSettingsRenderProperly();
-	});
-
 	test('vendor shipstation settings menu page is rendering properly @pro @explo', async ( ) => {
 		await vendor.vendorShipstationSettingsRenderProperly();
 	});
@@ -59,6 +55,7 @@ test.describe('Vendor settings test', () => {
 
 	// store settings
 
+	//todo: ensure which settings need to reset, and test data should be what
 
 	test('vendor can set store basic settings @lite', async ( ) => {
 		await vendor.setStoreSettings(data.vendor.vendorInfo, 'basic');
@@ -110,58 +107,12 @@ test.describe('Vendor settings test', () => {
 		//todo: disable min-max
 	});
 
-	//todo: ensure which settings need to reset, and test data should be what
-
-
-	// test.skip('vendor can send id verification request @pro', async ( )=> {
-	// 	await vendor.sendIdVerificationRequest(data.vendor.verification);
-	// });
-
-	// test.skip('vendor can send address verification request @pro', async ( )=> {
-	// 	await vendor.sendAddressVerificationRequest(data.vendor.verification);
-	// });
-
-	// test.skip('vendor can send company verification request @pro', async ( )=> {
-	// 	await vendor.sendCompanyVerificationRequest(data.vendor.verification);
-	// });
-
-
-	test('vendor can set delivery time settings @pro', async ( ) => {
-		await vendor.setDeliveryTimeSettings(data.vendor.deliveryTime);
-	});
-
-	test('vendor can set shipping policy @pro', async ( ) => {
-		await vendor.setShippingPolicies(data.vendor.shipping.shippingPolicy);
-	});
-
-	test('vendor can set flat rate shipping @pro', async ( ) => {
-		await vendor.setShippingSettings(data.vendor.shipping.shippingMethods.flatRate);
-	});
-
-	test('vendor can set free shipping @pro', async ( ) => {
-		await vendor.setShippingSettings(data.vendor.shipping.shippingMethods.freeShipping);
-	});
-
-	test('vendor can set local pickup shipping @pro', async ( ) => {
-		await vendor.setShippingSettings(data.vendor.shipping.shippingMethods.localPickup);
-	});
-
-	test('vendor can set table rate shipping shipping @pro', async ( ) => {
-		await vendor.setShippingSettings(data.vendor.shipping.shippingMethods.tableRateShipping);
-	});
-
-	test('vendor can set dokan distance rate shipping @pro', async ( ) => {
-		await vendor.setShippingSettings(data.vendor.shipping.shippingMethods.distanceRateShipping);
-	});
-
-	//todo: vendor can edit, delete shipping method, move to separate file
-
 	test('vendor can set shipStation settings @pro', async ( ) => {
 		await vendor.setShipStation(data.vendor.shipStation);
 	});
 
 	test('vendor can set social profile settings @pro', async ( ) => {
-		await vendor.setSocialProfile(data.vendor.socialProfileUrls);  //todo: add user can share store, provide valid link and test only gotourl is successed
+		await vendor.setSocialProfile(data.vendor.socialProfileUrls);
 	});
 
 	test('vendor can set rma settings @pro', async ( ) => {

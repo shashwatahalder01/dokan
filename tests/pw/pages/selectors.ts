@@ -4524,7 +4524,7 @@ export const selector = {
 
 			noProductFound: '//td[normalize-space()="No product found"]',
 			numberOfRowsFound: '.product-listing-table tbody tr',
-			productCell: (name: string) =>  `//a[normalize-space()="${name}"]/../..`,
+			productCell: (name: string) =>  `//p//a[normalize-space()="${name}"]/../..`,
 			edit: (name: string) =>  `//a[normalize-space()="${name}"]/../..//span[@class="edit"]`,
 			permanentlyDelete:(name: string) =>   `//a[normalize-space()="${name}"]/../..//span[@class="delete"]`,
 			duplicate: (name: string) =>  `//a[normalize-space()="${name}"]/../..//span[@class="duplicate"]`,
