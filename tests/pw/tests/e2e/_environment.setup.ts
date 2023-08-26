@@ -14,7 +14,7 @@ const { CUSTOMER_ID, DOKAN_PRO } = process.env;
 
 setup.describe('setup site & woocommerce & user settings', () => {
 
-	setup.use({ extraHTTPHeaders: { Authorization: payloads.aAuth } });
+	setup.use({ extraHTTPHeaders: { Authorization: payloads.adminAuth.Authorization } });
 
 	let apiUtils: ApiUtils;
 
@@ -114,7 +114,7 @@ setup.describe('setup site & woocommerce & user settings', () => {
 
 setup.describe('setup  user settings', () => {
 
-	setup.use({ extraHTTPHeaders: { Authorization: payloads.aAuth } });
+	setup.use({ extraHTTPHeaders: { Authorization: payloads.adminAuth.Authorization } });
 
 	let apiUtils: ApiUtils;
 

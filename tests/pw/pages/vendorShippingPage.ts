@@ -2,7 +2,7 @@ import { Page, expect } from '@playwright/test';
 import { VendorPage } from 'pages/vendorPage';
 import { selector } from 'pages/selectors';
 import { data } from 'utils/testData';
-import { vendor, } from 'utils/interfaces';
+import { vendor, shipping } from 'utils/interfaces';
 
 
 export class VendorShippingPage extends VendorPage {
@@ -68,29 +68,35 @@ export class VendorShippingPage extends VendorPage {
 
 	// vendor set all shipping settings
 	async setAllShippingSettings(): Promise<void> {
-		await this.setShippingSettings(data.vendor.shipping.shippingMethods.flatRate);
-		await this.setShippingSettings(data.vendor.shipping.shippingMethods.freeShipping);
-		await this.setShippingSettings(data.vendor.shipping.shippingMethods.localPickup);
-		await this.setShippingSettings(data.vendor.shipping.shippingMethods.tableRateShipping);
-		await this.setShippingSettings(data.vendor.shipping.shippingMethods.distanceRateShipping);
+		await this.addShippingMethod(data.vendor.shipping.shippingMethods.flatRate);
+		await this.addShippingMethod(data.vendor.shipping.shippingMethods.freeShipping);
+		await this.addShippingMethod(data.vendor.shipping.shippingMethods.localPickup);
+		await this.addShippingMethod(data.vendor.shipping.shippingMethods.tableRateShipping);
+		await this.addShippingMethod(data.vendor.shipping.shippingMethods.distanceRateShipping);
 	}
 
 
-	// vendor set shipping settings
-	async setShippingSettings(shipping: any): Promise<void> {
+	// vendor add shipping method
+	async addShippingMethod(shipping: any, forceAdd = false, skip?: boolean): Promise<void> {
 		await this.goIfNotThere(data.subUrls.frontend.vDashboard.settingsShipping);
 		// edit shipping zone
 		await this.hover(selector.vendor.vShippingSettings.shippingZoneCell(shipping.shippingZone));
 		await this.clickAndWaitForResponseAndLoadState(data.subUrls.ajax, selector.vendor.vShippingSettings.editShippingZone(shipping.shippingZone));
 
 		// add shipping method if not available
-		const methodIsVisible = await this.isVisible(selector.vendor.vShippingSettings.shippingMethodCell(shipping.shippingMethod));
-		if (!methodIsVisible) {
+		let methodExists = await this.isVisible(selector.vendor.vShippingSettings.shippingMethodCell(shipping.shippingMethod));
+		if (!methodExists || forceAdd) {
 			await this.click(selector.vendor.vShippingSettings.addShippingMethod);
 			await this.selectByValue(selector.vendor.vShippingSettings.shippingMethod, shipping.selectShippingMethod);
 			await this.clickAndWaitForResponseAndLoadState(data.subUrls.ajax, selector.vendor.vShippingSettings.shippingMethodPopupAddShippingMethod);
 			await expect(this.page.getByText(shipping.shippingMethodSaveSuccessMessage)).toBeVisible();
 			await expect(this.page.getByText(shipping.zoneSaveSuccessMessage)).toBeVisible();
+			methodExists = true;
+		}
+
+		// option to skip if shipping method is already available
+		if (methodExists && skip){
+			return;
 		}
 
 		// edit shipping method
@@ -98,9 +104,10 @@ export class VendorShippingPage extends VendorPage {
 		await this.click(selector.vendor.vShippingSettings.editShippingMethod(shipping.shippingMethod));
 
 		switch (shipping.selectShippingMethod) {
+
 		// flat rate
 		case 'flat_rate' :
-			await this.clearAndType(selector.vendor.vShippingSettings.flatRateMethodTitle, shipping.shippingMethod);
+			await this.clearAndType(selector.vendor.vShippingSettings.flatRateMethodTitle, shipping.shippingMethodTitle);
 			await this.clearAndType(selector.vendor.vShippingSettings.flatRateCost, shipping.shippingCost);
 			await this.selectByValue(selector.vendor.vShippingSettings.flatRateTaxStatus, shipping.taxStatus);
 			await this.clearAndType(selector.vendor.vShippingSettings.flatRateDescription, shipping.description);
@@ -109,13 +116,13 @@ export class VendorShippingPage extends VendorPage {
 
 			// free shipping
 		case 'free_shipping' :
-			await this.clearAndType(selector.vendor.vShippingSettings.freeShippingTitle, shipping.shippingMethod);
+			await this.clearAndType(selector.vendor.vShippingSettings.freeShippingTitle, shipping.shippingMethodTitle);
 			await this.clearAndType(selector.vendor.vShippingSettings.freeShippingMinimumOrderAmount, shipping.freeShippingMinimumOrderAmount);
 			break;
 
 			// local pickup
 		case 'local_pickup' :
-			await this.clearAndType(selector.vendor.vShippingSettings.localPickupTitle, shipping.shippingMethod);
+			await this.clearAndType(selector.vendor.vShippingSettings.localPickupTitle, shipping.shippingMethodTitle);
 			await this.clearAndType(selector.vendor.vShippingSettings.localPickupCost, shipping.shippingCost);
 			await this.selectByValue(selector.vendor.vShippingSettings.localPickupTaxStatus, shipping.taxStatus);
 			await this.clearAndType(selector.vendor.vShippingSettings.flatRateDescription, shipping.description);
@@ -123,7 +130,7 @@ export class VendorShippingPage extends VendorPage {
 
 			// dokan table rate shipping
 		case 'dokan_table_rate_shipping' :
-			await this.clearAndType(selector.vendor.vShippingSettings.tableRateShippingMethodTitle, shipping.shippingMethod);
+			await this.clearAndType(selector.vendor.vShippingSettings.tableRateShippingMethodTitle, shipping.shippingMethodTitle);
 			await this.selectByValue(selector.vendor.vShippingSettings.tableRateShippingTaxStatus, shipping.taxStatus);
 			await this.selectByValue(selector.vendor.vShippingSettings.tableRateShippingTaxIncludedInShippingCosts, shipping.taxIncludedInShippingCosts);
 			await this.clearAndType(selector.vendor.vShippingSettings.tableRateShippingHandlingFee, shipping.handlingFee);
@@ -139,7 +146,7 @@ export class VendorShippingPage extends VendorPage {
 
 			// dokan distance rate shipping
 		case 'dokan_distance_rate_shipping' :
-			await this.clearAndType(selector.vendor.vShippingSettings.distanceRateShippingMethodTitle, shipping.shippingMethod);
+			await this.clearAndType(selector.vendor.vShippingSettings.distanceRateShippingMethodTitle, shipping.shippingMethodTitle);
 			await this.selectByValue(selector.vendor.vShippingSettings.distanceRateShippingTaxStatus, shipping.taxStatus);
 			await this.selectByValue(selector.vendor.vShippingSettings.distanceRateShippingTransportationMode, shipping.transportationMode);
 			await this.selectByValue(selector.vendor.vShippingSettings.distanceRateShippingAvoid, shipping.avoid);
@@ -160,9 +167,37 @@ export class VendorShippingPage extends VendorPage {
 		default :
 			break;
 		}
+
 		await this.clickAndWaitForResponseAndLoadState(data.subUrls.ajax, selector.vendor.vShippingSettings.shippingSettingsSaveSettings);
 		await this.clickAndWaitForResponseAndLoadState(data.subUrls.ajax, selector.vendor.vShippingSettings.saveChanges);
 		await this.toContainText(selector.vendor.vShippingSettings.updateSettingsSuccessMessage, shipping.saveSuccessMessage);
+	}
+
+
+	// vendor add shipping method
+	async deleteShippingMethod(shipping: shipping['shippingMethods']['flatRate']): Promise<void> {
+		await this.goIfNotThere(data.subUrls.frontend.vDashboard.settingsShipping);
+
+		// edit shipping zone
+		await this.hover(selector.vendor.vShippingSettings.shippingZoneCell(shipping.shippingZone));
+		await this.clickAndWaitForResponseAndLoadState(data.subUrls.ajax, selector.vendor.vShippingSettings.editShippingZone(shipping.shippingZone));
+
+		const noOfMethods = await this.countLocator(selector.vendor.vShippingSettings.shippingMethodCell(shipping.shippingMethod));
+		console.log(noOfMethods);
+
+		if(noOfMethods > 1){
+
+			(this.lastLocator(selector.vendor.vShippingSettings.shippingMethodCell(shipping.shippingMethod))).hover();
+			const deleteMethod = this.lastLocator(selector.vendor.vShippingSettings.deleteShippingMethod(shipping.shippingMethod));
+			await this.clickLocatorAndWaitForResponse(data.subUrls.ajax, deleteMethod);
+			await this.toHaveCount(selector.vendor.vShippingSettings.shippingMethodCell(shipping.shippingMethod), noOfMethods - 1);
+
+		} else {
+
+			await this.hover(selector.vendor.vShippingSettings.shippingMethodCell(shipping.shippingMethod));
+			await this.clickAndWaitForResponse(data.subUrls.ajax, selector.vendor.vShippingSettings.deleteShippingMethod(shipping.shippingMethod));
+			await this.notToBeVisible(selector.vendor.vShippingSettings.shippingZoneCell(shipping.shippingZone));
+		}
 	}
 
 

@@ -258,6 +258,15 @@ export class BasePage {
 
 
 	// click & wait for response
+	async clickLocatorAndWaitForResponse(subUrl: string, locator: Locator, code = 200): Promise<Response> {
+		const [response] = await Promise.all([
+			this.page.waitForResponse((resp) => resp.url().includes(subUrl) && resp.status() === code),
+			locator.click()
+		]);
+		return response;
+	}
+
+	// click & wait for response
 	async clickAndWaitForResponse(subUrl: string, selector: string, code = 200): Promise<Response> {
 		const [response] = await Promise.all([
 			this.page.waitForResponse((resp) => resp.url().includes(subUrl) && resp.status() === code),
@@ -1239,6 +1248,7 @@ export class BasePage {
 
 	// get last matching locator
 	lastLocator(selector: string): Locator {
+		//todo: update all selector parameter to both selector or locator
 		const locator = this.page.locator(selector);
 		return locator.last();
 	}

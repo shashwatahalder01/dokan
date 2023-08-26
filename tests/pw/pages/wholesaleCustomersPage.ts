@@ -1,9 +1,11 @@
 import { Page, expect } from '@playwright/test';
 import { LoginPage } from 'pages/loginPage';
 import { AdminPage } from 'pages/adminPage';
+import { CustomerPage } from './customerPage';
 import { selector } from 'pages/selectors';
 import { data } from 'utils/testData';
 import { customer } from 'utils/interfaces';
+import { helpers } from 'utils/helpers';
 
 
 export class WholesaleCustomersPage extends AdminPage {
@@ -13,6 +15,7 @@ export class WholesaleCustomersPage extends AdminPage {
 	}
 
 	loginPage = new LoginPage(this.page);
+	customerPage = new CustomerPage(this.page);
 
 
 	// wholesale customers
@@ -181,6 +184,28 @@ export class WholesaleCustomersPage extends AdminPage {
 			await this.loginPage.switchUser(data.admin);
 			await this.updateWholesaleCustomer(currentUser as string, 'enable');
 		}
+	}
+
+
+	// view wholesale price
+	async viewWholeSalePrice(productName: string){
+		await this.customerPage.goToShop();
+		await this.customerPage.searchProduct(productName);
+		await this.toBeVisible(selector.customer.cWholesale.shop.wholesalePrice);
+		await this.toBeVisible(selector.customer.cWholesale.shop.wholesaleAmount);
+
+		await this.customerPage.goToProductDetails(productName);
+		await this.toBeVisible(selector.customer.cWholesale.singleProductDetails.wholesaleInfo);
+
+	}
+
+
+	// assert wholesale price
+	async assertWholesalePrice(wholesalePrice:string, minimumWholesaleQuantity:string){
+		await this.customerPage.goToCheckout();
+		const subtotal = Number(helpers.price(await this.getElementText(selector.customer.cCheckout.orderDetails.cartTotal ) as string));
+		const calcSubTotal = helpers.subtotal([Number(wholesalePrice)], [Number(minimumWholesaleQuantity)]);
+		expect(subtotal).toEqual(calcSubTotal);
 	}
 
 }

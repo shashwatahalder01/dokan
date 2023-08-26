@@ -782,7 +782,7 @@ export class ApiUtils {
 	// create a product advertisement
 	async createProductAdvertisement(product: object, auth? : auth): Promise<[responseBody, string]> {
 		const [body, productId] = await this.createProduct(product, auth);
-		const sellerId = body.store.id;									//todo:  hardcoding admin auth will hinder negative testing : test with invalid user
+		const sellerId = body.store.id;
 		const [, responseBody] = await this.post(endPoints.createProductAdvertisement, { data: { vendor_id: sellerId, product_id: productId }, headers: payloads.adminAuth });
 		const productAdvertisementId = String(responseBody.id);
 		return [responseBody, productAdvertisementId];
@@ -1053,6 +1053,43 @@ export class ApiUtils {
 		const allBadgeIds = (await this.getAllSellerBadges(auth)).map((o: { id: unknown; }) => o.id);
 		await this.updateBatchSellerBadges('delete', allBadgeIds, auth);
 	}
+
+
+	/**
+	 * vendor staff api methods
+	 */
+
+
+	// get all vendor staffs
+	async getAllVendorStaffs(auth? : auth): Promise<responseBody> {
+		const [, responseBody] = await this.get(endPoints.getAllVendorStaffs, { params: { per_page:100 }, headers: auth });
+		return responseBody;
+	}
+
+	// get staffId
+	async getStaffId(username: string, auth? : auth): Promise<string> {
+		const allStaffs = await this.getAllVendorStaffs(auth);
+		const staffId = (allStaffs.find((o: { user_login: unknown; }) => o.user_login === username)).ID;
+		return staffId;
+	}
+
+	// create vendor staff
+	async createVendorStaff(payload: any, auth? : auth): Promise<[responseBody, string]> {
+		const response = await this.request.post(endPoints.createVendorStaff, { data: payload, headers: auth });
+		const responseBody = await this.getResponseBody(response, false);
+
+		let staffId: string;
+		if(responseBody.code){
+			// expect(response.status()).toBe(400); //todo: status should be 400 dokan issue
+			expect(response.status()).toBe(500);
+			staffId = await this.getStaffId(payload.username, auth);
+		} else {
+			expect(response.ok()).toBeTruthy();
+			staffId = String(responseBody.ID);
+		}
+		return [responseBody, staffId];
+	}
+
 
 	/**
 	 * wp  api methods
@@ -1388,7 +1425,6 @@ export class ApiUtils {
 
 	// create complete order
 	async createOrderWithStatus(product: string | object, order: any, status: string, auth?: auth): Promise<[APIResponse, responseBody, string, string]> {
-		//todo: creator of product(who will be the owner), create order auth, update order auth
 		const [response, responseBody, orderId, productId] = await this.createOrder(product, order, auth);
 		await this.updateOrderStatus(orderId, status, auth);
 		return [response, responseBody, orderId, productId];

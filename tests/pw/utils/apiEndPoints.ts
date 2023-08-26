@@ -261,6 +261,16 @@ export const endPoints = {
 	getVendorStorePreferences: `${SERVER_URL}/dokan/v1/vendor-dashboard/preferences`,
 	getVendorProfileProgressBarData: `${SERVER_URL}/dokan/v1/vendor-dashboard/profile-progressbar`,
 
+
+	// vendor staff
+	getAllVendorStaffs: `${SERVER_URL}/dokan/v1/vendor-staff`,
+	getSingleVendorStaff: (staffId: string) => ` ${SERVER_URL}/dokan/v1/vendor-staff/${staffId}`,
+	createVendorStaff: ` ${SERVER_URL}/dokan/v1/vendor-staff`,
+	updateVendorStaff: (staffId: string) => ` ${SERVER_URL}/dokan/v1/vendor-staff/${staffId}`,
+	deleteVendorStaff: (staffId: string) => ` ${SERVER_URL}/dokan/v1/vendor-staff/${staffId}`,
+	getVendorStaffCapabilities: (staffId: string) => ` ${SERVER_URL}/dokan/v1/vendor-staff/${staffId}/capabilities`,
+	updateVendorStaffCapabilities: (staffId: string) => ` ${SERVER_URL}/dokan/v1/vendor-staff/${staffId}/capabilities`,
+
 	// v2
 
 	// rank math

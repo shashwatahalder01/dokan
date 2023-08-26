@@ -230,17 +230,22 @@ export class CustomerPage extends BasePage {
 
 
 	// add product to cart from product details page
-	async addProductToCartFromSingleProductPage(productName: string): Promise<void> {
+	async addProductToCartFromSingleProductPage(productName: string, quantity?: string): Promise<void> {
 		await this.goToProductDetails(productName);
 		const addonIsVisible = await this.isVisible(selector.customer.cSingleProduct.productAddon.addOnSelect);
 		addonIsVisible && this.selectByNumber(selector.customer.cSingleProduct.productAddon.addOnSelect, 1);
+		quantity && await this.clearAndType(selector.customer.cSingleProduct.productDetails.quantity, quantity);
 		await this.clickAndWaitForResponse(data.subUrls.frontend.productCustomerPage, selector.customer.cSingleProduct.productDetails.addToCart);
-		await this.toContainText(selector.customer.cWooSelector.wooCommerceSuccessMessage, `“${productName}” has been added to your cart.`);
+		if(!quantity){
+			await this.toContainText(selector.customer.cWooSelector.wooCommerceSuccessMessage, `“${productName}” has been added to your cart.`);
+		} else {
+			await this.toContainText(selector.customer.cWooSelector.wooCommerceSuccessMessage, `${quantity} × “${productName}” have been added to your cart.`);
+		}
 	}
 
 
 	// add product to cart
-	async addProductToCart(productName: string, from:string, clearCart = true ){
+	async addProductToCart(productName: string, from:string, clearCart = true, quantity?: string){
 		// clear cart
 		clearCart && await this.clearCart();
 		switch(from){
@@ -248,7 +253,7 @@ export class CustomerPage extends BasePage {
 			await this.addProductToCartFromShop(productName);
 			break;
 		case 'single-product' :
-			await this. addProductToCartFromSingleProductPage(productName);
+			await this. addProductToCartFromSingleProductPage(productName, quantity);
 			break;
 		default :
 			break;
@@ -310,7 +315,7 @@ export class CustomerPage extends BasePage {
 
 	// add shipping address in checkout
 	async addShippingAddressInCheckout(shippingInfo: customer['customerInfo']['shipping']): Promise<void> {
-		await this.clickAndWaitForResponse(data.subUrls.frontend.shippingAddressCheckout, selector.customer.cCheckout.shipToADifferentAddress);
+		await this.clickAndWaitForResponse(data.subUrls.frontend.shippingAddressCheckout, selector.customer.cCheckout.shippingAddress.shipToADifferentAddress);
 		await this.updateShippingFields(shippingInfo);
 	}
 

@@ -42,8 +42,6 @@ export const payloads = {
 
 	// user auth
 
-	aAuth: basicAuth(process.env.ADMIN, process.env.ADMIN_PASSWORD),
-
 	adminAuth: {
 		Authorization: basicAuth(process.env.ADMIN, process.env.ADMIN_PASSWORD),
 	},
@@ -143,6 +141,35 @@ export const payloads = {
 					addon_settings: []
 				}
 			}
+		]
+
+	}),
+
+	// wholesale product
+	createWholesaleProduct: () => ({
+		name: faker.commerce.productName() + ' (wholesale)',
+		type: 'simple',
+		regular_price: faker.finance.amount(100, 110, faker.helpers.arrayElement([0, 2])),
+		// regular_price: '114.15' , // failed for this price & 5% tax & 10% commission dokan .1 issue
+		status: 'publish',
+		categories: [
+			{
+				// id: 48
+			},
+		],
+		featured: true,
+		description: '<p>test description</p>',
+		short_description: '<p>test short description</p>',
+		meta_data: [
+			{
+				key: '_dokan_wholesale_meta',
+				value: {
+					enable_wholesale: 'yes',
+					// price: faker.finance.amount(90, 99, faker.helpers.arrayElement([0, 2])),
+					price: '100',
+					quantity: '10'
+				}
+			},
 		]
 
 	}),
@@ -969,7 +996,7 @@ export const payloads = {
 		last_name: faker.person.lastName(),
 		role: 'customer',
 		username: faker.person.firstName() + faker.string.uuid(),
-		password: '01dokan01',
+		password: String(process.env.USER_PASSWORD),
 		billing: {
 			first_name: 'customer1',
 			last_name: 'c1',
@@ -1002,7 +1029,7 @@ export const payloads = {
 		first_name: faker.person.firstName(),
 		last_name: faker.person.lastName(),
 		role: 'customer',
-		password: '01dokan01',
+		password: String(process.env.USER_PASSWORD),
 		billing: {
 			first_name: 'customer1',
 			last_name: 'c1',
@@ -1045,6 +1072,57 @@ export const payloads = {
 
 	deleteWholesaleCustomer: {
 		status: 'delete',
+	},
+
+
+	// create vendor staff
+
+	staff : {
+		username: 'staff1',
+		first_name: 'staff1',
+		last_name: 's1',
+		phone: '0123456789',
+		email: 'staff1@email.c',
+		password: String(process.env.USER_PASSWORD),
+	},
+
+	createStaff: () => ({
+		username: faker.person.firstName('male') + faker.string.uuid(),
+		first_name: faker.person.firstName('male'),
+		last_name: faker.person.lastName('male'),
+		phone: '0123456789',
+		email: faker.person.firstName('male') + '@email.com',
+		password: String(process.env.USER_PASSWORD),
+
+	}),
+
+
+	updateStaff: () => ({
+		// username: faker.person.firstName('male') + faker.string.uuid(),
+		first_name: faker.person.firstName('male'),
+		last_name: faker.person.lastName('male'),
+		phone: '0123456789',
+		email: faker.person.firstName('male') + '@email.com',
+		password: String(process.env.USER_PASSWORD),
+
+	}),
+
+	updateCapabilities: {
+		'capabilities': [
+			{
+				capability: 'read',
+				access: false
+			},
+			{
+				capability: 'vendor_staff',
+				access: false
+			},
+			{
+				capability: 'dokandar',
+				access: false
+			}
+		]
+
 	},
 
 	// support ticket
@@ -1143,7 +1221,7 @@ export const payloads = {
 		],
 		vendor_data: {
 			email: 'dummystore1@yopmail.com',
-			password: '01dokan01',
+			password: String(process.env.USER_PASSWORD),
 			store_name: 'dummyStore1',
 			social: [],
 			payment: [],
@@ -1168,7 +1246,7 @@ export const payloads = {
 
 	createStore: () => ({
 		user_login: faker.person.firstName() + faker.string.uuid(),
-		user_pass: '01dokan01',
+		user_pass: String(process.env.USER_PASSWORD),
 		role: 'seller',
 		email: faker.internet.email(),
 		store_name: faker.person.firstName() + '_store',
@@ -1666,7 +1744,7 @@ export const payloads = {
 
 	// update password
 	updatePassword: {
-		password: '01dokan01'
+		password: String(process.env.USER_PASSWORD),
 	},
 
 	// quote rule
@@ -1852,26 +1930,13 @@ export const payloads = {
 		force: true
 	},
 
-	paramsDeleteCustomer: {
+	paramsForceDelete: {
 		force: true
 	},
 
 	paramsGetProductsWithPagination: {
 		per_page: '10',
 		page : '1'
-	},
-
-	staff : {
-		username: 'staff1'+  faker.string.uuid(),
-		first_name: 'staff1'+  faker.string.uuid(),
-		last_name: 's1',
-		email: 's1'+  faker.string.uuid() + '@g.c',
-		roles: ['vendor_staff'],
-		password: '01dokan01',
-		'meta': {
-			'_vendor_id': '3',
-			'_staff_phone': '0123456789',
-		}
 	},
 
 

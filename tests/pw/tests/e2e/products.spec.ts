@@ -149,7 +149,7 @@ test.describe('Product functionality test', () => {
 		await vendor.addProductRmaSettings(data.predefined.simpleProduct.product1.name, data.vendor.rma);
 	});
 
-	//todo: add more product edit tests
+	//todo: add more product edit tests -> discount, wholesale, advertising
 
 	test('vendor can duplicate product @pro', async ( ) => {
 		await vendor.duplicateProduct(productName);

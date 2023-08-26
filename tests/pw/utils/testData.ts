@@ -1035,6 +1035,7 @@ export const data = {
 					shippingCountry: 'United States (US)',
 					selectShippingMethod: 'flat_rate',
 					shippingMethod: 'Flat Rate',
+					shippingMethodTitle: 'Flat Rate',
 					taxStatus: 'taxable',
 					shippingCost: '20',
 					description: 'Flat rate',
@@ -1049,6 +1050,7 @@ export const data = {
 					shippingCountry: 'United States (US)',
 					selectShippingMethod: 'free_shipping',
 					shippingMethod: 'Free Shipping',
+					shippingMethodTitle: 'Free Shipping',
 					freeShippingRequires: 'min_amount',
 					freeShippingMinimumOrderAmount: '200',
 					shippingMethodSaveSuccessMessage: 'Shipping method added successfully',
@@ -1061,6 +1063,7 @@ export const data = {
 					shippingCountry: 'United States (US)',
 					selectShippingMethod: 'local_pickup',
 					shippingMethod: 'Local Pickup',
+					shippingMethodTitle: 'Local Pickup',
 					taxStatus: 'taxable',
 					shippingCost: '20',
 					description: 'Local Pickup',
@@ -1074,6 +1077,7 @@ export const data = {
 					shippingCountry: 'United States (US)',
 					selectShippingMethod: 'dokan_table_rate_shipping',
 					shippingMethod: 'Table Rate',
+					shippingMethodTitle: 'Table Rate',
 					taxStatus: 'taxable',
 					taxIncludedInShippingCosts: 'no', // 'yes', 'no'
 					handlingFee: '10',
@@ -1093,6 +1097,7 @@ export const data = {
 					shippingCountry: 'United States (US)',
 					selectShippingMethod: 'dokan_distance_rate_shipping',
 					shippingMethod: 'Distance Rate',
+					shippingMethodTitle: 'Distance Rate',
 					taxStatus: 'taxable',
 					transportationMode: 'driving', // 'driving', 'walking', 'Bicycling'
 					avoid: 'none', // 'none', 'tolls', 'highways', 'ferries'

@@ -6218,7 +6218,7 @@ export const selector = {
 			productDetails: {
 				productImage: '.woocommerce-product-gallery__wrapper img.wp-post-image',
 				productTitle: '.product_title.entry-title',
-				quantity: '.quantity .qty',
+				quantity: '.quantity input.qty',
 				addToCart: '.single_add_to_cart_button',
 				viewCart: '.woocommerce-message > .button',
 				category: '.product_meta .posted_in',
@@ -6797,6 +6797,7 @@ export const selector = {
 		// Customer Cart
 		cCart: {
 			cartPageHeader: 'h1.entry-title',
+
 			// Edit Cart
 			cartItem: (productName: string) => `//td[@class='product-name']//a[contains(text(),'${productName}')]`,
 			removeItem: (productName: string) => `//a[contains(text(),'${productName}')]/../..//a[@class='remove']`,
@@ -6805,56 +6806,96 @@ export const selector = {
 			applyCoupon: '//button[@name="apply_coupon"]',
 			removeCoupon: (couponCode: string) => `.cart-discount.coupon-${couponCode.toLowerCase()} .woocommerce-remove-coupon`,
 			updateCart: '//button[@name="update_cart"]',
+
+			cartDetails: {
+				cartTotal: 'tr.cart-subtotal span.woocommerce-Price-amount.amount',
+				shipping: '//ul[@id="shipping_method"]//input[@checked="checked"]/..//span[@class="woocommerce-Price-amount amount"]',
+				tax: 'tr.tax-rate span.woocommerce-Price-amount.amount',
+				orderTotal: 'tr.order-total span.woocommerce-Price-amount.amount',
+
+			},
+
 			// Shipping Methods
 			shippingMethod: (vendorName: string, shippingMethod: string) => `//th[contains(text(),'Shipping:  ${vendorName}')]/..//label[contains(text(),'${shippingMethod}')]/..//input`, // For Vendor-Wise or Admin Shipping Method
 			vendorShippingMethod: (shippingMethod: string) => `//label[contains(text(),'${shippingMethod}')]/..//input`, // For Unique Shipping Method
+
 			// Proceed to Checkout
 			proceedToCheckout: '.checkout-button.button.wc-forward',
+
 			// Remove All Item
 			productCrossIcon: '.product-remove a',
 			firstProductCrossIcon: '(//td[@class="product-remove"]//a)[1]',
 			cartEmptyMessage: '.cart-empty.woocommerce-info',
 		},
 
+		cWholesale: {
+
+			shop:{
+				wholesalePrice: 'span.dokan-wholesale-price',
+				wholesaleAmount: 'span.dokan-wholesale-price span.woocommerce-Price-amount.amount',
+			},
+
+			singleProductDetails: {
+				wholesaleInfo: 'p.dokan-wholesale-meta',
+				wholesalePrice: 'p.dokan-wholesale-meta .woocommerce-Price-amount.amount',
+				minimumQuantity: '(//p[@class="dokan-wholesale-meta"]//strong)[2]',
+			}
+		},
+
 		// Customer Checkout
 		cCheckout: {
 			checkoutPageHeader: '.entry-title',
+
+			orderDetails:{
+				orderDetailsHeading: 'h3#order_review_heading',
+				orderDetailsDiv: 'div#order_review',
+
+				cartTotal: 'tr.cart-subtotal span.woocommerce-Price-amount.amount',
+				shipping: '//ul[@id="shipping_method"]//input[@checked="checked"]/..//span[@class="woocommerce-Price-amount amount"]',
+				tax: 'tr.tax-rate span.woocommerce-Price-amount.amount',
+				orderTotal: 'tr.order-total span.woocommerce-Price-amount.amount',
+			},
+
 			// Billing Details
-			billingFirstName: '#billing_first_name',
-			billingLastName: '#billing_last_name',
-			billingCompanyName: '#billing_company',
-			billingCompanyIDOrEuidNumber: '#billing_dokan_company_id_number',
-			billingVatOrTaxNumber: '#billing_dokan_vat_number',
-			billingNameOfBank: '#billing_dokan_bank_name',
-			billingBankIban: '#billing_dokan_bank_iban',
-			// billingCountryOrRegion: "#select2-billing_country-container",
-			billingCountryOrRegion: '.select2-selection__arrow',
-			billingCountryOrRegionValues: '.select2-results ul li',
-			billingStreetAddress: '#billing_address_1',
-			billingStreetAddress2: '#billing_address_2', //todo: group locators
-			billingTownCity: '#billing_city',
-			billingPhone: '#billing_phone',
-			billingEmailAddress: '#billing_email',
-			billingState: '#select2-billing_state-container',
-			billingStateValues: '.select2-results ul li',
-			billingZipCode: '#billing_postcode',
+			billingAddress: {
+				billingFirstName: '#billing_first_name',
+				billingLastName: '#billing_last_name',
+				billingCompanyName: '#billing_company',
+				billingCompanyIDOrEuidNumber: '#billing_dokan_company_id_number',
+				billingVatOrTaxNumber: '#billing_dokan_vat_number',
+				billingNameOfBank: '#billing_dokan_bank_name',
+				billingBankIban: '#billing_dokan_bank_iban',
+				// billingCountryOrRegion: "#select2-billing_country-container",
+				billingCountryOrRegion: '.select2-selection__arrow',
+				billingCountryOrRegionValues: '.select2-results ul li',
+				billingStreetAddress: '#billing_address_1',
+				billingStreetAddress2: '#billing_address_2',
+				billingTownCity: '#billing_city',
+				billingPhone: '#billing_phone',
+				billingEmailAddress: '#billing_email',
+				billingState: '#select2-billing_state-container',
+				billingStateValues: '.select2-results ul li',
+				billingZipCode: '#billing_postcode',
+			},
 
 			// Shipping Details
-			shipToADifferentAddress: '#ship-to-different-address-checkbox',
-			shippingFirstName: '#shipping_first_name',
-			shippingLastName: '#shipping_last_name',
-			shippingCompanyName: '#shipping_company',
-			// shippingCountryOrRegion: "#select2-shipping_country-container",
-			shippingCountryOrRegion: '.select2-selection__arrow',
+			shippingAddress: {
+				shipToADifferentAddress: '#ship-to-different-address-checkbox',
+				shippingFirstName: '#shipping_first_name',
+				shippingLastName: '#shipping_last_name',
+				shippingCompanyName: '#shipping_company',
+				// shippingCountryOrRegion: "#select2-shipping_country-container",
+				shippingCountryOrRegion: '.select2-selection__arrow',
 
-			shippingCountryOrRegionValues: '.select2-results ul li',
-			shippingStreetAddress: '#shipping_address_1',
-			shippingStreetAddress2: '#shipping_address_2',
-			shippingTownCity: '#shipping_city',
-			// shippingState: "#select2-shipping_state-container",
-			shippingState: '.select2-selection__arrow',
-			shippingStateValues: '.select2-results ul li',
-			shippingZipCode: '#shipping_postcode',
+				shippingCountryOrRegionValues: '.select2-results ul li',
+				shippingStreetAddress: '#shipping_address_1',
+				shippingStreetAddress2: '#shipping_address_2',
+				shippingTownCity: '#shipping_city',
+				// shippingState: "#select2-shipping_state-container",
+				shippingState: '.select2-selection__arrow',
+				shippingStateValues: '.select2-results ul li',
+				shippingZipCode: '#shipping_postcode',
+			},
 
 			// Order Comments
 			orderComments: '#order_comments',
@@ -6872,6 +6913,7 @@ export const selector = {
 			wireCardCreditCard: '.payment_method_dokan-moip-connect label',
 			paypalMarketPlace: '.wc_payment_method.payment_method_dokan_paypal_marketplace label',
 			stripeExpress: '.wc_payment_method.payment_method_dokan_stripe_express label',
+
 			// Place Order
 			placeOrder: '#place_order',
 		},

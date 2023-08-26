@@ -36,27 +36,34 @@ test.describe('Vendor shipping test', () => {
 		await vendor.setShippingPolicies(data.vendor.shipping.shippingPolicy);
 	});
 
-	test('vendor can set flat rate shipping @pro', async ( ) => {
-		await vendor.setShippingSettings(data.vendor.shipping.shippingMethods.flatRate);
+	test('vendor can add flat rate shipping @pro', async ( ) => {
+		await vendor.addShippingMethod(data.vendor.shipping.shippingMethods.flatRate);
 	});
 
-	test('vendor can set free shipping @pro', async ( ) => {
-		await vendor.setShippingSettings(data.vendor.shipping.shippingMethods.freeShipping);
+	test('vendor can add free shipping @pro', async ( ) => {
+		await vendor.addShippingMethod(data.vendor.shipping.shippingMethods.freeShipping);
 	});
 
-	test('vendor can set local pickup shipping @pro', async ( ) => {
-		await vendor.setShippingSettings(data.vendor.shipping.shippingMethods.localPickup);
+	test('vendor can add local pickup shipping @pro', async ( ) => {
+		await vendor.addShippingMethod(data.vendor.shipping.shippingMethods.localPickup);
 	});
 
-	test('vendor can set table rate shipping shipping @pro', async ( ) => {
-		await vendor.setShippingSettings(data.vendor.shipping.shippingMethods.tableRateShipping);
+	test('vendor can add table rate shipping @pro', async ( ) => {
+		await vendor.addShippingMethod(data.vendor.shipping.shippingMethods.tableRateShipping);
 	});
 
-	test('vendor can set dokan distance rate shipping @pro', async ( ) => {
-		await vendor.setShippingSettings(data.vendor.shipping.shippingMethods.distanceRateShipping);
+	test('vendor can add dokan distance rate shipping @pro', async ( ) => {
+		await vendor.addShippingMethod(data.vendor.shipping.shippingMethods.distanceRateShipping);
 	});
 
-	//todo: vendor can edit, delete shipping method, move to separate file
+	test('vendor can edit shipping method @pro', async ( ) => {
+		await vendor.addShippingMethod(data.vendor.shipping.shippingMethods.localPickup, false, true);
+		await vendor.addShippingMethod(data.vendor.shipping.shippingMethods.localPickup);
+	});
 
+	test('vendor can delete shipping method @pro', async ( ) => {
+		await vendor.addShippingMethod(data.vendor.shipping.shippingMethods.flatRate, true, true); //todo: add with api v2 settings group
+		await vendor.deleteShippingMethod(data.vendor.shipping.shippingMethods.flatRate);
+	});
 
 });
