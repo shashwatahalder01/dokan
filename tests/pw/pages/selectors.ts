@@ -6220,7 +6220,7 @@ export const selector = {
 				productTitle: '.product_title.entry-title',
 				quantity: '.quantity input.qty',
 				addToCart: '.single_add_to_cart_button',
-				viewCart: '.woocommerce-message > .button',
+				viewCart: '.woocommerce .woocommerce-message > .button',
 				category: '.product_meta .posted_in',
 			},
 
@@ -7100,7 +7100,7 @@ export const selector = {
 		},
 
 		cWooSelector: {
-			wooCommerceSuccessMessage: '.woocommerce-message',
+			wooCommerceSuccessMessage: 'div.woocommerce .woocommerce-message',
 			wooCommerceError: '.woocommerce .woocommerce-error',
 			wooCommerceInfo: '.woocommerce .woocommerce-info',
 		},

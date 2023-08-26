@@ -1,5 +1,6 @@
 import { Page } from '@playwright/test';
 import { VendorPage } from 'pages/vendorPage';
+import { CustomerPage } from './customerPage';
 import { selector } from 'pages/selectors';
 import { data } from 'utils/testData';
 import { product, date } from 'utils/interfaces';
@@ -11,6 +12,7 @@ export class AuctionsPage extends VendorPage {
 		super(page);
 	}
 
+	customerPage = new CustomerPage(this.page);
 
 	// auctions
 
@@ -203,6 +205,12 @@ export class AuctionsPage extends VendorPage {
 	async bidAuctionProduct(productName: string){
 		await this.goToProductDetails(productName);
 		await this.click(selector.vendor.vAuction.viewAuction.bidButton);
+
+	}
+
+	async buyAuctionProduct(productName: string){
+		await this.customerPage.addProductToCart(productName, 'single-product');
+		await this.customerPage.placeOrder();
 
 	}
 

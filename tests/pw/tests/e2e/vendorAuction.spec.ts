@@ -97,6 +97,9 @@ test.describe('Auction Product test', () => {
 		await customer.bidAuctionProduct(auctionProductName);
 	});
 
-	//todo:add more customer tests buy now, after bid buy...
+	test('customer can buy auction product with buy it now price @pro', async ( ) => {
+		await customer.buyAuctionProduct(auctionProductName);
+	});
+
 
 });
