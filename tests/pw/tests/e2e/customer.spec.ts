@@ -86,17 +86,6 @@ test.describe('Customer functionality test', () => {
 		await customer.productIsOnCart(productName);
 	});
 
-	test('customer can apply coupon @pro', async ( ) => {
-		await customer.addProductToCart(data.predefined.simpleProduct.product1.name, 'single-product');
-		await customer.applyCoupon(data.predefined.coupon.couponCode);
-	});
-
-	test('customer can buy product with coupon @pro', async ( ) => {
-		await customer.addProductToCart(data.predefined.simpleProduct.product1.name, 'single-product');
-		await customer.applyCoupon(data.predefined.coupon.couponCode);
-		await customer.placeOrder();
-	});
-
 	test('customer can buy product @lite', async ( ) => {
 		await customer.addProductToCart(data.predefined.simpleProduct.product1.name, 'single-product');
 		await customer.placeOrder();

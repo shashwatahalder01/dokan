@@ -71,7 +71,15 @@ test.describe('Coupons test', () => {
 	});
 
 	test('customer can view coupon on single store @pro', async ( ) => {
-		await customer.storeCoupon(data.predefined.vendorStores.vendor1, couponCode);
+		await customer.viewStoreCoupon(data.predefined.vendorStores.vendor1, couponCode);
+	});
+
+	test('customer can apply coupon @pro', async ( ) => {
+		await customer.applyCoupon(data.predefined.simpleProduct.product1.name, data.predefined.coupon.couponCode);
+	});
+
+	test('customer can buy product with coupon @pro', async ( ) => {
+		await customer.buyProductWithCoupon(data.predefined.simpleProduct.product1.name, data.predefined.coupon.couponCode);
 	});
 
 

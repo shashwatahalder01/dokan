@@ -1677,3 +1677,87 @@ export interface installWp {
 		adminPassword: string;
 		adminEmail: string;
 	}
+
+
+// api interfaces
+
+export interface auth {
+	[key: string]: string;
+ }
+
+export interface user_api {
+	username: string;
+	password: string;
+}
+
+export interface taxRate {
+	// [key: string]: string | number | boolean | string [];
+	country: string,
+	state: string,
+	postcode: string,
+	city: string,
+	rate: string,
+	name: string,
+	priority: number,
+	compound: boolean,
+	shipping: boolean,
+	order: number,
+	class: string,
+	postcodes: string[],
+	cities: string[],
+}
+
+export interface coupon_api {
+		code: string,
+		amount: string,
+		discount_type: string,
+		product_ids: number[],
+		individual_use?: boolean,
+		meta_data?: { key: string; value: string; }[]
+}
+
+export interface marketPlaceCoupon {
+	code: string,
+	amount: string,
+	discount_type: string,
+	individual_use?: boolean,
+	meta_data?: { key: string; value: string; }[]
+}
+
+export interface reqOptions {
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
+	data?: any;
+	failOnStatusCode?: boolean | undefined;
+	form?: { [key: string]: string | number | boolean; } | undefined;
+	headers?: { [key: string]: string; } | undefined;
+	ignoreHTTPSErrors?: boolean | undefined;
+	maxRedirects?: number | undefined;
+	multipart?: { [key: string]: string | number | boolean | fs.ReadStream | { name: string; mimeType: string; buffer: Buffer; }; } | undefined;
+	params?: { [key: string]: string | number | boolean; } | undefined;
+	timeout?: number | undefined;
+}
+
+export interface headers { [key: string]: string; }
+
+export interface storageState {
+    cookies: Array<{
+      name: string;
+      value: string;
+      domain: string;
+      path: string;
+      expires: number;
+      httpOnly: boolean;
+      secure: boolean;
+      sameSite: 'Strict'|'Lax'|'None';
+    }>;
+	origins: Array<{
+		origin: string;
+		localStorage: Array<{
+		name: string;
+		value: string;
+		}>;
+	}>;
+}
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export type responseBody = any;

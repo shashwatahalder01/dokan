@@ -2,89 +2,11 @@ import { expect, type APIRequestContext, APIResponse, Request } from '@playwrigh
 import { endPoints } from 'utils/apiEndPoints';
 import { payloads } from 'utils/payloads';
 import { helpers } from 'utils/helpers';
+import { auth, user_api, taxRate, coupon_api, marketPlaceCoupon, reqOptions, headers, storageState, responseBody  } from 'utils/interfaces';
 import fs from 'fs';
+
 // import FormData from 'form-data';
 
-interface auth {
-	[key: string]: string;
- }
-
- interface user {
-	username: string;
-	password: string;
-}
-
- interface taxRate {
-	// [key: string]: string | number | boolean | string [];
-	country: string,
-	state: string,
-	postcode: string,
-	city: string,
-	rate: string,
-	name: string,
-	priority: number,
-	compound: boolean,
-	shipping: boolean,
-	order: number,
-	class: string,
-	postcodes: string[],
-	cities: string[],
-}
-
-interface coupon {
-		code: string,
-		amount: string,
-		discount_type: string,
-		product_ids: number[],
-		individual_use?: boolean,
-		meta_data?: { key: string; value: string; }[]
-}
-
-interface marketPlaceCoupon {
-	code: string,
-	amount: string,
-	discount_type: string,
-	individual_use?: boolean,
-	meta_data?: { key: string; value: string; }[]
-}
-
-interface reqOptions {
-	// eslint-disable-next-line @typescript-eslint/no-explicit-any
-	data?: any;
-	failOnStatusCode?: boolean | undefined;
-	form?: { [key: string]: string | number | boolean; } | undefined;
-	headers?: { [key: string]: string; } | undefined;
-	ignoreHTTPSErrors?: boolean | undefined;
-	maxRedirects?: number | undefined;
-	multipart?: { [key: string]: string | number | boolean | fs.ReadStream | { name: string; mimeType: string; buffer: Buffer; }; } | undefined;
-	params?: { [key: string]: string | number | boolean; } | undefined;
-	timeout?: number | undefined;
-}
-
-interface headers { [key: string]: string; }
-
-interface storageState {
-    cookies: Array<{
-      name: string;
-      value: string;
-      domain: string;
-      path: string;
-      expires: number;
-      httpOnly: boolean;
-      secure: boolean;
-      sameSite: 'Strict'|'Lax'|'None';
-    }>;
-	origins: Array<{
-		origin: string;
-		localStorage: Array<{
-		name: string;
-		value: string;
-		}>;
-	}>;
-}
-
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-type responseBody = any;
 
 export class ApiUtils {
 	readonly request: APIRequestContext;
@@ -94,7 +16,7 @@ export class ApiUtils {
 	}
 
 	// get basic auth
-	getBasicAuth(user: user): string {
+	getBasicAuth(user: user_api): string {
 		const basicAuth = 'Basic ' + Buffer.from(user.username + ':' + user.password).toString('base64');
 		return basicAuth;
 	}
@@ -461,7 +383,7 @@ export class ApiUtils {
 
 
 	// create coupon
-	async createCoupon(productIds: string[], coupon: coupon, auth?: auth ): Promise<[responseBody, string, string]> { //todo:  need to update; handle productIds can be empty
+	async createCoupon(productIds: string[], coupon: coupon_api, auth?: auth ): Promise<[responseBody, string, string]> { //todo:  need to update; handle productIds can be empty
 		const response = await this.request.post(endPoints.createCoupon, { data: { ...coupon, product_ids: productIds }, headers: auth });
 		const responseBody = await this.getResponseBody(response, false);
 		let couponId: string;
