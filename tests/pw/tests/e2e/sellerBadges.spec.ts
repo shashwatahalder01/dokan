@@ -38,6 +38,10 @@ test.describe('Seller badge test', () => {
 		await admin.adminSellerBadgeRenderProperly();
 	});
 
+	// test('admin can view seller badge details @pro', async ( ) => { //todo:
+	// await admin.viewSellerBadge({ ...data.sellerBadge, badgeName: data.sellerBadge.eventName.numberOfItemsSold });
+	// });
+
 	test('admin can create seller badge @pro', async ( ) => {
 		await admin.createSellerBadge({ ...data.sellerBadge, badgeName: data.sellerBadge.eventName.numberOfItemsSold });
 	});
