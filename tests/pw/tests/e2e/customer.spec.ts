@@ -108,12 +108,8 @@ test.describe('Customer functionality test', () => {
 		await customer.placeOrder();
 	});
 
-
 	// test.skip('customer can download downloadables @lite', async ( ) => {
 	// pre: complete download product
 	// });
-
-
-	//todo: customer can order again from order received page
 
 });

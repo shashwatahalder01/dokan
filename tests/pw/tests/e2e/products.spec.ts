@@ -69,7 +69,9 @@ test.describe('Product functionality test', () => {
 	});
 
 
-	//vendors   //todo: move create product in separate files, or product functionality to another page
+	//vendors
+
+	//todo: move create product in separate files, or product functionality to another page
 
 	test('vendor can add simple product @lite', async ( ) => {
 		await vendor.vendorAddSimpleProduct(data.product.simple);

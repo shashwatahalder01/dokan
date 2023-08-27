@@ -30,7 +30,7 @@ test.describe('Single store functionality test', () => {
 
 	test('dokan single store page is rendering properly @lite @explo', async ( ) => {
 		await customer.singleStoreRenderProperly(data.predefined.vendorStores.vendor1);
-		//todo:  should be pass for all four layout
+
 	});
 
 	// test.skip('customer can view store open-close time on single store @lite', async ( ) => {

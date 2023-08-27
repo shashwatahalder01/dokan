@@ -3,6 +3,7 @@ import { VendorPage } from 'pages/vendorPage';
 import { CustomerPage } from 'pages/customerPage';
 import { selector } from 'pages/selectors';
 import { data } from 'utils/testData';
+import { helpers } from 'utils/helpers';
 import { product, date } from 'utils/interfaces';
 
 
@@ -183,7 +184,7 @@ export class AuctionsPage extends VendorPage {
 	// filter auction activity
 	async filterAuctionActivity(inputValue: date['dateRange']){
 		await this.goIfNotThere(data.subUrls.frontend.vDashboard.auctionActivity);
-		// await this.setAttributeValue(selector.vendor.vAuction.actionActivity.filters.filterByDate.dateRangeInput, 'value', inputValue.startDate + ' - ' + inputValue.endDate); //todo: based on site time settings
+		await this.setAttributeValue(selector.vendor.vAuction.actionActivity.filters.filterByDate.dateRangeInput, 'value', helpers.dateFormatFYJ(inputValue.startDate) + ' - ' + helpers.dateFormatFYJ(inputValue.endDate));
 		await this.setAttributeValue(selector.vendor.vAuction.actionActivity.filters.filterByDate.startDateInput, 'value', inputValue.startDate);
 		await this.setAttributeValue(selector.vendor.vAuction.actionActivity.filters.filterByDate.endDateInput, 'value', inputValue.endDate);
 		await this.clickAndWaitForResponseAndLoadState(data.subUrls.frontend.vDashboard.auctionActivity, selector.vendor.vAuction.actionActivity.filters.filter );

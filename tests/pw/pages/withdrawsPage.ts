@@ -174,16 +174,16 @@ export class WithdrawsPage extends AdminPage {
 	async requestWithdraw(withdraw: vendor['withdraw']): Promise<void> {
 		await this.goIfNotThere(data.subUrls.frontend.vDashboard.withdraw);
 
-		if (helpers.price(withdraw.currentBalance) > helpers.price(withdraw.minimumWithdrawAmount)) { //todo:
+		if (helpers.price(withdraw.currentBalance) > helpers.price(withdraw.minimumWithdrawAmount)) {
 			await this.click(selector.vendor.vWithdraw.manualWithdrawRequest.requestWithdraw);
 			await this.clearAndType(selector.vendor.vWithdraw.manualWithdrawRequest.withdrawAmount, String(withdraw.minimumWithdrawAmount));
 			await this.selectByValue(selector.vendor.vWithdraw.manualWithdrawRequest.withdrawMethod, withdraw.withdrawMethod.default);
 			await this.clickAndWaitForResponseAndLoadState(data.subUrls.ajax, selector.vendor.vWithdraw.manualWithdrawRequest.submitRequest);
-			// await expect(this.page.getByText(selector.vendor.vWithdraw.manualWithdrawRequest.withdrawRequestSaveSuccessMessage)).toBeVisible(); //todo
+			// await expect(this.page.getByText(selector.vendor.vWithdraw.manualWithdrawRequest.withdrawRequestSaveSuccessMessage)).toBeVisible(); //todo:
 		} else {
 			console.log('Vendor balance is less than minimum withdraw amount');
 			test.skip();
-			// throw new Error('Vendor balance is less than minimum withdraw amount'); //todo: skip or fail test
+			// throw new Error('Vendor balance is less than minimum withdraw amount');
 		}
 	}
 

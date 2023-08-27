@@ -2,6 +2,7 @@ import { Page } from '@playwright/test';
 import { VendorPage } from 'pages/vendorPage';
 import { selector } from 'pages/selectors';
 import { data } from 'utils/testData';
+import { helpers } from 'utils/helpers';
 import { vendor, } from 'utils/interfaces';
 
 
@@ -364,7 +365,7 @@ export class VendorSettingsPage extends VendorPage {
 			case 'datewise' :{
 				const vacationDayFrom = (vacation.datewise.vacationDayFrom());
 				const vacationDayTo = (vacation.datewise.vacationDayTo(vacationDayFrom));
-				// await this.setAttributeValue(selector.vendor.vStoreSettings.vacationDateRange, 'value', vacationDayFrom + ' - ' + vacationDayTo ); //todo: update according to site settings
+				await this.setAttributeValue(selector.vendor.vStoreSettings.vacationDateRange, 'value', helpers.dateFormatFYJ(vacationDayFrom) + ' - ' + helpers.dateFormatFYJ(vacationDayTo ));
 				await this.setAttributeValue(selector.vendor.vStoreSettings.vacationDateRangeFrom, 'value', vacationDayFrom);
 				await this.setAttributeValue(selector.vendor.vStoreSettings.vacationDateRangeTo, 'value', vacationDayTo);
 				await this.clearAndType(selector.vendor.vStoreSettings.setVacationMessageDatewise, vacation.datewise.vacationMessage);

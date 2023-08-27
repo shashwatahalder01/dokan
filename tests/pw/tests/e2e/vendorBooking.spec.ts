@@ -122,7 +122,6 @@ test.describe('Booking Product test', () => {
 	});
 
 	//todo: vendor can add booking resource to booking product
-
 	//todo: add vendor can add booking both customer and guest
 	//todo: add customer tests
 

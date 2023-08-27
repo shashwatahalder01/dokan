@@ -322,7 +322,7 @@ export class VendorPage extends BasePage {
 		if (advertisementStatus){
 			console.log('Product advertisement is currently ongoing.');
 			test.skip();
-			// throw new Error('Product advertisement is currently ongoing.'); //todo: skip or fail test
+			// throw new Error('Product advertisement is currently ongoing.');
 		}
 		await this.clickAndWaitForResponse(data.subUrls.ajax, selector.vendor.product.buyAdvertisement(productName));
 		await this.clickAndWaitForResponse(data.subUrls.ajax, selector.vendor.product.confirmAction);

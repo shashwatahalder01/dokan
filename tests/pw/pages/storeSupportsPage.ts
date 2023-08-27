@@ -260,7 +260,7 @@ export class StoreSupportsPage extends AdminPage {
 			break;
 
 		case 'by-date' :
-			// await this.setAttributeValue(selector.vendor.vSupport.filters.filterByDate.dateRangeInput, 'value', inputValue.startDate + ' - ' + inputValue.endDate); //todo: based on site time settings
+			await this.setAttributeValue(selector.vendor.vSupport.filters.filterByDate.dateRangeInput, 'value', helpers.dateFormatFYJ(inputValue.startDate) + ' - ' + helpers.dateFormatFYJ(inputValue.endDate));
 			await this.setAttributeValue(selector.vendor.vSupport.filters.filterByDate.startDateInput, 'value', inputValue.startDate); //todo: resolve this
 			await this.setAttributeValue(selector.vendor.vSupport.filters.filterByDate.endDateInput, 'value', inputValue.endDate);
 			await this.clickAndWaitForLoadState(selector.vendor.vSupport.filters.search);

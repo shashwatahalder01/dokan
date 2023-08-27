@@ -6029,7 +6029,7 @@ export const selector = {
 					renewNow: 'td a.button.subscription_renewal_early',
 				},
 
-				changePaymentMethod: '//input[@id="place_order"]', //todo: add & separate payment change locators
+				changePaymentMethod: '//input[@id="place_order"]', //todo: add & move to separate group -> payment change locators
 
 				//todo: add more locators
 
