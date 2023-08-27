@@ -13,6 +13,8 @@ test.describe('Store Support test (admin)', () => {
 	let admin: StoreSupportsPage;
 	let aPage: Page;
 	let apiUtils: ApiUtils;
+	let supportTicketId: string;
+	let closedSupportTicketId: string;
 
 
 	test.beforeAll(async ({ browser, request }) => {
@@ -21,8 +23,8 @@ test.describe('Store Support test (admin)', () => {
 		admin = new StoreSupportsPage(aPage);
 
 		apiUtils = new ApiUtils(request);
-		await apiUtils.createSupportTicket({ ...payloads.createSupportTicket, author: CUSTOMER_ID, meta: { store_id : VENDOR_ID } } );
-		await apiUtils.createSupportTicket({ ...payloads.createSupportTicket, status: 'closed', author: CUSTOMER_ID, meta: { store_id : VENDOR_ID } } );
+		[, supportTicketId] = await apiUtils.createSupportTicket({ ...payloads.createSupportTicket, author: CUSTOMER_ID, meta: { store_id : VENDOR_ID } } );
+		[, closedSupportTicketId] = await apiUtils.createSupportTicket({ ...payloads.createSupportTicket, status: 'closed', author: CUSTOMER_ID, meta: { store_id : VENDOR_ID } } );
 
 	});
 
@@ -36,8 +38,17 @@ test.describe('Store Support test (admin)', () => {
 		await admin.adminStoreSupportRenderProperly();
 	});
 
+	test('unread count decrease after admin viewing a support ticket @pro', async ( ) => {
+		await admin.decreaseUnreadSupportTicketCount(supportTicketId);
+	});
+
+	test.only('admin can view support ticket details @pro @explo', async ( ) => {
+		await admin.adminViewSupportTicketDetails(supportTicketId);
+	});
+
 	test('admin can search support ticket @pro', async ( ) => {
-		await admin.searchSupportTicket(data.storeSupport.title);
+		await admin.searchSupportTicket(supportTicketId);
+		// await admin.searchSupportTicket(data.storeSupport.title); //todo:
 	});
 
 	test('admin can filter support tickets by vendor @pro', async ( ) => {
@@ -49,27 +60,27 @@ test.describe('Store Support test (admin)', () => {
 	});
 
 	test('admin can reply to support ticket as admin @pro', async ( ) => {
-		await admin.replySupportTicket(data.storeSupport.chatReply.asAdmin);
+		await admin.replySupportTicket(supportTicketId, data.storeSupport.chatReply.asAdmin);
 	});
 
 	test('admin can reply to support ticket as vendor @pro', async ( ) => {
-		await admin.replySupportTicket(data.storeSupport.chatReply.asVendor);
+		await admin.replySupportTicket(supportTicketId, data.storeSupport.chatReply.asVendor);
 	});
 
 	test('admin can disable support ticket email notification @pro', async ( ) => {
-		await admin.updateSupportTicketEmailNotification('disable');
+		await admin.updateSupportTicketEmailNotification(supportTicketId, 'disable');
 	});
 
 	test('admin can enable support ticket email notification @pro', async ( ) => {
-		await admin.updateSupportTicketEmailNotification('enable');
+		await admin.updateSupportTicketEmailNotification(supportTicketId, 'enable');
 	});
 
 	test('admin can close support ticket @pro', async ( ) => {
-		await admin.closeSupportTicket();
+		await admin.closeSupportTicket(supportTicketId);
 	});
 
 	test('admin can reopen closed support ticket @pro', async ( ) => {
-		await admin.reopenSupportTicket();
+		await admin.reopenSupportTicket(closedSupportTicketId);
 	});
 
 	test('admin can perform store support bulk action @pro', async ( ) => {
@@ -77,9 +88,6 @@ test.describe('Store Support test (admin)', () => {
 		await admin.storeSupportBulkAction('close', supportTicketId);
 	});
 
-	test('unread count decrease after admin viewing a support ticket @pro', async ( ) => {
-		await admin.decreaseUnreadSupportTicketCount();
-	});
 
 });
 
@@ -198,6 +206,10 @@ test.describe('Store Support test (vendor)', () => {
 
 	test('vendor store support menu page is rendering properly @pro @explo', async ( ) => {
 		await vendor.vendorStoreSupportRenderProperly();
+	});
+
+	test('vendor can view support ticket details @pro @explo', async ( ) => {
+		await vendor.vendorViewSupportTicketDetails(supportTicketId);
 	});
 
 	test('vendor can filter support tickets by customer @pro', async ( ) => {

@@ -761,18 +761,37 @@ export const selector = {
 
 				numberOfRowsFound: '.tablenav.top .displaying-num',
 				noRowsFound: '//td[normalize-space()="No tickets found."]',
-				supportTicketCell: (title: string) => `//strong[contains(text(), '${title}')]/../..`,
+				supportTicketCell: (ticketId: string) => `//strong[contains(text(), '#${ticketId}')]/../..`,
 				supportTicketFirstCell: '(//td[@class="column ID"]//a)[1]',
-				supportTicketLink: (title: string) => `//strong[contains(text(), '${title}')]/..`,
+				supportTicketLink: (ticketId: string) => `//strong[contains(text(), '#${ticketId}')]/..`,
 
 				supportTicketDetails: {
-					backToTickets: '//span[@class="back-to-tickets"]//..',
-					chatAuthor: '#sender', // admin, vendor
-					chatReply: '.dokan-chat-replay',
-					sendReply: '.dokan-send-replay',
-					closeTicket: '.dokan-close-ticket',
-					reopenTicket: '.dokan-reopen-ticket',
-					emailNotification: '.dokan-summary-info .switch.tips',
+					backToTickets: '//span[@class="back-to-tickets"]//../..//a',
+
+					ticketTitle: '//span[contains(@class,"dokan-chat-title") and not(contains(@class,"dokan-chat-status"))]',
+					chatStatus: 'div.dokan-chat-status-box  span.dokan-chat-status',
+					chatBox: 'div.dokan-chat-box-container',
+
+					chatAuthor: 'select#sender', // admin, vendor
+					chatReply: 'textarea.dokan-chat-replay',
+					sendReply: 'button.dokan-send-replay',
+
+					ticketSummary: {
+						summaryDiv: 'div.dokan-chat-summary-holder',
+						summaryHeading: 'span.dokan-chat-summary',
+						summaryArrow: 'span.dokan-summary-arrow',
+
+						ticketId: 'div.dokan-summary-info.ticket-id',
+						vendorInfo: 'div.dokan-summary-info.dokan-vendor-info',
+						customerInfo: 'div.dokan-summary-info.dokan-customer-info',
+						messageCount: 'div.dokan-summary-info.conversation',
+						createdAt: '//div[normalize-space()="Created At:"]/..//div[@class="dokan-summary-info created-at"]',
+						emailNotification: '.dokan-summary-info label.switch.tips',
+						closeTicket: 'button.dokan-close-ticket',
+						reopenTicket: 'button.dokan-reopen-ticket',
+
+					},
+
 				},
 
 
@@ -5150,9 +5169,46 @@ export const selector = {
 			storeSupportCellByTitle: (title: string) => `//a[normalize-space()="${title}"]/..`,
 			storeSupportsCellByCustomer: (customerName: string) => `//strong[contains(text(),'${customerName}')]/../..`,
 
+			supportTicketDetails:{
+
+				backToTickets: '.dokan-dashboard-content > a',
+
+				basicDetails: {
+					basicDetailsDiv: 'div.dokan-support-single-title',
+					ticketTitle: '//span[contains(@class,"dokan-chat-title") and not(contains(@class,"dokan-chat-status"))]',
+					ticketId: 'span.dokan-chat-title.dokan-chat-status',
+				},
+
+				chatStatus: {
+					status: 'div.dokan-chat-status-box  span.dokan-chat-status',
+					open: 'div.dokan-chat-status-box span.dokan-chat-status.chat-open',
+					closed:'div.dokan-chat-status-box span.dokan-chat-status.chat-closed',
+				},
+
+				orderReference:{
+					orderReferenceSpan: 'span.order-reference',
+					orderReferenceText: (orderId: string) => `//strong[normalize-space()="Referenced Order #${orderId}"]`,
+					orderReferenceLink: (orderId: string) => `//strong[normalize-space()="Referenced Order #${orderId}"]/..`,
+				},
+
+				chatBox: {
+					mainChat: 'div.dokan-dss-chat-box.main-topic',
+					otherChats: 'ul.dokan-support-commentlist',
+				},
+
+				replyBox:{
+					addReplyText: '//strong[normalize-space()="Add Reply"]',
+					closeTicketText: '//strong[normalize-space()="Ticket Closed"]',
+					replyBoxDiv: 'div.dokan-panel.dokan-panel-default.dokan-dss-panel-default',
+					addReply: '#dokan-support-commentform #comment',
+					submitReply: '#submit',
+				},
+
+			},
+
 			// Manage Ticket
-			backToTickets: '.dokan-dashboard-content > a',
-			ticketStatus: '.dokan-chat-status-box .dokan-chat-status',
+
+			ticketStatus: 'span.dokan-chat-status-box .dokan-chat-status',
 			chatReply: '#comment',
 			changeStatus: 'select.dokan-support-topic-select', //  1
 			submitReply: '#submit',
