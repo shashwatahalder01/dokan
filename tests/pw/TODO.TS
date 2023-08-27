@@ -103,10 +103,19 @@
 
 
 
+//todo: 	 insert all date format according to site format , currently hardcoded to default format
+		await this.setAttributeValue(selector.vendor.orders.filters.filterByDate.dateRangeInput, 'value', helpers.dateFormatFYJ(inputValue.startDate) + ' - ' + helpers.dateFormatFYJ(inputValue.endDate));
 
 
+//todo: decide
+if (isPublished){
+	console.log('Badge is already published');
+	test.skip();
+	// throw new Error('Badge is already published'); //todo: skip or fail test
+}
 
-
+//todo: 
+await this.page.getByRole('listitem').filter({ hasText: deliveryTime.openingTime }).click(); //todo:  convert by locator, also move this to base page
 
 // tests to write
 

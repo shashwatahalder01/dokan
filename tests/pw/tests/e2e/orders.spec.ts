@@ -87,8 +87,6 @@ test.describe('Order functionality test', () => {
 		await vendor.addShipment(orderId, data.orderShipmentDetails);
 	});
 
-	// todo: update shipment
-
 	// test.skip('vendor can add downloadable product permission to order @lite', async ( ) => {
 	// 	const [,, downloadableProductName] = await apiUtils.createProduct(payloads.createDownloadableProduct(), payloads.vendorAuth);
 	// 	await vendor.addDownloadableProduct(orderId, downloadableProductName);

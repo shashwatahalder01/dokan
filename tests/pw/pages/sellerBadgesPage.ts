@@ -62,7 +62,7 @@ export class SellerBadgesPage extends AdminPage {
 		if (isPublished){
 			console.log('Badge is already published');
 			test.skip();
-			// throw new Error('Badge is already published'); //todo: skip or fail test
+			// throw new Error('Badge is already published');
 		}
 		await this.click(selector.admin.dokan.sellerBadge.badgeDetails.badgeEvent(badge.badgeName));
 		await this.clearAndType(selector.admin.dokan.sellerBadge.badgeDetails.badgeName, badge.badgeName);

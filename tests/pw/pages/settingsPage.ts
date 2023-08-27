@@ -339,7 +339,7 @@ export class SettingsPage extends AdminPage {
 				await this.click(selector.admin.dokan.settings.deliveryTime.openingTime(day));
 				await this.page.getByRole('listitem').filter({ hasText: 'Full day' }).click();
 			} else{
-				await this.page.getByRole('listitem').filter({ hasText: deliveryTime.openingTime }).click(); //todo:  convert by locator, also move this to base page
+				await this.page.getByRole('listitem').filter({ hasText: deliveryTime.openingTime }).click();
 				await this.click(selector.admin.dokan.settings.deliveryTime.closingTime(day));
 				await this.page.getByRole('listitem').filter({ hasText: deliveryTime.closingTime }).click();
 			}

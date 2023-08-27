@@ -2,6 +2,7 @@ import { Page, } from '@playwright/test';
 import { CustomerPage } from 'pages/customerPage';
 import { selector } from 'pages/selectors';
 import { data } from 'utils/testData';
+import { helpers } from 'utils/helpers';
 import { reverseWithdraw, date } from 'utils/interfaces';
 
 
@@ -142,7 +143,7 @@ export class ReverseWithdrawsPage extends CustomerPage {
 	async vendorFilterReverseWithdrawals(inputValue: date['dateRange']){
 		await this.goIfNotThere(data.subUrls.frontend.vDashboard.reverseWithdrawal);
 
-		// await this.setAttributeValue(selector.vendor.vReverseWithdrawal.filters.dateRangeInput, 'value', inputValue.startDate + ' - ' + inputValue.endDate); //todo: based on site time settings
+		await this.setAttributeValue(selector.vendor.vReverseWithdrawal.filters.dateRangeInput, 'value', helpers.dateFormatFYJ(inputValue.startDate) + ' - ' + helpers.dateFormatFYJ(inputValue.endDate));
 		await this.setAttributeValue(selector.vendor.vReverseWithdrawal.filters.startDateInput, 'value', inputValue.startDate);
 		await this.setAttributeValue(selector.vendor.vReverseWithdrawal.filters.endDateInput, 'value', inputValue.endDate);
 		await this.clickAndWaitForLoadState(selector.vendor.vReverseWithdrawal.filters.filter);

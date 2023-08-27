@@ -21,7 +21,7 @@ export class VendorReturnRequestPage extends VendorPage {
 		await this.goIfNotThere(data.subUrls.frontend.vDashboard.returnRequest);
 
 		// return request menu elements are visible
-		await this.toBeVisible(selector.vendor.vReturnRequest.menus.all); //todo: add all menus
+		await this.toBeVisible(selector.vendor.vReturnRequest.menus.all);
 
 		// return request table elements are visible
 		await this.multipleElementVisible(selector.vendor.vReturnRequest.table);

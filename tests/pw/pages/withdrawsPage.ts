@@ -50,7 +50,7 @@ export class WithdrawsPage extends AdminPage {
 
 		await this.click(selector.admin.dokan.withdraw.filters.filterByVendor);
 		await this.typeAndWaitForResponse(data.subUrls.api.dokan.stores, selector.admin.dokan.withdraw.filters.filterInput, vendorName);
-		await this.toContainText(selector.admin.dokan.withdraw.filters.result, vendorName); //todo:  apply this for every dropdown search
+		await this.toContainText(selector.admin.dokan.withdraw.filters.result, vendorName);
 		//todo: need to wait for focus event
 		await this.pressAndWaitForResponse(data.subUrls.api.dokan.withdraws, data.key.enter);
 		await this.toBeVisible(selector.admin.dokan.withdraw.withdrawCell(vendorName));

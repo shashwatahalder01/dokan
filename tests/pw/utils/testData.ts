@@ -359,7 +359,7 @@ export const data = {
 	orderTrackingDetails:{
 		shippingProvider: 'test shipping provider',
 		trackingNumber: '1234567890',
-		dateShipped: 'July 4, 2023' //todo:   f y, j
+		dateShipped: helpers.currentDate,
 	},
 
 
@@ -369,7 +369,7 @@ export const data = {
 		shipmentOrderItemQty: '1',
 		shippingStatus: 'ss_proceccing', // ss_delivered, ss_cancelled, ss_proceccing, ss_ready_for_pickup, ss_pickedup, ss_on_the_way
 		shippingProvider: 'sp-dhl', // sp-dhl, sp-dpd, sp-fedex, sp-polish-shipping-providers, sp-ups, sp-usps, sp-other
-		dateShipped: 'July 4, 2023', //todo:   f y, j
+		dateShipped: helpers.currentDate,
 		trackingNumber: '1234567890',
 		comments: 'test shipment comment'
 	},

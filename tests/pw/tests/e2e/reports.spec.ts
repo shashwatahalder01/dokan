@@ -45,7 +45,8 @@ test.describe('Reports test', () => {
 	});
 
 	test('admin can export all logs @pro', async ( ) => {
-		await admin.exportAllLogs(orderId);
+		// await admin.exportAllLogs(orderId);
+		await admin.exportAllLogs();
 	});
 
 	test('admin can filter all logs by store name @pro', async ( ) => {

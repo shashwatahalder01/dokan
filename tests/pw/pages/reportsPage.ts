@@ -78,7 +78,7 @@ export class ReportsPage extends AdminPage {
 
 	// export all logs
 	async exportAllLogs(orderId?: string){
-		// await this.searchAllLogs(orderId!); //todo: keep or delete
+		orderId && await this.searchAllLogs(orderId);
 		await this.clickAndWaitForDownload(selector.admin.dokan.reports.allLogs.exportLogs);
 	}
 

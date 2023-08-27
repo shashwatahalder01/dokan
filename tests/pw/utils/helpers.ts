@@ -57,6 +57,9 @@ export const helpers = {
 	// remove dollar sign
 	removeCurrencySign: (str: string): string => str.replace(/[^\d\-.,\\s]/g, ''),
 
+	// dateFormat //todo: remove all datetime , and update date to return date as required formate // also metod to return as site date format
+	dateFormatFYJ: (date: string) => new Date(date).toLocaleDateString('en-CA', { year: 'numeric', month: 'long', day: 'numeric' }),
+
 	// current year
 	currentYear: new Date().getFullYear(),
 

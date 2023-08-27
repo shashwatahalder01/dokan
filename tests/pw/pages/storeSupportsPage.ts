@@ -78,6 +78,7 @@ export class StoreSupportsPage extends AdminPage {
 			await this.toBeVisible(selector.admin.dokan.storeSupport.supportTicketCell(idOrTitle));
 		} else {
 			expect(Number(count)).not.toBe(0); //todo: convert with to have grater than
+			expect(Number(count)).toBeGreaterThan(0);
 		}
 	}
 

@@ -44,11 +44,13 @@
 
 // console.log(s3.replace(/[^\d\-.,\\s]/g, ''));
 
-let a = 'Earth is estimated to be 4.6 billion years old.';
-let b = `Earth is estimated to be ${''} billion years old.`;
+// let a = 'Earth is estimated to be 4.6 billion years old.';
+// let b = `Earth is estimated to be ${''} billion years old.`;
 
-if (a == b ) {
-	console.log('xxx');
-} else {
-	console.log('xxx');
-}
+// if (a == b ) {
+// 	console.log('xxx');
+// } else {
+// 	console.log('xxx');
+// }
+
+console.log(new Date('2023-06-02').toLocaleDateString('en-CA', { year: 'numeric', month: 'long', day: 'numeric' }));

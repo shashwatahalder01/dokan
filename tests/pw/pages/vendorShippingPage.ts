@@ -183,7 +183,6 @@ export class VendorShippingPage extends VendorPage {
 		await this.clickAndWaitForResponseAndLoadState(data.subUrls.ajax, selector.vendor.vShippingSettings.editShippingZone(shipping.shippingZone));
 
 		const noOfMethods = await this.countLocator(selector.vendor.vShippingSettings.shippingMethodCell(shipping.shippingMethod));
-		console.log(noOfMethods);
 
 		if(noOfMethods > 1){
 

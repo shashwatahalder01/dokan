@@ -2,6 +2,7 @@ import { Page, expect } from '@playwright/test';
 import { VendorPage } from 'pages/vendorPage';
 import { selector } from 'pages/selectors';
 import { data } from 'utils/testData';
+import { helpers } from 'utils/helpers';
 import { orderNote, orderTrackingDetails, orderShipmentDetails, date } from 'utils/interfaces';
 
 
@@ -90,7 +91,7 @@ export class OrdersPage extends VendorPage {
 			break;
 
 		case 'by-date' :
-			// await this.setAttributeValue(selector.vendor.orders.filters.filterByDate.dateRangeInput, 'value', inputValue.startDate + ' - ' + inputValue.endDate); //todo: based on site time settings
+			await this.setAttributeValue(selector.vendor.orders.filters.filterByDate.dateRangeInput, 'value', helpers.dateFormatFYJ(inputValue.startDate) + ' - ' + helpers.dateFormatFYJ(inputValue.endDate));
 			await this.setAttributeValue(selector.vendor.orders.filters.filterByDate.startDateInput, 'value', inputValue.startDate); //todo: resolve this
 			await this.setAttributeValue(selector.vendor.orders.filters.filterByDate.endDateInput, 'value', inputValue.endDate);
 			break;
@@ -206,7 +207,7 @@ export class OrdersPage extends VendorPage {
 		await this.click(selector.vendor.orders.trackingDetails.addTrackingNumber);
 		await this.clearAndType(selector.vendor.orders.trackingDetails.shippingProvider, orderTrackingDetails.shippingProvider);
 		await this.clearAndType(selector.vendor.orders.trackingDetails.trackingNumber, orderTrackingDetails.trackingNumber);
-		// await this.clearAndType(selector.vendor.orders.trackingDetails.dateShipped, orderTrackingDetails.dateShipped); //todo:  grab site date formate and based on that create date value
+		await this.setAttributeValue(selector.vendor.orders.trackingDetails.dateShipped, 'value', helpers.dateFormatFYJ(orderTrackingDetails.dateShipped));
 		await this.clickAndAcceptAndWaitForResponse(data.subUrls.ajax, selector.vendor.orders.trackingDetails.addTrackingDetails);
 	}
 
@@ -219,7 +220,7 @@ export class OrdersPage extends VendorPage {
 		await this.clearAndType(selector.vendor.orders.shipment.shipmentOrderItemQty(shipmentDetails.shipmentOrderItem), shipmentDetails.shipmentOrderItemQty );
 		await this.selectByValue(selector.vendor.orders.shipment.shippingStatus, shipmentDetails.shippingStatus);
 		await this.selectByValue(selector.vendor.orders.shipment.shippingProvider, shipmentDetails.shippingProvider);
-		// await this.clearAndType(selector.vendor.orders.shipment.dateShipped, shipmentDetails.dateShipped); //todo:  grab site date formate and based on that create date value
+		await this.setAttributeValue(selector.vendor.orders.shipment.dateShipped, 'value', helpers.dateFormatFYJ(shipmentDetails.dateShipped));
 		await this.clearAndType(selector.vendor.orders.shipment.trackingNumber, shipmentDetails.shippingProvider);
 		await this.clearAndType(selector.vendor.orders.shipment.comments, shipmentDetails.trackingNumber);
 		await this.click(selector.vendor.orders.shipment.notifyCustomer);
