@@ -20,8 +20,6 @@
 //todo:  Checkbox: replace click with check for all check fields all suite , update every checkbox with check instead of click, check method , if checked remains checked
 //todo:  Env Variables:  remove not needed env variables from yml file, like slowmo, setup .........
 //todo:  Modal: Close modal if exists, causes issue with other tests where popup blocks next step*****
-//todo:  Exploratory test: add render properly tests for, rfq, my subscriptions, vendors, seller support ticket, all customer menus 
-
 //todo: add new tests or multiple entry in same test for all search parameter, i.e : by-customer, by-product, but-store,..
 //todo:  insert all date format according to site format , currently hardcoded to default format -> helpers.dateFormatFYJ
 //todo:   try to fix product advertisement product, reversewithdraw product, storemap save via api, currently e2e is used
@@ -35,11 +33,14 @@
 //todo: image path need to from project origin
 //todo:   more test date need to be unique, apply this type soln title: 'converted quote ' + faker.string.uuid(),  
 
-//****************************       selectors       ****************************
+//****************************       assertions       ****************************
 
+//todo:  assert to have count more than , less than  used not-to-have-count
 //todo:  either this or that assertion
 //todo:  Assertion: convert all expect parameter to correct way: left side received and right side expected
 //todo:  Assertion: received & expected data: -> 1. trim if necessary 2. lowercase if necessary
+//todo:  convert by locator, also move this to base page  await this.page.getByRole('listitem').filter({ hasText: deliveryTime.openingTime }).click();
+//todo: convert with to have grater than  expect(Number(count)).not.toBe(0);  to ->   expect(Number(count)).toBeGreaterThan(0);
 
 //****************************       selectors       ****************************
 
@@ -74,23 +75,20 @@
 
 //****************************       api suite     ****************************
 
-//todo:   convert admin as vendor to vendor for whole suite
-//todo:   fix rank math api
-//todo:   create valid payload for every request : which doesn't cause php warning
-//todo:   run with parallel mode on , make tests independent if necessary
+//todo:  convert admin as vendor to vendor for whole suite
+//todo:  fix rank math api
+//todo:  create valid payload for every request : which doesn't cause php warning
+//todo:  run with parallel mode on , make tests independent if necessary
 //todo:  update all tests with productid, customerid, to make it faster
 //todo:  hardcoding admin auth will hinder negative testing : test with invalid user
 //todo:  reverse withdraw and proadvertisement setup needed on api suite
 //todo:  
 
 
+//********************************** NEW TODO **********************************
 
 
-
-// ********************************** NEW TODO **********************************
-
-
-//todo:  ************ DON"T USE goIfNotThere where we need to reflact any changes done via api call or db table modification ************
+//todo:  ************ DON"T USE goIfNotThere where we need to reflect any changes done via api call or db table modification ************
  also after performing some test to load changes we need to skip goIfNotThere, also look for that
  test order can be the culprit too
 
@@ -98,8 +96,7 @@
 // either throw error or just return or convert to playwright error
 
 //todo:   add modal or sub option on explotory tesing tests all
-		//todo:  assert either this or that 
-		//todo:  assert to have count more than , less than  used not-to-have-count
+
 
 //todo:   export log test keep this, for wait for witch api is listed below
 		// await Promise.all([
@@ -117,10 +114,6 @@
 //todo:  clear data in beforeAll where necessary
 
 
-
-
-
-
 //todo: decide
 if (isPublished){
 	console.log('Badge is already published');
@@ -128,15 +121,8 @@ if (isPublished){
 	// throw new Error('Badge is already published'); //todo: skip or fail test
 }
 
-//todo: 
-await this.page.getByRole('listitem').filter({ hasText: deliveryTime.openingTime }).click(); //todo:  convert by locator, also move this to base page
 
-//todo:
-expect(Number(count)).not.toBe(0); //todo: convert with to have grater than
-expect(Number(count)).toBeGreaterThan(0);
-
-
-// tests to write
+//********************************** tests to write **********************************
 
 
 wholesale setting options tests
@@ -148,10 +134,10 @@ wholesale setting options tests
 	//todo:   vendor can create wholesale product  via api
 
 
-
 product advertisement
     //todo:   add search product advertisement by order
 	//todo:   filter by calendar
+
 rfq
 
 //todo:   create a generic function for below scenario on base page
@@ -160,17 +146,20 @@ await Promise.all([
 	this.page.waitForResponse((resp) => resp.url().includes(data.subUrls.api.dokan.products) && resp.status() === 200),
 	this.page.locator(selector.admin.dokan.requestForQuotation.quoteRules.newQuoteRule).click()
 ]);
+
 reports 
 	//todo:   filter by calendar
+
 vendor stuff
-	//todo:   add tests for all permission group
-	//todo : add tests for email template
+	//todo: add tests for all permission group
+	//todo:	add tests for email template
 
 verifications
-	//todo:   need multiple verification request for admin, use db alteration
-	//todo:   admin can disapprove verification request
-	//todo:   add vendor tests
-	//todo:  admin can approve phone verification request
+	//todo: need multiple verification request for admin, use db alteration
+	//todo: admin can disapprove verification request
+	//todo: add vendor tests
+	//todo: admin can approve phone verification request
+
 store review
 	// test('customer can edit store review @pro', async ( ) => {
 	// 	//todo:   need separate method or update locator, ensure previous review exits
@@ -187,10 +176,9 @@ store review
 	// }
 
 follow Store
-// test('customer can follow store on store listing @pro', async ( ) => {
-// 	await customer.followStore(data.predefined.vendorStores.vendor1, data.predefined.vendorStores.followFromStoreListing); //todo:   update parameter
-// });
-	//todo:   vendor can see followers, need followers via api
+//todo:  need followers via api
+
+
 seller badge
 	// test.skip('admin can filter vendors by seller badge  @pro', async ( ) => {
 	// 	//todo:   need to wait 1 min after badge create ; run via background process; can background process can be automated
@@ -206,8 +194,8 @@ stores spec
 // 	const adminContext = await browser.newContext({ storageState: data.auth.adminAuthFile });
 // 	aPage = await adminContext.newPage();
 // 	admin = new StoresPage(aPage);
-// 	// apiUtils = new ApiUtils(request);
-// 	// [,, storeName] = await apiUtils.createStore(payloads.createStore());  //todo:  ues different store all stores
+	// apiUtils = new ApiUtils(request);
+	// [,, storeName] = await apiUtils.createStore(payloads.createStore());  //todo:  ues different store all stores
 });
 
 stores page
@@ -303,20 +291,6 @@ test.beforeAll(async ({ request }) => {
 
 
 
-apiutils
-
-//todo:   gather all interfaces in one place
-
-interface auth {
-	[key: string]: string;
- }
-
- interface user {
-	username: string;
-	password: string;
-
-
-
 
 dbquery
 
@@ -351,7 +325,7 @@ generalSettings: {
 
 basepage
 
-	//todo:  apply pseudo-style
+//todo:  apply pseudo-style
 //todo:  add assertion to every base-page function
 //todo:  update every page method with locator method
 	// returns whether the element is visible

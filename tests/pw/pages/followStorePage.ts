@@ -27,6 +27,17 @@ export class FollowStorePage extends CustomerPage {
 	}
 
 
+	// vendor followers render properly
+	async vendorViewFollowers(){
+		await this.goIfNotThere(data.subUrls.frontend.vDashboard.followers);
+		await this.notToHaveCount(selector.vendor.vFollowers.numberOfRowsFound, 0);
+
+	}
+
+
+	// customer
+
+
 	async customerFollowedVendorsRenderProperly(){
 		await this.goIfNotThere(data.subUrls.frontend.vendors);
 

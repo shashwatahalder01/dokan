@@ -49,6 +49,16 @@ export class StoreReviewsPage extends AdminPage {
 	}
 
 
+	// view  store review
+	async viewStoreReview(){
+		await this.goto(data.subUrls.backend.dokan.storeReviews);
+		await this.click(selector.admin.dokan.storeReviews.storeReviewFirstLink);
+		// eslint-disable-next-line @typescript-eslint/no-unused-vars
+		const { rating, ...editReview } = selector.admin.dokan.storeReviews.editReview;
+		await this.multipleElementVisible(editReview);
+		await this.click(selector.admin.dokan.storeReviews.editReview.modalClose);
+	}
+
 	// edit store review
 	async editStoreReview(review: storeReview['review']){
 		await this.goto(data.subUrls.backend.dokan.storeReviews);

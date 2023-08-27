@@ -699,12 +699,16 @@ export const selector = {
 				noRowsFound: '//td[normalize-space()="No reviews found."]',
 				storeReviewCell: (title: string) => `//td//a[contains(text(), '${title}')]/../..`,
 				storeReviewFirstCell: '(//td[@class="column title"]//a[@href="#"]/../..)[1]',
+				storeReviewFirstLink: '(//td[@class="column title"]//a[@href="#"])[1]',
 				storeReviewEdit: '(//a[normalize-space()="Edit"])[1]',
 				storeReviewDelete: '(//a[normalize-space()="Trash"])[1]',
 				storeReviewRestore: '(//a[normalize-space()="Restore"])[1]',
 				storeReviewPermanentlyDelete: '(//a[normalize-space()="Permanent Delete"])[1]',
 
 				editReview:{
+					editReviewText: '//h1[normalize-space()="Edit Review"]',
+					modalClose: 'button.modal-close.modal-close-link',
+					ratings: '(//div[@class="modal-body"]//div[@class="vue-star-rating"] )[1]',
 					rating: (star: string) => `(//span[@class='vue-star-rating-pointer vue-star-rating-star'])[${star}]`,
 					title: '#store-review-title',
 					content: '#store-review-content',
@@ -4497,6 +4501,7 @@ export const selector = {
 			},
 
 			noRowsFound: '//td[normalize-space()="Your store does not have any follower."]',
+			numberOfRowsFound: 'table.dokan-table tbody tr',
 		},
 
 		// Booking

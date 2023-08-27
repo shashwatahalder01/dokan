@@ -51,6 +51,10 @@ test.describe('Store Reviews test', () => {
 		await admin.adminStoreReviewsRenderProperly();
 	});
 
+	test('admin can view store review @pro @explo', async ( ) => {
+		await admin.viewStoreReview();
+	});
+
 	test('admin can edit store review @pro', async ( ) => {
 		await admin.editStoreReview(data.storeReview.review());
 	});
