@@ -24,6 +24,7 @@ test.describe('Product subscriptions test', () => {
 		customer = new VendorProductSubscriptionPage(cPage);
 
 		// apiUtils = new ApiUtils(request);
+		//todo: need subscription product via api
 
 	});
 
@@ -37,6 +38,10 @@ test.describe('Product subscriptions test', () => {
 		await vendor.vendorUserSubscriptionsRenderProperly();
 	});
 
+	// test.skip('vendor can view product subscription details @pro @explo', async ( ) => {
+	// 	await vendor.filterProductSubscriptions('by-customer', data.customer.username);
+	// });
+
 	// test.skip('vendor can filter user subscriptions by customer @pro', async ( ) => {
 	// 	await vendor.filterProductSubscriptions('by-customer', data.customer.username);
 	// });
@@ -49,26 +54,33 @@ test.describe('Product subscriptions test', () => {
 	// await vendor.viewProductSubscription(data.customer.username);
 	// });
 
-	//todo: add customer can cancel subscription, change address, change payment, renew now, reactivate
 
-	test.only('customer can cancel subscription @pro', async ( ) => {
-		await customer.cancelProductSubscription('966');
-	});
+	// test('customer can view product subscription details @pro @explo', async ( ) => {
+	// 	await customer.customerViewProductSubscription('2328');
+	// });
 
-	test.only('customer can reactivate subscription @pro', async ( ) => {
-		await customer.reactivateProductSubscription('966');
-	});
+	// test('customer can cancel subscription @pro', async ( ) => {
+	// 	await customer.cancelProductSubscription('2328');
+	// });
 
-	test.only('customer can change address of subscription @pro', async ( ) => {
-		await customer.changeAddressOfProductSubscription('966', data.customer.customerInfo.shipping);
-	});
+	// test('customer can reactivate subscription @pro', async ( ) => {
+	// 	await customer.reactivateProductSubscription('2328');
+	// });
 
-	test.skip('customer can change payment of subscription @pro', async ( ) => {
-		await customer.changePaymentOfProductSubscription(data.customer.username);
-	});
+	// test('customer can change address of subscription @pro', async ( ) => {
+	// 	await customer.changeAddressOfProductSubscription('2328', data.customer.customerInfo.shipping);
+	// });
 
-	test.skip('customer can renew subscription @pro', async ( ) => {
-		await customer.renewProductSubscription(data.customer.username);
-	});
+	// test('customer can change payment of subscription @pro', async ( ) => {
+	// 	await customer.changePaymentOfProductSubscription('2328');
+	// });
+
+	// test('customer can renew subscription @pro', async ( ) => {
+	// 	await customer.renewProductSubscription('2328');
+	// });
+
+	// test('customer can buy product subscription @pro', async ( ) => {
+	// await customer.buyProductSubscription(data.predefined.simpleSubscription.product1);
+	// });
 
 });

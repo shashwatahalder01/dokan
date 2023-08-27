@@ -6021,10 +6021,15 @@ export const selector = {
 				subscriptionHeading: 'h1.entry-title',
 
 				// actions
-				cancel: 'td a.button.cancel',
-				changeAddress: 'td a.button.change_address',
-				changePayment: 'td a.button.change_payment_method',
-				reActivate: 'td a.button.reactivate',
+				actions: {
+					cancel: 'td a.button.cancel',
+					changeAddress: 'td a.button.change_address',
+					changePayment: 'td a.button.change_payment_method',
+					reActivate: 'td a.button.reactivate',
+					renewNow: 'td a.button.subscription_renewal_early',
+				},
+
+				changePaymentMethod: '//input[@id="place_order"]', //todo: add & separate payment change locators
 
 				//todo: add more locators
 

@@ -42,7 +42,7 @@ test.describe('Store Support test (admin)', () => {
 		await admin.decreaseUnreadSupportTicketCount(supportTicketId);
 	});
 
-	test.only('admin can view support ticket details @pro @explo', async ( ) => {
+	test('admin can view support ticket details @pro @explo', async ( ) => {
 		await admin.adminViewSupportTicketDetails(supportTicketId);
 	});
 

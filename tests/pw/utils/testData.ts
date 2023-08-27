@@ -1873,7 +1873,7 @@ export const data = {
 		},
 
 		simpleSubscription: {
-			product1: 'p1_v1 (simple subscription)',
+			product1: 'sub1_v1 (simple subscription)',
 		},
 
 		variableSubscription: {

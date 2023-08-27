@@ -126,7 +126,7 @@ test.describe('Wholesale customers test (admin)', () => {
 // 	test('customer can buy wholesale product', async () => {
 // 		await customerPage.addProductToCart(productName, 'single-product', true, minimumWholesaleQuantity);
 // 		await customer.assertWholesalePrice(wholesalePrice, minimumWholesaleQuantity);
-// 		await customerPage.placeOrder();
+// 		await customerPage.paymentOrder();
 // 	});
 
 

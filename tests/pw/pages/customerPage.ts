@@ -385,6 +385,14 @@ export class CustomerPage extends BasePage {
 			await this.click(selector.customer.cCheckout.cashOnDelivery);
 			break;
 
+		case 'stripe' :
+			await this.payWithStripe(data.paymentDetails.strip);
+			break;
+
+		case 'stripeExpress' :
+			await this.payWithStripeExpress(data.paymentDetails.stripExpress);
+			break;
+
 		default :
 			break;
 		}
