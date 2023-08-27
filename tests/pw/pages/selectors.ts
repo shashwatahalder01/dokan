@@ -719,6 +719,8 @@ export const selector = {
 
 				storeSupportText: '.admin-store-support-tickets h1',
 
+				unreadTicketCount: 'span.pending-count.dokan-unread-ticket-count-badge-in-list',
+
 				// Nav Tabs
 				navTabs: {
 					open: '//ul[@class="subsubsub"]//li//a[contains(text(),"Open")]',
@@ -6130,24 +6132,51 @@ export const selector = {
 			},
 
 			noSupportTicketFound: '//div[@class="dokan-error" and contains(text(), "No tickets found!")]',
-			firstOpenTicket: '(//div[@class="dokan-support-topics-list"]//tr//td//a)[1]',
+			firstSupportTicket: '(//div[@class="dokan-support-topics-list"]//tr//td//a)[1]',
+			supportTicketLink: (ticketId: string) => `//tr//td[normalize-space()="#${ticketId}"]//a`,
 
 
-			addReply: '#dokan-support-commentform #comment',
-			submitReply: '#submit',
+			supportTicketDetails: {
 
-			chatText: (text: string) => `//div[contains(@class, 'dokan-chat-text')]//p[contains(text(),'${text}')]`,
+				backToTickets: '//a[contains(text(),"← Back to Tickets")]',
 
-			orderReference:{
-				orderReferenceSpan: 'span.order-reference',
-				orderReferenceText: (orderId: string) => `//strong[normalize-space()="Referenced Order #${orderId}"]`,
-				orderReferenceLink: (orderId: string) => `//strong[normalize-space()="Referenced Order #${orderId}"]/..`,
+				basicDetails: {
+					basicDetailsDiv: 'div.dokan-support-single-title',
+					ticketTitle: '//span[contains(@class,"dokan-chat-title") and not(contains(@class,"dokan-chat-status"))]',
+					ticketId: 'span.dokan-chat-title.dokan-chat-status',
+				},
 
-			},
+				chatStatus: {
+					status: 'div.dokan-chat-status-box  span.dokan-chat-status',
+					open: 'div.dokan-chat-status-box span.dokan-chat-status.chat-open',
+					closed:'div.dokan-chat-status-box span.dokan-chat-status.chat-closed',
+				},
 
-			closedTicket: {
-				closedTicketHeading: '//strong[normalize-space()="Ticket Closed"]',
-				closedTicketMessage: '.dokan-alert.dokan-alert-warning',
+				orderReference:{
+					orderReferenceSpan: 'span.order-reference',
+					orderReferenceText: (orderId: string) => `//strong[normalize-space()="Referenced Order #${orderId}"]`,
+					orderReferenceLink: (orderId: string) => `//strong[normalize-space()="Referenced Order #${orderId}"]/..`,
+				},
+
+				chatBox: {
+					mainChat: 'div.dokan-dss-chat-box.main-topic',
+					otherChats: 'ul.dokan-support-commentlist',
+				},
+
+				replyBox:{
+					addReplyText: '//strong[normalize-space()="Add Reply"]',
+					replyBoxDiv: 'div.dokan-panel.dokan-panel-default.dokan-dss-panel-default',
+					addReply: '#dokan-support-commentform #comment',
+					submitReply: '#submit',
+				},
+
+				chatText: (text: string) => `//div[contains(@class, 'dokan-chat-text')]//p[contains(text(),'${text}')]`,
+
+				closedTicket: {
+					closedTicketHeading: '//strong[normalize-space()="Ticket Closed"]',
+					closedTicketMessage: '.dokan-alert.dokan-alert-warning',
+				},
+
 			},
 
 

@@ -114,4 +114,6 @@ test.describe('Customer functionality test', () => {
 	// });
 
 
+	//todo: customer can order again from order received page
+
 });

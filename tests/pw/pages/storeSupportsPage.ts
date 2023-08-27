@@ -4,7 +4,7 @@ import { CustomerPage } from 'pages/customerPage';
 import { selector } from 'pages/selectors';
 import { helpers } from 'utils/helpers';
 import { data } from 'utils/testData';
-import { customer, date, storeSupport } from 'utils/interfaces';
+import { customer, date } from 'utils/interfaces';
 
 
 export class StoreSupportsPage extends AdminPage {
@@ -106,7 +106,7 @@ export class StoreSupportsPage extends AdminPage {
 	// update support ticket email notification
 	async updateSupportTicketEmailNotification(action: string){
 		await this.goIfNotThere(data.subUrls.backend.dokan.storeSupport);
-		await this.clickAndWaitForLoadState(selector.admin.dokan.storeSupport.supportTicketFirstCell);
+		await this.clickAndWaitForLoadState(selector.admin.dokan.storeSupport.supportTicketFirstCell);//todo: can replace with search ticket
 
 		switch(action){
 
@@ -128,7 +128,7 @@ export class StoreSupportsPage extends AdminPage {
 	// close support ticket
 	async closeSupportTicket(){
 		await this.goIfNotThere(data.subUrls.backend.dokan.storeSupport);
-		await this.clickAndWaitForLoadState(selector.admin.dokan.storeSupport.supportTicketFirstCell);
+		await this.clickAndWaitForLoadState(selector.admin.dokan.storeSupport.supportTicketFirstCell);//todo: can replace with search ticket
 		await this.clickAndWaitForResponse(data.subUrls.api.dokan.storeSupport, selector.admin.dokan.storeSupport.supportTicketDetails.closeTicket);
 	}
 
@@ -137,14 +137,14 @@ export class StoreSupportsPage extends AdminPage {
 	async reopenSupportTicket(){
 		await this.goIfNotThere(data.subUrls.backend.dokan.storeSupport);
 		await this.clickAndWaitForLoadState(selector.admin.dokan.storeSupport.navTabs.closed);
-		await this.clickAndWaitForLoadState(selector.admin.dokan.storeSupport.supportTicketFirstCell);
+		await this.clickAndWaitForLoadState(selector.admin.dokan.storeSupport.supportTicketFirstCell);//todo: can replace with search ticket
 		await this.clickAndWaitForResponse(data.subUrls.api.dokan.storeSupport, selector.admin.dokan.storeSupport.supportTicketDetails.reopenTicket);
 	}
 
 
 	// store support bulk action
 	async storeSupportBulkAction(action: string, supportTicketId?: string){
-		await this.goto(data.subUrls.backend.dokan.storeSupport); // not used ternary because page need to reload before reflecting api updatd
+		await this.goto(data.subUrls.backend.dokan.storeSupport); // not used ternary because page need to reload before reflecting api update
 		supportTicketId && await this.searchSupportTicket(supportTicketId);
 
 		// ensure row exists
@@ -153,6 +153,15 @@ export class StoreSupportsPage extends AdminPage {
 		await this.click(selector.admin.dokan.storeSupport.bulkActions.selectAll);
 		await this.selectByValue(selector.admin.dokan.storeSupport.bulkActions.selectAction, action);
 		await this.clickAndWaitForResponseAndLoadState(data.subUrls.api.dokan.storeSupport, selector.admin.dokan.storeSupport.bulkActions.applyAction);
+	}
+
+
+	// decrease unread support ticket count
+	async decreaseUnreadSupportTicketCount(supportTicketId: string){
+		await this.goIfNotThere(data.subUrls.backend.dokan.storeSupport);
+		const getUnreadCount = await this.getElementText(selector.admin.dokan.storeSupport.unreadTicketCount);
+		await this.searchSupportTicket(supportTicketId);
+
 	}
 
 
@@ -292,6 +301,7 @@ export class StoreSupportsPage extends AdminPage {
 
 	// customer
 
+
 	// customer store support render properly
 	async customerStoreSupportRenderProperly(){
 		await this.goIfNotThere(data.subUrls.frontend.supportTickets);
@@ -307,6 +317,35 @@ export class StoreSupportsPage extends AdminPage {
 		// store support table elements are visible
 		await this.multipleElementVisible(selector.customer.cSupportTickets.table);
 
+	}
+
+
+	// customer view support ticket details
+	async customerViewSupportTicketDetails(ticketId: string){
+		await this.goIfNotThere(data.subUrls.frontend.supportTickets);
+		const ticketIdIsVisible = await this.isVisible(selector.customer.cSupportTickets.supportTicketLink(ticketId));
+		if (ticketIdIsVisible){
+			await this.clickAndWaitForLoadState(selector.customer.cSupportTickets.supportTicketLink(ticketId));
+		} else {
+			await this.goIfNotThere(data.subUrls.frontend.supportTicketDetails(ticketId));
+		}
+
+		await this.toBeVisible(selector.customer.cSupportTickets.supportTicketDetails.backToTickets);
+
+		// basic details elements are visible
+		await this.multipleElementVisible(selector.customer.cSupportTickets.supportTicketDetails.basicDetails);
+
+		// chat status is visible
+		await this.toBeVisible(selector.customer.cSupportTickets.supportTicketDetails.chatStatus.status);
+
+		// first chat is visible
+		await this.toBeVisible(selector.customer.cSupportTickets.supportTicketDetails.chatBox.mainChat);
+
+		// chat reply box elements are visible is ticket is open
+		const ticketIsOpen = await this.isVisible(selector.customer.cSupportTickets.supportTicketDetails.chatStatus.open);
+		ticketIsOpen && await this.multipleElementVisible(selector.customer.cSupportTickets.supportTicketDetails.replyBox);
+		// closed ticket elements are visible is ticket is close
+		!ticketIsOpen && await this.multipleElementVisible(selector.customer.cSupportTickets.supportTicketDetails.closedTicket);
 	}
 
 
@@ -352,35 +391,34 @@ export class StoreSupportsPage extends AdminPage {
 		await this.toContainText(selector.customer.cDokanSelector.dokanAlertSuccessMessage, getSupport.supportSubmitSuccessMessage);
 		// close popup
 		await this.click(selector.customer.cSingleStore.getSupport.close);
-
 	}
 
 
 	// customer cant send message to closed support ticket
 	async viewOrderReferenceNumberOnSupportTicket(ticketId: string, orderId: string): Promise<void> {
 		await this.goIfNotThere(data.subUrls.frontend.supportTicketDetails(ticketId));
-		await this.toBeVisible(selector.customer.cSupportTickets.orderReference.orderReferenceSpan);
-		await this.toBeVisible(selector.customer.cSupportTickets.orderReference.orderReferenceText(orderId));
-		await this.toBeVisible(selector.customer.cSupportTickets.orderReference.orderReferenceLink(orderId));
+		await this.toBeVisible(selector.customer.cSupportTickets.supportTicketDetails.orderReference.orderReferenceSpan);
+		await this.toBeVisible(selector.customer.cSupportTickets.supportTicketDetails.orderReference.orderReferenceText(orderId));
+		await this.toBeVisible(selector.customer.cSupportTickets.supportTicketDetails.orderReference.orderReferenceLink(orderId));
 	}
 
 
 	// customer send message to  support ticket
-	async sendMessageToSupportTicket(supportTicket: customer['supportTicket']): Promise<void> {
+	async sendMessageToSupportTicket(ticketId: string, supportTicket: customer['supportTicket']): Promise<void> {
 		const message = supportTicket.message();
-		await this.goIfNotThere(data.subUrls.frontend.supportTickets);
-		await this.click(selector.customer.cSupportTickets.firstOpenTicket);
-		await this.clearAndType(selector.customer.cSupportTickets.addReply, message);
-		await this.clickAndWaitForResponse(data.subUrls.frontend.submitSupport, selector.customer.cSupportTickets.submitReply, 302);
-		await this.toBeVisible(selector.customer.cSupportTickets.chatText(message));
+		await this.goIfNotThere(data.subUrls.frontend.supportTicketDetails(ticketId));
+		await this.clearAndType(selector.customer.cSupportTickets.supportTicketDetails.replyBox.addReply, message);
+		await this.clickAndWaitForResponse(data.subUrls.frontend.submitSupport, selector.customer.cSupportTickets.supportTicketDetails.replyBox.submitReply, 302);
+		await this.toBeVisible(selector.customer.cSupportTickets.supportTicketDetails.chatText(message));
 	}
 
 
 	// customer can't send message to closed support ticket
 	async cantSendMessageToSupportTicket(ticketId: string): Promise<void> {
 		await this.goIfNotThere(data.subUrls.frontend.supportTicketDetails(ticketId));
-		await this.toBeVisible(selector.customer.cSupportTickets.closedTicket.closedTicketHeading);
-		await this.toContainText(selector.customer.cSupportTickets.closedTicket.closedTicketMessage, 'This ticket has been closed. Open a new support ticket if you have any further query.');
+		await this.toBeVisible(selector.customer.cSupportTickets.supportTicketDetails.chatStatus.closed);
+		await this.toBeVisible(selector.customer.cSupportTickets.supportTicketDetails.closedTicket.closedTicketHeading);
+		await this.toContainText(selector.customer.cSupportTickets.supportTicketDetails.closedTicket.closedTicketMessage, 'This ticket has been closed. Open a new support ticket if you have any further query.');
 	}
 
 }

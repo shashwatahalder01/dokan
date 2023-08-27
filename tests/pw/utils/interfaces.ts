@@ -1178,20 +1178,20 @@ export interface reverseWithdraw {
 }
 
 
-// store support
-export interface storeSupport {
+// // store support
+// export interface storeSupport {
 
-	title: string;
-	filter: {
-		byCustomer: string;
-		byVendor: string;
-	}
-	chatReply: {
-		asAdmin: string;
-		asVendor: string;
-	}
+// 	title: string;
+// 	filter: {
+// 		byCustomer: string;
+// 		byVendor: string;
+// 	}
+// 	chatReply: {
+// 		asAdmin: string;
+// 		asVendor: string;
+// 	}
 
-}
+// }
 
 
 // request for quotation

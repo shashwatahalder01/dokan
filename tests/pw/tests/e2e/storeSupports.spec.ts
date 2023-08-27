@@ -8,13 +8,10 @@ import { payloads } from 'utils/payloads';
 const { PRODUCT_ID, VENDOR_ID, CUSTOMER_ID } = process.env;
 
 
-test.describe('Store Support test', () => {
+test.describe('Store Support test (admin)', () => {
 
 	let admin: StoreSupportsPage;
-	// let vendor: StoreSupportsPage;
-	let customer: StoreSupportsPage;
-	let guest: StoreSupportsPage;
-	let aPage: Page, cPage: Page, uPage: Page;
+	let aPage: Page;
 	let apiUtils: ApiUtils;
 
 
@@ -22,14 +19,6 @@ test.describe('Store Support test', () => {
 		const adminContext = await browser.newContext({ storageState: data.auth.adminAuthFile });
 		aPage = await adminContext.newPage();
 		admin = new StoreSupportsPage(aPage);
-
-		const customerContext = await browser.newContext({ storageState: data.auth.customerAuthFile });
-		cPage = await customerContext.newPage();
-		customer = new StoreSupportsPage(cPage);
-
-		const guestContext = await browser.newContext({ storageState: { cookies: [], origins: [] } });
-		uPage = await guestContext.newPage();
-		guest =  new StoreSupportsPage(uPage);
 
 		apiUtils = new ApiUtils(request);
 		await apiUtils.createSupportTicket({ ...payloads.createSupportTicket, author: CUSTOMER_ID, meta: { store_id : VENDOR_ID } } );
@@ -40,8 +29,6 @@ test.describe('Store Support test', () => {
 
 	test.afterAll(async () => {
 		await aPage.close();
-		await cPage.close();
-		await uPage.close();
 	});
 
 
@@ -90,51 +77,86 @@ test.describe('Store Support test', () => {
 		await admin.storeSupportBulkAction('close', supportTicketId);
 	});
 
+	test('unread count decrease after admin viewing a support ticket @pro', async ( ) => {
+		await admin.decreaseUnreadSupportTicketCount();
+	});
 
-	//todo: count decrease for viewing a support ticket
+});
+
+
+test.describe('Store Support test (customer)', () => {
+
+
+	let customer: StoreSupportsPage;
+	let guest: StoreSupportsPage;
+	let cPage: Page, uPage: Page;
+	let apiUtils: ApiUtils;
+	let orderId: string;
+	let responseBody: any;
+	let supportTicketId: string;
+
+
+	test.beforeAll(async ({ browser, request }) => {
+
+		const customerContext = await browser.newContext({ storageState: data.auth.customerAuthFile });
+		cPage = await customerContext.newPage();
+		customer = new StoreSupportsPage(cPage);
+
+		const guestContext = await browser.newContext({ storageState: { cookies: [], origins: [] } });
+		uPage = await guestContext.newPage();
+		guest =  new StoreSupportsPage(uPage);
+
+		apiUtils = new ApiUtils(request);
+		[, responseBody, orderId, ] = await apiUtils.createOrderWithStatus(PRODUCT_ID, { ...payloads.createOrder, customer_id: CUSTOMER_ID }, data.order.orderStatus.completed, payloads.vendorAuth);
+		[, supportTicketId] = await apiUtils.createSupportTicket({ ...payloads.createSupportTicket, author: CUSTOMER_ID, meta: { store_id : VENDOR_ID, order_id: orderId } });
+	});
+
+
+	test.afterAll(async () => {
+		await cPage.close();
+		await uPage.close();
+	});
 
 
 	test('customer store support menu page is rendering properly @pro @explo', async ( ) => {
 		await customer.customerStoreSupportRenderProperly();
 	});
 
-	test('customer can ask for store support on single product @pro', async ( ) => {
-		await customer.storeSupport(data.predefined.simpleProduct.product1.name, data.customer.getSupport, 'product');
+	test('customer can view support ticket details @pro @explo', async ( ) => {
+		await customer.customerViewSupportTicketDetails(supportTicketId);
 	});
 
-	test('customer can ask for store support on order details @pro', async ( ) => {
-		const [,, orderId, ] = await apiUtils.createOrderWithStatus(PRODUCT_ID, { ...payloads.createOrder, customer_id: CUSTOMER_ID }, data.order.orderStatus.completed, payloads.vendorAuth);
-		await customer.storeSupport(orderId, data.customer.getSupport, 'order');
+	test('customer can ask for store support on single product @pro', async ( ) => {
+		await customer.storeSupport(data.predefined.simpleProduct.product1.name, data.customer.getSupport, 'product');
 	});
 
 	test('customer can ask for store support on single store @pro', async ( ) => {
 		await customer.storeSupport(data.predefined.vendorStores.vendor1, data.customer.getSupport, 'store');
 	});
 
+	test('customer can ask for store support on order details @pro', async ( ) => {
+		await customer.storeSupport(orderId, data.customer.getSupport, 'order');
+	});
+
 	test('customer can ask for store support on order received @pro', async ( ) => {
-		const [, responseBody, orderId, ] = await apiUtils.createOrderWithStatus(PRODUCT_ID, { ...payloads.createOrder, customer_id: CUSTOMER_ID }, data.order.orderStatus.completed, payloads.vendorAuth);
 		const orderKey = responseBody.order_key;
 		await customer.storeSupport(orderId + ',' + orderKey, data.customer.getSupport, 'order-received');
 	});
 
-	test('customer can ask for store support for order on single store @pro', async ( ) => {
-		const [,, orderId, ] = await apiUtils.createOrderWithStatus(PRODUCT_ID, { ...payloads.createOrder, customer_id: CUSTOMER_ID }, data.order.orderStatus.completed, payloads.vendorAuth);
+	test('customer can ask for store support for order @pro', async ( ) => {
 		await customer.storeSupport(data.predefined.vendorStores.vendor1, { ...data.customer.getSupport, orderId: orderId }, 'store');
 	});
 
 	test('customer can view reference order number on support ticket @pro', async ( ) => {
-		const [,, orderId, ] = await apiUtils.createOrderWithStatus(PRODUCT_ID, { ...payloads.createOrder, customer_id: CUSTOMER_ID }, data.order.orderStatus.completed, payloads.vendorAuth);
-		const [, supportTicketId] = await apiUtils.createSupportTicket({ ...payloads.createSupportTicket, status: 'closed', author: CUSTOMER_ID, meta: { store_id : VENDOR_ID, order_id: orderId } });
 		await customer.viewOrderReferenceNumberOnSupportTicket(supportTicketId, orderId);
 	});
 
 	test('customer can send message to support ticket @pro', async ( ) => {
-		await customer.storeSupport(data.predefined.vendorStores.vendor1, data.customer.getSupport, 'store'); //todo: might not needed
-		await customer.sendMessageToSupportTicket(data.customer.supportTicket);
+		await customer.sendMessageToSupportTicket(supportTicketId, data.customer.supportTicket);
 	});
 
 	test('customer can\'t send message to closed support ticket @pro', async ( ) => {
-		const [, supportTicketId] = await apiUtils.createSupportTicket({ ...payloads.createSupportTicket, status: 'closed', author: CUSTOMER_ID, meta: { store_id : VENDOR_ID } } );
+		const [, supportTicketId] = await apiUtils.createSupportTicket({ ...payloads.createSupportTicket, status: 'closed', author: CUSTOMER_ID, meta: { store_id : VENDOR_ID, order_id: orderId } });
 		await customer.cantSendMessageToSupportTicket(supportTicketId);
 	});
 
