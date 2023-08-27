@@ -5208,7 +5208,7 @@ export const selector = {
 
 			// Manage Ticket
 
-			ticketStatus: 'span.dokan-chat-status-box .dokan-chat-status',
+			ticketStatus: 'div.dokan-chat-status-box span.dokan-chat-status',
 			chatReply: '#comment',
 			changeStatus: 'select.dokan-support-topic-select', //  1
 			submitReply: '#submit',
