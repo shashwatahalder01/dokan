@@ -775,9 +775,11 @@ export const data = {
 			becomeVendor: 'my-account/account-migration',
 			productDetails: (productName: string) => `product/${productName}`,
 			orderDetails: (orderId: string) => `my-account/view-order/${orderId}`,
+			orderReceivedDetails: (orderId: string, orderKey: string) => `checkout/order-received/${orderId}/?key=${orderKey}`,
 			vendorDetails: (storeName: string) => `store/${storeName}`,
 			storeReviews: (storeName: string) => `store/${storeName}/reviews`,
 			quoteDetails: (quotId: string) => `my-account/request-a-quote/${quotId}`,
+			supportTicketDetails: (ticketId: string) => `my-account/support-tickets/${ticketId}`,
 
 			productReview: 'wp-comments-post.php',
 			submitSupport: 'wp-comments-post.php',
@@ -1343,6 +1345,7 @@ export const data = {
 		getSupport: {
 			subject: 'get Support Subject',
 			message: 'get Support Message',
+			orderId: '',
 			supportSubmitSuccessMessage: 'Thank you. Your ticket has been submitted!',
 			username: String(process.env.CUSTOMER),
 			userPassword: String(process.env.USER_PASSWORD),

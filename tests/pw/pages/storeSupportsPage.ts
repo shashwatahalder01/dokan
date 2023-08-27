@@ -1,9 +1,10 @@
 import { Page, expect } from '@playwright/test';
 import { AdminPage } from 'pages/adminPage';
+import { CustomerPage } from 'pages/customerPage';
 import { selector } from 'pages/selectors';
 import { helpers } from 'utils/helpers';
 import { data } from 'utils/testData';
-import { customer, date } from 'utils/interfaces';
+import { customer, date, storeSupport } from 'utils/interfaces';
 
 
 export class StoreSupportsPage extends AdminPage {
@@ -11,6 +12,8 @@ export class StoreSupportsPage extends AdminPage {
 	constructor(page: Page) {
 		super(page);
 	}
+
+	customerPage = new CustomerPage(this.page);
 
 
 	// store support
@@ -244,9 +247,7 @@ export class StoreSupportsPage extends AdminPage {
 		await this.vendorSearchSupportTicket('id', ticketId);
 		await this.clickAndWaitForLoadState(selector.vendor.vSupport.storeSupportLink(ticketId));
 		await this.clearAndType(selector.vendor.vSupport.chatReply, replyMessage );
-		// await this.click(selector.vendor.vSupport.submitReply);
-		await this.clickAndWaitForResponse('wp-comments-post.php', selector.vendor.vSupport.submitReply, 302); //todo: fix
-		// await this.clickAndWaitForResponse(data.subUrls.frontend.vDashboard.storeSupport, selector.vendor.vSupport.submitReply);
+		await this.clickAndWaitForResponse('wp-comments-post.php', selector.vendor.vSupport.submitReply, 302);
 	}
 
 
@@ -291,6 +292,7 @@ export class StoreSupportsPage extends AdminPage {
 
 	// customer
 
+	// customer store support render properly
 	async customerStoreSupportRenderProperly(){
 		await this.goIfNotThere(data.subUrls.frontend.supportTickets);
 
@@ -325,6 +327,12 @@ export class StoreSupportsPage extends AdminPage {
 			await this.goIfNotThere(data.subUrls.frontend.orderDetails(input));
 			break;
 
+		case 'order-received' :
+			// eslint-disable-next-line no-case-declarations
+			const [orderId, order_key]  = input.split(',');
+			await this.goIfNotThere(data.subUrls.frontend.orderReceivedDetails(orderId as string, order_key as string));
+			break;
+
 		default :
 			break;
 
@@ -338,6 +346,7 @@ export class StoreSupportsPage extends AdminPage {
 			await this.clickAndWaitForResponse(data.subUrls.ajax, selector.customer.cSingleStore.getSupport.login);
 		}
 		await this.clearAndType(selector.customer.cSingleStore.getSupport.subject, getSupport.subject);
+		getSupport.orderId && await this.selectByValue(selector.customer.cSingleStore.getSupport.orderId, getSupport.orderId);
 		await this.clearAndType(selector.customer.cSingleStore.getSupport.message, getSupport.message);
 		await this.clickAndWaitForResponse(data.subUrls.ajax, selector.customer.cSingleStore.getSupport.submit);
 		await this.toContainText(selector.customer.cDokanSelector.dokanAlertSuccessMessage, getSupport.supportSubmitSuccessMessage);
@@ -347,14 +356,31 @@ export class StoreSupportsPage extends AdminPage {
 	}
 
 
-	// customer add customer support ticket
-	async sendMessageCustomerSupportTicket(supportTicket: customer['supportTicket']): Promise<void> {
+	// customer cant send message to closed support ticket
+	async viewOrderReferenceNumberOnSupportTicket(ticketId: string, orderId: string): Promise<void> {
+		await this.goIfNotThere(data.subUrls.frontend.supportTicketDetails(ticketId));
+		await this.toBeVisible(selector.customer.cSupportTickets.orderReference.orderReferenceSpan);
+		await this.toBeVisible(selector.customer.cSupportTickets.orderReference.orderReferenceText(orderId));
+		await this.toBeVisible(selector.customer.cSupportTickets.orderReference.orderReferenceLink(orderId));
+	}
+
+
+	// customer send message to  support ticket
+	async sendMessageToSupportTicket(supportTicket: customer['supportTicket']): Promise<void> {
 		const message = supportTicket.message();
 		await this.goIfNotThere(data.subUrls.frontend.supportTickets);
 		await this.click(selector.customer.cSupportTickets.firstOpenTicket);
 		await this.clearAndType(selector.customer.cSupportTickets.addReply, message);
 		await this.clickAndWaitForResponse(data.subUrls.frontend.submitSupport, selector.customer.cSupportTickets.submitReply, 302);
 		await this.toBeVisible(selector.customer.cSupportTickets.chatText(message));
+	}
+
+
+	// customer can't send message to closed support ticket
+	async cantSendMessageToSupportTicket(ticketId: string): Promise<void> {
+		await this.goIfNotThere(data.subUrls.frontend.supportTicketDetails(ticketId));
+		await this.toBeVisible(selector.customer.cSupportTickets.closedTicket.closedTicketHeading);
+		await this.toContainText(selector.customer.cSupportTickets.closedTicket.closedTicketMessage, 'This ticket has been closed. Open a new support ticket if you have any further query.');
 	}
 
 }

@@ -1096,6 +1096,7 @@ export interface customer {
 	getSupport: {
 		subject: string;
 		message: string;
+		orderId: string;
 		supportSubmitSuccessMessage: string;
 		username: string;
 		userPassword: string;

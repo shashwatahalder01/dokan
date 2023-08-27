@@ -23,10 +23,6 @@ test.describe('Store Support test', () => {
 		aPage = await adminContext.newPage();
 		admin = new StoreSupportsPage(aPage);
 
-		// const vendorContext = await browser.newContext({ storageState: data.auth.vendorAuthFile });
-		// vPage = await vendorContext.newPage();
-		// vendor = new StoreSupportsPage(vPage);
-
 		const customerContext = await browser.newContext({ storageState: data.auth.customerAuthFile });
 		cPage = await customerContext.newPage();
 		customer = new StoreSupportsPage(cPage);
@@ -94,6 +90,7 @@ test.describe('Store Support test', () => {
 		await admin.storeSupportBulkAction('close', supportTicketId);
 	});
 
+
 	//todo: count decrease for viewing a support ticket
 
 
@@ -114,13 +111,31 @@ test.describe('Store Support test', () => {
 		await customer.storeSupport(data.predefined.vendorStores.vendor1, data.customer.getSupport, 'store');
 	});
 
-	//todo: customer can ask for store support for order id
-	//todo: customer can ask for store support on order received page
-	//todo: customer can view support ticket closed message/ cant send message to closed ticket
+	test('customer can ask for store support on order received @pro', async ( ) => {
+		const [, responseBody, orderId, ] = await apiUtils.createOrderWithStatus(PRODUCT_ID, { ...payloads.createOrder, customer_id: CUSTOMER_ID }, data.order.orderStatus.completed, payloads.vendorAuth);
+		const orderKey = responseBody.order_key;
+		await customer.storeSupport(orderId + ',' + orderKey, data.customer.getSupport, 'order-received');
+	});
+
+	test('customer can ask for store support for order on single store @pro', async ( ) => {
+		const [,, orderId, ] = await apiUtils.createOrderWithStatus(PRODUCT_ID, { ...payloads.createOrder, customer_id: CUSTOMER_ID }, data.order.orderStatus.completed, payloads.vendorAuth);
+		await customer.storeSupport(data.predefined.vendorStores.vendor1, { ...data.customer.getSupport, orderId: orderId }, 'store');
+	});
+
+	test('customer can view reference order number on support ticket @pro', async ( ) => {
+		const [,, orderId, ] = await apiUtils.createOrderWithStatus(PRODUCT_ID, { ...payloads.createOrder, customer_id: CUSTOMER_ID }, data.order.orderStatus.completed, payloads.vendorAuth);
+		const [, supportTicketId] = await apiUtils.createSupportTicket({ ...payloads.createSupportTicket, status: 'closed', author: CUSTOMER_ID, meta: { store_id : VENDOR_ID, order_id: orderId } });
+		await customer.viewOrderReferenceNumberOnSupportTicket(supportTicketId, orderId);
+	});
 
 	test('customer can send message to support ticket @pro', async ( ) => {
-		await customer.storeSupport(data.predefined.vendorStores.vendor1, data.customer.getSupport, 'store');
-		await customer.sendMessageCustomerSupportTicket(data.customer.supportTicket);
+		await customer.storeSupport(data.predefined.vendorStores.vendor1, data.customer.getSupport, 'store'); //todo: might not needed
+		await customer.sendMessageToSupportTicket(data.customer.supportTicket);
+	});
+
+	test('customer can\'t send message to closed support ticket @pro', async ( ) => {
+		const [, supportTicketId] = await apiUtils.createSupportTicket({ ...payloads.createSupportTicket, status: 'closed', author: CUSTOMER_ID, meta: { store_id : VENDOR_ID } } );
+		await customer.cantSendMessageToSupportTicket(supportTicketId);
 	});
 
 	test('guest customer need to login before asking for store support @pro', async ( ) => {
@@ -131,7 +146,7 @@ test.describe('Store Support test', () => {
 });
 
 
-test.describe('Store Support test vendor', () => {
+test.describe('Store Support test (vendor)', () => {
 
 	let vendor: StoreSupportsPage;
 	let vPage: Page;

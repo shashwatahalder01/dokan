@@ -6132,9 +6132,25 @@ export const selector = {
 			noSupportTicketFound: '//div[@class="dokan-error" and contains(text(), "No tickets found!")]',
 			firstOpenTicket: '(//div[@class="dokan-support-topics-list"]//tr//td//a)[1]',
 
-			chatText: (text: string) => `//div[contains(@class, 'dokan-chat-text')]//p[contains(text(),'${text}')]`,
+
 			addReply: '#dokan-support-commentform #comment',
 			submitReply: '#submit',
+
+			chatText: (text: string) => `//div[contains(@class, 'dokan-chat-text')]//p[contains(text(),'${text}')]`,
+
+			orderReference:{
+				orderReferenceSpan: 'span.order-reference',
+				orderReferenceText: (orderId: string) => `//strong[normalize-space()="Referenced Order #${orderId}"]`,
+				orderReferenceLink: (orderId: string) => `//strong[normalize-space()="Referenced Order #${orderId}"]/..`,
+
+			},
+
+			closedTicket: {
+				closedTicketHeading: '//strong[normalize-space()="Ticket Closed"]',
+				closedTicketMessage: '.dokan-alert.dokan-alert-warning',
+			},
+
+
 		},
 
 		// Customer Bookings
@@ -6514,7 +6530,7 @@ export const selector = {
 			// Store Tabs
 			storeTabs:{
 				follow: '.dokan-follow-store-button',
-				getSupport: '.dokan-store-support-btn',
+				getSupport: 'button.dokan-store-support-btn',
 				share: '.dokan-share-btn',
 
 				products: '//div[@class="dokan-store-tabs"]//a[contains(text(),"Products")]',
@@ -6575,10 +6591,10 @@ export const selector = {
 			getSupport: {
 				// close: '.mfp-close', //todo:  this locator don't exits delete this from all
 				close: 'button.icon-close',
-				subject: '#dokan-support-subject',
-				orderId: '.dokan-select',
-				message: '#dokan-support-msg',
-				submit: '#support-submit-btn',
+				subject: 'input#dokan-support-subject',
+				orderId: 'select.dokan-select',
+				message: 'textarea#dokan-support-msg',
+				submit: 'input#support-submit-btn',
 
 				//guest User
 				userName: '#login-name',

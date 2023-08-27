@@ -92,7 +92,6 @@ test.describe('Auction Product test', () => {
 		// await vendor.searchAuctionActivity(data.customer.username + '@yopmail.com');
 	});
 
-
 	test('customer can bid auction product @pro', async ( ) => {
 		await customer.bidAuctionProduct(auctionProductName);
 	});
