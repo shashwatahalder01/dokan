@@ -238,12 +238,12 @@ test.describe('Store Support test (vendor)', () => {
 		await vendor.vendorReopenSupportTicket(closedSupportTicketId);
 	});
 
-	test.only('vendor can close support ticket with a chat reply @pro', async ( ) => {
+	test('vendor can close support ticket with a chat reply @pro', async ( ) => {
 		const [, supportTicketId] = await apiUtils.createSupportTicket({ ...payloads.createSupportTicket, author: CUSTOMER_ID, meta: { store_id : VENDOR_ID } } );
 		await vendor.vendorCloseSupportTicketWithReply(supportTicketId, 'closing this ticket');
 	});
 
-	test.only('vendor can reopen closed support ticket with a chat reply @pro', async ( ) => {
+	test('vendor can reopen closed support ticket with a chat reply @pro', async ( ) => {
 		const [, closedSupportTicketId] =await apiUtils.createSupportTicket({ ...payloads.createSupportTicket, status: 'closed', author: CUSTOMER_ID, meta: { store_id : VENDOR_ID } } );
 		await vendor.vendorReopenSupportTicketWithReply(closedSupportTicketId, 'reopening this ticket');
 	});
