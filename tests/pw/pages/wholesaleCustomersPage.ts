@@ -1,7 +1,7 @@
 import { Page, expect } from '@playwright/test';
 import { LoginPage } from 'pages/loginPage';
 import { AdminPage } from 'pages/adminPage';
-import { CustomerPage } from './customerPage';
+import { CustomerPage } from 'pages/customerPage';
 import { selector } from 'pages/selectors';
 import { data } from 'utils/testData';
 import { customer } from 'utils/interfaces';

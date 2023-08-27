@@ -1,6 +1,6 @@
 import { Page } from '@playwright/test';
 import { VendorPage } from 'pages/vendorPage';
-import { CustomerPage } from './customerPage';
+import { CustomerPage } from 'pages/customerPage';
 import { selector } from 'pages/selectors';
 import { data } from 'utils/testData';
 import { product, date } from 'utils/interfaces';

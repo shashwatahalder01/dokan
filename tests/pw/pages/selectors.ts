@@ -6015,6 +6015,22 @@ export const selector = {
 		// Customer Subscription
 		cSubscription: {
 			view: (orderNumber: string) => `//a[contains(text(),'Order #${orderNumber}')]/../..//a[@class="woocommerce-button button view"]`,
+
+			subscriptionDetails:{
+
+				subscriptionHeading: 'h1.entry-title',
+
+				// actions
+				cancel: 'td a.button.cancel',
+				changeAddress: 'td a.button.change_address',
+				changePayment: 'td a.button.change_payment_method',
+				reActivate: 'td a.button.reactivate',
+
+				//todo: add more locators
+
+
+			}
+
 		},
 
 		// Customer Downloads

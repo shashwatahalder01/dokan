@@ -1,5 +1,5 @@
 import { Page } from '@playwright/test';
-import { CustomerPage } from './customerPage';
+import { CustomerPage } from 'pages/customerPage';
 import { selector } from 'pages/selectors';
 import { data } from 'utils/testData';
 import { helpers } from 'utils/helpers';

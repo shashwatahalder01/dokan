@@ -780,6 +780,7 @@ export const data = {
 			storeReviews: (storeName: string) => `store/${storeName}/reviews`,
 			quoteDetails: (quotId: string) => `my-account/request-a-quote/${quotId}`,
 			supportTicketDetails: (ticketId: string) => `my-account/support-tickets/${ticketId}`,
+			productSubscriptionDetails: (subscriptionId: string) => `my-account/view-subscription/${subscriptionId}`,
 
 			productReview: 'wp-comments-post.php',
 			submitSupport: 'wp-comments-post.php',
