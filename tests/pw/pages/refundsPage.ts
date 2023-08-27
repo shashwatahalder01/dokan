@@ -46,9 +46,8 @@ export class RefundsPage extends AdminPage {
 		if (!isNaN(Number(orderOrStore))){
 			await this.toBeVisible(selector.admin.dokan.refunds.refundCell(orderOrStore));
 			expect(Number(count)).toBe(1);
-
 		} else {
-			expect(Number(count)).not.toBe(0);
+			expect(Number(count)).toBeGreaterThan(0);
 		}
 	}
 

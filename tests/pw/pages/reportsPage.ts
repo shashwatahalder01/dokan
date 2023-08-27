@@ -94,7 +94,7 @@ export class ReportsPage extends AdminPage {
 		await this.pressAndWaitForResponse(data.subUrls.api.dokan.logs, data.key.enter);
 
 		const count = (await this.getElementText(selector.admin.dokan.reports.allLogs.numberOfRowsFound))?.split(' ')[0];
-		expect(Number(count)).not.toBe(0);
+		expect(Number(count)).toBeGreaterThan(0);
 		// await this.clickAndWaitForResponseAndLoadState(data.subUrls.api.dokan.logs, selector.admin.dokan.reports.allLogs.filters.clear);
 	}
 
@@ -108,7 +108,7 @@ export class ReportsPage extends AdminPage {
 		// await this.toContainText(selector.admin.dokan.reports.allLogs.filters.searchedResult, (orderStatus));
 		await this.clickAndAcceptAndWaitForResponse(data.subUrls.api.dokan.logs, selector.admin.dokan.reports.allLogs.filters.searchedResult);
 		const count = (await this.getElementText(selector.admin.dokan.reports.allLogs.numberOfRowsFound))?.split(' ')[0];
-		expect(Number(count)).not.toBe(0);
+		expect(Number(count)).toBeGreaterThan(0);
 		// await this.clickAndWaitForResponseAndLoadState(data.subUrls.api.dokan.logs, selector.admin.dokan.reports.allLogs.filters.clear);
 	}
 

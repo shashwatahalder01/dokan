@@ -118,7 +118,7 @@ export class ProductAdvertisingPage extends AdminPage {
 		}
 
 		const count = (await this.getElementText(selector.admin.dokan.productAdvertising.numberOfRowsFound))?.split(' ')[0];
-		expect(Number(count)).not.toBe(0);
+		expect(Number(count)).toBeGreaterThan(0);
 
 		//clear filter
 		await this.clickAndWaitForResponse(data.subUrls.api.dokan.productAdvertising, selector.admin.dokan.productAdvertising.filters.clearFilter);

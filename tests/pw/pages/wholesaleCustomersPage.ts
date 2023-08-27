@@ -118,7 +118,7 @@ export class WholesaleCustomersPage extends AdminPage {
 		await this.hover(selector.admin.dokan.wholesaleCustomer.wholesaleCustomerCell(wholesaleCustomer));
 		await this.clickAndWaitForLoadState(selector.admin.dokan.wholesaleCustomer.wholesaleCustomerOrders(wholesaleCustomer));
 		const count = (await this.getElementText(selector.admin.dokan.wholesaleCustomer.numberOfRowsFound))?.split(' ')[0];
-		expect(Number(count)).not.toBe(0);
+		expect(Number(count)).toBeGreaterThan(0);
 	}
 
 

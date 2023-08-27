@@ -77,7 +77,6 @@ export class StoreSupportsPage extends AdminPage {
 		if (!isNaN(Number(idOrTitle))){
 			await this.toBeVisible(selector.admin.dokan.storeSupport.supportTicketCell(idOrTitle));
 		} else {
-			expect(Number(count)).not.toBe(0); //todo: convert with to have grater than
 			expect(Number(count)).toBeGreaterThan(0);
 		}
 	}
@@ -120,7 +119,7 @@ export class StoreSupportsPage extends AdminPage {
 		}
 
 		const count = (await this.getElementText(selector.admin.dokan.storeSupport.numberOfRowsFound))?.split(' ')[0];
-		expect(Number(count)).not.toBe(0);
+		expect(Number(count)).toBeGreaterThan(0);
 	}
 
 

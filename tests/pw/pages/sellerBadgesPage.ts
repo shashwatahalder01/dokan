@@ -179,7 +179,7 @@ export class SellerBadgesPage extends AdminPage {
 		await this.selectByLabel( selector.admin.dokan.vendors.filters.filterByBadges, badgeName);
 
 		const count = (await this.getElementText(selector.admin.dokan.vendors.numberOfRowsFound))?.split(' ')[0];
-		expect(Number(count)).not.toBe(0);
+		expect(Number(count)).toBeGreaterThan(0);
 	}
 
 
@@ -191,7 +191,7 @@ export class SellerBadgesPage extends AdminPage {
 		await this.clickAndWaitForResponse(data.subUrls.api.dokan.sellerBadge, selector.admin.dokan.sellerBadge.sellerBadgeVendors(badgeName));
 		// await this.toBeVisible(selector.admin.dokan.vendors.vendorCell(badgeName));
 		const count = (await this.getElementText(selector.admin.dokan.vendors.numberOfRowsFound))?.split(' ')[0];
-		expect(Number(count)).not.toBe(0);
+		expect(Number(count)).toBeGreaterThan(0);
 	}
 
 
@@ -305,7 +305,7 @@ export class SellerBadgesPage extends AdminPage {
 		await this.goIfNotThere(data.subUrls.frontend.vDashboard.badges);
 		await this.selectByValue( selector.vendor.vBadges.filterBadges, option);
 		const count = (await this.getElementText(selector.vendor.vBadges.numberOfBadgesFound))?.split(' ')[0];
-		expect(Number(count)).not.toBe(0);
+		expect(Number(count)).toBeGreaterThan(0);
 	}
 
 }

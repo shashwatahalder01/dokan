@@ -117,6 +117,11 @@ if (isPublished){
 //todo: 
 await this.page.getByRole('listitem').filter({ hasText: deliveryTime.openingTime }).click(); //todo:  convert by locator, also move this to base page
 
+//todo:
+expect(Number(count)).not.toBe(0); //todo: convert with to have grater than
+expect(Number(count)).toBeGreaterThan(0);
+
+
 // tests to write
 
 Store support
@@ -275,7 +280,7 @@ async filterSellerBadges(option: string){
 	await this.goIfNotThere(data.subUrls.frontend.vDashboard.badges);
 	await this.selectByValue( selector.vendor.vBadges.filterBadges, option);
 	const count = (await this.getElementText(selector.vendor.vBadges.numberOfBadgesFound))?.split(' ')[0];
-	expect(Number(count)).not.toBe(0);
+	expect(Number(count)).toBeGreaterThan(0);
 	//todo:  either this or that assertion
 	//todo:  to have count more than
 }
@@ -311,7 +316,7 @@ async filterSellerBadges(option: string){
 		await this.pressAndWaitForResponse(data.subUrls.api.dokan.logs, data.key.enter);
 
 		const count = (await this.getElementText(selector.admin.dokan.reports.allLogs.numberOfRowsFound))?.split(' ')[0];
-		expect(Number(count)).not.toBe(0);
+		expect(Number(count)).toBeGreaterThan(0);
 		// await this.clickAndWaitForResponse(data.subUrls.api.dokan.logs, selector.admin.dokan.reports.allLogs.filters.clear); //todo:  why
 	}
 
@@ -324,7 +329,7 @@ async filterSellerBadges(option: string){
 		await this.type( selector.admin.dokan.reports.allLogs.filters.filterByStatusInput, orderStatus);
 		await this.clickAndAcceptAndWaitForResponse(data.subUrls.api.dokan.logs, selector.admin.dokan.reports.allLogs.filters.searchedResult);
 		const count = (await this.getElementText(selector.admin.dokan.reports.allLogs.numberOfRowsFound))?.split(' ')[0];
-		expect(Number(count)).not.toBe(0);
+		expect(Number(count)).toBeGreaterThan(0);
 		// await this.clickAndWaitForResponse(data.subUrls.api.dokan.logs, selector.admin.dokan.reports.allLogs.filters.clear); //todo:  why
 	}
 

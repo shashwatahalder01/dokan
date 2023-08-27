@@ -323,7 +323,7 @@ export class StoresPage extends AdminPage {
 		}
 
 		const count = (await this.getElementText(selector.admin.dokan.vendors.numberOfRowsFound))?.split(' ')[0];
-		expect(Number(count)).not.toBe(0);
+		expect(Number(count)).toBeGreaterThan(0);
 
 	}
 
