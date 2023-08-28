@@ -295,7 +295,7 @@ export class VendorPage extends BasePage {
 	}
 
 
-	// search product
+	// search product vendor dashboard
 	async searchProduct(productName: string): Promise<void> {
 		await this.goIfNotThere(data.subUrls.frontend.vDashboard.products);
 

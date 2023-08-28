@@ -68,12 +68,12 @@ test.describe('Store Support test (admin)', () => {
 	});
 
 	test('admin can disable support ticket email notification @pro', async ( ) => {
-		// await apiUtils.updateSupportTicketEmailNotification(supportTicketId, { notification: true, });
+		// await apiUtils.updateSupportTicketEmailNotification(supportTicketId, { notification: true, }, payloads.adminAuth);
 		await admin.updateSupportTicketEmailNotification(supportTicketId, 'disable');
 	});
 
 	test('admin can enable support ticket email notification @pro', async ( ) => {
-		await apiUtils.updateSupportTicketEmailNotification(supportTicketId, { notification: false, });
+		await apiUtils.updateSupportTicketEmailNotification(supportTicketId, { notification: false, }, payloads.adminAuth);
 		await admin.updateSupportTicketEmailNotification(supportTicketId, 'enable');
 	});
 

@@ -1739,7 +1739,7 @@ export interface reqOptions {
 	ignoreHTTPSErrors?: boolean | undefined;
 	maxRedirects?: number | undefined;
 	multipart?: { [key: string]: string | number | boolean | fs.ReadStream | { name: string; mimeType: string; buffer: Buffer; }; } | undefined;
-	params?: { [key: string]: string | number | boolean; } | undefined;
+	params?: { [key: string]: string | string[]| number | boolean; } | undefined;
 	timeout?: number | undefined;
 }
 

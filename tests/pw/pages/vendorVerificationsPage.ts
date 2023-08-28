@@ -14,6 +14,7 @@ export class vendorVerificationsPage extends AdminPage {
 
 	// verification requests
 
+
 	// verification requests render properly
 	async adminVerificationsRenderProperly(){
 		await this.goIfNotThere(data.subUrls.backend.dokan.verifications);
@@ -110,7 +111,7 @@ export class vendorVerificationsPage extends AdminPage {
 
 		// id verification
 		await this.click(selector.vendor.vVerificationSettings.id.startIdVerification);
-		await this.wait(0.5);
+		await this.wait(0.5); //todo: resolve this
 
 		// remove previously uploaded image
 		const uploadPhotoBtnIsVisible = await this.isVisible(selector.vendor.vVerificationSettings.id.uploadPhoto);
@@ -166,7 +167,6 @@ export class vendorVerificationsPage extends AdminPage {
 		const cancelRequestIsVisible = await this.isVisible(selector.vendor.vVerificationSettings.company.cancelCompanyVerificationRequest);
 		if (cancelRequestIsVisible) {
 			await this.clickAndWaitForResponse(data.subUrls.ajax, selector.vendor.vVerificationSettings.company.cancelCompanyVerificationRequest);
-			await expect(this.page.getByText(verification.companyRequestSubmitCancel)).toBeVisible();
 			await this.toContainText(selector.vendor.vVerificationSettings.company.companyInfoUpdateSuccessMessage, verification.companyRequestSubmitCancel);
 		}
 

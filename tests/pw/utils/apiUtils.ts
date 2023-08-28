@@ -173,8 +173,6 @@ export class ApiUtils {
 	// update store
 	async updateStore(storeId: string, payload: object, auth? : auth): Promise<responseBody> {
 		const [, responseBody] = await this.put(endPoints.updateStore(storeId), { data: payload, headers: auth });
-		console.log(responseBody);
-
 		return responseBody;
 	}
 
@@ -514,7 +512,6 @@ export class ApiUtils {
 	// get orderId
 	async getOrderId(auth? : auth): Promise<string> {
 		const allOrders = await this.getAllOrders(auth);
-		console.log(allOrders);
 		const orderId = allOrders[0].id;
 		return orderId;
 	}
@@ -630,7 +627,6 @@ export class ApiUtils {
 	// get support ticket id
 	async getSupportTicketId(auth? : auth): Promise<[string, string]> {
 		const allSupportTickets = await this.getAllSupportTickets(auth);
-		console.log(allSupportTickets);
 		const supportTicketId = allSupportTickets[0].ID;
 		const sellerId = allSupportTickets[0].vendor_id;
 		return [supportTicketId, sellerId];
@@ -736,7 +732,9 @@ export class ApiUtils {
 
 	// get all customers
 	async getAllCustomers(auth? : auth): Promise<responseBody> {
-		const [, responseBody] = await this.get(endPoints.wc.getAllCustomers, { params: { per_page:100 }, headers: auth });
+		const [, responseBody1] = await this.get(endPoints.wc.getAllCustomers, { params: { per_page:100, }, headers: auth });
+		const [, responseBody2] = await this.get(endPoints.wc.getAllCustomers, { params: { per_page:100, role: 'subscriber' }, headers: auth }); //todo: those customers who is currently subscriber
+		const responseBody = [...responseBody1, ...responseBody2 ];
 		return responseBody;
 	}
 
@@ -744,6 +742,7 @@ export class ApiUtils {
 	// get customerId
 	async getCustomerId(username: string, auth? : auth): Promise<string> {
 		const allCustomers = await this.getAllCustomers(auth);
+		if(!allCustomers?.length){ return ''; }
 		const customerId = (allCustomers.find((o: { username: unknown; }) => o.username === username)).id;
 		return customerId;
 	}
@@ -1199,8 +1198,8 @@ export class ApiUtils {
 
 
 	// get user by role
-	async getAllUsersByRole(role: string, auth? : auth): Promise<responseBody> {
-		const [, responseBody] = await this.get(endPoints.wp.getAllUsers, { params: { per_page:100, role: role }, headers: auth });
+	async getAllUsersByRole(roles: string[], auth? : auth): Promise<responseBody> {
+		const [, responseBody] = await this.get(endPoints.wp.getAllUsers, { params: { per_page:100, roles: roles }, headers: auth });
 		return responseBody;
 	}
 

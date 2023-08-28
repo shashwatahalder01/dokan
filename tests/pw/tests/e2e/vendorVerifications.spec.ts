@@ -44,6 +44,7 @@ test.describe('Verifications test', () => {
 		await vendor.sendCompanyVerificationRequest(data.vendor.verification);
 	});
 
+	//todo: remove dependency: admin tests depends on vendor tests
 
 	test('admin verifications menu page is rendering properly @pro @explo', async ( ) => {
 		await admin.adminVerificationsRenderProperly();
@@ -61,8 +62,6 @@ test.describe('Verifications test', () => {
 		await admin.companyVerificationRequest(data.predefined.vendorInfo.username, 'approve');
 	});
 
-	// test.skip('admin can approve phone verification request @pro', async ( ) => {
-	// 	// await admin.phoneVerificationRequest(data.predefined.vendorInfo.username,'approve');
-	// });
+
 
 });

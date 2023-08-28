@@ -7,7 +7,7 @@ import { payloads } from 'utils/payloads';
 const { CUSTOMER_ID, PRODUCT_ID } = process.env;
 
 
-test.describe('My Orders functionality test', () => {
+test.describe('My orders functionality test', () => {
 
 
 	let customer: MyOrdersPage;

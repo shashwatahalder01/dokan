@@ -128,6 +128,9 @@ if (isPublished){
 //todo: support ticket : filter by calendar
 //todo: reports: filter by calendar on by day, by year, by vendor
 //todo: all-logs : filter by calendar
+//todo: vendor can send phone verification request
+//todo: admin can approve phone verification request
+
 
 wholesale setting options tests
 	//todo:   customer need or don't need approval : re-modify above two tests
