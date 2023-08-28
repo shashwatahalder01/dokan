@@ -38,9 +38,14 @@ test.describe('Seller badge test', () => {
 		await admin.adminSellerBadgeRenderProperly();
 	});
 
-	// test('admin can view seller badge details @pro', async ( ) => { //todo:
-	// await admin.viewSellerBadge({ ...data.sellerBadge, badgeName: data.sellerBadge.eventName.numberOfItemsSold });
-	// });
+
+	test('admin can preview seller badge @pro', async ( ) => {
+		await admin.previewSellerBadge(data.sellerBadge.eventName.productsPublished);
+	});
+
+	test('admin can view seller badge details @pro @explo', async ( ) => {
+		await admin.viewSellerBadge(data.sellerBadge.eventName.productsPublished);
+	});
 
 	test('admin can create seller badge @pro', async ( ) => {
 		await admin.createSellerBadge({ ...data.sellerBadge, badgeName: data.sellerBadge.eventName.numberOfItemsSold });
@@ -54,9 +59,6 @@ test.describe('Seller badge test', () => {
 		await admin.editSellerBadge({ ...data.sellerBadge, badgeName: data.sellerBadge.eventName.productsPublished });
 	});
 
-	test('admin can preview seller badge @pro', async ( ) => {
-		await admin.previewSellerBadge(data.sellerBadge.eventName.productsPublished);
-	});
 
 	// test.skip('admin can filter vendors by seller badge  @pro', async ( ) => {
 	// 	await admin.filterVendorsByBadge(data.sellerBadge.eventName.productsPublished);

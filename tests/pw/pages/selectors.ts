@@ -1029,28 +1029,45 @@ export const selector = {
 				},
 
 				badgeDetails: {
-					badgeEventDropdown: '.seller-badge-event-dropdown',
-					badgeEvent: (name: string) => `//h3[normalize-space()="${name}"]/../..`,
-					badgePublishedStatus: (name: string) => `//h3[normalize-space()="${name}"]/..//i[contains(@class, "published")]`,
-					badgeName: '#title',
-					badgeLevel: '.badge-level',
-					startingLevelValue: '//span[normalize-space()="Level 1"]/..//input',
-					levelInputValue: (value: string) => `//span[normalize-space()="Level ${value}"]/..//input`,
-					addBadgeLevel: '.dokan-logical-container button',
-					removeBadgeLevel: '(//i[@class="remove-level"])[2]',
-					verifiedSellerMethod: '//option[normalize-space()="Select a method"]/..',
-					disabledVerifiedSellerMethod: '//select//option[@disabled="disabled"]',
-					verifiedSellerMethod1:(number: number) => `(//option[normalize-space()="Select a method"]/..)[${number}]`,
-					trendingProductPeriod: '.dokan-logical-container select',
-					trendingProductTopBestSellingProduct: '.dokan-logical-container input',
 
-					uploadBadgeImage:  '//div[@class="dokan-upload-image-container"]//img',
-					badgePhotoReset: '//a[normalize-space()="restore default."]',
+					// badge event
+					badgeEvents: {
+						badgeEventBox: 'div.badge__event-box',
+						badgeEventDropdown: '.seller-badge-event-dropdown',
+						badgeEvent: (name: string) => `//h3[normalize-space()="${name}"]/../..`,
+						badgePublishedStatus: (name: string) => `//h3[normalize-space()="${name}"]/..//i[contains(@class, "published")]`,
+						badgeName: 'input#title',
+					},
 
-					badgeStatus: '#status',
-					create: '//button[normalize-space()="Create"]',
-					update: '//button[normalize-space()="Update"]',
-					goBack: '//button[normalize-space()="Go Back"]',
+
+					// badge  condition & level
+					badgeCondition:{
+						badgeConditionBox: 'div.badge__condition-box',
+						badgeLevel: 'span.badge-level',
+						startingLevelValue: '//span[normalize-space()="Level 1"]/..//input',
+						levelInputValue: (value: string) => `//span[normalize-space()="Level ${value}"]/..//input`,
+						addBadgeLevel: 'div.dokan-logical-container button',
+						removeBadgeLevel: '(//i[@class="remove-level"])[2]',
+						verifiedSellerMethod: '//option[normalize-space()="Select a method"]/..',
+						disabledVerifiedSellerMethod: '//select//option[@disabled="disabled"]',
+						verifiedSellerMethod1:(number: number) => `(//option[normalize-space()="Select a method"]/..)[${number}]`,
+						trendingProductPeriod: '.dokan-logical-container select',
+						trendingProductTopBestSellingProduct: '.dokan-logical-container input',
+					},
+
+					// badge photo
+					badgePhoto: {
+						uploadBadgeImage:  '//div[@class="dokan-upload-image-container"]//img',
+						badgePhotoReset: '//a[normalize-space()="restore default."]',
+					},
+
+					//badge status
+					badgeStatus:{
+						badgeStatus: 'select#status',
+						create: '//button[normalize-space()="Create"]',
+						update: '//button[normalize-space()="Update"]',
+						goBack: '//button[normalize-space()="Go Back"]',
+					},
 
 					confirmBadgeUpdate: '.swal2-actions .swal2-confirm',
 					badgeAddedSuccessfully: '.swal2-actions .swal2-confirm',

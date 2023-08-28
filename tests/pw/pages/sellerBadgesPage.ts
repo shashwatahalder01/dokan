@@ -52,45 +52,71 @@ export class SellerBadgesPage extends AdminPage {
 	}
 
 
+	// view seller badge
+	async viewSellerBadge(badgeName: string){
+		await this.searchSellerBadge(badgeName);
+
+		await this.hover(selector.admin.dokan.sellerBadge.sellerBadgeRow(badgeName));
+		await this.clickAndWaitForResponse(data.subUrls.api.dokan.sellerBadge, selector.admin.dokan.sellerBadge.sellerBadgeEdit(badgeName));
+
+		// badge condition box is visible
+		await this.toBeVisible(selector.admin.dokan.sellerBadge.badgeDetails.badgeCondition.badgeConditionBox);
+
+		// badge event elements are visible
+		// eslint-disable-next-line @typescript-eslint/no-unused-vars
+		const { badgeEvent, badgePublishedStatus, ...badgeEvents } = selector.admin.dokan.sellerBadge.badgeDetails.badgeEvents;
+		await this.multipleElementVisible(badgeEvents);
+
+		// badge photo elements are visible
+		await this.multipleElementVisible(selector.admin.dokan.sellerBadge.badgeDetails.badgePhoto);
+
+		// badge status elements are visible
+		// eslint-disable-next-line @typescript-eslint/no-unused-vars
+		const { create, ...badgeStatus } = selector.admin.dokan.sellerBadge.badgeDetails.badgeStatus;
+		await this.multipleElementVisible(badgeStatus);
+
+	}
+
+
 	// create seller badge
 	async createSellerBadge(badge: sellerBadge){
 		await this.goIfNotThere(data.subUrls.backend.dokan.sellerBadge);
 
 		await this.clickAndWaitForResponse(data.subUrls.api.dokan.sellerBadgeEvent, selector.admin.dokan.sellerBadge.createBadge);
-		await this.click(selector.admin.dokan.sellerBadge.badgeDetails.badgeEventDropdown);
-		const isPublished = await this.isVisible(selector.admin.dokan.sellerBadge.badgeDetails.badgePublishedStatus(badge.badgeName));
+		await this.click(selector.admin.dokan.sellerBadge.badgeDetails.badgeEvents.badgeEventDropdown);
+		const isPublished = await this.isVisible(selector.admin.dokan.sellerBadge.badgeDetails.badgeEvents.badgePublishedStatus(badge.badgeName));
 		if (isPublished){
 			console.log('Badge is already published');
 			test.skip();
 			// throw new Error('Badge is already published');
 		}
-		await this.click(selector.admin.dokan.sellerBadge.badgeDetails.badgeEvent(badge.badgeName));
-		await this.clearAndType(selector.admin.dokan.sellerBadge.badgeDetails.badgeName, badge.badgeName);
+		await this.click(selector.admin.dokan.sellerBadge.badgeDetails.badgeEvents.badgeEvent(badge.badgeName));
+		await this.clearAndType(selector.admin.dokan.sellerBadge.badgeDetails.badgeEvents.badgeName, badge.badgeName);
 
-		const isLevelExists = await this.isVisible(selector.admin.dokan.sellerBadge.badgeDetails.startingLevelValue);
+		const isLevelExists = await this.isVisible(selector.admin.dokan.sellerBadge.badgeDetails.badgeCondition.startingLevelValue);
 		if(isLevelExists){
-			await this.clearAndType(selector.admin.dokan.sellerBadge.badgeDetails.startingLevelValue, badge.startingLevelValue);
+			await this.clearAndType(selector.admin.dokan.sellerBadge.badgeDetails.badgeCondition.startingLevelValue, badge.startingLevelValue);
 			for(let i = 1; i < badge.maxLevel; i++){
-				await this.click(selector.admin.dokan.sellerBadge.badgeDetails.addBadgeLevel);
+				await this.click(selector.admin.dokan.sellerBadge.badgeDetails.badgeCondition.addBadgeLevel);
 			}
 		} else {
 			if(badge.badgeName === 'Trending Product'){
-				await this.selectByValue(selector.admin.dokan.sellerBadge.badgeDetails.trendingProductPeriod, badge.trendingProductPeriod);
-				await this.clearAndType(selector.admin.dokan.sellerBadge.badgeDetails.trendingProductTopBestSellingProduct, badge.trendingProductTopBestSellingProduct);
+				await this.selectByValue(selector.admin.dokan.sellerBadge.badgeDetails.badgeCondition.trendingProductPeriod, badge.trendingProductPeriod);
+				await this.clearAndType(selector.admin.dokan.sellerBadge.badgeDetails.badgeCondition.trendingProductTopBestSellingProduct, badge.trendingProductTopBestSellingProduct);
 			}
 			if(badge.badgeName ===  'Verified Seller'){
 				// await this.selectByValue(selector.admin.dokan.sellerBadge.badgeDetails.verifiedSellerMethod, badge.verificationMethod);
 				const methods: string[]  = Object.values(badge.verifiedSellerMethod);
 				for(let i = 1; i <= methods.length; i++){
-					await this.selectByValue(selector.admin.dokan.sellerBadge.badgeDetails.verifiedSellerMethod1(i), methods[i-1] as string );
+					await this.selectByValue(selector.admin.dokan.sellerBadge.badgeDetails.badgeCondition.verifiedSellerMethod1(i), methods[i-1] as string );
 					if( i === methods.length ) { continue; }
-					await this.click(selector.admin.dokan.sellerBadge.badgeDetails.addBadgeLevel);
+					await this.click(selector.admin.dokan.sellerBadge.badgeDetails.badgeCondition.addBadgeLevel);
 				}
 			}
 		}
 
-		await this.selectByValue(selector.admin.dokan.sellerBadge.badgeDetails.badgeStatus, badge.badgeStatus );
-		await this.clickAndWaitForResponse(data.subUrls.api.dokan.sellerBadge, selector.admin.dokan.sellerBadge.badgeDetails.create);
+		await this.selectByValue(selector.admin.dokan.sellerBadge.badgeDetails.badgeStatus.badgeStatus, badge.badgeStatus );
+		await this.clickAndWaitForResponse(data.subUrls.api.dokan.sellerBadge, selector.admin.dokan.sellerBadge.badgeDetails.badgeStatus.create);
 		await this.click(selector.admin.dokan.sellerBadge.badgeDetails.badgeAddedSuccessfully);
 
 	}
@@ -103,47 +129,47 @@ export class SellerBadgesPage extends AdminPage {
 		await this.hover(selector.admin.dokan.sellerBadge.sellerBadgeRow(badge.badgeName));
 		await this.clickAndWaitForResponse(data.subUrls.api.dokan.sellerBadge, selector.admin.dokan.sellerBadge.sellerBadgeEdit(badge.badgeName));
 
-		await this.clearAndType(selector.admin.dokan.sellerBadge.badgeDetails.badgeName, badge.badgeName);
+		await this.clearAndType(selector.admin.dokan.sellerBadge.badgeDetails.badgeEvents.badgeName, badge.badgeName);
 
-		const isLevelExists = await this.isVisible(selector.admin.dokan.sellerBadge.badgeDetails.startingLevelValue);
+		const isLevelExists = await this.isVisible(selector.admin.dokan.sellerBadge.badgeDetails.badgeCondition.startingLevelValue);
 		if(isLevelExists){
 			// remove previous badge level
-			const maxLevel = await this.countLocator(selector.admin.dokan.sellerBadge.badgeDetails.badgeLevel);
+			const maxLevel = await this.countLocator(selector.admin.dokan.sellerBadge.badgeDetails.badgeCondition.badgeLevel);
 			for(let i = 1; i < maxLevel; i++){
-				await this.click(selector.admin.dokan.sellerBadge.badgeDetails.removeBadgeLevel);
+				await this.click(selector.admin.dokan.sellerBadge.badgeDetails.badgeCondition.removeBadgeLevel);
 			}
 			// add badge level
-			await this.clearAndType(selector.admin.dokan.sellerBadge.badgeDetails.startingLevelValue, badge.startingLevelValue);
+			await this.clearAndType(selector.admin.dokan.sellerBadge.badgeDetails.badgeCondition.startingLevelValue, badge.startingLevelValue);
 			for(let i = 1; i < badge.maxLevel; i++){
-				await this.click(selector.admin.dokan.sellerBadge.badgeDetails.addBadgeLevel);
+				await this.click(selector.admin.dokan.sellerBadge.badgeDetails.badgeCondition.addBadgeLevel);
 			}
 		} else {
 
 			if(badge.badgeName === 'Trending Product'){
-				await this.selectByValue(selector.admin.dokan.sellerBadge.badgeDetails.trendingProductPeriod, badge.trendingProductPeriod);
-				await this.clearAndType(selector.admin.dokan.sellerBadge.badgeDetails.trendingProductTopBestSellingProduct, badge.trendingProductTopBestSellingProduct);
+				await this.selectByValue(selector.admin.dokan.sellerBadge.badgeDetails.badgeCondition.trendingProductPeriod, badge.trendingProductPeriod);
+				await this.clearAndType(selector.admin.dokan.sellerBadge.badgeDetails.badgeCondition.trendingProductTopBestSellingProduct, badge.trendingProductTopBestSellingProduct);
 			}
 			if(badge.badgeName ===  'Verified Seller'){
 				// await this.selectByValue(selector.admin.dokan.sellerBadge.badgeDetails.verifiedSellerMethod, badge.verificationMethod);
 				// remove previous badge level
-				await this.waitForSelector(selector.admin.dokan.sellerBadge.badgeDetails.badgeLevel);
-				const maxLevel = await this.countLocator(selector.admin.dokan.sellerBadge.badgeDetails.badgeLevel);
+				await this.waitForSelector(selector.admin.dokan.sellerBadge.badgeDetails.badgeCondition.badgeLevel);
+				const maxLevel = await this.countLocator(selector.admin.dokan.sellerBadge.badgeDetails.badgeCondition.badgeLevel);
 				for(let i = 1; i < maxLevel; i++){
-					await this.click(selector.admin.dokan.sellerBadge.badgeDetails.removeBadgeLevel);
+					await this.click(selector.admin.dokan.sellerBadge.badgeDetails.badgeCondition.removeBadgeLevel);
 				}
 
 				// add badge level
 				const methods: string[]  = Object.values(badge.verifiedSellerMethod);
 				for(let i = 1; i <= methods.length; i++){
-					await this.selectByValue(selector.admin.dokan.sellerBadge.badgeDetails.verifiedSellerMethod1(i), methods[i-1] as string);
+					await this.selectByValue(selector.admin.dokan.sellerBadge.badgeDetails.badgeCondition.verifiedSellerMethod1(i), methods[i-1] as string);
 					if( i === methods.length ) { continue; }
-					await this.click(selector.admin.dokan.sellerBadge.badgeDetails.addBadgeLevel);
+					await this.click(selector.admin.dokan.sellerBadge.badgeDetails.badgeCondition.addBadgeLevel);
 				}
 			}
 		}
 
-		await this.selectByValue(selector.admin.dokan.sellerBadge.badgeDetails.badgeStatus, badge.badgeStatus );
-		await this.click(selector.admin.dokan.sellerBadge.badgeDetails.update);
+		await this.selectByValue(selector.admin.dokan.sellerBadge.badgeDetails.badgeStatus.badgeStatus, badge.badgeStatus );
+		await this.click(selector.admin.dokan.sellerBadge.badgeDetails.badgeStatus.update);
 		await this.clickAndWaitForResponse(data.subUrls.api.dokan.sellerBadge, selector.admin.dokan.sellerBadge.badgeDetails.confirmBadgeUpdate);
 		await this.click(selector.admin.dokan.sellerBadge.badgeDetails.badgeAddedSuccessfully);
 
