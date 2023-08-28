@@ -695,6 +695,7 @@ export const data = {
 				withdraw: 'wp-admin/admin.php?page=dokan#/withdraw?status=pending',
 				reverseWithdraws: 'wp-admin/admin.php?page=dokan#/reverse-withdrawal',
 				vendors: 'wp-admin/admin.php?page=dokan#/vendors',
+				vendorDetails: (vendorId: string) => `wp-admin/admin.php?page=dokan#/vendors/${vendorId}`,
 				storeCategories: 'wp-admin/admin.php?page=dokan#/store-categories',
 				abuseReports: 'wp-admin/admin.php?page=dokan#/abuse-reports',
 				storeReviews: 'wp-admin/admin.php?page=dokan#/store-reviews',
@@ -1019,6 +1020,11 @@ export const data = {
 				bankIban: faker.string.alphanumeric(10),
 				bankSwiftCode: faker.string.alphanumeric(10),
 			},
+
+			sendEmail:{
+				subject: 'test email subject',
+				message: 'test email message',
+			}
 		},
 
 		shipping: {

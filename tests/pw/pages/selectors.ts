@@ -497,12 +497,93 @@ export const selector = {
 				closeSweetAlert: '.swal2-close', // Sweet Alert Close
 				sweetAlertTitle: '#swal2-title', // sweet alert title
 
+
 				vendorDetails: {
 
-					// badges
-					badgesAcquired: '.seller-badge-list-card',
-					noBadgesAvailable: '.no-badge-available',
-					badgesGallery: '.myGallery',
+					profileInfo: {
+						profileInfoDiv: 'div.profile-info',
+						profileImage: '.profile-info .profile-icon img',
+						featuredVendor: 'span[title="Featured Vendor"]',
+
+						storeName: '.profile-info .store-name',
+						storeRating: '.profile-info .star-rating',
+						storeCategory: '.profile-info .store-categoy-names',
+						storeAddress: '.profile-info .address',
+						phone: '.profile-info .phone',
+
+						sendEmail: '.profile-info .message',
+						sellingStatus: '.profile-info .status',
+					},
+
+
+					sendEmail:{
+						closeModal: '.modal-close.modal-close-link',
+						replyTo: 'input#replyto',
+						subject: 'input#subject',
+						message: 'textarea#message',
+						sendEmail: '.modal-footer button',
+
+					},
+
+					profileBanner: {
+						profileBanner: 'div.profile-banner',
+						visitStore: 'div.action-links a.visit-store ',
+						editStore: 'div.action-links a.router-link-active',
+					},
+
+					vendorSummary: {
+						vendorSummarySection:'section.vendor-summary',
+
+						// badges
+						badgesAcquired: {
+							badgesAcquired: 'div.seller-badge-list-card',
+							noBadgesAvailable: '.no-badge-available',
+							badgesGallery: '.myGallery',
+						},
+
+						// products-revenue
+						productRevenue: {
+							productRevenueSection: '.vendor-summary div.products-revenue',
+
+							products: {
+								products: 'div.products-revenue .stat-summary.products',
+								productCount: 'ul.counts li.products .count',
+								soldItemCount: 'ul.counts li.items .count',
+								visitorsCount: 'ul.counts li.visitors .count',
+							},
+
+							revenue: {
+								revenue: 'div.products-revenue .revenue',
+								ordersCount: 'ul.counts li.orders .count',
+								grossSales: 'ul.counts li.gross .count',
+								totalEarning: 'ul.counts li.earning .count',
+							},
+
+							others:{
+								others: 'div.products-revenue .others',
+								commissionRate: 'ul.counts li.commision .count',
+								balance: 'ul.counts li.balance .count',
+								reviewsCount: 'ul.counts li.reviews .count',
+							},
+
+						},
+
+						// vendor info
+						vendorInfo:{
+							registeredSection: 'li.registered',
+							registeredDate: 'li.registered .date',
+
+							socialProfilesSection: 'li.social-profiles',
+							socialProfilesList: 'li.social-profiles .profiles',
+
+							paymentsSection: 'li.payments',
+							paymentMethods: 'li.payments .payment-methods',
+
+							publishStatusSection: 'li.publishing',
+
+						},
+
+					},
 
 				},
 

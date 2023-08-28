@@ -637,6 +637,14 @@ export class ApiUtils {
 	}
 
 
+	// create support ticket
+	async createSupportTicket(payload: object): Promise<[responseBody, string]> {
+		const [, responseBody] = await this.post(endPoints.wp.createCustomPost('dokan_store_support'), { data: payload, headers: payloads.adminAuth });
+		const supportTicketId = String(responseBody.id);
+		return [responseBody, supportTicketId];
+	}
+
+
 	// create support ticket comment
 	async createSupportTicketComment( supportTicketId = '', payload: object, auth? : auth): Promise<responseBody> { //todo:  update handle first parameter
 		if(!supportTicketId){
@@ -653,11 +661,10 @@ export class ApiUtils {
 		return responseBody;
 	}
 
-
-	async createSupportTicket(payload: object): Promise<[responseBody, string]> {
-		const [, responseBody] = await this.post(endPoints.wp.createCustomPost('dokan_store_support'), { data: payload, headers: payloads.adminAuth });
-		const supportTicketId = String(responseBody.id);
-		return [responseBody, supportTicketId];
+	// update support ticket email notification
+	async updateSupportTicketEmailNotification(supportTicketId: string, payload: object, auth? : auth): Promise<responseBody> {
+		const [, responseBody] = await this.post(endPoints.updateSupportTicketEmailNotification(supportTicketId), { data: payload, headers: auth });
+		return responseBody;
 	}
 
 

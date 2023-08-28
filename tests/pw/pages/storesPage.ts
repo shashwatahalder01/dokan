@@ -2,7 +2,7 @@ import { Page, expect } from '@playwright/test';
 import { AdminPage } from 'pages/adminPage';
 import { selector } from 'pages/selectors';
 import { data } from 'utils/testData';
-import { vendor } from 'utils/interfaces';
+import { vendor, email } from 'utils/interfaces';
 
 const { DOKAN_PRO } = process.env;
 
@@ -37,6 +37,46 @@ export class StoresPage extends AdminPage {
 
 		// vendor table elements are visible
 		await this.multipleElementVisible(selector.admin.dokan.vendors.table);
+	}
+
+
+	// view vendor details
+	async viewVendorDetails(storeName: string){
+		await this.goIfNotThere(data.subUrls.backend.dokan.vendorDetails(storeName));
+
+		// profile info elements are visible
+		// eslint-disable-next-line @typescript-eslint/no-unused-vars
+		const { featuredVendor, storeRating, storeCategory, ...profileInfo } = selector.admin.dokan.vendors.vendorDetails.profileInfo;
+		await this.multipleElementVisible(profileInfo);
+
+		// profile banner elements are visible
+		await this.multipleElementVisible(selector.admin.dokan.vendors.vendorDetails.profileBanner);
+
+		// badges acquired elements are visible
+		const badgesAcquired = await this.isVisible(selector.admin.dokan.vendors.vendorDetails.vendorSummary.badgesAcquired.badgesAcquired);
+		badgesAcquired && await this.toBeVisible(selector.admin.dokan.vendors.vendorDetails.vendorSummary.badgesAcquired.badgesAcquired);
+
+		// product & revenue elements are visible
+		await this.toBeVisible(selector.admin.dokan.vendors.vendorDetails.vendorSummary.productRevenue.productRevenueSection);
+		await this.multipleElementVisible(selector.admin.dokan.vendors.vendorDetails.vendorSummary.productRevenue.products);
+		await this.multipleElementVisible(selector.admin.dokan.vendors.vendorDetails.vendorSummary.productRevenue.revenue);
+		await this.multipleElementVisible(selector.admin.dokan.vendors.vendorDetails.vendorSummary.productRevenue.others);
+
+		// vendor info elements are visible
+		await this.multipleElementVisible(selector.admin.dokan.vendors.vendorDetails.vendorSummary.vendorInfo);
+
+	}
+
+
+	// email vendor
+	async emailVendor(storeName: string, email: vendor['vendorInfo']['sendEmail']){
+		await this.goIfNotThere(data.subUrls.backend.dokan.vendorDetails(storeName));
+
+		await this.click(selector.admin.dokan.vendors.vendorDetails.profileInfo.sendEmail);
+
+		await this.clearAndType(selector.admin.dokan.vendors.vendorDetails.sendEmail.subject, email.subject);
+		await this.clearAndType(selector.admin.dokan.vendors.vendorDetails.sendEmail.message, email.message);
+		await this.clickAndWaitForResponse(data.subUrls.api.dokan.stores, selector.admin.dokan.vendors.vendorDetails.sendEmail.sendEmail);
 	}
 
 

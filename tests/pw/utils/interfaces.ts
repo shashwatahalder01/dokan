@@ -731,6 +731,11 @@ export interface vendor {
 			bankIban: string;
 			bankSwiftCode: string;
 		}
+
+		sendEmail:{
+			subject: string;
+			message: string;
+		}
 	}
 
 	shipping: {

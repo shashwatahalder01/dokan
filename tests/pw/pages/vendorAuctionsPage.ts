@@ -127,7 +127,6 @@ export class AuctionsPage extends VendorPage {
 		// eslint-disable-next-line @typescript-eslint/no-unused-vars
 		const { bidQuantity, bidButton, ...viewAuction } = selector.vendor.vAuction.viewAuction;
 		await this.multipleElementVisible(viewAuction);
-		//todo: actual value can be asserted
 	}
 
 

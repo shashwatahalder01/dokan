@@ -226,7 +226,7 @@ export class SellerBadgesPage extends AdminPage {
 		await this.storesPage.searchVendor(vendorName);
 
 		await this.clickAndWaitForResponse(data.subUrls.api.dokan.sellerBadge, selector.admin.dokan.vendors.vendorViewDetails(vendorName));
-		await this.toBeVisible(selector.admin.dokan.vendors.vendorDetails.badgesAcquired);
+		await this.toBeVisible(selector.admin.dokan.vendors.vendorDetails.vendorSummary.badgesAcquired.badgesAcquired);
 		//todo: add assertions for achieved badges
 	}
 

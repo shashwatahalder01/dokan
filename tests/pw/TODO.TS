@@ -124,6 +124,8 @@ if (isPublished){
 
 //********************************** tests to write **********************************
 
+//todo: reverse withdraw : filter by calendar, do via vue locator
+//todo: support ticket : filter by calendar
 
 wholesale setting options tests
 	//todo:   customer need or don't need approval : re-modify above two tests
@@ -228,7 +230,18 @@ stores page
 
 
 
+	// view auction product
+	async viewAuctionProduct(productName: string){
+		await this.searchAuctionProduct(productName);
+		await this.hover(selector.vendor.vAuction.productCell(productName));
+		await this.clickAndWaitForLoadState(selector.vendor.vAuction.view(productName));
 
+		// auction product elements are visible
+		// eslint-disable-next-line @typescript-eslint/no-unused-vars
+		const { bidQuantity, bidButton, ...viewAuction } = selector.vendor.vAuction.viewAuction;
+		await this.multipleElementVisible(viewAuction);
+		//todo: actual value can be asserted
+	}
 
 
 
