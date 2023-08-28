@@ -78,7 +78,8 @@ export const selector = {
 	wpMedia: {
 		// Wp Image Upload
 		wpUploadFiles: '#menu-item-upload',
-		uploadedMedia: '.attachment-preview',
+		uploadedMedia: 'div.attachment-preview',
+		uploadedMediaFirst: '(//div[contains(@class,"attachment-preview")])[1]',
 		selectFiles: '//div[@class="supports-drag-drop" and @style="position: relative;"]//button[@class="browser button button-hero"]',
 		selectFilesInput: '//div[@class="supports-drag-drop" and @style="position: relative;"]//input[@type="file"]',
 		selectUploadedMedia: '(//h2[contains(text(),"Media list")]/..//ul//li)[1]',
@@ -5749,7 +5750,7 @@ export const selector = {
 				passport: '//input[@value="passport"]',
 				nationalIdCard: '//input[@value="national_id"]',
 				drivingLicense: '//input[@value="driving_license"]',
-				uploadPhoto: '.dokan-gravatar-drag',
+				uploadPhoto: 'a.dokan-gravatar-drag',
 				previousUploadedPhoto: '//div[@class="gravatar-wrap"]//img[@class="dokan-gravatar-img"]',
 				removePreviousUploadedPhoto: '.dokan-close.dokan-remove-gravatar-image',
 				submitId: '#dokan_v_id_submit',
@@ -5781,6 +5782,7 @@ export const selector = {
 				startCompanyVerification: '#dokan_v_company_click',
 				uploadedCompanyFileClose: '.dokan-btn.dokan-btn-danger',
 				uploadFiles: '.dokan-files-drag',
+				uploadedFileFirst: '(//a[@onclick="companyVerificationRemoveList(event)"])[1]',
 				cancelSelectedInfo: '.fa-times',
 				submitCompanyInfo: '#dokan_v_company_submit',
 				cancelSubmitCompanyInfo: '.dokan-w5 > #dokan_v_company_cancel',

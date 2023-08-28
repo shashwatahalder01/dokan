@@ -24,7 +24,7 @@
 //todo:  insert all date format according to site format , currently hardcoded to default format -> helpers.dateFormatFYJ
 //todo:   try to fix product advertisement product, reversewithdraw product, storemap save via api, currently e2e is used
 //todo:  **************** need custom check method
-//todo:  
+//todo:  *** add all email tests
 //todo:  
 
 

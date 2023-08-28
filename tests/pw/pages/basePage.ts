@@ -510,6 +510,12 @@ export class BasePage {
 
 	// returns whether the element is disabled
 	async isDisabled(selector: string): Promise<boolean> {
+		return await this.isDisabledLocator(selector);
+		// return await this.page.isDisabled(selector);
+	}
+
+	// returns whether the element is disabled
+	async isDisabledViaPage(selector: string): Promise<boolean> {
 		return await this.page.isDisabled(selector);
 	}
 
@@ -914,7 +920,7 @@ export class BasePage {
 	async uploadFile(selector: string, files: string | string[]): Promise<void> {
 		// await this.page.setInputFiles(selector, files, { noWaitAfter: true });
 		await this.page.setInputFiles(selector, files);
-		// await this.wait(2);
+		await this.wait(1.5);
 	}
 
 
@@ -1754,7 +1760,7 @@ export class BasePage {
 	}
 
 
-	// delete element if exist (only first will delete) : dokan rma,report abuse
+	// delete element if exist (only first will delete) : dokan rma,report abuse, company verifications //todo: delete all
 	async deleteIfExists(selector: string): Promise<void> {
 		const elementExists = await this.isVisible(selector);
 		if (elementExists) {
@@ -1763,15 +1769,14 @@ export class BasePage {
 		}
 	}
 
-
+	// upload file
 	async wpUploadFile(filePath: string | string[]) {
 		//wp image upload
 		const wpUploadFiles = '//div[@class="supports-drag-drop" and @style="position: relative;"]//button[@id="menu-item-upload"]';
 		const uploadedMedia = '.attachment-preview';
 		const selectFiles =	'//div[@class="supports-drag-drop" and @style="position: relative;"]//button[@class="browser button button-hero"]';
 		const select = '//div[@class="supports-drag-drop" and @style="position: relative;"]//button[contains(@class, "media-button-select")]';
-		const crop =
-			'//div[@class="supports-drag-drop" and @style="position: relative;"]//button[contains(@class, "media-button-insert")]';
+		const crop ='//div[@class="supports-drag-drop" and @style="position: relative;"]//button[contains(@class, "media-button-insert")]';
 		const uploadedMediaIsVisible = await this.isVisible(uploadedMedia);
 		if (uploadedMediaIsVisible) {
 			await this.click(wpUploadFiles);
