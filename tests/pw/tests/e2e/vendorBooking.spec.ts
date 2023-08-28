@@ -44,6 +44,7 @@ test.describe('Booking Product test', () => {
 		// await cPage.close();
 	});
 
+	//todo: user GET /wc-bookings/v1/products to create booking product, resource
 
 	test('admin can add booking product @pro', async ( ) => {
 		await admin.adminAddBookingProduct(data.product.booking);

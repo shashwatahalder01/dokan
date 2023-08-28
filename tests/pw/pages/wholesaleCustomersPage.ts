@@ -7,8 +7,6 @@ import { data } from 'utils/testData';
 import { helpers } from 'utils/helpers';
 
 
-
-
 export class WholesaleCustomersPage extends AdminPage {
 
 	constructor(page: Page) {
@@ -190,7 +188,6 @@ export class WholesaleCustomersPage extends AdminPage {
 
 	// view wholesale price
 	async viewWholeSalePrice(productName: string){
-		await this.customerPage.goToShop();
 		await this.customerPage.searchProduct(productName);
 		await this.toBeVisible(selector.customer.cWholesale.shop.wholesalePrice);
 		await this.toBeVisible(selector.customer.cWholesale.shop.wholesaleAmount);

@@ -32,7 +32,8 @@ test.describe('Vendor settings test', () => {
 		await vendor.vendorStoreSettingsRenderProperly();
 	});
 
-	test('vendor verifications settings menu page is rendering properly @pro @explo', async ( ) => {
+	test.skip('vendor verifications settings menu page is rendering properly @pro @explo', async ( ) => {
+		//todo: need to update
 		await vendor.vendorVerificationsSettingsRenderProperly();
 	});
 

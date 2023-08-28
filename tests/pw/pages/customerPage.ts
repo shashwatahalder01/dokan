@@ -222,7 +222,6 @@ export class CustomerPage extends BasePage {
 
 	// add product to cart from shop page
 	async addProductToCartFromShop(productName: string): Promise<void> {
-		await this.goToShop();
 		await this.searchProduct(productName);
 		await this.clickAndWaitForResponse(data.subUrls.frontend.addToCart, selector.customer.cShop.productCard.addToCart);
 		await this.toBeVisible(selector.customer.cShop.productCard.viewCart);
@@ -551,8 +550,9 @@ export class CustomerPage extends BasePage {
 
 	// search product
 	async searchProduct(productName: string): Promise<void> {
-		// await this.goIfNotThere(data.subUrls.frontend.shop);
+		await this.goIfNotThere(data.subUrls.frontend.shop);
 		if(!DOKAN_PRO){
+			// search on lite
 			await this.clearAndType(selector.customer.cShop.searchProductLite, productName);
 			await this.pressAndWaitForLoadState(data.key.enter);
 			await this.toContainText(selector.customer.cSingleProduct.productDetails.productTitle, productName );

@@ -92,8 +92,13 @@ export class VendorSettingsPage extends VendorPage {
 
 		// product addon fields elements are visible
 		// eslint-disable-next-line @typescript-eslint/no-unused-vars
-		const { startCompanyVerification, cancelCompanyVerificationRequest, uploadedCompanyFileClose, cancelSelectedInfo, companyInfoUpdateSuccessMessage,  ...companyVerifications } = selector.vendor.vVerificationSettings.company;
+		const { cancelCompanyVerificationRequest, startCompanyVerification, uploadedCompanyFileClose, uploadedFileFirst, cancelSelectedInfo, companyInfoUpdateSuccessMessage,  ...companyVerifications } = selector.vendor.vVerificationSettings.company;
 		await this.multipleElementVisible(companyVerifications);
+
+		//todo: update for if has pending request
+		//todo: update for if has approved request
+		//todo: only add locators that need to assert visible instead of above soln
+		//todo: update for new layout
 
 	}
 

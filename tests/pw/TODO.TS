@@ -130,6 +130,7 @@ if (isPublished){
 //todo: all-logs : filter by calendar
 //todo: vendor can send phone verification request
 //todo: admin can approve phone verification request
+//todo: need update to wholesale suite, merge both describe, update become customer tests
 
 
 wholesale setting options tests
