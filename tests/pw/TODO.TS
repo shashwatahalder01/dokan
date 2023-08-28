@@ -126,6 +126,8 @@ if (isPublished){
 
 //todo: reverse withdraw : filter by calendar, do via vue locator
 //todo: support ticket : filter by calendar
+//todo: reports: filter by calendar on by day, by year, by vendor
+//todo: all-logs : filter by calendar
 
 wholesale setting options tests
 	//todo:   customer need or don't need approval : re-modify above two tests
