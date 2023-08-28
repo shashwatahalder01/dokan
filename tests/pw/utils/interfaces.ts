@@ -1,3 +1,4 @@
+import fs from 'fs';
 
 export interface admin {
 	username: string;

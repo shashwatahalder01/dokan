@@ -2,7 +2,7 @@ import { Page, expect } from '@playwright/test';
 import { AdminPage } from 'pages/adminPage';
 import { selector } from 'pages/selectors';
 import { data } from 'utils/testData';
-import { vendor, email } from 'utils/interfaces';
+import { vendor } from 'utils/interfaces';
 
 const { DOKAN_PRO } = process.env;
 
