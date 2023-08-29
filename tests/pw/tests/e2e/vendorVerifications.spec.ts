@@ -31,6 +31,9 @@ test.describe('Verifications test', () => {
 
 	// vendor
 
+	test('vendor verifications settings menu page is rendering properly @pro @explo', async ( ) => {
+		await vendor.vendorVerificationsSettingsRenderProperly();
+	});
 
 	test('vendor can send id verification request @pro', async ( ) => {
 		await vendor.sendIdVerificationRequest(data.vendor.verification);
@@ -51,17 +54,30 @@ test.describe('Verifications test', () => {
 	});
 
 	test('admin can approve ID verification request @pro', async ( ) => {
-		await admin.idVerificationRequest(data.predefined.vendorInfo.username, 'approve');
+		await admin.approveVerificationRequest(data.predefined.vendorInfo.username, 'id', 'approve');
 	});
 
 	test('admin can approve address verification request @pro', async ( ) => {
-		await admin.addressVerificationRequest(data.predefined.vendorInfo.username, 'approve');
+		await admin.approveVerificationRequest(data.predefined.vendorInfo.username, 'address', 'approve');
 	});
 
 	test('admin can approve company verification request @pro', async ( ) => {
-		await admin.companyVerificationRequest(data.predefined.vendorInfo.username, 'approve');
+		await admin.approveVerificationRequest(data.predefined.vendorInfo.username, 'company', 'approve');
 	});
 
+	//todo: admin can reject requests
+
+	test('admin can disapprove approved ID verification request @pro', async ( ) => {
+		await admin.disapproveVerificationRequest(data.predefined.vendorInfo.username, 'id');
+	});
+
+	test('admin can disapprove approved address verification request @pro', async ( ) => {
+		await admin.disapproveVerificationRequest(data.predefined.vendorInfo.username, 'address');
+	});
+
+	test('admin can disapprove approved company verification request @pro', async ( ) => {
+		await admin.disapproveVerificationRequest(data.predefined.vendorInfo.username, 'company');
+	});
 
 
 });

@@ -44,7 +44,7 @@ test.describe('Auction Product test', () => {
 		await cPage.close();
 	});
 
-	//todo: disable 'Use ajax bid check' for auction causes issues goto with networkidle
+	//todo: disable 'Use ajax bid check' for auction causes issues with -> goto({waitUntil: networkidle})
 
 	test('admin can add auction product @pro', async ( ) => {
 		await admin.adminAddAuctionProduct(data.product.auction);
