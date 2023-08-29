@@ -79,8 +79,8 @@ export const helpers = {
 
 
 	// add two input days
-	addDays(date: string | number | Date, days: number, format: string) {
-		const result = new Date(date);
+	addDays(date: string | number | Date | null, days: number, format: string): string | Date {
+		const result = date ?  new Date(date) : new Date();
 		result.setDate(result.getDate() + days);
 
 		if (format === 'full'){
@@ -94,6 +94,14 @@ export const helpers = {
 			return result.toLocaleDateString('en-CA');
 		}
 
+	},
+
+
+	// future date
+	futureDate(date: string | number | Date | null, days: number): Date{
+		const result = date ?  new Date(date) : new Date();
+		result.setDate(result.getDate() + days);
+		return result;
 	},
 
 

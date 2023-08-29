@@ -1350,6 +1350,8 @@ export interface announcement {
 		title: string;
 		content: string;
 		receiver: string;
+		publishType: string;
+		scheduleDate: Date;
 }
 
 export interface modules {

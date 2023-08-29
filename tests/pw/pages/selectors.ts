@@ -1198,6 +1198,8 @@ export const selector = {
 				noRowsFound: '//td[normalize-space()="No announcement found."]',
 				announcementCell: (title: string) => `//a[contains(text(),'${title}')]/../..`,
 				announcementCellPublished: (title: string) => `//strong[contains(text(),'${title}')]/../..`,
+				announcementStatusPublished: (title: string) => `//strong[contains(text(),'${title}')]/../..//td[@class="column status"]//span[@class="publish"]`,
+				announcementStatusScheduled: (title: string) => `//a[contains(text(),'${title}')]/../../..//td[@class="column status"]//span[@class="future"]`,
 				announcementEdit: (title: string) => `//a[contains(text(),'${title}')]/../..//span[@class="edit"]`,
 				announcementDelete: (title: string) => `//strong[contains(text(),'${title}')]/../..//span[@class="trash"]`,
 				announcementPermanentlyDelete: (title: string) => `//a[contains(text(),'${title}')]/../..//span[@class="delete"]`,
@@ -1211,7 +1213,18 @@ export const selector = {
 					contentHtmlBody: '#tinymce',
 					sendAnnouncementTo: '#announcement_sender_type', // all_seller, selected_seller, enabled_seller, disabled_seller, featured_seller
 					saveAsDraft: '.draft-btn',
-					publish: '.publish-btn'
+					publish: '.publish-btn',
+
+					schedule: {
+						addSchedule: 'span#timestamp a',
+						month: 'fieldset#timestampdiv label select',
+						day: 'input#jj',
+						year: 'input#aa',
+						hour: 'input#hh',
+						minute: 'input#mm',
+						ok: '//button[normalize-space()="Ok"]',
+						cancel:'//button[normalize-space()="Cancel"]',
+					}
 				},
 
 			},

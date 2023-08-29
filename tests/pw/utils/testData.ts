@@ -1598,7 +1598,9 @@ export const data = {
 		randomTitle: () => 'test announcement_' + faker.string.uuid(),
 		title: 'test announcement title',
 		content:  'test announcement Content',
-		receiver: 'all_seller'
+		receiver: 'all_seller',
+		publishType: 'immediately',
+		scheduleDate: helpers.futureDate('', 10, ),
 
 	},
 
