@@ -1608,11 +1608,13 @@ export const selector = {
 				idRequest : {
 					approveRequest: (storeName: string) => `(//a[normalize-space()="${storeName}"]/../../..//a[@data-status="approved"])[1]`,
 					rejectRequest: (storeName: string) => `(//a[normalize-space()="${storeName}"]/../../..//a[@data-status="rejected"])[1]`,
+					disapproveRequest: (storeName: string) => `(//a[normalize-space()="${storeName}"]/../../..//a[@data-status="disapproved"])[1]`,
 				},
 
 				addressRequest : {
 					approveRequest: (storeName: string) => `//a[normalize-space()="${storeName}"]/../../..//a[@data-type="address"][normalize-space()="Approve"]`,
 					rejectRequest: (storeName: string) => `//a[normalize-space()="${storeName}"]/../../..//a[@data-type="address"][normalize-space()="Reject"]`,
+					disapproveRequest: (storeName: string) => `//a[normalize-space()="${storeName}"]/../../..//a[@data-type="address"][normalize-space()="Disapprove"]`,
 					proofOfResidence: (storeName: string) => `//a[normalize-space()="${storeName}"]/../../..//a[normalize-space()="Proof of residence"]`,
 				},
 
@@ -1623,6 +1625,7 @@ export const selector = {
 				companyRequest: {
 					approveRequest: (storeName: string) => `//a[normalize-space()="${storeName}"]/../../..//a[@data-type="company_verification_files"][normalize-space()="Approve"]`,
 					rejectRequest: (storeName: string) => `//a[normalize-space()="${storeName}"]/../../..//a[@data-type="company_verification_files"][normalize-space()="Reject"]`,
+					disapproveRequest: (storeName: string) => `//a[normalize-space()="${storeName}"]/../../..//a[@data-type="company_verification_files"][normalize-space()="Disapprove"]`,
 				}
 
 			},
@@ -5758,7 +5761,13 @@ export const selector = {
 
 			// Id Verification
 			id:{
+				idVerificationDiv: 'div#dokan_v_id',
+				idVerificationText: '//strong[normalize-space()="ID Verification"]',
+
+				idPendingFeedback: 'div#dokan_v_id_feedback.dokan-alert-warning',
 				cancelIdVerificationRequest: 'button#dokan_v_id_cancel',
+
+				idApproveFeedback: 'div#dokan_v_id_feedback.dokan-alert-success',
 				startIdVerification: '#dokan_v_id_click',
 				passport: '//input[@value="passport"]',
 				nationalIdCard: '//input[@value="national_id"]',
@@ -5768,12 +5777,19 @@ export const selector = {
 				removePreviousUploadedPhoto: '.dokan-close.dokan-remove-gravatar-image',
 				submitId: '#dokan_v_id_submit',
 				cancelSubmitId: '#dokan_v_id_cancel_form',
-				idUpdateSuccessMessage: '.dokan-alert.dokan-alert-success',
+
+				idUpdateSuccessMessage: 'div#feedback.dokan-alert.dokan-alert-success',
 			},
 
 			// Address Verification
 			address:{
+				addressVerificationDiv: '//strong[normalize-space()="Address Verification"]/../..',
+				addressVerificationText: '//strong[normalize-space()="Address Verification"]',
+
+				addressPendingFeedback: 'div#d_v_address_feedback.dokan-alert-warning',
 				cancelAddressVerificationRequest: 'button#dokan_v_address_cancel',
+
+				addressApproveFeedback: 'div#d_v_address_feedback.dokan-alert-success',
 				startAddressVerification: '#dokan_v_address_click',
 				street: '#dokan_address\\[street_1\\]',
 				street2: '#dokan_address\\[street_2\\]',
@@ -5786,20 +5802,28 @@ export const selector = {
 				removePreviousUploadedResidenceProof: '.dokan-close.dokan-remove-proof-image',
 				submitAddress: '#dokan_v_address_submit',
 				cancelSubmitAddress: '.dokan-form-group > #dokan_v_address_cancel',
-				addressUpdateSuccessMessage: '.dokan-alert.dokan-alert-success',
+
+				addressUpdateSuccessMessage: 'div#feedback.dokan-alert.dokan-alert-success',
 			},
 
 			// Company Verification
 			company:{
+				companyVerificationDiv: '//strong[normalize-space()="Company Verification"]/../..',
+				companyVerificationText: '//strong[normalize-space()="Company Verification"]',
+
+				companyPendingFeedback: 'div#d_v_company_feedback.dokan-alert-warning',
 				cancelCompanyVerificationRequest: 'button#dokan_v_company_cancel',
+
+				companyApproveFeedback: 'div#d_v_company_feedback.dokan-alert-success',
 				startCompanyVerification: '#dokan_v_company_click',
 				uploadedCompanyFileClose: '.dokan-btn.dokan-btn-danger',
-				uploadFiles: '.dokan-files-drag',
+				uploadFiles: 'a.dokan-files-drag',
 				uploadedFileFirst: '(//a[@onclick="companyVerificationRemoveList(event)"])[1]',
 				cancelSelectedInfo: '.fa-times',
 				submitCompanyInfo: '#dokan_v_company_submit',
 				cancelSubmitCompanyInfo: '.dokan-w5 > #dokan_v_company_cancel',
-				companyInfoUpdateSuccessMessage: '.dokan-alert.dokan-alert-success',
+
+				companyInfoUpdateSuccessMessage: 'div#feedback.dokan-alert.dokan-alert-success',
 			},
 		},
 

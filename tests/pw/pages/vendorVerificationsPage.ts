@@ -1,4 +1,4 @@
-import { Page, expect } from '@playwright/test';
+import { Page } from '@playwright/test';
 import { AdminPage } from 'pages/adminPage';
 import { selector } from 'pages/selectors';
 import { data } from 'utils/testData';
@@ -30,77 +30,220 @@ export class vendorVerificationsPage extends AdminPage {
 	}
 
 
-	// ID verification requests
-	async idVerificationRequest(storeName: string, action: string){
+	// approve verification requests
+	async approveVerificationRequest(storeName: string, verificationType: string, action: string){
 		await this.goIfNotThere(data.subUrls.backend.dokan.verifications);
 
-		await this.hover(selector.admin.dokan.verifications.vendorRow(storeName));
-		switch (action) {
+		const verificationRequestIsExists = await this.isVisible(selector.admin.dokan.verifications.vendorRow(storeName));
 
-		case 'approve' :
-			await this.clickAndWaitForResponse(data.subUrls.ajax, selector.admin.dokan.verifications.idRequest.approveRequest(storeName));
+		if(!verificationRequestIsExists){
+			console.log('No pending verification request found!!');
+			return;
+		}
+
+		await this.hover(selector.admin.dokan.verifications.vendorRow(storeName));
+
+		switch (verificationType) {
+
+		case 'id' :
+			if (action === 'approve'){
+				await this.clickAndWaitForResponseAndLoadState(data.subUrls.ajax, selector.admin.dokan.verifications.idRequest.approveRequest(storeName));
+			} else {
+				await this.clickAndWaitForResponseAndLoadState(data.subUrls.ajax, selector.admin.dokan.verifications.idRequest.rejectRequest(storeName));
+			}
 			break;
 
-		case 'reject' :
-			await this.clickAndWaitForResponse(data.subUrls.ajax, selector.admin.dokan.verifications.idRequest.rejectRequest(storeName));
+		case 'address' :
+			if (action === 'approve'){
+				await this.clickAndWaitForResponseAndLoadState(data.subUrls.ajax, selector.admin.dokan.verifications.addressRequest.approveRequest(storeName));
+			} else {
+				await this.clickAndWaitForResponseAndLoadState(data.subUrls.ajax, selector.admin.dokan.verifications.addressRequest.rejectRequest(storeName));
+			}
+
+			break;
+
+		case 'company' :
+			if (action === 'approve'){
+				await this.clickAndWaitForResponseAndLoadState(data.subUrls.ajax, selector.admin.dokan.verifications.companyRequest.approveRequest(storeName));
+			} else {
+				await this.clickAndWaitForResponseAndLoadState(data.subUrls.ajax, selector.admin.dokan.verifications.companyRequest.rejectRequest(storeName));
+			}
+
 			break;
 
 		default :
 			break;
 		}
-
 	}
 
 
-	// address verification requests
-	async addressVerificationRequest(storeName: string, action: string){
+	// disapprove verification requests
+	async disapproveVerificationRequest(storeName: string, verificationType: string){
 		await this.goIfNotThere(data.subUrls.backend.dokan.verifications);
 
-		await this.hover(selector.admin.dokan.verifications.vendorRow(storeName));
-		switch (action) {
+		await this.clickAndWaitForLoadState(selector.admin.dokan.verifications.navTabs.approved);
 
-		case 'approve' :
-			await this.clickAndWaitForResponse(data.subUrls.ajax, selector.admin.dokan.verifications.addressRequest.approveRequest(storeName));
+		const verificationRequestIsExists = await this.isVisible(selector.admin.dokan.verifications.vendorRow(storeName));
+		if(!verificationRequestIsExists){
+			console.log('No approved verification request found!!');
+			return;
+		}
+
+		await this.hover(selector.admin.dokan.verifications.vendorRow(storeName));
+
+		switch (verificationType) {
+
+		case 'id' :
+			await this.clickAndWaitForResponseAndLoadState(data.subUrls.ajax, selector.admin.dokan.verifications.idRequest.disapproveRequest(storeName));
 			break;
 
-		case 'reject' :
-			await this.clickAndWaitForResponse(data.subUrls.ajax, selector.admin.dokan.verifications.addressRequest.rejectRequest(storeName));
+		case 'address' :
+			await this.clickAndWaitForResponseAndLoadState(data.subUrls.ajax, selector.admin.dokan.verifications.addressRequest.disapproveRequest(storeName));
+			break;
+
+		case 'company' :
+			await this.clickAndWaitForResponseAndLoadState(data.subUrls.ajax, selector.admin.dokan.verifications.companyRequest.disapproveRequest(storeName));
 			break;
 
 		default :
 			break;
 		}
-	}
-
-
-	// company verification requests
-	async companyVerificationRequest(storeName: string, action: string){
-		await this.goIfNotThere(data.subUrls.backend.dokan.verifications);
-
-		await this.hover(selector.admin.dokan.verifications.vendorRow(storeName));
-		switch (action) {
-
-		case 'approve' :
-			await this.clickAndWaitForResponse(data.subUrls.ajax, selector.admin.dokan.verifications.companyRequest.approveRequest(storeName));
-			break;
-
-		case 'reject' :
-			await this.clickAndWaitForResponse(data.subUrls.ajax, selector.admin.dokan.verifications.companyRequest.rejectRequest(storeName));
-			break;
-
-		default :
-			break;
-		}
-
 	}
 
 
 	// vendor
 
+	// vendor verifications render properly
+	async vendorVerificationsSettingsRenderProperly(){
+		await this.goIfNotThere(data.subUrls.frontend.vDashboard.settingsVerification);
+
+		// verification text is visible
+		await this.toBeVisible(selector.vendor.vVerificationSettings.verificationText);
+
+		// visit store link is visible
+		await this.toBeVisible(selector.vendor.vVerificationSettings.visitStore);
+
+
+		// verification div and heading text
+
+		// id
+		await this.toBeVisible(selector.vendor.vVerificationSettings.id.idVerificationDiv);
+		await this.toBeVisible(selector.vendor.vVerificationSettings.id.idVerificationText);
+
+		// address
+		await this.toBeVisible(selector.vendor.vVerificationSettings.address.addressVerificationDiv);
+		await this.toBeVisible(selector.vendor.vVerificationSettings.address.addressVerificationText);
+
+		// company
+		await this.toBeVisible(selector.vendor.vVerificationSettings.company.companyVerificationDiv);
+		await this.toBeVisible(selector.vendor.vVerificationSettings.company.companyVerificationText);
+
+
+		// verification request is pending
+
+
+		// id
+		const idRequestIsPending = await this.isVisible(selector.vendor.vVerificationSettings.id.idPendingFeedback);
+		if (idRequestIsPending){
+			await this.toContainText(selector.vendor.vVerificationSettings.id.idPendingFeedback, 'Your ID verification request is pending');
+			await this.toBeVisible(selector.vendor.vVerificationSettings.id.cancelIdVerificationRequest);
+		}
+
+		// address
+		const addressRequestIsPending = await this.isVisible(selector.vendor.vVerificationSettings.address.addressPendingFeedback);
+		if (addressRequestIsPending){
+			await this.toContainText(selector.vendor.vVerificationSettings.address.addressPendingFeedback, 'Your Address verification request is pending');
+			await this.toBeVisible(selector.vendor.vVerificationSettings.address.cancelAddressVerificationRequest);
+		}
+
+		// company
+		const companyRequestIsPending = await this.isVisible(selector.vendor.vVerificationSettings.company.companyPendingFeedback);
+		if (companyRequestIsPending){
+			await this.toContainText(selector.vendor.vVerificationSettings.company.companyPendingFeedback, 'Your company verification request is pending');
+			await this.toBeVisible(selector.vendor.vVerificationSettings.company.cancelCompanyVerificationRequest);
+		}
+
+
+		// verification request is approved
+
+
+		// id
+		const idRequestIsApproved = await this.isVisible(selector.vendor.vVerificationSettings.id.idApproveFeedback);
+		if (idRequestIsApproved){
+			await this.toContainText(selector.vendor.vVerificationSettings.id.idApproveFeedback, 'Your ID verification request is approved');
+		}
+
+		// address
+		const addressRequestIsApproved = await this.isVisible(selector.vendor.vVerificationSettings.address.addressApproveFeedback);
+		if (addressRequestIsApproved){
+			await this.toContainText(selector.vendor.vVerificationSettings.address.addressApproveFeedback, 'Your Address verification request is approved');
+			await this.toBeVisible(selector.vendor.vVerificationSettings.address.startAddressVerification);
+		}
+
+		// company
+		const companyRequestIsApproved = await this.isVisible(selector.vendor.vVerificationSettings.company.companyApproveFeedback);
+		if (companyRequestIsApproved){
+			await this.toContainText(selector.vendor.vVerificationSettings.company.companyApproveFeedback, 'Your company verification request is approved');
+			await this.toBeVisible(selector.vendor.vVerificationSettings.company.startCompanyVerification);
+		}
+
+
+		// no verification request is submitted
+
+		// id
+		if (!idRequestIsPending && !idRequestIsApproved ){
+			await this.toBeVisible(selector.vendor.vVerificationSettings.id.startIdVerification);
+
+			await this.click(selector.vendor.vVerificationSettings.id.startIdVerification);
+
+			await this.toBeVisible(selector.vendor.vVerificationSettings.id.passport);
+			await this.toBeVisible(selector.vendor.vVerificationSettings.id.nationalIdCard);
+			await this.toBeVisible(selector.vendor.vVerificationSettings.id.drivingLicense);
+			const  previousUploadedPhotoIsVisible =  await this.isVisible(selector.vendor.vVerificationSettings.id.previousUploadedPhoto);
+			previousUploadedPhotoIsVisible && await this.toBeVisible(selector.vendor.vVerificationSettings.id.uploadPhoto);
+			await this.toBeVisible(selector.vendor.vVerificationSettings.id.submitId);
+			await this.toBeVisible(selector.vendor.vVerificationSettings.id.cancelSubmitId);
+		}
+
+		// address
+		if (!addressRequestIsPending && !addressRequestIsApproved){
+			await this.toBeVisible(selector.vendor.vVerificationSettings.address.startAddressVerification);
+
+			await this.click(selector.vendor.vVerificationSettings.address.startAddressVerification);
+
+			await this.toBeVisible(selector.vendor.vVerificationSettings.address.street);
+			await this.toBeVisible(selector.vendor.vVerificationSettings.address.street2);
+			await this.toBeVisible(selector.vendor.vVerificationSettings.address.city);
+			await this.toBeVisible(selector.vendor.vVerificationSettings.address.postOrZipCode);
+			await this.toBeVisible(selector.vendor.vVerificationSettings.address.country);
+			const  previousUploadedResidenceProofIsVisible =  await this.isVisible(selector.vendor.vVerificationSettings.address.previousUploadedResidenceProof);
+			!previousUploadedResidenceProofIsVisible  && await this.toBeVisible(selector.vendor.vVerificationSettings.address.uploadResidenceProof);
+			await this.toBeVisible(selector.vendor.vVerificationSettings.address.submitAddress);
+			await this.toBeVisible(selector.vendor.vVerificationSettings.address.cancelSubmitAddress);
+		}
+
+		// company
+		if (!companyRequestIsPending && !companyRequestIsApproved){
+			await this.toBeVisible(selector.vendor.vVerificationSettings.company.startCompanyVerification);
+
+			await this.click(selector.vendor.vVerificationSettings.company.startCompanyVerification);
+
+			await this.toBeVisible(selector.vendor.vVerificationSettings.company.uploadFiles);
+			await this.toBeVisible(selector.vendor.vVerificationSettings.company.submitCompanyInfo);
+			await this.toBeVisible(selector.vendor.vVerificationSettings.company.cancelSubmitCompanyInfo);
+		}
+
+	}
+
 
 	// vendor send id verification request
 	async sendIdVerificationRequest(verification: vendor['verification']): Promise<void> {
 		await this.goIfNotThere(data.subUrls.frontend.vDashboard.settingsVerification);
+
+		const idRequestIsApproved = await this.isVisible(selector.vendor.vVerificationSettings.id.idApproveFeedback);
+		if(idRequestIsApproved){
+			return;
+		}
 
 		// cancel previous verification request if any
 		const cancelRequestIsVisible = await this.isVisible(selector.vendor.vVerificationSettings.id.cancelIdVerificationRequest);
@@ -150,6 +293,13 @@ export class vendorVerificationsPage extends AdminPage {
 		await this.clearAndType(selector.vendor.vVerificationSettings.address.postOrZipCode, verification.zipCode);
 		await this.selectByValue(selector.vendor.vVerificationSettings.address.country, verification.country);
 		await this.selectByValue(selector.vendor.vVerificationSettings.address.state, verification.state);
+
+		// remove previously uploaded image
+		const uploadProofBtnIsVisible = await this.isVisible(selector.vendor.vVerificationSettings.address.uploadResidenceProof);
+		if (!uploadProofBtnIsVisible) {
+			await this.removeAttribute('div.proof-button-area', 'style');
+			await this.setAttributeValue('div.vendor_img_container', 'style', 'display: none;');
+		}
 
 		await this.click(selector.vendor.vVerificationSettings.address.uploadResidenceProof);
 		await this.uploadMedia(verification.file);

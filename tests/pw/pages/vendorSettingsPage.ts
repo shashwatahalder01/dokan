@@ -62,47 +62,6 @@ export class VendorSettingsPage extends VendorPage {
 	}
 
 
-	// vendor verifications render properly
-	async vendorVerificationsSettingsRenderProperly(){
-		await this.goIfNotThere(data.subUrls.frontend.vDashboard.settingsVerification);
-
-		// verification text is visible
-		await this.toBeVisible(selector.vendor.vVerificationSettings.verificationText);
-
-		// visit store link is visible
-		await this.toBeVisible(selector.vendor.vVerificationSettings.visitStore);
-
-		await this.toBeVisible(selector.vendor.vVerificationSettings.id.startIdVerification);
-		await this.toBeVisible(selector.vendor.vVerificationSettings.address.startAddressVerification);
-		await this.toBeVisible(selector.vendor.vVerificationSettings.company.startCompanyVerification);
-
-		await this.click(selector.vendor.vVerificationSettings.id.startIdVerification);
-		await this.click(selector.vendor.vVerificationSettings.address.startAddressVerification);
-		await this.click(selector.vendor.vVerificationSettings.company.startCompanyVerification);
-
-		// product addon fields elements are visible
-		// eslint-disable-next-line @typescript-eslint/no-unused-vars
-		const { startIdVerification, cancelIdVerificationRequest,  previousUploadedPhoto, removePreviousUploadedPhoto, idUpdateSuccessMessage,   ...idVerifications } = selector.vendor.vVerificationSettings.id;
-		await this.multipleElementVisible(idVerifications);
-
-		// product addon fields elements are visible
-		// eslint-disable-next-line @typescript-eslint/no-unused-vars
-		const { startAddressVerification, cancelAddressVerificationRequest, previousUploadedResidenceProof, removePreviousUploadedResidenceProof, addressUpdateSuccessMessage,  ...addressVerifications } = selector.vendor.vVerificationSettings.address;
-		await this.multipleElementVisible(addressVerifications);
-
-		// product addon fields elements are visible
-		// eslint-disable-next-line @typescript-eslint/no-unused-vars
-		const { cancelCompanyVerificationRequest, startCompanyVerification, uploadedCompanyFileClose, uploadedFileFirst, cancelSelectedInfo, companyInfoUpdateSuccessMessage,  ...companyVerifications } = selector.vendor.vVerificationSettings.company;
-		await this.multipleElementVisible(companyVerifications);
-
-		//todo: update for if has pending request
-		//todo: update for if has approved request
-		//todo: only add locators that need to assert visible instead of above soln
-		//todo: update for new layout
-
-	}
-
-
 	// vendor shipstation render properly
 	async vendorShipstationSettingsRenderProperly(){
 		await this.goIfNotThere(data.subUrls.frontend.vDashboard.settingsShipstation);

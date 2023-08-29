@@ -10,7 +10,7 @@ export const helpers = {
 	replaceAndCapitalizeEachWord: (str: string) => str.replace('_', ' ').replace(/(^\w{1})|(\s+\w{1})/g, (letter: string) => letter.toUpperCase()),
 
 	// capitalize
-	capitalize: (word: string) => word[0].toUpperCase() + word.substring(1).toLowerCase(),
+	capitalize: (word: string) => word[0]?.toUpperCase() + word.substring(1).toLowerCase(),
 
 	// returns a random number between min (inclusive) and max (exclusive)
 	getRandomArbitrary: (min: number, max: number) => Math.random() * (max - min) + min,
@@ -79,7 +79,7 @@ export const helpers = {
 
 
 	// add two input days
-	addDays(date: string | number | Date | null, days: number, format: string): string | Date {
+	addDays(date: string | number | Date | null, days: number, format: string): string  {
 		const result = date ?  new Date(date) : new Date();
 		result.setDate(result.getDate() + days);
 
