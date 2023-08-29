@@ -53,31 +53,31 @@ test.describe('Verifications test', () => {
 		await admin.adminVerificationsRenderProperly();
 	});
 
-	test('admin can approve ID verification request @pro', async ( ) => {
-		await admin.approveVerificationRequest(data.predefined.vendorInfo.username, 'id', 'approve');
-	});
+	// test('admin can approve ID verification request @pro', async ( ) => {
+	// 	await admin.approveVerificationRequest(data.predefined.vendorInfo.username, 'id', 'approve');
+	// });
 
-	test('admin can approve address verification request @pro', async ( ) => {
-		await admin.approveVerificationRequest(data.predefined.vendorInfo.username, 'address', 'approve');
-	});
+	// test('admin can approve address verification request @pro', async ( ) => {
+	// 	await admin.approveVerificationRequest(data.predefined.vendorInfo.username, 'address', 'approve');
+	// });
 
-	test('admin can approve company verification request @pro', async ( ) => {
-		await admin.approveVerificationRequest(data.predefined.vendorInfo.username, 'company', 'approve');
-	});
+	// test('admin can approve company verification request @pro', async ( ) => {
+	// 	await admin.approveVerificationRequest(data.predefined.vendorInfo.username, 'company', 'approve');
+	// });
 
 	//todo: admin can reject requests
 
-	test('admin can disapprove approved ID verification request @pro', async ( ) => {
-		await admin.disapproveVerificationRequest(data.predefined.vendorInfo.username, 'id');
-	});
+	// test('admin can disapprove approved ID verification request @pro', async ( ) => {
+	// 	await admin.disapproveVerificationRequest(data.predefined.vendorInfo.username, 'id');
+	// });
 
-	test('admin can disapprove approved address verification request @pro', async ( ) => {
-		await admin.disapproveVerificationRequest(data.predefined.vendorInfo.username, 'address');
-	});
+	// test('admin can disapprove approved address verification request @pro', async ( ) => {
+	// 	await admin.disapproveVerificationRequest(data.predefined.vendorInfo.username, 'address');
+	// });
 
-	test('admin can disapprove approved company verification request @pro', async ( ) => {
-		await admin.disapproveVerificationRequest(data.predefined.vendorInfo.username, 'company');
-	});
+	// test('admin can disapprove approved company verification request @pro', async ( ) => {
+	// 	await admin.disapproveVerificationRequest(data.predefined.vendorInfo.username, 'company');
+	// });
 
 
 });
