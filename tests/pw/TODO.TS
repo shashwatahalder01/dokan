@@ -51,6 +51,15 @@
 
 //todo: add zip testing tests
 
+//****************************       wp-env       ****************************
+
+//todo:  wp-env logs
+//todo: wp-env install-path to get debug log file
+	// latest/wp-env/wp-content/debug.log
+
+//todo: user .wp-env.override.json  for local development
+
+
 
 //****************************       playwright       ****************************
 

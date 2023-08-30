@@ -231,5 +231,16 @@ export const helpers = {
 		fs.writeFileSync(filePath, content,  { encoding: 'utf8' } );
 	},
 
+	// rename file
+	renameFile(newFilePath: string, oldFilePath: string){
+		fs.renameSync(newFilePath, oldFilePath);
+	},
+
+	overrideWpEnv(){
+		this.renameFile( '.wp-env.override.json', '.wp-env.override');
+
+		mv .wp-env.override .wp-env.override.json
+	}
+
 
 };
