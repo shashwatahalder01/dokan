@@ -238,8 +238,6 @@ export const helpers = {
 
 	overrideWpEnv(){
 		this.renameFile( '.wp-env.override.json', '.wp-env.override');
-
-		mv .wp-env.override .wp-env.override.json
 	}
 
 
