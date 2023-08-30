@@ -19,7 +19,7 @@ test.beforeAll(async ({ request }) => {
 
 test.describe('abuse report api test', () => {
 
-	test('get all abuse report reasons @pro', async () => {
+	test.only('get all abuse report reasons @pro', async () => {
 		const [response, responseBody] = await apiUtils.get(endPoints.getAllAbuseReportReasons);
 		expect(response.ok()).toBeTruthy();
 		expect(responseBody).toBeTruthy();
