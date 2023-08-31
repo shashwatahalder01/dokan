@@ -65,4 +65,7 @@ test.describe('Vendor SPMV test', () => {
 
 	//todo: add more spmv settings test
 
+
+	//todo: admin can add spmv product to other vendor
+
 });
