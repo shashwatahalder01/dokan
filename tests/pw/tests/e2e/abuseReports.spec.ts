@@ -45,7 +45,7 @@ test.describe('Abuse report test', () => {
 
 
 	test.only('dokan abuse report menu page is rendering properly @pro @explo', async ( ) => {
-		// await admin.adminAbuseReportRenderProperly();
+		await admin.adminAbuseReportRenderProperly();
 	});
 
 	test('admin can view abuse report details @pro @explo', async ( ) => {
