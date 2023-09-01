@@ -1777,6 +1777,12 @@ export const selector = {
 
 			},
 
+			spmv: {
+				searchVendor: '#dokan-spmv-products-admin input.select2-search__field',
+				assignVendor: '#dokan-spmv-products-admin-assign-vendors-btn',
+				highlightedResult: '.select2-results__option.select2-results__option--highlighted',
+			},
+
 			// Dokan Settings
 			settings: {
 
@@ -2067,11 +2073,10 @@ export const selector = {
 
 				// Social API
 				socialApi:{
-				// Social API
 					enableSocialLogin: '#dokan_social_api\\[enabled\\]',
 				},
 
-				// Shipping Status
+
 				// Shipping Status
 				allowShipmentTracking: '#dokan_shipping_status_setting\\[enabled\\]',
 				// Shipping Providers
@@ -2081,7 +2086,6 @@ export const selector = {
 				customShippingStatusAdd: '.dokan-repetable-add-item-btn',
 				shippingStatusSaveChanges: '#submit',
 
-				// Colors
 				// Colors
 				buttonTextColor: '.btn_text span',
 				buttonBackgroundColor: '.btn_primary span',
@@ -2095,20 +2099,23 @@ export const selector = {
 				dashboardMenuBorder: '.dash_nav_border span',
 
 				// Live Chat
-				// Live Chat
 				enableLiveChat: '#dokan_live_chat\\[enable\\]',
 				chatProviderFacebookMessenger: '#dokan_live_chat\\[provider\\]\\[messenger\\]',
 				chatProviderTalkJs: '#dokan_live_chat\\[provider\\]\\[talkjs\\]',
 				chatProviderTawkTo: '#dokan_live_chat\\[provider\\]\\[tawkto\\]',
 				chatProviderWhatsApp: '#dokan_live_chat\\[provider\\]\\[whatsapp\\]',
+
 				// Fb
 				messengerColor: '.button > span',
+
 				// Talkjs
 				talkJsAppId: '#dokan_live_chat\\[app_id\\]',
 				talkJsAppSecret: '#dokan_live_chat\\[app_secret\\]',
+
 				// Whatsapp
 				openingPattern: '#dokan_live_chat\\[wa_opening_method\\]',
 				preFilledMessage: '#dokan_live_chat\\[wa_pre_filled_message\\]',
+
 				// Chat Button
 				chatButtonOnVendorPage: '#dokan_live_chat\\[chat_button_seller_page\\]',
 				chatButtonOnProductPage: '#dokan_live_chat\\[chat_button_product_page\\]',
@@ -2116,7 +2123,6 @@ export const selector = {
 
 				// Rma
 				rma: {
-				// Rma
 					orderStatus: '#dokan_rma\\[rma_order_status\\]',
 					enableRefundRequests: '.rma_enable_refund_request .switch',
 					enableCouponRequests: '.rma_enable_coupon_request .switch',
@@ -2132,15 +2138,15 @@ export const selector = {
 
 				// Wholesale
 				wholesale:{
-				// Wholesale
 					whoCanSeeWholesalePrice: (type: string) => `//div[@class='wholesale_price_display dokan-settings-field-type-radio'] //label[@for='dokan_wholesale[wholesale_price_display][${type}]']`,
 					showWholesalePriceOnShopArchive: '.display_price_in_shop_archieve .switch',
 					needApprovalForCustomer: '.need_approval_for_wholesale_customer .switch',
 					wholesaleSaveChanges: '#submit',
 				},
 
-				euCompliance:{
 				// Eu Compliance Fields
+				euCompliance:{
+
 					vendorExtraFieldsCompanyName: '//input[@value="dokan_company_name"]//..',
 					vendorExtraFieldsCompanyIdOrEuidNumber: '//input[@value="dokan_company_id_number"]//..',
 					vendorExtraFieldsVatOrTaxNumber: '//input[@value="dokan_vat_number"]//..',
@@ -2156,8 +2162,9 @@ export const selector = {
 					euComplianceFieldsSaveChanges: '#submit',
 				},
 
-				deliveryTime:{
 				// Delivery Time
+				deliveryTime:{
+
 					allowVendorSettings: '.allow_vendor_override_settings .switch',
 					homeDelivery: '//div[contains(text(), "Home Delivery")]//label[@class="switch tips"]',
 					storePickup: '//div[contains(text(), "Store Pickup")]//label[@class="switch tips"]',
@@ -2178,7 +2185,6 @@ export const selector = {
 
 				// Product Advertising
 				productAdvertising:{
-				// Product Advertising
 					noOfAvailableSlot: '#dokan_product_advertisement\\[total_available_slot\\]',
 					expireAfterDays: '#dokan_product_advertisement\\[expire_after_days\\]',
 					vendorCanPurchaseAdvertisement: '.per_product_enabled .switch',
@@ -2190,10 +2196,8 @@ export const selector = {
 					productAdvertisingSaveChanges: '#submit',
 				},
 
-
 				// Geolocation
 				geolocation:{
-				// Geolocation
 					locationMapPosition: (position: string) => `//label[@for='dokan_geolocation[show_locations_map][${position}]']`,
 					showMap: (type: string) => `//label[@for='dokan_geolocation[show_location_map_pages][${type}]']`,
 					showFiltersBeforeLocationMap: '.show_filters_before_locations_map .switch',
@@ -2207,8 +2211,8 @@ export const selector = {
 					geolocationSaveChanges: '#submit',
 				},
 
-				productReportAbuse:{
 				// Product Report Abuse
+				productReportAbuse:{
 					reportedBy: '#dokan_report_abuse\\[reported_by_logged_in_users_only\\]',
 					reasonsForAbuseReportList: '.dokan-settings-repeatable-list li',
 					reasonsForAbuseReportSingle: (reason: string) => `//li[contains(text(),'${reason}')]//span[@class="dashicons dashicons-no-alt remove-item"]`,
@@ -2219,7 +2223,6 @@ export const selector = {
 
 				// Single Product Multi Vendor
 				spmv:{
-				// Single Product Multi Vendor
 					enableSingleProductMultipleVendor: '.enable_pricing .switch',
 					sellItemButtonText: '#dokan_spmv\\[sell_item_btn\\]',
 					availableVendorDisplayAreaTitle: '#dokan_spmv\\[available_vendor_list_title\\]',
@@ -2228,8 +2231,8 @@ export const selector = {
 					singleProductMultiVendorSaveChanges: '#submit',
 				},
 
-				vendorSubscriptions:{
 				// Vendor Subscription
+				vendorSubscriptions:{
 					subscription: '#dokan_product_subscription\\[subscription_pack\\]',
 					enableProductSubscription: '.enable_pricing .switch',
 					enableSubscriptionInRegistrationForm: '.enable_subscription_pack_in_reg .switch',
@@ -2243,8 +2246,8 @@ export const selector = {
 					vendorSubscriptionSaveChanges: '#submit',
 				},
 
+				// Vendor Analytics
 				vendorAnalytics:{
-					// Vendor Analytics
 					vendorAnalyticsSaveChanges: '#submit',
 				},
 
@@ -2327,9 +2330,10 @@ export const selector = {
 				viewProducts: '//a[normalize-space()="View products"]',
 				clearDummyData: '.cancel-btn.dokan-import-continue-btn',
 				confirmClearDummyData: '.swal2-actions .swal2-confirm',
-
 			}
+
 		},
+
 
 		// Woocommerce
 		wooCommerce: {
@@ -2787,6 +2791,7 @@ export const selector = {
 				saveDraft: '#save-post',
 				preview: '#post-preview',
 				publish: '#publishing-action #publish',
+				update: 'button[value="Update"]',
 				updatedSuccessMessage: '.updated.notice.notice-success p',
 			},
 
@@ -2821,6 +2826,7 @@ export const selector = {
 				attributeTermCell: (attributeTerm: string) => `//td[contains(text(), '${attributeTerm.toLowerCase()}')]/..`,
 			},
 		},
+
 		// Bookings
 		bookings: {
 			// Menus

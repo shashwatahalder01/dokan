@@ -52,6 +52,7 @@ export const data = {
 		draftUpdateSuccessMessage: 'Product draft updated. ',
 		pendingProductUpdateSuccessMessage: 'Product updated. ',
 		createUpdateSaveSuccessMessage: 'Success! The product has been saved successfully. View Product →',
+		updateSuccessMessage: 'Order updated.',
 
 		status: {
 			publish: 'publish',
@@ -695,6 +696,7 @@ export const data = {
 				withdraw: 'wp-admin/admin.php?page=dokan#/withdraw?status=pending',
 				reverseWithdraws: 'wp-admin/admin.php?page=dokan#/reverse-withdrawal',
 				vendors: 'wp-admin/admin.php?page=dokan#/vendors',
+				productDetails: (productId: string) => `wp-admin/post.php?post=${productId}&action=edit`,
 				vendorDetails: (vendorId: string) => `wp-admin/admin.php?page=dokan#/vendors/${vendorId}`,
 				storeCategories: 'wp-admin/admin.php?page=dokan#/store-categories',
 				abuseReports: 'wp-admin/admin.php?page=dokan#/abuse-reports',

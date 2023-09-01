@@ -3,14 +3,25 @@ import { VendorPage } from 'pages/vendorPage';
 import { selector } from 'pages/selectors';
 import { data } from 'utils/testData';
 
-export class VendorSpmvPage extends VendorPage {
+export class SpmvPage extends VendorPage {
 
 	constructor(page: Page) {
 		super(page);
 	}
 
+	//admin
 
-	// vendor spmv
+	async assignSpmvProduct(productName: string, storeName: string){
+
+		await this.typeAndWaitForResponse(data.subUrls.ajax, selector.admin.dokan.spmv.searchVendor, storeName);
+		await this.clickAndAcceptAndWaitForResponse(data.subUrls.ajax, selector.admin.dokan.spmv.assignVendor);
+
+		await this.clickAndWaitForResponseAndLoadState(data.subUrls.post, selector.admin.products.product.update, 302);
+		await this.toContainText(selector.admin.products.product.updatedSuccessMessage, data.product.updateSuccessMessage);
+	}
+
+
+	// vendor
 
 
 	// vendor spmv render properly
