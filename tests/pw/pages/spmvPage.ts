@@ -12,6 +12,7 @@ export class SpmvPage extends VendorPage {
 	//admin
 
 	async assignSpmvProduct(productName: string, storeName: string){
+		await this.goIfNotThere(data.subUrls.backend.wc.productDetails(productName));
 
 		await this.typeAndWaitForResponse(data.subUrls.ajax, selector.admin.dokan.spmv.searchVendor, storeName);
 		await this.clickAndAcceptAndWaitForResponse(data.subUrls.ajax, selector.admin.dokan.spmv.assignVendor);

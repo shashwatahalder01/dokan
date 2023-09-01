@@ -26,8 +26,8 @@ test.describe('Vendor SPMV test', () => {
 		vendor = new SpmvPage(vPage);
 
 		apiUtils = new ApiUtils(request);
-		[,, productName1] = await apiUtils.createProduct({ ...payloads.createProduct(), name: data.predefined.spmv.productName() }, payloads.vendor2Auth);
-		[,, productName] = await apiUtils.createProduct({ ...payloads.createProduct(), name: data.predefined.spmv.productName() }, payloads.vendor2Auth);
+		// [,, productName1] = await apiUtils.createProduct({ ...payloads.createProduct(), name: data.predefined.spmv.productName() }, payloads.vendor2Auth);
+		// [,, productName] = await apiUtils.createProduct({ ...payloads.createProduct(), name: data.predefined.spmv.productName() }, payloads.vendor2Auth);
 	});
 
 
@@ -37,9 +37,10 @@ test.describe('Vendor SPMV test', () => {
 	});
 
 
-	// test('add can assign SPMV product to other vendor @pro', async ( ) => {
-	// 	await admin.assignSpmvProduct(productName1, data.predefined.vendorStores.vendor1);
-	// });
+	test.only('add can assign SPMV product to other vendor @pro', async ( ) => {
+		// await admin.assignSpmvProduct(productName1, data.predefined.vendorStores.vendor1);
+		await admin.assignSpmvProduct('2471', data.predefined.vendorStores.vendor1);
+	});
 
 
 	test('vendor spmv menu page is rendering properly @pro @explo', async ( ) => {

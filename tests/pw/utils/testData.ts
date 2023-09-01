@@ -696,7 +696,6 @@ export const data = {
 				withdraw: 'wp-admin/admin.php?page=dokan#/withdraw?status=pending',
 				reverseWithdraws: 'wp-admin/admin.php?page=dokan#/reverse-withdrawal',
 				vendors: 'wp-admin/admin.php?page=dokan#/vendors',
-				productDetails: (productId: string) => `wp-admin/post.php?post=${productId}&action=edit`,
 				vendorDetails: (vendorId: string) => `wp-admin/admin.php?page=dokan#/vendors/${vendorId}`,
 				storeCategories: 'wp-admin/admin.php?page=dokan#/store-categories',
 				abuseReports: 'wp-admin/admin.php?page=dokan#/abuse-reports',
@@ -725,6 +724,7 @@ export const data = {
 
 			wc: {
 				products: 'wp-admin/edit.php?post_type=product',
+				productDetails: (productId: string) => `wp-admin/post.php?post=${productId}&action=edit`,
 				addNewProducts: 'wp-admin/post-new.php?post_type=product',
 				addNewCategories: 'wp-admin/edit-tags.php?taxonomy=product_cat&post_type=product',
 				addNewAttributes: 'wp-admin/edit.php?post_type=product&page=product_attributes',
