@@ -3,6 +3,8 @@ import { SpmvPage } from 'pages/spmvPage';
 import { ApiUtils } from 'utils/apiUtils';
 import { data } from 'utils/testData';
 import { payloads } from 'utils/payloads';
+import { dbUtils } from 'utils/dbUtils';
+import { dbData } from 'utils/dbData';
 
 
 test.describe('Vendor SPMV test', () => {
@@ -10,10 +12,12 @@ test.describe('Vendor SPMV test', () => {
 
 	let admin: SpmvPage;
 	let vendor: SpmvPage;
-	let aPage: Page, vPage: Page;
+	let customer: SpmvPage;
+	let aPage: Page, vPage: Page, cPage: Page;
 	let apiUtils: ApiUtils;
-	let productName1: string;
 	let productName: string;
+	let productName1: string;
+	let productId: string;
 
 
 	test.beforeAll(async ({ browser, request }) => {
@@ -25,22 +29,31 @@ test.describe('Vendor SPMV test', () => {
 		vPage = await vendorContext.newPage();
 		vendor = new SpmvPage(vPage);
 
+		const customerContext = await browser.newContext({ storageState: data.auth.customerAuthFile });
+		cPage = await customerContext.newPage();
+		customer = new SpmvPage(cPage);
+
 		apiUtils = new ApiUtils(request);
-		// [,, productName1] = await apiUtils.createProduct({ ...payloads.createProduct(), name: data.predefined.spmv.productName() }, payloads.vendor2Auth);
+		await dbUtils.setDokanSettings(dbData.dokan.optionName.selling, { ...dbData.dokan.sellingSettings, enable_min_max_quantity: 'off', enable_min_max_amount: 'off' }); //todo: might exists dokan issue
 		[,, productName] = await apiUtils.createProduct({ ...payloads.createProduct(), name: data.predefined.spmv.productName() }, payloads.vendor2Auth);
+		[, productId, productName1] = await apiUtils.createProduct({ ...payloads.createProduct(), name: data.predefined.spmv.productName() }, payloads.vendor2Auth);
+		await apiUtils.addSpmvProductToStore(productId, payloads.vendorAuth);
 	});
 
 
 	test.afterAll(async () => {
+		await dbUtils.setDokanSettings(dbData.dokan.optionName.selling, dbData.dokan.sellingSettings);
 		await aPage.close();
 		await vPage.close();
+		await cPage.close();
+
 	});
 
 
-	// test.only('add can assign SPMV product to other vendor @pro', async ( ) => {
-	// 	// await admin.assignSpmvProduct(productName1, data.predefined.vendorStores.vendor1);
-	// 	await admin.assignSpmvProduct('2471', data.predefined.vendorStores.vendor1);
-	// });
+	test('add can assign SPMV product to other vendor @pro', async ( ) => {
+		const [, productId, ] = await apiUtils.createProduct({ ...payloads.createProduct(), name: data.predefined.spmv.productName() }, payloads.vendor2Auth);
+		await admin.assignSpmvProduct(productId, data.predefined.vendorStores.vendor1FullName);
+	});
 
 
 	test('vendor spmv menu page is rendering properly @pro @explo', async ( ) => {
@@ -65,7 +78,7 @@ test.describe('Vendor SPMV test', () => {
 	// 	await vendor.searchSimilarProduct(productName, 'auction');
 	// });
 
-	test('vendor can go to product edit from spmv @pro', async ( ) => {
+	test('vendor can go to own product edit from spmv page @pro', async ( ) => {
 		await vendor.goToProductEditFromSPMV(data.predefined.simpleProduct.product1.name);
 	});
 
@@ -77,10 +90,27 @@ test.describe('Vendor SPMV test', () => {
 		await vendor.cloneProduct(productName);
 	});
 
-	//todo: add more spmv settings test
+	test('vendor can clone product via sell item button @pro', async ( ) => {
+		const [,, productName] = await apiUtils.createProduct({ ...payloads.createProduct(), name: data.predefined.spmv.productName() }, payloads.vendor2Auth);
+		await vendor.cloneProductViaSellItemButton(productName);
+	});
 
 
-	//todo: admin can add spmv product to other vendor
+	test('customer can view other available vendors @pro', async ( ) => {
+		await customer.viewOtherAvailableVendors(productName1);
+	});
+
+	test('customer can view other available vendor @pro', async ( ) => {
+		await customer.viewOtherAvailableVendor(productName1, data.predefined.vendorStores.vendor1);
+	});
+
+	test('customer can view other available vendor product @pro', async ( ) => {
+		await customer.viewOtherAvailableVendorProduct(productName1, data.predefined.vendorStores.vendor1);
+	});
+
+	test('customer can add to cart other available vendor product @pro', async ( ) => {
+		await customer.addToCartOtherAvailableVendorsProduct(productName1, data.predefined.vendorStores.vendor1);
+	});
 
 
 });

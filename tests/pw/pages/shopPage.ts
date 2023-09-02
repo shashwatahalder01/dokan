@@ -109,7 +109,7 @@ export class ShopPage extends CustomerPage {
 
 
 	// go to product details
-	async  goToProductDetails(productName: string): Promise<void> {
+	async  goToProductDetailsFromShop(productName: string): Promise<void> {
 		await this.searchProduct(productName);
 		if(DOKAN_PRO){
 			await this.clickAndWaitForResponse(data.subUrls.frontend.productCustomerPage, selector.customer.cShop.productCard.productDetailsLink);

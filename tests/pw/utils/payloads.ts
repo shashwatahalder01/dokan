@@ -140,7 +140,43 @@ export const payloads = {
 					length_duration: '',
 					addon_settings: []
 				}
-			}
+			},
+			// {
+			// 	key: '_dokan_min_max_meta',
+			// 	value: {
+			// 		product_wise_activation: 'yes',
+			// 		min_quantity: 0,
+			// 		max_quantity: 0,
+			// 		min_amount: 0,
+			// 		max_amount: 0,
+			// 		_donot_count: 'no',
+			// 		ignore_from_cat: 'no'
+			// 	}
+			// },
+			// {
+			// 	key: '_product_addons',
+			// 	value: []
+			// },
+			// {
+			// 	key: '_product_addons_exclude_global',
+			// 	value: '0'
+			// },
+			// {
+			// 	key: '_per_product_admin_commission_type',
+			// 	value: 'flat'
+			// },
+			// {
+			// 	key: '_per_product_admin_commission',
+			// 	value: ''
+			// },
+			// {
+			// 	key: '_per_product_admin_additional_fee',
+			// 	value: ''
+			// },
+			// {
+			// 	key: '_has_multi_vendor',
+			// 	value: '18'
+			// }
 		]
 
 	}),
@@ -1910,6 +1946,15 @@ export const payloads = {
 		amount: '10'
 	},
 
+	// spmv
+
+	spmvSearch: {
+		search: '',
+	},
+
+	spmvAddToStore: {
+		product_id: ''
+	},
 
 	paramsReverseWithdrawalTransactions:{
 		'trn_date[from]':  `${helpers.currentYear}-01-01 00:00:00`,

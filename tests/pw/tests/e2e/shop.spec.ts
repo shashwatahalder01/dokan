@@ -56,7 +56,7 @@ test.describe('Shop functionality test', () => {
 	});
 
 	test('customer can go to product details from shop @lite', async ( ) => {
-		await customer.goToProductDetails(data.predefined.simpleProduct.product1.name);
+		await customer.goToProductDetailsFromShop(data.predefined.simpleProduct.product1.name);
 	});
 
 

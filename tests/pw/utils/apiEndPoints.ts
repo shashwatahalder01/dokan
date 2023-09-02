@@ -311,6 +311,11 @@ export const endPoints = {
 	updateSubSettingFromSingleSettingGroup: (groupId: string, subGroupId: string) => `${SERVER_URL}/dokan/v2/settings/${groupId}/${subGroupId}`,
 	updateSubSubSettingFromSingleSettingGroup: (groupId: string, subGroupId: string, subSubSettingsId: string) => `${SERVER_URL}/dokan/v2/settings/${groupId}/${subGroupId}/${subSubSettingsId}`,
 
+	// spmv
+	getSpmvSettings: `${SERVER_URL}/dokan/v1/spmv-product/settings`,
+	getSpmvProducts: `${SERVER_URL}/dokan/v1/spmv-product/search`,
+	addToStore: `${SERVER_URL}/dokan/v1/spmv-product/add-to-store`,  //post
+
 	wc: {
 
 		// coupons

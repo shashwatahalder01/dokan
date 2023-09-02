@@ -83,7 +83,4 @@ test.describe('Vendor functionality test', () => {
 	});
 
 
-
-
-
 });

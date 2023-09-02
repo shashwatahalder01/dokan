@@ -52,7 +52,7 @@ export const data = {
 		draftUpdateSuccessMessage: 'Product draft updated. ',
 		pendingProductUpdateSuccessMessage: 'Product updated. ',
 		createUpdateSaveSuccessMessage: 'Success! The product has been saved successfully. View Product →',
-		updateSuccessMessage: 'Order updated.',
+		updateSuccessMessage: 'Product updated. ',
 
 		status: {
 			publish: 'publish',
@@ -1929,6 +1929,7 @@ export const data = {
 			followFromStoreListing: 'storeListing',
 			followFromSingleStore: 'singleStore',
 			vendor1: String(process.env.VENDOR) + 'store',
+			vendor1FullName: String(process.env.VENDOR) + ' ' + 'v1',
 			shopUrl: String(process.env.VENDOR) + 'store',
 		},
 

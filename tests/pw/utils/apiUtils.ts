@@ -1139,7 +1139,7 @@ export class ApiUtils {
 	}
 
 
-	// get staffId
+	// get staff Id
 	async getStaffId(username: string, auth? : auth): Promise<string> {
 		const allStaffs = await this.getAllVendorStaffs(auth);
 		const staffId = (allStaffs.find((o: { user_login: unknown; }) => o.user_login === username)).ID;
@@ -1162,6 +1162,27 @@ export class ApiUtils {
 			staffId = String(responseBody.ID);
 		}
 		return [responseBody, staffId];
+	}
+
+
+	/**
+	 * spmv api methods
+	 */
+
+
+	// add spmv product to store
+	async  addSpmvProductToStore(productId: string, auth? : auth): Promise<[APIResponse, responseBody]> {
+		const response = await this.request.post(endPoints.addToStore, { data: { product_id: productId }, headers: auth } );
+		const responseBody = await this.getResponseBody(response, false);
+
+		// //todo: need to handle already cloned product, dokan issue
+		// if(responseBody.code){
+		// 	expect(response.status()).toBe(500);
+		// } else {
+		// 	expect(response.ok()).toBeTruthy();
+		// }
+
+		return [response, responseBody];
 	}
 
 

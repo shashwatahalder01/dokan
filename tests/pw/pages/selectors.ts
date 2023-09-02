@@ -1778,9 +1778,12 @@ export const selector = {
 			},
 
 			spmv: {
+				spmvDiv: '#dokan-spmv-products-admin',
 				searchVendor: '#dokan-spmv-products-admin input.select2-search__field',
-				assignVendor: '#dokan-spmv-products-admin-assign-vendors-btn',
+				searchedResult: (storeName: string) => `//div[contains(text(),"${storeName}") and @class="dokan-spmv-vendor-dropdown-results__title"]`,
 				highlightedResult: '.select2-results__option.select2-results__option--highlighted',
+				assignVendor: '#dokan-spmv-products-admin-assign-vendors-btn',
+				unassignVendor: (storeName: string) =>  `//span[normalize-space()="${storeName}"]/../..//span[@class="delete-product"]`,
 			},
 
 			// Dokan Settings
@@ -2791,7 +2794,6 @@ export const selector = {
 				saveDraft: '#save-post',
 				preview: '#post-preview',
 				publish: '#publishing-action #publish',
-				update: 'button[value="Update"]',
 				updatedSuccessMessage: '.updated.notice.notice-success p',
 			},
 
@@ -5390,6 +5392,11 @@ export const selector = {
 			sortProduct: 'select.orderby', // popularity, rating, date, price, price-desc, bid_asc, bid_desc, auction_end, auction_started, auction_activity
 			editProduct: (productName: string) => `//a[normalize-space()="${productName}"]/../../..//a[@class="dokan-btn"]`,
 			addToStore: 'button.dokan-spmv-clone-product',
+
+
+			productDetails:{
+				sellThisItem: 'button[name="dokan_sell_this_item"]',
+			}
 		},
 
 		// Settings
@@ -6413,6 +6420,7 @@ export const selector = {
 			bookNow: '.wc-bookings-booking-form-button',
 		},
 
+
 		// Customer Auctions Settings
 		cAuctions: {
 			view: (orderNumber: string) => `//a[contains(text(),'Order #${orderNumber}')]/../..//a[@class="woocommerce-button button view"]`,
@@ -6421,6 +6429,7 @@ export const selector = {
 			minus: '//input[@value="-"]',
 			bid: '.bid_button',
 		},
+
 
 		// Customer Shop Page
 		cShop: {
@@ -6647,6 +6656,47 @@ export const selector = {
 
 		},
 
+		cSpmv:{
+			otherAvailableVendorDiv: 'div.dokan-other-vendor-camparison',
+			availableVendorDisplayAreaTitle: 'div.dokan-other-vendor-camparison h3',
+			availableVendorTable: '.table.dokan-other-vendor-camparison-table',
+			otherVendorAvailableTab: 'li#tab-title-vendor_comaprison',
+
+			availableVendorDetails: {
+
+				vendor: {
+					vendorCell: '.table-row .table-cell.vendor',
+					avatar: '.table-row .table-cell.vendor .avatar',
+					vendorLink: '.table-row .table-cell.vendor a',
+				},
+
+				price: {
+					priceCell: '.table-row .table-cell.price',
+					priceAmount: '.table-row .table-cell.price .amount',
+				},
+
+				rating: {
+					ratingCell: '.table-row .table-cell.rating',
+					rating: '.table-row .table-cell.rating .woocommerce-product-rating',
+				},
+
+				actions:{
+					actionsCell: '.table-row .table-cell.action-area',
+					viewStore:'.table-row .table-cell.action-area .link',
+					viewProduct:'.table-row .table-cell.action-area .view',
+					addToCart:'.table-row .table-cell.action-area .cart',
+
+					viewStoreByVendor: (storeName: string) => `//a[normalize-space()="${storeName}"]/../..//div[@class="table-cell action-area"]//a[@class="dokan-btn tips link"]`,
+					viewProductByVendor: (storeName: string) => `//a[normalize-space()="${storeName}"]/../..//div[@class="table-cell action-area"]//a[@class="dokan-btn tips view"]`,
+					addToCartByVendor: (storeName: string) => `//a[normalize-space()="${storeName}"]/../..//div[@class="table-cell action-area"]//a[@class="dokan-btn tips cart"]`,
+				}
+
+			}
+
+
+		},
+
+
 		// Customer Store List Page
 		cStoreList: {
 
@@ -6735,6 +6785,7 @@ export const selector = {
 			followUnFollowStoreSingleStore: 'button.dokan-follow-store-button',
 			currentFollowStatusSingleStore: 'span.dokan-follow-store-button-label-current'
 		},
+
 
 		// Customer Single Store
 		cSingleStore: {
@@ -6884,6 +6935,7 @@ export const selector = {
 
 		},
 
+
 		cMyOrders: {
 
 			myOrdersText: '//h1[normalize-space()="My Orders"]',
@@ -6992,7 +7044,6 @@ export const selector = {
 				pagination: 'ul.pagination',
 
 				viewQuoteDetails: (quoteId: string) => `//td[normalize-space()="Quote ${quoteId}"]/..//a[@class="woocommerce-button button view"]`,
-
 
 				// requested quote details
 				requestedQuoteDetails: {

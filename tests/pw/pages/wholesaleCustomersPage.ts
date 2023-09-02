@@ -5,7 +5,7 @@ import { CustomerPage } from 'pages/customerPage';
 import { selector } from 'pages/selectors';
 import { data } from 'utils/testData';
 import { helpers } from 'utils/helpers';
-
+import { customer } from 'utils/interfaces';
 
 export class WholesaleCustomersPage extends AdminPage {
 
