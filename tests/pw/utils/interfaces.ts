@@ -603,13 +603,16 @@ export interface vendorSetupWizard {
 // user
 export interface user  {
 	username: () => string;
+	password: string;
+
 	userDetails: {
+		emailDomain: string;
 		name: () => string;
 		firstName: () => string;
 		lastName: () => string;
 		email: () => string;
-		email1: string;
 		role: string;
+
 	}
 }
 
@@ -1497,10 +1500,42 @@ export interface	dokanSettings {
 		saveSuccessMessage:  string;
 	}
 
+	// colors
+	colors: {
+		paletteChoice:  string;
+		colorPalette:  string;
+		saveSuccessMessage:  string;
+	}
+
+	// shipping status
+	shippingStatus: {
+		customShippingStatus:  string;
+		saveSuccessMessage:  string;
+	},
+
+	// quote
+	quote: {
+		decreaseOfferedPrice: string;
+		saveSuccessMessage:  string;
+	},
+
+	// live search
+	liveSearch: {
+		liveSearchOption:  string;
+		saveSuccessMessage:  string;
+	},
+
 	// Store support
 	storeSupport: {
 		displayOnSingleProductPage:  string;
 		supportButtonLabel:  string;
+		saveSuccessMessage:  string;
+	}
+
+	// Email verification
+	emailVerification: {
+		registrationNotice:  string;
+		loginNotice:  string;
 		saveSuccessMessage:  string;
 	}
 

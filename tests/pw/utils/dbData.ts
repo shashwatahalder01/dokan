@@ -15,7 +15,7 @@ export const dbData = {
 			storeSupport: 'dokan_store_support_setting',
 			// sellerVerification: 'dokan_verification',
 			// verificationSMSGateways: 'dokan_verification_sms_gateways',
-			// emailVerification: 'dokan_email_verification',
+			emailVerification: 'dokan_email_verification',
 			// socialApi: 'dokan_social_api',
 			shippingStatus: 'dokan_shipping_status_setting',
 			quote: 'dokan_quote_settings',

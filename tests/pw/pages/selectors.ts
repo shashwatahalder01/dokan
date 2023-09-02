@@ -2017,6 +2017,37 @@ export const selector = {
 					privacyPolicySaveChanges: '#submit',
 				},
 
+				// Colors
+				colors:{
+					predefineColorPalette: '//h3[normalize-space()="Pre-defined Color Palette"]/../..',
+					customColorPalette: '//h3[normalize-space()="Custom Color Palette"]/../..',
+
+					colorPalette: {
+						default: '#default',
+						petalParty: '//input[@id="petal party"]',
+						pinky: '#pinky',
+						ocean: '#ocean',
+						sweety: '#sweety',
+						summerSplash: '//input[@id="summer splash"]',
+						tree: '#tree',
+					},
+
+					customColors: {
+						//todo: need to update all locators
+						buttonTextColor: '.btn_text span',
+						buttonBackgroundColor: '.btn_primary span',
+						buttonBorderColor: '.btn_primary_border span',
+						buttonHoverTextColor: '.btn_hover_text span',
+						buttonHoverColor: '.btn_hover span',
+						buttonHoverBorderColor: '.btn_hover_border span',
+						dashboardNavigationText: '.dash_nav_text span',
+						dashboardNavigationActiveMenu: '.dash_active_link span',
+						dashboardNavigationBackground: '.dash_nav_bg span',
+						dashboardMenuBorder: '.dash_nav_border span',
+					},
+
+					colorsSaveChanges: '#submit',
+				},
 
 				// Live Search
 				liveSearch:{
@@ -2068,9 +2099,9 @@ export const selector = {
 				// Email Verification
 				emailVerification:{
 				// Email Verification
-					enableEmailVerification: '#dokan_email_verification\\[enabled\\]',
-					registrationNotice: '#dokan_email_verification\\[registration_notice\\]',
-					loginNotice: '#dokan_email_verification\\[login_notice\\]',
+					enableEmailVerification: '//label[@for="dokan_email_verification[enabled]"]//label[@class="switch tips"]',
+					registrationNotice: 'textarea#dokan_email_verification\\[registration_notice\\]',
+					loginNotice: 'textarea#dokan_email_verification\\[login_notice\\]',
 					emailVerificationSaveChanges: '#submit',
 				},
 
@@ -2081,48 +2112,63 @@ export const selector = {
 
 
 				// Shipping Status
-				allowShipmentTracking: '#dokan_shipping_status_setting\\[enabled\\]',
-				// Shipping Providers
-				australiaPost: '#dokan_shipping_status_setting\\[shipping_status_provider\\]\\[sp-australia-post\\]',
-				canadaPost: '#dokan_shipping_status_setting\\[shipping_status_provider\\]\\[sp-canada-post\\]',
-				customShippingStatusInput: '.regular-text',
-				customShippingStatusAdd: '.dokan-repetable-add-item-btn',
-				shippingStatusSaveChanges: '#submit',
+				shippingStatus:{
+					allowShipmentTracking: 'label[for="dokan_shipping_status_setting[enabled]"] label',
 
-				// Colors
-				buttonTextColor: '.btn_text span',
-				buttonBackgroundColor: '.btn_primary span',
-				buttonBorderColor: '.btn_primary_border span',
-				buttonHoverTextColor: '.btn_hover_text span',
-				buttonHoverColor: '.btn_hover span',
-				buttonHoverBorderColor: '.btn_hover_border span',
-				dashboardNavigationText: '.dash_nav_text span',
-				dashboardNavigationActiveMenu: '.dash_active_link span',
-				dashboardNavigationBackground: '.dash_nav_bg span',
-				dashboardMenuBorder: '.dash_nav_border span',
+					// Shipping Providers
+					shippingProviders:{
+						australiaPost: '//input[@value="sp-australia-post"]/..',
+						canadaPost: '//input[@value="sp-canada-post"]/..',
+						cityLink: '//input[@value="sp-city-link"]/..',
+
+					},
+
+					customShippingStatusInput: 'input.regular-text',
+					customShippingStatusAdd: 'a.dokan-repetable-add-item-btn',
+
+					shippingStatusSaveChanges: '#submit',
+				},
+
+				// Quote
+				quote:{
+					// Configuration
+					enableQuoteForOutOfStockProducts: 'label[for="dokan_quote_settings[enable_out_of_stock]"] label.switch',
+					enableAjaxAddToQuote: 'label[for="dokan_quote_settings[enable_ajax_add_to_quote]"] label.switch',
+					redirectToQuotePage: 'label[for="dokan_quote_settings[redirect_to_quote_page]"] label.switch',
+
+					// Quote Attributes Settings
+					decreaseOfferedPrice: 'input#dokan_quote_settings\\[decrease_offered_price\\]',
+					enableConvertToOrder: 'label[for="dokan_quote_settings[enable_convert_to_order]"] label.switch',
+					enableQuoteConverterDisplay: 'label[for="dokan_quote_settings[enable_quote_converter_display]"] label.switch',
+
+					quoteSaveChanges: '#submit',
+				},
+
 
 				// Live Chat
-				enableLiveChat: '#dokan_live_chat\\[enable\\]',
-				chatProviderFacebookMessenger: '#dokan_live_chat\\[provider\\]\\[messenger\\]',
-				chatProviderTalkJs: '#dokan_live_chat\\[provider\\]\\[talkjs\\]',
-				chatProviderTawkTo: '#dokan_live_chat\\[provider\\]\\[tawkto\\]',
-				chatProviderWhatsApp: '#dokan_live_chat\\[provider\\]\\[whatsapp\\]',
+				liveChat: {
+					enableLiveChat: '#dokan_live_chat\\[enable\\]',
+					chatProviderFacebookMessenger: '#dokan_live_chat\\[provider\\]\\[messenger\\]',
+					chatProviderTalkJs: '#dokan_live_chat\\[provider\\]\\[talkjs\\]',
+					chatProviderTawkTo: '#dokan_live_chat\\[provider\\]\\[tawkto\\]',
+					chatProviderWhatsApp: '#dokan_live_chat\\[provider\\]\\[whatsapp\\]',
 
-				// Fb
-				messengerColor: '.button > span',
+					// Fb
+					messengerColor: '.button > span',
 
-				// Talkjs
-				talkJsAppId: '#dokan_live_chat\\[app_id\\]',
-				talkJsAppSecret: '#dokan_live_chat\\[app_secret\\]',
+					// Talkjs
+					talkJsAppId: '#dokan_live_chat\\[app_id\\]',
+					talkJsAppSecret: '#dokan_live_chat\\[app_secret\\]',
 
-				// Whatsapp
-				openingPattern: '#dokan_live_chat\\[wa_opening_method\\]',
-				preFilledMessage: '#dokan_live_chat\\[wa_pre_filled_message\\]',
+					// Whatsapp
+					openingPattern: '#dokan_live_chat\\[wa_opening_method\\]',
+					preFilledMessage: '#dokan_live_chat\\[wa_pre_filled_message\\]',
 
-				// Chat Button
-				chatButtonOnVendorPage: '#dokan_live_chat\\[chat_button_seller_page\\]',
-				chatButtonOnProductPage: '#dokan_live_chat\\[chat_button_product_page\\]',
-				liveChatSaveChanges: '#submit',
+					// Chat Button
+					chatButtonOnVendorPage: '#dokan_live_chat\\[chat_button_seller_page\\]',
+					chatButtonOnProductPage: '#dokan_live_chat\\[chat_button_product_page\\]',
+					liveChatSaveChanges: '#submit',
+				},
 
 				// Rma
 				rma: {

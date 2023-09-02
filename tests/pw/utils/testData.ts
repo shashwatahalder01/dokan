@@ -881,12 +881,15 @@ export const data = {
 	// user
 	user: {
 		username: () => faker.person.firstName('male'),
+		password: String(process.env.USER_PASSWORD),
+
 		userDetails: {
+			emailDomain: '@email.com',
 			name: () => faker.person.firstName('male'),
 			firstName: () => faker.person.firstName('male'),
 			lastName: () => faker.person.lastName('male'),
+			// email: faker.internet.email(),
 			email: () => faker.person.firstName('male') + '@email.com',
-			email1: faker.internet.email(),
 			role: 'customer',
 		},
 	},
@@ -908,9 +911,9 @@ export const data = {
 
 		vendorInfo: {
 
-			email: () => faker.internet.email(),
-			// emailDomain: '_' + faker.string.alphanumeric(5) + '@email.com',
 			emailDomain: '@email.com',
+			// email: () => faker.internet.email(),
+			email: () => faker.person.firstName('male') + '@email.com',
 			password: String(process.env.USER_PASSWORD),
 			password1: String(process.env.USER_PASSWORD) + '1',
 			firstName: () => faker.person.firstName('male'),
@@ -1012,7 +1015,8 @@ export const data = {
 			},
 
 			payment: {
-				email: () => faker.internet.email(),
+				// email: () => faker.internet.email(),
+				email: () => faker.person.firstName('male') + '@email.com',
 				bankAccountName: 'accountName',
 				bankAccountType: faker.helpers.arrayElement(['personal', 'business']),
 				bankAccountNumber: faker.string.alphanumeric(10),
@@ -1140,7 +1144,8 @@ export const data = {
 
 		payment: {
 			methodName: '',
-			email: () => faker.internet.email(),
+			// email: () => faker.internet.email(),
+			email: () => faker.person.firstName('male') + '@email.com',
 			bankAccountName: 'accountName',
 			bankAccountType: faker.helpers.arrayElement(['personal', 'business']),
 			bankAccountNumber: faker.string.alphanumeric(10),
@@ -1290,7 +1295,8 @@ export const data = {
 
 		customerInfo: {
 			emailDomain: '@email.com',
-			email: () => faker.internet.email(),
+			// email: () => faker.internet.email(),
+			email: () => faker.person.firstName('male') + '@email.com',
 			password: String(process.env.USER_PASSWORD),
 			password1: String(process.env.USER_PASSWORD) + '1',
 			firstName: () => faker.person.firstName('male'),
@@ -1754,10 +1760,42 @@ export const data = {
 			saveSuccessMessage: 'Setting has been saved successfully.',
 		},
 
+		// colors
+		colors: {
+			paletteChoice: 'pre-defined',
+			colorPalette: 'default',
+			saveSuccessMessage: 'Setting has been saved successfully.',
+		},
+
+		// shipping status
+		shippingStatus:{
+			customShippingStatus: 'Test shipping status',
+			saveSuccessMessage: 'Setting has been saved successfully.',
+		},
+
+		// quote
+		quote:{
+			decreaseOfferedPrice: '0',
+			saveSuccessMessage: 'Setting has been saved successfully.',
+		},
+
+		// live search
+		liveSearch:{
+			liveSearchOption: 'suggestion_box', // suggestion_box, old_live_search
+			saveSuccessMessage: 'Setting has been saved successfully.',
+		},
+
 		// Store support
 		storeSupport: {
 			displayOnSingleProductPage: 'above_tab', // 'above_tab', 'inside_tab', 'dont_show'
 			supportButtonLabel: 'Get Support',
+			saveSuccessMessage: 'Setting has been saved successfully.',
+		},
+
+		// Email verification
+		emailVerification: {
+			registrationNotice: 'Please check your email and complete email verification to login.',
+			loginNotice: 'Please check your email and complete email verification to login.',
 			saveSuccessMessage: 'Setting has been saved successfully.',
 		},
 

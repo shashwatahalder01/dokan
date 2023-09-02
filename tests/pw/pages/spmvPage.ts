@@ -10,6 +10,7 @@ export class SpmvPage extends VendorPage {
 		super(page);
 	}
 
+
 	//admin
 
 	async assignSpmvProduct(productId: string, storeName: string){
@@ -182,7 +183,7 @@ export class SpmvPage extends VendorPage {
 	}
 
 
-	// view other available vendor product
+	// add to cart other available vendor product
 	async addToCartOtherAvailableVendorsProduct(productName: string, storeName: string): Promise<void> {
 		await this.goToProductDetails(productName);
 
