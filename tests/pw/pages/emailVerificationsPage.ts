@@ -18,7 +18,7 @@ export class EmailVerificationsPage extends BasePage {
 		await this.clearAndType(selector.customer.cRegistration.regPassword, user.password);
 		await this.click(selector.customer.cRegistration.regAsCustomer);
 		await this.clickAndWaitForResponseAndLoadState(data.subUrls.frontend.myAccount, selector.customer.cRegistration.register, 302);
-		await this.toContainText(selector.customer.cWooSelector.wooCommerceSuccessMessage, data.emailVerification.LoginNotice);
+		await this.toContainText(selector.customer.cWooSelector.wooCommerceSuccessMessage, data.dokanSettings.emailVerification.loginNotice);
 	}
 
 
@@ -28,7 +28,7 @@ export class EmailVerificationsPage extends BasePage {
 		await this.clearAndType(selector.frontend.username, user.username);
 		await this.clearAndType(selector.frontend.userPassword, user.password);
 		await this.clickAndWaitForResponseAndLoadState(data.subUrls.frontend.myAccount, selector.frontend.logIn, 302);
-		await this.toContainText(selector.customer.cWooSelector.wooCommerceSuccessMessage, data.emailVerification.LoginNotice);
+		await this.toContainText(selector.customer.cWooSelector.wooCommerceSuccessMessage, data.dokanSettings.emailVerification.loginNotice);
 	}
 
 

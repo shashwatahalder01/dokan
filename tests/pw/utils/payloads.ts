@@ -1124,6 +1124,167 @@ export const payloads = {
 		// method_title: 'Cash on delivery',
 	},
 
+	stripeConnect: {
+		'id': 'dokan-stripe-connect',
+		'title': 'Dokan Credit card (Stripe)',
+		'description': 'Pay with your credit card via Stripe.',
+		'order': 4,
+		'enabled': true,
+		'method_title': 'Dokan Stripe Connect',
+		'method_description': 'Have your customers pay with credit card.',
+		'method_supports': [
+			'products',
+			'refunds',
+			'tokenization',
+			'subscriptions',
+			'subscription_cancellation',
+			'subscription_suspension',
+			'subscription_reactivation',
+			'subscription_amount_changes',
+			'subscription_date_changes',
+			'subscription_payment_method_change',
+			'subscription_payment_method_change_customer',
+			'subscription_payment_method_change_admin'
+		],
+		'settings': {
+			'title': {
+				'id': 'title',
+				// "label": "Title",
+				// "description": "This controls the title which the user sees during checkout.",
+				'value': 'Dokan Credit card (Stripe)'
+			},
+			'allow_non_connected_sellers': {
+				'id': 'allow_non_connected_sellers',
+				// "label": "Allow ordering products from non-connected sellers",
+				// "description": "If this is enable, customers can order products from non-connected sellers. The payment will send to admin Stripe account.",
+				'value': 'yes'
+			},
+			'display_notice_to_non_connected_sellers': {
+				'id': 'display_notice_to_non_connected_sellers',
+				// "label": "If checked, non-connected sellers will receive announcement notice to connect their Stripe account. ",
+				// "description": "If checked, non-connected sellers will receive announcement notice to connect their Stripe account once in a week.",
+				'value': 'yes'
+			},
+			'display_notice_interval': {
+				'id': 'display_notice_interval',
+				// "label": "If Display Notice to Connect Seller",
+				// "description": "If this is enabled and Dokan Stripe Connect is the only gateway available, non-connected sellers will receive announcement notice to connect their Stripe account once in a week.",
+				'value': '7'
+			},
+			'enable_3d_secure': {
+				'id': 'enable_3d_secure',
+				// "label": "Enable 3D Secure and Strong Customer Authentication",
+				// "description": "Note: 3D Secure and SCA ready transaction is only supported when both your platform and the connected account (Vendor) are in the same region: both in Europe or both in the U.S.",
+				'value': 'yes'
+			},
+			'seller_pays_the_processing_fee': {
+				'id': 'seller_pays_the_processing_fee',
+				// "label": "If activated, Sellers will pay the Stripe processing fee instead of Admin/Site Owner in 3DS mode.",
+				// "description": "By default Admin/Site Owner pays the Stripe processing fee.",
+				'value': 'yes'
+			},
+			'testmode': {
+				'id': 'testmode',
+				// "label": "Enable Test Mode",
+				// "description": "Place the payment gateway in test mode using test API keys.",
+				'value': 'yes'
+			},
+			'stripe_checkout': {
+				'id': 'stripe_checkout',
+				// "label": "Enable Stripe Checkout",
+				// "description": "(This only works when 3D Secure and SCA is disabled) If enabled, this option shows a \"pay\" button and modal credit card form on the checkout, instead of credit card fields directly on the page.",
+				'value': 'yes'
+			},
+			'stripe_checkout_locale': {
+				'id': 'stripe_checkout_locale',
+				// "label": "Stripe Checkout locale",
+				// "description": "Language to display in Stripe Checkout modal. Specify Auto to display Checkout in the user's preferred language, if available. English will be used by default.",
+				'value': 'en'
+				// "options": {
+				//     "auto": "Auto",
+				//     "zh": "Simplified Chinese",
+				//     "da": "Danish",
+				//     "nl": "Dutch",
+				//     "en": "English",
+				//     "fi": "Finnish",
+				//     "fr": "French",
+				//     "de": "German",
+				//     "it": "Italian",
+				//     "ja": "Japanese",
+				//     "no": "Norwegian",
+				//     "es": "Spanish",
+				//     "sv": "Swedish"
+				// }
+			},
+			'stripe_checkout_image': {
+				'id': 'stripe_checkout_image',
+				// "label": "Checkout Image",
+				// "description": "Optionally enter the URL to a 128x128px image of your brand or product. e.g. <code>https://yoursite.com/wp-content/uploads/2013/09/yourimage.jpg</code>",
+				'value': '',
+			},
+			'stripe_checkout_label': {
+				'id': 'stripe_checkout_label',
+				// "label": "Checkout Button Label",
+				// "description": "Optionally enter a Label for PAY button",
+				'value': ''
+			},
+			'saved_cards': {
+				'id': 'saved_cards',
+				// "label": "Enable saved cards",
+				// "description": "If enabled, users will be able to pay with a saved card during checkout. Card details are saved on Stripe servers, not on your store.",
+				'value': 'yes'
+			},
+			'live-credentials-title': {
+				'id': 'live-credentials-title',
+				// "label": "Live credentials",
+				// "description": ""
+				'value': ''
+			},
+			'publishable_key': {
+				'id': 'publishable_key',
+				// "label": "Publishable Key",
+				// "description": "Get your API keys from your stripe account.",
+				'value': ''
+			},
+			'secret_key': {
+				'id': 'secret_key',
+				// "label": "Secret Key",
+				// "description": "Get your API keys from your stripe account.",
+				'value': ''
+			},
+			'client_id': {
+				'id': 'client_id',
+				// "label": "Client ID",
+				// "description": "Get your client ID from your stripe account, the Apps menu.",
+				'value': ''
+			},
+			'test-credentials-title': {
+				'id': 'test-credentials-title',
+				// "label": "Test credentials",
+				// "description": "",
+				'value': ''
+			},
+			'test_publishable_key': {
+				'id': 'test_publishable_key',
+				// "label": "Test Publishable Key",
+				// "description": "Get your API keys from your stripe account.",
+				'value': 'pk_test_51KEXDwCV76dgVuikKzaFs3xlyAD7hxzi6i2HuxoiedARlQwjv54CBE02ohmJTMsXfRzrzlWrCyBY7VJOsBoLXru600cSFetwGh'
+			},
+			'test_secret_key': {
+				'id': 'test_secret_key',
+				// "label": "Test Secret Key",
+				// "description": "Get your API keys from your stripe account.",
+				'value': 'sk_test_51KEXDwCV76dgVuikYA52YsYoheUq30IXCAaGhYqTeiVLAtO0qL3isbj9jOFbAZCOo5kD8t6eoRzEfY6h9IuiSQ3F00Yfu6RuUO'
+			},
+			'test_client_id': {
+				'id': 'test_client_id',
+				// "label": "Test Client ID",
+				// "description": "Get your client ID from your stripe account, the Apps menu.",
+				'value': 'ca_KuLyp93VmDIZDE2pQZm9m77jTCqCcaI8'
+			}
+		}
+	},
+
 	payPal: {
 		id: 'dokan_paypal_marketplace',
 		title: 'PayPal Marketplace',
@@ -1153,7 +1314,7 @@ export const payloads = {
 		},
 	},
 
-	stripeConnect: {
+	stripeConnect1: {
 		id: 'dokan-stripe-connect',
 		title: 'Dokan Credit card (Stripe)',
 		enabled: false,
