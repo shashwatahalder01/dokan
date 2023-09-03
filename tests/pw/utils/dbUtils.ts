@@ -44,8 +44,8 @@ export const dbUtils = {
 	},
 
 	// update option table
-	async UpdateWpOptionTable(optionName: string, optionValue: object ): Promise<any> {
-		const queryUpdate = `UPDATE ${dbPrefix}_options SET option_value = '${serialize(optionValue)}' WHERE option_name = '${optionName}';`;
+	async updateWpOptionTable(optionName: string, optionValue: object| string, serializeData?: string ): Promise<any> {
+		const queryUpdate =  serializeData ? `UPDATE ${dbPrefix}_options SET option_value = '${serialize(optionValue)}' WHERE option_name = '${optionName}';`: `UPDATE ${dbPrefix}_options SET option_value = '${optionValue}' WHERE option_name = '${optionName}';`;
 		const res = await dbUtils.dbQuery(queryUpdate);
 		// console.log(res);
 		return res;

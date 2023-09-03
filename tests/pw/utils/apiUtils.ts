@@ -1272,9 +1272,16 @@ export class ApiUtils {
 
 
 	// get single plugin
-	async getSinglePlugin(plugin: string, auth? : auth): Promise<responseBody> {
-		const [, responseBody] = await this.get(endPoints.wp.getSinglePlugin(plugin), { headers: auth });
-		return responseBody;
+	async getSinglePlugin(plugin: string, auth? : auth): Promise<[responseBody, string, string]> {
+		const response = await this.request.get(endPoints.wp.getSinglePlugin(plugin), { headers: auth });
+		const responseBody = await this.getResponseBody(response, false);
+		if (responseBody.code){
+			expect(response.status()).toBe(404);
+			return [responseBody, plugin, 'not exists'];
+		}
+		const name = String(responseBody.name);
+		const status = String(responseBody.status);
+		return [responseBody, name, status];
 	}
 
 

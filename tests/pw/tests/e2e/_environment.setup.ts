@@ -107,6 +107,11 @@ setup.describe('setup site & woocommerce & user settings', () => {
 		await apiUtils.createAttributeTerm(attributeId, { name: 'm' });
 	});
 
+	setup('disable simple-auction ajax bid check @pro', async () => {
+		const [,, status] = await apiUtils.getSinglePlugin('woocommerce-simple-auctions/woocommerce-simple-auctions', payloads.adminAuth);
+		status === 'active' && await dbUtils.updateWpOptionTable('simple_auctions_live_check', 'no');
+	});
+
 });
 
 
