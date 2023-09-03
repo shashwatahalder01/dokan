@@ -307,9 +307,9 @@ export const payloads = {
 	}),
 
 	createBookingResource: {
-		'name': 'resource1',
-		'qty': '1',
-		'availability': [
+		name: 'resource1',
+		qty: '1',
+		availability: [
 			{
 				'type': 'months',
 				'bookable': 'yes',
@@ -318,10 +318,132 @@ export const payloads = {
 				'to': '12'
 			}
 		],
-		'base_cost': 5,
-		'block_cost': 6
+		base_cost: 5,
+		block_cost: 6
 	},
 
+	createAuctionProduct: () => ({
+		name: faker.commerce.productName() + ' (Auction)',
+		type: 'auction',
+		status: 'publish',
+		featured: true,
+		description: 'test description',
+		short_description: 'test short description',
+		// regular_price: faker.finance.amount(200, 400, 2),
+		price: '100',
+		regular_price: '100',
+		categories: [
+			{ }
+		],
+		meta_data: [
+
+			{
+				key: '_auction_item_condition',
+				value: 'new'
+			},
+			{
+				key: '_auction_type',
+				value: 'normal'
+			},
+
+			{
+				key: '_auction_start_price',
+				value: '10'  //faker.finance.amount(10, 20, 2),
+			},
+			{
+				key: '_auction_bid_increment',
+				value: '20'
+			},
+			{
+				key: '_auction_reserved_price',
+				value: '30'
+			},
+			{
+				key: '_auction_dates_from',
+				value: helpers.currentDateTime,
+			},
+			{
+				key: '_auction_dates_to',
+				value: helpers.addDays(helpers.currentDateTime, 20, 'full'),
+			},
+
+			// {
+			// 	key: '_auction_bid_count',
+			// 	value: '0'
+			// },
+			// {
+			// 	key: '_auction_proxy',
+			// 	value: '0'
+			// },
+			// {
+			// 	key: '_auction_sealed',
+			// 	value: 'no'
+			// },
+			// {
+			// 	key: '_auction_automatic_relist',
+			// 	value: 'no'
+			// },
+			// {
+			// 	key: '_auction_relist_fail_time',
+			// 	value: ''
+			// },
+			// {
+			// 	key: '_auction_relist_not_paid_time',
+			// 	value: ''
+			// },
+			// {
+			// 	key: '_auction_relist_duration',
+			// 	value: ''
+			// },
+			// {
+			// 	key: '_auction_extend_enable',
+			// 	value: 'no'
+			// },
+			// {
+			// 	key: '_auction_has_started',
+			// 	value: '1'
+			// },
+			// {
+			// 	key: '_auction_last_activity',
+			// 	value: '1693755727'
+			// },
+
+		],
+
+	}),
+
+	createProductAddons: () => ({
+		name: 'Test Addons Group_1' + faker.string.uuid(),
+		priority: 1,
+		restrict_to_categories: [],
+		fields: [
+			{
+				name: 'Test Add-on Title_'  + faker.string.uuid(),
+				title_format: 'label',
+				description_enable: 1,
+				description: 'Test Add-on description',
+				type: 'multiple_choice',
+				display: 'select',
+				position: 0,
+				required: 0,
+				restrictions: 0,
+				restrictions_type: 'any_text',
+				adjust_price: 0,
+				price_type: 'flat_fee',
+				price: '',
+				min: 0,
+				max: 0,
+				options: [
+					{
+						label: 'Option 1',
+						price: '30',
+						image: '',
+						price_type: 'flat_fee'
+					}
+				]
+			}
+		]
+	}),
 
 	updateProduct: () => ({ regular_price: faker.finance.amount(100, 200, faker.helpers.arrayElement([0, 2])) }),
 
@@ -785,21 +907,6 @@ export const payloads = {
 		method_id: 'dokan_vendor_shipping',
 	},
 
-	createTaxRate: {
-		country: '',
-		state: '',
-		postcode: '',
-		city: '',
-		rate: '5',
-		name: 'Tax',
-		priority: 1,
-		compound: false,
-		shipping: true,
-		order: 0,
-		class: 'standard',
-		postcodes: [],
-		cities: [],
-	},
 
 	// woocommerce settings: general , products, tax, shipping, checkout, account
 
@@ -895,6 +1002,8 @@ export const payloads = {
 		],
 	},
 
+
+	// enable tax rate
 	enableTaxRate: {
 		update: [
 			{
@@ -906,16 +1015,92 @@ export const payloads = {
 		],
 	},
 
+
+	// create tax rate
+	createTaxRate: {
+		country: '',
+		state: '',
+		postcode: '',
+		city: '',
+		rate: '5',
+		name: 'Tax',
+		priority: 1,
+		compound: false,
+		shipping: true,
+		order: 0,
+		class: 'standard',
+		postcodes: [],
+		cities: [],
+	},
+
 	// account
 
 	account: {
 		update: [
+			// Guest checkout
+			{
+				id: 'woocommerce_enable_guest_checkout',
+				// description: "Allow customers to place orders without an account",
+				value: 'yes',
+			},
+			{
+				id: 'woocommerce_enable_checkout_login_reminder',
+				// description: "Allow customers to log into an existing account during checkout",
+				value: 'yes',
+			},
+
+			// Account creation
+			{
+				id: 'woocommerce_enable_signup_and_login_from_checkout',
+				// description: "Allow customers to create an account during checkout",
+				value: 'yes',
+			},
+			// {
+			// 	id: 'woocommerce_enable_signup_from_checkout_for_subscriptions',
+			// 	// description: "Allow subscription customers to create an account during checkout",
+			// 	value: 'yes',
+			// },
+			{
+				id: 'woocommerce_enable_myaccount_registration',
+				// description: "Allow customers to create an account on the \"My account\" page",
+				value: 'yes',
+			},
+			{
+				id: 'woocommerce_registration_generate_username',
+				// description: "When creating an account, automatically generate an account username for the customer based on their name, surname or email",
+				value: 'yes',
+
+			},
 			{
 				id: 'woocommerce_registration_generate_password',
 				// description: 'When creating an account, send the new user a link to set their password',
 				value: 'no',
 				// value: 'yes',
 			},
+		],
+	},
+
+	// enable HPOS
+	advanced: {
+		update: [
+			// High performance order storage (HPOS)
+			{
+				'id': 'woocommerce_custom_orders_table_enabled',
+				// "label": "Data storage for orders",
+				'type': 'radio',
+				// "options": {
+				//     "no": "WordPress post tables",
+				//     "yes": "High performance order storage (new)"
+				// },
+				'value': 'no',
+
+			},
+			{
+				'id': 'woocommerce_custom_orders_table_data_sync_enabled',
+				// "description": "Keep the posts and orders tables in sync (compatibility mode).",
+				'value': 'no',
+			}
+
 		],
 	},
 
@@ -1091,6 +1276,7 @@ export const payloads = {
 			debug: [{}],
 		},
 	},
+
 
 	// customer
 

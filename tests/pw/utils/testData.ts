@@ -273,7 +273,7 @@ export const data = {
 			reservedPrice: () => (faker.finance.amount(400, 500, faker.helpers.arrayElement([1, 2]))).replace('.', ','),
 			buyItNowPrice: () => (faker.finance.amount(900, 1000, faker.helpers.arrayElement([1, 2]))).replace('.', ','),
 			startDate: helpers.currentDateTime,
-			endDate: helpers.addDays(helpers.currentDateTime, 1, 'full'),
+			endDate: helpers.addDays(helpers.currentDateTime, 20, 'full'),
 			storeName: String(process.env.VENDOR) + 'store',
 			// saveSuccessMessage: '× Success! The product has been updated successfully. View Product →',
 			saveSuccessMessage: 'Success! The product has been updated successfully.',

@@ -1,8 +1,8 @@
 import { test, Page } from '@playwright/test';
 import { AuctionsPage } from 'pages/vendorAuctionsPage';
-// import { ApiUtils } from 'utils/apiUtils';
+import { ApiUtils } from 'utils/apiUtils';
 import { data } from 'utils/testData';
-// import { payloads } from 'utils/payloads';
+import { payloads } from 'utils/payloads';
 
 
 test.describe('Auction Product test', () => {
@@ -12,11 +12,11 @@ test.describe('Auction Product test', () => {
 	let vendor: AuctionsPage;
 	let customer: AuctionsPage;
 	let aPage: Page, vPage: Page, cPage: Page;
-	// let apiUtils: ApiUtils;
-	const auctionProductName = data.product.auction.productName();
+	let apiUtils: ApiUtils;
+	let auctionProductName: string;
 
 
-	test.beforeAll(async ({ browser }) => {
+	test.beforeAll(async ({ browser, request }) => {
 
 		const adminContext = await browser.newContext({ storageState: data.auth.adminAuthFile });
 		aPage = await adminContext.newPage();
@@ -30,10 +30,10 @@ test.describe('Auction Product test', () => {
 		cPage = await customerContext.newPage();
 		customer = new AuctionsPage(cPage);
 
-		await vendor.addAuctionProduct({ ...data.product.auction, name: auctionProductName }); //todo: convert with api
-		await customer.bidAuctionProduct(auctionProductName); //todo: convert with api
+		apiUtils = new ApiUtils(request);
+		[,, auctionProductName] = await apiUtils.createProduct(payloads.createAuctionProduct(), payloads. vendorAuth);
 
-		// apiUtils = new ApiUtils(request);
+		await customer.bidAuctionProduct(auctionProductName);
 
 	});
 
@@ -75,8 +75,7 @@ test.describe('Auction Product test', () => {
 	});
 
 	test('vendor can permanently delete auction product @pro', async ( ) => {
-		const auctionProductName = data.product.auction.productName();
-		await vendor.addAuctionProduct({ ...data.product.auction, name: auctionProductName });
+		const [,, auctionProductName] = await apiUtils.createProduct(payloads.createAuctionProduct(), payloads. vendorAuth);
 		await vendor.deleteAuctionProduct(auctionProductName);
 	});
 
@@ -90,7 +89,6 @@ test.describe('Auction Product test', () => {
 
 	test('vendor can search auction activity @pro', async ( ) => {
 		await vendor.searchAuctionActivity(data.customer.username);
-		// await vendor.searchAuctionActivity(data.customer.username + '@yopmail.com');
 	});
 
 	test('customer can bid auction product @pro', async ( ) => {

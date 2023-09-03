@@ -9,7 +9,7 @@ import { data } from 'utils/testData';
 import { VendorSettingsPage } from 'pages/vendorSettingsPage';
 
 
-const { CUSTOMER_ID, DOKAN_PRO } = process.env;
+const { CUSTOMER_ID, DOKAN_PRO, HPOS } = process.env;
 
 
 setup.describe('setup site & woocommerce & user settings', () => {
@@ -42,16 +42,14 @@ setup.describe('setup site & woocommerce & user settings', () => {
 
 	// setup.skip('reset dokan previous settings @lite', async () => {
 	// 	setup.skip(!!process.env.CI, 'skip previous settings check');
-
-	// 	// previous seller badges
 	// 	await apiUtils.deleteAllSellerBadges();
-	// 	// previous quote rules
 	// 	await apiUtils.deleteAllQuoteRules();
 	// });
 
 	setup('set wc settings @lite', async () => {
 		await apiUtils.updateBatchWcSettingsOptions('general', payloads.general);
 		await apiUtils.updateBatchWcSettingsOptions('account', payloads.account);
+		HPOS && await apiUtils.updateBatchWcSettingsOptions('advanced', payloads.advanced);
 	});
 
 	setup('set tax rate @lite', async () => {
