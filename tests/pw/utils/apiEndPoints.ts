@@ -514,6 +514,14 @@ export const endPoints = {
 			deleteBooking: (productId: string) =>  `${SERVER_URL}/wc-bookings/v1/bookings/${productId}`,
 			updateBatchBookings: `${SERVER_URL}/wc-bookings/v1/bookings/batch`,
 
+		},
+
+		productAddons:{
+			getAllProductAddons: `${SERVER_URL}/wc-product-add-ons/v1/product-add-ons`,
+			getSingleProductAddon: (productId: string) =>  `${SERVER_URL}/wc-product-add-ons/v1/product-add-ons${productId}`,
+			createProductAddon: `${SERVER_URL}/wc-product-add-ons/v1/product-add-ons`,
+			updateProductAddon: (productId: string) =>  `${SERVER_URL}/wc-product-add-ons/v1/product-add-ons${productId}`,
+			deleteProductAddon: (productId: string) =>  `${SERVER_URL}/wc-product-add-ons/v1/product-add-ons${productId}`,
 		}
 
 	},

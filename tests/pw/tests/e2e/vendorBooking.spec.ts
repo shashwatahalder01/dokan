@@ -132,6 +132,5 @@ test.describe('Booking Product test', () => {
 		await customer.buyBookableProduct(bookableProductName, data.bookings);
 	});
 
-
 	//todo: vendor can add booking resource to booking product
 });
