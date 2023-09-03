@@ -1,15 +1,18 @@
 import { Page } from '@playwright/test';
 import { VendorPage } from 'pages/vendorPage';
+import { CustomerPage } from 'pages/customerPage';
 import { selector } from 'pages/selectors';
 import { data } from 'utils/testData';
-import { product, bookingResource } from 'utils/interfaces';
-
+import { helpers } from 'utils/helpers';
+import { product, bookings, bookingResource } from 'utils/interfaces';
 
 export class BookingPage extends VendorPage {
 
 	constructor(page: Page) {
 		super(page);
 	}
+
+	customerPage = new CustomerPage(this.page);
 
 
 	// booking
@@ -299,23 +302,40 @@ export class BookingPage extends VendorPage {
 
 
 	// add booking
-	async addBooking(){
+	async addBooking(productName: string, bookings: bookings, customerName?: string){
 		await this.goIfNotThere(data.subUrls.frontend.vDashboard.addBooking);
-		// await this.clickAndWaitForLoadState(selector.vendor.vBooking.addBookingBtn);
 
-		await this.click(selector.vendor.vBooking.addBooking.selectCustomerDropdown);
-		await this.typeAndWaitForResponse(data.subUrls.ajax, selector.vendor.vBooking.addBooking.selectCustomerInput, '');
-		await this.toContainText(selector.vendor.vBooking.addBooking.searchedResult, '');
-		await this.press(data.key.arrowDown);
-		await this.press(data.key.enter);
+		if(customerName) {
+			await this.click(selector.vendor.vBooking.addBooking.selectCustomerDropdown);
+			await this.typeAndWaitForResponse(data.subUrls.ajax, selector.vendor.vBooking.addBooking.selectCustomerInput, customerName);
+			await this.toContainText(selector.vendor.vBooking.addBooking.searchedResult, customerName);
+			await this.press(data.key.arrowDown);
+			await this.press(data.key.enter);
+		}
 
 		await this.click(selector.vendor.vBooking.addBooking.selectABookableProductDropdown);
-		await this.click(selector.vendor.vBooking.addBooking.selectABookableProduct('productName'));
+		await this.click(selector.vendor.vBooking.addBooking.selectABookableProduct(productName));
 
 		await this.click(selector.vendor.vBooking.addBooking.createANewCorrespondingOrderForThisNewBooking);
 		await this.clickAndWaitForResponseAndLoadState(data.subUrls.frontend.vDashboard.addBooking, selector.vendor.vBooking.addBooking.next);
+		await this.clickAndWaitForResponse(data.subUrls.ajax, selector.customer.cBookings.selectCalendarDay(bookings.startDate.getMonth(), bookings.startDate.getDate()));
+		await this.clickAndWaitForResponse(data.subUrls.ajax, selector.customer.cBookings.selectCalendarDay(bookings.endDate.getMonth(), bookings.endDate.getDate()));
+		await this.clickAndWaitForResponse(data.subUrls.frontend.vDashboard.addBooking, selector.vendor.vBooking.addBooking.addBooking);
+		await this.toContainText(selector.vendor.vBooking.addBooking.successMessage, 'The booking has been added successfully.');
 
-		await this.click(selector.vendor.vBooking.addBooking.addBooking);
+	}
+
+
+	// customer
+
+
+	async buyBookableProduct(productName: string, bookings: bookings){
+		await this.goIfNotThere(data.subUrls.frontend.productDetails(helpers.slugify(productName)));
+
+		await this.clickAndWaitForResponse(data.subUrls.ajax, selector.customer.cBookings.selectCalendarDay(bookings.startDate.getMonth(), bookings.startDate.getDate()));
+		await this.clickAndWaitForResponse(data.subUrls.ajax, selector.customer.cBookings.selectCalendarDay(bookings.endDate.getMonth(), bookings.endDate.getDate()));
+		await this.clickAndWaitForResponse(data.subUrls.frontend.productDetails(helpers.slugify(productName)), selector.customer.cBookings.bookNow );
+		await this.customerPage.placeOrder();
 	}
 
 

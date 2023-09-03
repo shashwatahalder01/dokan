@@ -1608,7 +1608,7 @@ export const data = {
 		content:  'test announcement Content',
 		receiver: 'all_seller',
 		publishType: 'immediately',
-		scheduleDate: helpers.futureDate('', 10, ),
+		scheduleDate: helpers.futureDate('', 10),
 
 	},
 
@@ -1889,6 +1889,11 @@ export const data = {
 
 	deliveryTime:{
 		date: helpers.currentDateFJY
+	},
+
+	bookings: {
+		startDate: new Date(),
+		endDate:  helpers.futureDate(new Date(), 5),  // future date must be less than maximum duration
 	},
 
 

@@ -224,7 +224,7 @@ setup.describe('setup dokan settings', () => {
 		await dbUtils.setDokanSettings(dbData.dokan.optionName.storeSupport, dbData.dokan.storeSupportSettings);
 	});
 
-	setup('admin set dokan shipping settings @pro', async () => {
+	setup('admin set dokan shipping status settings @pro', async () => {
 		await dbUtils.setDokanSettings(dbData.dokan.optionName.shippingStatus, dbData.dokan.shippingStatusSettings);
 	});
 

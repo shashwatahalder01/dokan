@@ -103,6 +103,10 @@ export const payloads = {
 		short_description: '<p>test short description</p>',
 		meta_data: [
 			{
+				key: '_dokan_geolocation_use_store_settings',
+				value: 'yes'
+			},
+			{
 				key: 'dokan_geo_latitude',
 				value: '40.7127753'
 			},
@@ -117,10 +121,6 @@ export const payloads = {
 			{
 				key: 'dokan_geo_address',
 				value: 'New York, NY, USA'
-			},
-			{
-				key: '_dokan_geolocation_use_store_settings',
-				value: 'yes'
 			},
 			{
 				key: '_dokan_rma_override_product',
@@ -176,10 +176,26 @@ export const payloads = {
 			// {
 			// 	key: '_has_multi_vendor',
 			// 	value: '18'
-			// }
+			// },
+			// {
+			// 	key: '_dokan_catalog_mode',
+			// 	value: {
+			// 		hide_add_to_cart_button: 'off',
+			// 		hide_product_price: 'off'
+			// 	}
+			// },
+			// {
+			// 	key: '_disable_shipping',
+			// 	value: 'no'
+			// },
+			// {
+			// 	key: '_overwrite_shipping',
+			// 	value: 'no'
+			// },
 		]
 
 	}),
+
 
 	// wholesale product
 	createWholesaleProduct: () => ({
@@ -201,14 +217,15 @@ export const payloads = {
 				key: '_dokan_wholesale_meta',
 				value: {
 					enable_wholesale: 'yes',
-					// price: faker.finance.amount(90, 99, faker.helpers.arrayElement([0, 2])),
-					price: '100',
+					price: faker.finance.amount(90, 99, faker.helpers.arrayElement([0, 2])),
+					// price: '100',
 					quantity: '10'
 				}
 			},
 		]
 
 	}),
+
 
 	createVariableProduct: () => ({
 		name: faker.commerce.productName() + ' (Variable)',
@@ -222,20 +239,6 @@ export const payloads = {
 		],
 	}),
 
-	createDownloadableProduct: () => ({
-		name: faker.commerce.productName() + ' (Downloadable)',
-		type: 'simple',
-		downloadable: true,
-		regular_price: faker.finance.amount(100, 200, faker.helpers.arrayElement([0, 2])),
-		downloads: [],
-		// download_limit: 100,
-		// download_expiry: 100,
-		categories: [
-			{
-				// id: 48
-			},
-		],
-	}),
 
 	createProductVariation: {
 		// id: '47',
@@ -254,6 +257,71 @@ export const payloads = {
 			},
 		],
 	},
+
+
+	createDownloadableProduct: () => ({
+		name: faker.commerce.productName() + ' (Downloadable)',
+		type: 'simple',
+		downloadable: true,
+		regular_price: faker.finance.amount(100, 200, faker.helpers.arrayElement([0, 2])),
+		downloads: [],
+		// download_limit: 100,
+		// download_expiry: 100,
+		categories: [
+			{
+				// id: 48
+			},
+		],
+	}),
+
+
+	createBookableProduct: () => ({
+		name: faker.commerce.productName() + ' (Bookable)',
+		status: 'publish',
+		featured: true,
+		description: '<p>test description</p>',
+		short_description: '<p>test short description</p>',
+		categories: [
+			{}
+		],
+		duration_type: 'customer',
+		duration_unit: 'day',
+		duration: 1,
+		min_duration: 1,
+		max_duration: 10,
+		calendar_display_mode: 'always_visible',
+		enable_range_picker: true,
+		requires_confirmation: false,
+		can_be_cancelled: false,
+		default_date_availability: 'available',
+		block_cost: 5,
+		cost: 10,
+		has_persons: false,
+		has_resources: false,
+		qty: 100,
+		// min_date_value: 10,
+		// min_date_unit: 'day',
+		// max_date_value: 11,
+		// max_date_unit: 'month'
+
+	}),
+
+	createBookingResource: {
+		'name': 'resource1',
+		'qty': '1',
+		'availability': [
+			{
+				'type': 'months',
+				'bookable': 'yes',
+				'priority': 1,
+				'from': '1',
+				'to': '12'
+			}
+		],
+		'base_cost': 5,
+		'block_cost': 6
+	},
+
 
 	updateProduct: () => ({ regular_price: faker.finance.amount(100, 200, faker.helpers.arrayElement([0, 2])) }),
 

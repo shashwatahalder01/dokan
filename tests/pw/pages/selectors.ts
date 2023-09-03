@@ -4931,8 +4931,11 @@ export const selector = {
 				bookingOrderId: '.text',
 				dontCreateAnOrderForThisBooking: '//label[normalize-space()="Don"t create an order for this booking."]/..//input',
 				next: '.button-primary',
+				selectCalendarDay: (month: number, day: number) => `//td[@title="This date is available" and @ data-month="${month}"]//a[@data-date="${day}"]`,
 
 				addBooking: 'input[value="Add Booking"][type="submit"]',
+
+				successMessage: '.woocommerce-message',
 			},
 
 
@@ -6462,8 +6465,9 @@ export const selector = {
 
 		// Customer Bookings
 		cBookings: {
+			selectCalendarDay: (month: number, day: number) => `//td[@title="This date is available" and @ data-month="${month}"]//a[@data-date="${day}"]`,
 			view: (orderNumber: string) => `//a[contains(text(),'Order #${orderNumber}')]/../..//a[@class="woocommerce-button button view"]`,
-			bookNow: '.wc-bookings-booking-form-button',
+			bookNow: 'button.wc-bookings-booking-form-button',
 		},
 
 

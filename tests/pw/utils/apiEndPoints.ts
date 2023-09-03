@@ -479,6 +479,43 @@ export const endPoints = {
 		//data
 		getCurrentCurrency: `${SERVER_URL}/wc/v3/data/currencies/current`,
 
+
+		booking:{
+			getAllBookableProducts: `${SERVER_URL}/wc-bookings/v1/products`,
+			getSingleBookableProduct: (productId: string) =>  `${SERVER_URL}/wc-bookings/v1/products/${productId}`,
+			createBookableProduct: `${SERVER_URL}/wc-bookings/v1/products`,
+			updateBookableProduct: (productId: string) =>  `${SERVER_URL}/wc-bookings/v1/products/${productId}`,
+			deleteBookableProduct: (productId: string) =>  `${SERVER_URL}/wc-bookings/v1/products/${productId}`,
+			updateBatchBookableProducts: `${SERVER_URL}/wc-bookings/v1/products/batch`,
+
+			getBookingsSlots: `${SERVER_URL}/wc-bookings/v1/products/slots`,
+
+			// categories
+			getAllBookableProductCategories: `${SERVER_URL}/wc-bookings/v1/products/categories`,
+			getSingleBookableProductCategory: (categoryId: string) =>  `${SERVER_URL}/wc-bookings/v1/products/categories/${categoryId}`,
+			createBookableProductCategory: `${SERVER_URL}/wc-bookings/v1/products/categories`,
+			updateBookableProductCategory: (categoryId: string) =>  `${SERVER_URL}/wc-bookings/v1/products/categories/${categoryId}`,
+			deleteBookableProductCategory: (categoryId: string) =>  `${SERVER_URL}/wc-bookings/v1/products/categories/${categoryId}`,
+			updateBatchBookableProductsCategories: `${SERVER_URL}/wc-bookings/v1/products/categories/batch`,
+
+			// resource
+			getAllBookableResources: `${SERVER_URL}/wc-bookings/v1/resources`,
+			getSingleBookableResource: (productId: string) =>  `${SERVER_URL}/wc-bookings/v1/resources/${productId}`,
+			createBookableResource: `${SERVER_URL}/wc-bookings/v1/resources`,
+			updateBookableResource: (productId: string) =>  `${SERVER_URL}/wc-bookings/v1/resources/${productId}`,
+			deleteBookableResource: (productId: string) =>  `${SERVER_URL}/wc-bookings/v1/resources/${productId}`,
+			updateBatchBookableResources: `${SERVER_URL}/wc-bookings/v1/resources/batch`,
+
+			// bookings
+			getAllBookings: `${SERVER_URL}/wc-bookings/v1/bookings`,
+			getSingleBooking: (productId: string) =>  `${SERVER_URL}/wc-bookings/v1/bookings/${productId}`,
+			createBooking: `${SERVER_URL}/wc-bookings/v1/bookings`,
+			updateBooking: (productId: string) =>  `${SERVER_URL}/wc-bookings/v1/bookings/${productId}`,
+			deleteBooking: (productId: string) =>  `${SERVER_URL}/wc-bookings/v1/bookings/${productId}`,
+			updateBatchBookings: `${SERVER_URL}/wc-bookings/v1/bookings/batch`,
+
+		}
+
 	},
 
 	wp: {

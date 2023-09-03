@@ -1726,4 +1726,20 @@ export class ApiUtils {
 		};
 		return [responseBody, compactInfo];
 	}
+
+
+	/**
+	 * woocommerce booking  api methods
+	 */
+
+
+	// create product
+	async createBookableProduct(payload: object, auth? : auth): Promise<[responseBody, string, string]> {
+		const [, responseBody] = await this.post(endPoints.wc.booking.createBookableProduct, { data: payload, headers: auth });
+		const productId = String(responseBody.id);
+		const productName = String(responseBody.name);
+		return [responseBody, productId, productName];
+	}
+
+
 }

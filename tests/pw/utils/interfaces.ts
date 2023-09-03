@@ -27,6 +27,11 @@ export interface adminDashboard {
 	}
 }
 
+export interface bookings {
+	startDate: Date;
+	endDate: Date;
+}
+
 export interface bookingResource {
 	resourceName: () => string;
 	name: string;
