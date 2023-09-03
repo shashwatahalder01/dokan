@@ -85,7 +85,7 @@ setup.describe('setup site & woocommerce & user settings', () => {
 		await apiUtils.updatePaymentGateway('bacs', payloads.bcs);
 		await apiUtils.updatePaymentGateway('cheque', payloads.cheque);
 		await apiUtils.updatePaymentGateway('cod', payloads.cod);
-		await apiUtils.updatePaymentGateway('dokan-stripe-connect', payloads.stripeConnect);
+		// await apiUtils.updatePaymentGateway('dokan-stripe-connect', payloads.stripeConnect);
 		// await apiUtils.updatePaymentGateway('dokan_paypal_marketplace', payloads.payPal);
 		// await apiUtils.updatePaymentGateway('dokan_mangopay', payloads.mangoPay);
 		// await apiUtils.updatePaymentGateway('dokan_razorpay', payloads.razorpay);
