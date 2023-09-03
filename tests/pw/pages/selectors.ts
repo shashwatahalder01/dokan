@@ -5421,6 +5421,7 @@ export const selector = {
 				searchDiv: '.dokan-spmv-add-new-product-search-box-area',
 				subHeader: '//p[@class="sub-header"]',
 				toggleBtn: '#dokan-spmv-area-toggle-button',
+				// toggleBtn: '#dokan-spmv-area-toggle-button i.fa-caret-down',
 				searchInput: 'input[name="search"]',
 				search: 'input.dokan-btn-search',
 				orCreateNew: 'a.dokan-add-new-product',

@@ -2386,7 +2386,7 @@ export const payloads = {
 		body: 'Test email body',
 	},
 
-	createStore1: { //todo: create and update data should be same
+	createStore1: {
 		user_login: process.env.VENDOR,
 		user_pass: process.env.USER_PASSWORD,
 		user_nicename: process.env.VENDOR + 'store',

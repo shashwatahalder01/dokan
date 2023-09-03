@@ -120,11 +120,11 @@ test.describe('Booking Product test', () => {
 		await vendor.deleteBookingResource(bookingResourceName);
 	});
 
-	test('vendor can add booking for guest customer@pro', async ( ) => {
+	test('vendor can add booking for guest customer @pro', async ( ) => {
 		await vendor.addBooking(bookableProductName, data.bookings);
 	});
 
-	test('vendor can add booking for existing customer@pro', async ( ) => {
+	test('vendor can add booking for existing customer @pro', async ( ) => {
 		await vendor.addBooking(bookableProductName, data.bookings, data.customer.username);
 	});
 

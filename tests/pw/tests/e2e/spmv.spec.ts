@@ -50,7 +50,7 @@ test.describe('Vendor SPMV test', () => {
 	});
 
 
-	test('add can assign SPMV product to other vendor @pro', async ( ) => {
+	test('admin can assign SPMV product to other vendor @pro', async ( ) => {
 		const [, productId, ] = await apiUtils.createProduct({ ...payloads.createProduct(), name: data.predefined.spmv.productName() }, payloads.vendor2Auth);
 		await admin.assignSpmvProduct(productId, data.predefined.vendorStores.vendor1FullName);
 	});
@@ -68,15 +68,15 @@ test.describe('Vendor SPMV test', () => {
 		await vendor.searchSimilarProduct(productName, 'popup');
 	});
 
-	// test('vendor can search similar booking product @pro', async ( ) => {
-	//todo: need admin booking product via api
-	// 	await vendor.searchSimilarProduct(productName, 'booking');
-	// });
+	test('vendor can search similar booking product @pro', async ( ) => {
+		const [,, bookableProductName] = await apiUtils.createBookableProduct(payloads.createBookableProduct(), payloads.vendor2Auth);
+		await vendor.searchSimilarProduct(bookableProductName, 'booking');
+	});
 
-	// test('vendor can search similar auction product @pro', async ( ) => {
-	//todo: need admin auction product via api
-	// 	await vendor.searchSimilarProduct(productName, 'auction');
-	// });
+	test('vendor can search similar auction product @pro', async ( ) => {
+		const[,, auctionProductName] = await apiUtils.createProduct(payloads.createAuctionProduct(), payloads. vendor2Auth);
+		await vendor.searchSimilarProduct(auctionProductName, 'auction');
+	});
 
 	test('vendor can go to own product edit from spmv page @pro', async ( ) => {
 		await vendor.goToProductEditFromSPMV(data.predefined.simpleProduct.product1.name);
@@ -95,6 +95,7 @@ test.describe('Vendor SPMV test', () => {
 		await vendor.cloneProductViaSellItemButton(productName);
 	});
 
+	// customer
 
 	test('customer can view other available vendors @pro', async ( ) => {
 		await customer.viewOtherAvailableVendors(productName1);

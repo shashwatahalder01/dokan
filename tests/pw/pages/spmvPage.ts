@@ -89,6 +89,13 @@ export class SpmvPage extends VendorPage {
 
 		}
 
+		const searchInputIsVisible = await this.isVisible(selector.vendor.vSpmv.search.searchInput);
+		if(!searchInputIsVisible){
+			// forcing spmv search section to open via removing class
+			const spmvSearchDiv = (await this.getClassValue(selector.vendor.vSpmv.search.searchDiv))!;
+			await this.setAttributeValue(selector.vendor.vSpmv.search.searchDiv, 'class', spmvSearchDiv.replace('section-closed', ''));
+		}
+
 		await this.clearAndType(selector.vendor.vSpmv.search.searchInput, productName);
 		await this.clickAndWaitForResponseAndLoadState(data.subUrls.frontend.vDashboard.spmv, selector.vendor.vSpmv.search.search);
 		await this.toContainText(selector.vendor.vSpmv.resultCount, 'Showing the single result');
