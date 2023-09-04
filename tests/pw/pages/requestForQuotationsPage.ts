@@ -219,7 +219,6 @@ export class RequestForQuotationsPage extends AdminPage {
 	// add quote
 	async addQuote(quote: requestForQuotation['quote']){
 		await this.goIfNotThere(data.subUrls.backend.dokan.requestForQuote);
-
 		await this.click(selector.admin.dokan.requestForQuotation.quotesList.newQuote);
 		await this.updateQuoteFields(quote, 'create');
 	}
