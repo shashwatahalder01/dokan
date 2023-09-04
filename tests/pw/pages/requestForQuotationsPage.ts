@@ -237,7 +237,8 @@ export class RequestForQuotationsPage extends AdminPage {
 
 	// update quote
 	async updateQuote(quoteTitle: string, action: string){
-		await this.goIfNotThere(data.subUrls.backend.dokan.requestForQuote);
+		await this.goto(data.subUrls.backend.dokan.requestForQuote);
+		// await this.goIfNotThere(data.subUrls.backend.dokan.requestForQuote);
 
 		switch (action) {
 
@@ -267,7 +268,8 @@ export class RequestForQuotationsPage extends AdminPage {
 
 	// approve quote
 	async approveQuote(quoteTitle: string){
-		await this.goIfNotThere(data.subUrls.backend.dokan.requestForQuote);
+		await this.goto(data.subUrls.backend.dokan.requestForQuote);
+		// await this.goIfNotThere(data.subUrls.backend.dokan.requestForQuote);
 		await this.hover(selector.admin.dokan.requestForQuotation.quotesList.quoteCell(quoteTitle));
 		await this.clickAndWaitForResponse(data.subUrls.api.dokan.quotes, selector.admin.dokan.requestForQuotation.quotesList.quoteEdit(quoteTitle));
 		await this.clickAndWaitForResponse(data.subUrls.api.dokan.quotes, selector.admin.dokan.requestForQuotation.quotesList.approveQuote);
@@ -277,7 +279,8 @@ export class RequestForQuotationsPage extends AdminPage {
 	// convert quote to order
 	async convertQuoteToOrder(quoteTitle: string){
 		// await this.approveQuote(quoteTitle);
-		await this.goIfNotThere(data.subUrls.backend.dokan.requestForQuote);
+		await this.goto(data.subUrls.backend.dokan.requestForQuote);
+		// await this.goIfNotThere(data.subUrls.backend.dokan.requestForQuote);
 		await this.hover(selector.admin.dokan.requestForQuotation.quotesList.quoteCell(quoteTitle));
 		await this.clickAndWaitForResponse(data.subUrls.api.dokan.quotes, selector.admin.dokan.requestForQuotation.quotesList.quoteEdit(quoteTitle));
 		await this.clickAndWaitForResponse(data.subUrls.api.dokan.quotes, selector.admin.dokan.requestForQuotation.quotesList.convertToOrder);

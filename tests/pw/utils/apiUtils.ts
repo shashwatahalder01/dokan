@@ -1027,10 +1027,13 @@ export class ApiUtils {
 
 
 	// create quote request
-	async createRequestQuote(payload: object, auth? : auth): Promise<[responseBody, string]> {
+	async createRequestQuote(payload: object, auth? : auth): Promise<[responseBody, string, string]> {
 		const [, responseBody] = await this.post(endPoints.createRequestQuote, { data: payload, headers: auth });
+		// console.log(responseBody);
 		const quoteId = String(responseBody[0].data.id);
-		return [responseBody, quoteId];
+		const quoteTitle = String(responseBody[0].data.title);
+		// console.log(quoteTitle);
+		return [responseBody, quoteId, quoteTitle];
 	}
 
 
