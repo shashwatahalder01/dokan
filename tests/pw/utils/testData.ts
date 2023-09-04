@@ -1503,7 +1503,7 @@ export const data = {
 
 		quote:{
 			title: () => 'test quote_' + faker.string.uuid(),
-			user: 'customer1',
+			user: 'customer1',  //todo: update customer data via env and email domain
 			fullName: 'Jhon Doe',
 			email: 'customer1@g.com',
 			companyName: 'abc',
