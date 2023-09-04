@@ -213,6 +213,7 @@ export interface product {
 		category: string;
 		bookingDurationType: string;
 		bookingDuration: string;
+		bookingDurationMin: string;
 		bookingDurationMax: string;
 		bookingDurationUnit: string;
 		calendarDisplayMode: string;

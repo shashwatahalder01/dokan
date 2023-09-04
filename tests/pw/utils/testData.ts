@@ -240,7 +240,8 @@ export const data = {
 			category: 'Uncategorized',
 			bookingDurationType: 'customer',  // 'fixed', 'customer'
 			bookingDuration: '2',
-			bookingDurationMax: '2',
+			bookingDurationMin: '1',
+			bookingDurationMax: '20',
 			bookingDurationUnit: 'day',  // 'month', 'day', 'hour', 'minute'
 			calendarDisplayMode: 'always_visible',  // '', 'always_visible'
 			maxBookingsPerBlock: '5',

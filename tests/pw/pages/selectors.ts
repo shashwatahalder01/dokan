@@ -4749,8 +4749,9 @@ export const selector = {
 
 				// General Booking Options
 				bookingDurationType: '#\\_wc_booking_duration_type',
-				bookingDuration: '#\\_wc_booking_duration',
-				bookingDurationMax: '#_wc_booking_max_duration',
+				bookingDuration: 'input#\\_wc_booking_duration',
+				bookingDurationMin: 'input#\\_wc_booking_min_duration',
+				bookingDurationMax: 'input#\\_wc_booking_max_duration',
 				bookingDurationUnit: '#\\_wc_booking_duration_unit',
 
 				calendarDisplayMode: '#\\_wc_booking_calendar_display_mode',

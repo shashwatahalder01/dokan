@@ -150,6 +150,7 @@ export class BookingPage extends VendorPage {
 		// await this.addProductCategory(product.category);
 		// general booking options
 		await this.selectByValue(selector.vendor.vBooking.booking.bookingDurationType, product.bookingDurationType);
+		await this.clearAndType(selector.vendor.vBooking.booking.bookingDurationMin, product.bookingDurationMin);
 		await this.clearAndType(selector.vendor.vBooking.booking.bookingDurationMax, product.bookingDurationMax);
 		await this.selectByValue(selector.vendor.vBooking.booking.bookingDurationUnit, product.bookingDurationUnit);
 		// calendar display mode

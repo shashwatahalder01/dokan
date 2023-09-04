@@ -31,10 +31,10 @@ test.describe('Booking Product test', () => {
 		cPage = await customerContext.newPage();
 		customer = new BookingPage(cPage);
 
-		await vendor.addBookingResource(bookingResourceName); //todo: convert with api or db
-
 		apiUtils = new ApiUtils(request);
 		[,, bookableProductName] = await apiUtils.createBookableProduct(payloads.createBookableProduct(), payloads.vendorAuth);
+
+		await vendor.addBookingResource(bookingResourceName); //todo: convert with api or db
 
 	});
 
