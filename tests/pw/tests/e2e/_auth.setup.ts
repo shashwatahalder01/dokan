@@ -16,7 +16,7 @@ setup.describe('authenticate users & set permalink', () => {
         const wpPage = new WpPage(page);
         await loginPage.adminLogin(data.admin);
         await wpPage.setPermalinkSettings(data.wpSettings.permalink);
-        process.env.SERVER_URL = process.env.BASE_URL + '/wp-json'; // todo: use global variable instead
+        process.env.SERVER_URL = process.env.BASE_URL + '/wp-json';
     });
 
     setup('add customer1 @lite', async ({ request }) => {
@@ -54,5 +54,15 @@ setup.describe('authenticate users & set permalink', () => {
         const res = await apiUtils.pluginsActiveOrNot(data.plugin.dokanPro, payloads.adminAuth);
         process.env.DOKAN_PRO = String(res);
         expect(res).toBeTruthy();
+    });
+
+    setup('disable dokan pro if enabled @liteOnly', async ({ request }) => {
+        const apiUtils = new ApiUtils(request);
+        const pluginExists = await apiUtils.checkPluginsExistence(data.plugin.dokanPro, payloads.adminAuth);
+        console.log(pluginExists);
+        if (pluginExists) {
+            await apiUtils.updatePlugin('dokan-pro/dokan-pro', { status: 'inactive' }, payloads.adminAuth);
+            process.env.DOKAN_PRO = String(!pluginExists);
+        }
     });
 });
