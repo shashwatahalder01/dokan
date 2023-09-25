@@ -59,7 +59,6 @@ for (const version of versions) {
 
 test('update batch orders @v2 @lite', async () => {
     const allOrderIds = (await apiUtils.getAllOrders())?.map((a: { id: unknown }) => a.id);
-    console.log(allOrderIds);
     const [response, responseBody] = await apiUtils.post(endPoints.updateBatchOrders, { data: { order_ids: allOrderIds, status: 'wc-completed' } });
     expect(response.ok()).toBeTruthy();
     expect(responseBody).toBeTruthy();
