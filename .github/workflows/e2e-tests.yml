@@ -163,12 +163,12 @@ jobs:
             #     retry_on: error
             #     command: cd tests/pw && npm run test:e2e
 
-            # - name: 🧪 Running the e2e tests
-            #   if: always()
-            #   timeout-minutes: 40
-            #   run: |
-            #       cd tests/pw 
-            #       npm run test:e2e:pro
+            - name: 🧪 Running the e2e tests
+              if: always()
+              timeout-minutes: 40
+              run: |
+                  cd tests/pw 
+                  npm run test:e2e:pro
 
             - name: 🧪 Running the api tests
               if: always()
@@ -177,20 +177,20 @@ jobs:
                   cd tests/pw 
                   npm run test:api:pro
 
-            # - name: Publish E2e Test Report (jUnit)
-            #   uses: mikepenz/action-junit-report@v3
-            #   if: always() # always run even if the previous step fails
-            #   with:
-            #       report_paths: 'tests/pw/playwright-report/e2e/junit-report/e2e-results.xml'
-            #       job_summary: false
-            #       # annotate_only: true,
-            #       # annotate_notice: true,
-            #       # include_passed: true,
-            #       # check_retries: true,
-            #       # detailed_summary: true,
-            #       # check_name: 'E2E Test Report'
-            #       # summary: 'E2E Test Summary'
-            #       # annotate_only: true
+            - name: Publish E2e Test Report (jUnit)
+              uses: mikepenz/action-junit-report@v3
+              if: always() # always run even if the previous step fails
+              with:
+                  report_paths: 'tests/pw/playwright-report/e2e/junit-report/e2e-results.xml'
+                  job_summary: false
+                  # annotate_only: true,
+                  # annotate_notice: true,
+                  # include_passed: true,
+                  # check_retries: true,
+                  # detailed_summary: true,
+                  # check_name: 'E2E Test Report'
+                  # summary: 'E2E Test Summary'
+                  # annotate_only: true
 
             - name: Publish API Test Report (jUnit)
               uses: mikepenz/action-junit-report@v3
@@ -207,33 +207,33 @@ jobs:
                   # summary: 'E2E Test Summary'
                   # annotate_only: true
 
-            # - name: Prepare test summary
-            #   id: prepare-test-summary
-            #   uses: actions/github-script@v6
-            #   if: always()
-            #   with:
-            #       result-encoding: string
-            #       script: |
-            #           const script = require("./tests/pw/testSummary.ts" )
-            #           return await script({github, context, core})
+            - name: Prepare test summary
+              id: prepare-test-summary
+              uses: actions/github-script@v6
+              if: always()
+              with:
+                  result-encoding: string
+                  script: |
+                      const script = require("./tests/pw/testSummary.ts" )
+                      return await script({github, context, core})
 
-            # - name: Find PR comment by github-actions[bot]
-            #   uses: peter-evans/find-comment@v2
-            #   id: find-comment
-            #   if: github.event_name == 'pull_request'
-            #   with:
-            #       issue-number: ${{ github.event.pull_request.number }}
-            #       comment-author: 'github-actions[bot]'
-            #       body-includes: Tests Summary
+            - name: Find PR comment by github-actions[bot]
+              uses: peter-evans/find-comment@v2
+              id: find-comment
+              if: github.event_name == 'pull_request'
+              with:
+                  issue-number: ${{ github.event.pull_request.number }}
+                  comment-author: 'github-actions[bot]'
+                  body-includes: Tests Summary
 
-            # - name: Create or update PR comment
-            #   uses: peter-evans/create-or-update-comment@v2
-            #   if: github.event_name == 'pull_request'
-            #   with:
-            #       comment-id: ${{ steps.find-comment.outputs.comment-id }}
-            #       issue-number: ${{ github.event.pull_request.number }}
-            #       body: ${{ steps.prepare-test-summary.outputs.result }}
-            #       edit-mode: replace
+            - name: Create or update PR comment
+              uses: peter-evans/create-or-update-comment@v2
+              if: github.event_name == 'pull_request'
+              with:
+                  comment-id: ${{ steps.find-comment.outputs.comment-id }}
+                  issue-number: ${{ github.event.pull_request.number }}
+                  body: ${{ steps.prepare-test-summary.outputs.result }}
+                  edit-mode: replace
 
             # - name: Generate Test Report
             #   uses: phoenix-actions/test-reporting@v8

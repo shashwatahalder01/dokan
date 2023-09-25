@@ -18,7 +18,6 @@ let apiUtils: ApiUtils;
 const versions = ['v1', 'v2'];
 for (const version of versions) {
     test.describe(`order api test ${version}`, () => {
-        let apiUtils: ApiUtils;
         let orderId: string;
 
         test.beforeAll(async ({ request }) => {
