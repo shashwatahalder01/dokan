@@ -56,13 +56,13 @@ setup.describe('authenticate users & set permalink', () => {
         expect(res).toBeTruthy();
     });
 
-    setup('disable dokan pro if enabled @liteOnly', async ({ request }) => {
-        const apiUtils = new ApiUtils(request);
-        const pluginExists = await apiUtils.checkPluginsExistence(data.plugin.dokanPro, payloads.adminAuth);
-        console.log(pluginExists);
-        if (pluginExists) {
-            await apiUtils.updatePlugin('dokan-pro/dokan-pro', { status: 'inactive' }, payloads.adminAuth);
-            process.env.DOKAN_PRO = String(!pluginExists);
-        }
-    });
+    // setup('disable dokan pro if enabled @liteOnly', async ({ request }) => {
+    //     const apiUtils = new ApiUtils(request);
+    //     const pluginExists = await apiUtils.checkPluginsExistence(data.plugin.dokanPro, payloads.adminAuth);
+    //     console.log(pluginExists);
+    //     if (pluginExists) {
+    //         await apiUtils.updatePlugin('dokan-pro/dokan-pro', { status: 'inactive' }, payloads.adminAuth);
+    //         process.env.DOKAN_PRO = String(!pluginExists);
+    //     }
+    // });
 });
