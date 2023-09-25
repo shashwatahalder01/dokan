@@ -27,6 +27,7 @@
 - [ ] add all email tests  
 - [ ] add more fields in settings test  
 - [ ] short browser context load in spec file  
+- [ ] use global variable instead of env variable
 
 ### Todo: Project
 

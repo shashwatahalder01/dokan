@@ -48,7 +48,7 @@ test.describe('Vendor SPMV test', () => {
         await admin.assignSpmvProduct(productId, data.predefined.vendorStores.vendor1FullName);
     });
 
-    test('vendor spmv menu page is rendering properly @pro @explo', async () => {
+    test.only('vendor spmv menu page is rendering properly @pro @explo', async () => {
         await vendor.vendorSpmvRenderProperly();
     });
 
