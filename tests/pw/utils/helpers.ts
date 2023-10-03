@@ -31,6 +31,9 @@ export const helpers = {
     // remove array element
     removeItem: (arr: any[], removeItem: any) => arr.filter(item => item !== removeItem),
 
+    // get count in array
+    getCount: (array: any[], element: any) => array.filter(n => n === element).length,
+
     // is sub array
     isSubArray: (parentArray: any[], subArray: any[]) => subArray.every(el => parentArray.includes(el)),
 

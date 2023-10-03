@@ -25,11 +25,13 @@ export default defineConfig({
               ['html', { open: 'never', outputFolder: 'playwright-report/e2e/html/html-report-e2e' }],
               ['junit', { outputFile: 'playwright-report/e2e/junit-report/e2e-results.xml' }],
               ['list', { printSteps: true }],
+              ['./utils/summaryReporter.ts', { outputFile: 'playwright-report/e2e/summary-report/results.json' }],
           ]
         : [
               ['html', { open: 'never', outputFolder: 'playwright-report/e2e/html/html-report-e2e' }],
               ['junit', { outputFile: 'playwright-report/e2e/junit-report/e2e-results.xml' }],
               ['list', { printSteps: true }],
+              ['./utils/summaryReporter.ts', { outputFile: 'playwright-report/e2e/summary-report/results.json' }],
               // ['allure-playwright',	{ detail: true, outputFolder: 'playwright-report/e2e/allure/allure-report', suiteTitle: false }]
           ],
 

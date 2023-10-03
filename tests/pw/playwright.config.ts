@@ -4,7 +4,7 @@ import 'dotenv/config';
 export default defineConfig({
     testDir: './tests/',
     testMatch: /.*\.spec\.ts/,
-    outputDir      : 'playwright/test-artifacts/', 	/* Folder for test artifacts such as screenshots, videos, traces, etc. */
+    outputDir: 'playwright/test-artifacts/' /* Folder for test artifacts such as screenshots, videos, traces, etc. */,
     // globalSetup    : './global-setup', /* Path to the global setup file. This file will be required and run before all the tests. */
     // globalTeardown : './global-teardown', /* Path to the global teardown file. This file will be required and run after all the tests. */
     globalTimeout: process.env.CI ? 20 * (60 * 1000) : 20 * (60 * 1000) /* Maximum time in milliseconds the whole test suite can run */,
@@ -26,13 +26,13 @@ export default defineConfig({
               // ['html', { open: 'never', outputFolder: 'playwright-report/html-report' }],
               // ['junit', { outputFile: 'playwright-report/junit-report/results.xml' }],
               ['list', { printSteps: true }],
+              ['./utils/summaryReporter.ts', { outputFile: 'playwright-report/summary-report/results.json' }],
           ]
         : [
-              // ['./myReporter.ts'],
               ['html', { open: 'never', outputFolder: 'playwright-report/html-report' }],
               // ['junit', { outputFile: 'playwright-report/junit-report/results.xml' }],
               ['list', { printSteps: true }],
-              // ['allure-playwright',	{ detail: true, outputFolder: 'playwright-report/allure-report', suiteTitle: false }]
+              ['./utils/summaryReporter.ts', { outputFile: 'playwright-report/summary-report/results.json' }],
           ],
     use: {
         ...devices['Desktop Chrome'],

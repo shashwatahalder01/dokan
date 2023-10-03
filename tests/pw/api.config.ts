@@ -25,12 +25,14 @@ export default defineConfig({
               ['html', { open: 'never', outputFolder: 'playwright-report/api/html/html-report-api' }],
               ['junit', { outputFile: 'playwright-report/api/junit-report/api-results.xml' }],
               ['list', { printSteps: true }],
+              ['./utils/summaryReporter.ts', { outputFile: 'playwright-report/api/summary-report/results.json' }],
           ]
         : [
               ['html', { open: 'never', outputFolder: 'playwright-report/api/html/html-report-api' }],
               ['junit', { outputFile: 'playwright-report/api/junit-report/api-results.xml' }],
               ['list', { printSteps: true }],
-              // ['allure-playwright',	{ detail: true, outputFolder: 'playwright-report/api/allure/allure-report', suiteTitle: false }]
+              ['./utils/summaryReporter.ts', { outputFile: 'playwright-report/api/summary-report/results.json' }],
+            //   ['allure-playwright', { detail: true, outputFolder: 'playwright-report/api/allure/allure-report', suiteTitle: false }],
           ],
 
     use: {
