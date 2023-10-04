@@ -153,13 +153,13 @@ jobs:
             #     cd tests/pw
             #     npm run pw:deps-only
 
-            - name: Running the e2e tests
-              uses: nick-fields/retry@v2
-              with:
-                  timeout_seconds: 30000
-                  max_attempts: 1
-                  retry_on: error
-                  command: cd tests/pw && npm run test:e2e
+            # - name: Running the e2e tests
+            #   uses: nick-fields/retry@v2
+            #   with:
+            #       timeout_seconds: 30000
+            #       max_attempts: 1
+            #       retry_on: error
+            #       command: cd tests/pw && npm run test:e2e
 
             - name: 🧪 Running the e2e tests
               if: always()
