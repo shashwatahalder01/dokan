@@ -1,12 +1,16 @@
-const convert = require('xml-js');
 const fs = require('fs');
 const { SHA, PR_NUMBER, SYSTEM_INFO, API_TEST_RESULT, E2E_TEST_RESULT } = process.env;
+
+function replace(obj) {
+    Object.keys(obj).forEach(key => (typeof obj[key] == 'object' ? replace(obj[key]) : (obj[key] = String(obj[key]))));
+}
 
 const envInfo = JSON.parse(fs.readFileSync(SYSTEM_INFO, 'utf8'));
 
 const getTestResult = (suiteName, filePath) => {
     if (fs.existsSync(filePath)) {
         const testResult = JSON.parse(fs.readFileSync(filePath, 'utf8'));
+        replace(testResult);
         const testSummary = [suiteName, testResult.total_tests, testResult.passed, testResult.failed, testResult.flaky, testResult.skipped, testResult.suite_duration_formatted];
         return testSummary;
     } else {

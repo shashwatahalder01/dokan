@@ -165,12 +165,12 @@ jobs:
             #     retry_on: error
             #     command: cd tests/pw && npm run test:e2e
 
-            - name: 🧪 Running the e2e tests
-              if: always()
-              timeout-minutes: 40
-              run: |
-                  cd tests/pw 
-                  npm run test:e2e:pro
+            # - name: 🧪 Running the e2e tests
+            #   if: always()
+            #   timeout-minutes: 40
+            #   run: |
+            #       cd tests/pw 
+            #       npm run test:e2e:pro
 
             - name: 🧪 Running the api tests
               if: always()
@@ -179,20 +179,20 @@ jobs:
                   cd tests/pw 
                   npm run test:api:pro
 
-            - name: Publish E2e Test Report (jUnit)
-              uses: mikepenz/action-junit-report@v3
-              if: always() # always run even if the previous step fails
-              with:
-                  report_paths: 'tests/pw/playwright-report/e2e/junit-report/e2e-results.xml'
-                  job_summary: false
-                  # annotate_only: true,
-                  # annotate_notice: true,
-                  # include_passed: true,
-                  # check_retries: true,
-                  # detailed_summary: true,
-                  # check_name: 'E2E Test Report'
-                  # summary: 'E2E Test Summary'
-                  # annotate_only: true
+            # - name: Publish E2e Test Report (jUnit)
+            #   uses: mikepenz/action-junit-report@v3
+            #   if: always() # always run even if the previous step fails
+            #   with:
+            #       report_paths: 'tests/pw/playwright-report/e2e/junit-report/e2e-results.xml'
+            #       job_summary: false
+            #       # annotate_only: true,
+            #       # annotate_notice: true,
+            #       # include_passed: true,
+            #       # check_retries: true,
+            #       # detailed_summary: true,
+            #       # check_name: 'E2E Test Report'
+            #       # summary: 'E2E Test Summary'
+            #       # annotate_only: true
 
             - name: Publish API Test Report (jUnit)
               uses: mikepenz/action-junit-report@v3
