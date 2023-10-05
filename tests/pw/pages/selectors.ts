@@ -1767,25 +1767,36 @@ export const selector = {
 
                 // General
                 general: {
-                    // Site Options
+                    // Site settings
                     adminAreaAccess: '.admin_access .switch',
 
                     vendorStoreUrl: '#dokan_general\\[custom_store_url\\]', // todo:  for CSS selector [ ] needs escaped with double back slash \\
                     vendorSetupWizardLogo: '#dokan_general\\[setup_wizard_logo_url\\]',
                     disableWelcomeWizard: '#dokan_general\\[disable_welcome_wizard\\]',
+                    setupWizardMessageIframe: 'iframe',
+                    setupWizardMessageHtmlBody: '#tinymce',
                     sellingProductTypes: (type: string) => `//label[@for='dokan_general[global_digital_mode][${type}]']`,
                     logShipStationApiRequest: '#dokan_general\\[enable_shipstation_logging\\]',
                     dataClear: '#dokan_general\\[data_clear_on_uninstall\\]',
                     confirmDataClear: '.swal2-confirm',
                     cancelDataClear: '.swal2-cancel',
 
-                    // Vendor Store Options
+                    // Vendor Store settings
                     storeTermsAndConditions: '.seller_enable_terms_and_conditions .switch',
                     storeProductPerPage: '#dokan_general\\[store_products_per_page\\]',
                     enableTermsAndCondition: '.enable_tc_on_reg .switch',
                     enableSingSellerMode: '#dokan_general\\[enable_single_seller_mode\\]',
                     storCategory: (category: string) => `//label[@for='dokan_general[store_category_type][${category}]']`,
+
+
+                    // product page settings
+                    showVendorInfo: '.show_vendor_info .switch',
+                    enableMoreProductsTab: '.enabled_more_products_tab .switch',
+
+
                     generalSaveChanges: '#submit',
+
+
                 },
 
                 // Selling
@@ -1800,8 +1811,10 @@ export const selector = {
 
                     // Vendor Capability
                     enableSelling: '.new_seller_enable_selling .switch',
+                    onePageProductCreate: '.one_step_product_create .switch',
                     disableProductPopup: '.disable_product_popup .switch',
                     orderStatusChange: '.order_status_change .switch',
+                    selectAnyCategory: '.dokan_any_category_selection .switch',
                     newProductStatus: (status: string) => `//label[@for='dokan_selling[product_status][${status}]']`,
                     duplicateProduct: '.vendor_duplicate_product .switch',
                     editedProductStatus: '.edited_product_status .switch',
@@ -1812,7 +1825,7 @@ export const selector = {
                     productDiscount: '//div[contains(text(),"Product Discount")]//label[@class="switch tips"]',
 
                     hideCustomerInfo: '.hide_customer_info .switch',
-                    vendorProductReview: '.seller_review_manage .switch',
+                    vendorProductReviewStatusChange: '.seller_review_manage .switch',
                     guestProductEnquiry: '.enable_guest_user_enquiry .switch',
                     newVendorEnableAuction: '.new_seller_enable_auction .switch',
                     enableMinMaxQuantities: '.enable_min_max_quantity .switch',
@@ -1908,7 +1921,7 @@ export const selector = {
                     storeBannerHeight: '#dokan_appearance\\[store_banner_height\\]',
                     storeOpeningClosingTimeWidget: '.store_open_close .switch',
                     enableStoreSidebarFromTheme: '.enable_theme_store_sidebar .switch',
-                    showVendorInfo: '.show_vendor_info .switch',
+                    
                     hideVendorInfoEmailAddress: '//div[contains(text(),"Email Address")]//label[@class="switch tips"]',
                     hideVendorInfoPhoneNumber: '//div[contains(text(),"Phone Number")]//label[@class="switch tips"]',
                     hideVendorInfoStoreAddress: '//div[contains(text(),"Store Address")]//label[@class="switch tips"]',

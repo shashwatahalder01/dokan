@@ -130,18 +130,16 @@ export class OrdersPage extends VendorPage {
         // order note elements are visible
         await this.multipleElementVisible(selector.vendor.orders.orderNote);
 
-        await this.click(selector.vendor.orders.trackingDetails.addTrackingNumber);
-
-        // tracking detail elements are visible
-        const { addTrackingNumber, ...trackingDetails } = selector.vendor.orders.trackingDetails;
-        await this.multipleElementVisible(trackingDetails);
-
         if (DOKAN_PRO) {
             await this.click(selector.vendor.orders.shipment.createNewShipment);
-
             // shipment elements are visible
             const { createNewShipment, shipmentOrderItem, shipmentOrderItemQty, ...shipment } = selector.vendor.orders.shipment;
             await this.multipleElementVisible(shipment);
+        } else {
+            await this.click(selector.vendor.orders.trackingDetails.addTrackingNumber);
+            // tracking detail elements are visible
+            const { addTrackingNumber, ...trackingDetails } = selector.vendor.orders.trackingDetails;
+            await this.multipleElementVisible(trackingDetails);
         }
 
         // downloadable product elements are visible

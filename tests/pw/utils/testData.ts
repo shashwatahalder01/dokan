@@ -1702,6 +1702,7 @@ export const data = {
         // General Settings
         general: {
             vendorStoreUrl: 'store',
+            setupWizardMessage: 'Thank you for choosing The Marketplace to power your online store! This quick setup wizard will help you configure the basic settings. It’s completely optional and shouldn’t take longer than two minutes.',
             sellingProductTypes: 'sell_both', // 'sell_both', 'sell_physical', 'sell_digital'
             storeProductPerPage: '12',
             storCategory: 'multiple', // 'none', 'single', 'multiple'
@@ -1766,7 +1767,7 @@ export const data = {
         // privacy policy
         privacyPolicy: {
             privacyPage: '2', // '2', '3', '4', '5', '6', '7', '8', '9', '10'
-            privacyPolicyHtmlBody:
+            privacyPolicyContent:
                 'Your personal data will be used to support your experience throughout this website, to manage access to your account, and for other purposes described in our [dokan_privacy_policy]',
             saveSuccessMessage: 'Setting has been saved successfully.',
         },
