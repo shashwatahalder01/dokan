@@ -13,7 +13,6 @@ import { endPoints } from '@utils/apiEndPoints';
 import { payloads } from '@utils/payloads';
 
 test.describe('vendor staff api test', () => {
-
     let apiUtils: ApiUtils;
     let staffId: string;
 

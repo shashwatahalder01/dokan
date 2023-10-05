@@ -192,8 +192,7 @@ export const dbData = {
         privacyPolicySettings: {
             enable_privacy: 'on',
             privacy_page: '2',
-            privacy_policy:
-                '<p>Your personal data will be used to support your experience throughout this website, to manage access to your account, and for other purposes described in our [dokan_privacy_policy]</p>',
+            privacy_policy: '<p>Your personal data will be used to support your experience throughout this website, to manage access to your account, and for other purposes described in our [dokan_privacy_policy]</p>',
         },
 
         colorsSettings: {

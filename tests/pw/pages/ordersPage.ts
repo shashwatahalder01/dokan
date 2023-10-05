@@ -84,13 +84,11 @@ export class OrdersPage extends VendorPage {
                 break;
 
             case 'by-date':
-                await this.setAttributeValue(
-                    selector.vendor.orders.filters.filterByDate.dateRangeInput,
-                    'value',
-                    helpers.dateFormatFYJ(inputValue.startDate) + ' - ' + helpers.dateFormatFYJ(inputValue.endDate),
-                );
-                await this.setAttributeValue(selector.vendor.orders.filters.filterByDate.startDateInput, 'value', inputValue.startDate); // todo: resolve this
-                await this.setAttributeValue(selector.vendor.orders.filters.filterByDate.endDateInput, 'value', inputValue.endDate);
+                if (typeof inputValue !== 'string') {
+                    await this.setAttributeValue(selector.vendor.orders.filters.filterByDate.dateRangeInput, 'value', helpers.dateFormatFYJ(inputValue.startDate) + ' - ' + helpers.dateFormatFYJ(inputValue.endDate));
+                    await this.setAttributeValue(selector.vendor.orders.filters.filterByDate.startDateInput, 'value', inputValue.startDate);
+                    await this.setAttributeValue(selector.vendor.orders.filters.filterByDate.endDateInput, 'value', inputValue.endDate);
+                }
                 break;
 
             default:

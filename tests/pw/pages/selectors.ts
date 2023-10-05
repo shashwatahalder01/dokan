@@ -1788,15 +1788,11 @@ export const selector = {
                     enableSingSellerMode: '#dokan_general\\[enable_single_seller_mode\\]',
                     storCategory: (category: string) => `//label[@for='dokan_general[store_category_type][${category}]']`,
 
-
                     // product page settings
                     showVendorInfo: '.show_vendor_info .switch',
                     enableMoreProductsTab: '.enabled_more_products_tab .switch',
 
-
                     generalSaveChanges: '#submit',
-
-
                 },
 
                 // Selling
@@ -1921,7 +1917,7 @@ export const selector = {
                     storeBannerHeight: '#dokan_appearance\\[store_banner_height\\]',
                     storeOpeningClosingTimeWidget: '.store_open_close .switch',
                     enableStoreSidebarFromTheme: '.enable_theme_store_sidebar .switch',
-                    
+
                     hideVendorInfoEmailAddress: '//div[contains(text(),"Email Address")]//label[@class="switch tips"]',
                     hideVendorInfoPhoneNumber: '//div[contains(text(),"Phone Number")]//label[@class="switch tips"]',
                     hideVendorInfoStoreAddress: '//div[contains(text(),"Store Address")]//label[@class="switch tips"]',
@@ -2103,8 +2099,7 @@ export const selector = {
 
                 // Wholesale
                 wholesale: {
-                    whoCanSeeWholesalePrice: (type: string) =>
-                        `//div[@class='wholesale_price_display dokan-settings-field-type-radio'] //label[@for='dokan_wholesale[wholesale_price_display][${type}]']`,
+                    whoCanSeeWholesalePrice: (type: string) => `//div[@class='wholesale_price_display dokan-settings-field-type-radio'] //label[@for='dokan_wholesale[wholesale_price_display][${type}]']`,
                     showWholesalePriceOnShopArchive: '.display_price_in_shop_archieve .switch',
                     needApprovalForCustomer: '.need_approval_for_wholesale_customer .switch',
                     wholesaleSaveChanges: '#submit',
@@ -3754,10 +3749,8 @@ export const selector = {
             shipment: {
                 shipmentDiv: '//strong[normalize-space()="Shipments"]/../..',
                 createNewShipment: '#create-tracking-status-action',
-                shipmentOrderItem: (productName: string) =>
-                    `//div[@id="dokan-order-shipping-status-tracking-panel"]//td//a[contains( text(),"${productName}")]/../..//input[@name="shipment_order_item_select"]`,
-                shipmentOrderItemQty: (productName: string) =>
-                    `//div[@id="dokan-order-shipping-status-tracking-panel"]//td//a[contains( text(),"${productName}")]/../..//input[@class="shipping_order_item_qty"]`,
+                shipmentOrderItem: (productName: string) => `//div[@id="dokan-order-shipping-status-tracking-panel"]//td//a[contains( text(),"${productName}")]/../..//input[@name="shipment_order_item_select"]`,
+                shipmentOrderItemQty: (productName: string) => `//div[@id="dokan-order-shipping-status-tracking-panel"]//td//a[contains( text(),"${productName}")]/../..//input[@class="shipping_order_item_qty"]`,
                 shippingStatus: '#shipping_status', // ss_delivered, ss_cancelled, ss_proceccing, ss_ready_for_pickup, ss_pickedup, ss_on_the_way
                 shippingProvider: '#shipping_status_provider', // sp-dhl, sp-dpd, sp-fedex, sp-polish-shipping-providers, sp-ups, sp-usps, sp-other
                 dateShipped: '#shipped_status_date',
@@ -4148,8 +4141,7 @@ export const selector = {
                 paymentMethods: '#dokan-withdraw-payment-method-list .dokan-panel-inner-container',
                 makeMethodDefault: (methodName: string) => `//div[@id='dokan-withdraw-payment-method-list']//strong[contains( text(), '${methodName}')]/../..//button[contains(@class, 'dokan-btn')]`,
                 setupMethod: (methodName: string) => `//strong[contains( text(), '${methodName}')]/../..//a[@class='dokan-btn']`,
-                defaultMethod: (methodName: string) =>
-                    `//div[@id='dokan-withdraw-payment-method-list']//strong[contains( text(), '${methodName}')]/../..//button[contains(@class, 'dokan-btn-default')]`,
+                defaultMethod: (methodName: string) => `//div[@id='dokan-withdraw-payment-method-list']//strong[contains( text(), '${methodName}')]/../..//button[contains(@class, 'dokan-btn-default')]`,
                 defaultPaymentMethodUpdateSuccessMessage: 'Default method update successful.',
             },
 
@@ -6199,8 +6191,7 @@ export const selector = {
 
             visitStore: (storeName: string) => `//a[text()='${storeName}']/../../../../..//a[@title='Visit Store']`,
             followUnFollowStore: (storeName: string) => `//a[text()='${storeName}']/../../../../..//button[contains(@class,'dokan-follow-store-button')]`,
-            currentFollowStatus: (storeName: string) =>
-                `//a[text()='${storeName}']/../../../../..//button[contains(@class,'dokan-follow-store-button')]//span[@class='dokan-follow-store-button-label-current']`,
+            currentFollowStatus: (storeName: string) => `//a[text()='${storeName}']/../../../../..//button[contains(@class,'dokan-follow-store-button')]//span[@class='dokan-follow-store-button-label-current']`,
         },
 
         // Customer Support Tickets
@@ -6622,8 +6613,7 @@ export const selector = {
 
             visitStore: (storeName: string) => `//a[text()='${storeName}']/../../../../..//a[@title='Visit Store']`,
             followUnFollowStore: (storeName: string) => `//a[text()='${storeName}']/../../../../..//button[contains(@class,'dokan-follow-store-button')]`,
-            currentFollowStatus: (storeName: string) =>
-                `//a[text()='${storeName}']/../../../../..//button[contains(@class,'dokan-follow-store-button')]//span[@class='dokan-follow-store-button-label-current']`,
+            currentFollowStatus: (storeName: string) => `//a[text()='${storeName}']/../../../../..//button[contains(@class,'dokan-follow-store-button')]//span[@class='dokan-follow-store-button-label-current']`,
             followUnFollowStoreSingleStore: 'button.dokan-follow-store-button',
             currentFollowStatusSingleStore: 'span.dokan-follow-store-button-label-current',
         },

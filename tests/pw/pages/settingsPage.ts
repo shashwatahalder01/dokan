@@ -51,7 +51,6 @@ export class SettingsPage extends AdminPage {
     }
 
     // dokan settings
-    //todo: add more fields to dokan settings tests
 
     // admin set dokan general settings
     async setDokanGeneralSettings(general: dokanSettings['general']) {
@@ -237,11 +236,7 @@ export class SettingsPage extends AdminPage {
         // Privacy Policy Settings
         await this.enableSwitcher(selector.admin.dokan.settings.privacyPolicy.enablePrivacyPolicy);
         await this.selectByValue(selector.admin.dokan.settings.privacyPolicy.privacyPage, privacyPolicy.privacyPage);
-        await this.typeFrameSelector(
-            selector.admin.dokan.settings.privacyPolicy.privacyPolicyIframe,
-            selector.admin.dokan.settings.privacyPolicy.privacyPolicyHtmlBody,
-            privacyPolicy.privacyPolicyContent,
-        );
+        await this.typeFrameSelector(selector.admin.dokan.settings.privacyPolicy.privacyPolicyIframe, selector.admin.dokan.settings.privacyPolicy.privacyPolicyHtmlBody, privacyPolicy.privacyPolicyContent);
 
         // save settings
         await this.clickAndWaitForResponseAndLoadState(data.subUrls.ajax, selector.admin.dokan.settings.privacyPolicy.privacyPolicySaveChanges);
