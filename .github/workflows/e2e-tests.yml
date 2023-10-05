@@ -55,12 +55,14 @@ jobs:
               uses: actions/checkout@v3
 
             - name: Use desired version of NodeJS
+              if: success()
               uses: actions/setup-node@v3
               with:
                   node-version: '16'
                   cache: 'npm'
 
             - name: Clone dokan-pro
+              if: success()
               uses: actions/checkout@v3
               with:
                   repository: getdokan/dokan-pro
@@ -69,54 +71,66 @@ jobs:
                   ref: 'develop'
 
             - name: Composer install and build (Dokan-lite)
+              if: success()
               run: |
                   composer install --no-dev
                   composer dump-autoload -o
 
             - name: Npm install and build (Dokan-lite)
+              if: success()
               run: |
                   npm ci 
                   npm run build
 
             - name: Composer install and build (Dokan-pro)
+              if: success()
               run: |
                   cd plugins/dokan-pro
                   composer install --no-dev
                   composer dump-autoload -o
 
             - name: Npm install and build (Dokan-pro)
+              if: success()
               run: |
                   cd plugins/dokan-pro
                   npm ci
                   npm run build
 
             - name: Install dependencies
+              if: success()
               run: |
                   cd tests/pw 
-                  npm ci --legacy-peer-deps
+                  npm ci
 
             - name: Start WordPress Env
+              id: wp-env
+              if: success()
               run: |
                   cd tests/pw
                   npm run start:env
 
             - name: Get Test DB PORT
+              if: success()
               run: |
                   cd tests/pw
                   echo "DB_PORT=$(docker ps -f ancestor='mariadb' -f name='tests-mysql' --format='{{.Ports}}' | sed -E 's/.*:(.*)->.*/\1/')" >> $GITHUB_ENV
 
             - name: DB PORT
+              if: success()
               run: |
                   cd tests/pw 
                   echo "The value of test DB_PORT is ${{ env.DB_PORT }}"
 
             - name: Set Permalink structure
+              id: permalink
+              if: success()
               run: |
                   cd tests/pw 
                   npm run wp-env run tests-cli "wp rewrite structure /%postname%/"
                   # curl http://localhost:9999/wp-json/wp/v2
 
             - name: Activate theme:Storefront
+              if: success()
               run: |
                   cd tests/pw
                   npm run wp-env run tests-cli "wp theme activate storefront"
@@ -124,14 +138,16 @@ jobs:
             # Get Playwright version
             - name: Get installed Playwright version
               id: playwright-version
+              if: success()
               run: |
                   cd tests/pw
                   echo "PLAYWRIGHT_VERSION=$(npm ls @playwright/test --json | jq --raw-output '.dependencies["@playwright/test"].version')" >> $GITHUB_ENV
 
             # Cache browser binaries, cache key is based on Playwright version and OS
             - name: Cache playwright binaries
-              uses: actions/cache@v3
               id: playwright-cache
+              if: success()
+              uses: actions/cache@v3
               with:
                   path: |
                       ~/.cache/ms-playwright
@@ -141,7 +157,8 @@ jobs:
 
             # Install browser binaries & OS dependencies if cache missed
             - name: Install Playwright browser binaries & OS dependencies
-              if: steps.playwright-cache.outputs.cache-hit != 'true'
+              id: pw-install
+              if: success() && steps.playwright-cache.outputs.cache-hit != 'true'
               run: |
                   cd tests/pw
                   npm run pw:browser-with-deps
@@ -153,66 +170,30 @@ jobs:
             #     cd tests/pw
             #     npm run pw:deps-only
 
-            # - name: Running the e2e tests
-            #   uses: nick-fields/retry@v2
-            #   with:
-            #       timeout_seconds: 30000
-            #       max_attempts: 1
-            #       retry_on: error
-            #       command: cd tests/pw && npm run test:e2e
-
             - name: 🧪 Running the e2e tests
-              if: always()
+              id: e2e-test
+              if: steps.pw-install.outcome == 'success'
               timeout-minutes: 40
               run: |
                   cd tests/pw 
                   npm run test:e2e:pro
 
             - name: 🧪 Running the api tests
-              if: always()
+              id: api-test
+              if: steps.wp-env.outcome == 'success'
               timeout-minutes: 5
               run: |
                   cd tests/pw 
                   npm run test:api:pro
 
-            # - name: Publish E2e Test Report (jUnit)
-            #   uses: mikepenz/action-junit-report@v3
-            #   if: always() # always run even if the previous step fails
-            #   with:
-            #       report_paths: 'tests/pw/playwright-report/e2e/junit-report/e2e-results.xml'
-            #       job_summary: false
-            #       # annotate_only: true,
-            #       # annotate_notice: true,
-            #       # include_passed: true,
-            #       # check_retries: true,
-            #       # detailed_summary: true,
-            #       # check_name: 'E2E Test Report'
-            #       # summary: 'E2E Test Summary'
-            #       # annotate_only: true
-
-            # - name: Publish API Test Report (jUnit)
-            #   uses: mikepenz/action-junit-report@v3
-            #   if: always() # always run even if the previous step fails
-            #   with:
-            #       report_paths: 'tests/pw/playwright-report/api/junit-report/api-results.xml'
-            #       job_summary: false
-            #       # annotate_only: true,
-            #       # annotate_notice: true,
-            #       # include_passed: true,
-            #       # check_retries: true,
-            #       # detailed_summary: true,
-            #       # check_name: 'E2E Test Report'
-            #       # summary: 'E2E Test Summary'
-            #       # annotate_only: true
-
             - name: Prepare test summary
               id: prepare-test-summary
+              if: steps.step1.outcome == 'success' || steps.step2.outcome == 'success'
               uses: actions/github-script@v6
-              if: always()
               with:
                   result-encoding: string
                   script: |
-                      const script = require("./tests/pw/testSummary.ts" )
+                      const script = require("./tests/pw/utils/gitTestSummary.ts" )
                       return await script({github, context, core})
 
             - name: Find PR comment by github-actions[bot]

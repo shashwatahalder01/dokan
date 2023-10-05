@@ -1,21 +1,16 @@
 const fs = require('fs');
 const { SHA, PR_NUMBER, SYSTEM_INFO, API_TEST_RESULT, E2E_TEST_RESULT } = process.env;
 
-function replace(obj) {
-    Object.keys(obj).forEach(key => (typeof obj[key] == 'object' ? replace(obj[key]) : (obj[key] = String(obj[key]))));
-}
-
-const envInfo = JSON.parse(fs.readFileSync(SYSTEM_INFO, 'utf8'));
-
+const replace = obj => Object.keys(obj).forEach(key => (typeof obj[key] == 'object' ? replace(obj[key]) : (obj[key] = String(obj[key]))));
+const readFile = filePath => (fs.existsSync(filePath) ? JSON.parse(fs.readFileSync(filePath, 'utf8')) : false);
 const getTestResult = (suiteName, filePath) => {
-    if (fs.existsSync(filePath)) {
-        const testResult = JSON.parse(fs.readFileSync(filePath, 'utf8'));
+        const testResult = readFile(filePath);
+        if (!testResult) {
+            return [];
+        }
         replace(testResult);
         const testSummary = [suiteName, testResult.total_tests, testResult.passed, testResult.failed, testResult.flaky, testResult.skipped, testResult.suite_duration_formatted];
         return testSummary;
-    } else {
-        return [];
-    }
 };
 
 const addSummaryHeadingAndTable = core => {
@@ -34,6 +29,10 @@ const addSummaryHeadingAndTable = core => {
 };
 
 const addList = core => {
+    const envInfo = readFile(SYSTEM_INFO);
+    if (!envInfo) {
+        return false;
+    }
     const pluginList = core.summary.addList(envInfo.activePlugins).stringify();
     core.summary.clear();
     const pluginDetails = core.summary.addDetails('Plugins: ', pluginList).stringify();
@@ -49,7 +48,7 @@ module.exports = async ({ github, context, core }) => {
     const plugins = addList(core);
     await core.summary.clear();
     addSummaryHeadingAndTable(core);
-    addSummaryFooter(core, plugins);
+    plugins && addSummaryFooter(core, plugins);
     const summary = core.summary.stringify();
     await core.summary.write();
     return summary;
