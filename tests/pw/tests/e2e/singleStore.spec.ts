@@ -22,7 +22,7 @@ test.describe('Single store functionality test', () => {
 
     // single store page
 
-    test.only('dokan single store page is rendering properly @lite @explo', async () => {
+    test('dokan single store page is rendering properly @lite @explo', async () => {
         await customer.singleStoreRenderProperly(data.predefined.vendorStores.vendor1);
     });
 

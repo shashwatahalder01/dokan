@@ -15,7 +15,7 @@ export class SingleStorePage extends CustomerPage {
 
     // single store render properly
     async singleStoreRenderProperly(storeName: string) {
-        // todo: update test for other layouts
+        // todo: update for other layouts
         await this.goIfNotThere(data.subUrls.frontend.vendorDetails(helpers.slugify(storeName)));
 
         // store profile elements are visible

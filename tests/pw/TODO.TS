@@ -855,11 +855,3 @@ const endpoints = [
   
   // Flatten the array and combine routes and methods
   const coverageArray = allRouteMethods.flat();
-
-
-
-
-
-
-
-
