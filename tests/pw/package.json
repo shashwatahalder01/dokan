@@ -66,6 +66,6 @@
         "dotenv": "^16.3.1",
         "mysqlconnector": "^2.0.1",
         "php-serialize": "^4.1.1",
-        "xml-js": "^1.6.11"
+        "zod": "^3.22.4"
     }
 }

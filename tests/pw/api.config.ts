@@ -1,4 +1,5 @@
-import { defineConfig } from '@playwright/test';
+import { defineConfig, expect } from '@playwright/test';
+import { customExpect } from '@utils/pwMatchers';
 import 'dotenv/config';
 
 export default defineConfig({
@@ -62,3 +63,5 @@ export default defineConfig({
         },
     ],
 });
+
+expect.extend(customExpect);
