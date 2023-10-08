@@ -1,12 +1,17 @@
-name: End-to-End Tests
+name: E2E_API Tests
 
 on:
     schedule:
+        # workflow will run daily at 8:00 AM
         - cron: '0 8 * * *'
+    # workflow will trigger on pull request
     pull_request:
+        branches: [develop]
+    # workflow will trigger on push to develop branch
     push:
-        branches:
-            - develop
+        branches: [develop]
+
+    # workflow can be manually triggered
     workflow_dispatch:
 
 # Cancels all previous workflow runs for pull requests that have not completed.
@@ -15,12 +20,14 @@ concurrency:
     group: ${{ github.workflow }}-${{ github.event_name == 'pull_request' && github.head_ref || github.sha }}
     cancel-in-progress: true
 
+# workflow permissions
 permissions:
     checks: write
     contents: read
     issues: write
     pull-requests: write
 
+# workflow environment variables
 env:
     ADMIN: admin
     ADMIN_PASSWORD: password
@@ -40,14 +47,12 @@ env:
     PR_NUMBER: ${{ github.event.number }}
     SHA: ${{ github.event.pull_request.head.sha }}
     SYSTEM_INFO: ./tests/pw/systemInfo.json
-    # API_TEST_RESULT: ./tests/pw/playwright-report/api/junit-report/api-results.xml
-    # E2E_TEST_RESULT: ./tests/pw/playwright-report/e2e/junit-report/e2e-results.xml
     API_TEST_RESULT: ./tests/pw/playwright-report/api/summary-report/results.json
     E2E_TEST_RESULT: ./tests/pw/playwright-report/e2e/summary-report/results.json
 
 jobs:
     tests:
-        name: e2e tests
+        name: e2e_api tests
         runs-on: ubuntu-latest
 
         steps:
@@ -102,6 +107,7 @@ jobs:
                   cd tests/pw 
                   npm ci
 
+            # Start wordpress environment
             - name: Start WordPress Env
               id: wp-env
               if: success()
@@ -109,31 +115,34 @@ jobs:
                   cd tests/pw
                   npm run start:env
 
+            # Grab test db port
             - name: Get Test DB PORT
+              id: db-port
               if: success()
               run: |
                   cd tests/pw
                   echo "DB_PORT=$(docker ps -f ancestor='mariadb' -f name='tests-mysql' --format='{{.Ports}}' | sed -E 's/.*:(.*)->.*/\1/')" >> $GITHUB_ENV
 
+            # db port
             - name: DB PORT
               if: success()
               run: |
-                  cd tests/pw 
+                  cd tests/pw
                   echo "The value of test DB_PORT is ${{ env.DB_PORT }}"
 
+            # Set permalink structure
             - name: Set Permalink structure
               id: permalink
               if: success()
               run: |
-                  cd tests/pw 
-                  npm run wp-env run tests-cli "wp rewrite structure /%postname%/"
+                  cd tests/pw
+                  npm run wp-env run tests-cli wp rewrite structure /%postname%/
                   # curl http://localhost:9999/wp-json/wp/v2
-
             - name: Activate theme:Storefront
               if: success()
               run: |
                   cd tests/pw
-                  npm run wp-env run tests-cli "wp theme activate storefront"
+                  npm run wp-env run tests-cli wp theme activate storefront
 
             # Get Playwright version
             - name: Get installed Playwright version
@@ -163,13 +172,14 @@ jobs:
                   cd tests/pw
                   npm run pw:browser-with-deps
 
-            # # Install only the OS dependencies if cache hit  not needed
+            # Install only the OS dependencies if cache hit not needed
             # - name: Install Playwright OS dependencies
             #   if: steps.playwright-cache.outputs.cache-hit == 'true'
             #   run: |
             #     cd tests/pw
             #     npm run pw:deps-only
 
+            # Run e2e tests
             - name: 🧪 Running the e2e tests
               id: e2e-test
               if: steps.pw-install.outcome == 'success'
@@ -178,24 +188,27 @@ jobs:
                   cd tests/pw 
                   npm run test:e2e:pro
 
+            # Run API tests
             - name: 🧪 Running the api tests
               id: api-test
-              if: steps.wp-env.outcome == 'success'
+              if: always()
               timeout-minutes: 5
               run: |
                   cd tests/pw 
                   npm run test:api:pro
 
+            # Prepare test summary
             - name: Prepare test summary
               id: prepare-test-summary
-              if: steps.step1.outcome == 'success' || steps.step2.outcome == 'success'
               uses: actions/github-script@v6
+              if: always()
               with:
                   result-encoding: string
                   script: |
                       const script = require("./tests/pw/utils/gitTestSummary.ts" )
                       return await script({github, context, core})
 
+            # Find PR comment
             - name: Find PR comment by github-actions[bot]
               uses: peter-evans/find-comment@v2
               id: find-comment
@@ -205,6 +218,7 @@ jobs:
                   comment-author: 'github-actions[bot]'
                   body-includes: Tests Summary
 
+            # Post test summary as PR comment
             - name: Create or update PR comment
               uses: peter-evans/create-or-update-comment@v2
               if: github.event_name == 'pull_request'
@@ -231,6 +245,7 @@ jobs:
             #   run: |
             #     echo "url is ${{ steps.test-report.outputs.runHtmlUrl }}"
 
+            # Upload artifacts
             - name: Archive test artifacts (screenshots, HTML snapshots, Reports)
               uses: actions/upload-artifact@v3
               if: always()
