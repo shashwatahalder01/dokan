@@ -161,7 +161,7 @@ jobs:
             # Run e2e tests
             - name: 🧪 Running the e2e tests
               id: e2e-test
-              if: steps.pw-install.outcome == 'success'
+              if: success()
               timeout-minutes: 40
               run: |
                   cd tests/pw 

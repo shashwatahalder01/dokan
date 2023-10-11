@@ -33,7 +33,6 @@ export default defineConfig({
               ['junit', { outputFile: 'playwright-report/api/junit-report/api-results.xml' }],
               ['list', { printSteps: true }],
               ['./utils/summaryReporter.ts', { outputFile: 'playwright-report/api/summary-report/results.json' }],
-              //   ['allure-playwright', { detail: true, outputFolder: 'playwright-report/api/allure/allure-report', suiteTitle: false }],
           ],
 
     use: {
