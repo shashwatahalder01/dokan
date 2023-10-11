@@ -1,4 +1,4 @@
-name: E2E_API Tests
+name: E2E_API Tests All
 
 on:
     schedule:
