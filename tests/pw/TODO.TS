@@ -1,66 +1,3 @@
-
-
-//****************************       e2e testing       ****************************
-
-// todo:  ***************** list all core tests and setup tests : plugins activated, wp settings, woocommerce settings, dokan modules activated , dokan settings for both e2e and api
-// todo:  ***************** GRAB CONSOLE ERROR, And PHP ERROR 
-// todo:  make tests more independent where possible specially admin parts : use before-all , after-all, delete data in before-all or after-all to repeat each tests: test should be passed for repeat-each:5, can be test parallely
-// todo:  slack integration : follow https://playwrightsolutions.com/how-do-you-handle-combining-html-json-reports-and-a-slack-message-after-a-playwright-test-is-run-with-the-shard-command/
-// todo:  working-directory: ./path/to/tests
-// todo:  update auth if expired instead of every-time
-// todo:  Report: separate two junit report showing on simple git-action summary
-// todo:  global setup & teardown can be converted to project setup: no need 
-// todo:  Project Configuration: separate everything for local & CI like: global setup, env, playwright config, Configure projects for multiple environments : ci, local,
-// todo:  Fixture: add fixture: separate user role,  implement fixture for lite pro issue handle
-// todo:  ESlint: #  // "no-unused-vars": "off" is enabled for now but remove before push, remove every eslint comment before push
-// todo:  test basic auth can be used instead of cookies for authentication , no need to do this
-// todo:  # why two pages are opening : fix that
-// todo:  Wp-env: Theme activation, permalink update and wp cli not work for latest wp-env version
-// todo:  Modal: Close modal if exists, causes issue with other tests where popup blocks next step*****
-// todo:  add new tests or multiple entry in same test for all search parameter, i.e : by-customer, by-product, but-store,..
-// todo:  insert all date format according to site format , currently hardcoded to default format -> helpers.dateFormatFYJ
-// todo:   try to fix product advertisement product, reverse withdraw product, store map save via api, currently e2e is used
-// todo:  **************** need custom check method
-// todo:  *** add all email tests
-// todo:  // add more fields in settings test
-// todo:  // short this in pom
-const vendorContext = await browser.newContext({ storageState: data.auth.vendorAuthFile });
-vPage = await vendorContext.newPage();
-vendor = new OrdersPage(vPage);
-
-
-// todo: ******************************************* add comments
-// todo: ******************************************* add coverage report
-// todo: ******************************************* add linters
-// todo: ******************************************* add js doc
-
-// add comments for whole suite
-
-
-
-
-//****************************       test data       ****************************
-
-// todo: image path need to from project origin
-
-//****************************       assertions       ****************************
-
-// todo:  assert to have count more than , less than  used not-to-have-count
-// todo:  either this or that assertion
-// todo:  Assertion: convert all expect parameter to correct way: left side received and right side expected
-// todo:  Assertion: received & expected data: -> 1. trim if necessary 2. lowercase if necessary
-// todo:  convert by locator, also move this to base page  await this.page.getByRole('listitem').filter({ hasText: deliveryTime.openingTime }).click();
-// todo: convert with to have grater than  expect(Number(count)).not.toBe(0);  to ->   expect(Number(count)).toBeGreaterThan(0);
-
-//****************************       selectors       ****************************
-
-// todo:  Locator: add html tag to every css locator by-id, by class -> #id to input#id
-// todo:  Locator: shorten selector: -> locator = selector.admin.dokan.settings; locator length can be shorten
-
-//****************************       zip testing       ****************************
-
-// todo: add zip testing tests
-
 //****************************       wp-env       ****************************
 
 // todo: wp-env logs
@@ -81,37 +18,7 @@ afterDestroy: Runs after wp-env destroy has destroyed the environment.
 
 
 
-//****************************       playwright       ****************************
 
-// todo:  implement new playwright settings 
-// todo:  fix npm run error without npx
-// todo:  read every playwright github issue & playwright comment
-
-//****************************       reporter       ****************************
-
-// todo:  Reporter: add os and browsers in env info
-// todo:  convert testSummary from commonjs module to es module
-// todo:  ['json', { outputFile: 'results.json' }] add json reporter and try to replace junit, use json report for test summary if summary exists
-
-//****************************       readme        ****************************
-
-// todo:  add lite & pro config on readme
-// todo:  make readme follow readme guideline
-// todo:  use chatgpt to rephrase readme
-// todo:  update readme contribute to e2e api
-
-
-//****************************       api suite     ****************************
-
-// todo:  make api suite independent, import: => like dokan pro exists or not, test summary, env setup from e2e suite  
-// todo:  convert admin as vendor to vendor for whole suite
-// todo:  fix rank math api
-// todo:  create valid payload for every request : which doesn't cause php warning
-// todo:  run with parallel mode on , make tests independent if necessary
-// todo:  update all tests with product-id, customer-id, to make it faster
-// todo:  hardcoding admin auth will hinder negative testing : test with invalid user
-// todo:  reverse withdraw and product advertisement setup needed on api suite
-// todo:  run loop & increment page to grab all plugins/products/users/... see woocommerce code base
 
 
 //********************************** NEW TODO **********************************
@@ -478,53 +385,8 @@ async multipleElementVisible(selectors: any){
 	async uploadFileViaListener(selector: string, files: string | string[]): Promise<void> {
 		this.page.on('filechooser', async (fileChooser) => { await fileChooser.setFiles(files); });
 		await this.page.locator(selector).click(); // invokes the filechooser  // todo:  convert with pormise all
+
 	}
-
-
-// test data
-
-	customerInfo: {
-		// emailDomain: '_' + faker.string.alphanumeric(5) + '@email.com',
-		emailDomain: '@email.com',
-		email: () => faker.internet.email(),
-		password: String(process.env.USER_PASSWORD),
-		password1: String(process.env.USER_PASSWORD) + '1',
-		firstName: () => faker.person.firstName('male'),
-		lastName: () => faker.person.lastName('male'),
-		// username: () => this.customer.customerInfo.firstName, // todo:   handel callback  & not works
-		// storename: () => this.customer.customerInfo.firstName + 'store',
-
-
-
-		customerInfo: {
-			// emailDomain: '_' + faker.string.alphanumeric(5) + '@email.com',
-			emailDomain: '@email.com',
-			email: () => faker.internet.email(),
-			password: String(process.env.USER_PASSWORD),
-			password1: String(process.env.USER_PASSWORD) + '1',
-			firstName: () => faker.person.firstName('male'),
-			lastName: () => faker.person.lastName('male'),
-			// username: () => this.customer.customerInfo.firstName,
-			// storename: () => this.customer.customerInfo.firstName + 'store',
-			role: 'customer',
-			username: () => faker.person.firstName('male'),
-			storename: () => faker.person.firstName('male') + 'store',
-			companyName: faker.company.name(),
-			companyId: faker.string.alphanumeric(5),
-			vatNumber: faker.string.alphanumeric(10),
-			bankIban: faker.finance.iban(),
-			phone: faker.phone.number('(###) ###-####'),
-			street1: 'abc street', // todo:   address should be global or not
-			street2: 'xyz street',
-			country: 'United States (US)',
-			countrySelectValue: 'US',
-			stateSelectValue: 'NY',
-			city: 'New York',
-
-
-
-
-
 
 //  **********************************          woocommerce            **********************************
 
@@ -695,15 +557,6 @@ This returns undefined if the expression inside the brackets is not a valid key.
 
 
 
-
-
-
-
-
-
-
-
-
 		// todo:  this flags are not allowed in playwright project
 		// globalSetup: './global-setup', /* Path to the global setup file. This file will be required and run before all the tests. */
 		// // globalTeardown: './global-teardown', /* Path to the global teardown file. This file will be required and run after all the tests. */
@@ -819,19 +672,9 @@ This returns undefined if the expression inside the brackets is not a valid key.
 // };s
 
 
-
-
-
-
-
-
 // todo: only for reference
 test.use({ storageState: data.auth.adminAuthFile });
 test.use({ extraHTTPHeaders: { Authorization: payloads.adminAuth.Authorization } });
-
-
-
-
 
 
 // todo: implement this
