@@ -1,5 +1,7 @@
+// import { request } from '@playwright/test';
 import { faker } from '@faker-js/faker';
 import { helpers } from '@utils/helpers';
+import 'dotenv/config';
 
 interface user {
     username: string;
@@ -14,7 +16,19 @@ interface admin {
 export { admin, user };
 
 export const data = {
-    // Generated  test data
+    envData: 'utils/data.json',
+    env: {
+        DOKAN_PRO: process.env.DOKAN_PRO ? true : false,
+
+        // db data
+        DB_HOST_NAME: process.env.DB_HOST_NAME,
+        DB_USER_NAME: process.env.DB_USER_NAME,
+        DB_USER_PASSWORD: process.env.DB_USER_PASSWORD,
+        DATABASE: process.env.DATABASE,
+        DB_PORT: process.env.DB_PORT,
+        DB_PREFIX: process.env.DB_PREFIX,
+    },
+
     auth: {
         adminAuthFile: 'playwright/.auth/adminStorageState.json',
         vendorAuthFile: 'playwright/.auth/vendorStorageState.json',
