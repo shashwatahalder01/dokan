@@ -3,11 +3,11 @@
 **Donate Link:** http://tareq.co/donate/  
 **Tags:** WooCommerce multivendor marketplace, multi vendor marketplace, multi seller store, multi-vendor, multi seller, commissions, multivendor, marketplace, product vendors, woocommerce vendor, commission rate, e-commerce, woocommerce, ebay, ecommerce.  
 **Requires at least:** 5.6  
-**Tested up to:** 6.4.1  
+**Tested up to:** 6.4.2  
 **WC requires at least:** 5.0.0  
-**WC tested up to:** 8.2.2  
-**Requires PHP:** 7.3  
-**Stable tag:** 3.9.2  
+**WC tested up to:** 8.4.2  
+**Requires PHP:** 7.4  
+**Stable tag:** 3.9.6  
 **License:** GPLv2 or later  
 **License URI:** http://www.gnu.org/licenses/gpl-2.0.html  
 
@@ -338,7 +338,26 @@ A. Just install and activate the PRO version without deleting the free plugin. A
 
 ## Changelog ##
 
-### v3.9.2 ( Nov 10, 2023 ) ###
+### v3.9.6 ( Jan 10, 2024 ) ###
+
+- **new** Features: Withdraw Charge
+Dokan has introduced a new feature that allows the admin to set a withdrawal charge for vendors. This charge can be either a flat rate or a percentage of the withdrawal amount based on the payment gateway used. The charge will be reflected in the details report, and vendors can see how many charges will apply when they request a withdrawal. The vendor dashboard list will also show the charge and receivable amount. This feature provides greater flexibility and transparency in managing vendor withdrawals.
+
+### v3.9.5 ( Dec 28, 2023 ) ###
+
+- **fix:** API request on get all orders returns empty results for the endpoint http://dev.test/wp-json/dokan/v1/orders due to default customer id was set to 0.
+
+### v3.9.4 ( Dec 12, 2023 ) ###
+
+- **fix:** Fixed an issue where the Vendor class shop_data persistence is broken on save()
+- **fix:** Fixed a fatal error while trying to edit a subscription under WordPress Admin Panel → WooCommerce → Subscription menu of the WooCommerce Subscription Plugin.
+- **fix:** Toggle Sub-Orders and Show Sub-Orders buttons are not working if HPOS feature is disabled.
+
+### v3.9.3 ( Nov 30, 2023 ) ###
+
+- **fix:** Fixed an issue where the Tab fields under the product Add/Edit page don’t display predefined tags until users start typing to select tags.
+
+### v3.9.2 ( Nov 13, 2023 ) ###
 
 - **new:** A new email template has been introduced named Dokan Vendor Product Review. After a product has been reviewed, an email containing information about the review is sent to the vendor. The email includes details such as the reviewer’s name, product name, review rating, and text. The email also contains a link to the review page where the vendor can view the review and respond if necessary.
 - **update:** Display a non-purchasable notice for the vendor’s own products.
