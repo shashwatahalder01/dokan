@@ -9,7 +9,7 @@ on:
         branches: [develop]
     # workflow will trigger on push to develop branch
     push:
-        branches: [develop]
+        branches: [develop, e2e-pw]
 
     # workflow can be manually triggered
     workflow_dispatch:
@@ -79,8 +79,7 @@ jobs:
             - name: Composer install and build (Dokan-lite)
               if: success()
               run: |
-                  composer install --no-dev
-                  composer dump-autoload -o
+                  composer install --no-dev -o
 
             - name: Npm install and build (Dokan-lite)
               if: success()
@@ -92,8 +91,7 @@ jobs:
               if: success()
               run: |
                   cd plugins/dokan-pro
-                  composer install --no-dev
-                  composer dump-autoload -o
+                  composer install --no-dev -o
 
             - name: Npm install and build (Dokan-pro)
               if: success()
