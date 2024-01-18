@@ -19,12 +19,12 @@ export default defineConfig({
     // forbidOnly     : !!process.env.CI, 	/* Fail the build on CI if you accidentally left test-only in the source code. */
     // repeatEach     : 1, /* The number of times to repeat each test, useful for debugging flaky tests. */
     retries: process.env.CI ? 1 : 0 /* The maximum number of retry attempts given to failed tests.  */,
-    workers: process.env.CI ? 1 : 1 /* Opt out of parallel tests on CI. */,
+    workers: process.env.CI ? 4 : 1 /* Opt out of parallel tests on CI. */,
     reportSlowTests: { max: 3, threshold: 25 } /* Whether to report slow test files. Pass null to disable this feature. */,
     reporter: process.env.CI
         ? [
-              // ['github'],
-              // ['html', { open: 'never', outputFolder: 'playwright-report/html-report' }],
+              ['github'],
+              ['html', { open: 'never', outputFolder: 'playwright-report/html-report' }],
               // ['junit', { outputFile: 'playwright-report/junit-report/results.xml' }],
               ['list', { printSteps: true }],
               ['./utils/summaryReporter.ts', { outputFile: 'playwright-report/summary-report/results.json' }],
