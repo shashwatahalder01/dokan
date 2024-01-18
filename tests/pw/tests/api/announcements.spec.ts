@@ -98,5 +98,4 @@ test.describe('announcements api test', () => {
         expect(responseBody).toBeTruthy();
         expect(responseBody).toMatchSchema(schemas.announcementsSchema.deleteAnnouncementNoticeSchema);
     });
-
 });

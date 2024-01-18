@@ -37,7 +37,6 @@ export class LicensePage extends AdminPage {
             }
         } else {
             console.log('License already activated!!');
-            
         }
     }
 
