@@ -1,4 +1,4 @@
-import { expect, type APIRequestContext, APIResponse, Request } from '@playwright/test';
+import { expect, Request, APIRequestContext, APIResponse } from '@playwright/test';
 import { endPoints } from '@utils/apiEndPoints';
 import { payloads } from '@utils/payloads';
 import { helpers } from '@utils/helpers';
@@ -82,14 +82,14 @@ export class ApiUtils {
         return response;
     }
 
+    // dispose api request context
+    async dispose(): Promise<void> {
+        await this.request.dispose();
+    }
+
     // get storageState
     async storageState(path?: string | undefined): Promise<storageState> {
         return await this.request.storageState({ path: path });
-    }
-
-    // dispose api context
-    async disposeApiRequestContext(): Promise<void> {
-        await this.request.dispose();
     }
 
     // get responseBody
@@ -1204,6 +1204,47 @@ export class ApiUtils {
     }
 
     /**
+     * product questions answers
+     */
+
+    // get all product questions
+    async getAllProductQuestions(auth?: auth): Promise<responseBody> {
+        const [, responseBody] = await this.get(endPoints.getAllProductQuestions, { params: { per_page: 100 }, headers: auth });
+        return responseBody;
+    }
+
+    // create product question
+    async createProductQuestion(payload: object, auth?: auth): Promise<[responseBody, string]> {
+        const [, responseBody] = await this.post(endPoints.createProductQuestion, { data: payload, headers: auth });
+        const questionId = String(responseBody?.id);
+        return [responseBody, questionId];
+    }
+
+    // update product question
+    async updateProductQuestion(questionId: string, payload: object, auth?: auth): Promise<responseBody> {
+        const [, responseBody] = await this.put(endPoints.updateProductQuestion(questionId), { data: payload, headers: auth });
+        return responseBody;
+    }
+
+    // delete all product questions
+    async deleteAllProductQuestions(auth?: auth): Promise<responseBody> {
+        const allProductQuestionIds = (await this.getAllProductQuestions()).map((a: { id: unknown }) => a.id);
+        if (!allProductQuestionIds?.length) {
+            console.log('No product question exists');
+            return;
+        }
+        const [, responseBody] = await this.put(endPoints.updateBatchProductQuestions, { data: { action: 'delete', ids: allProductQuestionIds }, headers: auth });
+        return responseBody;
+    }
+
+    // create product question answer
+    async createProductQuestionAnswer(payload: object, auth?: auth): Promise<[responseBody, string]> {
+        const [, responseBody] = await this.post(endPoints.createProductQuestionAnswer, { data: payload, headers: auth });
+        const answerId = String(responseBody?.id);
+        return [responseBody, answerId];
+    }
+
+    /**
      * wp api methods
      */
 
@@ -1695,7 +1736,7 @@ export class ApiUtils {
         const [, responseBody] = await this.get(endPoints.wc.getAllSystemStatus, { headers: auth });
         let activePlugins = responseBody.active_plugins.map((a: { plugin: string; version: string }) => a.plugin.split('/')[0] + ' v' + a.version);
         activePlugins.sort();
-        const conditions = ['Basic-Auth', 'bookings', 'addons', 'auctions', 'subscriptions', 'ba', 'wa', 'wb', 'ws', 'wps'];
+        const conditions = ['Basic-Auth', 'bookings', 'addons', 'auctions', 'subscriptions', 'ba', 'wa', 'wb', 'ws', 'wpa'];
         activePlugins = activePlugins.filter((e: string | string[]) => !conditions.some(el => e.includes(el)));
         // activePlugins = activePlugins.slice(1, -4);
         const compactInfo = {

@@ -1,4 +1,4 @@
-import { test, Page } from '@playwright/test';
+import { test, request, Page } from '@playwright/test';
 import { ProductEnquiryPage } from '@pages/productEnquiryPage';
 import { ApiUtils } from '@utils/apiUtils';
 import { dbUtils } from '@utils/dbUtils';
@@ -12,10 +12,10 @@ test.describe('Product Enquiry test', () => {
     // let admin: ProductEnquiryPage;
     let customer: ProductEnquiryPage;
     let guest: ProductEnquiryPage;
-    let cPage: Page, uPage: Page;
+    let cPage: Page, gPage: Page;
     let apiUtils: ApiUtils;
 
-    test.beforeAll(async ({ browser, request }) => {
+    test.beforeAll(async ({ browser }) => {
         // const adminContext = await browser.newContext(data.auth.adminAuth);
         // aPage = await adminContext.newPage();
         // admin = new ProductEnquiryPage(aPage);
@@ -25,17 +25,18 @@ test.describe('Product Enquiry test', () => {
         customer = new ProductEnquiryPage(cPage);
 
         const guestContext = await browser.newContext(data.auth.noAuth);
-        uPage = await guestContext.newPage();
-        guest = new ProductEnquiryPage(uPage);
+        gPage = await guestContext.newPage();
+        guest = new ProductEnquiryPage(gPage);
 
-        apiUtils = new ApiUtils(request);
+        apiUtils = new ApiUtils(await request.newContext());
         const productId = await apiUtils.getProductId(data.predefined.simpleProduct.product1.name, payloads.vendorAuth);
         await dbUtils.createAbuseReport(dbData.dokan.createAbuseReport, productId, VENDOR_ID, CUSTOMER_ID);
     });
 
     test.afterAll(async () => {
         await cPage.close();
-        await uPage.close();
+        await gPage.close();
+        await apiUtils.dispose();
     });
 
     test('customer can enquire product @pro', async () => {

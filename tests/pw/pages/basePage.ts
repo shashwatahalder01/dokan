@@ -1326,7 +1326,7 @@ export class BasePage {
     }
 
     // assert element to contain text
-    async toContainText(selector: string, text: string) {
+    async toContainText(selector: string, text: string | RegExp) {
         await expect(this.page.locator(selector)).toContainText(text);
     }
 

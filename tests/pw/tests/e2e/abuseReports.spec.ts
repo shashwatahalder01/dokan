@@ -1,4 +1,4 @@
-import { test, Page } from '@playwright/test';
+import { test, request, Page } from '@playwright/test';
 import { AbuseReportsPage } from '@pages/abuseReportsPage';
 import { ApiUtils } from '@utils/apiUtils';
 import { dbUtils } from '@utils/dbUtils';
@@ -12,10 +12,10 @@ test.describe('Abuse report test', () => {
     let admin: AbuseReportsPage;
     let customer: AbuseReportsPage;
     let guest: AbuseReportsPage;
-    let aPage: Page, cPage: Page, uPage: Page;
+    let aPage: Page, cPage: Page, gPage: Page;
     let apiUtils: ApiUtils;
 
-    test.beforeAll(async ({ browser, request }) => {
+    test.beforeAll(async ({ browser }) => {
         const adminContext = await browser.newContext(data.auth.adminAuth);
         aPage = await adminContext.newPage();
         admin = new AbuseReportsPage(aPage);
@@ -25,10 +25,10 @@ test.describe('Abuse report test', () => {
         customer = new AbuseReportsPage(cPage);
 
         const guestContext = await browser.newContext(data.auth.noAuth);
-        uPage = await guestContext.newPage();
-        guest = new AbuseReportsPage(uPage);
+        gPage = await guestContext.newPage();
+        guest = new AbuseReportsPage(gPage);
 
-        apiUtils = new ApiUtils(request);
+        apiUtils = new ApiUtils(await request.newContext());
         const productId = await apiUtils.getProductId(data.predefined.simpleProduct.product1.name, payloads.vendorAuth);
         await dbUtils.createAbuseReport(dbData.dokan.createAbuseReport, productId, VENDOR_ID, CUSTOMER_ID);
     });
@@ -36,7 +36,8 @@ test.describe('Abuse report test', () => {
     test.afterAll(async () => {
         await aPage.close();
         await cPage.close();
-        await uPage.close();
+        await gPage.close();
+        await apiUtils.dispose();
     });
 
     test('dokan abuse report menu page is rendering properly @pro @explo', async () => {
