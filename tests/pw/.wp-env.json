@@ -22,8 +22,7 @@
                 "WP_DEBUG_DISPLAY": "true"
             },
             "mappings": {
-                ".htaccess": ".htaccess",
-                "wp-content/debug.log": "./debuglog/debug.log"
+                ".htaccess": ".htaccess"
             }
         }
     }
