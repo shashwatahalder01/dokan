@@ -10,9 +10,9 @@ use WeDevs\Dokan\Traits\AjaxResponseError;
 /**
  * Admin Settings Class
  *
- * @package dokan
+ * @since   3.0.0
  *
- * @since 3.0.0
+ * @package dokan
  */
 class Settings {
 
@@ -31,16 +31,42 @@ class Settings {
         add_filter( 'dokan_admin_localize_script', [ $this, 'add_admin_settings_nonce' ] );
         add_action( 'wp_ajax_dokan_refresh_admin_settings_field_options', [ $this, 'refresh_admin_settings_field_options' ] );
         add_filter( 'dokan_get_settings_values', [ $this, 'format_price_values' ], 12, 2 );
+        add_filter( 'dokan_get_settings_values', [ $this, 'set_withdraw_limit_gateways' ], 20, 2 );
         add_filter( 'dokan_settings_general_site_options', [ $this, 'add_dokan_data_clear_setting' ], 310 );
+    }
+
+    /**
+     * Set unselected Withdraw Methods
+     *
+     * @since 3.6.0
+     *
+     * @param mixed $option_name
+     * @param mixed $option_value
+     *
+     * @return void|mixed $option_value
+     */
+    public function set_withdraw_limit_gateways( $option_value, $option_name ) {
+        if ( 'dokan_withdraw' !== $option_name ) {
+            return $option_value;
+        }
+
+        if ( empty( $option_value ) ) { // for fresh installation
+            $option_value['withdraw_methods'] = apply_filters( 'dokan_settings_withdraw_methods_default', [ 'paypal' => 'paypal' ] );
+        }
+
+        $all_withdraw_methods             = array_fill_keys( array_keys( dokan_withdraw_get_methods() ), '' );
+        $option_value['withdraw_methods'] = wp_parse_args( $option_value['withdraw_methods'], $all_withdraw_methods );
+
+        return $option_value;
     }
 
     /**
      * Format price values for price settings
      *
-     * @param $option_values
-     * @param $option_name
-     *
      * @since 1.0.0
+     *
+     * @param $option_name
+     * @param $option_values
      *
      * @return void
      */
@@ -49,7 +75,7 @@ class Settings {
             if ( isset( $option_values['commission_type'] ) && 'flat' === $option_values['commission_type'] ) {
                 $option_values['admin_percentage'] = isset( $option_values['admin_percentage'] ) ? wc_format_localized_price( $option_values['admin_percentage'] ) : 0;
             } else {
-                $option_values['admin_percentage'] = isset( $option_values['admin_percentage'] ) ? wc_format_decimal( $option_values['admin_percentage'] ) : 0;
+                $option_values['admin_percentage'] = isset( $option_values['admin_percentage'] ) ? wc_format_localized_decimal( $option_values['admin_percentage'] ) : 0;
             }
         }
 
@@ -68,9 +94,7 @@ class Settings {
             wp_send_json_error( __( 'You have no permission to get settings value', 'dokan-lite' ) );
         }
 
-        $_post_data = wp_unslash( $_POST );
-
-        if ( ! isset( $_post_data['nonce'] ) || ! wp_verify_nonce( sanitize_key( $_post_data['nonce'] ), 'dokan_admin' ) ) {
+        if ( ! isset( $_POST['nonce'] ) || ! wp_verify_nonce( sanitize_key( wp_unslash( $_POST['nonce'] ) ), 'dokan_admin' ) ) {
             wp_send_json_error( __( 'Invalid nonce', 'dokan-lite' ) );
         }
 
@@ -96,18 +120,16 @@ class Settings {
                 throw new DokanException( 'dokan_settings_unauthorized_operation', __( 'You are not authorized to perform this action.', 'dokan-lite' ), 401 );
             }
 
-            $_post_data = wp_unslash( $_POST );
-
-            if ( ! isset( $_post_data['nonce'] ) || ! wp_verify_nonce( sanitize_key( $_post_data['nonce'] ), 'dokan_admin' ) ) {
+            if ( ! isset( $_POST['nonce'] ) || ! wp_verify_nonce( sanitize_key( wp_unslash( $_POST['nonce'] ) ), 'dokan_admin' ) ) {
                 throw new DokanException( 'dokan_settings_invalid_nonce', __( 'Invalid nonce', 'dokan-lite' ), 403 );
             }
 
-            if ( empty( $_post_data['section'] ) ) {
+            if ( empty( $_POST['section'] ) ) {
                 throw new DokanException( 'dokan_settings_error_saving', __( '`section` parameter is required.', 'dokan-lite' ), 400 );
             }
 
-            $option_name  = $_post_data['section'];
-            $option_value = $this->sanitize_options( $_post_data['settingsData'], 'edit' );
+            $option_name  = sanitize_text_field( wp_unslash( $_POST['section'] ) );
+            $option_value = $this->sanitize_options( wp_unslash( $_POST['settingsData'] ), 'edit' ); // phpcs:ignore
             $option_value = apply_filters( 'dokan_save_settings_value', $option_value, $option_name );
             $old_options  = get_option( $option_name, [] );
 
@@ -148,7 +170,7 @@ class Settings {
     /**
      * Sanitize callback for Settings API
      *
-     * @param $options
+     * @param        $options
      * @param string $context
      *
      * @return mixed
@@ -164,7 +186,6 @@ class Settings {
             // If callback is set, call it
             if ( $sanitize_callback ) {
                 $options[ $option_slug ] = call_user_func( $sanitize_callback, $option_value );
-                continue;
             }
         }
 
@@ -216,9 +237,9 @@ class Settings {
     /**
      * Load settings sections and fields
      *
-     * @param $data
-     *
      * @since 2.8.2
+     *
+     * @param $data
      *
      * @return void
      */
@@ -242,7 +263,7 @@ class Settings {
      *
      * @since 1.0
      *
-     * @param  string $post_type
+     * @param string $post_type
      *
      * @return array
      */
@@ -274,39 +295,66 @@ class Settings {
     public function get_settings_sections() {
         $sections = [
             [
-                'id'    => 'dokan_general',
-                'title' => __( 'General', 'dokan-lite' ),
-                'icon'  => 'dashicons-admin-generic',
+                'id'                   => 'dokan_general',
+                'title'                => __( 'General', 'dokan-lite' ),
+                'icon_url'             => DOKAN_PLUGIN_ASSEST . '/images/admin-settings-icons/general.svg',
+                'description'          => __( 'Site Settings and Store Options', 'dokan-lite' ),
+                'document_link'        => 'https://wedevs.com/docs/dokan/settings/general/',
+                'settings_title'       => __( 'General Settings', 'dokan-lite' ),
+                'settings_description' => __( 'You can configure your general site settings and vendor store options from this settings menu. Dokan offers countless custom options when setting up your store to provide you with the ultimate flexibility.', 'dokan-lite' ),
             ],
             [
-                'id'    => 'dokan_selling',
-                'title' => __( 'Selling Options', 'dokan-lite' ),
-                'icon'  => 'dashicons-cart',
+                'id'                   => 'dokan_selling',
+                'title'                => __( 'Selling Options', 'dokan-lite' ),
+                'icon_url'             => DOKAN_PLUGIN_ASSEST . '/images/admin-settings-icons/selling.svg',
+                'description'          => __( 'Store Settings, Commissions', 'dokan-lite' ),
+                'document_link'        => 'https://wedevs.com/docs/dokan/settings/selling-options/',
+                'settings_title'       => __( 'Selling Option Settings', 'dokan-lite' ),
+                'settings_description' => __( 'You can configure commissions scales and vendor capabilities from this menu.', 'dokan-lite' ),
             ],
             [
-                'id'    => 'dokan_withdraw',
-                'title' => __( 'Withdraw Options', 'dokan-lite' ),
-                'icon'  => 'dashicons-money',
+                'id'                   => 'dokan_withdraw',
+                'title'                => __( 'Withdraw Options', 'dokan-lite' ),
+                'icon_url'             => DOKAN_PLUGIN_ASSEST . '/images/admin-settings-icons/withdraw.svg',
+                'description'          => __( 'Withdraw Settings, Threshold', 'dokan-lite' ),
+                'document_link'        => 'https://wedevs.com/docs/dokan/settings/withdraw-options/',
+                'settings_title'       => __( 'Withdraw Settings', 'dokan-lite' ),
+                'settings_description' => __( 'You can configure your store\'s withdrawal methods, charges, limits, order status and more.', 'dokan-lite' ),
             ],
             [
-                'id'    => 'dokan_reverse_withdrawal',
-                'title' => __( 'Reverse Withdrawal', 'dokan-lite' ),
-                'icon'  => 'dashicons-money-alt',
+                'id'                   => 'dokan_reverse_withdrawal',
+                'title'                => __( 'Reverse Withdrawal', 'dokan-lite' ),
+                'icon_url'             => DOKAN_PLUGIN_ASSEST . '/images/admin-settings-icons/reverse-witdrawal.svg',
+                'description'          => __( 'Admin commission config (on COD)', 'dokan-lite' ),
+                'document_link'        => 'https://wedevs.com/docs/dokan/withdraw/dokan-reverse-withdrawal/',
+                'settings_title'       => __( 'Reverse Withdrawal Settings', 'dokan-lite' ),
+                'settings_description' => __( 'Configure commission from vendors on Cash on Delivery orders, method and threshold for reverse balance, restrictive actions on vendors and more.', 'dokan-lite' ),
             ],
             [
-                'id'    => 'dokan_pages',
-                'title' => __( 'Page Settings', 'dokan-lite' ),
-                'icon'  => 'dashicons-admin-page',
+                'id'                   => 'dokan_pages',
+                'title'                => __( 'Page Settings', 'dokan-lite' ),
+                'icon_url'             => DOKAN_PLUGIN_ASSEST . '/images/admin-settings-icons/page.svg',
+                'description'          => __( 'Store Page Settings Manage', 'dokan-lite' ),
+                'document_link'        => 'https://wedevs.com/docs/dokan/settings/page-settings-2/',
+                'settings_title'       => __( 'Site and Store Page Settings', 'dokan-lite' ),
+                'settings_description' => __( 'You can configure and setup your necessary page settings from this menu.', 'dokan-lite' ),
             ],
             [
-                'id'    => 'dokan_appearance',
-                'title' => __( 'Appearance', 'dokan-lite' ),
-                'icon'  => 'dashicons-admin-appearance',
+                'id'                   => 'dokan_appearance',
+                'title'                => __( 'Appearance', 'dokan-lite' ),
+                'icon_url'             => DOKAN_PLUGIN_ASSEST . '/images/admin-settings-icons/appearance.svg',
+                'description'          => __( 'Custom Store Appearance', 'dokan-lite' ),
+                'document_link'        => 'https://wedevs.com/docs/dokan/settings/appearance/',
+                'settings_title'       => __( 'Appearance Settings', 'dokan-lite' ),
+                'settings_description' => __( 'You can configure your store appearance settings, configure map API, Google reCaptcha and more. Dokan offers various store header templates to choose from.', 'dokan-lite' ),
             ],
             [
-                'id'    => 'dokan_privacy',
-                'title' => __( 'Privacy Policy', 'dokan-lite' ),
-                'icon'  => 'dashicons-admin-network',
+                'id'                   => 'dokan_privacy',
+                'title'                => __( 'Privacy Policy', 'dokan-lite' ),
+                'icon_url'             => DOKAN_PLUGIN_ASSEST . '/images/admin-settings-icons/privacy.svg',
+                'description'          => __( 'Update Store Privacy Policies', 'dokan-lite' ),
+                'settings_title'       => __( 'Privacy Settings', 'dokan-lite' ),
+                'settings_description' => __( 'You can configure your site\'s privacy settings and policy.', 'dokan-lite' ),
             ],
         ];
 
@@ -326,32 +374,33 @@ class Settings {
         $commission_types              = dokan_commission_types();
         $withdraw_order_status_options = apply_filters(
             'dokan_settings_withdraw_order_status_options',
-            array(
+            [
                 'wc-completed'  => __( 'Completed', 'dokan-lite' ),
                 'wc-processing' => __( 'Processing', 'dokan-lite' ),
                 'wc-on-hold'    => __( 'On-hold', 'dokan-lite' ),
-            )
+            ]
         );
 
         $general_site_options = apply_filters(
             'dokan_settings_general_site_options', [
                 'site_options'           => [
-                    'name'  => 'site_options',
-                    'label' => __( 'Site Options', 'dokan-lite' ),
-                    'type'  => 'sub_section',
+                    'name'        => 'site_options',
+                    'type'        => 'sub_section',
+                    'label'       => __( 'Site Settings', 'dokan-lite' ),
+                    'description' => __( 'Configure your site settings and control access to your site.', 'dokan-lite' ),
                 ],
                 'admin_access'           => [
                     'name'    => 'admin_access',
-                    'label'   => __( 'Admin area access', 'dokan-lite' ),
-                    'desc'    => __( 'Disallow Vendors and Customers from accessing the wp-admin dashboard area', 'dokan-lite' ),
-                    'type'    => 'checkbox',
+                    'label'   => __( 'Admin Area Access', 'dokan-lite' ),
+                    'desc'    => __( 'Prevent vendors from accessing the wp-admin dashboard area. If HPOS feature is enabled, admin access will be blocked regardless of this setting.', 'dokan-lite' ),
+                    'type'    => 'switcher',
                     'default' => 'on',
                 ],
                 'custom_store_url'       => [
                     'name'    => 'custom_store_url',
                     'label'   => __( 'Vendor Store URL', 'dokan-lite' ),
                     /* translators: %s: store url */
-                    'desc'    => sprintf( __( 'Define the Vendor store URL (%s<strong>[this-text]</strong>/[vendor-name])', 'dokan-lite' ), site_url( '/' ) ),
+                    'desc'    => sprintf( __( 'Define the vendor store URL (%s<strong>[this-text]</strong>/[vendor-name])', 'dokan-lite' ), site_url( '/' ) ),
                     'default' => 'store',
                     'type'    => 'text',
                 ],
@@ -359,13 +408,19 @@ class Settings {
                     'name'  => 'setup_wizard_logo_url',
                     'label' => __( 'Vendor Setup Wizard Logo', 'dokan-lite' ),
                     'type'  => 'file',
-                    'desc'  => __( 'Recommended Logo size ( 270px X 90px ). If no logo is uploaded, site title is shown by default.', 'dokan-lite' ),
+                    'desc'  => __( 'Recommended logo size ( 270px X 90px ). If no logo is uploaded, site title is shown by default.', 'dokan-lite' ),
+                ],
+                'setup_wizard_message'   => [
+                    'name'    => 'setup_wizard_message',
+                    'label'   => __( 'Vendor Setup Wizard Message', 'dokan-lite' ),
+                    'type'    => 'wpeditor',
+                    'default' => __( 'Thank you for choosing The Marketplace to power your online store! This quick setup wizard will help you configure the basic settings. <strong>It’s completely optional and shouldn’t take longer than two minutes.</strong>', 'dokan-lite' ),
                 ],
                 'disable_welcome_wizard' => [
                     'name'    => 'disable_welcome_wizard',
                     'label'   => __( 'Disable Welcome Wizard', 'dokan-lite' ),
                     'desc'    => __( 'Disable welcome wizard for newly registered vendors', 'dokan-lite' ),
-                    'type'    => 'checkbox',
+                    'type'    => 'switcher',
                     'default' => 'off',
                     'tooltip' => __( 'If checked, vendors will not be prompted through a guided setup process but redirected straight to the vendor dashboard.', 'dokan-lite' ),
                 ],
@@ -375,25 +430,51 @@ class Settings {
         $general_vendor_store_options = apply_filters(
             'dokan_settings_general_vendor_store_options', [
                 'vendor_store_options'               => [
-                    'name'  => 'vendor_store_options',
-                    'label' => __( 'Vendor Store Options', 'dokan-lite' ),
-                    'type'  => 'sub_section',
+                    'name'          => 'vendor_store_options',
+                    'type'          => 'sub_section',
+                    'label'         => __( 'Vendor Store Settings', 'dokan-lite' ),
+                    'description'   => __( 'Configure your vendor store settings and setup your store policy for vendor.', 'dokan-lite' ),
+                    'content_class' => 'sub-section-styles',
                 ],
                 'seller_enable_terms_and_conditions' => [
                     'name'    => 'seller_enable_terms_and_conditions',
                     'label'   => __( 'Store Terms and Conditions', 'dokan-lite' ),
-                    'desc'    => __( 'Enable Terms and Conditions for vendor stores', 'dokan-lite' ),
-                    'type'    => 'checkbox',
+                    'desc'    => __( 'Enable terms and conditions for vendor stores', 'dokan-lite' ),
+                    'type'    => 'switcher',
                     'default' => 'off',
-                    'tooltip' => __( 'Prompt Terms and Condition check for Vendors when creating store on your site', 'dokan-lite' ),
                 ],
-                'store_products_per_page' => [
+                'store_products_per_page'            => [
                     'name'    => 'store_products_per_page',
                     'label'   => __( 'Store Products Per Page', 'dokan-lite' ),
-                    'desc'    => __( 'Set how many products to display per page on the vendor store page. It will affect only if the vendor isn\'t set this value on their vendor setting page.', 'dokan-lite' ),
+                    'desc'    => __( 'Set how many products to display per page on the vendor store page.', 'dokan-lite' ),
                     'type'    => 'number',
                     'default' => '12',
-                    'tooltip' => __( 'It will affect the vendor only if they havent set a value on their settings page.', 'dokan-lite' ),
+                ],
+                'enabled_address_on_reg'             => [
+                    'name'    => 'enabled_address_on_reg',
+                    'label'   => __( 'Enable Address Fields', 'dokan-lite' ),
+                    'desc'    => __( 'Add Address Fields on the Vendor Registration form', 'dokan-lite' ),
+                    'type'    => 'switcher',
+                    'default' => 'off',
+                ],
+            ]
+        );
+
+        $general_product_page_options = apply_filters(
+            'dokan_settings_general_product_page_options', [
+                'product_page_options'      => [
+                    'name'          => 'product_page_options',
+                    'type'          => 'sub_section',
+                    'label'         => __( 'Product Page Settings', 'dokan-lite' ),
+                    'description'   => __( 'Configure single product page for vendors.', 'dokan-lite' ),
+                    'content_class' => 'sub-section-styles',
+                ],
+                'enabled_more_products_tab' => [
+                    'name'    => 'enabled_more_products_tab',
+                    'label'   => __( 'Enable More Products Tab', 'dokan-lite' ),
+                    'desc'    => __( 'Enable "More Products" tab on the single product page.', 'dokan-lite' ),
+                    'type'    => 'switcher',
+                    'default' => 'on',
                 ],
             ]
         );
@@ -401,14 +482,15 @@ class Settings {
         $selling_option_commission = apply_filters(
             'dokan_settings_selling_option_commission', [
                 'commission'             => [
-                    'name'  => 'commission',
-                    'label' => __( 'Commission', 'dokan-lite' ),
-                    'type'  => 'sub_section',
+                    'name'        => 'commission',
+                    'label'       => __( 'Commission', 'dokan-lite' ),
+                    'type'        => 'sub_section',
+                    'description' => __( 'Define commission types, admin commissions, shipping and tax recipients, and more.', 'dokan-lite' ),
                 ],
                 'commission_type'        => [
                     'name'    => 'commission_type',
                     'label'   => __( 'Commission Type ', 'dokan-lite' ),
-                    'desc'    => __( 'Select a commission type for Vendor', 'dokan-lite' ),
+                    'desc'    => __( 'Select a commission type for vendor', 'dokan-lite' ),
                     'type'    => 'select',
                     'options' => $commission_types,
                     'default' => 'percentage',
@@ -421,15 +503,12 @@ class Settings {
                     'default'           => '10',
                     'type'              => 'price',
                     'sanitize_callback' => 'wc_format_decimal',
-                    // @codingStandardsIgnoreStart
-                    // 'response_sanitize_callback' => 'wc_format_localized_price',
-                    // @codingStandardsIgnoreEnd
                 ],
                 'shipping_fee_recipient' => [
                     'name'    => 'shipping_fee_recipient',
                     'label'   => __( 'Shipping Fee Recipient', 'dokan-lite' ),
-                    'desc'    => __( 'Who will be receiving the Shipping fees', 'dokan-lite' ),
-                    'type'    => 'select',
+                    'desc'    => __( 'Who will be receiving the shipping fees? Note that, tax fees for corresponding shipping method will not be included with shipping fees.', 'dokan-lite' ),
+                    'type'    => 'radio',
                     'options' => [
                         'seller' => __( 'Vendor', 'dokan-lite' ),
                         'admin'  => __( 'Admin', 'dokan-lite' ),
@@ -438,9 +517,20 @@ class Settings {
                 ],
                 'tax_fee_recipient'      => [
                     'name'    => 'tax_fee_recipient',
-                    'label'   => __( 'Tax Fee Recipient', 'dokan-lite' ),
-                    'desc'    => __( 'Who will be receiving the Tax fees', 'dokan-lite' ),
-                    'type'    => 'select',
+                    'label'   => __( 'Product Tax Fee Recipient', 'dokan-lite' ),
+                    'desc'    => __( 'Who will be receiving the tax fees for products? Note that, shipping tax fees will not be included with product tax.', 'dokan-lite' ),
+                    'type'    => 'radio',
+                    'options' => [
+                        'seller' => __( 'Vendor', 'dokan-lite' ),
+                        'admin'  => __( 'Admin', 'dokan-lite' ),
+                    ],
+                    'default' => 'seller',
+                ],
+                'shipping_tax_fee_recipient'      => [
+                    'name'    => 'shipping_tax_fee_recipient',
+                    'label'   => __( 'Shipping Tax Fee Recipient', 'dokan-lite' ),
+                    'desc'    => __( 'Who will be receiving the tax fees for shipping?', 'dokan-lite' ),
+                    'type'    => 'radio',
                     'options' => [
                         'seller' => __( 'Vendor', 'dokan-lite' ),
                         'admin'  => __( 'Admin', 'dokan-lite' ),
@@ -452,34 +542,54 @@ class Settings {
 
         $selling_option_vendor_capability = apply_filters(
             'dokan_settings_selling_option_vendor_capability', [
-                'vendor_capability'         => [
-                    'name'  => 'vendor_capability',
-                    'label' => __( 'Vendor Capability', 'dokan-lite' ),
-                    'type'  => 'sub_section',
+                'selling_capabilities'      => [
+                    'name'          => 'selling_capabilities',
+                    'label'         => __( 'Vendor Capabilities', 'dokan-lite' ),
+                    'type'          => 'sub_section',
+                    'description'   => __( 'Configure your multivendor site settings and vendor selling capabilities.', 'dokan-lite' ),
+                    'content_class' => 'sub-section-styles',
                 ],
                 'new_seller_enable_selling' => [
                     'name'    => 'new_seller_enable_selling',
-                    'label'   => __( 'New Vendor Product Upload', 'dokan-lite' ),
-                    'desc'    => __( 'Allow newly registered vendors to add products', 'dokan-lite' ),
-                    'type'    => 'checkbox',
+                    'label'   => __( 'Enable Selling', 'dokan-lite' ),
+                    'desc'    => __( 'Immediately enable selling for newly registered vendors', 'dokan-lite' ),
+                    'type'    => 'switcher',
                     'default' => 'on',
-                    'tooltip' => __( 'If checked, vendors will have permission to sell immediately after registration. If unchecked, newly registered vendors cannot add products until selling capability is activated manually from Dashboard -> Vendors.', 'dokan-lite' ),
+                    'tooltip' => __( 'If checked, vendors will have permission to sell immediately after registration. If unchecked, newly registered vendors cannot add products until selling capability is activated manually from admin dashboard.', 'dokan-lite' ),
+                ],
+                'one_step_product_create'     => [
+                    'name'    => 'one_step_product_create',
+                    'label'   => __( 'One Page Product Creation', 'dokan-lite' ),
+                    'desc'    => __( 'Add new product in single page view', 'dokan-lite' ),
+                    'type'    => 'switcher',
+                    'default' => 'on',
+                    'tooltip' => __( 'If disabled, instead of a single add product page it will open a pop up window or vendor will redirect to product page when adding new product.', 'dokan-lite' ),
                 ],
                 'disable_product_popup'     => [
                     'name'    => 'disable_product_popup',
                     'label'   => __( 'Disable Product Popup', 'dokan-lite' ),
                     'desc'    => __( 'Disable add new product in popup view', 'dokan-lite' ),
-                    'type'    => 'checkbox',
+                    'type'    => 'switcher',
                     'default' => 'off',
+                    'show_if' => [
+                        'dokan_selling.one_step_product_create' => [ 'equal' => 'off' ],
+                    ],
                     'tooltip' => __( 'If disabled, instead of a pop up window vendor will redirect to product page when adding new product.', 'dokan-lite' ),
                 ],
                 'order_status_change'       => [
                     'name'    => 'order_status_change',
                     'label'   => __( 'Order Status Change', 'dokan-lite' ),
                     'desc'    => __( 'Allow vendor to update order status', 'dokan-lite' ),
-                    'type'    => 'checkbox',
+                    'type'    => 'switcher',
                     'default' => 'on',
                     'tooltip' => __( 'Checking this will enable sellers to change the order status. If unchecked, only admin can change the order status.', 'dokan-lite' ),
+                ],
+                'dokan_any_category_selection'       => [
+                    'name'    => 'dokan_any_category_selection',
+                    'label'   => __( 'Select any category', 'dokan-lite' ),
+                    'desc'    => __( 'Allow vendors to select any category while creating/editing products.', 'dokan-lite' ),
+                    'type'    => 'switcher',
+                    'default' => 'off',
                 ],
             ]
         );
@@ -487,23 +597,46 @@ class Settings {
         $settings_fields = [
             'dokan_general'    => array_merge(
                 $general_site_options,
-                $general_vendor_store_options
+                $general_vendor_store_options,
+                $general_product_page_options
             ),
-            'dokan_selling'    => array_merge(
-                $selling_option_commission,
-                $selling_option_vendor_capability
+            'dokan_selling'    => apply_filters(
+                'dokan_settings_selling_options',
+                array_merge(
+                    $selling_option_commission,
+                    $selling_option_vendor_capability
+                )
             ),
             'dokan_withdraw'   => [
-                'withdraw_methods'    => [
+                'withdraw_methods'      => [
                     'name'    => 'withdraw_methods',
                     'label'   => __( 'Withdraw Methods', 'dokan-lite' ),
-                    'desc'    => __( 'Select suitable Withdraw methods for Vendors', 'dokan-lite' ),
+                    'desc'    => __( 'Select suitable withdraw methods for vendors', 'dokan-lite' ),
                     'type'    => 'multicheck',
-                    'default' => [ 'paypal' => 'paypal' ],
+                    'default' => apply_filters( 'dokan_settings_withdraw_methods_default', [ 'paypal' => 'paypal' ] ),
                     'options' => dokan_withdraw_get_methods(),
                     'tooltip' => __( 'Check to add available payment methods for vendors to withdraw money.', 'dokan-lite' ),
                 ],
-                'withdraw_limit'      => [
+                'withdraw_charges'      => [
+                    'name'               => 'withdraw_charges',
+                    'label'              => __( 'Withdraw Charges', 'dokan-lite' ),
+                    'desc'               => __( 'Select suitable withdraw charges for vendors', 'dokan-lite' ),
+                    'type'               => 'charges',
+                    'options'            => dokan_withdraw_get_methods(),
+                    'chargeable_methods' => dokan_withdraw_get_chargeable_methods(),
+                    'default'            => dokan_withdraw_get_method_charges(),
+                    'show_if'            => [
+                        'withdraw_methods' => [
+                            'contains-any' => array_keys( dokan_withdraw_get_methods() ),
+                        ],
+                    ],
+                    'items_show_if'      => [
+                        'key'       => 'withdraw_methods',
+                        'condition' => 'contains-key-value',
+                    ],
+                    'refresh_after_save' => true,
+                ],
+                'withdraw_limit'        => [
                     'name'                       => 'withdraw_limit',
                     'label'                      => __( 'Minimum Withdraw Limit', 'dokan-lite' ),
                     'desc'                       => __( 'Minimum balance required to make a withdraw request. Leave blank to set no minimum limits.', 'dokan-lite' ),
@@ -518,17 +651,17 @@ class Settings {
                     'label'   => __( 'Order Status for Withdraw', 'dokan-lite' ),
                     'desc'    => __( 'Order status for which vendor can make a withdraw request.', 'dokan-lite' ),
                     'type'    => 'multicheck',
-                    'default' => array(
-                        'wc-completed'  => 'wc-completed',
-                    ),
+                    'default' => [
+                        'wc-completed' => 'wc-completed',
+                    ],
                     'options' => $withdraw_order_status_options,
                     'tooltip' => __( 'Select the order status that will allow vendors to make withdraw request. We prefer you select "completed", "processing".', 'dokan-lite' ),
                 ],
-                'exclude_cod_payment' => [
+                'exclude_cod_payment'   => [
                     'name'    => 'exclude_cod_payment',
                     'label'   => __( 'Exclude COD Payments', 'dokan-lite' ),
                     'desc'    => __( 'If an order is paid with Cash on Delivery (COD), then exclude that payment from vendor balance.', 'dokan-lite' ),
-                    'type'    => 'checkbox',
+                    'type'    => 'switcher',
                     'default' => 'off',
                 ],
             ],
@@ -536,15 +669,15 @@ class Settings {
                 'dashboard'     => [
                     'name'        => 'dashboard',
                     'label'       => __( 'Dashboard', 'dokan-lite' ),
-                    'desc'        => __( 'Select a page to show Vendor Dashboard', 'dokan-lite' ),
+                    'desc'        => __( 'Select a page to show vendor dashboard', 'dokan-lite' ),
                     'type'        => 'select',
-                    'placeholder' => __( 'Select page', 'dokan-lite' ),
                     'options'     => $pages_array,
+                    'placeholder' => __( 'Select page', 'dokan-lite' ),
                 ],
                 'my_orders'     => [
                     'name'        => 'my_orders',
                     'label'       => __( 'My Orders', 'dokan-lite' ),
-                    'desc'        => __( 'Select a page to show My Orders', 'dokan-lite' ),
+                    'desc'        => __( 'Select a page to show my orders', 'dokan-lite' ),
                     'type'        => 'select',
                     'placeholder' => __( 'Select page', 'dokan-lite' ),
                     'options'     => $pages_array,
@@ -552,34 +685,39 @@ class Settings {
                 'store_listing' => [
                     'name'        => 'store_listing',
                     'label'       => __( 'Store Listing', 'dokan-lite' ),
-                    'desc'        => __( 'Select a page to show all Stores', 'dokan-lite' ),
+                    'desc'        => __( 'Select a page to show all stores', 'dokan-lite' ),
                     'type'        => 'select',
                     'placeholder' => __( 'Select page', 'dokan-lite' ),
                     'options'     => $pages_array,
                 ],
                 'reg_tc_page'   => [
                     'name'        => 'reg_tc_page',
-                    'label'       => __( 'Terms and Conditions Page', 'dokan-lite' ),
                     'type'        => 'select',
-                    'placeholder' => __( 'Select page', 'dokan-lite' ),
+                    'desc'        => __( 'Select where you want to add Dokan pages.', 'dokan-lite' ),
+                    'label'       => __( 'Terms and Conditions Page', 'dokan-lite' ),
                     'options'     => $pages_array,
-                    /* translators: %s: dokan pages  */
-                    'desc'        => sprintf( __( 'Select where you want to add Dokan pages <a target="_blank" href="%s"> Learn More </a>', 'dokan-lite' ), 'https://wedevs.com/docs/dokan/settings/page-settings-2/' ),
                     'tooltip'     => __( 'Select a page to display the Terms and Conditions of your store for Vendors.', 'dokan-lite' ),
+                    'placeholder' => __( 'Select page', 'dokan-lite' ),
                 ],
             ],
             'dokan_appearance' => [
+                'appearance_options'         => [
+                    'name'        => 'appearance_options',
+                    'type'        => 'sub_section',
+                    'label'       => __( 'Store Appearance', 'dokan-lite' ),
+                    'description' => __( 'Configure your site appearances.', 'dokan-lite' ),
+                ],
                 'store_map'                  => [
                     'name'    => 'store_map',
-                    'label'   => __( 'Show Map on Store Page', 'dokan-lite' ),
-                    'desc'    => __( 'Enable Map of the Store Location in the store sidebar', 'dokan-lite' ),
-                    'type'    => 'checkbox',
+                    'label'   => __( 'Show map on Store Page', 'dokan-lite' ),
+                    'desc'    => __( 'Enable map of the store location in the store sidebar', 'dokan-lite' ),
+                    'type'    => 'switcher',
                     'default' => 'on',
                 ],
                 'map_api_source'             => [
                     'name'               => 'map_api_source',
                     'label'              => __( 'Map API Source', 'dokan-lite' ),
-                    'desc'               => __( 'Which Map API source you want to use in your site?', 'dokan-lite' ),
+                    'desc'               => __( 'Which map API source you want to use in your site?', 'dokan-lite' ),
                     'refresh_after_save' => true,
                     'type'               => 'radio',
                     'default'            => 'google_maps',
@@ -593,44 +731,72 @@ class Settings {
                     'label'   => __( 'Google Map API Key', 'dokan-lite' ),
                     'desc'    => __( '<a href="https://developers.google.com/maps/documentation/javascript/" target="_blank" rel="noopener noreferrer">API Key</a> is needed to display map on store page', 'dokan-lite' ),
                     'type'    => 'text',
+                    'secret_text' => true,
                     'tooltip' => __( 'Insert Google API Key (with hyperlink) to display store map.', 'dokan-lite' ),
+                    'show_if' => [
+                        'map_api_source' => [
+                            'equal' => 'google_maps',
+                        ],
+                    ],
                 ],
                 'mapbox_access_token'        => [
                     'name'    => 'mapbox_access_token',
                     'label'   => __( 'Mapbox Access Token', 'dokan-lite' ),
                     'desc'    => __( '<a href="https://docs.mapbox.com/help/how-mapbox-works/access-tokens/" target="_blank" rel="noopener noreferrer">Access Token</a> is needed to display map on store page', 'dokan-lite' ),
                     'type'    => 'text',
+                    'secret_text' => true,
                     'tooltip' => __( 'Insert Mapbox Access Token (with hyperlink) to display store map.', 'dokan-lite' ),
+                    'show_if' => [
+                        'map_api_source' => [
+                            'equal' => 'mapbox',
+                        ],
+                    ],
                 ],
                 'recaptcha_validation_label' => [
-                    'name'  => 'recaptcha_validation_label',
-                    'label' => __( 'Google reCAPTCHA Validation', 'dokan-lite' ),
-                    'type'  => 'html',
-                    'desc'  => sprintf( '<a href="https://developers.google.com/recaptcha/docs/v3" target="_blank" rel="noopener noreferrer">%s</a> %s. <a href="https://wedevs.com/docs/dokan/settings/dokan-recaptacha-v3-integration" target="_blank" rel="noopener noreferrer">%s</a>', __( 'reCAPTCHA v3', 'dokan-lite' ), __( 'credentials required to enable invisible captcha for contact forms', 'dokan-lite' ), __( 'Get Help', 'dokan-lite' ) ),
-                ],
-                'recaptcha_site_key'         => [
-                    'name'    => 'recaptcha_site_key',
-                    'label'   => __( 'Site Key', 'dokan-lite' ),
-                    'type'    => 'text',
-                    'tooltip' => __( 'Insert Google reCAPTCHA v3 site key.', 'dokan-lite' ),
-                ],
-                'recaptcha_secret_key'       => [
-                    'name'    => 'recaptcha_secret_key',
-                    'label'   => __( 'Secret Key', 'dokan-lite' ),
-                    'type'    => 'text',
-                    'tooltip' => __( 'Insert Google reCAPTCHA v3 secret key.', 'dokan-lite' ),
+                    'name'                 => 'recaptcha_validation_label',
+                    'type'                 => 'social',
+                    'desc'                 => sprintf(
+                    /* translators: 1) Opening anchor tag, 2) Closing anchor tag, 3) Opening anchor tag, 4) Closing anchor tag */
+                        __( '%1$sreCAPTCHA%2$s credentials required to enable invisible captcha for contact forms. %3$sGet Help%4$s', 'dokan-lite' ),
+                        '<a href="https://developers.google.com/recaptcha/docs/v3" target="_blank" rel="noopener noreferrer">',
+                        '</a>',
+                        '<a href="https://wedevs.com/docs/dokan/settings/dokan-recaptacha-v3-integration" target="_blank" rel="noopener noreferrer">',
+                        '</a>'
+                    ),
+                    'label'                => __( 'Google reCAPTCHA Validation', 'dokan-lite' ),
+                    'icon_url'             => DOKAN_PLUGIN_ASSEST . '/images/google.svg',
+                    'social_desc'          => __( 'You can successfully connect to your Google reCaptcha account from here.', 'dokan-lite' ),
+                    'enable_status'        => [
+                        'name'    => 'recaptcha_enable_status',
+                        'default' => 'on',
+                    ],
+                    'recaptcha_site_key'   => [
+                        'name'         => 'recaptcha_site_key',
+                        'type'         => 'text',
+                        'label'        => __( 'Site Key', 'dokan-lite' ),
+                        'tooltip'      => __( 'Insert Google reCAPTCHA v3 site key.', 'dokan-lite' ),
+                        'social_field' => true,
+                    ],
+                    'recaptcha_secret_key' => [
+                        'name'         => 'recaptcha_secret_key',
+                        'label'        => __( 'Secret Key', 'dokan-lite' ),
+                        'type'         => 'text',
+                        'tooltip'      => __( 'Insert Google reCAPTCHA v3 secret key.', 'dokan-lite' ),
+                        'social_field' => true,
+                    ],
                 ],
                 'contact_seller'             => [
                     'name'    => 'contact_seller',
                     'label'   => __( 'Show Contact Form on Store Page', 'dokan-lite' ),
                     'desc'    => __( 'Display a vendor contact form in the store sidebar', 'dokan-lite' ),
-                    'type'    => 'checkbox',
+                    'type'    => 'switcher',
                     'default' => 'on',
                 ],
                 'store_header_template'      => [
                     'name'    => 'store_header_template',
-                    'label'   => __( 'Store Header Template', 'dokan-lite' ),
                     'type'    => 'radio_image',
+                    'desc'    => __( 'Select a store header for your store.', 'dokan-lite' ),
+                    'label'   => __( 'Store Header Template', 'dokan-lite' ),
                     'options' => [
                         'default' => DOKAN_PLUGIN_ASSEST . '/images/store-header-templates/default.png',
                         'layout1' => DOKAN_PLUGIN_ASSEST . '/images/store-header-templates/layout1.png',
@@ -638,25 +804,25 @@ class Settings {
                         'layout3' => DOKAN_PLUGIN_ASSEST . '/images/store-header-templates/layout3.png',
                     ],
                     'default' => 'default',
-                    'tooltip' => __( 'Choose your header design from any of the templates provided. You can change it again anytime.', 'dokan-lite' ),
                 ],
                 'store_open_close'           => [
                     'name'    => 'store_open_close',
                     'label'   => __( 'Store Opening Closing Time Widget', 'dokan-lite' ),
                     'desc'    => __( 'Enable store opening & closing time widget in the store sidebar', 'dokan-lite' ),
-                    'type'    => 'checkbox',
+                    'type'    => 'switcher',
                     'default' => 'on',
                 ],
                 'enable_theme_store_sidebar' => [
                     'name'    => 'enable_theme_store_sidebar',
                     'label'   => __( 'Enable Store Sidebar From Theme', 'dokan-lite' ),
-                    'desc'    => __( 'Enable showing Store Sidebar From Your Theme.', 'dokan-lite' ),
-                    'type'    => 'checkbox',
+                    'desc'    => __( 'Enable showing store sidebar from your theme.', 'dokan-lite' ),
+                    'type'    => 'switcher',
                     'default' => 'off',
                 ],
                 'hide_vendor_info'           => [
                     'name'    => 'hide_vendor_info',
                     'label'   => __( 'Hide Vendor Info', 'dokan-lite' ),
+                    'desc'    => __( 'Hide vendor contact info from single store page.', 'dokan-lite' ),
                     'type'    => 'multicheck',
                     'default' => [
                         'email'   => '',
@@ -669,13 +835,20 @@ class Settings {
                         'address' => __( 'Store Address', 'dokan-lite' ),
                     ],
                 ],
+                'disable_dokan_fontawesome' => [
+                    'name'    => 'disable_dokan_fontawesome',
+                    'label'   => __( 'Disable Dokan FontAwesome', 'dokan-lite' ),
+                    'desc'    => __( "If disabled then dokan fontawesome library won't be loaded in frontend", 'dokan-lite' ),
+                    'type'    => 'switcher',
+                    'default' => 'off',
+                ],
             ],
             'dokan_privacy'    => [
                 'enable_privacy' => [
                     'name'    => 'enable_privacy',
                     'label'   => __( 'Enable Privacy Policy', 'dokan-lite' ),
-                    'type'    => 'checkbox',
-                    'desc'    => __( 'Enable privacy policy for Vendor store contact form', 'dokan-lite' ),
+                    'type'    => 'switcher',
+                    'desc'    => __( 'Enable privacy policy for vendor store contact form', 'dokan-lite' ),
                     'default' => 'on',
                 ],
                 'privacy_page'   => [
@@ -689,8 +862,7 @@ class Settings {
                 'privacy_policy' => [
                     'name'    => 'privacy_policy',
                     'label'   => __( 'Privacy Policy', 'dokan-lite' ),
-                    'type'    => 'textarea',
-                    'rows'    => 5,
+                    'type'    => 'wpeditor',
                     'default' => __( 'Your personal data will be used to support your experience throughout this website, to manage access to your account, and for other purposes described in our [dokan_privacy_policy]', 'dokan-lite' ),
                     'tooltip' => __( 'Customize the Privacy Policy text that will be displayed on your store.', 'dokan-lite' ),
                 ],
@@ -703,12 +875,12 @@ class Settings {
     /**
      * Add settings after specific option
      *
-     * @param array $settings_fields Current settings
-     * @param string $section Name of the section
-     * @param string $option Name of the option after which we wish to add new settings
-     * @param array $additional_settings New settings/options
-     *
      * @since 2.9.11
+     *
+     * @param string $section             Name of the section
+     * @param string $option              Name of the option after which we wish to add new settings
+     * @param array  $additional_settings New settings/options
+     * @param array  $settings_fields     Current settings
      *
      * @return array
      */
@@ -758,9 +930,8 @@ class Settings {
                 );
             }
 
-            $post_data = wp_unslash( $_POST );
-            $section   = ! empty( $post_data['section'] ) ? sanitize_text_field( $post_data['section'] ) : null;
-            $field     = ! empty( $post_data['field'] ) ? sanitize_text_field( $post_data['field'] ) : null;
+            $section   = ! empty( $_POST['section'] ) ? sanitize_text_field( wp_unslash( $_POST['section'] ) ) : null;
+            $field     = ! empty( $_POST['field'] ) ? sanitize_text_field( wp_unslash( $_POST['field'] ) ) : null;
 
             if ( ! $section || ! $field ) {
                 throw new DokanException(
@@ -789,10 +960,10 @@ class Settings {
     /**
      * Validates admin withdraw limit settings
      *
-     * @param mixed $option_value
-     * @param mixed $option_name
-     *
      * @since 3.2.15
+     *
+     * @param mixed $option_name
+     * @param mixed $option_value
      *
      * @return void|mixed $option_value
      */
@@ -805,7 +976,7 @@ class Settings {
 
         if ( ! empty( $option_value['withdraw_limit'] && $option_value['withdraw_limit'] < 0 ) ) {
             $errors[] = [
-                'name' => 'withdraw_limit',
+                'name'  => 'withdraw_limit',
                 'error' => __( 'Minimum Withdraw Limit can\'t be negative value.', 'dokan-lite' ),
             ];
         }
@@ -818,7 +989,7 @@ class Settings {
                         'value' => $option_value,
                     ],
                     'message'  => __( 'Validation error', 'dokan-lite' ),
-                    'errors' => $errors,
+                    'errors'   => $errors,
                 ],
                 400
             );
@@ -834,12 +1005,13 @@ class Settings {
      */
     public function add_dokan_data_clear_setting( $settings_fields ) {
         $settings_fields['data_clear_on_uninstall'] = [
-            'name'    => 'data_clear_on_uninstall',
-            'label'   => __( 'Data Clear', 'dokan-lite' ),
-            'desc'    => __( 'Delete all data and tables related to Dokan and Dokan Pro plugin while deleting the Dokan plugin.', 'dokan-lite' ),
-            'type'    => 'checkbox',
-            'default' => 'off',
-            'tooltip' => __( 'Check this to remove Dokan related data and table from the database upon deleting the plugin. When you delete the Dokan lite version, it will also delete all the data related to Dokan Pro as well. This won\'t happen when the plugins are deactivated..', 'dokan-lite' ),
+            'name'          => 'data_clear_on_uninstall',
+            'label'         => __( 'Data Clear', 'dokan-lite' ),
+            'desc'          => __( 'Delete all data and tables related to Dokan and Dokan Pro plugin while deleting the Dokan plugin.', 'dokan-lite' ),
+            'type'          => 'switcher',
+            'default'       => 'off',
+            'field_icon'    => __( 'Check this to remove Dokan related data and table from the database upon deleting the plugin. When you delete the Dokan lite version, it will also delete all the data related to Dokan Pro as well. This won\'t happen when the plugins are deactivated..', 'dokan-lite' ),
+            'content_class' => 'data_clear',
         ];
 
         return $settings_fields;

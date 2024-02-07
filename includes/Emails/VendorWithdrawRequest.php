@@ -80,7 +80,7 @@ class VendorWithdrawRequest extends WC_Email {
         $this->find['site_url']      = '{site_url}';
 
         $this->replace['username']      = $seller->user_login;
-        $this->replace['amount']        = wc_price( $amount );
+        $this->replace['amount']        = dokan()->email->currency_symbol( $amount );
         $this->replace['method']        = dokan_withdraw_get_method_title( $method );
         $this->replace['profile_url']   = admin_url( 'user-edit.php?user_id=' . $seller->ID );
         $this->replace['withdraw_page'] = admin_url( 'admin.php?page=dokan#/withdraw?status=pending' );
@@ -152,6 +152,7 @@ class VendorWithdrawRequest extends WC_Email {
             'recipient' => array(
                 'title'         => __( 'Recipient(s)', 'dokan-lite' ),
                 'type'          => 'text',
+                // translators: 1) Email recipients
                 'description'   => sprintf( __( 'Enter recipients (comma separated) for this email. Defaults to %s.', 'dokan-lite' ), '<code>' . esc_attr( get_option( 'admin_email' ) ) . '</code>' ),
                 'placeholder'   => '',
                 'default'       => '',

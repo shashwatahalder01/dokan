@@ -256,6 +256,13 @@ class Manager {
                 )
             );
 
+            $refund_amount = (float) $wpdb->get_var(
+                $wpdb->prepare(
+                    "SELECT SUM(trn.credit) FROM {$this->table} AS trn $join WHERE %d=%d $where AND trn.trn_type='order_refund'",
+                    $query_args
+                )
+            );
+
             // check for query error
             if ( ! empty( $wpdb->last_error ) ) {
                 return new WP_Error( 'db_query_error', $wpdb->last_error, $wpdb->last_query );
@@ -264,7 +271,7 @@ class Manager {
             $data = [
                 'total_transactions' => (int) $row->total_transactions,
                 'debit'              => (float) $row->debit,
-                'credit'             => (float) $row->credit,
+                'credit'             => (float) $row->credit - $refund_amount,
             ];
 
             if ( 'balance_count' === $args['return'] ) {
@@ -394,8 +401,8 @@ class Manager {
             'trn_date'  => isset( $args['trn_date'] ) && ! $this->is_empty( $args['trn_date'] ) ? $args['trn_date'] : $default_transactions_date,
             'per_page'  => isset( $args['per_page'] ) ? $args['per_page'] : -1,
             'page'      => isset( $args['page'] ) ? $args['page'] : 1,
-            'orderby'   => isset( $args['orderby'] ) ? $args['orderby'] : 'id',
-            'order'     => isset( $args['order'] ) ? $args['order'] : 'DESC',
+            'orderby'   => 'id',
+            'order'     => 'ASC',
         ];
 
         if ( empty( $query_params['vendor_id'] ) || ! is_numeric( $query_params['vendor_id'] ) ) {
@@ -515,7 +522,7 @@ class Manager {
         $args = wp_parse_args( $args, $default );
 
         // validate required fields
-        if ( empty( $args['trn_id'] ) ) {
+        if ( isset( $args['trn_id'] ) && ! is_numeric( $args['trn_id'] ) ) {
             return new WP_Error( 'insert_rw_invalid_transaction_id', esc_html__( 'Transaction id is required.', 'dokan-lite' ) );
         }
 

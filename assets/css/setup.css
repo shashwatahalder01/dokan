@@ -2,7 +2,7 @@
   position: absolute;
   width: 20px;
   height: 20px;
-  background: url('../images/spinner-2x.gif') center center no-repeat;
+  background: url(../js/../images/spinner-2x.gif) center center no-repeat;
   z-index: 99;
   background-size: 20px;
 }
@@ -89,7 +89,7 @@
 }
 .form-table .dokan-bank-settings-template .dokan-form-group input[name="settings[bank][routing_number]"],
 .form-table .dokan-bank-settings-template .dokan-form-group input[name="settings[bank][ac_number]"] {
-  width: 48% !important;
+  width: 100%;
 }
 .form-table .dokan-bank-settings-template .dokan-form-group textarea[name="settings[bank][bank_addr]"] {
   height: 45px !important;
@@ -162,15 +162,13 @@
   color: #fff;
   background: #f2624d;
   border-color: #f2624d;
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.25), 0 1px 0 #f2624d;
-  text-shadow: 0 -1px 1px #f2624d, 1px 0 1px #f2624d, 0 1px 1px #f2624d, -1px 0 1px #f2624d;
+  text-shadow: none;
 }
 .wc-setup .wc-setup-actions .button-primary:hover,
 .wc-setup .wc-setup-actions .button-primary:active,
 .wc-setup .wc-setup-actions .button-primary:focus {
   background-color: #ef381d;
   border-color: #ef381d;
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.25), 0 1px 0 #ef381d;
 }
 .wc-setup .wc-setup-content a {
   color: #f2624d;
@@ -191,6 +189,9 @@
 }
 .wc-wizard-service-item .wc-wizard-service-name {
   padding-left: 20px;
+}
+.wc-wizard-service-item .wc-wizard-service-name p {
+  text-align: left;
 }
 .wc-wizard-service-item .dokan-wizard-service-enable {
   flex-basis: 0;
@@ -245,3 +246,14 @@
 .dokan-vendor-setup-wizard #wc-logo img {
   max-width: 100%;
 }
+.dokan-vendor-setup-wizard .wc-setup-content .dokan-seller-setup-form .dokan-map-wrap .dokan-map-search-bar input#dokan-map-add {
+  width: 100%;
+}
+.dokan-vendor-setup-wizard .wc-setup-content .dokan-seller-setup-form .dokan-map-wrap .dokan-map-search-bar a#dokan-location-find-btn {
+  display: none;
+}
+.dokan-vendor-setup-wizard .wc-setup-content .dokan-seller-setup-form .dokan-map-wrap .dokan-google-map {
+  width: 100%;
+  height: 300px;
+}
+

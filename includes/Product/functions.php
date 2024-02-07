@@ -5,6 +5,8 @@
  * @since 2.5.1
  */
 
+use WeDevs\Dokan\ProductCategory\Helper;
+
 /**
  * Dokan insert new product
  *
@@ -31,14 +33,18 @@ function dokan_save_product( $args ) {
         return new WP_Error( 'no-title', __( 'Please enter product title', 'dokan-lite' ) );
     }
 
-    if ( dokan_get_option( 'product_category_style', 'dokan_selling', 'single' ) === 'single' ) {
-        if ( absint( $data['product_cat'] ) < 0 ) {
-            return new WP_Error( 'no-category', __( 'Please select a category', 'dokan-lite' ) );
+    if ( ! isset( $data['chosen_product_cat'] ) ) {
+        if ( Helper::product_category_selection_is_single() ) {
+            if ( absint( $data['product_cat'] ) < 0 ) {
+                return new WP_Error( 'no-category', __( 'Please select a category', 'dokan-lite' ) );
+            }
+        } else {
+            if ( ! isset( $data['product_cat'] ) && empty( $data['product_cat'] ) ) {
+                return new WP_Error( 'no-category', __( 'Please select at least one category', 'dokan-lite' ) );
+            }
         }
-    } else {
-        if ( ! isset( $data['product_cat'] ) && empty( $data['product_cat'] ) ) {
-            return new WP_Error( 'no-category', __( 'Please select AT LEAST ONE category', 'dokan-lite' ) );
-        }
+    } elseif ( empty( $data['chosen_product_cat'] ) ) {
+        return new WP_Error( 'no-category', __( 'Please select a category', 'dokan-lite' ) );
     }
 
     $error = apply_filters( 'dokan_new_product_popup_args', '', $data );
@@ -47,7 +53,7 @@ function dokan_save_product( $args ) {
         return $error;
     }
 
-    $post_status = ! empty( $data['post_status'] ) ? sanitize_text_field( $data['post_status'] ) : dokan_get_new_post_status();
+    $post_status = ! empty( $data['post_status'] ) ? sanitize_text_field( $data['post_status'] ) : dokan_get_default_product_status();
 
     $post_arr = [
         'post_type'    => 'product',
@@ -71,14 +77,6 @@ function dokan_save_product( $args ) {
 
     $post_arr = apply_filters( 'dokan_insert_product_post_data', $post_arr, $data );
 
-    if ( dokan_get_option( 'product_category_style', 'dokan_selling', 'single' ) === 'single' ) {
-        $cat_ids[] = $data['product_cat'];
-    } else {
-        if ( ! empty( $data['product_cat'] ) ) {
-            $cat_ids = array_map( 'absint', (array) $data['product_cat'] );
-        }
-    }
-
     $post_data = [
         'id'                 => $is_updating ? $post_arr['ID'] : '',
         'name'               => $post_arr['post_title'],
@@ -86,8 +84,18 @@ function dokan_save_product( $args ) {
         'description'        => $post_arr['post_content'],
         'short_description'  => $post_arr['post_excerpt'],
         'status'             => $post_status,
-        'categories'         => $cat_ids,
     ];
+
+    if ( ! isset( $data['chosen_product_cat'] ) ) {
+        if ( Helper::product_category_selection_is_single() ) {
+            $cat_ids[] = $data['product_cat'];
+        } else {
+            if ( ! empty( $data['product_cat'] ) ) {
+                $cat_ids = array_map( 'absint', (array) $data['product_cat'] );
+            }
+        }
+        $post_data['categories'] = $cat_ids;
+    }
 
     if ( isset( $data['feat_image_id'] ) ) {
         $post_data['featured_image_id'] = ! empty( $data['feat_image_id'] ) ? absint( $data['feat_image_id'] ) : '';
@@ -137,6 +145,11 @@ function dokan_save_product( $args ) {
     }
 
     $product = dokan()->product->create( $post_data );
+
+    if ( $product ) {
+        $chosen_cat = Helper::product_category_selection_is_single() ? [ reset( $data['chosen_product_cat'] ) ] : $data['chosen_product_cat'];
+        Helper::set_object_terms_from_chosen_categories( $product->get_id(), $chosen_cat );
+    }
 
     if ( ! $is_updating ) {
         do_action( 'dokan_new_product_added', $product->get_id(), $data );
@@ -372,19 +385,22 @@ function dokan_search_seller_products( $term, $user_ids = false, $type = '', $in
     $type_join     = '';
     $type_where    = '';
     $users_where   = '';
+    $query_args    = [ $like_term, $like_term, $like_term ];
 
     if ( $type ) {
         if ( in_array( $type, [ 'virtual', 'downloadable' ], true ) ) {
             $type_join  = " LEFT JOIN {$wpdb->postmeta} postmeta_type ON posts.ID = postmeta_type.post_id ";
-            $type_where = " AND ( postmeta_type.meta_key = '_{$type}' AND postmeta_type.meta_value = 'yes' ) ";
+            $type_where = " AND ( postmeta_type.meta_key = %s AND postmeta_type.meta_value = 'yes' ) ";
+            $query_args[] = "_{$type}";
         }
     }
 
-    if ( $user_ids ) {
+    if ( ! empty( $user_ids ) ) {
         if ( is_array( $user_ids ) ) {
-            $users_where = " AND posts.post_author IN ('" . implode( "','", $user_ids ) . "')";
-        } else {
-            $users_where = " AND posts.post_author = '$user_ids'";
+            $users_where = " AND posts.post_author IN ('" . implode( "','", array_filter( array_map( 'absint', $user_ids ) ) ) . "')";
+        } elseif ( is_numeric( $user_ids ) ) {
+            $users_where = ' AND posts.post_author = %d';
+            $query_args[] = $user_ids;
         }
     }
     // phpcs:ignore WordPress.DB.PreparedSQL
@@ -407,9 +423,7 @@ function dokan_search_seller_products( $term, $user_ids = false, $type = '', $in
             $users_where
             ORDER BY posts.post_parent ASC, posts.post_title ASC
             ",
-            $like_term,
-            $like_term,
-            $like_term
+            $query_args
         )
         // phpcs:enable
     );
@@ -447,12 +461,18 @@ function dokan_products_array_filter_editable( $product ) {
  * Get row action for product
  *
  * @since 2.7.3
+ * @since 3.7.11 Added `$format_html` as an optional parameter
  *
- * @param object $post
+ * @param object|int|string $post
+ * @param bool              $format_html (Optional)
  *
  * @return array
  */
-function dokan_product_get_row_action( $post ) {
+function dokan_product_get_row_action( $post, $format_html = true ) {
+    if ( is_numeric( $post ) ) {
+        $post = get_post( $post );
+    }
+
     if ( empty( $post->ID ) ) {
         return [];
     }
@@ -496,6 +516,10 @@ function dokan_product_get_row_action( $post ) {
     $row_action = apply_filters( 'dokan_product_row_actions', $row_action, $post );
 
     if ( empty( $row_action ) ) {
+        return $row_action;
+    }
+
+    if ( ! $format_html ) {
         return $row_action;
     }
 
@@ -609,8 +633,9 @@ function dokan_store_product_catalog_orderby() {
     }
 
     $orderby_options = array(
-        'orderby'  => $orderby,
-        'catalogs' => $catalog_orderby_options,
+        'show_default_orderby'    => $show_default_orderby,
+        'orderby'                 => $orderby,
+        'catalogs'                => $catalog_orderby_options,
     );
 
     return $orderby_options;

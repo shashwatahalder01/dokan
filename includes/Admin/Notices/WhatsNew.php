@@ -14,7 +14,7 @@ class WhatsNew {
      * @since 3.3.3
      */
     public function __construct() {
-        add_action( 'dokan_admin_notices', [ $this, 'show_whats_new_notice' ] );
+        add_filter( 'dokan_admin_notices', [ $this, 'show_whats_new_notice' ] );
         add_action( 'wp_ajax_dokan-whats-new-notice', [ $this, 'dismiss_new_notice' ] );
     }
 
@@ -35,7 +35,7 @@ class WhatsNew {
         // check if it has already been dismissed
         $versions = get_option( 'dokan_lite_whats_new_versions', array() );
 
-        if ( in_array( DOKAN_PLUGIN_VERSION, $versions ) ) {
+        if ( in_array( DOKAN_PLUGIN_VERSION, $versions, true ) ) {
             return $notices;
         }
 

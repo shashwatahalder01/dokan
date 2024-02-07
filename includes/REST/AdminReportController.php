@@ -3,6 +3,8 @@
 namespace WeDevs\Dokan\REST;
 
 use DateTime;
+use WP_Error;
+use WP_REST_Response;
 use WP_REST_Server;
 use WeDevs\Dokan\Abstracts\DokanRESTAdminController;
 
@@ -54,7 +56,7 @@ class AdminReportController extends DokanRESTAdminController {
      *
      * @since 2.8.0
      *
-     * @return void
+     * @return WP_REST_Response|WP_Error
      */
     public function get_summary( $request ) {
         require_once DOKAN_INC_DIR . '/Admin/functions.php';
@@ -84,7 +86,7 @@ class AdminReportController extends DokanRESTAdminController {
      *
      * @since 2.8.0
      *
-     * @return void
+     * @return WP_REST_Response|WP_Error
      */
     public function get_overview( $request ) {
         require_once DOKAN_INC_DIR . '/Admin/functions.php';
@@ -101,6 +103,7 @@ class AdminReportController extends DokanRESTAdminController {
         $date_modifier = $start_date->diff( $end_date )->m >= 11 ? '+1 month' : '+1 day';
         $group_by      = $date_modifier === '+1 month' ? 'month' : 'day';
         $data          = dokan_admin_report_data( $group_by, '', $start_date->format( 'Y-m-d' ), $end_date->format( 'Y-m-d' ), $seller_id );
+        $data          = apply_filters( 'dokan_get_overview_data', $data, $group_by, $start_date->format( 'Y-m-d' ), $end_date->format( 'Y-m-d' ), $seller_id );
 
         $labels          = array();
         $order_counts    = array();
@@ -118,12 +121,12 @@ class AdminReportController extends DokanRESTAdminController {
 
         // fillup real datea
         foreach ( $data as $row ) {
-            if ( 'month' == $group_by ) {
+            if ( 'month' === $group_by ) {
                 $date = new DateTime( $row->order_date );
                 $date->modify( 'first day of this month' );
                 $date = $date->format( 'Y-m-d' );
             } else {
-                $date = date( 'Y-m-d', strtotime( $row->order_date ) );
+                $date = dokan_current_datetime()->modify( $row->order_date )->format( 'Y-m-d' );
             }
 
             $order_counts[ $date ]    = (int) $row->total_orders;

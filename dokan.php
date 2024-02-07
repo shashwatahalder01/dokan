@@ -1,14 +1,14 @@
 <?php
 /**
  * Plugin Name: Dokan
- * Plugin URI: https://wordpress.org/plugins/dokan-lite/
+ * Plugin URI: https://dokan.co/wordpress/
  * Description: An e-commerce marketplace plugin for WordPress. Powered by WooCommerce and weDevs.
- * Version: 3.5.1
+ * Version: 3.9.8
  * Author: weDevs
- * Author URI: https://wedevs.com/
+ * Author URI: https://dokan.co/
  * Text Domain: dokan-lite
  * WC requires at least: 5.0.0
- * WC tested up to: 6.5.1
+ * WC tested up to: 8.5.2
  * Domain Path: /languages/
  * License: GPL2
  */
@@ -48,6 +48,14 @@ if ( ! defined( 'ABSPATH' ) ) {
  * WeDevs_Dokan class
  *
  * @class WeDevs_Dokan The class that holds the entire WeDevs_Dokan plugin
+ *
+ * @property WeDevs\Dokan\Commission    $commission Instance of Commission class
+ * @property WeDevs\Dokan\Order\Manager $order Instance of Order Manager class
+ * @property WeDevs\Dokan\Product\Manager $product Instance of Order Manager class
+ * @property WeDevs\Dokan\Vendor\Manager $vendor Instance of Vendor Manager Class
+ * @property WeDevs\Dokan\BackgroundProcess\Manager $bg_process Instance of WeDevs\Dokan\BackgroundProcess\Manager class
+ * @property WeDevs\Dokan\Withdraw\Manager $withdraw Instance of WeDevs\Dokan\Withdraw\Manager class
+ * @property WeDevs\Dokan\Frontend\Frontend $frontend_manager Instance of \WeDevs\Dokan\Frontend\Frontend class
  */
 final class WeDevs_Dokan {
 
@@ -56,7 +64,7 @@ final class WeDevs_Dokan {
      *
      * @var string
      */
-    public $version = '3.5.1';
+    public $version = '3.9.8';
 
     /**
      * Instance of self
@@ -70,7 +78,7 @@ final class WeDevs_Dokan {
      *
      * @var string
      */
-    private $min_php = '7.0';
+    private $min_php = '7.4';
 
     /**
      * Holds various class instances
@@ -104,6 +112,7 @@ final class WeDevs_Dokan {
         register_activation_hook( __FILE__, [ $this, 'activate' ] );
         register_deactivation_hook( __FILE__, [ $this, 'deactivate' ] );
 
+        add_action( 'before_woocommerce_init', [ $this, 'declare_woocommerce_feature_compatibility' ] );
         add_action( 'woocommerce_loaded', [ $this, 'init_plugin' ] );
         add_action( 'woocommerce_flush_rewrite_rules', [ $this, 'flush_rewrite_rules' ] );
 
@@ -119,7 +128,7 @@ final class WeDevs_Dokan {
      * Initializes the WeDevs_Dokan() class
      *
      * Checks for an existing WeDevs_WeDevs_Dokan() instance
-     * and if it doesn't find one, creates it.
+     * and if it doesn't find one, create it.
      */
     public static function init() {
         if ( self::$instance === null ) {
@@ -136,7 +145,7 @@ final class WeDevs_Dokan {
      *
      * @param string $prop
      *
-     * @return Class Instance
+     * @return object Class Instance
      */
     public function __get( $prop ) {
         if ( array_key_exists( $prop, $this->container ) ) {
@@ -273,6 +282,20 @@ final class WeDevs_Dokan {
     }
 
     /**
+     * Add High Performance Order Storage Support
+     *
+     * @since 3.8.0
+     *
+     * @return void
+     */
+    public function declare_woocommerce_feature_compatibility() {
+        if ( class_exists( \Automattic\WooCommerce\Utilities\FeaturesUtil::class ) ) {
+            \Automattic\WooCommerce\Utilities\FeaturesUtil::declare_compatibility( 'custom_order_tables', __FILE__, true );
+            \Automattic\WooCommerce\Utilities\FeaturesUtil::declare_compatibility( 'cart_checkout_blocks', __FILE__, true );
+        }
+    }
+
+    /**
      * Load the plugin after WP User Frontend is loaded
      *
      * @return void
@@ -295,7 +318,7 @@ final class WeDevs_Dokan {
 
         // initialize the classes
         add_action( 'init', [ $this, 'init_classes' ], 4 );
-        add_action( 'init', [ $this, 'wpdb_table_shortcuts' ] );
+        add_action( 'init', [ $this, 'wpdb_table_shortcuts' ], 1 );
 
         add_action( 'plugins_loaded', [ $this, 'after_plugins_loaded' ] );
 
@@ -314,6 +337,11 @@ final class WeDevs_Dokan {
         require_once DOKAN_DIR . '/deprecated/deprecated-functions.php';
         require_once DOKAN_DIR . '/deprecated/deprecated-hooks.php';
         require_once DOKAN_INC_DIR . '/functions.php';
+
+        if ( ! function_exists( 'dokan_pro' ) ) {
+            require_once DOKAN_INC_DIR . '/reports.php';
+        }
+
         require_once DOKAN_INC_DIR . '/Order/functions.php';
         require_once DOKAN_INC_DIR . '/Product/functions.php';
         require_once DOKAN_INC_DIR . '/Withdraw/functions.php';
@@ -339,12 +367,13 @@ final class WeDevs_Dokan {
      */
     public function init_classes() {
         new \WeDevs\Dokan\Withdraw\Hooks();
-        new \WeDevs\Dokan\Order\Hooks();
         new \WeDevs\Dokan\Product\Hooks();
+        new \WeDevs\Dokan\ProductCategory\Hooks();
         new \WeDevs\Dokan\Vendor\Hooks();
         new \WeDevs\Dokan\Upgrade\Hooks();
         new \WeDevs\Dokan\Vendor\UserSwitch();
         new \WeDevs\Dokan\CacheInvalidate();
+        new \WeDevs\Dokan\Shipping\Hooks();
 
         if ( is_admin() ) {
             new \WeDevs\Dokan\Admin\Hooks();
@@ -359,6 +388,7 @@ final class WeDevs_Dokan {
             new \WeDevs\Dokan\ThemeSupport\Manager();
         }
 
+        $this->container['product_block']       = new \WeDevs\Dokan\Blocks\ProductBlock();
         $this->container['pageview']            = new \WeDevs\Dokan\PageViews();
         $this->container['seller_wizard']       = new \WeDevs\Dokan\Vendor\SetupWizard();
         $this->container['core']                = new \WeDevs\Dokan\Core();
@@ -369,6 +399,7 @@ final class WeDevs_Dokan {
         $this->container['shortcodes']          = new \WeDevs\Dokan\Shortcodes\Shortcodes();
         $this->container['registration']        = new \WeDevs\Dokan\Registration();
         $this->container['order']               = new \WeDevs\Dokan\Order\Manager();
+        $this->container['order_controller']    = new \WeDevs\Dokan\Order\Controller();
         $this->container['api']                 = new \WeDevs\Dokan\REST\Manager();
         $this->container['withdraw']            = new \WeDevs\Dokan\Withdraw\Manager();
         $this->container['dashboard']           = new \WeDevs\Dokan\Dashboard\Manager();
@@ -377,6 +408,10 @@ final class WeDevs_Dokan {
         $this->container['upgrades']            = new \WeDevs\Dokan\Upgrade\Manager();
         $this->container['product_sections']    = new \WeDevs\Dokan\ProductSections\Manager();
         $this->container['reverse_withdrawal']  = new \WeDevs\Dokan\ReverseWithdrawal\ReverseWithdrawal();
+        $this->container['dummy_data_importer'] = new \WeDevs\Dokan\DummyData\Importer();
+        $this->container['catalog_mode']        = new \WeDevs\Dokan\CatalogMode\Controller();
+        $this->container['bg_process']          = new \WeDevs\Dokan\BackgroundProcess\Manager();
+        $this->container['frontend_manager']    = new \WeDevs\Dokan\Frontend\Frontend();
 
         //fix rewrite rules
         if ( ! isset( $this->container['rewrite'] ) ) {
@@ -472,11 +507,11 @@ final class WeDevs_Dokan {
      */
     public function plugin_action_links( $links ) {
         if ( ! $this->is_pro_exists() ) {
-            $links[] = '<a href="https://wedevs.com/dokan/" style="color: #389e38;font-weight: bold;" target="_blank">' . __( 'Get Pro', 'dokan-lite' ) . '</a>';
+            $links[] = '<a href="https://dokan.co/wordpress/" style="color: #389e38;font-weight: bold;" target="_blank">' . __( 'Get Pro', 'dokan-lite' ) . '</a>';
         }
 
         $links[] = '<a href="' . admin_url( 'admin.php?page=dokan#/settings' ) . '">' . __( 'Settings', 'dokan-lite' ) . '</a>';
-        $links[] = '<a href="https://wedevs.com/docs/dokan/" target="_blank">' . __( 'Documentation', 'dokan-lite' ) . '</a>';
+        $links[] = '<a href="https://dokan.co/docs/wordpress/" target="_blank">' . __( 'Documentation', 'dokan-lite' ) . '</a>';
 
         return $links;
     }
@@ -550,9 +585,11 @@ final class WeDevs_Dokan {
  *
  * @return WeDevs_Dokan
  */
-function dokan() {
+function dokan() { // phpcs:ignore
     return WeDevs_Dokan::init();
 }
 
 // Lets Go....
 dokan();
+
+// Path: includes/Upgrade/Manager.php

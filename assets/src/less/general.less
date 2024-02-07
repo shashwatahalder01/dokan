@@ -46,16 +46,25 @@ ul.subsubsub {
   padding: 0;
 
   li {
-    line-height: 13px;
     padding: 0 5px;
+    line-height: 13px;
     border-right: 1px solid @borderColor;
+
+    a {
+      color: #6d6d6d;
+      transition: .2s linear;
+
+      &:hover {
+        color: #000;
+      }
+    }
 
     &:last-child {
       border-right: none;
     }
 
     &.active a {
-      color: #999;
+      color: #000;
     }
   }
 }
@@ -137,6 +146,16 @@ table.dokan-table {
     }
   }
 
+  td {
+    a {
+      color: #6d6d6d;
+
+      &:hover {
+        color: #000;
+      }
+    }
+  }
+
   .is-expanded .toggle-row::before {
     content: '\f0d8';
   }
@@ -202,7 +221,7 @@ table.dokan-table {
 }
 
 span.dokan-loading {
-  background: url('../images/wpspin_light.gif') no-repeat;
+  background: url('../../images/wpspin_light.gif') no-repeat;
   float: right;
   height: 16px;
   margin: 5px 5px 0;
@@ -219,7 +238,7 @@ span.error {
   border: 2px solid #ccc !important;
   border-radius: 4px !important;
   background-color: white !important;
-  background-image: url('../images/searchicon.png') !important;
+  background-image: url('../../images/searchicon.png') !important;
   background-position: 8px 8px !important;
   background-repeat: no-repeat !important;
   padding: 5px 0 5px 36px !important;
@@ -252,7 +271,7 @@ span.error {
   -webkit-animation: spin 1s ease-in-out infinite;
   -moz-animation: spin 1s ease-in-out infinite;
   animation: spin 1s ease-in-out infinite;
-  background: url(../images/loader.svg) center center;
+  background: url(../../images/loader.svg) center center;
   background-size: cover;
   line-height: 1;
   text-align: center;
@@ -276,7 +295,7 @@ span.error {
     border-bottom: none;
   }
 
-  #cat-drop-stack {
+  .cat-drop-stack {
     ul {
       .children {
         display: none;

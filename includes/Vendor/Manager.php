@@ -150,7 +150,6 @@ class Manager {
      */
     public function create( $data = [] ) {
         $defaults = [
-            'role'       => 'seller',
             'user_login' => '', // dokan_generate_username()
             'user_pass'  => wp_generate_password(),
         ];
@@ -161,6 +160,7 @@ class Manager {
         }
 
         $vendor_data = wp_parse_args( $data, $defaults );
+        $vendor_data['role'] = 'seller'; // this value can't be edited
         $vendor_id   = wp_insert_user( $vendor_data );
 
         if ( is_wp_error( $vendor_id ) ) {
@@ -191,8 +191,6 @@ class Manager {
             'banner'                  => ! empty( $data['banner_id'] ) ? $data['banner_id'] : 0,
             'icon'                    => ! empty( $data['icon'] ) ? $data['icon'] : '',
             'gravatar'                => ! empty( $data['gravatar_id'] ) ? $data['gravatar_id'] : 0,
-            'show_more_ptab'          => ! empty( $data['show_more_ptab'] ) ? $data['show_more_ptab'] : 'yes',
-            'store_ppp'               => ! empty( $data['store_ppp'] ) ? $data['store_ppp'] : (int) dokan_get_option( 'store_products_per_page', 'dokan_general', 12 ),
             'enable_tnc'              => ! empty( $data['enable_tnc'] ) ? $data['enable_tnc'] : 'off',
             'store_tnc'               => ! empty( $data['store_tnc'] ) ? $data['store_tnc'] : '',
             'show_min_order_discount' => ! empty( $data['show_min_order_discount'] ) ? $data['show_min_order_discount'] : 'no',
@@ -308,10 +306,13 @@ class Manager {
 
         // update vendor other metadata | @todo: move all other metadata to 'dokan_profile_settings' meta
         if ( current_user_can( 'manage_woocommerce' ) ) {
-            if ( isset( $data['enabled'] ) && dokan_validate_boolean( $data['enabled'] ) ) {
-                $vendor->update_meta( 'dokan_enable_selling', 'yes' );
-            } else {
-                $vendor->update_meta( 'dokan_enable_selling', 'no' );
+            if ( isset( $data['enabled'] ) ) {
+                $previously_enabled = $vendor->is_enabled();
+                $newly_enabled      = dokan_validate_boolean( $data['enabled'] );
+
+                if ( $previously_enabled !== $newly_enabled ) {
+                    $newly_enabled ? $vendor->make_active() : $vendor->make_inactive();
+                }
             }
 
             if ( isset( $data['featured'] ) && dokan_validate_boolean( $data['featured'] ) ) {
@@ -351,11 +352,11 @@ class Manager {
             $vendor->set_show_email( 'no' );
         }
 
-        if ( ! empty( $data['gravatar_id'] ) && is_numeric( $data['gravatar_id'] ) ) {
+        if ( isset( $data['gravatar_id'] ) && is_numeric( $data['gravatar_id'] ) ) {
             $vendor->set_gravatar_id( $data['gravatar_id'] );
         }
 
-        if ( ! empty( $data['banner_id'] ) && is_numeric( $data['banner_id'] ) ) {
+        if ( isset( $data['banner_id'] ) && is_numeric( $data['banner_id'] ) ) {
             $vendor->set_banner_id( $data['banner_id'] );
         }
 

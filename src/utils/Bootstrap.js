@@ -9,6 +9,7 @@ import ChartJS from 'vue-chartjs'
 import Mixin from './Mixin'
 import Debounce from 'debounce'
 import VersionCompare from '@/utils/VersionCompare'
+import { parse } from 'papaparse'
 
 window.__ = function( text, domain ) {
   return __( text, domain );
@@ -38,7 +39,6 @@ import Search from "admin/components/Search.vue"
 import Datepicker from "admin/components/Datepicker.vue";
 import DateRangePicker from 'vue2-daterange-picker';
 import 'vue2-daterange-picker/dist/vue2-daterange-picker.css';
-import VueSweetalert2 from 'vue-sweetalert2';
 import ColorPicker from "admin/components/ColorPicker.vue"
 import GoogleMaps from "admin/components/GoogleMaps.vue"
 import Mapbox from "admin/components/Mapbox.vue"
@@ -55,7 +55,6 @@ import CardFunFact from "../admin/components/CardFunFact.vue";
 import "vue-multiselect/dist/vue-multiselect.min.css"
 
 Vue.use(Notifications)
-Vue.use(VueSweetalert2);
 
 Vue.mixin( Mixin );
 
@@ -121,6 +120,7 @@ window.dokan.libs['VendorPaymentFields'] = VendorPaymentFields;
 window.dokan.libs['RefreshSettingOptions'] = RefreshSettingOptions;
 window.dokan.libs['AdminNotice']         = AdminNotice;
 window.dokan.libs['CardFunFact']         = CardFunFact;
+window.dokan.libs['papaparse']           = parse;
 
 window.dokan.libs['ContentLoading']  = {
   VclCode,
@@ -133,7 +133,7 @@ window.dokan.libs['ContentLoading']  = {
 };
 
 // wp npm packages with backward compatibility
-dokan.hooks = (wp && wp.hooks) ? wp.hooks : dokan.wpPackages.hooks;
+dokan.hooks = window.wp.hooks;
 
 if ( dokan.hooks ) {
     dokan.addFilterComponent = (hookName, namespace, component, priority = 10) => {

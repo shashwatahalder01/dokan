@@ -103,13 +103,16 @@ jQuery(function($) {
     form_group.addClass('has-error').append(error);
   };
 
-  var validatorSuccess = function(label, element) {
+  var validatorSuccess = function(error, element) {
     $(element)
       .closest('.dokan-form-group')
       .removeClass('has-error');
+    $(error).remove();
   };
 
   var api = wp.customize;
+
+  var selectors = 'input[name="settings[bank][disconnect]"], input[name="settings[paypal][disconnect]"], input[name="settings[skrill][disconnect]"], input[name="settings[dokan_custom][disconnect]"]';
 
   var Dokan_Settings = {
     init: function() {
@@ -127,7 +130,31 @@ jQuery(function($) {
           $("input[name='dokan_update_store_settings']").trigger( 'click' );
       });
 
+
       this.validateForm(self);
+
+      $('.dokan_payment_disconnect_btn').on( 'click', function(){
+        var form = $(this).closest('form');
+        var self = $('form#' + form.attr('id'));
+
+        $(':input',form)
+        .not(':button, :submit, :reset, :hidden, :checkbox')
+        .val('')
+        .prop('selected', false);
+
+        var data = form.serializeArray().reduce(function(obj, item) {
+            obj[item.name] = item.value;
+            return obj;
+        }, {});
+
+        data[$(this).attr('name')] = ''
+        data['form_id'] = form.attr('id');
+        data['action'] = 'dokan_settings';
+
+        var isDisconnect = true;
+
+        Dokan_Settings.handleRequest( self, data, isDisconnect );
+      });
 
       return false;
     },
@@ -466,16 +493,27 @@ jQuery(function($) {
       }
 
       var self = $('form#' + form_id),
-        form_data =
-          self.serialize() + '&action=dokan_settings&form_id=' + form_id;
+        form_data = self.serialize() + '&action=dokan_settings&form_id=' + form_id;
 
-      self.find('.ajax_prev').append('<span class="dokan-loading"> </span>');
+      var isDisconnect = false;
+
+      Dokan_Settings.handleRequest( self, form_data, isDisconnect );
+    },
+
+    handleRequest: function ( self, form_data, isDisconnect ) {
+      if (isDisconnect) {
+        self.find('.ajax_prev.disconnect').append('<span class="dokan-loading"> </span>');
+      } else {
+        self.find('.ajax_prev.save').append('<span class="dokan-loading"> </span>');
+      }
+
       $('.dokan-update-setting-top-button span.dokan-loading').remove();
       $('.dokan-update-setting-top-button').append('<span class="dokan-loading"> </span>');
+
       $.post(dokan.ajaxurl, form_data, function(resp) {
         self.find('span.dokan-loading').remove();
         $('.dokan-update-setting-top-button span.dokan-loading').remove();
-        $('html,body').animate({ scrollTop: 100 });
+        $('html,body').animate({ scrollTop: $('.dokan-dashboard-header').offset().top });
 
         if (resp.success) {
           // Harcoded Customization for template-settings function
@@ -490,6 +528,13 @@ jQuery(function($) {
 
           if ( dokan && dokan.storeProgressBar ) {
             dokan.storeProgressBar.init();
+          }
+
+          selectors = selectors.replaceAll( 'input', 'button' );
+          if (isDisconnect){
+            self.find(selectors).addClass('dokan-hide');
+          } else {
+            self.find(selectors).removeClass('dokan-hide');
           }
         } else {
           $('.dokan-ajax-response').html(
@@ -850,69 +895,6 @@ jQuery(function($) {
   };
 
   bulkItemsSelection.init();
-
-  $('.product-cat-stack-dokan li.has-children').on(
-    'click',
-    '> a span.caret-icon',
-    function(e) {
-      e.preventDefault();
-      var self = $(this),
-        liHasChildren = self.closest('li.has-children');
-
-      if (!liHasChildren.find('> ul.children').is(':visible')) {
-        self.find('i.fa').addClass('fa-rotate-90');
-        if (liHasChildren.find('> ul.children').hasClass('level-0')) {
-          self.closest('a').css({ borderBottom: 'none' });
-        }
-      }
-
-      liHasChildren.find('> ul.children').slideToggle('fast', function() {
-        if (!$(this).is(':visible')) {
-          self.find('i.fa').removeClass('fa-rotate-90');
-
-          if (liHasChildren.find('> ul.children').hasClass('level-0')) {
-            self.closest('a').css({ borderBottom: '1px solid #eee' });
-          }
-        }
-      });
-    }
-  );
-
-  $('.store-cat-stack-dokan li.has-children').on(
-    'click',
-    '> a span.caret-icon',
-    function(e) {
-      e.preventDefault();
-      var self = $(this),
-        liHasChildren = self.closest('li.has-children');
-
-      if (!liHasChildren.find('> ul.children').is(':visible')) {
-        self.find('i.fa').addClass('fa-rotate-90');
-        if (liHasChildren.find('> ul.children').hasClass('level-0')) {
-          self.closest('a').css({ borderBottom: 'none' });
-        }
-      }
-
-      liHasChildren.find('> ul.children').slideToggle('fast', function() {
-        if (!$(this).is(':visible')) {
-          self.find('i.fa').removeClass('fa-rotate-90');
-
-          if (liHasChildren.find('> ul.children').hasClass('level-0')) {
-            self.closest('a').css({ borderBottom: '1px solid #eee' });
-          }
-        }
-      });
-    }
-  );
-
-  $(document).ready(function() {
-    var selectedLi = $('#cat-drop-stack ul').find('a.selected');
-    selectedLi.css({ fontWeight: 'bold' });
-
-    selectedLi.parents('ul.children').each(function(i, val) {
-      $(val).css({ display: 'block' });
-    });
-  });
 })(jQuery);
 
 (function($) {
@@ -1156,6 +1138,86 @@ jQuery(function($) {
           .css('cursor', 'help');
       });
     });
+
+    // Submenu navigation on vendor dashboard
+    $( '#dokan-navigation .dokan-dashboard-menu li.has-submenu:not(.active)' )
+    .on( 'mouseover', (e) => {
+        dokanNavigateSubmenu(e);
+    } )
+    .on( 'mouseout', (e) => {
+        dokanNavigateSubmenu( e, true );
+    } );
+
+    /**
+     * Navigates submenu on hovering the parent menu.
+     *
+     * @param {event}   evt  The dom event
+     * @param {boolean} hide Hide or show sub menu
+     *
+     * @return {void}
+     */
+    function dokanNavigateSubmenu( evt, hide ) {
+        const elem = $( evt.target ).closest( 'li.has-submenu' );
+
+        elem.find( '.navigation-submenu' ).each( ( index, subElem ) => {
+            if ( ! hide ) {
+                elem.addClass( 'submenu-hovered' );
+
+                let elemRect        = elem[0].getBoundingClientRect(),
+                    subElemRect     = subElem.getBoundingClientRect(),
+                    dashboard       = $( '.dokan-dashboard-wrap' ),
+                    dashboardRect   = dashboard[0].getBoundingClientRect(),
+                    dashboardHeight = Math.min( dashboardRect.bottom, dashboardRect.height );
+
+                if ( dashboardHeight < subElemRect.height ) {
+                    let extendedHeight = subElemRect.height - dashboardHeight;
+                    if ( elemRect.top < elemRect.height ) {
+                        extendedHeight += elemRect.top;
+                    }
+                    dashboard.css( 'height', dashboardRect.height + extendedHeight );
+                } else {
+                    dashboard.css( 'height', '' );
+                }
+
+                if ( elemRect.top < elemRect.height ) {
+                    $(subElem).css( 'bottom', 'unset' );
+                    $(subElem).css( 'top', 0 );
+                } else {
+                    $(subElem).css( 'top', 'unset' );
+
+                    let dist = elemRect.top - subElemRect.height;
+                    if ( dist > 0 ) {
+                        $(subElem).css( 'bottom', 0 );
+
+                        subElemRect = subElem.getBoundingClientRect();
+                        if ( subElemRect.top < 0 ) {
+                            $(subElem).css( 'bottom', 'unset' );
+                            $(subElem).css( 'top', 0 );
+                        }
+                    } else {
+                        $(subElem).css( 'bottom', dist );
+
+                        let navRect             = $( '.dokan-dash-sidebar' )[0].getBoundingClientRect(),
+                            navElderSiblingRect = $( '.entry-header' )[0].getBoundingClientRect();
+                        subElemRect = subElem.getBoundingClientRect();
+
+                        if ( subElemRect.bottom > navRect.bottom ) {
+                            dist += subElemRect.bottom - navRect.bottom;
+                        } else if ( subElemRect.bottom - navElderSiblingRect.bottom < subElemRect.height ) {
+                            dist += subElemRect.bottom - navElderSiblingRect.bottom - subElemRect.height - 20;
+                        }
+
+                        $(subElem).css( 'bottom', dist );
+                    }
+                }
+            } else {
+                elem.removeClass( 'submenu-hovered' );
+                $( '.dokan-dashboard-wrap' ).css( 'height', '' );
+                $(subElem).css( 'bottom', 0 );
+                $(subElem).removeAttr( 'style' );
+            }
+        } );
+    }
 })(jQuery);
 /**
  * Show Delete Button Prompt
@@ -1165,7 +1227,7 @@ jQuery(function($) {
  *
  * @returns boolean
  */
- async function dokan_show_delete_prompt( event, messgae ) {
+window.dokan_show_delete_prompt = async function ( event, messgae ) {
   event.preventDefault();
 
   let answer = await dokan_sweetalert( messgae, {
@@ -1181,5 +1243,29 @@ jQuery(function($) {
   }
   else {
     return false;
+  }
+}
+
+/**
+ * Shows bulk action delete operation confirmation
+ *
+ * @param {object} event
+ * @param {string} message
+ * @param {string} inputSelector
+ * @param {string} formSelector
+ */
+window.dokan_bulk_delete_prompt = async function ( event, message, inputSelector, formSelector ) {
+  if ( 'delete' === jQuery( inputSelector ).val() ) {
+    // only prevent default if action is delete
+    event.preventDefault();
+
+    let answer = await dokan_sweetalert( message, {
+      action  : 'confirm',
+      icon    : 'warning'
+    } );
+
+    if( answer.isConfirmed ) {
+      jQuery( formSelector ).submit()
+    }
   }
 }

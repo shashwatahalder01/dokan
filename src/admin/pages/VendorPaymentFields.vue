@@ -17,6 +17,15 @@
                 </div>
 
                 <div class="column">
+                    <label for="account-type">{{ __( 'Account Type', 'dokan-lite') }}</label>
+                    <select id="account-type" class="dokan-form-input" v-model="vendorInfo.payment.bank.ac_type" >
+                        <option value="">{{__('Please Select...', 'dokan-lite')}}</option>
+                        <option value="personal">{{__('Personal', 'dokan-lite')}}</option>
+                        <option value="business">{{__('Business', 'dokan-lite')}}</option>
+                    </select>
+                </div>
+
+                <div class="column">
                     <label for="bank-name">{{ __( 'Bank Name', 'dokan-lite') }}</label>
                     <input type="text" id="bank-name" class="dokan-form-input" v-model="vendorInfo.payment.bank.bank_name" :placeholder="__( 'Bank Name', 'dokan-lite')">
                 </div>
@@ -101,6 +110,13 @@
                     </div>
                 </div>
 
+                <!-- Add other payment fields here -->
+                <component v-for="(component, index) in afterFeaturedCheckbox"
+                    :key="index"
+                    :is="component"
+                    :vendorInfo="vendorInfo"
+                />
+
             </div>
 
             <!-- Add other payment fields here -->
@@ -156,6 +172,7 @@ export default {
             },
             getBankFields: dokan.hooks.applyFilters( 'getVendorBankFields', [] ),
             getPyamentFields: dokan.hooks.applyFilters( 'AfterPyamentFields', [] ),
+            afterFeaturedCheckbox: dokan.hooks.applyFilters( 'afterFeaturedCheckbox', [] ),
         }
     },
 

@@ -77,7 +77,7 @@
                         <date-range-picker
                             class="mr-5"
                             ref="picker"
-                            :locale-data="this.dateTimePickerFormat"
+                            :locale-data="dateTimePickerFormat()"
                             :singleDatePicker="false"
                             :timePicker="false"
                             :timePicker24Hour="false"
@@ -155,10 +155,6 @@ export default {
                 debit: 0,
                 credit: 0,
                 total_transaction: 0
-            },
-            dateTimePickerFormat: {
-                format: dokan_get_daterange_picker_format().toLowerCase(),
-                ...dokan_helper.daterange_picker_local,
             },
             dateRangePickerRanges: {
                 'Today': [moment().toDate(), moment().toDate()],
@@ -249,8 +245,8 @@ export default {
             if ( ! this.filter.transaction_date.startDate || ! this.filter.transaction_date.endDate ) {
                 return data;
             }
-            data.from = $.datepicker.formatDate('yy-mm-dd', new Date(this.filter.transaction_date.startDate));
-            data.to = $.datepicker.formatDate('yy-mm-dd', new Date(this.filter.transaction_date.endDate));
+            data.from = moment( new Date(this.filter.transaction_date.startDate ) ).format( 'YYYY-MM-DD HH:mm:ss' );
+            data.to = moment( new Date(this.filter.transaction_date.endDate ) ).format( 'YYYY-MM-DD HH:mm:ss' );
             return data;
         },
 
@@ -282,9 +278,9 @@ export default {
 
     methods: {
         updatedCounts( xhr ) {
-            this.counts.debit  = parseInt( xhr.getResponseHeader('X-Status-Debit') ?? 0 );
-            this.counts.credit = parseInt( xhr.getResponseHeader('X-Status-Credit') ?? 0 );
-            this.counts.balance = parseInt( xhr.getResponseHeader('X-Status-Balance') ?? 0 );
+            this.counts.debit  = parseFloat( xhr.getResponseHeader('X-Status-Debit') ?? 0 );
+            this.counts.credit = parseFloat( xhr.getResponseHeader('X-Status-Credit') ?? 0 );
+            this.counts.balance = parseFloat( xhr.getResponseHeader('X-Status-Balance') ?? 0 );
             this.counts.total_transactions = parseInt( xhr.getResponseHeader('X-Status-Total-Transactions') ?? 0 );
         },
 
@@ -315,8 +311,8 @@ export default {
 
         getDefaultTransactionDate() {
             return {
-                startDate: moment().subtract(29, 'days').format('YYYY-MM-DD 00:00:00'),
-                endDate: moment().format('YYYY-MM-DD 23:59:59'),
+                startDate: moment().subtract(29, 'days').hour(0).minute(0).second(0).toDate(),
+                endDate: moment().hour(23).minute(59).second(59).toDate(),
             }
         },
 
@@ -350,7 +346,7 @@ export default {
                 per_page: -1,
             };
 
-            dokan.api.get('/reverse-withdrawal/transactions/' + self.ID, data)
+            dokan.api.get('/reverse-withdrawal/transactions/', data)
             .done( ( response, status, xhr ) => {
                 self.transactionData = response;
                 self.updatedCounts( xhr );

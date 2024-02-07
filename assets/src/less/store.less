@@ -197,7 +197,7 @@
     }
 
     .dokan-ajax-search-loader{
-        background-image: url('../images/spinner-2x.gif');
+        background-image: url('../../images/spinner-2x.gif');
         background-position:right center;
         background-repeat: no-repeat;
         background-size: 25px 25px;
@@ -231,7 +231,7 @@
                 height: auto;
 
                 &.dummy-image {
-                    background-image: url(../images/default-store-banner.png);
+                    background-image: url(../../images/default-store-banner.png);
                     background-size: 100% 100%;
                     background-repeat: no-repeat;
                 }
@@ -261,6 +261,8 @@
                                 background: #fff;
                                 width: 80px;
                                 height: 80px;
+                                margin-left: auto;
+                                margin-right: auto;
                             }
 
                             &.profile-img-square img {
@@ -322,7 +324,7 @@
                                         top: 110%;
                                         left: -20%;
                                         color: #3E474F;
-                                        width: 300px;
+                                        width: 310px;
                                         z-index: 1;
                                         display: none;
                                         padding: 1.5em 2em;
@@ -433,7 +435,7 @@
                                             &:after {
                                                 content: "";
                                                 top: 75%;
-                                                right: 44.5%;
+                                                right: 44%;
                                                 width: 25px;
                                                 height: 40px;
                                                 z-index: 1;
@@ -525,9 +527,9 @@
                     padding: 0 15px;
 
                     .profile-info-summery {
-                        top: -55px;
                         color: #444;
                         width: 100%;
+                        margin-top: -55px;
                         padding: 0;
                         position: relative;
                         background: none;
@@ -589,7 +591,7 @@
                         padding: 10px;
 
                         .profile-info-head {
-                            width: 150px;
+                            width: 20%;
                             float: left;
 
                             .profile-img {
@@ -699,7 +701,25 @@
     }
 
     .dokan-store-tabs {
-        ul {
+        text-align: center;
+
+        ul.dokan-modules-button {
+            overflow: hidden;
+            display: flex;
+            flex-wrap: wrap;
+            flex-direction: row-reverse;
+            justify-content: center;
+            margin: 0;
+            padding: 10px 0;
+            border: 1px solid #EDEDED;
+
+            li {
+                display: inline-block;
+            }
+        }
+
+        ul.dokan-list-inline {
+            display: flex;
             background-color: #fff;
             border-width: 0 1px 1px 1px;
             border-color: @borderColor;
@@ -707,13 +727,20 @@
             margin: 0;
             padding: 0;
             margin-bottom: 20px;
+            font-size: 14px;
 
             li {
                 display: inline-block;
+                flex: auto;
                 border-right: 1px solid @borderColor;
                 margin-right: -4px;
 
+                &:last-child {
+                    border-right: unset;
+                }
+
                 a {
+                    width: 100%;
                     text-decoration: none;
                     color: #666;
                     padding: 10px 15px;
@@ -757,6 +784,14 @@
     #dokan-store-location {
         width: 100%;
         height: 200px;
+    }
+
+    form#dokan-form-contact-seller {
+        .dokan-privacy-policy-text {
+            p {
+                word-break: break-all;
+            }
+        }
     }
 }
 
@@ -1044,6 +1079,28 @@
                     }
                 }
 
+                &.profile-layout-default {
+                    img.profile-info-img {
+                        position: absolute;
+                        top: 0;
+                        left: 0;
+                    }
+
+                    .profile-info-summery-wrapper {
+                        position: relative;
+
+                        .profile-info-summery {
+                            .profile-info {
+                                padding: 5px 30px;
+
+                                ul.dokan-store-info {
+                                    margin-bottom: 10px;
+                                }
+                            }
+                        }
+                    }
+                }
+
                 &.profile-layout-layout1 {
 
                     .profile-info-summery-wrapper {
@@ -1072,16 +1129,15 @@
                         background-color: #fff;
                         color: #444;
                         border: 1px solid @borderColor;
-                        height: 220px;
 
                         .profile-info-summery {
                             width: 100%;
+                            margin-top: -75px;
                             padding-top: 0;
                             background: none;
 
                             .profile-info-head {
                                 position: relative;
-                                top: -75px;
 
                                 .profile-img {
 
@@ -1096,8 +1152,7 @@
                             }
 
                             .profile-info {
-                                position: absolute;
-                                top: 15%;
+                                position: relative;
 
                                 .store-name {
                                     color: inherit;
@@ -1195,6 +1250,24 @@
         width: 94% !important;
         margin-left: 3%;
     }
+
+    .dokan-single-store {
+        .profile-frame {
+            &.profile-frame-no-banner {
+                .profile-info-box {
+                    &.profile-layout-layout3 {
+                        .profile-info-summery-wrapper {
+                            .profile-info-summery {
+                                .profile-info-head {
+                                    width: 150px;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
 }
 
 @media (max-width: 1199px) {
@@ -1218,7 +1291,7 @@
 
                         .profile-info-head {
                             position: relative;
-                            top: -45px;
+                            top: 0;
 
                             .store-name {
                                 color: inherit;
@@ -1248,12 +1321,12 @@
 
                             .dokan-store-info {
                                 position: relative;
-                                top: -45px;
+                                top: 0;
                                 padding: 0;
                                 width: 100%;
                                 margin: 0;
                                 display: block;
-                                overflow: hidden;
+                                overflow: visible;
                                 line-height: 1.4;
 
                                 li {
@@ -1277,13 +1350,17 @@
 
                                     .store-open-close-notice {
                                         justify-content: center;
+
+                                        #vendor-store-times {
+                                            left: calc(50% - 155px) !important;
+                                        }
                                     }
                                 }
                             }
 
                             .store-social-wrapper {
                                 position: relative;
-                                top: -45px;
+                                top: 0;
                                 text-align: center;
 
                                 .store-social {
@@ -1304,11 +1381,10 @@
                 &.profile-layout-layout1 {
 
                     .profile-info-summery-wrapper {
-                        height: 275px;
                         padding: 0 8px;
 
                         .profile-info-summery {
-                            top: 6px;
+                            margin-top: 0px;
 
                             .profile-info-head {
                                 top: 0;
@@ -1349,6 +1425,10 @@
                                             display: inline-block;
                                         }
                                     }
+
+                                    .store-open-close-notice {
+                                        justify-content: flex-start;
+                                    }
                                 }
 
                                 .store-social-wrapper {
@@ -1383,16 +1463,25 @@
                         .profile-info-summery {
 
                             .profile-info {
+                                margin-top: 0;
 
                                 .store-name {
                                     position: relative;
-                                    top: -45px;
+                                    top: 0px;
                                     text-align: center;
                                     font-size: 20px;
-                                    margin-bottom: 8px;
+                                    margin-bottom: 10px;
                                     color: #444;
                                     text-shadow: none;
                                     font-weight: bold;
+                                }
+
+                                .dokan-store-info {
+                                    top: 0;
+                                }
+
+                                .store-social-wrapper {
+                                    top: 0;
                                 }
                             }
                         }
@@ -1429,6 +1518,10 @@
                                         &:before {
                                             content: "";
                                         }
+                                    }
+
+                                    .store-open-close-notice {
+                                        justify-content: flex-start;
                                     }
                                 }
 

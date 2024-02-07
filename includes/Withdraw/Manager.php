@@ -9,13 +9,12 @@ use WeDevs\Dokan\Withdraw\Withdraws;
 /**
  * Withdraw base class
  *
- * @author wedDevs <info@wedevs.com>
+ * @since   2.4
  *
- * @since 2.4
+ * @author  wedDevs <info@wedevs.com>
  *
  * @package dokan
  */
-
 class Manager {
 
     /**
@@ -28,11 +27,15 @@ class Manager {
      * @return bool|\WP_Error
      */
     public function is_valid_approval_request( $args ) {
+        $withdraw = new Withdraw();
         $user_id = $args['user_id'];
         $limit   = $this->get_withdraw_limit();
         $balance = wc_format_decimal( dokan_get_seller_balance( $user_id, false ), 2 );
         $amount  = wc_format_decimal( $args['amount'], 2 );
         $method  = $args['method'];
+
+        $all_withdraw_charges = dokan_withdraw_get_method_charges();
+        $charge_data = $all_withdraw_charges[ $method ];
 
         if ( empty( $amount ) ) {
             return new WP_Error( 'dokan_withdraw_empty', __( 'Withdraw amount required ', 'dokan-lite' ) );
@@ -57,6 +60,18 @@ class Manager {
 
         if ( ! empty( $args['id'] ) && isset( $args['status'] ) && absint( $args['status'] ) === dokan()->withdraw->get_status_code( 'approved' ) ) {
             return new WP_Error( 'dokan_withdraw_already_approved', __( 'Withdraw is already approved.', 'dokan-lite' ) );
+        }
+
+        $withdraw
+            ->set_user_id( $user_id )
+            ->set_amount( $amount )
+            ->set_method( $method )
+            ->set_charge_data( $charge_data )
+            ->calculate_charge();
+
+        // Check if withdraw amount is equal or greater than the charge.
+        if ( $withdraw->get_receivable_amount() < 0 ) {
+            return new WP_Error( 'dokan_withdraw_not_enough_balance', __( 'Withdraw amount is less then the withdraw charge.', 'dokan-lite' ) );
         }
 
         /**
@@ -107,9 +122,9 @@ class Manager {
      *
      * @since 2.4
      *
-     * @param  int     $id
-     * @param  int     $user_id
-     * @param  string  $status
+     * @param int    $id
+     * @param int    $user_id
+     * @param string $status
      *
      * @return void
      */
@@ -122,20 +137,20 @@ class Manager {
 
         $updated = $wpdb->update(
             $wpdb->dokan_withdraw,
-            array(
+            [
                 'status' => $status,
-            ),
-            array(
+            ],
+            [
                 'id'      => $id,
                 'user_id' => $user_id,
-            ),
-            array(
+            ],
+            [
                 '%s',
-            ),
-            array(
+            ],
+            [
                 '%d',
                 '%d',
-            )
+            ]
         );
 
         if ( $updated !== 1 ) {
@@ -154,10 +169,10 @@ class Manager {
      *
      * @return bool|\WP_Error
      */
-    public function insert_withdraw( $args = array() ) {
+    public function insert_withdraw( $args = [] ) {
         global $wpdb;
 
-        $data = array(
+        $data = [
             'user_id' => $args['user_id'],
             'amount'  => $args['amount'],
             'date'    => current_time( 'mysql' ),
@@ -166,9 +181,9 @@ class Manager {
             'note'    => $args['notes'],
             'details' => ! empty( $args['details'] ) ? $args['details'] : '',
             'ip'      => $args['ip'],
-        );
+        ];
 
-        $format = array( '%d', '%f', '%s', '%d', '%s', '%s', '%s', '%s' );
+        $format = [ '%d', '%f', '%s', '%d', '%s', '%s', '%s', '%s' ];
 
         $inserted = $wpdb->insert( $wpdb->dokan_withdraw, $data, $format );
 
@@ -195,7 +210,7 @@ class Manager {
     /**
      * Check if a user has already pending withdraw request
      *
-     * @param  integer   $user_id
+     * @param integer $user_id
      *
      * @return boolean
      */
@@ -223,14 +238,14 @@ class Manager {
     /**
      * Get withdraw request of a user
      *
-     * @param  integer   $user_id
-     * @param  integer   $status
-     * @param  integer   $limit
-     * @param  integer   $offset
+     * @param integer $user_id
+     * @param integer $status
+     * @param integer $limit
+     * @param integer $offset
      *
-     * @return array
+     * @return Withdraw[]
      */
-    public function get_withdraw_requests( $user_id = '', $status = 0, $limit = 10, $offset = 0 ) {
+    public function get_withdraw_requests( $user_id = '', $status = 0, $limit = 10, $offset = 0 ): array {
         // get all function arguments as key => value pairs
         $args = get_defined_vars();
 
@@ -246,6 +261,12 @@ class Manager {
                 $result = $wpdb->get_results( $wpdb->prepare( "SELECT * FROM {$wpdb->dokan_withdraw} WHERE user_id = %d AND status = %d ORDER BY id DESC LIMIT %d, %d", $user_id, $status, $offset, $limit ) );
             }
 
+            $result = array_map(
+                function ( $withdraw ) {
+                    return new Withdraw( $withdraw );
+                }, $result
+            );
+
             Cache::set( $cache_key, $result, $cache_group );
         }
 
@@ -255,7 +276,7 @@ class Manager {
     /**
      * Get status code by status type
      *
-     * @param  string
+     * @param string
      *
      * @return integer
      */
@@ -278,8 +299,8 @@ class Manager {
     /**
      * Get withdraw details by method and user
      *
-     * @param  string $method
-     * @param  int    $user_id
+     * @param string $method
+     * @param int    $user_id
      *
      * @return array
      */
@@ -288,7 +309,7 @@ class Manager {
             $store_settings = dokan_get_store_info( $user_id );
 
             return [
-                'value' => $store_settings['payment']['dokan_custom']['value'],
+                'value'  => $store_settings['payment']['dokan_custom']['value'],
                 'method' => dokan_get_option( 'withdraw_method_name', 'dokan_withdraw' ),
             ];
         }
@@ -327,22 +348,29 @@ class Manager {
      *
      * @since 3.0.0
      *
-     * @param array $args
+     * @param  array $args
      *
      * @return array|object
      */
-    public function all( $args = array() ) {
+    public function all( $args = [] ) {
         $withdraws = new Withdraws( $args );
 
+        // Return status counts.
+        if ( isset( $args['return'] ) && 'count' === $args['return'] ) {
+            return $withdraws->get_status_count();
+        }
+
+        // Return withdraw object only.
         if ( empty( $args['paginate'] ) ) {
             return $withdraws->get_withdraws();
-        } else {
-            return (object) array(
-                'withdraws'     => $withdraws->get_withdraws(),
-                'total'         => $withdraws->get_total(),
-                'max_num_pages' => $withdraws->get_maximum_num_pages(),
-            );
         }
+
+        // Return withdraw object with pagination.
+        return (object) [
+            'withdraws'     => $withdraws->get_withdraws(),
+            'total'         => $withdraws->get_total(),
+            'max_num_pages' => $withdraws->get_maximum_num_pages(),
+        ];
     }
 
     /**
@@ -352,7 +380,8 @@ class Manager {
      */
     public function get_total_withdraw_count() {
         $withdraws = new Withdraws();
-        $count = $withdraws->get_total();
+        $count     = $withdraws->get_total();
+
         return (int) $count;
     }
 
@@ -376,7 +405,7 @@ class Manager {
                 ), ARRAY_A
             );
         } else {
-            $attributes = array(
+            $attributes = [
                 'id'      => '%d',
                 'user_id' => '%d',
                 'amount'  => '%s',
@@ -386,7 +415,7 @@ class Manager {
                 'note'    => '%s',
                 'details' => '%s',
                 'ip'      => '%s',
-            );
+            ];
 
             $fields = array_intersect( array_keys( $attributes ), array_keys( $id ) );
 
@@ -394,10 +423,10 @@ class Manager {
                 return null;
             }
 
-            $where = '';
-            $formats = array();
+            $where   = '';
+            $formats = [];
             foreach ( $fields as $field ) {
-                $where .= ' and ' . $field . '=' . $attributes[ $field ];
+                $where     .= ' and ' . $field . '=' . $attributes[ $field ];
                 $formats[] = $id[ $field ];
             }
 
@@ -429,7 +458,7 @@ class Manager {
     /**
      * Check if a user has sufficient withdraw balance
      *
-     * @param  integer   $user_id
+     * @param integer $user_id
      *
      * @return boolean
      */
@@ -456,7 +485,7 @@ class Manager {
     /**
      * Get a sellers balance
      *
-     * @param  integer  $user_id
+     * @param integer $user_id
      *
      * @return integer
      */
@@ -475,5 +504,45 @@ class Manager {
      */
     public function export( $args ) {
         return new Export\Manager( $args );
+    }
+
+    /**
+     * Returns users withdraws summary.
+     *
+     * @since 3.7.10
+     *
+     * @param int $user_id
+     *
+     * @return array
+     */
+    public function get_user_withdraw_summary( $user_id = '' ) {
+        global $wpdb;
+
+        if ( empty( $user_id ) ) {
+            $user_id = dokan_get_current_user_id();
+        }
+
+        $results = $wpdb->get_row(
+            $wpdb->prepare(
+                "SELECT
+                    count(*) AS total,
+                    sum(status = '0') AS pending,
+                    sum(status = '1') AS approved,
+                    sum(status = '2') AS cancelled
+                FROM {$wpdb->prefix}dokan_withdraw AS dw
+                WHERE dw.user_id = %d",
+                $user_id
+            ),
+            ARRAY_A
+        );
+
+        $summary = [
+            'total'     => ! empty( $results['total'] ) ? absint( $results['total'] ) : 0,
+            'pending'   => ! empty( $results['pending'] ) ? absint( $results['pending'] ) : 0,
+            'approved'  => ! empty( $results['approved'] ) ? absint( $results['approved'] ) : 0,
+            'cancelled' => ! empty( $results['cancelled'] ) ? absint( $results['cancelled'] ) : 0,
+        ];
+
+        return $summary;
     }
 }

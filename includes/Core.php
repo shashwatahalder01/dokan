@@ -2,13 +2,15 @@
 
 namespace WeDevs\Dokan;
 
+use WeDevs\Dokan\Utilities\OrderUtil;
+
 /**
-* Core Class for Dokan Main functionality
-*
-* @package dokan
-*
-* @since 3.0.0
-*/
+ * Core Class for Dokan Main functionality
+ *
+ * @since   3.0.0
+ *
+ * @package dokan
+ */
 class Core {
 
     /**
@@ -17,12 +19,12 @@ class Core {
      * @since 3.0.0
      */
     public function __construct() {
-        add_action( 'admin_init', array( $this, 'block_admin_access' ) );
-        add_filter( 'posts_where', array( $this, 'hide_others_uploads' ) );
-        add_filter( 'body_class', array( $this, 'add_dashboard_template_class' ), 99 );
-        add_filter( 'wp_title', array( $this, 'wp_title' ), 20, 2 );
-        add_action( 'template_redirect', array( $this, 'redirect_if_not_logged_seller' ), 11 );
-        add_action( 'admin_init', array( $this, 'redirect_after_activate' ), 999 );
+        add_action( 'admin_init', [ $this, 'block_admin_access' ] );
+        add_filter( 'posts_where', [ $this, 'hide_others_uploads' ] );
+        add_filter( 'body_class', [ $this, 'add_dashboard_template_class' ], 99 );
+        add_filter( 'wp_title', [ $this, 'wp_title' ], 20, 2 );
+        add_action( 'template_redirect', [ $this, 'redirect_if_not_logged_seller' ], 11 );
+        add_action( 'admin_init', [ $this, 'redirect_after_activate' ], 999 );
     }
 
     /**
@@ -32,7 +34,7 @@ class Core {
      *
      * @global string $pagenow
      */
-    function block_admin_access() {
+    public function block_admin_access() {
         global $pagenow, $current_user;
 
         // bail out if we are from WP Cli
@@ -40,12 +42,15 @@ class Core {
             return;
         }
 
-        $no_access   = dokan_get_option( 'admin_access', 'dokan_general', 'on' );
-        $valid_pages = array( 'admin-ajax.php', 'admin-post.php', 'async-upload.php', 'media-upload.php' );
+        $no_access = dokan_get_option( 'admin_access', 'dokan_general', 'on' );
+        if ( OrderUtil::is_hpos_enabled() ) {
+            $no_access = 'on';
+        }
+        $valid_pages = [ 'admin-ajax.php', 'admin-post.php', 'async-upload.php', 'media-upload.php' ];
         $user_role   = reset( $current_user->roles );
 
-        if ( ( 'on' == $no_access ) && ( ! in_array( $pagenow, $valid_pages ) ) && in_array( $user_role, array( 'seller', 'customer', 'vendor_staff' ) ) ) {
-            wp_redirect( home_url() );
+        if ( ( 'on' === $no_access ) && ( ! in_array( $pagenow, $valid_pages, true ) ) && in_array( $user_role, [ 'seller', 'customer', 'vendor_staff' ], true ) ) {
+            wp_safe_redirect( home_url() );
             exit;
         }
     }
@@ -58,21 +63,21 @@ class Core {
      *
      * FIXME: fix the upload counts
      *
-     * @global string $pagenow
-     * @global object $wpdb
-     *
      * @param string  $where
+     *
+     * @global object $wpdb
+     * @global string $pagenow
      *
      * @return string
      */
-    function hide_others_uploads( $where ) {
+    public function hide_others_uploads( $where ) {
         global $pagenow, $wpdb;
 
         if ( current_user_can( 'manage_woocommerce' ) ) {
             return $where;
         }
 
-        if ( ( $pagenow == 'upload.php' || $pagenow == 'media-upload.php' ) && current_user_can( 'dokandar' ) ) {
+        if ( ( $pagenow === 'upload.php' || $pagenow === 'media-upload.php' ) && current_user_can( 'dokandar' ) ) {
             $user_id = dokan_get_current_user_id();
 
             $where .= " AND $wpdb->posts.post_author = $user_id";
@@ -88,7 +93,7 @@ class Core {
      *
      * @param array $classes
      */
-    function add_dashboard_template_class( $classes ) {
+    public function add_dashboard_template_class( $classes ) {
         $page_id = dokan_get_option( 'dashboard', 'dokan_pages' );
 
         if ( ! $page_id ) {
@@ -114,12 +119,12 @@ class Core {
      *
      * @since Dokan 1.0.4
      *
-     * @param string  $title Default title text for current view.
-     * @param string  $sep   Optional separator.
+     * @param string $title Default title text for current view.
+     * @param string $sep   Optional separator.
      *
      * @return string The filtered title.
      */
-    function wp_title( $title, $sep ) {
+    public function wp_title( $title, $sep ) {
         global $paged, $page;
 
         if ( is_feed() ) {
@@ -140,7 +145,8 @@ class Core {
 
             // Add a page number if necessary.
             if ( $paged >= 2 || $page >= 2 ) {
-                $title = "$title $sep " . sprintf( __( 'Page %s', 'dokan-lite' ), max( $paged, $page ) );
+                // translators: 1) page number
+                $title = "$title $sep " . sprintf( __( 'Page %1$s', 'dokan-lite' ), max( $paged, $page ) );
             }
 
             return $title;
@@ -156,7 +162,7 @@ class Core {
      *
      * @return void [redirection]
      */
-    function redirect_if_not_logged_seller() {
+    public function redirect_if_not_logged_seller() {
         global $post;
 
         $page_id = dokan_get_option( 'dashboard', 'dokan_pages' );

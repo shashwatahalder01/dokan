@@ -17,6 +17,14 @@ div.media-sidebar a.edit-attachment{
     border-radius: 3px;
 }
 
+.daterangepicker {
+    .calendar-table {
+        th, td {
+            padding: 5px 10px;
+        }
+    }
+}
+
 .dokan-dashboard {
 
     .dokan-dashboard-wrap {
@@ -33,6 +41,10 @@ div.media-sidebar a.edit-attachment{
 
         * {
             box-sizing: border-box;
+        }
+
+        a:focus {
+            outline-color: #ff5a40;
         }
     }
 
@@ -89,6 +101,19 @@ div.media-sidebar a.edit-attachment{
                     i {
                         color: #ccc;
                         padding-right: 5px;
+                    }
+
+                    .pull-right {
+                        float: right;
+
+                        a {
+                            color: #6d6d6d;
+                            transition: .2s linear;
+
+                            &:hover {
+                              color: #000;
+                            }
+                        }
                     }
                 }
 
@@ -150,6 +175,10 @@ div.media-sidebar a.edit-attachment{
                 }
 
                 .list-count {
+                    a {
+                        color: #6d6d6d;
+                    }
+
                     .count {
                         float: right;
                     }
@@ -262,7 +291,7 @@ div.media-sidebar a.edit-attachment{
                                             white-space: nowrap;
                                             display: flex;
                                             align-items: center;
-                                            padding: 10px 10px;
+                                            padding: 10px 20px 10px 10px;
 
                                             img {
                                                 width: calc(12px + 1.5vw);
@@ -414,6 +443,12 @@ div.media-sidebar a.edit-attachment{
                                 border-top: 1px #cccccc solid;
                                 padding: 20px;
                                 margin: -20px;
+                                position: relative;
+
+                                button.dokan-btn-danger {
+                                    position: absolute;
+                                    right: 20px;
+                                }
 
                                 a {
                                     margin-left: 10px;
@@ -467,6 +502,30 @@ div.media-sidebar a.edit-attachment{
                 margin-bottom: 10px;
             }
         }
+    }
+
+    div.chart-container > div.chart-placeholder > div.legend {
+        table {
+          border-spacing: 0.5em;
+          width: auto;
+          margin: 0;
+          border-collapse: separate;
+
+          td {
+              padding: 0;
+              text-align: left;
+              vertical-align: middle;
+              background: none;
+          }
+        }
+    }
+
+    div.chart-container > div.chart-legend-container > table {
+      td {
+        padding: 0;
+        padding-left: 5px;
+        padding-right: 5px;
+      }
     }
 }
 

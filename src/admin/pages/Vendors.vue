@@ -63,7 +63,7 @@
                 </template>
 
                 <template slot="categories" slot-scope="{ row }">
-                    {{ row.categories.map( category => category.name ).join( ', ' ) }}
+                      <span v-for="(category, key) in row.categories" :key="key" v-html="`${category.name}${key < row.categories.length - 1 ? ', ' : ''}`"></span>
                 </template>
 
                 <template slot="registered" slot-scope="data">
@@ -84,6 +84,13 @@
                     <a v-else href="#">{{ action.label }}</a>
                     <template v-if="index !== (actions.length - 1)"> | </template>
                 </span>
+                </template>
+                <template slot="filters" slot-scope="data">
+                    <component v-for="(dokanVendorFilterSection, index) in dokanVendorFilterSectionStart"
+                               :key="index"
+                               :is="dokanVendorFilterSection"
+                               @updateVendorComponent="updateVendorComponent"
+                    />
                 </template>
             </list-table>
 
@@ -177,7 +184,8 @@ export default {
             vendors: [],
             loadAddVendor: false,
             dokanVendorHeaderArea: dokan.hooks.applyFilters( 'getDokanVendorHeaderArea', [] ),
-            isVendorSwitchingEnabled: false
+            isVendorSwitchingEnabled: false,
+            dokanVendorFilterSectionStart: dokan.hooks.applyFilters( 'dokanVendorFilterSectionStart', [] ),
         }
     },
 
@@ -219,7 +227,7 @@ export default {
         },
 
         storeCategory() {
-            return this.$route.query.store_category || null;
+            return this.$route.query.store_categories || null;
         }
     },
 
@@ -259,7 +267,11 @@ export default {
         addNew() {
             this.loadAddVendor = true;
         },
-
+        updateVendorComponent (rerender=false) {
+            if (rerender) {
+                this.fetchVendors()
+            }
+        },
         doSearch(payload) {
             let self     = this;
             self.loading = true;
@@ -296,15 +308,16 @@ export default {
 
             self.loading = true;
 
-            const data = {
+            let data = {
                 per_page: self.perPage,
                 page: self.currentPage,
                 status: self.currentStatus,
                 orderby: self.sortBy,
                 order: self.sortOrder,
-                store_category: self.storeCategory
+                store_categories: self.storeCategory
             };
 
+            data = dokan.hooks.applyFilters( 'DokanGetVendorArgs', data, this.$route.query );
             dokan.api.get('/stores', data)
                 .done((response, status, xhr) => {
                     self.vendors = response;
@@ -387,7 +400,7 @@ export default {
         },
 
         ordersUrl(id) {
-            return dokan.urls.adminRoot + 'edit.php?post_type=shop_order&vendor_id=' + id;
+            return dokan.urls.adminOrderListUrl + '&vendor_id=' + id;
         },
 
         editUrl(id) {

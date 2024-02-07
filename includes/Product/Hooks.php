@@ -2,13 +2,16 @@
 
 namespace WeDevs\Dokan\Product;
 
+use WeDevs\Dokan\ProductCategory\Helper;
+use WC_Product;
+
 /**
-* Admin Hooks
-*
-* @package dokan
-*
-* @since 3.0.0
-*/
+ * Admin Hooks
+ *
+ * @since   3.0.0
+ *
+ * @package dokan
+ */
 class Hooks {
 
     /**
@@ -19,10 +22,21 @@ class Hooks {
     public function __construct() {
         add_action( 'template_redirect', [ $this, 'bulk_product_status_change' ] );
         add_action( 'dokan_bulk_product_status_change', [ $this, 'bulk_product_delete' ], 10, 2 );
-        add_action( 'dokan_store_profile_frame_after', [ $this, 'store_products_orderby' ], 10, 2 );
+        add_action( 'dokan_store_profile_frame_after', [ $this, 'store_products_orderby' ], 30, 2 );
         add_action( 'wp_ajax_dokan_store_product_search_action', [ $this, 'store_product_search_action' ], 10, 2 );
         add_action( 'wp_ajax_nopriv_dokan_store_product_search_action', [ $this, 'store_product_search_action' ], 10, 2 );
+        add_action( 'woocommerce_product_quick_edit_save', [ $this, 'update_category_data_for_bulk_and_quick_edit' ], 10, 1 );
+        add_action( 'woocommerce_product_bulk_edit_save', [ $this, 'update_category_data_for_bulk_and_quick_edit' ], 10, 1 );
+        add_action( 'woocommerce_new_product', [ $this, 'update_category_data_for_new_and_update_product' ], 10, 1 );
+        add_action( 'woocommerce_update_product', [ $this, 'update_category_data_for_new_and_update_product' ], 10, 1 );
+        add_filter( 'dokan_post_status', [ $this, 'set_product_status' ], 1, 2 );
+        add_action( 'dokan_new_product_added', [ $this, 'set_new_product_email_status' ], 1, 1 );
 
+        // Remove product type filter if pro not exists.
+        add_filter( 'dokan_product_listing_filter_args', [ $this, 'remove_product_type_filter' ] );
+        add_action( 'woocommerce_before_single_product', [ $this, 'own_product_not_purchasable_notice' ] );
+        // product review action hook
+        add_action( 'comment_notification_recipients', [ $this, 'product_review_notification_recipients' ], 10, 2 );
         // Init Product Cache Class
         new VendorStoreInfo();
         new ProductCache();
@@ -32,7 +46,6 @@ class Hooks {
      * Callback for Ajax Action Initialization
      *
      * @since DOKAN_LITE_SINCE
-     *
      * @return void
      */
     public function store_product_search_action() {
@@ -42,7 +55,7 @@ class Hooks {
 
         global $wpdb;
 
-        $return_result              = array();
+        $return_result              = [];
         $return_result['type']      = 'error';
         $return_result['data_list'] = '<li> ' . __( 'Products not found with this search', 'dokan-lite' ) . ' </li>';
         $output                     = '';
@@ -53,7 +66,8 @@ class Hooks {
 
         $keyword  = wc_clean( wp_unslash( $_POST['search_term'] ) ); //phpcs:ignore
         $store_id = intval( wp_unslash( $_POST['store_id'] ) ); //phpcs:ignore
-        $keyword  = '%' . $wpdb->esc_like( $keyword ) . '%';
+        // escaping keyword
+        $keyword_escaped = '%' . $wpdb->esc_like( $keyword ) . '%';
 
         $querystr = $wpdb->prepare(
             "SELECT DISTINCT posts.ID
@@ -70,13 +84,13 @@ class Hooks {
                 AND posts.post_type   = 'product'
                 AND posts.post_author = %d
                 ORDER BY posts.post_date DESC LIMIT 100",
-            $keyword,
-            $keyword,
-            $keyword,
+            $keyword_escaped,
+            $keyword_escaped,
+            $keyword_escaped,
             $store_id
         );
 
-        $query_results = $wpdb->get_results( $querystr );
+        $query_results = apply_filters( 'dokan_store_product_search_results', $wpdb->get_results( $querystr ), $store_id, $keyword ); // phpcs:ignore
 
         if ( empty( $query_results ) ) {
             echo wp_json_encode( $return_result );
@@ -123,7 +137,7 @@ class Hooks {
                 $output .= '<div class="dokan-ls-product-categories">';
                 foreach ( $categories as $category ) {
                     if ( $category->parent ) {
-                        $parent  = get_term_by( 'id', $category->parent, 'product_cat' );
+                        $parent = get_term_by( 'id', $category->parent, 'product_cat' );
                         $output .= '<span>' . $parent->name . '</span>';
                     }
                     $output .= '<span>' . $category->name . '</span>';
@@ -153,7 +167,6 @@ class Hooks {
      * Output the store product sorting options
      *
      * @since DOKAN_LITE_SINCE
-     *
      * @return void
      */
     public function store_products_orderby() {
@@ -169,17 +182,23 @@ class Hooks {
         ?>
         <div class="dokan-store-products-filter-area dokan-clearfix">
             <form class="dokan-store-products-ordeby" method="get">
-                <input type="text" name="product_name" class="product-name-search dokan-store-products-filter-search"  placeholder="<?php esc_attr_e( 'Enter product name', 'dokan-lite' ); ?>" autocomplete="off" data-store_id="<?php echo esc_attr( $store_id ); ?>">
+                <input type="text" name="product_name" class="product-name-search dokan-store-products-filter-search"
+                       placeholder="<?php esc_attr_e( 'Enter product name', 'dokan-lite' ); ?>" autocomplete="off"
+                       data-store_id="<?php echo esc_attr( $store_id ); ?>">
                 <div id="dokan-store-products-search-result" class="dokan-ajax-store-products-search-result"></div>
-                <input type="submit" name="search_store_products" class="search-store-products dokan-btn-theme" value="<?php esc_attr_e( 'Search', 'dokan-lite' ); ?>">
+                <input type="submit" name="search_store_products" class="search-store-products dokan-btn-theme"
+                       value="<?php esc_attr_e( 'Search', 'dokan-lite' ); ?>">
 
                 <?php if ( is_array( $orderby_options['catalogs'] ) && isset( $orderby_options['orderby'] ) ) : ?>
-                    <select name="product_orderby" class="orderby orderby-search" aria-label="<?php esc_attr_e( 'Shop order', 'dokan-lite' ); ?>" onchange='if(this.value != 0) { this.form.submit(); }'>
+                    <select name="product_orderby" class="orderby orderby-search"
+                            aria-label="<?php esc_attr_e( 'Shop order', 'dokan-lite' ); ?>"
+                            onchange='if(this.value != 0) { this.form.submit(); }'>
                         <?php foreach ( $orderby_options['catalogs'] as $id => $name ) : ?>
-                            <option value="<?php echo esc_attr( $id ); ?>" <?php selected( $orderby_options['orderby'], $id ); ?>><?php echo esc_html( $name ); ?></option>
+                            <option
+                                value="<?php echo esc_attr( $id ); ?>" <?php selected( $orderby_options['orderby'], $id ); ?>><?php echo esc_html( $name ); ?></option>
                         <?php endforeach; ?>
                     </select>
-                    <?php endif; ?>
+                <?php endif; ?>
                 <input type="hidden" name="paged" value="1" />
             </form>
         </div>
@@ -190,7 +209,6 @@ class Hooks {
      * Change bulk product status in vendor dashboard
      *
      * @since 2.8.6
-     *
      * @return void
      */
     public function bulk_product_status_change() {
@@ -235,8 +253,202 @@ class Hooks {
             }
         }
 
-        wp_redirect( add_query_arg( array( 'message' => 'product_deleted' ), dokan_get_navigation_url( 'products' ) ) );
+        wp_safe_redirect( add_query_arg( [ 'message' => 'product_deleted' ], dokan_get_navigation_url( 'products' ) ) );
         exit;
     }
 
+    /**
+     * Triggers when admin quick edits products or bulk edit products from admin panel.
+     * we are auto selecting all category ancestors here.
+     *
+     * @since 3.6.4
+     *
+     * @param object $product
+     *
+     * @return void
+     */
+    public function update_category_data_for_bulk_and_quick_edit( $product ) {
+        if ( ! current_user_can( 'manage_woocommerce' ) ) {
+            return;
+        }
+
+        if ( ! isset( $_REQUEST['woocommerce_quick_edit_nonce'] ) || ! wp_verify_nonce( sanitize_key( $_REQUEST['woocommerce_quick_edit_nonce'] ), 'woocommerce_quick_edit_nonce' ) ) {
+            return;
+        }
+
+        $this->update_product_categories( $product->get_id() );
+    }
+
+    /**
+     * Triggers when admin saves/edits products.
+     * we are auto selecting all category ancestors here.
+     *
+     * @since 3.6.4
+     *
+     * @param int $product_id
+     *
+     * @return void
+     */
+    public function update_category_data_for_new_and_update_product( $product_id ) {
+        if ( ! is_admin() ) {
+            return;
+        }
+
+        $this->update_product_categories( $product_id );
+    }
+
+    /**
+     * Gets chosen categories and updated product categories.
+     *
+     * @since 3.6.4
+     *
+     * @param int $product_id
+     *
+     * @return void
+     */
+    private function update_product_categories( $product_id ) {
+        $terms             = wp_get_post_terms( $product_id, 'product_cat', [ 'fields' => 'ids' ] );
+        $chosen_categories = Helper::generate_chosen_categories( $terms );
+
+        Helper::set_object_terms_from_chosen_categories( $product_id, $chosen_categories );
+    }
+
+    /**
+     * Set product edit status
+     *
+     * @since 3.8.2
+     *
+     * @param int   $product_id
+     *
+     * @param array $all_statuses
+     *
+     * @return array
+     */
+    public function set_product_status( $all_statuses, int $product_id ) {
+        if ( ! is_user_logged_in() ) {
+            return [
+                'draft' => dokan_get_post_status( 'draft' ),
+            ];
+        }
+
+        $user_id = get_current_user_id();
+        if ( ! dokan_is_seller_trusted( $user_id ) ) {
+            unset( $all_statuses['publish'] );
+        } else {
+            unset( $all_statuses['pending'] );
+        }
+
+        $product = wc_get_product( $product_id );
+        if ( ! $product ) {
+            return $all_statuses;
+        }
+
+        switch ( $product->get_status() ) {
+            case 'pending':
+                $all_statuses['pending'] = dokan_get_post_status( 'pending' );
+                break;
+
+            case 'publish':
+                $all_statuses['publish'] = dokan_get_post_status( 'publish' );
+                unset( $all_statuses['pending'] );
+                break;
+        }
+
+        return $all_statuses;
+    }
+
+    /**
+     * Set new product email status to false
+     *
+     * @since 3.8.2
+     *
+     * @param int|WC_Product $product_id
+     *
+     * @return void
+     */
+    public function set_new_product_email_status( $product_id ) {
+        if ( is_a( $product_id, 'WC_Product' ) ) {
+            $product_id->update_meta_data( '_dokan_new_product_email_sent', 'no' );
+        } else {
+            update_post_meta( $product_id, '_dokan_new_product_email_sent', 'no' );
+        }
+    }
+
+    /**
+     * Remove product type filter if dokan pro does not exist.
+     *
+     * @since 3.8.2
+     *
+     * @param array $args
+     *
+     * @return array
+     */
+    public function remove_product_type_filter( $args ) {
+        global $wp;
+
+        if ( dokan_is_seller_dashboard() && isset( $wp->query_vars['products'] ) && ! function_exists( 'dokan_pro' ) ) {
+            $args['product_types'] = '';
+        }
+
+        return $args;
+    }
+
+    /**
+     * Display own product not punchable notice.
+     *
+     * @since 3.9.2
+     *
+     * @return void
+     */
+    public function own_product_not_purchasable_notice() {
+        global $product;
+
+        if ( ! dokan_is_product_author( $product->get_id() ) || 'auction' === $product->get_type() ) {
+            return;
+        }
+
+        wc_print_notice( __( 'As this is your own product, the "Add to Cart" button has been removed. Please visit as a guest to view it.', 'dokan-lite' ), 'notice' );
+    }
+  
+    /**
+     * Filter the recipients of the product review notification.
+     *
+     * Right now, if someone leaves a review for a vendor product, the vendor is receiving a notification email.
+     * This email notification should be sent to the admin instead of the vendor.
+     *
+     * @since 3.9.2
+     *
+     * @param array $emails
+     * @param int   $comment_id
+     *
+     * @return array
+     */
+    public function product_review_notification_recipients( $emails, $comment_id ) {
+        $comment = get_comment( $comment_id );
+
+        $product = wc_get_product( $comment->comment_post_ID );
+        if ( ! $product ) {
+            // the comment is not for a product
+            return $emails;
+        }
+
+        // Facilitate unsetting below without knowing the keys.
+        $filtered_emails = array_flip( $emails );
+
+        $vendor = dokan_get_vendor_by_product( $product->get_id() );
+        if ( array_key_exists( $vendor->get_email(), $filtered_emails ) ) {
+            unset( $filtered_emails[ $vendor->get_email() ] );
+        }
+
+        // revert the array flip
+        $filtered_emails = array_flip( $filtered_emails );
+
+        // get admin email
+        $admin_email = get_option( 'admin_email' );
+        if ( ! in_array( $admin_email, $filtered_emails, true ) ) {
+            $filtered_emails[] = $admin_email;
+        }
+
+        return $filtered_emails;
+    }
 }

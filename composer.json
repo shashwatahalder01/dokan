@@ -11,20 +11,23 @@
   ],
   "minimum-stability": "dev",
   "require": {
-    "php": ">=7.0",
-    "appsero/client": "dev-master",
-    "jakeasmith/http_build_url": "^1"
+    "php": ">=7.4",
+    "appsero/client": "^v2.0.2",
+    "jakeasmith/http_build_url": "^1",
+    "appsero/updater": "^v1.0.0"
   },
   "require-dev": {
-    "wp-coding-standards/wpcs": "dev-master",
-    "dealerdirect/phpcodesniffer-composer-installer": "dev-master",
+    "wp-coding-standards/wpcs": "dev-develop",
+    "dealerdirect/phpcodesniffer-composer-installer": "^0.7.2",
     "tareq1988/wp-php-cs-fixer": "dev-master",
     "phpcompatibility/phpcompatibility-wp": "dev-master",
-    "phpunit/phpunit": ">=5.7.27"
+    "phpunit/phpunit": "^9.6",
+    "wp-phpunit/wp-phpunit": "dev-master",
+    "yoast/phpunit-polyfills": "^1.0@dev"
   },
   "config": {
     "platform": {
-      "php": "7.0"
+      "php": "7.4"
     },
     "allow-plugins": {
       "dealerdirect/phpcodesniffer-composer-installer": true
@@ -33,14 +36,20 @@
   "autoload": {
     "psr-4": {
       "WeDevs\\Dokan\\": "includes/"
-    }
+    },
+    "files": [
+      "includes/functions-rest-api.php"
+    ]
   },
   "scripts": {
     "phpcs": [
-      "phpcs -p -s"
+      "vendor/bin/phpcs -p -s"
+    ],
+    "phpcs:report": [
+      "vendor/bin/phpcs --report-file='phpcs-report.txt'"
     ],
     "phpcbf": [
-      "phpcbf -p"
+      "vendor/bin/phpcbf -p"
     ]
   }
 }

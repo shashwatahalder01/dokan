@@ -8,14 +8,15 @@ namespace WeDevs\Dokan\Dashboard\Templates;
  * @author weDves
  */
 class Dashboard {
+    /**
+     * @var int $user_id current user id
+     */
+    protected $user_id;
 
-    public $user_id;
-    public $orders_count;
-    public $post_counts;
-    public $comment_counts;
-    public $pageviews;
-    public $earning;
-    public $seller_balance;
+    /**
+     * @var array $order_count
+     */
+    protected $orders_count;
 
     /**
      * Load autometically when class inistantiate
@@ -23,20 +24,14 @@ class Dashboard {
      *
      * @since 2.4
      */
-    function __construct() {
-        $this->user_id        = dokan_get_current_user_id();
-        $this->orders_count   = $this->get_orders_count();
-        $this->post_counts    = $this->get_post_counts();
-        $this->comment_counts = $this->get_comment_counts();
-        $this->pageviews      = $this->get_pageviews();
-        $this->earning        = $this->get_earning();
+    public function __construct() {
+        $this->user_id = dokan_get_current_user_id();
 
-        add_action( 'dokan_dashboard_content_inside_before', array( $this, 'show_seller_dashboard_notice' ), 10 );
-        add_action( 'dokan_dashboard_left_widgets', array( $this, 'get_big_counter_widgets' ), 10 );
-        add_action( 'dokan_dashboard_left_widgets', array( $this, 'get_orders_widgets' ), 15 );
-        add_action( 'dokan_dashboard_left_widgets', array( $this, 'get_products_widgets' ), 20 );
-        add_action( 'dokan_dashboard_right_widgets', array( $this, 'get_sales_report_chart_widget' ), 10 );
-
+        add_action( 'dokan_dashboard_content_inside_before', [ $this, 'show_seller_dashboard_notice' ], 10 );
+        add_action( 'dokan_dashboard_left_widgets', [ $this, 'get_big_counter_widgets' ], 10 );
+        add_action( 'dokan_dashboard_left_widgets', [ $this, 'get_orders_widgets' ], 15 );
+        add_action( 'dokan_dashboard_left_widgets', [ $this, 'get_products_widgets' ], 20 );
+        add_action( 'dokan_dashboard_right_widgets', [ $this, 'get_sales_report_chart_widget' ], 10 );
     }
 
     /**
@@ -47,9 +42,7 @@ class Dashboard {
      * @return void
      */
     public function show_seller_dashboard_notice() {
-        $user_id = get_current_user_id();
-
-        if ( ! dokan_is_seller_enabled( $user_id ) ) {
+        if ( ! dokan_is_seller_enabled( $this->user_id ) ) {
             dokan_seller_not_enabled_notice();
         }
     }
@@ -66,16 +59,18 @@ class Dashboard {
             return;
         }
 
-        if ( ! (array) $this->orders_count ) {
-            return;
+        if ( ! is_array( $this->orders_count ) ) {
+            $this->orders_count = $this->get_orders_count();
         }
 
-        dokan_get_template_part( 'dashboard/big-counter-widget', '', array(
-            'pageviews'      => $this->pageviews,
-            'orders_count'   => $this->orders_count,
-            'earning'        => $this->earning,
-            'seller_balance' => $this->get_seller_balance(),
-        ) );
+        dokan_get_template_part(
+            'dashboard/big-counter-widget', '', [
+                'pageviews'      => $this->get_pageviews(),
+                'orders_count'   => $this->orders_count,
+                'earning'        => $this->get_earning(),
+                'seller_balance' => $this->get_seller_balance(),
+            ]
+        );
     }
 
     /**
@@ -90,48 +85,101 @@ class Dashboard {
             return;
         }
 
-        if ( ! (array) $this->orders_count ) {
-            return;
+        if ( ! is_array( $this->orders_count ) ) {
+            $this->orders_count = $this->get_orders_count();
         }
 
-        $order_data = array(
-            array(
-				'value' => $this->orders_count->{'wc-completed'},
-				'color' => '#73a724',
-				'label' => __( 'Completed', 'dokan-lite' ),
-			),
-            array(
-				'value' => $this->orders_count->{'wc-pending'},
-				'color' => '#999',
-				'label' => __( 'Pending', 'dokan-lite' ),
-			),
-            array(
-				'value' => $this->orders_count->{'wc-processing'},
-				'color' => '#21759b',
-				'label' => __( 'Processing', 'dokan-lite' ),
-			),
-            array(
-				'value' => $this->orders_count->{'wc-cancelled'},
-				'color' => '#d54e21',
-				'label' => __( 'Cancelled', 'dokan-lite' ),
-			),
-            array(
-				'value' => $this->orders_count->{'wc-refunded'},
-				'color' => '#e6db55',
-				'label' => __( 'Refunded', 'dokan-lite' ),
-			),
-            array(
-				'value' => $this->orders_count->{'wc-on-hold'},
-				'color' => '#f0ad4e',
-				'label' => __( 'On Hold', 'dokan-lite' ),
-			),
+        $order_data = [
+            [
+                'value' => $this->orders_count->{'wc-completed'},
+                'color' => '#73a724',
+                'label' => __( 'Completed', 'dokan-lite' ),
+            ],
+            [
+                'value' => $this->orders_count->{'wc-pending'},
+                'color' => '#999',
+                'label' => __( 'Pending', 'dokan-lite' ),
+            ],
+            [
+                'value' => $this->orders_count->{'wc-processing'},
+                'color' => '#21759b',
+                'label' => __( 'Processing', 'dokan-lite' ),
+            ],
+            [
+                'value' => $this->orders_count->{'wc-cancelled'},
+                'color' => '#d54e21',
+                'label' => __( 'Cancelled', 'dokan-lite' ),
+            ],
+            [
+                'value' => $this->orders_count->{'wc-refunded'},
+                'color' => '#e6db55',
+                'label' => __( 'Refunded', 'dokan-lite' ),
+            ],
+            [
+                'value' => $this->orders_count->{'wc-on-hold'},
+                'color' => '#f0ad4e',
+                'label' => __( 'On Hold', 'dokan-lite' ),
+            ],
+        ];
+
+        $nonce          = wp_create_nonce( 'seller-order-filter-nonce' );
+        $order_url      = dokan_get_navigation_url( 'orders' );
+        $completed_url  = add_query_arg(
+            [
+                'order_status'              => 'wc-completed',
+                'seller_order_filter_nonce' => $nonce,
+            ],
+            $order_url
+        );
+        $pending_url    = add_query_arg(
+            [
+                'order_status'              => 'wc-pending',
+                'seller_order_filter_nonce' => $nonce,
+            ],
+            $order_url
+        );
+        $processing_url = add_query_arg(
+            [
+                'order_status'              => 'wc-processing',
+                'seller_order_filter_nonce' => $nonce,
+            ],
+            $order_url
+        );
+        $cancelled_url  = add_query_arg(
+            [
+                'order_status'              => 'wc-cancelled',
+                'seller_order_filter_nonce' => $nonce,
+            ],
+            $order_url
+        );
+        $refunded_url   = add_query_arg(
+            [
+                'order_status'              => 'wc-refunded',
+                'seller_order_filter_nonce' => $nonce,
+            ],
+            $order_url
+        );
+        $on_hold_url    = add_query_arg(
+            [
+                'order_status'              => 'wc-on-hold',
+                'seller_order_filter_nonce' => $nonce,
+            ],
+            $order_url
         );
 
-        dokan_get_template_part( 'dashboard/orders-widget', '', array(
-            'order_data'   => $order_data,
-            'orders_count' => $this->orders_count,
-            'orders_url'   => dokan_get_navigation_url('orders'),
-        ) );
+        dokan_get_template_part(
+            'dashboard/orders-widget', '', [
+                'order_data'     => $order_data,
+                'orders_count'   => $this->orders_count,
+                'orders_url'     => $order_url,
+                'completed_url'  => $completed_url,
+                'pending_url'    => $pending_url,
+                'processing_url' => $processing_url,
+                'cancelled_url'  => $cancelled_url,
+                'refunded_url'   => $refunded_url,
+                'on_hold_url'    => $on_hold_url,
+            ]
+        );
     }
 
     /**
@@ -145,11 +193,35 @@ class Dashboard {
         if ( ! current_user_can( 'dokan_view_product_status_report' ) ) {
             return;
         }
-
-        dokan_get_template_part( 'dashboard/products-widget', '', array(
-            'post_counts'  => $this->post_counts,
-            'products_url' => dokan_get_navigation_url('products'),
-        ) );
+        $nonce       = wp_create_nonce( 'product_listing_filter' );
+        $product_url = dokan_get_navigation_url( 'products' );
+        $online_url  = add_query_arg(
+            [
+                'post_status'                   => 'publish',
+                '_product_listing_filter_nonce' => $nonce,
+            ], $product_url
+        );
+        $draft_url   = add_query_arg(
+            [
+                'post_status'                   => 'draft',
+                '_product_listing_filter_nonce' => $nonce,
+            ], $product_url
+        );
+        $pending_url = add_query_arg(
+            [
+                'post_status'                   => 'pending',
+                '_product_listing_filter_nonce' => $nonce,
+            ], $product_url
+        );
+        dokan_get_template_part(
+            'dashboard/products-widget', '', [
+                'post_counts'  => $this->get_post_counts(),
+                'products_url' => $product_url,
+                'online_url'   => $online_url,
+                'draft_url'    => $draft_url,
+                'pending_url'  => $pending_url,
+            ]
+        );
     }
 
     /**
@@ -172,7 +244,7 @@ class Dashboard {
      *
      * @since 2.4
      *
-     * @return integer
+     * @return array
      */
     public function get_orders_count() {
         return dokan_count_orders( $this->user_id );
@@ -183,7 +255,7 @@ class Dashboard {
      *
      * @since 2.4
      *
-     * @return integer
+     * @return array
      */
     public function get_post_counts() {
         return dokan_count_posts( 'product', $this->user_id );
@@ -194,7 +266,7 @@ class Dashboard {
      *
      * @since 2.4
      *
-     * @return integer
+     * @return array
      */
     public function get_comment_counts() {
         return dokan_count_comments( 'product', $this->user_id );

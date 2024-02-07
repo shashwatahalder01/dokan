@@ -41,7 +41,7 @@ class Helper {
         $promos = Cache::get_transient( 'promo_notices' );
 
         if ( false === $promos ) {
-            $promo_notice_url = 'https://raw.githubusercontent.com/weDevsOfficial/dokan-util/master/promotions.json';
+            $promo_notice_url = 'https://dokan.co/wp-json/org/promotions';
             $response         = wp_remote_get( $promo_notice_url, array( 'timeout' => 15 ) );
             $promos           = wp_remote_retrieve_body( $response );
 
@@ -64,6 +64,10 @@ class Helper {
 
         foreach ( $promos as $promo ) {
             if ( in_array( $promo['key'], $already_displayed_promo, true ) ) {
+                continue;
+            }
+
+            if ( isset( $promo['lite_only'] ) && wc_string_to_bool( $promo['lite_only'] ) && self::is_pro_license_active() ) {
                 continue;
             }
 
@@ -98,6 +102,32 @@ class Helper {
         uasort( $notices, [ self::class, 'dokan_sort_notices_by_priority' ] );
 
         return array_values( $notices );
+    }
+
+    /**
+     * Check if dokan pro-license is active
+     *
+     * @since 3.9.3
+     *
+     * @return bool
+     */
+    public static function is_pro_license_active(): bool {
+        if ( ! dokan()->is_pro_exists() ) {
+            return false;
+        }
+
+        if ( ! property_exists( dokan_pro(), 'license' ) ) {
+            // this is old version of dokan pro
+            return false;
+        }
+
+        $license = dokan_pro()->license->plugin_update_message();
+        if ( ! empty( $license ) ) {
+            // if the plugin update message is not empty, then the license is not active
+            return false;
+        }
+
+        return true;
     }
 
     /**

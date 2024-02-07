@@ -5,17 +5,18 @@
  *
  * @access public
  *
- * @param int $post_id
+ * @param int   $post_id
  * @param array $data
  *
+ * @throws WC_Data_Exception
  * @return void
  */
-function dokan_process_product_meta( $post_id, $data = [] ) {
+function dokan_process_product_meta( int $post_id, array $data = [] ) {
     if ( ! $post_id || ! $data ) {
         return;
     }
 
-    global $wpdb, $woocommerce, $woocommerce_errors;
+    global $woocommerce_errors;
 
     $product_type = empty( $data['product_type'] ) ? 'simple' : sanitize_text_field( $data['product_type'] );
 
@@ -37,11 +38,11 @@ function dokan_process_product_meta( $post_id, $data = [] ) {
         update_post_meta( $post_id, '_product_image_gallery', implode( ',', $attachment_ids ) );
     }
 
-    // Check product visibility and purchaces note
+    // Check product visibility and purchase note
     $data['_visibility']    = isset( $data['_visibility'] ) ? sanitize_text_field( $data['_visibility'] ) : '';
     $data['_purchase_note'] = isset( $data['_purchase_note'] ) ? sanitize_textarea_field( $data['_purchase_note'] ) : '';
 
-    // Set visibiliy for WC 3.0.0+
+    // Set visibility for WC 3.0.0+
     $terms = [];
 
     switch ( $data['_visibility'] ) {
@@ -65,7 +66,7 @@ function dokan_process_product_meta( $post_id, $data = [] ) {
         $terms[] = 'featured';
     }
 
-    wp_set_post_terms( $post_id, $terms, 'product_visibility', false );
+    wp_set_post_terms( $post_id, $terms, 'product_visibility' );
     update_post_meta( $post_id, '_visibility', $data['_visibility'] );
 
     // Update post meta
@@ -118,7 +119,7 @@ function dokan_process_product_meta( $post_id, $data = [] ) {
         $attribute_position      = array_map( 'absint', $data['attribute_position'] );
         $attribute_names_max_key = max( array_keys( $attribute_names ) );
 
-        for ( $i = 0; $i <= $attribute_names_max_key; $i ++ ) {
+        for ( $i = 0; $i <= $attribute_names_max_key; $i++ ) {
             if ( empty( $attribute_names[ $i ] ) ) {
                 continue;
             }
@@ -223,6 +224,7 @@ function dokan_process_product_meta( $post_id, $data = [] ) {
         $date_to       = (string) isset( $data['_sale_price_dates_to'] ) ? wc_clean( $data['_sale_price_dates_to'] ) : '';
         $regular_price = (string) isset( $data['_regular_price'] ) ? wc_clean( $data['_regular_price'] ) : '';
         $sale_price    = (string) isset( $data['_sale_price'] ) ? wc_clean( $data['_sale_price'] ) : '';
+        $now           = dokan_current_datetime();
 
         update_post_meta( $post_id, '_regular_price', '' === $regular_price ? '' : wc_format_decimal( $regular_price ) );
         update_post_meta( $post_id, '_sale_price', '' === $sale_price ? '' : wc_format_decimal( $sale_price ) );
@@ -232,21 +234,21 @@ function dokan_process_product_meta( $post_id, $data = [] ) {
         update_post_meta( $post_id, '_sale_price_dates_to', $date_to ? strtotime( '+ 23 hours', strtotime( $date_to ) ) : '' );
 
         if ( $date_to && ! $date_from ) {
-            $date_from = date( 'Y-m-d' ); // phpcs:ignore
-            update_post_meta( $post_id, '_sale_price_dates_from', strtotime( $date_from ) );
+            $date_from = $now->format( 'Y-m-d' );
+            update_post_meta( $post_id, '_sale_price_dates_from', $now->getTimestamp() );
         }
 
         // Update price if on sale
         if ( '' !== $sale_price && '' === $date_to && '' === $date_from ) {
             update_post_meta( $post_id, '_price', wc_format_decimal( $sale_price ) );
-        } elseif ( '' !== $sale_price && $date_from && strtotime( $date_from ) <= strtotime( 'NOW', current_time( 'timestamp' ) ) ) {
+        } elseif ( '' !== $sale_price && $date_from && $now->modify( $date_from )->getTimestamp() <= $now->getTimestamp() ) {
             update_post_meta( $post_id, '_price', wc_format_decimal( $sale_price ) );
         } else {
             update_post_meta( $post_id, '_price', '' === $regular_price ? '' : wc_format_decimal( $regular_price ) );
         }
 
         //update product price if date to is smaller than current date
-        if ( $date_to && strtotime( $date_to ) < strtotime( 'NOW', current_time( 'timestamp' ) ) ) {
+        if ( $date_to && $now->modify( $date_to )->getTimestamp() < $now->getTimestamp() ) {
             update_post_meta( $post_id, '_price', $regular_price );
         }
     }
@@ -312,6 +314,7 @@ function dokan_process_product_meta( $post_id, $data = [] ) {
             try {
                 wc_update_product_stock_status( $post_id, $stock_status );
             } catch ( Exception $ex ) {
+                dokan_log( 'product stock update exception' );
             }
         }
 
@@ -333,14 +336,14 @@ function dokan_process_product_meta( $post_id, $data = [] ) {
 
     // Downloadable options
     if ( 'yes' === $is_downloadable ) {
-        $_download_limit = absint( $data['_download_limit'] );
+        $_download_limit = intval( $data['_download_limit'] );
 
-        if ( ! $_download_limit ) {
+        if ( ! $_download_limit || -1 === $_download_limit ) {
             $_download_limit = ''; // 0 or blank = unlimited
         }
 
-        $_download_expiry = absint( $data['_download_expiry'] );
-        if ( ! $_download_expiry ) {
+        $_download_expiry = intval( $data['_download_expiry'] );
+        if ( ! $_download_expiry || -1 === $_download_expiry ) {
             $_download_expiry = ''; // 0 or blank = unlimited
         }
 
@@ -349,10 +352,10 @@ function dokan_process_product_meta( $post_id, $data = [] ) {
             $files = [];
 
             $file_names    = isset( $data['_wc_file_names'] ) ? array_map( 'wc_clean', $data['_wc_file_names'] ) : [];
-            $file_urls     = isset( $data['_wc_file_urls'] ) ? array_map( 'esc_url_raw', array_map( 'trim', $data['_wc_file_urls'] ) ) : [];
+            $file_urls     = array_map( 'esc_url_raw', array_map( 'trim', $data['_wc_file_urls'] ) );
             $file_url_size = count( $file_urls );
 
-            for ( $i = 0; $i < $file_url_size; $i ++ ) {
+            for ( $i = 0; $i < $file_url_size; $i++ ) {
                 if ( ! empty( $file_urls[ $i ] ) ) {
                     $files[ md5( $file_urls[ $i ] ) ] = [
                         'name' => $file_names[ $i ],
@@ -393,7 +396,7 @@ function dokan_process_product_meta( $post_id, $data = [] ) {
     $sku = trim( wp_unslash( $data['_sku'] ) ) !== '' ? sanitize_text_field( wp_unslash( $data['_sku'] ) ) : '';
     try {
         $product->set_sku( $sku );
-    } catch ( \WC_Data_Exception $e ) {
+    } catch ( WC_Data_Exception $e ) {
         $product->set_sku( $old_sku );
         $woocommerce_errors[] = __( 'Product SKU must be unique', 'dokan-lite' );
     }
@@ -412,11 +415,16 @@ function dokan_process_product_meta( $post_id, $data = [] ) {
  * Grant downloadable file access to any newly added files on any existing.
  * orders for this product that have previously been granted downloadable file access.
  *
- * @param int $product_id product identifier
- * @param int $variation_id optional product variation identifier
+ * @param int   $product_id         product identifier
+ * @param int   $variation_id       optional product variation identifier
  * @param array $downloadable_files newly set files
+ *
+ * @deprecated 3.8.0
+ *
+ * @return void
  */
-function dokan_process_product_file_download_paths( $product_id, $variation_id, $downloadable_files ) {
+function dokan_process_product_file_download_paths( int $product_id, int $variation_id, array $downloadable_files ) {
+    wc_deprecated_function( 'dokan_process_product_file_download_paths', '3.8.0' );
     global $wpdb;
 
     if ( $variation_id ) {
@@ -462,14 +470,16 @@ function dokan_process_product_file_download_paths( $product_id, $variation_id, 
 }
 
 /**
- * Get discount coupon total from a order
+ * Get discount coupon total from an order
  *
  * @param int $order_id
  *
+ * @deprecated 3.8.0
+ *
  * @return int
- * @global WPDB $wpdb
  */
-function dokan_sub_order_get_total_coupon( $order_id ) {
+function dokan_sub_order_get_total_coupon( int $order_id ) : int {
+    wc_deprecated_function( 'dokan_sub_order_get_total_coupon', '3.8.0' );
     global $wpdb;
 
     $result = $wpdb->get_var(
@@ -491,9 +501,9 @@ function dokan_sub_order_get_total_coupon( $order_id ) {
 /**
  * Change seller display name to store name
  *
- * @param string $display_name
- *
  * @since 2.4.10 [Change seller display name to store name]
+ *
+ * @param string $display_name
  *
  * @return string $display_name
  */
@@ -506,8 +516,6 @@ function dokan_seller_displayname( $display_name ) {
     return $display_name;
 }
 
-//add_filter( 'pre_user_display_name', 'dokan_seller_displayname' );
-
 /**
  * Get featured products
  *
@@ -515,7 +523,7 @@ function dokan_seller_displayname( $display_name ) {
  *
  * @param int $per_page
  *
- * @return \WP_Query
+ * @return WP_Query
  */
 function dokan_get_featured_products( $per_page = 9, $seller_id = '', $page = 1 ) {
     $args = [
@@ -536,13 +544,13 @@ function dokan_get_featured_products( $per_page = 9, $seller_id = '', $page = 1 
 }
 
 /**
- * Get latest products
+ * Get the latest products
  *
  * Shown on homepage
  *
  * @param int $per_page
  *
- * @return \WP_Query
+ * @return WP_Query
  */
 function dokan_get_latest_products( $per_page = 9, $seller_id = '', $page = 1 ) {
     $args = [
@@ -561,13 +569,13 @@ function dokan_get_latest_products( $per_page = 9, $seller_id = '', $page = 1 ) 
 }
 
 /**
- * Get best selling products
+ * Get best-selling products
  *
  * Shown on homepage
  *
  * @param int $per_page
  *
- * @return \WP_Query
+ * @return WP_Query
  */
 function dokan_get_best_selling_products( $per_page = 8, $seller_id = '', $page = 1, $hide_outofstock = false ) {
     $args = [
@@ -600,29 +608,32 @@ function dokan_get_best_selling_products( $per_page = 8, $seller_id = '', $page 
  * Check More product from Seller tab is active or not.
  *
  * @since 2.5
+ *
  * @return boolean
- * @global object $post
  */
 function check_more_seller_product_tab() {
-    global $post;
-
-    $store_info = dokan_get_store_info( $post->post_author );
-
-    if ( isset( $store_info['show_more_ptab'] ) && 'yes' === $store_info['show_more_ptab'] ) {
-        return true;
-    } else {
-        return false;
-    }
+    return 'on' === dokan_get_option( 'enabled_more_products_tab', 'dokan_general', 'on' );
 }
 
 /**
- * Get top rated products
+ * Check if Vendor Info tab enabled in single product page.
+ *
+ * @since 3.9.0
+ *
+ * @return boolean
+ */
+function is_enabled_vendor_info_product_tab() {
+    return 'on' === dokan_get_option( 'show_vendor_info', 'dokan_general', 'off' );
+}
+
+/**
+ * Get top-rated products
  *
  * Shown on homepage
  *
  * @param int $per_page
  *
- * @return \WP_Query
+ * @return WP_Query
  */
 function dokan_get_top_rated_products( $per_page = 8, $seller_id = '', $page = 1 ) {
     $args = [
@@ -645,12 +656,13 @@ function dokan_get_top_rated_products( $per_page = 8, $seller_id = '', $page = 1
  *
  * Shown on homepage
  *
- * @param type $per_page
- * @param type $paged
+ * @param int $per_page
+ * @param int $paged
+ * @param int $seller_id
  *
- * @return \WP_Query
+ * @return WP_Query
  */
-function dokan_get_on_sale_products( $per_page = 10, $paged = 1, $seller_id = '' ) {
+function dokan_get_on_sale_products( int $per_page = 10, int $paged = 1, int $seller_id = 0 ) : WP_Query {
     // Get products on sale
     $product_ids_on_sale = wc_get_product_ids_on_sale();
 
@@ -687,11 +699,10 @@ function dokan_get_on_sale_products( $per_page = 10, $paged = 1, $seller_id = ''
  *
  * Total = SUM(net_amount) - SUM(withdraw)
  *
- * @param type $seller_id
- * @param type $formatted
+ * @param int  $seller_id
+ * @param bool $formatted
  *
- * @return mixed
- * @global WPDB $wpdb
+ * @return float|string float if formatted is false, string otherwise
  */
 function dokan_get_seller_balance( $seller_id, $formatted = true ) {
     $vendor = dokan()->vendor->get( $seller_id );
@@ -702,13 +713,12 @@ function dokan_get_seller_balance( $seller_id, $formatted = true ) {
 /**
  * Get Seller Earned amount
  *
- * @param int $seller_id
+ * @since 2.5.4
  *
  * @param boolean $formatted
+ * @param string  $on_date
  *
- * @param type string
- *
- * @since 2.5.4
+ * @param int     $seller_id
  *
  * @return float|null
  */
@@ -725,10 +735,9 @@ function dokan_get_seller_earnings( $seller_id, $formatted = true, $on_date = ''
 /**
  * Get seller rating
  *
- * @param type $seller_id
+ * @param int $seller_id
  *
- * @return type
- * @global WPDB $wpdb
+ * @return array
  */
 function dokan_get_seller_rating( $seller_id ) {
     $vendor = dokan()->vendor->get( $seller_id );
@@ -741,7 +750,7 @@ function dokan_get_seller_rating( $seller_id ) {
  *
  * @param int $seller_id
  *
- * @return void
+ * @return string
  */
 function dokan_get_readable_seller_rating( $seller_id ) {
     $vendor = dokan()->vendor->get( $seller_id );
@@ -749,85 +758,22 @@ function dokan_get_readable_seller_rating( $seller_id ) {
     return $vendor->get_readable_rating( false );
 }
 
-/**
- * Exclude child order emails for customers
- *
- * A hacky and dirty way to do this from this action. Because there is no easy
- * way to do this by removing action hooks from WooCommerce. It would be easier
- * if they were from functions. Because they are added from classes, we can't
- * remove those action hooks. Thats why we are doing this from the phpmailer_init action
- * by returning a fake phpmailer class.
- *
- * @param array $attr
- *
- * @return array
- */
-function dokan_exclude_child_customer_receipt( &$phpmailer ) {
-    $subject = $phpmailer->Subject; ////phpcs:ignore WordPress.NamingConventions.ValidVariableName.UsedPropertyNotSnakeCase
-
-    // order receipt
-    $sub_receipt  = __( 'Your {site_title} order receipt from {order_date}', 'dokan-lite' );
-    $sub_download = __( 'Your {site_title} order from {order_date} is complete', 'dokan-lite' );
-
-    $sub_receipt  = str_replace(
-        [
-            '{site_title}',
-            '{order_date}',
-        ], [ wp_specialchars_decode( get_option( 'blogname' ), ENT_QUOTES ), '' ], $sub_receipt
-    );
-    $sub_download = str_replace(
-        [
-            '{site_title}',
-            '{order_date} is complete',
-        ], [ wp_specialchars_decode( get_option( 'blogname' ), ENT_QUOTES ), '' ], $sub_download
-    );
-
-    // not a customer receipt mail
-    if ( ( stripos( $subject, $sub_receipt ) === false ) && ( stripos( $subject, $sub_download ) === false ) ) {
-        return;
-    }
-
-    $message = $phpmailer->Body; //phpcs:ignore WordPress.NamingConventions.ValidVariableName.UsedPropertyNotSnakeCase
-    $pattern = '/Order: #(\d+)/';
-    preg_match( $pattern, $message, $matches );
-
-    if ( isset( $matches[1] ) ) {
-        $order_id = $matches[1];
-        $order    = get_post( $order_id );
-
-        // we found a child order
-        if ( ! is_wp_error( $order ) && $order->post_parent !== 0 ) {
-            $phpmailer = new DokanFakeMailer();
-        }
-    }
-}
-
-add_action( 'phpmailer_init', 'dokan_exclude_child_customer_receipt' );
-
-/**
- * A fake mailer class to replace phpmailer
- */
-class DokanFakeMailer {
-    public function Send() {
-    }
-}
-
 add_filter( 'woocommerce_dashboard_status_widget_sales_query', 'dokan_filter_woocommerce_dashboard_status_widget_sales_query' );
 
 /**
  * Woocommerce Admin dashboard Sales Report Synced with Dokan Dashboard report
  *
+ * @since  2.4.3
+ *
  * @param array $query
  *
- * @since 2.4.3
- *
- * @return $query
- * @global WPDB $wpdb
+ * @return array
  */
 function dokan_filter_woocommerce_dashboard_status_widget_sales_query( $query ) {
     global $wpdb;
 
-    $query['where'] .= " AND posts.ID NOT IN ( SELECT post_parent FROM {$wpdb->posts} WHERE post_type IN ( '" . implode( "','", array_merge( wc_get_order_types( 'sales-reports' ), [ 'shop_order_refund' ] ) ) . "' ) )";
+    $query['where'] .= " AND posts.ID NOT IN ( SELECT post_parent FROM {
+    $wpdb->posts} WHERE post_type IN ( '" . implode( "','", array_merge( wc_get_order_types( 'sales-reports' ), [ 'shop_order_refund' ] ) ) . "' ) )";
 
     return $query;
 }
@@ -840,15 +786,7 @@ function dokan_filter_woocommerce_dashboard_status_widget_sales_query( $query ) 
  * @return void
  */
 function dokan_save_account_details() {
-    $_server = isset( $_SERVER['REQUEST_METHOD'] ) ? sanitize_text_field( wp_unslash( $_SERVER['REQUEST_METHOD'] ) ) : '';
-
-    if ( 'POST' !== strtoupper( $_server ) ) {
-        return;
-    }
-
-    $postdata = wp_unslash( $_POST );
-
-    if ( empty( $postdata['_wpnonce'] ) || ! wp_verify_nonce( sanitize_key( $postdata['_wpnonce'] ), 'dokan_save_account_details' ) ) {
+    if ( ! isset( $_POST['_wpnonce'] ) || ! wp_verify_nonce( sanitize_key( wp_unslash( $_POST['_wpnonce'] ) ), 'dokan_save_account_details' ) ) {
         return;
     }
 
@@ -862,12 +800,12 @@ function dokan_save_account_details() {
         return;
     }
 
-    $account_first_name = ! empty( $postdata['account_first_name'] ) ? wc_clean( $postdata['account_first_name'] ) : '';
-    $account_last_name  = ! empty( $postdata['account_last_name'] ) ? wc_clean( $postdata['account_last_name'] ) : '';
-    $account_email      = ! empty( $postdata['account_email'] ) ? sanitize_email( $postdata['account_email'] ) : '';
-    $pass_cur           = ! empty( $postdata['password_current'] ) ? $postdata['password_current'] : '';
-    $pass1              = ! empty( $postdata['password_1'] ) ? $postdata['password_1'] : '';
-    $pass2              = ! empty( $postdata['password_2'] ) ? $postdata['password_2'] : '';
+    $account_first_name = ! empty( $_POST['account_first_name'] ) ? wc_clean( wp_unslash( $_POST['account_first_name'] ) ) : '';
+    $account_last_name  = ! empty( $_POST['account_last_name'] ) ? wc_clean( wp_unslash( $_POST['account_last_name'] ) ) : '';
+    $account_email      = ! empty( $_POST['account_email'] ) ? sanitize_email( wp_unslash( $_POST['account_email'] ) ) : '';
+    $pass_cur           = ! empty( $_POST['password_current'] ) ? wp_unslash( $_POST['password_current'] ) : ''; // phpcs:ignore
+    $pass1              = ! empty( $_POST['password_1'] ) ? wp_unslash( $_POST['password_1'] ) : ''; // phpcs:ignore
+    $pass2              = ! empty( $_POST['password_2'] ) ? wp_unslash( $_POST['password_2'] ) : ''; // phpcs:ignore
     $save_pass          = true;
 
     $user->first_name = $account_first_name;
@@ -947,110 +885,7 @@ function dokan_save_account_details() {
 add_action( 'template_redirect', 'dokan_save_account_details' );
 
 /**
- * This method will delete vendors best selling product cache after a new order has been made
- *
- * @since 3.2.11
- *
- * @param int $post_id
- */
-function dokan_clear_best_selling_product_category_cache( $order_id ) {
-    $order = wc_get_order( $order_id );
-
-    if ( ! $order ) {
-        return;
-    }
-
-    // check if order has suborder
-    if ( $order->get_meta( 'has_sub_order' ) ) {
-        // same hooks will be called for individual sub orders
-        return;
-    }
-
-    // get vendor id from order
-    $seller_id = dokan_get_seller_id_by_order( $order_id );
-    if ( empty( $seller_id ) ) {
-        return;
-    }
-
-    delete_transient( 'dokan_vendor_get_best_selling_products_' . $seller_id );
-    delete_transient( 'dokan_vendor_get_best_selling_categories_' . $seller_id );
-}
-add_action( 'woocommerce_new_order', 'dokan_clear_best_selling_product_category_cache', 10, 1 );
-add_action( 'woocommerce_update_order', 'dokan_clear_best_selling_product_category_cache', 10, 1 );
-
-/**
- * This method will delete store category cache after a category is updated
- *
- * @since 3.2.10
- *
- * @param int $term_id
- */
-function dokan_clear_edit_product_category_cache( $term_id ) {
-    // get taxonomy slug
-    $term = get_term_by( 'ID', $term_id, 'product_cat' );
-    if ( false === $term || ! isset( $term->slug ) ) {
-        return;
-    }
-
-    // get associated product id with this category
-    $args = [
-        'status'   => 'publish',
-        'limit'    => -1,
-        'return'   => 'ids',
-        'category' => array( $term->slug ),
-    ];
-
-    $query = new WC_Product_Query( $args );
-    $products = $query->get_products();
-
-    if ( empty( $products ) ) {
-        return;
-    }
-
-    global $wpdb;
-    $products = implode( ',', $products );
-    $seller_ids = $wpdb->get_col( "SELECT DISTINCT post_author from {$wpdb->posts} WHERE ID in ($products)" ); // phpcs:ignore
-
-    foreach ( $seller_ids as $seller_id ) {
-        // delete vendor get_store_categories() method transient
-        if ( function_exists( 'wpml_get_active_languages' ) ) {
-            foreach ( wpml_get_active_languages() as $active_language ) {
-                delete_transient( 'dokan_vendor_get_store_categories_' . $active_language['code'] . '_' . $seller_id );
-            }
-        }
-
-        delete_transient( 'dokan_vendor_get_store_categories_' . $seller_id );
-    }
-}
-add_action( 'edit_product_cat', 'dokan_clear_edit_product_category_cache', 10, 1 );
-add_action( 'pre_delete_term', 'dokan_clear_edit_product_category_cache', 10, 1 );
-
-if ( ! function_exists( 'dokan_date_time_format' ) ) {
-
-    /**
-     * Format date time string to WC format
-     *
-     * @param string $time
-     * @param boolean $date_only
-     *
-     * @since 2.6.8
-     *
-     * @return string
-     */
-    function dokan_date_time_format( $time, $date_only = false ) {
-        $format = apply_filters( 'dokan_date_time_format', wc_date_format() . ' ' . wc_time_format() );
-
-        if ( $date_only ) {
-            return date_i18n( wc_date_format(), strtotime( $time ) );
-        }
-
-        return date_i18n( $format, strtotime( $time ) );
-    }
-}
-
-/**
- * Remove banner when without banner layout
- * selected for profile
+ * Remove banner when without banner layout selected for profile
  *
  * @param array $progress_values
  *
@@ -1073,13 +908,13 @@ function dokan_split_profile_completion_value( $progress_values ) {
 add_filter( 'dokan_profile_completion_values', 'dokan_split_profile_completion_value', 10 );
 
 /**
- * Set More products from seller tab
- * On Single Product Page
+ * Set More products from seller tab on Single Product Page
+ *
+ * @since 2.5
  *
  * @param array $tabs
  *
- * @since 2.5
- * @return int
+ * @return array
  */
 function dokan_set_more_from_seller_tab( $tabs ) {
     if ( check_more_seller_product_tab() ) {
@@ -1096,16 +931,15 @@ function dokan_set_more_from_seller_tab( $tabs ) {
 add_action( 'woocommerce_product_tabs', 'dokan_set_more_from_seller_tab', 10 );
 
 /**
- *  Show more products from current seller
- *
- * @param int $seller_id
- * @param int $posts_per_page
+ * Show more products from current seller
  *
  * @since 2.5
  * @since DOKAN_LITE_SINCE added filter 'dokan_get_more_products_per_page'
  *
- * @global object $product
- * @global object $post
+ * @param int|string $seller_id
+ * @param int|string $posts_per_page
+ *
+ * @return void
  */
 function dokan_get_more_products_from_seller( $seller_id = 0, $posts_per_page = 6 ) {
     global $product, $post;
@@ -1145,93 +979,10 @@ function dokan_get_more_products_from_seller( $seller_id = 0, $posts_per_page = 
 }
 
 /**
- * Change bulk order status in vendor dashboard
- *
- * @since 2.8.3
- *
- * @return string
- */
-function dokan_bulk_order_status_change() {
-    if ( ! current_user_can( 'dokan_manage_order' ) ) {
-        return;
-    }
-
-    if ( dokan_get_option( 'order_status_change', 'dokan_selling' ) === 'off' ) {
-        return;
-    }
-
-    $postdata = wp_unslash( $_POST );
-
-    if ( ! isset( $postdata['security'] ) || ! wp_verify_nonce( sanitize_key( $postdata['security'] ), 'bulk_order_status_change' ) ) {
-        return;
-    }
-
-    if ( ! isset( $postdata['status'] ) || ! isset( $postdata['bulk_orders'] ) ) {
-        return;
-    }
-
-    $status = sanitize_text_field( $postdata['status'] );
-    $orders = array_map( 'sanitize_text_field', $postdata['bulk_orders'] );
-
-    // -1 means bluk action option value
-    $excluded_status = [ '-1', 'cancelled', 'refunded' ];
-
-    if ( in_array( $status, $excluded_status, true ) ) {
-        return;
-    }
-
-    foreach ( $orders as $order ) {
-        $the_order = new WC_Order( $order );
-
-        if ( $the_order->get_status() === $status ) {
-            continue;
-        }
-
-        if ( in_array( $the_order->get_status(), $excluded_status, true ) ) {
-            continue;
-        }
-
-        $the_order->update_status( $status );
-    }
-}
-
-add_action( 'template_redirect', 'dokan_bulk_order_status_change' );
-
-/**
- * Add vendor email on customers note mail replay to
- *
- * @param string $headers
- * @param string $id
- * @param object $order
- *
- * @return string $headers
- */
-function dokan_add_reply_to_vendor_email_on_wc_customer_note_mail( $headers, $id, $order ) {
-    if ( ! ( $order instanceof WC_Order ) ) {
-        return $headers;
-    }
-
-    if ( 'customer_note' === $id ) {
-        foreach ( $order->get_items( 'line_item' ) as $item ) {
-            $product_id  = $item['product_id'];
-            $author      = get_post_field( 'post_author', $product_id );
-            $author_data = get_userdata( absint( $author ) );
-            $user_email  = $author_data->user_email;
-
-            $headers .= "Reply-to: <$user_email>\r\n";
-        }
-    }
-
-    return $headers;
-}
-
-add_filter( 'woocommerce_email_headers', 'dokan_add_reply_to_vendor_email_on_wc_customer_note_mail', 10, 3 );
-
-/**
  * Keep old vendor after duplicate any product
  *
- * @param object $duplicate
- * @param object $product
+ * @param WC_Product $duplicate
+ * @param WC_Product $product
  *
  * @return void
  */
@@ -1248,27 +999,43 @@ function dokan_keep_old_vendor_woocommerce_duplicate_product( $duplicate, $produ
 
 add_action( 'woocommerce_product_duplicate', 'dokan_keep_old_vendor_woocommerce_duplicate_product', 35, 2 );
 
-
 /**
- * Send email to the vendor/seller when cancel the order
+ * @since 3.7.24
+ *
+ * @param boolean $is_purchasable
+ * @param object $product
+ *
+ * @return boolean
  */
-function send_email_for_order_cancellation( $recipient, $order ) {
-    if ( ! $order instanceof \WC_Order ) {
-        return $recipient;
+function dokan_vendor_own_product_purchase_restriction( bool $is_purchasable, $product ): bool {
+    if ( false === $is_purchasable || dokan_is_product_author( $product->get_id() ) ) {
+        $is_purchasable = false;
     }
-
-    // get the order id from order object
-    $seller_id = dokan_get_seller_id_by_order( $order->get_id() );
-
-    $seller_info      = get_userdata( $seller_id );
-    $seller_email     = $seller_info->user_email;
-
-    // if admin email & seller email is same
-    if ( false === strpos( $recipient, $seller_email ) ) {
-        $recipient .= ',' . $seller_email;
-    }
-
-    return $recipient;
+    return $is_purchasable;
 }
 
-add_filter("woocommerce_email_recipient_cancelled_order", 'send_email_for_order_cancellation', 10, 2);
+add_filter( 'woocommerce_is_purchasable', 'dokan_vendor_own_product_purchase_restriction', 10, 2 );
+
+/**
+ * Restricts vendor from reviewing own product
+ *
+ * @since 3.7.24
+ *
+ * @param array $data
+ * @return array
+ */
+function dokan_vendor_product_review_restriction( array $data ): array {
+    global $product;
+    if ( ! is_user_logged_in() ) {
+        return $data;
+    }
+    if ( dokan_is_product_author( $product->get_id() ) ) {
+        $data['title_reply'] = __( 'Reviews cannot be posted for products that you own.', 'dokan-lite' );
+        $data['comment_field'] = '';
+        $data['fields'] = [];
+        $data['submit_field'] = '';
+        $data['submit_button'] = '';
+    }
+    return $data;
+}
+add_filter( 'woocommerce_product_review_comment_form_args', 'dokan_vendor_product_review_restriction' );

@@ -4,6 +4,7 @@
  *
  * @param array $item_data
  * @param array $cart_item
+ *
  * @return array
  */
 function dokan_product_seller_info( $item_data, $cart_item ) {
@@ -27,14 +28,17 @@ add_filter( 'woocommerce_get_item_data', 'dokan_product_seller_info', 10, 2 );
  * Adds a seller tab in product single page
  *
  * @param array $tabs
+ *
  * @return array
  */
 function dokan_seller_product_tab( $tabs ) {
-    $tabs['seller'] = [
-        'title'    => __( 'Vendor Info', 'dokan-lite' ),
-        'priority' => 90,
-        'callback' => 'dokan_product_seller_tab',
-    ];
+    if ( is_enabled_vendor_info_product_tab() ) {
+        $tabs['seller'] = [
+            'title' => __('Vendor Info', 'dokan-lite'),
+            'priority' => 90,
+            'callback' => 'dokan_product_seller_tab',
+        ];
+    }
 
     return $tabs;
 }
@@ -71,15 +75,8 @@ function dokan_product_seller_tab( $val ) {
  * @return void
  */
 function dokan_order_show_suborders( $parent_order ) {
-    $sub_orders = get_children(
-        [
-            'post_parent' => dokan_get_prop( $parent_order, 'id' ),
-            'post_type'   => 'shop_order',
-            'post_status' => array_keys( wc_get_order_statuses() ),
-        ]
-    );
-
-    if ( ! $sub_orders ) {
+    $sub_orders = dokan()->order->get_child_orders( $parent_order );
+    if ( empty( $sub_orders ) ) {
         return;
     }
 
@@ -230,7 +227,7 @@ add_action( 'manage_product_posts_custom_column', 'dokan_vendor_quick_edit_data'
 /**
  * Save quick edit data
  *
- * @param object $product
+ * @param WC_Product $product
  *
  * @return void
  */
@@ -239,13 +236,11 @@ function dokan_save_quick_edit_vendor_data( $product ) {
         return;
     }
 
-    $get_data = wp_unslash( $_REQUEST );
-
-    if ( ! isset( $get_data['woocommerce_quick_edit_nonce'] ) || ! wp_verify_nonce( sanitize_key( $get_data['woocommerce_quick_edit_nonce'] ), 'woocommerce_quick_edit_nonce' ) ) {
+    if ( ! isset( $_REQUEST['woocommerce_quick_edit_nonce'] ) || ! wp_verify_nonce( sanitize_key( $_REQUEST['woocommerce_quick_edit_nonce'] ), 'woocommerce_quick_edit_nonce' ) ) {
         return;
     }
 
-    $posted_vendor_id = ! empty( $get_data['dokan_product_author_override'] ) ? (int) $get_data['dokan_product_author_override'] : 0;
+    $posted_vendor_id = ! empty( $_REQUEST['dokan_product_author_override'] ) ? (int) $_REQUEST['dokan_product_author_override'] : 0;
 
     if ( ! $posted_vendor_id ) {
         return;
@@ -297,7 +292,7 @@ add_action( 'woocommerce_account_dashboard', 'dokan_set_go_to_vendor_dashboard_b
  *
  * @since 2.8.3
  *
- * @return string
+ * @return void
  */
 function dokan_attach_vendor_name( $item_id, $order ) {
     $product_id = $order->get_product_id();
@@ -309,7 +304,7 @@ function dokan_attach_vendor_name( $item_id, $order ) {
     $vendor_id = get_post_field( 'post_author', $product_id );
     $vendor    = dokan()->vendor->get( $vendor_id );
 
-    if ( ! is_object( $vendor ) ) {
+    if ( ! $vendor->is_vendor() ) {
         return;
     }
 
@@ -400,7 +395,7 @@ add_action(
     'pre_get_avatar',
     function () {
         $page_id = get_queried_object_id();
-        $page    = get_page( $page_id );
+        $page    = get_post( $page_id );
 
         if ( ! $page instanceof WP_Post ) {
             return;

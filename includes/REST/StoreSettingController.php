@@ -2,6 +2,7 @@
 
 namespace WeDevs\Dokan\REST;
 
+use WeDevs\Dokan\Vendor\Vendor;
 use WP_REST_Controller;
 use WP_REST_Server;
 use WP_Error;
@@ -87,6 +88,9 @@ class StoreSettingController extends WP_REST_Controller {
         $vendor   = $this->get_vendor();
         $response = dokan_get_store_info( $vendor->id );
 
+        $response['bank_payment_required_fields'] = dokan_bank_payment_required_fields();
+        $response['active_payment_methods'] = dokan_withdraw_get_active_methods();
+
         return rest_ensure_response( $response );
     }
 
@@ -112,7 +116,7 @@ class StoreSettingController extends WP_REST_Controller {
     /**
      * Get vendor
      *
-     * @return WP_Error | $vendor
+     * @return WP_Error|Vendor
      */
     protected function get_vendor() {
         $current_user = dokan_get_current_user_id();

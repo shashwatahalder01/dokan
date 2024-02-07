@@ -74,11 +74,7 @@ function dokan_replace_func( $old_method, $new_method, $object = null ) {
  * @return String date
  */
 function dokan_get_date_created( $order ) {
-    if ( version_compare( WC_VERSION, '2.7', '>' ) ) {
-        return wc_format_datetime( $order->get_date_created(), get_option( 'date_format' ) . ', ' . get_option( 'time_format' ) );
-    }
-
-    return $order->order_date;
+    return wc_format_datetime( $order->get_date_created(), wc_date_format() . ', ' . wc_time_format() );
 }
 
 /**
@@ -145,8 +141,10 @@ function dokan_save_product_price( $product_id, $regular_price, $sale_price = ''
     $product->set_sale_price( $sale_price );
 
     // Save Dates
-    $product->set_date_on_sale_from( $date_from );
-    $product->set_date_on_sale_to( $date_to );
+    if ( $date_from && $date_to ) {
+        $product->set_date_on_sale_from( $now->modify( $date_from )->modify( 'today' )->getTimestamp() );
+        $product->set_date_on_sale_to( $now->modify( $date_to )->setTime( 23, 59, 59 )->getTimestamp() );
+    }
 
     if ( $date_to && ! $date_from ) {
         $product->set_date_on_sale_from( $now->getTimestamp() );
@@ -204,12 +202,12 @@ function dokan_process_product_file_download_paths_permission( $product_id, $var
         foreach ( $existing_permissions as $existing_permission ) {
             $order = wc_get_order( $existing_permission->order_id );
 
-            if ( ! empty( $order->id ) ) {
+            if ( ! empty( $order->get_id() ) ) {
                 // Remove permissions
                 if ( ! empty( $removed_download_ids ) ) {
                     foreach ( $removed_download_ids as $download_id ) {
                         if ( apply_filters( 'woocommerce_process_product_file_download_paths_remove_access_to_old_file', true, $download_id, $product_id, $order ) ) {
-                            $wpdb->query( $wpdb->prepare( "DELETE FROM {$wpdb->prefix}woocommerce_downloadable_product_permissions WHERE order_id = %d AND product_id = %d AND download_id = %s", $order->id, $product_id, $download_id ) );
+                            $wpdb->query( $wpdb->prepare( "DELETE FROM {$wpdb->prefix}woocommerce_downloadable_product_permissions WHERE order_id = %d AND product_id = %d AND download_id = %s", $order->get_id(), $product_id, $download_id ) );
                         }
                     }
                 }
@@ -218,7 +216,7 @@ function dokan_process_product_file_download_paths_permission( $product_id, $var
                     foreach ( $new_download_ids as $download_id ) {
                         if ( apply_filters( 'woocommerce_process_product_file_download_paths_grant_access_to_new_file', true, $download_id, $product_id, $order ) ) {
                             // grant permission if it doesn't already exist
-                            if ( ! $wpdb->get_var( $wpdb->prepare( "SELECT 1=1 FROM {$wpdb->prefix}woocommerce_downloadable_product_permissions WHERE order_id = %d AND product_id = %d AND download_id = %s", $order->id, $product_id, $download_id ) ) ) {
+                            if ( ! $wpdb->get_var( $wpdb->prepare( "SELECT 1=1 FROM {$wpdb->prefix}woocommerce_downloadable_product_permissions WHERE order_id = %d AND product_id = %d AND download_id = %s", $order->get_id(), $product_id, $download_id ) ) ) {
                                 wc_downloadable_file_permission( $download_id, $product_id, $order );
                             }
                         }

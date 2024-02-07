@@ -147,8 +147,10 @@ a.dokan-btn,
   &:hover,
   &:focus,
   &.focus {
-    color: #333;
+    color: #fff;
+    border-color: #f05025;
     text-decoration: none;
+    background-color: #f05025;
   }
 
   &:active,
@@ -180,7 +182,7 @@ a.dokan-btn-default,
 input[type='submit'].dokan-btn-danger,
 a.dokan-btn-danger,
 .dokan-btn-danger {
-  .button-variant(#fff; @brand-danger; darken(@brand-danger, 5%));
+  .button-variant(#fff; @brand-danger; darken(@brand-danger, 5%)) !important;
 }
 
 input[type='submit'].dokan-btn-info,
@@ -198,7 +200,7 @@ a.dokan-btn-lg,
 input[type='submit'].dokan-btn-sm,
 a.dokan-btn-sm,
 .dokan-btn-sm {
-  .button-size(5px; 10px; 12px; 1.5; 3px);
+  .button-size(6px; 12px; 14px; 1.428; 3px);
 }
 
 .dokan-btn-round[class] {
@@ -422,10 +424,12 @@ table.my_account_orders {
       }
 
       a {
+        color: #6d6d6d;
         display: block;
         padding: 6px 8px !important;
 
         &:hover {
+          color: #000;
           background-color: #eee;
         }
       }
@@ -437,6 +441,10 @@ table.my_account_orders {
 
     li.active {
       border-bottom: 1px solid #fff !important;
+
+      a {
+        color: #000;
+      }
     }
   }
 }
