@@ -136,9 +136,9 @@ export const data = {
             // price           : faker.commerce.price(100, 200, 2),
             // price           : faker.number.int({ min: 1, max: 200, precision: 0.01 }),
             // price           : faker.finance.amount(1, 200, 2),
-            price_int: () => faker.finance.amount(100, 200, 0),
-            price_random: () => faker.finance.amount(100, 200, faker.helpers.arrayElement([0, 2])), // 0 = no decimals, 2 = 2 decimals
-            price_frac: () => faker.finance.amount(100, 200, faker.helpers.arrayElement([1, 2])),
+            price_int: () => faker.finance.amount({ min: 100, max: 200, dec: 0 }),
+            price_random: () => faker.finance.amount({ min: 100, max: 200, dec: faker.helpers.arrayElement([0, 2]) }), // 0 = no decimals, 2 = 2 decimals
+            price_frac: () => faker.finance.amount({ min: 100, max: 200, dec: faker.helpers.arrayElement([1, 2]) }),
             price_frac_comma: () => faker.finance.amount(100, 200, faker.helpers.arrayElement([1, 2])).replace('.', ','),
             auctionPrice: () => faker.commerce.price({ min: 10, max: 100, dec: 0 }),
             price: () => data.product.price.price_frac_comma(),
@@ -739,6 +739,7 @@ export const data = {
 
     // Vendor Setup Wizard
     vendorSetupWizard: {
+        setupWizardEnabled: true,
         choice: true,
         storeProductsPerPage: '12',
         street1: 'abc street',
@@ -1060,6 +1061,9 @@ export const data = {
             termsAndConditions: 'Vendor Terms and Conditions',
             biography: 'Vendor biography',
             supportButtonText: 'Get Support',
+
+            // address fields enable flag (on vendor registration)
+            addressFieldsEnabled: false,
 
             account: {
                 updateSuccessMessage: 'Account details changed successfully.',
@@ -2112,6 +2116,25 @@ export const data = {
             username: () => 'customer1',
             username1: 'customer1',
         },
+    },
+
+    status: {
+        on: 'on',
+        off: 'off',
+    },
+
+    // image
+    image: {
+        avatar: 'utils/sampleData/avatar.png',
+        dokan: 'utils/sampleData/dokan.png',
+        license: 'utils/sampleData/license.png',
+    },
+
+    // command
+    command: {
+        permalink: 'npm run wp-env run tests-cli wp rewrite structure /%postname%/',
+        permalinkLocal: `cd ${process.env.SITE_PATH} && wp rewrite structure /%postname%/ && wp rewrite flush`,
+        activateTheme: `cd ${process.env.SITE_PATH} && wp theme activate storefront`,
     },
 
     // install wordpress

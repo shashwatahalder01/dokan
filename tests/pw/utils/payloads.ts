@@ -103,7 +103,7 @@ export const payloads = {
     createProduct: () => ({
         name: faker.commerce.productName() + ' (Simple)',
         type: 'simple',
-        regular_price: faker.finance.amount(100, 200, faker.helpers.arrayElement([0, 2])),
+        regular_price: faker.finance.amount({ min: 100, max: 200, dec: faker.helpers.arrayElement([0, 2]) }),
         // regular_price: '114.15' , // failed for this price & 5% tax & 10% commission dokan .1 issue
         status: 'publish',
         categories: [
@@ -212,7 +212,7 @@ export const payloads = {
     createWholesaleProduct: () => ({
         name: faker.commerce.productName() + ' (wholesale)',
         type: 'simple',
-        regular_price: faker.finance.amount(100, 110, faker.helpers.arrayElement([0, 2])),
+        regular_price: { min: 100, max: 110, dec: faker.helpers.arrayElement([0, 2]) },
         // regular_price: '114.15' , // failed for this price & 5% tax & 10% commission dokan .1 issue
         status: 'publish',
         categories: [
@@ -230,7 +230,7 @@ export const payloads = {
                 key: '_dokan_wholesale_meta',
                 value: {
                     enable_wholesale: 'yes',
-                    price: faker.finance.amount(90, 99, faker.helpers.arrayElement([0, 2])),
+                    regular_price: { min: 90, max: 99, dec: faker.helpers.arrayElement([0, 2]) },
                     // price: '100',
                     quantity: '10',
                 },
@@ -241,7 +241,7 @@ export const payloads = {
     createVariableProduct: () => ({
         name: faker.commerce.productName() + ' (Variable)',
         type: 'variable',
-        regular_price: faker.finance.amount(100, 200, faker.helpers.arrayElement([0, 2])),
+        regular_price: faker.finance.amount({ min: 100, max: 200, dec: faker.helpers.arrayElement([0, 2]) }),
         status: 'publish',
         categories: [
             {
@@ -266,7 +266,7 @@ export const payloads = {
 
     createProductVariation: {
         // id: '47',
-        regular_price: faker.finance.amount(100, 200, faker.helpers.arrayElement([0, 2])),
+        regular_price: faker.finance.amount({ min: 100, max: 200, dec: faker.helpers.arrayElement([0, 2]) }),
         status: 'publish',
         categories: [
             {
@@ -293,7 +293,7 @@ export const payloads = {
         name: faker.commerce.productName() + ' (Downloadable)',
         type: 'simple',
         downloadable: true,
-        regular_price: faker.finance.amount(100, 200, faker.helpers.arrayElement([0, 2])),
+        regular_price: faker.finance.amount({ min: 100, max: 200, dec: faker.helpers.arrayElement([0, 2]) }),
         downloads: [],
         // download_limit: 100,
         // download_expiry: 100,
@@ -675,6 +675,10 @@ export const payloads = {
                 product_id: '',
                 quantity: 1,
             },
+            // {
+            //     product_id: '',
+            //     quantity: 1,
+            // },
         ],
 
         shipping_lines: [
@@ -2324,7 +2328,6 @@ export const payloads = {
         gravatar: '',
         gravatar_id: 0,
         shop_url: '',
-        products_per_page: 12,
         show_more_product_tab: true,
         toc_enabled: false,
         store_toc: '',
@@ -2406,7 +2409,6 @@ export const payloads = {
         gravatar: '',
         gravatar_id: 0,
         shop_url: '',
-        products_per_page: 12,
         show_more_product_tab: true,
         toc_enabled: false,
         store_toc: '',
@@ -2451,6 +2453,68 @@ export const payloads = {
         admin_additional_fee: '0.00',
         admin_commission_type: 'flat',
     }),
+
+    // always revert vendor settings to this after altering in tests
+    defaultStoreSettings: {
+        social: {
+            fb: 'http://dokan.test',
+            youtube: 'http://dokan.test',
+            twitter: 'http://dokan.test',
+            linkedin: 'http://dokan.test',
+            pinterest: 'http://dokan.test',
+            instagram: 'http://dokan.test',
+            flickr: 'http://dokan.test',
+        },
+        phone: '0123456789',
+        show_email: 'yes',
+        address: {
+            street_1: 'abc street',
+            street_2: 'xyz street',
+            city: 'New York',
+            zip: '10003',
+            state: 'NY',
+            country: 'US',
+        },
+        location: '40.7127753,-74.0059728',
+        banner: 0,
+        banner_id: 0,
+        gravatar: 0,
+        gravatar_id: 0,
+        show_more_product_tab: true,
+        enable_tnc: 'on',
+        store_tnc: 'test Vendor terms and conditions',
+        featured: 'yes',
+        // rating: {
+        //     rating: '4.00', // todo:  doesn't work on lite [might not implemented on lite]
+        //     count: 1,
+        // },
+        enabled: true,
+        payment: {
+            paypal: {
+                email: 'paypal@g.c',
+            },
+            bank: {
+                ac_name: 'account name',
+                ac_type: 'personal',
+                ac_number: '1234567',
+                bank_name: 'bank name',
+                bank_addr: 'bank address',
+                routing_number: '123456',
+                iban: '123456',
+                swift: '12345',
+            },
+        },
+        trusted: true,
+        company_name: 'company name',
+        vat_number: '123456789',
+        company_id_number: '123456789',
+        bank_name: 'bank name',
+        bank_iban: 'bank iban',
+        categories: [{}],
+        admin_commission: '',
+        admin_additional_fee: '0.00',
+        admin_commission_type: 'flat',
+    },
 
     createStoreReview: {
         title: 'Test store review',
@@ -2507,7 +2571,6 @@ export const payloads = {
         banner_id: 0,
         gravatar: 0,
         gravatar_id: 0,
-        products_per_page: 12,
         show_more_product_tab: true,
         enable_tnc: 'on',
         store_tnc: 'test Vendor terms and conditions',
@@ -2632,7 +2695,6 @@ export const payloads = {
         banner_id: 0,
         gravatar: 0,
         gravatar_id: 0,
-        products_per_page: 12,
         show_more_product_tab: true,
         toc_enabled: true, // todo:  doesn't work on lite
         store_toc: 'test Vendor terms and conditions',

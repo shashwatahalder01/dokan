@@ -1,5 +1,6 @@
 // const open = require( 'open' );
 import fs from 'fs';
+import { execSync } from 'child_process';
 import { Browser, BrowserContextOptions, Page } from '@playwright/test';
 
 export const helpers = {
@@ -147,6 +148,13 @@ export const helpers = {
     subtotal(price: number[], quantity: number[]) {
         const subtotal = price.map((e, index) => e * quantity[index]!);
         return subtotal.reduce((a, b) => a + b, 0);
+    },
+
+    lineItemsToSubtoal(lineItems: object[]) {
+        const arrOfPriceQuantity = lineItems.map(({ price, quantity }) => [price, quantity]);
+        // const arrOfSubtotals = res.map(([price, quantity]) => price * quantity)
+        const subtotal = arrOfPriceQuantity.reduce((sum, [price, quantity]) => sum + price * quantity, 0);
+        return subtotal;
     },
 
     // discount
@@ -342,6 +350,12 @@ export const helpers = {
         }
         envData[property] = value;
         this.writeFile(filePath, JSON.stringify(envData, null, 2));
+    },
+
+    // execute command
+    async execommand(command: string) {
+        const output = execSync(command, { encoding: 'utf-8' });
+        console.log(output);
     },
 
     async createPage(browser: Browser, options?: BrowserContextOptions | undefined) {
