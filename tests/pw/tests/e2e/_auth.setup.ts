@@ -52,7 +52,6 @@ setup.describe('authenticate users & set permalink', () => {
 
     setup('add vendor1 @lite', async () => {
         const [responseBody, sellerId] = await apiUtils.createStore(payloads.createStore1, payloads.adminAuth);
-        console.log(responseBody);
         await apiUtils.updateCustomer(sellerId, payloads.updateAddress, payloads.adminAuth);
         console.log('VENDOR_ID:', sellerId);
         process.env.VENDOR_ID = sellerId;
