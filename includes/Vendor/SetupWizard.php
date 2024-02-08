@@ -533,7 +533,9 @@ class SetupWizard extends DokanSetupWizard {
         }
 
         // Check address and add manually values on Profile Completion also increase progress value
-        $dokan_settings['profile_completion']['address'] = $dokan_settings['profile_completion']['progress_vals']['address_val'];
+        if ( ! empty( $dokan_settings['profile_completion']['progress_vals']['address_val'] ) ) {
+            $dokan_settings['profile_completion']['address'] = $dokan_settings['profile_completion']['progress_vals']['address_val'];
+        }
 
         if ( empty( $dokan_settings['address']['street_1'] ) ) {
             unset( $dokan_settings['profile_completion']['address'] );
@@ -648,13 +650,13 @@ class SetupWizard extends DokanSetupWizard {
                 }
             }
 
-            if ( $has_bank_information ) {
+            if ( $has_bank_information && ! empty( $dokan_settings['profile_completion']['progress_vals']['payment_method_val'] ) ) {
                 $dokan_settings['profile_completion']['bank'] = $dokan_settings['profile_completion']['progress_vals']['payment_method_val'];
                 $dokan_settings['profile_completion']['paypal'] = 0;
             }
         }
 
-        if ( ! empty( $_POST['settings']['paypal']['email'] ) ) {
+        if ( ! empty( $_POST['settings']['paypal']['email'] ) && ! empty( $dokan_settings['profile_completion']['progress_vals']['payment_method_val'] ) ) {
             $dokan_settings['payment']['paypal']            = [
                 'email' => sanitize_email( wp_unslash( $_POST['settings']['paypal']['email'] ) ),
             ];
@@ -665,7 +667,7 @@ class SetupWizard extends DokanSetupWizard {
         // Check any payment methods setups and add manually value on Profile Completion also increase progress value
         if ( ! empty( $dokan_settings['profile_completion']['paypal'] ) || ! empty( $dokan_settings['profile_completion']['bank'] ) ) {
             $profile_settings = get_user_meta( $this->store_id, 'dokan_profile_settings', true );
-            if ( ! empty( $profile_settings['profile_completion']['progress'] ) ) {
+            if ( ! empty( $profile_settings['profile_completion']['progress'] ) && ! empty( $dokan_settings['profile_completion']['progress_vals']['payment_method_val'] ) ) {
                 $dokan_settings['profile_completion']['progress'] = $profile_settings['profile_completion']['progress'] + $dokan_settings['profile_completion']['progress_vals']['payment_method_val'];
             }
         }
