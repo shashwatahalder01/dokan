@@ -2,8 +2,8 @@ name: E2E_API Tests All
 
 on:
     schedule:
-        # workflow will run daily at 7:00 AM BDT (1:00 AM UTC)
-        - cron: '0 1 * * *'
+        # workflow will run daily at 8:00 AM BDT (2:00 AM UTC)
+        - cron: '0 2 * * *'
     # workflow will trigger on pull request
     # pull_request:
     #     branches: [develop]
@@ -13,15 +13,15 @@ on:
 
     # workflow can be manually triggered
     workflow_dispatch:
-      inputs:
-        testsuite:
-          description: Choose which test suite to run
-          default: All
-          type: choice
-          options:
-            - E2E
-            - API
-            - All
+        inputs:
+            testsuite:
+                description: Choose which test suite to run
+                default: All
+                type: choice
+                options:
+                    - E2E
+                    - API
+                    - All
 
 # Cancels all previous workflow runs for pull requests that have not completed.
 concurrency:
@@ -70,7 +70,7 @@ jobs:
             - name: Checkout testing repo
               uses: actions/checkout@v3
               with:
-                ref: 'e2e-pw'
+                  ref: 'e2e-pw'
 
             - name: Use desired version of NodeJS
               if: success()
@@ -113,19 +113,26 @@ jobs:
                   npm run build
 
             # Install test dependencies
-            - name: Install dependencies
+            - name: Install test dependencies
               if: success()
               run: |
                   cd tests/pw 
                   npm ci
-            
+
+            # Override wp-env for pro required plugins
+            - name: Allow override wp-env.json via .wp-env.override.json
+              if: success()
+              run: |
+                  cd tests/pw
+                  mv .wp-env.override .wp-env.override.json
+
             # Create php debuglog file
             - name: Create php debuglog file
               if: success()
               run: |
                   cd tests/pw 
                   mkdir -p debuglog && touch debuglog/debug.log
-      
+
             # Start wordpress environment
             - name: Start WordPress Env
               id: wp-env
@@ -155,7 +162,7 @@ jobs:
               run: |
                   cd tests/pw
                   npm run wp-env run tests-cli wp rewrite structure /%postname%/
-                  # curl http://localhost:9999/wp-json/wp/v2
+              # curl http://localhost:9999/wp-json/wp/v2
 
             # Activate theme
             - name: Activate theme:Storefront
