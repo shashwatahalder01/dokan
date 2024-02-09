@@ -44,9 +44,8 @@ test.describe('Shop functionality test', () => {
         await customer.filterProducts('by-location', 'New York, NY, USA');
     });
 
-    test('customer can view products on map @pro', async () => {
+    test('customer can view products list on map @pro', async () => {
         await customer.productOnMap();
-        // await customer.productOnMap(data.predefined.simpleProduct.product1.name);
     });
 
     test('customer can go to product details from shop @lite', async () => {

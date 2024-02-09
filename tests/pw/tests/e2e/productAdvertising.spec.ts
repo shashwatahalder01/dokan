@@ -66,7 +66,9 @@ test.describe('Product Advertising test', () => {
     });
 
     test('vendor can buy product advertising @pro', async () => {
-        const orderId = await vendor.buyProductAdvertising(data.productAdvertisement.advertisedProduct);
+        //todo: p1_v1 status gets pending review; need to resolve
+        [, , productName] = await apiUtils.createProduct(payloads.createProduct(), payloads.vendorAuth);
+        const orderId = await vendor.buyProductAdvertising(productName);
         await apiUtils.updateOrderStatus(orderId, 'wc-completed', payloads.adminAuth);
     });
 
