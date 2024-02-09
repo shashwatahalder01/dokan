@@ -8,7 +8,7 @@ export default defineConfig({
     globalSetup: './global-setup' /* Path to the global setup file. This file will be required and run before all the tests. */,
     // globalTeardown: './global-teardown' /* Path to the global teardown file. This file will be required and run after all the tests. */,
     globalTimeout: process.env.CI ? 40 * (60 * 1000) : 40 * (60 * 1000) /* Maximum time in milliseconds the whole test suite can run */,
-    maxFailures: process.env.CI ? 40 : 30 /* The maximum number of test failures for the whole test suite run. After reaching this number, testing will stop and exit with an error. */,
+    // maxFailures: process.env.CI ? 60 : 30 /* The maximum number of test failures for the whole test suite run. After reaching this number, testing will stop and exit with an error. */,
     timeout: process.env.CI ? 60 * 1000 : 35 * 1000 /* Maximum time one test can run for. */,
     expect: {
         timeout: 15 * 1000 /* Maximum time expect() should wait for the condition to be met.  For example in `await expect(locator).toHaveText();`*/,
@@ -23,7 +23,7 @@ export default defineConfig({
     // forbidOnly     : !!process.env.CI, 	/* Fail the build on CI if you accidentally left test-only in the source code. */
     repeatEach: 1 /* The number of times to repeat each test, useful for debugging flaky tests. */,
     retries: process.env.CI ? 1 : 0 /* The maximum number of retry attempts given to failed tests.  */,
-    workers: process.env.CI ? 4 : 1 /* Opt out of parallel tests on CI. */,
+    workers: process.env.CI ? 2 : 1 /* Opt out of parallel tests on CI. */,
     reportSlowTests: { max: 2, threshold: 25 } /* Whether to report slow test files. Pass null to disable this feature. */,
     reporter: process.env.CI
         ? [
