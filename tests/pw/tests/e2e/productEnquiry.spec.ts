@@ -39,11 +39,11 @@ test.describe('Product Enquiry test', () => {
         await apiUtils.dispose();
     });
 
-    test('customer can enquire product @pro', async () => {
+    test('customer can enquire product @pro @c', async () => {
         await customer.enquireProduct(data.predefined.simpleProduct.product1.name, data.product.enquiry);
     });
 
-    test('guest customer can enquire product @pro', async () => {
+    test('guest customer can enquire product @pro @g', async () => {
         await guest.enquireProduct(data.predefined.simpleProduct.product1.name, data.product.enquiry);
     });
 });

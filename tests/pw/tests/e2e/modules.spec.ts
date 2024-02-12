@@ -16,31 +16,31 @@ test.describe('Modules test', () => {
         await aPage.close();
     });
 
-    test('dokan modules menu page is rendering properly @pro @explo', async () => {
+    test('dokan modules menu page is rendering properly @pro @exp @a', async () => {
         await admin.adminModulesRenderProperly();
     });
 
-    test('admin can search module @pro', async () => {
+    test('admin can search module @pro @a', async () => {
         await admin.searchModule(data.modules.modulesName.AuctionIntegration);
     });
 
-    test('admin can filter modules by category @pro', async () => {
+    test('admin can filter modules by category @pro @a', async () => {
         await admin.filterModules(data.modules.moduleCategory.productManagement);
     });
 
-    test('admin can deactivate module @pro', async () => {
+    test('admin can deactivate module @pro @a', async () => {
         await admin.activateDeactivateModule(data.modules.modulesName.AuctionIntegration);
     });
 
-    test('admin can activate module @pro', async () => {
+    test('admin can activate module @pro @a', async () => {
         await admin.activateDeactivateModule(data.modules.modulesName.AuctionIntegration);
     });
 
-    test('admin can perform module bulk action @pro', async () => {
+    test('admin can perform module bulk action @pro @a', async () => {
         await admin.moduleBulkAction('activate');
     });
 
-    test('admin can change module view layout @pro', async () => {
+    test('admin can change module view layout @pro @a', async () => {
         await admin.moduleViewLayout(data.modules.layout.list);
     });
 });

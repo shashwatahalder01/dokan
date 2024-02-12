@@ -22,19 +22,19 @@ test.describe('Product addon functionality test', () => {
         await vPage.close();
     });
 
-    test('vendor product addons menu page is rendering properly @pro @explo', async () => {
+    test('vendor product addons menu page is rendering properly @pro @exp @v', async () => {
         await vendor.vendorProductAddonsSettingsRenderProperly();
     });
 
-    test('vendor can add addons @pro', async () => {
+    test('vendor can add addons @pro @v', async () => {
         await vendor.addAddon({ ...data.vendor.addon, name: data.vendor.addon.randomName() });
     });
 
-    test('vendor can edit addon @pro', async () => {
+    test('vendor can edit addon @pro @v', async () => {
         await vendor.editAddon({ ...data.vendor.addon, name: addonName, titleRequired: addonFieldTitle });
     });
 
-    test('vendor can delete addon @pro', async () => {
+    test('vendor can delete addon @pro @v', async () => {
         await vendor.deleteAddon({ ...data.vendor.addon, name: addonName });
     });
 });

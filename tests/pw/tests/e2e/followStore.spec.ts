@@ -31,23 +31,23 @@ test.describe('Follow stores functionality test', () => {
 
     // follow store
 
-    test('customer followed vendors menu page is rendering properly @pro @explo', async () => {
+    test('customer followed vendors menu page is rendering properly @pro @exp @c', async () => {
         await customer.customerFollowedVendorsRenderProperly();
     });
 
-    test('customer can follow store on store listing @pro', async () => {
+    test('customer can follow store on store listing @pro @c', async () => {
         await customer.followStore(data.predefined.vendorStores.vendor1, data.predefined.vendorStores.followFromStoreListing);
     });
 
-    test('customer can follow store on single store @pro', async () => {
+    test('customer can follow store on single store @pro @c', async () => {
         await customer.followStore(data.predefined.vendorStores.vendor1, data.predefined.vendorStores.followFromSingleStore);
     });
 
-    test('vendor followers menu page is rendering properly @pro @explo', async () => {
+    test('vendor followers menu page is rendering properly @pro @exp @v', async () => {
         await vendor.vendorFollowersRenderProperly();
     });
 
-    test('vendor can view followers @pro', async () => {
+    test('vendor can view followers @pro @v', async () => {
         await vendor.vendorViewFollowers();
     });
 });
