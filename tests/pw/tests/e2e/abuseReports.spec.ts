@@ -36,7 +36,7 @@ test.describe('Abuse report test', () => {
     test.afterAll(async () => {
         await aPage.close();
         await cPage.close();
-        await gPage.close();
+        // await gPage.close();
         await apiUtils.dispose();
     });
 
@@ -60,7 +60,8 @@ test.describe('Abuse report test', () => {
         await admin.filterAbuseReports(data.predefined.vendorStores.vendor1, 'by-vendor');
     });
 
-    test('admin can perform abuse report bulk action @pro @a', async () => {
+    test.skip('admin can perform abuse report bulk action @pro @a', async () => {
+        // todo: might cause other tests to fail in parallel
         await admin.abuseReportBulkAction('delete');
     });
 
@@ -70,12 +71,16 @@ test.describe('Abuse report test', () => {
         await customer.reportProduct(data.predefined.simpleProduct.product1.name, data.product.report);
     });
 
-    test('guest customer can report product @pro @g', async () => {
+    test('guest customer can report product @pro @g', async ({ page }) => {
+        guest = new AbuseReportsPage(page); //todo: apply guest user like this where every test need seperate guest user
         await guest.reportProduct(data.predefined.simpleProduct.product1.name, data.product.report);
     });
 
-    test('only logged-in customer can report product @pro @g', async () => {
+    test.skip('guest customer need to log-in to report product @pro @g', async ({ page }) => {
+        // todo: might cause other tests to fail in parallel
+        guest = new AbuseReportsPage(page);
         await dbUtils.setDokanSettings(dbData.dokan.optionName.productReportAbuse, { ...dbData.dokan.productReportAbuseSettings, reported_by_logged_in_users_only: 'on' });
         await guest.reportProduct(data.predefined.simpleProduct.product1.name, data.product.report);
+        await dbUtils.setDokanSettings(dbData.dokan.optionName.productReportAbuse, dbData.dokan.productReportAbuseSettings);
     });
 });

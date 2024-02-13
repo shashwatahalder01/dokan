@@ -13,6 +13,7 @@ test.describe('License test', () => {
     });
 
     test.afterAll(async () => {
+        await admin.activateLicense(data.dokanLicense.correctKey);
         await aPage.close();
     });
 

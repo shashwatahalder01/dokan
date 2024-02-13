@@ -1,19 +1,25 @@
-import { test, Page } from '@playwright/test';
+import { test, request, Page } from '@playwright/test';
 import { ModulesPage } from '@pages/modulesPage';
+import { ApiUtils } from '@utils/apiUtils';
+import { payloads } from '@utils/payloads';
 import { data } from '@utils/testData';
 
 test.describe('Modules test', () => {
     let admin: ModulesPage;
     let aPage: Page;
+    let apiUtils: ApiUtils;
 
     test.beforeAll(async ({ browser }) => {
         const adminContext = await browser.newContext(data.auth.adminAuth);
         aPage = await adminContext.newPage();
         admin = new ModulesPage(aPage);
+
+        apiUtils = new ApiUtils(await request.newContext());
     });
 
     test.afterAll(async () => {
         await aPage.close();
+        await apiUtils.dispose();
     });
 
     test('dokan modules menu page is rendering properly @pro @exp @a', async () => {
@@ -33,6 +39,7 @@ test.describe('Modules test', () => {
     });
 
     test('admin can activate module @pro @a', async () => {
+        await apiUtils.deactivateModules([payloads.moduleids.auction]);
         await admin.activateDeactivateModule(data.modules.modulesName.AuctionIntegration);
     });
 

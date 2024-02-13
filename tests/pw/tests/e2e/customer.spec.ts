@@ -82,7 +82,7 @@ test.describe('Customer functionality test', () => {
         await customer.placeOrder();
     });
 
-    test('customer can buy multi vendor products @lite @c', async () => {
+    test('customer can buy multi-vendor products @lite @c', async () => {
         await customer.addProductToCart(data.predefined.simpleProduct.product1.name, 'single-product');
         await customer.addProductToCart(data.predefined.vendor2.simpleProduct.product1.name, 'single-product', false);
         await customer.placeOrder();

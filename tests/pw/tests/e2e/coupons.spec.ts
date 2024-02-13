@@ -44,6 +44,8 @@ test.describe('Coupons test', () => {
         await admin.addMarketplaceCoupon({ ...data.coupon, title: data.coupon.couponTitle() });
     });
 
+    //vendor
+
     test('vendor coupon menu page is rendering properly @pro @exp @v', async () => {
         await vendor.vendorCouponsRenderProperly();
     });
@@ -64,6 +66,8 @@ test.describe('Coupons test', () => {
         const [, , couponCode] = await apiUtils.createCoupon([PRODUCT_ID], payloads.createCoupon(), payloads.vendorAuth);
         await vendor.deleteCoupon(couponCode);
     });
+
+    //customer
 
     test('customer can view coupon on single store @pro @c', async () => {
         await customer.viewStoreCoupon(data.predefined.vendorStores.vendor1, couponCode);

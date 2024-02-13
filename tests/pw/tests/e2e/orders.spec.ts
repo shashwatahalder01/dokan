@@ -59,11 +59,12 @@ test.describe('Order functionality test', () => {
         await vendor.viewOrderDetails(orderId);
     });
 
-    test('vendor can update order status on table @lite @v', async () => {
+    test('vendor can update order status on order table @lite @v', async () => {
         await vendor.updateOrderStatusOnTable(orderId, data.order.orderStatus.processing);
     });
 
     test('vendor can update order status on order details @lite @v', async () => {
+        [, , orderId] = await apiUtils.createOrderWithStatus(PRODUCT_ID, { ...payloads.createOrder, customer_id: CUSTOMER_ID }, data.order.orderStatus.onhold, payloads.vendorAuth);
         await vendor.updateOrderStatus(orderId, data.order.orderStatus.completed);
     });
 

@@ -26,17 +26,17 @@ test.describe.skip('Plugin functionality test', () => {
 
     test('activate dokan lite plugin @lite @a', async () => {
         await apiUtils.updatePlugin('dokan/dokan', { status: 'inactive' }, payloads.adminAuth);
-        await admin.activatePlugin(data.plugin.pluginName.dokanlite);
+        await admin.activatePlugin(data.plugin.pluginName.dokanLite);
     });
 
     test('deactivate dokan lite plugin @lite @a', async () => {
         await apiUtils.updatePlugin('dokan/dokan', { status: 'active' }, payloads.adminAuth);
-        await admin.deactivateDokanPlugin(data.plugin.pluginName.dokanlite, false);
+        await admin.deactivateDokanPlugin(data.plugin.pluginName.dokanLite, false);
     });
 
     test('deactivate dokan lite plugin with deactivate reason @lite @a', async () => {
         await apiUtils.updatePlugin('dokan/dokan', { status: 'active' }, payloads.adminAuth);
-        await admin.deactivateDokanPlugin(data.plugin.pluginName.dokanlite, true);
+        await admin.deactivateDokanPlugin(data.plugin.pluginName.dokanLite, true);
     });
 
     test('activate dokan pro plugin @pro @a', async () => {
@@ -54,11 +54,11 @@ test.describe.skip('Plugin functionality test', () => {
         await admin.deactivateDokanPlugin(data.plugin.pluginName.dokanPro, true);
     });
 
-    // test('delete dokan lite plugin @lite @a', async ( ) => {
-    // 	await admin.activatePlugin(data.plugin.dokanLite);
-    // });
+    test('delete dokan lite plugin @lite @a', async () => {
+        await admin.activatePlugin(data.plugin.pluginName.dokanLite);
+    });
 
-    // test('delete dokan pro plugin @pro @a', async ( ) => {
-    // 	await admin.activatePlugin(data.plugin.dokanLite);
-    // });
+    test('delete dokan pro plugin @pro @a', async () => {
+        await admin.activatePlugin(data.plugin.pluginName.dokanLite);
+    });
 });

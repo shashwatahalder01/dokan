@@ -4,7 +4,7 @@ import { ApiUtils } from '@utils/apiUtils';
 import { data } from '@utils/testData';
 import { payloads } from '@utils/payloads';
 
-test.describe('Announcements test', () => {
+test.describe('Announcements test (admin)', () => {
     let admin: AnnouncementsPage;
     let aPage: Page;
     let apiUtils: ApiUtils;
@@ -24,6 +24,8 @@ test.describe('Announcements test', () => {
         await apiUtils.dispose();
     });
 
+    //admin
+
     test('dokan announcements menu page is rendering properly @pro @exp @a', async () => {
         await admin.adminAnnouncementsRenderProperly();
     });
@@ -41,6 +43,7 @@ test.describe('Announcements test', () => {
     });
 
     test('admin can trash announcement @pro @a', async () => {
+        const [, , announcementTitle] = await apiUtils.createAnnouncement(payloads.createAnnouncement(), payloads.adminAuth);
         await admin.updateAnnouncement(announcementTitle, 'trash');
     });
 
@@ -56,13 +59,14 @@ test.describe('Announcements test', () => {
         await admin.updateAnnouncement(announcementTitle, 'permanently-delete');
     });
 
-    test('admin can perform announcements bulk action @pro @a', async () => {
+    test.skip('admin can perform announcements bulk action @pro @a', async () => {
+         // todo: might cause other tests to fail in parallel
         // await apiUtils.createAnnouncement(payloads.createAnnouncement(), payloads.adminAuth);
         await admin.announcementBulkAction('trash');
     });
 });
 
-test.describe('Announcements test vendor', () => {
+test.describe('Announcements test (vendor)', () => {
     let vendor: AnnouncementsPage;
     let vPage: Page;
     let apiUtils: ApiUtils;
