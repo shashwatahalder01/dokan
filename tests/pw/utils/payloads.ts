@@ -2211,7 +2211,7 @@ export const payloads = {
 
     // module
 
-    moduleids: {
+    moduleIds: {
         booking: 'booking',
         colorSchemeCustomize: 'color_scheme_customizer',
         deliveryTime: 'delivery_time',
