@@ -484,8 +484,8 @@ export const payloads = {
     }),
 
     createProductAddons: () => ({
-        name: 'Test Addons Group_1' + faker.string.nanoid(10),
-        priority: 1,
+        name: 'Test Addons Group_' + faker.string.nanoid(10),
+        priority: 10,
         restrict_to_categories: [],
         fields: [
             {
@@ -507,7 +507,13 @@ export const payloads = {
                 options: [
                     {
                         label: 'Option 1',
-                        price: '30',
+                        price: '10',
+                        image: '',
+                        price_type: 'flat_fee',
+                    },
+                    {
+                        label: 'Option 2',
+                        price: '20',
                         image: '',
                         price_type: 'flat_fee',
                     },
@@ -2204,6 +2210,46 @@ export const payloads = {
     },
 
     // module
+
+    moduleids: {
+        booking: 'booking',
+        colorSchemeCustomize: 'color_scheme_customizer',
+        deliveryTime: 'delivery_time',
+        elementor: 'elementor',
+        exportImport: 'export_import',
+        followStore: 'follow_store',
+        geolocation: 'geolocation',
+        germanized: 'germanized',
+        liveChat: 'live_chat',
+        liveSearch: 'live_search',
+        moip: 'moip',
+        paypalMarketplace: 'paypal_marketplace',
+        productAddon: 'product_addon',
+        productEnquiry: 'product_enquiry',
+        reportAbuse: 'report_abuse',
+        rma: 'rma',
+        sellerVacation: 'seller_vacation',
+        shipstation: 'shipstation',
+        auction: 'auction',
+        spmv: 'spmv',
+        storeReviews: 'store_reviews',
+        storeSupport: 'store_support',
+        stripe: 'stripe',
+        productAdvertising: 'product_advertising',
+        productSubscription: 'product_subscription',
+        vendorAnalytics: 'vendor_analytics',
+        vendorStaff: 'vendor_staff',
+        vsp: 'vsp',
+        vendorVerification: 'vendor_verification',
+        wholesale: 'wholesale',
+        rankMath: 'rank_math',
+        tableRateShipping: 'table_rate_shipping',
+        mangopay: 'mangopay',
+        orderMinMax: 'order_min_max',
+        sellerBadge: 'seller_badge',
+        stripeExpress: 'stripe_express',
+        requestForQuotation: 'request_for_quotation',
+    },
 
     deactivateModule: {
         module: ['booking'],

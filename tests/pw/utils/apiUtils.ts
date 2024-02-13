@@ -732,14 +732,14 @@ export class ApiUtils {
     }
 
     // get activate modules
-    async activateModules(moduleIds: string, auth?: auth): Promise<responseBody> {
-        const [, responseBody] = await this.put(endPoints.activateModule, { data: { module: [moduleIds] }, headers: auth });
+    async activateModules(moduleIds: string[], auth?: auth): Promise<responseBody> {
+        const [, responseBody] = await this.put(endPoints.activateModule, { data: { module: moduleIds }, headers: auth });
         return responseBody;
     }
 
     // get deactivated modules
-    async deactivateModules(moduleIds: string, auth?: auth): Promise<responseBody> {
-        const [, responseBody] = await this.put(endPoints.deactivateModule, { data: { module: [moduleIds] }, headers: auth });
+    async deactivateModules(moduleIds: string[], auth?: auth): Promise<responseBody> {
+        const [, responseBody] = await this.put(endPoints.deactivateModule, { data: { module: moduleIds }, headers: auth });
         return responseBody;
     }
 
@@ -1777,16 +1777,53 @@ export class ApiUtils {
                 discount_total: responseBody.discount_total,
                 discount_tax: responseBody.discount_tax,
             },
-            line_items:{
+            line_items: {
                 subtotal: responseBody.line_items.subtotal,
                 subtotal_tax: responseBody.line_items.subtotal_tax,
                 total: responseBody.line_items.total,
                 total_tax: responseBody.line_items.total_tax,
                 price: responseBody.line_items.price,
-                
-            }
+            },
         };
 
         return orderDetails;
+    }
+
+    /**
+     * woocommerce product addon api methods
+     */
+
+    // get all product addons
+    async getAllProductAddons(auth?: auth): Promise<responseBody> {
+        const [, responseBody] = await this.get(endPoints.wc.productAddons.getAllProductAddons, { headers: auth });
+        return responseBody;
+    }
+
+    // create product addon
+    async createProductAddon(payload: object, auth?: auth): Promise<[responseBody, string, string, string]> {
+        const [, responseBody] = await this.post(endPoints.wc.productAddons.createProductAddon, { data: payload, headers: auth });
+        const productAddonId = String(responseBody?.id);
+        const addonName = responseBody.name;
+        const addonFieldTitle = responseBody.fields[0].name;
+        return [responseBody, productAddonId, addonName, addonFieldTitle];
+    }
+
+    // delete product addon
+    async deleteProductAddon(productAddonId: string, auth?: auth): Promise<responseBody> {
+        const [, responseBody] = await this.delete(endPoints.wc.productAddons.deleteProductAddon(productAddonId), { headers: auth });
+        return responseBody;
+    }
+
+    // delete all product addons
+    async deleteAllProductAddons(auth?: auth): Promise<responseBody> {
+        const allProductAddons = await this.getAllProductAddons(auth);
+        if (!allProductAddons?.length) {
+            console.log('No product addon exists');
+            return;
+        }
+        const allProductAddonIds = allProductAddons.map((o: { id: unknown }) => o.id);
+        for (const productAddonId of allProductAddonIds) {
+            await this.deleteProductAddon(productAddonId, auth);
+        }
     }
 }
