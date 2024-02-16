@@ -93,12 +93,12 @@ jobs:
                   cd tests/pw 
                   npm ci
 
-            # Create php debuglog filev f
-            - name: Create php debuglog file
+            # Create wp debuglog file
+            - name: Create wp debuglog file
               if: success()
               run: |
                   cd tests/pw 
-                  mkdir -p debuglog && touch debuglog/debug.log
+                  mkdir -p wp-data && touch wp-data/debug.log
 
             # Start wordpress environment
             - name: Start WordPress Env
@@ -227,8 +227,7 @@ jobs:
               if: success()
               run: |
                   cd tests/pw
-                  mkdir -p database
-                  npm run wp-env run tests-cli wp db export --add-drop-table database/db-backup.sql
+                  npm run wp-env run tests-cli wp db export wp-data/db.sql
 
             # Upload artifacts
             - name: Archive test artifacts (screenshots, HTML snapshots, Reports)
@@ -237,8 +236,7 @@ jobs:
               with:
                   name: test-artifact
                   path: |
-                      tests/pw/database
-                      tests/pw/debuglog
+                      tests/pw/wp-data
                       tests/pw/playwright
                       tests/pw/playwright-report
                   if-no-files-found: ignore
