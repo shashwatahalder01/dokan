@@ -135,12 +135,12 @@ jobs:
                   cd tests/pw
                   mv .wp-env.override .wp-env.override.json
 
-            # Create php debuglog file
-            - name: Create php debuglog file
+            # Create wp debuglog file
+            - name: Create wp debuglog file
               if: success()
               run: |
                   cd tests/pw 
-                  mkdir -p debuglog && touch debuglog/debug.log
+                  mkdir -p wp-data && touch wp-data/debug.log
 
             # Start wordpress environment
             - name: Start WordPress Env
@@ -171,7 +171,6 @@ jobs:
               run: |
                   cd tests/pw
                   npm run wp-env run tests-cli wp rewrite structure /%postname%/
-              # curl http://localhost:9999/wp-json/wp/v2
 
             # Activate theme
             - name: Activate theme:Storefront
@@ -281,6 +280,13 @@ jobs:
             #   run: |
             #     echo "url is ${{ steps.test-report.outputs.runHtmlUrl }}"
 
+            # Backup Database
+            - name: Backup Database
+              if: success()
+              run: |
+                  cd tests/pw
+                  npm run wp-env run tests-cli wp db export wp-data/db.sql
+
             # Upload artifacts
             - name: Archive test artifacts (screenshots, HTML snapshots, Reports)
               uses: actions/upload-artifact@v3
@@ -288,7 +294,7 @@ jobs:
               with:
                   name: test-artifact
                   path: |
-                      tests/pw/debuglog
+                      tests/pw/wp-data
                       tests/pw/playwright
                       tests/pw/playwright-report
                   if-no-files-found: ignore
