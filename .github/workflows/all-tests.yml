@@ -86,7 +86,16 @@ jobs:
                   repository: getdokan/dokan-pro
                   token: ${{ secrets.ACCESS_TOKEN }}
                   path: 'plugins/dokan-pro'
-                  ref: 'develop'
+                  ref: 'test_utils'
+
+            - name: Unzip woocommerce plugins
+              if: success()
+              run: |
+                  cd plugins/dokan-pro/tests/plugins
+                  unzip woocommerce-bookings.zip
+                  unzip woocommerce-product-addons.zip
+                  unzip woocommerce-simple-auctions.zip
+                  unzip woocommerce-subscriptions.zip
 
             - name: Composer install and build (Dokan-lite)
               if: success()

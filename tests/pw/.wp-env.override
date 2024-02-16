@@ -5,11 +5,10 @@
                 "https://downloads.wordpress.org/plugin/woocommerce.latest-stable.zip",
                 "../../",
                 "../../plugins/dokan-pro",
-                "https://github.com/shashwatahalder01/TestUtils/raw/main/ba.zip",
-                "https://github.com/shashwatahalder01/TestUtils/raw/main/wa.zip",
-                "https://github.com/shashwatahalder01/TestUtils/raw/main/wb.zip",
-                "https://github.com/shashwatahalder01/TestUtils/raw/main/wpa.zip",
-                "https://github.com/shashwatahalder01/TestUtils/raw/main/ws.zip"
+                "../../plugins/dokan-pro/tests/plugins/woocommerce-bookings",
+                "../../plugins/dokan-pro/tests/plugins/woocommerce-product-addons",
+                "../../plugins/dokan-pro/tests/plugins/woocommerce-simple-auctions",
+                "../../plugins/dokan-pro/tests/plugins/woocommerce-subscriptions",
             ]
         }
     }
