@@ -1,37 +1,3 @@
-//****************************       wp-env       ****************************
-
-// todo: wp-env logs
-// todo: wp-env install-path to get debug log file
-	// latest/wp-env/wp-content/debug.log
-
-// todo: user .wp-env.override.json  for local development
-// todo: use lifecycle scripts for running nodejs script after wp-env command 
-Lifecycle Scripts
-Using the lifecycleScripts option in .wp-env.json will allow you to set arbitrary commands to be executed at certain points in the lifecycle. This configuration
-can also be overridden using WP_ENV_LIFECYCLE_SCRIPT_{LIFECYCLE_EVENT} environment variables, with the remainder being the all-caps snake_case name of the option, for
-example, WP_ENV_LIFECYCLE_SCRIPT_AFTER_START. Keep in mind that these will be executed on both fresh and existing environments, so, ensure any commands you
-build won’t break on subsequent executions.
-
-afterStart: Runs after wp-env start has finished setting up the environment.
-afterClean: Runs after wp-env clean has finished cleaning the environment.
-afterDestroy: Runs after wp-env destroy has destroyed the environment.
-
-
-
-
-
-
-//********************************** NEW TODO **********************************
-
-
-// todo:  ************ DON"T USE goIfNotThere where we need to reflect any changes done via api call or db table modification ************
- also after performing some test to load changes we need to skip goIfNotThere, also look for that
- test order can be the culprit too
-
-// todo:   HANDLE ERROR: throw new Error('Badge is already published');
-// either throw error or just return or convert to playwright error
-
-// todo:   add modal or sub option on explotory tesing tests all
 
 
 // todo:   export log test keep this, for wait for witch api is listed below
@@ -40,22 +6,8 @@ afterDestroy: Runs after wp-env destroy has destroyed the environment.
 		// 	this.page.waitForResponse((resp) => resp.url().includes(data.subUrls.backend.dokan.downloadOrderLogs) && resp.status() === 200),
 		// 	this.page.locator(selector.admin.dokan.reports.allLogs.exportLogs).click()
 		// ]); 
-// todo:   add wait for multiple different response on base-page
 
 
-// test.beforeAll(async ({ request }) => {
-// 	apiUtils = new ApiUtils(request);
-	// delete previous badges
-// todo: 	await apiUtils.deleteAllSellerBadges(); // todo:   apply this type of trick where possible
-// todo:  clear data in beforeAll where necessary
-
-
-// todo: decide
-if (isPublished){
-	console.log('Badge is already published');
-	test.skip();
-	// throw new Error('Badge is already published'); // todo: skip or fail test
-}
 
 
 //********************************** tests to write **********************************
@@ -66,9 +18,7 @@ if (isPublished){
 // todo: all-logs : filter by calendar
 // todo: vendor can send phone verification request
 // todo: admin can approve phone verification request
-// todo: need update to wholesale suite, merge both describe, update become customer tests
-
-
+// todo: need update to whole suite, merge both describe, update become customer tests
 wholesale setting options tests
 	// todo:   customer need or don't need approval : re-modify above two tests
 	// todo:   only customer can see wholesale price
@@ -76,7 +26,6 @@ wholesale setting options tests
 	// todo:   customer can purchase product at wholesale price
 	// todo:   vendor can see Wholesale Price on Shop Archive
 	// todo:   vendor can create wholesale product  via api
-
 
 product advertisement
     // todo:   add search product advertisement by order
@@ -341,21 +290,8 @@ async multipleElementVisible(selectors: any){
 		}
 	}
 
-	// async clearInputField2(selector): Promise<void>  { // todo:   fix this method
-	// 	let element = await this.getElement(selector)
-	// 	await this.page.evaluate(element => element.value = '', element)
-	// }
 
-		// get element property value: background color
-		async getElementColor(selector: string): Promise<string> {
-			// todo:  All promise<string> should be Promise<string | null> , after refactor check for any conflict
-			const element = this.page.locator(selector);
-			const value = await element.evaluate((element) =>
-				window.getComputedStyle(element).getPropertyValue('color'),
-			);
-			// console.log(value)
-			return value;
-		}
+
 
 	// todo:  urgent : update wait for multiple different response
 	// todo:  urgent : update wait for multiple same response
@@ -406,41 +342,11 @@ async multipleElementVisible(selectors: any){
 
 // todo:   follow woocommerce project structure like global setup, teardown, ....
 
-// todo:   Grab stateDir, baseURL from config
-const { stateDir, baseURL, userAgent } = config.projects[ 0 ].use;
-
-console.log( `State Dir: ${ stateDir }` );
-console.log( `Base URL: ${ baseURL }` );
-
-// todo:   file upload : plugin
-// const [ fileChooser ] = await Promise.all( [
-//     page.waitForEvent( 'filechooser' ),
-//     page.click( '#pluginzip' ),
-// ] );
-// await fileChooser.setFiles( woocommerceZipPath );
-
-
 // todo:   can implement test.step
-// test( `can update WooCommerce to "${ UPDATE_WC }"`, async ( {
-//     page,
-//     baseURL,
-// } ) => {
-
-// await test.step(
-//     'Choose the option "Replace current with uploaded"',
-//     async () => { 
-
-
-//     });
-
-// });
-
-
 
 // todo:   what is expect.poll
 
-await expect
-					.poll(
+await expect.poll(
 						async () => {
 							await page.goto( 'wp-admin/plugins.php', {
 								waitUntil: 'networkidle',
@@ -457,7 +363,7 @@ await expect
 
 // todo:   try error.response.data
 
-response = await axios( options ).catch( ( error ) => {
+let response = await axios( options ).catch( ( error ) => {
     if ( error.response ) {
         console.error( error.response.data );
     }
@@ -577,99 +483,6 @@ This returns undefined if the expression inside the brackets is not a valid key.
 		// 		['list', { printSteps: true }],
 		// 		['allure-playwright',	{ detail: true, outputFolder: 'playwright-report/api/allure/allure-report', suiteTitle: false }]
 		// 	],
-
-
-		// const apiSuiteConfig = {
-// 	name: 'api_suite',
-// 	testDir: './tests/api',
-// 	testMatch: /.*\.spec\.ts/,
-// 	outputDir: 'playwright/api/test-artifacts/', 	/* Folder for test artifacts such as screenshots, videos, traces, etc. */
-// 	// globalSetup: './global-setup', /* Path to the global setup file. This file will be required and run before all the tests. */
-// 	// globalTeardown: './global-teardown', /* Path to the global teardown file. This file will be required and run after all the tests. */
-// 	// globalTimeout: process.env.CI ? 20 * (60 * 1000) : 20 * (60 * 1000), /* Maximum time in milliseconds the whole test suite can run */
-// 	// maxFailures: process.env.CI ? 30 : 30, /* The maximum number of test failures for the whole test suite run. After reaching this number, testing will stop and exit with an error. */
-// 	timeout: 40 * 1000, /* Maximum time one test can run for. */
-// 	expect: { timeout: 5 * 1000, /* Maximum time expect() should wait for the condition to be met.  For example in `await expect(locator).toHaveText();`*/
-// 	},  /* Configuration for the expect assertion library */
-// 	// preserveOutput: 'always',  /* Whether to preserve test output in the testConfig.outputDir. Defaults to 'always'. */
-// 	// fullyParallel: true, 	/* Run tests in files in parallel */
-// 	// forbidOnly: !!process.env.CI, 	/* Fail the build on CI if you accidentally left testonly in the source code. */
-// 	repeatEach: 1, /* The number of times to repeat each test, useful for debugging flaky tests. */
-// 	// retries: process.env.CI ? 1 : 0,  	/* The maximum number of retry attempts given to failed tests.  */
-// 	// workers: process.env.CI ? 1 : 1, 	/* Opt out of parallel tests on CI. */
-// 	// reportSlowTests: { max: 10, threshold: 20 },  /* Whether to report slow test files. Pass null to disable this feature. */
-// 	// reporter: process.env.CI
-// 	// 	? [
-// 	// 		['html', { open: 'never', outputFolder: 'playwright-report/api/html/html-report-api' }],
-// 	// 		['junit', { outputFile: 'playwright-report/api/junit-report/api-results.xml' }],
-// 	// 		['list', { printSteps: true }]]
-// 	// 	: [
-// 	// 		['html', { open: 'never', outputFolder: 'playwright-report/api/html/html-report-api' }],
-// 	// 		['junit', { outputFile: 'playwright-report/api/junit-report/api-results.xml' }],
-// 	// 		['list', { printSteps: true }],
-// 	// 		['allure-playwright',	{ detail: true, outputFolder: 'playwright-report/api/allure/allure-report', suiteTitle: false }]
-// 	// 	],
-// 	use : {
-// 		baseURL: process.env.BASE_URL ? process.env.BASE_URL : 'http://localhost:9999',  /* Base URL */
-// 		ignoreHTTPSErrors: true, /* Whether to ignore HTTPS errors during navigation. */
-// 		/* api request headers */
-// 		extraHTTPHeaders: {
-// 			Accept: '*/*',
-// 			Authorization: 'Basic ' + Buffer.from( process.env.ADMIN + ':' + process.env.ADMIN_PASSWORD ).toString( 'base64' ),
-// 		}
-// 	},
-
-// };
-
-// const e2eSuiteConfig = {
-// 	name: 'e2e_suite',
-// 	testDir: './tests/e2e',
-// 	testMatch: /.*\.spec\.ts/,
-// 	outputDir: 'playwright/e2e/test-artifacts/', 	/* Folder for test artifacts such as screenshots, videos, traces, etc. */
-// 	// globalSetup: './global-setup', /* Path to the global setup file. This file will be required and run before all the tests. */
-// 	// globalTeardown: './global-teardown', /* Path to the global teardown file. This file will be required and run after all the tests. */
-// 	globalTimeout: process.env.CI ? 20 * (60 * 1000) : 20 * (60 * 1000), /* Maximum time in milliseconds the whole test suite can run */
-// 	maxFailures: process.env.CI ? 20 : 20, /* The maximum number of test failures for the whole test suite run. After reaching this number, testing will stop and exit with an error. */
-// 	timeout: 45 * 1000, /* Maximum time one test can run for. */
-// 	expect: { timeout: 10 * 1000, /* Maximum time expect() should wait for the condition to be met.  For example in `await expect(locator).toHaveText();`*/
-// 	},  /* Configuration for the expect assertion library */
-// 	preserveOutput: 'always',  /* Whether to preserve test output in the testConfig.outputDir. Defaults to 'always'. */
-// 	fullyParallel: true, 	/* Run tests in files in parallel */
-// 	// forbidOnly: !!process.env.CI, 	/* Fail the build on CI if you accidentally left testonly in the source code. */
-// 	repeatEach: 1, /* The number of times to repeat each test, useful for debugging flaky tests. */
-// 	retries: process.env.CI ? 1 : 0,  	/* The maximum number of retry attempts given to failed tests.  */
-// 	workers: process.env.CI ? 1 : 1, 	/* Opt out of parallel tests on CI. */
-// 	reportSlowTests: { max: 10, threshold: 20 },  /* Whether to report slow test files. Pass null to disable this feature. */
-// 	reporter: process.env.CI
-// 		? [
-// 			['html', { open: 'never', outputFolder: 'playwright-report/e2e/html/html-report-e2e' }],
-// 			['junit', { outputFile: 'playwright-report/e2e/junit-report/e2e-results.xml' }],
-// 			['list', { printSteps: true }]]
-// 		: [
-// 			['html', { open: 'never', outputFolder: 'playwright-report/e2e/html/html-report-e2e' }],
-// 			['junit', { outputFile: 'playwright-report/e2e/junit-report/e2e-results.xml' }],
-// 			['list', { printSteps: true }],
-// 			['allure-playwright',	{ detail: true, outputFolder: 'playwright-report/e2e/allure/allure-report', suiteTitle: false }]
-// 		],
-// 	use: {
-// 		...devices['Desktop Chrome'],
-// 		acceptDownloads: true, /* Whether to automatically download all the attachments. */
-// 		actionTimeout: 0, /* Maximum time each action such as `click()` can take. Defaults to 0 (no limit). */
-// 		baseURL: process.env.BASE_URL ? process.env.BASE_URL : 'http://localhost:9999', /* Base URL */
-// 		// browserName: 'chromium', /* Name of the browser that runs tests. */
-// 		bypassCSP: true, /* Toggles bypassing page's Content-Security-Policy. */
-// 		// channel: 'chrome', /* Browser distribution channel. */
-// 		// colorScheme: 'dark', /* Emulates 'prefers-colors-scheme' media feature, supported values are 'light', 'dark', 'no-preference' */
-// 		headless: process.env.CI ? !! process.env.CI : false, /* Whether to run tests on headless or non-headless mode */
-// 		ignoreHTTPSErrors: true, /* Whether to ignore HTTPS errors during navigation. */
-// 		// trace: 'on-first-retry', /* Record trace only when retrying a test for the first time. */
-// 		// screenshot: 'only-on-failure', /* Capture screenshot after each test failure. */
-// 		// video: 'on-first-retry', /* Record video only when retrying a test for the first time. */
-// 		// viewport: { width: 1280, height: 720 }, /* Size of viewport */
-// 		launchOptions: { slowMo: process.env.SLOWMO ? Number(process.env.SLOWMO) * 1000 : 0, /* whether to slow down test execution by provided seconds */
-// 		},
-// 	},
-// };s
 
 
 // todo: only for reference
