@@ -1094,7 +1094,7 @@ export const dbData = {
 
         // dokan pro license
         dokanProLicense: {
-            key: '74c8654e-84a5-49b2-a3f5-81afba8e13fa',
+            key: process.env.LICENSE_KEY,
             status: 'activate',
             remaining: 42,
             activation_limit: 50,
