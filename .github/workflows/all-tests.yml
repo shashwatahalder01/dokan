@@ -283,7 +283,7 @@ jobs:
 
             # Backup Database
             - name: Backup Database
-              if: steps.db-port.outcome == 'success'
+              if: always()
               run: |
                   cd tests/pw
                   npm run wp-env run tests-cli wp db export wp-data/db.sql
