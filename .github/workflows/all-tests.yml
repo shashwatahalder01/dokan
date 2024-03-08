@@ -106,7 +106,7 @@ jobs:
             - name: Npm install and build (Dokan-lite)
               if: success()
               run: |
-                  npm ci 
+                  npm ci || npm i
                   npm run build
 
             - name: Composer install and build (Dokan-pro)
@@ -119,7 +119,7 @@ jobs:
               if: success()
               run: |
                   cd plugins/dokan-pro
-                  npm ci
+                  npm ci || npm i
                   npm run build
 
             # Install test dependencies
@@ -127,7 +127,7 @@ jobs:
               if: success()
               run: |
                   cd tests/pw 
-                  npm ci
+                  npm ci || npm i
 
             # Override wp-env for pro required plugins
             - name: Allow override wp-env.json via .wp-env.override.json
@@ -283,7 +283,7 @@ jobs:
 
             # Backup Database
             - name: Backup Database
-              if: steps.wp-env.outcome == 'success'
+              if: steps.db-port.outcome == 'success'
               run: |
                   cd tests/pw
                   npm run wp-env run tests-cli wp db export wp-data/db.sql

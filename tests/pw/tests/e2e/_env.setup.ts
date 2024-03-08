@@ -49,7 +49,7 @@ setup.describe('setup site & woocommerce & dokan settings', () => {
 
     setup('activate all dokan modules @pro', async () => {
         setup.skip(!DOKAN_PRO, 'skip on lite');
-        await dbUtils.setDokanSettings(dbData.dokan.optionName.dokanProActiveModules, dbData.dokan.dokanProActiveModules);
+        await dbUtils.setDokanSettings(dbData.dokan.optionName.dokanProActiveModules, dbData.dokan.modules);
     });
 
     setup('check active dokan modules @pro', async () => {

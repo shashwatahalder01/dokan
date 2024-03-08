@@ -2026,7 +2026,7 @@ export const data = {
 
     // dokan license
     dokanLicense: {
-        correctKey: String(process.env.LICENSE_KEY),
+        correctKey: process.env.LICENSE_KEY,
         incorrectKey: 'ABC-123-DEF-456-GHI-789',
     },
 
