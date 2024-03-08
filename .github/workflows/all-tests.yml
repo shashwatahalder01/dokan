@@ -222,7 +222,7 @@ jobs:
               timeout-minutes: 40
               run: |
                   cd tests/pw 
-                  npm run test:e2e:pro_
+                  npm run test:e2e:pro
 
             # Run API tests
             - name: 🧪 Running the api tests
