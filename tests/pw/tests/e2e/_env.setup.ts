@@ -202,7 +202,7 @@ setup.describe('setup dokan settings', () => {
         await dbUtils.setDokanSettings(dbData.dokan.optionName.page, pageSettings);
     });
 
-    setup.skip('admin set dokan appearance settings @lite', async () => {
+    setup('admin set dokan appearance settings @lite', async () => {
         await dbUtils.setDokanSettings(dbData.dokan.optionName.appearance, dbData.dokan.appearanceSettings);
     });
 
@@ -222,7 +222,7 @@ setup.describe('setup dokan settings', () => {
         await dbUtils.setDokanSettings(dbData.dokan.optionName.storeSupport, dbData.dokan.storeSupportSettings);
     });
 
-    setup.skip('admin set dokan shipping status settings @pro', async () => {
+    setup('admin set dokan shipping status settings @pro', async () => {
         setup.skip(!DOKAN_PRO, 'skip on lite');
         await dbUtils.setDokanSettings(dbData.dokan.optionName.shippingStatus, dbData.dokan.shippingStatusSettings);
     });
