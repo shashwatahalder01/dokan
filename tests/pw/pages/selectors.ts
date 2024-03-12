@@ -6740,9 +6740,7 @@ export const selector = {
 
                 // non logged User
                 nonLoggedUser: {
-                    // userName: '#login-name',
-                    // userPassword: '#login-password',
-                    // login: '#support-submit-btn',
+                    loginPopup: 'div#dokan-modal-login-form-popup',
                     userName: '#dokan-login-form-username',
                     userPassword: '#dokan-login-form-password',
                     login: '#dokan-login-form-submit-btn',
