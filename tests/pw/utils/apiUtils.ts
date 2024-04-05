@@ -1372,8 +1372,6 @@ export class ApiUtils {
     // get all plugins
     async getAllPlugins(params = {}, auth?: auth): Promise<responseBody> {
         const [, responseBody] = await this.get(endPoints.wp.getAllPlugins, { params: { ...params, per_page: 100 }, headers: auth });
-        console.log(responseBody);
-        
         return responseBody;
     }
 
