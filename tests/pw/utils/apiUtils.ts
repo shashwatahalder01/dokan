@@ -1372,6 +1372,8 @@ export class ApiUtils {
     // get all plugins
     async getAllPlugins(params = {}, auth?: auth): Promise<responseBody> {
         const [, responseBody] = await this.get(endPoints.wp.getAllPlugins, { params: { ...params, per_page: 100 }, headers: auth });
+        console.log(responseBody);
+        
         return responseBody;
     }
 
@@ -1403,6 +1405,8 @@ export class ApiUtils {
     async checkPluginsExistence(plugins: string[], auth?: auth): Promise<boolean> {
         const existingPlugins = (await this.getAllPlugins({}, auth)).map((a: { plugin: string }) => a.plugin.split('/')[1]);
         console.log(existingPlugins);
+        console.log(plugins);
+        console.log(helpers.isSubArray(existingPlugins, plugins));
         return helpers.isSubArray(existingPlugins, plugins);
     }
 
