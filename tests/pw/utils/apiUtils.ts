@@ -1404,9 +1404,6 @@ export class ApiUtils {
     // get plugin active or not
     async checkPluginsExistence(plugins: string[], auth?: auth): Promise<boolean> {
         const existingPlugins = (await this.getAllPlugins({}, auth)).map((a: { plugin: string }) => a.plugin.split('/')[1]);
-        console.log(existingPlugins);
-        console.log(plugins);
-        console.log(helpers.isSubArray(existingPlugins, plugins));
         return helpers.isSubArray(existingPlugins, plugins);
     }
 
