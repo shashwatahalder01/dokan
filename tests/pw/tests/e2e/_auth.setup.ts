@@ -74,6 +74,7 @@ setup.describe('authenticate users & set permalink', () => {
 
     setup('dokan pro enabled or not @lite', async () => {
         let res = await apiUtils.checkPluginsExistence(data.plugin.dokanPro, payloads.adminAuth);
+        helpers.createEnvVar('plugin_status', String(res));
         if (res) {
             res = await apiUtils.pluginsActiveOrNot(data.plugin.dokanPro, payloads.adminAuth);
         }

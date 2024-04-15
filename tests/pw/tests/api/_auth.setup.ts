@@ -50,11 +50,10 @@ setup.describe('setup test environment', () => {
 
     setup('dokan pro enabled or not @lite', async () => {
         let res = await apiUtils.checkPluginsExistence(data.plugin.dokanPro, payloads.adminAuth);
-        helpers.createEnvVar('plugin_status', String(res));
         if (res) {
             res = await apiUtils.pluginsActiveOrNot(data.plugin.dokanPro, payloads.adminAuth);
         }
-        // DOKAN_PRO ? expect(res).toBeTruthy() : expect(res).toBeFalsy();
+        DOKAN_PRO ? expect(res).toBeTruthy() : expect(res).toBeFalsy();
     });
 
     setup('get test environment info @lite', async () => {
