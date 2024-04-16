@@ -117,6 +117,7 @@ jobs:
               if: success()
               run: |
                   cd plugins/dokan-pro
+                  ls
                   npm ci || npm i
                   npm run build
             
@@ -124,6 +125,7 @@ jobs:
               if: success()
               run: |
                   cd plugins/dokan-pro
+                  ls
                   sed -i '' 's/Requires Plugins: woocommerce, dokan-lite/Requires Plugins: woocommerce, dokan/' dokan-pro.php  
 
             # Install test dependencies
