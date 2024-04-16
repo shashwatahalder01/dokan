@@ -117,16 +117,23 @@ jobs:
               if: success()
               run: |
                   cd plugins/dokan-pro
-                  ls
+                  ls -l
                   npm ci || npm i
                   npm run build
+
+            - name: Check file existence
+              run: |
+                cd plugins/dokan-pro
+                ls -l dokan-pro.php || echo "File not found"
+
             
             - name: Update Required Plugin name from dokan-lite to dokan (Dokan-pro)
               if: success()
               run: |
                   cd plugins/dokan-pro
-                  ls
-                  sed -i '' 's/Requires Plugins: woocommerce, dokan-lite/Requires Plugins: woocommerce, dokan/' dokan-pro.php  
+                  ls -l
+                  sed -i ' ' 's/Requires Plugins: woocommerce, dokan-lite/Requires Plugins: woocommerce, dokan/' dokan-pro.php
+  
 
             # Install test dependencies
             - name: Install test dependencies
