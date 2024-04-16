@@ -119,6 +119,12 @@ jobs:
                   cd plugins/dokan-pro
                   npm ci || npm i
                   npm run build
+            
+            - name: Update Required Plugin name from dokan-lite to dokan (Dokan-pro)
+              if: success()
+              run: |
+                  cd plugins/dokan-pro
+                  sed -i '' 's/Requires Plugins: woocommerce, dokan-lite/Requires Plugins: woocommerce, dokan/' dokan-pro.php  
 
             # Install test dependencies
             - name: Install test dependencies
