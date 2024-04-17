@@ -1,4 +1,4 @@
-name: Del_workflow_runs
+name: Workflow_runs_cleanup
 on:
     # schedule:
     # - cron: '0 0 1 * *'
