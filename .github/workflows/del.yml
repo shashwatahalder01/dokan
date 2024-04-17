@@ -20,5 +20,5 @@ jobs:
                   token: ${{ github.token }}
                   repository: ${{ github.repository }}
                   retain_days: 30
-                  keep_minimum_runs: 50
-                  delete_workflow_pattern: API Tests
+                  keep_minimum_runs: 40
+                  delete_workflow_pattern: phpcs.yml
