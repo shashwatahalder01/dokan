@@ -2,8 +2,8 @@ name: E2E_API Tests All
 
 on:
     # workflow will run daily at 8:00 AM BDT (2:00 AM UTC)
-    schedule:
-        - cron: 0 2 * * *
+    # schedule:
+    #     - cron: 0 2 * * *
     # workflow will trigger on pull request
     # pull_request:
     #     branches: [develop]
@@ -287,7 +287,7 @@ jobs:
 
             # Backup Database
             - name: Backup Database
-              if: steps.db-port.outcome == 'success'
+              if: always() && steps.db-port.outcome == 'success'
               run: |
                   cd tests/pw
                   npm run wp-env run tests-cli wp db export wp-data/db.sql
