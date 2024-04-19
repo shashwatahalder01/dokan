@@ -1402,14 +1402,12 @@ export class ApiUtils {
     // get plugin active or not
     async checkPluginsExistence(plugins: string[], auth?: auth): Promise<boolean> {
         const existingPlugins = (await this.getAllPlugins({}, auth)).map((a: { plugin: string }) => a.plugin.split('/')[1]);
-        console.log('existing_Plugins', existingPlugins);
         return helpers.isSubArray(existingPlugins, plugins);
     }
 
     // get plugin active or not
     async pluginsActiveOrNot(plugins: string[], auth?: auth): Promise<boolean> {
         const activePlugins = (await this.getAllPlugins({ status: 'active' }, auth)).map((a: { plugin: string }) => a.plugin.split('/')[1]);
-        console.log('active_plugins', activePlugins);
         return helpers.isSubArray(activePlugins, plugins);
     }
 
