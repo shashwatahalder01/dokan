@@ -76,6 +76,35 @@ export class BookingPage extends VendorPage {
         await this.multipleElementVisible(bookingProductsVendor.table);
     }
 
+    // vendor booking render properly
+    async vendorBookingtest() {
+        // soln1:
+        // const errorLogs: string[] = [];
+        // this.page.on('console', (message: any) => {
+        //     if (message.type() === 'error' || message.type() === 'warning') {
+        //         errorLogs.push(message.text());
+
+        //         console.log('-------------\n' + message.text() );
+        //         console.log('message type: ',message.type() + '\n-------------------\n');
+        //     }
+        // });
+
+        //soln:2
+        // this.page.on('pageerror', exception => {
+        //     console.log(`Uncaught exception: "${exception}"`);
+        // });
+
+        await this.goIfNotThere(data.subUrls.frontend.vDashboard.booking);
+        await this.clickAndWaitForLoadState(bookingProductsVendor.menus.calendar);
+        // await this.wait(20);
+
+        // // soln1:
+        // await this.page.evaluate(() => {
+        //     console.error('hello from the browser');
+        // });
+        // console.log(errorLogs);
+    }
+
     // vendor manage booking render properly
     async vendorManageBookingRenderProperly() {
         await this.goIfNotThere(data.subUrls.frontend.vDashboard.manageBooking);
