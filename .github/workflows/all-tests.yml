@@ -111,7 +111,7 @@ jobs:
               if: success()
               run: |
                   cd plugins/dokan-pro
-                  composer install --no-dev -o || composer update --no-dev -o
+                  composer update --no-dev -o
 
             - name: Npm install and build (Dokan-pro)
               if: success()
