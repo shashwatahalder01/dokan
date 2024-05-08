@@ -15,6 +15,7 @@ const getTestResult = (suiteName, filePath, coverage) => {
 
 const getCoverageReport = filePath => {
     const coverageReport = readFile(filePath);
+    console.log('Coverage Report:', coverageReport);
     if (!coverageReport) {
         return;
     }
