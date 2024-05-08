@@ -17,6 +17,7 @@ const getCoverageReport = filePath => {
     const coverageReport = readFile(filePath);
     console.log('Coverage Report:', coverageReport);
     if (!coverageReport) {
+        console.log(`Coverage Report File ${filePath.split('/').pop()} does not exists!!`);
         return;
     }
     return String(coverageReport.coverage);
