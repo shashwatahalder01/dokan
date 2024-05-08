@@ -35,6 +35,9 @@ const addSummaryHeadingAndTable = core => {
     const apiTestResult = getTestResult('API Tests', API_TEST_RESULT, getCoverageReport(API_COVERAGE));
     const e2eTestResult = getTestResult('E2E Tests', E2E_TEST_RESULT, getCoverageReport(E2E_COVERAGE));
     const commit_sha = SHA ? `Commit SHA: ${SHA}` : '';
+    console.log('API Test Result:', apiTestResult);
+    console.log('E2E Test Result:', e2eTestResult);
+    console.log(commit_sha);
     if (apiTestResult || e2eTestResult) {
         core.summary.addHeading('Tests Summary').addRaw(commit_sha).addBreak().addBreak().addTable([tableHeader, apiTestResult, e2eTestResult]);
     }
