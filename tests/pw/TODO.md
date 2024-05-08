@@ -4,13 +4,12 @@
 - [ ] Project: add more comments for code readability  
 - [ ] Project: add JSDOC  
 - [ ] Project: GRAB CONSOLE ERROR, And PHP ERROR  
-- [ ] Zip_suite: add zip testing tests  
-- [ ] Selectors: shorten selector is all pages e.g. adminSettings = selector.admin.dokan.settings;  
+- [ ] Project: fix flaky tests
+- [ ] Zip_suite: add zip testing tests 
 - [ ] Reporter: add os and browsers in env info  
 - [ ] Reporter: convert testSummary from commonjs module to es-module  
 - [ ] Readme: add readme contribute to e2e_api project  
 - [ ] Readme: rephrase readme  
-- [ ] Readme: fix bookmark issue  
 - [ ] Readme: update readme following readme guideline  
 - [ ] E2E_Suite: List all core tests and setup tests : plugins activated, wp settings, woocommerce settings, dokan modules activated , dokan settings for both e2e and api  
 - [ ] E2E_Suite: Slack integration  
@@ -59,7 +58,6 @@
 - [ ] E2E_Suite: *** need custom check method causing multiple tests flaky  
 - [ ] E2E_Suite: add all email tests  
 - [ ] E2E_Suite: short browser context load in spec file  
-- [ ] E2E_Suite: use global variable instead of env variable  
 - [ ] E2E_Suite: todo: commission tests  
 - [ ] E2E_Suite: todo: add multi store category tests  
 - [ ] E2E_Suite: todo: move to other files: product categories  
@@ -70,8 +68,8 @@
 - [ ] E2E_Suite: todo: add separate files for terms and conditions and add new tests  
 - [ ] E2E_Suite: todo: add multivendor payloads, and update create order for multivendor  
 - [ ] E2E_Suite: todo: add round option for helper methods  
+- [ ] E2E_Suite: Add multiple customer to handle parallel issue  
 - [ ] API_Suite: make api suite independent, import: => like dokan pro exists or not, test summary, env setup from e2e suite  
-- [ ] API_Suite: add reverse withdraw and product advertisement on setup tests  
 - [ ] API_Suite: convert admin as vendor to vendor for whole suite  
 - [ ] API_Suite: add wait for multiple different response method  
 - [ ] API_Suite: add wait for multiple same response method  
