@@ -82,7 +82,7 @@ jobs:
 
             - name: Clone dokan-pro
               if: success()
-              uses: actions/checkout@v3
+              uses: actions/checkout@v4
               with:
                   repository: getdokan/dokan-pro
                   token: ${{ secrets.ACCESS_TOKEN }}
