@@ -75,7 +75,7 @@ jobs:
               if: success()
               uses: actions/setup-node@v4
               with:
-                  node-version: 16
+                  node-version: 20
                   cache: npm
 
             - name: Composer install and build (Dokan-lite)
@@ -108,9 +108,14 @@ jobs:
             - name: Start WordPress Env
               id: wp-env
               if: success()
-              run: |
-                  cd tests/pw
-                  npm run start:env
+              uses: nick-fields/retry@v3
+              with:
+                  timeout_minutes: 4
+                  max_attempts: 2
+                  retry_on: error
+                  command: |
+                      cd tests/pw
+                      npm run start:env
 
             # Grab test db port
             - name: Get Test DB PORT
@@ -185,12 +190,6 @@ jobs:
                   cd tests/pw 
                   npm run test:e2e:lite
                   npm run e2e_coverage
-            # Run e2e tests
-            - name: 🧪 check coverage file
-              run: |
-                  cd tests/pw 
-                  ls playwright-report/e2e
-                  ls playwright-report/e2e/coverage-report
 
             # Run API tests
             - name: 🧪 Running the api tests
