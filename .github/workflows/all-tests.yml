@@ -314,21 +314,21 @@ jobs:
                   if-no-files-found: ignore
                   retention-days: 30
 
-            - name: Publish HTML report to GH Pages
-              if: always() # We want this to always run, even if test fail prior to this step running
-              uses: peaceiris/actions-gh-pages@v4
-              with:
-                github_token: ${{ secrets.GITHUB_TOKEN }}
-                publish_branch: gh-pages
-                publish_dir: tests/pw/playwright-report/e2e/html-report # This is where index.html will be output
-                # keep_files: true # Set this to true to make sure we don't wipe out the other content in GitHub Pages
-                user_name: "github-actions[bot]" # This will be the username that gets stamped in the repo commit
-                user_email: "github-actions[bot]@users.noreply.github.com" # This will be the user email that gets stamped in the repo commit
+            # - name: Publish HTML report to GH Pages
+            #   if: always() # We want this to always run, even if test fail prior to this step running
+            #   uses: peaceiris/actions-gh-pages@v4
+            #   with:
+            #     github_token: ${{ secrets.GITHUB_TOKEN }}
+            #     publish_branch: gh-pages
+            #     publish_dir: tests/pw/playwright-report/e2e/html-report # This is where index.html will be output
+            #     keep_files: true # Set this to true to make sure we don't wipe out the other content in GitHub Pages
+            #     user_name: "github-actions[bot]" # This will be the username that gets stamped in the repo commit
+            #     user_email: "github-actions[bot]@users.noreply.github.com" # This will be the user email that gets stamped in the repo commit
 
-            - name: Test results
-              if: always()
-              run: |
-                echo "https://$GITHUB_REPOSITORY_OWNER.github.io/${GITHUB_REPOSITORY#*/}"
+            # - name: Test results
+            #   if: always()
+            #   run: |
+            #     echo "https://$GITHUB_REPOSITORY_OWNER.github.io/${GITHUB_REPOSITORY#*/}"
 
 # publishTestResults:
 #   name: Publish Test Result

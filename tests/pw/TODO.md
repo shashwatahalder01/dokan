@@ -3,35 +3,21 @@
 
 - [ ] Project: add more comments for code readability  
 - [ ] Project: add JSDOC  
-- [ ] Project: GRAB CONSOLE ERROR, And PHP ERROR  
+- [ ] Project: GRAB CONSOLE ERROR 
 - [ ] Project: fix flaky tests
 - [ ] Zip_suite: add zip testing tests 
 - [ ] Reporter: add os and browsers in env info  
 - [ ] Reporter: convert testSummary from commonjs module to es-module  
 - [ ] Readme: add readme contribute to e2e_api project  
 - [ ] Readme: rephrase readme  
-- [ ] Readme: update readme following readme guideline  
-- [ ] E2E_Suite: List all core tests and setup tests : plugins activated, wp settings, woocommerce settings, dokan modules activated , dokan settings for both e2e and api  
+- [ ] Readme: update readme following readme guideline   
 - [ ] E2E_Suite: Slack integration  
-- [ ] E2E_Suite: Working-directory: ./path/to/tests  
 - [ ] E2E_Suite: Update auth if expired instead of every-time  
-- [ ] E2E_Suite: Report: separate two junit report showing on simple git-action summary  
-- [ ] E2E_Suite: Global setup & teardown can be converted to project setup: no need  
-- [ ] E2E_Suite: Project Configuration: separate everything for local & CI like: global setup, env, playwright config, Configure projects for multiple environments : ci, local,  
-- [ ] E2E_Suite: Fixture: add fixture: separate user role, implement fixture for lite pro issue handle  
-- [ ] E2E_Suite: Test basic auth can be used instead of cookies for authentication , no need to do this  
-- [ ] E2E_Suite: why two pages are opening : fix that  
-- [ ] E2E_Suite: Modal: Close modal if exists, causes issue with other tests where popup blocks next step*****  
-- [ ] E2E_Suite: add new tests or multiple entry in same test for all search parameter, i.e : by-customer, by-product, but-store,..  
-- [ ] E2E_Suite: insert all date format according to site format , currently hardcoded to default format -> helpers.dateFormatFYJ  
-- [ ] E2E_Suite: try to fix product advertisement product, reverse withdraw product, store map save via api, currently e2e is used  
-- [ ] E2E_Suite: Convert yml step to nodejs script for local development  
-- [ ] E2E_Suite: Update goIfNotThere method usages: previous action add some changes but doesn't get reflected due to goIfNotThere  
-- [ ] E2E_Suite: HANDLE ERROR: throw new Error('Badge is already published'); : either throw error or just return or convert to playwright error  
-- [ ] E2E_Suite: Add modal or sub option to all explotory tesing  
-- [ ] E2E_Suite: Add wait for multiple different response on base-page  
-- [ ] E2E_Suite: Clear data in beforeAll where necessary  
-- [ ] E2E_Suite: reverse-withdraw: filter by calendar, do via vue locator  
+- [ ] E2E_Suite: Report: separate two junit report showing on simple git-action summary   
+- [ ] E2E_Suite: Fixture: add fixture: separate user role, implement fixture for lite pro issue handle     
+- [ ] E2E_Suite: insert all date format according to site format , currently hardcoded to default format -> helpers.dateFormatFYJ 
+- [ ] E2E_Suite: Convert yml step to nodejs script for local development    
+- [ ] E2E_Suite: Add wait for multiple different response on base-page 
 - [ ] E2E_Suite: support-ticket: filter by calendar  
 - [ ] E2E_Suite: reports: filter by calendar on by day, by year, by vendor  
 - [ ] E2E_Suite: all-logs: filter by calendar  
@@ -54,8 +40,6 @@
 - [ ] E2E_Suite: verifications: admin can approve phone verification request  
 - [ ] E2E_Suite: follow-Store: need followers via api  
 - [ ] E2E_Suite: add multiple assertion to each test  
-- [ ] E2E_Suite: products: import product  
-- [ ] E2E_Suite: *** need custom check method causing multiple tests flaky  
 - [ ] E2E_Suite: add all email tests  
 - [ ] E2E_Suite: short browser context load in spec file  
 - [ ] E2E_Suite: todo: commission tests  
