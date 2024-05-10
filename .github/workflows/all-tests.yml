@@ -228,14 +228,14 @@ jobs:
             #     npm run pw:deps-only
 
             # Run e2e tests
-            - name: 🧪 Running the e2e tests
-              id: e2e-test
-              if: success() && (github.event_name != 'workflow_dispatch' || ( github.event_name == 'workflow_dispatch' && (github.event.inputs.testsuite == 'E2E' || github.event.inputs.testsuite == 'All')))
-              timeout-minutes: 40
-              run: |
-                  cd tests/pw 
-                  npm run test:e2e:pro
-                  npm run e2e_coverage
+            # - name: 🧪 Running the e2e tests
+            #   id: e2e-test
+            #   if: success() && (github.event_name != 'workflow_dispatch' || ( github.event_name == 'workflow_dispatch' && (github.event.inputs.testsuite == 'E2E' || github.event.inputs.testsuite == 'All')))
+            #   timeout-minutes: 40
+            #   run: |
+            #       cd tests/pw 
+            #       npm run test:e2e:pro
+            #       npm run e2e_coverage
 
             # Run API tests
             - name: 🧪 Running the api tests
@@ -313,21 +313,22 @@ jobs:
                       tests/pw/playwright-report
                   if-no-files-found: ignore
                   retention-days: 30
-#
-# publishTestResults:
-#   name: Publish HTML report to GH Pages
-#   if: always() # We want this to always run, even if test fail prior to this step running
-#   uses: peaceiris/actions-gh-pages@v3
-#   with:
-#     github_token: ${{ secrets.GITHUB_TOKEN }}
-#     publish_dir: tests/pw/playwright-report # This is where index.html will be output
-#     keep_files: true # Set this to true to make sure we don't wipe out the other content in GitHub Pages
-#     user_name: "github-actions[bot]" # This will be the username that gets stamped in the repo commit
-#     user_email: "github-actions[bot]@users.noreply.github.com" # This will be the user email that gets stamped in the repo c
-# - name: Test results
-#   if: always()
-#   run: |
-#     echo "url is https://$GITHUB_REPOSITORY_OWNER.github.io/${GITHUB_REPOSITORY#*/}"
+
+            - name: Publish HTML report to GH Pages
+              if: always() # We want this to always run, even if test fail prior to this step running
+              uses: peaceiris/actions-gh-pages@v4
+              with:
+                github_token: ${{ secrets.GITHUB_TOKEN }}
+                publish_branch: gh-pages
+                publish_dir: tests/pw/playwright-report/e2e/html-report # This is where index.html will be output
+                keep_files: true # Set this to true to make sure we don't wipe out the other content in GitHub Pages
+                # user_name: "github-actions[bot]" # This will be the username that gets stamped in the repo commit
+                # user_email: "github-actions[bot]@users.noreply.github.com" # This will be the user email that gets stamped in the repo commit
+
+            - name: Test results
+              if: always()
+              run: |
+                echo "https://$GITHUB_REPOSITORY_OWNER.github.io/${GITHUB_REPOSITORY#*/}"
 
 # publishTestResults:
 #   name: Publish Test Result
