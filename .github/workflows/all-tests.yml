@@ -227,7 +227,7 @@ jobs:
             #     cd tests/pw
             #     npm run pw:deps-only
 
-            Run e2e tests
+            # Run e2e tests
             - name: 🧪 Running the e2e tests
               id: e2e-test
               if: success() && (github.event_name != 'workflow_dispatch' || ( github.event_name == 'workflow_dispatch' && (github.event.inputs.testsuite == 'E2E' || github.event.inputs.testsuite == 'All')))
@@ -329,7 +329,6 @@ jobs:
             #   if: always()
             #   run: |
             #     echo "https://$GITHUB_REPOSITORY_OWNER.github.io/${GITHUB_REPOSITORY#*/}"
-
 # publishTestResults:
 #   name: Publish Test Result
 #   needs: tests
