@@ -227,15 +227,15 @@ jobs:
             #     cd tests/pw
             #     npm run pw:deps-only
 
-            # Run e2e tests
-            # - name: 🧪 Running the e2e tests
-            #   id: e2e-test
-            #   if: success() && (github.event_name != 'workflow_dispatch' || ( github.event_name == 'workflow_dispatch' && (github.event.inputs.testsuite == 'E2E' || github.event.inputs.testsuite == 'All')))
-            #   timeout-minutes: 40
-            #   run: |
-            #       cd tests/pw 
-            #       npm run test:e2e:pro
-            #       npm run e2e_coverage
+            Run e2e tests
+            - name: 🧪 Running the e2e tests
+              id: e2e-test
+              if: success() && (github.event_name != 'workflow_dispatch' || ( github.event_name == 'workflow_dispatch' && (github.event.inputs.testsuite == 'E2E' || github.event.inputs.testsuite == 'All')))
+              timeout-minutes: 40
+              run: |
+                  cd tests/pw 
+                  npm run test:e2e:pro
+                  npm run e2e_coverage
 
             # Run API tests
             - name: 🧪 Running the api tests
