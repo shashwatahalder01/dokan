@@ -9,8 +9,7 @@
                 "../../plugins/dokan-pro/tests/plugins/woocommerce-bookings",
                 "../../plugins/dokan-pro/tests/plugins/woocommerce-product-addons",
                 "../../plugins/dokan-pro/tests/plugins/woocommerce-simple-auctions",
-                "../../plugins/dokan-pro/tests/plugins/woocommerce-subscriptions",
-                "https://downloads.wordpress.org/plugin/woocommerce-germanized.latest-stable.zip"
+                "../../plugins/dokan-pro/tests/plugins/woocommerce-subscriptions"
             ]
         }
     }
