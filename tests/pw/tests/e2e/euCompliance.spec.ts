@@ -11,7 +11,7 @@ import { data } from '@utils/testData';
 import { dbData } from '@utils/dbData';
 import { payloads } from '@utils/payloads';
 
-test.describe.only('EU Compliance test', () => {
+test.describe('EU Compliance test', () => {
     let admin: EuCompliancePage;
     let vendor: VendorSettingsPage;
     let productsPage: ProductsPage;
