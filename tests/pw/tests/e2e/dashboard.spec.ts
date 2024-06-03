@@ -36,8 +36,7 @@ test.describe('Dashboard test', () => {
     });
 
     test('admin can evaluate dashboard at a glance values', { tag: ['@lite', '@admin'] }, async () => {
-        const summary = await apiUtils.getAdminReportSummary(payloads.adminAuth);
-        await admin.dokanAtAGlanceValueAccuracy(summary);
+        await admin.dokanAtAGlanceValueAccuracy(apiUtils, payloads);
     });
 
     test('admin can add Dokan news subscriber', { tag: ['@lite', '@admin'] }, async () => {
