@@ -40,10 +40,8 @@ export class AdminDashboardPage extends AdminPage {
     }
 
     // at a glance value
-    async dokanAtAGlanceValueAccuracy(apiUtils: any, payloads: any) {
+    async dokanAtAGlanceValueAccuracy(atAGlanceValues: adminDashboard['summary']) {
         await this.goIfNotThere(data.subUrls.backend.dokan.dokan);
-        const atAGlanceValues = await apiUtils.getAdminReportSummary(payloads.adminAuth);
-
         const netSales = (await this.getElementText(dashboardAdmin.atAGlance.netSalesThisMonth)) as string;
         const commissionEarned = (await this.getElementText(dashboardAdmin.atAGlance.commissionEarned)) as string;
 
