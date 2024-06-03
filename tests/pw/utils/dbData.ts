@@ -1271,7 +1271,7 @@ export const dbData = {
                 error_message: '',
                 hide_input: 'no',
                 is_mandatory: 'no',
-                locations: []
+                locations: [],
             },
             used_goods_warranty: {
                 is_enabled: 'no',
