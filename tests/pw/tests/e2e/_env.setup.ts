@@ -13,7 +13,7 @@ import { helpers } from '@utils/helpers';
 const { DOKAN_PRO, HPOS } = process.env;
 
 setup.describe('setup site & woocommerce & dokan settings', () => {
-    setup.use({ extraHTTPHeaders: { Authorization: payloads.adminAuth.Authorization } });
+    setup.use({ extraHTTPHeaders: payloads.adminAuth });
 
     let apiUtils: ApiUtils;
 
@@ -181,14 +181,6 @@ setup.describe('setup user settings', () => {
         const allProductIds = (await apiUtils.getAllProducts(payloads.vendorAuth)).map((o: { id: string }) => o.id);
         await apiUtils.createCoupon(allProductIds, payloads.createCoupon1, payloads.vendorAuth);
     });
-
-    setup.skip('admin add vendor products', { tag: ['@lite'] }, async () => {
-        const product = payloads.createProduct();
-        await apiUtils.createProduct({ ...product, status: 'publish', in_stock: false }, payloads.vendorAuth);
-        await apiUtils.createProduct({ ...product, status: 'draft', in_stock: true }, payloads.vendorAuth);
-        await apiUtils.createProduct({ ...product, status: 'pending', in_stock: true }, payloads.vendorAuth);
-        await apiUtils.createProduct({ ...product, status: 'publish', in_stock: true }, payloads.vendorAuth);
-    });
 });
 
 setup.describe('setup dokan settings', () => {
@@ -235,7 +227,7 @@ setup.describe('setup dokan settings', () => {
         await dbUtils.setDokanSettings(dbData.dokan.optionName.privacyPolicy, dbData.dokan.privacyPolicySettings);
     });
 
-    setup.skip('admin set dokan color settings', { tag: ['@pro'] }, async () => {
+    setup('admin set dokan color settings', { tag: ['@pro'] }, async () => {
         setup.skip(!DOKAN_PRO, 'skip on lite');
         await dbUtils.setDokanSettings(dbData.dokan.optionName.colors, dbData.dokan.colorsSettings);
     });
@@ -255,7 +247,7 @@ setup.describe('setup dokan settings', () => {
         await dbUtils.setDokanSettings(dbData.dokan.optionName.quote, dbData.dokan.quoteSettings);
     });
 
-    setup.skip('admin set dokan rma settings', { tag: ['@pro'] }, async () => {
+    setup('admin set dokan rma settings', { tag: ['@pro'] }, async () => {
         setup.skip(!DOKAN_PRO, 'skip on lite');
         await dbUtils.setDokanSettings(dbData.dokan.optionName.rma, dbData.dokan.rmaSettings);
     });
@@ -265,7 +257,7 @@ setup.describe('setup dokan settings', () => {
         await dbUtils.setDokanSettings(dbData.dokan.optionName.wholesale, dbData.dokan.wholesaleSettings);
     });
 
-    setup.skip('admin set dokan eu compliance settings', { tag: ['@pro'] }, async () => {
+    setup('admin set dokan eu compliance settings', { tag: ['@pro'] }, async () => {
         setup.skip(!DOKAN_PRO, 'skip on lite');
         await dbUtils.setDokanSettings(dbData.dokan.optionName.euCompliance, dbData.dokan.euComplianceSettings);
     });
@@ -280,7 +272,7 @@ setup.describe('setup dokan settings', () => {
         await dbUtils.setDokanSettings(dbData.dokan.optionName.productAdvertising, dbData.dokan.productAdvertisingSettings);
     });
 
-    setup.skip('admin set dokan geolocation settings', { tag: ['@pro'] }, async () => {
+    setup('admin set dokan geolocation settings', { tag: ['@pro'] }, async () => {
         setup.skip(!DOKAN_PRO, 'skip on lite');
         await dbUtils.setDokanSettings(dbData.dokan.optionName.geolocation, dbData.dokan.geolocationSettings);
     });
@@ -290,7 +282,7 @@ setup.describe('setup dokan settings', () => {
         await dbUtils.setDokanSettings(dbData.dokan.optionName.productReportAbuse, dbData.dokan.productReportAbuseSettings);
     });
 
-    setup.skip('admin set dokan spmv settings', { tag: ['@pro'] }, async () => {
+    setup('admin set dokan spmv settings', { tag: ['@pro'] }, async () => {
         setup.skip(!DOKAN_PRO, 'skip on lite');
         await dbUtils.setDokanSettings(dbData.dokan.optionName.spmv, dbData.dokan.spmvSettings);
     });

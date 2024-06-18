@@ -434,7 +434,7 @@ const verificationRequestSchema = z.object({
     status_title: z.string(),
     documents: z.array(z.string().or(z.number())),
     note: z.string(),
-    additional_info: z.array(z.unknown()),
+    additional_info: z.unknown(), //todo: need to resolve
     checked_by: z.number(),
     created_at: z.coerce.date(),
     updated_at: z.coerce.date(),
@@ -444,6 +444,342 @@ const verificationRequestSchema = z.object({
         z.object({
             url: z.string().url(),
             title: z.string(),
+        }),
+    ),
+    _links: linksSchema,
+});
+
+const dimensionsSchema = z.object({
+    length: z.string(),
+    width: z.string(),
+    height: z.string(),
+});
+
+const productCategorySchema = z.object({
+    id: z.number(),
+    name: z.string(),
+    slug: z.string(),
+});
+
+const productMetaDataSchema = z.object({
+    id: z.number(),
+    key: z.string(),
+    value: z.union([
+        z.string(),
+        z.object({
+            label: z.string(),
+            type: z.string(),
+            policy: z.string(),
+            reasons: z.array(z.string()),
+            length: z.string(),
+            length_value: z.string(),
+            length_duration: z.string(),
+            addon_settings: z.array(z.unknown()),
+        }),
+    ]),
+});
+
+const productSchema = z.object({
+    id: z.number(),
+    name: z.string(),
+    slug: z.string(),
+    permalink: z.string().url(),
+    date_created: z.coerce.date(),
+    date_created_gmt: z.coerce.date(),
+    date_modified: z.coerce.date(),
+    date_modified_gmt: z.coerce.date(),
+    type: z.string(),
+    status: z.string(),
+    featured: z.boolean(),
+    catalog_visibility: z.string(),
+    description: z.string(),
+    short_description: z.string(),
+    sku: z.string().optional(),
+    price: z.string().regex(/^\d+(\.\d+)?$/),
+    regular_price: z.string().regex(/^\d+(\.\d+)?$/),
+    sale_price: z.string().optional(),
+    date_on_sale_from: z.null(),
+    date_on_sale_from_gmt: z.null(),
+    date_on_sale_to: z.null(),
+    date_on_sale_to_gmt: z.null(),
+    on_sale: z.boolean(),
+    purchasable: z.boolean(),
+    total_sales: z.number(),
+    virtual: z.boolean(),
+    downloadable: z.boolean(),
+    downloads: z.array(z.unknown()),
+    download_limit: z.number(),
+    download_expiry: z.number(),
+    external_url: z.string().optional(),
+    button_text: z.string().optional(),
+    tax_status: z.string(),
+    tax_class: z.string().optional(),
+    manage_stock: z.boolean(),
+    stock_quantity: z.null(),
+    backorders: z.string(),
+    backorders_allowed: z.boolean(),
+    backordered: z.boolean(),
+    low_stock_amount: z.null(),
+    sold_individually: z.boolean(),
+    weight: z.string().optional(),
+    dimensions: dimensionsSchema,
+    shipping_required: z.boolean(),
+    shipping_taxable: z.boolean(),
+    shipping_class: z.string().optional(),
+    shipping_class_id: z.number(),
+    reviews_allowed: z.boolean(),
+    average_rating: z.string().regex(/^\d+(\.\d+)?$/),
+    rating_count: z.number(),
+    upsell_ids: z.array(z.unknown()),
+    cross_sell_ids: z.array(z.unknown()),
+    parent_id: z.number(),
+    purchase_note: z.string().optional(),
+    categories: z.array(productCategorySchema),
+    tags: z.array(z.unknown()),
+    images: z.array(z.unknown()),
+    attributes: z.array(z.unknown()),
+    default_attributes: z.array(z.unknown()),
+    variations: z.array(z.unknown()),
+    grouped_products: z.array(z.unknown()),
+    menu_order: z.number(),
+    price_html: z.string(),
+    related_ids: z.array(z.number()),
+    meta_data: z.array(productMetaDataSchema),
+    stock_status: z.string(),
+    has_options: z.boolean(),
+    post_password: z.string().optional(),
+    tax_amount: z.string().regex(/^\d+(\.\d+)?$/),
+    regular_display_price: z.string().regex(/^\d+(\.\d+)?$/),
+    sales_display_price: z.string().regex(/^\d+(\.\d+)?$/),
+    barcode: z.string().optional(),
+    _links: linksSchema,
+});
+
+const orderMetaDataSchema = z.object({
+    id: z.number(),
+    key: z.string(),
+    value: z.string(),
+});
+
+const taxSchema = z.object({
+    id: z.number(),
+    total: z.string(),
+    subtotal: z.string(),
+});
+
+const lineItemSchema = z.object({
+    id: z.number().or(z.string()),
+    name: z.string(),
+    product_id: z.number(),
+    variation_id: z.number(),
+    quantity: z.number(),
+    tax_class: z.string(),
+    subtotal: z.string(),
+    subtotal_tax: z.string(),
+    total: z.string(),
+    total_tax: z.string(),
+    taxes: z.array(taxSchema),
+    meta_data: z.array(z.any()), // Assuming meta_data can have various structures
+    sku: z.string().nullable(),
+    price: z.number(),
+    image: z
+        .object({
+            id: z.string().or(z.number()).optional(),
+            src: z.string().optional(),
+        })
+        .optional(),
+    parent_name: z.string().nullable(),
+});
+
+const taxLineSchema = z.object({
+    id: z.number(),
+    rate_code: z.string(),
+    rate_id: z.number(),
+    label: z.string(),
+    compound: z.boolean(),
+    tax_total: z.string(),
+    shipping_tax_total: z.string(),
+    rate_percent: z.number(),
+    meta_data: z.array(z.any()), // Assuming meta_data can have various structures
+});
+
+const shippingLineSchema = z.object({
+    id: z.number(),
+    method_title: z.string(),
+    method_id: z.string(),
+    instance_id: z.string().optional(),
+    total: z.string(),
+    total_tax: z.string(),
+    taxes: z.array(taxSchema),
+    meta_data: z.array(z.any()), // Assuming meta_data can have various structures
+});
+
+const orderAddressSchema = z.object({
+    first_name: z.string(),
+    last_name: z.string(),
+    company: z.string().optional(),
+    address_1: z.string(),
+    address_2: z.string(),
+    city: z.string(),
+    state: z.string(),
+    postcode: z.string(),
+    country: z.string(),
+    email: z.string().optional(),
+    phone: z.string().optional(),
+});
+
+const orderSchema = z.object({
+    id: z.number(),
+    parent_id: z.number(),
+    status: z.string(),
+    currency: z.string(),
+    version: z.string(),
+    prices_include_tax: z.boolean(),
+    date_created: z.string(),
+    date_modified: z.string(),
+    discount_total: z.string(),
+    discount_tax: z.string(),
+    shipping_total: z.string(),
+    shipping_tax: z.string(),
+    cart_tax: z.string(),
+    total: z.string(),
+    total_tax: z.string(),
+    customer_id: z.number(),
+    order_key: z.string(),
+    billing: orderAddressSchema,
+    shipping: orderAddressSchema,
+    payment_method: z.string(),
+    payment_method_title: z.string(),
+    transaction_id: z.string().optional(),
+    customer_ip_address: z.string().optional(),
+    customer_user_agent: z.string().optional(),
+    created_via: z.string(),
+    customer_note: z.string().optional(),
+    date_completed: z.string().nullable(),
+    date_paid: z.string(),
+    cart_hash: z.string().optional(),
+    number: z.string(),
+    meta_data: z.array(orderMetaDataSchema),
+    line_items: z.array(lineItemSchema),
+    tax_lines: z.array(taxLineSchema),
+    shipping_lines: z.array(shippingLineSchema),
+    fee_lines: z.array(z.any()), // Assuming fee_lines can have various structures
+    coupon_lines: z.array(z.any()), // Assuming coupon_lines can have various structures
+    refunds: z.array(z.any()), // Assuming refunds can have various structures
+    payment_url: z.string(),
+    is_editable: z.boolean(),
+    needs_payment: z.boolean(),
+    needs_processing: z.boolean(),
+    date_created_gmt: z.string(),
+    date_modified_gmt: z.string(),
+    date_completed_gmt: z.string().nullable(),
+    date_paid_gmt: z.string(),
+    currency_symbol: z.string(),
+    _links: linksSchema,
+});
+
+const orderNoteSchema = z.object({
+    id: z.number().or(z.string()),
+    author: z.string(),
+    date_created: z.string(),
+    date_created_gmt: z.string(),
+    note: z.string(),
+    customer_note: z.boolean(),
+    _links: z.object({
+        self: z.array(z.object({ href: z.string().url() })),
+        collection: z.array(z.object({ href: z.string().url() })),
+        up: z.array(z.object({ href: z.string().url() })),
+    }),
+});
+
+const customerSchema = z.object({
+    id: z.number(),
+    date_created: z.string(),
+    date_created_gmt: z.string(),
+    date_modified: z.string(),
+    date_modified_gmt: z.string(),
+    email: z.string().email(),
+    first_name: z.string(),
+    last_name: z.string(),
+    role: z.string(),
+    username: z.string(),
+    billing: z
+        .object({
+            first_name: z.string(),
+            last_name: z.string(),
+            company: z.string(),
+            address_1: z.string(),
+            address_2: z.string(),
+            city: z.string(),
+            postcode: z.string(),
+            country: z.string(),
+            state: z.string(),
+            email: z.union([z.string().email(), z.literal('')]),
+            phone: z.string(),
+        })
+        .optional(),
+    shipping: z
+        .object({
+            first_name: z.string(),
+            last_name: z.string(),
+            company: z.string(),
+            address_1: z.string(),
+            address_2: z.string(),
+            city: z.string(),
+            postcode: z.string(),
+            country: z.string(),
+            state: z.string(),
+            phone: z.string(),
+        })
+        .optional(),
+    is_paying_customer: z.boolean(),
+    avatar_url: z.string().url(),
+    meta_data: z
+        .array(
+            z.object({
+                id: z.number(),
+                key: z.string(),
+                value: z.unknown(),
+            }),
+        )
+        .optional(),
+    orders_count: z.number(),
+    total_spent: z.string(),
+    _links: linksSchema,
+});
+
+const couponSchema = z.object({
+    id: z.number(),
+    code: z.string(),
+    amount: z.string(),
+    date_created: z.coerce.date(),
+    date_created_gmt: z.coerce.date(),
+    date_modified: z.coerce.date(),
+    date_modified_gmt: z.coerce.date(),
+    discount_type: z.string(),
+    description: z.string(),
+    date_expires: z.nullable(z.string()),
+    date_expires_gmt: z.nullable(z.string()),
+    usage_count: z.number(),
+    individual_use: z.boolean(),
+    product_ids: z.array(z.number()),
+    excluded_product_ids: z.array(z.string()),
+    usage_limit: z.nullable(z.number()),
+    usage_limit_per_user: z.nullable(z.number()),
+    limit_usage_to_x_items: z.nullable(z.number()),
+    free_shipping: z.boolean(),
+    product_categories: z.array(z.string()),
+    excluded_product_categories: z.array(z.string()),
+    exclude_sale_items: z.boolean(),
+    minimum_amount: z.string(),
+    maximum_amount: z.string(),
+    email_restrictions: z.array(z.string()),
+    used_by: z.array(z.string()),
+    meta_data: z.array(
+        z.object({
+            id: z.number(),
+            key: z.string(),
+            value: z.string(),
         }),
     ),
     _links: linksSchema,
@@ -723,10 +1059,7 @@ export const schemas = {
                 }),
             ),
             announcement_type: z.string(),
-            _links: z.object({
-                self: z.array(z.object({ href: z.string() })),
-                collection: z.array(z.object({ href: z.string() })),
-            }),
+            _links: linksSchema,
         }),
 
         m: z.coerce.date(),
@@ -751,10 +1084,7 @@ export const schemas = {
                     }),
                 ),
                 announcement_type: z.string(),
-                _links: z.object({
-                    self: z.array(z.object({ href: z.string() })),
-                    collection: z.array(z.object({ href: z.string() })),
-                }),
+                _links: linksSchema,
             }),
         ),
 
@@ -773,10 +1103,7 @@ export const schemas = {
             date: z.coerce.date(),
             date_gmt: z.coerce.date(),
             human_readable_date: z.string(),
-            _links: z.object({
-                self: z.array(z.object({ href: z.string() })),
-                collection: z.array(z.object({ href: z.string() })),
-            }),
+            _links: linksSchema,
         }),
 
         deleteAnnouncementNoticeSchema: z.object({
@@ -792,10 +1119,7 @@ export const schemas = {
             type: z.enum(['select']),
             order_by: z.enum(['menu_order', 'name', 'name_num', 'id']),
             has_archives: z.boolean(),
-            _links: z.object({
-                self: z.array(z.object({ href: z.string().url() })),
-                collection: z.array(z.object({ href: z.string().url() })),
-            }),
+            _links: linksSchema,
         }),
 
         attributesSchema: z.array(
@@ -806,10 +1130,7 @@ export const schemas = {
                 type: z.enum(['select']),
                 order_by: z.enum(['menu_order', 'name', 'name_num', 'id']),
                 has_archives: z.boolean(),
-                _links: z.object({
-                    self: z.array(z.object({ href: z.string().url() })),
-                    collection: z.array(z.object({ href: z.string().url() })),
-                }),
+                _links: linksSchema,
             }),
         ),
 
@@ -823,10 +1144,7 @@ export const schemas = {
                         type: z.enum(['select']),
                         order_by: z.enum(['menu_order', 'name', 'name_num', 'id']),
                         has_archives: z.boolean(),
-                        _links: z.object({
-                            self: z.array(z.object({ href: z.string().url() })),
-                            collection: z.array(z.object({ href: z.string().url() })),
-                        }),
+                        _links: linksSchema,
                     }),
                 )
                 .optional(),
@@ -839,10 +1157,7 @@ export const schemas = {
                         type: z.enum(['select']),
                         order_by: z.enum(['menu_order', 'name', 'name_num', 'id']),
                         has_archives: z.boolean(),
-                        _links: z.object({
-                            self: z.array(z.object({ href: z.string().url() })),
-                            collection: z.array(z.object({ href: z.string().url() })),
-                        }),
+                        _links: linksSchema,
                     }),
                 )
                 .optional(),
@@ -855,10 +1170,7 @@ export const schemas = {
                         type: z.enum(['select']),
                         order_by: z.enum(['menu_order', 'name', 'name_num', 'id']),
                         has_archives: z.boolean(),
-                        _links: z.object({
-                            self: z.array(z.object({ href: z.string().url() })),
-                            collection: z.array(z.object({ href: z.string().url() })),
-                        }),
+                        _links: linksSchema,
                     }),
                 )
                 .optional(),
@@ -876,10 +1188,7 @@ export const schemas = {
             description: z.string(),
             menu_order: z.number(),
             count: z.number(),
-            _links: z.object({
-                self: z.array(z.object({ href: z.string() })),
-                collection: z.array(z.object({ href: z.string() })),
-            }),
+            _links: linksSchema,
         }),
 
         attributeTermsSchema: z.array(
@@ -890,10 +1199,7 @@ export const schemas = {
                 description: z.string(),
                 menu_order: z.number(),
                 count: z.number(),
-                _links: z.object({
-                    self: z.array(z.object({ href: z.string() })),
-                    collection: z.array(z.object({ href: z.string() })),
-                }),
+                _links: linksSchema,
             }),
         ),
 
@@ -906,413 +1212,25 @@ export const schemas = {
                     description: z.string(),
                     menu_order: z.number(),
                     count: z.number(),
-                    _links: z.object({
-                        self: z.array(z.object({ href: z.string() })),
-                        collection: z.array(z.object({ href: z.string() })),
-                    }),
+                    _links: linksSchema,
                 }),
             ),
         }),
     },
 
     couponsSchema: {
-        couponSchema: z.object({
-            id: z.number(),
-            code: z.string(),
-            amount: z.string(),
-            date_created: z.coerce.date(),
-            date_created_gmt: z.coerce.date(),
-            date_modified: z.coerce.date(),
-            date_modified_gmt: z.coerce.date(),
-            discount_type: z.string(),
-            description: z.string(),
-            date_expires: z.nullable(z.string()),
-            date_expires_gmt: z.nullable(z.string()),
-            usage_count: z.number(),
-            individual_use: z.boolean(),
-            product_ids: z.array(z.number()),
-            excluded_product_ids: z.array(z.string()),
-            usage_limit: z.nullable(z.number()),
-            usage_limit_per_user: z.nullable(z.number()),
-            limit_usage_to_x_items: z.nullable(z.number()),
-            free_shipping: z.boolean(),
-            product_categories: z.array(z.string()),
-            excluded_product_categories: z.array(z.string()),
-            exclude_sale_items: z.boolean(),
-            minimum_amount: z.string(),
-            maximum_amount: z.string(),
-            email_restrictions: z.array(z.string()),
-            used_by: z.array(z.string()),
-            meta_data: z.array(
-                z.object({
-                    id: z.number(),
-                    key: z.string(),
-                    value: z.string(),
-                }),
-            ),
-            _links: z.object({
-                self: z.array(
-                    z.object({
-                        href: z.string().url(),
-                    }),
-                ),
-                collection: z.array(
-                    z.object({
-                        href: z.string().url(),
-                    }),
-                ),
-            }),
-        }),
-
-        couponsSchema: z.array(
-            z.object({
-                id: z.number(),
-                code: z.string(),
-                amount: z.string(),
-                date_created: z.coerce.date(),
-                date_created_gmt: z.coerce.date(),
-                date_modified: z.coerce.date(),
-                date_modified_gmt: z.coerce.date(),
-                discount_type: z.string(),
-                description: z.string(),
-                date_expires: z.nullable(z.string()),
-                date_expires_gmt: z.nullable(z.string()),
-                usage_count: z.number(),
-                individual_use: z.boolean(),
-                product_ids: z.array(z.number()),
-                excluded_product_ids: z.array(z.string()),
-                usage_limit: z.nullable(z.number()),
-                usage_limit_per_user: z.nullable(z.number()),
-                limit_usage_to_x_items: z.nullable(z.number()),
-                free_shipping: z.boolean(),
-                product_categories: z.array(z.string()),
-                excluded_product_categories: z.array(z.string()),
-                exclude_sale_items: z.boolean(),
-                minimum_amount: z.string(),
-                maximum_amount: z.string(),
-                email_restrictions: z.array(z.string()),
-                used_by: z.array(z.string()),
-                meta_data: z.array(
-                    z.object({
-                        id: z.number(),
-                        key: z.string(),
-                        value: z.string(),
-                    }),
-                ),
-                _links: z.object({
-                    self: z.array(
-                        z.object({
-                            href: z.string().url(),
-                        }),
-                    ),
-                    collection: z.array(
-                        z.object({
-                            href: z.string().url(),
-                        }),
-                    ),
-                }),
-            }),
-        ),
+        couponSchema: couponSchema,
+        couponsSchema: z.array(couponSchema),
     },
 
     customersSchema: {
-        customerSchema: z.object({
-            id: z.number(),
-            date_created: z.string(),
-            date_created_gmt: z.string(),
-            date_modified: z.string(),
-            date_modified_gmt: z.string(),
-            email: z.string().email(),
-            first_name: z.string(),
-            last_name: z.string(),
-            role: z.string(),
-            username: z.string(),
-            billing: z
-                .object({
-                    first_name: z.string(),
-                    last_name: z.string(),
-                    company: z.string(),
-                    address_1: z.string(),
-                    address_2: z.string(),
-                    city: z.string(),
-                    postcode: z.string(),
-                    country: z.string(),
-                    state: z.string(),
-                    email: z.union([z.string().email(), z.literal('')]),
-                    phone: z.string(),
-                })
-                .optional(),
-            shipping: z
-                .object({
-                    first_name: z.string(),
-                    last_name: z.string(),
-                    company: z.string(),
-                    address_1: z.string(),
-                    address_2: z.string(),
-                    city: z.string(),
-                    postcode: z.string(),
-                    country: z.string(),
-                    state: z.string(),
-                    phone: z.string(),
-                })
-                .optional(),
-            is_paying_customer: z.boolean(),
-            avatar_url: z.string().url(),
-            meta_data: z.array(
-                z.object({
-                    id: z.number(),
-                    key: z.string(),
-                    value: z.unknown(),
-                }),
-            ),
-            orders_count: z.number(),
-            total_spent: z.string(),
-            _links: z.object({
-                self: z.array(z.object({ href: z.string().url() })),
-                collection: z.array(z.object({ href: z.string().url() })),
-            }),
-        }),
-
-        customersSchema: z.array(
-            z.object({
-                id: z.number(),
-                date_created: z.string(),
-                date_created_gmt: z.string(),
-                date_modified: z.string(),
-                date_modified_gmt: z.string(),
-                email: z.string().email(),
-                first_name: z.string(),
-                last_name: z.string(),
-                role: z.string(),
-                username: z.string(),
-                billing: z
-                    .object({
-                        first_name: z.string(),
-                        last_name: z.string(),
-                        company: z.string(),
-                        address_1: z.string(),
-                        address_2: z.string(),
-                        city: z.string(),
-                        postcode: z.string(),
-                        country: z.string(),
-                        state: z.string(),
-                        email: z.union([z.string().email(), z.literal('')]),
-                        phone: z.string(),
-                    })
-                    .optional(),
-                shipping: z
-                    .object({
-                        first_name: z.string(),
-                        last_name: z.string(),
-                        company: z.string(),
-                        address_1: z.string(),
-                        address_2: z.string(),
-                        city: z.string(),
-                        postcode: z.string(),
-                        country: z.string(),
-                        state: z.string(),
-                        phone: z.string(),
-                    })
-                    .optional(),
-                is_paying_customer: z.boolean(),
-                avatar_url: z.string().url(),
-                meta_data: z.array(
-                    z.object({
-                        id: z.number(),
-                        key: z.string(),
-                        value: z.unknown(),
-                    }),
-                ),
-                orders_count: z.number(),
-                total_spent: z.string(),
-                _links: z.object({
-                    self: z.array(z.object({ href: z.string().url() })),
-                    collection: z.array(z.object({ href: z.string().url() })),
-                }),
-            }),
-        ),
+        customerSchema: customerSchema,
+        customersSchema: z.array(customerSchema),
 
         batchUpdateCustomersSchema: z.object({
-            create: z
-                .array(
-                    z.object({
-                        id: z.number(),
-                        date_created: z.string(),
-                        date_created_gmt: z.string(),
-                        date_modified: z.string(),
-                        date_modified_gmt: z.string(),
-                        email: z.string().email(),
-                        first_name: z.string(),
-                        last_name: z.string(),
-                        role: z.string(),
-                        username: z.string(),
-                        billing: z
-                            .object({
-                                first_name: z.string(),
-                                last_name: z.string(),
-                                company: z.string(),
-                                address_1: z.string(),
-                                address_2: z.string(),
-                                city: z.string(),
-                                postcode: z.string(),
-                                country: z.string(),
-                                state: z.string(),
-                                email: z.union([z.string().email(), z.literal('')]),
-                                phone: z.string(),
-                            })
-                            .optional(),
-                        shipping: z
-                            .object({
-                                first_name: z.string(),
-                                last_name: z.string(),
-                                company: z.string(),
-                                address_1: z.string(),
-                                address_2: z.string(),
-                                city: z.string(),
-                                postcode: z.string(),
-                                country: z.string(),
-                                state: z.string(),
-                                phone: z.string(),
-                            })
-                            .optional(),
-                        is_paying_customer: z.boolean(),
-                        avatar_url: z.string().url(),
-                        meta_data: z.array(
-                            z.object({
-                                id: z.number(),
-                                key: z.string(),
-                                value: z.unknown(),
-                            }),
-                        ),
-                        orders_count: z.number(),
-                        total_spent: z.string(),
-                        _links: z.object({
-                            self: z.array(z.object({ href: z.string().url() })),
-                            collection: z.array(z.object({ href: z.string().url() })),
-                        }),
-                    }),
-                )
-                .optional(),
-            update: z
-                .array(
-                    z.object({
-                        id: z.number(),
-                        date_created: z.string(),
-                        date_created_gmt: z.string(),
-                        date_modified: z.string(),
-                        date_modified_gmt: z.string(),
-                        email: z.string().email(),
-                        first_name: z.string(),
-                        last_name: z.string(),
-                        role: z.string(),
-                        username: z.string(),
-                        billing: z
-                            .object({
-                                first_name: z.string(),
-                                last_name: z.string(),
-                                company: z.string(),
-                                address_1: z.string(),
-                                address_2: z.string(),
-                                city: z.string(),
-                                postcode: z.string(),
-                                country: z.string(),
-                                state: z.string(),
-                                email: z.union([z.string().email(), z.literal('')]),
-                                phone: z.string(),
-                            })
-                            .optional(),
-                        shipping: z
-                            .object({
-                                first_name: z.string(),
-                                last_name: z.string(),
-                                company: z.string(),
-                                address_1: z.string(),
-                                address_2: z.string(),
-                                city: z.string(),
-                                postcode: z.string(),
-                                country: z.string(),
-                                state: z.string(),
-                                phone: z.string(),
-                            })
-                            .optional(),
-                        is_paying_customer: z.boolean(),
-                        avatar_url: z.string().url(),
-                        meta_data: z.array(
-                            z.object({
-                                id: z.number(),
-                                key: z.string(),
-                                value: z.unknown(),
-                            }),
-                        ),
-                        orders_count: z.number(),
-                        total_spent: z.string(),
-                        _links: z.object({
-                            self: z.array(z.object({ href: z.string().url() })),
-                            collection: z.array(z.object({ href: z.string().url() })),
-                        }),
-                    }),
-                )
-                .optional(),
-            delete: z
-                .array(
-                    z.object({
-                        id: z.number(),
-                        date_created: z.string(),
-                        date_created_gmt: z.string(),
-                        date_modified: z.string(),
-                        date_modified_gmt: z.string(),
-                        email: z.string().email(),
-                        first_name: z.string(),
-                        last_name: z.string(),
-                        role: z.string(),
-                        username: z.string(),
-                        billing: z
-                            .object({
-                                first_name: z.string(),
-                                last_name: z.string(),
-                                company: z.string(),
-                                address_1: z.string(),
-                                address_2: z.string(),
-                                city: z.string(),
-                                postcode: z.string(),
-                                country: z.string(),
-                                state: z.string(),
-                                email: z.union([z.string().email(), z.literal('')]),
-                                phone: z.string(),
-                            })
-                            .optional(),
-                        shipping: z
-                            .object({
-                                first_name: z.string(),
-                                last_name: z.string(),
-                                company: z.string(),
-                                address_1: z.string(),
-                                address_2: z.string(),
-                                city: z.string(),
-                                postcode: z.string(),
-                                country: z.string(),
-                                state: z.string(),
-                                phone: z.string(),
-                            })
-                            .optional(),
-                        is_paying_customer: z.boolean(),
-                        avatar_url: z.string().url(),
-                        meta_data: z.array(
-                            z.object({
-                                id: z.number(),
-                                key: z.string(),
-                                value: z.unknown(),
-                            }),
-                        ),
-                        orders_count: z.number(),
-                        total_spent: z.string(),
-                        _links: z.object({
-                            self: z.array(z.object({ href: z.string().url() })),
-                            collection: z.array(z.object({ href: z.string().url() })),
-                        }),
-                    }),
-                )
-                .optional(),
+            create: z.array(customerSchema).optional(),
+            update: z.array(customerSchema).optional(),
+            delete: z.array(customerSchema).optional(),
         }),
     },
 
@@ -1375,9 +1293,15 @@ export const schemas = {
 
     orderDownloadsSchema: {}, //TODO:
 
-    orderNotesSchema: {}, //TODO:
+    ordersSchema: {
+        orderSchema: orderSchema,
+        ordersSchema: z.array(orderSchema),
+    },
 
-    ordersSchema: {}, //TODO:
+    orderNotesSchema: {
+        orderNoteSchema: orderNoteSchema,
+        orderNotesSchema: z.array(orderNoteSchema),
+    },
 
     productAdvertisementsSchema: {}, //TODO:
 
@@ -1389,7 +1313,10 @@ export const schemas = {
 
     productReviewsSchema: {}, //TODO:
 
-    productsSchema: {}, //TODO:
+    productsSchema: {
+        productSchema: productSchema,
+        productsSchema: z.array(productSchema),
+    },
 
     productVariationsSchema: {}, //TODO:
 
@@ -1410,10 +1337,7 @@ export const schemas = {
             rule_priority: z.string(),
             status: z.string(),
             created_at: z.string(),
-            _links: z.object({
-                self: z.array(z.object({ href: z.string() })),
-                collection: z.array(z.object({ href: z.string() })),
-            }),
+            _links: linksSchema,
         }),
         quoteRulesSchema: z.array(
             z.object({
@@ -1430,10 +1354,7 @@ export const schemas = {
                 rule_priority: z.string(),
                 status: z.string(),
                 created_at: z.string(),
-                _links: z.object({
-                    self: z.array(z.object({ href: z.string() })),
-                    collection: z.array(z.object({ href: z.string() })),
-                }),
+                _links: linksSchema,
             }),
         ),
     },
@@ -1881,18 +1802,7 @@ export const schemas = {
             role: z.string(),
             registered_date: z.string(),
             wholesale_status: z.string(),
-            _links: z.object({
-                self: z.array(
-                    z.object({
-                        href: z.string(),
-                    }),
-                ),
-                collection: z.array(
-                    z.object({
-                        href: z.string(),
-                    }),
-                ),
-            }),
+            _links: linksSchema,
         }),
     }, //TODO:
 
@@ -2040,10 +1950,7 @@ export const schemas = {
                 }),
             ]),
             ip: z.string(),
-            _links: z.object({
-                self: z.array(z.object({ href: z.string().url() })),
-                collection: z.array(z.object({ href: z.string().url() })),
-            }),
+            _links: linksSchema,
 
             WithdrawPaymentMethods: z.array(
                 z.object({

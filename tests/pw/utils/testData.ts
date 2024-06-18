@@ -1012,7 +1012,9 @@ export const data = {
             },
 
             wc: {
-                wcProducts: 'wc/v3/products',
+                products: 'wc/v3/products',
+                orders: 'wc/v3/orders',
+                customers: 'wc/v3/customers',
                 store: 'wc/store',
             },
         },

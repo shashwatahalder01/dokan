@@ -1449,8 +1449,21 @@ export class ApiUtils {
 
     // delete user
     async deleteUser(userId: string, auth?: auth): Promise<responseBody> {
-        const [, responseBody] = await this.delete(endPoints.wp.deleteUser(userId), { headers: auth });
+        const [, responseBody] = await this.delete(endPoints.wp.deleteUser(userId), { params: { ...payloads.paramsForceDelete, reassign: '' }, headers: auth });
         return responseBody;
+    }
+
+    // delete all users
+    async deleteAllUsers(role: string[] = [], auth?: auth): Promise<responseBody> {
+        const allUsers = role ? await this.getAllUsersByRole(role) : await this.getAllUsers(auth);
+        if (!allUsers?.length) {
+            console.log('No user exists');
+            return;
+        }
+        const allUserIds = allUsers.map((o: { id: unknown }) => o.id);
+        for (const userId of allUserIds) {
+            await this.delete(endPoints.wp.deleteUser(userId), { headers: auth });
+        }
     }
 
     // plugins

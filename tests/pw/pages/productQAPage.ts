@@ -80,7 +80,7 @@ export class ProductQAPage extends BasePage {
 
             case 'by-product':
                 await this.click(productQAAdmin.filters.filterByProducts);
-                await this.typeAndWaitForResponse(data.subUrls.api.wc.wcProducts, productQAAdmin.filters.filterInput, input);
+                await this.typeAndWaitForResponse(data.subUrls.api.wc.products, productQAAdmin.filters.filterInput, input);
                 await this.toContainText(productQAAdmin.filters.result, input);
                 await this.pressAndWaitForResponse(data.subUrls.api.dokan.productQuestions, data.key.enter);
                 break;
