@@ -1408,8 +1408,8 @@ export class ApiUtils {
         return responseBody;
     }
 
-    // get user by role
-    async getAllUsersByRole(roles: string[], auth?: auth): Promise<responseBody> {
+    // get user by roles [ for multiple roles use comma separated string]
+    async getAllUsersByRoles(roles: string, auth?: auth): Promise<responseBody> {
         const [, responseBody] = await this.get(endPoints.wp.getAllUsers, { params: { per_page: 100, roles: roles }, headers: auth });
         return responseBody;
     }
@@ -1454,12 +1454,12 @@ export class ApiUtils {
     }
 
     // delete all users
-    async deleteAllUsers(role: string[] = [], auth?: auth): Promise<responseBody> {
-        const allUsers = role ? await this.getAllUsersByRole(role) : await this.getAllUsers(auth);
-        if (!allUsers?.length) {
-            console.log('No user exists');
-            return;
+    async deleteAllUsers(role?: string, auth?: auth): Promise<responseBody> {
+        if (arguments.length === 1 && typeof role === 'object') {
+            auth = role as auth;
+            role = undefined;
         }
+        const allUsers = role ? await this.getAllUsersByRoles(role, auth) : await this.getAllUsers(auth);
         const allUserIds = allUsers.map((o: { id: unknown }) => o.id);
         for (const userId of allUserIds) {
             await this.delete(endPoints.wp.deleteUser(userId), { headers: auth });
@@ -1599,7 +1599,7 @@ export class ApiUtils {
 
     // create page
     async createPage(payload: object, auth?: auth): Promise<[responseBody, string]> {
-        let pageId = await this.getPageId(helpers.slugify(payloads.tocPage.title), payloads.adminAuth);
+        let pageId = await this.getPageId(helpers.slugify(payloads.tocPage.title), payloads.adminAuth); //todo: remove this hardcoded data payloads.tocPage.title
         let responseBody;
         if (!pageId) {
             [, responseBody] = await this.post(endPoints.wp.createPage, { data: payload, headers: auth });
@@ -1701,6 +1701,16 @@ export class ApiUtils {
         }
         const [response, responseBody] = await this.post(endPoints.wc.updateBatchCategories, { data: { [action]: allIds }, headers: auth });
         return [response, responseBody];
+    }
+
+    // tags
+
+    // create tag
+    async createTag(payload: object, auth?: auth): Promise<[responseBody, string, string]> {
+        const [, responseBody] = await this.post(endPoints.wc.createTag, { data: payload, headers: auth });
+        const tagId = String(responseBody?.id);
+        const tagName = String(responseBody?.name);
+        return [responseBody, tagId, tagName];
     }
 
     // product

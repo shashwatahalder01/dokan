@@ -10,7 +10,7 @@ import { dbData } from '@utils/dbData';
 import { data } from '@utils/testData';
 import { helpers } from '@utils/helpers';
 
-const { DOKAN_PRO, HPOS } = process.env;
+const { DOKAN_PRO, HPOS, CI } = process.env;
 
 setup.describe('setup site & woocommerce & dokan settings', () => {
     setup.use({ extraHTTPHeaders: payloads.adminAuth });
@@ -26,7 +26,7 @@ setup.describe('setup site & woocommerce & dokan settings', () => {
     });
 
     setup('check active plugins', { tag: ['@lite'] }, async () => {
-        setup.skip(!process.env.CI, 'skip plugin check on local');
+        setup.skip(!CI, 'skip plugin check on local');
         const activePlugins = (await apiUtils.getAllPlugins({ status: 'active' })).map((a: { plugin: string }) => a.plugin.split('/')[1]);
         DOKAN_PRO ? expect(activePlugins).toEqual(expect.arrayContaining(data.plugin.plugins)) : expect(activePlugins).toEqual(expect.arrayContaining(data.plugin.pluginsLite));
     });
@@ -116,7 +116,7 @@ setup.describe('setup site & woocommerce & dokan settings', () => {
     });
 
     setup('disable simple-auction ajax bid check', { tag: ['@pro'] }, async () => {
-        setup.skip(!process.env.CI || !DOKAN_PRO, 'skip on local');
+        setup.skip(!CI || !DOKAN_PRO, 'skip on local');
         const [, , status] = await apiUtils.getSinglePlugin('woocommerce-simple-auctions/woocommerce-simple-auctions', payloads.adminAuth);
         status === 'active' && (await dbUtils.updateWpOptionTable('simple_auctions_live_check', 'no'));
     });

@@ -6,7 +6,7 @@ import { payloads } from '@utils/payloads';
 // import { dbData } from '@utils/dbData';
 // import { helpers } from '@utils/helpers';
 
-test.describe('test environment', () => {
+test.describe('reset test environment', () => {
     let apiUtils: ApiUtils;
 
     test.beforeAll(async () => {

@@ -13,7 +13,7 @@ export class LoginPage extends BasePage {
         await this.loginFronted(user, storageState);
     }
 
-    // user loginFronted
+    // user login frontend
     async loginFronted(user: user, storageState?: string): Promise<void> {
         await this.goIfNotThere(data.subUrls.frontend.myAccount);
         const currentUser = await this.getCurrentUser();
@@ -41,7 +41,7 @@ export class LoginPage extends BasePage {
         expect(loggedInUser).toBe(user.username);
     }
 
-    // user loginBackend
+    // user login backend
     async loginBackend(user: user, url: string = data.subUrls.backend.login, storageState?: string): Promise<void> {
         await this.goIfNotThere(url);
         const emailField = await this.isVisible(selector.backend.email);
@@ -62,7 +62,7 @@ export class LoginPage extends BasePage {
         await this.logoutFrontend();
     }
 
-    // user logoutFrontend
+    // user logout frontend
     async logoutFrontend(): Promise<void> {
         await this.goIfNotThere(data.subUrls.frontend.myAccount);
         await this.clickAndWaitForLoadState(selector.frontend.customerLogout);

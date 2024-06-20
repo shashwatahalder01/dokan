@@ -839,6 +839,12 @@ export const payloads = {
         order_by: 'menu_order',
     }),
 
+    // tags
+
+    createTagsRandom: () => ({
+        name: faker.string.nanoid(5),
+    }),
+
     // coupon
 
     createCoupon: () => ({
