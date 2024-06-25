@@ -85,6 +85,8 @@ export const selector = {
     },
 
     wpMedia: {
+        uploadFiles: '//div[@class="supports-drag-drop" and @style="position: relative;"]//button[@id="menu-item-upload"]',
+        mediaLibrary: '//div[@class="supports-drag-drop" and @style="position: relative;"]//button[@id="menu-item-browse"]',
         // Wp Image Upload
         wpUploadFiles: '#menu-item-upload',
         uploadedMedia: 'div.attachment-preview',

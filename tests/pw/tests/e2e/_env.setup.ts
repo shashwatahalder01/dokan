@@ -97,13 +97,9 @@ setup.describe('setup site & woocommerce & dokan settings', () => {
     });
 
     setup('add categories and attributes', { tag: ['@lite'] }, async () => {
-        // delete previous categories
-        const allCategoryIds = (await apiUtils.getAllCategories()).map((a: { id: string }) => a.id);
-        await apiUtils.updateBatchCategories('delete', allCategoryIds);
-
-        // delete previous attributes
-        const allAttributeIds = (await apiUtils.getAllAttributes()).map((a: { id: string }) => a.id);
-        await apiUtils.updateBatchAttributes('delete', allAttributeIds);
+        // delete previous categories and attributes
+        await apiUtils.updateBatchCategories('delete', []);
+        await apiUtils.updateBatchAttributes('delete', []);
 
         // create category
         await apiUtils.createCategory(payloads.createCategory);

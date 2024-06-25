@@ -434,7 +434,7 @@ const verificationRequestSchema = z.object({
     status_title: z.string(),
     documents: z.array(z.string().or(z.number())),
     note: z.string(),
-    additional_info: z.unknown(), //todo: need to resolve
+    additional_info: z.any(),
     checked_by: z.number(),
     created_at: z.coerce.date(),
     updated_at: z.coerce.date(),

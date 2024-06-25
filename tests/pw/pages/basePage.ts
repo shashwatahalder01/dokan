@@ -403,6 +403,7 @@ export class BasePage {
 
     // returns whether the element is visible
     async isVisible(selector: string): Promise<boolean> {
+        await this.wait(1); // to add a buffer time for the element to be visible //todo: need to resolve in future
         return await this.isVisibleLocator(selector);
         // return await this.isVisibleByPage(selector);
     }
@@ -1590,16 +1591,30 @@ export class BasePage {
     }
 
     async uploadMedia(file: string) {
-        // await this.wait(0.5);
+        await this.wait(0.5);
+        await this.click(selector.wpMedia.mediaLibrary);
         const uploadedMediaIsVisible = await this.isVisible(selector.wpMedia.uploadedMediaFirst);
         if (uploadedMediaIsVisible) {
             await this.click(selector.wpMedia.uploadedMediaFirst);
+            console.log('File Already Uploaded');
         } else {
+            await this.click(selector.wpMedia.uploadFiles);
             await this.uploadFile(selector.wpMedia.selectFilesInput, file);
-            const isSelectDisabled = await this.isDisabled(selector.wpMedia.select);
-            isSelectDisabled && (await this.click(selector.wpMedia.selectUploadedMedia));
-            await this.click(selector.wpMedia.select);
+            console.log('File Uploaded');
         }
+        await this.click(selector.wpMedia.selectUploadedMedia);
+
+        // check if the uploaded media is selected or not for 3 times
+        for (let i = 0; i < 3; i++) {
+            const isSelectDisabled = await this.isDisabled(selector.wpMedia.select);
+            if (!isSelectDisabled) {
+                console.log('Media Selected');
+                break;
+            }
+            isSelectDisabled && (await this.click(selector.wpMedia.selectUploadedMedia));
+        }
+
+        await this.click(selector.wpMedia.select);
     }
 
     // upload file
