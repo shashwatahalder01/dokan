@@ -2030,4 +2030,6 @@ export const schemas = {
         verificationRequestSchema: verificationRequestSchema,
         verificationRequestsSchema: z.array(verificationRequestSchema),
     },
+
+    commission: z.number(),
 };

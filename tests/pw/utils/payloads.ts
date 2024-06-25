@@ -3670,4 +3670,13 @@ export const payloads = {
         per_page: '10',
         page: '1',
     },
+
+    //commission
+    commission: {
+        product_id: 0,
+        amount: 0,
+        vendor_id: 0,
+        category_ids: 0,
+        context: 'admin',
+    },
 };
