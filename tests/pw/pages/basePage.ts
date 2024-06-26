@@ -250,6 +250,22 @@ export class BasePage {
         return response;
     }
 
+    // click & wait for responses
+    async clickAndWaitForResponses(subUrls: string[], selector: string, codes: number[] = [200]): Promise<Response[]> {
+        const responsePromises = subUrls.map((subUrl, index) => this.page.waitForResponse(resp => resp.url().includes(subUrl) && resp.status() === codes[index % codes.length]));
+        await this.page.locator(selector).click();
+        const responses = await Promise.all(responsePromises);
+        return responses;
+    }
+
+    // click & wait for responses
+    async clickAndWaitForResponsesAndLoadState(subUrls: string[], selector: string, codes: number[] = [200]): Promise<Response[]> {
+        const responsePromises = subUrls.map((subUrl, index) => this.page.waitForResponse(resp => resp.url().includes(subUrl) && resp.status() === codes[index % codes.length]));
+        await this.page.locator(selector).click();
+        const [, ...responses] = await Promise.all([this.page.waitForLoadState('networkidle'), ...responsePromises]);
+        return responses;
+    }
+
     // click & wait for multiple responses
     async clickAndWaitForMultipleResponses(subUrls: string[][], selector: string, code = 200): Promise<void[] | Response[]> {
         // todo: fix this; also update for same and different subUrls

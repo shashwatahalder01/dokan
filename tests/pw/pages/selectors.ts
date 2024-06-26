@@ -3385,6 +3385,9 @@ export const selector = {
                 tools: 'ul.dokan-dashboard-menu li.tools a',
                 auction: 'ul.dokan-dashboard-menu li.auction a',
                 support: 'ul.dokan-dashboard-menu li.support a',
+                inbox: 'ul.dokan-dashboard-menu li.inbox a',
+                subscription: 'ul.dokan-dashboard-menu li.subscription a',
+                wepos: 'ul.dokan-dashboard-menu li.wepos a', // only available if wepos is plugin is actived
                 settings: '(//ul[@class="dokan-dashboard-menu"]//li[contains(@class,"settings has-submenu")]//a)[1]',
                 visitStore: '//i[@class="fas fa-external-link-alt"]/..',
                 editAccount: '.fa-user',
