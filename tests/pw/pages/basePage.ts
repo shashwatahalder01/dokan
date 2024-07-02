@@ -54,8 +54,8 @@ export class BasePage {
     }
 
     // goto subUrl
-    async goto(subPath: string): Promise<void> {
-        await this.page.goto(subPath, { waitUntil: 'networkidle' });
+    async goto(subPath: string, waitUntil: 'load' | 'domcontentloaded' | 'networkidle' | 'commit' = 'networkidle'): Promise<void> {
+        await this.page.goto(subPath, { waitUntil: waitUntil });
     }
 
     // go forward
@@ -1312,7 +1312,7 @@ export class BasePage {
     async setDropdownOptionSpan(selector: string, value: string): Promise<void> {
         const elements = await this.page.$$(selector);
         for (const element of elements) {
-            const text = element.evaluate(element => element.textContent, element);
+            const text = await element.evaluate(element => element.textContent, element);
             // console.log(text)
             if (value.toLowerCase() == text?.trim().toLowerCase()) {
                 // console.log(text)
@@ -1417,6 +1417,12 @@ export class BasePage {
     // assert element to have class
     async toHaveClass(selector: string, className: string) {
         await expect(this.page.locator(selector)).toHaveClass(className);
+    }
+
+    // assert element to contain class
+    async toContainClass(selector: string, className: string) {
+        const elementClass = await this.getClassValue(selector);
+        expect(elementClass).toContain(className);
     }
 
     // assert element to have background color

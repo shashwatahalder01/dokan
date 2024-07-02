@@ -3679,4 +3679,76 @@ export const payloads = {
         category_ids: 0,
         context: 'admin',
     },
+
+    // shortcodes
+
+    // dokan dashboard shortcode
+    dashboardShortcode: {
+        title: 'Dashboard-shortcode',
+        content: '[dokan-dashboard]',
+        status: 'publish',
+    },
+
+    // dokan subscription pack shortcode
+    dokanSubscriptionPackShortcode: {
+        title: 'Dokan_subscription_pack',
+        content: '[dps_product_pack]',
+        status: 'publish',
+    },
+
+    // vendor registration  shortcode
+    vendorRegistrationShortcode: {
+        title: 'Vendor-registration',
+        content: '[dokan-vendor-registration]',
+        status: 'publish',
+    },
+
+    // best selling product shortcode
+    bestSellingProductShortcode: {
+        title: 'Best-selling-product',
+        content: '[dokan-best-selling-product]',
+        status: 'publish',
+    },
+
+    // top rated product shortcode
+    topRatedProductShortcode: {
+        title: 'Top-rated-product',
+        content: '[dokan-top-rated-product]',
+        status: 'publish',
+    },
+
+    // customer migration shortcode
+    customerMigrationShortcode: {
+        title: 'Customer-migration',
+        content: '[dokan-customer-migration]',
+        status: 'publish',
+    },
+
+    // geolocation filter form shortcode
+    geolocationFilterFormShortcode: {
+        title: 'geolocation-filter-form',
+        content: '[dokan-geolocation-filter-form]',
+        status: 'publish',
+    },
+
+    // stores shortcode
+    storesShortcode: {
+        title: 'Stores-shortcode',
+        content: '[dokan-stores]',
+        status: 'publish',
+    },
+
+    // my orders shortcode
+    myOrdersShortcode: {
+        title: 'My-orders-shortcode',
+        content: '[dokan-my-orders]',
+        status: 'publish',
+    },
+
+    // request quote shortcode
+    requestQuoteShortcode: {
+        title: 'Request-quote',
+        content: '[dokan-request-quote]',
+        status: 'publish',
+    },
 };

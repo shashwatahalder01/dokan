@@ -316,7 +316,17 @@
 - page: 'Shortcode'
   features:
       admin:
-          admin can add vendor registration shortcode: false
+          admin can create page with dokan shortcode: false
+          vendor can view dokan dashboard (shortcode): true
+          vendor can view dokan subscription packs (shortcode): true
+          guest user can view vendor registration form (shortcode): true
+          customer can view best selling products (shortcode): true
+          customer can view top rated products (shortcode): true
+          customer can view customer migration form (shortcode): true
+          customer can view geolocation filter form (shortcode): true
+          customer can view stores (shortcode): true
+          customer can view my orders (shortcode): true
+          customer can view request for quote (shortcode): true
 
 - page: 'Vendor Settings'
   features:

@@ -1610,6 +1610,12 @@ export class ApiUtils {
         return [responseBody, pageId];
     }
 
+    // delete page
+    async deletePage(pageId: string, auth?: auth): Promise<responseBody> {
+        const [, responseBody] = await this.delete(endPoints.wp.deletePage(pageId), { params: { force: true }, headers: auth });
+        return responseBody;
+    }
+
     /**
      * woocommerce  api methods
      */
