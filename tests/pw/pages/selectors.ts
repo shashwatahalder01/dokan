@@ -3072,11 +3072,12 @@ export const selector = {
             deactivatePlugin: (plugin: string) => `a#deactivate-${plugin}`,
 
             deactivateReason: {
-                deactivateReasonModal: (plugin: string) => `div#${plugin}-wd-dr-modal`,
-                reason: (reasonNumber: number) => `//div[contains(@class, 'wd-dr-modal')]//ul[@class="wd-de-reasons"]//li[${reasonNumber}]`,
-                skipAndDeactivate: `div.wd-dr-modal div.wd-dr-modal-footer a.dont-bother-me`,
-                cancel: `div.wd-dr-modal div.wd-dr-modal-footer button.wd-dr-cancel-modal`,
-                submitAndDeactivate: `div.wd-dr-modal div.wd-dr-modal-footer button.wd-dr-submit-modal`,
+                deactivateReasonModal: 'div.wd-dr-modal.modal-active',
+                reason: (reasonNumber: number) => `//div[contains(@class, 'wd-dr-modal modal-active')]//ul[@class="wd-de-reasons"]//li[${reasonNumber}]`,
+                reaseonInput: 'div.wd-dr-modal.modal-active div.wd-dr-modal-reason-input textarea',
+                skipAndDeactivate: `div.wd-dr-modal.modal-active div.wd-dr-modal-footer a.dont-bother-me`,
+                cancel: `div.wd-dr-modal.modal-active div.wd-dr-modal-footer button.wd-dr-cancel-modal`,
+                submitAndDeactivate: `div.wd-dr-modal.modal-active div.wd-dr-modal-footer button.wd-dr-submit-modal`,
             },
         },
 
