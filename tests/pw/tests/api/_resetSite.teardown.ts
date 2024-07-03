@@ -28,7 +28,7 @@ test.describe('reset test environment', () => {
     });
 
     test('delete all stores', async () => {
-        await apiUtils.deleteAllStores(payloads.adminAuth); //todo: don't work
+        await apiUtils.deleteAllStores(payloads.adminAuth); // todo: doesn't work
     });
 
     test('delete all customers', async () => {

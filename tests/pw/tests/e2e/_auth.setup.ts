@@ -35,7 +35,7 @@ setup.describe('authenticate users & set permalink', () => {
         await loginPage.adminLogin(data.admin, data.auth.adminAuthFile);
     });
 
-    //todo: add plugin activation for local setup
+    // todo: add plugin activation for local setup
 
     setup.skip('admin set WpSettings', { tag: ['@lite'] }, async ({ page }) => {
         const loginPage = new LoginPage(page);

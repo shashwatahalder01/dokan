@@ -170,7 +170,7 @@ export class EuCompliancePage extends AdminPage {
     // view product EU compliance data
     async viewProductEuComplianceData(productName: string) {
         await this.goIfNotThere(data.subUrls.frontend.productDetails(helpers.slugify(productName)));
-        const { deliveryTime, ...euComplianceData } = singleProductCustomer.productDetails.euComplianceData; //todo: skip delivery time for data is not saved via api
+        const { deliveryTime, ...euComplianceData } = singleProductCustomer.productDetails.euComplianceData; // todo: skip delivery time for data is not saved via api
         await this.multipleElementVisible(euComplianceData);
     }
 }

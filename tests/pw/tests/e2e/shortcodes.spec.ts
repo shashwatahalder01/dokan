@@ -35,23 +35,27 @@ test.describe('Shortcodes test', () => {
     });
 
     test.skip('admin can create page with dokan shortcode', { tag: ['@lite', '@admin'] }, async () => {
-        //todo: need to fix this test
+        // todo: need to fix this test
         await admin.createPageWithShortcode(data.dokanShortcodes.dashboard);
     });
 
     test('vendor can view dokan dashboard (shortcode)', { tag: ['@lite', '@admin'] }, async () => {
-        const [reponsbody] = await apiUtils.createPage(payloads.dashboardShortcode, payloads.adminAuth);
+        const [reponsbody, pageId] = await apiUtils.createPage(payloads.dashboardShortcode, payloads.adminAuth);
+        console.log(reponsbody); //todo: remove this
         await vendor.viewDashboard(reponsbody.link);
+        await apiUtils.deletePage(pageId, payloads.adminAuth); // todo: add to before each
     });
 
     test('vendor can view dokan subscription packs (shortcode)', { tag: ['@pro', '@admin'] }, async () => {
-        const [reponsbody] = await apiUtils.createPage(payloads.dokanSubscriptionPackShortcode, payloads.adminAuth);
+        const [reponsbody, pageId] = await apiUtils.createPage(payloads.dokanSubscriptionPackShortcode, payloads.adminAuth);
         await vendor.viewDokanSubscriptionPacks(reponsbody.link);
+        await apiUtils.deletePage(pageId, payloads.adminAuth);
     });
 
     test('guest user can view vendor registration form (shortcode)', { tag: ['@lite', '@admin'] }, async ({ page }) => {
         const guest = new ShortcodePage(page);
         const [reponsbody, pageId] = await apiUtils.createPage(payloads.vendorRegistrationShortcode, payloads.adminAuth);
+        console.log(reponsbody); //todo: remove this
         await guest.viewVendorRegistrationForm(reponsbody.link);
         await apiUtils.deletePage(pageId, payloads.adminAuth);
     });
@@ -99,5 +103,5 @@ test.describe('Shortcodes test', () => {
         await apiUtils.deletePage(pageId, payloads.adminAuth);
     });
 
-    //todo: add test for each page functionality
+    // todo: add test for each page functionality
 });

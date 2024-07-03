@@ -105,7 +105,7 @@ test.describe('EU Compliance test', () => {
         await admin.hideEuComplianceVendor(data.predefined.vendorStores.vendor1);
 
         // reset
-        await dbUtils.setDokanSettings(dbData.dokan.optionName.appearance, appearanceSettings); //todo: should we reset to previous value or default value [dbData.dokan.appearanceSettings](need to check)
+        await dbUtils.setDokanSettings(dbData.dokan.optionName.appearance, appearanceSettings); // todo: should we reset to previous value or default value [dbData.dokan.appearanceSettings](need to check)
     });
 
     // vendor

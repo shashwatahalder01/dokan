@@ -100,7 +100,7 @@ test.describe.skip('Marketplace Coupon calculation test', () => {
     });
 
     test('coupon calculation test', { tag: ['@pro'] }, async () => {
-        //todo: apply single coupon, multiple coupon, sequential coupon with options and make separate test
+        // todo: apply single coupon, multiple coupon, sequential coupon with options and make separate test
         const [, , code1, amount1] = await apiUtils.createMarketPlaceCoupon({ ...payloads.createMarketPlaceCoupon(), discount_type: 'percent' }, payloads.adminAuth);
         const [, , code2, amount2] = await apiUtils.createMarketPlaceCoupon({ ...payloads.createMarketPlaceCoupon(), discount_type: 'percent' }, payloads.adminAuth);
         const discount = {
@@ -194,7 +194,7 @@ test.describe.skip('commission test', () => {
         await dbUtils.setDokanSettings(dbData.dokan.optionName.selling, { ...dbData.dokan.sellingSettings, commission_type: 'combine' });
     });
 
-    // //todo: add vendor-wise, category-wise, product-wise commission
+    // todo: add vendor-wise, category-wise, product-wise commission
 
     test('shipping fee recipient test', { tag: ['@pro'] }, async () => {
         await dbUtils.setDokanSettings(dbData.dokan.optionName.selling, { ...dbData.dokan.sellingSettings, shipping_fee_recipient: 'seller' });

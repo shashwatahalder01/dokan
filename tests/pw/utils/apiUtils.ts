@@ -1599,7 +1599,7 @@ export class ApiUtils {
 
     // create page
     async createPage(payload: object, auth?: auth): Promise<[responseBody, string]> {
-        let pageId = await this.getPageId(helpers.slugify(payloads.tocPage.title), payloads.adminAuth); //todo: remove this hardcoded data payloads.tocPage.title
+        let pageId = await this.getPageId(helpers.slugify(payloads.tocPage.title), payloads.adminAuth); // todo: remove this hardcoded data payloads.tocPage.title
         let responseBody;
         if (!pageId) {
             [, responseBody] = await this.post(endPoints.wp.createPage, { data: payload, headers: auth });
@@ -1652,7 +1652,7 @@ export class ApiUtils {
     async createProductReview(payload: string | object, review: object, auth?: auth): Promise<[responseBody, string, string]> {
         let productId: string;
         typeof payload === 'object' ? ([, productId] = await this.createProduct(payload, auth)) : (productId = payload);
-        //todo: check if product exists with that id follow: createOrder
+        // todo: check if product exists with that id follow: createOrder
         const [, responseBody] = await this.post(endPoints.wc.createReview, { data: { ...review, product_id: productId }, headers: auth });
         const reviewId = String(responseBody?.id);
         const reviewMessage = String(responseBody?.review);
@@ -1742,7 +1742,7 @@ export class ApiUtils {
         //     [, productId] = await this.createProduct(payloads.createProduct(), auth);
         // } else {
         //     typeof product === 'object' ? ([, productId] = await this.createProduct(product, auth)) : (productId = product);
-        // } //todo: have to resolve invalid id form env issue
+        // } // todo: have to resolve invalid id form env issue
 
         if (!product) {
             [, productId] = await this.createProduct(payloads.createProduct(), auth);

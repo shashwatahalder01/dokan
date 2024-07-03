@@ -2172,7 +2172,7 @@ export const selector = {
                         enableMehod: (methodName: string) => `//div[@class='${methodName} dokan-settings-field-type-social']//label[@class='switch tips']`,
                         settings: (methodName: string) => `//div[@class='${methodName} dokan-settings-field-type-social']//span[contains(@class,"active-social-expend-btn")]`,
 
-                        //todo: need to update all social connect locators
+                        // todo: need to update all social connect locators
                         facebook: {
                             facebookAppId: '#dokan_verification\\[fb_app_id\\]',
                             facebookAppSecret: '#dokan_verification\\[fb_app_secret\\]',
@@ -7307,7 +7307,7 @@ export const selector = {
             vendorShippingMethod: (shippingMethod: string) => `//label[contains(text(),'${shippingMethod}')]/..//input`, // For Unique Shipping Method
 
             // Proceed to Checkout
-            // proceedToCheckout: '.checkout-button.button.wc-forward, .wp-block-woocommerce-proceed-to-checkout-block a', //todo: remove in future
+            // proceedToCheckout: '.checkout-button.button.wc-forward, .wp-block-woocommerce-proceed-to-checkout-block a', // todo: remove in future
             // proceedToCheckout: 'div.wc-block-cart__submit-container a.wc-block-cart__submit-button',
             proceedToCheckout: '//a[.="Proceed to Checkout"]',
             // proceedToCheckout: '//span[contains (text(), "Proceed to Checkout")]/..',

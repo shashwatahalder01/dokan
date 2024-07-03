@@ -28,8 +28,6 @@ test.describe.skip('Plugin functionality test', () => {
         await apiUtils.dispose();
     });
 
-    
-
     test('activate Dokan pro plugin', { tag: ['@pro', '@admin'] }, async () => {
         await apiUtils.updatePlugin('dokan-pro/dokan-pro', { status: 'inactive' }, payloads.adminAuth);
         await admin.activatePlugin(data.plugin.pluginName.dokanPro);
@@ -68,5 +66,5 @@ test.describe.skip('Plugin functionality test', () => {
         await admin.activatePlugin(data.plugin.pluginName.dokanLite);
     });
 
-    //todo: install plugin
+    // todo: install plugin
 });

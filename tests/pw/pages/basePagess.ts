@@ -4,7 +4,7 @@
 /* eslint-disable playwright/no-networkidle */
 /* eslint-disable playwright/no-force-option */
 
-import { expect, Page, BrowserContext, Cookie, Request, Response, Locator, Frame, FrameLocator, JSHandle, ElementHandle } from '@playwright/test';
+import { expect, Page, BrowserContext, Cookie, Request, Response, Locator, Frame, FrameLocator, ElementHandle } from '@playwright/test';
 import { data } from '@utils/testData';
 import { selector } from '@pages/selectors';
 
@@ -44,7 +44,6 @@ export class BasePage {
     // wait for load state
     async waitForLoadState(): Promise<void> {
         await this.page.waitForLoadState('networkidle');
-        // await this.page.waitForLoadState( 'domcontentloaded');
     }
 
     // wait for load state
@@ -55,12 +54,11 @@ export class BasePage {
     // wait for url to be loaded
     async waitForUrl(url: string, options?: { timeout?: number | undefined; waitUntil?: 'networkidle' | 'load' | 'domcontentloaded' | 'commit' | undefined } | undefined): Promise<void> {
         await this.page.waitForURL(url, options);
-        // await this.page.waitForURL(url,{ waitUntil: 'networkidle' });
     }
 
     // goto subUrl
-    async goto(subPath: string, waitUntil: 'load' | 'domcontentloaded' | 'networkidle' | 'commit' = 'networkidle'): Promise<void> {
-        await this.page.goto(subPath, { waitUntil: waitUntil });
+    async goto(subPath: string): Promise<void> {
+        await this.page.goto(subPath, { waitUntil: 'networkidle' });
     }
 
     // go forward
@@ -89,7 +87,9 @@ export class BasePage {
     // returns whether the current URL is expected
     isCurrentUrl(subPath: string): boolean {
         const url = new URL(this.getCurrentUrl());
-        const currentURL = url.href.replace(/[/]$/, ''); // added to remove last '/',
+        const currentURL = url.href;
+        // console.log('currentURL: ', currentURL);
+        // console.log('newURL: ', this.createUrl(subPath));
         return currentURL === this.createUrl(subPath);
     }
 
@@ -106,9 +106,6 @@ export class BasePage {
         if (!this.isCurrentUrl(subPath)) {
             const url = this.createUrl(subPath);
             await this.page.goto(url, { waitUntil: 'networkidle' });
-            // await this.page.goto(url, { waitUntil: 'domcontentloaded' }); //doesn't work for backend
-            // this.page.waitForURL(url + '/**', { waitUntil: 'networkidle' });
-            // this.page.waitForURL(url + '/**', { waitUntil: 'domcontentloaded' });
             const currentUrl = this.getCurrentUrl();
             expect(currentUrl).toMatch(subPath);
         }
@@ -165,15 +162,12 @@ export class BasePage {
     // scroll to top
     async scrollToTop(): Promise<void> {
         await this.page.keyboard.down(data.key.home);
-        // await this.page.evaluate(() => window.scroll(0, 0));
         await this.wait(1);
     }
 
     // scroll to bottom
     async scrollToBottom(): Promise<void> {
         await this.page.keyboard.down(data.key.end);
-        // await this.page.evaluate(() => window.scrollTo(0, document.body.scrollHeight));
-        // await this.wait(0.5);
     }
 
     /**
@@ -183,7 +177,6 @@ export class BasePage {
     // click on element
     async click(selector: string): Promise<void> {
         await this.clickLocator(selector);
-        // await this.clickByPage(selector);
     }
 
     // click on element
@@ -261,20 +254,6 @@ export class BasePage {
         await this.page.locator(selector).click();
         const [, ...responses] = await Promise.all([this.page.waitForLoadState('networkidle'), ...responsePromises]);
         return responses;
-    }
-
-    // click & wait for multiple responses
-    async clickAndWaitForMultipleResponses(subUrls: string[][], selector: string, code = 200): Promise<void[] | Response[]> {
-        // todo: fix this; also update for same and different subUrls
-        const promises = [];
-        subUrls.forEach(subUrl => {
-            console.log('subUls: ', subUrl[0], ' code: ', subUrl[1]);
-            const promise = this.page.waitForResponse(resp => resp.url().includes(subUrl[0] as string) && resp.status() === (subUrl[1] ?? code));
-            promises.push(promise);
-        });
-        promises.push(this.page.locator(selector).click());
-        const response = await Promise.all([...promises, this.page.locator(selector).click()]);
-        return response;
     }
 
     // click & accept
@@ -405,15 +384,12 @@ export class BasePage {
     // get locators
     async getLocators(selector: string): Promise<Locator[]> {
         return await this.page.locator(selector).all();
-        // return this.page.locator(selector).elementHandles();
-        // return this.page.$$(selector);
     }
 
     // returns whether the element is visible
     async isVisible(selector: string): Promise<boolean> {
         await this.wait(1); // to add a buffer time for the element to be visible // todo: need to resolve in future
         return await this.isVisibleLocator(selector);
-        // return await this.isVisibleByPage(selector);
     }
 
     // returns whether the element is visible
@@ -460,7 +436,6 @@ export class BasePage {
     // hover on selector
     async hover(selector: string): Promise<void> {
         await this.page.locator(selector).hover();
-        // await this.page.hover(selector);
         await this.wait(0.2);
     }
 
@@ -477,13 +452,11 @@ export class BasePage {
     // get element count
     async getElementCount(selector: string): Promise<number> {
         return await this.countLocator(selector);
-        // return this.page.locator(selector).count();
     }
 
     // get element text content
     async getElementText(selector: string): Promise<string | null> {
         return await this.textContentOfLocator(selector);
-        // return await this.page.textContent(selector);
     }
 
     // get element text if visible
@@ -605,7 +578,6 @@ export class BasePage {
 
     // get multiple element texts
     async getMultipleElementTexts(selector: string): Promise<string[]> {
-        // const texts = await this.page.$$eval(selector, (elements) => elements.map((item) => item.textContent));
         const element = this.getElement(selector);
         const allTexts = await element.allTextContents();
         // console.log(allTexts);
@@ -654,17 +626,9 @@ export class BasePage {
         await this.press('Backspace');
     }
 
-    // Or
-
-    async clearInputFieldByEvaluate(selector: string): Promise<void> {
-        const element = this.getElement(selector);
-        await this.page.evaluate(element => (element.value = ''), element); // todo: fix
-    }
-
     // clear input field and type
     async clearAndType(selector: string, text: string): Promise<void> {
         await this.fill(selector, text);
-        // await this.clearAndTypeByPage(selector, text);
     }
 
     // clear input field and type
@@ -680,7 +644,7 @@ export class BasePage {
 
     // type in input field
     async type(selector: string, text: string): Promise<void> {
-        await this.page.locator(selector).pressSequentially(text);
+        await this.page.locator(selector).pressSequentially(text, { delay: 200 });
     }
 
     // fill in input field
@@ -796,7 +760,6 @@ export class BasePage {
 
     // upload file
     async uploadFile(selector: string, files: string | string[]): Promise<void> {
-        // await this.page.setInputFiles(selector, files, { noWaitAfter: true });
         await this.page.setInputFiles(selector, files);
         await this.wait(1.5); // todo: resolve this
     }
@@ -812,17 +775,6 @@ export class BasePage {
             await fileChooser.setFiles(files);
         });
         await this.page.locator(selector).click(); // invokes the filechooser
-    }
-
-    async uploadFileViaListener1(selector: string, files: string | string[]): Promise<void> {
-        // Start waiting for file chooser before clicking. Note no await.
-        const fileChooserPromise = this.page.waitForEvent('filechooser'); // Note: no await on listener
-        await this.page.locator(selector).click(); //  invokes the filechooser
-        const fileChooser = await fileChooserPromise;
-        await fileChooser.setFiles(files);
-        // or
-        // const [fileChooser] = await Promise.all([this.page.waitForEvent('filechooser'), this.page.locator(selector).click()])
-        // await fileChooser.setFiles(files)
     }
 
     // remove selected files to upload
@@ -888,7 +840,6 @@ export class BasePage {
     async typeFrameSelector(frame: string, frameSelector: string, text: string): Promise<void> {
         const locator = this.page.frameLocator(frame).locator(frameSelector);
         await locator.fill(text);
-        // await locator.pressSequentially(text);
     }
 
     /**
@@ -917,7 +868,6 @@ export class BasePage {
     async checkLocator(selector: string): Promise<void> {
         const locator = this.page.locator(selector);
         await locator.check();
-        // await locator.check({ force: true }); // forced is used to avoid "locator.check: Clicking the checkbox did not change its state" error
     }
 
     // click locator
@@ -975,16 +925,8 @@ export class BasePage {
         await locator.evaluateAll(pageFunction);
     }
 
-    // returns the return value of pageFunction as a JSHandle
-    // eslint-disable-next-line @typescript-eslint/ban-types
-    async evaluateHandle(selector: string, pageFunction: any): Promise<JSHandle> {
-        const locator = this.page.locator(selector);
-        return await locator.evaluateHandle(pageFunction);
-    }
-
     // get locator index relative to it's parent
     async getLocatorIndex(parentSelector: string, childSelector: string): Promise<number> {
-        // const parent = await this.getElementHandle(parentSelector);
         const parent = this.getElement(parentSelector);
         const child = await this.getElementHandle(childSelector);
         const index = await parent.evaluate((parent, child) => Array.from(parent.children).indexOf(child as HTMLElement), child);
@@ -1224,33 +1166,6 @@ export class BasePage {
         });
     }
 
-    // get default prompt value. Otherwise, returns empty string.
-    // getDefaultPromptValue(): string {
-    // 	let value: string;
-    // 	this.page.on('dialog', (dialog) => {
-    // 		value = dialog.defaultValue();
-    // 	});
-    // 	return value;
-    // }
-
-    // get dialog's type [alert, beforeunload, confirm or prompt]
-    // async getDialogType(): Promise<string> {
-    // 	let type: string;
-    // 	this.page.on('dialog', (dialog) => {
-    // 		type = dialog.type();
-    // 	});
-    // 	return type;
-    // }
-
-    // get dialog's message
-    // async getDialogMessage(): Promise<string> {
-    // 	let message: string;
-    // 	this.page.on('dialog', (dialog) => {
-    // 		message = dialog.message();
-    // 	});
-    // 	return message;
-    // }
-
     /**
      * Cookies methods
      */
@@ -1365,14 +1280,12 @@ export class BasePage {
 
     // assert any element to be visible
     async toBeVisibleAnyOfThem(selectors: string[]) {
-        // todo: extend and improve this method
         const res = [];
         for (const selector of selectors) {
             res.push(await this.isVisible(selector));
         }
         const result = res.includes(true);
         expect(result).toBeTruthy();
-        // todo:  return which elements are true for further operation
     }
 
     // assert element to be visible
@@ -1478,7 +1391,7 @@ export class BasePage {
      * Custom methods
      */
 
-    // dokan select2
+    // wepos select2
     async select2ByText(selectSelector: string, optionSelector: string, text: string): Promise<void> {
         await this.click(selectSelector);
         await this.typeAndWaitForResponse(data.subUrls.ajax, optionSelector, text);
@@ -1486,7 +1399,7 @@ export class BasePage {
         await this.press('Enter');
     }
 
-    // dokan select2 multi-selector
+    // wepos select2 multi-selector
     async select2ByTextMultiSelector(selectSelector: string, optionSelector: string, text: string): Promise<void> {
         const isExists = await this.isLocatorExists(`//li[@class="select2-selection__choice" and @title="${text}"]`);
         if (!isExists) {
@@ -1501,7 +1414,7 @@ export class BasePage {
     async enableSwitcher(selector: string): Promise<void> {
         selector = /^(\/\/|\(\/\/)/.test(selector) ? `${selector}//span` : `${selector} span`;
         const value = await this.getElementBackgroundColor(selector);
-        if (!value.includes('rgb(0, 144, 255)')) {
+        if (!value.includes('rgb(59, 128, 244)')) {
             await this.click(selector);
         }
     }
@@ -1510,66 +1423,7 @@ export class BasePage {
     async disableSwitcher(selector: string): Promise<void> {
         selector = /^(\/\/|\(\/\/)/.test(selector) ? `${selector}//span` : `${selector} span`;
         const value = await this.getElementBackgroundColor(selector);
-        if (value.includes('rgb(0, 144, 255)')) {
-            await this.click(selector);
-        }
-    }
-
-    // admin enable switcher , if enabled then Skip : admin settings switcher
-    async enableSwitcherAndWaitForResponse(subUrl: string, selector: string, code = 200): Promise<Response | string> {
-        selector = /^(\/\/|\(\/\/)/.test(selector) ? `${selector}//span` : `${selector} span`;
-        const value = await this.getElementBackgroundColor(selector);
-        if (!value.includes('rgb(0, 144, 255)')) {
-            const [response] = await Promise.all([this.page.waitForResponse(resp => resp.url().includes(subUrl) && resp.status() === code), this.page.locator(selector).click()]);
-            return response;
-        }
-        return '';
-    }
-
-    // admin disable switcher , if disabled then skip : admin settings switcher
-    async disableSwitcherAndWaitForResponse(subUrl: string, selector: string, code = 200): Promise<Response | string> {
-        selector = /^(\/\/|\(\/\/)/.test(selector) ? `${selector}//span` : `${selector} span`;
-        const value = await this.getElementBackgroundColor(selector);
-        if (value.includes('rgb(0, 144, 255)')) {
-            const [response] = await Promise.all([this.page.waitForResponse(resp => resp.url().includes(subUrl) && resp.status() === code), this.page.locator(selector).click()]);
-            return response;
-        }
-        return '';
-    }
-
-    // enable switch or checkbox: dokan setup wizard
-    async enableSwitcherSetupWizard(selector: string): Promise<void> {
-        const value = await this.getPseudoElementStyles(selector, 'before', 'background-color');
-        // rgb(251, 203, 196) for switcher & rgb(242, 98, 77) for checkbox
-        if (!value.includes('rgb(251, 203, 196)') && !value.includes('rgb(242, 98, 77)')) {
-            if (selector.includes('withdraw_methods')) selector += '/..';
-            await this.click(selector);
-        }
-    }
-
-    // disable switch or checkbox: dokan setup wizard
-    async disableSwitcherSetupWizard(selector: string): Promise<void> {
-        const value = await this.getPseudoElementStyles(selector, 'before', 'background-color');
-        // rgb(251, 203, 196) for switcher & rgb(242, 98, 77) for checkbox
-        if (value.includes('rgb(251, 203, 196)') || value.includes('rgb(242, 98, 77)')) {
-            if (selector.includes('withdraw_methods')) selector += '/..';
-            await this.click(selector);
-        }
-    }
-
-    // admin enable switcher , if enabled then Skip : vendor dashboard disbursements
-    async enableSwitcherDisbursement(selector: string): Promise<void> {
-        selector = /^(\/\/|\(\/\/)/.test(selector) ? `${selector}//span` : `${selector} span`;
-        const value = await this.getElementBackgroundColor(selector);
-        if (!value.includes('rgb(33, 150, 243)')) {
-            await this.click(selector);
-        }
-    }
-
-    // enable switch or checkbox: vendor dashboard delivery time
-    async enableSwitcherDeliveryTime(selector: string): Promise<void> {
-        const value = await this.hasClass((selector += '//div[contains(@class,"minitoggle")]'), 'active');
-        if (!value) {
+        if (value.includes('rgb(59, 128, 244)')) {
             await this.click(selector);
         }
     }
@@ -1591,15 +1445,6 @@ export class BasePage {
             if (!isCheckBoxChecked) {
                 await element.click();
             }
-        }
-    }
-
-    // delete element if exist (only first will delete) : dokan rma,report abuse, company verifications // todo: delete all
-    async deleteIfExists(selector: string): Promise<void> {
-        const elementExists = await this.isVisible(selector);
-        if (elementExists) {
-            const element = this.getElement(selector);
-            await element.click();
         }
     }
 
@@ -1628,33 +1473,5 @@ export class BasePage {
         }
 
         await this.click(selector.wpMedia.select);
-    }
-
-    // upload file
-    async wpUploadFile(filePath: string | string[]) {
-        // wp image upload
-        const wpUploadFiles = '//div[@class="supports-drag-drop" and @style="position: relative;"]//button[@id="menu-item-upload"]';
-        const uploadedMedia = '.attachment-preview';
-        const selectFiles = '//div[@class="supports-drag-drop" and @style="position: relative;"]//button[@class="browser button button-hero"]';
-        const select = '//div[@class="supports-drag-drop" and @style="position: relative;"]//button[contains(@class, "media-button-select")]';
-        const crop = '//div[@class="supports-drag-drop" and @style="position: relative;"]//button[contains(@class, "media-button-insert")]';
-        const uploadedMediaIsVisible = await this.isVisible(uploadedMedia);
-        if (uploadedMediaIsVisible) {
-            await this.click(wpUploadFiles);
-        } else {
-            await this.uploadFile(selectFiles, filePath);
-            await this.click(select);
-            await this.clickIfVisible(crop);
-        }
-    }
-
-    // Remove Previous Uploaded media If Exists
-    async removePreviouslyUploadedImage(previousUploadedImageSelector: string, removePreviousUploadedImageSelector: string) {
-        const previousUploadedImageIsVisible = await this.isVisible(previousUploadedImageSelector);
-        if (previousUploadedImageIsVisible) {
-            await this.hover(previousUploadedImageSelector);
-            await this.click(removePreviousUploadedImageSelector);
-            await this.wait(2);
-        }
     }
 }
