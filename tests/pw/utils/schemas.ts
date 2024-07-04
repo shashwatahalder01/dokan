@@ -1494,26 +1494,28 @@ export const schemas = {
                     store_settings_url: z.string(),
                 })
                 .optional(),
-            product_advertising: z.object({
-                advertisement_data: z
-                    .object({
-                        vendor_id: z.number(),
-                        product_id: z.number(),
-                        subscription_status: z.boolean(),
-                        remaining_slot: z.number(),
-                        global_remaining_slot: z.number(),
-                        subscription_remaining_slot: z.number(),
-                        listing_price: z.string(),
-                        expires_after_days: z.string(),
-                        subscription_expires_after_days: z.number(),
-                        already_advertised: z.boolean(),
-                        can_advertise_for_free: z.boolean(),
-                        expire_date: z.string(),
-                        post_status: z.string(),
-                    })
-                    .optional(),
-                dokan_advertise_single_product: z.boolean(),
-            }),
+            product_advertising: z
+                .object({
+                    advertisement_data: z
+                        .object({
+                            vendor_id: z.number(),
+                            product_id: z.number(),
+                            subscription_status: z.boolean(),
+                            remaining_slot: z.number(),
+                            global_remaining_slot: z.number(),
+                            subscription_remaining_slot: z.number(),
+                            listing_price: z.string(),
+                            expires_after_days: z.string(),
+                            subscription_expires_after_days: z.number(),
+                            already_advertised: z.boolean(),
+                            can_advertise_for_free: z.boolean(),
+                            expire_date: z.string(),
+                            post_status: z.string(),
+                        })
+                        .optional(),
+                    dokan_advertise_single_product: z.boolean(),
+                })
+                .optional(),
             rma: z
                 .object({
                     dokan_rma_product_override: z.boolean(),
@@ -2136,29 +2138,33 @@ export const schemas = {
                 })
                 .optional(),
             assigned_subscription: z.number().optional(),
-            assigned_subscription_info: z.object({
-                subscription_id: z.number(),
-                has_subscription: z.boolean(),
-                expiry_date: z.string(),
-                published_products: z.number(),
-                remaining_products: z.number(),
-                recurring: z.boolean(),
-                start_date: z.string(),
-            }).optional(),
-            categories: z.array(
-                z.object({
-                    term_id: z.number(),
-                    name: z.string(),
-                    slug: z.string(),
-                    term_group: z.number(),
-                    term_taxonomy_id: z.number(),
-                    taxonomy: z.string(),
-                    description: z.string(),
-                    parent: z.number(),
-                    count: z.number(),
-                    filter: z.string(),
-                }),
-            ).optional(),
+            assigned_subscription_info: z
+                .object({
+                    subscription_id: z.number(),
+                    has_subscription: z.boolean(),
+                    expiry_date: z.string(),
+                    published_products: z.number(),
+                    remaining_products: z.number(),
+                    recurring: z.boolean(),
+                    start_date: z.string(),
+                })
+                .optional(),
+            categories: z
+                .array(
+                    z.object({
+                        term_id: z.number(),
+                        name: z.string(),
+                        slug: z.string(),
+                        term_group: z.number(),
+                        term_taxonomy_id: z.number(),
+                        taxonomy: z.string(),
+                        description: z.string(),
+                        parent: z.number(),
+                        count: z.number(),
+                        filter: z.string(),
+                    }),
+                )
+                .optional(),
         }),
 
         // sale report schema
@@ -2186,10 +2192,10 @@ export const schemas = {
             'request-confirmed': z.number(),
             'request-failed': z.number(),
             'request-completed': z.number(),
-            'wc-active': z.number(),
-            'wc-switched': z.number(),
-            'wc-expired': z.number(),
-            'wc-pending-cancel': z.number(),
+            'wc-active': z.number().optional(),
+            'wc-switched': z.number().optional(),
+            'wc-expired': z.number().optional(),
+            'wc-pending-cancel': z.number().optional(),
             'wc-pending': z.number(),
             'wc-processing': z.number(),
             'wc-on-hold': z.number(),
@@ -2198,17 +2204,17 @@ export const schemas = {
             'wc-refunded': z.number(),
             'wc-failed': z.number(),
             'wc-checkout-draft': z.number(),
-            complete: z.number(),
-            paid: z.number(),
-            confirmed: z.number(),
-            unpaid: z.number(),
-            'pending-confirmation': z.number(),
-            cancelled: z.number(),
-            'in-cart': z.number(),
-            'was-in-cart': z.number(),
-            vacation: z.number(),
-            open: z.number(),
-            closed: z.number(),
+            complete: z.number().optional(),
+            paid: z.number().optional(),
+            confirmed: z.number().optional(),
+            unpaid: z.number().optional(),
+            'pending-confirmation': z.number().optional(),
+            cancelled: z.number().optional(),
+            'in-cart': z.number().optional(),
+            'was-in-cart': z.number().optional(),
+            vacation: z.number().optional(),
+            open: z.number().optional(),
+            closed: z.number().optional(),
             total: z.number(),
         }),
 
