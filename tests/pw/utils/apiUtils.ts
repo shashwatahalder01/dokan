@@ -1598,8 +1598,8 @@ export class ApiUtils {
     }
 
     // create page
-    async createPage(payload: object, auth?: auth): Promise<[responseBody, string]> {
-        let pageId = await this.getPageId(helpers.slugify(payloads.tocPage.title), payloads.adminAuth); // todo: remove this hardcoded data payloads.tocPage.title
+    async createPage(payload: any, auth?: auth): Promise<[responseBody, string]> {
+        let pageId = await this.getPageId(helpers.slugify(payload.title), payloads.adminAuth);
         let responseBody;
         if (!pageId) {
             [, responseBody] = await this.post(endPoints.wp.createPage, { data: payload, headers: auth });
@@ -1738,12 +1738,6 @@ export class ApiUtils {
     // create order
     async createOrder(product: string | object, orderPayload: any, auth?: auth): Promise<[APIResponse, responseBody, string, string]> {
         let productId: string;
-        // if (!product) {
-        //     [, productId] = await this.createProduct(payloads.createProduct(), auth);
-        // } else {
-        //     typeof product === 'object' ? ([, productId] = await this.createProduct(product, auth)) : (productId = product);
-        // } // todo: have to resolve invalid id form env issue
-
         if (!product) {
             [, productId] = await this.createProduct(payloads.createProduct(), auth);
         } else {

@@ -1461,8 +1461,8 @@ export const schemas = {
                     }),
                 ),
                 chosen_cat: z.array(z.number()),
-                external_url: z.string(),
-                button_text: z.string(),
+                external_url: z.string().optional(),
+                button_text: z.string().optional(),
             }),
             inventory: z.object({
                 sku: z.string(),
@@ -1483,83 +1483,99 @@ export const schemas = {
                 purchase_note: z.string(),
                 reviews_allowed: z.boolean(),
             }),
-            geolocation: z.object({
-                use_store_settings: z.string(),
-                dokan_geo_latitude: z.string(),
-                dokan_geo_longitude: z.string(),
-                dokan_geo_public: z.string(),
-                dokan_geo_address: z.string(),
-                store_has_settings: z.boolean(),
-                store_settings_url: z.string(),
-            }),
+            geolocation: z
+                .object({
+                    use_store_settings: z.string(),
+                    dokan_geo_latitude: z.string(),
+                    dokan_geo_longitude: z.string(),
+                    dokan_geo_public: z.string(),
+                    dokan_geo_address: z.string(),
+                    store_has_settings: z.boolean(),
+                    store_settings_url: z.string(),
+                })
+                .optional(),
             product_advertising: z.object({
-                advertisement_data: z.object({
-                    vendor_id: z.number(),
-                    product_id: z.number(),
-                    subscription_status: z.boolean(),
-                    remaining_slot: z.number(),
-                    global_remaining_slot: z.number(),
-                    subscription_remaining_slot: z.number(),
-                    listing_price: z.string(),
-                    expires_after_days: z.string(),
-                    subscription_expires_after_days: z.number(),
-                    already_advertised: z.boolean(),
-                    can_advertise_for_free: z.boolean(),
-                    expire_date: z.string(),
-                    post_status: z.string(),
-                }),
+                advertisement_data: z
+                    .object({
+                        vendor_id: z.number(),
+                        product_id: z.number(),
+                        subscription_status: z.boolean(),
+                        remaining_slot: z.number(),
+                        global_remaining_slot: z.number(),
+                        subscription_remaining_slot: z.number(),
+                        listing_price: z.string(),
+                        expires_after_days: z.string(),
+                        subscription_expires_after_days: z.number(),
+                        already_advertised: z.boolean(),
+                        can_advertise_for_free: z.boolean(),
+                        expire_date: z.string(),
+                        post_status: z.string(),
+                    })
+                    .optional(),
                 dokan_advertise_single_product: z.boolean(),
             }),
-            rma: z.object({
-                dokan_rma_product_override: z.boolean(),
-                warranty_label: z.string(),
-                warranty_type: z.string(),
-                warranty_length: z.string(),
-                warranty_length_value: z.string(),
-                warranty_length_duration: z.string(),
-                warranty_reason: z.array(z.string()),
-                addon_settings: z.array(z.unknown()), // Assuming addon_settings can be any type
-                warranty_policy: z.string(),
-            }),
-            wholesale: z.object({
-                wholesale_price: z.string(),
-                wholesale_quantity: z.string(),
-                enable_wholesale: z.boolean(),
-            }),
-            order_min_max: z.object({
-                product_wise_activation: z.string(),
-                min_quantity: z.string().or(z.number()),
-                max_quantity: z.string().or(z.number()),
-                min_amount: z.string().or(z.number()),
-                max_amount: z.string().or(z.number()),
-                _donot_count: z.string().or(z.number()),
-                ignore_from_cat: z.string().or(z.number()),
-            }),
-            linked: z.object({
-                upsell_ids: z.array(z.number()),
-                cross_sell_ids: z.array(z.number()),
-                grouped_products: z.array(z.number()),
-            }),
-            shipping_tax: z.object({
-                _disable_shipping: z.boolean(),
-                _weight: z.string(),
-                _length: z.string(),
-                _width: z.string(),
-                _height: z.string(),
-                shipping_class: z.string(),
-                _overwrite_shipping: z.boolean(),
-                _additional_price: z.string(),
-                _additional_qty: z.string(),
-                _dps_processing_time: z.string(),
-                _tax_status: z.string(),
-                _tax_class: z.string(),
-            }),
-            attributes: z.object({
-                _has_attribute: z.boolean(),
-                _create_variations: z.boolean(),
-                _product_attributes: z.array(z.unknown()), // Assuming _product_attributes can be any type
-                _default_attributes: z.array(z.unknown()), // Assuming _default_attributes can be any type
-            }),
+            rma: z
+                .object({
+                    dokan_rma_product_override: z.boolean(),
+                    warranty_label: z.string(),
+                    warranty_type: z.string(),
+                    warranty_length: z.string(),
+                    warranty_length_value: z.string(),
+                    warranty_length_duration: z.string(),
+                    warranty_reason: z.array(z.string()),
+                    addon_settings: z.array(z.unknown()), // Assuming addon_settings can be any type
+                    warranty_policy: z.string(),
+                })
+                .optional(),
+            wholesale: z
+                .object({
+                    wholesale_price: z.string(),
+                    wholesale_quantity: z.string(),
+                    enable_wholesale: z.boolean(),
+                })
+                .optional(),
+            order_min_max: z
+                .object({
+                    product_wise_activation: z.string(),
+                    min_quantity: z.string().or(z.number()),
+                    max_quantity: z.string().or(z.number()),
+                    min_amount: z.string().or(z.number()),
+                    max_amount: z.string().or(z.number()),
+                    _donot_count: z.string().or(z.number()),
+                    ignore_from_cat: z.string().or(z.number()),
+                })
+                .optional(),
+            linked: z
+                .object({
+                    upsell_ids: z.array(z.number()),
+                    cross_sell_ids: z.array(z.number()),
+                    grouped_products: z.array(z.number()),
+                })
+                .optional(),
+            shipping_tax: z
+                .object({
+                    _disable_shipping: z.boolean(),
+                    _weight: z.string(),
+                    _length: z.string(),
+                    _width: z.string(),
+                    _height: z.string(),
+                    shipping_class: z.string(),
+                    _overwrite_shipping: z.boolean(),
+                    _additional_price: z.string(),
+                    _additional_qty: z.string(),
+                    _dps_processing_time: z.string(),
+                    _tax_status: z.string(),
+                    _tax_class: z.string(),
+                })
+                .optional(),
+            attributes: z
+                .object({
+                    _has_attribute: z.boolean(),
+                    _create_variations: z.boolean(),
+                    _product_attributes: z.array(z.unknown()), // Assuming _product_attributes can be any type
+                    _default_attributes: z.array(z.unknown()), // Assuming _default_attributes can be any type
+                })
+                .optional(),
         }),
     },
 
@@ -1994,10 +2010,10 @@ export const schemas = {
                 'request-confirmed': z.number(),
                 'request-failed': z.number(),
                 'request-completed': z.number(),
-                'wc-active': z.number(),
-                'wc-switched': z.number(),
-                'wc-expired': z.number(),
-                'wc-pending-cancel': z.number(),
+                'wc-active': z.number().optional(),
+                'wc-switched': z.number().optional(),
+                'wc-expired': z.number().optional(),
+                'wc-pending-cancel': z.number().optional(),
                 'wc-pending': z.number(),
                 'wc-processing': z.number(),
                 'wc-on-hold': z.number(),
@@ -2006,17 +2022,17 @@ export const schemas = {
                 'wc-refunded': z.number(),
                 'wc-failed': z.number(),
                 'wc-checkout-draft': z.number(),
-                complete: z.number(),
-                paid: z.number(),
-                confirmed: z.number(),
-                unpaid: z.number(),
-                'pending-confirmation': z.number(),
-                cancelled: z.number(),
-                'in-cart': z.number(),
-                'was-in-cart': z.number(),
-                vacation: z.number(),
-                open: z.number(),
-                closed: z.number(),
+                complete: z.number().optional(),
+                paid: z.number().optional(),
+                confirmed: z.number().optional(),
+                unpaid: z.number().optional(),
+                'pending-confirmation': z.number().optional(),
+                cancelled: z.number().optional(),
+                'in-cart': z.number().optional(),
+                'was-in-cart': z.number().optional(),
+                vacation: z.number().optional(),
+                open: z.number().optional(),
+                closed: z.number().optional(),
                 total: z.number(),
             }),
             sales: z.string(),
@@ -2053,7 +2069,7 @@ export const schemas = {
                     .or(z.array(z.any())),
                 paypal: z
                     .object({
-                        email: z.string().email(),
+                        email: z.string(),
                     })
                     .or(z.array(z.any())),
             }),
@@ -2082,12 +2098,12 @@ export const schemas = {
             dokan_store_open_notice: z.string(),
             dokan_store_close_notice: z.string(),
             dokan_store_time: z.array(z.unknown()).optional(),
-            sale_only_here: z.boolean(),
-            company_name: z.string(),
-            vat_number: z.string(),
-            company_id_number: z.string(),
-            bank_name: z.string(),
-            bank_iban: z.string(),
+            sale_only_here: z.boolean().optional(),
+            company_name: z.string().optional(),
+            vat_number: z.string().optional(),
+            company_id_number: z.string().optional(),
+            bank_name: z.string().optional(),
+            bank_iban: z.string().optional(),
             profile_completion: z
                 .object({
                     closed_by_user: z.boolean(),
@@ -2113,11 +2129,13 @@ export const schemas = {
                     }),
                 })
                 .optional(),
-            current_subscription: z.object({
-                name: z.union([z.string(), z.number()]),
-                label: z.string(),
-            }),
-            assigned_subscription: z.number(),
+            current_subscription: z
+                .object({
+                    name: z.union([z.string(), z.number()]),
+                    label: z.string(),
+                })
+                .optional(),
+            assigned_subscription: z.number().optional(),
             assigned_subscription_info: z.object({
                 subscription_id: z.number(),
                 has_subscription: z.boolean(),
@@ -2126,7 +2144,7 @@ export const schemas = {
                 remaining_products: z.number(),
                 recurring: z.boolean(),
                 start_date: z.string(),
-            }),
+            }).optional(),
             categories: z.array(
                 z.object({
                     term_id: z.number(),
@@ -2140,7 +2158,7 @@ export const schemas = {
                     count: z.number(),
                     filter: z.string(),
                 }),
-            ),
+            ).optional(),
         }),
 
         // sale report schema
