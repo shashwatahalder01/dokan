@@ -1375,6 +1375,10 @@ export class BasePage {
         // todo:  return which elements are true for further operation
     }
 
+    // assert velue to be equal
+    toBeEqual(received: any, expected: any) {
+        expect(received).toEqual(expected);
+    }
     // assert element to be visible
     async toBeVisible(selector: string) {
         await expect(this.page.locator(selector)).toBeVisible();

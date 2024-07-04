@@ -157,10 +157,13 @@ export const selector = {
             closeModal: 'div.components-modal__content button[aria-label="Close"]',
 
             addTitle: '//h1[@aria-label="Add title"]',
-            contentPlaceholder: '(//span[@data-rich-text-placeholder="Type / to choose a block"])[1]',
+            contentPlaceholder: 'p[aria-label="Add default block"]',
             addContent: '//p[@data-title="Paragraph"]',
 
-            publish: '//button[text()="Publish"]',
+            publish: '//div[@class="edit-post-header__settings"]//button[text()="Publish"]',
+            publishFromPanel: '//div[@class="editor-post-publish-panel"]//button[text()="Publish"]',
+
+            publishMessage: '//div[@class="components-snackbar__content" and text()="Page published."]'
         },
         // Comments
         comments: {
@@ -2555,8 +2558,10 @@ export const selector = {
 
                 // Add Tax
                 taxTable: '.wc_tax_rates',
+                taxTableRow: 'tbody#rates tr',
                 insertRow: '.plus',
-                taxRate: 'td.rate input',
+                taxRate: (row: number) => `(//td[@class="rate"]//input)[${row}]`,
+                priority: (row: number) => `(//td[@class="priority"]//input)[${row}]`,
                 taxRateSaveChanges: '.woocommerce-save-button',
 
                 // Shipping

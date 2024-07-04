@@ -459,6 +459,7 @@ export interface wpSettings {
 
 export interface tax {
     taxRate: string;
+    priority: string;
     enableTax: boolean;
     saveSuccessMessage: string;
 }

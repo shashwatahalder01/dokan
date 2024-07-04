@@ -595,6 +595,7 @@ export const data = {
 
     tax: {
         taxRate: '5',
+        priority: '10',
         enableTax: true,
         saveSuccessMessage: 'Your settings have been saved.',
     },
@@ -985,6 +986,10 @@ export const data = {
         },
 
         api: {
+            wp: {
+                pages: 'wp/v2/pages',
+            },
+
             dokan: {
                 products: 'dokan/v1/products',
                 stores: 'dokan/v1/stores',
@@ -2204,6 +2209,8 @@ export const data = {
         myorders: '[dokan-my-orders]',
         requestQuote: '[dokan-request-quote]',
     },
+
+    pageTitle: 'shortcode_' + faker.string.nanoid(5),
 
     deliveryTime: {
         date: helpers.currentDateFJY,

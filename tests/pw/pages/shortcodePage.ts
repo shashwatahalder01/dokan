@@ -19,18 +19,19 @@ export class ShortcodePage extends AdminPage {
         super(page);
     }
 
-    async createPageWithShortcode(shortcode: string) {
+    async createPageWithShortcode(pageTitle: string, shortcode: string) {
         await this.goto(data.subUrls.backend.addNewPage, 'domcontentloaded');
         // await this.pause();
         const isModalVisible = await this.isVisible(selector.admin.pages.closeModal);
         isModalVisible && (await this.click(selector.admin.pages.closeModal));
 
-        await this.clearAndType(selector.admin.pages.addTitle, 'xoxo');
-        await this.click(selector.admin.pages.contentPlaceholder);
+        await this.clearAndType(selector.admin.pages.addTitle, pageTitle);
         await this.click(selector.admin.pages.contentPlaceholder);
         await this.clearAndType(selector.admin.pages.addContent, shortcode);
 
-        // await this.clickAndWaitForLoadState(selector.admin.pages.publish);
+        await this.click(selector.admin.pages.publish);
+        await this.clickAndWaitForResponse(data.subUrls.api.wp.pages, selector.admin.pages.publishFromPanel);
+        await this.toBeVisible(selector.admin.pages.publishMessage);
     }
 
     // view dashboard
