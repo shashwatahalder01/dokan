@@ -38,7 +38,7 @@ export class PluginPage extends BasePage {
         await this.click(pluginsAdmin.deactivatePlugin(plugin));
         if (submitReason) {
             await this.click(pluginsAdmin.deactivateReason.reason(helpers.getRandomNumber(1, 7)));
-            await this.clearAndType(pluginsAdmin.deactivateReason.reaseonInput, reason);
+            await this.clearAndType(pluginsAdmin.deactivateReason.reasonInput, reason);
             await this.clickAndAcceptAndWaitForResponseAndLoadState(data.subUrls.backend.deactivatePlugin, pluginsAdmin.deactivateReason.submitAndDeactivate, 302);
         } else {
             await this.clickAndAcceptAndWaitForResponseAndLoadState(data.subUrls.backend.deactivatePlugin, pluginsAdmin.deactivateReason.skipAndDeactivate, 302);

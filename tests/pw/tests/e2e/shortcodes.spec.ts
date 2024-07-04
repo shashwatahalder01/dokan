@@ -39,64 +39,64 @@ test.describe('Shortcodes test', () => {
     });
 
     test('vendor can view dokan dashboard (shortcode)', { tag: ['@lite', '@admin'] }, async () => {
-        const [reponsbody, pageId] = await apiUtils.createPage(payloads.dashboardShortcode, payloads.adminAuth);
-        await vendor.viewDashboard(reponsbody.link);
+        const [responseBody, pageId] = await apiUtils.createPage(payloads.dashboardShortcode, payloads.adminAuth);
+        await vendor.viewDashboard(responseBody.link);
         await apiUtils.deletePage(pageId, payloads.adminAuth);
     });
 
     test('vendor can view dokan subscription packs (shortcode)', { tag: ['@pro', '@admin'] }, async () => {
-        const [reponsbody, pageId] = await apiUtils.createPage(payloads.dokanSubscriptionPackShortcode, payloads.adminAuth);
-        await vendor.viewDokanSubscriptionPacks(reponsbody.link);
+        const [responseBody, pageId] = await apiUtils.createPage(payloads.dokanSubscriptionPackShortcode, payloads.adminAuth);
+        await vendor.viewDokanSubscriptionPacks(responseBody.link);
         await apiUtils.deletePage(pageId, payloads.adminAuth);
     });
 
     test('guest user can view vendor registration form (shortcode)', { tag: ['@lite', '@admin'] }, async ({ page }) => {
         const guest = new ShortcodePage(page);
-        const [reponsbody, pageId] = await apiUtils.createPage(payloads.vendorRegistrationShortcode, payloads.adminAuth);
-        await guest.viewVendorRegistrationForm(reponsbody.link);
+        const [responseBody, pageId] = await apiUtils.createPage(payloads.vendorRegistrationShortcode, payloads.adminAuth);
+        await guest.viewVendorRegistrationForm(responseBody.link);
         await apiUtils.deletePage(pageId, payloads.adminAuth);
     });
 
     test('customer can view best selling products (shortcode)', { tag: ['@lite', '@admin'] }, async () => {
-        const [reponsbody, pageId] = await apiUtils.createPage(payloads.bestSellingProductShortcode, payloads.adminAuth);
-        await customer.viewBestSellingProducts(reponsbody.link);
+        const [responseBody, pageId] = await apiUtils.createPage(payloads.bestSellingProductShortcode, payloads.adminAuth);
+        await customer.viewBestSellingProducts(responseBody.link);
         await apiUtils.deletePage(pageId, payloads.adminAuth);
     });
 
     test('customer can view top rated products (shortcode)', { tag: ['@lite', '@admin'] }, async () => {
-        const [reponsbody, pageId] = await apiUtils.createPage(payloads.topRatedProductShortcode, payloads.adminAuth);
-        await customer.topRatedProducts(reponsbody.link);
+        const [responseBody, pageId] = await apiUtils.createPage(payloads.topRatedProductShortcode, payloads.adminAuth);
+        await customer.topRatedProducts(responseBody.link);
         await apiUtils.deletePage(pageId, payloads.adminAuth);
     });
 
     test('customer can view customer migration form (shortcode)', { tag: ['@lite', '@admin'] }, async () => {
         test.skip(true, 'Fatal error exists');
-        const [reponsbody, pageId] = await apiUtils.createPage(payloads.customerMigrationShortcode, payloads.adminAuth);
-        await customer.viewMigrationForm(reponsbody.link);
+        const [responseBody, pageId] = await apiUtils.createPage(payloads.customerMigrationShortcode, payloads.adminAuth);
+        await customer.viewMigrationForm(responseBody.link);
         await apiUtils.deletePage(pageId, payloads.adminAuth);
     });
 
     test('customer can view geolocation filter form (shortcode)', { tag: ['@pro', '@admin'] }, async () => {
-        const [reponsbody, pageId] = await apiUtils.createPage(payloads.geolocationFilterFormShortcode, payloads.adminAuth);
-        await customer.viewGeolocationFilterForm(reponsbody.link);
+        const [responseBody, pageId] = await apiUtils.createPage(payloads.geolocationFilterFormShortcode, payloads.adminAuth);
+        await customer.viewGeolocationFilterForm(responseBody.link);
         await apiUtils.deletePage(pageId, payloads.adminAuth);
     });
 
     test('customer can view stores (shortcode)', { tag: ['@lite', '@admin'] }, async () => {
-        const [reponsbody, pageId] = await apiUtils.createPage(payloads.storesShortcode, payloads.adminAuth);
-        await customer.viewStores(reponsbody.link);
+        const [responseBody, pageId] = await apiUtils.createPage(payloads.storesShortcode, payloads.adminAuth);
+        await customer.viewStores(responseBody.link);
         await apiUtils.deletePage(pageId, payloads.adminAuth);
     });
 
     test('customer can view my orders (shortcode)', { tag: ['@lite', '@admin'] }, async () => {
-        const [reponsbody, pageId] = await apiUtils.createPage(payloads.myOrdersShortcode, payloads.adminAuth);
-        await customer.viewMyOrders(reponsbody.link);
+        const [responseBody, pageId] = await apiUtils.createPage(payloads.myOrdersShortcode, payloads.adminAuth);
+        await customer.viewMyOrders(responseBody.link);
         await apiUtils.deletePage(pageId, payloads.adminAuth);
     });
 
     test('customer can view request for quote (shortcode)', { tag: ['@pro', '@admin'] }, async () => {
-        const [reponsbody, pageId] = await apiUtils.createPage(payloads.requestQuoteShortcode, payloads.adminAuth);
-        await customer.viewRequestQuote(reponsbody.link);
+        const [responseBody, pageId] = await apiUtils.createPage(payloads.requestQuoteShortcode, payloads.adminAuth);
+        await customer.viewRequestQuote(responseBody.link);
         await apiUtils.deletePage(pageId, payloads.adminAuth);
     });
 

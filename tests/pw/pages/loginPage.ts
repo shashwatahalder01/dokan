@@ -10,11 +10,11 @@ export class LoginPage extends BasePage {
 
     // user login
     async login(user: user, storageState?: string): Promise<void> {
-        await this.loginFronted(user, storageState);
+        await this.loginFrontend(user, storageState);
     }
 
     // user login frontend
-    async loginFronted(user: user, storageState?: string): Promise<void> {
+    async loginFrontend(user: user, storageState?: string): Promise<void> {
         await this.goIfNotThere(data.subUrls.frontend.myAccount);
         const currentUser = await this.getCurrentUser();
 

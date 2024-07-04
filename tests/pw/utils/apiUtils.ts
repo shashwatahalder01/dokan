@@ -156,7 +156,7 @@ export class ApiUtils {
 
     // get sellerId
     async getSellerId(storeName?: string, auth?: auth): Promise<string> {
-        if (arguments.length === 1 && typeof storeName === 'object') {
+        if (storeName && typeof storeName === 'object') {
             auth = storeName as auth;
             storeName = undefined;
         }
@@ -246,7 +246,7 @@ export class ApiUtils {
 
     // get productId
     async getProductId(productName?: string, auth?: auth): Promise<string> {
-        if (arguments.length === 1 && typeof productName === 'object') {
+        if (productName && typeof productName === 'object') {
             auth = productName as auth;
             productName = undefined;
         }
@@ -272,7 +272,7 @@ export class ApiUtils {
 
     // delete all products
     async deleteAllProducts(productName?: any, auth?: auth): Promise<responseBody> {
-        if (arguments.length === 1 && typeof productName === 'object') {
+        if (productName && typeof productName === 'object') {
             auth = productName as auth;
             productName = undefined;
         }
@@ -405,7 +405,7 @@ export class ApiUtils {
 
     // get couponId
     async getCouponId(couponCode?: string, auth?: auth): Promise<string> {
-        if (arguments.length === 1 && typeof couponCode === 'object') {
+        if (couponCode && typeof couponCode === 'object') {
             auth = couponCode as auth;
             couponCode = undefined;
         }
@@ -450,7 +450,7 @@ export class ApiUtils {
 
     // get marketplace couponId
     async getMarketPlaceCouponId(couponCode?: string, auth?: auth): Promise<string> {
-        if (arguments.length === 1 && typeof couponCode === 'object') {
+        if (couponCode && typeof couponCode === 'object') {
             auth = couponCode as auth;
             couponCode = undefined;
         }
@@ -770,7 +770,7 @@ export class ApiUtils {
 
     // get customerId
     async getCustomerId(username?: string, auth?: auth): Promise<string> {
-        if (arguments.length === 1 && typeof username === 'object') {
+        if (username && typeof username === 'object') {
             auth = username as auth;
             username = undefined;
         }
@@ -1010,7 +1010,7 @@ export class ApiUtils {
 
     // get store category Id
     async getStoreCategoryId(StoreCategoryName?: string, auth?: auth): Promise<string> {
-        if (arguments.length === 1 && typeof StoreCategoryName === 'object') {
+        if (StoreCategoryName && typeof StoreCategoryName === 'object') {
             auth = StoreCategoryName as auth;
             StoreCategoryName = undefined;
         }
@@ -1048,7 +1048,7 @@ export class ApiUtils {
 
     // get all quote rules
     async getAllQuoteRules(params: params = { per_page: 100 }, auth?: auth): Promise<responseBody> {
-        if (arguments.length === 1 && 'Authorization' in params) {
+        if (params && 'Authorization' in params) {
             auth = params as auth;
             params = undefined;
         }
@@ -1455,7 +1455,7 @@ export class ApiUtils {
 
     // delete all users
     async deleteAllUsers(role?: string, auth?: auth): Promise<responseBody> {
-        if (arguments.length === 1 && typeof role === 'object') {
+        if (role && typeof role === 'object') {
             auth = role as auth;
             role = undefined;
         }
@@ -1652,7 +1652,6 @@ export class ApiUtils {
     async createProductReview(payload: string | object, review: object, auth?: auth): Promise<[responseBody, string, string]> {
         let productId: string;
         typeof payload === 'object' ? ([, productId] = await this.createProduct(payload, auth)) : (productId = payload);
-        // todo: check if product exists with that id follow: createOrder
         const [, responseBody] = await this.post(endPoints.wc.createReview, { data: { ...review, product_id: productId }, headers: auth });
         const reviewId = String(responseBody?.id);
         const reviewMessage = String(responseBody?.review);

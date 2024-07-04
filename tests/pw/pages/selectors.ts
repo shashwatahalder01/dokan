@@ -163,7 +163,7 @@ export const selector = {
             publish: '//div[@class="edit-post-header__settings"]//button[text()="Publish"]',
             publishFromPanel: '//div[@class="editor-post-publish-panel"]//button[text()="Publish"]',
 
-            publishMessage: '//div[@class="components-snackbar__content" and text()="Page published."]'
+            publishMessage: '//div[@class="components-snackbar__content" and text()="Page published."]',
         },
         // Comments
         comments: {
@@ -3079,7 +3079,7 @@ export const selector = {
             deactivateReason: {
                 deactivateReasonModal: 'div.wd-dr-modal.modal-active',
                 reason: (reasonNumber: number) => `//div[contains(@class, 'wd-dr-modal modal-active')]//ul[@class="wd-de-reasons"]//li[${reasonNumber}]`,
-                reaseonInput: 'div.wd-dr-modal.modal-active div.wd-dr-modal-reason-input textarea',
+                reasonInput: 'div.wd-dr-modal.modal-active div.wd-dr-modal-reason-input textarea',
                 skipAndDeactivate: `div.wd-dr-modal.modal-active div.wd-dr-modal-footer a.dont-bother-me`,
                 cancel: `div.wd-dr-modal.modal-active div.wd-dr-modal-footer button.wd-dr-cancel-modal`,
                 submitAndDeactivate: `div.wd-dr-modal.modal-active div.wd-dr-modal-footer button.wd-dr-submit-modal`,
@@ -5600,7 +5600,7 @@ export const selector = {
             lastName: '#account_last_name',
             email: '#account_email',
             currentPassword: '#password_current',
-            NewPassword: '#password_1',
+            newPassword: '#password_1',
             confirmNewPassword: '#password_2',
             saveChanges: '.dokan-btn',
             saveSuccessMessage: 'Account details changed successfully.',

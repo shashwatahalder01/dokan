@@ -217,6 +217,7 @@ const ratingSchema = z.object({
 const linksSchema = z.object({
     self: z.array(z.object({ href: z.string().url() })),
     collection: z.array(z.object({ href: z.string().url() })),
+    up: z.array(z.object({ href: z.string().url() })).optional(), // only for product variations
 });
 
 const storyCategorySchema = z.object({
@@ -553,6 +554,83 @@ const productSchema = z.object({
     _links: linksSchema,
 });
 
+const imageSchema = z.object({
+    id: z.number(),
+    date_created: z.string(),
+    date_created_gmt: z.string(),
+    date_modified: z.string(),
+    date_modified_gmt: z.string(),
+    src: z.string(),
+    name: z.string(),
+    alt: z.string(),
+    position: z.number(),
+});
+
+const attributeSchema = z.object({
+    id: z.number(),
+    slug: z.string(),
+    name: z.string(),
+    option: z.string(),
+});
+
+const metaDataSchema = z.object({
+    id: z.number(),
+    key: z.string(),
+    value: z.union([
+        z.array(z.unknown()),
+        z
+            .object({
+                enable_wholesale: z.string(),
+                price: z.string(),
+                quantity: z.number(),
+            })
+            .passthrough(),
+    ]),
+});
+
+const productVariationSchema = z.object({
+    id: z.number(),
+    date_created: z.string(),
+    date_created_gmt: z.string(),
+    date_modified: z.string(),
+    date_modified_gmt: z.string(),
+    description: z.string(),
+    permalink: z.string(),
+    sku: z.string(),
+    price: z.string(),
+    regular_price: z.string(),
+    sale_price: z.string(),
+    date_on_sale_from: z.null(),
+    date_on_sale_from_gmt: z.null(),
+    date_on_sale_to: z.null(),
+    date_on_sale_to_gmt: z.null(),
+    on_sale: z.boolean(),
+    visible: z.boolean(),
+    purchasable: z.boolean(),
+    virtual: z.boolean(),
+    downloadable: z.boolean(),
+    downloads: z.array(z.unknown()), // Assuming downloads is an array of unknown objects
+    download_limit: z.number(),
+    download_expiry: z.number(),
+    tax_status: z.string(),
+    tax_class: z.string(),
+    manage_stock: z.boolean(),
+    stock_quantity: z.null(),
+    in_stock: z.boolean(),
+    backorders: z.string(),
+    backorders_allowed: z.boolean(),
+    backordered: z.boolean(),
+    weight: z.string(),
+    dimensions: dimensionsSchema,
+    shipping_class: z.string(),
+    shipping_class_id: z.number(),
+    image: imageSchema,
+    attributes: z.array(attributeSchema),
+    menu_order: z.number(),
+    meta_data: z.array(metaDataSchema),
+    _links: linksSchema,
+});
+
 const orderMetaDataSchema = z.object({
     id: z.number(),
     key: z.string(),
@@ -674,6 +752,20 @@ const orderSchema = z.object({
     date_paid_gmt: z.string(),
     currency_symbol: z.string(),
     _links: linksSchema,
+});
+
+const orderDownloadSchema = z.object({
+    permission_id: z.string().or(z.number()),
+    download_id: z.string().or(z.number()),
+    product_id: z.string().or(z.number()),
+    order_id: z.string().or(z.number()),
+    order_key: z.string(),
+    user_email: z.string().email(),
+    user_id: z.string().or(z.number()),
+    downloads_remaining: z.string(), // Assuming it's an empty string when not specified
+    access_granted: z.string(), // Assuming this is always a string in a specific format
+    access_expires: z.any(),
+    download_count: z.string().or(z.number()),
 });
 
 const orderNoteSchema = z.object({
@@ -1407,7 +1499,14 @@ export const schemas = {
         }),
     ),
 
-    orderDownloadsSchema: {}, //TODO: add schema
+    orderDownloadsSchema: {
+        orderDownloadSchema: orderDownloadSchema,
+        orderDownloadsSchema: z.object({
+            downloads: z.array(orderDownloadSchema),
+        }),
+        createOrderDownlaodSchema: z.record(z.string(), z.string()),
+        deleteOrderDownlaodSchema: z.object({ success: z.boolean() }),
+    },
 
     ordersSchema: {
         orderSchema: orderSchema,
@@ -1419,7 +1518,60 @@ export const schemas = {
         orderNotesSchema: z.array(orderNoteSchema),
     },
 
-    productAdvertisementsSchema: {}, //TODO: add schema
+    productAdvertisementsSchema: {
+        // advertised product stores schema
+        advertisedProductStoresSchema: z.array(
+            z.object({
+                vendor_id: z.string(),
+                store_name: z.string(),
+            }),
+        ),
+
+        // advertised product schema
+        advertisedProductSchema: z.array(
+            z.object({
+                id: z.number(),
+                product_id: z.number(),
+                product_title: z.string(),
+                vendor_id: z.number(),
+                store_name: z.string(),
+                created_via: z.string(),
+                order_id: z.number(),
+                price: z.string(),
+                expires_at: z.string(),
+                status: z.number(),
+                post_status: z.string(),
+                added: z.string(),
+                _links: linksSchema,
+            }),
+        ),
+
+        // create product advertisement schema
+        createProductAdvertisementSchema: z.object({
+            id: z.string(),
+            product_id: z.string(),
+            created_via: z.string(),
+            order_id: z.string(),
+            price: z.string(),
+            expires_at: z.string(),
+            status: z.string(),
+            added: z.string(),
+            updated: z.string(),
+            product_title: z.string(),
+            post_status: z.string(),
+            vendor_id: z.string(),
+            store_name: z.string(),
+        }),
+
+        // expire product advertisement schema
+        expireProductAdvertisementSchema: z.number(),
+
+        // delete product advertisement schema
+        deleteProductAdvertisementSchema: z.number(),
+
+        // update batch advertisement schema
+        updateBatchProductAdvertisementSchema: z.number(),
+    },
 
     productBlocksSchema: {
         productBlockSchema: z.object({
@@ -1606,7 +1758,15 @@ export const schemas = {
         productsSchema: z.array(productSchema),
     },
 
-    productVariationsSchema: {}, //TODO:
+    productVariationsSchema: {
+        productVariationSchema: productVariationSchema,
+        productVariationsSchema: z.array(productVariationSchema),
+        batchUpdateproductVariationsSchema: z.object({
+            create: z.array(productVariationSchema).optional(),
+            update: z.array(productVariationSchema).optional(),
+            delete: z.array(productVariationSchema).optional(),
+        }),
+    },
 
     quoteRequestsSchema: {}, //TODO:
 

@@ -224,7 +224,7 @@ export class VendorPage extends BasePage {
     // vendor update password
     async updatePassword(currentPassword: string, newPassword: string, saveChanges = false): Promise<void> {
         await this.clearAndType(selector.vendor.vAccountDetails.currentPassword, currentPassword);
-        await this.clearAndType(selector.vendor.vAccountDetails.NewPassword, newPassword);
+        await this.clearAndType(selector.vendor.vAccountDetails.newPassword, newPassword);
         await this.clearAndType(selector.vendor.vAccountDetails.confirmNewPassword, newPassword);
         if (saveChanges) {
             await this.clickAndWaitForResponse(data.subUrls.frontend.vDashboard.editAccountVendor, selector.vendor.vAccountDetails.saveChanges, 302);
