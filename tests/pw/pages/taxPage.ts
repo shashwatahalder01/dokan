@@ -41,6 +41,6 @@ export class TaxPage extends AdminPage {
 
         await this.click(woocommerceSettings.taxRateSaveChanges);
         const taxRate = await this.getElementValue(woocommerceSettings.taxRate(rowCount));
-        this.toBeEqual(parseInt(taxRate), tax.taxRate);
+        this.toBeEqual(Number(taxRate), Number(tax.taxRate));
     }
 }
