@@ -70,15 +70,17 @@ const badgeCreateUpdateSchema = z.object({
 });
 
 // store settings
-const socialSchema = z.object({
-    fb: z.string().url().or(z.string().nullish()),
-    youtube: z.string().url().or(z.string().nullish()),
-    twitter: z.string().url().or(z.string().nullish()),
-    linkedin: z.string().url().or(z.string().nullish()),
-    pinterest: z.string().url().or(z.string().nullish()),
-    instagram: z.string().url().or(z.string().nullish()),
-    flickr: z.string().url().or(z.string().nullish()),
-});
+const socialSchema = z
+    .object({
+        fb: z.string().url().or(z.string().nullish()),
+        youtube: z.string().url().or(z.string().nullish()),
+        twitter: z.string().url().or(z.string().nullish()),
+        linkedin: z.string().url().or(z.string().nullish()),
+        pinterest: z.string().url().or(z.string().nullish()),
+        instagram: z.string().url().or(z.string().nullish()),
+        flickr: z.string().url().or(z.string().nullish()),
+    })
+    .or(z.array(z.any()));
 
 const paypalSchema = z.object({
     email: z.string().email().or(z.string().nullish()),
@@ -106,14 +108,16 @@ const paymentSchema = z.object({
     skrill: skrillSchema.optional(),
 });
 
-const addressSchema = z.object({
-    street_1: z.string(),
-    street_2: z.string(),
-    city: z.string(),
-    zip: z.string(),
-    country: z.string(),
-    state: z.string(),
-});
+const addressSchema = z
+    .object({
+        street_1: z.string(),
+        street_2: z.string(),
+        city: z.string(),
+        zip: z.string(),
+        country: z.string(),
+        state: z.string(),
+    })
+    .or(z.array(z.any()));
 
 const timeSchema = z.object({
     status: z.string(),
@@ -328,17 +332,19 @@ const storeSchema = z.object({
                 })
                 .partial(),
         })
-        .partial(),
+        .optional(),
     trusted: z.boolean(),
     store_open_close: z.object({
         enabled: z.boolean(),
-        time: z.object({
-            enabled: z.boolean().optional(),
-            time: z.any().optional(),
-            status: z.string().optional(),
-            opening_time: z.array(z.string()).optional(),
-            closing_time: z.array(z.string()).optional(),
-        }),
+        time: z
+            .object({
+                enabled: z.boolean().optional(),
+                time: z.any().optional(),
+                status: z.string().optional(),
+                opening_time: z.array(z.string()).optional(),
+                closing_time: z.array(z.string()).optional(),
+            })
+            .or(z.array(z.any())),
 
         open_notice: z.string(),
         close_notice: z.string(),
@@ -1167,7 +1173,32 @@ const vendorStaffSchema = z.object({
     last_name: z.string(),
     registered_at: z.string(),
     avatar: z.string(),
-    capabilities: verndorStaffCapabilitiesSchema
+    capabilities: verndorStaffCapabilitiesSchema,
+});
+
+const wholesaleCustomerSchema = z.object({
+    id: z.number().or(z.string()),
+    first_name: z.string(),
+    last_name: z.string(),
+    username: z.string(),
+    name: z.string(),
+    email: z.string(),
+    avatar: z.string(),
+    url: z.string(),
+    role: z.string(),
+    registerd_date: z.string(),
+    wholesale_status: z.string(),
+    _links: linksSchema,
+});
+
+const paymentMethodSchema = z.object({
+    id: z.string(),
+    title: z.string(),
+});
+
+const chargeDataSchema = z.object({
+    fixed: z.number(),
+    percentage: z.number(),
 });
 
 export const schemas = {
@@ -2881,29 +2912,20 @@ export const schemas = {
     },
 
     wholesaleCustomersSchema: {
-        wholesaleCustomersSchema: z.object({
-            id: z.number(),
-            first_name: z.string(),
-            last_name: z.string(),
-            username: z.string(),
-            name: z.string(),
-            email: z.string(),
-            avatar: z.string(),
-            url: z.string(),
-            role: z.string(),
-            registered_date: z.string(),
-            wholesale_status: z.string(),
-            _links: linksSchema,
-        }),
+        wholesaleCustomerSchema: wholesaleCustomerSchema,
+        wholesaleCustomersSchema: z.array(wholesaleCustomerSchema),
+        updateWholesaleCustomerSchema: customerSchema,
     },
 
     withdrawsSchema: {
+        withdrawPaymentMethod: z.array(paymentMethodSchema),
+
         // getBalanceDetailsSchema
         getBalanceDetailsSchema: z.object({
             current_balance: z.number(),
             withdraw_limit: z.string(),
             withdraw_threshold: z.number(),
-            withdraw_methods: z.enum(['paypal', 'bank']), // TODO: add more
+            withdraw_methods: z.array(z.string()),
             last_withdraw: z
                 .array(
                     z.object({
@@ -2921,38 +2943,28 @@ export const schemas = {
                 .optional(),
         }),
 
-        allWithdrawsSchema: z.object({
-            id: z.string(),
+        withdrawsSchema: z.object({
+            id: z.string().or(z.number()),
             user: z.object({
-                id: z.string(),
+                id: z.string().or(z.number()),
                 store_name: z.string(),
                 first_name: z.string(),
                 last_name: z.string(),
                 email: z.string(),
-                social: z.record(z.string()), // assuming social is a record of strings
+                social: socialSchema,
                 phone: z.string(),
                 show_email: z.boolean(),
-                address: z.object({
-                    street_1: z.string(),
-                    street_2: z.string(),
-                    city: z.string(),
-                    zip: z.string(),
-                    country: z.string(),
-                    state: z.string(),
-                }),
+                address: addressSchema,
                 location: z.string(),
                 banner: z.string(),
-                banner_id: z.string(),
+                banner_id: z.string().or(z.number()),
                 gravatar: z.string(),
-                gravatar_id: z.string(),
+                gravatar_id: z.string().or(z.number()),
                 shop_url: z.string(),
                 toc_enabled: z.boolean(),
                 store_toc: z.string(),
                 featured: z.boolean(),
-                rating: z.object({
-                    rating: z.string(),
-                    count: z.number(),
-                }),
+                rating: ratingSchema,
                 enabled: z.boolean(),
                 registered: z.string(),
                 payment: z.object({
@@ -2974,18 +2986,21 @@ export const schemas = {
                             email: z.string(),
                         })
                         .nullable(), // Assuming paypal is optional
-                    stripe_express: z.boolean(),
+                    stripe_express: z.boolean().optional(),
                 }),
                 trusted: z.boolean(),
                 store_open_close: z.object({
                     enabled: z.boolean(),
-                    time: z.record(
-                        z.object({
-                            status: z.string(),
-                            opening_time: z.array(z.string()),
-                            closing_time: z.array(z.string()),
-                        }),
-                    ),
+                    time: z
+                        .object({
+                            enabled: z.boolean().optional(),
+                            time: z.any().optional(),
+                            status: z.string().optional(),
+                            opening_time: z.array(z.string()).optional(),
+                            closing_time: z.array(z.string()).optional(),
+                        })
+                        .or(z.array(z.any())),
+
                     open_notice: z.string(),
                     close_notice: z.string(),
                 }),
@@ -3042,20 +3057,26 @@ export const schemas = {
             ]),
             ip: z.string(),
             _links: linksSchema,
+        }),
 
-            WithdrawPaymentMethods: z.array(
-                z.object({
-                    id: z.string(),
-                    title: z.string(),
-                }),
-            ),
+        batchUpdateWithdrawsSchema: z.object({
+            success: z.array(z.unknown()).optional(),
+            failed: z.array(z.unknown()).optional(),
+            approved: z.array(z.unknown()).optional(),
+        }),
 
-            batchUpdateWithdraw: z.object({
-                success: z.array(z.unknown()),
-                failed: z.object({
-                    approved: z.array(z.number()),
-                }),
-            }),
+        withdrawChargesSchema: z.object({
+            paypal: chargeDataSchema.optional(),
+            bank: chargeDataSchema.optional(),
+            skrill: chargeDataSchema.optional(),
+            dokan_custom: chargeDataSchema.optional(),
+            'dokan-stripe-connect': chargeDataSchema.optional(),
+        }),
+
+        chargeDetailsSchema: z.object({
+            charge: z.number(),
+            receivable: z.number(),
+            charge_data: chargeDataSchema,
         }),
     },
 
@@ -3099,6 +3120,10 @@ export const schemas = {
         }),
 
         updateWithdrawDisbursementSettingsSchema: z.object({
+            success: z.boolean(),
+        }),
+
+        disableWithdrawDisbursementSettingsSchema: z.object({
             success: z.boolean(),
         }),
     },
