@@ -215,8 +215,8 @@ const ratingSchema = z.object({
 });
 
 const linksSchema = z.object({
-    self: z.array(z.object({ href: z.string().url() })),
-    collection: z.array(z.object({ href: z.string().url() })),
+    self: z.array(z.object({ href: z.string().url() })).optional(),
+    collection: z.array(z.object({ href: z.string().url() })).optional(),
     up: z.array(z.object({ href: z.string().url() })).optional(), // only for product variations
 });
 
@@ -343,19 +343,21 @@ const storeSchema = z.object({
         open_notice: z.string(),
         close_notice: z.string(),
     }),
-    sale_only_here: z.boolean(),
+    sale_only_here: z.boolean().optional(),
     company_name: z.string().optional(),
     vat_number: z.string().optional(),
     company_id_number: z.string().optional(),
     bank_name: z.string().optional(),
     bank_iban: z.string().optional(),
-    categories: z.array(
-        z.object({
-            id: z.number().optional(),
-            name: z.string(),
-            slug: z.string(),
-        }),
-    ),
+    categories: z
+        .array(
+            z.object({
+                id: z.number().optional(),
+                name: z.string(),
+                slug: z.string(),
+            }),
+        )
+        .optional(),
     admin_category_commission: z.array(z.any()).optional(),
     admin_commission: z.string().optional(),
     admin_additional_fee: z.string().optional(),
@@ -388,17 +390,17 @@ const supportTicketSchema = z.object({
     post_mime_type: z.string(),
     comment_count: z.string(),
     filter: z.string(),
-    vendor_name: z.string(),
-    customer_name: z.string(),
-    vendor_id: z.string(),
-    store_url: z.string().url(),
-    ticket_date: z.string(),
-    reading: z.string(),
-    ancestors: z.array(z.any()), // Adjust this based on the actual structure
-    page_template: z.string(),
-    post_category: z.array(z.any()), // Adjust this based on the actual structure
-    tags_input: z.array(z.any()), // Adjust this based on the actual structure
-    _links: linksSchema,
+    vendor_name: z.string().optional(),
+    customer_name: z.string().optional(),
+    vendor_id: z.string().optional(),
+    store_url: z.string().optional(),
+    ticket_date: z.string().optional(),
+    reading: z.string().optional(),
+    ancestors: z.array(z.any()).optional(), // Adjust this based on the actual structure
+    page_template: z.string().optional(),
+    post_category: z.array(z.any()).optional(), // Adjust this based on the actual structure
+    tags_input: z.array(z.any()).optional(), // Adjust this based on the actual structure
+    _links: linksSchema.optional(),
 });
 
 const productQuestionSchema = z.object({
@@ -1105,6 +1107,67 @@ const quoteRequestSchema = z.object({
     status: z.string(),
     created_at: z.string(),
     _links: linksSchema,
+});
+
+const verndorStaffCapabilitiesSchema = z.object({
+    read: z.boolean(),
+    vendor_staff: z.boolean(),
+    dokandar: z.boolean(),
+    delete_pages: z.boolean(),
+    publish_posts: z.boolean(),
+    edit_posts: z.boolean(),
+    delete_published_posts: z.boolean(),
+    edit_published_posts: z.boolean(),
+    delete_posts: z.boolean(),
+    manage_categories: z.boolean(),
+    moderate_comments: z.boolean(),
+    upload_files: z.boolean(),
+    edit_shop_orders: z.boolean(),
+    edit_product: z.boolean(),
+    dokan_view_sales_overview: z.boolean().optional(),
+    dokan_view_sales_report_chart: z.boolean().optional(),
+    dokan_view_announcement: z.boolean().optional(),
+    dokan_view_order_report: z.boolean().optional(),
+    dokan_view_review_reports: z.boolean(),
+    dokan_view_product_status_report: z.boolean().optional(),
+    dokan_add_product: z.boolean().optional(),
+    dokan_edit_product: z.boolean(),
+    dokan_delete_product: z.boolean(),
+    dokan_view_product: z.boolean(),
+    dokan_duplicate_product: z.boolean(),
+    dokan_import_product: z.boolean(),
+    dokan_export_product: z.boolean(),
+    dokan_view_order: z.boolean(),
+    dokan_manage_order: z.boolean(),
+    dokan_manage_order_note: z.boolean(),
+    dokan_manage_reviews: z.boolean(),
+    dokan_view_overview_menu: z.boolean(),
+    dokan_view_product_menu: z.boolean(),
+    dokan_view_order_menu: z.boolean(),
+    dokan_view_review_menu: z.boolean(),
+    dokan_view_store_settings_menu: z.boolean(),
+    dokan_view_store_shipping_menu: z.boolean(),
+    dokan_view_store_social_menu: z.boolean(),
+    dokan_view_store_seo_menu: z.boolean(),
+    dokan_export_order: z.boolean(),
+});
+
+const vendorStaffSchema = z.object({
+    ID: z.string(),
+    user_login: z.string(),
+    user_nicename: z.string(),
+    user_email: z.string(),
+    user_url: z.string(),
+    user_registered: z.string(),
+    user_activation_key: z.string(),
+    user_status: z.string(),
+    display_name: z.string(),
+    phone: z.string(),
+    first_name: z.string(),
+    last_name: z.string(),
+    registered_at: z.string(),
+    avatar: z.string(),
+    capabilities: verndorStaffCapabilitiesSchema
 });
 
 export const schemas = {
@@ -2226,7 +2289,7 @@ export const schemas = {
 
     spmvSchema: {
         spmvSettingsSchema: z.object({
-            success: z.boolean(),
+            isEnabled: z.boolean(),
         }),
 
         spmvProductsSchema: z.array(
@@ -2262,11 +2325,11 @@ export const schemas = {
     },
 
     storeReviewsSchema: {
-        storeReviewSchema1: storeReviewSchema1,
-        storeReviewsSchema1: z.array(storeReviewSchema1),
+        storeReviewSchemaStoreEndpint: storeReviewSchema1,
+        storeReviewsSchemaStoreEndpint: z.array(storeReviewSchema1),
         storeReviewSchema: storeReviewSchema,
         storeReviewsSchema: z.array(storeReviewSchema),
-        batchUpdateBadgesSchema: z.boolean(),
+        batchUpdateStoreReviewsSchema: z.boolean(),
     },
 
     storesSchema: {
@@ -2351,10 +2414,88 @@ export const schemas = {
         ),
         supportTicketSchema: supportTicketSchema,
         supportTicketsSchema: z.array(supportTicketSchema),
-
-        batchUpdateSupportTicketSchema: z.object({
-            closed: z.array(z.number()),
+        singleSupportTicketSchema: z.object({
+            topic: supportTicketSchema, // Assuming topic can be any array structure
+            comments: z.array(z.any()), // Assuming comments can be any array structure
+            store_info: z.object({
+                store_name: z.string(),
+                social: socialSchema,
+                payment: z.object({
+                    paypal: z.object({
+                        email: z.string(),
+                    }),
+                    bank: z.object({
+                        ac_name: z.string(),
+                        ac_type: z.string(),
+                        ac_number: z.string(),
+                        bank_name: z.string(),
+                        bank_addr: z.string(),
+                        routing_number: z.string(),
+                        iban: z.string(),
+                        swift: z.string(),
+                    }),
+                }),
+                phone: z.string(),
+                show_email: z.string(), // Assuming "yes" or "no"
+                address: addressSchema,
+                location: z.string(),
+                banner: z.number(),
+                icon: z.number().or(z.string()),
+                gravatar: z.number(),
+                enable_tnc: z.string(), // Assuming "on" or "off"
+                store_tnc: z.string(),
+                show_min_order_discount: z.string(), // Assuming "yes" or "no"
+                store_seo: z.array(z.any()), // Assuming store_seo can be any array structure
+                dokan_store_time_enabled: z.string(), // Assuming "yes" or "no"
+                dokan_store_open_notice: z.string(),
+                dokan_store_close_notice: z.string(),
+                sale_only_here: z.boolean(),
+                company_name: z.string(),
+                vat_number: z.string(),
+                company_id_number: z.string(),
+                bank_name: z.string(),
+                bank_iban: z.string(),
+                categories: z.array(
+                    z.object({
+                        term_id: z.number(),
+                        name: z.string(),
+                        slug: z.string(),
+                        term_group: z.number(),
+                        term_taxonomy_id: z.number(),
+                        taxonomy: z.string(),
+                        description: z.string(),
+                        parent: z.number(),
+                        count: z.number(),
+                        filter: z.string(),
+                    }),
+                ),
+                store_url: z.string(),
+            }),
+            site_image_url: z.string(),
+            site_title: z.string(),
+            unread_topics_count: z.number(),
+            dokan_admin_email_notification_global: z.boolean(),
+            dokan_admin_email_notification: z.string(),
         }),
+        supportTicketCommentSchema: z.number(),
+        supportTicketStatusSchema: z.object({
+            success: z.boolean(),
+            data: z.object({
+                result: z.string(),
+                message: z.string(),
+            }),
+        }),
+        supportTicketEmailSchema: z.object({
+            result: z.boolean(),
+            message: z.string(),
+            type: z.string(),
+        }),
+        deleteSupportTicketSchema: z.boolean(),
+        batchUpdateSupportTicketSchema: z
+            .object({
+                closed: z.array(z.number()),
+            })
+            .or(z.array(z.unknown())),
     },
 
     vendorDashboardSchema: {
@@ -2649,66 +2790,10 @@ export const schemas = {
     },
 
     vendorStaffSchema: {
-        staff: z.object({
-            ID: z.string(),
-            user_login: z.string(),
-            user_nicename: z.string(),
-            user_email: z.string(),
-            user_url: z.string(),
-            user_registered: z.string(),
-            user_activation_key: z.string(),
-            user_status: z.string(),
-            display_name: z.string(),
-            phone: z.string(),
-            first_name: z.string(),
-            last_name: z.string(),
-            registered_at: z.string(),
-            avatar: z.string(),
-            capabilities: z.object({
-                read: z.boolean(),
-                vendor_staff: z.boolean(),
-                dokandar: z.boolean(),
-                delete_pages: z.boolean(),
-                publish_posts: z.boolean(),
-                edit_posts: z.boolean(),
-                delete_published_posts: z.boolean(),
-                edit_published_posts: z.boolean(),
-                delete_posts: z.boolean(),
-                manage_categories: z.boolean(),
-                moderate_comments: z.boolean(),
-                upload_files: z.boolean(),
-                edit_shop_orders: z.boolean(),
-                edit_product: z.boolean(),
-                dokan_view_sales_overview: z.boolean(),
-                dokan_view_sales_report_chart: z.boolean(),
-                dokan_view_announcement: z.boolean(),
-                dokan_view_order_report: z.boolean(),
-                dokan_view_review_reports: z.boolean(),
-                dokan_view_product_status_report: z.boolean(),
-                dokan_add_product: z.boolean(),
-                dokan_edit_product: z.boolean(),
-                dokan_delete_product: z.boolean(),
-                dokan_view_product: z.boolean(),
-                dokan_duplicate_product: z.boolean(),
-                dokan_import_product: z.boolean(),
-                dokan_export_product: z.boolean(),
-                dokan_view_order: z.boolean(),
-                dokan_manage_order: z.boolean(),
-                dokan_manage_order_note: z.boolean(),
-                dokan_manage_reviews: z.boolean(),
-                dokan_view_overview_menu: z.boolean(),
-                dokan_view_product_menu: z.boolean(),
-                dokan_view_order_menu: z.boolean(),
-                dokan_view_review_menu: z.boolean(),
-                dokan_view_store_settings_menu: z.boolean(),
-                dokan_view_store_shipping_menu: z.boolean(),
-                dokan_view_store_social_menu: z.boolean(),
-                dokan_view_store_seo_menu: z.boolean(),
-                dokan_export_order: z.boolean(),
-            }),
-        }),
+        vendorStaffSchema: vendorStaffSchema,
+        vendorStaffsSchema: z.array(vendorStaffSchema),
 
-        allStaffCapabilities: z.object({
+        staffCapabilitiesSchema: z.object({
             all: z.object({
                 overview: z.object({
                     dokan_view_sales_overview: z.string(),
@@ -2792,108 +2877,7 @@ export const schemas = {
             default: z.array(z.string()),
         }),
 
-        staffCapabilities: z.object({
-            user_login: z.string(),
-            user_nicename: z.string(),
-            user_email: z.string(),
-            user_url: z.string(),
-            user_registered: z.string(),
-            user_activation_key: z.string(),
-            user_status: z.string(),
-            display_name: z.string(),
-            phone: z.string(),
-            first_name: z.string(),
-            last_name: z.string(),
-            registered_at: z.string(),
-            avatar: z.string(),
-            capabilities: z
-                .object({
-                    read: z.boolean(),
-                    vendor_staff: z.boolean(),
-                    dokandar: z.boolean(),
-                    delete_pages: z.boolean(),
-                    publish_posts: z.boolean(),
-                    edit_posts: z.boolean(),
-                    delete_published_posts: z.boolean(),
-                    edit_published_posts: z.boolean(),
-                    delete_posts: z.boolean(),
-                    manage_categories: z.boolean(),
-                    moderate_comments: z.boolean(),
-                    upload_files: z.boolean(),
-                    edit_shop_orders: z.boolean(),
-                    edit_product: z.boolean(),
-                    dokan_view_sales_overview: z.boolean(),
-                    dokan_view_sales_report_chart: z.boolean(),
-                    dokan_view_announcement: z.boolean(),
-                    dokan_view_order_report: z.boolean(),
-                    dokan_view_review_reports: z.boolean(),
-                    dokan_view_product_status_report: z.boolean(),
-                    dokan_add_product: z.boolean(),
-                    dokan_edit_product: z.boolean(),
-                    dokan_delete_product: z.boolean(),
-                    dokan_view_product: z.boolean(),
-                    dokan_duplicate_product: z.boolean(),
-                    dokan_import_product: z.boolean(),
-                    dokan_export_product: z.boolean(),
-                    dokan_view_order: z.boolean(),
-                    dokan_manage_order: z.boolean(),
-                    dokan_manage_order_note: z.boolean(),
-                    dokan_manage_reviews: z.boolean(),
-                    dokan_view_overview_menu: z.boolean(),
-                    dokan_view_product_menu: z.boolean(),
-                    dokan_view_order_menu: z.boolean(),
-                    dokan_view_review_menu: z.boolean(),
-                    dokan_view_store_settings_menu: z.boolean(),
-                    dokan_view_store_shipping_menu: z.boolean(),
-                    dokan_view_store_social_menu: z.boolean(),
-                    dokan_view_store_seo_menu: z.boolean(),
-                    dokan_export_order: z.boolean(),
-                })
-                .optional(),
-        }),
-
-        updateCapabilities: z.object({
-            dokan_view_sales_overview: z.boolean(),
-            dokan_view_sales_report_chart: z.boolean(),
-            dokan_view_announcement: z.boolean(),
-            dokan_view_order_report: z.boolean(),
-            dokan_view_review_reports: z.boolean(),
-            dokan_view_product_status_report: z.boolean(),
-            dokan_add_product: z.boolean(),
-            dokan_edit_product: z.boolean(),
-            dokan_delete_product: z.boolean(),
-            dokan_view_product: z.boolean(),
-            dokan_duplicate_product: z.boolean(),
-            dokan_import_product: z.boolean(),
-            dokan_export_product: z.boolean(),
-            dokan_view_order: z.boolean(),
-            dokan_manage_order: z.boolean(),
-            dokan_manage_order_note: z.boolean(),
-            dokan_manage_reviews: z.boolean(),
-            dokan_view_overview_menu: z.boolean(),
-            dokan_view_product_menu: z.boolean(),
-            dokan_view_order_menu: z.boolean(),
-            dokan_view_review_menu: z.boolean(),
-            dokan_view_store_settings_menu: z.boolean(),
-            dokan_view_store_shipping_menu: z.boolean(),
-            dokan_view_store_social_menu: z.boolean(),
-            dokan_view_store_seo_menu: z.boolean(),
-            dokan_export_order: z.boolean(),
-            read: z.boolean(),
-            vendor_staff: z.boolean(),
-            dokandar: z.boolean(),
-            delete_pages: z.boolean(),
-            publish_posts: z.boolean(),
-            edit_posts: z.boolean(),
-            delete_published_posts: z.boolean(),
-            edit_published_posts: z.boolean(),
-            delete_posts: z.boolean(),
-            manage_categories: z.boolean(),
-            moderate_comments: z.boolean(),
-            upload_files: z.boolean(),
-            edit_shop_orders: z.boolean(),
-            edit_product: z.boolean(),
-        }),
+        staffCapabilities: verndorStaffCapabilitiesSchema,
     },
 
     wholesaleCustomersSchema: {
