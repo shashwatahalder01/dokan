@@ -3671,6 +3671,10 @@ export const payloads = {
         page: '1',
     },
 
+    paramsStoreSlug: {
+        store_slug: faker.string.nanoid(10),
+    },
+
     //commission
     commission: {
         product_id: 0,

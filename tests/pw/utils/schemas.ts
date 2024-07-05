@@ -238,7 +238,7 @@ const storeReviewSchema1 = z.object({
         id: z.number(),
         name: z.string(),
         email: z.string().email(),
-        url: z.union([z.string().url(), z.literal('')]),
+        url: z.string().optional(),
         avatar: z.string().url(),
     }),
     title: z.string(),
@@ -273,6 +273,93 @@ const storeReviewSchema = z.object({
         banner: z.string(),
     }),
     rating: z.number(),
+    _links: linksSchema,
+});
+
+const storeSchema = z.object({
+    id: z.number(),
+    store_name: z.string(),
+    first_name: z.string(),
+    last_name: z.string(),
+    email: z.string().email(),
+    social: socialSchema,
+    phone: z.string(),
+    show_email: z.boolean(),
+    address: addressSchema,
+    location: z.string().optional(),
+    banner: z.string().optional(),
+    banner_id: z.number(),
+    gravatar: z.string().url(),
+    gravatar_id: z.number(),
+    shop_url: z.string().url(),
+    toc_enabled: z.boolean(),
+    store_toc: z.string().optional(),
+    featured: z.boolean(),
+    rating: ratingSchema,
+    enabled: z.boolean(),
+    registered: z.string(),
+    payment: z
+        .object({
+            bank: z
+                .object({
+                    ac_name: z.string().optional(),
+                    ac_type: z.string().optional(),
+                    ac_number: z.string().optional(),
+                    bank_name: z.string().optional(),
+                    bank_addr: z.string().optional(),
+                    routing_number: z.string().optional(),
+                    iban: z.string().optional(),
+                    swift: z.string().optional(),
+                })
+                .partial(),
+            paypal: z
+                .object({
+                    email: z.string().optional(),
+                })
+                .partial(),
+            dokan_razorpay: z.boolean(),
+            stripe: z.boolean(),
+            dokan_moip_connect: z.boolean(),
+            dokan_custom: z
+                .object({
+                    withdraw_method_name: z.string().optional(),
+                    withdraw_method_type: z.string().optional(),
+                    value: z.string().optional(),
+                })
+                .partial(),
+        })
+        .partial(),
+    trusted: z.boolean(),
+    store_open_close: z.object({
+        enabled: z.boolean(),
+        time: z.object({
+            enabled: z.boolean().optional(),
+            time: z.any().optional(),
+            status: z.string().optional(),
+            opening_time: z.array(z.string()).optional(),
+            closing_time: z.array(z.string()).optional(),
+        }),
+
+        open_notice: z.string(),
+        close_notice: z.string(),
+    }),
+    sale_only_here: z.boolean(),
+    company_name: z.string().optional(),
+    vat_number: z.string().optional(),
+    company_id_number: z.string().optional(),
+    bank_name: z.string().optional(),
+    bank_iban: z.string().optional(),
+    categories: z.array(
+        z.object({
+            id: z.number().optional(),
+            name: z.string(),
+            slug: z.string(),
+        }),
+    ),
+    admin_category_commission: z.array(z.any()).optional(),
+    admin_commission: z.string().optional(),
+    admin_additional_fee: z.string().optional(),
+    admin_commission_type: z.string().optional(),
     _links: linksSchema,
 });
 
@@ -494,8 +581,8 @@ const productSchema = z.object({
     description: z.string(),
     short_description: z.string(),
     sku: z.string().optional(),
-    price: z.string().regex(/^\d+(\.\d+)?$/),
-    regular_price: z.string().regex(/^\d+(\.\d+)?$/),
+    price: z.string(),
+    regular_price: z.string(),
     sale_price: z.string().optional(),
     date_on_sale_from: z.null(),
     date_on_sale_from_gmt: z.null(),
@@ -991,6 +1078,33 @@ const transactionTypeSchema = z.object({
 const roleSchema = z.object({
     name: z.string(),
     capabilities: z.record(z.boolean()),
+});
+
+const quoteRuleSchema = z.object({
+    id: z.string(),
+    rule_name: z.string(),
+    selected_user_role: z.array(z.string()).or(z.string()),
+    category_ids: z.array(z.string()).or(z.string()),
+    product_categories: z.array(z.string()).optional(),
+    product_ids: z.array(z.string()).or(z.string()),
+    hide_price: z.string(),
+    hide_cart_button: z.string(),
+    button_text: z.string(),
+    apply_on_all_product: z.string(),
+    rule_priority: z.string(),
+    status: z.string(),
+    created_at: z.string(),
+    _links: linksSchema,
+});
+
+const quoteRequestSchema = z.object({
+    id: z.string(),
+    title: z.string(),
+    customer_name: z.string(),
+    customer_email: z.string(),
+    status: z.string(),
+    created_at: z.string(),
+    _links: linksSchema,
 });
 
 export const schemas = {
@@ -1768,43 +1882,71 @@ export const schemas = {
         }),
     },
 
-    quoteRequestsSchema: {}, //TODO:
+    quoteRuleSchema: {
+        quoteRuleSchema: quoteRuleSchema,
+        quoteRulesSchema: z.array(quoteRuleSchema),
+        batchUpdatequoteRulesSchema: z.boolean(),
+    },
 
-    quoteRulesSchema: {
-        quoteRuleSchema: z.object({
-            id: z.string(),
-            rule_name: z.string(),
-            selected_user_role: z.array(z.string()),
-            category_ids: z.array(z.string()),
-            product_categories: z.array(z.string()),
-            product_ids: z.string(),
-            hide_price: z.string(),
-            hide_cart_button: z.string(),
-            button_text: z.string(),
-            apply_on_all_product: z.string(),
-            rule_priority: z.string(),
+    quoteRequestsSchema: {
+        quoteRequestSchema: quoteRequestSchema,
+        quoteRequestsSchema: z.array(quoteRequestSchema),
+
+        singleQuoteRequestSchema: z.object({
+            quote_id: z.string(),
+            title: z.string(),
+            customer_info: z.object({
+                name_field: z.string(),
+                email_field: z.string().email(),
+                company_field: z.string(),
+                phone_field: z.string(),
+            }),
+            customer: z.object({
+                user_id: z.number(),
+                user_login: z.string(),
+                user_email: z.string(),
+            }),
+            products: z.array(
+                z.object({
+                    id: z.number().or(z.string()),
+                    images: z.array(z.unknown()), // Assuming images can be any array
+                    permalink: z.string().url(),
+                    name: z.string(),
+                    store: z.object({}),
+                    price: z.string(), // Assuming price and other numeric values are strings
+                    offer_price: z.string(),
+                    offer_product_quantity: z.string(),
+                }),
+            ),
+
+            quote_details: z.array(
+                z.object({
+                    id: z.string(),
+                    quote_id: z.string(),
+                    product_id: z.string(),
+                    quantity: z.string(),
+                }),
+            ),
             status: z.string(),
-            created_at: z.string(),
             _links: linksSchema,
         }),
-        quoteRulesSchema: z.array(
+
+        createQuoteRequestSchema: z.array(
             z.object({
-                id: z.string(),
-                rule_name: z.string(),
-                selected_user_role: z.array(z.string()),
-                category_ids: z.array(z.string()),
-                product_categories: z.array(z.string()),
-                product_ids: z.string(),
-                hide_price: z.string(),
-                hide_cart_button: z.string(),
-                button_text: z.string(),
-                apply_on_all_product: z.string(),
-                rule_priority: z.string(),
-                status: z.string(),
-                created_at: z.string(),
-                _links: linksSchema,
+                data: z.object({
+                    id: z.string(),
+                    title: z.string(),
+                    customer_name: z.string(),
+                    customer_email: z.string(),
+                    status: z.string(),
+                    created_at: z.string(),
+                }),
+                headers: z.array(z.unknown()), // Assuming headers can be any array
+                status: z.number(), // Assuming status is a number
             }),
         ),
+
+        batchUpdatequoteRequestsSchema: z.boolean(),
     },
 
     rankMathSchema: {}, //TODO: add schema
@@ -2127,7 +2269,78 @@ export const schemas = {
         batchUpdateBadgesSchema: z.boolean(),
     },
 
-    storesSchema: {}, //TODO: add schema
+    storesSchema: {
+        storeSchema: storeSchema,
+        storesSchema: z.array(storeSchema),
+        storeStatsSchema: z.object({
+            products: z.object({
+                total: z.number(),
+                sold: z.number(),
+                visitor: z.number(),
+            }),
+            revenue: z.object({
+                orders: z.number(),
+                sales: z.number(),
+                earning: z.number(),
+            }),
+            others: z.object({
+                commission_rate: z.string().optional(),
+                additional_fee: z.string().optional(),
+                commission_type: z.string().optional(),
+                balance: z.number(),
+                reviews: z.number(),
+            }),
+        }),
+
+        storeCurrentVisitorSchema: z.object({
+            user: z.object({
+                user_login: z.string(),
+                email: z.string().email(),
+                first_name: z.string(),
+                last_name: z.string(),
+                display_name: z.string(),
+            }),
+        }),
+
+        storeCategoriesSchema: z
+            .object({
+                term_id: z.number(),
+                name: z.string(),
+                slug: z.string(),
+                term_group: z.number(),
+                term_taxonomy_id: z.number(),
+                taxonomy: z.string(),
+                description: z.string(),
+                parent: z.number(),
+                count: z.number(),
+                filter: z.string(),
+                thumbnail: z.string().url(),
+                image: z.string().url(),
+                icon: z.string(),
+                icon_color: z.string(),
+                display_type: z.string(),
+                admin_commission_type: z.string(),
+                commission: z.array(z.any()),
+            })
+            .or(z.any()),
+        storeProductsSchema: z.array(productSchema),
+        storeReviewsSchema: z.array(storeReviewSchema1),
+        storeSlugCheckSchema: z.object({ url: z.string(), available: z.boolean() }),
+        clientContactStoreSchema: z.object({
+            store_id: z.number(),
+            data: z.string(),
+            sender_name: z.string(),
+            sender_email: z.string(),
+            sender_message: z.string(),
+        }),
+        adminEmailStoreSchema: z.object({
+            success: z.boolean(),
+        }),
+        batchUpdateStoreSchema: z.object({
+            approved: z.array(storeSchema).optional(),
+            pending: z.array(storeSchema).optional(),
+        }),
+    },
 
     supportTicketsSchema: {
         supportTicketCustomerSchema: z.array(
