@@ -1191,6 +1191,122 @@ const wholesaleCustomerSchema = z.object({
     _links: linksSchema,
 });
 
+const whithdrawSchema = z.object({
+    id: z.string().or(z.number()),
+    user: z.object({
+        id: z.string().or(z.number()),
+        store_name: z.string(),
+        first_name: z.string(),
+        last_name: z.string(),
+        email: z.string(),
+        social: socialSchema,
+        phone: z.string(),
+        show_email: z.boolean(),
+        address: addressSchema,
+        location: z.string(),
+        banner: z.string(),
+        banner_id: z.string().or(z.number()),
+        gravatar: z.string(),
+        gravatar_id: z.string().or(z.number()),
+        shop_url: z.string(),
+        toc_enabled: z.boolean(),
+        store_toc: z.string(),
+        featured: z.boolean(),
+        rating: ratingSchema,
+        enabled: z.boolean(),
+        registered: z.string(),
+        payment: z.object({
+            bank: z
+                .object({
+                    ac_name: z.string(),
+                    ac_type: z.string(),
+                    ac_number: z.string(),
+                    bank_name: z.string(),
+                    bank_addr: z.string(),
+                    routing_number: z.string(),
+                    iban: z.string(),
+                    swift: z.string(),
+                    declaration: z.string(),
+                })
+                .nullable(), // Assuming bank is optional
+            paypal: z
+                .object({
+                    email: z.string(),
+                })
+                .nullable(), // Assuming paypal is optional
+            stripe_express: z.boolean().optional(),
+        }),
+        trusted: z.boolean(),
+        store_open_close: z.object({
+            enabled: z.boolean(),
+            time: z
+                .object({
+                    enabled: z.boolean().optional(),
+                    time: z.any().optional(),
+                    status: z.string().optional(),
+                    opening_time: z.array(z.string()).optional(),
+                    closing_time: z.array(z.string()).optional(),
+                })
+                .or(z.array(z.any())),
+
+            open_notice: z.string(),
+            close_notice: z.string(),
+        }),
+        sale_only_here: z.boolean(),
+        company_name: z.string(),
+        vat_number: z.string(),
+        company_id_number: z.string(),
+        bank_name: z.string(),
+        bank_iban: z.string(),
+        categories: z.array(
+            z.object({
+                term_id: z.number(),
+                name: z.string(),
+                slug: z.string(),
+                term_group: z.number(),
+                term_taxonomy_id: z.number(),
+                taxonomy: z.string(),
+                description: z.string(),
+                parent: z.number(),
+                count: z.number(),
+                filter: z.string(),
+            }),
+        ),
+    }),
+    amount: z.number(),
+    created: z.string(),
+    status: z.string(),
+    method: z.string(),
+    method_title: z.string(),
+    note: z.string(),
+    details: z.union([
+        z.object({
+            paypal: z.object({
+                email: z.string(),
+            }),
+        }),
+        z.object({
+            bank: z.object({
+                ac_name: z.string(),
+                ac_type: z.string(),
+                ac_number: z.string(),
+                bank_name: z.string(),
+                bank_addr: z.string(),
+                routing_number: z.string(),
+                iban: z.string(),
+                swift: z.string(),
+            }),
+        }),
+        z.object({
+            skrill: z.object({
+                email: z.string(),
+            }),
+        }),
+    ]),
+    ip: z.string(),
+    _links: linksSchema,
+});
+
 const paymentMethodSchema = z.object({
     id: z.string(),
     title: z.string(),
@@ -2942,122 +3058,8 @@ export const schemas = {
                 )
                 .optional(),
         }),
-
-        withdrawsSchema: z.object({
-            id: z.string().or(z.number()),
-            user: z.object({
-                id: z.string().or(z.number()),
-                store_name: z.string(),
-                first_name: z.string(),
-                last_name: z.string(),
-                email: z.string(),
-                social: socialSchema,
-                phone: z.string(),
-                show_email: z.boolean(),
-                address: addressSchema,
-                location: z.string(),
-                banner: z.string(),
-                banner_id: z.string().or(z.number()),
-                gravatar: z.string(),
-                gravatar_id: z.string().or(z.number()),
-                shop_url: z.string(),
-                toc_enabled: z.boolean(),
-                store_toc: z.string(),
-                featured: z.boolean(),
-                rating: ratingSchema,
-                enabled: z.boolean(),
-                registered: z.string(),
-                payment: z.object({
-                    bank: z
-                        .object({
-                            ac_name: z.string(),
-                            ac_type: z.string(),
-                            ac_number: z.string(),
-                            bank_name: z.string(),
-                            bank_addr: z.string(),
-                            routing_number: z.string(),
-                            iban: z.string(),
-                            swift: z.string(),
-                            declaration: z.string(),
-                        })
-                        .nullable(), // Assuming bank is optional
-                    paypal: z
-                        .object({
-                            email: z.string(),
-                        })
-                        .nullable(), // Assuming paypal is optional
-                    stripe_express: z.boolean().optional(),
-                }),
-                trusted: z.boolean(),
-                store_open_close: z.object({
-                    enabled: z.boolean(),
-                    time: z
-                        .object({
-                            enabled: z.boolean().optional(),
-                            time: z.any().optional(),
-                            status: z.string().optional(),
-                            opening_time: z.array(z.string()).optional(),
-                            closing_time: z.array(z.string()).optional(),
-                        })
-                        .or(z.array(z.any())),
-
-                    open_notice: z.string(),
-                    close_notice: z.string(),
-                }),
-                sale_only_here: z.boolean(),
-                company_name: z.string(),
-                vat_number: z.string(),
-                company_id_number: z.string(),
-                bank_name: z.string(),
-                bank_iban: z.string(),
-                categories: z.array(
-                    z.object({
-                        term_id: z.number(),
-                        name: z.string(),
-                        slug: z.string(),
-                        term_group: z.number(),
-                        term_taxonomy_id: z.number(),
-                        taxonomy: z.string(),
-                        description: z.string(),
-                        parent: z.number(),
-                        count: z.number(),
-                        filter: z.string(),
-                    }),
-                ),
-            }),
-            amount: z.number(),
-            created: z.string(),
-            status: z.string(),
-            method: z.string(),
-            method_title: z.string(),
-            note: z.string(),
-            details: z.union([
-                z.object({
-                    paypal: z.object({
-                        email: z.string(),
-                    }),
-                }),
-                z.object({
-                    bank: z.object({
-                        ac_name: z.string(),
-                        ac_type: z.string(),
-                        ac_number: z.string(),
-                        bank_name: z.string(),
-                        bank_addr: z.string(),
-                        routing_number: z.string(),
-                        iban: z.string(),
-                        swift: z.string(),
-                    }),
-                }),
-                z.object({
-                    skrill: z.object({
-                        email: z.string(),
-                    }),
-                }),
-            ]),
-            ip: z.string(),
-            _links: linksSchema,
-        }),
+        withdrawSchema: whithdrawSchema,
+        withdrawsSchema: z.array(whithdrawSchema),
 
         batchUpdateWithdrawsSchema: z.object({
             success: z.array(z.unknown()).optional(),
