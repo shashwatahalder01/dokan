@@ -120,9 +120,9 @@ const addressSchema = z
     .or(z.array(z.any()));
 
 const timeSchema = z.object({
-    status: z.string(),
-    opening_time: z.array(z.string()),
-    closing_time: z.array(z.string()),
+    status: z.string().optional(),
+    opening_time: z.array(z.string()).optional(),
+    closing_time: z.array(z.string()).optional(),
 });
 
 const storeTimeSchema = z.object({
@@ -183,17 +183,17 @@ const activePaymentMethodsSchema = z.object({
 
 const profileCompletionSchema = z.object({
     closed_by_user: z.boolean(),
-    phone: z.number(),
-    store_name: z.number(),
-    address: z.number(),
-    location: z.number(),
+    phone: z.number().optional(),
+    store_name: z.number().optional(),
+    address: z.number().optional(),
+    location: z.number().optional(),
     Bank: z.number(),
     paypal: z.number(),
     skrill: z.number(),
-    fb: z.number(),
-    youtube: z.number(),
-    twitter: z.number(),
-    linkedin: z.number(),
+    fb: z.number().optional(),
+    youtube: z.number().optional(),
+    twitter: z.number().optional(),
+    linkedin: z.number().optional(),
     next_todo: z.string(),
     progress: z.number(),
     progress_vals: z.object({
@@ -221,7 +221,7 @@ const ratingSchema = z.object({
 const linksSchema = z.object({
     self: z.array(z.object({ href: z.string().url() })).optional(),
     collection: z.array(z.object({ href: z.string().url() })).optional(),
-    up: z.array(z.object({ href: z.string().url() })).optional(), // only for product variations
+    up: z.array(z.object({ href: z.string().url() })).optional(),
 });
 
 const storyCategorySchema = z.object({
@@ -315,22 +315,22 @@ const storeSchema = z.object({
                     iban: z.string().optional(),
                     swift: z.string().optional(),
                 })
-                .partial(),
+                .optional(),
             paypal: z
                 .object({
                     email: z.string().optional(),
                 })
-                .partial(),
-            dokan_razorpay: z.boolean(),
-            stripe: z.boolean(),
-            dokan_moip_connect: z.boolean(),
+                .optional(),
+            dokan_razorpay: z.boolean().optional(),
+            stripe: z.boolean().optional(),
+            dokan_moip_connect: z.boolean().optional(),
             dokan_custom: z
                 .object({
                     withdraw_method_name: z.string().optional(),
                     withdraw_method_type: z.string().optional(),
                     value: z.string().optional(),
                 })
-                .partial(),
+                .optional(),
         })
         .optional(),
     trusted: z.boolean(),
@@ -758,8 +758,9 @@ const lineItemSchema = z.object({
             id: z.string().or(z.number()).optional(),
             src: z.string().optional(),
         })
+        .or(z.string())
         .optional(),
-    parent_name: z.string().nullable(),
+    parent_name: z.string().optional(),
 });
 
 const taxLineSchema = z.object({
@@ -837,15 +838,15 @@ const orderSchema = z.object({
     fee_lines: z.array(z.any()), // Assuming fee_lines can have various structures
     coupon_lines: z.array(z.any()), // Assuming coupon_lines can have various structures
     refunds: z.array(z.any()), // Assuming refunds can have various structures
-    payment_url: z.string(),
-    is_editable: z.boolean(),
-    needs_payment: z.boolean(),
-    needs_processing: z.boolean(),
+    payment_url: z.string().optional(),
+    is_editable: z.boolean().optional(),
+    needs_payment: z.boolean().optional(),
+    needs_processing: z.boolean().optional(),
     date_created_gmt: z.string(),
     date_modified_gmt: z.string(),
     date_completed_gmt: z.string().nullable(),
     date_paid_gmt: z.string(),
-    currency_symbol: z.string(),
+    currency_symbol: z.string().optional(),
     _links: linksSchema,
 });
 
@@ -865,16 +866,10 @@ const orderDownloadSchema = z.object({
 
 const orderNoteSchema = z.object({
     id: z.number().or(z.string()),
-    author: z.string(),
     date_created: z.string(),
     date_created_gmt: z.string(),
     note: z.string(),
     customer_note: z.boolean(),
-    _links: z.object({
-        self: z.array(z.object({ href: z.string().url() })),
-        collection: z.array(z.object({ href: z.string().url() })),
-        up: z.array(z.object({ href: z.string().url() })),
-    }),
 });
 
 const customerSchema = z.object({
@@ -1835,11 +1830,27 @@ export const schemas = {
     ordersSchema: {
         orderSchema: orderSchema,
         ordersSchema: z.array(orderSchema),
+        ordersSummarySchema: z.object({
+            'wc-pending': z.number(),
+            'wc-completed': z.number(),
+            'wc-on-hold': z.number(),
+            'wc-processing': z.number(),
+            'wc-refunded': z.number(),
+            'wc-cancelled': z.number(),
+            'wc-failed': z.number(),
+            'wc-checkout-draft': z.number(),
+            total: z.number(),
+        }),
+        batchUpdateOrderSchema: z.object({
+            success: z.boolean(),
+        }),
     },
 
     orderNotesSchema: {
         orderNoteSchema: orderNoteSchema,
         orderNotesSchema: z.array(orderNoteSchema),
+        createorderNoteSchema: orderNoteSchema.omit({ date_created: true, date_created_gmt: true }),
+        deleteorderNoteSchema: orderNoteSchema.omit({ date_created: true, date_created_gmt: true }),
     },
 
     productAdvertisementsSchema: {
@@ -2080,6 +2091,58 @@ export const schemas = {
     productsSchema: {
         productSchema: productSchema,
         productsSchema: z.array(productSchema),
+        productSummarySchema: z.object({
+            post_counts: z.object({
+                publish: z.number(),
+                future: z.number(),
+                draft: z.number(),
+                pending: z.number(),
+                private: z.number(),
+                trash: z.number(),
+                'auto-draft': z.number(),
+                inherit: z.number(),
+                'request-pending': z.number(),
+                'request-confirmed': z.number(),
+                'request-failed': z.number(),
+                'request-completed': z.number(),
+                'wc-active': z.number(),
+                'wc-switched': z.number(),
+                'wc-expired': z.number(),
+                'wc-pending-cancel': z.number(),
+                'wc-pending': z.number(),
+                'wc-processing': z.number(),
+                'wc-on-hold': z.number(),
+                'wc-completed': z.number(),
+                'wc-cancelled': z.number(),
+                'wc-refunded': z.number(),
+                'wc-failed': z.number(),
+                'wc-checkout-draft': z.number(),
+                complete: z.number(),
+                paid: z.number(),
+                confirmed: z.number(),
+                unpaid: z.number(),
+                'pending-confirmation': z.number(),
+                cancelled: z.number(),
+                'in-cart': z.number(),
+                'was-in-cart': z.number(),
+                vacation: z.number(),
+                open: z.number(),
+                closed: z.number(),
+                total: z.number(),
+            }),
+            products_url: z.string(),
+        }),
+
+        multistepCategories: z.record(
+            z.object({
+                term_id: z.string(),
+                name: z.string(),
+                parent_id: z.string(),
+                children: z.array(z.any()),
+                parents: z.array(z.any()),
+                breadcumb: z.array(z.string()),
+            }),
+        ),
     },
 
     productVariationsSchema: {
@@ -2362,7 +2425,7 @@ export const schemas = {
             address: addressSchema,
             location: z.string(),
             banner: z.number(),
-            icon: z.string(),
+            icon: z.string().or(z.number()),
             gravatar: z.number(),
             enable_tnc: z.string(),
             store_tnc: z.string(),
@@ -2371,7 +2434,7 @@ export const schemas = {
             dokan_store_time_enabled: z.string(),
             dokan_store_open_notice: z.string(),
             dokan_store_close_notice: z.string(),
-            dokan_store_time: storeTimeSchema,
+            dokan_store_time: storeTimeSchema.optional(),
             sale_only_here: z.boolean(),
             company_name: z.string(),
             vat_number: z.string(),
@@ -2379,19 +2442,19 @@ export const schemas = {
             bank_name: z.string(),
             bank_iban: z.string(),
             profile_completion: profileCompletionSchema,
-            find_address: z.string(),
-            catalog_mode: catalogModeSchema,
-            order_min_max: orderMinMaxSchema,
+            find_address: z.string().optional(),
+            catalog_mode: catalogModeSchema.optional(),
+            order_min_max: orderMinMaxSchema.optional(),
             categories: z.array(categorySchema),
-            vendor_biography: z.string(),
-            show_support_btn_product: z.string(),
-            support_btn_name: z.string(),
-            show_support_btn: z.string(),
-            setting_go_vacation: z.string(),
-            settings_closing_style: z.string(),
-            setting_vacation_message: z.string(),
-            seller_vacation_schedules: z.array(z.any()), // Adjust this based on the actual structure
-            vendor_store_location_pickup: vendorStoreLocationPickupSchema,
+            vendor_biography: z.string().optional(),
+            show_support_btn_product: z.string().optional(),
+            support_btn_name: z.string().optional(),
+            show_support_btn: z.string().optional(),
+            setting_go_vacation: z.string().optional(),
+            settings_closing_style: z.string().optional(),
+            setting_vacation_message: z.string().optional(),
+            seller_vacation_schedules: z.array(z.any()).optional(),
+            vendor_store_location_pickup: vendorStoreLocationPickupSchema.optional(),
             bank_payment_required_fields: bankPaymentRequiredFieldsSchema,
             active_payment_methods: activePaymentMethodsSchema,
         }),
@@ -2420,7 +2483,7 @@ export const schemas = {
             registered: z.string(),
             payment: paymentSchema,
             trusted: z.boolean(),
-            store_open_close: timeSchema,
+            store_open_close: timeSchema.optional(),
             sale_only_here: z.boolean(),
             company_name: z.string(),
             vat_number: z.string(),
