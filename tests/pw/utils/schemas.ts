@@ -1221,27 +1221,32 @@ const whithdrawSchema = z.object({
         rating: ratingSchema,
         enabled: z.boolean(),
         registered: z.string(),
-        payment: z.object({
-            bank: z
-                .object({
-                    ac_name: z.string(),
-                    ac_type: z.string(),
-                    ac_number: z.string(),
-                    bank_name: z.string(),
-                    bank_addr: z.string(),
-                    routing_number: z.string(),
-                    iban: z.string(),
-                    swift: z.string(),
-                    declaration: z.string(),
-                })
-                .nullable(), // Assuming bank is optional
-            paypal: z
-                .object({
-                    email: z.string(),
-                })
-                .nullable(), // Assuming paypal is optional
-            stripe_express: z.boolean().optional(),
-        }),
+        payment: z
+            .object({
+                bank: z
+                    .object({
+                        ac_name: z.string(),
+                        ac_type: z.string(),
+                        ac_number: z.string(),
+                        bank_name: z.string(),
+                        bank_addr: z.string(),
+                        routing_number: z.string(),
+                        iban: z.string(),
+                        swift: z.string(),
+                        declaration: z.string().optional(),
+                    })
+                    .or(z.array(z.any()))
+                    .optional(),
+                paypal: z
+                    .object({
+                        email: z.string(),
+                    })
+                    .or(z.array(z.any()))
+                    .optional(), // Assuming paypal is optional
+                stripe_express: z.boolean().optional(),
+            })
+            .or(z.array(z.any()))
+            .optional(),
         trusted: z.boolean(),
         store_open_close: z.object({
             enabled: z.boolean(),
@@ -1258,25 +1263,27 @@ const whithdrawSchema = z.object({
             open_notice: z.string(),
             close_notice: z.string(),
         }),
-        sale_only_here: z.boolean(),
-        company_name: z.string(),
-        vat_number: z.string(),
-        company_id_number: z.string(),
-        bank_name: z.string(),
-        bank_iban: z.string(),
+        sale_only_here: z.boolean().optional(),
+        company_name: z.string().optional(),
+        vat_number: z.string().optional(),
+        company_id_number: z.string().optional(),
+        bank_name: z.string().optional(),
+        bank_iban: z.string().optional(),
         categories: z.array(
-            z.object({
-                term_id: z.number(),
-                name: z.string(),
-                slug: z.string(),
-                term_group: z.number(),
-                term_taxonomy_id: z.number(),
-                taxonomy: z.string(),
-                description: z.string(),
-                parent: z.number(),
-                count: z.number(),
-                filter: z.string(),
-            }),
+            z
+                .object({
+                    term_id: z.number(),
+                    name: z.string(),
+                    slug: z.string(),
+                    term_group: z.number(),
+                    term_taxonomy_id: z.number(),
+                    taxonomy: z.string(),
+                    description: z.string(),
+                    parent: z.number(),
+                    count: z.number(),
+                    filter: z.string(),
+                })
+                .optional(),
         ),
     }),
     amount: z.number(),
