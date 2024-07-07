@@ -1284,7 +1284,7 @@ const whithdrawSchema = z.object({
                     filter: z.string(),
                 })
                 .optional(),
-        ),
+        ).optional(),
     }),
     amount: z.number(),
     created: z.string(),
@@ -2302,7 +2302,7 @@ export const schemas = {
         batchUpdatequoteRequestsSchema: z.boolean(),
     },
 
-    rankMathSchema: {}, //TODO: add schema
+    rankMathSchema: z.boolean(),
 
     refundsSchema: {
         refundSchema: refundSchema,
@@ -2578,8 +2578,6 @@ export const schemas = {
         settingV2GropupSchema: settingV2GropupSchema,
         singleSettingGroupV2StoreSchema: z.array(settingV2GropupSchema),
     },
-
-    settingsGroupSchema: {}, //TODO: add schema
 
     spmvSchema: {
         spmvSettingsSchema: z.object({

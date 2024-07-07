@@ -4,8 +4,9 @@ import { test, expect, request } from '@playwright/test';
 import { ApiUtils } from '@utils/apiUtils';
 import { endPoints } from '@utils/apiEndPoints';
 import { payloads } from '@utils/payloads';
+import { schemas } from '@utils/schemas';
 
-test.describe.skip('rank math api test', () => {
+test.describe('rank math api test', () => {
     let apiUtils: ApiUtils;
     let productId: string;
 
@@ -19,8 +20,9 @@ test.describe.skip('rank math api test', () => {
     });
 
     test('rank math', { tag: ['@pro'] }, async () => {
-        const [response, responseBody] = await apiUtils.post(endPoints.rankMath(productId), { data: {} });
+        const [response, responseBody] = await apiUtils.post(endPoints.rankMath(productId));
         expect(response.ok()).toBeTruthy();
         expect(responseBody).toBeTruthy();
+        expect(responseBody).toMatchSchema(schemas.rankMathSchema);
     });
 });
