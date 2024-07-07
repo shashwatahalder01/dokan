@@ -595,6 +595,7 @@ export const data = {
 
     tax: {
         taxRate: '5',
+        priority: '10',
         enableTax: true,
         saveSuccessMessage: 'Your settings have been saved.',
     },
@@ -804,6 +805,8 @@ export const data = {
             adminLogin: 'wp-admin',
             adminLogout: 'wp-login.php?action=logout',
             adminDashboard: 'wp-admin',
+            pages: 'wp-admin/edit.php?post_type=page',
+            addNewPage: 'wp-admin/post-new.php?post_type=page',
             user: 'wp-admin/user-edit.php',
             setupWP: 'wp-admin/install.php',
             general: 'wp-admin/options-general.php',
@@ -983,6 +986,10 @@ export const data = {
         },
 
         api: {
+            wp: {
+                pages: 'wp/v2/pages',
+            },
+
             dokan: {
                 products: 'dokan/v1/products',
                 stores: 'dokan/v1/stores',
@@ -1012,7 +1019,9 @@ export const data = {
             },
 
             wc: {
-                wcProducts: 'wc/v3/products',
+                products: 'wc/v3/products',
+                orders: 'wc/v3/orders',
+                customers: 'wc/v3/customers',
                 store: 'wc/store',
             },
         },
@@ -2186,6 +2195,22 @@ export const data = {
         correctKey: process.env.LICENSE_KEY,
         incorrectKey: 'ABC-123-DEF-456-GHI-789',
     },
+
+    // dokan shortcodes
+    dokanShortcodes: {
+        dashboard: '[dokan-dashboard]',
+        dokanSubscriptionPacks: '[dps_product_pack]',
+        vendorRegistration: '[dokan-vendor-registration]',
+        bestSellingProduct: '[dokan-best-selling-product]',
+        topRatedProduct: '[dokan-top-rated-product]',
+        customerMigration: '[dokan-customer-migration]',
+        geolocationFilter: '[dokan-geolocation-filter-form]',
+        stores: '[dokan-stores]',
+        myorders: '[dokan-my-orders]',
+        requestQuote: '[dokan-request-quote]',
+    },
+
+    pageTitle: 'shortcode_' + faker.string.nanoid(5),
 
     deliveryTime: {
         date: helpers.currentDateFJY,

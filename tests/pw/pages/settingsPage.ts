@@ -32,7 +32,7 @@ export class SettingsPage extends AdminPage {
         // settings field is visible
         await this.toBeVisible(settingsAdmin.fields);
 
-        // settings save Changes is visible
+        // settings save changes is visible
         await this.toBeVisible(settingsAdmin.saveChanges);
     }
 

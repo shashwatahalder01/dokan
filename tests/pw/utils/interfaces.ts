@@ -1,5 +1,3 @@
-import fs from 'fs';
-
 export interface admin {
     username: string;
     password: string;
@@ -461,6 +459,7 @@ export interface wpSettings {
 
 export interface tax {
     taxRate: string;
+    priority: string;
     enableTax: boolean;
     saveSuccessMessage: string;
 }

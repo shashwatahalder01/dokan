@@ -156,7 +156,7 @@ export class ApiUtils {
 
     // get sellerId
     async getSellerId(storeName?: string, auth?: auth): Promise<string> {
-        if (arguments.length === 1 && typeof storeName === 'object') {
+        if (storeName && typeof storeName === 'object') {
             auth = storeName as auth;
             storeName = undefined;
         }
@@ -246,7 +246,7 @@ export class ApiUtils {
 
     // get productId
     async getProductId(productName?: string, auth?: auth): Promise<string> {
-        if (arguments.length === 1 && typeof productName === 'object') {
+        if (productName && typeof productName === 'object') {
             auth = productName as auth;
             productName = undefined;
         }
@@ -272,7 +272,7 @@ export class ApiUtils {
 
     // delete all products
     async deleteAllProducts(productName?: any, auth?: auth): Promise<responseBody> {
-        if (arguments.length === 1 && typeof productName === 'object') {
+        if (productName && typeof productName === 'object') {
             auth = productName as auth;
             productName = undefined;
         }
@@ -405,7 +405,7 @@ export class ApiUtils {
 
     // get couponId
     async getCouponId(couponCode?: string, auth?: auth): Promise<string> {
-        if (arguments.length === 1 && typeof couponCode === 'object') {
+        if (couponCode && typeof couponCode === 'object') {
             auth = couponCode as auth;
             couponCode = undefined;
         }
@@ -450,7 +450,7 @@ export class ApiUtils {
 
     // get marketplace couponId
     async getMarketPlaceCouponId(couponCode?: string, auth?: auth): Promise<string> {
-        if (arguments.length === 1 && typeof couponCode === 'object') {
+        if (couponCode && typeof couponCode === 'object') {
             auth = couponCode as auth;
             couponCode = undefined;
         }
@@ -621,7 +621,7 @@ export class ApiUtils {
     // get single order log
     async getSingleOrderLog(orderId: string, auth?: auth) {
         const allOrderLogs = await this.getAllOrderLogs(auth);
-        const singleOrderLog = allOrderLogs.find((o: { order_id: string }) => o.order_id.toLowerCase() === orderId.toLowerCase());
+        const singleOrderLog = allOrderLogs.find((o: { order_id: string }) => String(o.order_id).toLowerCase() === orderId.toLowerCase());
         return singleOrderLog;
     }
 
@@ -770,7 +770,7 @@ export class ApiUtils {
 
     // get customerId
     async getCustomerId(username?: string, auth?: auth): Promise<string> {
-        if (arguments.length === 1 && typeof username === 'object') {
+        if (username && typeof username === 'object') {
             auth = username as auth;
             username = undefined;
         }
@@ -1010,7 +1010,7 @@ export class ApiUtils {
 
     // get store category Id
     async getStoreCategoryId(StoreCategoryName?: string, auth?: auth): Promise<string> {
-        if (arguments.length === 1 && typeof StoreCategoryName === 'object') {
+        if (StoreCategoryName && typeof StoreCategoryName === 'object') {
             auth = StoreCategoryName as auth;
             StoreCategoryName = undefined;
         }
@@ -1048,7 +1048,7 @@ export class ApiUtils {
 
     // get all quote rules
     async getAllQuoteRules(params: params = { per_page: 100 }, auth?: auth): Promise<responseBody> {
-        if (arguments.length === 1 && 'Authorization' in params) {
+        if (params && 'Authorization' in params) {
             auth = params as auth;
             params = undefined;
         }
@@ -1408,8 +1408,8 @@ export class ApiUtils {
         return responseBody;
     }
 
-    // get user by role
-    async getAllUsersByRole(roles: string[], auth?: auth): Promise<responseBody> {
+    // get user by roles [ for multiple roles use comma separated string]
+    async getAllUsersByRoles(roles: string, auth?: auth): Promise<responseBody> {
         const [, responseBody] = await this.get(endPoints.wp.getAllUsers, { params: { per_page: 100, roles: roles }, headers: auth });
         return responseBody;
     }
@@ -1449,8 +1449,21 @@ export class ApiUtils {
 
     // delete user
     async deleteUser(userId: string, auth?: auth): Promise<responseBody> {
-        const [, responseBody] = await this.delete(endPoints.wp.deleteUser(userId), { headers: auth });
+        const [, responseBody] = await this.delete(endPoints.wp.deleteUser(userId), { params: { ...payloads.paramsForceDelete, reassign: '' }, headers: auth });
         return responseBody;
+    }
+
+    // delete all users
+    async deleteAllUsers(role?: string, auth?: auth): Promise<responseBody> {
+        if (role && typeof role === 'object') {
+            auth = role as auth;
+            role = undefined;
+        }
+        const allUsers = role ? await this.getAllUsersByRoles(role, auth) : await this.getAllUsers(auth);
+        const allUserIds = allUsers.map((o: { id: unknown }) => o.id);
+        for (const userId of allUserIds) {
+            await this.delete(endPoints.wp.deleteUser(userId), { headers: auth });
+        }
     }
 
     // plugins
@@ -1585,8 +1598,8 @@ export class ApiUtils {
     }
 
     // create page
-    async createPage(payload: object, auth?: auth): Promise<[responseBody, string]> {
-        let pageId = await this.getPageId(helpers.slugify(payloads.tocPage.title), payloads.adminAuth);
+    async createPage(payload: any, auth?: auth): Promise<[responseBody, string]> {
+        let pageId = await this.getPageId(helpers.slugify(payload.title), payloads.adminAuth);
         let responseBody;
         if (!pageId) {
             [, responseBody] = await this.post(endPoints.wp.createPage, { data: payload, headers: auth });
@@ -1595,6 +1608,12 @@ export class ApiUtils {
             responseBody = await this.getSinglePage(pageId, auth);
         }
         return [responseBody, pageId];
+    }
+
+    // delete page
+    async deletePage(pageId: string, auth?: auth): Promise<responseBody> {
+        const [, responseBody] = await this.delete(endPoints.wp.deletePage(pageId), { params: { force: true }, headers: auth });
+        return responseBody;
     }
 
     /**
@@ -1633,7 +1652,6 @@ export class ApiUtils {
     async createProductReview(payload: string | object, review: object, auth?: auth): Promise<[responseBody, string, string]> {
         let productId: string;
         typeof payload === 'object' ? ([, productId] = await this.createProduct(payload, auth)) : (productId = payload);
-        //todo: check if product exists with that id follow: createOrder
         const [, responseBody] = await this.post(endPoints.wc.createReview, { data: { ...review, product_id: productId }, headers: auth });
         const reviewId = String(responseBody?.id);
         const reviewMessage = String(responseBody?.review);
@@ -1690,6 +1708,16 @@ export class ApiUtils {
         return [response, responseBody];
     }
 
+    // tags
+
+    // create tag
+    async createTag(payload: object, auth?: auth): Promise<[responseBody, string, string]> {
+        const [, responseBody] = await this.post(endPoints.wc.createTag, { data: payload, headers: auth });
+        const tagId = String(responseBody?.id);
+        const tagName = String(responseBody?.name);
+        return [responseBody, tagId, tagName];
+    }
+
     // product
 
     // get all products
@@ -1709,12 +1737,6 @@ export class ApiUtils {
     // create order
     async createOrder(product: string | object, orderPayload: any, auth?: auth): Promise<[APIResponse, responseBody, string, string]> {
         let productId: string;
-        // if (!product) {
-        //     [, productId] = await this.createProduct(payloads.createProduct(), auth);
-        // } else {
-        //     typeof product === 'object' ? ([, productId] = await this.createProduct(product, auth)) : (productId = product);
-        // } //todo: have to resolve invalid id form env issue
-
         if (!product) {
             [, productId] = await this.createProduct(payloads.createProduct(), auth);
         } else {

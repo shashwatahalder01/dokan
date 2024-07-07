@@ -44,7 +44,7 @@ export class VendorSettingsPage extends VendorPage {
         await this.toBeVisible(settingsVendor.email);
 
         // map is visible
-        // await this.toBeVisible(settingsVendor.map); //TODO: g_map value not found
+        // await this.toBeVisible(settingsVendor.map); // TODO: g_map value not found
 
         // todo: catalog, discount, vacation, open close, store category
 

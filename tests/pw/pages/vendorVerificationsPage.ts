@@ -116,8 +116,6 @@ export class VendorVerificationsPage extends AdminPage {
     // verification requests render properly
     async adminVerificationsRenderProperly() {
         await this.goIfNotThere(data.subUrls.backend.dokan.verifications);
-        await this.wait(1); //TODO: added to goto else clause need to resolve this
-
         const noVerificationRequests = await this.isVisible(verificationsAdmin.noRowsFound);
 
         if (noVerificationRequests) {
@@ -172,7 +170,7 @@ export class VendorVerificationsPage extends AdminPage {
         await this.toContainText(verificationsAdmin.filters.result, input);
         await this.pressAndWaitForResponse(data.subUrls.api.dokan.verifications, data.key.enter);
         // todo: need to wait for focus event
-        //todo: need to update assertions
+        // todo: need to update assertions
         const count = (await this.getElementText(verificationsAdmin.numberOfRowsFound))?.split(' ')[0];
         expect(Number(count)).toBeGreaterThan(0);
     }
@@ -269,7 +267,7 @@ export class VendorVerificationsPage extends AdminPage {
     async submitVerificationRequest(verification: vendor['verification'], setupWizard = false): Promise<void> {
         if (!setupWizard) {
             await this.goIfNotThere(data.subUrls.frontend.vDashboard.settingsVerification);
-            await this.reload(); //todo: need to resolve this
+            await this.reload(); // todo: need to resolve this
         } else {
             await this.goIfNotThere(data.subUrls.frontend.vDashboard.setupWizard);
             await this.click(setupWizardVendor.letsGo);
@@ -291,7 +289,7 @@ export class VendorVerificationsPage extends AdminPage {
     async cancelVerificationRequest(verificationMethod: string, setupWizard = false): Promise<void> {
         if (!setupWizard) {
             await this.goIfNotThere(data.subUrls.frontend.vDashboard.settingsVerification);
-            await this.reload(); //todo: need to resolve this
+            await this.reload(); // todo: need to resolve this
         } else {
             await this.goIfNotThere(data.subUrls.frontend.vDashboard.setupWizard);
             await this.click(setupWizardVendor.letsGo);
