@@ -68,6 +68,6 @@ test.describe('vendor dashboard api test', () => {
         const [response, responseBody] = await apiUtils.get(endPoints.getVendorProfileProgressBarData);
         expect(response.ok()).toBeTruthy();
         expect(responseBody).toBeTruthy();
-        expect(responseBody).toMatchSchema(schemas.vendorDashboardSchema.profileProgressBarSchema);
+        expect(responseBody).toMatchSchema(schemas.vendorDashboardSchema.profileCompletionSchema);
     });
 });

@@ -19,7 +19,7 @@ test.describe('rank math api test', () => {
         await apiUtils.dispose();
     });
 
-    test('rank math', { tag: ['@pro'] }, async () => {
+    test('product rank math data editable or not', { tag: ['@pro'] }, async () => {
         const [response, responseBody] = await apiUtils.post(endPoints.rankMath(productId));
         expect(response.ok()).toBeTruthy();
         expect(responseBody).toBeTruthy();

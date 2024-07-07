@@ -35,7 +35,7 @@ test.describe('product advertisement api test', () => {
         const [response, responseBody] = await apiUtils.get(endPoints.getAllProductAdvertisements);
         expect(response.ok()).toBeTruthy();
         expect(responseBody).toBeTruthy();
-        expect(responseBody).toMatchSchema(schemas.productAdvertisementsSchema.advertisedProductSchema);
+        expect(responseBody).toMatchSchema(schemas.productAdvertisementsSchema.advertisedProductsSchema);
     });
 
     test('create a product advertisement', { tag: ['@pro'] }, async () => {
@@ -44,7 +44,7 @@ test.describe('product advertisement api test', () => {
         const [response, responseBody] = await apiUtils.post(endPoints.createProductAdvertisement, { data: { vendor_id: sellerId, product_id: productId } });
         expect(response.ok()).toBeTruthy();
         expect(responseBody).toBeTruthy();
-        expect(responseBody).toMatchSchema(schemas.productAdvertisementsSchema.createProductAdvertisementSchema);
+        expect(responseBody).toMatchSchema(schemas.productAdvertisementsSchema.createAdvertisedProductSchema);
     });
 
     test('expire a product advertisement', { tag: ['@pro'] }, async () => {

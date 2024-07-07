@@ -621,7 +621,7 @@ export class ApiUtils {
     // get single order log
     async getSingleOrderLog(orderId: string, auth?: auth) {
         const allOrderLogs = await this.getAllOrderLogs(auth);
-        const singleOrderLog = allOrderLogs.find((o: { order_id: string }) => o.order_id.toLowerCase() === orderId.toLowerCase());
+        const singleOrderLog = allOrderLogs.find((o: { order_id: string }) => String(o.order_id).toLowerCase() === orderId.toLowerCase());
         return singleOrderLog;
     }
 

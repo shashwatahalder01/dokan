@@ -81,6 +81,7 @@ test.describe('withdraw api test', () => {
 
     test('update batch withdraws', { tag: ['@lite'] }, async () => {
         const allWithdrawIds = (await apiUtils.getAllWithdraws()).map((a: { id: unknown }) => a.id);
+
         const [response, responseBody] = await apiUtils.put(endPoints.updateBatchWithdraws, { data: { approved: allWithdrawIds } });
         expect(response.ok()).toBeTruthy();
         expect(responseBody).toBeTruthy();

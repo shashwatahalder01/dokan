@@ -2494,8 +2494,8 @@ export const payloads = {
         first_name: faker.person.firstName('male'),
         last_name: faker.person.lastName('male'),
         phone: '0123456789',
-        email: faker.person.firstName('male') + '@email.com',
-        // password: String(USER_PASSWORD), // todo: fatal error exists dokan issue, for updating password
+        email: faker.person.firstName('male') + faker.string.nanoid(5) + '@email.com',
+        password: String(USER_PASSWORD),
     }),
 
     updateCapabilities: {
