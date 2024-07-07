@@ -82,31 +82,39 @@ const socialSchema = z
     })
     .or(z.array(z.any()));
 
-const paypalSchema = z.object({
-    email: z.string().email().or(z.string().nullish()),
-});
+const paypalSchema = z
+    .object({
+        email: z.string().email().or(z.string().nullish()),
+    })
+    .or(z.array(z.any()));
 
-const bankSchema = z.object({
-    ac_name: z.string(),
-    ac_type: z.string(),
-    ac_number: z.string(),
-    bank_name: z.string(),
-    bank_addr: z.string(),
-    routing_number: z.string(),
-    iban: z.string(),
-    swift: z.string(),
-});
+const bankSchema = z
+    .object({
+        ac_name: z.string(),
+        ac_type: z.string(),
+        ac_number: z.string(),
+        bank_name: z.string(),
+        bank_addr: z.string(),
+        routing_number: z.string(),
+        iban: z.string(),
+        swift: z.string(),
+    })
+    .or(z.array(z.any()));
 
-const skrillSchema = z.object({
-    email: z.string().email(),
-});
+const skrillSchema = z
+    .object({
+        email: z.string().email(),
+    })
+    .or(z.array(z.any()));
 
-const paymentSchema = z.object({
-    paypal: paypalSchema.optional(),
-    bank: bankSchema.optional(),
-    stripe: z.boolean().optional(),
-    skrill: skrillSchema.optional(),
-});
+const paymentSchema = z
+    .object({
+        paypal: paypalSchema.optional(),
+        bank: bankSchema.optional(),
+        stripe: z.boolean().optional(),
+        skrill: skrillSchema.optional(),
+    })
+    .or(z.array(z.any()));
 
 const addressSchema = z
     .object({
@@ -315,11 +323,13 @@ const storeSchema = z.object({
                     iban: z.string().optional(),
                     swift: z.string().optional(),
                 })
+                .or(z.array(z.any()))
                 .optional(),
             paypal: z
                 .object({
                     email: z.string().optional(),
                 })
+                .or(z.array(z.any()))
                 .optional(),
             dokan_razorpay: z.boolean().optional(),
             stripe: z.boolean().optional(),
@@ -332,6 +342,7 @@ const storeSchema = z.object({
                 })
                 .optional(),
         })
+        .or(z.array(z.any()))
         .optional(),
     trusted: z.boolean(),
     store_open_close: z.object({
@@ -1312,6 +1323,68 @@ const chargeDataSchema = z.object({
     percentage: z.number(),
 });
 
+const settingV2Schema = z.object({
+    id: z.string(),
+    label: z.string(),
+    description: z.string(),
+    parent_id: z.string(),
+    sub_groups: z.array(z.any()), // Adjust the type of sub_groups if you know the specific structure
+    _links: z.object({
+        options: z.object({ href: z.string().url() }),
+        collection: z.object({ href: z.string().url() }),
+        self: z.object({ href: z.string().url() }),
+    }),
+});
+const linkSchema = z.object({
+    href: z.string().url(),
+});
+
+const settingV2LinksSchema = z.object({
+    self: linkSchema,
+    collection: linkSchema,
+    options: linkSchema.optional(), // options is optional because not all objects have it
+});
+
+const infoSchema = z.object({
+    text: z.string(),
+    url: z.string().url(),
+    icon: z.string(),
+});
+
+const optionSchema = z.object({
+    term_id: z.number(),
+    name: z.string(),
+    slug: z.string(),
+    term_group: z.number(),
+    term_taxonomy_id: z.number(),
+    taxonomy: z.string(),
+    description: z.string(),
+    parent: z.number(),
+    count: z.number(),
+    filter: z.string(),
+});
+
+const settingV2GropupSchema = z.object({
+    id: z.string(),
+    title: z.string(),
+    desc: z.string(),
+    icon: z.string(),
+    info: z.array(infoSchema).optional(),
+    type: z.string(),
+    parent_id: z.string(),
+    tab: z.string().optional(),
+    card: z.string().optional(),
+    editable: z.boolean().optional(),
+    fields: z.array(z.any()).optional(),
+    placeholder: z.string().optional(),
+    required: z.boolean().optional(),
+    multiple: z.boolean().optional(),
+    value: z.any(),
+    url: z.boolean().optional(),
+    options: z.any(),
+    _links: settingV2LinksSchema.optional(),
+});
+
 export const schemas = {
     abuseReportsSchema: {
         abuseReportReasonsSchema: z.array(
@@ -2093,42 +2166,42 @@ export const schemas = {
         productsSchema: z.array(productSchema),
         productSummarySchema: z.object({
             post_counts: z.object({
-                publish: z.number(),
-                future: z.number(),
-                draft: z.number(),
-                pending: z.number(),
-                private: z.number(),
-                trash: z.number(),
-                'auto-draft': z.number(),
-                inherit: z.number(),
-                'request-pending': z.number(),
-                'request-confirmed': z.number(),
-                'request-failed': z.number(),
-                'request-completed': z.number(),
-                'wc-active': z.number(),
-                'wc-switched': z.number(),
-                'wc-expired': z.number(),
-                'wc-pending-cancel': z.number(),
-                'wc-pending': z.number(),
-                'wc-processing': z.number(),
-                'wc-on-hold': z.number(),
-                'wc-completed': z.number(),
-                'wc-cancelled': z.number(),
-                'wc-refunded': z.number(),
-                'wc-failed': z.number(),
+                publish: z.number().optional(),
+                future: z.number().optional(),
+                draft: z.number().optional(),
+                pending: z.number().optional(),
+                private: z.number().optional(),
+                trash: z.number().optional(),
+                'auto-draft': z.number().optional(),
+                inherit: z.number().optional(),
+                'request-pending': z.number().optional(),
+                'request-confirmed': z.number().optional(),
+                'request-failed': z.number().optional(),
+                'request-completed': z.number().optional(),
+                'wc-active': z.number().optional(),
+                'wc-switched': z.number().optional(),
+                'wc-expired': z.number().optional(),
+                'wc-pending-cancel': z.number().optional(),
+                'wc-pending': z.number().optional(),
+                'wc-processing': z.number().optional(),
+                'wc-on-hold': z.number().optional(),
+                'wc-completed': z.number().optional(),
+                'wc-cancelled': z.number().optional(),
+                'wc-refunded': z.number().optional(),
+                'wc-failed': z.number().optional(),
                 'wc-checkout-draft': z.number(),
-                complete: z.number(),
-                paid: z.number(),
-                confirmed: z.number(),
-                unpaid: z.number(),
-                'pending-confirmation': z.number(),
-                cancelled: z.number(),
-                'in-cart': z.number(),
-                'was-in-cart': z.number(),
-                vacation: z.number(),
-                open: z.number(),
-                closed: z.number(),
-                total: z.number(),
+                complete: z.number().optional(),
+                paid: z.number().optional(),
+                confirmed: z.number().optional(),
+                unpaid: z.number().optional(),
+                'pending-confirmation': z.number().optional(),
+                cancelled: z.number().optional(),
+                'in-cart': z.number().optional(),
+                'was-in-cart': z.number().optional(),
+                vacation: z.number().optional(),
+                open: z.number().optional(),
+                closed: z.number().optional(),
+                total: z.number().optional(),
             }),
             products_url: z.string(),
         }),
@@ -2435,17 +2508,17 @@ export const schemas = {
             dokan_store_open_notice: z.string(),
             dokan_store_close_notice: z.string(),
             dokan_store_time: storeTimeSchema.optional(),
-            sale_only_here: z.boolean(),
-            company_name: z.string(),
-            vat_number: z.string(),
-            company_id_number: z.string(),
-            bank_name: z.string(),
-            bank_iban: z.string(),
-            profile_completion: profileCompletionSchema,
+            sale_only_here: z.boolean().optional(),
+            company_name: z.string().optional(),
+            vat_number: z.string().optional(),
+            company_id_number: z.string().optional(),
+            bank_name: z.string().optional(),
+            bank_iban: z.string().optional(),
+            profile_completion: profileCompletionSchema.optional(),
             find_address: z.string().optional(),
             catalog_mode: catalogModeSchema.optional(),
             order_min_max: orderMinMaxSchema.optional(),
-            categories: z.array(categorySchema),
+            categories: z.array(categorySchema).optional(),
             vendor_biography: z.string().optional(),
             show_support_btn_product: z.string().optional(),
             support_btn_name: z.string().optional(),
@@ -2484,15 +2557,19 @@ export const schemas = {
             payment: paymentSchema,
             trusted: z.boolean(),
             store_open_close: timeSchema.optional(),
-            sale_only_here: z.boolean(),
-            company_name: z.string(),
-            vat_number: z.string(),
-            company_id_number: z.string(),
-            bank_name: z.string(),
-            bank_iban: z.string(),
-            categories: z.array(categorySchema),
+            sale_only_here: z.boolean().optional(),
+            company_name: z.string().optional(),
+            vat_number: z.string().optional(),
+            company_id_number: z.string().optional(),
+            bank_name: z.string().optional(),
+            bank_iban: z.string().optional(),
+            categories: z.array(categorySchema).optional(),
             _links: linksSchema,
         }),
+
+        storeSettingsV2Schema: z.array(settingV2Schema),
+        settingV2GropupSchema: settingV2GropupSchema,
+        singleSettingGroupV2StoreSchema: z.array(settingV2GropupSchema),
     },
 
     settingsGroupSchema: {}, //TODO: add schema
