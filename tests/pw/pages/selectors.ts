@@ -6114,6 +6114,8 @@ export const selector = {
             flatRateCalculationType: '#calculation_type',
             // Free Shipping
             freeShippingTitle: '#method_title',
+            freeShippingOptions:'//label[@for="dokan-free-shipping-options"]/..//select', // coupon, min_amount, either, both
+            freeShippingMinAmountRule: 'input#apply_min_amount_rule_before_discount',
             freeShippingMinimumOrderAmount: '#minimum_order_amount',
             // Local Pickup
             localPickupTitle: '#method_title',

@@ -1221,6 +1221,7 @@ export const data = {
                     selectShippingMethod: 'free_shipping',
                     shippingMethod: 'Free Shipping',
                     shippingMethodTitle: 'Free Shipping',
+                    freeShippingOption: 'min_amount', // 'coupon', 'min_amount', 'either', 'both'
                     freeShippingRequires: 'min_amount',
                     freeShippingMinimumOrderAmount: '200',
                     shippingMethodSaveSuccessMessage: 'Shipping method added successfully',

@@ -48,9 +48,9 @@ const productAttributeSchema = z.object({
 });
 
 const productMetaDataSchema = z.object({
-    id: z.number(),
-    key: z.string(),
-    value: z.any(),
+    id: z.number().optional(),
+    key: z.string().optional(),
+    value: z.any().optional(),
 });
 
 const productSchema = z.object({
@@ -118,7 +118,7 @@ const productSchema = z.object({
     menu_order: z.number(),
     price_html: z.string(),
     related_ids: z.array(z.number()),
-    meta_data: z.array(productMetaDataSchema),
+    meta_data: z.array(productMetaDataSchema).optional(),
     stock_status: z.string().optional(),
     has_options: z.boolean().optional(),
     post_password: z.string().optional(),
@@ -960,7 +960,7 @@ const quoteRuleSchema = z.object({
     selected_user_role: z.array(z.string()).or(z.string()).optional(),
     category_ids: z.array(z.string()).or(z.string()).optional(),
     product_categories: z.array(z.string()).or(z.string()).optional(),
-    product_ids: z.array(z.string()).or(z.string()).optional(),
+    product_ids: z.string().or(z.number()).optional(),
     hide_price: z.string(),
     hide_cart_button: z.string(),
     button_text: z.string(),
@@ -1748,7 +1748,7 @@ export const schemas = {
                 .object({
                     wholesale_price: z.string(),
                     wholesale_quantity: z.string(),
-                    enable_wholesale: z.string(),
+                    enable_wholesale: z.string().or(z.boolean()),
                 })
                 .optional(),
             order_min_max: z
