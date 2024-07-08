@@ -957,10 +957,10 @@ const advertisedProductSchema = z.object({
 const quoteRuleSchema = z.object({
     id: z.string(),
     rule_name: z.string(),
-    selected_user_role: z.array(z.string()).or(z.string()),
-    category_ids: z.array(z.string()).or(z.string()),
-    product_categories: z.array(z.string()).optional(),
-    product_ids: z.array(z.string()).or(z.string()),
+    selected_user_role: z.array(z.string()).or(z.string()).optional(),
+    category_ids: z.array(z.string()).or(z.string()).optional(),
+    product_categories: z.array(z.string()).or(z.string()).optional(),
+    product_ids: z.array(z.string()).or(z.string()).optional(),
     hide_price: z.string(),
     hide_cart_button: z.string(),
     button_text: z.string(),
@@ -1748,7 +1748,7 @@ export const schemas = {
                 .object({
                     wholesale_price: z.string(),
                     wholesale_quantity: z.string(),
-                    enable_wholesale: z.boolean(),
+                    enable_wholesale: z.string(),
                 })
                 .optional(),
             order_min_max: z

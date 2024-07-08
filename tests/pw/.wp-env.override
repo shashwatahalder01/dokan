@@ -10,8 +10,6 @@
                 "../../plugins/dokan-pro/tests/plugins/woocommerce-product-addons",
                 "../../plugins/dokan-pro/tests/plugins/woocommerce-simple-auctions",
                 "../../plugins/dokan-pro/tests/plugins/woocommerce-subscriptions",
-                "https://downloads.wordpress.org/plugin/woocommerce-germanized.latest-stable.zip",
-                "https://downloads.wordpress.org/plugin/seo-by-rank-math.latest-stable.zip"
             ]
         }
     }

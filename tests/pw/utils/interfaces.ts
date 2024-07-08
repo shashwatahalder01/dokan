@@ -1,3 +1,4 @@
+import fs from 'fs';
 export interface admin {
     username: string;
     password: string;
@@ -1036,7 +1037,7 @@ export interface vendor {
     };
 
     // addon
-    addon: () => {
+    addon: {
         name: string;
         priority: string;
         category: string;

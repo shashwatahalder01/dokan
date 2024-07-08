@@ -5809,7 +5809,6 @@ export const selector = {
             visitStore: '//a[normalize-space()="Visit Store"]',
 
             createNewAddon: '.dokan-pa-all-addons .dokan-btn',
-            createNew: '//a[normalize-space()="Create New"]',
 
             // table
             table: {

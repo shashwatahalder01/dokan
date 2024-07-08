@@ -67,7 +67,7 @@ export class ShortcodePage extends AdminPage {
         const noSubscriptionPacks = await this.isVisible(vendorSubscription.noSubscriptionMessage);
 
         if (noSubscriptionPacks) {
-            await this.toContainText(selector.customer.cMyOrders.noOrdersFound, 'No orders found!');
+            await this.toContainText(vendorSubscription.noSubscriptionMessage, 'No subscription pack has been found!');
             console.log('No subscription pack found!');
         } else {
             await this.toBeVisible(vendorSubscription.dokanSubscriptionDiv);
