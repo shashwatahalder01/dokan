@@ -8,8 +8,10 @@ import { payloads } from '@utils/payloads';
 import { dbUtils } from '@utils/dbUtils';
 import { dbData } from '@utils/dbData';
 
+const { CI } = process.env;
+
 test.describe('setup local site', () => {
-    test.skip(!!process.env.CI, 'skip site setup on CI');
+    test.skip(CI, 'skip site setup on CI');
 
     test('download wordpress to desired folder', async ({ page }) => {});
 

@@ -183,12 +183,12 @@ const productVariationSchema = z.object({
 
 const addressSchema = z
     .object({
-        street_1: z.string(),
-        street_2: z.string(),
-        city: z.string(),
-        zip: z.string(),
-        country: z.string(),
-        state: z.string(),
+        street_1: z.string().optional(),
+        street_2: z.string().optional(),
+        city: z.string().optional(),
+        zip: z.string().optional(),
+        country: z.string().optional(),
+        state: z.string().optional(),
     })
     .or(z.array(z.any()));
 
@@ -913,7 +913,7 @@ const announcementSchema = z.object({
     announcement_sellers: z
         .array(
             z.object({
-                id: z.string(),
+                id: z.string().or(z.number()),
                 name: z.string(),
                 shop_name: z.string(),
                 email: z.string(),
@@ -943,10 +943,10 @@ const advertisedProductSchema = z.object({
 const quoteRuleSchema = z.object({
     id: z.string(),
     rule_name: z.string(),
-    selected_user_role: z.array(z.string()).or(z.string()),
-    category_ids: z.array(z.string()).or(z.string()),
+    selected_user_role: z.array(z.string()).or(z.number()),
+    category_ids: z.array(z.string()).or(z.number()),
     product_categories: z.array(z.string()).optional(),
-    product_ids: z.array(z.string()).or(z.string()),
+    product_ids: z.array(z.string()).or(z.number()),
     hide_price: z.string(),
     hide_cart_button: z.string(),
     button_text: z.string(),
@@ -1283,7 +1283,7 @@ export const schemas = {
             shop_manager: roleSchema,
             seller: roleSchema,
             vendor_staff: roleSchema,
-            translator: roleSchema,
+            translator: roleSchema.optional(),
         }),
 
         role_objects: z.object({
@@ -1803,8 +1803,8 @@ export const schemas = {
                 earning: z.number(),
             }),
             others: z.object({
-                commission_rate: z.string().optional(),
-                additional_fee: z.string().optional(),
+                commission_rate: z.string().nullable().optional(),
+                additional_fee: z.string().nullable().optional(),
                 commission_type: z.string().optional(),
                 balance: z.number(),
                 reviews: z.number(),
@@ -2059,7 +2059,7 @@ export const schemas = {
                 }),
             ),
             active_methods: z.array(z.string()),
-            method_additional_info: z.array(z.enum(['paypal', 'bank', 'skrill', 'dokan_custom'])),
+            method_additional_info: z.array(z.string()),
             minimum_amount_needed: z.number(),
             is_schedule_selected: z.boolean(),
         }),
@@ -2210,7 +2210,20 @@ export const schemas = {
             enable_tnc: z.string(),
             store_tnc: z.string(),
             show_min_order_discount: z.string(),
-            store_seo: z.array(z.unknown()),
+            store_seo: z
+                .object({
+                    'dokan-seo-meta-title': z.string().optional(),
+                    'dokan-seo-meta-desc': z.string().optional(),
+                    'dokan-seo-meta-keywords': z.string().optional(),
+                    'dokan-seo-og-title': z.string().optional(),
+                    'dokan-seo-og-desc': z.string().optional(),
+                    'dokan-seo-og-image': z.string().optional(),
+                    'dokan-seo-twitter-title': z.string().optional(),
+                    'dokan-seo-twitter-desc': z.string().optional(),
+                    'dokan-seo-twitter-image': z.string().optional(),
+                })
+                .or(z.array(z.unknown()))
+                .optional(),
             dokan_store_time_enabled: z.string(),
             dokan_store_open_notice: z.string(),
             dokan_store_close_notice: z.string(),

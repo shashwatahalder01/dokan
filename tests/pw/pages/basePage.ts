@@ -8,16 +8,13 @@ import { expect, Page, BrowserContext, Cookie, Request, Response, Locator, Frame
 import { data } from '@utils/testData';
 import { selector } from '@pages/selectors';
 
+const { BASE_URL } = process.env;
+
 // This Page Contains All Necessary Playwright Automation Methods
 
 export class BasePage {
     readonly page: Page;
 
-    /**
-     * Constructs a new instance of the BasePage class.
-     *
-     * @param {Page} page - The Playwright Page object to associate with this BasePage instance.
-     */
     constructor(page: Page) {
         this.page = page;
     }
@@ -95,10 +92,10 @@ export class BasePage {
 
     // Create a New URL
     createUrl(subPath: string): string {
-        // let url = new URL(process.env.BASE_URL)
+        // let url = new URL(BASE_URL)
         // url.pathname = url.pathname + subPath + '/'
         // return url.href
-        return process.env.BASE_URL + '/' + subPath;
+        return BASE_URL + '/' + subPath;
     }
 
     // goto subPath if not already there

@@ -3,8 +3,10 @@ import { VisualPage } from '@pages/visualPage';
 import { data } from '@utils/testData';
 import { selector } from '@pages/selectors';
 
+const { CI } = process.env;
+
 test.describe('dokan visual test', () => {
-    test.skip(!!process.env.CI, 'skip visual test on CI');
+    test.skip(CI, 'skip visual test on CI');
     let admin: VisualPage;
     let aPage: Page;
 
