@@ -5246,6 +5246,7 @@ export const selector = {
 
         vSubscribtion: {
             dokanSubscriptionDiv: 'div.dokan-subscription-content',
+            noSubscriptionMessage: '//h3[text()="No subscription pack has been found!"]',
 
             subscribedSubscriptionInfo: 'div.seller_subs_info',
             dokanSubscriptionProductContainer: 'div.pack_content_wrapper',
@@ -6650,7 +6651,7 @@ export const selector = {
             // Product Card
             productCard: {
                 card: '#main ul.products li',
-                productDetailsLink: '#main .products .woocommerce-LoopProduct-link',
+                productDetailsLink: '#main ul.products li.product a.woocommerce-LoopProduct-link',
                 productTitle: '#main .products .woocommerce-loop-product__title',
                 productPrice: '#main .products .price',
                 addToCart: '#main .products a.add_to_cart_button',
@@ -7295,7 +7296,7 @@ export const selector = {
             cartItem: (productName: string) => `//tr[@class='wc-block-cart-items__row']//a[@class= 'wc-block-components-product-name' and contains(text(),'${productName}')]`,
             removeItem: (productName: string) => `//a[contains(text(),'${productName}')]/..//button[@class='wc-block-cart-item__remove-link']`,
             quantity: (productName: string) => `//a[contains(text(),'${productName}')]/..//input[@class='wc-block-components-quantity-selector__input']`,
-            addCoupon: 'a[aria-label="Add a coupon"]',
+            addCoupon: '//button[text()="Add a coupon"]',
             couponCode: 'form#wc-block-components-totals-coupon__form input',
             applyCoupon: 'form#wc-block-components-totals-coupon__form  button',
             removeCoupon: (couponCode: string) => `//span[contains(text(), '${couponCode.toLowerCase()}')]/..//button`,

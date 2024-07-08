@@ -376,6 +376,20 @@ const storyCategorySchema = z.object({
     _links: linksSchema,
 });
 
+const storeSeo = z
+    .object({
+        'dokan-seo-meta-title': z.string().optional(),
+        'dokan-seo-meta-desc': z.string().optional(),
+        'dokan-seo-meta-keywords': z.string().optional(),
+        'dokan-seo-og-title': z.string().optional(),
+        'dokan-seo-og-desc': z.string().optional(),
+        'dokan-seo-og-image': z.string().optional(),
+        'dokan-seo-twitter-title': z.string().optional(),
+        'dokan-seo-twitter-desc': z.string().optional(),
+        'dokan-seo-twitter-image': z.string().optional(),
+    })
+    .or(z.array(z.unknown()));
+
 const storeSchema = z.object({
     id: z.number().optional(),
     store_name: z.string(),
@@ -404,7 +418,7 @@ const storeSchema = z.object({
     enable_tnc: z.string().optional(),
     store_tnc: z.string().optional(),
     show_min_order_discount: z.string().optional(),
-    store_seo: z.unknown().optional(),
+    store_seo: storeSeo.optional(),
     dokan_store_time_enabled: z.string().optional(),
     dokan_store_open_notice: z.string().optional(),
     dokan_store_close_notice: z.string().optional(),
@@ -943,10 +957,10 @@ const advertisedProductSchema = z.object({
 const quoteRuleSchema = z.object({
     id: z.string(),
     rule_name: z.string(),
-    selected_user_role: z.array(z.string()).or(z.number()),
-    category_ids: z.array(z.string()).or(z.number()),
+    selected_user_role: z.array(z.string()).or(z.string()),
+    category_ids: z.array(z.string()).or(z.string()),
     product_categories: z.array(z.string()).optional(),
-    product_ids: z.array(z.string()).or(z.number()),
+    product_ids: z.array(z.string()).or(z.string()),
     hide_price: z.string(),
     hide_cart_button: z.string(),
     button_text: z.string(),
@@ -1296,7 +1310,7 @@ export const schemas = {
             shop_manager: roleSchema,
             seller: roleSchema,
             vendor_staff: roleSchema,
-            translator: roleSchema,
+            translator: roleSchema.optional(),
         }),
         role_names: z.record(z.string()),
         role_key: z.array(z.string()),
@@ -1804,7 +1818,7 @@ export const schemas = {
             }),
             others: z.object({
                 commission_rate: z.string().nullable().optional(),
-                additional_fee: z.string().nullable().optional(),
+                additional_fee: z.string().or(z.number()).nullable().optional(),
                 commission_type: z.string().optional(),
                 balance: z.number(),
                 reviews: z.number(),
@@ -2210,20 +2224,7 @@ export const schemas = {
             enable_tnc: z.string(),
             store_tnc: z.string(),
             show_min_order_discount: z.string(),
-            store_seo: z
-                .object({
-                    'dokan-seo-meta-title': z.string().optional(),
-                    'dokan-seo-meta-desc': z.string().optional(),
-                    'dokan-seo-meta-keywords': z.string().optional(),
-                    'dokan-seo-og-title': z.string().optional(),
-                    'dokan-seo-og-desc': z.string().optional(),
-                    'dokan-seo-og-image': z.string().optional(),
-                    'dokan-seo-twitter-title': z.string().optional(),
-                    'dokan-seo-twitter-desc': z.string().optional(),
-                    'dokan-seo-twitter-image': z.string().optional(),
-                })
-                .or(z.array(z.unknown()))
-                .optional(),
+            store_seo: storeSeo.optional(),
             dokan_store_time_enabled: z.string(),
             dokan_store_open_notice: z.string(),
             dokan_store_close_notice: z.string(),
@@ -2370,7 +2371,7 @@ export const schemas = {
             enable_tnc: z.string(),
             store_tnc: z.string(),
             show_min_order_discount: z.string(),
-            store_seo: z.array(z.any()), // Adjust this based on the actual structure
+            store_seo: storeSeo.optional(),
             dokan_store_time_enabled: z.string(),
             dokan_store_open_notice: z.string(),
             dokan_store_close_notice: z.string(),
@@ -2683,7 +2684,7 @@ export const schemas = {
                 enable_tnc: z.string(), // Assuming "on" or "off"
                 store_tnc: z.string(),
                 show_min_order_discount: z.string(), // Assuming "yes" or "no"
-                store_seo: z.array(z.any()), // Assuming store_seo can be any array structure
+                store_seo: storeSeo.optional(),
                 dokan_store_time_enabled: z.string(), // Assuming "yes" or "no"
                 dokan_store_open_notice: z.string(),
                 dokan_store_close_notice: z.string(),
