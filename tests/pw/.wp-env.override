@@ -9,7 +9,7 @@
                 "../../plugins/dokan-pro/tests/plugins/woocommerce-bookings",
                 "../../plugins/dokan-pro/tests/plugins/woocommerce-product-addons",
                 "../../plugins/dokan-pro/tests/plugins/woocommerce-simple-auctions",
-                "../../plugins/dokan-pro/tests/plugins/woocommerce-subscriptions",
+                "../../plugins/dokan-pro/tests/plugins/woocommerce-subscriptions"
             ]
         }
     }
