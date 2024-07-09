@@ -44,13 +44,13 @@ test.describe('order downloads api test', () => {
         const [response, responseBody] = await apiUtils.post(endPoints.createOrderDownload(orderId), { data: { ids: [downloadableProductId] } });
         expect(response.ok()).toBeTruthy();
         expect(responseBody).toBeTruthy();
-        expect(responseBody).toMatchSchema(schemas.orderDownloadsSchema.createOrderDownlaodSchema);
+        expect(responseBody).toMatchSchema(schemas.orderDownloadsSchema.createOrderDownloadSchema);
     });
 
     test('delete order downloads', { tag: ['@lite', '@v2'] }, async () => {
         const [response, responseBody] = await apiUtils.delete(endPoints.deleteOrderDownload(orderId), { data: { permission_id: downloadId } });
         expect(response.ok()).toBeTruthy();
         expect(responseBody).toBeTruthy();
-        expect(responseBody).toMatchSchema(schemas.orderDownloadsSchema.deleteOrderDownlaodSchema);
+        expect(responseBody).toMatchSchema(schemas.orderDownloadsSchema.deleteOrderDownloadSchema);
     });
 });
