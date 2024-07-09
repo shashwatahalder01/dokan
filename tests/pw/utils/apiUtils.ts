@@ -1721,8 +1721,19 @@ export class ApiUtils {
     // product
 
     // get all products
-    async getAllProductsWc(auth?: auth): Promise<responseBody> {
-        const [, responseBody] = await this.get(endPoints.wc.getAllProducts, { params: { per_page: 100 }, headers: auth });
+    async getAllProductsWc(auth?: auth): Promise<responseBody> {  //todo: update all getall methods whit loop and per_page
+        let responseBody: object[] = [];
+        let page = 1;
+        let hasMoreProducts = true;
+        while (hasMoreProducts) {
+            const [, productResponseBody] = await this.get(endPoints.wc.getAllProducts, { params: { per_page: 100, page: page }, headers: auth });
+            if (productResponseBody.length === 0) {
+                hasMoreProducts = false;
+            } else {
+                responseBody = responseBody.concat(productResponseBody);
+                page++;
+            }
+        }
         return responseBody;
     }
 

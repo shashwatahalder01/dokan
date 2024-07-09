@@ -1174,7 +1174,7 @@ const supportTicketSchema = z.object({
 });
 
 const verndorStaffCapabilitiesSchema = z.object({
-    read: z.boolean(),
+    read: z.boolean().optional(),
     vendor_staff: z.boolean(),
     dokandar: z.boolean(),
     delete_pages: z.boolean(),
@@ -1293,10 +1293,10 @@ export const schemas = {
             author: roleSchema,
             contributor: roleSchema,
             subscriber: roleSchema,
-            customer: roleSchema,
-            shop_manager: roleSchema,
-            seller: roleSchema,
-            vendor_staff: roleSchema,
+            customer: roleSchema.optional(),
+            shop_manager: roleSchema.optional(),
+            seller: roleSchema.optional(),
+            vendor_staff: roleSchema.optional(),
             translator: roleSchema.optional(),
         }),
 
@@ -1306,10 +1306,10 @@ export const schemas = {
             author: roleSchema,
             contributor: roleSchema,
             subscriber: roleSchema,
-            customer: roleSchema,
-            shop_manager: roleSchema,
-            seller: roleSchema,
-            vendor_staff: roleSchema,
+            customer: roleSchema.optional(),
+            shop_manager: roleSchema.optional(),
+            seller: roleSchema.optional(),
+            vendor_staff: roleSchema.optional(),
             translator: roleSchema.optional(),
         }),
         role_names: z.record(z.string()),
@@ -1506,7 +1506,7 @@ export const schemas = {
                     status: z.string(),
                     date: z.string(),
                 })
-                .or(z.null()),
+                .optional(),
         }),
     },
 
