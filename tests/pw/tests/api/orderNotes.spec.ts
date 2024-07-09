@@ -46,13 +46,13 @@ test.describe('order note api test', () => {
         expect(response.status()).toBe(201);
         expect(response.ok()).toBeTruthy();
         expect(responseBody).toBeTruthy();
-        expect(responseBody).toMatchSchema(schemas.orderNotesSchema.createorderNoteSchema);
+        expect(responseBody).toMatchSchema(schemas.orderNotesSchema.createOrderNoteSchema);
     });
 
     test('delete an order note', { tag: ['@lite'] }, async () => {
         const [response, responseBody] = await apiUtils.delete(endPoints.deleteOrderNote(orderId, orderNoteId));
         expect(response.ok()).toBeTruthy();
         expect(responseBody).toBeTruthy();
-        expect(responseBody).toMatchSchema(schemas.orderNotesSchema.deleteorderNoteSchema);
+        expect(responseBody).toMatchSchema(schemas.orderNotesSchema.deleteOrderNoteSchema);
     });
 });

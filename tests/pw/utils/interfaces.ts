@@ -1,3 +1,4 @@
+import fs from 'fs';
 export interface admin {
     username: string;
     password: string;
@@ -548,7 +549,7 @@ export interface payment {
     };
 
     basicPayment: {
-        toggleEanbledClass: string;
+        toggleEnabledClass: string;
         toggleDisabledClass: string;
     };
 
@@ -1036,7 +1037,7 @@ export interface vendor {
     };
 
     // addon
-    addon: () => {
+    addon: {
         name: string;
         priority: string;
         category: string;
@@ -1399,12 +1400,12 @@ export interface modules {
     };
 
     modulesName: {
-        AuctionIntegration: string;
-        ColorSchemeCustomize: string;
-        DeliveryTime: string;
-        Elementor: string;
-        EUComplianceFields: string;
-        FollowStore: string;
+        auctionIntegration: string;
+        colorSchemeCustomize: string;
+        deliveryTime: string;
+        elementor: string;
+        eUComplianceFields: string;
+        followStore: string;
     };
 
     moduleCategory: {

@@ -8,16 +8,13 @@ import { expect, Page, BrowserContext, Cookie, Request, Response, Locator, Frame
 import { data } from '@utils/testData';
 import { selector } from '@pages/selectors';
 
+const { BASE_URL } = process.env;
+
 // This Page Contains All Necessary Playwright Automation Methods
 
 export class BasePage {
     readonly page: Page;
 
-    /**
-     * Constructs a new instance of the BasePage class.
-     *
-     * @param {Page} page - The Playwright Page object to associate with this BasePage instance.
-     */
     constructor(page: Page) {
         this.page = page;
     }
@@ -95,10 +92,10 @@ export class BasePage {
 
     // Create a New URL
     createUrl(subPath: string): string {
-        // let url = new URL(process.env.BASE_URL)
+        // let url = new URL(BASE_URL)
         // url.pathname = url.pathname + subPath + '/'
         // return url.href
-        return process.env.BASE_URL + '/' + subPath;
+        return BASE_URL + '/' + subPath;
     }
 
     // goto subPath if not already there
@@ -296,7 +293,7 @@ export class BasePage {
 
     // type & wait for response
     async typeByPageAndWaitForResponse(subUrl: string, selector: string, text: string, code = 200): Promise<Response> {
-        const [response] = await Promise.all([this.page.waitForResponse(resp => resp.url().includes(subUrl) && resp.status() === code), this.page.locator(selector).pressSequentially(text, { delay: 100 })]);
+        const [response] = await Promise.all([this.page.waitForResponse(resp => resp.url().includes(subUrl) && resp.status() === code), this.page.locator(selector).pressSequentially(text, { delay: 200 })]);
         return response;
     }
 
@@ -680,7 +677,7 @@ export class BasePage {
 
     // type in input field
     async type(selector: string, text: string): Promise<void> {
-        await this.page.locator(selector).pressSequentially(text);
+        await this.page.locator(selector).pressSequentially(text, { delay: 100 });
     }
 
     // fill in input field
@@ -1349,7 +1346,7 @@ export class BasePage {
     }
 
     // multiple elements to be visible
-    async multipleElementnotVisible(selectors: any) {
+    async customerAddEuComplianceData(selectors: any) {
         for (const selector in selectors) {
             await this.notToBeVisible(selectors[selector]);
         }
@@ -1375,7 +1372,7 @@ export class BasePage {
         // todo:  return which elements are true for further operation
     }
 
-    // assert velue to be equal
+    // assert value to be equal
     toBeEqual(received: any, expected: any) {
         expect(received).toEqual(expected);
     }

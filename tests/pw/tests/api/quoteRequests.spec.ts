@@ -83,6 +83,6 @@ test.describe('request quote api test', () => {
         const [response, responseBody] = await apiUtils.put(endPoints.updateBatchRequestQuotes, { data: { trash: allRequestQuoteIds } });
         expect(response.ok()).toBeTruthy();
         expect(responseBody).toBeTruthy();
-        expect(responseBody).toMatchSchema(schemas.quoteRequestsSchema.batchUpdatequoteRequestsSchema);
+        expect(responseBody).toMatchSchema(schemas.quoteRequestsSchema.batchUpdateQuoteRequestsSchema);
     });
 });

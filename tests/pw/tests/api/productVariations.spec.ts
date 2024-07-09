@@ -66,6 +66,6 @@ test.describe('product variation api test', () => {
         const [response, responseBody] = await apiUtils.put(endPoints.batchUpdateProductVariations(productId), { data: { update: { ...payloads.batchProductVariation, id: productId } } });
         expect(response.ok()).toBeTruthy();
         expect(responseBody).toBeTruthy();
-        expect(responseBody).toMatchSchema(schemas.productVariationsSchema.batchUpdateproductVariationsSchema);
+        expect(responseBody).toMatchSchema(schemas.productVariationsSchema.batchUpdateProductVariationsSchema);
     });
 });

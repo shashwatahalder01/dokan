@@ -134,11 +134,11 @@ test.describe('EU Compliance test', () => {
     // customer
 
     test('customer can add EU Compliance data on billing address', { tag: ['@pro', '@customer'] }, async () => {
-        await customer.customerAddEuComplicancedata(data.euComplianceData());
+        await customer.customerAddEuComplianceData(data.euComplianceData());
     });
 
     test('customer can update EU compliance data', { tag: ['@pro', '@customer'] }, async () => {
-        await customer.customerAddEuComplicancedata(data.euComplianceData());
+        await customer.customerAddEuComplianceData(data.euComplianceData());
     });
 
     test('customer can add EU compliance data (vendor) while become a vendor', { tag: ['@pro', '@customer'] }, async ({ page }) => {

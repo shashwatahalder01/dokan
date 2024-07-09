@@ -72,6 +72,6 @@ test.describe('quote rules api test', () => {
         const [response, responseBody] = await apiUtils.put(endPoints.updateBatchQuoteRules, { data: { trash: allQuoteRuleIds } });
         expect(response.ok()).toBeTruthy();
         expect(responseBody).toBeTruthy();
-        expect(responseBody).toMatchSchema(schemas.quoteRuleSchema.batchUpdatequoteRulesSchema);
+        expect(responseBody).toMatchSchema(schemas.quoteRuleSchema.batchUpdateQuoteRulesSchema);
     });
 });

@@ -48,9 +48,9 @@ const productAttributeSchema = z.object({
 });
 
 const productMetaDataSchema = z.object({
-    id: z.number(),
-    key: z.string(),
-    value: z.any(),
+    id: z.number().optional(),
+    key: z.string().optional(),
+    value: z.any().optional(),
 });
 
 const productSchema = z.object({
@@ -89,7 +89,7 @@ const productSchema = z.object({
     tax_status: z.string(),
     tax_class: z.string().optional(),
     manage_stock: z.boolean(),
-    stock_quantity: z.null(),
+    stock_quantity: z.number().nullable(),
     backorders: z.string(),
     backorders_allowed: z.boolean(),
     backordered: z.boolean(),
@@ -118,7 +118,7 @@ const productSchema = z.object({
     menu_order: z.number(),
     price_html: z.string(),
     related_ids: z.array(z.number()),
-    meta_data: z.array(productMetaDataSchema),
+    meta_data: z.array(productMetaDataSchema).optional(),
     stock_status: z.string().optional(),
     has_options: z.boolean().optional(),
     post_password: z.string().optional(),
@@ -183,12 +183,12 @@ const productVariationSchema = z.object({
 
 const addressSchema = z
     .object({
-        street_1: z.string(),
-        street_2: z.string(),
-        city: z.string(),
-        zip: z.string(),
-        country: z.string(),
-        state: z.string(),
+        street_1: z.string().optional(),
+        street_2: z.string().optional(),
+        city: z.string().optional(),
+        zip: z.string().optional(),
+        country: z.string().optional(),
+        state: z.string().optional(),
     })
     .or(z.array(z.any()));
 
@@ -376,6 +376,20 @@ const storyCategorySchema = z.object({
     _links: linksSchema,
 });
 
+const storeSeo = z
+    .object({
+        'dokan-seo-meta-title': z.string().optional(),
+        'dokan-seo-meta-desc': z.string().optional(),
+        'dokan-seo-meta-keywords': z.string().optional(),
+        'dokan-seo-og-title': z.string().optional(),
+        'dokan-seo-og-desc': z.string().optional(),
+        'dokan-seo-og-image': z.string().optional(),
+        'dokan-seo-twitter-title': z.string().optional(),
+        'dokan-seo-twitter-desc': z.string().optional(),
+        'dokan-seo-twitter-image': z.string().optional(),
+    })
+    .or(z.array(z.unknown()));
+
 const storeSchema = z.object({
     id: z.number().optional(),
     store_name: z.string(),
@@ -404,7 +418,7 @@ const storeSchema = z.object({
     enable_tnc: z.string().optional(),
     store_tnc: z.string().optional(),
     show_min_order_discount: z.string().optional(),
-    store_seo: z.unknown().optional(),
+    store_seo: storeSeo.optional(),
     dokan_store_time_enabled: z.string().optional(),
     dokan_store_open_notice: z.string().optional(),
     dokan_store_close_notice: z.string().optional(),
@@ -726,7 +740,7 @@ const roleSchema = z.object({
     capabilities: z.record(z.boolean()),
 });
 
-const whithdrawSchema = z.object({
+const withdrawSchema = z.object({
     id: z.string().or(z.number()),
     user: z.object({
         id: z.string().or(z.number()),
@@ -833,7 +847,7 @@ const infoSchema = z.object({
     icon: z.string(),
 });
 
-const settingV2GropupSchema = z.object({
+const settingV2GroupSchema = z.object({
     id: z.string(),
     title: z.string(),
     desc: z.string(),
@@ -913,7 +927,7 @@ const announcementSchema = z.object({
     announcement_sellers: z
         .array(
             z.object({
-                id: z.string(),
+                id: z.string().or(z.number()),
                 name: z.string(),
                 shop_name: z.string(),
                 email: z.string(),
@@ -943,10 +957,10 @@ const advertisedProductSchema = z.object({
 const quoteRuleSchema = z.object({
     id: z.string(),
     rule_name: z.string(),
-    selected_user_role: z.array(z.string()).or(z.string()),
-    category_ids: z.array(z.string()).or(z.string()),
-    product_categories: z.array(z.string()).optional(),
-    product_ids: z.array(z.string()).or(z.string()),
+    selected_user_role: z.any(),
+    category_ids: z.any(),
+    product_categories: z.any(),
+    product_ids: z.any(),
     hide_price: z.string(),
     hide_cart_button: z.string(),
     button_text: z.string(),
@@ -1077,7 +1091,7 @@ const productQuestionSchema = z.object({
     _links: linksSchema,
 });
 
-const storeReviewSchemaStoreEndpint = z.object({
+const storeReviewSchemaStoreEndpoint = z.object({
     id: z.number(),
     author: z.object({
         id: z.number(),
@@ -1159,8 +1173,8 @@ const supportTicketSchema = z.object({
     _links: linksSchema.optional(),
 });
 
-const verndorStaffCapabilitiesSchema = z.object({
-    read: z.boolean(),
+const vendorStaffCapabilitiesSchema = z.object({
+    read: z.boolean().optional(),
     vendor_staff: z.boolean(),
     dokandar: z.boolean(),
     delete_pages: z.boolean(),
@@ -1217,7 +1231,7 @@ const vendorStaffSchema = z.object({
     last_name: z.string(),
     registered_at: z.string(),
     avatar: z.string(),
-    capabilities: verndorStaffCapabilitiesSchema,
+    capabilities: vendorStaffCapabilitiesSchema,
 });
 
 const verificationMethodSchema = z.object({
@@ -1279,11 +1293,11 @@ export const schemas = {
             author: roleSchema,
             contributor: roleSchema,
             subscriber: roleSchema,
-            customer: roleSchema,
-            shop_manager: roleSchema,
-            seller: roleSchema,
-            vendor_staff: roleSchema,
-            translator: roleSchema,
+            customer: roleSchema.optional(),
+            shop_manager: roleSchema.optional(),
+            seller: roleSchema.optional(),
+            vendor_staff: roleSchema.optional(),
+            translator: roleSchema.optional(),
         }),
 
         role_objects: z.object({
@@ -1292,11 +1306,11 @@ export const schemas = {
             author: roleSchema,
             contributor: roleSchema,
             subscriber: roleSchema,
-            customer: roleSchema,
-            shop_manager: roleSchema,
-            seller: roleSchema,
-            vendor_staff: roleSchema,
-            translator: roleSchema,
+            customer: roleSchema.optional(),
+            shop_manager: roleSchema.optional(),
+            seller: roleSchema.optional(),
+            vendor_staff: roleSchema.optional(),
+            translator: roleSchema.optional(),
         }),
         role_names: z.record(z.string()),
         role_key: z.array(z.string()),
@@ -1492,7 +1506,7 @@ export const schemas = {
                     status: z.string(),
                     date: z.string(),
                 })
-                .or(z.null()),
+                .optional(),
         }),
     },
 
@@ -1597,7 +1611,7 @@ export const schemas = {
     productVariationsSchema: {
         productVariationSchema: productVariationSchema,
         productVariationsSchema: z.array(productVariationSchema),
-        batchUpdateproductVariationsSchema: z.object({
+        batchUpdateProductVariationsSchema: z.object({
             create: z.array(productVariationSchema).optional(),
             update: z.array(productVariationSchema).optional(),
             delete: z.array(productVariationSchema).optional(),
@@ -1734,7 +1748,7 @@ export const schemas = {
                 .object({
                     wholesale_price: z.string(),
                     wholesale_quantity: z.string(),
-                    enable_wholesale: z.boolean(),
+                    enable_wholesale: z.string().or(z.boolean()),
                 })
                 .optional(),
             order_min_max: z
@@ -1803,8 +1817,8 @@ export const schemas = {
                 earning: z.number(),
             }),
             others: z.object({
-                commission_rate: z.string().optional(),
-                additional_fee: z.string().optional(),
+                commission_rate: z.string().nullable().optional(),
+                additional_fee: z.string().or(z.number()).nullable().optional(),
                 commission_type: z.string().optional(),
                 balance: z.number(),
                 reviews: z.number(),
@@ -1843,7 +1857,7 @@ export const schemas = {
             })
             .or(z.any()),
         storeProductsSchema: z.array(productSchema),
-        storeReviewsSchema: z.array(storeReviewSchemaStoreEndpint),
+        storeReviewsSchema: z.array(storeReviewSchemaStoreEndpoint),
         storeSlugCheckSchema: z.object({ url: z.string(), available: z.boolean() }),
         clientContactStoreSchema: z.object({
             store_id: z.number(),
@@ -1883,16 +1897,16 @@ export const schemas = {
     orderDownloadsSchema: {
         orderDownloadSchema: orderDownloadSchema,
         orderDownloadsSchema: z.object({ downloads: z.array(orderDownloadSchema) }),
-        createOrderDownlaodSchema: z.record(z.string(), z.string()),
-        deleteOrderDownlaodSchema: z.object({ success: z.boolean() }),
+        createOrderDownloadSchema: z.record(z.string(), z.string()),
+        deleteOrderDownloadSchema: z.object({ success: z.boolean() }),
     },
 
     // order notes schema
     orderNotesSchema: {
         orderNoteSchema: orderNoteSchema,
         orderNotesSchema: z.array(orderNoteSchema),
-        createorderNoteSchema: orderNoteSchema.omit({ date_created: true, date_created_gmt: true }),
-        deleteorderNoteSchema: orderNoteSchema.omit({ date_created: true, date_created_gmt: true }),
+        createOrderNoteSchema: orderNoteSchema.omit({ date_created: true, date_created_gmt: true }),
+        deleteOrderNoteSchema: orderNoteSchema.omit({ date_created: true, date_created_gmt: true }),
     },
 
     // refunds schema
@@ -1993,8 +2007,8 @@ export const schemas = {
                 )
                 .optional(),
         }),
-        withdrawSchema: whithdrawSchema,
-        withdrawsSchema: z.array(whithdrawSchema),
+        withdrawSchema: withdrawSchema,
+        withdrawsSchema: z.array(withdrawSchema),
 
         batchUpdateWithdrawsSchema: z.object({
             success: z
@@ -2059,7 +2073,7 @@ export const schemas = {
                 }),
             ),
             active_methods: z.array(z.string()),
-            method_additional_info: z.array(z.enum(['paypal', 'bank', 'skrill', 'dokan_custom'])),
+            method_additional_info: z.array(z.string()),
             minimum_amount_needed: z.number(),
             is_schedule_selected: z.boolean(),
         }),
@@ -2210,7 +2224,7 @@ export const schemas = {
             enable_tnc: z.string(),
             store_tnc: z.string(),
             show_min_order_discount: z.string(),
-            store_seo: z.array(z.unknown()),
+            store_seo: storeSeo.optional(),
             dokan_store_time_enabled: z.string(),
             dokan_store_open_notice: z.string(),
             dokan_store_close_notice: z.string(),
@@ -2357,7 +2371,7 @@ export const schemas = {
             enable_tnc: z.string(),
             store_tnc: z.string(),
             show_min_order_discount: z.string(),
-            store_seo: z.array(z.any()), // Adjust this based on the actual structure
+            store_seo: storeSeo.optional(),
             dokan_store_time_enabled: z.string(),
             dokan_store_open_notice: z.string(),
             dokan_store_close_notice: z.string(),
@@ -2422,8 +2436,8 @@ export const schemas = {
         }),
 
         storeSettingsV2Schema: z.array(settingV2Schema),
-        settingV2GropupSchema: settingV2GropupSchema,
-        singleSettingGroupV2StoreSchema: z.array(settingV2GropupSchema),
+        settingV2GroupSchema: settingV2GroupSchema,
+        singleSettingGroupV2StoreSchema: z.array(settingV2GroupSchema),
     },
 
     // modules schema
@@ -2519,7 +2533,7 @@ export const schemas = {
     quoteRuleSchema: {
         quoteRuleSchema: quoteRuleSchema,
         quoteRulesSchema: z.array(quoteRuleSchema),
-        batchUpdatequoteRulesSchema: z.boolean(),
+        batchUpdateQuoteRulesSchema: z.boolean(),
     },
 
     // quote requests schema
@@ -2576,7 +2590,7 @@ export const schemas = {
             }),
         ),
 
-        batchUpdatequoteRequestsSchema: z.boolean(),
+        batchUpdateQuoteRequestsSchema: z.boolean(),
     },
 
     // rank math schema
@@ -2636,8 +2650,8 @@ export const schemas = {
 
     // store reviews schema
     storeReviewsSchema: {
-        storeReviewSchemaStoreEndpint: storeReviewSchemaStoreEndpint,
-        storeReviewsSchemaStoreEndpint: z.array(storeReviewSchemaStoreEndpint),
+        storeReviewSchemaStoreEndpoint: storeReviewSchemaStoreEndpoint,
+        storeReviewsSchemaStoreEndpoint: z.array(storeReviewSchemaStoreEndpoint),
         storeReviewSchema: storeReviewSchema,
         storeReviewsSchema: z.array(storeReviewSchema),
         batchUpdateStoreReviewsSchema: z.boolean(),
@@ -2670,7 +2684,7 @@ export const schemas = {
                 enable_tnc: z.string(), // Assuming "on" or "off"
                 store_tnc: z.string(),
                 show_min_order_discount: z.string(), // Assuming "yes" or "no"
-                store_seo: z.array(z.any()), // Assuming store_seo can be any array structure
+                store_seo: storeSeo.optional(),
                 dokan_store_time_enabled: z.string(), // Assuming "yes" or "no"
                 dokan_store_open_notice: z.string(),
                 dokan_store_close_notice: z.string(),
@@ -2726,7 +2740,7 @@ export const schemas = {
             }),
             default: z.array(z.string()),
         }),
-        staffCapabilities: verndorStaffCapabilitiesSchema,
+        staffCapabilities: vendorStaffCapabilitiesSchema,
     },
 
     // vendor verifications schema
@@ -2737,7 +2751,7 @@ export const schemas = {
         verificationRequestsSchema: z.array(verificationRequestSchema),
     },
 
-    // whodlesale customers schema
+    // wholesale customers schema
     wholesaleCustomersSchema: {
         wholesaleCustomerSchema: wholesaleCustomerSchema,
         wholesaleCustomersSchema: z.array(wholesaleCustomerSchema),

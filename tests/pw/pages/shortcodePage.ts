@@ -7,7 +7,7 @@ const { DOKAN_PRO } = process.env;
 
 // selectors
 const vendorDashboard = selector.vendor.vDashboard;
-const vendorSubscription = selector.vendor.vSubscribtion;
+const vendorSubscription = selector.vendor.vSubscription;
 const registrationVendor = selector.vendor.vRegistration;
 const storeList = selector.customer.cStoreList;
 const shopCustomer = selector.customer.cShop;
@@ -64,13 +64,20 @@ export class ShortcodePage extends AdminPage {
     async viewDokanSubscriptionPacks(link: string) {
         await this.goto(link);
 
-        await this.toBeVisible(vendorSubscription.dokanSubscriptionDiv);
-        await this.toBeVisible(vendorSubscription.dokanSubscriptionProductContainer);
+        const noSubscriptionPacks = await this.isVisible(vendorSubscription.noSubscriptionMessage);
 
-        await this.notToHaveCount(vendorSubscription.dokanSubscriptionProduct, 0);
-        await this.notToHaveCount(vendorSubscription.dokanSubscriptionProductPrice, 0);
-        await this.notToHaveCount(vendorSubscription.dokanSubscriptionProductContent, 0);
-        await this.notToHaveCount(vendorSubscription.dokanSubscriptionProductBuyButton, 0);
+        if (noSubscriptionPacks) {
+            await this.toContainText(vendorSubscription.noSubscriptionMessage, 'No subscription pack has been found!');
+            console.log('No subscription pack found!');
+        } else {
+            await this.toBeVisible(vendorSubscription.dokanSubscriptionDiv);
+            await this.toBeVisible(vendorSubscription.dokanSubscriptionProductContainer);
+
+            await this.notToHaveCount(vendorSubscription.dokanSubscriptionProduct, 0);
+            await this.notToHaveCount(vendorSubscription.dokanSubscriptionProductPrice, 0);
+            await this.notToHaveCount(vendorSubscription.dokanSubscriptionProductContent, 0);
+            await this.notToHaveCount(vendorSubscription.dokanSubscriptionProductBuyButton, 0);
+        }
     }
 
     // view vendor registration

@@ -2172,7 +2172,7 @@ export const selector = {
 
                     // Social Connect
                     socialConnect: {
-                        enableMehod: (methodName: string) => `//div[@class='${methodName} dokan-settings-field-type-social']//label[@class='switch tips']`,
+                        enableMethod: (methodName: string) => `//div[@class='${methodName} dokan-settings-field-type-social']//label[@class='switch tips']`,
                         settings: (methodName: string) => `//div[@class='${methodName} dokan-settings-field-type-social']//span[contains(@class,"active-social-expend-btn")]`,
 
                         // todo: need to update all social connect locators
@@ -5244,8 +5244,9 @@ export const selector = {
             noAnalyticsFound: '//div[@class="tab-pane active" and normalize-space()="There is no analytics found for your store."]',
         },
 
-        vSubscribtion: {
+        vSubscription: {
             dokanSubscriptionDiv: 'div.dokan-subscription-content',
+            noSubscriptionMessage: '//h3[text()="No subscription pack has been found!"]',
 
             subscribedSubscriptionInfo: 'div.seller_subs_info',
             dokanSubscriptionProductContainer: 'div.pack_content_wrapper',
@@ -5808,7 +5809,6 @@ export const selector = {
             visitStore: '//a[normalize-space()="Visit Store"]',
 
             createNewAddon: '.dokan-pa-all-addons .dokan-btn',
-            createNew: '//a[normalize-space()="Create New"]',
 
             // table
             table: {
@@ -6114,6 +6114,8 @@ export const selector = {
             flatRateCalculationType: '#calculation_type',
             // Free Shipping
             freeShippingTitle: '#method_title',
+            freeShippingOptions: '//label[@for="dokan-free-shipping-options"]/..//select', // coupon, min_amount, either, both
+            freeShippingMinAmountRule: 'input#apply_min_amount_rule_before_discount',
             freeShippingMinimumOrderAmount: '#minimum_order_amount',
             // Local Pickup
             localPickupTitle: '#method_title',
@@ -6650,7 +6652,7 @@ export const selector = {
             // Product Card
             productCard: {
                 card: '#main ul.products li',
-                productDetailsLink: '#main .products .woocommerce-LoopProduct-link',
+                productDetailsLink: '#main ul.products li.product a.woocommerce-LoopProduct-link',
                 productTitle: '#main .products .woocommerce-loop-product__title',
                 productPrice: '#main .products .price',
                 addToCart: '#main .products a.add_to_cart_button',
@@ -7295,7 +7297,7 @@ export const selector = {
             cartItem: (productName: string) => `//tr[@class='wc-block-cart-items__row']//a[@class= 'wc-block-components-product-name' and contains(text(),'${productName}')]`,
             removeItem: (productName: string) => `//a[contains(text(),'${productName}')]/..//button[@class='wc-block-cart-item__remove-link']`,
             quantity: (productName: string) => `//a[contains(text(),'${productName}')]/..//input[@class='wc-block-components-quantity-selector__input']`,
-            addCoupon: 'a[aria-label="Add a coupon"]',
+            addCoupon: '//button[text()="Add a coupon"]',
             couponCode: 'form#wc-block-components-totals-coupon__form input',
             applyCoupon: 'form#wc-block-components-totals-coupon__form  button',
             removeCoupon: (couponCode: string) => `//span[contains(text(), '${couponCode.toLowerCase()}')]/..//button`,

@@ -2,6 +2,8 @@ import { faker } from '@faker-js/faker';
 import { helpers } from '@utils/helpers';
 import 'dotenv/config';
 
+const { DOKAN_PRO, ADMIN, ADMIN_PASSWORD, VENDOR, VENDOR2, CUSTOMER, CUSTOMER2, USER_PASSWORD, SITE_PATH, GMAP, MAPBOX, LICENSE_KEY } = process.env;
+
 interface user {
     username: string;
     password: string;
@@ -17,7 +19,7 @@ export { admin, user };
 export const data = {
     envData: 'utils/data.json',
     env: {
-        DOKAN_PRO: process.env.DOKAN_PRO ? true : false,
+        DOKAN_PRO: DOKAN_PRO ? true : false,
 
         // db data
         DB_HOST_NAME: process.env.DB_HOST_NAME,
@@ -162,8 +164,8 @@ export const data = {
         },
 
         store: {
-            adminStore: String(process.env.ADMIN) + 'store',
-            vendorStore1: String(process.env.VENDOR) + 'store',
+            adminStore: String(ADMIN) + 'store',
+            vendorStore1: String(VENDOR) + 'store',
         },
 
         attribute: {
@@ -188,7 +190,7 @@ export const data = {
             productName: () => faker.commerce.productName() + ' (Simple)',
             category: 'Uncategorized',
             regularPrice: () => faker.finance.amount({ min: 100, max: 200, dec: faker.helpers.arrayElement([1, 2]) }).replace('.', ','),
-            storeName: String(process.env.VENDOR) + 'store',
+            storeName: String(VENDOR) + 'store',
             status: 'publish',
             stockStatus: false,
             editProduct: '',
@@ -200,7 +202,7 @@ export const data = {
             productName: () => faker.commerce.productName() + ' (Downloadable)',
             category: 'Uncategorized',
             regularPrice: () => faker.finance.amount({ min: 100, max: 200, dec: faker.helpers.arrayElement([1, 2]) }).replace('.', ','),
-            storeName: String(process.env.VENDOR) + 'store',
+            storeName: String(VENDOR) + 'store',
             status: 'publish',
             stockStatus: false,
             editProduct: '',
@@ -219,7 +221,7 @@ export const data = {
             productName: () => faker.commerce.productName() + ' (Virtual)',
             category: 'Uncategorized',
             regularPrice: () => faker.finance.amount({ min: 100, max: 200, dec: faker.helpers.arrayElement([1, 2]) }).replace('.', ','),
-            storeName: String(process.env.VENDOR) + 'store',
+            storeName: String(VENDOR) + 'store',
             status: 'publish',
             stockStatus: false,
             editProduct: '',
@@ -231,7 +233,7 @@ export const data = {
             productName: () => faker.commerce.productName() + ' (Variable)',
             category: 'Uncategorized',
             regularPrice: () => faker.finance.amount({ min: 100, max: 200, dec: faker.helpers.arrayElement([1, 2]) }).replace('.', ','),
-            storeName: String(process.env.VENDOR) + 'store',
+            storeName: String(VENDOR) + 'store',
             status: 'publish',
             stockStatus: false,
             attribute: 'sizes',
@@ -250,7 +252,7 @@ export const data = {
             buttonText: 'Buy product',
             category: 'Uncategorized',
             regularPrice: () => faker.finance.amount({ min: 100, max: 200, dec: faker.helpers.arrayElement([1, 2]) }).replace('.', ','),
-            storeName: String(process.env.VENDOR) + 'store',
+            storeName: String(VENDOR) + 'store',
             status: 'publish',
             saveSuccessMessage: 'Success! The product has been saved successfully. View Product →',
         },
@@ -266,7 +268,7 @@ export const data = {
             expireAfter: '0', // '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24'
             subscriptionTrialLength: '0',
             subscriptionTrialPeriod: 'day', // 'day', 'week', 'month', 'year'
-            storeName: String(process.env.VENDOR) + 'store',
+            storeName: String(VENDOR) + 'store',
             status: 'publish',
             saveSuccessMessage: 'Success! The product has been saved successfully. View Product →',
         },
@@ -282,7 +284,7 @@ export const data = {
             expireAfter: '0',
             subscriptionTrialLength: '0',
             subscriptionTrialPeriod: 'day',
-            storeName: String(process.env.VENDOR) + 'store',
+            storeName: String(VENDOR) + 'store',
             status: 'publish',
             attribute: 'sizes',
             attributeTerms: ['s', 'l', 'm'],
@@ -310,7 +312,7 @@ export const data = {
             packValidity: '0',
             advertisementSlot: '-1',
             expireAfterDays: '-1',
-            storeName: String(process.env.VENDOR) + 'store',
+            storeName: String(VENDOR) + 'store',
             status: 'publish',
         },
 
@@ -332,7 +334,7 @@ export const data = {
             maximumBookingWindowIntoTheFutureDateUnit: 'month',
             baseCost: '20',
             blockCost: '10',
-            storeName: String(process.env.VENDOR) + 'store',
+            storeName: String(VENDOR) + 'store',
             saveSuccessMessage: 'Success! The product has been saved successfully.',
 
             resource: {
@@ -356,7 +358,7 @@ export const data = {
             buyItNowPrice: () => faker.finance.amount({ min: 900, max: 1000, dec: faker.helpers.arrayElement([1, 2]) }).replace('.', ','),
             startDate: helpers.currentDateTime,
             endDate: helpers.addDays(helpers.currentDateTime, 20, 'full'),
-            storeName: String(process.env.VENDOR) + 'store',
+            storeName: String(VENDOR) + 'store',
             // saveSuccessMessage: '× Success! The product has been updated successfully. View Product →',
             saveSuccessMessage: 'Success! The product has been updated successfully.',
         },
@@ -383,8 +385,8 @@ export const data = {
             reportSubmitSuccessMessage: 'Your report has been submitted. Thank you for your response.',
 
             // non logged user
-            username: String(process.env.CUSTOMER),
-            password: String(process.env.USER_PASSWORD),
+            username: String(CUSTOMER),
+            password: String(USER_PASSWORD),
 
             // guest user
             guestName: () => faker.person.firstName('male'),
@@ -676,7 +678,7 @@ export const data = {
         },
 
         basicPayment: {
-            toggleEanbledClass: 'woocommerce-input-toggle--enabled',
+            toggleEnabledClass: 'woocommerce-input-toggle--enabled',
             toggleDisabledClass: 'woocommerce-input-toggle--disabled',
         },
 
@@ -754,7 +756,7 @@ export const data = {
         shippingFeeRecipient: 'seller', // 'seller', 'admin'
         taxFeeRecipient: 'seller', // 'seller', 'admin'
         mapApiSource: 'google_maps', // 'google_maps', 'mapbox'
-        googleMapApiKey: String(process.env.GMAP),
+        googleMapApiKey: String(GMAP),
         sellingProductTypes: 'sell_both', // 'physical', 'digital', 'sell_both',
         commissionType: 'percentage', // 'flat','percentage' 'combine',
         adminCommission: '10',
@@ -1030,7 +1032,7 @@ export const data = {
     // user
     user: {
         username: () => faker.person.firstName('male'),
-        password: String(process.env.USER_PASSWORD),
+        password: String(USER_PASSWORD),
 
         userDetails: {
             emailDomain: '@email.com',
@@ -1045,28 +1047,28 @@ export const data = {
 
     // admin
     admin: {
-        username: String(process.env.ADMIN),
-        password: String(process.env.ADMIN_PASSWORD),
+        username: String(ADMIN),
+        password: String(ADMIN_PASSWORD),
     },
 
     // vendor
     vendor: {
-        username: String(process.env.VENDOR),
-        password: String(process.env.USER_PASSWORD),
-        lastname: (String(process.env.VENDOR)[0] as string) + String(process.env.VENDOR)[String(process.env.VENDOR).length - 1],
-        storeName: String(process.env.VENDOR) + 'store',
+        username: String(VENDOR),
+        password: String(USER_PASSWORD),
+        lastname: (String(VENDOR)[0] as string) + String(VENDOR)[String(VENDOR).length - 1],
+        storeName: String(VENDOR) + 'store',
 
         vendor2: {
-            username: String(process.env.VENDOR2),
-            password: String(process.env.USER_PASSWORD),
+            username: String(VENDOR2),
+            password: String(USER_PASSWORD),
         },
 
         vendorInfo: {
             emailDomain: '@email.com',
             // email             : () => faker.internet.email(),
             email: () => faker.person.firstName('male') + '@email.com',
-            password: String(process.env.USER_PASSWORD),
-            password1: String(process.env.USER_PASSWORD) + '1',
+            password: String(USER_PASSWORD),
+            password1: String(USER_PASSWORD) + '1',
             firstName: () => faker.person.firstName('male'),
             lastName: () => faker.person.lastName('male'),
             userName: faker.person.firstName('male'),
@@ -1103,7 +1105,7 @@ export const data = {
             // shop details
             banner: 'tests/e2e/utils/sampleData/banner.png',
             profilePicture: 'tests/e2e/utils/sampleData/avatar.png',
-            storeName: String(process.env.VENDOR) + 'store',
+            storeName: String(VENDOR) + 'store',
             productsPerPage: '12',
             mapLocation: 'New York',
             termsAndConditions: 'Vendor Terms and Conditions',
@@ -1219,6 +1221,7 @@ export const data = {
                     selectShippingMethod: 'free_shipping',
                     shippingMethod: 'Free Shipping',
                     shippingMethodTitle: 'Free Shipping',
+                    freeShippingOption: 'min_amount', // 'coupon', 'min_amount', 'either', 'both'
                     freeShippingRequires: 'min_amount',
                     freeShippingMinimumOrderAmount: '200',
                     shippingMethodSaveSuccessMessage: 'Shipping method added successfully',
@@ -1413,26 +1416,26 @@ export const data = {
         lastName: faker.person.lastName('male'),
         email: faker.internet.email(),
         phone: faker.phone.number(),
-        password: String(process.env.USER_PASSWORD),
+        password: String(USER_PASSWORD),
     }),
 
     // customer
     customer: {
-        username: String(process.env.CUSTOMER),
-        password: String(process.env.USER_PASSWORD),
-        lastname: (String(process.env.CUSTOMER)[0] as string) + String(process.env.CUSTOMER)[String(process.env.CUSTOMER).length - 1],
+        username: String(CUSTOMER),
+        password: String(USER_PASSWORD),
+        lastname: (String(CUSTOMER)[0] as string) + String(CUSTOMER)[String(CUSTOMER).length - 1],
 
         customer2: {
-            username: String(process.env.CUSTOMER2),
-            password: String(process.env.USER_PASSWORD),
+            username: String(CUSTOMER2),
+            password: String(USER_PASSWORD),
         },
 
         customerInfo: {
             emailDomain: '@email.com',
             // email: () => faker.internet.email(),
             email: () => faker.person.firstName('male') + '@email.com',
-            password: String(process.env.USER_PASSWORD),
-            password1: String(process.env.USER_PASSWORD) + '1',
+            password: String(USER_PASSWORD),
+            password1: String(USER_PASSWORD) + '1',
             firstName: () => faker.person.firstName('male'),
             lastName: () => faker.person.lastName('male'),
             username: () => faker.person.firstName('male'),
@@ -1460,7 +1463,7 @@ export const data = {
             iban: faker.string.alphanumeric(10),
             biography: 'Customer biography',
             billing: {
-                firstName: process.env.CUSTOMER,
+                firstName: CUSTOMER,
                 lastName: 'c1',
                 companyName: faker.company.name(),
                 companyId: faker.string.alphanumeric(5),
@@ -1473,11 +1476,11 @@ export const data = {
                 zipCode: '10003',
                 country: 'United States (US)',
                 state: 'New York',
-                email: process.env.CUSTOMER + '@yopmail.com',
+                email: CUSTOMER + '@yopmail.com',
                 phone: '0123456789',
             },
             shipping: {
-                firstName: process.env.CUSTOMER,
+                firstName: CUSTOMER,
                 lastName: 'c1',
                 companyName: faker.company.name(),
                 street1: 'abc street',
@@ -1495,8 +1498,8 @@ export const data = {
             message: 'get Support Message',
             orderId: '',
             supportSubmitSuccessMessage: 'Thank you. Your ticket has been submitted!',
-            username: String(process.env.CUSTOMER),
-            userPassword: String(process.env.USER_PASSWORD),
+            username: String(CUSTOMER),
+            userPassword: String(USER_PASSWORD),
         },
 
         supportTicket: {
@@ -1558,7 +1561,7 @@ export const data = {
             content: 'test content_' + faker.string.nanoid(10),
         }),
         filter: {
-            byVendor: String(process.env.VENDOR) + 'store',
+            byVendor: String(VENDOR) + 'store',
         },
     },
 
@@ -1567,8 +1570,8 @@ export const data = {
         title: 'test support ticket',
 
         filter: {
-            byCustomer: String(process.env.CUSTOMER),
-            byVendor: String(process.env.VENDOR) + 'store',
+            byCustomer: String(CUSTOMER),
+            byVendor: String(VENDOR) + 'store',
         },
 
         chatReply: {
@@ -1580,7 +1583,7 @@ export const data = {
 
     // Reverse withdraw
     reverseWithdraw: {
-        store: String(process.env.VENDOR2) + 'store',
+        store: String(VENDOR2) + 'store',
         transactionType: 'manual_product', // manual_product, manual_order, other
         product: '',
         withdrawalBalanceType: 'debit', // debit, credit
@@ -1715,12 +1718,12 @@ export const data = {
         answer: 'test answer',
         editAnswer: 'edited test answer',
         user: {
-            username: String(process.env.CUSTOMER),
-            password: String(process.env.USER_PASSWORD),
+            username: String(CUSTOMER),
+            password: String(USER_PASSWORD),
         },
 
         filter: {
-            byVendor: String(process.env.VENDOR) + 'store',
+            byVendor: String(VENDOR) + 'store',
             byProduct: 'p1_v1 (simple)',
         },
     },
@@ -1800,12 +1803,12 @@ export const data = {
         ],
 
         modulesName: {
-            AuctionIntegration: 'Auction Integration',
-            ColorSchemeCustomize: 'Color Scheme Customize',
-            DeliveryTime: 'Delivery Time',
-            Elementor: 'Elementor',
-            EUComplianceFields: 'EU Compliance Fields',
-            FollowStore: 'Follow Store',
+            auctionIntegration: 'Auction Integration',
+            colorSchemeCustomize: 'Color Scheme Customize',
+            deliveryTime: 'Delivery Time',
+            elementor: 'Elementor',
+            eUComplianceFields: 'EU Compliance Fields',
+            followStore: 'Follow Store',
         },
 
         moduleCategory: {
@@ -1837,11 +1840,11 @@ export const data = {
 
     // product advertisement
     productAdvertisement: {
-        advertisedProductStore: String(process.env.VENDOR) + 'store',
+        advertisedProductStore: String(VENDOR) + 'store',
         advertisedProduct: 'p1_v1 (simple)',
 
         filter: {
-            byStore: String(process.env.VENDOR) + 'store',
+            byStore: String(VENDOR) + 'store',
             createVia: {
                 admin: 'Admin',
                 order: 'Order',
@@ -1925,8 +1928,8 @@ export const data = {
         // Appearance
         appearance: {
             mapApiSource: 'google_maps', // 'google_maps', 'mapbox'
-            googleMapApiKey: String(process.env.GMAP),
-            mapBoxApiKey: String(process.env.MAPBOX),
+            googleMapApiKey: String(GMAP),
+            mapBoxApiKey: String(MAPBOX),
             storeBannerWidth: '625',
             storeBannerHeight: '300',
             saveSuccessMessage: 'Setting has been saved successfully.',
@@ -2171,8 +2174,8 @@ export const data = {
     },
 
     storeContactData: {
-        name: String(process.env.CUSTOMER),
-        email: String(process.env.CUSTOMER) + '@yopmail.com',
+        name: String(CUSTOMER),
+        email: String(CUSTOMER) + '@yopmail.com',
         message: 'Test Message',
     },
 
@@ -2192,7 +2195,7 @@ export const data = {
 
     // dokan license
     dokanLicense: {
-        correctKey: process.env.LICENSE_KEY,
+        correctKey: LICENSE_KEY,
         incorrectKey: 'ABC-123-DEF-456-GHI-789',
     },
 
@@ -2292,16 +2295,16 @@ export const data = {
             firstName: () => 'vendor1',
             lastName: () => 'v1',
             username: 'vendor1',
-            shopName: String(process.env.VENDOR) + 'store',
+            shopName: String(VENDOR) + 'store',
         },
 
         vendorStores: {
             followFromStoreListing: 'storeListing',
             followFromSingleStore: 'singleStore',
-            vendor1: String(process.env.VENDOR) + 'store',
-            vendor2: String(process.env.VENDOR2) + 'store',
-            vendor1FullName: String(process.env.VENDOR) + ' ' + 'v1',
-            shopUrl: String(process.env.VENDOR) + 'store',
+            vendor1: String(VENDOR) + 'store',
+            vendor2: String(VENDOR2) + 'store',
+            vendor1FullName: String(VENDOR) + ' ' + 'v1',
+            shopUrl: String(VENDOR) + 'store',
         },
 
         customerInfo: {
@@ -2325,10 +2328,12 @@ export const data = {
     },
 
     // command
-    command: {
+    commands: {
         permalink: 'npm run wp-env run tests-cli wp rewrite structure /%postname%/',
-        permalinkLocal: `cd ${process.env.SITE_PATH} && wp rewrite structure /%postname%/ && wp rewrite flush`,
-        activateTheme: `cd ${process.env.SITE_PATH} && wp theme activate storefront`,
+        permalinkLocal: `cd ${SITE_PATH} && wp rewrite structure /%postname%/ && wp rewrite flush`,
+        activateTheme: `cd ${SITE_PATH} && wp theme activate storefront`,
+        cloneDokanPro: "git clone -b test_utils https://github.com/getdokan/dokan-pro.git && cd dokan-pro && sed -i '''' '''s/Requires Plugins: woocommerce, dokan-lite/Requires Plugins: woocommerce, dokan/''' dokan-pro.php",
+        buildPlugin: 'composer i --no-dev && composer du -o && npm i && npm run build',
     },
 
     // install wordpress
@@ -2341,8 +2346,8 @@ export const data = {
         dbTablePrefix: process.env.DB_PREFIX,
         // site info
         siteTitle: process.env.DATABASE,
-        adminUserName: process.env.ADMIN,
-        adminPassword: process.env.USER_PASSWORD,
+        adminUserName: ADMIN,
+        adminPassword: USER_PASSWORD,
         adminEmail: 'shashwata@wedevs.com',
     },
 
