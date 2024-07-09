@@ -2328,10 +2328,12 @@ export const data = {
     },
 
     // command
-    command: {
+    commands: {
         permalink: 'npm run wp-env run tests-cli wp rewrite structure /%postname%/',
         permalinkLocal: `cd ${SITE_PATH} && wp rewrite structure /%postname%/ && wp rewrite flush`,
         activateTheme: `cd ${SITE_PATH} && wp theme activate storefront`,
+        cloneDokanPro: "git clone -b test_utils https://github.com/getdokan/dokan-pro.git && cd dokan-pro && sed -i '''' '''s/Requires Plugins: woocommerce, dokan-lite/Requires Plugins: woocommerce, dokan/''' dokan-pro.php",
+        buildPlugin: 'composer i --no-dev && composer du -o && npm i && npm run build',
     },
 
     // install wordpress
