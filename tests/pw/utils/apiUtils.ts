@@ -320,12 +320,11 @@ export class ApiUtils {
         return [responseBody, variationId];
     }
 
-    // get variationId
-    async createVariableProductWithVariation(attribute: object, attributeTerm: object, product: any, auth?: auth): Promise<[string, string]> {
-        const [, productId] = await this.createProduct(product, auth);
-        const [body, attributeId] = await this.createAttributeTerm(attribute, attributeTerm, auth);
-        const payload = { ...product, attributes: [{ id: attributeId, visible: true, variation: true, option: body.name }] }; // todo: need to fix
-        const [, variationId] = await this.createProductVariation(productId, payload, auth);
+    // create variable product with variation
+    async createVariableProductWithVariation(attribute: any, attributeTerm: any, product: any, productVariation: any, auth?: auth): Promise<[string, string]> {
+        const [, attributeId] = await this.createAttributeTerm(attribute, attributeTerm, auth);
+        const [, productId] = await this.createProduct({ ...product, attributes: [{ id: attributeId, visible: true, variation: true, options: [attributeTerm.name] }] }, auth);
+        const [, variationId] = await this.createProductVariation(productId, { ...productVariation, attributes: [{ id: attributeId, option: attributeTerm.name }] }, auth);
         return [productId, variationId];
     }
 
@@ -1721,7 +1720,8 @@ export class ApiUtils {
     // product
 
     // get all products
-    async getAllProductsWc(auth?: auth): Promise<responseBody> {  //todo: update all getall methods whit loop and per_page
+    async getAllProductsWc(auth?: auth): Promise<responseBody> {
+        //todo: update all getall methods whit loop and per_page
         let responseBody: object[] = [];
         let page = 1;
         let hasMoreProducts = true;

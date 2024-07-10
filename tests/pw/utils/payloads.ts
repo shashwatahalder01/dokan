@@ -480,10 +480,8 @@ export const payloads = {
         // ],
     }),
 
-    createProductVariation: {
-        // id: '47',
+    createProductVariation: () => ({
         regular_price: faker.finance.amount({ min: 100, max: 200, dec: faker.helpers.arrayElement([0, 2]) }),
-        status: 'publish',
         categories: [
             {
                 //  id: 48
@@ -493,12 +491,11 @@ export const payloads = {
         ],
         attributes: [
             {
-                id: 18,
-                // name: 'size',
+                // id: 18,
                 option: 'l',
             },
         ],
-    },
+    }),
 
     batchProductVariation: {
         id: '',
@@ -1197,7 +1194,7 @@ export const payloads = {
 
     updateAttribute: () => ({ name: 'Updated_Test_attribute_' + faker.string.alpha(5) }),
 
-    createAttributeTerm: () => ({ name: 'Test_attributeTerm_' + faker.string.alpha(8) }),
+    createAttributeTerm: () => ({ name: 'Test_attributeTerm_' + faker.string.alpha(5) }),
 
     updateAttributeTerm: () => ({ name: 'Updated_Test_attributeTerm_' + faker.string.alpha(5) }),
 

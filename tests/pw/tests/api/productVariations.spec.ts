@@ -18,7 +18,7 @@ test.describe('product variation api test', () => {
 
     test.beforeAll(async () => {
         apiUtils = new ApiUtils(await request.newContext());
-        [productId, variationId] = await apiUtils.createVariableProductWithVariation(payloads.createAttribute(), payloads.createAttributeTerm(), payloads.createVariableProduct());
+        [productId, variationId] = await apiUtils.createVariableProductWithVariation(payloads.createAttribute(), payloads.createAttributeTerm(), payloads.createVariableProduct(), payloads.createProductVariation());
     });
 
     test.afterAll(async () => {
@@ -40,7 +40,7 @@ test.describe('product variation api test', () => {
     });
 
     test('create a product variation', { tag: ['@pro'] }, async () => {
-        const [response, responseBody] = await apiUtils.post(endPoints.createProductVariation(productId), { data: payloads.createProductVariation });
+        const [response, responseBody] = await apiUtils.post(endPoints.createProductVariation(productId), { data: payloads.createProductVariation() });
         expect(response.ok()).toBeTruthy();
         expect(responseBody).toBeTruthy();
         expect(responseBody).toMatchSchema(schemas.productVariationsSchema.productVariationSchema);
@@ -61,9 +61,8 @@ test.describe('product variation api test', () => {
     });
 
     test('update batch product variations', { tag: ['@pro'] }, async () => {
-        test.skip(true, 'fatal error exists');
-        const [productId] = await apiUtils.createVariableProductWithVariation(payloads.createAttribute(), payloads.createAttributeTerm(), payloads.createVariableProduct());
-        const [response, responseBody] = await apiUtils.put(endPoints.batchUpdateProductVariations(productId), { data: { update: { ...payloads.batchProductVariation, id: productId } } });
+        const [productId, variationId] = await apiUtils.createVariableProductWithVariation(payloads.createAttribute(), payloads.createAttributeTerm(), payloads.createVariableProduct(), payloads.createProductVariation());
+        const [response, responseBody] = await apiUtils.put(endPoints.batchUpdateProductVariations(productId), { data: { update: [{ ...payloads.batchProductVariation, id: variationId }] } });
         expect(response.ok()).toBeTruthy();
         expect(responseBody).toBeTruthy();
         expect(responseBody).toMatchSchema(schemas.productVariationsSchema.batchUpdateProductVariationsSchema);
