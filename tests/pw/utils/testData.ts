@@ -169,7 +169,7 @@ export const data = {
 
             randomAttribute: () => ({
                 attributeName: `attribute_${faker.string.alpha(5)}`,
-                attributeTerms: [`'attributeTerm_${faker.string.alpha(5)}`],
+                attributeTerms: [`attributeTerm_${faker.string.alpha(5)}`],
             }),
         },
 
