@@ -234,7 +234,18 @@ export class ApiUtils {
 
     // get all products
     async getAllProducts(auth?: auth): Promise<responseBody> {
-        const [, responseBody] = await this.get(endPoints.getAllProducts, { params: { per_page: 100 }, headers: auth });
+        let responseBody: object[] = [];
+        let page = 1;
+        let hasMoreProducts = true;
+        while (hasMoreProducts) {
+            const [, productResponseBody] = await this.get(endPoints.getAllProducts, { params: { per_page: 100, page: page }, headers: auth });
+            if (productResponseBody.length === 0) {
+                hasMoreProducts = false;
+            } else {
+                responseBody = responseBody.concat(productResponseBody);
+                page++;
+            }
+        }
         return responseBody;
     }
 
@@ -290,7 +301,19 @@ export class ApiUtils {
             // get all product ids
             allProductIds = allProducts.map((o: { id: unknown }) => o.id);
         }
-        const [, responseBody] = await this.put(endPoints.wc.updateBatchProducts, { data: { delete: allProductIds }, headers: payloads.adminAuth });
+
+        let responseBody: object[] = [];
+        while (allProductIds.length > 0) {
+            const chunkProductIds = allProductIds.splice(0, 100); // Unable to accept more than 100 items for batch update
+            console.log('Deleting products: ', chunkProductIds);
+            const [response, body] = await this.put(endPoints.wc.updateBatchProducts, { data: { delete: chunkProductIds }, headers: payloads.adminAuth });
+            if (!response.ok()) {
+                console.log('batch update failed');
+                break;
+            }
+            responseBody = responseBody.concat(body);
+        }
+
         return responseBody;
     }
 
