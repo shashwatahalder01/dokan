@@ -48,21 +48,21 @@ test.describe('new settings api test', () => {
         const [response, responseBody] = await apiUtils.get(endPoints.getSubSettingFromSingleSettingGroup('store', 'store_name'));
         expect(response.ok()).toBeTruthy();
         expect(responseBody).toBeTruthy();
-        expect(responseBody).toMatchSchema(schemas.settingsSchema.settingV2GropupSchema);
+        expect(responseBody).toMatchSchema(schemas.settingsSchema.settingV2GroupSchema);
     });
 
     test('update sub settings from single settings group', { tag: ['@lite', '@v2'] }, async () => {
         const [response, responseBody] = await apiUtils.post(endPoints.updateSubSettingFromSingleSettingGroup('store', 'store_name'), { data: payloads.updateSubSettingFromSingleSettingGroup });
         expect(response.ok()).toBeTruthy();
         expect(responseBody).toBeTruthy();
-        expect(responseBody).toMatchSchema(schemas.settingsSchema.settingV2GropupSchema);
+        expect(responseBody).toMatchSchema(schemas.settingsSchema.settingV2GroupSchema);
     });
 
     test('get sub sub settings from single settings group', { tag: ['@lite', '@v2'] }, async () => {
         const [response, responseBody] = await apiUtils.get(endPoints.getSubSubSettingFromSingleSettingGroup('store', 'address', 'street_1'));
         expect(response.ok()).toBeTruthy();
         expect(responseBody).toBeTruthy();
-        expect(responseBody).toMatchSchema(schemas.settingsSchema.settingV2GropupSchema);
+        expect(responseBody).toMatchSchema(schemas.settingsSchema.settingV2GroupSchema);
     });
 
     test('update sub sub settings from single settings group', { tag: ['@lite', '@v2'] }, async () => {
@@ -71,6 +71,6 @@ test.describe('new settings api test', () => {
         });
         expect(response.ok()).toBeTruthy();
         expect(responseBody).toBeTruthy();
-        expect(responseBody).toMatchSchema(schemas.settingsSchema.settingV2GropupSchema);
+        expect(responseBody).toMatchSchema(schemas.settingsSchema.settingV2GroupSchema);
     });
 });

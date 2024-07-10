@@ -75,14 +75,12 @@ jobs:
               uses: actions/checkout@v4
 
             - name: Use desired version of NodeJS
-              if: success()
               uses: actions/setup-node@v4
               with:
                   node-version: 20
                   cache: npm
 
             - name: Clone dokan-pro
-              if: success()
               uses: actions/checkout@v4
               with:
                   repository: getdokan/dokan-pro
@@ -91,70 +89,60 @@ jobs:
                   ref: 'test_utils'
 
             - name: Unzip woocommerce plugins
-              if: success()
+              working-directory: plugins/dokan-pro/tests/plugins
               run: |
-                  cd plugins/dokan-pro/tests/plugins
                   unzip woocommerce-bookings.zip
                   unzip woocommerce-product-addons.zip
                   unzip woocommerce-simple-auctions.zip
                   unzip woocommerce-subscriptions.zip
 
             - name: Composer install and build (Dokan-lite)
-              if: success()
               run: |
                   composer i --no-dev -o || composer update --no-dev -o
 
             - name: Npm install and build (Dokan-lite)
-              if: success()
               run: |
                   npm ci || npm i
                   npm run build
 
             - name: Composer install and build (Dokan-pro)
-              if: success()
+              working-directory: plugins/dokan-pro
               run: |
-                  cd plugins/dokan-pro
                   composer i --no-dev -o || composer update --no-dev -o
 
             - name: Npm install and build (Dokan-pro)
-              if: success()
+              working-directory: plugins/dokan-pro
               run: |
-                  cd plugins/dokan-pro
                   npm ci || npm i
                   npm run build
 
             - name: Update Required Plugin name from dokan-lite to dokan (Dokan-pro)
-              if: success()
+              working-directory: plugins/dokan-pro
               run: |
-                  cd plugins/dokan-pro
                   sed -i'' 's/Requires Plugins: woocommerce, dokan-lite/Requires Plugins: woocommerce, dokan/' dokan-pro.php
 
             # Install test dependencies
             - name: Install test dependencies
-              if: success()
+              working-directory: tests/pw
               run: |
-                  cd tests/pw 
                   npm ci || npm i
 
             # Override wp-env for pro required plugins
             - name: Allow override wp-env.json via .wp-env.override.json
-              if: success()
+              working-directory: tests/pw
               run: |
-                  cd tests/pw
                   mv .wp-env.override .wp-env.override.json
 
             # Create wp debuglog file
             - name: Create wp debuglog file
               id: debug-log
-              if: success()
+              working-directory: tests/pw
               run: |
-                  cd tests/pw 
                   mkdir -p wp-data && touch wp-data/debug.log
 
             # Start wordpress environment
             - name: Start WordPress Env
               id: wp-env
-              if: success()
               uses: nick-fields/retry@v3
               with:
                   timeout_minutes: 4
@@ -167,44 +155,38 @@ jobs:
             # Grab test db port
             - name: Get Test DB PORT
               id: db-port
-              if: success()
+              working-directory: tests/pw
               run: |
-                  cd tests/pw
                   echo "DB_PORT=$(docker ps -f ancestor='mariadb:lts' -f name='tests-mysql' --format='{{.Ports}}' | sed -E 's/.*:(.*)->.*/\1/')" >> $GITHUB_ENV
 
             # db port
             - name: DB PORT
-              if: success()
+              working-directory: tests/pw
               run: |
-                  cd tests/pw
                   echo "The value of test DB_PORT is ${{ env.DB_PORT }}"
 
             # Set permalink structure
             - name: Set Permalink structure
-              if: success()
+              working-directory: tests/pw
               run: |
-                  cd tests/pw
                   npm run wp-env run tests-cli wp rewrite structure /%postname%/
 
             # Activate theme
             - name: Activate theme:Storefront
-              if: success()
+              working-directory: tests/pw
               run: |
-                  cd tests/pw
                   npm run wp-env run tests-cli wp theme activate storefront
 
             # Get Playwright version
             - name: Get installed Playwright version
               id: playwright-version
-              if: success()
+              working-directory: tests/pw
               run: |
-                  cd tests/pw
                   echo "PLAYWRIGHT_VERSION=$(npm ls @playwright/test --json | jq --raw-output '.dependencies["@playwright/test"].version')" >> $GITHUB_ENV
 
             # Cache browser binaries, cache key is based on Playwright version and OS
             - name: Cache playwright binaries
               id: playwright-cache
-              if: success()
               uses: actions/cache@v4
               with:
                   path: |
@@ -216,16 +198,16 @@ jobs:
             # Install browser binaries & OS dependencies if cache missed
             - name: Install Playwright browser binaries & OS dependencies
               id: pw-install
-              if: success() && steps.playwright-cache.outputs.cache-hit != 'true'
+              if: steps.playwright-cache.outputs.cache-hit != 'true'
+              working-directory: tests/pw
               run: |
-                  cd tests/pw
                   npm run pw:browser-with-deps
 
             # Install only the OS dependencies if cache hit not needed
             # - name: Install Playwright OS dependencies
             #   if: steps.playwright-cache.outputs.cache-hit == 'true'
+            #   working-directory: tests/pw
             #   run: |
-            #     cd tests/pw
             #     npm run pw:deps-only
 
             # Run e2e tests
@@ -233,18 +215,24 @@ jobs:
               id: e2e-test
               if: success() && (github.event_name != 'workflow_dispatch' || ( github.event_name == 'workflow_dispatch' && (github.event.inputs.testsuite == 'E2E' || github.event.inputs.testsuite == 'All')))
               timeout-minutes: 40
+              working-directory: tests/pw
               run: |
-                  cd tests/pw 
                   npm run test:e2e:pro
-                  npm run e2e_coverage
+                          
+            # Run e2e coverage
+            - name: 🧪 Running e2e coverage
+              if: always() && (steps.e2e-test.outcome == 'success' || steps.e2e-test.outcome == 'failure')
+              working-directory: tests/pw
+              run: |
+                npm run e2e_coverage
 
             # Run API tests
             - name: 🧪 Running the api tests
               id: api-test
               if: always() && steps.db-port.outcome == 'success' && ( github.event_name != 'workflow_dispatch'  || ( github.event_name == 'workflow_dispatch' && (github.event.inputs.testsuite == 'API' || github.event.inputs.testsuite == 'All')))
               timeout-minutes: 5
+              working-directory: tests/pw
               run: |
-                  cd tests/pw 
                   npm run test:api:pro
 
             # Prepare test summary
@@ -298,8 +286,8 @@ jobs:
             # Backup Database
             - name: Backup Database
               if: always() && steps.db-port.outcome == 'success'
+              working-directory: tests/pw
               run: |
-                  cd tests/pw
                   npm run wp-env run tests-cli wp db export wp-data/db.sql
 
             # Upload artifacts

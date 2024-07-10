@@ -549,7 +549,7 @@ export interface payment {
     };
 
     basicPayment: {
-        toggleEanbledClass: string;
+        toggleEnabledClass: string;
         toggleDisabledClass: string;
     };
 
@@ -1400,12 +1400,12 @@ export interface modules {
     };
 
     modulesName: {
-        AuctionIntegration: string;
-        ColorSchemeCustomize: string;
-        DeliveryTime: string;
-        Elementor: string;
-        EUComplianceFields: string;
-        FollowStore: string;
+        auctionIntegration: string;
+        colorSchemeCustomize: string;
+        deliveryTime: string;
+        elementor: string;
+        eUComplianceFields: string;
+        followStore: string;
     };
 
     moduleCategory: {

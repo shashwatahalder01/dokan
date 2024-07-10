@@ -234,7 +234,18 @@ export class ApiUtils {
 
     // get all products
     async getAllProducts(auth?: auth): Promise<responseBody> {
-        const [, responseBody] = await this.get(endPoints.getAllProducts, { params: { per_page: 100 }, headers: auth });
+        let responseBody: object[] = [];
+        let page = 1;
+        let hasMoreProducts = true;
+        while (hasMoreProducts) {
+            const [, productResponseBody] = await this.get(endPoints.getAllProducts, { params: { per_page: 100, page: page }, headers: auth });
+            if (productResponseBody.length === 0) {
+                hasMoreProducts = false;
+            } else {
+                responseBody = responseBody.concat(productResponseBody);
+                page++;
+            }
+        }
         return responseBody;
     }
 
@@ -290,7 +301,19 @@ export class ApiUtils {
             // get all product ids
             allProductIds = allProducts.map((o: { id: unknown }) => o.id);
         }
-        const [, responseBody] = await this.put(endPoints.wc.updateBatchProducts, { data: { delete: allProductIds }, headers: payloads.adminAuth });
+
+        let responseBody: object[] = [];
+        while (allProductIds.length > 0) {
+            const chunkProductIds = allProductIds.splice(0, 100); // Unable to accept more than 100 items for batch update
+            console.log('Deleting products: ', chunkProductIds);
+            const [response, body] = await this.put(endPoints.wc.updateBatchProducts, { data: { delete: chunkProductIds }, headers: payloads.adminAuth });
+            if (!response.ok()) {
+                console.log('batch update failed');
+                break;
+            }
+            responseBody = responseBody.concat(body);
+        }
+
         return responseBody;
     }
 
@@ -320,12 +343,11 @@ export class ApiUtils {
         return [responseBody, variationId];
     }
 
-    // get variationId
-    async createVariableProductWithVariation(attribute: object, attributeTerm: object, product: any, auth?: auth): Promise<[string, string]> {
-        const [, productId] = await this.createProduct(product, auth);
-        const [body, attributeId] = await this.createAttributeTerm(attribute, attributeTerm, auth);
-        const payload = { ...product, attributes: [{ id: attributeId, visible: true, variation: true, option: body.name }] }; // todo: need to fix
-        const [, variationId] = await this.createProductVariation(productId, payload, auth);
+    // create variable product with variation
+    async createVariableProductWithVariation(attribute: any, attributeTerm: any, product: any, productVariation: any, auth?: auth): Promise<[string, string]> {
+        const [, attributeId] = await this.createAttributeTerm(attribute, attributeTerm, auth);
+        const [, productId] = await this.createProduct({ ...product, attributes: [{ id: attributeId, visible: true, variation: true, options: [attributeTerm.name] }] }, auth);
+        const [, variationId] = await this.createProductVariation(productId, { ...productVariation, attributes: [{ id: attributeId, option: attributeTerm.name }] }, auth);
         return [productId, variationId];
     }
 
@@ -1353,8 +1375,8 @@ export class ApiUtils {
             console.log('No verification method exists');
             return;
         }
-        const allmethodIds = allVerificationMethods.map((o: { id: unknown }) => o.id);
-        for (const methodId of allmethodIds) {
+        const allMethodIds = allVerificationMethods.map((o: { id: unknown }) => o.id);
+        for (const methodId of allMethodIds) {
             await this.delete(endPoints.deleteVerificationMethod(methodId), { headers: auth });
         }
     }
@@ -1721,7 +1743,8 @@ export class ApiUtils {
     // product
 
     // get all products
-    async getAllProductsWc(auth?: auth): Promise<responseBody> {  //todo: update all getall methods whit loop and per_page
+    async getAllProductsWc(auth?: auth): Promise<responseBody> {
+        //todo: update all getall methods whit loop and per_page
         let responseBody: object[] = [];
         let page = 1;
         let hasMoreProducts = true;

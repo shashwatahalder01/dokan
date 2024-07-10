@@ -180,7 +180,7 @@ export class VendorPage extends BasePage {
 
             // verifications
             if (DOKAN_PRO) {
-                const method = await this.getElementText(verificationsVendor.firtstVerificationMethod);
+                const method = await this.getElementText(verificationsVendor.firstVerificationMethod);
                 if (method) {
                     await this.click(verificationsVendor.startVerification(method));
                     await this.click(verificationsVendor.uploadFiles(method));

@@ -678,7 +678,7 @@ export const data = {
         },
 
         basicPayment: {
-            toggleEanbledClass: 'woocommerce-input-toggle--enabled',
+            toggleEnabledClass: 'woocommerce-input-toggle--enabled',
             toggleDisabledClass: 'woocommerce-input-toggle--disabled',
         },
 
@@ -1803,12 +1803,12 @@ export const data = {
         ],
 
         modulesName: {
-            AuctionIntegration: 'Auction Integration',
-            ColorSchemeCustomize: 'Color Scheme Customize',
-            DeliveryTime: 'Delivery Time',
-            Elementor: 'Elementor',
-            EUComplianceFields: 'EU Compliance Fields',
-            FollowStore: 'Follow Store',
+            auctionIntegration: 'Auction Integration',
+            colorSchemeCustomize: 'Color Scheme Customize',
+            deliveryTime: 'Delivery Time',
+            elementor: 'Elementor',
+            eUComplianceFields: 'EU Compliance Fields',
+            followStore: 'Follow Store',
         },
 
         moduleCategory: {
@@ -2209,7 +2209,7 @@ export const data = {
         customerMigration: '[dokan-customer-migration]',
         geolocationFilter: '[dokan-geolocation-filter-form]',
         stores: '[dokan-stores]',
-        myorders: '[dokan-my-orders]',
+        myOrders: '[dokan-my-orders]',
         requestQuote: '[dokan-request-quote]',
     },
 

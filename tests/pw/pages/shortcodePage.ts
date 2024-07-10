@@ -7,7 +7,7 @@ const { DOKAN_PRO } = process.env;
 
 // selectors
 const vendorDashboard = selector.vendor.vDashboard;
-const vendorSubscription = selector.vendor.vSubscribtion;
+const vendorSubscription = selector.vendor.vSubscription;
 const registrationVendor = selector.vendor.vRegistration;
 const storeList = selector.customer.cStoreList;
 const shopCustomer = selector.customer.cShop;

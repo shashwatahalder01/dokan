@@ -63,7 +63,7 @@ const germanized0 = {
             id: 'woocommerce_gzd_dispute_resolution_type',
             label: 'Dispute Resolution',
             description:
-                'You may select whether you are willing, obliged or not willing to participate in dispute settlement proceeedings before a consumer arbitration board. The corresponding Resolution Text is attached to the [gzd_complaints] shortcode which you should add to your imprint. Trusted Shops advises you to add that text to your Terms & Conditions as well.',
+                'You may select whether you are willing, obliged or not willing to participate in dispute settlement proceedings before a consumer arbitration board. The corresponding Resolution Text is attached to the [gzd_complaints] shortcode which you should add to your imprint. Trusted Shops advises you to add that text to your Terms & Conditions as well.',
             default: 'none',
             value: 'none',
         },
@@ -95,7 +95,7 @@ const germanized0 = {
         {
             id: 'woocommerce_gzd_small_enterprise_text',
             label: 'Notice Text',
-            description: 'You may want to adjust the small buisness notice text to meet your criteria.',
+            description: 'You may want to adjust the small business notice text to meet your criteria.',
 
             default: 'Value added tax is not collected, as small businesses according to §19 (1) UStG.',
 
@@ -287,7 +287,7 @@ const germanized0 = {
         {
             id: 'woocommerce_gzd_display_single_product_unit_price_filter',
             label: 'Location',
-            description: 'Choose a location for the shopmark. Locations are mapped to specific WooCommerce hooks and may differ from Theme to Theme.',
+            description: 'Choose a location for the shop-mark. Locations are mapped to specific WooCommerce hooks and may differ from Theme to Theme.',
 
             default: 'woocommerce_single_product_summary',
 
@@ -296,7 +296,7 @@ const germanized0 = {
         {
             id: 'woocommerce_gzd_display_single_product_unit_price_priority',
             label: 'Priority',
-            description: 'Choose a priority by which the shopmark should be attached to the location. The higher the priority, the later the shopmark will be attached. Defaults to 11.',
+            description: 'Choose a priority by which the shop-mark should be attached to the location. The higher the priority, the later the shop-mark will be attached. Defaults to 11.',
 
             default: 11,
 
@@ -305,7 +305,7 @@ const germanized0 = {
         {
             id: 'woocommerce_gzd_display_single_product_legal_filter',
             label: 'Location',
-            description: 'Choose a location for the shopmark. Locations are mapped to specific WooCommerce hooks and may differ from Theme to Theme.',
+            description: 'Choose a location for the shop-mark. Locations are mapped to specific WooCommerce hooks and may differ from Theme to Theme.',
 
             default: 'woocommerce_single_product_summary',
 
@@ -314,7 +314,7 @@ const germanized0 = {
         {
             id: 'woocommerce_gzd_display_single_product_legal_priority',
             label: 'Priority',
-            description: 'Choose a priority by which the shopmark should be attached to the location. The higher the priority, the later the shopmark will be attached. Defaults to 12.',
+            description: 'Choose a priority by which the shop-mark should be attached to the location. The higher the priority, the later the shop-mark will be attached. Defaults to 12.',
 
             default: 12,
 
@@ -323,7 +323,7 @@ const germanized0 = {
         {
             id: 'woocommerce_gzd_display_single_product_delivery_time_filter',
             label: 'Location',
-            description: 'Choose a location for the shopmark. Locations are mapped to specific WooCommerce hooks and may differ from Theme to Theme.',
+            description: 'Choose a location for the shop-mark. Locations are mapped to specific WooCommerce hooks and may differ from Theme to Theme.',
 
             default: 'woocommerce_single_product_summary',
 
@@ -332,7 +332,7 @@ const germanized0 = {
         {
             id: 'woocommerce_gzd_display_single_product_delivery_time_priority',
             label: 'Priority',
-            description: 'Choose a priority by which the shopmark should be attached to the location. The higher the priority, the later the shopmark will be attached. Defaults to 27.',
+            description: 'Choose a priority by which the shop-mark should be attached to the location. The higher the priority, the later the shop-mark will be attached. Defaults to 27.',
 
             default: 27,
 
@@ -341,7 +341,7 @@ const germanized0 = {
         {
             id: 'woocommerce_gzd_display_single_product_units_filter',
             label: 'Location',
-            description: 'Choose a location for the shopmark. Locations are mapped to specific WooCommerce hooks and may differ from Theme to Theme.',
+            description: 'Choose a location for the shop-mark. Locations are mapped to specific WooCommerce hooks and may differ from Theme to Theme.',
 
             default: 'woocommerce_product_meta_start',
 
@@ -350,7 +350,7 @@ const germanized0 = {
         {
             id: 'woocommerce_gzd_display_single_product_units_priority',
             label: 'Priority',
-            description: 'Choose a priority by which the shopmark should be attached to the location. The higher the priority, the later the shopmark will be attached. Defaults to 5.',
+            description: 'Choose a priority by which the shop-mark should be attached to the location. The higher the priority, the later the shop-mark will be attached. Defaults to 5.',
 
             default: 5,
 
@@ -359,7 +359,7 @@ const germanized0 = {
         {
             id: 'woocommerce_gzd_display_single_product_defect_description_filter',
             label: 'Location',
-            description: 'Choose a location for the shopmark. Locations are mapped to specific WooCommerce hooks and may differ from Theme to Theme.',
+            description: 'Choose a location for the shop-mark. Locations are mapped to specific WooCommerce hooks and may differ from Theme to Theme.',
 
             default: 'woocommerce_single_product_summary',
 
@@ -368,7 +368,7 @@ const germanized0 = {
         {
             id: 'woocommerce_gzd_display_single_product_defect_description_priority',
             label: 'Priority',
-            description: 'Choose a priority by which the shopmark should be attached to the location. The higher the priority, the later the shopmark will be attached. Defaults to 21.',
+            description: 'Choose a priority by which the shop-mark should be attached to the location. The higher the priority, the later the shop-mark will be attached. Defaults to 21.',
 
             default: 21,
 
@@ -377,7 +377,7 @@ const germanized0 = {
         {
             id: 'woocommerce_gzd_display_single_product_deposit_filter',
             label: 'Location',
-            description: 'Choose a location for the shopmark. Locations are mapped to specific WooCommerce hooks and may differ from Theme to Theme.',
+            description: 'Choose a location for the shop-mark. Locations are mapped to specific WooCommerce hooks and may differ from Theme to Theme.',
 
             default: 'woocommerce_single_product_summary',
 
@@ -386,7 +386,7 @@ const germanized0 = {
         {
             id: 'woocommerce_gzd_display_single_product_deposit_priority',
             label: 'Priority',
-            description: 'Choose a priority by which the shopmark should be attached to the location. The higher the priority, the later the shopmark will be attached. Defaults to 13.',
+            description: 'Choose a priority by which the shop-mark should be attached to the location. The higher the priority, the later the shop-mark will be attached. Defaults to 13.',
 
             default: 13,
 
@@ -395,7 +395,7 @@ const germanized0 = {
         {
             id: 'woocommerce_gzd_display_single_product_deposit_packaging_type_filter',
             label: 'Location',
-            description: 'Choose a location for the shopmark. Locations are mapped to specific WooCommerce hooks and may differ from Theme to Theme.',
+            description: 'Choose a location for the shop-mark. Locations are mapped to specific WooCommerce hooks and may differ from Theme to Theme.',
 
             default: 'woocommerce_single_product_summary',
 
@@ -404,7 +404,7 @@ const germanized0 = {
         {
             id: 'woocommerce_gzd_display_single_product_deposit_packaging_type_priority',
             label: 'Priority',
-            description: 'Choose a priority by which the shopmark should be attached to the location. The higher the priority, the later the shopmark will be attached. Defaults to 10.',
+            description: 'Choose a priority by which the shop-mark should be attached to the location. The higher the priority, the later the shop-mark will be attached. Defaults to 10.',
 
             default: 10,
 
@@ -413,7 +413,7 @@ const germanized0 = {
         {
             id: 'woocommerce_gzd_display_single_product_nutri_score_filter',
             label: 'Location',
-            description: 'Choose a location for the shopmark. Locations are mapped to specific WooCommerce hooks and may differ from Theme to Theme.',
+            description: 'Choose a location for the shop-mark. Locations are mapped to specific WooCommerce hooks and may differ from Theme to Theme.',
 
             default: 'woocommerce_single_product_summary',
 
@@ -422,7 +422,7 @@ const germanized0 = {
         {
             id: 'woocommerce_gzd_display_single_product_nutri_score_priority',
             label: 'Priority',
-            description: 'Choose a priority by which the shopmark should be attached to the location. The higher the priority, the later the shopmark will be attached. Defaults to 15.',
+            description: 'Choose a priority by which the shop-mark should be attached to the location. The higher the priority, the later the shop-mark will be attached. Defaults to 15.',
 
             default: 15,
 
@@ -431,7 +431,7 @@ const germanized0 = {
         {
             id: 'woocommerce_gzd_display_single_product_grouped_unit_price_filter',
             label: 'Location',
-            description: 'Choose a location for the shopmark. Locations are mapped to specific WooCommerce hooks and may differ from Theme to Theme.',
+            description: 'Choose a location for the shop-mark. Locations are mapped to specific WooCommerce hooks and may differ from Theme to Theme.',
 
             default: 'woocommerce_grouped_product_list_column_price',
 
@@ -440,7 +440,7 @@ const germanized0 = {
         {
             id: 'woocommerce_gzd_display_single_product_grouped_unit_price_priority',
             label: 'Priority',
-            description: 'Choose a priority by which the shopmark should be attached to the location. The higher the priority, the later the shopmark will be attached. Defaults to 11.',
+            description: 'Choose a priority by which the shop-mark should be attached to the location. The higher the priority, the later the shop-mark will be attached. Defaults to 11.',
 
             default: 11,
 
@@ -449,7 +449,7 @@ const germanized0 = {
         {
             id: 'woocommerce_gzd_display_single_product_grouped_legal_filter',
             label: 'Location',
-            description: 'Choose a location for the shopmark. Locations are mapped to specific WooCommerce hooks and may differ from Theme to Theme.',
+            description: 'Choose a location for the shop-mark. Locations are mapped to specific WooCommerce hooks and may differ from Theme to Theme.',
 
             default: 'woocommerce_grouped_product_list_column_price',
 
@@ -458,7 +458,7 @@ const germanized0 = {
         {
             id: 'woocommerce_gzd_display_single_product_grouped_legal_priority',
             label: 'Priority',
-            description: 'Choose a priority by which the shopmark should be attached to the location. The higher the priority, the later the shopmark will be attached. Defaults to 12.',
+            description: 'Choose a priority by which the shop-mark should be attached to the location. The higher the priority, the later the shop-mark will be attached. Defaults to 12.',
 
             default: 12,
 
@@ -467,7 +467,7 @@ const germanized0 = {
         {
             id: 'woocommerce_gzd_display_single_product_grouped_delivery_time_filter',
             label: 'Location',
-            description: 'Choose a location for the shopmark. Locations are mapped to specific WooCommerce hooks and may differ from Theme to Theme.',
+            description: 'Choose a location for the shop-mark. Locations are mapped to specific WooCommerce hooks and may differ from Theme to Theme.',
 
             default: 'woocommerce_grouped_product_list_column_price',
 
@@ -476,7 +476,7 @@ const germanized0 = {
         {
             id: 'woocommerce_gzd_display_single_product_grouped_delivery_time_priority',
             label: 'Priority',
-            description: 'Choose a priority by which the shopmark should be attached to the location. The higher the priority, the later the shopmark will be attached. Defaults to 15.',
+            description: 'Choose a priority by which the shop-mark should be attached to the location. The higher the priority, the later the shop-mark will be attached. Defaults to 15.',
 
             default: 15,
 
@@ -485,7 +485,7 @@ const germanized0 = {
         {
             id: 'woocommerce_gzd_display_single_product_grouped_units_filter',
             label: 'Location',
-            description: 'Choose a location for the shopmark. Locations are mapped to specific WooCommerce hooks and may differ from Theme to Theme.',
+            description: 'Choose a location for the shop-mark. Locations are mapped to specific WooCommerce hooks and may differ from Theme to Theme.',
 
             default: 'woocommerce_grouped_product_list_column_price',
 
@@ -494,7 +494,7 @@ const germanized0 = {
         {
             id: 'woocommerce_gzd_display_single_product_grouped_units_priority',
             label: 'Priority',
-            description: 'Choose a priority by which the shopmark should be attached to the location. The higher the priority, the later the shopmark will be attached. Defaults to 20.',
+            description: 'Choose a priority by which the shop-mark should be attached to the location. The higher the priority, the later the shop-mark will be attached. Defaults to 20.',
 
             default: 20,
 
@@ -503,7 +503,7 @@ const germanized0 = {
         {
             id: 'woocommerce_gzd_display_single_product_grouped_defect_description_filter',
             label: 'Location',
-            description: 'Choose a location for the shopmark. Locations are mapped to specific WooCommerce hooks and may differ from Theme to Theme.',
+            description: 'Choose a location for the shop-mark. Locations are mapped to specific WooCommerce hooks and may differ from Theme to Theme.',
 
             default: 'woocommerce_grouped_product_list_column_label',
 
@@ -512,7 +512,7 @@ const germanized0 = {
         {
             id: 'woocommerce_gzd_display_single_product_grouped_defect_description_priority',
             label: 'Priority',
-            description: 'Choose a priority by which the shopmark should be attached to the location. The higher the priority, the later the shopmark will be attached. Defaults to 11.',
+            description: 'Choose a priority by which the shop-mark should be attached to the location. The higher the priority, the later the shop-mark will be attached. Defaults to 11.',
 
             default: 11,
 
@@ -521,7 +521,7 @@ const germanized0 = {
         {
             id: 'woocommerce_gzd_display_single_product_grouped_deposit_filter',
             label: 'Location',
-            description: 'Choose a location for the shopmark. Locations are mapped to specific WooCommerce hooks and may differ from Theme to Theme.',
+            description: 'Choose a location for the shop-mark. Locations are mapped to specific WooCommerce hooks and may differ from Theme to Theme.',
 
             default: 'woocommerce_grouped_product_list_column_price',
 
@@ -530,7 +530,7 @@ const germanized0 = {
         {
             id: 'woocommerce_gzd_display_single_product_grouped_deposit_priority',
             label: 'Priority',
-            description: 'Choose a priority by which the shopmark should be attached to the location. The higher the priority, the later the shopmark will be attached. Defaults to 13.',
+            description: 'Choose a priority by which the shop-mark should be attached to the location. The higher the priority, the later the shop-mark will be attached. Defaults to 13.',
 
             default: 13,
 
@@ -539,7 +539,7 @@ const germanized0 = {
         {
             id: 'woocommerce_gzd_display_single_product_grouped_deposit_packaging_type_filter',
             label: 'Location',
-            description: 'Choose a location for the shopmark. Locations are mapped to specific WooCommerce hooks and may differ from Theme to Theme.',
+            description: 'Choose a location for the shop-mark. Locations are mapped to specific WooCommerce hooks and may differ from Theme to Theme.',
 
             default: 'woocommerce_grouped_product_list_column_price',
 
@@ -548,7 +548,7 @@ const germanized0 = {
         {
             id: 'woocommerce_gzd_display_single_product_grouped_deposit_packaging_type_priority',
             label: 'Priority',
-            description: 'Choose a priority by which the shopmark should be attached to the location. The higher the priority, the later the shopmark will be attached. Defaults to 10.',
+            description: 'Choose a priority by which the shop-mark should be attached to the location. The higher the priority, the later the shop-mark will be attached. Defaults to 10.',
 
             default: 10,
 
@@ -557,154 +557,154 @@ const germanized0 = {
         {
             id: 'woocommerce_gzd_display_single_product_grouped_nutri_score_filter',
             label: 'Location',
-            description: 'Choose a location for the shopmark. Locations are mapped to specific WooCommerce hooks and may differ from Theme to Theme.',
+            description: 'Choose a location for the shop-mark. Locations are mapped to specific WooCommerce hooks and may differ from Theme to Theme.',
             default: 'woocommerce_grouped_product_list_column_label',
             value: 'woocommerce_grouped_product_list_column_label',
         },
         {
             id: 'woocommerce_gzd_display_single_product_grouped_nutri_score_priority',
             label: 'Priority',
-            description: 'Choose a priority by which the shopmark should be attached to the location. The higher the priority, the later the shopmark will be attached. Defaults to 20.',
+            description: 'Choose a priority by which the shop-mark should be attached to the location. The higher the priority, the later the shop-mark will be attached. Defaults to 20.',
             default: 20,
             value: '20',
         },
         {
             id: 'woocommerce_gzd_display_product_loop_unit_price_filter',
             label: 'Location',
-            description: 'Choose a location for the shopmark. Locations are mapped to specific WooCommerce hooks and may differ from Theme to Theme.',
+            description: 'Choose a location for the shop-mark. Locations are mapped to specific WooCommerce hooks and may differ from Theme to Theme.',
             default: 'woocommerce_after_shop_loop_item_title',
             value: 'woocommerce_after_shop_loop_item_title',
         },
         {
             id: 'woocommerce_gzd_display_product_loop_unit_price_priority',
             label: 'Priority',
-            description: 'Choose a priority by which the shopmark should be attached to the location. The higher the priority, the later the shopmark will be attached. Defaults to 11.',
+            description: 'Choose a priority by which the shop-mark should be attached to the location. The higher the priority, the later the shop-mark will be attached. Defaults to 11.',
             default: 11,
             value: '11',
         },
         {
             id: 'woocommerce_gzd_display_product_loop_tax_filter',
             label: 'Location',
-            description: 'Choose a location for the shopmark. Locations are mapped to specific WooCommerce hooks and may differ from Theme to Theme.',
+            description: 'Choose a location for the shop-mark. Locations are mapped to specific WooCommerce hooks and may differ from Theme to Theme.',
             default: 'woocommerce_after_shop_loop_item',
             value: 'woocommerce_after_shop_loop_item',
         },
         {
             id: 'woocommerce_gzd_display_product_loop_tax_priority',
             label: 'Priority',
-            description: 'Choose a priority by which the shopmark should be attached to the location. The higher the priority, the later the shopmark will be attached. Defaults to 6.',
+            description: 'Choose a priority by which the shop-mark should be attached to the location. The higher the priority, the later the shop-mark will be attached. Defaults to 6.',
             default: 6,
             value: '6',
         },
         {
             id: 'woocommerce_gzd_display_product_loop_shipping_costs_filter',
             label: 'Location',
-            description: 'Choose a location for the shopmark. Locations are mapped to specific WooCommerce hooks and may differ from Theme to Theme.',
+            description: 'Choose a location for the shop-mark. Locations are mapped to specific WooCommerce hooks and may differ from Theme to Theme.',
             default: 'woocommerce_after_shop_loop_item',
             value: 'woocommerce_after_shop_loop_item',
         },
         {
             id: 'woocommerce_gzd_display_product_loop_shipping_costs_priority',
             label: 'Priority',
-            description: 'Choose a priority by which the shopmark should be attached to the location. The higher the priority, the later the shopmark will be attached. Defaults to 7.',
+            description: 'Choose a priority by which the shop-mark should be attached to the location. The higher the priority, the later the shop-mark will be attached. Defaults to 7.',
             default: 7,
             value: '7',
         },
         {
             id: 'woocommerce_gzd_display_product_loop_delivery_time_filter',
             label: 'Location',
-            description: 'Choose a location for the shopmark. Locations are mapped to specific WooCommerce hooks and may differ from Theme to Theme.',
+            description: 'Choose a location for the shop-mark. Locations are mapped to specific WooCommerce hooks and may differ from Theme to Theme.',
             default: 'woocommerce_after_shop_loop_item',
             value: 'woocommerce_after_shop_loop_item',
         },
         {
             id: 'woocommerce_gzd_display_product_loop_delivery_time_priority',
             label: 'Priority',
-            description: 'Choose a priority by which the shopmark should be attached to the location. The higher the priority, the later the shopmark will be attached. Defaults to 8.',
+            description: 'Choose a priority by which the shop-mark should be attached to the location. The higher the priority, the later the shop-mark will be attached. Defaults to 8.',
             default: 8,
             value: '8',
         },
         {
             id: 'woocommerce_gzd_display_product_loop_units_filter',
             label: 'Location',
-            description: 'Choose a location for the shopmark. Locations are mapped to specific WooCommerce hooks and may differ from Theme to Theme.',
+            description: 'Choose a location for the shop-mark. Locations are mapped to specific WooCommerce hooks and may differ from Theme to Theme.',
             default: 'woocommerce_after_shop_loop_item',
             value: 'woocommerce_after_shop_loop_item',
         },
         {
             id: 'woocommerce_gzd_display_product_loop_units_priority',
             label: 'Priority',
-            description: 'Choose a priority by which the shopmark should be attached to the location. The higher the priority, the later the shopmark will be attached. Defaults to 9.',
+            description: 'Choose a priority by which the shop-mark should be attached to the location. The higher the priority, the later the shop-mark will be attached. Defaults to 9.',
             default: 9,
             value: '9',
         },
         {
             id: 'woocommerce_gzd_display_product_loop_deposit_filter',
             label: 'Location',
-            description: 'Choose a location for the shopmark. Locations are mapped to specific WooCommerce hooks and may differ from Theme to Theme.',
+            description: 'Choose a location for the shop-mark. Locations are mapped to specific WooCommerce hooks and may differ from Theme to Theme.',
             default: 'woocommerce_after_shop_loop_item_title',
             value: 'woocommerce_after_shop_loop_item_title',
         },
         {
             id: 'woocommerce_gzd_display_product_loop_deposit_priority',
             label: 'Priority',
-            description: 'Choose a priority by which the shopmark should be attached to the location. The higher the priority, the later the shopmark will be attached. Defaults to 12.',
+            description: 'Choose a priority by which the shop-mark should be attached to the location. The higher the priority, the later the shop-mark will be attached. Defaults to 12.',
             default: 12,
             value: '12',
         },
         {
             id: 'woocommerce_gzd_display_product_loop_deposit_packaging_type_filter',
             label: 'Location',
-            description: 'Choose a location for the shopmark. Locations are mapped to specific WooCommerce hooks and may differ from Theme to Theme.',
+            description: 'Choose a location for the shop-mark. Locations are mapped to specific WooCommerce hooks and may differ from Theme to Theme.',
             default: 'woocommerce_after_shop_loop_item_title',
             value: 'woocommerce_after_shop_loop_item_title',
         },
         {
             id: 'woocommerce_gzd_display_product_loop_deposit_packaging_type_priority',
             label: 'Priority',
-            description: 'Choose a priority by which the shopmark should be attached to the location. The higher the priority, the later the shopmark will be attached. Defaults to 10.',
+            description: 'Choose a priority by which the shop-mark should be attached to the location. The higher the priority, the later the shop-mark will be attached. Defaults to 10.',
             default: 10,
             value: '10',
         },
         {
             id: 'woocommerce_gzd_display_product_loop_nutri_score_filter',
             label: 'Location',
-            description: 'Choose a location for the shopmark. Locations are mapped to specific WooCommerce hooks and may differ from Theme to Theme.',
+            description: 'Choose a location for the shop-mark. Locations are mapped to specific WooCommerce hooks and may differ from Theme to Theme.',
             default: 'woocommerce_after_shop_loop_item',
             value: 'woocommerce_after_shop_loop_item',
         },
         {
             id: 'woocommerce_gzd_display_product_loop_nutri_score_priority',
             label: 'Priority',
-            description: 'Choose a priority by which the shopmark should be attached to the location. The higher the priority, the later the shopmark will be attached. Defaults to 15.',
+            description: 'Choose a priority by which the shop-mark should be attached to the location. The higher the priority, the later the shop-mark will be attached. Defaults to 15.',
             default: 15,
             value: '15',
         },
         {
             id: 'woocommerce_gzd_display_product_block_unit_price_filter',
             label: 'Location',
-            description: 'Choose a location for the shopmark. Locations are mapped to specific WooCommerce hooks and may differ from Theme to Theme.',
+            description: 'Choose a location for the shop-mark. Locations are mapped to specific WooCommerce hooks and may differ from Theme to Theme.',
             default: 'woocommerce_gzd_after_product_grid_block_after_price',
             value: 'woocommerce_gzd_after_product_grid_block_after_price',
         },
         {
             id: 'woocommerce_gzd_display_product_block_unit_price_priority',
             label: 'Priority',
-            description: 'Choose a priority by which the shopmark should be attached to the location. The higher the priority, the later the shopmark will be attached. Defaults to 5.',
+            description: 'Choose a priority by which the shop-mark should be attached to the location. The higher the priority, the later the shop-mark will be attached. Defaults to 5.',
             default: 5,
             value: '5',
         },
         {
             id: 'woocommerce_gzd_display_product_block_tax_filter',
             label: 'Location',
-            description: 'Choose a location for the shopmark. Locations are mapped to specific WooCommerce hooks and may differ from Theme to Theme.',
+            description: 'Choose a location for the shop-mark. Locations are mapped to specific WooCommerce hooks and may differ from Theme to Theme.',
             default: 'woocommerce_gzd_after_product_grid_block_after_price',
             value: 'woocommerce_gzd_after_product_grid_block_after_price',
         },
         {
             id: 'woocommerce_gzd_display_product_block_tax_priority',
             label: 'Priority',
-            description: 'Choose a priority by which the shopmark should be attached to the location. The higher the priority, the later the shopmark will be attached. Defaults to 10.',
+            description: 'Choose a priority by which the shop-mark should be attached to the location. The higher the priority, the later the shop-mark will be attached. Defaults to 10.',
 
             default: 10,
 
@@ -713,126 +713,126 @@ const germanized0 = {
         {
             id: 'woocommerce_gzd_display_product_block_shipping_costs_filter',
             label: 'Location',
-            description: 'Choose a location for the shopmark. Locations are mapped to specific WooCommerce hooks and may differ from Theme to Theme.',
+            description: 'Choose a location for the shop-mark. Locations are mapped to specific WooCommerce hooks and may differ from Theme to Theme.',
             default: 'woocommerce_gzd_after_product_grid_block_after_price',
             value: 'woocommerce_gzd_after_product_grid_block_after_price',
         },
         {
             id: 'woocommerce_gzd_display_product_block_shipping_costs_priority',
             label: 'Priority',
-            description: 'Choose a priority by which the shopmark should be attached to the location. The higher the priority, the later the shopmark will be attached. Defaults to 11.',
+            description: 'Choose a priority by which the shop-mark should be attached to the location. The higher the priority, the later the shop-mark will be attached. Defaults to 11.',
             default: 11,
             value: '11',
         },
         {
             id: 'woocommerce_gzd_display_product_block_delivery_time_filter',
             label: 'Location',
-            description: 'Choose a location for the shopmark. Locations are mapped to specific WooCommerce hooks and may differ from Theme to Theme.',
+            description: 'Choose a location for the shop-mark. Locations are mapped to specific WooCommerce hooks and may differ from Theme to Theme.',
             default: 'woocommerce_gzd_after_product_grid_block_after_price',
             value: 'woocommerce_gzd_after_product_grid_block_after_price',
         },
         {
             id: 'woocommerce_gzd_display_product_block_delivery_time_priority',
             label: 'Priority',
-            description: 'Choose a priority by which the shopmark should be attached to the location. The higher the priority, the later the shopmark will be attached. Defaults to 12.',
+            description: 'Choose a priority by which the shop-mark should be attached to the location. The higher the priority, the later the shop-mark will be attached. Defaults to 12.',
             default: 12,
             value: '12',
         },
         {
             id: 'woocommerce_gzd_display_product_block_units_filter',
             label: 'Location',
-            description: 'Choose a location for the shopmark. Locations are mapped to specific WooCommerce hooks and may differ from Theme to Theme.',
+            description: 'Choose a location for the shop-mark. Locations are mapped to specific WooCommerce hooks and may differ from Theme to Theme.',
             default: 'woocommerce_gzd_after_product_grid_block_after_price',
             value: 'woocommerce_gzd_after_product_grid_block_after_price',
         },
         {
             id: 'woocommerce_gzd_display_product_block_units_priority',
             label: 'Priority',
-            description: 'Choose a priority by which the shopmark should be attached to the location. The higher the priority, the later the shopmark will be attached. Defaults to 15.',
+            description: 'Choose a priority by which the shop-mark should be attached to the location. The higher the priority, the later the shop-mark will be attached. Defaults to 15.',
             default: 15,
             value: '15',
         },
         {
             id: 'woocommerce_gzd_display_product_block_deposit_filter',
             label: 'Location',
-            description: 'Choose a location for the shopmark. Locations are mapped to specific WooCommerce hooks and may differ from Theme to Theme.',
+            description: 'Choose a location for the shop-mark. Locations are mapped to specific WooCommerce hooks and may differ from Theme to Theme.',
             default: 'woocommerce_gzd_after_product_grid_block_after_price',
             value: 'woocommerce_gzd_after_product_grid_block_after_price',
         },
         {
             id: 'woocommerce_gzd_display_product_block_deposit_priority',
             label: 'Priority',
-            description: 'Choose a priority by which the shopmark should be attached to the location. The higher the priority, the later the shopmark will be attached. Defaults to 6.',
+            description: 'Choose a priority by which the shop-mark should be attached to the location. The higher the priority, the later the shop-mark will be attached. Defaults to 6.',
             default: 6,
             value: '6',
         },
         {
             id: 'woocommerce_gzd_display_product_block_deposit_packaging_type_filter',
             label: 'Location',
-            description: 'Choose a location for the shopmark. Locations are mapped to specific WooCommerce hooks and may differ from Theme to Theme.',
+            description: 'Choose a location for the shop-mark. Locations are mapped to specific WooCommerce hooks and may differ from Theme to Theme.',
             default: 'woocommerce_gzd_after_product_grid_block_after_title',
             value: 'woocommerce_gzd_after_product_grid_block_after_title',
         },
         {
             id: 'woocommerce_gzd_display_product_block_deposit_packaging_type_priority',
             label: 'Priority',
-            description: 'Choose a priority by which the shopmark should be attached to the location. The higher the priority, the later the shopmark will be attached. Defaults to 10.',
+            description: 'Choose a priority by which the shop-mark should be attached to the location. The higher the priority, the later the shop-mark will be attached. Defaults to 10.',
             default: 10,
             value: '10',
         },
         {
             id: 'woocommerce_gzd_display_product_block_nutri_score_filter',
             label: 'Location',
-            description: 'Choose a location for the shopmark. Locations are mapped to specific WooCommerce hooks and may differ from Theme to Theme.',
+            description: 'Choose a location for the shop-mark. Locations are mapped to specific WooCommerce hooks and may differ from Theme to Theme.',
             default: 'woocommerce_gzd_after_product_grid_block_after_price',
             value: 'woocommerce_gzd_after_product_grid_block_after_price',
         },
         {
             id: 'woocommerce_gzd_display_product_block_nutri_score_priority',
             label: 'Priority',
-            description: 'Choose a priority by which the shopmark should be attached to the location. The higher the priority, the later the shopmark will be attached. Defaults to 20.',
+            description: 'Choose a priority by which the shop-mark should be attached to the location. The higher the priority, the later the shop-mark will be attached. Defaults to 20.',
             default: 20,
             value: '20',
         },
         {
             id: 'woocommerce_gzd_display_cart_unit_price_filter',
             label: 'Location',
-            description: 'Choose a location for the shopmark. Locations are mapped to specific WooCommerce hooks and may differ from Theme to Theme.',
+            description: 'Choose a location for the shop-mark. Locations are mapped to specific WooCommerce hooks and may differ from Theme to Theme.',
             default: 'woocommerce_cart_item_price',
             value: 'woocommerce_cart_item_price',
         },
         {
             id: 'woocommerce_gzd_display_cart_unit_price_priority',
             label: 'Priority',
-            description: 'Choose a priority by which the shopmark should be attached to the location. The higher the priority, the later the shopmark will be attached. Defaults to 5000.',
+            description: 'Choose a priority by which the shop-mark should be attached to the location. The higher the priority, the later the shop-mark will be attached. Defaults to 5000.',
             default: 5000,
             value: '5000',
         },
         {
             id: 'woocommerce_gzd_display_cart_delivery_time_filter',
             label: 'Location',
-            description: 'Choose a location for the shopmark. Locations are mapped to specific WooCommerce hooks and may differ from Theme to Theme.',
+            description: 'Choose a location for the shop-mark. Locations are mapped to specific WooCommerce hooks and may differ from Theme to Theme.',
             default: 'woocommerce_after_cart_item_name',
             value: 'woocommerce_after_cart_item_name',
         },
         {
             id: 'woocommerce_gzd_display_cart_delivery_time_priority',
             label: 'Priority',
-            description: 'Choose a priority by which the shopmark should be attached to the location. The higher the priority, the later the shopmark will be attached. Defaults to 1.',
+            description: 'Choose a priority by which the shop-mark should be attached to the location. The higher the priority, the later the shop-mark will be attached. Defaults to 1.',
             default: 1,
             value: '1',
         },
         {
             id: 'woocommerce_gzd_display_cart_units_filter',
             label: 'Location',
-            description: 'Choose a location for the shopmark. Locations are mapped to specific WooCommerce hooks and may differ from Theme to Theme.',
+            description: 'Choose a location for the shop-mark. Locations are mapped to specific WooCommerce hooks and may differ from Theme to Theme.',
             default: 'woocommerce_after_cart_item_name',
             value: 'woocommerce_after_cart_item_name',
         },
         {
             id: 'woocommerce_gzd_display_cart_units_priority',
             label: 'Priority',
-            description: 'Choose a priority by which the shopmark should be attached to the location. The higher the priority, the later the shopmark will be attached. Defaults to 2.',
+            description: 'Choose a priority by which the shop-mark should be attached to the location. The higher the priority, the later the shop-mark will be attached. Defaults to 2.',
 
             default: 2,
 
@@ -841,7 +841,7 @@ const germanized0 = {
         {
             id: 'woocommerce_gzd_display_cart_item_desc_filter',
             label: 'Location',
-            description: 'Choose a location for the shopmark. Locations are mapped to specific WooCommerce hooks and may differ from Theme to Theme.',
+            description: 'Choose a location for the shop-mark. Locations are mapped to specific WooCommerce hooks and may differ from Theme to Theme.',
 
             default: 'woocommerce_after_cart_item_name',
 
@@ -850,7 +850,7 @@ const germanized0 = {
         {
             id: 'woocommerce_gzd_display_cart_item_desc_priority',
             label: 'Priority',
-            description: 'Choose a priority by which the shopmark should be attached to the location. The higher the priority, the later the shopmark will be attached. Defaults to 3.',
+            description: 'Choose a priority by which the shop-mark should be attached to the location. The higher the priority, the later the shop-mark will be attached. Defaults to 3.',
 
             default: 3,
 
@@ -859,7 +859,7 @@ const germanized0 = {
         {
             id: 'woocommerce_gzd_display_cart_defect_description_filter',
             label: 'Location',
-            description: 'Choose a location for the shopmark. Locations are mapped to specific WooCommerce hooks and may differ from Theme to Theme.',
+            description: 'Choose a location for the shop-mark. Locations are mapped to specific WooCommerce hooks and may differ from Theme to Theme.',
 
             default: 'woocommerce_after_cart_item_name',
 
@@ -868,7 +868,7 @@ const germanized0 = {
         {
             id: 'woocommerce_gzd_display_cart_defect_description_priority',
             label: 'Priority',
-            description: 'Choose a priority by which the shopmark should be attached to the location. The higher the priority, the later the shopmark will be attached. Defaults to 4.',
+            description: 'Choose a priority by which the shop-mark should be attached to the location. The higher the priority, the later the shop-mark will be attached. Defaults to 4.',
 
             default: 4,
 
@@ -877,7 +877,7 @@ const germanized0 = {
         {
             id: 'woocommerce_gzd_display_cart_deposit_filter',
             label: 'Location',
-            description: 'Choose a location for the shopmark. Locations are mapped to specific WooCommerce hooks and may differ from Theme to Theme.',
+            description: 'Choose a location for the shop-mark. Locations are mapped to specific WooCommerce hooks and may differ from Theme to Theme.',
 
             default: 'woocommerce_cart_item_subtotal',
 
@@ -886,7 +886,7 @@ const germanized0 = {
         {
             id: 'woocommerce_gzd_display_cart_deposit_priority',
             label: 'Priority',
-            description: 'Choose a priority by which the shopmark should be attached to the location. The higher the priority, the later the shopmark will be attached. Defaults to 5000.',
+            description: 'Choose a priority by which the shop-mark should be attached to the location. The higher the priority, the later the shop-mark will be attached. Defaults to 5000.',
 
             default: 5000,
 
@@ -895,7 +895,7 @@ const germanized0 = {
         {
             id: 'woocommerce_gzd_display_cart_deposit_packaging_type_filter',
             label: 'Location',
-            description: 'Choose a location for the shopmark. Locations are mapped to specific WooCommerce hooks and may differ from Theme to Theme.',
+            description: 'Choose a location for the shop-mark. Locations are mapped to specific WooCommerce hooks and may differ from Theme to Theme.',
 
             default: 'woocommerce_after_cart_item_name',
 
@@ -904,7 +904,7 @@ const germanized0 = {
         {
             id: 'woocommerce_gzd_display_cart_deposit_packaging_type_priority',
             label: 'Priority',
-            description: 'Choose a priority by which the shopmark should be attached to the location. The higher the priority, the later the shopmark will be attached. Defaults to 5.',
+            description: 'Choose a priority by which the shop-mark should be attached to the location. The higher the priority, the later the shop-mark will be attached. Defaults to 5.',
 
             default: 5,
 
@@ -913,7 +913,7 @@ const germanized0 = {
         {
             id: 'woocommerce_gzd_display_mini_cart_unit_price_filter',
             label: 'Location',
-            description: 'Choose a location for the shopmark. Locations are mapped to specific WooCommerce hooks and may differ from Theme to Theme.',
+            description: 'Choose a location for the shop-mark. Locations are mapped to specific WooCommerce hooks and may differ from Theme to Theme.',
 
             default: 'woocommerce_cart_item_price',
 
@@ -922,7 +922,7 @@ const germanized0 = {
         {
             id: 'woocommerce_gzd_display_mini_cart_unit_price_priority',
             label: 'Priority',
-            description: 'Choose a priority by which the shopmark should be attached to the location. The higher the priority, the later the shopmark will be attached. Defaults to 5000.',
+            description: 'Choose a priority by which the shop-mark should be attached to the location. The higher the priority, the later the shop-mark will be attached. Defaults to 5000.',
 
             default: 5000,
 
@@ -931,7 +931,7 @@ const germanized0 = {
         {
             id: 'woocommerce_gzd_display_mini_cart_delivery_time_filter',
             label: 'Location',
-            description: 'Choose a location for the shopmark. Locations are mapped to specific WooCommerce hooks and may differ from Theme to Theme.',
+            description: 'Choose a location for the shop-mark. Locations are mapped to specific WooCommerce hooks and may differ from Theme to Theme.',
 
             default: 'woocommerce_cart_item_name',
 
@@ -940,7 +940,7 @@ const germanized0 = {
         {
             id: 'woocommerce_gzd_display_mini_cart_delivery_time_priority',
             label: 'Priority',
-            description: 'Choose a priority by which the shopmark should be attached to the location. The higher the priority, the later the shopmark will be attached. Defaults to 10.',
+            description: 'Choose a priority by which the shop-mark should be attached to the location. The higher the priority, the later the shop-mark will be attached. Defaults to 10.',
 
             default: 10,
 
@@ -949,7 +949,7 @@ const germanized0 = {
         {
             id: 'woocommerce_gzd_display_mini_cart_units_filter',
             label: 'Location',
-            description: 'Choose a location for the shopmark. Locations are mapped to specific WooCommerce hooks and may differ from Theme to Theme.',
+            description: 'Choose a location for the shop-mark. Locations are mapped to specific WooCommerce hooks and may differ from Theme to Theme.',
 
             default: 'woocommerce_cart_item_name',
 
@@ -958,7 +958,7 @@ const germanized0 = {
         {
             id: 'woocommerce_gzd_display_mini_cart_units_priority',
             label: 'Priority',
-            description: 'Choose a priority by which the shopmark should be attached to the location. The higher the priority, the later the shopmark will be attached. Defaults to 11.',
+            description: 'Choose a priority by which the shop-mark should be attached to the location. The higher the priority, the later the shop-mark will be attached. Defaults to 11.',
 
             default: 11,
 
@@ -967,7 +967,7 @@ const germanized0 = {
         {
             id: 'woocommerce_gzd_display_mini_cart_item_desc_filter',
             label: 'Location',
-            description: 'Choose a location for the shopmark. Locations are mapped to specific WooCommerce hooks and may differ from Theme to Theme.',
+            description: 'Choose a location for the shop-mark. Locations are mapped to specific WooCommerce hooks and may differ from Theme to Theme.',
 
             default: 'woocommerce_cart_item_name',
 
@@ -976,7 +976,7 @@ const germanized0 = {
         {
             id: 'woocommerce_gzd_display_mini_cart_item_desc_priority',
             label: 'Priority',
-            description: 'Choose a priority by which the shopmark should be attached to the location. The higher the priority, the later the shopmark will be attached. Defaults to 12.',
+            description: 'Choose a priority by which the shop-mark should be attached to the location. The higher the priority, the later the shop-mark will be attached. Defaults to 12.',
 
             default: 12,
 
@@ -985,7 +985,7 @@ const germanized0 = {
         {
             id: 'woocommerce_gzd_display_mini_cart_defect_description_filter',
             label: 'Location',
-            description: 'Choose a location for the shopmark. Locations are mapped to specific WooCommerce hooks and may differ from Theme to Theme.',
+            description: 'Choose a location for the shop-mark. Locations are mapped to specific WooCommerce hooks and may differ from Theme to Theme.',
 
             default: 'woocommerce_cart_item_name',
 
@@ -994,7 +994,7 @@ const germanized0 = {
         {
             id: 'woocommerce_gzd_display_mini_cart_defect_description_priority',
             label: 'Priority',
-            description: 'Choose a priority by which the shopmark should be attached to the location. The higher the priority, the later the shopmark will be attached. Defaults to 13.',
+            description: 'Choose a priority by which the shop-mark should be attached to the location. The higher the priority, the later the shop-mark will be attached. Defaults to 13.',
 
             default: 13,
 
@@ -1003,7 +1003,7 @@ const germanized0 = {
         {
             id: 'woocommerce_gzd_display_mini_cart_deposit_filter',
             label: 'Location',
-            description: 'Choose a location for the shopmark. Locations are mapped to specific WooCommerce hooks and may differ from Theme to Theme.',
+            description: 'Choose a location for the shop-mark. Locations are mapped to specific WooCommerce hooks and may differ from Theme to Theme.',
 
             default: 'woocommerce_cart_item_price',
 
@@ -1012,7 +1012,7 @@ const germanized0 = {
         {
             id: 'woocommerce_gzd_display_mini_cart_deposit_priority',
             label: 'Priority',
-            description: 'Choose a priority by which the shopmark should be attached to the location. The higher the priority, the later the shopmark will be attached. Defaults to 5000.',
+            description: 'Choose a priority by which the shop-mark should be attached to the location. The higher the priority, the later the shop-mark will be attached. Defaults to 5000.',
 
             default: 5000,
 
@@ -1021,7 +1021,7 @@ const germanized0 = {
         {
             id: 'woocommerce_gzd_display_mini_cart_deposit_packaging_type_filter',
             label: 'Location',
-            description: 'Choose a location for the shopmark. Locations are mapped to specific WooCommerce hooks and may differ from Theme to Theme.',
+            description: 'Choose a location for the shop-mark. Locations are mapped to specific WooCommerce hooks and may differ from Theme to Theme.',
 
             default: 'woocommerce_cart_item_name',
 
@@ -1030,7 +1030,7 @@ const germanized0 = {
         {
             id: 'woocommerce_gzd_display_mini_cart_deposit_packaging_type_priority',
             label: 'Priority',
-            description: 'Choose a priority by which the shopmark should be attached to the location. The higher the priority, the later the shopmark will be attached. Defaults to 9.',
+            description: 'Choose a priority by which the shop-mark should be attached to the location. The higher the priority, the later the shop-mark will be attached. Defaults to 9.',
 
             default: 9,
 
@@ -1039,7 +1039,7 @@ const germanized0 = {
         {
             id: 'woocommerce_gzd_display_checkout_unit_price_filter',
             label: 'Location',
-            description: 'Choose a location for the shopmark. Locations are mapped to specific WooCommerce hooks and may differ from Theme to Theme.',
+            description: 'Choose a location for the shop-mark. Locations are mapped to specific WooCommerce hooks and may differ from Theme to Theme.',
 
             default: 'woocommerce_cart_item_subtotal',
 
@@ -1048,7 +1048,7 @@ const germanized0 = {
         {
             id: 'woocommerce_gzd_display_checkout_unit_price_priority',
             label: 'Priority',
-            description: 'Choose a priority by which the shopmark should be attached to the location. The higher the priority, the later the shopmark will be attached. Defaults to 0.',
+            description: 'Choose a priority by which the shop-mark should be attached to the location. The higher the priority, the later the shop-mark will be attached. Defaults to 0.',
 
             default: 0,
 
@@ -1057,7 +1057,7 @@ const germanized0 = {
         {
             id: 'woocommerce_gzd_display_checkout_delivery_time_filter',
             label: 'Location',
-            description: 'Choose a location for the shopmark. Locations are mapped to specific WooCommerce hooks and may differ from Theme to Theme.',
+            description: 'Choose a location for the shop-mark. Locations are mapped to specific WooCommerce hooks and may differ from Theme to Theme.',
 
             default: 'woocommerce_checkout_cart_item_quantity',
 
@@ -1066,7 +1066,7 @@ const germanized0 = {
         {
             id: 'woocommerce_gzd_display_checkout_delivery_time_priority',
             label: 'Priority',
-            description: 'Choose a priority by which the shopmark should be attached to the location. The higher the priority, the later the shopmark will be attached. Defaults to 10.',
+            description: 'Choose a priority by which the shop-mark should be attached to the location. The higher the priority, the later the shop-mark will be attached. Defaults to 10.',
 
             default: 10,
 
@@ -1075,7 +1075,7 @@ const germanized0 = {
         {
             id: 'woocommerce_gzd_display_checkout_units_filter',
             label: 'Location',
-            description: 'Choose a location for the shopmark. Locations are mapped to specific WooCommerce hooks and may differ from Theme to Theme.',
+            description: 'Choose a location for the shop-mark. Locations are mapped to specific WooCommerce hooks and may differ from Theme to Theme.',
 
             default: 'woocommerce_checkout_cart_item_quantity',
 
@@ -1084,7 +1084,7 @@ const germanized0 = {
         {
             id: 'woocommerce_gzd_display_checkout_units_priority',
             label: 'Priority',
-            description: 'Choose a priority by which the shopmark should be attached to the location. The higher the priority, the later the shopmark will be attached. Defaults to 11.',
+            description: 'Choose a priority by which the shop-mark should be attached to the location. The higher the priority, the later the shop-mark will be attached. Defaults to 11.',
 
             default: 11,
 
@@ -1093,7 +1093,7 @@ const germanized0 = {
         {
             id: 'woocommerce_gzd_display_checkout_item_desc_filter',
             label: 'Location',
-            description: 'Choose a location for the shopmark. Locations are mapped to specific WooCommerce hooks and may differ from Theme to Theme.',
+            description: 'Choose a location for the shop-mark. Locations are mapped to specific WooCommerce hooks and may differ from Theme to Theme.',
 
             default: 'woocommerce_checkout_cart_item_quantity',
 
@@ -1102,147 +1102,147 @@ const germanized0 = {
         {
             id: 'woocommerce_gzd_display_checkout_item_desc_priority',
             label: 'Priority',
-            description: 'Choose a priority by which the shopmark should be attached to the location. The higher the priority, the later the shopmark will be attached. Defaults to 12.',
+            description: 'Choose a priority by which the shop-mark should be attached to the location. The higher the priority, the later the shop-mark will be attached. Defaults to 12.',
             default: 12,
             value: '12',
         },
         {
             id: 'woocommerce_gzd_display_checkout_defect_description_filter',
             label: 'Location',
-            description: 'Choose a location for the shopmark. Locations are mapped to specific WooCommerce hooks and may differ from Theme to Theme.',
+            description: 'Choose a location for the shop-mark. Locations are mapped to specific WooCommerce hooks and may differ from Theme to Theme.',
             default: 'woocommerce_checkout_cart_item_quantity',
             value: 'woocommerce_checkout_cart_item_quantity',
         },
         {
             id: 'woocommerce_gzd_display_checkout_defect_description_priority',
             label: 'Priority',
-            description: 'Choose a priority by which the shopmark should be attached to the location. The higher the priority, the later the shopmark will be attached. Defaults to 13.',
+            description: 'Choose a priority by which the shop-mark should be attached to the location. The higher the priority, the later the shop-mark will be attached. Defaults to 13.',
             default: 13,
             value: '13',
         },
         {
             id: 'woocommerce_gzd_display_checkout_deposit_filter',
             label: 'Location',
-            description: 'Choose a location for the shopmark. Locations are mapped to specific WooCommerce hooks and may differ from Theme to Theme.',
+            description: 'Choose a location for the shop-mark. Locations are mapped to specific WooCommerce hooks and may differ from Theme to Theme.',
             default: 'woocommerce_cart_item_subtotal',
             value: 'woocommerce_cart_item_subtotal',
         },
         {
             id: 'woocommerce_gzd_display_checkout_deposit_priority',
             label: 'Priority',
-            description: 'Choose a priority by which the shopmark should be attached to the location. The higher the priority, the later the shopmark will be attached. Defaults to 5.',
+            description: 'Choose a priority by which the shop-mark should be attached to the location. The higher the priority, the later the shop-mark will be attached. Defaults to 5.',
             default: 5,
             value: '5',
         },
         {
             id: 'woocommerce_gzd_display_checkout_deposit_packaging_type_filter',
             label: 'Location',
-            description: 'Choose a location for the shopmark. Locations are mapped to specific WooCommerce hooks and may differ from Theme to Theme.',
+            description: 'Choose a location for the shop-mark. Locations are mapped to specific WooCommerce hooks and may differ from Theme to Theme.',
             default: 'woocommerce_checkout_cart_item_quantity',
             value: 'woocommerce_checkout_cart_item_quantity',
         },
         {
             id: 'woocommerce_gzd_display_checkout_deposit_packaging_type_priority',
             label: 'Priority',
-            description: 'Choose a priority by which the shopmark should be attached to the location. The higher the priority, the later the shopmark will be attached. Defaults to 9.',
+            description: 'Choose a priority by which the shop-mark should be attached to the location. The higher the priority, the later the shop-mark will be attached. Defaults to 9.',
             default: 9,
             value: '9',
         },
         {
             id: 'woocommerce_gzd_display_order_unit_price_filter',
             label: 'Location',
-            description: 'Choose a location for the shopmark. Locations are mapped to specific WooCommerce hooks and may differ from Theme to Theme.',
+            description: 'Choose a location for the shop-mark. Locations are mapped to specific WooCommerce hooks and may differ from Theme to Theme.',
             default: 'woocommerce_order_formatted_line_subtotal',
             value: 'woocommerce_order_formatted_line_subtotal',
         },
         {
             id: 'woocommerce_gzd_display_order_unit_price_priority',
             label: 'Priority',
-            description: 'Choose a priority by which the shopmark should be attached to the location. The higher the priority, the later the shopmark will be attached. Defaults to 0.',
+            description: 'Choose a priority by which the shop-mark should be attached to the location. The higher the priority, the later the shop-mark will be attached. Defaults to 0.',
             default: 0,
             value: '0',
         },
         {
             id: 'woocommerce_gzd_display_order_delivery_time_filter',
             label: 'Location',
-            description: 'Choose a location for the shopmark. Locations are mapped to specific WooCommerce hooks and may differ from Theme to Theme.',
+            description: 'Choose a location for the shop-mark. Locations are mapped to specific WooCommerce hooks and may differ from Theme to Theme.',
             default: 'woocommerce_order_item_meta_start',
             value: 'woocommerce_order_item_meta_start',
         },
         {
             id: 'woocommerce_gzd_display_order_delivery_time_priority',
             label: 'Priority',
-            description: 'Choose a priority by which the shopmark should be attached to the location. The higher the priority, the later the shopmark will be attached. Defaults to 20.',
+            description: 'Choose a priority by which the shop-mark should be attached to the location. The higher the priority, the later the shop-mark will be attached. Defaults to 20.',
             default: 20,
             value: '20',
         },
         {
             id: 'woocommerce_gzd_display_order_units_filter',
             label: 'Location',
-            description: 'Choose a location for the shopmark. Locations are mapped to specific WooCommerce hooks and may differ from Theme to Theme.',
+            description: 'Choose a location for the shop-mark. Locations are mapped to specific WooCommerce hooks and may differ from Theme to Theme.',
             default: 'woocommerce_order_item_meta_start',
             value: 'woocommerce_order_item_meta_start',
         },
         {
             id: 'woocommerce_gzd_display_order_units_priority',
             label: 'Priority',
-            description: 'Choose a priority by which the shopmark should be attached to the location. The higher the priority, the later the shopmark will be attached. Defaults to 25.',
+            description: 'Choose a priority by which the shop-mark should be attached to the location. The higher the priority, the later the shop-mark will be attached. Defaults to 25.',
             default: 25,
             value: '25',
         },
         {
             id: 'woocommerce_gzd_display_order_item_desc_filter',
             label: 'Location',
-            description: 'Choose a location for the shopmark. Locations are mapped to specific WooCommerce hooks and may differ from Theme to Theme.',
+            description: 'Choose a location for the shop-mark. Locations are mapped to specific WooCommerce hooks and may differ from Theme to Theme.',
             default: 'woocommerce_order_item_meta_start',
             value: 'woocommerce_order_item_meta_start',
         },
         {
             id: 'woocommerce_gzd_display_order_item_desc_priority',
             label: 'Priority',
-            description: 'Choose a priority by which the shopmark should be attached to the location. The higher the priority, the later the shopmark will be attached. Defaults to 10.',
+            description: 'Choose a priority by which the shop-mark should be attached to the location. The higher the priority, the later the shop-mark will be attached. Defaults to 10.',
             default: 10,
             value: '10',
         },
         {
             id: 'woocommerce_gzd_display_order_defect_description_filter',
             label: 'Location',
-            description: 'Choose a location for the shopmark. Locations are mapped to specific WooCommerce hooks and may differ from Theme to Theme.',
+            description: 'Choose a location for the shop-mark. Locations are mapped to specific WooCommerce hooks and may differ from Theme to Theme.',
             default: 'woocommerce_order_item_meta_start',
             value: 'woocommerce_order_item_meta_start',
         },
         {
             id: 'woocommerce_gzd_display_order_defect_description_priority',
             label: 'Priority',
-            description: 'Choose a priority by which the shopmark should be attached to the location. The higher the priority, the later the shopmark will be attached. Defaults to 15.',
+            description: 'Choose a priority by which the shop-mark should be attached to the location. The higher the priority, the later the shop-mark will be attached. Defaults to 15.',
             default: 15,
             value: '15',
         },
         {
             id: 'woocommerce_gzd_display_order_deposit_filter',
             label: 'Location',
-            description: 'Choose a location for the shopmark. Locations are mapped to specific WooCommerce hooks and may differ from Theme to Theme.',
+            description: 'Choose a location for the shop-mark. Locations are mapped to specific WooCommerce hooks and may differ from Theme to Theme.',
             default: 'woocommerce_order_formatted_line_subtotal',
             value: 'woocommerce_order_formatted_line_subtotal',
         },
         {
             id: 'woocommerce_gzd_display_order_deposit_priority',
             label: 'Priority',
-            description: 'Choose a priority by which the shopmark should be attached to the location. The higher the priority, the later the shopmark will be attached. Defaults to 5.',
+            description: 'Choose a priority by which the shop-mark should be attached to the location. The higher the priority, the later the shop-mark will be attached. Defaults to 5.',
             default: 5,
             value: '5',
         },
         {
             id: 'woocommerce_gzd_display_order_deposit_packaging_type_filter',
             label: 'Location',
-            description: 'Choose a location for the shopmark. Locations are mapped to specific WooCommerce hooks and may differ from Theme to Theme.',
+            description: 'Choose a location for the shop-mark. Locations are mapped to specific WooCommerce hooks and may differ from Theme to Theme.',
             default: 'woocommerce_order_item_meta_start',
             value: 'woocommerce_order_item_meta_start',
         },
         {
             id: 'woocommerce_gzd_display_order_deposit_packaging_type_priority',
             label: 'Priority',
-            description: 'Choose a priority by which the shopmark should be attached to the location. The higher the priority, the later the shopmark will be attached. Defaults to 9.',
+            description: 'Choose a priority by which the shop-mark should be attached to the location. The higher the priority, the later the shop-mark will be attached. Defaults to 9.',
             default: 9,
             value: '9',
         },
@@ -1319,7 +1319,7 @@ const germanized0 = {
             id: 'woocommerce_gzd_shipments_customer_return_open_days',
             label: 'Days to return',
             description:
-                '<div class="wc-gzd-additional-desc">In case one of your <a href="http://dokan3.test/wp-admin/admin.php?page=wc-settings&#038;tab=germanized-shipping_provider">shipping providers</a> supports returns added by customers you might want to limit the number of days a customer is allowed to add returns to an order. The days are counted starting with the date the order was shipped, completed or created (by checking for existance in this order).</div>',
+                '<div class="wc-gzd-additional-desc">In case one of your <a href="http://dokan3.test/wp-admin/admin.php?page=wc-settings&#038;tab=germanized-shipping_provider">shipping providers</a> supports returns added by customers you might want to limit the number of days a customer is allowed to add returns to an order. The days are counted starting with the date the order was shipped, completed or created (by checking for existence in this order).</div>',
             default: '14',
             value: '14',
         },
@@ -1521,10 +1521,10 @@ const germanized0 = {
         },
         {
             id: 'woocommerce_gzd_customer_cleanup_interval',
-            label: 'Delete unactivated after',
+            label: 'Delete inactivated after',
             description: 'days',
             default: 7,
-            tip: "This will make sure unactivated customer accounts will be deleted after X days. Set to 0 if you don't want to automatically delete unactivated customers.",
+            tip: "This will make sure inactivated customer accounts will be deleted after X days. Set to 0 if you don't want to automatically delete inactivated customers.",
             value: '7',
         },
     ],

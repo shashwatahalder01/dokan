@@ -1346,7 +1346,7 @@ export class BasePage {
     }
 
     // multiple elements to be visible
-    async multipleElementnotVisible(selectors: any) {
+    async customerAddEuComplianceData(selectors: any) {
         for (const selector in selectors) {
             await this.notToBeVisible(selectors[selector]);
         }
@@ -1372,7 +1372,7 @@ export class BasePage {
         // todo:  return which elements are true for further operation
     }
 
-    // assert velue to be equal
+    // assert value to be equal
     toBeEqual(received: any, expected: any) {
         expect(received).toEqual(expected);
     }

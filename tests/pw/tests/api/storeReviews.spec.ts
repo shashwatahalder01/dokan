@@ -33,14 +33,14 @@ test.describe('store reviews api test', () => {
         const [response, responseBody] = await apiUtils.get(endPoints.getStoreReviews(sellerId));
         expect(response.ok()).toBeTruthy();
         expect(responseBody).toBeTruthy();
-        expect(responseBody).toMatchSchema(schemas.storeReviewsSchema.storeReviewsSchemaStoreEndpint);
+        expect(responseBody).toMatchSchema(schemas.storeReviewsSchema.storeReviewsSchemaStoreEndpoint);
     });
 
     test('create a store review', { tag: ['@pro'] }, async () => {
         const [response, responseBody] = await apiUtils.post(endPoints.createStoreReview(sellerId), { data: payloads.createStoreReview });
         expect(response.ok()).toBeTruthy();
         expect(responseBody).toBeTruthy();
-        expect(responseBody).toMatchSchema(schemas.storeReviewsSchema.storeReviewSchemaStoreEndpint);
+        expect(responseBody).toMatchSchema(schemas.storeReviewsSchema.storeReviewSchemaStoreEndpoint);
     });
 
     test('get all store reviews', { tag: ['@pro'] }, async () => {

@@ -179,7 +179,7 @@ test.describe('dokan visual test', () => {
     });
 
     test('dokan settings sellerVerification menu @visual', async () => {
-        await admin.dokanSettingsMenu(selector.admin.dokan.settings.menus.sellerVerification);
+        await admin.dokanSettingsMenu(selector.admin.dokan.settings.menus.vendorVerification);
     });
 
     test('dokan settings verificationSmsGateways menu @visual', async () => {

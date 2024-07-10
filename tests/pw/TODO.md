@@ -50,7 +50,7 @@
 - [ ] E2E_Suite: todo: add individual withdraw settings test  
 - [ ] E2E_Suite: todo: add separate files for catalog mode add new tests  
 - [ ] E2E_Suite: todo: add separate files for terms and conditions and add new tests  
-- [ ] E2E_Suite: todo: add multivendor payloads, and update create order for multivendor  
+- [ ] E2E_Suite: todo: add multi-vendor payloads, and update create order for multi-vendor  
 - [ ] E2E_Suite: todo: add round option for helper methods  
 - [ ] E2E_Suite: Add multiple customer to handle parallel issue  
 - [ ] API_Suite: make api suite independent, import: => like dokan pro exists or not, test summary, env setup from e2e suite  

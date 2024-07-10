@@ -6,7 +6,7 @@ import { execSync } from 'child_process';
 import fs from 'fs';
 import path from 'path';
 
-// todo: update schema logic to get coverage from only running tests
+// todo: update coverage logic to get coverage from only running tests
 
 teardown.describe('get api test coverage', () => {
     const outputFile = 'playwright-report/api/coverage-report/coverage.json';

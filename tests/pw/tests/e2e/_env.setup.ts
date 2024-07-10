@@ -124,7 +124,7 @@ setup.describe('setup site & woocommerce & dokan settings', () => {
     });
 
     setup.skip('disable germanized settings', { tag: ['@pro', '@admin'] }, async () => {
-        // disbale all legal checkboxes
+        // disable all legal checkboxes
         await dbUtils.setDokanSettings('woocommerce_gzd_legal_checkboxes_settings', dbData.germanized.legalCheckboxes);
         // disable theme supported notice
         await dbUtils.setDokanSettings('_wc_gzd_hide_theme_supported_notice', 'yes');
