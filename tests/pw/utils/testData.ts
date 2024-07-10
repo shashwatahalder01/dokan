@@ -1627,9 +1627,9 @@ export const data = {
 
         quote: () => ({
             title: 'test quote_' + faker.string.nanoid(10),
-            user: 'customer1', // todo: update customer data via env and email domain
+            user: CUSTOMER, 
             fullName: 'Jhon Doe',
-            email: 'customer1@g.com',
+            email: CUSTOMER + '@yopmail.com',
             companyName: 'abc',
             phoneNumber: '0123456789',
             product: 'p1_v1 (simple)',

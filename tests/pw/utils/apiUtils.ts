@@ -1744,7 +1744,7 @@ export class ApiUtils {
 
     // get all products
     async getAllProductsWc(auth?: auth): Promise<responseBody> {
-        //todo: update all getall methods whit loop and per_page
+        // todo: update all getall methods with loop and per_page
         let responseBody: object[] = [];
         let page = 1;
         let hasMoreProducts = true;
