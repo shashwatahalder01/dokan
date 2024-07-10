@@ -113,7 +113,7 @@ test.describe.skip('Marketplace Coupon calculation test', () => {
             },
         };
         const [, res, oid] = await apiUtils.createOrder(payloads.createProduct(), { ...payloads.createOrder, coupon_lines: [{ code: code1 }, { code: code2 }] });
-        // const [, res, oid] = await apiUtils.createOrder('997', { ...payloads.createOrder, coupon_lines: [{ code: 'ac_66iu9e4awq' }, { code: 'ac_05taq2zkqo' }] });
+        // const [, res, oid] = await apiUtils.createOrder('997', { ...payloads.createOrder, coupon_lines: [{ code: 'ac_66iu9e4awq' }, { code: 'ewe' }] });
         // console.log(res);
         console.log('Order id:', oid);
         const discountTotal = res.discount_total;

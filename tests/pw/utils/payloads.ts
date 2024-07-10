@@ -211,7 +211,7 @@ export const payloads = {
         ],
     }),
 
-    createProductInterger: () => ({
+    createProductInteger: () => ({
         name: faker.commerce.productName() + ' (Simple)',
         type: 'simple',
         regular_price: faker.finance.amount({ min: 100, max: 200, dec: 0 }),

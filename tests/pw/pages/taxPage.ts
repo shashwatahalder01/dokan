@@ -23,7 +23,7 @@ export class TaxPage extends AdminPage {
     }
 
     // Admin Add Standard Tax Rate
-    async addStandardTaxRate(tax: tax, edit = false) {
+    async addStandardTaxRate(tax: tax) {
         await this.goToWooCommerceSettings();
 
         // Enable Tax

@@ -2209,7 +2209,7 @@ export const data = {
         customerMigration: '[dokan-customer-migration]',
         geolocationFilter: '[dokan-geolocation-filter-form]',
         stores: '[dokan-stores]',
-        myorders: '[dokan-my-orders]',
+        myOrders: '[dokan-my-orders]',
         requestQuote: '[dokan-request-quote]',
     },
 

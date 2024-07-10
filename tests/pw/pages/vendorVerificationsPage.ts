@@ -55,15 +55,15 @@ export class VendorVerificationsPage extends AdminPage {
         await this.toContainText(settingsAdmin.dokanUpdateSuccessMessage, data.dokanSettings.vendorVerification.saveSuccessMessage);
     }
 
-    // updte verification method fields
+    // update verification method fields
     async updateVerificationMethod(verificationMethod: dokanSettings['vendorVerification']['verificationMethodDetails']) {
         await this.clearAndType(settingsAdmin.vendorVerification.addNewVerification.label, verificationMethod.title);
         await this.clearAndType(settingsAdmin.vendorVerification.addNewVerification.helpText, verificationMethod.help_text);
         verificationMethod.required && (await this.check(settingsAdmin.vendorVerification.addNewVerification.required));
     }
 
-    // add Verificaton Method
-    async addVendoVerificationMethod(verificationMethod: dokanSettings['vendorVerification']['verificationMethodDetails']) {
+    // add Verification Method
+    async addVendorVerificationMethod(verificationMethod: dokanSettings['vendorVerification']['verificationMethodDetails']) {
         await this.goToDokanSettings();
         await this.reload();
         await this.click(settingsAdmin.menus.vendorVerification);
@@ -78,8 +78,8 @@ export class VendorVerificationsPage extends AdminPage {
         await this.toContainText(settingsAdmin.dokanUpdateSuccessMessage, data.dokanSettings.vendorVerification.saveSuccessMessage);
     }
 
-    // edit Verificaton Method
-    async editVendoVerificationMethod(methodName: string, verificationMethod: dokanSettings['vendorVerification']['verificationMethodDetails']) {
+    // edit Verification Method
+    async editVendorVerificationMethod(methodName: string, verificationMethod: dokanSettings['vendorVerification']['verificationMethodDetails']) {
         await this.goToDokanSettings();
         await this.reload();
         await this.click(settingsAdmin.menus.vendorVerification);
@@ -95,8 +95,8 @@ export class VendorVerificationsPage extends AdminPage {
         await this.toContainText(settingsAdmin.dokanUpdateSuccessMessage, data.dokanSettings.vendorVerification.saveSuccessMessage);
     }
 
-    // delete Verificaton Method
-    async deleteVendoVerificationMethod(methodName: string) {
+    // delete Verification Method
+    async deleteVendorVerificationMethod(methodName: string) {
         await this.goToDokanSettings();
         await this.reload();
         await this.click(settingsAdmin.menus.vendorVerification);

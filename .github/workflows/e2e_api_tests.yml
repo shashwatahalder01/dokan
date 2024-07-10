@@ -83,7 +83,6 @@ jobs:
                   composer i --no-dev -o || composer update --no-dev -o
 
             - name: Npm install and build (Dokan-lite)
-              working-directory: tests/pw
               run: |
                   npm ci || npm i
                   npm run build

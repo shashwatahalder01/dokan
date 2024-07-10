@@ -64,7 +64,7 @@ test.describe('EU Compliance test', () => {
         await admin.setDokanEuComplianceSettings('germanizedSupport');
     });
 
-    test('admin can enable orverride invoice number premission for vendors', { tag: ['@pro', '@admin'] }, async () => {
+    test('admin can enable override invoice number permission for vendors', { tag: ['@pro', '@admin'] }, async () => {
         await admin.setDokanEuComplianceSettings('overrideInvoice');
     });
 
@@ -111,7 +111,7 @@ test.describe('EU Compliance test', () => {
     // vendor
 
     test('vendor can add EU compliance data on store settings', { tag: ['@pro', '@vendor'] }, async () => {
-        await vendor.setStoreSettings(data.vendor.vendorInfo, 'euComplicance');
+        await vendor.setStoreSettings(data.vendor.vendorInfo, 'euCompliance');
     });
 
     test('vendor can add EU compliance data on registration', { tag: ['@pro', '@vendor'] }, async ({ page }) => {

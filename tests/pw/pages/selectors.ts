@@ -3402,7 +3402,7 @@ export const selector = {
                 support: 'ul.dokan-dashboard-menu li.support a',
                 inbox: 'ul.dokan-dashboard-menu li.inbox a',
                 subscription: 'ul.dokan-dashboard-menu li.subscription a',
-                wepos: 'ul.dokan-dashboard-menu li.wepos a', // only available if wepos is plugin is actived
+                wepos: 'ul.dokan-dashboard-menu li.wepos a', // only available if wepos is plugin is activated
                 settings: '(//ul[@class="dokan-dashboard-menu"]//li[contains(@class,"settings has-submenu")]//a)[1]',
                 visitStore: '//i[@class="fas fa-external-link-alt"]/..',
                 editAccount: '.fa-user',
@@ -6013,16 +6013,16 @@ export const selector = {
 
             verificationMethodAllDiv: '.dokan-verification-content .dokan-panel',
             requiredText: '//small[text()="(Required)"]',
-            firtstVerificationMethod: '(//div[@class="dokan-panel-heading"]//strong)[1]',
+            firstVerificationMethod: '(//div[@class="dokan-panel-heading"]//strong)[1]',
             verificationMethodDiv: (methodName: string) => `//strong[text()='${methodName}']/../..`,
             verificationMethodHelpText: (methodName: string) => `//strong[text()='${methodName}']/../..//p`,
             startVerification: (methodName: string) => `//strong[text()='${methodName}']/../..//button[contains(@class,'dokan-vendor-verification-start')]`,
             cancelVerification: (methodName: string) => `//strong[text()='${methodName}']/../..//button[contains(@class,'dokan-vendor-verification-cancel-request')]`,
             uploadFiles: (methodName: string) => `//strong[text()='${methodName}']/../..//a[@data-uploader_button_text='Add File']`,
-            removeuploadedFile: (methodName: string) => `(//strong[text()='${methodName}']/../..//a[contains(@class,'dokan-btn-danger')])[1]`,
+            removeUploadedFile: (methodName: string) => `(//strong[text()='${methodName}']/../..//a[contains(@class,'dokan-btn-danger')])[1]`,
             submit: (methodName: string) => `//strong[text()='${methodName}']/../..//input[contains(@class,'dokan_vendor_verification_submit')]`,
             cancelSubmit: (methodName: string) => `//strong[text()='${methodName}']/../..//input[contains(@class,'dokan_vendor_verification_cancel')]`,
-            verificationStatus: (methodName: string, staus: string) => `//strong[text()='${methodName}']/../..//p//label[contains(@class,'${staus}')]`,
+            verificationStatus: (methodName: string, status: string) => `//strong[text()='${methodName}']/../..//p//label[contains(@class,'${status}')]`,
             verificationRequestDocument: (methodName: string) => `(//strong[text()='${methodName}']/../..//div[@class='dokan-vendor-verification-file-item']//a)[1]`,
             verificationRequestNote: (methodName: string) => `(//strong[text()='${methodName}']/../..//p[text()='Note:']/..//p)[2]`,
 

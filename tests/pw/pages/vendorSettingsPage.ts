@@ -176,7 +176,7 @@ export class VendorSettingsPage extends VendorPage {
                 await this.setStoreAddress(vendorInfo);
                 break;
 
-            case 'euComplicance':
+            case 'euCompliance':
                 await this.setCompanyInfo(vendorInfo);
                 break;
 

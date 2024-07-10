@@ -55,20 +55,20 @@ test.describe('Verifications test', () => {
     });
 
     test('admin can add vendor verification method', { tag: ['@pro', '@admin'] }, async () => {
-        await admin.addVendoVerificationMethod(data.dokanSettings.vendorVerification.customMethod);
+        await admin.addVendorVerificationMethod(data.dokanSettings.vendorVerification.customMethod);
     });
 
     test('admin can edit vendor verification method', { tag: ['@pro', '@admin'] }, async () => {
         const [, , methodName] = await apiUtils.createVerificationMethod(payloads.createVerificationMethod(), payloads.adminAuth);
-        await admin.editVendoVerificationMethod(methodName, data.dokanSettings.vendorVerification.updateMethod);
+        await admin.editVendorVerificationMethod(methodName, data.dokanSettings.vendorVerification.updateMethod);
     });
 
     test('admin can delete vendor verification method', { tag: ['@pro', '@admin'] }, async () => {
         const [, , methodName] = await apiUtils.createVerificationMethod(payloads.createVerificationMethod(), payloads.adminAuth);
-        await admin.deleteVendoVerificationMethod(methodName);
+        await admin.deleteVendorVerificationMethod(methodName);
     });
 
-    test('admin can update verificaiton method status', { tag: ['@pro', '@admin'] }, async () => {
+    test('admin can update verification method status', { tag: ['@pro', '@admin'] }, async () => {
         const [, , methodName] = await apiUtils.createVerificationMethod(payloads.createVerificationMethod(), payloads.adminAuth);
         await admin.updateVerificationMethodStatus(methodName, 'disable');
     });
@@ -171,7 +171,7 @@ test.describe('Verifications test', () => {
         await vendor.viewVerificationRequestNote(methodName, note);
     });
 
-    test('vendor can view only required verificaiton method on setup wizard', { tag: ['@pro', '@vendor'] }, async () => {
+    test('vendor can view only required verification method on setup wizard', { tag: ['@pro', '@vendor'] }, async () => {
         const [, , nonRequiredMethodName] = await apiUtils.createVerificationMethod({ ...payloads.createVerificationMethod(), required: false }, payloads.adminAuth);
         await vendor.viewRequiredVerificationMethod(methodName, nonRequiredMethodName);
     });
