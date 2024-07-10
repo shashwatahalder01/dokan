@@ -2,7 +2,7 @@ import { faker } from '@faker-js/faker';
 import { helpers } from '@utils/helpers';
 import 'dotenv/config';
 
-const { DOKAN_PRO, ADMIN, ADMIN_PASSWORD, VENDOR, VENDOR2, CUSTOMER, CUSTOMER2, USER_PASSWORD, SITE_PATH, GMAP, MAPBOX, LICENSE_KEY } = process.env;
+const { ADMIN, ADMIN_PASSWORD, VENDOR, VENDOR2, CUSTOMER, CUSTOMER2, USER_PASSWORD, SITE_PATH, GMAP, MAPBOX, LICENSE_KEY } = process.env;
 
 interface user {
     username: string;
@@ -19,8 +19,6 @@ export { admin, user };
 export const data = {
     envData: 'utils/data.json',
     env: {
-        DOKAN_PRO: DOKAN_PRO ? true : false,
-
         // db data
         DB_HOST_NAME: process.env.DB_HOST_NAME,
         DB_USER_NAME: process.env.DB_USER_NAME,
@@ -122,30 +120,20 @@ export const data = {
         },
 
         name: {
-            simple: () => faker.commerce.productName() + ' (Simple)',
-            variable: () => faker.commerce.productName() + ' (Variable)',
-            external: () => faker.commerce.productName() + ' (External)',
-            grouped: () => faker.commerce.productName() + ' (Grouped)',
-            simpleSubscription: () => faker.commerce.productName() + ' (Simple Subscription)',
-            variableSubscription: () => faker.commerce.productName() + ' (Variable Subscription)',
-            dokanSubscription: {
-                nonRecurring: () =>
-                    'Dokan Subscription ' +
-                    faker.helpers.arrayElement(['Gold', 'Silver', 'Platinum', 'Premium']) +
-                    ' ' +
-                    faker.string.alpha({
-                        length: 5,
-                        casing: 'upper',
-                    }) +
-                    ' (Product Pack)',
-            },
-            booking: () => faker.commerce.productName() + ' (Booking)',
-            auction: () => faker.commerce.productName() + ' (Auction)',
+            simple: () => `${faker.commerce.productName()} (Simple)`,
+            variable: () => `${faker.commerce.productName()} (Variable)`,
+            external: () => `${faker.commerce.productName()} (External)`,
+            grouped: () => `${faker.commerce.productName()} (Grouped)`,
+            simpleSubscription: () => `${faker.commerce.productName()} (Simple Subscription)`,
+            variableSubscription: () => `${faker.commerce.productName()} (Variable Subscription)`,
+            dokanSubscription: { nonRecurring: () => `Dokan Subscription_${faker.string.alpha({ length: 5, casing: 'upper' })} (Product Pack)` },
+            booking: () => `${faker.commerce.productName()} (Booking)`,
+            auction: () => `${faker.commerce.productName()} (Auction)`,
         },
 
         price: {
-            // price           : faker.commerce.price(100, 200, 2),
-            // price           : faker.number.int({ min: 1, max: 200, precision: 0.01 }),
+            // price: faker.commerce.price(100, 200, 2),
+            // price: faker.number.int({ min: 1, max: 200, precision: 0.01 }),
             // price: faker.finance.amount({ min: 1, max: 200, dec: 2 }),
             price_int: () => faker.finance.amount({ min: 100, max: 200, dec: 0 }),
             price_random: () => faker.finance.amount({ min: 100, max: 200, dec: faker.helpers.arrayElement([0, 2]) }), // 0 = no decimals, 2 = 2 decimals
@@ -159,13 +147,13 @@ export const data = {
             unCategorized: 'Uncategorized',
             clothings: 'Clothings',
             randomCategory1: () => faker.commerce.productAdjective(),
-            randomCategory: () => 'category_' + faker.string.alpha(5),
+            randomCategory: () => `category_${faker.string.alpha(5)}`,
             categories: faker.helpers.arrayElement(['Electronic Devices', 'Electronic Accessories', 'Men"s Fashion', 'Clothings', 'Women"s Fashion']),
         },
 
         store: {
-            adminStore: String(ADMIN) + 'store',
-            vendorStore1: String(VENDOR) + 'store',
+            adminStore: `${ADMIN}store`,
+            vendorStore1: `${VENDOR}store`,
         },
 
         attribute: {
@@ -180,17 +168,17 @@ export const data = {
             },
 
             randomAttribute: () => ({
-                attributeName: 'attribute_' + faker.string.alpha(5),
-                attributeTerms: ['attributeTerm_' + faker.string.alpha(5)],
+                attributeName: `attribute_${faker.string.alpha(5)}`,
+                attributeTerms: [`'attributeTerm_${faker.string.alpha(5)}`],
             }),
         },
 
         simple: {
             productType: 'simple',
-            productName: () => faker.commerce.productName() + ' (Simple)',
+            productName: () => `${faker.commerce.productName()} (Simple)`,
             category: 'Uncategorized',
             regularPrice: () => faker.finance.amount({ min: 100, max: 200, dec: faker.helpers.arrayElement([1, 2]) }).replace('.', ','),
-            storeName: String(VENDOR) + 'store',
+            storeName: `${VENDOR}store`,
             status: 'publish',
             stockStatus: false,
             editProduct: '',
@@ -199,10 +187,10 @@ export const data = {
 
         downloadable: {
             productType: 'simple',
-            productName: () => faker.commerce.productName() + ' (Downloadable)',
+            productName: () => `${faker.commerce.productName()} (Downloadable)`,
             category: 'Uncategorized',
             regularPrice: () => faker.finance.amount({ min: 100, max: 200, dec: faker.helpers.arrayElement([1, 2]) }).replace('.', ','),
-            storeName: String(VENDOR) + 'store',
+            storeName: `${VENDOR}store`,
             status: 'publish',
             stockStatus: false,
             editProduct: '',
@@ -218,10 +206,10 @@ export const data = {
 
         virtual: {
             productType: 'simple',
-            productName: () => faker.commerce.productName() + ' (Virtual)',
+            productName: () => `${faker.commerce.productName()} (Virtual)`,
             category: 'Uncategorized',
             regularPrice: () => faker.finance.amount({ min: 100, max: 200, dec: faker.helpers.arrayElement([1, 2]) }).replace('.', ','),
-            storeName: String(VENDOR) + 'store',
+            storeName: `${VENDOR}store`,
             status: 'publish',
             stockStatus: false,
             editProduct: '',
@@ -230,10 +218,10 @@ export const data = {
 
         variable: {
             productType: 'variable',
-            productName: () => faker.commerce.productName() + ' (Variable)',
+            productName: () => `${faker.commerce.productName()} (Variable)`,
             category: 'Uncategorized',
             regularPrice: () => faker.finance.amount({ min: 100, max: 200, dec: faker.helpers.arrayElement([1, 2]) }).replace('.', ','),
-            storeName: String(VENDOR) + 'store',
+            storeName: `${VENDOR}store`,
             status: 'publish',
             stockStatus: false,
             attribute: 'sizes',
@@ -247,19 +235,19 @@ export const data = {
 
         external: {
             productType: 'external',
-            productName: () => faker.commerce.productName() + ' (External)',
+            productName: () => `${faker.commerce.productName()} (External)`,
             productUrl: '/product/p1_v1-simple/',
             buttonText: 'Buy product',
             category: 'Uncategorized',
             regularPrice: () => faker.finance.amount({ min: 100, max: 200, dec: faker.helpers.arrayElement([1, 2]) }).replace('.', ','),
-            storeName: String(VENDOR) + 'store',
+            storeName: `${VENDOR}store`,
             status: 'publish',
             saveSuccessMessage: 'Success! The product has been saved successfully. View Product →',
         },
 
         simpleSubscription: {
             productType: 'subscription',
-            productName: () => faker.commerce.productName() + ' (Simple Subscription)',
+            productName: () => `${faker.commerce.productName()} (Simple Subscription)`,
             category: 'Uncategorized',
             regularPrice: () => faker.finance.amount({ min: 100, max: 200, dec: faker.helpers.arrayElement([1, 2]) }).replace('.', ','),
             subscriptionPrice: () => faker.finance.amount({ min: 100, max: 200, dec: faker.helpers.arrayElement([1, 2]) }).replace('.', ','),
@@ -268,14 +256,14 @@ export const data = {
             expireAfter: '0', // '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24'
             subscriptionTrialLength: '0',
             subscriptionTrialPeriod: 'day', // 'day', 'week', 'month', 'year'
-            storeName: String(VENDOR) + 'store',
+            storeName: `${VENDOR}store`,
             status: 'publish',
             saveSuccessMessage: 'Success! The product has been saved successfully. View Product →',
         },
 
         variableSubscription: {
             productType: 'variable-subscription',
-            productName: () => faker.commerce.productName() + ' (Variable Subscription)',
+            productName: () => `${faker.commerce.productName()} (Variable Subscription)`,
             category: 'Uncategorized',
             regularPrice: () => faker.finance.amount({ min: 100, max: 200, dec: faker.helpers.arrayElement([1, 2]) }).replace('.', ','),
             subscriptionPrice: () => faker.finance.amount({ min: 100, max: 200, dec: faker.helpers.arrayElement([1, 2]) }).replace('.', ','),
@@ -284,7 +272,7 @@ export const data = {
             expireAfter: '0',
             subscriptionTrialLength: '0',
             subscriptionTrialPeriod: 'day',
-            storeName: String(VENDOR) + 'store',
+            storeName: `${VENDOR}store`,
             status: 'publish',
             attribute: 'sizes',
             attributeTerms: ['s', 'l', 'm'],
@@ -297,27 +285,19 @@ export const data = {
 
         vendorSubscription: {
             productType: 'product_pack',
-            productName: () =>
-                'Dokan Subscription ' +
-                faker.helpers.arrayElement(['Gold', 'Silver', 'Platinum', 'Premium']) +
-                ' ' +
-                faker.string.alpha({
-                    length: 5,
-                    casing: 'upper',
-                }) +
-                ' (Product Pack)',
+            productName: () => `Dokan Subscription_${faker.string.alpha({ length: 5, casing: 'upper' })} (Product Pack)`,
             category: 'Uncategorized',
             regularPrice: () => faker.finance.amount({ min: 100, max: 200, dec: faker.helpers.arrayElement([1, 2]) }).replace('.', ','),
             numberOfProducts: '-1',
             packValidity: '0',
             advertisementSlot: '-1',
             expireAfterDays: '-1',
-            storeName: String(VENDOR) + 'store',
+            storeName: `${VENDOR}store`,
             status: 'publish',
         },
 
         booking: {
-            productName: () => faker.commerce.productName() + ' (Booking)',
+            productName: () => `${faker.commerce.productName()} (Booking)`,
             name: '',
             productType: 'booking',
             category: 'Uncategorized',
@@ -334,11 +314,11 @@ export const data = {
             maximumBookingWindowIntoTheFutureDateUnit: 'month',
             baseCost: '20',
             blockCost: '10',
-            storeName: String(VENDOR) + 'store',
+            storeName: `${VENDOR}store`,
             saveSuccessMessage: 'Success! The product has been saved successfully.',
 
             resource: {
-                resourceName: () => 'Booking Resource_' + faker.string.nanoid(10),
+                resourceName: () => `Booking Resource_${faker.string.nanoid(10)}`,
                 name: '',
                 quantity: String(faker.number.int({ min: 1, max: 100 })),
             },
@@ -346,7 +326,7 @@ export const data = {
 
         // Auction
         auction: {
-            productName: () => faker.commerce.productName() + ' (Auction)',
+            productName: () => `${faker.commerce.productName()} (Auction)`,
             name: '',
             productType: 'auction',
             category: 'Uncategorized',
@@ -358,7 +338,7 @@ export const data = {
             buyItNowPrice: () => faker.finance.amount({ min: 900, max: 1000, dec: faker.helpers.arrayElement([1, 2]) }).replace('.', ','),
             startDate: helpers.currentDateTime,
             endDate: helpers.addDays(helpers.currentDateTime, 20, 'full'),
-            storeName: String(VENDOR) + 'store',
+            storeName: `${VENDOR}store`,
             // saveSuccessMessage: '× Success! The product has been updated successfully. View Product →',
             saveSuccessMessage: 'Success! The product has been updated successfully.',
         },
@@ -385,12 +365,12 @@ export const data = {
             reportSubmitSuccessMessage: 'Your report has been submitted. Thank you for your response.',
 
             // non logged user
-            username: String(CUSTOMER),
-            password: String(USER_PASSWORD),
+            username: CUSTOMER,
+            password: USER_PASSWORD,
 
             // guest user
             guestName: () => faker.person.firstName('male'),
-            guestEmail: () => faker.person.firstName('male') + '@email.com',
+            guestEmail: () => `${faker.person.firstName('male')}@email.com`,
         },
 
         // Enquiry
@@ -400,7 +380,7 @@ export const data = {
 
             // guest user
             guestName: () => faker.person.firstName('male'),
-            guestEmail: () => faker.person.firstName('male') + '@email.com',
+            guestEmail: () => `${faker.person.firstName('male')}@email.com`,
         },
 
         productInfo: {
@@ -494,7 +474,7 @@ export const data = {
             noteType: 'Private note',
         },
 
-        note: () => 'test order note' + faker.string.nanoid(10),
+        note: () => `test order note_${faker.string.nanoid(10)}`,
     },
 
     // order Tracking Details
@@ -559,8 +539,8 @@ export const data = {
 
     // coupon
     coupon: {
-        // title: () => 'VC_' + faker.string.alpha({ count: 5, casing: 'upper' }),
-        couponTitle: () => 'VC_' + faker.string.nanoid(10),
+        // title: () => `VC_${faker.string.alpha({ count: 5, casing: 'upper' })}`,
+        couponTitle: () => `VC_${faker.string.nanoid(10)}`,
         title: '',
         amount: () => faker.number.int({ min: 1, max: 10 }).toString(),
         discount_type: () => faker.helpers.arrayElement(['percent', 'fixed_product']), // percent, fixed_product, booking_person, sign_up_fee, sign_up_fee_percent, recurring_fee, recurring_percent
@@ -756,7 +736,7 @@ export const data = {
         shippingFeeRecipient: 'seller', // 'seller', 'admin'
         taxFeeRecipient: 'seller', // 'seller', 'admin'
         mapApiSource: 'google_maps', // 'google_maps', 'mapbox'
-        googleMapApiKey: String(GMAP),
+        googleMapApiKey: GMAP,
         sellingProductTypes: 'sell_both', // 'physical', 'digital', 'sell_both',
         commissionType: 'percentage', // 'flat','percentage' 'combine',
         adminCommission: '10',
@@ -1032,7 +1012,7 @@ export const data = {
     // user
     user: {
         username: () => faker.person.firstName('male'),
-        password: String(USER_PASSWORD),
+        password: USER_PASSWORD,
 
         userDetails: {
             emailDomain: '@email.com',
@@ -1040,35 +1020,34 @@ export const data = {
             firstName: () => faker.person.firstName('male'),
             lastName: () => faker.person.lastName('male'),
             // email: faker.internet.email(),
-            email: () => faker.person.firstName('male') + '@email.com',
+            email: () => `${faker.person.firstName('male')}@email.com`,
             role: 'customer',
         },
     },
 
     // admin
     admin: {
-        username: String(ADMIN),
-        password: String(ADMIN_PASSWORD),
+        username: ADMIN,
+        password: ADMIN_PASSWORD,
     },
 
     // vendor
     vendor: {
-        username: String(VENDOR),
-        password: String(USER_PASSWORD),
-        lastname: (String(VENDOR)[0] as string) + String(VENDOR)[String(VENDOR).length - 1],
-        storeName: String(VENDOR) + 'store',
+        username: VENDOR,
+        password: USER_PASSWORD,
+        lastname: `${VENDOR} ln`,
+        storeName: `${VENDOR}store`,
 
         vendor2: {
-            username: String(VENDOR2),
-            password: String(USER_PASSWORD),
+            username: VENDOR2,
+            password: USER_PASSWORD,
         },
 
         vendorInfo: {
             emailDomain: '@email.com',
-            // email             : () => faker.internet.email(),
-            email: () => faker.person.firstName('male') + '@email.com',
-            password: String(USER_PASSWORD),
-            password1: String(USER_PASSWORD) + '1',
+            email: () => `${faker.person.firstName('male')}@email.com`,
+            password: USER_PASSWORD,
+            password1: `${USER_PASSWORD}1`,
             firstName: () => faker.person.firstName('male'),
             lastName: () => faker.person.lastName('male'),
             userName: faker.person.firstName('male'),
@@ -1105,7 +1084,7 @@ export const data = {
             // shop details
             banner: 'tests/e2e/utils/sampleData/banner.png',
             profilePicture: 'tests/e2e/utils/sampleData/avatar.png',
-            storeName: String(VENDOR) + 'store',
+            storeName: `${VENDOR}store`,
             productsPerPage: '12',
             mapLocation: 'New York',
             termsAndConditions: 'Vendor Terms and Conditions',
@@ -1158,7 +1137,7 @@ export const data = {
 
             payment: {
                 // email: () => faker.internet.email(),
-                email: () => faker.person.firstName('male') + '@email.com',
+                email: () => `${faker.person.firstName('male')}@email.com`,
                 bankAccountName: 'accountName',
                 bankAccountType: faker.helpers.arrayElement(['personal', 'business']),
                 bankAccountNumber: faker.string.alphanumeric(10),
@@ -1301,7 +1280,7 @@ export const data = {
         payment: {
             methodName: '',
             // email: () => faker.internet.email(),
-            email: () => faker.person.firstName('male') + '@email.com',
+            email: () => `${faker.person.firstName('male')}@email.com`,
             bankAccountName: 'accountName',
             bankAccountType: faker.helpers.arrayElement(['personal', 'business']),
             bankAccountNumber: faker.string.alphanumeric(10),
@@ -1392,12 +1371,12 @@ export const data = {
 
         // addon
         addon: () => ({
-            name: 'Test Addons Group_' + faker.string.nanoid(10),
+            name: `Test Addons Group_${faker.string.nanoid(10)}`,
             priority: '10',
             category: 'Uncategorized',
             type: 'multiple_choice', // 'multiple_choice', 'checkbox', 'custom_text', 'custom_textarea', 'file_upload', 'custom_price', 'input_multiplier', 'heading'
             displayAs: 'select', // 'select', 'radiobutton', 'images'
-            title: 'Test Add-on Title_' + faker.string.nanoid(10),
+            title: `Test Add-on Title_${faker.string.nanoid(10)}`,
             formatTitle: 'label', // 'label', 'heading', 'hide'
             addDescription: 'Add-on description',
             enterAnOption: 'Option 1',
@@ -1411,35 +1390,34 @@ export const data = {
     },
 
     staff: () => ({
-        // username: faker.person.firstName('male') + faker.string.nanoid(10),
+        // username: `faker.person.firstName('male')_${faker.string.nanoid(10)}`,
         firstName: faker.person.firstName('male'),
         lastName: faker.person.lastName('male'),
         email: faker.internet.email(),
         phone: faker.phone.number(),
-        password: String(USER_PASSWORD),
+        password: USER_PASSWORD,
     }),
 
     // customer
     customer: {
-        username: String(CUSTOMER),
-        password: String(USER_PASSWORD),
-        lastname: (String(CUSTOMER)[0] as string) + String(CUSTOMER)[String(CUSTOMER).length - 1],
+        username: CUSTOMER,
+        password: USER_PASSWORD,
+        lastname: `${CUSTOMER} ln`,
 
         customer2: {
-            username: String(CUSTOMER2),
-            password: String(USER_PASSWORD),
+            username: CUSTOMER2,
+            password: USER_PASSWORD,
         },
 
         customerInfo: {
             emailDomain: '@email.com',
-            // email: () => faker.internet.email(),
-            email: () => faker.person.firstName('male') + '@email.com',
-            password: String(USER_PASSWORD),
-            password1: String(USER_PASSWORD) + '1',
+            email: () => `${faker.person.firstName('male')}@email.com`,
+            password: USER_PASSWORD,
+            password1: `${USER_PASSWORD}1`,
             firstName: () => faker.person.firstName('male'),
             lastName: () => faker.person.lastName('male'),
             username: () => faker.person.firstName('male'),
-            shopName: () => faker.person.firstName('male') + 'store',
+            shopName: () => `${faker.person.firstName('male')}store`,
             role: 'customer',
             companyName: faker.company.name(),
             companyId: faker.string.alphanumeric(5),
@@ -1476,7 +1454,7 @@ export const data = {
                 zipCode: '10003',
                 country: 'United States (US)',
                 state: 'New York',
-                email: CUSTOMER + '@yopmail.com',
+                email: `${CUSTOMER}@yopmail.com`,
                 phone: '0123456789',
             },
             shipping: {
@@ -1498,8 +1476,8 @@ export const data = {
             message: 'get Support Message',
             orderId: '',
             supportSubmitSuccessMessage: 'Thank you. Your ticket has been submitted!',
-            username: String(CUSTOMER),
-            userPassword: String(USER_PASSWORD),
+            username: CUSTOMER,
+            userPassword: USER_PASSWORD,
         },
 
         supportTicket: {
@@ -1548,7 +1526,7 @@ export const data = {
 
     // store category
     storeCategory: () => ({
-        name: 'test category_' + faker.string.nanoid(10),
+        name: `test category_${faker.string.nanoid(10)}`,
         description: 'test category description',
     }),
 
@@ -1557,11 +1535,11 @@ export const data = {
         review: () => ({
             rating: '4',
             ratingByWidth: faker.helpers.arrayElement(['width: 20%', 'width: 40%', 'width: 60%', 'width: 80%', 'width: 100%']),
-            title: 'test title_' + faker.string.nanoid(10),
-            content: 'test content_' + faker.string.nanoid(10),
+            title: `test title_${faker.string.nanoid(10)}`,
+            content: `test content_${faker.string.nanoid(10)}`,
         }),
         filter: {
-            byVendor: String(VENDOR) + 'store',
+            byVendor: `${VENDOR}store`,
         },
     },
 
@@ -1570,12 +1548,12 @@ export const data = {
         title: 'test support ticket',
 
         filter: {
-            byCustomer: String(CUSTOMER),
-            byVendor: String(VENDOR) + 'store',
+            byCustomer: CUSTOMER,
+            byVendor: `${VENDOR}store`,
         },
 
         chatReply: {
-            reply: 'chat reply' + faker.string.nanoid(10),
+            reply: `chat reply${faker.string.nanoid(10)}`,
             asAdmin: 'admin chat reply',
             asVendor: 'vendor chat reply',
         },
@@ -1583,7 +1561,7 @@ export const data = {
 
     // Reverse withdraw
     reverseWithdraw: {
-        store: String(VENDOR2) + 'store',
+        store: `${VENDOR2}store`,
         transactionType: 'manual_product', // manual_product, manual_order, other
         product: '',
         withdrawalBalanceType: 'debit', // debit, credit
@@ -1609,7 +1587,7 @@ export const data = {
         },
 
         quoteRule: () => ({
-            title: 'test rule_' + faker.string.nanoid(10),
+            title: `test rule_${faker.string.nanoid(10)}`,
             userRole: 'customer',
             product: 'p1_v1 (simple)',
             category: 'Uncategorized',
@@ -1626,10 +1604,10 @@ export const data = {
         },
 
         quote: () => ({
-            title: 'test quote_' + faker.string.nanoid(10),
-            user: CUSTOMER, 
+            title: `test quote_${faker.string.nanoid(10)}`,
+            user: CUSTOMER,
             fullName: 'Jhon Doe',
-            email: CUSTOMER + '@yopmail.com',
+            email: `${CUSTOMER}@yopmail.com`,
             companyName: 'abc',
             phoneNumber: '0123456789',
             product: 'p1_v1 (simple)',
@@ -1644,7 +1622,7 @@ export const data = {
         },
 
         convertedQuote: {
-            title: 'converted quote ' + faker.string.nanoid(10),
+            title: `converted quote_${faker.string.nanoid(10)}`,
         },
 
         vendorUpdateQuote: {
@@ -1661,7 +1639,7 @@ export const data = {
 
         guest: () => ({
             fullName: faker.person.fullName({ sex: 'male' }),
-            email: faker.person.firstName('male') + '@email.com',
+            email: `${faker.person.firstName('male')}@email.com`,
             companyName: faker.company.name(),
             phoneNumber: faker.phone.number(),
         }),
@@ -1718,12 +1696,12 @@ export const data = {
         answer: 'test answer',
         editAnswer: 'edited test answer',
         user: {
-            username: String(CUSTOMER),
-            password: String(USER_PASSWORD),
+            username: CUSTOMER,
+            password: USER_PASSWORD,
         },
 
         filter: {
-            byVendor: String(VENDOR) + 'store',
+            byVendor: `${VENDOR}store`,
             byProduct: 'p1_v1 (simple)',
         },
     },
@@ -1738,7 +1716,7 @@ export const data = {
             featuredVendors: 'featured_seller',
         },
 
-        randomTitle: () => 'test announcement_' + faker.string.nanoid(10),
+        randomTitle: () => `test announcement_${faker.string.nanoid(10)}`,
         title: 'test announcement title',
         content: 'test announcement Content',
         receiver: 'all_seller',
@@ -1840,11 +1818,11 @@ export const data = {
 
     // product advertisement
     productAdvertisement: {
-        advertisedProductStore: String(VENDOR) + 'store',
+        advertisedProductStore: `${VENDOR}store`,
         advertisedProduct: 'p1_v1 (simple)',
 
         filter: {
-            byStore: String(VENDOR) + 'store',
+            byStore: `${VENDOR}store`,
             createVia: {
                 admin: 'Admin',
                 order: 'Order',
@@ -1928,8 +1906,8 @@ export const data = {
         // Appearance
         appearance: {
             mapApiSource: 'google_maps', // 'google_maps', 'mapbox'
-            googleMapApiKey: String(GMAP),
-            mapBoxApiKey: String(MAPBOX),
+            googleMapApiKey: GMAP,
+            mapBoxApiKey: MAPBOX,
             storeBannerWidth: '625',
             storeBannerHeight: '300',
             saveSuccessMessage: 'Setting has been saved successfully.',
@@ -2064,13 +2042,13 @@ export const data = {
             },
 
             customMethod: {
-                title: 'test verification method_' + faker.string.nanoid(10),
+                title: `test verification method_${faker.string.nanoid(10)}`,
                 help_text: 'test help-text',
                 required: false,
             },
 
             updateMethod: {
-                title: 'test verification method updated_' + faker.string.nanoid(10),
+                title: `test verification method updated_${faker.string.nanoid(10)}`,
                 help_text: 'test help-text updated',
                 required: true,
             },
@@ -2174,8 +2152,8 @@ export const data = {
     },
 
     storeContactData: {
-        name: String(CUSTOMER),
-        email: String(CUSTOMER) + '@yopmail.com',
+        name: CUSTOMER,
+        email: `${CUSTOMER}@yopmail.com`,
         message: 'Test Message',
     },
 
@@ -2213,7 +2191,7 @@ export const data = {
         requestQuote: '[dokan-request-quote]',
     },
 
-    pageTitle: 'shortcode_' + faker.string.nanoid(5),
+    pageTitle: `shortcode_${faker.string.nanoid(5)}`,
 
     deliveryTime: {
         date: helpers.currentDateFJY,
@@ -2287,7 +2265,7 @@ export const data = {
         },
 
         spmv: {
-            productName: () => 'spmv_' + faker.string.nanoid(10),
+            productName: () => `spmv_${faker.string.nanoid(10)}`,
             product1: 'spmv_a1',
         },
 
@@ -2295,16 +2273,16 @@ export const data = {
             firstName: () => 'vendor1',
             lastName: () => 'v1',
             username: 'vendor1',
-            shopName: String(VENDOR) + 'store',
+            shopName: `${VENDOR}store`,
         },
 
         vendorStores: {
             followFromStoreListing: 'storeListing',
             followFromSingleStore: 'singleStore',
-            vendor1: String(VENDOR) + 'store',
-            vendor2: String(VENDOR2) + 'store',
-            vendor1FullName: String(VENDOR) + ' ' + 'v1',
-            shopUrl: String(VENDOR) + 'store',
+            vendor1: `${VENDOR}store`,
+            vendor2: `${VENDOR2}store`,
+            vendor1FullName: `${VENDOR} v1`,
+            shopUrl: `${VENDOR}store`,
         },
 
         customerInfo: {
