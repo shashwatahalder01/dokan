@@ -2751,16 +2751,16 @@ export const payloads = {
             open_notice: 'Store is open',
             close_notice: 'Store is closed',
         },
-        company_name: '',
-        vat_number: '',
-        company_id_number: '',
-        bank_name: '',
-        bank_iban: '',
+        company_name: faker.company.name(), 
+        company_id_number: faker.string.alphanumeric(5),
+        vat_number: faker.string.alphanumeric(10),
+        bank_name: faker.string.alphanumeric(7),
+        bank_iban: faker.finance.iban(),
         categories: [
             {
                 // id: 74,
-                // name: 'Uncategorized',
-                // slug: 'uncategorized',
+                name: 'Uncategorized',
+                slug: 'uncategorized',
             },
         ],
         admin_commission: '',
@@ -3045,7 +3045,7 @@ export const payloads = {
         //     open_notice: 'Store is open',
         //     close_notice: 'Store is closed',
         // },
-        company_name: faker.company.name(), // todo: eu compliance doesn't save on post request works on update endpoint
+        company_name: faker.company.name(), 
         company_id_number: faker.string.alphanumeric(5),
         vat_number: faker.string.alphanumeric(10),
         bank_name: faker.string.alphanumeric(7),
@@ -3053,8 +3053,8 @@ export const payloads = {
         categories: [
             {
                 // id: 74,
-                // name: 'Uncategorized',
-                // slug: 'uncategorized'
+                name: 'Uncategorized',
+                slug: 'uncategorized',
             },
         ],
         admin_commission: '',
@@ -3172,16 +3172,16 @@ export const payloads = {
             open_notice: 'Store is open',
             close_notice: 'Store is closed',
         },
-        company_name: '',
-        vat_number: '',
-        company_id_number: '',
-        bank_name: '',
-        bank_iban: '',
+        company_name: faker.company.name(), 
+        company_id_number: faker.string.alphanumeric(5),
+        vat_number: faker.string.alphanumeric(10),
+        bank_name: faker.string.alphanumeric(7),
+        bank_iban: faker.finance.iban(),
         categories: [
             {
                 // id: 74,
-                // name: 'Uncategorized',
-                // slug: 'uncategorized'
+                name: 'Uncategorized',
+                slug: 'uncategorized',
             },
         ],
         admin_commission: '',
@@ -3299,7 +3299,7 @@ export const payloads = {
             open_notice: 'Store is open',
             close_notice: 'Store is closed',
         },
-        company_name: faker.company.name(), // todo: eu compliance doesn't save on post request works on update endpoint
+        company_name: faker.company.name(), 
         company_id_number: faker.string.alphanumeric(5),
         vat_number: faker.string.alphanumeric(10),
         bank_name: faker.string.alphanumeric(7),
