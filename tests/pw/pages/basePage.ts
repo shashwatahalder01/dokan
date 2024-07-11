@@ -1346,7 +1346,7 @@ export class BasePage {
     }
 
     // multiple elements to be visible
-    async customerAddEuComplianceData(selectors: any) {
+    async multipleElementNotVisible(selectors: any) {
         for (const selector in selectors) {
             await this.notToBeVisible(selectors[selector]);
         }

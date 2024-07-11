@@ -363,7 +363,7 @@ export const helpers = {
         try {
             fs.mkdirSync(folderName);
             console.log(`Folder '${folderName}' created successfully.`);
-        } catch (error) {
+        } catch (error: any) {
             if (error.code === 'EEXIST') {
                 console.log(`Folder '${folderName}' already exists.`);
                 return;

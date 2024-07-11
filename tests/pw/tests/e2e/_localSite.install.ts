@@ -14,7 +14,7 @@ const { CI } = process.env;
 test.describe('setup local site', () => {
     test.skip(CI, 'skip site setup on CI');
 
-    test('clone dokan pro and build', { tag: ['@pro'] }, async ({}) => {
+    test('clone dokan pro and build', { tag: ['@pro'] }, async () => {
         await helpers.createFolder('plugins');
         console.log('cloning dokan pro...');
         await helpers.exeCommand(data.commands.cloneDokanPro, 'plugins');
@@ -24,7 +24,7 @@ test.describe('setup local site', () => {
         console.log('building dokan pro done');
     });
 
-    test('download wordpress to desired folder', async ({ page }) => {});
+    test('download wordpress to desired folder', async () => {});
 
     // todo:
     /*
@@ -37,7 +37,7 @@ test.describe('setup local site', () => {
 
     // });
 
-    test('delete database or all tables', async ({ page }) => {});
+    test('delete database or all tables', async () => {});
 
     test('admin setup WP', async ({ page }) => {
         const loginPage = new LoginPage(page);
@@ -52,7 +52,7 @@ test.describe('setup local site', () => {
         // await dbUtils.updateWpOptionTable(dbData.dokan.optionName.dokanActiveModules, dbData.dokan.modules, 'serialize');
     });
 
-    test('install and activate theme', async ({ request }) => {});
+    test('install and activate theme', async () => {});
 
     // todo:  skip global setup for local_setup
 

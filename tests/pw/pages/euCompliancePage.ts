@@ -139,7 +139,7 @@ export class EuCompliancePage extends AdminPage {
     // hide vendor EU compliance data
     async hideEuComplianceVendor(storeName: string) {
         await this.goIfNotThere(data.subUrls.frontend.vendorDetails(helpers.slugify(storeName)));
-        await this.customerAddEuComplianceData(singleStoreCustomer.storeProfile.euComplianceData);
+        await this.multipleElementNotVisible(singleStoreCustomer.storeProfile.euComplianceData);
     }
 
     // customer
