@@ -234,14 +234,6 @@ jobs:
               run: |
                   npm run test:api:pro
 
-            # Run API coverage
-            - name: 🧪 Running the api tests
-              if: always() && (steps.api-test.outcome == 'success' || steps.api-test.outcome == 'failure')
-              timeout-minutes: 5
-              working-directory: tests/pw
-              run: |
-                  npm run test:api:pro
-
             # Prepare test summary
             - name: Prepare test summary
               id: prepare-test-summary
