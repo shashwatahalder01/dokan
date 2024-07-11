@@ -2756,5 +2756,9 @@ export const schemas = {
         wholesaleCustomerSchema: wholesaleCustomerSchema,
         wholesaleCustomersSchema: z.array(wholesaleCustomerSchema),
         updateWholesaleCustomerSchema: customerSchema,
+        batchUpdateWholesaleCustomersSchema: z.object({
+            approved: z.array(z.number()).optional(),
+            pending: z.array(z.number()).optional(),
+        }),
     },
 };
