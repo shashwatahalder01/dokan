@@ -18,7 +18,7 @@ declare global {
             CUSTOMER2_ID: string;
             PRODUCT_ID: string;
             PRODUCT_ID_V2: string;
-            LOCAL: boolean
+            LOCAL: boolean;
             CI: boolean;
             GMAP: string;
             MAPBOX: string;
@@ -47,6 +47,7 @@ declare global {
             E2E_TEST_RESULT: string;
             API_COVERAGE: string;
             E2E_COVERAGE: string;
+            SYSTEM_INFO: string;
         }
     }
 }
