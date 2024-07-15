@@ -195,6 +195,9 @@ jobs:
             #   run: |
             #       npm run test:api:lite
 
+            - name: Compile TypeScript
+              run: npx tsc
+
             # Prepare test summary
             - name: Prepare test summary
               id: prepare-test-summary
