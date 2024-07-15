@@ -43,7 +43,7 @@ test.describe('Product Advertising test', () => {
         await admin.addNewProductAdvertisement({ ...data.productAdvertisement, advertisedProduct: productName });
     });
 
-    test('admin can search advertised product', { tag: ['@pro', '@admin'] }, async () => {
+    test('admin can search advertised product by product', { tag: ['@pro', '@admin'] }, async () => {
         await admin.searchAdvertisedProduct(advertisedProduct);
     });
 
