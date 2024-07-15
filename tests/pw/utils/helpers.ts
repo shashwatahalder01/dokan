@@ -359,20 +359,52 @@ export const helpers = {
         this.writeFile(filePath, JSON.stringify(envData, null, 2));
     },
 
+    async createFolder(folderName: string) {
+        try {
+            fs.mkdirSync(folderName);
+            console.log(`Folder '${folderName}' created successfully.`);
+        } catch (error: any) {
+            if (error.code === 'EEXIST') {
+                console.log(`Folder '${folderName}' already exists.`);
+                return;
+            } else {
+                console.error(`Error creating folder '${folderName}':`, error);
+            }
+        }
+    },
+
     // execute command
-    async exeCommand(command: string) {
+    async exeCommand(command: string, directoryPath = process.cwd()) {
+        process.chdir(directoryPath);
+
         const output = execSync(command, { encoding: 'utf-8' });
         console.log(output);
     },
 
+    // create a new page
     async createPage(browser: Browser, options?: BrowserContextOptions | undefined) {
         const browserContext = await browser.newContext(options);
         return browserContext.newPage();
     },
 
+    // close pages
     async closePages(pages: Page[]): Promise<void> {
         for (const page of pages) {
             await page.close();
         }
+    },
+
+    // rgb (rgb(r, g, b)) to hex (#rrggbb) color
+    rgbToHex(rgb: string): string {
+        const [r, g, b]: number[] = rgb.match(/\d+/g)!.map(Number);
+        return `#${((1 << 24) + (r! << 16) + (g! << 8) + b!).toString(16).slice(1).toUpperCase()}`;
+    },
+
+    // hex (#rrggbb) to rgb (rgb(r, g, b)) color
+    hexToRgb(hex: string): string {
+        const r = parseInt(hex.substring(1, 3), 16);
+        const g = parseInt(hex.substring(3, 5), 16);
+        const b = parseInt(hex.substring(5, 7), 16);
+        return `rgb(${r}, ${g}, ${b})`;
     },
 };

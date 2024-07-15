@@ -1,5 +1,4 @@
 import fs from 'fs';
-
 export interface admin {
     username: string;
     password: string;
@@ -303,6 +302,20 @@ export interface product {
             description: string;
         };
 
+        euCompliance: {
+            saleLabel: string;
+            saleRegularLabel: string;
+            unit: string;
+            minimumAge: string;
+            productUnits: string;
+            basePriceUnits: string;
+            deliveryTime: string;
+            freeShipping: boolean;
+            regularUnitPrice: string;
+            saleUnitPrice: string;
+            optionalMiniDescription: string;
+        };
+
         amountDiscount: {
             minimumOrderAmount: string;
             discountPercentage: string;
@@ -447,6 +460,7 @@ export interface wpSettings {
 
 export interface tax {
     taxRate: string;
+    priority: string;
     enableTax: boolean;
     saveSuccessMessage: string;
 }
@@ -535,7 +549,7 @@ export interface payment {
     };
 
     basicPayment: {
-        toggleEanbledClass: string;
+        toggleEnabledClass: string;
         toggleDisabledClass: string;
     };
 
@@ -644,6 +658,7 @@ export interface vendorSetupWizard {
     bankSwiftCode: string;
     customPayment: string;
     skrill: string;
+    file: string;
 }
 
 // user
@@ -700,6 +715,7 @@ export interface vendor {
         state: string;
         accountName: string;
         accountNumber: string;
+        accountType: string;
         bankName: string;
         bankAddress: string;
         routingNumber: string;
@@ -947,19 +963,8 @@ export interface vendor {
     };
 
     verification: {
+        method: string;
         file: string;
-        street1: string;
-        street2: string;
-        city: string;
-        zipCode: string;
-        country: string;
-        state: string;
-        idRequestSubmitSuccessMessage: string;
-        idRequestSubmitCancel: string;
-        addressRequestSubmitSuccessMessage: string;
-        addressRequestSubmitCancel: string;
-        companyRequestSubmitSuccessMessage: string;
-        companyRequestSubmitCancel: string;
     };
 
     deliveryTime: {
@@ -1395,12 +1400,12 @@ export interface modules {
     };
 
     modulesName: {
-        AuctionIntegration: string;
-        ColorSchemeCustomize: string;
-        DeliveryTime: string;
-        Elementor: string;
-        EUComplianceFields: string;
-        FollowStore: string;
+        auctionIntegration: string;
+        colorSchemeCustomize: string;
+        deliveryTime: string;
+        elementor: string;
+        eUComplianceFields: string;
+        followStore: string;
     };
 
     moduleCategory: {
@@ -1563,6 +1568,44 @@ export interface dokanSettings {
     storeSupport: {
         displayOnSingleProductPage: string;
         supportButtonLabel: string;
+        saveSuccessMessage: string;
+    };
+
+    // Vendor Verification
+    vendorVerification: {
+        verifiedIcons: {
+            circleSolid: string;
+            circleRegular: string;
+            solid: string;
+            doubleSolid: string;
+            squireRegular: string;
+            userCheckSolid: string;
+            certificateSolid: string;
+
+            byIcon: {
+                circleSolid: string;
+                circleRegular: string;
+                solid: string;
+                doubleSolid: string;
+                squireRegular: string;
+                userCheckSolid: string;
+                certificateSolid: string;
+            };
+        };
+
+        verificationMethods: {
+            nationalId: string;
+            drivingLicense: string;
+            address: string;
+            company: string;
+        };
+
+        verificationMethodDetails: {
+            title: string;
+            help_text: string;
+            required: boolean;
+        };
+
         saveSuccessMessage: string;
     };
 
@@ -1881,4 +1924,27 @@ export interface dashboardMenu {
     url: string;
     pos: string;
     permission: string;
+}
+
+export interface paletteValues {
+    buttonText: string;
+    buttonBackground: string;
+    buttonBorder: string;
+
+    buttonHoverText: string;
+    buttonHoverBackground: string;
+    buttonHoverBorder: string;
+
+    dashboardSidebarMenuText: string;
+    dashboardSidebarBackground: string;
+    dashboardSidebarActiveMenuText: string;
+    dashboardSidebarActiveMenuBackground: string;
+}
+
+export interface eUComplianceData {
+    companyName?: string;
+    companyId: string;
+    vatNumber: string;
+    bankName: string;
+    bankIban: string;
 }

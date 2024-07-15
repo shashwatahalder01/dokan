@@ -8,6 +8,8 @@ import { expect, Page, BrowserContext, Cookie, Request, Response, Locator, Frame
 import { data } from '@utils/testData';
 import { selector } from '@pages/selectors';
 
+const { BASE_URL } = process.env;
+
 // This Page Contains All Necessary Playwright Automation Methods
 
 export class BasePage {
@@ -54,8 +56,8 @@ export class BasePage {
     }
 
     // goto subUrl
-    async goto(subPath: string): Promise<void> {
-        await this.page.goto(subPath, { waitUntil: 'domcontentloaded' });
+    async goto(subPath: string, waitUntil: 'load' | 'domcontentloaded' | 'networkidle' | 'commit' = 'networkidle'): Promise<void> {
+        await this.page.goto(subPath, { waitUntil: waitUntil });
     }
 
     // go forward
@@ -73,6 +75,14 @@ export class BasePage {
         await this.page.reload();
     }
 
+    // reload if visible
+    async reloadIfVisible(selector: string): Promise<void> {
+        const isVisible = await this.isVisible(selector);
+        if (isVisible) {
+            await this.reload();
+        }
+    }
+
     // returns whether the current URL is expected
     isCurrentUrl(subPath: string): boolean {
         const url = new URL(this.getCurrentUrl());
@@ -82,10 +92,10 @@ export class BasePage {
 
     // Create a New URL
     createUrl(subPath: string): string {
-        // let url = new URL(process.env.BASE_URL)
+        // let url = new URL(BASE_URL)
         // url.pathname = url.pathname + subPath + '/'
         // return url.href
-        return process.env.BASE_URL + '/' + subPath;
+        return BASE_URL + '/' + subPath;
     }
 
     // goto subPath if not already there
@@ -110,7 +120,7 @@ export class BasePage {
     }
 
     /**
-     * current page methods
+     * Current page methods
      */
 
     // get base url
@@ -164,7 +174,7 @@ export class BasePage {
     }
 
     /**
-     * click methods
+     * Click methods
      */
 
     // click on element
@@ -202,20 +212,12 @@ export class BasePage {
 
     // click & wait for load state to complete
     async clickAndWaitForLoadState(selector: string): Promise<void> {
-        await Promise.all([
-            this.page.waitForLoadState('networkidle'),
-            // this.page.waitForLoadState( 'domcontentloaded' ),
-            this.page.locator(selector).click(),
-        ]);
+        await Promise.all([this.page.waitForLoadState('networkidle'), this.page.locator(selector).click()]);
     }
 
     // click & wait for navigation to complete
     async clickAndWaitForUrl(url: string | RegExp, selector: string): Promise<void> {
-        await Promise.all([
-            this.page.waitForURL(url, { waitUntil: 'networkidle' }),
-            // this.page.waitForURL(url, { waitUntil: 'domcontentloaded' }),
-            this.page.locator(selector).click(),
-        ]);
+        await Promise.all([this.page.waitForURL(url, { waitUntil: 'networkidle' }), this.page.locator(selector).click()]);
     }
 
     // click & wait for request
@@ -240,6 +242,22 @@ export class BasePage {
         const [, response] = await Promise.all([this.page.waitForLoadState('networkidle'), this.page.waitForResponse(resp => resp.url().includes(subUrl) && resp.status() === code), this.page.locator(selector).click()]);
         expect(response.status()).toBe(code);
         return response;
+    }
+
+    // click & wait for responses
+    async clickAndWaitForResponses(subUrls: string[], selector: string, codes: number[] = [200]): Promise<Response[]> {
+        const responsePromises = subUrls.map((subUrl, index) => this.page.waitForResponse(resp => resp.url().includes(subUrl) && resp.status() === codes[index % codes.length]));
+        await this.page.locator(selector).click();
+        const responses = await Promise.all(responsePromises);
+        return responses;
+    }
+
+    // click & wait for responses
+    async clickAndWaitForResponsesAndLoadState(subUrls: string[], selector: string, codes: number[] = [200]): Promise<Response[]> {
+        const responsePromises = subUrls.map((subUrl, index) => this.page.waitForResponse(resp => resp.url().includes(subUrl) && resp.status() === codes[index % codes.length]));
+        await this.page.locator(selector).click();
+        const [, ...responses] = await Promise.all([this.page.waitForLoadState('networkidle'), ...responsePromises]);
+        return responses;
     }
 
     // click & wait for multiple responses
@@ -269,18 +287,13 @@ export class BasePage {
 
     // click & wait for response
     async clickAndAcceptAndWaitForResponseAndLoadState(subUrl: string, selector: string, code = 200): Promise<Response> {
-        const [response] = await Promise.all([
-            this.page.waitForResponse(resp => resp.url().includes(subUrl) && resp.status() === code),
-            this.acceptAlert(),
-            this.page.waitForLoadState('networkidle'),
-            this.page.locator(selector).click(),
-        ]);
+        const [response] = await Promise.all([this.page.waitForResponse(resp => resp.url().includes(subUrl) && resp.status() === code), this.acceptAlert(), this.page.waitForLoadState('networkidle'), this.page.locator(selector).click()]);
         return response;
     }
 
     // type & wait for response
     async typeByPageAndWaitForResponse(subUrl: string, selector: string, text: string, code = 200): Promise<Response> {
-        const [response] = await Promise.all([this.page.waitForResponse(resp => resp.url().includes(subUrl) && resp.status() === code), this.page.locator(selector).pressSequentially(text, { delay: 100 })]);
+        const [response] = await Promise.all([this.page.waitForResponse(resp => resp.url().includes(subUrl) && resp.status() === code), this.page.locator(selector).pressSequentially(text, { delay: 200 })]);
         return response;
     }
 
@@ -292,12 +305,7 @@ export class BasePage {
 
     // type & wait for response and LoadState
     async typeAndWaitForResponseAndLoadState(subUrl: string, selector: string, text: string, code = 200): Promise<Response> {
-        const [response] = await Promise.all([
-            this.page.waitForResponse(resp => resp.url().includes(subUrl) && resp.status() === code),
-            // await this.page.locator(selector).pressSequentially(text),
-            this.page.waitForLoadState('networkidle'),
-            this.clearAndFill(selector, text),
-        ]);
+        const [response] = await Promise.all([this.page.waitForResponse(resp => resp.url().includes(subUrl) && resp.status() === code), this.page.waitForLoadState('networkidle'), this.clearAndFill(selector, text)]);
         return response;
     }
 
@@ -345,7 +353,7 @@ export class BasePage {
         }
     }
 
-    // click if visible
+    // click if exists
     async clickIfExists(selector: string): Promise<void> {
         const isExists = await this.isLocatorExists(selector);
         if (isExists) {
@@ -355,7 +363,7 @@ export class BasePage {
 
     // is locator exists
     async isLocatorExists(selector: string): Promise<boolean> {
-        return (await this.page.locator(selector).count()) ? true : false;
+        return (await this.page.locator(selector).count()) > 0;
     }
 
     // is element exists
@@ -378,7 +386,7 @@ export class BasePage {
     }
 
     /**
-     * selector methods
+     * Selector methods
      */
 
     // wait for selector
@@ -400,6 +408,7 @@ export class BasePage {
 
     // returns whether the element is visible
     async isVisible(selector: string): Promise<boolean> {
+        await this.wait(1); // to add a buffer time for the element to be visible // todo: need to resolve in future
         return await this.isVisibleLocator(selector);
         // return await this.isVisibleByPage(selector);
     }
@@ -462,6 +471,12 @@ export class BasePage {
         return this.page.locator(selector);
     }
 
+    // get element count
+    async getElementCount(selector: string): Promise<number> {
+        return await this.countLocator(selector);
+        // return this.page.locator(selector).count();
+    }
+
     // get element text content
     async getElementText(selector: string): Promise<string | null> {
         return await this.textContentOfLocator(selector);
@@ -484,7 +499,7 @@ export class BasePage {
     // get element has test or not
     async hasText(selector: string, text: string): Promise<boolean> {
         const elementText = await this.textContentOfLocator(selector);
-        return elementText?.trim() === text ? true : false;
+        return elementText?.trim() === text;
     }
 
     // get element inner text
@@ -538,6 +553,22 @@ export class BasePage {
         await element.evaluate((element, attribute) => element.removeAttribute(attribute), attribute);
     }
 
+    // get element css value
+    async getElementCssStyle(selector: string): Promise<CSSStyleDeclaration> {
+        const element = this.getElement(selector);
+        const value = await element.evaluate(element => window.getComputedStyle(element));
+        // console.log(value)
+        return value;
+    }
+
+    // get element property value
+    async getElementPropertyValue(selector: string, property: string): Promise<string> {
+        const element = this.getElement(selector);
+        const value = await element.evaluate((element, property) => window.getComputedStyle(element).getPropertyValue(property), property);
+        // console.log(value)
+        return value;
+    }
+
     // get element property value: background color
     async getElementBackgroundColor(selector: string): Promise<string> {
         const element = this.getElement(selector);
@@ -558,7 +589,7 @@ export class BasePage {
     async hasColor(selector: string, color: string): Promise<boolean> {
         const elementColor = await this.getElementColor(selector);
         // console.log(elementColor);
-        return elementColor === color ? true : false;
+        return elementColor === color;
     }
 
     // get pseudo element style
@@ -585,7 +616,7 @@ export class BasePage {
     }
 
     /**
-     * timeout methods
+     * Timeout methods
      */
 
     // change default maximum time(seconds) for all the methods
@@ -646,7 +677,7 @@ export class BasePage {
 
     // type in input field
     async type(selector: string, text: string): Promise<void> {
-        await this.page.locator(selector).pressSequentially(text);
+        await this.page.locator(selector).pressSequentially(text, { delay: 100 });
     }
 
     // fill in input field
@@ -764,7 +795,7 @@ export class BasePage {
     async uploadFile(selector: string, files: string | string[]): Promise<void> {
         // await this.page.setInputFiles(selector, files, { noWaitAfter: true });
         await this.page.setInputFiles(selector, files);
-        await this.wait(1.5); //todo: resolve this
+        await this.wait(1.5); // todo: resolve this
     }
 
     // upload file
@@ -840,7 +871,7 @@ export class BasePage {
     }
 
     // get frame
-    getFrameSelector(frame: string, frameSelector: string): FrameLocator {
+    getFrameSelector(frame: string, frameSelector: string): Locator {
         return this.page.frameLocator(frame).locator(frameSelector);
     }
 
@@ -930,7 +961,7 @@ export class BasePage {
     }
 
     // returns the return value of pageFunction
-    async evaluate(selector: string, pageFunction: string): Promise<void> {
+    async evaluate(selector: string, pageFunction: any): Promise<void> {
         const locator = this.page.locator(selector);
         await locator.evaluate(pageFunction);
     }
@@ -943,7 +974,7 @@ export class BasePage {
 
     // returns the return value of pageFunction as a JSHandle
     // eslint-disable-next-line @typescript-eslint/ban-types
-    async evaluateHandle(selector: string, pageFunction: Function | string): Promise<JSHandle> {
+    async evaluateHandle(selector: string, pageFunction: any): Promise<JSHandle> {
         const locator = this.page.locator(selector);
         return await locator.evaluateHandle(pageFunction);
     }
@@ -1263,17 +1294,16 @@ export class BasePage {
     }
 
     /**
-     * dropdown methods
+     * Dropdown methods
      */
 
     // set dropdown option  span dropdown
     async setDropdownOptionSpan(selector: string, value: string): Promise<void> {
         const elements = await this.page.$$(selector);
         for (const element of elements) {
-            const text = element.evaluate(element => element.textContent, element);
+            const text = await element.evaluate(element => element.textContent, element);
             // console.log(text)
             if (value.toLowerCase() == text?.trim().toLowerCase()) {
-                // console.log(text)
                 await element.click();
             }
         }
@@ -1289,7 +1319,7 @@ export class BasePage {
     }
 
     /**
-     * page methods
+     * Page methods
      */
 
     // get all pages
@@ -1315,6 +1345,13 @@ export class BasePage {
         }
     }
 
+    // multiple elements to be visible
+    async multipleElementNotVisible(selectors: any) {
+        for (const selector in selectors) {
+            await this.notToBeVisible(selectors[selector]);
+        }
+    }
+
     async toHaveScreenshot(page: Page, locators?: Locator[]) {
         await expect(page).toHaveScreenshot({ fullPage: true, mask: locators, maskColor: 'black', animations: 'disabled' });
     }
@@ -1335,6 +1372,10 @@ export class BasePage {
         // todo:  return which elements are true for further operation
     }
 
+    // assert value to be equal
+    toBeEqual(received: any, expected: any) {
+        expect(received).toEqual(expected);
+    }
     // assert element to be visible
     async toBeVisible(selector: string) {
         await expect(this.page.locator(selector)).toBeVisible();
@@ -1370,9 +1411,21 @@ export class BasePage {
         await expect(this.page.locator(selector)).toHaveClass(className);
     }
 
+    // assert element to contain class
+    async toContainClass(selector: string, className: string) {
+        const elementClass = await this.getClassValue(selector);
+        expect(elementClass).toContain(className);
+    }
+
     // assert element to have background color
     async toHaveBackgroundColor(selector: string, backgroundColor: string) {
         const value = await this.getElementBackgroundColor(selector);
+        expect(value).toBe(backgroundColor);
+    }
+
+    // assert element to have  color
+    async toHaveColor(selector: string, backgroundColor: string) {
+        const value = await this.getElementColor(selector);
         expect(value).toBe(backgroundColor);
     }
 
@@ -1406,8 +1459,24 @@ export class BasePage {
         await expect(this.page.locator(selector)).not.toHaveClass(className);
     }
 
+    // assert element to contain text
+    async toContainTextFrameLocator(frame: string, frameSelector: string, text: string | RegExp): Promise<void> {
+        const locator = this.page.frameLocator(frame).locator(frameSelector);
+        await expect(locator).toContainText(text);
+    }
+
     /**
-     * custom methods
+     * Custom assertion methods
+     */
+
+    // admin enable switcher , if enabled then Skip : admin settings switcher
+    async switcherHasColor(selector: string, color: string): Promise<void> {
+        selector = /^(\/\/|\(\/\/)/.test(selector) ? `${selector}//span` : `${selector} span`;
+        await this.toHaveBackgroundColor(selector, color);
+    }
+
+    /**
+     * Custom methods
      */
 
     // dokan select2
@@ -1431,7 +1500,7 @@ export class BasePage {
 
     // admin enable switcher , if enabled then Skip : admin settings switcher
     async enableSwitcher(selector: string): Promise<void> {
-        /^(\/\/|\(\/\/)/.test(selector) ? (selector += '//span') : (selector += ' span');
+        selector = /^(\/\/|\(\/\/)/.test(selector) ? `${selector}//span` : `${selector} span`;
         const value = await this.getElementBackgroundColor(selector);
         if (!value.includes('rgb(0, 144, 255)')) {
             await this.click(selector);
@@ -1440,7 +1509,7 @@ export class BasePage {
 
     // admin disable switcher , if disabled then skip : admin settings switcher
     async disableSwitcher(selector: string): Promise<void> {
-        /^(\/\/|\(\/\/)/.test(selector) ? (selector += '//span') : (selector += ' span');
+        selector = /^(\/\/|\(\/\/)/.test(selector) ? `${selector}//span` : `${selector} span`;
         const value = await this.getElementBackgroundColor(selector);
         if (value.includes('rgb(0, 144, 255)')) {
             await this.click(selector);
@@ -1449,7 +1518,7 @@ export class BasePage {
 
     // admin enable switcher , if enabled then Skip : admin settings switcher
     async enableSwitcherAndWaitForResponse(subUrl: string, selector: string, code = 200): Promise<Response | string> {
-        /^(\/\/|\(\/\/)/.test(selector) ? (selector += '//span') : (selector += ' span');
+        selector = /^(\/\/|\(\/\/)/.test(selector) ? `${selector}//span` : `${selector} span`;
         const value = await this.getElementBackgroundColor(selector);
         if (!value.includes('rgb(0, 144, 255)')) {
             const [response] = await Promise.all([this.page.waitForResponse(resp => resp.url().includes(subUrl) && resp.status() === code), this.page.locator(selector).click()]);
@@ -1460,7 +1529,7 @@ export class BasePage {
 
     // admin disable switcher , if disabled then skip : admin settings switcher
     async disableSwitcherAndWaitForResponse(subUrl: string, selector: string, code = 200): Promise<Response | string> {
-        /^(\/\/|\(\/\/)/.test(selector) ? (selector += '//span') : (selector += ' span');
+        selector = /^(\/\/|\(\/\/)/.test(selector) ? `${selector}//span` : `${selector} span`;
         const value = await this.getElementBackgroundColor(selector);
         if (value.includes('rgb(0, 144, 255)')) {
             const [response] = await Promise.all([this.page.waitForResponse(resp => resp.url().includes(subUrl) && resp.status() === code), this.page.locator(selector).click()]);
@@ -1491,7 +1560,7 @@ export class BasePage {
 
     // admin enable switcher , if enabled then Skip : vendor dashboard disbursements
     async enableSwitcherDisbursement(selector: string): Promise<void> {
-        /^(\/\/|\(\/\/)/.test(selector) ? (selector += '//span') : (selector += ' span');
+        selector = /^(\/\/|\(\/\/)/.test(selector) ? `${selector}//span` : `${selector} span`;
         const value = await this.getElementBackgroundColor(selector);
         if (!value.includes('rgb(33, 150, 243)')) {
             await this.click(selector);
@@ -1536,16 +1605,30 @@ export class BasePage {
     }
 
     async uploadMedia(file: string) {
-        // await this.wait(0.5);
+        await this.wait(0.5);
+        await this.click(selector.wpMedia.mediaLibrary);
         const uploadedMediaIsVisible = await this.isVisible(selector.wpMedia.uploadedMediaFirst);
         if (uploadedMediaIsVisible) {
             await this.click(selector.wpMedia.uploadedMediaFirst);
+            console.log('File Already Uploaded');
         } else {
+            await this.click(selector.wpMedia.uploadFiles);
             await this.uploadFile(selector.wpMedia.selectFilesInput, file);
-            const isSelectDisabled = await this.isDisabled(selector.wpMedia.select);
-            isSelectDisabled && (await this.click(selector.wpMedia.selectUploadedMedia));
-            await this.click(selector.wpMedia.select);
+            console.log('File Uploaded');
         }
+        await this.click(selector.wpMedia.selectUploadedMedia);
+
+        // check if the uploaded media is selected or not for 3 times
+        for (let i = 0; i < 3; i++) {
+            const isSelectDisabled = await this.isDisabled(selector.wpMedia.select);
+            if (!isSelectDisabled) {
+                console.log('Media Selected');
+                break;
+            }
+            isSelectDisabled && (await this.click(selector.wpMedia.selectUploadedMedia));
+        }
+
+        await this.click(selector.wpMedia.select);
     }
 
     // upload file

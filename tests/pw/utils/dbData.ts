@@ -1,4 +1,4 @@
-const { BASE_URL } = process.env;
+const { BASE_URL, GMAP, LICENSE_KEY } = process.env;
 
 export const dbData = {
     dokan: {
@@ -202,7 +202,7 @@ export const dbData = {
             appearance_options: '',
             store_map: 'on',
             map_api_source: 'google_maps',
-            gmap_api_key: process.env.GMAP,
+            gmap_api_key: GMAP,
             mapbox_access_token: '',
             recaptcha_validation_label: '',
             contact_seller: 'on',
@@ -215,6 +215,11 @@ export const dbData = {
                 email: '',
                 phone: '',
                 address: '',
+                dokan_company_name: '',
+                dokan_company_id_number: '',
+                dokan_vat_number: '',
+                dokan_bank_name: '',
+                dokan_bank_iban: '',
             },
             disable_dokan_fontawesome: 'off',
         },
@@ -1093,7 +1098,7 @@ export const dbData = {
 
         // dokan pro license
         dokanProLicense: {
-            key: process.env.LICENSE_KEY,
+            key: LICENSE_KEY,
             status: 'activate',
             remaining: 42,
             activation_limit: 50,
@@ -1192,6 +1197,107 @@ export const dbData = {
         woocommerce_enable_myaccount_registration: 'yes',
     },
 
+    // germanized
+
+    germanized: {
+        legalCheckboxes: {
+            terms: {
+                is_enabled: 'no',
+                admin_name: 'Legal',
+                id: 'terms',
+                admin_desc: '',
+                label: '',
+                error_message: '',
+                hide_input: 'no',
+                is_mandatory: 'no',
+                locations: [],
+            },
+            download: {
+                is_enabled: 'no',
+                admin_name: 'Digital',
+                id: 'download',
+                admin_desc: '',
+                label: '',
+                error_message: '',
+                hide_input: 'no',
+                is_mandatory: 'no',
+                locations: [],
+                confirmation: '',
+                types: [],
+            },
+            service: {
+                is_enabled: 'no',
+                admin_name: 'Service',
+                id: 'service',
+                admin_desc: '',
+                label: '',
+                error_message: '',
+                hide_input: 'no',
+                is_mandatory: 'no',
+                locations: [],
+                confirmation: '',
+            },
+            parcel_delivery: {
+                is_enabled: 'no',
+                admin_name: 'Parcel Delivery',
+                id: 'parcel_delivery',
+                admin_desc: '',
+                label: '',
+                error_message: '',
+                hide_input: 'no',
+                is_mandatory: 'no',
+                locations: [],
+                show_special: 'always',
+                show_shipping_methods: [],
+            },
+            age_verification: {
+                is_enabled: 'no',
+                admin_name: 'Age Verification',
+                id: 'age_verification',
+                admin_desc: '',
+                label: '',
+                error_message: '',
+                hide_input: 'no',
+                is_mandatory: 'no',
+                locations: [],
+                min_age: '-1',
+            },
+            privacy: {
+                is_enabled: 'no',
+                admin_name: 'New account',
+                id: 'privacy',
+                admin_desc: '',
+                label: '',
+                error_message: '',
+                hide_input: 'no',
+                is_mandatory: 'no',
+                locations: [],
+            },
+            used_goods_warranty: {
+                is_enabled: 'no',
+                admin_name: 'Used Goods',
+                id: 'used_goods_warranty',
+                admin_desc: '',
+                label: '',
+                error_message: '',
+                hide_input: 'no',
+                is_mandatory: 'no',
+                locations: [],
+            },
+            defective_copy: {
+                is_enabled: 'no',
+                admin_name: 'Defective Copies',
+                id: 'defective_copy',
+                admin_desc: '',
+                label: '',
+                error_message: '',
+                hide_input: 'no',
+                is_mandatory: 'no',
+                locations: [],
+            },
+        },
+    },
+
     // test db data
 
     testData: {
@@ -1224,6 +1330,25 @@ export const dbData = {
                 product_page_options: '',
                 show_vendor_info: 'on',
                 enabled_more_products_tab: 'on',
+            },
+
+            hideVendorInfo: {
+                email: 'email',
+                phone: 'phone',
+                address: 'address',
+                dokan_company_name: 'dokan_company_name',
+                dokan_company_id_number: 'dokan_company_id_number',
+                dokan_vat_number: 'dokan_vat_number',
+                dokan_bank_name: 'dokan_bank_name',
+                dokan_bank_iban: 'dokan_bank_iban',
+            },
+
+            hideVendorEuInfo: {
+                dokan_company_name: 'dokan_company_name',
+                dokan_company_id_number: 'dokan_company_id_number',
+                dokan_vat_number: 'dokan_vat_number',
+                dokan_bank_name: 'dokan_bank_name',
+                dokan_bank_iban: 'dokan_bank_iban',
             },
         },
     },

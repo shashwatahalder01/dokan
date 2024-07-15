@@ -408,7 +408,7 @@ export class ProductsPage extends AdminPage {
         await this.clickAndWaitForResponseAndLoadState(data.subUrls.frontend.vDashboard.products, productsVendor.saveProduct, 302);
         await this.toContainText(productsVendor.updatedSuccessMessage, product.saveSuccessMessage);
         await this.toHaveValue(productsVendor.edit.title, productName);
-        //todo: add more assertions
+        // todo: add more assertions
     }
 
     // vendor add variable subscription product
@@ -434,7 +434,7 @@ export class ProductsPage extends AdminPage {
         await this.clickAndWaitForResponseAndLoadState(data.subUrls.frontend.vDashboard.products, productsVendor.saveProduct, 302);
         await this.toContainText(productsVendor.updatedSuccessMessage, product.saveSuccessMessage);
         await this.toHaveValue(productsVendor.edit.title, productName);
-        //todo: add more assertions
+        // todo: add more assertions
     }
 
     // vendor add external product
@@ -449,7 +449,7 @@ export class ProductsPage extends AdminPage {
         await this.clickAndWaitForResponseAndLoadState(data.subUrls.frontend.vDashboard.products, productsVendor.saveProduct, 302);
         await this.toContainText(productsVendor.updatedSuccessMessage, product.saveSuccessMessage);
         await this.toHaveValue(productsVendor.edit.title, productName);
-        //todo: add more assertions
+        // todo: add more assertions
     }
 
     // go to product edit
@@ -537,7 +537,7 @@ export class ProductsPage extends AdminPage {
         await this.hover(productsVendor.productCell(productName));
         await this.clickAndWaitForLoadState(productsVendor.view(productName));
         await expect(this.page).toHaveURL(data.subUrls.frontend.productDetails(helpers.slugify(productName)) + '/');
-        const { quantity, addToCart, viewCart, ...productDetails } = selector.customer.cSingleProduct.productDetails;
+        const { quantity, addToCart, viewCart, euComplianceData, ...productDetails } = selector.customer.cSingleProduct.productDetails;
         await this.multipleElementVisible(productDetails);
     }
 
@@ -568,8 +568,40 @@ export class ProductsPage extends AdminPage {
         await this.typeFrameSelector(productsVendor.shortDescription.shortDescriptionIframe, productsVendor.shortDescription.shortDescriptionHtmlBody, description.shortDescription);
         await this.typeFrameSelector(productsVendor.description.descriptionIframe, productsVendor.description.descriptionHtmlBody, description.description);
         await this.clickAndWaitForResponseAndLoadState(data.subUrls.frontend.vDashboard.products, productsVendor.saveProduct, 302);
+
         await this.toContainText(productsVendor.updatedSuccessMessage, data.product.createUpdateSaveSuccessMessage);
-        // todo: add more assertions
+
+        await this.toContainTextFrameLocator(productsVendor.shortDescription.shortDescriptionIframe, productsVendor.shortDescription.shortDescriptionHtmlBody, description.shortDescription);
+        await this.toContainTextFrameLocator(productsVendor.description.descriptionIframe, productsVendor.description.descriptionHtmlBody, description.description);
+    }
+
+    // add product EU compliance data
+    async addProductEuCompliance(productName: string, euCompliance: product['productInfo']['euCompliance']): Promise<void> {
+        await this.goToProductEdit(productName);
+        await this.selectByValue(productsVendor.euComplianceFields.saleLabel, euCompliance.saleLabel);
+        await this.selectByValue(productsVendor.euComplianceFields.saleRegularLabel, euCompliance.saleRegularLabel);
+        await this.selectByValue(productsVendor.euComplianceFields.unit, euCompliance.unit);
+        await this.selectByValue(productsVendor.euComplianceFields.minimumAge, euCompliance.minimumAge);
+        await this.clearAndType(productsVendor.euComplianceFields.productUnits, euCompliance.productUnits);
+        await this.clearAndType(productsVendor.euComplianceFields.basePriceUnits, euCompliance.basePriceUnits);
+        euCompliance.freeShipping && (await this.check(productsVendor.euComplianceFields.freeShipping));
+        await this.clearAndType(productsVendor.euComplianceFields.regularUnitPrice, euCompliance.regularUnitPrice);
+        await this.clearAndType(productsVendor.euComplianceFields.saleUnitPrice, euCompliance.saleUnitPrice);
+        await this.typeFrameSelector(productsVendor.euComplianceFields.optionalMiniDescription.descriptionIframe, productsVendor.euComplianceFields.optionalMiniDescription.descriptionHtmlBody, euCompliance.optionalMiniDescription);
+        await this.clickAndWaitForResponseAndLoadState(data.subUrls.frontend.vDashboard.products, productsVendor.saveProduct, 302);
+
+        await this.toContainText(productsVendor.updatedSuccessMessage, data.product.createUpdateSaveSuccessMessage);
+
+        await this.toHaveValue(productsVendor.euComplianceFields.saleLabel, euCompliance.saleLabel);
+        await this.toHaveValue(productsVendor.euComplianceFields.saleRegularLabel, euCompliance.saleRegularLabel);
+        await this.toHaveValue(productsVendor.euComplianceFields.unit, euCompliance.unit);
+        await this.toHaveValue(productsVendor.euComplianceFields.minimumAge, euCompliance.minimumAge);
+        await this.toHaveValue(productsVendor.euComplianceFields.productUnits, euCompliance.productUnits);
+        await this.toHaveValue(productsVendor.euComplianceFields.basePriceUnits, euCompliance.basePriceUnits);
+        await this.toBeChecked(productsVendor.euComplianceFields.freeShipping);
+        await this.toHaveValue(productsVendor.euComplianceFields.regularUnitPrice, euCompliance.regularUnitPrice);
+        await this.toHaveValue(productsVendor.euComplianceFields.saleUnitPrice, euCompliance.saleUnitPrice);
+        await this.toContainTextFrameLocator(productsVendor.euComplianceFields.optionalMiniDescription.descriptionIframe, productsVendor.euComplianceFields.optionalMiniDescription.descriptionHtmlBody, euCompliance.optionalMiniDescription);
     }
 
     // add product quantity discount
@@ -579,8 +611,11 @@ export class ProductsPage extends AdminPage {
         await this.clearAndType(productsVendor.discount.lotMinimumQuantity, quantityDiscount.minimumQuantity);
         await this.clearAndType(productsVendor.discount.lotDiscountInPercentage, quantityDiscount.discountPercentage);
         await this.clickAndWaitForResponseAndLoadState(data.subUrls.frontend.vDashboard.products, productsVendor.saveProduct, 302);
+
         await this.toContainText(productsVendor.updatedSuccessMessage, data.product.createUpdateSaveSuccessMessage);
-        // todo: add more assertions
+        await this.toBeChecked(productsVendor.discount.enableBulkDiscount);
+        await this.toHaveValue(productsVendor.discount.lotMinimumQuantity, quantityDiscount.minimumQuantity);
+        await this.toHaveValue(productsVendor.discount.lotDiscountInPercentage, quantityDiscount.discountPercentage);
     }
 
     // vendor add product rma options
@@ -601,7 +636,7 @@ export class ProductsPage extends AdminPage {
         }
         await this.clickAndWaitForResponseAndLoadState(data.subUrls.frontend.vDashboard.products, productsVendor.saveProduct, 302);
         await this.toContainText(productsVendor.updatedSuccessMessage, data.product.createUpdateSaveSuccessMessage);
-        //todo: add more assertions
+        // todo: add more assertions
     }
 
     // add product Wholesale options
@@ -611,7 +646,9 @@ export class ProductsPage extends AdminPage {
         await this.clearAndType(productsVendor.wholesale.wholesalePrice, wholesaleOption.wholesalePrice);
         await this.clearAndType(productsVendor.wholesale.minimumQuantityForWholesale, wholesaleOption.minimumWholesaleQuantity);
         await this.clickAndWaitForResponseAndLoadState(data.subUrls.frontend.vDashboard.products, productsVendor.saveProduct, 302);
+
         await this.toContainText(productsVendor.updatedSuccessMessage, data.product.createUpdateSaveSuccessMessage);
+        await this.toBeChecked(productsVendor.wholesale.enableWholeSaleForThisProduct);
         await this.toHaveValue(productsVendor.wholesale.wholesalePrice, wholesaleOption.wholesalePrice);
         await this.toHaveValue(productsVendor.wholesale.minimumQuantityForWholesale, wholesaleOption.minimumWholesaleQuantity);
     }
@@ -648,12 +685,12 @@ export class ProductsPage extends AdminPage {
 
         await this.clickAndWaitForResponseAndLoadState(data.subUrls.frontend.vDashboard.products, productsVendor.saveProduct, 302);
         await this.toContainText(productsVendor.updatedSuccessMessage, data.product.createUpdateSaveSuccessMessage);
-        //todo: add more assertion
+        // todo: add more assertion
         await this.toHaveValue(productsVendor.otherOptions.purchaseNote, otherOption.purchaseNote);
         await this.toBeChecked(productsVendor.otherOptions.enableProductReviews);
     }
 
-    // add product description
+    // add product catalog mode
     async addCatalogMode(productName: string): Promise<void> {
         await this.goToProductEdit(productName);
         await this.check(productsVendor.catalogMode.removeAddToCart);
