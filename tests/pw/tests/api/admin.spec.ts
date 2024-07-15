@@ -25,7 +25,7 @@ test.describe('admin api test', () => {
         await apiUtils.dispose();
     });
 
-    test.only('get admin report overview', { tag: ['@lite'] }, async () => {
+    test('get admin report overview', { tag: ['@lite'] }, async () => {
         const [response, responseBody] = await apiUtils.get(endPoints.getAdminReportOverview);
         expect(response.ok()).toBeTruthy();
         expect(responseBody).toBeTruthy();

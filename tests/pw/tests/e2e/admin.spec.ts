@@ -22,7 +22,7 @@ test.describe('Admin functionality test', () => {
         await aPage.close();
     });
 
-    test.only('admin can login', { tag: ['@lite', '@admin'] }, async ({ page }) => {
+    test('admin can login', { tag: ['@lite', '@admin'] }, async ({ page }) => {
         const loginPage = new LoginPage(page);
         await loginPage.adminLogin(data.admin);
     });
