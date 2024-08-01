@@ -67,8 +67,7 @@ export class VendorPage extends BasePage {
         const username = vendorInfo.firstName() + vendorInfo.lastName().replace("'", '');
 
         await this.goToMyAccount();
-        const regIsVisible = await this.isVisible(selector.customer.cRegistration.regEmail);
-        !regIsVisible && (await this.loginPage.logout());
+
         await this.clearAndType(registrationVendor.regEmail, username + data.vendor.vendorInfo.emailDomain);
         await this.clearAndType(registrationVendor.regPassword, vendorInfo.password);
         await this.focusAndClick(registrationVendor.regVendor);
@@ -95,21 +94,36 @@ export class VendorPage extends BasePage {
             await this.clearAndType(registrationVendor.bankName, vendorInfo.bankName);
             await this.clearAndType(registrationVendor.bankIban, vendorInfo.bankIban);
         }
+
         await this.clearAndType(registrationVendor.phone, vendorInfo.phoneNumber);
+
+        // check if terms and conditions is visible
         await this.checkIfVisible(selector.customer.cDashboard.termsAndConditions);
+
+        // purchase subscription pack if enabled
         const subscriptionPackIsVisible = await this.isVisible(registrationVendor.subscriptionPack);
-        subscriptionPackIsVisible && (await this.selectByLabel(registrationVendor.subscriptionPack, data.predefined.vendorSubscription.nonRecurring));
-        setupWizardData.setupWizardEnabled ? await this.clickAndWaitForResponseAndLoadState(data.subUrls.frontend.vDashboard.setupWizard, registrationVendor.register) : await this.clickAndWaitForResponseAndLoadState(data.subUrls.frontend.vDashboard.dashboard, registrationVendor.register);
-        const registrationErrorIsVisible = await this.isVisible(selector.customer.cWooSelector.wooCommerceError);
-        if (registrationErrorIsVisible) {
-            const hasError = await this.hasText(selector.customer.cWooSelector.wooCommerceError, data.customer.registration.registrationErrorMessage);
-            if (hasError) {
-                console.log('User already exists!!');
-                return;
+        if (subscriptionPackIsVisible) {
+            await this.selectByLabel(registrationVendor.subscriptionPack, vendorInfo.vendorSubscription);
+            await this.clickAndWaitForResponseAndLoadState(data.subUrls.frontend.checkout, registrationVendor.register);
+            await this.customer.placeOrder('bank', false, true);
+
+            if (setupWizardData.setupWizardEnabled) {
+                // to avoid net::ERR_ABORTED  [race condition page auto navigates to setup wizard, also there is goto to setup wizard in the next line]
+                await this.waitForUrl(data.subUrls.frontend.vDashboard.setupWizard);
+                await this.vendorSetupWizard(setupWizardData);
+            } else {
+                await this.goto(data.subUrls.frontend.vDashboard.dashboard);
+                await this.toBeVisible(selector.vendor.vDashboard.menus.dashboard);
             }
+        } else {
+            if (setupWizardData.setupWizardEnabled) {
+                await this.clickAndWaitForResponseAndLoadState(data.subUrls.frontend.vDashboard.setupWizard, registrationVendor.register);
+                await this.vendorSetupWizard(setupWizardData);
+            }
+
+            await this.clickAndWaitForResponseAndLoadState(data.subUrls.frontend.vDashboard.dashboard, registrationVendor.register);
+            await this.toBeVisible(selector.vendor.vDashboard.menus.dashboard);
         }
-        subscriptionPackIsVisible && (await this.customer.placeOrder('bank', false, true, false));
-        setupWizardData.setupWizardEnabled && (await this.vendorSetupWizard(setupWizardData));
     }
 
     // vendor setup wizard

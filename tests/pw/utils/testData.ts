@@ -811,7 +811,8 @@ export const data = {
                 withdraw: 'wp-admin/admin.php?page=dokan#/withdraw?status=pending',
                 reverseWithdraws: 'wp-admin/admin.php?page=dokan#/reverse-withdrawal',
                 vendors: 'wp-admin/admin.php?page=dokan#/vendors',
-                vendorDetails: (vendorId: string) => `wp-admin/admin.php?page=dokan#/vendors/${vendorId}`,
+                vendorDetails: (sellerId: string) => `wp-admin/admin.php?page=dokan#/vendors/${sellerId}`,
+                vendorDetailsEdit: (sellerId: string) => `wp-admin/admin.php?page=dokan#/vendors/${sellerId}?edit=true`,
                 storeCategories: 'wp-admin/admin.php?page=dokan#/store-categories',
                 abuseReports: 'wp-admin/admin.php?page=dokan#/abuse-reports',
                 storeReviews: 'wp-admin/admin.php?page=dokan#/store-reviews',
@@ -827,6 +828,7 @@ export const data = {
                 tools: 'wp-admin/admin.php?page=dokan#/tools',
                 productQA: 'wp-admin/admin.php?page=dokan#/product-qa',
                 questionDetails: (questionId: string) => `wp-admin/admin.php?page=dokan#/product-qa/${questionId}`,
+                subscriptions: 'wp-admin/admin.php?page=dokan#/subscriptions',
                 verifications: 'wp-admin/admin.php?page=dokan#/verifications?status=pending',
                 productAdvertising: 'wp-admin/admin.php?page=dokan#/product-advertising',
                 wholeSaleCustomer: 'wp-admin/admin.php?page=dokan#/wholesale-customer',
@@ -937,6 +939,7 @@ export const data = {
                 manageResources: 'dashboard/booking/resources',
                 announcements: 'dashboard/announcement',
                 analytics: 'dashboard/analytics',
+                subscriptions: 'dashboard/subscription',
                 tools: 'dashboard/tools',
                 export: 'dashboard/tools/#export',
                 csvImport: 'dashboard/tools/csv-import',
@@ -996,8 +999,9 @@ export const data = {
                 productQuestions: 'dokan/v1/product-questions',
                 productQuestionsBulkActions: 'dokan/v1/product-questions/bulk_action',
                 productAnswers: 'dokan/v1/product-answers',
-                verifications: '/dokan/v1/verification-requests',
-                verificationMethods: '/dokan/v1/verification-methods',
+                subscriptions: 'dokan/v1/subscription',
+                verifications: 'dokan/v1/verification-requests',
+                verificationMethods: 'dokan/v1/verification-methods',
             },
 
             wc: {
@@ -1093,6 +1097,9 @@ export const data = {
 
             // address fields enable flag (on vendor registration)
             addressFieldsEnabled: false,
+
+            //
+            vendorSubscription: 'Dokan_Subscription_Non_recurring',
 
             // commission
             commissionType: 'fixed', // 'fixed','category_based'
@@ -1462,6 +1469,7 @@ export const data = {
                 phone: '0123456789',
             },
             shipping: {
+                email: `${CUSTOMER}@yopmail.com`,
                 firstName: CUSTOMER,
                 lastName: 'c1',
                 companyName: faker.company.name(),

@@ -101,9 +101,9 @@ export const dbUtils = {
     },
 
     // create abuse report
-    async createAbuseReport(abuseReport: any, productId: string, vendorId: string, customerId: string): Promise<any> {
+    async createAbuseReport(abuseReport: any, productId: string, sellerId: string, customerId: string): Promise<any> {
         const querySelect = `INSERT INTO ${dbPrefix}_dokan_report_abuse_reports (reason, product_id, vendor_id, customer_id, description, reported_at) VALUES ('${abuseReport.reason}', ${parseInt(productId)}, ${parseInt(
-            vendorId,
+            sellerId,
         )}, ${parseInt(customerId)}, '${abuseReport.description}',  '${helpers.currentDateTimeFullFormat}');`;
         const res = await dbUtils.dbQuery(querySelect);
         // console.log(res);
@@ -149,6 +149,22 @@ export const dbUtils = {
     async createBookingResource(postId: string, url: string): Promise<any> {
         const guid = url + '?post_type=bookable_resource&#038;p=' + postId;
         const queryUpdate = `UPDATE ${dbPrefix}_posts SET guid = '${guid}', post_type = 'bookable_resource' WHERE ID = '${postId}';`;
+        const res = await dbUtils.dbQuery(queryUpdate);
+        // console.log(res);
+        return res;
+    },
+
+    async updateProductType(productId: string): Promise<any> {
+        // get term id
+        const simpleTermIdQuery = `SELECT term_id FROM ${dbPrefix}_terms WHERE name = 'simple';`;
+        const simpleTermIdQueryResult = await dbUtils.dbQuery(simpleTermIdQuery);
+        const simpleTermId = simpleTermIdQueryResult[0].term_id;
+
+        const subscriptionTermIdQuery = `SELECT term_id FROM ${dbPrefix}_terms WHERE name = 'product_pack';`;
+        const subscriptionTermIdQueryResult = await dbUtils.dbQuery(subscriptionTermIdQuery);
+        const subscriptionTermId = subscriptionTermIdQueryResult[0].term_id;
+
+        const queryUpdate = `UPDATE ${dbPrefix}_term_relationships SET term_taxonomy_id = '${subscriptionTermId}' WHERE object_id = '${productId}' AND term_taxonomy_id = ${simpleTermId};`;
         const res = await dbUtils.dbQuery(queryUpdate);
         // console.log(res);
         return res;

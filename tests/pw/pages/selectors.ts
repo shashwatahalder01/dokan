@@ -664,7 +664,8 @@ export const selector = {
                     makeVendorFeature: '//span[contains(text(), "Make Vendor Featured")]/..//label[@class="switch tips"]',
 
                     // Vendor Subscription
-                    AssignSubscriptionPack: '.multiselect--active > .multiselect__tags',
+                    assignSubscriptionPackDropdown: '//label[text()="Assign Subscription Pack"]/..//div[@class="multiselect__select"]',
+                    selectSubscriptionPack: (subscriptionPack: string) => `//li[contains(.,'${subscriptionPack}')]`,
 
                     // Commission
                     commissionType: 'select#_subscription_product_admin_commission_type', // fixed, category_based
@@ -679,7 +680,7 @@ export const selector = {
                     saveChanges: '//div[contains(@class, "action-links footer")]//button[contains(text(),"Save Changes")]',
                     cancelEditOnTop: '//div[contains(@class, "profile-banner")]//button[contains(text(),"Cancel")]',
                     saveChangesOnTop: '//div[contains(@class, "profile-banner")]//button[contains(text(),"Save Changes")]',
-                    confirmSaveChanges: 'button.swal2-confirm',
+                    closeUpdateSuccessModal: 'button.swal2-confirm',
                 },
 
                 storeCategory: {
@@ -1640,6 +1641,55 @@ export const selector = {
                 },
             },
 
+            // subscriptions
+            subscriptions: {
+                subscribedVendorList: '//h1[text()="Subscribed Vendor List"]',
+
+                // Bulk Actions
+                bulkActions: {
+                    selectAll: 'thead .manage-column input',
+                    selectAction: '.tablenav.top #bulk-action-selector-top', // approved, cancelled, rejected
+                    applyAction: '//div[@class="tablenav top"]//button[normalize-space()="Apply"]',
+                },
+
+                // Filters
+                filters: {
+                    filterByVendors: '(//div[@class="multiselect__select"])[1]',
+                    filterByVendorsInput: '(//input[@class="multiselect__input"])[1]',
+                    filterBySubscriptionPack: '(//div[@class="multiselect__select"])[2]',
+                    filterBySubscriptionPackInput: '(//input[@class="multiselect__input"])[2]',
+                    filteredResult: (result: string) => `//span[text()='${result}']`,
+                },
+
+                // Table
+                table: {
+                    subscriptionTable: '.subscription-list table',
+                    storeColumn: 'thead th.store_name',
+                    subscriptionPackColumn: 'thead th.subscription_title',
+                    startDateColumn: 'thead th.start_date',
+                    endDateColumn: 'thead th.end_date',
+                    statusColumn: 'thead th.status',
+                    orderColumn: 'thead th.order_id',
+                    actionsColumn: 'thead th.action',
+                },
+
+                numberOfRowsFound: '.tablenav.top .displaying-num',
+                noRowsFound: '//td[normalize-space()="No subscribed vendors found."]',
+                currentNoOfRows: 'table tbody tr',
+
+                vendorSubscriptionsRow: (storeName: string) => `//td[@class="column store_name"]//a[contains(text(),'${storeName}')]/../../..`,
+                vendorSubscriptionsCell: (storeName: string) => `//td[@class="column store_name"]//a[contains(text(),'${storeName}')]`,
+                vendorSubscriptionsActions: (storeName: string) => `//td[@class="column store_name"]//a[contains(text(),'${storeName}')]/../../..//td[@class="column action"]//span`,
+
+                subscriptionAction: {
+                    cancelImmediately: '//input[@value="immediately"]',
+                    cancelAfterEndOfCurrentPeriod: '//input[@value="end_of_current_period"]',
+                    cancelSubscription: '.swal2-confirm',
+                    dontCancelSubscription: 'swal2-cancel',
+                    cancelSuccessMessage: '//h2[contains(text(),"Subscription has been cancelled")]', //todo: update locator
+                },
+            },
+
             // Verifications
             verifications: {
                 verificationRequestsText: '//h1[normalize-space()="Verification Requests"]',
@@ -1841,6 +1891,7 @@ export const selector = {
                 },
             },
 
+            // SPMV
             spmv: {
                 spmvDiv: '#dokan-spmv-products-admin',
                 searchVendor: '#dokan-spmv-products-admin input.select2-search__field',
@@ -5262,17 +5313,28 @@ export const selector = {
             noAnalyticsFound: '//div[@class="tab-pane active" and normalize-space()="There is no analytics found for your store."]',
         },
 
-        vSubscription: {
+        vSubscriptions: {
             dokanSubscriptionDiv: 'div.dokan-subscription-content',
             noSubscriptionMessage: '//h3[text()="No subscription pack has been found!"]',
 
-            subscribedSubscriptionInfo: 'div.seller_subs_info',
-            dokanSubscriptionProductContainer: 'div.pack_content_wrapper',
+            sellerSubscriptionInfo: {
+                sellerSubscriptionInfo: 'div.seller_subs_info',
+                subscribedPack: (pack: string) => `//div[@class='seller_subs_info']//p//span[text()='${pack}']`,
+                cancelSubscription: '//form[@id="dps_submit_form"]//input[@value="Cancel"]',
+                confirmCancelSubscription: '.swal2-confirm',
+                cancelCancelSubscription: '.swal2-cancel',
+                cancelSuccessMessage: '.dokan-message p',
+            },
 
-            dokanSubscriptionProduct: 'div.product_pack_item',
-            dokanSubscriptionProductPrice: 'div.pack_price',
-            dokanSubscriptionProductContent: 'div.pack_content',
-            dokanSubscriptionProductBuyButton: 'div.buy_pack_button',
+            productCardContainer: 'div.pack_content_wrapper',
+            productCard: {
+                item: 'div.product_pack_item',
+                price: 'div.pack_price',
+                content: 'div.pack_content',
+                buyButton: 'div.buy_pack_button',
+            },
+
+            buySubscription: (subscriptionPack: string) => `//div[@class="pack_content"]//h2[text()='${subscriptionPack}']/../..//div[@class='buy_pack_button']`,
         },
 
         // Announcements
@@ -6413,28 +6475,26 @@ export const selector = {
             // Billing Address
             billing: {
                 editBillingAddress: '//h3[contains(text(),"Billing address")]/..//a[@class="edit"]',
-                billingFirstName: '#billing_first_name',
-                billingLastName: '#billing_last_name',
-                billingCompanyName: '#billing_company',
-                billingCompanyID: '#billing_dokan_company_id_number',
-                billingVatOrTaxNumber: '#billing_dokan_vat_number',
-                billingNameOfBank: '#billing_dokan_bank_name',
-                billingBankIban: '#billing_dokan_bank_iban',
-                // billingCountryOrRegion: '#select2-billing_country-container',
-                billingCountryOrRegion: '(//span[@class="select2-selection__arrow"])[1]',
-                billingCountryOrRegionInput: '.select2-search.select2-search--dropdown .select2-search__field',
-                billingCountryOrRegionValues: '.select2-results ul li',
-                billingStreetAddress: '#billing_address_1',
-                billingStreetAddress2: '#billing_address_2',
-                billingTownCity: '#billing_city',
-                // billingState: '#select2-billing_state-container',
-                billingState: '(//span[@class="select2-selection__arrow"])[2]',
-                billingStateInput: '.select2-search.select2-search--dropdown .select2-search__field',
-                billingStateValues: '.select2-results ul li',
-                billingZipCode: '#billing_postcode',
-                billingPhone: '#billing_phone',
-                billingEmailAddress: '#billing_email',
-                billingSaveAddress: '//button[@name="save_address"]',
+                firstName: '#billing_first_name',
+                lastName: '#billing_last_name',
+                companyName: '#billing_company',
+                companyID: '#billing_dokan_company_id_number',
+                vatOrTaxNumber: '#billing_dokan_vat_number',
+                nameOfBank: '#billing_dokan_bank_name',
+                bankIban: '#billing_dokan_bank_iban',
+                countryOrRegion: '(//span[@class="select2-selection__arrow"])[1]',
+                countryOrRegionInput: '.select2-search.select2-search--dropdown .select2-search__field',
+                countryOrRegionValues: '.select2-results ul li',
+                streetAddress: '#billing_address_1',
+                streetAddress2: '#billing_address_2',
+                city: '#billing_city',
+                state: '(//span[@class="select2-selection__arrow"])[2]',
+                stateInput: '.select2-search.select2-search--dropdown .select2-search__field',
+                stateValues: '.select2-results ul li',
+                zipCode: '#billing_postcode',
+                phone: '#billing_phone',
+                email: '#billing_email',
+                saveAddress: '//button[@name="save_address"]',
                 // Success Message
                 successMessage: '.woocommerce-message',
             },
@@ -6442,22 +6502,20 @@ export const selector = {
             // Shipping Address
             shipping: {
                 editShippingAddress: '//h3[contains(text(),"Shipping address")]/..//a[@class="edit"]',
-                shippingFirstName: '#shipping_first_name',
-                shippingLastName: '#shipping_last_name',
-                shippingCompanyName: '#shipping_company',
-                // shippingCountryOrRegion: '#select2-shipping_country-container',
-                shippingCountryOrRegion: '(//span[@class="select2-selection__arrow"])[1]',
-                shippingCountryOrRegionInput: '.select2-search.select2-search--dropdown .select2-search__field',
-                shippingCountryOrRegionValues: '.select2-results ul li',
-                shippingStreetAddress: '#shipping_address_1',
-                shippingStreetAddress2: '#shipping_address_2',
-                shippingTownCity: '#shipping_city',
-                // shippingState: '#select2-shipping_state-container',
-                shippingState: '(//span[@class="select2-selection__arrow"])[2]',
-                shippingStateInput: '.select2-search.select2-search--dropdown .select2-search__field',
-                shippingStateValues: '.select2-results ul li',
-                shippingZipCode: '#shipping_postcode',
-                shippingSaveAddress: '//button[@name="save_address"]',
+                firstName: '#shipping_first_name',
+                lastName: '#shipping_last_name',
+                companyName: '#shipping_company',
+                countryOrRegion: '(//span[@class="select2-selection__arrow"])[1]',
+                countryOrRegionInput: '.select2-search.select2-search--dropdown .select2-search__field',
+                countryOrRegionValues: '.select2-results ul li',
+                streetAddress: '#shipping_address_1',
+                streetAddress2: '#shipping_address_2',
+                city: '#shipping_city',
+                state: '(//span[@class="select2-selection__arrow"])[2]',
+                stateInput: '.select2-search.select2-search--dropdown .select2-search__field',
+                stateValues: '.select2-results ul li',
+                zipCode: '#shipping_postcode',
+                saveAddress: '//button[@name="save_address"]',
 
                 // Success Message
                 successMessage: '.woocommerce-message',
@@ -7370,45 +7428,41 @@ export const selector = {
                 orderTotal: 'tr.order-total span.woocommerce-Price-amount.amount',
             },
 
-            // Billing Details
-            billingAddress: {
-                billingFirstName: '#billing_first_name',
-                billingLastName: '#billing_last_name',
-                billingCompanyName: '#billing_company',
-                billingCompanyIDOrEuidNumber: '#billing_dokan_company_id_number',
-                billingVatOrTaxNumber: '#billing_dokan_vat_number',
-                billingNameOfBank: '#billing_dokan_bank_name',
-                billingBankIban: '#billing_dokan_bank_iban',
-                // billingCountryOrRegion: '#select2-billing_country-container',
-                billingCountryOrRegion: '.select2-selection__arrow',
-                billingCountryOrRegionValues: '.select2-results ul li',
-                billingStreetAddress: '#billing_address_1',
-                billingStreetAddress2: '#billing_address_2',
-                billingTownCity: '#billing_city',
-                billingPhone: '#billing_phone',
-                billingEmailAddress: '#billing_email',
-                billingState: '#select2-billing_state-container',
-                billingStateValues: '.select2-results ul li',
-                billingZipCode: '#billing_postcode',
+            // Billing Address
+            billing: {
+                email: '#email',
+                country: '#billing-country input',
+                firstName: '#billing-first_name',
+                lastName: '#billing-last_name',
+                address: '#billing-address_1',
+                address2toggle: 'button.wc-block-components-address-form__address_2-toggle',
+                address2: '#billing-address_2',
+                city: '#billing-city',
+                stateInput: '#billing-state input',
+                zipCode: '#billing-postcode',
+                phone: '#billing-phone',
+                //todo: add eu compliance fields locator after dokan implement it & also update test methods
+                // companyName: '#billing_company',
+                // companyIDOrEuidNumber: '#billing_dokan_company_id_number',
+                // vatOrTaxNumber: '#billing_dokan_vat_number',
+                // nameOfBank: '#billing_dokan_bank_name',
+                // bankIban: '#billing_dokan_bank_iban',
             },
 
-            // Shipping Details
-            shippingAddress: {
-                shipToADifferentAddress: '#ship-to-different-address-checkbox',
-                shippingFirstName: '#shipping_first_name',
-                shippingLastName: '#shipping_last_name',
-                shippingCompanyName: '#shipping_company',
-                // shippingCountryOrRegion: '#select2-shipping_country-container',
-                shippingCountryOrRegion: '.select2-selection__arrow',
-
-                shippingCountryOrRegionValues: '.select2-results ul li',
-                shippingStreetAddress: '#shipping_address_1',
-                shippingStreetAddress2: '#shipping_address_2',
-                shippingTownCity: '#shipping_city',
-                // shippingState: '#select2-shipping_state-container',
-                shippingState: '.select2-selection__arrow',
-                shippingStateValues: '.select2-results ul li',
-                shippingZipCode: '#shipping_postcode',
+            // Shipping Address
+            shipping: {
+                email: '#email',
+                country: '#shipping-country input',
+                firstName: '#shipping-first_name',
+                lastName: '#shipping-last_name',
+                address: '#shipping-address_1',
+                address2toggle: 'button.wc-block-components-address-form__address_2-toggle',
+                address2: '#shipping-address_2',
+                city: '#shipping-city',
+                stateInput: '#shipping-state input',
+                zipCode: '#shipping-postcode',
+                phone: '#shipping-phone',
+                useSameAddressForBilling: 'div.wc-block-checkout__use-address-for-billing input',
             },
 
             // Order Comments

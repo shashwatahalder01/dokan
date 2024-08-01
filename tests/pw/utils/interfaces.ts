@@ -736,6 +736,8 @@ export interface vendor {
 
         addressFieldsEnabled: boolean;
 
+        vendorSubscription: string;
+
         commissionType: string;
         adminCommission: string;
 
@@ -1131,6 +1133,7 @@ export interface customer {
         };
 
         shipping: {
+            email: string;
             firstName: string;
             lastName: string;
             companyName: string;
