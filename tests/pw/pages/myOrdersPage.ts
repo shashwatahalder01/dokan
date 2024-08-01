@@ -20,8 +20,11 @@ export class MyOrdersPage extends CustomerPage {
     // my orders
 
     // my orders render properly
-    async myOrdersRenderProperly() {
-        await this.goIfNotThere(data.subUrls.frontend.myOrders);
+    async myOrdersRenderProperly(link?: string) {
+        link ? await this.goto(link) : await this.goIfNotThere(data.subUrls.frontend.myOrders);
+
+        // my orders text is visible
+        !link && (await this.toBeVisible(selector.customer.cMyOrders.myOrdersText));
 
         const noOrders = await this.isVisible(selector.customer.cMyOrders.noOrdersFound);
 
@@ -29,9 +32,6 @@ export class MyOrdersPage extends CustomerPage {
             await this.toContainText(selector.customer.cMyOrders.noOrdersFound, 'No orders found!');
             console.log('No orders found on my order page');
         } else {
-            // my orders text is visible
-            await this.toBeVisible(selector.customer.cMyOrders.myOrdersText);
-
             // recent orders text is visible
             await this.toBeVisible(selector.customer.cMyOrders.recentOrdersText);
 

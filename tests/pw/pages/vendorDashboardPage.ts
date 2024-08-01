@@ -16,8 +16,8 @@ export class VendorDashboardPage extends VendorPage {
     // vendor dashboard
 
     // vendor dashboard render properly
-    async vendorDashboardRenderProperly() {
-        await this.goIfNotThere(data.subUrls.frontend.vDashboard.dashboard);
+    async vendorDashboardRenderProperly(link?: string) {
+        link ? await this.goto(link) : await this.goIfNotThere(data.subUrls.frontend.vDashboard.dashboard);
 
         // at a glance elements are visible
         await this.multipleElementVisible(vendorDashboard.atAGlance);

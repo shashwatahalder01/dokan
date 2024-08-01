@@ -124,7 +124,7 @@ export class RequestForQuotationsPage extends AdminPage {
 
         await this.check(requestForQuotationAdmin.quoteRules.bulkActions.selectAll);
 
-        // only to remove flakiness // todo: need diff soln and make generic , don't work need custom soln
+        // only to remove flakiness // todo: need different solution and make generic , don't work need custom solution
         // const isDisabled = await this.hasAttribute(requestForQuotationAdmin.quoteRules.bulkActions.applyAction, 'disabled');
         // if(isDisabled){
         // 	await this.uncheck(requestForQuotationAdmin.quoteRules.bulkActions.selectAll);
@@ -332,10 +332,10 @@ export class RequestForQuotationsPage extends AdminPage {
     // customer
 
     // customer request for quote render properly
-    async requestForQuoteRenderProperly() {
-        await this.goIfNotThere(data.subUrls.frontend.requestForQuote);
+    async requestForQuoteRenderProperly(link: string) {
+        link ? await this.goto(link) : await this.goIfNotThere(data.subUrls.frontend.requestForQuote);
 
-        await this.toBeVisible(requestForQuotationCustomer.requestForQuote.requestForQuoteText);
+        !link && (await this.toBeVisible(requestForQuotationCustomer.requestForQuote.requestForQuoteText));
 
         const noQuote = await this.isVisible(requestForQuotationCustomer.requestForQuote.noQuotesFound);
 

@@ -390,8 +390,8 @@ export class BasePage {
      */
 
     // wait for selector
-    async waitForSelector(selector: string): Promise<void> {
-        await this.page.locator(selector).waitFor();
+    async waitForSelector(selector: string, options?: any): Promise<void> {
+        await this.page.locator(selector).waitFor(options);
     }
 
     // get locator
@@ -410,7 +410,6 @@ export class BasePage {
     async isVisible(selector: string): Promise<boolean> {
         await this.wait(1); // to add a buffer time for the element to be visible // todo: need to resolve in future
         return await this.isVisibleLocator(selector);
-        // return await this.isVisibleByPage(selector);
     }
 
     // returns whether the element is visible
