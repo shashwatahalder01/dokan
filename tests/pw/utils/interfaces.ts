@@ -736,7 +736,7 @@ export interface vendor {
 
         addressFieldsEnabled: boolean;
 
-        vendorSubscription: string;
+        vendorSubscriptionPack: string;
 
         commissionType: string;
         adminCommission: string;
@@ -1145,6 +1145,8 @@ export interface customer {
             state: string;
             phone: string;
         };
+
+        vendorSubscriptionPack: string;
     };
 
     getSupport: {

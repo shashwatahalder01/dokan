@@ -42,7 +42,7 @@ test.describe('Customer functionality test', () => {
     test('customer can become a vendor', { tag: ['@lite', '@customer'] }, async ({ page }) => {
         const customer = new CustomerPage(page);
         await customer.customerRegister(data.customer.customerInfo);
-        await customer.customerBecomeVendor(data.customer.customerInfo);
+        await customer.customerBecomeVendor(data.customer.customerInfo, { ...data.vendorSetupWizard, choice: false });
     });
 
     test('customer can add billing details', { tag: ['@lite', '@customer'] }, async () => {

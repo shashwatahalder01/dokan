@@ -93,7 +93,7 @@ export class CustomerPage extends BasePage {
     }
 
     // customer become vendor
-    async customerBecomeVendor(customerInfo: customer['customerInfo']): Promise<void> {
+    async customerBecomeVendor(customerInfo: customer['customerInfo'], setupWizardData: vendorSetupWizard): Promise<void> {
         const firstName = customerInfo.firstName();
 
         await this.goIfNotThere(data.subUrls.frontend.myAccount);
@@ -113,14 +113,33 @@ export class CustomerPage extends BasePage {
             await this.clearAndType(customerDashboard.bankIban, customerInfo.bankIban);
         }
 
-        await this.clickIfVisible(customerDashboard.termsAndConditions);
-        const subscriptionPackIsVisible = await this.isVisible(customerDashboard.subscriptionPack);
-        subscriptionPackIsVisible && (await this.selectByLabel(selector.vendor.vRegistration.subscriptionPack, data.predefined.vendorSubscription.nonRecurring));
-        await this.clickAndWaitForResponseAndLoadState(data.subUrls.frontend.becomeVendor, customerDashboard.becomeAVendor, 302);
-        subscriptionPackIsVisible && (await this.placeOrder('bank', false, true, false));
+        // check if terms and conditions is visible
+        await this.checkIfVisible(customerDashboard.termsAndConditions);
 
-        // skip vendor setup wizard
-        await this.clickAndWaitForResponseAndLoadState(data.subUrls.frontend.vDashboard.dashboard, selector.vendor.vSetup.notRightNow);
+        // purchase subscription pack if enabled
+        const subscriptionPackIsVisible = await this.isVisible(customerDashboard.subscriptionPack);
+        if (subscriptionPackIsVisible) {
+            await this.selectByLabel(selector.vendor.vRegistration.subscriptionPack, customerInfo.vendorSubscriptionPack);
+            await this.clickAndWaitForResponseAndLoadState(data.subUrls.frontend.checkout, customerDashboard.becomeAVendor);
+            await this.placeOrder('bank', false, true);
+
+            if (setupWizardData.setupWizardEnabled) {
+                // to avoid net::ERR_ABORTED  [race condition page auto navigates to setup wizard, also there is goto to setup wizard in the next line]
+                await this.waitForUrl(data.subUrls.frontend.vDashboard.setupWizard);
+                await this.goIfNotThere(data.subUrls.frontend.vDashboard.setupWizard);
+                await this.clickAndWaitForResponseAndLoadState(data.subUrls.frontend.vDashboard.dashboard, selector.vendor.vSetup.notRightNow); // skip setup wizard
+            } else {
+                await this.goto(data.subUrls.frontend.vDashboard.dashboard);
+            }
+        } else {
+            if (setupWizardData.setupWizardEnabled) {
+                await this.clickAndWaitForResponseAndLoadState(data.subUrls.frontend.vDashboard.setupWizard, customerDashboard.becomeAVendor);
+                await this.clickAndWaitForResponseAndLoadState(data.subUrls.frontend.vDashboard.dashboard, selector.vendor.vSetup.notRightNow); // skip setup wizard
+            } else {
+                await this.clickAndWaitForResponseAndLoadState(data.subUrls.frontend.vDashboard.dashboard, customerDashboard.becomeAVendor);
+            }
+        }
+
         await this.toBeVisible(selector.vendor.vDashboard.menus.dashboard);
     }
 

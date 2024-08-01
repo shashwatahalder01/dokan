@@ -103,7 +103,7 @@ export class VendorPage extends BasePage {
         // purchase subscription pack if enabled
         const subscriptionPackIsVisible = await this.isVisible(registrationVendor.subscriptionPack);
         if (subscriptionPackIsVisible) {
-            await this.selectByLabel(registrationVendor.subscriptionPack, vendorInfo.vendorSubscription);
+            await this.selectByLabel(registrationVendor.subscriptionPack, vendorInfo.vendorSubscriptionPack);
             await this.clickAndWaitForResponseAndLoadState(data.subUrls.frontend.checkout, registrationVendor.register);
             await this.customer.placeOrder('bank', false, true);
 

@@ -1098,8 +1098,8 @@ export const data = {
             // address fields enable flag (on vendor registration)
             addressFieldsEnabled: false,
 
-            //
-            vendorSubscription: 'Dokan_Subscription_Non_recurring',
+            // subscription pack
+            vendorSubscriptionPack: 'Dokan_Subscription_Non_recurring',
 
             // commission
             commissionType: 'fixed', // 'fixed','category_based'
@@ -1481,6 +1481,10 @@ export const data = {
                 state: 'New York',
                 phone: '0123456789',
             },
+
+            // subscription
+            // vendorSubscriptionPack: 'Dokan_Subscription_Non_recurring',
+            vendorSubscriptionPack: 'dokan sub',
         },
 
         getSupport: {
