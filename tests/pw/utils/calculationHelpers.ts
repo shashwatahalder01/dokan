@@ -98,4 +98,4 @@ async function assertData(orderId: string, calculatedData: number[], receivedDat
     expect(receivedDiscountTax).toBeApproximately(calculatedDiscountTax, 0.01, orderlog);
 }
 
-export { assertOrderCalculation, getParameters, getCalculatedData, getReceivedData, assertData };
+export { assertOrderCalculation, getParameters, getCalculatedData, getReceivedData, assertData }; //todo other imports wont work cause of how apiUtils is initialized fix this or remove other exports

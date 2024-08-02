@@ -89,7 +89,7 @@ test.describe('Vendor subscription test', () => {
 
     test('vendor can buy non recurring subscription pack (on registration)', { tag: ['@pro', '@vendor'] }, async ({ page }) => {
         const vendor = new VendorPage(page);
-        await vendor.vendorRegister({ ...data.vendor.vendorInfo, vendorSubscription: subscriptionPack }, { ...data.vendorSetupWizard, choice: false });
+        await vendor.vendorRegister({ ...data.vendor.vendorInfo, vendorSubscriptionPack: subscriptionPack }, { ...data.vendorSetupWizard, choice: false });
     });
 
     test('vendor can buy non recurring subscription pack (on subscription page)', { tag: ['@pro', '@vendor'] }, async ({ page }) => {
