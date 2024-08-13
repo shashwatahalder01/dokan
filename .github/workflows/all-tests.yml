@@ -5,8 +5,8 @@ on:
     # schedule:
     #     - cron: 0 2 * * *
     # workflow will trigger on pull request
-    # pull_request:
-    #     branches: [develop]
+    pull_request:
+        branches: [e2e-pw]
     # workflow will trigger on push to develop branch
     push:
         branches: [develop, e2e-pw]
