@@ -224,7 +224,7 @@ jobs:
               if: always() && (steps.e2e-test.outcome == 'success' || steps.e2e-test.outcome == 'failure')
               working-directory: tests/pw
               run: |
-                npm run e2e_coverage
+                npm run test:e2e:coverage
 
             # Run API tests
             - name: 🧪 Running the api tests
