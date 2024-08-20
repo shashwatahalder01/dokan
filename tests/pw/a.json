@@ -1,0 +1,438 @@
+{
+    "id": "stripe",
+    "title": "Credit / Debit Card",
+    "description": "",
+    "order": "",
+    "enabled": true,
+    "method_title": "Stripe",
+    "method_description": "Accept debit and credit cards in 135+ currencies, methods such as SEPA, and one-touch checkout with Apple Pay.",
+    "method_supports": [
+        "products",
+        "refunds",
+        "tokenization",
+        "add_payment_method",
+        "subscriptions",
+        "subscription_cancellation",
+        "subscription_suspension",
+        "subscription_reactivation",
+        "subscription_amount_changes",
+        "subscription_date_changes",
+        "subscription_payment_method_change",
+        "subscription_payment_method_change_customer",
+        "subscription_payment_method_change_admin",
+        "multiple_subscriptions"
+    ],
+    "settings": {
+        "api_credentials": {
+            "id": "api_credentials",
+            "label": "Stripe Account Keys",
+            "description": "",
+            "type": "stripe_account_keys",
+            "value": "",
+            "default": "",
+            "tip": "",
+            "placeholder": ""
+        },
+        "testmode": {
+            "id": "testmode",
+            "label": "Enable Test Mode",
+            "value": "yes"
+        },
+        "test_publishable_key": {
+            "id": "test_publishable_key",
+            "label": "Test Publishable Key",
+            "value": "pk_test_51PpQ3YJB6yimgus0Xx5qoc23FnZne8rm6KlfBogdOcEUQvQdevStInLGwJPM1CYphFVBCZLPDlXQLgabbwE6BSmC00ovZwg92A"
+        },
+        "test_secret_key": {
+            "id": "test_secret_key",
+            "label": "Test Secret Key",
+            "value": "sk_test_51PpQ3YJB6yimgus0mAeY3pWvz8YcxhdRHlz2yB7Rv171N94bSY8FuYz5uIdp2f0olNGF8nOG3S1UInEOsfUwc40a005iRzR3Jj"
+        },
+        "publishable_key": {
+            "id": "publishable_key",
+            "label": "Live Publishable Key",
+            "value": ""
+        },
+        "secret_key": {
+            "id": "secret_key",
+            "label": "Live Secret Key",
+            "value": ""
+        },
+        "webhook": {
+            "id": "webhook",
+            "label": "Webhook Endpoints",
+            "value": ""
+        },
+        "test_webhook_secret": {
+            "id": "test_webhook_secret",
+            "label": "Test Webhook Secret",
+            "value": ""
+        },
+        "webhook_secret": {
+            "id": "webhook_secret",
+            "label": "Webhook Secret",
+            "value": "",
+            "default": ""
+        },
+        "statement_descriptor": {
+            "id": "statement_descriptor",
+            "label": "Statement Descriptor",
+            "value": ""
+        },
+        "short_statement_descriptor": {
+            "id": "short_statement_descriptor",
+            "label": "Short Statement Descriptor",
+            "value": ""
+        },
+        "capture": {
+            "id": "capture",
+            "label": "Capture charge immediately",
+            "value": "yes"
+        },
+        "payment_request": {
+            "id": "payment_request",
+            "label": "Enable Payment Request Buttons. (Apple Pay/Google Pay) <br />By using Apple Pay, you agree to <a href=\"https://stripe.com/apple-pay/legal\" target=\"_blank\">Stripe</a> and <a href=\"https://developer.apple.com/apple-pay/acceptable-use-guidelines-for-websites/\" target=\"_blank\">Apple</a>'s terms of service. (Apple Pay domain verification is performed automatically in live mode; configuration can be found on the <a href=\"https://dashboard.stripe.com/settings/payments/apple_pay\" target=\"_blank\">Stripe dashboard</a>.)",
+            "value": "yes"
+        },
+        "payment_request_button_type": {
+            "id": "payment_request_button_type",
+            "label": "Button Type",
+            "value": "buy"
+        },
+        "payment_request_button_theme": {
+            "id": "payment_request_button_theme",
+            "label": "Button Theme",
+            "value": "dark"
+        },
+        "payment_request_button_locations": {
+            "id": "payment_request_button_locations",
+            "label": "Payment Request Button Locations",
+            "value": ["product", "cart", "checkout"]
+        },
+        "payment_request_button_size": {
+            "id": "payment_request_button_size",
+            "label": "Payment Request Button Size",
+            "value": "default"
+        },
+        "saved_cards": {
+            "id": "saved_cards",
+            "label": "Enable Payment via Saved Cards",
+            "value": "yes"
+        },
+        "logging": {
+            "id": "logging",
+            "label": "Log debug messages",
+            "value": "yes"
+        },
+        "upe_checkout_experience_enabled": {
+            "id": "upe_checkout_experience_enabled",
+            "label": "Try the new payment experience (Early access) <br />Get early access to a new, smarter payment experience on checkout and let us know what you think by <a href=\"https://woocommerce.survey.fm/woocommerce-stripe-upe-opt-out-survey\" target=\"_blank\">submitting your feedback</a>. We recommend this feature for experienced merchants as the functionality is currently limited. <a href=\"https://woocommerce.com/document/stripe/admin-experience/new-checkout-experience/\" target=\"_blank\">Learn more</a>",
+            "value": "yes"
+        },
+        "upe_checkout_experience_accepted_payments": {
+            "id": "upe_checkout_experience_accepted_payments",
+            "label": "Payments accepted on checkout (Early access)",
+            "value": ["card", "link"]
+        }
+    }
+}
+
+
+
+
+
+
+
+{
+    "id": "stripe",
+    "title": "Credit / Debit Card",
+    "description": "",
+    "order": "",
+    "enabled": true,
+    "method_title": "Stripe",
+    "method_description": "Accept debit and credit cards in 135+ currencies, methods such as SEPA, and one-touch checkout with Apple Pay.",
+    "method_supports": [
+        "products",
+        "refunds",
+        "tokenization",
+        "add_payment_method",
+        "subscriptions",
+        "subscription_cancellation",
+        "subscription_suspension",
+        "subscription_reactivation",
+        "subscription_amount_changes",
+        "subscription_date_changes",
+        "subscription_payment_method_change",
+        "subscription_payment_method_change_customer",
+        "subscription_payment_method_change_admin",
+        "multiple_subscriptions"
+    ],
+    "settings": {
+        "api_credentials": {
+            "id": "api_credentials",
+            "label": "Stripe Account Keys",
+            "description": "",
+            "type": "stripe_account_keys",
+            "value": "",
+            "default": "",
+            "tip": "",
+            "placeholder": ""
+        },
+        "testmode": {
+            "id": "testmode",
+            "label": "Enable Test Mode",
+            "description": "Place the payment gateway in test mode using test API keys.",
+            "type": "checkbox",
+            "value": "yes",
+            "default": "yes",
+            "tip": "Place the payment gateway in test mode using test API keys.",
+            "placeholder": ""
+        },
+        "test_publishable_key": {
+            "id": "test_publishable_key",
+            "label": "Test Publishable Key",
+            "description": "Get your API keys from your stripe account. Invalid values will be rejected. Only values starting with \"pk_test_\" will be saved.",
+            "type": "text",
+            "value": "pk_test_51PpnOUAELWXtfzYP9E03tJDgQdQe31A05cp14kjURwEhbU0VwdJ3lXhlTKT9eihwebTE81rGzIlNIBgfH0bEdmvG005tGEFlux",
+            "default": "",
+            "tip": "Get your API keys from your stripe account. Invalid values will be rejected. Only values starting with \"pk_test_\" will be saved.",
+            "placeholder": ""
+        },
+        "test_secret_key": {
+            "id": "test_secret_key",
+            "label": "Test Secret Key",
+            "description": "Get your API keys from your stripe account. Invalid values will be rejected. Only values starting with \"sk_test_\" or \"rk_test_\" will be saved.",
+            "type": "password",
+            "value": "sk_test_51PpnOUAELWXtfzYPt54gPoi5CR4iClTagJa6cDTEShXM6zjeWL5RJD30Ihk4bRs3CLX3Wo35B7Mbb7gVwZxX8rD9008maqhFE1",
+            "default": "",
+            "tip": "Get your API keys from your stripe account. Invalid values will be rejected. Only values starting with \"sk_test_\" or \"rk_test_\" will be saved.",
+            "placeholder": ""
+        },
+        "publishable_key": {
+            "id": "publishable_key",
+            "label": "Live Publishable Key",
+            "description": "Get your API keys from your stripe account. Invalid values will be rejected. Only values starting with \"pk_live_\" will be saved.",
+            "type": "text",
+            "value": "",
+            "default": "",
+            "tip": "Get your API keys from your stripe account. Invalid values will be rejected. Only values starting with \"pk_live_\" will be saved.",
+            "placeholder": ""
+        },
+        "secret_key": {
+            "id": "secret_key",
+            "label": "Live Secret Key",
+            "description": "Get your API keys from your stripe account. Invalid values will be rejected. Only values starting with \"sk_live_\" or \"rk_live_\" will be saved.",
+            "type": "password",
+            "value": "",
+            "default": "",
+            "tip": "Get your API keys from your stripe account. Invalid values will be rejected. Only values starting with \"sk_live_\" or \"rk_live_\" will be saved.",
+            "placeholder": ""
+        },
+        "webhook": {
+            "id": "webhook",
+            "label": "Webhook Endpoints",
+            "description": "You must add the following webhook endpoint <strong style=\"background-color:#ddd;\">&nbsp;https://dokan4.test/?wc-api=wc_stripe&nbsp;</strong> to your <a href=\"https://dashboard.stripe.com/account/webhooks\" target=\"_blank\">Stripe account settings</a> (if there isn't one already enabled). This will enable you to receive notifications on the charge statuses.<br><br>No test webhooks have been received since monitoring began at 2024-08-20 08:26:29 UTC.",
+            "type": "title",
+            "value": "",
+            "default": "",
+            "tip": "You must add the following webhook endpoint <strong style=\"background-color:#ddd;\">&nbsp;https://dokan4.test/?wc-api=wc_stripe&nbsp;</strong> to your <a href=\"https://dashboard.stripe.com/account/webhooks\" target=\"_blank\">Stripe account settings</a> (if there isn't one already enabled). This will enable you to receive notifications on the charge statuses.<br><br>No test webhooks have been received since monitoring began at 2024-08-20 08:26:29 UTC.",
+            "placeholder": ""
+        },
+        "test_webhook_secret": {
+            "id": "test_webhook_secret",
+            "label": "Test Webhook Secret",
+            "description": "Get your webhook signing secret from the webhooks section in your stripe account.",
+            "type": "password",
+            "value": "whsec_3NeOMIJGzQYrzFenArpnxVWT4ph6YUNc",
+            "default": "",
+            "tip": "Get your webhook signing secret from the webhooks section in your stripe account.",
+            "placeholder": ""
+        },
+        "webhook_secret": {
+            "id": "webhook_secret",
+            "label": "Webhook Secret",
+            "description": "Get your webhook signing secret from the webhooks section in your stripe account.",
+            "type": "password",
+            "value": "",
+            "default": "",
+            "tip": "Get your webhook signing secret from the webhooks section in your stripe account.",
+            "placeholder": ""
+        },
+        "statement_descriptor": {
+            "id": "statement_descriptor",
+            "label": "Statement Descriptor",
+            "description": "Statement descriptors are limited to 22 characters, cannot use the special characters >, <, \", \\, ', *, /, (, ), {, }, and must not consist solely of numbers. This will appear on your customer's statement in capital letters.",
+            "type": "text",
+            "value": "",
+            "default": "",
+            "tip": "Statement descriptors are limited to 22 characters, cannot use the special characters >, <, \", \\, ', *, /, (, ), {, }, and must not consist solely of numbers. This will appear on your customer's statement in capital letters.",
+            "placeholder": ""
+        },
+        "short_statement_descriptor": {
+            "id": "short_statement_descriptor",
+            "label": "Short Statement Descriptor",
+            "description": "Shortened version of the statement descriptor in combination with the customer order number.",
+            "type": "text",
+            "value": "",
+            "default": "",
+            "tip": "Shortened version of the statement descriptor in combination with the customer order number.",
+            "placeholder": ""
+        },
+        "capture": {
+            "id": "capture",
+            "label": "Capture charge immediately",
+            "description": "Whether or not to immediately capture the charge. When unchecked, the charge issues an authorization and will need to be captured later. Uncaptured charges expire in 7 days.",
+            "type": "checkbox",
+            "value": "yes",
+            "default": "yes",
+            "tip": "Whether or not to immediately capture the charge. When unchecked, the charge issues an authorization and will need to be captured later. Uncaptured charges expire in 7 days.",
+            "placeholder": ""
+        },
+        "payment_request": {
+            "id": "payment_request",
+            "label": "Enable Payment Request Buttons. (Apple Pay/Google Pay) <br />By using Apple Pay, you agree to <a href=\"https://stripe.com/apple-pay/legal\" target=\"_blank\">Stripe</a> and <a href=\"https://developer.apple.com/apple-pay/acceptable-use-guidelines-for-websites/\" target=\"_blank\">Apple</a>'s terms of service. (Apple Pay domain verification is performed automatically in live mode; configuration can be found on the <a href=\"https://dashboard.stripe.com/settings/payments/apple_pay\" target=\"_blank\">Stripe dashboard</a>.)",
+            "description": "If enabled, users will be able to pay using Apple Pay or Chrome Payment Request if supported by the browser.",
+            "type": "checkbox",
+            "value": "yes",
+            "default": "yes",
+            "tip": "If enabled, users will be able to pay using Apple Pay or Chrome Payment Request if supported by the browser.",
+            "placeholder": ""
+        },
+        "payment_request_button_type": {
+            "id": "payment_request_button_type",
+            "label": "Button Type",
+            "description": "Select the button type you would like to show.",
+            "type": "select",
+            "value": "buy",
+            "default": "buy",
+            "tip": "Select the button type you would like to show.",
+            "placeholder": "",
+            "options": {
+                "default": "Only icon",
+                "buy": "Buy",
+                "donate": "Donate",
+                "book": "Book"
+            }
+        },
+        "payment_request_button_theme": {
+            "id": "payment_request_button_theme",
+            "label": "Button Theme",
+            "description": "Select the button theme you would like to show.",
+            "type": "select",
+            "value": "dark",
+            "default": "dark",
+            "tip": "Select the button theme you would like to show.",
+            "placeholder": "",
+            "options": {
+                "dark": "Dark",
+                "light": "Light",
+                "light-outline": "Light-Outline"
+            }
+        },
+        "payment_request_button_locations": {
+            "id": "payment_request_button_locations",
+            "label": "Payment Request Button Locations",
+            "description": "Select where you would like Payment Request Buttons to be displayed",
+            "type": "multiselect",
+            "value": [
+                "product",
+                "cart",
+                "checkout"
+            ],
+            "default": [
+                "product",
+                "cart",
+                "checkout"
+            ],
+            "tip": "Select where you would like Payment Request Buttons to be displayed",
+            "placeholder": "",
+            "options": {
+                "product": "Product",
+                "cart": "Cart",
+                "checkout": "Checkout"
+            }
+        },
+        "payment_request_button_size": {
+            "id": "payment_request_button_size",
+            "label": "Payment Request Button Size",
+            "description": "Select the size of the button.",
+            "type": "select",
+            "value": "default",
+            "default": "default",
+            "tip": "Select the size of the button.",
+            "placeholder": "",
+            "options": {
+                "small": "Small (40px)",
+                "default": "Default (48px)",
+                "large": "Large (56px)"
+            }
+        },
+        "saved_cards": {
+            "id": "saved_cards",
+            "label": "Enable Payment via Saved Cards",
+            "description": "If enabled, users will be able to pay with a saved card during checkout. Card details are saved on Stripe servers, not on your store.",
+            "type": "checkbox",
+            "value": "yes",
+            "default": "yes",
+            "tip": "If enabled, users will be able to pay with a saved card during checkout. Card details are saved on Stripe servers, not on your store.",
+            "placeholder": ""
+        },
+        "logging": {
+            "id": "logging",
+            "label": "Log debug messages",
+            "description": "Save debug messages to the WooCommerce System Status log.",
+            "type": "checkbox",
+            "value": "no",
+            "default": "no",
+            "tip": "Save debug messages to the WooCommerce System Status log.",
+            "placeholder": ""
+        },
+        "upe_checkout_experience_enabled": {
+            "id": "upe_checkout_experience_enabled",
+            "label": "Try the new payment experience (Early access) <br />Get early access to a new, smarter payment experience on checkout and let us know what you think by <a href=\"https://woocommerce.survey.fm/woocommerce-stripe-upe-opt-out-survey\" target=\"_blank\">submitting your feedback</a>. We recommend this feature for experienced merchants as the functionality is currently limited. <a href=\"https://woocommerce.com/document/stripe/admin-experience/new-checkout-experience/\" target=\"_blank\">Learn more</a>",
+            "description": "New checkout experience allows you to manage all payment methods on one screen and display them to customers based on their currency and location.",
+            "type": "checkbox",
+            "value": "yes",
+            "default": "no",
+            "tip": "New checkout experience allows you to manage all payment methods on one screen and display them to customers based on their currency and location.",
+            "placeholder": ""
+        },
+        "upe_checkout_experience_accepted_payments": {
+            "id": "upe_checkout_experience_accepted_payments",
+            "label": "Payments accepted on checkout (Early access)",
+            "description": "",
+            "type": "upe_checkout_experience_accepted_payments",
+            "value": [
+                "card",
+                "link"
+            ],
+            "default": [
+                "card",
+                "link"
+            ],
+            "tip": "",
+            "placeholder": ""
+        }
+    },
+    "needs_setup": false,
+    "post_install_scripts": [],
+    "settings_url": "https://dokan4.test/wp-admin/admin.php?page=wc-settings&tab=checkout&section=stripe",
+    "connection_url": null,
+    "setup_help_text": "Your API details can be obtained from your <a href=\"https://dashboard.stripe.com/apikeys\">Stripe account</a>. Don’t have a Stripe account? <a href=\"https://dashboard.stripe.com/register\">Create one.</a>",
+    "required_settings_keys": [
+        "publishable_key",
+        "secret_key"
+    ],
+    "_links": {
+        "self": [
+            {
+                "href": "https://dokan4.test/wp-json/wc/v3/payment_gateways/stripe"
+            }
+        ],
+        "collection": [
+            {
+                "href": "https://dokan4.test/wp-json/wc/v3/payment_gateways"
+            }
+        ]
+    }
+}

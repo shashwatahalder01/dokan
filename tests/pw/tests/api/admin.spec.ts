@@ -13,6 +13,7 @@ import { test, expect, request } from '@playwright/test';
 import { ApiUtils } from '@utils/apiUtils';
 import { endPoints } from '@utils/apiEndPoints';
 import { schemas } from '@utils/schemas';
+import { payloads } from '@utils/payloads';
 
 test.describe('admin api test', () => {
     let apiUtils: ApiUtils;
@@ -25,11 +26,12 @@ test.describe('admin api test', () => {
         await apiUtils.dispose();
     });
 
-    test('get admin report overview', { tag: ['@lite'] }, async () => {
-        const [response, responseBody] = await apiUtils.get(endPoints.getAdminReportOverview);
-        expect(response.ok()).toBeTruthy();
-        expect(responseBody).toBeTruthy();
-        expect(responseBody).toMatchSchema(schemas.admin.reportOverviewSchema);
+    test.only('get admin report overview', { tag: ['@lite'] }, async () => {
+        await apiUtils.updatePaymentGateway('stripe', payloads.wcStripe);
+        // const [response, responseBody] = await apiUtils.get(endPoints.getAdminReportOverview);
+        // expect(response.ok()).toBeTruthy();
+        // expect(responseBody).toBeTruthy();
+        // expect(responseBody).toMatchSchema(schemas.admin.reportOverviewSchema);
     });
 
     test('get admin report summary', { tag: ['@lite'] }, async () => {

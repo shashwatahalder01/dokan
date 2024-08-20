@@ -2665,6 +2665,141 @@ export const payloads = {
         ],
     },
 
+    wcStripe: {
+        id: 'stripe',
+        title: 'Credit / Debit Card',
+        description: '',
+        order: '1',
+        enabled: true,
+        method_title: 'Stripe',
+        method_description: 'Accept debit and credit cards in 135+ currencies, methods such as SEPA, and one-touch checkout with Apple Pay.',
+        method_supports: [
+            'products',
+            'refunds',
+            'tokenization',
+            'add_payment_method',
+            'subscriptions',
+            'subscription_cancellation',
+            'subscription_suspension',
+            'subscription_reactivation',
+            'subscription_amount_changes',
+            'subscription_date_changes',
+            'subscription_payment_method_change',
+            'subscription_payment_method_change_customer',
+            'subscription_payment_method_change_admin',
+            'multiple_subscriptions',
+        ],
+        settings: {
+            api_credentials: {
+                id: 'api_credentials',
+                // label: 'Stripe Account Keys',
+                value: '',
+            },
+            testmode: {
+                id: 'testmode',
+                // label: 'Enable Test Mode',
+                value: 'yes',
+            },
+            test_publishable_key: {
+                id: 'test_publishable_key',
+                // label: 'Test Publishable Key',
+                value: 'pk_test_51PpQ3YJB6yimgus0Xx5qoc23FnZne8rm6KlfBogdOcEUQvQdevStInLGwJPM1CYphFVBCZLPDlXQLgabbwE6BSmC00ovZwg92A',
+            },
+            test_secret_key: {
+                id: 'test_secret_key',
+                // label: 'Test Secret Key',
+                value: 'sk_test_51PpQ3YJB6yimgus0mAeY3pWvz8YcxhdRHlz2yB7Rv171N94bSY8FuYz5uIdp2f0olNGF8nOG3S1UInEOsfUwc40a005iRzR3Jj',
+            },
+            publishable_key: {
+                id: 'publishable_key',
+                // label: 'Live Publishable Key',
+                value: '',
+            },
+            secret_key: {
+                id: 'secret_key',
+                // label: 'Live Secret Key',
+                value: '',
+            },
+            webhook: {
+                id: 'webhook',
+                // label: 'Webhook Endpoints',
+                value: '',
+            },
+            test_webhook_secret: {
+                id: 'test_webhook_secret',
+                // label: 'Test Webhook Secret',
+                value: '',
+            },
+            webhook_secret: {
+                id: 'webhook_secret',
+                // label: 'Webhook Secret',
+                value: '',
+            },
+            statement_descriptor: {
+                id: 'statement_descriptor',
+                // label: 'Statement Descriptor',
+                value: '',
+            },
+            short_statement_descriptor: {
+                id: 'short_statement_descriptor',
+                // label: 'Short Statement Descriptor',
+                value: '',
+            },
+            capture: {
+                id: 'capture',
+                // label: 'Capture charge immediately',
+                value: 'yes',
+            },
+            payment_request: {
+                id: 'payment_request',
+                // label: 'Enable Payment Request Buttons. (Apple Pay/Google Pay) <br />By using Apple Pay, you agree to <a href="https://stripe.com/apple-pay/legal" target="_blank">Stripe</a> and <a href="https://developer.apple.com/apple-pay/acceptable-use-guidelines-for-websites/" target="_blank">Apple</a>\'s terms of service. (Apple Pay domain verification is performed automatically in live mode; configuration can be found on the <a href="https://dashboard.stripe.com/settings/payments/apple_pay" target="_blank">Stripe dashboard</a>.)',
+                value: 'yes',
+            },
+            payment_request_button_type: {
+                id: 'payment_request_button_type',
+                // label: 'Button Type',
+                value: 'buy',
+            },
+            payment_request_button_theme: {
+                id: 'payment_request_button_theme',
+                // label: 'Button Theme',
+                value: 'dark',
+            },
+            payment_request_button_locations: {
+                id: 'payment_request_button_locations',
+                // label: 'Payment Request Button Locations',
+                value: ['product', 'cart', 'checkout'],
+            },
+            payment_request_button_size: {
+                id: 'payment_request_button_size',
+                // label: 'Payment Request Button Size',
+                value: 'default',
+            },
+            saved_cards: {
+                id: 'saved_cards',
+                // label: 'Enable Payment via Saved Cards',
+                value: 'yes',
+            },
+            logging: {
+                id: 'logging',
+                // label: 'Log debug messages',
+                value: 'yes',
+            },
+            upe_checkout_experience_enabled: {
+                id: 'upe_checkout_experience_enabled',
+                // label: 'Try the new payment experience (Early access) <br />Get early access to a new, smarter payment experience on checkout and let us know what you think by <a href="https://woocommerce.survey.fm/woocommerce-stripe-upe-opt-out-survey" target="_blank">submitting your feedback</a>. We recommend this feature for experienced merchants as the functionality is currently limited. <a href="https://woocommerce.com/document/stripe/admin-experience/new-checkout-experience/" target="_blank">Learn more</a>',
+                value: 'yes',
+            },
+            upe_checkout_experience_accepted_payments: {
+                id: 'upe_checkout_experience_accepted_payments',
+                // label: 'Payments accepted on checkout (Early access)',
+                value: ['card', 'link'],
+            },
+        },
+        needs_setup: false,
+        post_install_scripts: [],
+    },
+
     // customer
 
     createCustomer: () => ({
@@ -4047,6 +4182,7 @@ export const payloads = {
         shipping_number: '#002',
         shipped_status: 'ss_pickedup', // ss_delivered, ss_cancelled, ss_proceccing, ss_ready_for_pickup, ss_pickedup (has more options)
         shipped_date: new Date(new Date().setDate(new Date().getDate() + 2)).toISOString(),
+        shipment_comments: 'updated shipment comment',
     },
 
     // shortcodes
