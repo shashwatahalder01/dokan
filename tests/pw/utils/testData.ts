@@ -25,6 +25,8 @@ const {
     LICENSE_KEY,
 } = process.env;
 
+const basicAuth = (username: string, password: string) => 'Basic ' + Buffer.from(username + ':' + password).toString('base64');
+
 interface user {
     username: string;
     password: string;
@@ -39,6 +41,17 @@ export { admin, user };
 
 export const data = {
     systemInfo: 'playwright/systemInfo.json',
+
+    header: {
+        userAuth: (username: string, password: string = USER_PASSWORD) => {
+            return { extraHTTPHeaders: { Authorization: basicAuth(username, password) } };
+        },
+
+        adminAuth: { extraHTTPHeaders: { Authorization: basicAuth(ADMIN, ADMIN_PASSWORD) } },
+        vendorAuth: { extraHTTPHeaders: { Authorization: basicAuth(VENDOR, ADMIN_PASSWORD) } },
+        vendor2Auth: { extraHTTPHeaders: { Authorization: basicAuth(VENDOR2, ADMIN_PASSWORD) } },
+        customerAuth: { extraHTTPHeaders: { Authorization: basicAuth(CUSTOMER, ADMIN_PASSWORD) } },
+    },
 
     auth: {
         adminAuthFile: 'playwright/.auth/adminStorageState.json',
@@ -74,6 +87,7 @@ export const data = {
 
     // keyboard key
     key: {
+        escape: 'Escape',
         arrowDown: 'ArrowDown',
         enter: 'Enter',
         home: 'Home',
@@ -140,15 +154,15 @@ export const data = {
         },
 
         name: {
-            simple: () => `${faker.commerce.productName()} (Simple)`,
-            variable: () => `${faker.commerce.productName()} (Variable)`,
-            external: () => `${faker.commerce.productName()} (External)`,
-            grouped: () => `${faker.commerce.productName()} (Grouped)`,
-            simpleSubscription: () => `${faker.commerce.productName()} (Simple Subscription)`,
-            variableSubscription: () => `${faker.commerce.productName()} (Variable Subscription)`,
+            simple: () => `${faker.commerce.productName()}_${faker.string.nanoid(5)} (Simple)`,
+            variable: () => `${faker.commerce.productName()}_${faker.string.nanoid(5)} (Variable)`,
+            external: () => `${faker.commerce.productName()}_${faker.string.nanoid(5)} (External)`,
+            grouped: () => `${faker.commerce.productName()}_${faker.string.nanoid(5)} (Grouped)`,
+            simpleSubscription: () => `${faker.commerce.productName()}_${faker.string.nanoid(5)} (Simple Subscription)`,
+            variableSubscription: () => `${faker.commerce.productName()}_${faker.string.nanoid(5)} (Variable Subscription)`,
             dokanSubscription: { nonRecurring: () => `Dokan Subscription_${faker.string.alpha({ length: 5, casing: 'upper' })} (Product Pack)` },
-            booking: () => `${faker.commerce.productName()} (Booking)`,
-            auction: () => `${faker.commerce.productName()} (Auction)`,
+            booking: () => `${faker.commerce.productName()}_${faker.string.nanoid(5)} (Booking)`,
+            auction: () => `${faker.commerce.productName()}_${faker.string.nanoid(5)} (Auction)`,
         },
 
         price: {
@@ -195,7 +209,7 @@ export const data = {
 
         simple: {
             productType: 'simple',
-            productName: () => `${faker.commerce.productName()} (Simple)`,
+            productName: () => `${faker.commerce.productName()}_${faker.string.nanoid(5)} (Simple)`,
             category: 'Uncategorized',
             regularPrice: () => faker.finance.amount({ min: 100, max: 200, dec: faker.helpers.arrayElement([1, 2]) }).replace('.', ','),
             storeName: `${VENDOR}store`,
@@ -207,7 +221,7 @@ export const data = {
 
         downloadable: {
             productType: 'simple',
-            productName: () => `${faker.commerce.productName()} (Downloadable)`,
+            productName: () => `${faker.commerce.productName()}_${faker.string.nanoid(5)} (Downloadable)`,
             category: 'Uncategorized',
             regularPrice: () => faker.finance.amount({ min: 100, max: 200, dec: faker.helpers.arrayElement([1, 2]) }).replace('.', ','),
             storeName: `${VENDOR}store`,
@@ -226,7 +240,7 @@ export const data = {
 
         virtual: {
             productType: 'simple',
-            productName: () => `${faker.commerce.productName()} (Virtual)`,
+            productName: () => `${faker.commerce.productName()}_${faker.string.nanoid(5)} (Virtual)`,
             category: 'Uncategorized',
             regularPrice: () => faker.finance.amount({ min: 100, max: 200, dec: faker.helpers.arrayElement([1, 2]) }).replace('.', ','),
             storeName: `${VENDOR}store`,
@@ -238,7 +252,7 @@ export const data = {
 
         variable: {
             productType: 'variable',
-            productName: () => `${faker.commerce.productName()} (Variable)`,
+            productName: () => `${faker.commerce.productName()}_${faker.string.nanoid(5)} (Variable)`,
             category: 'Uncategorized',
             regularPrice: () => faker.finance.amount({ min: 100, max: 200, dec: faker.helpers.arrayElement([1, 2]) }).replace('.', ','),
             storeName: `${VENDOR}store`,
@@ -255,7 +269,7 @@ export const data = {
 
         external: {
             productType: 'external',
-            productName: () => `${faker.commerce.productName()} (External)`,
+            productName: () => `${faker.commerce.productName()}_${faker.string.nanoid(5)} (External)`,
             productUrl: '/product/p1_v1-simple/',
             buttonText: 'Buy product',
             category: 'Uncategorized',
@@ -267,7 +281,7 @@ export const data = {
 
         simpleSubscription: {
             productType: 'subscription',
-            productName: () => `${faker.commerce.productName()} (Simple Subscription)`,
+            productName: () => `${faker.commerce.productName()}_${faker.string.nanoid(5)} (Simple Subscription)`,
             category: 'Uncategorized',
             regularPrice: () => faker.finance.amount({ min: 100, max: 200, dec: faker.helpers.arrayElement([1, 2]) }).replace('.', ','),
             subscriptionPrice: () => faker.finance.amount({ min: 100, max: 200, dec: faker.helpers.arrayElement([1, 2]) }).replace('.', ','),
@@ -283,7 +297,7 @@ export const data = {
 
         variableSubscription: {
             productType: 'variable-subscription',
-            productName: () => `${faker.commerce.productName()} (Variable Subscription)`,
+            productName: () => `${faker.commerce.productName()}_${faker.string.nanoid(5)} (Variable Subscription)`,
             category: 'Uncategorized',
             regularPrice: () => faker.finance.amount({ min: 100, max: 200, dec: faker.helpers.arrayElement([1, 2]) }).replace('.', ','),
             subscriptionPrice: () => faker.finance.amount({ min: 100, max: 200, dec: faker.helpers.arrayElement([1, 2]) }).replace('.', ','),
@@ -317,7 +331,7 @@ export const data = {
         },
 
         booking: {
-            productName: () => `${faker.commerce.productName()} (Booking)`,
+            productName: () => `${faker.commerce.productName()}_${faker.string.nanoid(5)} (Booking)`,
             name: '',
             productType: 'booking',
             category: 'Uncategorized',
@@ -346,7 +360,7 @@ export const data = {
 
         // Auction
         auction: {
-            productName: () => `${faker.commerce.productName()} (Auction)`,
+            productName: () => `${faker.commerce.productName()}_${faker.string.nanoid(5)} (Auction)`,
             name: '',
             productType: 'auction',
             category: 'Uncategorized',
@@ -605,56 +619,41 @@ export const data = {
     shipping: {
         enableShipping: 'Ship to all countries you sell to',
         disableShipping: 'Disable shipping & shipping calculations',
-        shippingZone: 'US',
 
-        shippingMethods: {
-            methods: faker.helpers.arrayElement(['flat_rate', 'free_shipping', 'local_pickup', 'dokan_table_rate_shipping', 'dokan_distance_rate_shipping', 'dokan_vendor_shipping']),
+        zone: () => ({
+            zoneName: faker.string.alpha(3).toUpperCase(),
+            zoneRegion: 'United States (US)',
+            saveSuccessMessage: 'Your settings have been saved.',
+        }),
+
+        methods: {
             flatRate: {
-                shippingZone: 'US',
-                shippingCountry: 'United States (US)',
-                selectShippingMethod: 'flat_rate',
-                shippingMethod: 'Flat rate',
-                taxStatus: 'taxable', // 'none
+                selectMethodName: 'flat_rate',
+                methodName: 'Flat rate',
+                taxStatus: 'taxable', // 'none', 'taxable'
                 shippingCost: '20',
             },
 
             freeShipping: {
-                shippingZone: 'US',
-                shippingCountry: 'United States (US)',
-                selectShippingMethod: 'free_shipping',
-                shippingMethod: 'Free shipping',
-                freeShippingRequires: 'min_amount', // 'coupon', 'min_amount', 'either', 'both'
+                selectMethodName: 'free_shipping',
+                methodName: 'Free shipping',
+                freeShippingRequires: 'both', // 'coupon', 'min_amount', 'either', 'both'
                 freeShippingMinimumOrderAmount: '200',
             },
 
-            localPickup: {
-                shippingZone: 'US',
-                shippingCountry: 'United States (US)',
-                selectShippingMethod: 'local_pickup',
-                shippingMethod: 'Local pickup',
-                taxStatus: 'taxable', // 'none
-                shippingCost: '20',
-            },
-
             tableRateShipping: {
-                shippingZone: 'US',
-                shippingCountry: 'United States (US)',
-                selectShippingMethod: 'dokan_table_rate_shipping',
-                shippingMethod: 'Vendor Table Rate',
+                selectMethodName: 'dokan_table_rate_shipping',
+                methodName: 'Vendor Table Rate',
             },
 
             distanceRateShipping: {
-                shippingZone: 'US',
-                shippingCountry: 'United States (US)',
-                selectShippingMethod: 'dokan_distance_rate_shipping',
-                shippingMethod: 'Vendor Distance Rate',
+                selectMethodName: 'dokan_distance_rate_shipping',
+                methodName: 'Vendor Distance Rate',
             },
 
             vendorShipping: {
-                shippingZone: 'US',
-                shippingCountry: 'United States (US)',
-                selectShippingMethod: 'dokan_vendor_shipping',
-                shippingMethod: 'Vendor Shipping',
+                selectMethodName: 'dokan_vendor_shipping',
+                methodName: 'Vendor Shipping',
                 taxStatus: 'taxable', // 'none
             },
         },
@@ -666,9 +665,9 @@ export const data = {
     payment: {
         saveSuccessMessage: 'Your settings have been saved.',
         currency: {
-            dollar: 'United States (US) dollar ($)',
-            euro: 'Euro (€)',
-            rupee: 'Indian rupee (₹)',
+            dollar: 'United States (US) dollar ($) — USD',
+            euro: 'Euro (€) — EUR',
+            rupee: 'Indian rupee (₹) — INR',
             currencyOptions: {
                 thousandSeparator: ',',
                 decimalSeparator: ',',
@@ -686,7 +685,6 @@ export const data = {
             title: 'Dokan Credit card (Stripe)',
             description: 'Pay with your credit card via Stripe.',
             displayNoticeInterval: '7',
-            stripeCheckoutLocale: 'English',
             testPublishableKey: 'pk_test_',
             testSecretKey: 'sk_test_',
             testClientId: 'ca_',
@@ -876,6 +874,11 @@ export const data = {
                 addCoupon: 'wp-admin/post-new.php?post_type=shop_coupon',
                 orders: 'wp-admin/edit.php?post_type=shop_order',
                 settings: 'wp-admin/admin.php?page=wc-settings',
+                taxSettings: 'wp-admin/admin.php?page=wc-settings&tab=tax',
+                shippingSettings: 'wp-admin/admin.php?page=wc-settings&tab=shipping',
+                shippingZone: (zoneId: string) => `wp-admin/admin.php?page=wc-settings&tab=shipping&zone_id=${zoneId}`,
+                paymentSettings: 'wp-admin/admin.php?page=wc-settings&tab=checkout',
+                accountSettings: 'wp-admin/admin.php?page=wc-settings&tab=account',
             },
         },
 
@@ -1006,6 +1009,7 @@ export const data = {
                 logs: 'dokan/v1/admin/logs',
                 announcements: 'dokan/v1/announcement',
                 dummyData: 'dokan/v1/dummy-data',
+                dummyDataImport: 'dokan/v1/dummy-data/import',
                 refunds: 'dokan/v1/refunds',
                 modules: 'dokan/v1/admin/modules',
                 storeReviews: 'dokan/v1/store-reviews',
@@ -1030,6 +1034,7 @@ export const data = {
                 orders: 'wc/v3/orders',
                 customers: 'wc/v3/customers',
                 store: 'wc/store',
+                paymentGateways: 'wc/v3/payment_gateways',
             },
         },
     },
@@ -1486,6 +1491,7 @@ export const data = {
                 phone: '0123456789',
             },
             shipping: {
+                email: `${CUSTOMER}@yopmail.com`,
                 firstName: CUSTOMER,
                 lastName: 'c1',
                 companyName: faker.company.name(),
@@ -1721,13 +1727,13 @@ export const data = {
     },
 
     //  question answers
-    questionAnswers: {
-        question: 'test question',
-        editQuestion: 'edited test question',
-        answer: 'test answer',
-        editAnswer: 'edited test answer',
-        user: {
-            username: CUSTOMER,
+    questionAnswers: () => ({
+        question: `test question_${faker.string.nanoid(5)}`,
+        editQuestion: `edited test question_${faker.string.nanoid(5)}`,
+        answer: `test answer_${faker.string.nanoid(5)}`,
+        editAnswer: `edited test answer_${faker.string.nanoid(5)}`,
+        guest: {
+            username: CUSTOMER2,
             password: USER_PASSWORD,
         },
 
@@ -1735,7 +1741,7 @@ export const data = {
             byVendor: `${VENDOR}store`,
             byProduct: 'p1_v1 (simple)',
         },
-    },
+    }),
 
     // announcement
     announcement: {
@@ -2379,7 +2385,7 @@ export const data = {
 
         // plugins
         plugins: {
-            basicAuth: 'Basic-Auth-master',
+            basicAuth: 'Basic-Auth',
             woocommerce: 'woocommerce',
             dokan: 'dokan',
             dokanLite: 'dokan-lite',
@@ -2393,21 +2399,29 @@ export const data = {
 
     // command
     commands: {
-        resetSite: `cd ${SITE_PATH} && wp db reset --yes`,
-        createConfig: (db: any) => `cd ${SITE_PATH} && wp config create --dbhost="${db.dbHost}" --dbname="${db.dbName}" --dbuser="${db.dbUserName}" --dbpass="${db.dbPassword}"  --dbprefix="${db.dbTablePrefix}" --force`,
-        setConfig: (key: string, value: string) => `cd ${SITE_PATH} && wp config set ${key} ${value} --add`,
-        setDebugConfig: (key: string, value: boolean) => `cd ${SITE_PATH} && wp config set ${key} ${value} --add --raw`,
-        installWp: (core: any) => `cd ${SITE_PATH} && wp core install --locale="${core.language}" --url="${core.url}" --title="${core.title}" --admin_user="${core.admin}" --admin_password="${core.password}" --admin_email="${core.email}"`,
-        installTheme: (theme: string) => `cd ${SITE_PATH} && wp theme install ${theme} --activate`,
-        installPlugin: (plugin: string) => `cd ${SITE_PATH} && wp plugin install ${plugin} --activate --force`,
-        activatePlugin: (plugin: string, skipPlugins?: string) => `cd ${SITE_PATH} && wp plugin activate ${plugin} --skip-plugins=${skipPlugins}`,
-        activateTheme: (theme: string) => `cd ${SITE_PATH} && wp theme activate ${theme}`,
-        permalinkLocal: `cd ${SITE_PATH} && wp rewrite structure /%postname%/ && wp rewrite flush`,
+        wpcli: {
+            resetSite: `wp db reset --yes`,
+            downloadWp: `wp core download --locale=en_US --force`,
+            createConfig: (db: any) => `wp config create --dbhost="${db.dbHost}" --dbname="${db.dbName}" --dbuser="${db.dbUserName}" --dbpass="${db.dbPassword}"  --dbprefix="${db.dbTablePrefix}" --force`,
+            dropDb: `wp db drop --yes`,
+            createDb: `wp db create`,
+            cleanDb: `wp db clean --yes`,
+            setConfig: (key: string, value: string) => `wp config set ${key} ${value} --add`,
+            setDebugConfig: (key: string, value: boolean) => `wp config set ${key} ${value} --add --raw`,
+            installWp: (core: any) => `wp core install --locale="${core.language}" --url="${core.url}" --title="${core.title}" --admin_user="${core.admin}" --admin_password="${core.password}" --admin_email="${core.email}"`,
+            installTheme: (theme: string) => `wp theme install ${theme} --activate`,
+            installPlugin: (plugin: string) => `wp plugin install ${plugin} --activate --force`,
+            activatePlugin: (plugin: string) => `wp plugin activate ${plugin}`,
+            activateTheme: (theme: string) => `wp theme activate ${theme}`,
+            rewritePermalink: `wp rewrite structure /%postname%/`,
+        },
+        makePath: (path: string) => `mkdir -p ${path}`,
+        deleteFolder: (path: string) => `rm -rf ${path}`,
         removeLiteRequired: `cd ${SITE_PATH}/wp-content/plugins/dokan-pro && sed -i '''' '''s/Requires Plugins: woocommerce, dokan-lite/Requires Plugins: woocommerce, dokan/''' dokan-pro.php`,
-        cloneDokanPro: "git clone -b test_utils https://github.com/getdokan/dokan-pro.git && cd dokan-pro && sed -i '''' '''s/Requires Plugins: woocommerce, dokan-lite/Requires Plugins: woocommerce, dokan/''' dokan-pro.php",
-        buildPlugin: 'composer i --no-dev && composer du -o && npm i && npm run build',
-        permalinkWpEnv: 'npm run wp-env run tests-cli wp rewrite structure /%postname%/',
-        activateThemeWpEnv: 'npm run wp-env run tests-cli wp theme activate storefront',
+        cloneBasicAuth: (path: string) => `cd ${path} && git clone https://github.com/WP-API/Basic-Auth.git`,
+        cloneDokanLite: (path: string) => `cd ${path} && git clone -b develop https://github.com/getdokan/dokan.git`,
+        cloneDokanPro: (path: string) => `cd ${path} && git clone -b test_utils https://github.com/getdokan/dokan-pro.git`,
+        buildPlugin: (path: string) => `cd ${path} && composer i --no-dev && composer du -o && npm i && npm run build`,
     },
 
     cssStyle: {

@@ -55,23 +55,21 @@ export const payloads = {
         zip: 'application/zip',
     },
 
+    // headers
+    authHeader: (username: string, password: string = USER_PASSWORD) => {
+        return { extraHTTPHeaders: { Authorization: basicAuth(username, password) } };
+    },
+
     // user auth
 
-    adminAuth: {
-        Authorization: basicAuth(ADMIN, ADMIN_PASSWORD),
+    userAuth: (username: string, password: string = USER_PASSWORD) => {
+        return { Authorization: basicAuth(username, password) };
     },
 
-    vendorAuth: {
-        Authorization: basicAuth(VENDOR, USER_PASSWORD),
-    },
-
-    vendor2Auth: {
-        Authorization: basicAuth(VENDOR2, USER_PASSWORD),
-    },
-
-    customerAuth: {
-        Authorization: basicAuth(CUSTOMER, USER_PASSWORD),
-    },
+    adminAuth: { Authorization: basicAuth(ADMIN, ADMIN_PASSWORD) },
+    vendorAuth: { Authorization: basicAuth(VENDOR, USER_PASSWORD) },
+    vendor2Auth: { Authorization: basicAuth(VENDOR2, USER_PASSWORD) },
+    customerAuth: { Authorization: basicAuth(CUSTOMER, USER_PASSWORD) },
 
     admin: {
         username: ADMIN,
@@ -100,22 +98,31 @@ export const payloads = {
         },
     },
 
+    // product meta data
+
+    // catalog mode
+    catalogMode: {
+        meta_data: [
+            {
+                key: '_dokan_catalog_mode',
+                value: {
+                    hide_add_to_cart_button: 'on',
+                    hide_product_price: 'on',
+                },
+            },
+        ],
+    },
+
     // product
 
     createProduct: () => ({
-        name: `${faker.commerce.productName()} (Simple)`,
+        name: `${faker.commerce.productName()}_${faker.string.nanoid(5)} (Simple)`,
         type: 'simple',
         regular_price: faker.finance.amount({ min: 100, max: 200, dec: faker.helpers.arrayElement([0, 2]) }),
         // regular_price: faker.finance.amount({ min: 100, max: 200, dec: faker.helpers.arrayElement([0, 2]) }),
         // regular_price: '114.15' , // failed for this price & 5% tax & 10% commission dokan .1 issue
         status: 'publish',
-        categories: [
-            {
-                // id: 48
-                name: 'Uncategorized',
-                slug: 'uncategorized',
-            },
-        ],
+        categories: [{}],
         featured: true,
         description: '<p>test description</p>',
         short_description: '<p>test short description</p>',
@@ -212,19 +219,13 @@ export const payloads = {
     }),
 
     createProductInteger: () => ({
-        name: `${faker.commerce.productName()} (Simple)`,
+        name: `${faker.commerce.productName()}_${faker.string.nanoid(5)} (Simple)`,
         type: 'simple',
         regular_price: faker.finance.amount({ min: 100, max: 200, dec: 0 }),
         // regular_price: faker.finance.amount({ min: 100, max: 200, dec: faker.helpers.arrayElement([0, 2]) }),
         // regular_price: '114.15' , // failed for this price & 5% tax & 10% commission dokan .1 issue
         status: 'publish',
-        categories: [
-            {
-                // id: 48
-                name: 'Uncategorized',
-                slug: 'uncategorized',
-            },
-        ],
+        categories: [{}],
         featured: true,
         description: '<p>test description</p>',
         short_description: '<p>test short description</p>',
@@ -321,17 +322,11 @@ export const payloads = {
     }),
 
     createProductEuCompliance: () => ({
-        name: `${faker.commerce.productName()} (Simple)`,
+        name: `${faker.commerce.productName()}_${faker.string.nanoid(5)} (Simple)`,
         type: 'simple',
         regular_price: '100',
         status: 'publish',
-        categories: [
-            {
-                // id: 48
-                name: 'Uncategorized',
-                slug: 'uncategorized',
-            },
-        ],
+        categories: [{}],
         featured: true,
         description: '<p>test description</p>',
         short_description: '<p>test short description</p>',
@@ -426,18 +421,12 @@ export const payloads = {
 
     // wholesale product
     createWholesaleProduct: () => ({
-        name: `${faker.commerce.productName()} (wholesale)`,
+        name: `${faker.commerce.productName()}_${faker.string.nanoid(5)} (wholesale)`,
         type: 'simple',
-        regular_price: { min: 100, max: 110, dec: faker.helpers.arrayElement([0, 2]) },
-        // regular_price: '114.15' , // failed for this price & 5% tax & 10% commission dokan .1 issue
+        regular_price: faker.finance.amount({ min: 100, max: 110, dec: faker.helpers.arrayElement([0, 2]) }),
+        // regular_price: '100',
         status: 'publish',
-        categories: [
-            {
-                // id: 48
-                name: 'Uncategorized',
-                slug: 'uncategorized',
-            },
-        ],
+        categories: [{}],
         featured: true,
         description: '<p>test description</p>',
         short_description: '<p>test short description</p>',
@@ -446,8 +435,8 @@ export const payloads = {
                 key: '_dokan_wholesale_meta',
                 value: {
                     enable_wholesale: 'yes',
-                    regular_price: { min: 90, max: 99, dec: faker.helpers.arrayElement([0, 2]) },
-                    // price: '100',
+                    price: faker.finance.amount({ min: 90, max: 99, dec: faker.helpers.arrayElement([0, 2]) }),
+                    // price: '90',
                     quantity: '10',
                 },
             },
@@ -455,17 +444,11 @@ export const payloads = {
     }),
 
     createVariableProduct: () => ({
-        name: `${faker.commerce.productName()} (Variable)`,
+        name: `${faker.commerce.productName()}_${faker.string.nanoid(5)} (Variable)`,
         type: 'variable',
         regular_price: faker.finance.amount({ min: 100, max: 200, dec: faker.helpers.arrayElement([0, 2]) }),
         status: 'publish',
-        categories: [
-            {
-                // id: 48
-                name: 'Uncategorized',
-                slug: 'uncategorized',
-            },
-        ],
+        categories: [{}],
         // attributes: [
         // 	{
         // 		'id'       : 28,
@@ -485,8 +468,6 @@ export const payloads = {
         categories: [
             {
                 //  id: 48
-                name: 'Uncategorized',
-                slug: 'uncategorized',
             },
         ],
         attributes: [
@@ -503,22 +484,18 @@ export const payloads = {
     },
 
     createDownloadableProduct: () => ({
-        name: `${faker.commerce.productName()} (Downloadable)`,
+        name: `${faker.commerce.productName()}_${faker.string.nanoid(5)} (Downloadable)`,
         type: 'simple',
         downloadable: true,
         regular_price: faker.finance.amount({ min: 100, max: 200, dec: faker.helpers.arrayElement([0, 2]) }),
         downloads: [],
         // download_limit: 100,
         // download_expiry: 100,
-        categories: [
-            {
-                // id: 48
-            },
-        ],
+        categories: [{}],
     }),
 
     createSimpleSubscriptionProduct: () => ({
-        name: `${faker.commerce.productName()} (Subscription)`,
+        name: `${faker.commerce.productName()}_${faker.string.nanoid(5)} (Subscription)`,
         type: 'subscription',
         status: 'publish',
         featured: true,
@@ -568,7 +545,7 @@ export const payloads = {
     }),
 
     createBookableProduct: () => ({
-        name: `${faker.commerce.productName()} (Bookable)`,
+        name: `${faker.commerce.productName()}_${faker.string.nanoid(5)} (Bookable)`,
         status: 'publish',
         featured: true,
         description: '<p>test description</p>',
@@ -620,7 +597,7 @@ export const payloads = {
     }),
 
     createAuctionProduct: () => ({
-        name: `${faker.commerce.productName()} (Auction)`,
+        name: `${faker.commerce.productName()}_${faker.string.nanoid(5)} (Auction)`,
         type: 'auction',
         status: 'publish',
         featured: true,
@@ -1180,7 +1157,8 @@ export const payloads = {
 
     createMarketPlaceCoupon: () => ({
         code: `AC_${faker.string.nanoid(10)}`,
-        discount_type: faker.helpers.arrayElement(['percent', 'fixed_product', 'fixed_cart']),
+        // discount_type: faker.helpers.arrayElement(['percent', 'fixed_product', 'fixed_cart']),
+        discount_type: 'percent',
         amount: faker.number.int({ min: 1, max: 10 }).toString(),
         individual_use: false,
         meta_data: [
@@ -1330,6 +1308,7 @@ export const payloads = {
         amount: '50',
         notes: 'Withdraw notes',
         method: 'paypal',
+        status: 'pending',
     },
 
     updateWithdraw: {
@@ -1440,6 +1419,11 @@ export const payloads = {
         setting_minimum_order_amount: '',
         setting_order_percentage: '',
         find_address: 'Dhaka',
+        catalog_mode: {
+            hide_add_to_cart_button: 'off',
+            hide_product_price: 'off',
+            request_a_quote_enabled: 'off',
+        },
         product_sections: {
             advertised: 'no',
             featured: 'no',
@@ -1470,6 +1454,13 @@ export const payloads = {
             default_location_name: 'Default',
         },
         store_locations: [],
+    },
+
+    // catalog mode settings
+    catalogModeSetting: {
+        hide_add_to_cart_button: 'on',
+        hide_product_price: 'on',
+        request_a_quote_enabled: 'on',
     },
 
     // attribute
@@ -1550,6 +1541,11 @@ export const payloads = {
         order: 0,
     },
 
+    createRandomShippingZone: () => ({
+        name: faker.string.alpha(3).toUpperCase(),
+        // order: 0,
+    }),
+
     addShippingZoneLocation: [
         {
             code: 'US',
@@ -1563,10 +1559,6 @@ export const payloads = {
 
     addShippingMethodFreeShipping: {
         method_id: 'free_shipping',
-    },
-
-    addShippingMethodLocalPickup: {
-        method_id: 'local_pickup',
     },
 
     addShippingMethodDokanTableRateShipping: {
@@ -1675,8 +1667,19 @@ export const payloads = {
         ],
     },
 
-    // enable tax rate
-    enableTaxRate: {
+    // currency
+    currency: {
+        update: [
+            {
+                id: 'woocommerce_currency',
+                // label: 'Currency',
+                value: 'USD', // 'USD', 'EUR', 'INR'
+            },
+        ],
+    },
+
+    // enable tax
+    enableTax: {
         update: [
             {
                 id: 'woocommerce_calc_taxes',
@@ -1748,6 +1751,58 @@ export const payloads = {
                 // value: 'yes',
             },
         ],
+    },
+
+    tax: {
+        exclusive: {
+            update: [
+                {
+                    id: 'woocommerce_prices_include_tax',
+                    // label: 'Prices entered with tax',
+                    value: 'no', // 'no', 'yes'
+                },
+                {
+                    id: 'woocommerce_tax_round_at_subtotal',
+                    label: 'Rounding',
+                    value: 'no', // 'no', 'yes'
+                },
+                {
+                    id: 'woocommerce_tax_display_shop',
+                    // label: 'Display prices in the shop',
+                    value: 'excl', // 'excl', 'incl
+                },
+                {
+                    id: 'woocommerce_tax_display_cart',
+                    // label: 'Display prices during cart and checkout',
+                    value: 'excl', // 'excl', 'incl
+                },
+            ],
+        },
+
+        inclusive: {
+            update: [
+                {
+                    id: 'woocommerce_prices_include_tax',
+                    // label: 'Prices entered with tax',
+                    value: 'yes', // 'no', 'yes'
+                },
+                {
+                    id: 'woocommerce_tax_round_at_subtotal',
+                    label: 'Rounding',
+                    value: 'no', // 'no', 'yes'
+                },
+                {
+                    id: 'woocommerce_tax_display_shop',
+                    // label: 'Display prices in the shop',
+                    value: 'incl', // 'excl', 'incl'
+                },
+                {
+                    id: 'woocommerce_tax_display_cart',
+                    // label: 'Display prices during cart and checkout',
+                    value: 'incl', // 'excl', 'incl
+                },
+            ],
+        },
     },
 
     // enable HPOS
@@ -1890,45 +1945,7 @@ export const payloads = {
                 // description: "Place the payment gateway in test mode using test API keys.",
                 value: 'yes',
             },
-            {
-                id: 'stripe_checkout',
-                // label: "Enable Stripe Checkout",
-                // description: "(This only works when 3D Secure and SCA is disabled) If enabled, this option shows a \"pay\" button and modal credit card form on the checkout, instead of credit card fields directly on the page.",
-                value: 'yes',
-            },
-            {
-                id: 'stripe_checkout_locale',
-                // label: "Stripe Checkout locale",
-                // description: "Language to display in Stripe Checkout modal. Specify Auto to display Checkout in the user's preferred language, if available. English will be used by default.",
-                value: 'en',
-                // 'options': {
-                //     'auto': 'Auto',
-                //     'zh': 'Simplified Chinese',
-                //     'da': 'Danish',
-                //     'nl': 'Dutch',
-                //     'en': 'English',
-                //     'fi': 'Finnish',
-                //     'fr': 'French',
-                //     'de': 'German',
-                //     'it': 'Italian',
-                //     'ja': 'Japanese',
-                //     'no': 'Norwegian',
-                //     'es': 'Spanish',
-                //     'sv': 'Swedish'
-                // }
-            },
-            {
-                id: 'stripe_checkout_image',
-                // label: "Checkout Image",
-                // description: "Optionally enter the URL to a 128x128px image of your brand or product. e.g. <code>https://yoursite.com/wp-content/uploads/2013/09/yourimage.jpg</code>",
-                value: '',
-            },
-            {
-                id: 'stripe_checkout_label',
-                // label: "Checkout Button Label",
-                // description: "Optionally enter a Label for PAY button",
-                value: '',
-            },
+
             {
                 id: 'saved_cards',
                 // label: "Enable saved cards",
@@ -2932,8 +2949,8 @@ export const payloads = {
 
     // store category
 
-    createStoreCategory: () => ({ name: `Test_Store_Category_${faker.string.nanoid(10)}` }),
-    updateStoreCategory: () => ({ name: `Update_Test_Store_Category_${faker.string.nanoid(10)}` }),
+    createStoreCategory: () => ({ name: `Store_Category_${faker.string.nanoid(5)}` }),
+    updateStoreCategory: () => ({ name: `Update_Store_Category_${faker.string.nanoid(5)}` }),
 
     // dummy data
 
@@ -3718,7 +3735,7 @@ export const payloads = {
         hide_price_text: 'Price is hidden',
         hide_cart_button: 'replace',
         button_text: 'Add to quote',
-        apply_on_all_product: '1',
+        apply_on_all_product: '0',
         rule_priority: '0',
         status: 'publish',
     }),
@@ -3864,6 +3881,7 @@ export const payloads = {
     createProductQuestion: () => ({
         question: `test question_${faker.string.nanoid(10)}`,
         product_id: '',
+        status: 'visible',
     }),
 
     updateProductQuestion: () => ({
@@ -4014,15 +4032,15 @@ export const payloads = {
     // shipping status
 
     createShipment: {
-        shipped_status: 'ss_proceccing', 
-        shipping_provider: 'sp-dhl', 
-        shipped_date: new Date().toISOString(), 
-        shipping_number: '#001', 
+        shipped_status: 'ss_proceccing',
+        shipping_provider: 'sp-dhl',
+        shipped_date: new Date().toISOString(),
+        shipping_number: '#001',
         shipment_comments: 'test shipment comment',
-        is_notify: 'on', 
-        item_id: ['lineitemid'], // replace with actual line item id 
+        is_notify: 'on',
+        item_id: ['lineitemid'], // replace with actual line item id
         item_qty: {
-            lineitemid: 1, // replace with actual line item id 
+            lineitemid: 1, // replace with actual line item id
         },
     },
 
