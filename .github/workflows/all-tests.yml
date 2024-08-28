@@ -1,0 +1,342 @@
+name: E2E_API Tests All
+
+on:
+    workflow will run daily at 8:00 AM BDT (2:00 AM UTC)
+    schedule:
+        - cron: 0 2 * * *
+    # workflow will trigger on pull request
+    pull_request:
+        branches: [e2e-pw]
+    # workflow will trigger on push to develop branch
+    push:
+        branches: [develop, e2e-pw]
+
+    # workflow can be manually triggered
+    workflow_dispatch:
+        inputs:
+            testsuite:
+                description: Choose which test suite to run
+                default: All
+                type: choice
+                options:
+                    - E2E
+                    - API
+                    - All
+
+# Cancels all previous workflow runs for pull requests that have not completed.
+concurrency:
+    # The concurrency group contains the workflow name and the branch name for pull requests or the commit hash for any other events.
+    group: ${{ github.workflow }}-${{ github.event_name == 'pull_request' && github.head_ref || github.sha }}
+    cancel-in-progress: true
+
+# workflow permissions
+permissions:
+    checks: write
+    contents: write
+    issues: write
+    pull-requests: write
+
+# workflow environment variables
+env:
+    ADMIN: admin
+    ADMIN_PASSWORD: password
+    VENDOR: vendor1
+    VENDOR2: vendor2
+    CUSTOMER: customer1
+    CUSTOMER2: customer2
+    USER_PASSWORD: 01dokan01
+    GMAP: ${{secrets.GMAP}}
+    LICENSE_KEY: ${{secrets.LICENSE_KEY}}
+    BASE_URL: http://localhost:9999
+    CI: true
+    DOKAN_PRO: true
+    FORCE_COLOR: 1
+    DB_HOST_NAME: localhost
+    DB_USER_NAME: root
+    DB_USER_PASSWORD: password
+    DB_PORT: 9998
+    DATABASE: tests-wordpress
+    DB_PREFIX: wp
+    PR_NUMBER: ${{ github.event.number }}
+    SHA: ${{ github.event.pull_request.head.sha }}
+    SYSTEM_INFO: ./tests/pw/playwright/systemInfo.json
+    API_TEST_RESULT: ./tests/pw/playwright-report/api/summary-report/results.json
+    E2E_TEST_RESULT: ./tests/pw/playwright-report/e2e/summary-report/results.json
+    API_COVERAGE: ./tests/pw/playwright-report/api/coverage-report/coverage.json
+    E2E_COVERAGE: ./tests/pw/playwright-report/e2e/coverage-report/coverage.json
+    TEST_PUBLISH_KEY_STRIPE: ${{secrets.TEST_PUBLISH_KEY_STRIPE}}
+    TEST_SECRET_KEY_STRIPE: ${{secrets.TEST_SECRET_KEY_STRIPE}}
+    CLIENT_ID_STRIPE: ${{secrets.CLIENT_ID_STRIPE}}
+
+jobs:
+    tests:
+        name: e2e_api tests
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: Checkout testing repo
+              id: clone-dokan-lite
+              uses: actions/checkout@v4
+
+            - name: Use desired version of NodeJS
+              uses: actions/setup-node@v4
+              with:
+                  node-version: 20
+                  cache: npm
+
+            - name: Clone dokan-pro
+              uses: actions/checkout@v4
+              with:
+                  repository: getdokan/dokan-pro
+                  token: ${{ secrets.ACCESS_TOKEN }}
+                  path: 'plugins/dokan-pro'
+                  ref: 'test_utils'
+
+            - name: Unzip woocommerce plugins
+              working-directory: plugins/dokan-pro/tests/plugins
+              run: |
+                  unzip woocommerce-bookings.zip
+                  unzip woocommerce-product-addons.zip
+                  unzip woocommerce-simple-auctions.zip
+                  unzip woocommerce-subscriptions.zip
+
+            - name: Composer install and build (Dokan-lite)
+              run: |
+                  composer i --no-dev -o || composer update --no-dev -o
+
+            - name: Npm install and build (Dokan-lite)
+              run: |
+                  npm ci || npm i
+                  npm run build
+
+            - name: Composer install and build (Dokan-pro)
+              working-directory: plugins/dokan-pro
+              run: |
+                  composer i --no-dev -o || composer update --no-dev -o
+
+            - name: Npm install and build (Dokan-pro)
+              working-directory: plugins/dokan-pro
+              run: |
+                  npm ci || npm i
+                  npm run build
+
+            - name: Update Required Plugin name from dokan-lite to dokan (Dokan-pro)
+              working-directory: plugins/dokan-pro
+              run: |
+                  sed -i'' 's/Requires Plugins: woocommerce, dokan-lite/Requires Plugins: woocommerce, dokan/' dokan-pro.php
+
+            # Install test dependencies
+            - name: Install test dependencies
+              working-directory: tests/pw
+              run: |
+                  npm ci || npm i
+
+            # Override wp-env for pro required plugins
+            - name: Allow override wp-env.json via .wp-env.override.json
+              working-directory: tests/pw
+              run: |
+                  mv .wp-env.override .wp-env.override.json
+
+            # Create wp debuglog file
+            - name: Create wp debuglog file
+              id: debug-log
+              working-directory: tests/pw
+              run: |
+                  mkdir -p wp-data && touch wp-data/debug.log
+
+            # Start wordpress environment
+            - name: Start WordPress Env
+              id: wp-env
+              uses: nick-fields/retry@v3
+              with:
+                  timeout_minutes: 4
+                  max_attempts: 2
+                  retry_on: error
+                  command: |
+                      cd tests/pw
+                      npm run start:env
+
+            # Set permalink structure
+            - name: Set Permalink structure
+              working-directory: tests/pw
+              run: |
+                  npm run wp-env run tests-cli wp rewrite structure /%postname%/
+
+            # Activate theme
+            - name: Activate theme:Storefront
+              working-directory: tests/pw
+              run: |
+                  npm run wp-env run tests-cli wp theme activate storefront
+
+            # Get Playwright version
+            - name: Get installed Playwright version
+              id: playwright-version
+              working-directory: tests/pw
+              run: |
+                  echo "PLAYWRIGHT_VERSION=$(npm ls @playwright/test --json | jq --raw-output '.dependencies["@playwright/test"].version')" >> $GITHUB_ENV
+
+            # Cache browser binaries, cache key is based on Playwright version and OS
+            - name: Cache playwright binaries
+              id: playwright-cache
+              uses: actions/cache@v4
+              with:
+                  path: |
+                      ~/.cache/ms-playwright
+                  key: ${{ runner.os }}-playwright-${{ env.PLAYWRIGHT_VERSION }}
+                  restore-keys: |
+                      ${{ runner.os }}-playwright-
+
+            # Install browser binaries & OS dependencies if cache missed
+            - name: Install Playwright browser binaries & OS dependencies
+              id: pw-install
+              if: steps.playwright-cache.outputs.cache-hit != 'true'
+              working-directory: tests/pw
+              run: |
+                  npm run pw:browser-with-deps
+
+            # Install only the OS dependencies if cache hit not needed
+            # - name: Install Playwright OS dependencies
+            #   if: steps.playwright-cache.outputs.cache-hit == 'true'
+            #   working-directory: tests/pw
+            #   run: |
+            #     npm run pw:deps-only
+
+            # Run e2e tests
+            - name: 🧪 Run e2e tests
+              id: e2e-test
+              if: success() && (github.event_name != 'workflow_dispatch' || ( github.event_name == 'workflow_dispatch' && (github.event.inputs.testsuite == 'E2E' || github.event.inputs.testsuite == 'All')))
+              timeout-minutes: 40
+              working-directory: tests/pw
+              run: |
+                  npm run test:e2e:pro
+                          
+            # Run e2e coverage
+            - name: 🧪 Run e2e coverage
+              if: always() && (steps.e2e-test.outcome == 'success' || steps.e2e-test.outcome == 'failure')
+              working-directory: tests/pw
+              run: |
+                npm run test:e2e:coverage
+
+            # Run API tests
+            - name: 🧪 Run api tests
+              id: api-test
+              if: always() && steps.wp-env.outcome == 'success' && ( github.event_name != 'workflow_dispatch'  || ( github.event_name == 'workflow_dispatch' && (github.event.inputs.testsuite == 'API' || github.event.inputs.testsuite == 'All')))
+              working-directory: tests/pw
+              run: |
+                  npm run test:api:pro
+
+            # Prepare test summary
+            - name: Prepare test summary
+              id: prepare-test-summary
+              uses: actions/github-script@v7
+              if: always() && steps.clone-dokan-lite.outcome == 'success'
+              with:
+                  result-encoding: string
+                  script: |
+                      const script = require("./tests/pw/utils/gitTestSummary.ts")
+                      return await script({github, context, core})
+
+            # Find PR comment
+            - name: Find PR comment by github-actions[bot]
+              uses: peter-evans/find-comment@v3
+              id: find-comment
+              if: github.event_name == 'pull_request'
+              with:
+                  issue-number: ${{ github.event.pull_request.number }}
+                  comment-author: 'github-actions[bot]'
+                  body-includes: Tests Summary
+
+            # Post test summary as PR comment
+            - name: Create or update PR comment
+              uses: peter-evans/create-or-update-comment@v4
+              if: github.event_name == 'pull_request'
+              with:
+                  comment-id: ${{ steps.find-comment.outputs.comment-id }}
+                  issue-number: ${{ github.event.pull_request.number }}
+                  body: ${{ steps.prepare-test-summary.outputs.result }}
+                  edit-mode: replace
+
+            # - name: Generate Test Report
+            #   uses: phoenix-actions/test-reporting@v8
+            #   id: test-report # Set ID reference for step
+            #   if: success() || failure() # run this step even if previous step failed
+            #   with:
+            #     name: e2e tests result # Name of the check run which will be created
+            #     path: tests/pw/playwright-report/results.xml # Path to test results
+            #     reporter: jest-junit
+            #     only-summary: "false" # Allows you to generate only the summary.
+            #     list-suites: "all" # Limits which test suites are listed: 'all', 'failed'
+            #     list-tests: "all" # Limits which test cases are listed: 'all','failed', 'none'
+            #     fail-on-error: "true" # Set action as failed if test report contains any failed test
+
+            # - name: Test results
+            #   run: |
+            #     echo "url is ${{ steps.test-report.outputs.runHtmlUrl }}"
+
+            # Backup Database
+            - name: Backup Database
+              if: always() && steps.wp-env.outcome == 'success'
+              working-directory: tests/pw
+              run: |
+                  npm run wp-env run tests-cli wp db export wp-data/db.sql
+
+            # Upload artifacts
+            - name: Archive test artifacts (screenshots, HTML snapshots, Reports)
+              uses: actions/upload-artifact@v4
+              if: always() && steps.debug-log.outcome == 'success'
+              with:
+                  name: test-artifact
+                  path: |
+                      tests/pw/wp-data
+                      tests/pw/playwright
+                      tests/pw/playwright-report
+                  if-no-files-found: ignore
+                  retention-days: 30
+
+            # - name: Publish HTML report to GH Pages
+            #   if: always() # We want this to always run, even if test fail prior to this step running
+            #   uses: peaceiris/actions-gh-pages@v4
+            #   with:
+            #     github_token: ${{ secrets.GITHUB_TOKEN }}
+            #     publish_branch: gh-pages
+            #     publish_dir: tests/pw/playwright-report/e2e/html-report # This is where index.html will be output
+            #     keep_files: true # Set this to true to make sure we don't wipe out the other content in GitHub Pages
+            #     user_name: "github-actions[bot]" # This will be the username that gets stamped in the repo commit
+            #     user_email: "github-actions[bot]@users.noreply.github.com" # This will be the user email that gets stamped in the repo commit
+
+            # - name: Test results
+            #   if: always()
+            #   run: |
+            #     echo "https://$GITHUB_REPOSITORY_OWNER.github.io/${GITHUB_REPOSITORY#*/}"
+# publishTestResults:
+#   name: Publish Test Result
+#   needs: tests
+#   runs-on: ubuntu-latest
+#   if: always()
+#   steps:
+#     - name: Download artifacts
+#       uses: actions/download-artifact@v2
+#       id: download
+
+#     - name: Publish HTML report to GH Pages
+#       if: always() # We want this to always run, even if test fail prior to this step running
+#       uses: peaceiris/actions-gh-pages@v3
+#       with:
+#         github_token: ${{ secrets.GITHUB_TOKEN }}
+#         publish_dir: ${{steps.download.outputs.download-path}} # This is where index.html will be output
+#         # keep_files: true # Set this to true to make sure we don't wipe out the other content in GitHub Pages
+#         user_name: "github-actions[bot]" # This will be the username that gets stamped in the repo commit
+#         user_email: "github-actions[bot]@users.noreply.github.com" # This will be the user email that gets stamped in the repo commit
+
+#       # redundant / in echo url remove before run
+#     - name: Test results
+#       run: |
+#         echo "url is https://$GITHUB_REPOSITORY_OWNER.github.io/${GITHUB_REPOSITORY#/*/}"
+# iff: github.event_name == 'pull_request'
+
+# - name: Log github context & env variables
+#   env:
+#     GITHUB_CONTEXT: ${{ toJson(github) }}
+#   run: |
+#     echo "$GITHUB_CONTEXT"
+#     env
