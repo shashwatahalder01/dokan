@@ -46,6 +46,7 @@ export class StoreCategoriesPage extends AdminPage {
     async searchStoreCategory(categoryName: string) {
         await this.goIfNotThere(data.subUrls.backend.dokan.storeCategories);
         await this.typeAndWaitForResponse(data.subUrls.api.dokan.storeCategories, storeCategoryAdmin.search, categoryName);
+        await this.toHaveCount(storeCategoryAdmin.numberOfRows, 1);
         await this.toBeVisible(storeCategoryAdmin.storeCategoryCell(categoryName));
     }
 
@@ -64,6 +65,7 @@ export class StoreCategoriesPage extends AdminPage {
     async updateStoreCategory(categoryName: string, action: string) {
         await this.searchStoreCategory(categoryName);
 
+        await this.removeAttribute(storeCategoryAdmin.storeCategoryRowActions(categoryName), 'class'); // forcing the row actions to be visible, to avoid flakiness
         await this.hover(storeCategoryAdmin.storeCategoryCell(categoryName));
 
         switch (action) {
