@@ -99,27 +99,66 @@
           vendor can add simple subscription product: true
           vendor can add variable subscription product: true
           vendor can add external product: true
+          vendor can add group product: true
           vendor can add downloadable product [lite]: true
           vendor can add virtual product [lite]: true
-          vendor can add product category [lite]: true
-          vendor can export products: true
           vendor can search product [lite]: true
           vendor can filter products by date [lite]: true
           vendor can filter products by category [lite]: true
           vendor can filter products by type: true
           vendor can filter products by other: true
-          vendor can view product [lite]: true
-          vendor can't buy own product: true
-          vendor can edit product [lite]: true
-          vendor can quick edit product: true
-          vendor can add product description [lite]: true
-          vendor can add product quantity discount: false
-          vendor can add product rma options: false
-          vendor can add product wholesale options: true
-          vendor can add product min-max options: false
-          vendor can add product other options [lite]: true
+          vendor can reset filter [lite]: true
+          vendor can import products: true
+          vendor can export products: true
           vendor can duplicate product: true
           vendor can permanently delete product [lite]: true
+          vendor can view product [lite]: true
+          vendor can't add product without required fields [lite]: true
+          vendor can't buy own product [lite]: true
+          vendor can edit product [lite]: true
+          vendor can quick edit product: true
+          vendor can add product title [lite]: true
+          vendor can add product permalink [lite]: true
+          vendor can add product discount price [lite]: true
+          vendor can add product discount price (with schedule) [lite]: true
+          vendor can add product category (single) [lite]: true
+          vendor can add product category (multiple) [lite]: true
+          vendor can add multi-step product category (last category) [lite]: true
+          vendor can add multi-step product category (any category) [lite]: true
+          vendor can't add multi-step product category (any category) [lite]: true
+          vendor can add product tags [lite]: true
+          vendor can create product tags [lite]: true
+          vendor can add product cover image [lite]: true
+          vendor can add product gallery image [lite]: true
+          vendor can add product short description [lite]: true
+          vendor can add product description [lite]: true
+          vendor can add product inventory options (SKU) [lite]: true
+          vendor can add product inventory options (stock status) [lite]: true
+          vendor can add product inventory options (stock management) [lite]: true
+          vendor can add product inventory options (allow single quantity) [lite]: true
+          vendor can add product other options (product status) [lite]: true
+          vendor can add product other options (visibility) [lite]: true
+          vendor can add product other options (purchase note) [lite]: true
+          vendor can add product other options (product review) [lite]: true
+          vendor can add catalog mode [lite]: true
+          vendor can add catalog mode (with price hidden) [lite]: true
+          vendor can add product shipping: true
+          vendor can add product tax: true
+          vendor can add product tax (with tax class): true
+          vendor can add product linked products (up-selles): true
+          vendor can add product linked products (cross-selles): true
+          vendor can add product attribute: true
+          vendor can add product attribute term: true
+          vendor can remove product attribute: true
+          vendor can add product bulk discount options: true
+          # move module tests to module section
+          vendor can add product geolocation: true
+          vendor can add product rma options (no warranty): true
+          vendor can add product rma options (warranty included limited): true
+          vendor can add product rma options (warranty included lifetime): true
+          vendor can add product rma options (warranty as addon): true
+          vendor can add product wholesale options: true
+          vendor can add product min-max options: true
 
 - page: 'MyOrders'
   features:
@@ -355,7 +394,10 @@
           vendor can set min-max settings: true
           vendor can set shipStation settings: true
           vendor can set social profile settings: true
-          vendor can set rma settings: true
+          vendor can set rma settings (no warranty): true
+          vendor can set rma settings (warranty included limited): true
+          vendor can set rma settings (warranty included lifetime): true
+          vendor can set rma settings (warranty as addon): true
           vendor can set store seo settings: true
 
 - page: 'Setting'
