@@ -113,7 +113,6 @@
           vendor can edit product [lite]: true
           vendor can quick edit product: true
           vendor can add product description [lite]: true
-          #   vendor can add product addon options [duplicate]: false
           vendor can add product quantity discount: false
           vendor can add product rma options: false
           vendor can add product wholesale options: true
@@ -710,13 +709,16 @@
           vendor can view product addons menu page: true
           vendor can add global product addon: true
           vendor can edit global product addon: true
+          vendor can import global product addon field: true
+          vendor can export global product addon field: true
+          vendor can delete product addon field: true
+          vendor can add product addon: true
+          vendor can import product addon: true
+          vendor can export product addon: true
           vendor can delete product addon: true
-          #   vendor can add individual product addon [duplicate]: false
-          vendor can edit individual product product addon: false
-          vendor can delete individual productproduct addon: false
       customer:
           customer can view product addons on single product page: false
-          customer can buy product with addons: false
+          customer can buy product with addon: false
 
 - page: 'Product Advertising'
   features:
