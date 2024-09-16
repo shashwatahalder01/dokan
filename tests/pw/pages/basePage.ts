@@ -240,6 +240,14 @@ export class BasePage {
         return response;
     }
 
+    // click & wait for response until network idle
+    async clickAndWaitForResponseAndLoadStateUntilNetworkIdle(subUrl: string, selector: string, code = 200): Promise<Response> {
+        // eslint-disable-next-line playwright/no-networkidle
+        const [, response] = await Promise.all([this.waitForLoadState('networkidle'), this.page.waitForResponse(resp => resp.url().includes(subUrl) && resp.status() === code), this.page.locator(selector).click()]);
+        expect(response.status()).toBe(code);
+        return response;
+    }
+
     // click & wait for responses sequentially (requests are made one after the other)
     async clickAndWaitForResponsesSequentially(subUrls: string[], selector: string, codes: number[] = [200]): Promise<Response[]> {
         await this.page.locator(selector).click();
@@ -743,6 +751,7 @@ export class BasePage {
     // check input fields [checkbox/radio]
     async check(selector: string): Promise<void> {
         await this.toPass(async () => {
+            // added to remove flakiness
             await this.checkLocator(selector);
             await this.toBeChecked(selector, { timeout: 200 });
             // await this.checkByPage(selector);
@@ -1416,6 +1425,11 @@ export class BasePage {
         await expect(this.page.locator(selector)).toBeEnabled(options);
     }
 
+    // assert element to be disabled
+    async toBeDisabled(selector: string, options?: { timeout?: number; visible?: boolean } | undefined) {
+        await expect(this.page.locator(selector)).toBeDisabled(options);
+    }
+
     // assert element to be visible
     async toBeVisible(selector: string, options?: { timeout?: number; visible?: boolean } | undefined) {
         await expect(this.page.locator(selector)).toBeVisible(options);
@@ -1451,15 +1465,23 @@ export class BasePage {
         await expect(this.page.locator(selector)).toHaveAttribute(attribute, value);
     }
 
-    // assert element to have class
+    // assert element to have class [pass regex for contain class]
     async toHaveClass(selector: string, className: string | RegExp | readonly (string | RegExp)[]) {
         await expect(this.page.locator(selector)).toHaveClass(className);
     }
 
-    // assert select element to have value
+    // assert select element to have value [select, input]
     async toHaveSelectedValue(selector: string, value: string, options?: { timeout?: number; intervals?: number[] }) {
         await this.toPass(async () => {
             const selectedValue = await this.getSelectedValue(selector);
+            expect(selectedValue).toBe(value);
+        }, options);
+    }
+
+    // assert select element to have label
+    async toHaveSelectedLabel(selector: string, value: string, options?: { timeout?: number; intervals?: number[] }) {
+        await this.toPass(async () => {
+            const selectedValue = await this.getSelectedText(selector);
             expect(selectedValue).toBe(value);
         }, options);
     }
@@ -1507,6 +1529,11 @@ export class BasePage {
     // assert element not to be visible
     async notToBeVisible(selector: string) {
         await expect(this.page.locator(selector)).toBeHidden();
+    }
+
+    // assert checkbox to be unchecked
+    async notToBeChecked(selector: string, options?: { checked?: boolean; timeout?: number } | undefined) {
+        await expect(this.page.locator(selector)).not.toBeChecked(options);
     }
 
     // assert element not to have text
@@ -1662,10 +1689,17 @@ export class BasePage {
     // check multiple elements with same selector/class/xpath
     async checkMultiple(selector: string): Promise<void> {
         for (const element of await this.page.locator(selector).all()) {
-            const isCheckBoxChecked = await element.isChecked();
-            if (!isCheckBoxChecked) {
-                await element.click();
-            }
+            await this.toPass(async () => {
+                await element.check();
+                await expect(element).toBeChecked();
+            });
+        }
+    }
+
+    // checked multiple elements with same selector/class/xpath
+    async toBeCheckedMultiple(selector: string): Promise<void> {
+        for (const element of await this.page.locator(selector).all()) {
+            await expect(element).toBeChecked();
         }
     }
 
@@ -1684,14 +1718,16 @@ export class BasePage {
         }
         await this.click(selector.wpMedia.selectUploadedMedia);
 
+        // todo: upload with toPass method
         // check if the uploaded media is selected or not for 3 times
         for (let i = 0; i < 3; i++) {
             const isSelectDisabled = await this.isDisabled(selector.wpMedia.select);
             if (!isSelectDisabled) {
                 console.log('Media Selected');
                 break;
+            } else {
+                await this.click(selector.wpMedia.selectUploadedMedia);
             }
-            if (isSelectDisabled) await this.click(selector.wpMedia.selectUploadedMedia);
         }
 
         await this.click(selector.wpMedia.select);
