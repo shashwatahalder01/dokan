@@ -61,7 +61,7 @@ export class SpmvPage extends VendorPage {
         switch (from) {
             case 'popup':
                 await this.goIfNotThere(data.subUrls.frontend.vDashboard.products);
-                await this.click(selector.vendor.product.create.addNewProduct);
+                await this.click(selector.vendor.product.addNewProduct);
                 await this.click(spmvVendor.search.toggleBtn);
                 break;
 
