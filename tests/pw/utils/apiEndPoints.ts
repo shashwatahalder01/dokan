@@ -450,14 +450,6 @@ export const endPoints = {
         deleteCategory: (categoryId: string) => `${SERVER_URL}/wc/v3/products/categories/${categoryId}`,
         updateBatchCategories: `${SERVER_URL}/wc/v3/products/categories/batch`,
 
-        // product shipping class
-        getAllShippingClasses: `${SERVER_URL}/wc/v3/products/shipping_classes`,
-        getSingleShippingClass: (shippingClassId: string) => `${SERVER_URL}/wc/v3/products/shipping_classes/${shippingClassId}`,
-        createShippingClass: `${SERVER_URL}/wc/v3/products/shipping_classes`,
-        updateShippingClass: (shippingClassId: string) => `${SERVER_URL}/wc/v3/products/shipping_classes/${shippingClassId}`,
-        deleteShippingClass: (shippingClassId: string) => `${SERVER_URL}/wc/v3/products/shipping_classes/${shippingClassId}`,
-        updateBatchShippingClass: `${SERVER_URL}/wc/v3/products/shipping_classes/batch`,
-
         // product tags
         getAllTags: `${SERVER_URL}/wc/v3/products/tags`,
         getSingleTag: (tagId: string) => `${SERVER_URL}/wc/v3/products/tags/${tagId}`,
@@ -515,6 +507,14 @@ export const endPoints = {
         // shipping methods
         getAllShippingMethods: `${SERVER_URL}/wc/v3/shipping_methods`,
         getSingleShippingMethod: (shippingId: string) => `${SERVER_URL}/wc/v3/shipping_methods/${shippingId}`,
+
+        // shipping class
+        getAllShippingClasses: `${SERVER_URL}/wc/v3/products/shipping_classes`,
+        getSingleShippingClass: (shippingClassId: string) => `${SERVER_URL}/wc/v3/products/shipping_classes/${shippingClassId}`,
+        createShippingClass: `${SERVER_URL}/wc/v3/products/shipping_classes`,
+        updateShippingClass: (classId: string) => `${SERVER_URL}/wc/v3/products/shipping_classes/${classId}`,
+        deleteShippingClass: (classId: string) => `${SERVER_URL}/wc/v3/products/shipping_classes/${classId}`,
+        updateBatchShippingClass: `${SERVER_URL}/wc/v3/products/shipping_classes/batch`,
 
         // payment gateways
         getAllPaymentGateways: `${SERVER_URL}/wc/v3/payment_gateways`,
