@@ -486,7 +486,8 @@ export class VendorSettingsPage extends VendorPage {
         }
         await this.typeFrameSelector(settingsRma.rmaPolicyIframe, settingsRma.rmaPolicyHtmlBody, rma.refundPolicy);
 
-        await this.saveSettings();
+        await this.clickAndWaitForResponseAndLoadState(data.subUrls.frontend.vDashboard.settingsRma, selector.vendor.vRmaSettings.saveChanges, 302);
+        await this.toContainText(selector.vendor.vRmaSettings.updateSettingsSuccessMessage, rma.saveSuccessMessage);
 
         await this.toHaveValue(settingsRma.label, rma.label);
         await this.toHaveSelectedValue(settingsRma.type, rma.type);
