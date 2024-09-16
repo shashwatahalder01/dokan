@@ -60,6 +60,14 @@ export const helpers = {
             .toLowerCase(); // Ensure the entire string is lowercase
     },
 
+    // convert string to kebab case
+    kebabCase: (str: string): string => {
+        return str
+            .replace(/([a-z])([A-Z])/g, '$1-$2') // Insert hyphen between lowercase and uppercase letters
+            .replace(/[\s_]+/g, '-') // Replace spaces and underscores with hyphens
+            .toLowerCase(); // Convert the entire string to lowercase
+    },
+
     // string between two tags
     stringBetweenTags: (str: string): string => {
         const match = str.match(/<([^>]+)>(.*?)<\/\1>/);
@@ -103,7 +111,7 @@ export const helpers = {
         return result.toLocaleDateString('en-CA');
     },
 
-    // current day [2023-06-02]
+    // current day [2023-06-02] [YY-MM-DD]
     currentDate: new Date().toLocaleDateString('en-CA'),
 
     // current day [August 22, 2023]
@@ -118,7 +126,7 @@ export const helpers = {
     currentDateTime2: () => new Date().toLocaleString('en-CA', { year: 'numeric', month: 'numeric', day: 'numeric', hourCycle: 'h23', hour: 'numeric', minute: 'numeric', second: 'numeric' }).replace(',', ''),
 
     // add two input days
-    addDays(date: string | number | Date | null, days: number, format: string): string {
+    addDays(date: string | number | Date | null, days: number, format: string = 'default'): string {
         const result = date ? new Date(date) : new Date();
         result.setDate(result.getDate() + days);
 
