@@ -101,7 +101,7 @@ export class SpmvPage extends VendorPage {
     async goToProductEditFromSpmv(productName: string): Promise<void> {
         await this.searchSimilarProduct(productName, 'spmv');
         await this.clickAndWaitForResponseAndLoadState(data.subUrls.frontend.vDashboard.products, spmvVendor.editProduct(productName));
-        await this.toHaveValue(selector.vendor.product.edit.title, productName);
+        await this.toHaveValue(selector.vendor.product.title, productName);
     }
 
     // sort spmv product
@@ -115,14 +115,14 @@ export class SpmvPage extends VendorPage {
     async cloneProduct(productName: string): Promise<void> {
         await this.searchSimilarProduct(productName, 'spmv');
         await this.clickAndWaitForResponseAndLoadState(data.subUrls.ajax, spmvVendor.addToStore);
-        await this.toHaveValue(selector.vendor.product.edit.title, productName);
+        await this.toHaveValue(selector.vendor.product.title, productName);
     }
 
     // clone product via sell item button
     async cloneProductViaSellItemButton(productName: string): Promise<void> {
         await this.goToProductDetails(productName);
         await this.clickAndWaitForResponseAndLoadState(data.subUrls.frontend.vDashboard.products, spmvVendor.productDetails.sellThisItem);
-        await this.toHaveValue(selector.vendor.product.edit.title, productName);
+        await this.toHaveValue(selector.vendor.product.title, productName);
     }
 
     // view other available vendors

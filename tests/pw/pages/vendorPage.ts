@@ -50,7 +50,7 @@ export class VendorPage extends BasePage {
         await this.searchProduct(productName);
         await this.hover(productsVendor.productCell(productName));
         await this.clickAndWaitForResponseAndLoadState(data.subUrls.frontend.vDashboard.products, productsVendor.editProduct(productName));
-        await this.toHaveValue(productsVendor.edit.title, productName);
+        await this.toHaveValue(productsVendor.title, productName);
     }
 
     // open vendor registration form
