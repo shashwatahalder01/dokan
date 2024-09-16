@@ -269,7 +269,7 @@ export class SettingsPage extends AdminPage {
     }
 
     // Admin Set Dokan MenuManager Settings
-    async setDokanMenuManagerSettings(menuManager: dokanSettings['menuManager']) {
+    async setDokanMenuManagerSettings() {
         await this.goToDokanSettings();
         await this.click(settingsAdmin.menus.menuManager);
 

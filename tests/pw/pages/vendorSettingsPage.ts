@@ -9,6 +9,10 @@ const { DOKAN_PRO } = process.env;
 
 // selectors
 const settingsVendor = selector.vendor.vStoreSettings;
+const settingsShipStation = selector.vendor.vShipStationSettings;
+const settingsSocialProfile = selector.vendor.vSocialProfileSettings;
+const settingsStoreSeo = selector.vendor.vStoreSeoSettings;
+const settingsRma = selector.vendor.vRmaSettings;
 
 export class VendorSettingsPage extends VendorPage {
     constructor(page: Page) {
@@ -70,23 +74,23 @@ export class VendorSettingsPage extends VendorPage {
     async vendorShipstationSettingsRenderProperly() {
         await this.goIfNotThere(data.subUrls.frontend.vDashboard.settingsShipstation);
 
-        // shipstation text is visible
-        await this.toBeVisible(selector.vendor.vShipStationSettings.shipStationText);
+        // shipStation text is visible
+        await this.toBeVisible(settingsShipStation.shipStationText);
 
         // visit store link is visible
-        await this.toBeVisible(selector.vendor.vShipStationSettings.visitStore);
+        await this.toBeVisible(settingsShipStation.visitStore);
 
         // authentication key is visible
-        await this.toBeVisible(selector.vendor.vShipStationSettings.authenticationKey);
+        await this.toBeVisible(settingsShipStation.authenticationKey);
 
         // export order statuses is visible
-        await this.toBeVisible(selector.vendor.vShipStationSettings.exportOrderStatusesInput);
+        await this.toBeVisible(settingsShipStation.exportOrderStatusesInput);
 
         // Shipped Order Status is visible
-        await this.toBeVisible(selector.vendor.vShipStationSettings.shippedOrderStatusDropdown);
+        await this.toBeVisible(settingsShipStation.shippedOrderStatusDropdown);
 
         // save changes is visible
-        await this.toBeVisible(selector.vendor.vShipStationSettings.saveChanges);
+        await this.toBeVisible(settingsShipStation.saveChanges);
     }
 
     // vendor social profile render properly
@@ -94,16 +98,16 @@ export class VendorSettingsPage extends VendorPage {
         await this.goIfNotThere(data.subUrls.frontend.vDashboard.settingsSocialProfile);
 
         // social profile text is visible
-        await this.toBeVisible(selector.vendor.vSocialProfileSettings.socialProfileText);
+        await this.toBeVisible(settingsSocialProfile.socialProfileText);
 
         // visit store link is visible
-        await this.toBeVisible(selector.vendor.vSocialProfileSettings.visitStore);
+        await this.toBeVisible(settingsSocialProfile.visitStore);
 
         // social platform elements are visible
-        await this.multipleElementVisible(selector.vendor.vSocialProfileSettings.platforms);
+        await this.multipleElementVisible(settingsSocialProfile.platforms);
 
         // update settings is visible
-        await this.toBeVisible(selector.vendor.vSocialProfileSettings.updateSettings);
+        await this.toBeVisible(settingsSocialProfile.updateSettings);
     }
 
     // vendor rma render properly
@@ -111,22 +115,22 @@ export class VendorSettingsPage extends VendorPage {
         await this.goIfNotThere(data.subUrls.frontend.vDashboard.settingsRma);
 
         // return and warranty text is visible
-        await this.toBeVisible(selector.vendor.vRmaSettings.returnAndWarrantyText);
+        await this.toBeVisible(settingsRma.returnAndWarrantyText);
 
         // visit store link is visible
-        await this.toBeVisible(selector.vendor.vRmaSettings.visitStore);
+        await this.toBeVisible(settingsRma.visitStore);
 
         // rma label input is visible
-        await this.toBeVisible(selector.vendor.vRmaSettings.label);
+        await this.toBeVisible(settingsRma.label);
 
         // rma type input is visible
-        await this.toBeVisible(selector.vendor.vRmaSettings.type);
+        await this.toBeVisible(settingsRma.type);
 
         // rma policy input is visible
-        await this.toBeVisible(selector.vendor.vRmaSettings.refundPolicyIframe);
+        await this.toBeVisible(settingsRma.rmaPolicyIframe);
 
         // save changes is visible
-        await this.toBeVisible(selector.vendor.vRmaSettings.saveChanges);
+        await this.toBeVisible(settingsRma.saveChanges);
     }
 
     // vendor store seo render properly
@@ -134,28 +138,28 @@ export class VendorSettingsPage extends VendorPage {
         await this.goIfNotThere(data.subUrls.frontend.vDashboard.settingsSeo);
 
         // store seo text is visible
-        await this.toBeVisible(selector.vendor.vStoreSeoSettings.storeSeoText);
+        await this.toBeVisible(settingsStoreSeo.storeSeoText);
 
         // visit store link is visible
-        await this.toBeVisible(selector.vendor.vStoreSeoSettings.visitStore);
+        await this.toBeVisible(settingsStoreSeo.visitStore);
 
         // seo title is visible
-        await this.toBeVisible(selector.vendor.vStoreSeoSettings.seoTitle);
+        await this.toBeVisible(settingsStoreSeo.seoTitle);
 
         // meta description is visible
-        await this.toBeVisible(selector.vendor.vStoreSeoSettings.metaDescription);
+        await this.toBeVisible(settingsStoreSeo.metaDescription);
 
         // meta keywords is visible
-        await this.toBeVisible(selector.vendor.vStoreSeoSettings.metaKeywords);
+        await this.toBeVisible(settingsStoreSeo.metaKeywords);
 
         // store seo facebook elements are visible
-        await this.multipleElementVisible(selector.vendor.vStoreSeoSettings.facebook);
+        await this.multipleElementVisible(settingsStoreSeo.facebook);
 
         // store seo twitter elements are visible
-        await this.multipleElementVisible(selector.vendor.vStoreSeoSettings.twitter);
+        await this.multipleElementVisible(settingsStoreSeo.twitter);
 
         // save changes is visible
-        await this.toBeVisible(selector.vendor.vStoreSeoSettings.saveChanges);
+        await this.toBeVisible(settingsStoreSeo.saveChanges);
     }
 
     // store settings
@@ -164,6 +168,12 @@ export class VendorSettingsPage extends VendorPage {
     async updateStoreMapViaSettingsSave() {
         await this.goIfNotThere(data.subUrls.frontend.vDashboard.settingsStore);
         await this.clickAndWaitForResponseAndLoadState(data.subUrls.ajax, settingsVendor.updateSettings);
+        await this.toContainText(settingsVendor.updateSettingsSuccessMessage, 'Your information has been saved successfully');
+    }
+
+    // save settings
+    async saveSettings() {
+        await this.clickAndWaitForResponseAndLoadState(data.subUrls.frontend.vDashboard.settingsRma, settingsRma.saveChanges, 302);
         await this.toContainText(settingsVendor.updateSettingsSuccessMessage, 'Your information has been saved successfully');
     }
 
@@ -421,74 +431,98 @@ export class VendorSettingsPage extends VendorPage {
     async setShipStation(shipStation: vendor['shipStation']): Promise<void> {
         await this.goIfNotThere(data.subUrls.frontend.vDashboard.settingsShipstation);
 
-        const allStatus = await this.getMultipleElementTexts(selector.vendor.vShipStationSettings.selectedStatus);
+        const allStatus = await this.getMultipleElementTexts(settingsShipStation.selectedStatus);
         const statusIsSelected = allStatus.includes('×' + shipStation.status);
         if (!statusIsSelected) {
-            await this.clearAndType(selector.vendor.vShipStationSettings.exportOrderStatusesInput, shipStation.status);
-            await this.toContainText(selector.vendor.vShipStationSettings.result, shipStation.status);
+            await this.clearAndType(settingsShipStation.exportOrderStatusesInput, shipStation.status);
+            await this.toContainText(settingsShipStation.result, shipStation.status);
             await this.press(data.key.enter);
         }
 
-        // await this.click(selector.vendor.vShipStationSettings.shippedOrderStatusDropdown);
-        // await this.clearAndType(selector.vendor.vShipStationSettings.shippedOrderStatusInput, shipStation.status);// todo: need to fix -> locator issue
-        // await this.toContainText(selector.vendor.vShipStationSettings.result, shipStation.status);
+        // await this.click(settingsShipStation.shippedOrderStatusDropdown);
+        // await this.clearAndType(settingsShipStation.shippedOrderStatusInput, shipStation.status);// todo: need to fix -> locator issue
+        // await this.toContainText(settingsShipStation.result, shipStation.status);
         // await this.press(data.key.enter);
 
-        await this.clickAndAcceptAndWaitForResponse(data.subUrls.ajax, selector.vendor.vShipStationSettings.saveChanges);
-        await this.toContainText(selector.vendor.vShipStationSettings.saveSuccessMessage, 'Your changes has been updated!');
-        await this.click(selector.vendor.vShipStationSettings.successOk);
+        await this.clickAndAcceptAndWaitForResponse(data.subUrls.ajax, settingsShipStation.saveChanges);
+        await this.toContainText(settingsShipStation.saveSuccessMessage, 'Your changes has been updated!');
+        await this.click(settingsShipStation.successOk);
     }
 
     // vendor set social profile settings
     async setSocialProfile(urls: vendor['socialProfileUrls']): Promise<void> {
         await this.goIfNotThere(data.subUrls.frontend.vDashboard.settingsSocialProfile);
-        await this.clearAndType(selector.vendor.vSocialProfileSettings.platforms.facebook, urls.facebook);
-        await this.clearAndType(selector.vendor.vSocialProfileSettings.platforms.twitter, urls.twitter);
-        await this.clearAndType(selector.vendor.vSocialProfileSettings.platforms.pinterest, urls.pinterest);
-        await this.clearAndType(selector.vendor.vSocialProfileSettings.platforms.linkedin, urls.linkedin);
-        await this.clearAndType(selector.vendor.vSocialProfileSettings.platforms.youtube, urls.youtube);
-        await this.clearAndType(selector.vendor.vSocialProfileSettings.platforms.instagram, urls.instagram);
-        await this.clearAndType(selector.vendor.vSocialProfileSettings.platforms.flickr, urls.flickr);
-        await this.keyPressOnLocator(selector.vendor.vSocialProfileSettings.updateSettings, data.key.enter);
-        await this.toContainText(selector.vendor.vSocialProfileSettings.updateSettingsSuccessMessage, urls.saveSuccessMessage);
+        await this.clearAndType(settingsSocialProfile.platforms.facebook, urls.facebook);
+        await this.clearAndType(settingsSocialProfile.platforms.twitter, urls.twitter);
+        await this.clearAndType(settingsSocialProfile.platforms.pinterest, urls.pinterest);
+        await this.clearAndType(settingsSocialProfile.platforms.linkedin, urls.linkedin);
+        await this.clearAndType(settingsSocialProfile.platforms.youtube, urls.youtube);
+        await this.clearAndType(settingsSocialProfile.platforms.instagram, urls.instagram);
+        await this.clearAndType(settingsSocialProfile.platforms.flickr, urls.flickr);
+        await this.keyPressOnLocator(settingsSocialProfile.updateSettings, data.key.enter);
+        await this.toContainText(settingsSocialProfile.updateSettingsSuccessMessage, urls.saveSuccessMessage);
     }
 
     // vendor set rma settings
     async setRmaSettings(rma: vendor['rma']): Promise<void> {
         await this.goIfNotThere(data.subUrls.frontend.vDashboard.settingsRma);
-        await this.clearAndType(selector.vendor.vRmaSettings.label, rma.label);
-        await this.selectByValue(selector.vendor.vRmaSettings.type, rma.type);
-        await this.selectByValue(selector.vendor.vRmaSettings.length, rma.rmaLength);
-        // todo: add addon
-        if (rma.rmaLength === 'limited') {
-            await this.clearAndType(selector.vendor.vRmaSettings.lengthValue, rma.lengthValue);
-            await this.selectByValue(selector.vendor.vRmaSettings.lengthDuration, rma.lengthDuration);
+        await this.clearAndType(settingsRma.label, rma.label);
+        await this.selectByValue(settingsRma.type, rma.type);
+
+        if (rma.type === 'included_warranty') {
+            await this.selectByValue(settingsRma.length, rma.length);
+            if (rma.length === 'limited') {
+                await this.clearAndType(settingsRma.lengthValue, rma.lengthValue);
+                await this.selectByValue(settingsRma.lengthDuration, rma.lengthDuration);
+            }
+        } else if (rma.type === 'addon_warranty') {
+            await this.clearAndType(settingsRma.addonCost, rma.addon.cost);
+            await this.clearAndType(settingsRma.addonDurationLength, rma.addon.durationLength);
+            await this.selectByValue(settingsRma.addonDurationType, rma.addon.durationType);
         }
-        // check if refund reason exists
-        const refundReasonIsVisible = await this.isVisible(selector.vendor.vRmaSettings.refundReasonsFirst);
+        const refundReasonIsVisible = await this.isVisible(settingsRma.refundReasonsFirst);
         if (refundReasonIsVisible) {
-            await this.checkMultiple(selector.vendor.vRmaSettings.refundReasons);
+            await this.checkMultiple(settingsRma.refundReasons);
         }
-        await this.typeFrameSelector(selector.vendor.vRmaSettings.refundPolicyIframe, selector.vendor.vRmaSettings.refundPolicyHtmlBody, rma.refundPolicyHtmlBody);
-        await this.clickAndWaitForResponseAndLoadState(data.subUrls.frontend.vDashboard.settingsRma, selector.vendor.vRmaSettings.saveChanges, 302);
-        await this.toContainText(selector.vendor.vRmaSettings.updateSettingsSuccessMessage, rma.saveSuccessMessage);
+        await this.typeFrameSelector(settingsRma.rmaPolicyIframe, settingsRma.rmaPolicyHtmlBody, rma.refundPolicy);
+
+        await this.saveSettings();
+
+        await this.toHaveValue(settingsRma.label, rma.label);
+        await this.toHaveSelectedValue(settingsRma.type, rma.type);
+        if (rma.type === 'included_warranty') {
+            await this.toHaveSelectedValue(settingsRma.length, rma.length);
+            if (rma.length === 'limited') {
+                await this.toHaveValue(settingsRma.lengthValue, rma.lengthValue);
+                await this.toHaveSelectedValue(settingsRma.lengthDuration, rma.lengthDuration);
+            }
+        } else if (rma.type === 'addon_warranty') {
+            await this.toHaveValue(settingsRma.addonCost, rma.addon.cost);
+            await this.toHaveValue(settingsRma.addonDurationLength, rma.addon.durationLength);
+            await this.toHaveSelectedValue(settingsRma.addonDurationType, rma.addon.durationType);
+        }
+
+        if (refundReasonIsVisible) {
+            await this.toBeCheckedMultiple(settingsRma.refundReasons);
+        }
+        await this.toContainTextFrameLocator(settingsRma.rmaPolicyIframe, settingsRma.rmaPolicyHtmlBody, rma.refundPolicy);
     }
 
     // vendor set seo settings
     async setStoreSeo(seo: vendor['seo']): Promise<void> {
         await this.goIfNotThere(data.subUrls.frontend.vDashboard.settingsSeo);
 
-        await this.clearAndType(selector.vendor.vStoreSeoSettings.seoTitle, seo.seoTitle);
-        await this.clearAndType(selector.vendor.vStoreSeoSettings.metaDescription, seo.metaDescription);
-        await this.clearAndType(selector.vendor.vStoreSeoSettings.metaKeywords, seo.metaKeywords);
+        await this.clearAndType(settingsStoreSeo.seoTitle, seo.seoTitle);
+        await this.clearAndType(settingsStoreSeo.metaDescription, seo.metaDescription);
+        await this.clearAndType(settingsStoreSeo.metaKeywords, seo.metaKeywords);
 
-        await this.clearAndType(selector.vendor.vStoreSeoSettings.facebook.facebookTitle, seo.facebookTitle);
-        await this.clearAndType(selector.vendor.vStoreSeoSettings.facebook.facebookDescription, seo.facebookDescription);
+        await this.clearAndType(settingsStoreSeo.facebook.facebookTitle, seo.facebookTitle);
+        await this.clearAndType(settingsStoreSeo.facebook.facebookDescription, seo.facebookDescription);
 
-        await this.clearAndType(selector.vendor.vStoreSeoSettings.twitter.twitterTitle, seo.twitterTitle);
-        await this.clearAndType(selector.vendor.vStoreSeoSettings.twitter.twitterDescription, seo.twitterDescription);
+        await this.clearAndType(settingsStoreSeo.twitter.twitterTitle, seo.twitterTitle);
+        await this.clearAndType(settingsStoreSeo.twitter.twitterDescription, seo.twitterDescription);
 
-        await this.clickAndWaitForResponseAndLoadState(data.subUrls.ajax, selector.vendor.vStoreSeoSettings.saveChanges);
-        await this.toContainText(selector.vendor.vStoreSeoSettings.updateSettingsSuccessMessage, 'Your changes has been updated!');
+        await this.clickAndWaitForResponseAndLoadState(data.subUrls.ajax, settingsStoreSeo.saveChanges);
+        await this.toContainText(settingsStoreSeo.updateSettingsSuccessMessage, 'Your changes has been updated!');
     }
 }
