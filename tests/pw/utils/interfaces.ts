@@ -1029,8 +1029,10 @@ export interface vendor {
         metaKeywords: string;
         facebookTitle: string;
         facebookDescription: string;
+        facebookImage: string;
         twitterTitle: string;
         twitterDescription: string;
+        twitterImage: string;
     };
 
     withdraw: {

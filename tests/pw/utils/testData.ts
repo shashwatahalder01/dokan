@@ -1201,8 +1201,8 @@ export const data = {
             nanoid: faker.string.nanoid(10),
 
             // shop details
-            banner: 'tests/e2e/utils/sampleData/banner.png',
-            profilePicture: 'tests/e2e/utils/sampleData/avatar.png',
+            banner: 'utils/sampleData/banner.png',
+            profilePicture: 'utils/sampleData/avatar.png',
             storeName: `${VENDOR}store`,
             productsPerPage: '12',
             mapLocation: 'New York',
@@ -1445,6 +1445,7 @@ export const data = {
             youtube: 'https://www.youtube.com/',
             instagram: 'https://www.instagram.com/',
             flickr: 'https://www.flickr.com/',
+            threads: 'https://www.threads.net/',
             saveSuccessMessage: 'Your information has been saved successfully',
         },
 
@@ -1470,8 +1471,10 @@ export const data = {
             metaKeywords: 'test meta keywords',
             facebookTitle: 'test facebook title',
             facebookDescription: 'test facebook description',
+            facebookImage: 'utils/sampleData/avatar.png',
             twitterTitle: 'test twitter title',
             twitterDescription: 'test twitter description',
+            twitterImage: 'utils/sampleData/avatar.png',
         },
 
         withdraw: {

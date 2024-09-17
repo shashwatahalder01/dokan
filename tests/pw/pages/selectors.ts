@@ -95,6 +95,7 @@ export const selector = {
         selectFilesInput: '//div[@class="supports-drag-drop" and @style="position: relative;"]//input[@type="file"]',
         selectUploadedMedia: '(//h2[contains(text(),"Media list")]/..//ul//li)[1]',
         select: '//div[@class="supports-drag-drop" and @style="position: relative;"]//button[contains(@class, "media-button-select")]',
+        crop: '//div[@class="supports-drag-drop" and @style="position: relative;"]//button[contains(@class, "media-button-insert")]',
     },
 
     // Admin
@@ -5853,12 +5854,15 @@ export const selector = {
             select: '//div[@class="supports-drag-drop" and @style="position: relative;"]//button[contains(@class, "media-button-select")]',
             crop: '//div[@class="supports-drag-drop" and @style="position: relative;"]//button[contains(@class, "media-button-insert")]',
 
-            // Banner and Profile Image
+            // banner and profile picture
             banner: '.dokan-banner .dokan-banner-drag',
             bannerImage: '//div[@class="image-wrap"]//img[@class="dokan-banner-img"]',
+            uploadedBanner: 'div#dokan-profile-picture-wrapper div.gravatar-wrap',
             removeBannerImage: '.close.dokan-remove-banner-image',
+
             profilePicture: '.dokan-pro-gravatar-drag',
             profilePictureImage: '//div[@class="dokan-left gravatar-wrap"]//img[@class="dokan-gravatar-img"]',
+            uploadedProfilePicture: 'div#dokan-profile-picture-wrapper div.gravatar-wrap',
             removeProfilePictureImage: '.dokan-close.dokan-remove-gravatar-image',
 
             // Basic Store Info
@@ -5969,19 +5973,10 @@ export const selector = {
             supportButtonText: '#dokan_support_btn_name',
 
             // Min-Max
-            enableMinMaxQuantities: '#enable_vendor_min_max_quantity',
-            minimumProductQuantityToPlaceAnOrder: '#min_quantity_to_order',
-            maximumProductQuantityToPlaceAnOrder: '#max_quantity_to_order',
-            enableMinMaxAmount: '#enable_vendor_min_max_amount',
-            minimumAmountToPlaceAnOrder: '#min_amount_to_order',
-            maximumAmountToPlaceAnOrder: '#max_amount_to_order',
-            selectProducts: '//label[contains(text(), "Select Products")]/..//input[contains(@class,"select2-search__field")]',
-            selectAll: '.dokan-min-max-product-select-all',
-            clear: '.dokan-min-max-product-clear-all',
-            selectCategory: 'select#product_cat',
-            selectCategorySearch: '//select[@id="product_cat"]/..//input[@class="select2-search__field"]',
-            selectCategorySearchedResult: '.select2-results__option.select2-results__option--highlighted',
-            alreadySelectedOption: (option: string) => `//li[@class="select2-selection__choice" and @title="${option}"]`,
+            minMax: {
+                minimumAmountToPlaceAnOrder: 'input#min_amount_to_order',
+                maximumAmountToPlaceAnOrder: 'input#max_amount_to_order',
+            },
 
             // Update Settings
             updateSettingsTop: 'button.dokan-update-setting-top-button',
@@ -6408,6 +6403,7 @@ export const selector = {
                 youtube: '#settings\\[social\\]\\[youtube\\]',
                 instagram: '#settings\\[social\\]\\[instagram\\]',
                 flickr: '#settings\\[social\\]\\[flickr\\]',
+                threads: '#settings\\[social\\]\\[threads\\]',
             },
 
             // updateSettings: '.dokan-btn.dokan-btn-danger.dokan-btn-theme',
@@ -6451,12 +6447,14 @@ export const selector = {
                 facebookTitle: '#dokan-seo-og-title',
                 facebookDescription: '#dokan-seo-og-desc',
                 facebookImage: '//label[contains( text(), "Facebook Image :")]/..//a[contains(@class, "dokan-gravatar-drag")]',
+                uploadedImage: '//label[@for="dokan-seo-og-image"]/..//div[@class="dokan-left gravatar-wrap"]',
             },
 
             twitter: {
                 twitterTitle: '#dokan-seo-twitter-title',
                 twitterDescription: '#dokan-seo-twitter-desc',
                 twitterImage: '//label[contains( text(), "Twitter Image")]/..//a[contains(@class, "dokan-gravatar-drag")]',
+                uploadedImage: '//label[@for="dokan-seo-twitter-image"]/..//div[@class="dokan-left gravatar-wrap"]',
             },
 
             saveChanges: '#dokan-store-seo-form-submit',

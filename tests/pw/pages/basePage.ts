@@ -1705,9 +1705,8 @@ export class BasePage {
 
     // upload media
     async uploadMedia(file: string) {
-        await this.wait(0.5);
         await this.click(selector.wpMedia.mediaLibrary);
-        const uploadedMediaIsVisible = await this.isVisible(selector.wpMedia.uploadedMediaFirst);
+        const uploadedMediaIsVisible = await this.isVisible(selector.wpMedia.uploadedMediaFirst, 3);
         if (uploadedMediaIsVisible) {
             await this.click(selector.wpMedia.uploadedMediaFirst);
             console.log('File Already Uploaded');
@@ -1717,7 +1716,6 @@ export class BasePage {
             console.log('File Uploaded');
         }
         await this.click(selector.wpMedia.selectUploadedMedia);
-
         // todo: upload with toPass method
         // check if the uploaded media is selected or not for 3 times
         for (let i = 0; i < 3; i++) {
@@ -1731,33 +1729,6 @@ export class BasePage {
         }
 
         await this.click(selector.wpMedia.select);
-    }
-
-    // upload file
-    async wpUploadFile(filePath: string | string[]) {
-        // wp image upload
-        const wpUploadFiles = '//div[@class="supports-drag-drop" and @style="position: relative;"]//button[@id="menu-item-upload"]';
-        const uploadedMedia = '.attachment-preview';
-        const selectFiles = '//div[@class="supports-drag-drop" and @style="position: relative;"]//button[@class="browser button button-hero"]';
-        const select = '//div[@class="supports-drag-drop" and @style="position: relative;"]//button[contains(@class, "media-button-select")]';
-        const crop = '//div[@class="supports-drag-drop" and @style="position: relative;"]//button[contains(@class, "media-button-insert")]';
-        const uploadedMediaIsVisible = await this.isVisible(uploadedMedia);
-        if (uploadedMediaIsVisible) {
-            await this.click(wpUploadFiles);
-        } else {
-            await this.uploadFile(selectFiles, filePath);
-            await this.click(select);
-            await this.clickIfVisible(crop);
-        }
-    }
-
-    // remove previous uploaded media if exists
-    async removePreviouslyUploadedImage(previousUploadedImageSelector: string, removePreviousUploadedImageSelector: string) {
-        const previousUploadedImageIsVisible = await this.isVisible(previousUploadedImageSelector);
-        if (previousUploadedImageIsVisible) {
-            await this.hover(previousUploadedImageSelector);
-            await this.click(removePreviousUploadedImageSelector);
-            await this.wait(2);
-        }
+        await this.clickIfVisible(selector.wpMedia.crop);
     }
 }

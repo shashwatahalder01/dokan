@@ -182,8 +182,12 @@ export class VendorSettingsPage extends VendorPage {
         await this.goIfNotThere(data.subUrls.frontend.vDashboard.settingsStore);
 
         switch (topic) {
-            case 'banner-profile':
-                // await this.bannerAndProfilePictureSettings(); // todo:
+            case 'banner':
+                await this.addBannerSettings(vendorInfo.banner);
+                break;
+
+            case 'profile-picture':
+                await this.addProfilePictureSettings(vendorInfo.profilePicture);
                 break;
 
             case 'basic':
@@ -241,6 +245,20 @@ export class VendorSettingsPage extends VendorPage {
         // update settings
         await this.clickAndWaitForResponseAndLoadState(data.subUrls.ajax, settingsVendor.updateSettings);
         await this.toContainText(settingsVendor.updateSettingsSuccessMessage, data.vendor.vendorInfo.storeSettingsSaveSuccessMessage);
+    }
+
+    // vendor set banner settings
+    async addBannerSettings(banner: string): Promise<void> {
+        await this.clickIfVisible(settingsVendor.uploadedBanner);
+        await this.click(settingsVendor.banner);
+        await this.uploadMedia(banner);
+    }
+
+    // vendor set profile picture settings
+    async addProfilePictureSettings(profilePicture: string): Promise<void> {
+        await this.clickIfVisible(settingsVendor.uploadedProfilePicture);
+        await this.click(settingsVendor.profilePicture);
+        await this.uploadMedia(profilePicture);
     }
 
     // vendor set basic info settings
@@ -405,26 +423,8 @@ export class VendorSettingsPage extends VendorPage {
 
     // vendor set minmax settings
     async minMaxSettings(minMax: vendor['vendorInfo']['minMax']): Promise<void> {
-        const minMaxEnabled = await this.isVisible(settingsVendor.enableMinMaxQuantities);
-        if (minMaxEnabled) {
-            // min max quantities
-            await this.check(settingsVendor.enableMinMaxQuantities);
-            await this.clearAndType(settingsVendor.minimumProductQuantityToPlaceAnOrder, minMax.minimumProductQuantity);
-            await this.clearAndType(settingsVendor.maximumProductQuantityToPlaceAnOrder, minMax.maximumProductQuantity);
-
-            // min max amount
-            await this.check(settingsVendor.enableMinMaxAmount);
-            await this.clearAndType(settingsVendor.minimumAmountToPlaceAnOrder, minMax.minimumAmount);
-            await this.clearAndType(settingsVendor.maximumAmountToPlaceAnOrder, minMax.maximumAmount);
-            await this.click(settingsVendor.clear);
-            await this.click(settingsVendor.selectAll);
-            const multipleCategory = await this.isVisible(settingsVendor.selectCategorySearch);
-            if (multipleCategory) {
-                await this.select2ByTextMultiSelector(settingsVendor.selectCategorySearch, settingsVendor.selectCategorySearchedResult, minMax.category);
-            } else {
-                await this.selectByLabel(settingsVendor.selectCategory, minMax.category);
-            }
-        }
+        await this.clearAndType(settingsVendor.minMax.minimumAmountToPlaceAnOrder, minMax.minimumAmount);
+        await this.clearAndType(settingsVendor.minMax.maximumAmountToPlaceAnOrder, minMax.maximumAmount);
     }
 
     // vendor set Shipstation settings
@@ -459,8 +459,17 @@ export class VendorSettingsPage extends VendorPage {
         await this.clearAndType(settingsSocialProfile.platforms.youtube, urls.youtube);
         await this.clearAndType(settingsSocialProfile.platforms.instagram, urls.instagram);
         await this.clearAndType(settingsSocialProfile.platforms.flickr, urls.flickr);
+        await this.clearAndType(settingsSocialProfile.platforms.threads, urls.flickr);
         await this.keyPressOnLocator(settingsSocialProfile.updateSettings, data.key.enter);
         await this.toContainText(settingsSocialProfile.updateSettingsSuccessMessage, urls.saveSuccessMessage);
+        await this.toHaveValue(settingsSocialProfile.platforms.facebook, urls.facebook);
+        await this.toHaveValue(settingsSocialProfile.platforms.twitter, urls.twitter);
+        await this.toHaveValue(settingsSocialProfile.platforms.pinterest, urls.pinterest);
+        await this.toHaveValue(settingsSocialProfile.platforms.linkedin, urls.linkedin);
+        await this.toHaveValue(settingsSocialProfile.platforms.youtube, urls.youtube);
+        await this.toHaveValue(settingsSocialProfile.platforms.instagram, urls.instagram);
+        await this.toHaveValue(settingsSocialProfile.platforms.flickr, urls.flickr);
+        await this.toHaveValue(settingsSocialProfile.platforms.threads, urls.flickr);
     }
 
     // vendor set rma settings
@@ -519,11 +528,29 @@ export class VendorSettingsPage extends VendorPage {
 
         await this.clearAndType(settingsStoreSeo.facebook.facebookTitle, seo.facebookTitle);
         await this.clearAndType(settingsStoreSeo.facebook.facebookDescription, seo.facebookDescription);
+        await this.clickIfVisible(settingsStoreSeo.facebook.uploadedImage);
+        await this.click(settingsStoreSeo.facebook.facebookImage);
+        await this.uploadMedia(seo.facebookImage);
 
         await this.clearAndType(settingsStoreSeo.twitter.twitterTitle, seo.twitterTitle);
         await this.clearAndType(settingsStoreSeo.twitter.twitterDescription, seo.twitterDescription);
+        await this.clickIfVisible(settingsStoreSeo.twitter.uploadedImage);
+        await this.click(settingsStoreSeo.twitter.twitterImage);
+        await this.uploadMedia(seo.twitterImage);
 
         await this.clickAndWaitForResponseAndLoadState(data.subUrls.ajax, settingsStoreSeo.saveChanges);
         await this.toContainText(settingsStoreSeo.updateSettingsSuccessMessage, 'Your changes has been updated!');
+
+        await this.toHaveValue(settingsStoreSeo.seoTitle, seo.seoTitle);
+        await this.toHaveValue(settingsStoreSeo.metaDescription, seo.metaDescription);
+        await this.toHaveValue(settingsStoreSeo.metaKeywords, seo.metaKeywords);
+
+        await this.toHaveValue(settingsStoreSeo.facebook.facebookTitle, seo.facebookTitle);
+        await this.toHaveValue(settingsStoreSeo.facebook.facebookDescription, seo.facebookDescription);
+        await this.toBeVisible(settingsStoreSeo.facebook.uploadedImage);
+
+        await this.toHaveValue(settingsStoreSeo.twitter.twitterTitle, seo.twitterTitle);
+        await this.toHaveValue(settingsStoreSeo.twitter.twitterDescription, seo.twitterDescription);
+        await this.toBeVisible(settingsStoreSeo.twitter.uploadedImage);
     }
 }
