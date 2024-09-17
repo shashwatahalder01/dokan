@@ -465,6 +465,13 @@ export const data = {
                 description: 'test long description',
             },
 
+            downloadableOptions: {
+                fileName: 'avatar',
+                fileUrl: 'utils/sampleData/avatar.png',
+                downloadLimit: '100',
+                downloadExpiry: '365',
+            },
+
             otherOptions: {
                 status: 'draft', // publish,
                 visibility: 'hidden', // visible, catalog, search, hidden

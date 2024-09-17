@@ -794,6 +794,31 @@ export class ProductsPage extends AdminPage {
         await this.toContainTextFrameLocator(productsVendor.description.descriptionIframe, productsVendor.description.descriptionHtmlBody, description);
     }
 
+    // add product downloadable options
+    async addProductDownloadableOptions(productName: string, downloadableOption: product['productInfo']['downloadableOptions']): Promise<void> {
+        await this.goToProductEdit(productName);
+        await this.check(productsVendor.downloadable);
+        await this.click(productsVendor.downloadableOptions.addFile);
+        await this.clearAndType(productsVendor.downloadableOptions.fileName, downloadableOption.fileName);
+        await this.click(productsVendor.downloadableOptions.chooseFile);
+        await this.uploadMedia(downloadableOption.fileUrl);
+        await this.clearAndType(productsVendor.downloadableOptions.downloadLimit, downloadableOption.downloadLimit);
+        await this.clearAndType(productsVendor.downloadableOptions.downloadExpiry, downloadableOption.downloadExpiry);
+        await this.saveProduct();
+        await this.toBeChecked(productsVendor.downloadable);
+        await this.toHaveValue(productsVendor.downloadableOptions.fileName, downloadableOption.fileName);
+        await this.toHaveValue(productsVendor.downloadableOptions.downloadLimit, downloadableOption.downloadLimit);
+        await this.toHaveValue(productsVendor.downloadableOptions.downloadExpiry, downloadableOption.downloadExpiry);
+    }
+
+    // remove product downloadable files
+    async removeDownloadableFile(productName: string): Promise<void> {
+        await this.goToProductEdit(productName);
+        await this.clickMultiple(productsVendor.downloadableOptions.deleteFile);
+        await this.saveProduct();
+        await this.notToBeVisible(productsVendor.downloadableOptions.deleteFile);
+    }
+
     // add product inventory
     async addProductInventory(productName: string, inventory: product['productInfo']['inventory'], choice: string): Promise<void> {
         await this.goToProductEdit(productName);

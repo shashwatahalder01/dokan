@@ -88,6 +88,7 @@ test.describe('Product addon functionality test', () => {
     });
 
     test('vendor can import product addon', { tag: ['@pro', '@vendor'] }, async () => {
+        const [, , productName] = await apiUtils.createProduct(payloads.createProduct(), payloads.vendorAuth);
         const addon = payloads.createProductAddon();
         await vendor1.importAddon(productName, serialize([addon]), addon.name);
     });

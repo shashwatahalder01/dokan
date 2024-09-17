@@ -95,9 +95,11 @@ export class BasePage {
         if (!this.isCurrentUrl(subPath)) {
             const url = this.createUrl(subPath);
             // console.log('url: ', url);
-            await this.goto(url, { waitUntil: waitUntil });
-            const currentUrl = this.getCurrentUrl();
-            expect(currentUrl).toMatch(subPath);
+            await this.toPass(async () => {
+                await this.goto(url, { waitUntil: waitUntil });
+                const currentUrl = this.getCurrentUrl();
+                expect(currentUrl).toMatch(subPath);
+            });
         }
     }
 
@@ -1685,6 +1687,15 @@ export class BasePage {
         await this.toHaveBackgroundColor(selector, 'rgb(0, 124, 186)');
     }
 
+    // click multiple elements with same selector/class/xpath
+    async clickMultiple(selector: string): Promise<void> {
+        for (const element of await this.page.locator(selector).all()) {
+            await this.toPass(async () => {
+                await element.click();
+            });
+        }
+    }
+
     // check multiple elements with same selector/class/xpath
     async checkMultiple(selector: string): Promise<void> {
         for (const element of await this.page.locator(selector).all()) {
@@ -1716,7 +1727,7 @@ export class BasePage {
         }
 
         await this.toPass(async () => {
-            const isSelected = await this.isEnabled(selector.wpMedia.select, { timeout: 5000 });
+            const isSelected = await this.isEnabled(selector.wpMedia.select);
             if (!isSelected) {
                 await this.click(selector.wpMedia.selectUploadedMedia);
             }

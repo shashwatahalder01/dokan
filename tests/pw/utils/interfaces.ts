@@ -321,6 +321,13 @@ export interface product {
     };
 
     productInfo: {
+        downloadableOptions: {
+            fileName: string;
+            fileUrl: string;
+            downloadLimit: string;
+            downloadExpiry: string;
+        };
+
         inventory: {
             sku: string;
             stockStatus: string;

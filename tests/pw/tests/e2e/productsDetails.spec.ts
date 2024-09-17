@@ -64,14 +64,22 @@ test.describe('Product details functionality test', () => {
         await vendor.addDiscountPrice(productName, { ...data.product.productInfo.discount, regularPrice: productResponseBody.price }, true);
     });
 
+    // test('vendor can remove product discount schedule', { tag: ['@lite', '@vendor'] }, async () => {
+    //     const [, , productName] = await apiUtils.createProduct(payloads.createProduct(), payloads.vendorAuth);
+    //     await vendor.addDiscountPrice(productName, { ...data.product.productInfo.discount, regularPrice: productResponseBody.price }, true);
+    // });
+
+    // todo: vendor can cancel discount schedule
+    // todo: virtual product shouldn't have shipping
+
     // product category
 
     test('vendor can add product category (single)', { tag: ['@lite', '@vendor'] }, async () => {
         await vendor.vendorAddProductCategory(productName, [data.product.category.clothings]);
     });
 
-    // todo: retest on lite
-    test.skip('vendor can add product category (multiple)', { tag: ['@pro', '@vendor'] }, async () => {
+    // todo: retest on lite [why lite pass it]
+    test('vendor can add product category (multiple)', { tag: ['@pro', '@vendor'] }, async () => {
         await dbUtils.updateOptionValue(dbData.dokan.optionName.selling, { product_category_style: 'multiple' });
         const [, , productName] = await apiUtils.createProduct(payloads.createProduct(), payloads.vendorAuth);
         await vendor.vendorAddProductCategory(productName, data.product.category.categories, true);
@@ -123,6 +131,28 @@ test.describe('Product details functionality test', () => {
 
     test('vendor can add product description', { tag: ['@lite', '@vendor'] }, async () => {
         await vendor.addProductDescription(productName, data.product.productInfo.description.description);
+    });
+
+    // product downloadable options
+
+    test('vendor can add product downloadable options', { tag: ['@lite', '@vendor'] }, async () => {
+        await vendor.addProductDownloadableOptions(productName, data.product.productInfo.downloadableOptions);
+    });
+
+    test.skip('vendor can remove product downloadable file', { tag: ['@lite', '@vendor'] }, async () => {
+        const [responseBody] = await apiUtils.uploadMedia('../../tests/pw/utils/sampleData/avatar.png', payloads.mimeTypes.png, payloads.adminAuth); // todo: update image path
+        const downloads = [
+            {
+                id: String(responseBody.id),
+                name: responseBody.title.raw,
+                file: responseBody.source_url,
+            },
+        ];
+        console.log(downloads);
+
+        [, , productName] = await apiUtils.createProduct({ ...payloads.createDownloadableProduct(), downloads: downloads }, payloads.vendorAuth);
+        console.log(productName);
+        // await vendor.removeDownloadableFile(productName);
     });
 
     // product inventory options
@@ -245,6 +275,7 @@ test.describe('Product details functionality test', () => {
     });
 
     test('vendor can import product addon', { tag: ['@pro', '@vendor'] }, async () => {
+        const [, , productName] = await apiUtils.createProduct(payloads.createProduct(), payloads.vendorAuth);
         const addon = payloads.createProductAddon();
         await vendor.importAddon(productName, serialize([addon]), addon.name);
     });

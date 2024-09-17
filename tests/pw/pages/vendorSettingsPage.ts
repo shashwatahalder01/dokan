@@ -154,9 +154,13 @@ export class VendorSettingsPage extends VendorPage {
 
         // store seo facebook elements are visible
         await this.multipleElementVisible(settingsStoreSeo.facebook);
+        const { facebookImage, uploadedFacebookImage, ...facebook } = settingsStoreSeo.facebook;
+        await this.multipleElementVisible(facebook);
 
         // store seo twitter elements are visible
         await this.multipleElementVisible(settingsStoreSeo.twitter);
+        const { twitterImage, uploadedTwitterImage, ...twitter } = settingsStoreSeo.twitter;
+        await this.multipleElementVisible(twitter);
 
         // save changes is visible
         await this.toBeVisible(settingsStoreSeo.saveChanges);
@@ -528,13 +532,13 @@ export class VendorSettingsPage extends VendorPage {
 
         await this.clearAndType(settingsStoreSeo.facebook.facebookTitle, seo.facebookTitle);
         await this.clearAndType(settingsStoreSeo.facebook.facebookDescription, seo.facebookDescription);
-        await this.clickIfVisible(settingsStoreSeo.facebook.uploadedImage);
+        await this.clickIfVisible(settingsStoreSeo.facebook.uploadedFacebookImage);
         await this.click(settingsStoreSeo.facebook.facebookImage);
         await this.uploadMedia(seo.facebookImage);
 
         await this.clearAndType(settingsStoreSeo.twitter.twitterTitle, seo.twitterTitle);
         await this.clearAndType(settingsStoreSeo.twitter.twitterDescription, seo.twitterDescription);
-        await this.clickIfVisible(settingsStoreSeo.twitter.uploadedImage);
+        await this.clickIfVisible(settingsStoreSeo.twitter.uploadedTwitterImage);
         await this.click(settingsStoreSeo.twitter.twitterImage);
         await this.uploadMedia(seo.twitterImage);
 
@@ -547,10 +551,10 @@ export class VendorSettingsPage extends VendorPage {
 
         await this.toHaveValue(settingsStoreSeo.facebook.facebookTitle, seo.facebookTitle);
         await this.toHaveValue(settingsStoreSeo.facebook.facebookDescription, seo.facebookDescription);
-        await this.toBeVisible(settingsStoreSeo.facebook.uploadedImage);
+        await this.toBeVisible(settingsStoreSeo.facebook.uploadedFacebookImage);
 
         await this.toHaveValue(settingsStoreSeo.twitter.twitterTitle, seo.twitterTitle);
         await this.toHaveValue(settingsStoreSeo.twitter.twitterDescription, seo.twitterDescription);
-        await this.toBeVisible(settingsStoreSeo.twitter.uploadedImage);
+        await this.toBeVisible(settingsStoreSeo.twitter.uploadedTwitterImage);
     }
 }

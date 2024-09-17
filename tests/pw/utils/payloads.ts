@@ -121,6 +121,9 @@ export const payloads = {
         regular_price: faker.finance.amount({ min: 100, max: 200, dec: faker.helpers.arrayElement([0, 2]) }),
         // regular_price: faker.finance.amount({ min: 100, max: 200, dec: faker.helpers.arrayElement([0, 2]) }),
         // regular_price: '114.15' , // failed for this price & 5% tax & 10% commission dokan .1 issue
+        sale_price: faker.finance.amount({ min: 50, max: 100, dec: faker.helpers.arrayElement([0, 2]) }),
+        date_on_sale_from: helpers.currentDateTime,
+        date_on_sale_to: helpers.addDays(helpers.currentDateTime, 10, 'full'),
         status: 'publish',
         categories: [{}],
         featured: true,
@@ -516,8 +519,8 @@ export const payloads = {
         downloadable: true,
         regular_price: faker.finance.amount({ min: 100, max: 200, dec: faker.helpers.arrayElement([0, 2]) }),
         downloads: [],
-        // download_limit: 100,
-        // download_expiry: 100,
+        download_limit: 100,
+        download_expiry: 365,
         categories: [{}],
     }),
 

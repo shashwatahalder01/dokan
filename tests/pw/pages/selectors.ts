@@ -6447,14 +6447,14 @@ export const selector = {
                 facebookTitle: '#dokan-seo-og-title',
                 facebookDescription: '#dokan-seo-og-desc',
                 facebookImage: '//label[contains( text(), "Facebook Image :")]/..//a[contains(@class, "dokan-gravatar-drag")]',
-                uploadedImage: '//label[@for="dokan-seo-og-image"]/..//div[@class="dokan-left gravatar-wrap"]',
+                uploadedFacebookImage: '//label[@for="dokan-seo-og-image"]/..//div[@class="dokan-left gravatar-wrap"]',
             },
 
             twitter: {
                 twitterTitle: '#dokan-seo-twitter-title',
                 twitterDescription: '#dokan-seo-twitter-desc',
                 twitterImage: '//label[contains( text(), "Twitter Image")]/..//a[contains(@class, "dokan-gravatar-drag")]',
-                uploadedImage: '//label[@for="dokan-seo-twitter-image"]/..//div[@class="dokan-left gravatar-wrap"]',
+                uploadedTwitterImage: '//label[@for="dokan-seo-twitter-image"]/..//div[@class="dokan-left gravatar-wrap"]',
             },
 
             saveChanges: '#dokan-store-seo-form-submit',
@@ -6887,7 +6887,7 @@ export const selector = {
                 },
 
                 productAddedSuccessMessage: (productName: string) => `//div[@class="woocommerce-message" and contains(.,"“${productName}” has been added to your cart.")]`,
-                productWithQuantityAddedSuccessMessage: (productName: string, quantity: string) => `//div[@class="woocommerce-message" and contains(.," ${quantity} × “${productName}” have been added to your cart.")]`,
+                productWithQuantityAddedSuccessMessage: (productName: string, quantity: string) => `//div[@class="woocommerce-message" and contains(.,"${quantity} × “${productName}” have been added to your cart.")]`,
             },
 
             // Sub menus
