@@ -2081,7 +2081,7 @@ export class ApiUtils {
 
     // create shipping class
     async createShippingClass(payload: object, auth?: auth): Promise<responseBody> {
-        const [response, responseBody] = await this.post(endPoints.wc.createShippingClass, { data: payload, headers: auth });
+        const [response, responseBody] = await this.post(endPoints.wc.createShippingClass, { data: payload, headers: auth }, false);
         if (responseBody.code) {
             expect(response.status()).toBe(400);
             console.log('shipping class exists');

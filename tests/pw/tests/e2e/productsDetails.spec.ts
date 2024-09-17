@@ -156,11 +156,15 @@ test.describe('Product details functionality test', () => {
 
     // catalog mode
 
+    // todo: move to catalog page
+
     test('vendor can add product catalog mode', { tag: ['@lite', '@vendor'] }, async () => {
+        await dbUtils.updateOptionValue(dbData.dokan.optionName.selling, { catalog_mode_hide_add_to_cart_button: 'on' });
         await vendor.addProductCatalogMode(productName);
     });
 
     test('vendor can add product catalog mode (with price hidden)', { tag: ['@lite', '@vendor'] }, async () => {
+        await dbUtils.updateOptionValue(dbData.dokan.optionName.selling, { catalog_mode_hide_add_to_cart_button: 'on', catalog_mode_hide_product_price: 'on' });
         await vendor.addProductCatalogMode(productName, true);
     });
 
