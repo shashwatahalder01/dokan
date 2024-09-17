@@ -2075,19 +2075,19 @@ export class ApiUtils {
 
     // get all shipping classes
     async getAllShippingClasses(auth?: auth): Promise<responseBody> {
-        const [response, responseBody] = await this.get(endPoints.wc.getAllShippingClasses, { headers: auth }, false);
+        const [, responseBody] = await this.get(endPoints.wc.getAllShippingClasses, { headers: auth }, false);
+        return responseBody;
+    }
+
+    // create shipping class
+    async createShippingClass(payload: object, auth?: auth): Promise<responseBody> {
+        const [response, responseBody] = await this.post(endPoints.wc.createShippingClass, { data: payload, headers: auth });
         if (responseBody.code) {
             expect(response.status()).toBe(400);
             console.log('shipping class exists');
         } else {
             expect(response.ok()).toBeTruthy();
         }
-        return responseBody;
-    }
-
-    // create shipping class
-    async createShippingClass(payload: object, auth?: auth): Promise<responseBody> {
-        const [, responseBody] = await this.post(endPoints.wc.createShippingClass, { data: payload, headers: auth });
         return responseBody;
     }
 

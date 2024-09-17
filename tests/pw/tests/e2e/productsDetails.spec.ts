@@ -10,7 +10,7 @@ import { serialize } from 'php-serialize';
 
 test.describe('Product details functionality test', () => {
     let vendor: ProductsPage;
-    let aPage: Page, vPage: Page;
+    let vPage: Page;
     let apiUtils: ApiUtils;
     let productResponseBody: responseBody;
     let productName: string;
@@ -26,7 +26,6 @@ test.describe('Product details functionality test', () => {
 
     test.afterAll(async () => {
         // await apiUtils.deleteAllProducts(payloads.vendorAuth);
-        await aPage.close();
         await vPage.close();
         await apiUtils.dispose();
     });
@@ -91,7 +90,7 @@ test.describe('Product details functionality test', () => {
         await vendor.addProductTags(productName, data.product.productInfo.tags.tags);
     });
 
-    test('vendor can create product tags', { tag: ['@lite', '@vendor'] }, async () => {
+    test('vendor can create product tags', { tag: ['@pro', '@vendor'] }, async () => {
         await vendor.addProductTags(productName, data.product.productInfo.tags.randomTags);
     });
 
@@ -157,11 +156,11 @@ test.describe('Product details functionality test', () => {
 
     // catalog mode
 
-    test('vendor can add catalog mode', { tag: ['@lite', '@vendor'] }, async () => {
+    test('vendor can add product catalog mode', { tag: ['@lite', '@vendor'] }, async () => {
         await vendor.addProductCatalogMode(productName);
     });
 
-    test('vendor can add catalog mode (with price hidden)', { tag: ['@lite', '@vendor'] }, async () => {
+    test('vendor can add product catalog mode (with price hidden)', { tag: ['@lite', '@vendor'] }, async () => {
         await vendor.addProductCatalogMode(productName, true);
     });
 

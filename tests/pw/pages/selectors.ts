@@ -160,7 +160,7 @@ export const selector = {
             blockEditorModal: '//div[@aria-label="Welcome to the block editor"]',
             closeModal: 'div.components-modal__content button[aria-label="Close"]',
 
-            addTitle: '//h1[@aria-label="Add title"]',
+            addTitle: 'h1.wp-block-post-title',
             contentPlaceholder: 'p[aria-label="Add default block"]',
             addContent: '//p[@data-title="Paragraph"]',
 
@@ -3754,7 +3754,7 @@ export const selector = {
                 selectACategory: '//span[@id="dokan_product_cat_res" and normalize-space(text())="- Select a category -"]', // for multiple category
                 searchInput: 'input#dokan-single-cat-search-input',
                 searchedResult: '#dokan-cat-search-res-ul li',
-                searchedResultText: 'div.dokan-cat-search-res-item',
+                searchedResultText: '(//div[@class="dokan-cat-search-res-item"])[1]',
                 categoryOnList: (categoryName: string) => `//span[contains(@class,"dokan-product-category") and normalize-space()="${categoryName}"]`,
                 done: '#dokan-single-cat-select-btn',
                 categoryAlreadySelectedPopup: 'button.swal2-confirm',

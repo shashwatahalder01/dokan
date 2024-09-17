@@ -182,7 +182,7 @@ export const data = {
             clothings: 'clothings',
             randomCategory: () => `category_${faker.string.alpha(5)}`,
             categories: ['clothings', 'electronics'],
-            multistepCategories: ['gadgets', 'Wearables', 'smartwatches', 'Fitness-trackers'],
+            multistepCategories: ['gadgets', 'Wearables', 'smartwatches', 'fitness-trackers'],
         },
 
         store: {
