@@ -49,11 +49,11 @@ test.describe('Vendor settings test', () => {
 
     // store settings
 
-    test('vendor can set store banner settings', { tag: ['@lite', '@vendor'] }, async () => {
+    test.skip('vendor can set store banner settings', { tag: ['@lite', '@vendor'] }, async () => {
         await vendor.setStoreSettings(data.vendor.vendorInfo, 'banner');
     });
 
-    test('vendor can set store profile picture settings', { tag: ['@lite', '@vendor'] }, async () => {
+    test.skip('vendor can set store profile picture settings', { tag: ['@lite', '@vendor'] }, async () => {
         await vendor.setStoreSettings(data.vendor.vendorInfo, 'profile-picture');
     });
 

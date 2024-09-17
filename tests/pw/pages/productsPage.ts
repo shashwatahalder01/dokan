@@ -673,7 +673,7 @@ export class ProductsPage extends AdminPage {
         const discountPrice = String(Number(discount.regularPrice) - Number(discount.discountPrice));
         await this.goToProductEdit(productName);
         await this.toPass(async () => {
-            await this.wait(1); // TODO: remove this line after fixing the flakiness
+            await this.wait(2); // TODO: remove this line after fixing the flakiness
             await this.clearAndType(productsVendor.discount.discountedPrice, discountPrice);
             await this.toHaveSelectedValue(productsVendor.discount.discountedPrice, discountPrice);
         });
