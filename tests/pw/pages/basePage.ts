@@ -444,8 +444,8 @@ export class BasePage {
     }
 
     // returns whether the element is enabled
-    async isEnabled(selector: string): Promise<boolean> {
-        return await this.page.isEnabled(selector);
+    async isEnabled(selector: string, options?: { strict?: boolean; timeout?: number } | undefined): Promise<boolean> {
+        return await this.page.isEnabled(selector, options);
     }
 
     // returns whether the element is editable
@@ -857,7 +857,6 @@ export class BasePage {
     // upload file
     async uploadFile(selector: string, files: string | string[]): Promise<void> {
         await this.page.setInputFiles(selector, files);
-        await this.wait(1); // todo: resolve this
     }
 
     // upload file
@@ -1715,18 +1714,14 @@ export class BasePage {
             await this.uploadFile(selector.wpMedia.selectFilesInput, file);
             console.log('File Uploaded');
         }
-        await this.click(selector.wpMedia.selectUploadedMedia);
-        // todo: upload with toPass method
-        // check if the uploaded media is selected or not for 3 times
-        for (let i = 0; i < 3; i++) {
-            const isSelectDisabled = await this.isDisabled(selector.wpMedia.select);
-            if (!isSelectDisabled) {
-                console.log('Media Selected');
-                break;
-            } else {
+
+        await this.toPass(async () => {
+            const isSelected = await this.isEnabled(selector.wpMedia.select, { timeout: 5000 });
+            if (!isSelected) {
                 await this.click(selector.wpMedia.selectUploadedMedia);
             }
-        }
+            await this.toBeEnabled(selector.wpMedia.select);
+        });
 
         await this.click(selector.wpMedia.select);
         await this.clickIfVisible(selector.wpMedia.crop);
