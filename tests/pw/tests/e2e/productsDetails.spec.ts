@@ -21,7 +21,8 @@ test.describe('Product details functionality test', () => {
         vendor = new ProductsPage(vPage);
 
         apiUtils = new ApiUtils(await request.newContext());
-        [productResponseBody, , productName] = await apiUtils.createProduct(payloads.createProduct(), payloads.vendorAuth);
+        [productResponseBody, , productName] = await apiUtils.createProduct(payloads.createProduct(), payloads.vendorAuth); // ToDo: add a payload with only required fields
+        // todo: need another product with all fields added
     });
 
     test.afterAll(async () => {
@@ -57,20 +58,22 @@ test.describe('Product details functionality test', () => {
     // product discount price
 
     test('vendor can add product discount price', { tag: ['@lite', '@vendor'] }, async () => {
-        await vendor.addDiscountPrice(productName, { ...data.product.productInfo.discount, regularPrice: productResponseBody.price });
+        await vendor.addDiscount(productName, { ...data.product.productInfo.discount, regularPrice: productResponseBody.price });
     });
 
     test('vendor can add product discount price (with schedule)', { tag: ['@lite', '@vendor'] }, async () => {
-        await vendor.addDiscountPrice(productName, { ...data.product.productInfo.discount, regularPrice: productResponseBody.price }, true);
+        await vendor.addDiscount(productName, { ...data.product.productInfo.discount, regularPrice: productResponseBody.price }, true);
     });
 
-    // test('vendor can remove product discount schedule', { tag: ['@lite', '@vendor'] }, async () => {
-    //     const [, , productName] = await apiUtils.createProduct(payloads.createProduct(), payloads.vendorAuth);
-    //     await vendor.addDiscountPrice(productName, { ...data.product.productInfo.discount, regularPrice: productResponseBody.price }, true);
-    // });
+    test('vendor can remove product discount price', { tag: ['@lite', '@vendor'] }, async () => {
+        const [, , productName] = await apiUtils.createProduct({ ...payloads.createDiscountProduct(), date_on_sale_from: '', date_on_sale_to: '' }, payloads.vendorAuth);
+        await vendor.removeDiscount(productName);
+    });
 
-    // todo: vendor can cancel discount schedule
-    // todo: virtual product shouldn't have shipping
+    test('vendor can remove product discount schedule', { tag: ['@lite', '@vendor'] }, async () => {
+        const [, , productName] = await apiUtils.createProduct(payloads.createDiscountProduct(), payloads.vendorAuth);
+        await vendor.removeDiscount(productName, true);
+    });
 
     // product category
 
@@ -99,6 +102,12 @@ test.describe('Product details functionality test', () => {
         await vendor.vendorCantAddCategory(productName, data.product.category.multistepCategories.at(-2)!);
     });
 
+    test.skip('vendor can remove product category (multiple)', { tag: ['@pro', '@vendor'] }, async () => {
+        await dbUtils.updateOptionValue(dbData.dokan.optionName.selling, { product_category_style: 'multiple' });
+        const [, , productName] = await apiUtils.createProduct(payloads.createProduct(), payloads.vendorAuth); // need multiple categories
+        await vendor.vendorAddProductCategory(productName, data.product.category.categories, true);
+    });
+
     // product tags
 
     test('vendor can add product tags', { tag: ['@lite', '@vendor'] }, async () => {
@@ -107,6 +116,11 @@ test.describe('Product details functionality test', () => {
 
     test('vendor can create product tags', { tag: ['@pro', '@vendor'] }, async () => {
         await vendor.addProductTags(productName, data.product.productInfo.tags.randomTags);
+    });
+
+    test.skip('vendor can remove product tags', { tag: ['@lite', '@vendor'] }, async () => {
+        const [, , productName] = await apiUtils.createProduct(payloads.createProduct(), payloads.vendorAuth); // need tags
+        await vendor.addProductTags(productName, data.product.productInfo.tags.tags);
     });
 
     // product cover image
@@ -125,6 +139,10 @@ test.describe('Product details functionality test', () => {
 
     test('vendor can add product short description', { tag: ['@lite', '@vendor'] }, async () => {
         await vendor.addProductShortDescription(productName, data.product.productInfo.description.shortDescription);
+    });
+
+    test('vendor can remove product short description', { tag: ['@lite', '@vendor'] }, async () => {
+        await vendor.addProductShortDescription(productName, '');
     });
 
     // product description
@@ -191,6 +209,16 @@ test.describe('Product details functionality test', () => {
         await vendor.addProductOtherOptions(productName, data.product.productInfo.otherOptions, 'reviews');
     });
 
+    test('vendor can remove product other options (purchase note)', { tag: ['@lite', '@vendor'] }, async () => {
+        await vendor.addProductOtherOptions(productName, data.product.productInfo.otherOptions, 'purchaseNote'); //todo: need a product with purchase note
+        await vendor.addProductOtherOptions(productName, { ...data.product.productInfo.otherOptions, purchaseNote: '' }, 'purchaseNote');
+    });
+
+    test('vendor can remove product other options (product review)', { tag: ['@lite', '@vendor'] }, async () => {
+        await vendor.addProductOtherOptions(productName, data.product.productInfo.otherOptions, 'reviews'); //todo: need a product with enabled reviews
+        await vendor.addProductOtherOptions(productName, { ...data.product.productInfo.otherOptions, enableReview: false }, 'reviews');
+    });
+
     // catalog mode
 
     // todo: move to catalog page
@@ -203,6 +231,18 @@ test.describe('Product details functionality test', () => {
     test('vendor can add product catalog mode (with price hidden)', { tag: ['@lite', '@vendor'] }, async () => {
         await dbUtils.updateOptionValue(dbData.dokan.optionName.selling, { catalog_mode_hide_add_to_cart_button: 'on', catalog_mode_hide_product_price: 'on' });
         await vendor.addProductCatalogMode(productName, true);
+    });
+
+    test('vendor can remove product catalog mode', { tag: ['@lite', '@vendor'] }, async () => {
+        await dbUtils.updateOptionValue(dbData.dokan.optionName.selling, { catalog_mode_hide_add_to_cart_button: 'on', catalog_mode_hide_product_price: 'on' });
+        await vendor.addProductCatalogMode(productName, true); // todo: need a product with catalog mode
+        await vendor.removeProductCatalogMode(productName);
+    });
+
+    test('vendor can remove product catalog mode (price hidden option)', { tag: ['@lite', '@vendor'] }, async () => {
+        await dbUtils.updateOptionValue(dbData.dokan.optionName.selling, { catalog_mode_hide_add_to_cart_button: 'on', catalog_mode_hide_product_price: 'on' });
+        await vendor.addProductCatalogMode(productName, true); // todo: need a product with catalog mode
+        await vendor.removeProductCatalogMode(productName, true);
     });
 
     // shipping and tax
@@ -221,13 +261,15 @@ test.describe('Product details functionality test', () => {
 
     // linked products
 
-    test('vendor can add product linked products (up-selles)', { tag: ['@pro', '@vendor'] }, async () => {
+    test('vendor can add product linked products (up-sells)', { tag: ['@pro', '@vendor'] }, async () => {
         await vendor.addProductLinkedProducts(productName, data.product.productInfo.linkedProducts, 'up-sells');
     });
 
-    test('vendor can add product linked products (cross-selles)', { tag: ['@pro', '@vendor'] }, async () => {
+    test('vendor can add product linked products (cross-sells)', { tag: ['@pro', '@vendor'] }, async () => {
         await vendor.addProductLinkedProducts(productName, data.product.productInfo.linkedProducts, 'cross-sells');
     });
+
+    // todo: vendor can remove product linked products
 
     // attribute
 
@@ -248,16 +290,30 @@ test.describe('Product details functionality test', () => {
         await vendor.removeProductAttribute(productName, attributeName);
     });
 
+    // todo: vendor can remove product attribute term
+
     // discount options
 
     test('vendor can add product bulk discount options', { tag: ['@pro', '@vendor'] }, async () => {
         await vendor.addProductBulkDiscountOptions(productName, data.product.productInfo.quantityDiscount);
     });
 
+    test('vendor can remove product bulk discount options', { tag: ['@pro', '@vendor'] }, async () => {
+        //todo: need a product with bulk discount options
+        await vendor.addProductBulkDiscountOptions(productName, data.product.productInfo.quantityDiscount);
+        await vendor.removeProductBulkDiscountOptions(productName);
+    });
+
     // geolocation
 
-    test('vendor can add product geolocation', { tag: ['@pro', '@vendor'] }, async () => {
+    test('vendor can add product geolocation (individual)', { tag: ['@pro', '@vendor'] }, async () => {
         await vendor.addProductGeolocation(productName, data.product.productInfo.geolocation);
+    });
+
+    test('vendor can remove product geolocation (individual)', { tag: ['@pro', '@vendor'] }, async () => {
+        //todo: need a product with geolocation
+        await vendor.addProductGeolocation(productName, data.product.productInfo.geolocation);
+        await vendor.removeProductGeolocation(productName);
     });
 
     // EU compliance options
@@ -311,10 +367,19 @@ test.describe('Product details functionality test', () => {
         await vendor.addProductRmaOptions(productName, { ...data.vendor.rma, type: 'addon_warranty' });
     });
 
+    test('vendor can remove product rma options', { tag: ['@pro', '@vendor'] }, async () => {
+        await vendor.removeProductRmaOptions(productName);
+    });
+
     // wholesale options
 
     test('vendor can add product wholesale options', { tag: ['@pro', '@vendor'] }, async () => {
         await vendor.addProductWholesaleOptions(productName, data.product.productInfo.wholesaleOption);
+    });
+
+    test('vendor can remove product wholesale options', { tag: ['@pro', '@vendor'] }, async () => {
+        const [, , productName] = await apiUtils.createProduct(payloads.createWholesaleProduct(), payloads.vendorAuth); // todo: create a product with all options
+        await vendor.removeProductWholesaleOptions(productName);
     });
 
     // mix-max options
@@ -323,7 +388,17 @@ test.describe('Product details functionality test', () => {
         await vendor.addProductMinMaxOptions(productName, data.product.productInfo.minMax);
     });
 
+    test("vendor can't add product min limit grater than max limit", { tag: ['@pro', '@vendor'] }, async () => {
+        await vendor.cantAddGreaterMin(productName, { minimumProductQuantity: '100', maximumProductQuantity: '50' });
+    });
+
+    test('vendor can remove product min-max options', { tag: ['@pro', '@vendor'] }, async () => {
+        // todo: product create api, doesn't have min-max meta support
+        await vendor.addProductMinMaxOptions(productName, data.product.productInfo.minMax); // need product with min-max options via api
+        await vendor.removeProductMinMaxOptions(productName, { minimumProductQuantity: '', maximumProductQuantity: '' });
+    });
+
     // todo: advertising
     // todo: rank math seo
-    // todo: downloadable options, variation options
+    // todo: variation options
 });

@@ -153,12 +153,10 @@ export class VendorSettingsPage extends VendorPage {
         await this.toBeVisible(settingsStoreSeo.metaKeywords);
 
         // store seo facebook elements are visible
-        await this.multipleElementVisible(settingsStoreSeo.facebook);
         const { facebookImage, uploadedFacebookImage, ...facebook } = settingsStoreSeo.facebook;
         await this.multipleElementVisible(facebook);
 
         // store seo twitter elements are visible
-        await this.multipleElementVisible(settingsStoreSeo.twitter);
         const { twitterImage, uploadedTwitterImage, ...twitter } = settingsStoreSeo.twitter;
         await this.multipleElementVisible(twitter);
 

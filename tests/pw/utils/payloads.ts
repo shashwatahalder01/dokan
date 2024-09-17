@@ -119,11 +119,9 @@ export const payloads = {
         name: `${faker.commerce.productName()}_${faker.string.nanoid(5)} (Simple)`,
         type: 'simple',
         regular_price: faker.finance.amount({ min: 100, max: 200, dec: faker.helpers.arrayElement([0, 2]) }),
-        // regular_price: faker.finance.amount({ min: 100, max: 200, dec: faker.helpers.arrayElement([0, 2]) }),
-        // regular_price: '114.15' , // failed for this price & 5% tax & 10% commission dokan .1 issue
-        sale_price: faker.finance.amount({ min: 50, max: 100, dec: faker.helpers.arrayElement([0, 2]) }),
-        date_on_sale_from: helpers.currentDateTime,
-        date_on_sale_to: helpers.addDays(helpers.currentDateTime, 10, 'full'),
+        // sale_price: faker.finance.amount({ min: 50, max: 100, dec: faker.helpers.arrayElement([0, 2]) }),
+        // date_on_sale_from: helpers.currentDateTime,
+        // date_on_sale_to: helpers.addDays(helpers.currentDateTime, 10),
         status: 'publish',
         categories: [{}],
         featured: true,
@@ -200,6 +198,105 @@ export const payloads = {
             //     ],
             // },
             // {
+            //     key: '_dokan_min_max_meta',
+            //     value: {
+            //         min_quantity: 5,
+            //         max_quantity: 10,
+            //     },
+            // },
+            // {
+            // 	key  : '_product_addons',
+            // 	value: []
+            // },
+            // {
+            // 	key  : '_product_addons_exclude_global',
+            // 	value: '0'
+            // },
+            // {
+            // 	key  : '_per_product_admin_commission_type',
+            // 	value: 'flat'
+            // },
+            // {
+            // 	key  : '_per_product_admin_commission',
+            // 	value: ''
+            // },
+            // {
+            // 	key  : '_per_product_admin_additional_fee',
+            // 	value: ''
+            // },
+            // {
+            // 	key  : '_has_multi_vendor',
+            // 	value: '18'
+            // },
+            // {
+            // 	key  : '_dokan_catalog_mode',
+            // 	value: {
+            // 		hide_add_to_cart_button: 'off',
+            // 		hide_product_price     : 'off'
+            // 	}
+            // },
+            // {
+            // 	key  : '_disable_shipping',
+            // 	value: 'no'
+            // },
+            // {
+            // 	key  : '_overwrite_shipping',
+            // 	value: 'no'
+            // },
+        ],
+    }),
+
+    createDiscountProduct: () => ({
+        name: `${faker.commerce.productName()}_${faker.string.nanoid(5)} (Simple)`,
+        type: 'simple',
+        regular_price: faker.finance.amount({ min: 100, max: 200, dec: faker.helpers.arrayElement([0, 2]) }),
+        sale_price: faker.finance.amount({ min: 50, max: 100, dec: faker.helpers.arrayElement([0, 2]) }),
+        date_on_sale_from: helpers.currentDateTime,
+        date_on_sale_to: helpers.addDays(helpers.currentDateTime, 10),
+        status: 'publish',
+        categories: [{}],
+        featured: true,
+        description: '<p>test description</p>',
+        short_description: '<p>test short description</p>',
+        meta_data: [
+            {
+                key: '_dokan_geolocation_use_store_settings',
+                value: 'yes',
+            },
+            {
+                key: 'dokan_geo_latitude',
+                value: '40.7127753',
+            },
+            {
+                key: 'dokan_geo_longitude',
+                value: '-74.0059728',
+            },
+            {
+                key: 'dokan_geo_public',
+                value: '1',
+            },
+            {
+                key: 'dokan_geo_address',
+                value: 'New York, NY, USA',
+            },
+            {
+                key: '_dokan_rma_override_product',
+                value: 'yes',
+            },
+            {
+                key: '_dokan_rma_settings',
+                value: {
+                    label: 'Warranty',
+                    type: 'included_warranty',
+                    policy: 'test refund policy',
+                    reasons: ['defective'],
+                    length: 'lifetime',
+                    length_value: '',
+                    length_duration: '',
+                    addon_settings: [],
+                },
+            },
+            // {
             // key: '_dokan_min_max_meta',
             // value: {
             //     min_quantity: 4,
@@ -253,7 +350,7 @@ export const payloads = {
         type: 'simple',
         regular_price: faker.finance.amount({ min: 100, max: 200, dec: 0 }),
         // regular_price: faker.finance.amount({ min: 100, max: 200, dec: faker.helpers.arrayElement([0, 2]) }),
-        // regular_price: '114.15' , // failed for this price & 5% tax & 10% commission dokan .1 issue
+
         status: 'publish',
         categories: [{}],
         featured: true,
@@ -298,16 +395,11 @@ export const payloads = {
                 },
             },
             // {
-            // 	key  : '_dokan_min_max_meta',
-            // 	value: {
-            // 		product_wise_activation: 'yes',
-            // 		min_quantity           : 0,
-            // 		max_quantity           : 0,
-            // 		min_amount             : 0,
-            // 		max_amount             : 0,
-            // 		_donot_count           : 'no',
-            // 		ignore_from_cat        : 'no'
-            // 	}
+            // key: '_dokan_min_max_meta',
+            // value: {
+            //     min_quantity: 4,
+            //     max_quantity: 5,
+            // },
             // },
             // {
             // 	key  : '_product_addons',
@@ -466,7 +558,6 @@ export const payloads = {
                 value: {
                     enable_wholesale: 'yes',
                     price: faker.finance.amount({ min: 90, max: 99, dec: faker.helpers.arrayElement([0, 2]) }),
-                    // price: '90',
                     quantity: '10',
                 },
             },

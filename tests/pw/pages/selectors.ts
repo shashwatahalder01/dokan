@@ -3742,9 +3742,9 @@ export const selector = {
             discount: {
                 discountedPrice: '#\\_sale_price',
                 schedule: '//label[@for="_sale_price"]//a[normalize-space()="Schedule"]',
+                scheduleCancel: '//label[@for="_sale_price"]//a[normalize-space()="Cancel"]',
                 scheduleFrom: 'input[name="_sale_price_dates_from"]',
                 scheduleTo: 'input[name="_sale_price_dates_to"]',
-                scheduleCancel: 'a.cancel_sale_schedule',
             },
 
             // category

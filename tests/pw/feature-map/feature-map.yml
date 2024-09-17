@@ -146,8 +146,8 @@
           vendor can add product shipping: true
           vendor can add product tax: true
           vendor can add product tax (with tax class): true
-          vendor can add product linked products (up-selles): true
-          vendor can add product linked products (cross-selles): true
+          vendor can add product linked products (up-sells): true
+          vendor can add product linked products (cross-sells): true
           vendor can add product attribute: true
           vendor can add product attribute term: true
           vendor can remove product attribute: true

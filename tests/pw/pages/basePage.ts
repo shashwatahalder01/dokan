@@ -474,6 +474,7 @@ export class BasePage {
     // focus on selector
     async focus(selector: string): Promise<void> {
         await this.page.focus(selector);
+        // await this.wait(1); // for visualizing the focus
     }
 
     // hover on selector
