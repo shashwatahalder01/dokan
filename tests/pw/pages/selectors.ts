@@ -3725,7 +3725,7 @@ export const selector = {
 
             // permalink
             permalink: {
-                productlink: 'span#sample-permalink a',
+                productLink: 'span#sample-permalink a',
                 permalink: 'span#editable-post-name',
                 permalinkEdit: 'button.edit-slug',
                 permalinkInput: 'input#new-post-slug',
@@ -3766,7 +3766,7 @@ export const selector = {
 
             // tags
             tags: {
-                tagInput: '//select[@id="product_tag_edit"]/..//input[@class="select2-search__field"]',
+                tagInput: '//select[@id="product_tag_edit"]/..//input[@class="select2-search__field"] | //select[@id="product_tag[]"]/..//input[@class="select2-search__field"]', // todo: remove previous when pr merged
                 searchedTag: (tagName: string) => `//li[@class="select2-results__option select2-results__option--highlighted"]//span[normalize-space(text())="${tagName}"]`,
                 selectedTags: (tagName: string) => `//li[@class="select2-selection__choice" and contains(., "${tagName}")]`,
             },
@@ -4009,10 +4009,10 @@ export const selector = {
 
             // other options
             otherOptions: {
-                productStatus: '#post_status',
+                productStatus: '#post_status, #status', // todo: remove previous when pr merged
                 visibility: '#\\_visibility',
                 purchaseNote: '#\\_purchase_note',
-                enableProductReviews: '#\\_enable_reviews',
+                enableProductReviews: '#\\_enable_reviews, #comment_status', // todo: remove previous when pr merged
             },
 
             // advertise product

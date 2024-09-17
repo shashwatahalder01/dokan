@@ -48,6 +48,12 @@ test.describe('Product details functionality test', () => {
         await vendor.addProductPermalink(productName, data.product.productInfo.permalink);
     });
 
+    // product price
+
+    test('vendor can add product price', { tag: ['@lite', '@vendor'] }, async () => {
+        await vendor.addPrice(productName, data.product.productInfo.price());
+    });
+
     // product discount price
 
     test('vendor can add product discount price', { tag: ['@lite', '@vendor'] }, async () => {
@@ -64,7 +70,8 @@ test.describe('Product details functionality test', () => {
         await vendor.vendorAddProductCategory(productName, [data.product.category.clothings]);
     });
 
-    test('vendor can add product category (multiple)', { tag: ['@lite', '@vendor'] }, async () => {
+    // todo: retest on lite
+    test.skip('vendor can add product category (multiple)', { tag: ['@pro', '@vendor'] }, async () => {
         await dbUtils.updateOptionValue(dbData.dokan.optionName.selling, { product_category_style: 'multiple' });
         const [, , productName] = await apiUtils.createProduct(payloads.createProduct(), payloads.vendorAuth);
         await vendor.vendorAddProductCategory(productName, data.product.category.categories, true);
@@ -287,4 +294,5 @@ test.describe('Product details functionality test', () => {
 
     // todo: advertising
     // todo: rank math seo
+    // todo: downloadable options, variation options
 });

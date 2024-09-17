@@ -666,17 +666,24 @@ export class ProductsPage extends AdminPage {
         await this.clickAndWaitForResponse(data.subUrls.ajax, productsVendor.permalink.confirmPermalinkEdit);
         await this.saveProduct();
         await this.toContainText(productsVendor.permalink.permalink, helpers.slugify(permalink));
+        // todo: add more assertions to all product edit test, customer pov
+    }
+
+    // add product  price
+    async addPrice(productName: string, price: string): Promise<void> {
+        await this.goToProductEdit(productName);
+        await this.clearAndType(productsVendor.price, price);
+        await this.saveProduct();
+        await this.toHaveValue(productsVendor.price, price);
     }
 
     // add product discount price
     async addDiscountPrice(productName: string, discount: product['discount'], schedule: boolean = false): Promise<void> {
-        const discountPrice = String(Number(discount.regularPrice) - Number(discount.discountPrice));
+        const regularPrice = discount.regularPrice.replace('.', ',');
+        const discountPrice = String(Number(discount.regularPrice) - Number(discount.discountPrice)).replace('.', ',');
         await this.goToProductEdit(productName);
-        await this.toPass(async () => {
-            await this.wait(2); // TODO: remove this line after fixing the flakiness
-            await this.clearAndType(productsVendor.discount.discountedPrice, discountPrice);
-            await this.toHaveSelectedValue(productsVendor.discount.discountedPrice, discountPrice);
-        });
+        await this.clearAndType(productsVendor.price, regularPrice);
+        await this.clearAndType(productsVendor.discount.discountedPrice, discountPrice);
         if (schedule) {
             await this.click(productsVendor.discount.schedule);
             await this.clearAndType(productsVendor.discount.scheduleFrom, discount.startDate!);

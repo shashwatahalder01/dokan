@@ -441,6 +441,8 @@ export const data = {
 
             permalink: `_${faker.string.nanoid(10)}`,
 
+            price: () => faker.finance.amount({ min: 100, max: 200, dec: faker.helpers.arrayElement([1, 2]) }).replace('.', ','),
+
             discount: {
                 regularPrice: '',
                 discountPrice: '10',
@@ -455,7 +457,7 @@ export const data = {
 
             images: {
                 cover: 'utils/sampleData/avatar.png',
-                gallery: ['utils/sampleData/avatar.png', 'utils/sampleData/avatar.png'],
+                gallery: ['utils/sampleData/avatar.png'],
             },
 
             description: {

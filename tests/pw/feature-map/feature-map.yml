@@ -119,6 +119,7 @@
           vendor can quick edit product: true
           vendor can add product title [lite]: true
           vendor can add product permalink [lite]: true
+          vendor can add product price [lite]: true
           vendor can add product discount price [lite]: true
           vendor can add product discount price (with schedule) [lite]: true
           vendor can add product category (single) [lite]: true
