@@ -124,6 +124,7 @@ export const payloads = {
         // date_on_sale_to: helpers.addDays(helpers.currentDateTime, 10),
         status: 'publish',
         categories: [{}],
+        tags: [{}],
         featured: true,
         description: '<p>test description</p>',
         short_description: '<p>test short description</p>',

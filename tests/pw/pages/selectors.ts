@@ -3769,16 +3769,18 @@ export const selector = {
                 tagInput: '//select[@id="product_tag_edit"]/..//input[@class="select2-search__field"] | //select[@id="product_tag[]"]/..//input[@class="select2-search__field"]', // todo: remove previous when pr merged
                 searchedTag: (tagName: string) => `//li[@class="select2-results__option select2-results__option--highlighted"]//span[normalize-space(text())="${tagName}"]`,
                 selectedTags: (tagName: string) => `//li[@class="select2-selection__choice" and contains(., "${tagName}")]`,
+                removeSelectedTags: (tagName: string) => `//li[@class="select2-selection__choice" and contains(., "${tagName}")]//span[@class="select2-selection__choice__remove"]`,
             },
 
             // image
             image: {
-                //feature
-                feature: 'a.dokan-feat-image-btn',
+                // cover
+                coverImageDiv: 'div.dokan-new-product-featured-img',
+                cover: 'a.dokan-feat-image-btn',
                 removeFeatureImage: 'a.dokan-remove-feat-image',
                 uploadedFeatureImage: 'div.dokan-new-product-featured-img img',
 
-                //gallery
+                // gallery
                 gallery: 'a.add-product-images',
                 removeGalleryImage: 'a.action-delete',
                 uploadedGalleryImage: 'div.dokan-product-gallery img',
@@ -4031,8 +4033,8 @@ export const selector = {
             },
 
             // save product
-            saveProduct: '.dokan-btn-lg',
-            updatedSuccessMessage: '.dokan-message',
+            saveProduct: 'input#publish',
+            updatedSuccessMessage: 'div.dokan-message',
 
             quickEditProduct: {
                 // title : (productName: string) => `//fieldset//input[contains(@value, "${productName}")]`,

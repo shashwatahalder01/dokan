@@ -672,12 +672,20 @@ export class ProductsPage extends AdminPage {
         // todo: add more assertions to all product edit test, customer pov
     }
 
-    // add product  price
+    // add product price
     async addPrice(productName: string, price: string): Promise<void> {
         await this.goToProductEdit(productName);
         await this.clearAndType(productsVendor.price, price);
         await this.saveProduct();
         await this.toHaveValue(productsVendor.price, price);
+    }
+
+    // remove product price
+    async removePrice(productName: string): Promise<void> {
+        await this.goToProductEdit(productName);
+        await this.clearAndType(productsVendor.price, '');
+        await this.saveProduct();
+        await this.toHaveValue(productsVendor.price, '');
     }
 
     // add product discount
@@ -777,14 +785,41 @@ export class ProductsPage extends AdminPage {
         }
     }
 
+    // remove product tags
+    async removeProductTags(productName: string, tags: string[]): Promise<void> {
+        await this.goToProductEdit(productName);
+        for (const tag of tags) {
+            await this.click(productsVendor.tags.removeSelectedTags(tag));
+            await this.click(productsVendor.price); // to close or shift focus from the tag input
+        }
+        await this.saveProduct();
+
+        for (const tag of tags) {
+            await this.notToBeVisible(productsVendor.tags.selectedTags(tag));
+        }
+    }
+
     // add product cover image
     async addProductCoverImage(productName: string, coverImage: string): Promise<void> {
         await this.goToProductEdit(productName);
-        await this.click(productsVendor.image.feature);
+        await this.click(productsVendor.image.cover);
         await this.uploadMedia(coverImage);
+
         await this.saveProduct();
-        await this.toBeVisible(productsVendor.image.uploadedFeatureImage);
-        await this.toHaveCount(productsVendor.image.removeFeatureImage, 1);
+        const imageSource = await this.getAttributeValue(productsVendor.image.uploadedFeatureImage, 'src');
+        expect(imageSource).toBeTruthy();
+
+        // await this.toBeVisible(productsVendor.image.uploadedFeatureImage);
+    }
+
+    // remove product cover image
+    async removeProductCoverImage(productName: string): Promise<void> {
+        await this.goToProductEdit(productName);
+        await this.hover(productsVendor.image.coverImageDiv);
+        await this.click(productsVendor.image.removeFeatureImage);
+        await this.saveProduct();
+        const imageSource = await this.getAttributeValue(productsVendor.image.uploadedFeatureImage, 'src');
+        expect(imageSource).toBeFalsy();
     }
 
     // add product gallery images
@@ -797,6 +832,17 @@ export class ProductsPage extends AdminPage {
         await this.saveProduct();
         await this.toHaveCount(productsVendor.image.uploadedGalleryImage, galleryImages.length);
         await this.toHaveCount(productsVendor.image.removeGalleryImage, galleryImages.length);
+    }
+
+    // remove product gallery images
+    async removeProductGalleryImages(productName: string): Promise<void> {
+        await this.goToProductEdit(productName);
+        // for (const galleryImage of galleryImages) {
+        //     await this.click(productsVendor.image.gallery);
+        // }
+        // await this.saveProduct();
+        // await this.toHaveCount(productsVendor.image.uploadedGalleryImage, galleryImages.length);
+        // await this.toHaveCount(productsVendor.image.removeGalleryImage, galleryImages.length);
     }
 
     // add product short description

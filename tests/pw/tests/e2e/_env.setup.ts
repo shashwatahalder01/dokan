@@ -102,7 +102,8 @@ setup.describe('setup woocommerce settings', () => {
         await apiUtils.updateBatchTags('delete', []);
 
         // create tag
-        await apiUtils.createTag(payloads.createTag);
+        const [, tagId] = await apiUtils.createTag(payloads.createTag);
+        helpers.createEnvVar('TAG_ID', tagId);
     });
 
     setup('disable storefront sticky add to cart', { tag: ['@lite'] }, async () => {

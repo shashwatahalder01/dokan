@@ -1859,6 +1859,19 @@ export class ApiUtils {
         return responseBody;
     }
 
+    // get single tag
+    async getSingleTag(tagId: string, auth?: auth): Promise<responseBody> {
+        const [, responseBody] = await this.get(endPoints.getSingleProduct(tagId), { headers: auth });
+        return responseBody;
+    }
+
+    // get tagId
+    async getTagId(tagName: string, auth?: auth): Promise<string> {
+        const allTags = await this.getAllTags(auth);
+        const tagId = allTags.find((o: { name: string }) => o.name.toLowerCase() === tagName.toLowerCase())?.id;
+        return tagId;
+    }
+
     // create tag
     async createTag(payload: object, auth?: auth): Promise<[responseBody, string, string]> {
         const [, responseBody] = await this.post(endPoints.wc.createTag, { data: payload, headers: auth });

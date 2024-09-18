@@ -8,6 +8,8 @@ import { payloads } from '@utils/payloads';
 import { responseBody } from '@utils/interfaces';
 import { serialize } from 'php-serialize';
 
+const { TAG_ID } = process.env;
+
 test.describe('Product details functionality test', () => {
     let vendor: ProductsPage;
     let vPage: Page;
@@ -21,7 +23,7 @@ test.describe('Product details functionality test', () => {
         vendor = new ProductsPage(vPage);
 
         apiUtils = new ApiUtils(await request.newContext());
-        [productResponseBody, , productName] = await apiUtils.createProduct(payloads.createProduct(), payloads.vendorAuth); // ToDo: add a payload with only required fields
+        [productResponseBody, , productName] = await apiUtils.createProduct(payloads.createProduct(), payloads.vendorAuth); // Todo: add a payload with only required fields
         // todo: need another product with all fields added
     });
 
@@ -53,6 +55,10 @@ test.describe('Product details functionality test', () => {
 
     test('vendor can add product price', { tag: ['@lite', '@vendor'] }, async () => {
         await vendor.addPrice(productName, data.product.productInfo.price());
+    });
+
+    test('vendor can remove product price', { tag: ['@lite', '@vendor'] }, async () => {
+        await vendor.removePrice(productName);
     });
 
     // product discount price
@@ -118,9 +124,9 @@ test.describe('Product details functionality test', () => {
         await vendor.addProductTags(productName, data.product.productInfo.tags.randomTags);
     });
 
-    test.skip('vendor can remove product tags', { tag: ['@lite', '@vendor'] }, async () => {
-        const [, , productName] = await apiUtils.createProduct(payloads.createProduct(), payloads.vendorAuth); // need tags
-        await vendor.addProductTags(productName, data.product.productInfo.tags.tags);
+    test('vendor can remove product tags', { tag: ['@lite', '@vendor'] }, async () => {
+        const [, , productName] = await apiUtils.createProduct({ ...payloads.createProduct(), tags: [{ id: TAG_ID }] }, payloads.vendorAuth);
+        await vendor.removeProductTags(productName, data.product.productInfo.tags.tags);
     });
 
     // product cover image
@@ -129,10 +135,22 @@ test.describe('Product details functionality test', () => {
         await vendor.addProductCoverImage(productName, data.product.productInfo.images.cover);
     });
 
+    test('vendor can remove product cover image', { tag: ['@lite', '@vendor'] }, async () => {
+        // todo: need a product with cover image
+        await vendor.addProductCoverImage(productName, data.product.productInfo.images.cover);
+        await vendor.removeProductCoverImage(productName);
+    });
+
     // product gallery image
 
     test('vendor can add product gallery image', { tag: ['@lite', '@vendor'] }, async () => {
         await vendor.addProductGalleryImages(productName, data.product.productInfo.images.gallery);
+    });
+
+    test.skip('vendor can remove product gallery image', { tag: ['@lite', '@vendor'] }, async () => {
+        // todo: need a product with gallery image
+        await vendor.addProductGalleryImages(productName, data.product.productInfo.images.gallery);
+        await vendor.removeProductGalleryImages(productName);
     });
 
     // product short description
