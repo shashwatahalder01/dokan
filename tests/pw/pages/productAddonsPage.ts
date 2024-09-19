@@ -120,16 +120,16 @@ export class ProductAddonsPage extends VendorPage {
         expect(exportedAddon[0]).toEqual(expect.objectContaining(addon));
     }
 
-    // delete addon field
-    async deleteAddonField(addonId: string, addonFieldTitle: string): Promise<void> {
+    // remove addon field
+    async removeAddonField(addonId: string, addonFieldTitle: string): Promise<void> {
         await this.goToAddonEdit(addonId);
         await this.click(addonsVendor.addon.removeAddon(addonFieldTitle));
         await this.click(addonsVendor.addon.confirmRemove);
         await this.notToBeVisible(addonsVendor.addon.addonRow(addonFieldTitle));
     }
 
-    // delete addon
-    async deleteAddon(addon: addon): Promise<void> {
+    // remove addon
+    async removeAddon(addon: addon): Promise<void> {
         await this.goIfNotThere(data.subUrls.frontend.vDashboard.settingsAddon);
         await this.hover(addonsVendor.addonRow(addon.name));
         await this.clickAndWaitForLoadState(addonsVendor.deleteAddon(addon.name));

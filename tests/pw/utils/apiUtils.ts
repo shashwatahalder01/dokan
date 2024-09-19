@@ -1809,7 +1809,7 @@ export class ApiUtils {
     // get categoryId
     async getCategoryId(categoryName: string, auth?: auth): Promise<string> {
         const allCategories = await this.getAllCategories(auth);
-        const categoryId = categoryName ? allCategories.find((o: { name: string }) => o.name === categoryName.toLowerCase())?.id : allCategories[0]?.id;
+        const categoryId = categoryName ? allCategories.find((o: { name: string }) => o.name.toLowerCase() === categoryName.toLowerCase())?.id : allCategories[0]?.id;
         return categoryId;
     }
 

@@ -71,6 +71,10 @@ test.describe('Product functionality test', () => {
         await vendor.vendorProductsRenderProperly();
     });
 
+    test('vendor can view add new product page', { tag: ['@lite', '@vendor'] }, async () => {
+        await vendor.vendorAddNewProductRenderProperly();
+    });
+
     // add products
 
     test('vendor can add simple product', { tag: ['@lite', '@vendor'] }, async () => {

@@ -4,7 +4,7 @@ import { dbData } from '@utils/dbData';
 
 const basicAuth = (username: string, password: string) => 'Basic ' + Buffer.from(username + ':' + password).toString('base64');
 
-const { ADMIN, VENDOR, VENDOR2, VENDOR3, CUSTOMER, CUSTOMER2, ADMIN_PASSWORD, USER_PASSWORD, CUSTOMER_ID, PRODUCT_ID } = process.env;
+const { ADMIN, VENDOR, VENDOR2, VENDOR3, CUSTOMER, CUSTOMER2, ADMIN_PASSWORD, USER_PASSWORD, CUSTOMER_ID, PRODUCT_ID, CATEGORY_ID, TAG_ID } = process.env;
 
 export const payloads = {
     // wp
@@ -114,6 +114,150 @@ export const payloads = {
     },
 
     // product
+
+    createProductRequiredFields: () => ({
+        name: `${faker.commerce.productName()}_${faker.string.nanoid(5)} (Simple)`,
+        type: 'simple',
+        status: 'publish',
+        categories: [{}],
+        description: '<p>test description</p>',
+    }),
+
+    createProductAllFields: () => ({
+        name: `${faker.commerce.productName()}_${faker.string.nanoid(5)} (Simple)`,
+        type: 'simple',
+        status: 'publish',
+        categories: [
+            {
+                id: CATEGORY_ID,
+            },
+        ],
+        tags: [{ id: TAG_ID }],
+        featured: true,
+        regular_price: faker.finance.amount({ min: 100, max: 200, dec: faker.helpers.arrayElement([0, 2]) }),
+        sale_price: faker.finance.amount({ min: 50, max: 100, dec: faker.helpers.arrayElement([0, 2]) }),
+        date_on_sale_from: helpers.currentDateTime,
+        date_on_sale_to: helpers.addDays(helpers.currentDateTime, 10),
+        short_description: '<p>test short description</p>',
+        description: '<p>test description</p>',
+        meta_data: [
+            {
+                key: '_dokan_geolocation_use_store_settings',
+                value: 'yes',
+            },
+            {
+                key: 'dokan_geo_latitude',
+                value: '40.7127753',
+            },
+            {
+                key: 'dokan_geo_longitude',
+                value: '-74.0059728',
+            },
+            {
+                key: 'dokan_geo_public',
+                value: '1',
+            },
+            {
+                key: 'dokan_geo_address',
+                value: 'New York, NY, USA',
+            },
+            {
+                key: '_dokan_rma_override_product',
+                value: 'yes',
+            },
+            {
+                key: '_dokan_rma_settings',
+                value: {
+                    label: 'Warranty',
+                    type: 'included_warranty',
+                    policy: 'test refund policy',
+                    reasons: ['defective'],
+                    length: 'lifetime',
+                    length_value: '',
+                    length_duration: '',
+                    addon_settings: [],
+                },
+            },
+            {
+                key: '_product_addons',
+                value: [
+                    {
+                        name: `Add-on Title_${faker.string.nanoid(5)}`,
+                        title_format: 'label',
+                        description_enable: 1,
+                        description: 'Add-on description',
+                        type: 'multiple_choice',
+                        display: 'select',
+                        position: 0,
+                        required: 1,
+                        restrictions: 0,
+                        restrictions_type: 'any_text',
+                        adjust_price: 0,
+                        price_type: 'flat_fee',
+                        price: '',
+                        min: 0,
+                        max: 0,
+                        options: [
+                            {
+                                label: 'Option 1',
+                                price: '30',
+                                image: '',
+                                price_type: 'flat_fee',
+                            },
+                        ],
+                        wc_booking_person_qty_multiplier: 0,
+                        wc_booking_block_qty_multiplier: 0,
+                    },
+                ],
+            },
+            {
+                key: '_dokan_min_max_meta',
+                value: {
+                    min_quantity: 5,
+                    max_quantity: 10,
+                },
+            },
+            {
+                key: '_product_addons',
+                value: [],
+            },
+            {
+                key: '_product_addons_exclude_global',
+                value: '0',
+            },
+            {
+                key: '_per_product_admin_commission_type',
+                value: 'flat',
+            },
+            {
+                key: '_per_product_admin_commission',
+                value: '',
+            },
+            {
+                key: '_per_product_admin_additional_fee',
+                value: '',
+            },
+            {
+                key: '_has_multi_vendor',
+                value: '18',
+            },
+            {
+                key: '_dokan_catalog_mode',
+                value: {
+                    hide_add_to_cart_button: 'on',
+                    hide_product_price: 'on',
+                },
+            },
+            {
+                key: '_disable_shipping',
+                value: 'no',
+            },
+            {
+                key: '_overwrite_shipping',
+                value: 'no',
+            },
+        ],
+    }),
 
     createProduct: () => ({
         name: `${faker.commerce.productName()}_${faker.string.nanoid(5)} (Simple)`,

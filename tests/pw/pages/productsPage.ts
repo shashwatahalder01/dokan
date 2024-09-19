@@ -284,6 +284,113 @@ export class ProductsPage extends AdminPage {
         await this.multipleElementVisible(table);
     }
 
+    // add new product render properly
+    async vendorAddNewProductRenderProperly(): Promise<void> {
+        await this.goToAddNewProduct();
+
+        // title
+        await this.toBeVisible(productsVendor.title);
+
+        // product type
+        if (DOKAN_PRO) await this.toBeVisible(productsVendor.productType);
+
+        // downloadable
+        await this.toBeVisible(productsVendor.downloadable);
+
+        // virtual
+        await this.toBeVisible(productsVendor.virtual);
+
+        // price
+        await this.toBeVisible(productsVendor.price);
+
+        // discount price & Schedule
+        await this.click(productsVendor.discount.schedule);
+        const { schedule, greaterDiscountError, ...discount } = productsVendor.discount;
+        await this.multipleElementVisible(discount);
+
+        // category
+        await this.toBeVisible(productsVendor.category.openCategoryModal);
+
+        // tags
+        await this.toBeVisible(productsVendor.tags.tagInput);
+
+        // cover image
+        await this.toBeVisible(productsVendor.image.cover);
+
+        // gallery image
+        await this.toBeVisible(productsVendor.image.gallery);
+
+        // short description
+        await this.toBeVisible(productsVendor.shortDescription.shortDescriptionIframe);
+
+        // description
+        await this.toBeVisible(productsVendor.description.descriptionIframe);
+
+        // inventory
+        await this.toBeVisible(productsVendor.inventory.stockStatus);
+        await this.check(productsVendor.inventory.enableStockManagement);
+        const { stockStatus, ...inventory } = productsVendor.inventory;
+        await this.multipleElementVisible(inventory);
+
+        // other options
+        await this.multipleElementVisible(productsVendor.otherOptions);
+
+        // catalog mode
+        await this.check(productsVendor.catalogMode.removeAddToCart);
+        await this.multipleElementVisible(productsVendor.catalogMode);
+
+        if (DOKAN_PRO) {
+            // shipping
+            await this.multipleElementVisible(productsVendor.shipping);
+
+            // tax
+            await this.multipleElementVisible(productsVendor.tax);
+
+            // geolocation
+            await this.uncheck(productsVendor.geolocation.sameAsStore);
+            await this.multipleElementVisible(productsVendor.geolocation);
+
+            // linked products
+            await this.toBeVisible(productsVendor.linkedProducts.upSells);
+            await this.toBeVisible(productsVendor.linkedProducts.crossSells);
+
+            // attribute
+            await this.toBeVisible(productsVendor.attribute.customAttribute);
+            await this.toBeVisible(productsVendor.attribute.addAttribute);
+            await this.toBeVisible(productsVendor.attribute.saveAttribute);
+
+            // discount options
+            await this.check(productsVendor.bulkDiscount.enableBulkDiscount);
+            await this.multipleElementVisible(productsVendor.bulkDiscount);
+
+            // addon
+            await this.toBeVisible(productsVendor.addon.addField);
+            await this.toBeVisible(productsVendor.addon.import);
+            await this.toBeVisible(productsVendor.addon.export);
+            await this.toBeVisible(productsVendor.addon.excludeAddons);
+
+            // rma
+            await this.check(productsVendor.rma.overrideDefaultRmaSettings);
+            const { length, lengthValue, lengthDuration, addonCost, addonDurationLength, addonDurationType, rmaPolicyHtmlBody, refundReasons, ...rma } = productsVendor.rma;
+            await this.multipleElementVisible(rma);
+
+            // wholesale
+            await this.check(productsVendor.wholesale.enableWholesale);
+            await this.multipleElementVisible(productsVendor.wholesale);
+
+            // min-max
+            await this.multipleElementVisible(productsVendor.minMax);
+
+            // advertisement
+            await this.toBeVisible(productsVendor.advertisement.needsPublishNotice);
+
+            // eu compliance
+            // todo: need a check for germanized plugin
+            const { deliveryTime, optionalMiniDescription, ...euComplianceFields } = productsVendor.euComplianceFields;
+            await this.multipleElementVisible(euComplianceFields);
+        }
+    }
+
     // products
 
     // vendor add product
@@ -653,7 +760,7 @@ export class ProductsPage extends AdminPage {
 
     // product options
 
-    // add product titile
+    // add product title
     async addProductTitle(productName: string, title: string): Promise<void> {
         await this.goToProductEdit(productName);
         await this.clearAndType(productsVendor.title, title);
@@ -686,6 +793,16 @@ export class ProductsPage extends AdminPage {
         await this.clearAndType(productsVendor.price, '');
         await this.saveProduct();
         await this.toHaveValue(productsVendor.price, '');
+    }
+
+    // can't add product discount greater than regular price
+    async cantAddGreaterDiscount(productName: string, discount: product['discount']): Promise<void> {
+        const regularPrice = discount.regularPrice.replace('.', ',');
+        const discountPrice = String(Number(discount.regularPrice) + Number(discount.discountPrice)).replace('.', ',');
+        await this.goToProductEdit(productName);
+        await this.clearAndType(productsVendor.price, regularPrice);
+        await this.type(productsVendor.discount.discountedPrice, discountPrice);
+        await this.toBeVisible(productsVendor.discount.greaterDiscountError);
     }
 
     // add product discount
@@ -726,11 +843,10 @@ export class ProductsPage extends AdminPage {
     }
 
     // vendor add product category
-    async addProductCategory(category: string, multiple: boolean, neg?: boolean): Promise<void> {
+    async vendorAddProductCategory(category: string, multiple: boolean, neg?: boolean): Promise<void> {
         if (!multiple) {
             await this.click(productsVendor.category.openCategoryModal);
         } else {
-            console.log('multiple');
             await this.click(productsVendor.category.addNewCategory);
             await this.click(productsVendor.category.selectACategory);
         }
@@ -754,10 +870,10 @@ export class ProductsPage extends AdminPage {
     }
 
     // add product category
-    async vendorAddProductCategory(productName: string, categories: string[], multiple: boolean = false): Promise<void> {
+    async addProductCategory(productName: string, categories: string[], multiple: boolean = false): Promise<void> {
         await this.goToProductEdit(productName);
         for (const category of categories) {
-            await this.addProductCategory(category, multiple);
+            await this.vendorAddProductCategory(category, multiple);
         }
         await this.saveProduct();
         for (const category of categories) {
@@ -765,10 +881,23 @@ export class ProductsPage extends AdminPage {
         }
     }
 
-    // cant add product category
-    async vendorCantAddCategory(productName: string, category: string): Promise<void> {
+    // remove product category
+    async removeProductCategory(productName: string, categories: string[]): Promise<void> {
         await this.goToProductEdit(productName);
-        await this.addProductCategory(category, false, true);
+        for (const category of categories) {
+            await this.click(productsVendor.category.removeSelectedCategory(category));
+            await this.notToBeVisible(productsVendor.category.selectedCategory(category));
+        }
+        await this.saveProduct();
+        for (const category of categories) {
+            await this.notToBeVisible(productsVendor.category.selectedCategory(category));
+        }
+    }
+
+    // can't add product category
+    async cantAddCategory(productName: string, category: string): Promise<void> {
+        await this.goToProductEdit(productName);
+        await this.vendorAddProductCategory(category, false, true);
     }
 
     // add product tags
@@ -790,7 +919,8 @@ export class ProductsPage extends AdminPage {
         await this.goToProductEdit(productName);
         for (const tag of tags) {
             await this.click(productsVendor.tags.removeSelectedTags(tag));
-            await this.click(productsVendor.price); // to close or shift focus from the tag input
+            // await this.click(productsVendor.price); // to shift focus from the previous input
+            await this.press('Tab'); // to shift focus from the previous input
         }
         await this.saveProduct();
 
@@ -808,8 +938,6 @@ export class ProductsPage extends AdminPage {
         await this.saveProduct();
         const imageSource = await this.getAttributeValue(productsVendor.image.uploadedFeatureImage, 'src');
         expect(imageSource).toBeTruthy();
-
-        // await this.toBeVisible(productsVendor.image.uploadedFeatureImage);
     }
 
     // remove product cover image
@@ -831,18 +959,18 @@ export class ProductsPage extends AdminPage {
         }
         await this.saveProduct();
         await this.toHaveCount(productsVendor.image.uploadedGalleryImage, galleryImages.length);
-        await this.toHaveCount(productsVendor.image.removeGalleryImage, galleryImages.length);
     }
 
     // remove product gallery images
     async removeProductGalleryImages(productName: string): Promise<void> {
         await this.goToProductEdit(productName);
-        // for (const galleryImage of galleryImages) {
-        //     await this.click(productsVendor.image.gallery);
-        // }
-        // await this.saveProduct();
-        // await this.toHaveCount(productsVendor.image.uploadedGalleryImage, galleryImages.length);
-        // await this.toHaveCount(productsVendor.image.removeGalleryImage, galleryImages.length);
+        const imageCount = await this.getElementCount(productsVendor.image.uploadedGalleryImage);
+        for (let i = 0; i < imageCount; i++) {
+            await this.hover(productsVendor.image.galleryImageDiv);
+            await this.click(productsVendor.image.removeGalleryImage);
+        }
+        await this.saveProduct();
+        await this.toHaveCount(productsVendor.image.uploadedGalleryImage, 0);
     }
 
     // add product short description
@@ -879,11 +1007,18 @@ export class ProductsPage extends AdminPage {
     }
 
     // remove product downloadable files
-    async removeDownloadableFile(productName: string): Promise<void> {
+    async removeDownloadableFile(productName: string, downloadableOption: product['productInfo']['downloadableOptions']): Promise<void> {
         await this.goToProductEdit(productName);
-        await this.clickMultiple(productsVendor.downloadableOptions.deleteFile);
+        const fileCount = await this.getElementCount(productsVendor.downloadableOptions.deleteFile);
+        for (let i = 0; i < fileCount; i++) {
+            await this.clickFirstLocator(productsVendor.downloadableOptions.deleteFile);
+        }
+        await this.clearAndType(productsVendor.downloadableOptions.downloadLimit, downloadableOption.downloadLimit);
+        await this.clearAndType(productsVendor.downloadableOptions.downloadExpiry, downloadableOption.downloadExpiry);
         await this.saveProduct();
         await this.notToBeVisible(productsVendor.downloadableOptions.deleteFile);
+        await this.toHaveValue(productsVendor.downloadableOptions.downloadLimit, downloadableOption.downloadLimit);
+        await this.toHaveValue(productsVendor.downloadableOptions.downloadExpiry, downloadableOption.downloadExpiry);
     }
 
     // add product inventory
@@ -942,6 +1077,13 @@ export class ProductsPage extends AdminPage {
             default:
                 break;
         }
+    }
+    // remove product inventory [stock management]
+    async removeProductInventory(productName: string): Promise<void> {
+        await this.goToProductEdit(productName);
+        await this.uncheck(productsVendor.inventory.enableStockManagement);
+        await this.saveProduct();
+        await this.notToBeChecked(productsVendor.inventory.enableStockManagement);
     }
 
     // add product other options (product status, visibility, purchase note, reviews)
@@ -1041,6 +1183,13 @@ export class ProductsPage extends AdminPage {
         await this.toHaveValue(productsVendor.shipping.height, shipping.height);
         await this.toHaveSelectedLabel(productsVendor.shipping.shippingClass, shipping.shippingClass);
     }
+    // add product shipping
+    async removeProductShipping(productName: string): Promise<void> {
+        await this.goToProductEdit(productName);
+        await this.uncheck(productsVendor.shipping.requiresShipping);
+        await this.saveProduct();
+        await this.notToBeChecked(productsVendor.shipping.requiresShipping);
+    }
 
     // add product tax
     async addProductTax(productName: string, tax: product['productInfo']['tax'], hasClass: boolean = false): Promise<void> {
@@ -1092,6 +1241,46 @@ export class ProductsPage extends AdminPage {
         }
     }
 
+    // add product linked products
+    async removeProductLinkedProducts(productName: string, linkedProducts: product['productInfo']['linkedProducts'], choice: string): Promise<void> {
+        await this.goToProductEdit(productName);
+        switch (choice) {
+            case 'up-sells':
+                for (const product of linkedProducts.upSells) {
+                    await this.click(productsVendor.linkedProducts.removeSelectedUpSellProduct(product));
+                    // await this.click(productsVendor.otherOptions.purchaseNote); // to shift focus from the previous input
+                    await this.press('Tab'); // to shift focus from the previous input
+                }
+                break;
+            case 'cross-sells':
+                for (const product of linkedProducts.crossSells) {
+                    await this.click(productsVendor.linkedProducts.removeSelectedCrossSellProduct(product));
+                    // await this.click(productsVendor.otherOptions.purchaseNote); // to shift focus from the previous input
+                    await this.press('Tab'); // to shift focus from the previous input
+                }
+                break;
+            default:
+                break;
+        }
+
+        await this.saveProduct();
+
+        switch (choice) {
+            case 'up-sells':
+                for (const product of linkedProducts.upSells) {
+                    await this.notToBeVisible(productsVendor.linkedProducts.selectedUpSellProduct(product));
+                }
+                break;
+            case 'cross-sells':
+                for (const product of linkedProducts.upSells) {
+                    await this.notToBeVisible(productsVendor.linkedProducts.selectedCrossSellProduct(product));
+                }
+                break;
+            default:
+                break;
+        }
+    }
+
     // add product attribute
     async addProductAttribute(productName: string, attribute: product['productInfo']['attribute'], addTerm: boolean = false): Promise<void> {
         await this.goToProductEdit(productName);
@@ -1121,6 +1310,19 @@ export class ProductsPage extends AdminPage {
         await this.notToBeVisible(productsVendor.attribute.savedAttribute(attribute));
     }
 
+    // remove product attribute term
+    async removeProductAttributeTerm(productName: string, attribute: string, attributeTerm: string): Promise<void> {
+        await this.goToProductEdit(productName);
+        await this.click(productsVendor.attribute.savedAttribute(attribute));
+        await this.click(productsVendor.attribute.removeSelectedAttributeTerm(attributeTerm));
+        await this.press('Tab'); // to shift focus from the previous input
+        await this.notToBeVisible(productsVendor.attribute.selectedAttributeTerm(attributeTerm));
+        await this.clickAndWaitForResponse(data.subUrls.ajax, productsVendor.attribute.saveAttribute);
+        await this.saveProduct();
+        await this.click(productsVendor.attribute.savedAttribute(attribute));
+        await this.notToBeVisible(productsVendor.attribute.selectedAttributeTerm(attributeTerm));
+    }
+
     // add product discount options
     async addProductBulkDiscountOptions(productName: string, quantityDiscount: product['productInfo']['quantityDiscount']): Promise<void> {
         await this.goToProductEdit(productName);
@@ -1136,7 +1338,6 @@ export class ProductsPage extends AdminPage {
     // add product discount options
     async removeProductBulkDiscountOptions(productName: string): Promise<void> {
         await this.goToProductEdit(productName);
-        await this.focus(productsVendor.bulkDiscount.enableBulkDiscount);
         await this.uncheck(productsVendor.bulkDiscount.enableBulkDiscount);
         await this.saveProduct();
         await this.notToBeChecked(productsVendor.bulkDiscount.enableBulkDiscount);
@@ -1175,6 +1376,8 @@ export class ProductsPage extends AdminPage {
         await this.clearAndType(productsVendor.euComplianceFields.basePriceUnits, euCompliance.basePriceUnits);
         if (euCompliance.freeShipping) {
             await this.check(productsVendor.euComplianceFields.freeShipping);
+        } else {
+            await this.uncheck(productsVendor.euComplianceFields.freeShipping);
         }
         await this.clearAndType(productsVendor.euComplianceFields.regularUnitPrice, euCompliance.regularUnitPrice);
         await this.clearAndType(productsVendor.euComplianceFields.saleUnitPrice, euCompliance.saleUnitPrice);
@@ -1188,7 +1391,11 @@ export class ProductsPage extends AdminPage {
         await this.toHaveValue(productsVendor.euComplianceFields.minimumAge, euCompliance.minimumAge);
         await this.toHaveValue(productsVendor.euComplianceFields.productUnits, euCompliance.productUnits);
         await this.toHaveValue(productsVendor.euComplianceFields.basePriceUnits, euCompliance.basePriceUnits);
-        await this.toBeChecked(productsVendor.euComplianceFields.freeShipping);
+        if (euCompliance.freeShipping) {
+            await this.toBeChecked(productsVendor.euComplianceFields.freeShipping);
+        } else {
+            await this.notToBeChecked(productsVendor.euComplianceFields.freeShipping);
+        }
         await this.toHaveValue(productsVendor.euComplianceFields.regularUnitPrice, euCompliance.regularUnitPrice);
         await this.toHaveValue(productsVendor.euComplianceFields.saleUnitPrice, euCompliance.saleUnitPrice);
         await this.toContainTextFrameLocator(productsVendor.euComplianceFields.optionalMiniDescription.descriptionIframe, productsVendor.euComplianceFields.optionalMiniDescription.descriptionHtmlBody, euCompliance.optionalMiniDescription);
@@ -1251,7 +1458,7 @@ export class ProductsPage extends AdminPage {
     }
 
     // delete addon
-    async deleteAddon(productName: string, addonName: string): Promise<void> {
+    async removeAddon(productName: string, addonName: string): Promise<void> {
         await this.goToProductEdit(productName);
         await this.click(productsVendor.addon.removeAddon(addonName));
         await this.click(productsVendor.addon.confirmRemove);
@@ -1263,7 +1470,7 @@ export class ProductsPage extends AdminPage {
     // add product rma options
     async addProductRmaOptions(productName: string, rma: vendor['rma']): Promise<void> {
         await this.goToProductEdit(productName);
-        await this.check(productsVendor.rma.overrideYourDefaultRmaSettingsForThisProduct);
+        await this.check(productsVendor.rma.overrideDefaultRmaSettings);
         await this.clearAndType(productsVendor.rma.label, rma.label);
         await this.selectByValue(productsVendor.rma.type, rma.type);
 
@@ -1286,7 +1493,7 @@ export class ProductsPage extends AdminPage {
 
         await this.saveProduct();
 
-        await this.toBeChecked(productsVendor.rma.overrideYourDefaultRmaSettingsForThisProduct);
+        await this.toBeChecked(productsVendor.rma.overrideDefaultRmaSettings);
         await this.toHaveValue(productsVendor.rma.label, rma.label);
         await this.toHaveSelectedValue(productsVendor.rma.type, rma.type);
         if (rma.type === 'included_warranty') {
@@ -1310,9 +1517,9 @@ export class ProductsPage extends AdminPage {
     // remove product rma options
     async removeProductRmaOptions(productName: string): Promise<void> {
         await this.goToProductEdit(productName);
-        await this.uncheck(productsVendor.rma.overrideYourDefaultRmaSettingsForThisProduct);
+        await this.uncheck(productsVendor.rma.overrideDefaultRmaSettings);
         await this.saveProduct();
-        await this.notToBeChecked(productsVendor.rma.overrideYourDefaultRmaSettingsForThisProduct);
+        await this.notToBeChecked(productsVendor.rma.overrideDefaultRmaSettings);
     }
 
     // add product wholesale options
@@ -1345,7 +1552,7 @@ export class ProductsPage extends AdminPage {
         await this.toHaveValue(productsVendor.minMax.maximumQuantity, minMaxOption.maximumProductQuantity);
     }
 
-    // cant add product min greater than max
+    // can't add product min greater than max
     async cantAddGreaterMin(productName: string, minMaxOption: product['productInfo']['minMax']): Promise<void> {
         await this.goToProductEdit(productName);
         await this.clearAndType(productsVendor.minMax.minimumQuantity, minMaxOption.minimumProductQuantity);

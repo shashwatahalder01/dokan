@@ -444,7 +444,7 @@ export const data = {
             price: () => faker.finance.amount({ min: 100, max: 200, dec: faker.helpers.arrayElement([1, 2]) }).replace('.', ','),
 
             discount: {
-                regularPrice: '',
+                regularPrice: faker.finance.amount({ min: 100, max: 200, dec: faker.helpers.arrayElement([1, 2]) }).replace('.', ','),
                 discountPrice: '10',
                 startDate: helpers.currentDate,
                 endDate: helpers.addDays(helpers.currentDateTime, 2),

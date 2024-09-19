@@ -71,14 +71,14 @@ test.describe('Product addon functionality test', () => {
         await vendor.exportAddonField(addonId, responseBody.fields[0]);
     });
 
-    test('vendor can delete product addon field', { tag: ['@pro', '@vendor'] }, async () => {
+    test('vendor can remove product addon field', { tag: ['@pro', '@vendor'] }, async () => {
         const [, addonId, , addonFieldTitle] = await createVendorProductAddon();
-        await vendor.deleteAddonField(addonId, addonFieldTitle);
+        await vendor.removeAddonField(addonId, addonFieldTitle);
     });
 
-    test('vendor can delete global product addon', { tag: ['@pro', '@vendor'] }, async () => {
+    test('vendor can remove global product addon', { tag: ['@pro', '@vendor'] }, async () => {
         const [, , addonName] = await createVendorProductAddon();
-        await vendor.deleteAddon({ ...data.vendor.addon(), name: addonName });
+        await vendor.removeAddon({ ...data.vendor.addon(), name: addonName });
     });
 
     // product addon
@@ -103,6 +103,6 @@ test.describe('Product addon functionality test', () => {
         const addon = payloads.createProductAddon();
         const [, productId, productName] = await apiUtils.createProduct(payloads.createProduct(), payloads.vendorAuth);
         await apiUtils.updateProduct(productId, { meta_data: [{ key: '_product_addons', value: [addon] }] }, payloads.vendorAuth);
-        await vendor1.deleteAddon(productName, addon.name);
+        await vendor1.removeAddon(productName, addon.name);
     });
 });

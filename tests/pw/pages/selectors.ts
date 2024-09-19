@@ -3745,6 +3745,7 @@ export const selector = {
                 scheduleCancel: '//label[@for="_sale_price"]//a[normalize-space()="Cancel"]',
                 scheduleFrom: 'input[name="_sale_price_dates_from"]',
                 scheduleTo: 'input[name="_sale_price_dates_to"]',
+                greaterDiscountError: '//div[@class="wc_error_tip i18n_sale_less_than_regular_error" and contains(.,"Please enter in a value less than the regular price.")]',
             },
 
             // category
@@ -3762,6 +3763,8 @@ export const selector = {
                 categoryModalClose: 'span#dokan-category-close-modal',
                 categoryValues: '.select2-results ul li',
                 selectedCategory: (categoryName: string) => `//div[@id="dokan-category-open-modal"]//span[contains(@class,'dokan-selected-category-product') and normalize-space()="${categoryName}"]`,
+                removeSelectedCategory: (categoryName: string) =>
+                    `//div[@id="dokan-category-open-modal"]//span[contains(@class,'dokan-selected-category-product') and normalize-space()="${categoryName}"]/../../..//span[@class="dokan-select-product-category-remove"]`,
             },
 
             // tags
@@ -3775,14 +3778,15 @@ export const selector = {
             // image
             image: {
                 // cover
-                coverImageDiv: 'div.dokan-new-product-featured-img',
                 cover: 'a.dokan-feat-image-btn',
+                coverImageDiv: 'div.dokan-new-product-featured-img',
                 removeFeatureImage: 'a.dokan-remove-feat-image',
                 uploadedFeatureImage: 'div.dokan-new-product-featured-img img',
 
                 // gallery
                 gallery: 'a.add-product-images',
-                removeGalleryImage: 'a.action-delete',
+                galleryImageDiv: '(//div[@class="dokan-product-gallery"]//li[contains(@class,"image")])[1]',
+                removeGalleryImage: '(//a[@class="action-delete"])[1]',
                 uploadedGalleryImage: 'div.dokan-product-gallery img',
             },
 
@@ -3927,6 +3931,8 @@ export const selector = {
                 searchedResult: (productName: string) => `//li[contains(text(), "${productName}") and @class="select2-results__option select2-results__option--highlighted"]`,
                 selectedUpSellProduct: (productName: string) => `//select[@id="upsell_ids"]/..//li[@class="select2-selection__choice" and contains(., "${productName}")]`,
                 selectedCrossSellProduct: (productName: string) => `//select[@id="crosssell_ids"]/..//li[@class="select2-selection__choice" and contains(., "${productName}")]`,
+                removeSelectedUpSellProduct: (productName: string) => `//select[@id="upsell_ids"]/..//li[@class="select2-selection__choice" and contains(., "${productName}")]//span[@class="select2-selection__choice__remove"]`,
+                removeSelectedCrossSellProduct: (productName: string) => `//select[@id="crosssell_ids"]/..//li[@class="select2-selection__choice" and contains(., "${productName}")]//span[@class="select2-selection__choice__remove"]`,
 
                 // grouped products
                 groupProducts: '//label[contains(text(),"Grouped products")]/..//input[@class="select2-search__field"]',
@@ -3950,7 +3956,7 @@ export const selector = {
                 attributeTermInput: 'div.swal2-modal input.swal2-input',
                 confirmAddAttributeTerm: 'button.swal2-confirm',
                 selectedAttributeTerm: (attributeTerm: string) => `//li[text()='${attributeTerm}']`,
-
+                removeSelectedAttributeTerm: (attributeTerm: string) => `//li[text()='${attributeTerm}']//span`,
                 saveAttribute: 'a.dokan-save-attribute',
 
                 // variations
@@ -3981,7 +3987,7 @@ export const selector = {
 
             // rma options
             rma: {
-                overrideYourDefaultRmaSettingsForThisProduct: '#dokan_rma_product_override',
+                overrideDefaultRmaSettings: '#dokan_rma_product_override',
                 label: '#dokan-rma-label',
                 type: '#dokan-warranty-type',
                 length: '#dokan-warranty-length',
@@ -4019,6 +4025,7 @@ export const selector = {
 
             // advertise product
             advertisement: {
+                needsPublishNotice: '//p[normalize-space(text())="You can not advertise this product. Product needs to be published before you can advertise."]',
                 advertiseThisProduct: 'input#dokan_advertise_single_product',
                 confirmAdvertiseThisProduct: '.swal2-confirm',
                 okSuccessAlertAdvertiseThisProduct: '.swal2-confirm',

@@ -149,7 +149,7 @@
           vendor can add product linked products (up-sells): true
           vendor can add product linked products (cross-sells): true
           vendor can add product attribute: true
-          vendor can add product attribute term: true
+          vendor can add product attribute term (new): true
           vendor can remove product attribute: true
           vendor can add product bulk discount options: true
           # move module tests to module section
@@ -754,11 +754,11 @@
           vendor can edit global product addon: true
           vendor can import global product addon field: true
           vendor can export global product addon field: true
-          vendor can delete product addon field: true
+          vendor can remove product addon field: true
           vendor can add product addon: true
           vendor can import product addon: true
           vendor can export product addon: true
-          vendor can delete product addon: true
+          vendor can remove product addon: true
       customer:
           customer can view product addons on single product page: false
           customer can buy product with addon: false

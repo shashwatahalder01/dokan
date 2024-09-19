@@ -480,8 +480,7 @@ export class BasePage {
     // hover on selector
     async hover(selector: string): Promise<void> {
         await this.page.locator(selector).hover();
-        // await this.page.hover(selector);
-        await this.wait(0.2);
+        // await this.wait(0.2);
     }
 
     // drag and drop
@@ -1065,7 +1064,7 @@ export class BasePage {
     }
 
     // get first matching locator
-    firstLocator(selector: string): Locator {
+    getFirstLocator(selector: string): Locator {
         const locator = this.page.locator(selector);
         return locator.first();
     }
@@ -1373,6 +1372,11 @@ export class BasePage {
      * Extra methods
      */
 
+    // click first element
+    async clickFirstLocator(selector: string): Promise<void> {
+        await this.page.locator(selector).first().click();
+    }
+
     // multiple elements to be checked
     async multipleElementCheck(selectors: any) {
         for (const selector in selectors) {
@@ -1397,6 +1401,25 @@ export class BasePage {
     // screenshot to be similar
     async toHaveScreenshot(page: Page, locators?: Locator[]) {
         await expect(page).toHaveScreenshot({ fullPage: true, mask: locators, maskColor: 'black', animations: 'disabled' });
+    }
+
+    // click multiple elements with same selector/class/xpath
+    async clickMultiple(selector: string): Promise<void> {
+        for (const element of await this.page.locator(selector).all()) {
+            // await this.toPass(async () => {
+            await element.click();
+            // });
+        }
+    }
+
+    // check multiple elements with same selector/class/xpath
+    async checkMultiple(selector: string): Promise<void> {
+        for (const element of await this.page.locator(selector).all()) {
+            await this.toPass(async () => {
+                await element.check();
+                await expect(element).toBeChecked();
+            });
+        }
     }
 
     /**
@@ -1572,6 +1595,13 @@ export class BasePage {
      * Custom assertion methods
      */
 
+    // checked multiple elements with same selector/class/xpath
+    async toBeCheckedMultiple(selector: string): Promise<void> {
+        for (const element of await this.page.locator(selector).all()) {
+            await expect(element).toBeChecked();
+        }
+    }
+
     // admin enable switcher, if enabled then Skip : admin settings switcher
     async switcherHasColor(selector: string, color: string): Promise<void> {
         selector = /^(\/\/|\(\/\/)/.test(selector) ? `${selector}//span` : `${selector} span`;
@@ -1686,32 +1716,6 @@ export class BasePage {
         }
         await this.toHaveClass(selector, /woocommerce-input-toggle--enabled/);
         await this.toHaveBackgroundColor(selector, 'rgb(0, 124, 186)');
-    }
-
-    // click multiple elements with same selector/class/xpath
-    async clickMultiple(selector: string): Promise<void> {
-        for (const element of await this.page.locator(selector).all()) {
-            await this.toPass(async () => {
-                await element.click();
-            });
-        }
-    }
-
-    // check multiple elements with same selector/class/xpath
-    async checkMultiple(selector: string): Promise<void> {
-        for (const element of await this.page.locator(selector).all()) {
-            await this.toPass(async () => {
-                await element.check();
-                await expect(element).toBeChecked();
-            });
-        }
-    }
-
-    // checked multiple elements with same selector/class/xpath
-    async toBeCheckedMultiple(selector: string): Promise<void> {
-        for (const element of await this.page.locator(selector).all()) {
-            await expect(element).toBeChecked();
-        }
     }
 
     // upload media
