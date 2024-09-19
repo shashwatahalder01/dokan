@@ -4,7 +4,7 @@ import { dbData } from '@utils/dbData';
 
 const basicAuth = (username: string, password: string) => 'Basic ' + Buffer.from(username + ':' + password).toString('base64');
 
-const { ADMIN, VENDOR, VENDOR2, VENDOR3, CUSTOMER, CUSTOMER2, ADMIN_PASSWORD, USER_PASSWORD, CUSTOMER_ID, PRODUCT_ID, CATEGORY_ID, TAG_ID } = process.env;
+const { ADMIN, VENDOR, VENDOR2, VENDOR3, CUSTOMER, CUSTOMER2, ADMIN_PASSWORD, USER_PASSWORD, CUSTOMER_ID, PRODUCT_ID, PRODUCT_ID_V2, CATEGORY_ID, TAG_ID, ATTRIBUTE_ID } = process.env;
 
 export const payloads = {
     // wp
@@ -125,33 +125,104 @@ export const payloads = {
 
     createProductAllFields: () => ({
         name: `${faker.commerce.productName()}_${faker.string.nanoid(5)} (Simple)`,
-        type: 'simple',
-        status: 'publish',
-        categories: [
-            {
-                id: CATEGORY_ID,
-            },
-        ],
-        tags: [{ id: TAG_ID }],
+        type: 'simple', // simple, variable, grouped, external
         featured: true,
+        virtual: false,
         regular_price: faker.finance.amount({ min: 100, max: 200, dec: faker.helpers.arrayElement([0, 2]) }),
+        // discount
         sale_price: faker.finance.amount({ min: 50, max: 100, dec: faker.helpers.arrayElement([0, 2]) }),
         date_on_sale_from: helpers.currentDateTime,
         date_on_sale_to: helpers.addDays(helpers.currentDateTime, 10),
-        short_description: '<p>test short description</p>',
-        description: '<p>test description</p>',
+        // categories
+        categories: [
+            {},
+            // {
+            //     id: CATEGORY_ID,
+            // },
+        ],
+        // tags
+        tags: [{ id: TAG_ID }],
+        attributes: [
+            {
+                id: ATTRIBUTE_ID,
+                name: 'sizes',
+                position: 0,
+                visible: true,
+                variation: true,
+                options: ['s', 'l', 'm'],
+            },
+        ],
+        // images
+        images: [
+            // cover
+            {
+                // id: 78,
+                name: 'coverImage',
+                alt: 'coverImage',
+                src: '',
+            },
+            // gallery
+            {
+                // id: 78,
+                name: 'galleryImage',
+                alt: 'galleryImage',
+                src: '',
+            },
+        ],
+
+        short_description: '<p>test short product description.</p>',
+        description: '<p>test product description</p>',
+        // downloadable
+        downloadable: true,
+        downloads: [
+            {
+                name: 'File 1',
+                file: '',
+            },
+        ],
+        download_limit: 50,
+        download_expiry: 100,
+        // inventory
+        sku: faker.string.nanoid(10),
+        stock_status: 'instock', // instock, outofstock, onbackorder
+        manage_stock: true,
+        stock_quantity: 50,
+        low_stock_amount: 5,
+        backorders: 'yes', // no, notify, yes
+        sold_individually: true,
+        // shipping
+        weight: '15',
+        dimensions: {
+            length: '25',
+            width: '35',
+            height: '45',
+        },
+        shipping_taxable: true,
+        shipping_class: 'heavy',
+        //tax
+        tax_status: 'taxable', // taxable, shipping, none
+        tax_class: 'reduced-rate', // standard, reduced-rate, zero-rate
+        // linked products
+        upsell_ids: [PRODUCT_ID],
+        cross_sell_ids: [PRODUCT_ID_V2],
+        grouped_products: [PRODUCT_ID, PRODUCT_ID_V2],
+        // other options
+        status: 'publish', // publish, draft, pending, private
+        catalog_visibility: 'visible', // visible, catalog, search, hidden
+        purchase_note: 'test purchase note',
+        reviews_allowed: true,
         meta_data: [
             {
                 key: '_dokan_geolocation_use_store_settings',
-                value: 'yes',
+                value: 'no',
             },
             {
                 key: 'dokan_geo_latitude',
-                value: '40.7127753',
+                value: '23.8041',
             },
             {
                 key: 'dokan_geo_longitude',
-                value: '-74.0059728',
+                value: '90.4152',
             },
             {
                 key: 'dokan_geo_public',
@@ -159,7 +230,7 @@ export const payloads = {
             },
             {
                 key: 'dokan_geo_address',
-                value: 'New York, NY, USA',
+                value: 'Dhaka, Bangladesh',
             },
             {
                 key: '_dokan_rma_override_product',
@@ -211,20 +282,46 @@ export const payloads = {
                 ],
             },
             {
-                key: '_dokan_min_max_meta',
+                key: '_product_addons_exclude_global',
+                value: '1',
+            },
+            {
+                key: '_dokan_wholesale_meta',
                 value: {
-                    min_quantity: 5,
-                    max_quantity: 10,
+                    enable_wholesale: 'yes',
+                    price: '80',
+                    quantity: '100',
                 },
             },
             {
-                key: '_product_addons',
-                value: [],
+                key: '_dokan_min_max_meta',
+                value: {
+                    min_quantity: '5',
+                    max_quantity: '100',
+                },
             },
             {
-                key: '_product_addons_exclude_global',
-                value: '0',
+                key: '_dokan_catalog_mode',
+                value: {
+                    hide_add_to_cart_button: 'on',
+                    hide_product_price: 'on',
+                },
             },
+
+            // bulk discount
+            {
+                key: '_is_lot_discount',
+                value: 'yes',
+            },
+            {
+                key: '_lot_discount_quantity',
+                value: '50',
+            },
+            {
+                key: '_lot_discount_amount',
+                value: '5.00',
+            },
+            // commission
             {
                 key: '_per_product_admin_commission_type',
                 value: 'flat',
@@ -242,19 +339,62 @@ export const payloads = {
                 value: '18',
             },
             {
-                key: '_dokan_catalog_mode',
-                value: {
-                    hide_add_to_cart_button: 'on',
-                    hide_product_price: 'on',
-                },
-            },
-            {
                 key: '_disable_shipping',
                 value: 'no',
             },
             {
                 key: '_overwrite_shipping',
                 value: 'no',
+            },
+
+            // eu compliance
+            {
+                key: '_sale_price_label',
+                value: 'old-price',
+            },
+            {
+                key: '_sale_price_regular_label',
+                value: 'new-price',
+            },
+            {
+                key: '_unit',
+                value: 'kg',
+            },
+            {
+                key: '_min_age',
+                value: 18,
+            },
+            {
+                key: '_unit_product',
+                value: '1',
+            },
+            {
+                key: '_unit_base',
+                value: '80',
+            },
+            {
+                key: '_default_delivery_time',
+                value: 1,
+            },
+            {
+                key: '_delivery_time_countries',
+                value: [],
+            },
+            {
+                key: '_free_shipping',
+                value: 'yes',
+            },
+            {
+                key: '_unit_price_regular',
+                value: '50',
+            },
+            {
+                key: '_unit_price_sale',
+                value: '20',
+            },
+            {
+                key: '_mini_desc',
+                value: 'test mini description',
             },
         ],
     }),
@@ -661,7 +801,7 @@ export const payloads = {
             },
             {
                 key: '_default_delivery_time',
-                value: -1,
+                value: 1,
             },
             {
                 key: '_delivery_time_countries',

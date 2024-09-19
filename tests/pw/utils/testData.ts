@@ -492,16 +492,16 @@ export const data = {
             geolocation: 'NYC, NY, USA',
 
             shipping: {
-                weight: '50',
+                weight: '10',
                 length: '20',
-                width: '10',
-                height: '5',
+                width: '30',
+                height: '40',
                 shippingClass: 'heavy',
             },
 
             tax: {
-                status: 'shipping', // taxable, shipping, none
-                class: 'reduced-rate', // reduced-rate, zero-rate
+                status: 'taxable', // taxable, shipping, none
+                class: 'zero-rate', // reduced-rate, zero-rate
             },
 
             linkedProducts: {
@@ -546,7 +546,7 @@ export const data = {
             },
 
             quantityDiscount: {
-                minimumQuantity: '10',
+                minimumQuantity: '100',
                 discountPercentage: '10,00', // todo: handle in test assertion pass number and convert to string with 2 decimal with woo decimal separator
             },
 

@@ -1646,7 +1646,7 @@ export class ApiUtils {
     // media
 
     // upload media
-    async uploadMedia(filePath: string, mimeType: string, auth: auth): Promise<[responseBody, string]> {
+    async uploadMedia(filePath: string, mimeType: string, auth: auth): Promise<[responseBody, string, string]> {
         const fs = await import('fs');
         const payload = {
             headers: {
@@ -1664,7 +1664,8 @@ export class ApiUtils {
         };
         const [, responseBody] = await this.post(endPoints.wp.createMediaItem, payload);
         const mediaId = String(responseBody?.id);
-        return [responseBody, mediaId];
+        const srcUrl = responseBody.source_url;
+        return [responseBody, mediaId, srcUrl];
     }
 
     // upload file
@@ -1895,6 +1896,14 @@ export class ApiUtils {
     async getAllProductsWc(auth?: auth): Promise<responseBody> {
         const responseBody = await this.getAllItems(endPoints.wc.getAllProducts, {}, auth);
         return responseBody;
+    }
+
+    // create product
+    async createProductWc(payload: object, auth?: auth): Promise<[responseBody, string, string]> {
+        const [, responseBody] = await this.post(endPoints.wc.createProduct, { data: payload, headers: auth });
+        const productId = String(responseBody?.id);
+        const productName = String(responseBody?.name);
+        return [responseBody, productId, productName];
     }
 
     // order
