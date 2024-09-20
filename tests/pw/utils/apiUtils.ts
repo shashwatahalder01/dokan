@@ -623,6 +623,8 @@ export class ApiUtils {
 
             // get withdraw id if already exists
             withdrawId = await this.getWithdrawId(auth);
+            expect(withdrawId).toBeTruthy();
+
             await this.updateWithdraw(withdrawId, payload, auth);
         } else {
             expect(response.ok()).toBeTruthy();
@@ -1362,10 +1364,11 @@ export class ApiUtils {
     }
 
     // create product question
-    async createProductQuestion(payload: object, auth?: auth): Promise<[responseBody, string]> {
+    async createProductQuestion(payload: object, auth?: auth): Promise<[responseBody, string, string]> {
         const [, responseBody] = await this.post(endPoints.createProductQuestion, { data: payload, headers: auth });
         const questionId = String(responseBody?.id);
-        return [responseBody, questionId];
+        const question = String(responseBody?.question);
+        return [responseBody, questionId, question];
     }
 
     // update product question
@@ -1388,10 +1391,11 @@ export class ApiUtils {
     }
 
     // create product question answer
-    async createProductQuestionAnswer(payload: object, auth?: auth): Promise<[responseBody, string]> {
+    async createProductQuestionAnswer(payload: object, auth?: auth): Promise<[responseBody, string, string]> {
         const [, responseBody] = await this.post(endPoints.createProductQuestionAnswer, { data: payload, headers: auth });
         const answerId = String(responseBody?.id);
-        return [responseBody, answerId];
+        const answer = helpers.stringBetweenTags(String(responseBody?.answer));
+        return [responseBody, answerId, answer];
     }
 
     /**
@@ -1863,7 +1867,7 @@ export class ApiUtils {
 
         if (typeof product === 'object') {
             [, productId] = await this.createProduct(product, auth);
-        } else if (!isNaN(Number(product))) {
+        } else if (!Number.isNaN(Number(product))) {
             const responseBody = await this.getSingleProduct(product, payloads.adminAuth); // check if product exists
             productId = responseBody.code === 'dokan_rest_invalid_product_id' ? (await this.createProduct(payloads.createProduct(), auth))[1] : product;
         } else {
