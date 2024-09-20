@@ -930,14 +930,19 @@ export class ProductsPage extends AdminPage {
     }
 
     // add product cover image
-    async addProductCoverImage(productName: string, coverImage: string): Promise<void> {
+    async addProductCoverImage(productName: string, coverImage: string, removePrevious: boolean = false): Promise<void> {
         await this.goToProductEdit(productName);
+        // remove previous cover image
+        if (removePrevious) {
+            await this.hover(productsVendor.image.coverImageDiv);
+            await this.click(productsVendor.image.removeFeatureImage);
+            await this.toBeVisible(productsVendor.image.uploadImageText);
+        }
         await this.click(productsVendor.image.cover);
         await this.uploadMedia(coverImage);
-
         await this.saveProduct();
-        const imageSource = await this.getAttributeValue(productsVendor.image.uploadedFeatureImage, 'src');
-        expect(imageSource).toBeTruthy();
+        await this.toHaveAttribute(productsVendor.image.uploadedFeatureImage, 'src', /.+/); // Ensures 'src' has any non-falsy value
+        await this.notToBeVisible(productsVendor.image.uploadImageText);
     }
 
     // remove product cover image
@@ -946,13 +951,23 @@ export class ProductsPage extends AdminPage {
         await this.hover(productsVendor.image.coverImageDiv);
         await this.click(productsVendor.image.removeFeatureImage);
         await this.saveProduct();
-        const imageSource = await this.getAttributeValue(productsVendor.image.uploadedFeatureImage, 'src');
-        expect(imageSource).toBeFalsy();
+        await this.toHaveAttribute(productsVendor.image.uploadedFeatureImage, 'src', /^$/);
+        await this.toBeVisible(productsVendor.image.uploadImageText);
     }
 
     // add product gallery images
-    async addProductGalleryImages(productName: string, galleryImages: string[]): Promise<void> {
+    async addProductGalleryImages(productName: string, galleryImages: string[], removePrevious: boolean = false): Promise<void> {
         await this.goToProductEdit(productName);
+        // remove previous gallery images
+        if (removePrevious) {
+            const imageCount = await this.getElementCount(productsVendor.image.uploadedGalleryImage);
+            for (let i = 0; i < imageCount; i++) {
+                await this.hover(productsVendor.image.galleryImageDiv);
+                await this.click(productsVendor.image.removeGalleryImage);
+            }
+            await this.toHaveCount(productsVendor.image.uploadedGalleryImage, 0);
+        }
+
         for (const galleryImage of galleryImages) {
             await this.click(productsVendor.image.gallery);
             await this.uploadMedia(galleryImage);

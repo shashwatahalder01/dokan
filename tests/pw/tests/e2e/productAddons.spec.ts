@@ -88,21 +88,17 @@ test.describe('Product addon functionality test', () => {
     });
 
     test('vendor can import product addon', { tag: ['@pro', '@vendor'] }, async () => {
-        const [, , productName] = await apiUtils.createProduct(payloads.createProduct(), payloads.vendorAuth);
         const addon = payloads.createProductAddon();
         await vendor1.importAddon(productName, serialize([addon]), addon.name);
     });
 
     test('vendor can export product addon', { tag: ['@pro', '@vendor'] }, async () => {
-        const [, productId, productName] = await apiUtils.createProduct(payloads.createProduct(), payloads.vendorAuth);
-        const responseBody = await apiUtils.updateProduct(productId, { meta_data: [{ key: '_product_addons', value: [payloads.createProductAddon()] }] }, payloads.vendorAuth);
+        const [responseBody, , productName] = await apiUtils.createProductWithAddon(payloads.createProduct(), [payloads.createProductAddon()], payloads.vendorAuth);
         await vendor1.exportAddon(productName, serialize(apiUtils.getMetaDataValue(responseBody.meta_data, '_product_addons')));
     });
 
-    test('vendor can delete product addon', { tag: ['@pro', '@vendor'] }, async () => {
-        const addon = payloads.createProductAddon();
-        const [, productId, productName] = await apiUtils.createProduct(payloads.createProduct(), payloads.vendorAuth);
-        await apiUtils.updateProduct(productId, { meta_data: [{ key: '_product_addons', value: [addon] }] }, payloads.vendorAuth);
-        await vendor1.removeAddon(productName, addon.name);
+    test('vendor can remove product addon', { tag: ['@pro', '@vendor'] }, async () => {
+        const [, , productName, addonName] = await apiUtils.createProductWithAddon(payloads.createProduct(), [payloads.createProductAddon()], payloads.vendorAuth);
+        await vendor1.removeAddon(productName, addonName[0] as string);
     });
 });

@@ -2195,6 +2195,15 @@ export class ApiUtils {
         }
     }
 
+    // create product addon
+    async createProductWithAddon(productPayload: string | object, addonPayload: object[], auth?: auth): Promise<[responseBody, string, string, string[]]> {
+        const productId = typeof productPayload === 'object' ? (await this.createProduct(productPayload, auth))[1] : productPayload;
+        const responseBody = await this.updateProduct(productId, { meta_data: [{ key: '_product_addons', value: addonPayload }] }, auth);
+        const productName = String(responseBody?.name);
+        const addonNames = addonPayload.map((item: any) => item.name);
+        return [responseBody, productId, productName, addonNames];
+    }
+
     /**
      * miscellaneous methods
      */

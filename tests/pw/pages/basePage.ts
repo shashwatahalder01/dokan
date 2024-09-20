@@ -343,7 +343,7 @@ export class BasePage {
 
     // click if visible
     async clickIfVisible(selector: string): Promise<void> {
-        const isVisible = await this.isVisible(selector);
+        const isVisible = await this.isVisible(selector, 1);
         if (isVisible) {
             await this.click(selector);
         }
@@ -1486,7 +1486,7 @@ export class BasePage {
     }
 
     // assert element to have attribute along with attribute value
-    async toHaveAttribute(selector: string, attribute: string, value: string) {
+    async toHaveAttribute(selector: string, attribute: string, value: string | RegExp) {
         await expect(this.page.locator(selector)).toHaveAttribute(attribute, value);
     }
 

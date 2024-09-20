@@ -28,8 +28,9 @@ test.describe('Product details functionality test', () => {
         // product with only required fields
         [, , productName1] = await apiUtils.createProduct(payloads.createProductRequiredFields(), payloads.vendorAuth);
         // product with all fields
-        const [, , mediaUrl] = await apiUtils.uploadMedia(data.image.avatar, payloads.mimeTypes.png, payloads.vendorAuth);
-        [productResponseBody, productId, productName] = await apiUtils.createProductWc({ ...payloads.createProductAllFields(), images: [{ src: mediaUrl }, { src: mediaUrl }] }, payloads.vendorAuth);
+        // const [, , mediaUrl] = await apiUtils.uploadMedia(data.image.avatar, payloads.mimeTypes.png, payloads.vendorAuth);
+        // [productResponseBody, productId, productName] = await apiUtils.createProductWc({ ...payloads.createProductAllFields(), images: [{ src: mediaUrl }, { src: mediaUrl }] }, payloads.vendorAuth); // todo: mediaUrl is not working on git action
+        [productResponseBody, productId, productName] = await apiUtils.createProductWc(payloads.createProductAllFields(), payloads.vendorAuth);
         await apiUtils.updateProduct(
             productId,
             {
@@ -162,9 +163,15 @@ test.describe('Product details functionality test', () => {
         await vendor.addProductCoverImage(productName1, data.product.productInfo.images.cover);
     });
 
-    // todo: add update cover image >> update addProductCoverImage to have update option
+    test('vendor can update product cover image', { tag: ['@lite', '@vendor'] }, async () => {
+        // todo: need a product with cover image
+        await vendor.addProductCoverImage(productName, data.product.productInfo.images.cover);
+        await vendor.addProductCoverImage(productName, data.product.productInfo.images.cover, true);
+    });
 
     test('vendor can remove product cover image', { tag: ['@lite', '@vendor'] }, async () => {
+        // todo: need a product with cover image
+        await vendor.addProductCoverImage(productName, data.product.productInfo.images.cover);
         await vendor.removeProductCoverImage(productName);
     });
 
@@ -174,9 +181,15 @@ test.describe('Product details functionality test', () => {
         await vendor.addProductGalleryImages(productName1, data.product.productInfo.images.gallery);
     });
 
-    // todo: add update gallery image
+    test('vendor can update product gallery image', { tag: ['@lite', '@vendor'] }, async () => {
+        // todo: need a product with gallery images
+        await vendor.addProductGalleryImages(productName, data.product.productInfo.images.gallery);
+        await vendor.addProductGalleryImages(productName, data.product.productInfo.images.gallery, true);
+    });
 
     test('vendor can remove product gallery image', { tag: ['@lite', '@vendor'] }, async () => {
+        // todo: need a product with gallery images
+        await vendor.addProductGalleryImages(productName, data.product.productInfo.images.gallery);
         await vendor.removeProductGalleryImages(productName);
     });
 
@@ -204,6 +217,11 @@ test.describe('Product details functionality test', () => {
 
     test('vendor can add product downloadable options', { tag: ['@lite', '@vendor'] }, async () => {
         await vendor.addProductDownloadableOptions(productName1, data.product.productInfo.downloadableOptions);
+    });
+
+    test('vendor can update product downloadable options', { tag: ['@lite', '@vendor'] }, async () => {
+        // todo: need a product with downloadable file
+        await vendor.addProductDownloadableOptions(productName, data.product.productInfo.downloadableOptions);
     });
 
     test('vendor can remove product downloadable file', { tag: ['@lite', '@vendor'] }, async () => {
@@ -420,24 +438,19 @@ test.describe('Product details functionality test', () => {
         await vendor.addProductAddon(productName1, data.product.productInfo.addon);
     });
 
-    // todo: refactor below tests
     test('vendor can import product addon', { tag: ['@pro', '@vendor'] }, async () => {
-        // const [, , productName] = await apiUtils.createProduct(payloads.createProduct(), payloads.vendorAuth);
         const addon = payloads.createProductAddon();
         await vendor.importAddon(productName1, serialize([addon]), addon.name);
     });
 
     test('vendor can export product addon', { tag: ['@pro', '@vendor'] }, async () => {
-        const [, productId, productName] = await apiUtils.createProduct(payloads.createProduct(), payloads.vendorAuth);
-        const responseBody = await apiUtils.updateProduct(productId, { meta_data: [{ key: '_product_addons', value: [payloads.createProductAddon()] }] }, payloads.vendorAuth);
+        const [responseBody, , productName] = await apiUtils.createProductWithAddon(payloads.createProduct(), [payloads.createProductAddon()], payloads.vendorAuth);
         await vendor.exportAddon(productName, serialize(apiUtils.getMetaDataValue(responseBody.meta_data, '_product_addons')));
     });
 
     test('vendor can remove product addon', { tag: ['@pro', '@vendor'] }, async () => {
-        const addon = payloads.createProductAddon();
-        const [, productId, productName] = await apiUtils.createProduct(payloads.createProduct(), payloads.vendorAuth);
-        await apiUtils.updateProduct(productId, { meta_data: [{ key: '_product_addons', value: [addon] }] }, payloads.vendorAuth);
-        await vendor.removeAddon(productName, addon.name);
+        const [, , productName, addonName] = await apiUtils.createProductWithAddon(payloads.createProduct(), [payloads.createProductAddon()], payloads.vendorAuth);
+        await vendor.removeAddon(productName, addonName[0] as string);
     });
 
     // rma options

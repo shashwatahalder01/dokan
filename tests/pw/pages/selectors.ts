@@ -3779,6 +3779,7 @@ export const selector = {
             image: {
                 // cover
                 cover: 'a.dokan-feat-image-btn',
+                uploadImageText: '//a[normalize-space(text())="Upload a product cover image"]',
                 coverImageDiv: 'div.dokan-new-product-featured-img',
                 removeFeatureImage: 'a.dokan-remove-feat-image',
                 uploadedFeatureImage: 'div.dokan-new-product-featured-img img',

@@ -153,33 +153,33 @@ export const payloads = {
             },
         ],
         // images
-        images: [
-            // cover
-            {
-                // id: 78,
-                name: 'coverImage',
-                alt: 'coverImage',
-                src: '',
-            },
-            // gallery
-            {
-                // id: 78,
-                name: 'galleryImage',
-                alt: 'galleryImage',
-                src: '',
-            },
-        ],
+        // images: [
+        //     // cover
+        //     {
+        //         // id: 78,
+        //         name: 'coverImage',
+        //         alt: 'coverImage',
+        //         src: '',
+        //     },
+        //     // gallery
+        //     {
+        //         // id: 78,
+        //         name: 'galleryImage',
+        //         alt: 'galleryImage',
+        //         src: '',
+        //     },
+        // ],
 
         short_description: '<p>test short product description.</p>',
         description: '<p>test product description</p>',
         // downloadable
         downloadable: true,
-        downloads: [
-            {
-                name: 'File 1',
-                file: '',
-            },
-        ],
+        // downloads: [
+        //     {
+        //         name: 'File 1',
+        //         file: '',
+        //     },
+        // ],
         download_limit: 50,
         download_expiry: 100,
         // inventory
