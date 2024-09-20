@@ -51,6 +51,8 @@ export const data = {
         vendorAuth: { extraHTTPHeaders: { Authorization: basicAuth(VENDOR, ADMIN_PASSWORD) } },
         vendor2Auth: { extraHTTPHeaders: { Authorization: basicAuth(VENDOR2, ADMIN_PASSWORD) } },
         customerAuth: { extraHTTPHeaders: { Authorization: basicAuth(CUSTOMER, ADMIN_PASSWORD) } },
+
+        admin: { Authorization: basicAuth(ADMIN, ADMIN_PASSWORD) },
     },
 
     auth: {
