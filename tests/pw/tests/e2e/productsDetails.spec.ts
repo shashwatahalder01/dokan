@@ -171,7 +171,7 @@ test.describe('Product details functionality test', () => {
 
     test('vendor can remove product cover image', { tag: ['@lite', '@vendor'] }, async () => {
         // todo: need a product with cover image
-        await vendor.addProductCoverImage(productName, data.product.productInfo.images.cover);
+        await vendor.addProductCoverImage(productName, data.product.productInfo.images.cover, true);
         await vendor.removeProductCoverImage(productName);
     });
 
@@ -189,7 +189,7 @@ test.describe('Product details functionality test', () => {
 
     test('vendor can remove product gallery image', { tag: ['@lite', '@vendor'] }, async () => {
         // todo: need a product with gallery images
-        await vendor.addProductGalleryImages(productName, data.product.productInfo.images.gallery);
+        await vendor.addProductGalleryImages(productName, data.product.productInfo.images.gallery, true);
         await vendor.removeProductGalleryImages(productName);
     });
 
