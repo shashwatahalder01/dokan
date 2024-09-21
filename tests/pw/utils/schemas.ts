@@ -1766,7 +1766,7 @@ export const schemas = {
                 stock_status: z.string(),
                 manage_stock: z.boolean(),
                 stock_quantity: z.null().optional(),
-                low_stock_amount: z.string(),
+                low_stock_amount: z.string().or(z.number()),
                 backorders: z.string(),
                 sold_individually: z.boolean(),
             }),

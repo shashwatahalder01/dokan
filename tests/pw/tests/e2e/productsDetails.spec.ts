@@ -41,7 +41,7 @@ test.describe('Product details functionality test', () => {
             },
             payloads.vendorAuth,
         );
-        // todo: doesn't work on dokan create product api min-max, discount, addon, linked products, shipping-tax class, feature image
+        // todo: doesn't work on Dokan create product api min-max, discount, addon, linked products, shipping-tax class, feature image
     });
 
     test.afterAll(async () => {
@@ -233,27 +233,27 @@ test.describe('Product details functionality test', () => {
     // product inventory options
 
     test('vendor can add product inventory options (SKU)', { tag: ['@lite', '@vendor'] }, async () => {
-        await vendor.addProductInventory(productName1, data.product.productInfo.inventory, 'sku');
+        await vendor.addProductInventory(productName1, data.product.productInfo.inventory(), 'sku');
     });
 
     test('vendor can update product inventory options (SKU)', { tag: ['@lite', '@vendor'] }, async () => {
-        await vendor.addProductInventory(productName, data.product.productInfo.inventory, 'sku');
+        await vendor.addProductInventory(productName, data.product.productInfo.inventory(), 'sku');
     });
 
     test('vendor can remove product inventory options (SKU)', { tag: ['@lite', '@vendor'] }, async () => {
-        await vendor.addProductInventory(productName, { ...data.product.productInfo.inventory, sku: '' }, 'sku');
+        await vendor.addProductInventory(productName, { ...data.product.productInfo.inventory(), sku: '' }, 'sku');
     });
 
     test('vendor can add product inventory options (stock status)', { tag: ['@lite', '@vendor'] }, async () => {
-        await vendor.addProductInventory(productName1, data.product.productInfo.inventory, 'stock-status');
+        await vendor.addProductInventory(productName1, data.product.productInfo.inventory(), 'stock-status');
     });
 
     test('vendor can add product inventory options (stock management)', { tag: ['@lite', '@vendor'] }, async () => {
-        await vendor.addProductInventory(productName1, data.product.productInfo.inventory, 'stock-management');
+        await vendor.addProductInventory(productName1, data.product.productInfo.inventory(), 'stock-management');
     });
 
     test('vendor can update product inventory options (stock management)', { tag: ['@lite', '@vendor'] }, async () => {
-        await vendor.addProductInventory(productName1, data.product.productInfo.inventory, 'stock-management');
+        await vendor.addProductInventory(productName1, data.product.productInfo.inventory(), 'stock-management');
     });
 
     test('vendor can remove product inventory options (stock management)', { tag: ['@lite', '@vendor'] }, async () => {
@@ -261,11 +261,11 @@ test.describe('Product details functionality test', () => {
     });
 
     test('vendor can add product inventory options (allow single quantity)', { tag: ['@lite', '@vendor'] }, async () => {
-        await vendor.addProductInventory(productName1, data.product.productInfo.inventory, 'one-quantity');
+        await vendor.addProductInventory(productName1, data.product.productInfo.inventory(), 'one-quantity');
     });
 
     test('vendor can remove product inventory options (allow single quantity)', { tag: ['@lite', '@vendor'] }, async () => {
-        await vendor.addProductInventory(productName, { ...data.product.productInfo.inventory, oneQuantity: false }, 'one-quantity');
+        await vendor.addProductInventory(productName, { ...data.product.productInfo.inventory(), oneQuantity: false }, 'one-quantity');
     });
 
     // product other options

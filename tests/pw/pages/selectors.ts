@@ -3831,9 +3831,9 @@ export const selector = {
             downloadableOptions: {
                 addFile: 'a.insert-file-row.dokan-btn',
                 addDownloadableFiles: '.insert',
-                fileName: 'input[placeholder="File Name"]',
-                fileUrl: 'input[placeholder="https://"]',
-                chooseFile: 'a.upload_file_button',
+                fileName: '(//input[@placeholder="File Name"])[last()]',
+                fileUrl: '(//input[@placeholder="https://"])[last()]',
+                chooseFile: '(//a[contains(@class,"upload_file_button")])[last()]',
                 deleteFile: 'a.dokan-product-delete',
                 downloadLimit: '#\\_download_limit',
                 downloadExpiry: '#\\_download_expiry',

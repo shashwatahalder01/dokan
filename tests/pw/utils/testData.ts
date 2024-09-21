@@ -444,7 +444,7 @@ export const data = {
             price: () => faker.finance.amount({ min: 100, max: 200, dec: faker.helpers.arrayElement([1, 2]) }).replace('.', ','),
 
             discount: {
-                regularPrice: faker.finance.amount({ min: 100, max: 200, dec: faker.helpers.arrayElement([1, 2]) }).replace('.', ','),
+                regularPrice: faker.finance.amount({ min: 100, max: 200, dec: faker.helpers.arrayElement([1, 2]) }),
                 discountPrice: '10',
                 startDate: helpers.currentDate,
                 endDate: helpers.addDays(helpers.currentDateTime, 2),
@@ -479,7 +479,7 @@ export const data = {
                 enableReview: true,
             },
 
-            inventory: {
+            inventory: () => ({
                 sku: faker.string.nanoid(10),
                 stockStatus: 'outofstock', // instock, outofstock, onbackorder
                 stockManagement: true,
@@ -487,7 +487,7 @@ export const data = {
                 lowStockThreshold: '10',
                 backorders: 'notify', // no, notify, yes
                 oneQuantity: true,
-            },
+            }),
 
             geolocation: 'NYC, NY, USA',
 
