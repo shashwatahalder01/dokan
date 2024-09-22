@@ -301,6 +301,8 @@ export const endPoints = {
     createDuplicateProduct: (productId: string) => `${SERVER_URL}/dokan/v2/products/${productId}/duplicate`,
 
     getAllProductsV2: `${SERVER_URL}/dokan/v2/products`,
+    getAllLinkedProducts: (productId: string) => `${SERVER_URL}/dokan/v2/products/linked-products?term=${productId}`,
+
     getAllOrdersV2: `${SERVER_URL}/dokan/v2/products`,
 
     // product filter
