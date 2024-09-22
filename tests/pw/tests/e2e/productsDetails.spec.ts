@@ -94,7 +94,7 @@ test.describe('Product details functionality test', () => {
     });
 
     test('vendor can update product discount price (with schedule)', { tag: ['@lite', '@vendor'] }, async () => {
-        await vendor.addDiscount(productName, { ...data.product.productInfo.discount, regularPrice: productResponseBody.price }, true);
+        await vendor.addDiscount(productName, { ...data.product.productInfo.discount, regularPrice: productResponseBody.price }, true, true);
     });
 
     test("vendor can't add product discount price higher than price", { tag: ['@lite', '@vendor'] }, async () => {

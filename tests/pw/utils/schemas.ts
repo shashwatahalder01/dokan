@@ -2167,12 +2167,14 @@ export const schemas = {
     // reverse withdraws schema
     reverseWithdrawalSchema: {
         transactionTypesSchema: z.array(transactionTypeSchema),
+
         reverseWithdrawalStoresSchema: z.array(
             z.object({
                 id: z.string().or(z.number()),
                 name: z.string(),
             }),
         ),
+
         reverseWithdrawalStoreBalanceSchema: z.array(
             z.object({
                 store_name: z.string(),
@@ -2184,6 +2186,7 @@ export const schemas = {
                 _links: linksSchema,
             }),
         ),
+
         reverseWithdrawalTransactionsSchema: z.array(
             z.object({
                 id: z.string().or(z.number()),
@@ -2200,6 +2203,11 @@ export const schemas = {
                 _links: linksSchema,
             }),
         ),
+
+        createReverseWithdrawalTransaction: z.object({
+            trn_id: z.string().or(z.number()),
+        }),
+
         reverseWithdrawalVendorDueStatusSchema: z.object({
             status: z.boolean(),
             due_date: z.string(),

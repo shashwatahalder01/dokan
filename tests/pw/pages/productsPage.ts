@@ -806,14 +806,14 @@ export class ProductsPage extends AdminPage {
     }
 
     // add product discount
-    async addDiscount(productName: string, discount: product['discount'], schedule: boolean = false): Promise<void> {
+    async addDiscount(productName: string, discount: product['discount'], schedule = false, hasSchedule = false): Promise<void> {
         const regularPrice = discount.regularPrice.replace('.', ',');
         const discountPrice = String(Number(discount.regularPrice) - Number(discount.discountPrice)).replace('.', ',');
         await this.goToProductEdit(productName);
         await this.clearAndType(productsVendor.price, regularPrice);
         await this.clearAndType(productsVendor.discount.discountedPrice, discountPrice);
         if (schedule) {
-            await this.click(productsVendor.discount.schedule);
+            if (!hasSchedule) await this.click(productsVendor.discount.schedule);
             await this.clearAndType(productsVendor.discount.scheduleFrom, discount.startDate!);
             await this.clearAndType(productsVendor.discount.scheduleTo, discount.endDate!);
         }

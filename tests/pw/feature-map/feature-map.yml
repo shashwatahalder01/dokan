@@ -1,4 +1,4 @@
-- page: 'plugins'
+- page: 'Plugins'
   features:
       admin:
           admin can install Dokan plugin [lite]: false
@@ -21,14 +21,14 @@
 - page: 'Shipping'
   features:
       admin:
-          admin can enable shipping method [lite]: true
+          admin can enable shipping [lite]: true
           admin can add flat rate shipping method [lite]: true
           admin can add free shipping method [lite]: true
           admin can add vendor table rate shipping method: true
           admin can add vendor distance rate shipping method: true
           admin can add vendor shipping method: true
           admin can delete shipping method [lite]: true
-          admin can delete shipping zone  [lite]: true
+          admin can delete shipping zone [lite]: true
       vendor:
           vendor can view shipping settings menu page: true
           vendor can add shipping policy: true
@@ -124,7 +124,7 @@
           vendor can update product price [lite]: true
           vendor can remove product price [lite]: true
           vendor can add product discount price [lite]: true
-          vendor can add product discount price (with schedule [lite]: true
+          vendor can add product discount price (with schedule) [lite]: true
           vendor can update product discount price [lite]: true
           vendor can update product discount price (with schedule) [lite]: true
           vendor can't add product discount price higher than price [lite]: true
@@ -138,7 +138,7 @@
           vendor can't add multi-step product category (any category) [lite]: true
           vendor can add product tags [lite]: true
           vendor can remove product tags [lite]: true
-          vendor can create product tags [lite]: true
+          vendor can create product tags: true
           vendor can add product cover image [lite]: true
           vendor can update product cover image [lite]: true
           vendor can remove product cover image [lite]: true
@@ -365,14 +365,14 @@
           vendor can view reverse withdrawal menu page [lite]: true
           vendor can view reverse withdrawal notice (In grace period) [lite]: true
           vendor can view reverse withdrawal notice (after grace period) [lite]: true
-          vendor can view reverse withdrawal announcement [lite]: true
+          vendor can view reverse withdrawal announcement: true
           vendor can filter reverse withdrawals by date [lite]: true
           vendor can pay reverse withdrawal balance [lite]: true
 
 - page: 'Catalog Mode'
   features:
       admin:
-          admin can set catalog settings [lite]: true
+          admin can set catalog mode [lite]: true
           admin can disable hide product price in catalog mode [lite]: true
       vendor:
           vendor can set catalog mode (storewide) [lite]: true
@@ -465,7 +465,7 @@
           admin can enable vendor selling (selling settings) [lite]: true
           admin can set order status change capability (selling settings) [lite]: true
 
-- page: 'settings'
+- page: 'Settings'
   features:
       admin:
           admin can view settings menu page [lite]: true

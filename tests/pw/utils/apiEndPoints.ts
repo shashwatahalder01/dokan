@@ -216,6 +216,7 @@ export const endPoints = {
     getAllReverseWithdrawalStores: `${SERVER_URL}/dokan/v1/reverse-withdrawal/stores`,
     getAllReverseWithdrawalStoreBalance: `${SERVER_URL}/dokan/v1/reverse-withdrawal/stores-balance`,
     getAllReverseWithdrawalTransactions: `${SERVER_URL}/dokan/v1/reverse-withdrawal/transactions`,
+    createReverseWithdrawalTransactions: `${SERVER_URL}/dokan/v1/reverse-withdrawal/transactions`,
 
     // modules
     getAllModules: `${SERVER_URL}/dokan/v1/admin/modules`,

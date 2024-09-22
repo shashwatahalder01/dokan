@@ -161,7 +161,7 @@ test.describe('Product functionality test', () => {
         await vendor.addProductWithoutRequiredFields(data.product.simple);
     });
 
-    test("vendor can't buy own product", { tag: ['@pro', '@vendor'] }, async () => {
+    test("vendor can't buy own product", { tag: ['@lite', '@vendor'] }, async () => {
         await vendor.cantBuyOwnProduct(productName);
     });
 
