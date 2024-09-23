@@ -704,7 +704,7 @@ export class BasePage {
 
     // clear input field and type
     async clearAndFill(selector: string, text: string): Promise<void> {
-        await this.page.fill(selector, text);
+        await this.page.locator(selector).fill(text);
     }
 
     // type in input field
@@ -714,7 +714,7 @@ export class BasePage {
 
     // fill in input field
     async fill(selector: string, text: string): Promise<void> {
-        await this.page.fill(selector, text);
+        await this.page.locator(selector).fill(text);
     }
 
     // fill if visible

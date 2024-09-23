@@ -919,7 +919,6 @@ export class ProductsPage extends AdminPage {
         await this.goToProductEdit(productName);
         for (const tag of tags) {
             await this.click(productsVendor.tags.removeSelectedTags(tag));
-            // await this.click(productsVendor.price); // to shift focus from the previous input
             await this.press('Tab'); // to shift focus from the previous input
         }
         await this.saveProduct();
@@ -1263,14 +1262,12 @@ export class ProductsPage extends AdminPage {
             case 'up-sells':
                 for (const product of linkedProducts.upSells) {
                     await this.click(productsVendor.linkedProducts.removeSelectedUpSellProduct(product));
-                    // await this.click(productsVendor.otherOptions.purchaseNote); // to shift focus from the previous input
                     await this.press('Tab'); // to shift focus from the previous input
                 }
                 break;
             case 'cross-sells':
                 for (const product of linkedProducts.crossSells) {
                     await this.click(productsVendor.linkedProducts.removeSelectedCrossSellProduct(product));
-                    // await this.click(productsVendor.otherOptions.purchaseNote); // to shift focus from the previous input
                     await this.press('Tab'); // to shift focus from the previous input
                 }
                 break;
@@ -1572,7 +1569,7 @@ export class ProductsPage extends AdminPage {
         await this.goToProductEdit(productName);
         await this.clearAndType(productsVendor.minMax.minimumQuantity, minMaxOption.minimumProductQuantity);
         await this.clearAndType(productsVendor.minMax.maximumQuantity, minMaxOption.maximumProductQuantity);
-        await this.click(productsVendor.minMax.minimumQuantity); // to trigger validation
+        await this.press('Tab'); // to trigger validation
         await this.toHaveValue(productsVendor.minMax.maximumQuantity, minMaxOption.minimumProductQuantity);
         await this.saveProduct();
         await this.toHaveValue(productsVendor.minMax.minimumQuantity, minMaxOption.minimumProductQuantity);

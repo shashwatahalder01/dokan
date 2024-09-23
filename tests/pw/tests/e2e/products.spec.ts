@@ -145,6 +145,7 @@ test.describe('Product functionality test', () => {
     });
 
     test('vendor can duplicate product', { tag: ['@pro', '@vendor'] }, async () => {
+        const [, , productName] = await apiUtils.createProduct(payloads.createProduct(), payloads.vendorAuth);
         await vendor.duplicateProduct(productName);
     });
 
