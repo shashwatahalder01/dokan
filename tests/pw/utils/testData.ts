@@ -506,7 +506,7 @@ export const data = {
 
             linkedProducts: {
                 upSells: ['p1_v1 (simple)'],
-                crossSells: ['p1_v1 (simple)'],
+                crossSells: ['p1_v2 (simple)'],
             },
 
             attribute: {

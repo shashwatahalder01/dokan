@@ -179,9 +179,11 @@ const linkedProductSchema = z.object({
     cross_sell_ids: z.array(z.unknown()),
     parent_id: z.string().or(z.number()).optional(),
     purchase_note: z.string().optional(),
-    attributes: z.object({
-        pa_sizes: z.any(),
-    }),
+    attributes: z.array(productAttributeSchema).or(
+        z.object({
+            pa_sizes: z.any(),
+        }),
+    ),
     default_attributes: z.array(z.unknown()),
     menu_order: z.number(),
     meta_data: z.array(productMetaDataSchema).optional(),

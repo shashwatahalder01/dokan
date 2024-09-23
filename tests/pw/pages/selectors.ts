@@ -4012,8 +4012,8 @@ export const selector = {
 
             // min-Max options
             minMax: {
-                minimumQuantity: 'input#dokan_simple_product_min_quantity',
-                maximumQuantity: 'input#dokan_simple_product_max_quantity',
+                minimumQuantity: 'input#min_quantity',
+                maximumQuantity: 'input#max_quantity',
             },
 
             // other options

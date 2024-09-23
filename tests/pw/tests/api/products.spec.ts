@@ -141,7 +141,7 @@ for (const version of versions) {
     });
 }
 
-test('get all linked products', { tag: ['@lite', '@v2'] }, async () => {
+test('get all linked products', { tag: ['@pro', '@v2'] }, async () => {
     apiUtils = new ApiUtils(await request.newContext());
     const [response, responseBody] = await apiUtils.get(endPoints.getAllLinkedProducts(PRODUCT_ID));
     expect(response.ok()).toBeTruthy();
