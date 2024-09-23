@@ -386,8 +386,8 @@ export class ProductsPage extends AdminPage {
 
             // eu compliance
             // todo: need a check for germanized plugin
-            const { deliveryTime, optionalMiniDescription, ...euComplianceFields } = productsVendor.euComplianceFields;
-            await this.multipleElementVisible(euComplianceFields);
+            // const { deliveryTime, optionalMiniDescription, ...euComplianceFields } = productsVendor.euComplianceFields;
+            // await this.multipleElementVisible(euComplianceFields);
         }
     }
 

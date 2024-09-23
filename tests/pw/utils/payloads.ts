@@ -204,7 +204,7 @@ export const payloads = {
         tax_class: 'reduced-rate', // standard, reduced-rate, zero-rate
         // linked products
         upsell_ids: [PRODUCT_ID],
-        cross_sell_ids: [PRODUCT_ID_V2],
+        cross_sell_ids: [PRODUCT_ID],
         grouped_products: [PRODUCT_ID, PRODUCT_ID_V2],
         // other options
         status: 'publish', // publish, draft, pending, private

@@ -6,6 +6,8 @@ import { dbUtils } from '@utils/dbUtils';
 import { data } from '@utils/testData';
 import { payloads } from '@utils/payloads';
 
+const { VENDOR_ID } = process.env;
+
 test.describe('Vendor settings test', () => {
     let vendor: VendorSettingsPage;
     let vPage: Page;
@@ -21,6 +23,7 @@ test.describe('Vendor settings test', () => {
 
     test.afterAll(async () => {
         await apiUtils.setStoreSettings(payloads.defaultStoreSettings, payloads.vendorAuth);
+        await dbUtils.setUserMeta(VENDOR_ID, '_dokan_rma_settings', dbData.testData.dokan.rmaSettings, true);
         await vPage.close();
         await apiUtils.dispose();
     });
