@@ -134,6 +134,7 @@ export const selector = {
             home: '//li[@id="menu-dashboard"]//a[contains(text(),"Home")]',
             updates: '//li[@id="menu-dashboard"]//a[contains(text(),"Updates ")]',
         },
+
         // Posts
         posts: {
             // Menus
@@ -142,12 +143,14 @@ export const selector = {
             categories: '//li[@id="menu-posts"]//a[contains(text(),"Categories")]',
             tags: '//li[@id="menu-posts"]//a[contains(text(),"Tags")]',
         },
+
         // Media
         media: {
             // Menus
             library: '//li[@id="menu-media"]//a[contains(text(),"Library")]',
             addNew: '//li[@id="menu-media"]//a[contains(text(),"Add New")]',
         },
+
         // Pages
         pages: {
             // Menus
@@ -166,6 +169,7 @@ export const selector = {
 
             publishMessage: '//div[@class="components-snackbar__content" and text()="Page published."]',
         },
+
         // Comments
         comments: {
             // Nav Tabs
@@ -191,6 +195,7 @@ export const selector = {
             addOns: '//li[@id="toplevel_page_email-log"]//a[contains(text(),"Add-ons")]',
             systemInfo: '//li[@id="toplevel_page_email-log"]//a[contains(text(),"System Info")]',
         },
+
         // Dokan
         dokan: {
             // Dokan Menus
@@ -328,6 +333,7 @@ export const selector = {
                     filterInput: '.select2-search.select2-search--dropdown .select2-search__field',
                     clearFilter: 'a#clear-all-filtering',
                     result: 'li.select2-results__option.select2-results__option--highlighted',
+                    filteredResult: (storeName: string) => `//li[contains(text(), "${storeName}") and @class="select2-results__option select2-results__option--highlighted"]`,
                 },
 
                 // Logs
@@ -349,8 +355,7 @@ export const selector = {
                 statusColumnValue: (status: string) => `td.column.status .${status}`, // pending, approved, rejected, cancelled
 
                 numberOfRowsFound: '.tablenav.top .displaying-num',
-                numberOfRows: 'table.wp-list-table tbody tr',
-                currentNoOfRows: 'table tbody tr',
+                numberOfRows: 'div.withdraw-requests table tbody tr',
                 noRowsFound: '//td[normalize-space()="No requests found."]',
                 withdrawCell: (storeName: string) => `//td//a[contains(text(), '${storeName}')]/../..`,
                 withdrawDelete: (storeName: string) => `//td//a[contains(text(), '${storeName}')]/../..//span[@class="trash"]//a`,
@@ -459,10 +464,12 @@ export const selector = {
                 },
 
                 numberOfRowsFound: '.tablenav.top .displaying-num',
+                numberOfRows: 'div.vendor-list table tbody tr',
                 noRowsFound: '//td[normalize-space()="No vendors found."]',
                 vendorViewDetails: (username: string) => `//td//a[contains(text(), '${username}')]`,
                 vendorRow: (username: string) => `//td//a[contains(text(), '${username}')]/../../..`,
                 vendorCell: (username: string) => `//td//a[contains(text(), '${username}')]/../..`,
+                vendorRowActions: (username: string) => `//td//a[contains(text(), '${username}')]/../..//div[@class="row-actions"]`,
                 vendorEdit: (username: string) => `//td//a[contains(text(), '${username}')]/../..//span[@class="edit"]//a`,
                 vendorProducts: (username: string) => `//td//a[contains(text(), '${username}')]/../..//span[@class="products"]//a`,
                 vendorOrders: (username: string) => `//td//a[contains(text(), '${username}')]/../..//span[@class="orders"]//a`,
@@ -628,6 +635,12 @@ export const selector = {
                     nameOfBank: '#dokan-bank-name',
                     bankIban: '#dokan-bank-iban',
 
+                    // store category
+                    storeCategoryDropdown: '//div[contains(@class,"dokan-store-category")]/..//div[@class="multiselect__select"]',
+                    storeCategoryInput: 'input#store-category',
+                    searchedStoreCategory: 'ul#listbox-store-category span.multiselect__option.multiselect__option--highlight',
+                    selectedStoreCategory: (category: string) => `//span[@class="multiselect__tag"]//span[contains(text(), "${category}")]`,
+
                     // Address
                     street1: '#street-1',
                     street2: '#street-2',
@@ -705,7 +718,9 @@ export const selector = {
                     },
 
                     numberOfRowsFound: '.tablenav.top .displaying-num',
+                    numberOfRows: 'div#dokan-store-categories table tbody tr',
                     noRowsFound: '//td[normalize-space()="No category found"]',
+                    storeCategoryRowActions: (title: string) => `//td//a[contains(text(), '${title}')]/../..//div[@class="row-actions"]`,
                     storeCategoryCell: (title: string) => `//td//a[contains(text(), '${title}')]/../..`,
                     storeCategoryEdit: (title: string) => `//td//a[contains(text(), '${title}')]/../..//span[@class='edit']//a`,
                     storeCategoryDelete: (title: string) => `//td//a[contains(text(), '${title}')]/../..//span[@class='delete']//a`,
@@ -731,6 +746,8 @@ export const selector = {
                     filterByProduct: '(//span[@class="select2-selection__arrow"])[1]',
                     filterByVendors: '(//span[@class="select2-selection__arrow"])[2]',
                     filterInput: '.select2-search.select2-search--dropdown .select2-search__field',
+                    reset: '(//button[text()="×"])[1]',
+                    filteredResult: (input: string) => `//li[normalize-space()="${input}"]`,
                 },
 
                 // Table
@@ -744,6 +761,7 @@ export const selector = {
                 },
 
                 numberOfRowsFound: '.tablenav.top .displaying-num',
+                numberOfRows: 'table tbody tr',
                 noRowsFound: '//td[normalize-space()="No items found."]',
                 abuseReportCell: (input: string) => `//a[contains(text(), '${input}')]/../..`, // abuse-reason, product-name, vendor-name
                 abuseReportFirstCell: '(//a[@href="#view-report"])[1]',
@@ -773,6 +791,7 @@ export const selector = {
                 // Bulk Actions
                 bulkActions: {
                     selectAll: 'thead .manage-column input',
+                    firstRowCheckbox: '(//input[@name="item[]"])[1]',
                     selectAction: '.tablenav.top #bulk-action-selector-top', // trash
                     applyAction: '.tablenav.top .button.action',
                 },
@@ -782,6 +801,7 @@ export const selector = {
                     filterByVendor: '.select2-selection__arrow',
                     filterInput: '.select2-search.select2-search--dropdown .select2-search__field',
                     filterClear: '.select2-selection__clear',
+                    filteredResult: (storeName: string) => `//li[contains(text(), "${storeName}") and @class="select2-results__option select2-results__option--highlighted"]`,
                 },
 
                 // Table
@@ -860,6 +880,7 @@ export const selector = {
                 },
 
                 numberOfRowsFound: '.tablenav.top .displaying-num',
+                numberOfRows: 'div.admin-store-support-tickets table tbody tr',
                 noRowsFound: '//td[normalize-space()="No tickets found."]',
                 supportTicketCell: (ticketId: string) => `//strong[contains(text(), '#${ticketId}')]/../..`,
                 supportTicketFirstCell: '(//td[@class="column ID"]//a)[1]',
@@ -1077,17 +1098,18 @@ export const selector = {
                 },
 
                 numberOfRowsFound: '.tablenav.top .displaying-num',
-                numberOfRows: 'table.wp-list-table tbody tr',
+                numberOfRows: 'div#seller_badge_list_table table tbody tr',
                 noRowsFound: '//td[normalize-space()="No badges found."]',
                 sellerBadgeRow: (name: string) => `//a[contains(text(),'${name}')]/../../..`,
                 sellerBadgeCell: (name: string) => `//a[contains(text(),'${name}')]/../..`,
+                sellerBadgeRowActions: (name: string) => `//a[contains(text(),'${name}')]/../../..//div[@class="row-actions"]`,
                 sellerBadgeLevel: (name: string) => `//a[contains(text(),'${name}')]/../../..//span[@class="level_count"]//strong`,
-                sellerBadgeEdit: (name: string) => `//a[contains(text(),'${name}')]/../..//div[@class="row-actions"]//span[@class="edit"]//a`,
-                sellerBadgePreview: (name: string) => `//a[contains(text(),'${name}')]/../..//div[@class="row-actions"]//span[@class="view"]//a`,
-                sellerBadgeVendors: (name: string) => `//a[contains(text(),'${name}')]/../..//div[@class="row-actions"]//span[@class="show_vendors"]//a`,
-                sellerBadgePublish: (name: string) => `//a[contains(text(),'${name}')]/../..//div[@class="row-actions"]//span[@class="publish"]//a`,
-                sellerBadgeDraft: (name: string) => `//a[contains(text(),'${name}')]/../..//div[@class="row-actions"]//span[@class="draft"]//a`,
-                sellerBadgeDelete: (name: string) => `//a[contains(text(),'${name}')]/../..//div[@class="row-actions"]//span[@class="delete"]//a`,
+                sellerBadgeEdit: (name: string) => `//a[contains(text(),'${name}')]/../..//span[@class="edit"]//a`,
+                sellerBadgePreview: (name: string) => `//a[contains(text(),'${name}')]/../..//span[@class="view"]//a`,
+                sellerBadgeVendors: (name: string) => `//a[contains(text(),'${name}')]/../..//span[@class="show_vendors"]//a`,
+                sellerBadgePublish: (name: string) => `//a[contains(text(),'${name}')]/../..//span[@class="publish"]//a`,
+                sellerBadgeDraft: (name: string) => `//a[contains(text(),'${name}')]/../..//span[@class="draft"]//a`,
+                sellerBadgeDelete: (name: string) => `//a[contains(text(),'${name}')]/../..//span[@class="delete"]//a`,
 
                 confirmAction: '.swal2-actions .swal2-confirm',
                 cancelAction: '.swal2-actions .swal2-cancel',
@@ -1248,6 +1270,7 @@ export const selector = {
                 },
 
                 numberOfRowsFound: '.tablenav.top .displaying-num',
+                numberOfRows: 'div.dokan-refund-wrapper table tbody tr',
                 noRowsFound: '//td[normalize-space()="No request found."]',
                 refundCell: (orderNumber: string) => `//strong[contains(text(),'#${orderNumber}')]/../..`,
                 approveRefund: (orderNumber: string) => `//strong[contains(text(),'#${orderNumber}')]/../..//span[@class='completed']`,
@@ -1345,6 +1368,8 @@ export const selector = {
 
                     // Order Details
                     numberOfRowsFound: '.tablenav.top .displaying-num',
+                    numberOfRows: 'div.logs-area table tbody tr',
+                    noRowsFound: '//td[normalize-space()="No logs found."]',
                     orderIdRow: (orderNumber: string) => `//a[normalize-space()='#${orderNumber}']/..//..`,
                     orderIdCell: (orderNumber: string) => `//a[normalize-space()='#${orderNumber}']/..`,
                     orderIdOrderTotal: (orderNumber: string) => `//a[normalize-space()='#${orderNumber}']/..//..//td[@class="column order_total"]//div`,
@@ -1589,6 +1614,7 @@ export const selector = {
                 },
 
                 numberOfRowsFound: '.tablenav.top .displaying-num',
+                numberOfRows: 'div.product-questions-answers table tbody tr',
                 noRowsFound: '//td[normalize-space()="No question found."]',
                 productQuestionCell: (input: string) => `//strong[contains(text(), '${input}')]/..`,
                 productQuestionFirstCell: '(//tbody//tr//td//a)[1]',
@@ -1667,8 +1693,8 @@ export const selector = {
                 },
 
                 numberOfRowsFound: '.tablenav.top .displaying-num',
+                numberOfRows: 'div.subscription-list table tbody tr',
                 noRowsFound: '//td[normalize-space()="No subscribed vendors found."]',
-                currentNoOfRows: 'table tbody tr',
 
                 vendorSubscriptionsRow: (storeName: string) => `//td[@class="column store_name"]//a[contains(text(),'${storeName}')]/../../..`,
                 vendorSubscriptionsCell: (storeName: string) => `//td[@class="column store_name"]//a[contains(text(),'${storeName}')]`,
@@ -1709,9 +1735,10 @@ export const selector = {
                     filterByMethods: '(//select[@id="filter-methods"]/..//span[@class="select2-selection__arrow"])[2]',
                     resetFilterByVendors: '(//select[@id="filter-vendors"]/..//button[@class="button"])[1]',
                     resetFilterByMethods: '(//select[@id="filter-methods"]/..//button[@class="button"])[1]',
-                    reset: '//button[text()="×"]',
+                    reset: '(//button[text()="×"])[1]',
                     filterInput: '.select2-search.select2-search--dropdown .select2-search__field',
                     result: 'li.select2-results__option.select2-results__option--highlighted',
+                    filteredResult: (input: string) => `//li[normalize-space()="${input}"]`,
                 },
 
                 // Table
@@ -1729,8 +1756,8 @@ export const selector = {
                 statusColumnValue: (status: string) => `td.column.status .${status}`, // pending, approved, rejected, cancelled
 
                 numberOfRowsFound: '.tablenav.top .displaying-num',
+                numberOfRows: 'table tbody tr',
                 noRowsFound: '//td[normalize-space()="No requests found."]',
-                currentNoOfRows: 'table tbody tr',
                 vendorRequestFirstCell: '(//tbody//tr//td//strong)[1]',
                 verificationRequestCell: (requestId: string) => `//td//strong[contains(text(), '#${requestId}')]/..`,
                 verificationRequestDocument: (requestId: string) => `(//td//strong[contains(text(), '#${requestId}')]/../..//a[@target])[1]`,
@@ -1788,6 +1815,7 @@ export const selector = {
                 },
 
                 numberOfRowsFound: '.tablenav.top .displaying-num',
+                numberOfRows: 'div#product_advertisement_list_table table tbody tr',
                 noRowsFound: '//td[normalize-space()="No advertisement found."]',
                 advertisedProductCell: (productName: string) => `//a[normalize-space()="${productName}"]/../..`,
                 advertisedProductOrderIdCell: (orderNumber: number) => `//a[normalize-space()="${orderNumber}"]/../..`,
@@ -1842,6 +1870,7 @@ export const selector = {
                 },
 
                 numberOfRowsFound: '.tablenav.top .displaying-num',
+                numberOfRows: 'div.wholesale-customer-list table tbody tr',
                 noRowsFound: '//td[normalize-space()="No customers found."]',
                 wholesaleCustomerCell: (username: string) => `//td[contains(text(), '${username}')]/..//td[@class='column full_name']`,
                 wholesaleCustomerEdit: (username: string) => `//td[contains(text(), '${username}')]/..//td[@class='column full_name']//span[@class='edit']//a`,
@@ -1961,6 +1990,8 @@ export const selector = {
                     vendorAnalytics: '//div[@class="nav-title" and contains(text(),"Vendor Analytics")]',
                 },
 
+                settingTitle: 'div.settings-content h2.settings-title',
+
                 // General
                 general: {
                     // Site settings
@@ -2020,8 +2051,6 @@ export const selector = {
                     vendorProductReviewStatusChange: '.seller_review_manage .switch',
                     guestProductEnquiry: '.enable_guest_user_enquiry .switch',
                     newVendorEnableAuction: '.new_seller_enable_auction .switch',
-                    enableMinMaxQuantities: '.enable_min_max_quantity .switch',
-                    enableMinMaxAmount: '.enable_min_max_amount .switch',
 
                     removeAddToCartButton: '.catalog_mode_hide_add_to_cart_button .switch',
                     hideProductPrice: '.catalog_mode_hide_product_price .switch',
@@ -2854,6 +2883,13 @@ export const selector = {
                 // Update Success Message
                 updatedSuccessMessage: '#message.updated.inline p',
             },
+
+            // orders
+            orders: {
+                //table
+                numberOfRowsFound: '(//span[@class="displaying-num"])[1]',
+                noRowsFound: '//td[normalize-space(text())="No items found."]',
+            },
         },
 
         // Products
@@ -2865,6 +2901,10 @@ export const selector = {
             tagsMenu: '//li[@id="menu-posts-product"]//a[text()="Tags"]',
             addOnsMenu: '//li[@id="menu-posts-product"]//a[text()="Add-ons"]',
             attributesMenu: '//li[@id="menu-posts-product"]//a[text()="Attributes"]',
+
+            // table
+            numberOfRowsFound: '(//span[@class="displaying-num"])[1]',
+            noRowsFound: '//td[normalize-space(text())="No products found"]',
 
             // Product
             product: {
@@ -3070,7 +3110,7 @@ export const selector = {
                 attributeTerm: '#tag-name',
                 attributeTermSlug: '#tag-slug',
                 description: '#tag-description',
-                addAttributeTerm: '#submit',
+                addAttributeTerm: 'input#submit',
                 attributeTermCell: (attributeTerm: string) => `//td[contains(text(), '${attributeTerm.toLowerCase()}')]/..`,
             },
         },
@@ -3663,8 +3703,9 @@ export const selector = {
             buyAdvertisement: (productName: string) => `//a[contains(text(),'${productName}')]/../../..//td[@class="product-advertisement-td"]//span`,
             advertisementStatus: (productName: string) => `//a[contains(text(),'${productName}')]/../../..//td[@class="product-advertisement-td"]//i[contains(@class,'fa fa-circle')]`,
             permanentlyDelete: (productName: string) => `//a[contains(text(),'${productName}')]/../..//span[@class="delete"]//a`,
+            rowActions: (productName: string) => `//a[contains(text(), '${productName}')]/../..//div[@class="row-actions"]`,
             view: (productName: string) => `//a[contains(text(),'${productName}')]/../..//span[@class="view"]//a`,
-            quickEdit: (productName: string) => `//a[contains(text(),'${productName}')]/../..//span[@class="item-inline-edit"]//a`,
+            quickEdit: (productName: string) => `//a[contains(text(),'${productName}')]/../..//span[@class="item-inline-edit editline"]//a`,
             duplicate: (productName: string) => `//a[contains(text(),'${productName}')]/../..//span[@class="duplicate"]//a`,
 
             // Create Product
@@ -3916,6 +3957,7 @@ export const selector = {
             // Wholesale Options
             wholesale: {
                 enableWholeSaleForThisProduct: '#wholesale\\[enable_wholesale\\]',
+                wholeSaleOptionsDiv: 'div.show_if_wholesale.dokan-hide',
                 wholesalePrice: '#dokan-wholesale-price',
                 minimumQuantityForWholesale: '#dokan-wholesale-qty',
             },
@@ -4309,8 +4351,8 @@ export const selector = {
             couponRow: (couponCode: string) => `//span[normalize-space()="${couponCode}"]/../../../../..`,
             couponCell: (couponCode: string) => `//span[normalize-space()="${couponCode}"]/../../../..`,
             couponLink: (couponCode: string) => `//span[normalize-space()="${couponCode}"]/..`,
-            couponEdit: (couponCode: string) => `//span[normalize-space()="${couponCode}"]/../../../..//div[@class="row-actions"]//span[@class="edit"]`,
-            couponDelete: (couponCode: string) => `//span[normalize-space()="${couponCode}"]/../../../..//div[@class="row-actions"]//span[@class="delete"]`,
+            couponEdit: (couponCode: string) => `//span[normalize-space()="${couponCode}"]/../../../..//span[@class="edit"]`,
+            couponDelete: (couponCode: string) => `//span[normalize-space()="${couponCode}"]/../../../..//span[@class="delete"]`,
 
             // Create Coupon
             addNewCoupon: '.dokan-btn',
@@ -4472,12 +4514,13 @@ export const selector = {
             // Review Actions
             reviewRow: (reviewMessage: string) => `//div[contains(text(),'${reviewMessage}')]/../..`,
             reviewMessageCell: (reviewMessage: string) => `//div[contains(text(),'${reviewMessage}')]/..`,
-            unApproveReview: (reviewMessage: string) => `//div[contains(text(),'${reviewMessage}')]/..//ul[@class='dokan-cmt-row-actions']//a[contains(text(),'Unapprove')]`,
-            approveReview: (reviewMessage: string) => `//div[contains(text(),'${reviewMessage}')]/..//ul[@class='dokan-cmt-row-actions']//a[contains(text(),'Approve')]`,
-            spamReview: (reviewMessage: string) => `//div[contains(text(),'${reviewMessage}')]/..//ul[@class='dokan-cmt-row-actions']//a[contains(text(),'Spam')]`,
-            trashReview: (reviewMessage: string) => `//div[contains(text(),'${reviewMessage}')]/..//ul[@class='dokan-cmt-row-actions']//a[contains(text(),'Trash')]`,
-            restoreReview: (reviewMessage: string) => `//div[contains(text(),'${reviewMessage}')]/..//ul[@class='dokan-cmt-row-actions']//a[contains(text(),'Restore')]`,
-            permanentlyDeleteReview: (reviewMessage: string) => `//div[contains(text(),'${reviewMessage}')]/..//ul[@class='dokan-cmt-row-actions']//a[contains(text(),'Delete Permanently')]`,
+            rowActions: (reviewMessage: string) => `//div[contains(text(),'${reviewMessage}')]/..//ul[@class='dokan-cmt-row-actions']`,
+            unApproveReview: (reviewMessage: string) => `//div[contains(text(),'${reviewMessage}')]/..//a[contains(text(),'Unapprove')]`,
+            approveReview: (reviewMessage: string) => `//div[contains(text(),'${reviewMessage}')]/..//a[contains(text(),'Approve')]`,
+            spamReview: (reviewMessage: string) => `//div[contains(text(),'${reviewMessage}')]/..//a[contains(text(),'Spam')]`,
+            trashReview: (reviewMessage: string) => `//div[contains(text(),'${reviewMessage}')]/..//a[contains(text(),'Trash')]`,
+            restoreReview: (reviewMessage: string) => `//div[contains(text(),'${reviewMessage}')]/..//a[contains(text(),'Restore')]`,
+            permanentlyDeleteReview: (reviewMessage: string) => `//div[contains(text(),'${reviewMessage}')]/..//a[contains(text(),'Delete Permanently')]`,
             reviewLink: (reviewMessage: string) => `//div[contains(text(),'${reviewMessage}')]/../..//td[@class="col-link"]//a`,
             viewReview: '//a[contains(text(),"View Comment")]',
 
@@ -5216,6 +5259,7 @@ export const selector = {
                 selectCustomerDropdown: '//span[@id="select2-customer_id-container"]/..//span[@class="select2-selection__arrow"]',
                 selectCustomerInput: '.select2-search__field',
                 searchedResult: '.select2-results__option.select2-results__option--highlighted',
+                searchedResultByName: (customerName: string) => `//li[contains(text(), "${customerName}") and @class="select2-results__option select2-results__option--highlighted"]`,
                 selectABookableProductDropdown: '//span[@id="select2-bookable_product_id-container"]/..//span[@class="select2-selection__arrow"]',
                 selectABookableProduct: (productName: string) => `//li[contains(@class,"select2-results__option") and contains(text(), '${productName}')]`,
 
@@ -5223,7 +5267,7 @@ export const selector = {
                 assignThisBookingToAnExistingOrderWithThisId: '//input[@name="booking_order" and @value="existing"]',
                 bookingOrderId: '.text',
                 dontCreateAnOrderForThisBooking: '//label[normalize-space()="Don"t create an order for this booking."]/..//input',
-                next: '.button-primary',
+                next: 'input[name="create_booking"]',
                 selectCalendarDay: (month: number, day: number) => `//td[@title="This date is available" and @ data-month="${month}"]//a[@data-date="${day}"]`,
 
                 addBooking: 'input[value="Add Booking"][type="submit"]',
@@ -5638,6 +5682,7 @@ export const selector = {
             },
 
             numOfRowsFound: 'table.dokan-support-table tbody tr',
+            numberOfRows: 'table.dokan-support-table tbody tr',
             noSupportTicketFound: '//div[@class="dokan-error" and contains(text(), "No tickets found!")]',
             storeSupportLink: (id: string) => `//strong[normalize-space()="#${id}"]/..`,
             storeSupportCellById: (id: string) => `//strong[normalize-space()="#${id}"]/../..`,
@@ -6692,7 +6737,8 @@ export const selector = {
 
         // Customer Bookings
         cBookings: {
-            selectCalendarDay: (month: number, day: number) => `//td[@title="This date is available" and @ data-month="${month}"]//a[@data-date="${day}"]`,
+            calanderLoader: '//div[@class="blockUI blockOverlay"]',
+            selectCalendarDay: (month: number, day: number) => `//td[not(contains(@class,"not-bookable")) and @data-month="${month}"]//a[@data-date="${day}"]`,
             view: (orderNumber: string) => `//a[contains(text(),'Order #${orderNumber}')]/../..//a[@class="woocommerce-button button view"]`,
             bookNow: 'button.wc-bookings-booking-form-button',
         },
@@ -6785,6 +6831,9 @@ export const selector = {
                     productUnit: 'div.summary p.wc-gzd-additional-info.product-units',
                     deliveryTime: 'div.summary p.wc-gzd-additional-info.delivery-time-info',
                 },
+
+                productAddedSuccessMessage: (productName: string) => `//div[@class="woocommerce-message" and contains(.,"“${productName}” has been added to your cart.")]`,
+                productWithQuantityAddedSuccessMessage: (productName: string, quantity: string) => `//div[@class="woocommerce-message" and contains(.,"${quantity} × “${productName}” have been added to your cart.")]`,
             },
 
             // Sub menus
@@ -7687,9 +7736,9 @@ export const selector = {
         },
 
         cWooSelector: {
-            wooCommerceSuccessMessage: '.woocommerce-message',
-            wooCommerceError: '.woocommerce-error',
-            wooCommerceInfo: '.woocommerce-info',
+            wooCommerceSuccessMessage: 'div.woocommerce-message',
+            wooCommerceError: 'div.woocommerce-error',
+            wooCommerceInfo: 'div.woocommerce-info',
             wooCommerceNoticeBanner: 'div.wc-block-components-notice-banner',
             wooCommerceNoticeBannerContent: 'div.wc-block-components-notice-banner__content',
         },

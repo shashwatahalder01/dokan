@@ -4,6 +4,58 @@
  */
 $changelog = [
     [
+        'version'  => 'Version 3.12.2',
+        'released' => '2024-09-23',
+        'changes'  => [
+            'Fix'         => [
+                [
+                    'title'       => 'Product gallery image uploader close button style fix.',
+                    'description' => '',
+                ],
+                [
+                    'title'       => 'Fix incorrect sub-order status updates when the main order status changed specifically for cancelled sub-orders.',
+                    'description' => '',
+                ],
+                [
+                    'title'       => 'Fixed vendor coupon validation for various discount item types.',
+                    'description' => '',
+                ],
+            ],
+        ],
+    ],
+    [
+        'version'  => 'Version 3.12.1',
+        'released' => '2024-08-30',
+        'changes'  => [
+            'Fix'         => [
+                [
+                    'title'       => 'Resolve fatal error when updating Dokan Lite to 3.12.0 with Dokan Pro 3.9.7.',
+                    'description' => '',
+                ],
+            ],
+        ],
+    ],
+    [
+        'version'  => 'Version 3.12.0',
+        'released' => '2024-08-29',
+        'changes'  => [
+            'Fix'         => [
+                [
+                    'title'       => 'Displaying incorrect withdrawal amount when using decimal separator as thousand.',
+                    'description' => '',
+                ],
+                [
+                    'title'       => 'Removed multiple invoice button for dokan sub-orders.',
+                    'description' => '',
+                ],
+                [
+                    'title'       => 'Ensure accurate stock updates when vendors edit products while sales occur. Thanks @brunomendespereira',
+                    'description' => '',
+                ],
+            ],
+        ],
+    ],
+    [
         'version'  => 'Version 3.11.5',
         'released' => '2024-08-07',
         'changes'  => [
