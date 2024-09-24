@@ -544,7 +544,7 @@
           admin can export all logs: true
           admin can filter all logs by store name: true
           admin can filter all logs by order status: true
-          #   admin can filter all logs by calander: true
+          #   admin can filter all logs by calendar: true
       vendor:
           vendor can view reports menu page: true
           vendor can export statement: true
@@ -822,7 +822,7 @@
           admin can set product advertisement cost: false
           admin can enable product advertising on Dokan subscription: false
           admin can set advertised product as featured: false
-          admin can set advertised product display pefeference: false
+          admin can set advertised product display preference: false
           admin can hide out of stock advertised product: false
           admin can add product advertising widget: false
           #    admin can add product advertising shortcode [duplicate]: false
@@ -832,7 +832,7 @@
           admin can search advertised product by order: false
           admin can filter advertised product by stores: true
           admin can filter advertised product by creation process: true
-          #   admin can filter advertised product by calander: false
+          #   admin can filter advertised product by calendar: false
           admin can expire advertised product: true
           admin can delete advertised product: true
           admin can perform bulk action on product advertisements: false
@@ -1048,7 +1048,7 @@
           admin can search support ticket by ticket title: true
           admin can filter support tickets by vendor: true
           admin can filter support tickets by customer: true
-          #   admin can filter support tickets by calander: false
+          #   admin can filter support tickets by calendar: false
           admin can reply to support ticket as admin: true
           admin can reply to support ticket as vendor: true
           admin can disable support ticket email notification: true
@@ -1187,7 +1187,7 @@
       admin:
           #   admin can set Dokan wholesale settings [duplicate]: true
           admin can set wholesale price viewer: false
-          admin can set show wholsesale price on shop archive: false
+          admin can set show wholesale price on shop archive: false
           admin can set need approval for becoming wholesale customer: false
           admin can view wholesale customers menu page: true
           admin can search wholesale customer: true
