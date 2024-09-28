@@ -98,6 +98,7 @@
           vendor can add variable subscription product: true
           vendor can add external product: true
           vendor can add group product: true
+          vendor can add group product: true
           vendor can add downloadable product [lite]: true
           vendor can add virtual product [lite]: true
           vendor can search product [lite]: true
@@ -105,6 +106,11 @@
           vendor can filter products by category [lite]: true
           vendor can filter products by type: true
           vendor can filter products by other: true
+          vendor can reset filter [lite]: true
+          vendor can import products: true
+          vendor can export products: true
+          vendor can duplicate product: true
+          vendor can permanently delete product [lite]: true
           vendor can reset filter [lite]: true
           vendor can import products: true
           vendor can export products: true

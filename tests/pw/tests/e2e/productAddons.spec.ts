@@ -7,6 +7,8 @@ import { payloads } from '@utils/payloads';
 import { dbUtils } from '@utils/dbUtils';
 import { serialize } from 'php-serialize';
 import { responseBody } from '@utils/interfaces';
+import { serialize } from 'php-serialize';
+import { responseBody } from '@utils/interfaces';
 
 const { VENDOR_ID } = process.env;
 
@@ -22,9 +24,12 @@ test.describe('Product addon functionality test', () => {
 
     // create product addon
     async function createVendorProductAddon(): Promise<[responseBody, string, string, string, string]> {
+    async function createVendorProductAddon(): Promise<[responseBody, string, string, string, string]> {
         const [, categoryId, categoryName] = await apiUtils.createCategory(payloads.createCategoryRandom(), payloads.adminAuth);
         const [responseBody, addonId, addonName, addonFieldTitle] = await apiUtils.createProductAddon({ ...payloads.createGlobalProductAddons(), restrict_to_categories: [categoryId] }, payloads.adminAuth);
+        const [responseBody, addonId, addonName, addonFieldTitle] = await apiUtils.createProductAddon({ ...payloads.createGlobalProductAddons(), restrict_to_categories: [categoryId] }, payloads.adminAuth);
         await dbUtils.updateCell(addonId, VENDOR_ID);
+        return [responseBody, addonId, addonName, addonFieldTitle, categoryName];
         return [responseBody, addonId, addonName, addonFieldTitle, categoryName];
     }
 
@@ -47,9 +52,12 @@ test.describe('Product addon functionality test', () => {
 
     // vendor
 
+
     test('vendor can view product addons menu page', { tag: ['@pro', '@exploratory', '@vendor'] }, async () => {
         await vendor.vendorProductAddonsSettingsRenderProperly();
     });
+
+    // global addon
 
     // global addon
 
@@ -57,6 +65,7 @@ test.describe('Product addon functionality test', () => {
         await vendor.addAddon({ ...data.vendor.addon(), category: categoryName });
     });
 
+    test('vendor can edit global product addon', { tag: ['@pro', '@vendor'] }, async () => {
     test('vendor can edit global product addon', { tag: ['@pro', '@vendor'] }, async () => {
         await vendor.editAddon({ ...data.vendor.addon(), name: addonName, title: addonFieldTitle });
     });
