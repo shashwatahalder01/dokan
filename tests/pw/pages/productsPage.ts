@@ -3,14 +3,13 @@ import { AdminPage } from '@pages/adminPage';
 import { selector } from '@pages/selectors';
 import { data } from '@utils/testData';
 import { helpers } from '@utils/helpers';
-import { product } from '@utils/interfaces';
+import { product, vendor } from '@utils/interfaces';
 
 const { DOKAN_PRO } = process.env;
 
 // selectors
 const productsAdmin = selector.admin.products;
 const productsVendor = selector.vendor.product;
-const vendorTools = selector.vendor.vTools;
 const vendorTools = selector.vendor.vTools;
 
 export class ProductsPage extends AdminPage {
@@ -1585,80 +1584,5 @@ export class ProductsPage extends AdminPage {
         await this.saveProduct();
         await this.toHaveValue(productsVendor.minMax.minimumQuantity, '0');
         await this.toHaveValue(productsVendor.minMax.maximumQuantity, '0');
-    }
-
-    // product edit
-
-    async editProduct(product: product['simple']): Promise<void> {
-        await this.goToProductEdit(product.editProduct);
-        await this.clearAndType(productsVendor.price, product.regularPrice());
-        await this.saveProduct();
-    }
-
-    // quick edit product
-    async quickEditProduct(product: product['simple']): Promise<void> {
-        await this.searchProduct(product.editProduct);
-        await this.hover(productsVendor.productCell(product.editProduct));
-        await this.click(productsVendor.quickEdit(product.editProduct));
-
-        await this.clearAndType(productsVendor.quickEditProduct.title, product.editProduct);
-        // todo:  add more fields
-
-        await this.clickAndWaitForResponse(data.subUrls.ajax, productsVendor.quickEditProduct.update);
-    }
-    // add product catalog mode
-    async addProductCatalogMode(productName: string, hidePrice: boolean = false): Promise<void> {
-        await this.goToProductEdit(productName);
-        await this.check(productsVendor.catalogMode.removeAddToCart);
-        if (hidePrice) await this.check(productsVendor.catalogMode.hideProductPrice);
-        await this.saveProduct();
-        await this.toBeChecked(productsVendor.catalogMode.removeAddToCart);
-        if (hidePrice) await this.toBeChecked(productsVendor.catalogMode.hideProductPrice);
-    }
-    // add product EU compliance
-    async addProductEuCompliance(productName: string, euCompliance: product['productInfo']['euCompliance']): Promise<void> {
-        await this.goToProductEdit(productName);
-        await this.selectByValue(productsVendor.euComplianceFields.saleLabel, euCompliance.saleLabel);
-        await this.selectByValue(productsVendor.euComplianceFields.saleRegularLabel, euCompliance.saleRegularLabel);
-        await this.selectByValue(productsVendor.euComplianceFields.unit, euCompliance.unit);
-        await this.selectByValue(productsVendor.euComplianceFields.minimumAge, euCompliance.minimumAge);
-        await this.clearAndType(productsVendor.euComplianceFields.productUnits, euCompliance.productUnits);
-        await this.clearAndType(productsVendor.euComplianceFields.basePriceUnits, euCompliance.basePriceUnits);
-        if (euCompliance.freeShipping) {
-            await this.check(productsVendor.euComplianceFields.freeShipping);
-        } else {
-            await this.uncheck(productsVendor.euComplianceFields.freeShipping);
-        }
-        await this.clearAndType(productsVendor.euComplianceFields.regularUnitPrice, euCompliance.regularUnitPrice);
-        await this.clearAndType(productsVendor.euComplianceFields.saleUnitPrice, euCompliance.saleUnitPrice);
-        await this.typeFrameSelector(productsVendor.euComplianceFields.optionalMiniDescription.descriptionIframe, productsVendor.euComplianceFields.optionalMiniDescription.descriptionHtmlBody, euCompliance.optionalMiniDescription);
-
-        await this.saveProduct();
-
-        await this.toHaveValue(productsVendor.euComplianceFields.saleLabel, euCompliance.saleLabel);
-        await this.toHaveValue(productsVendor.euComplianceFields.saleRegularLabel, euCompliance.saleRegularLabel);
-        await this.toHaveValue(productsVendor.euComplianceFields.unit, euCompliance.unit);
-        await this.toHaveValue(productsVendor.euComplianceFields.minimumAge, euCompliance.minimumAge);
-        await this.toHaveValue(productsVendor.euComplianceFields.productUnits, euCompliance.productUnits);
-        await this.toHaveValue(productsVendor.euComplianceFields.basePriceUnits, euCompliance.basePriceUnits);
-        if (euCompliance.freeShipping) {
-            await this.toBeChecked(productsVendor.euComplianceFields.freeShipping);
-        } else {
-            await this.notToBeChecked(productsVendor.euComplianceFields.freeShipping);
-        }
-        await this.toHaveValue(productsVendor.euComplianceFields.regularUnitPrice, euCompliance.regularUnitPrice);
-        await this.toHaveValue(productsVendor.euComplianceFields.saleUnitPrice, euCompliance.saleUnitPrice);
-        await this.toContainTextFrameLocator(productsVendor.euComplianceFields.optionalMiniDescription.descriptionIframe, productsVendor.euComplianceFields.optionalMiniDescription.descriptionHtmlBody, euCompliance.optionalMiniDescription);
-    }
-    // add product wholesale options
-    async addProductWholesaleOptions(productName: string, wholesaleOption: product['productInfo']['wholesaleOption']): Promise<void> {
-        await this.goToProductEdit(productName);
-        await this.check(productsVendor.wholesale.enableWholesale);
-        await this.clearAndType(productsVendor.wholesale.wholesalePrice, wholesaleOption.wholesalePrice);
-        await this.clearAndType(productsVendor.wholesale.minimumQuantity, wholesaleOption.minimumQuantity);
-        await this.saveProduct();
-        await this.toBeChecked(productsVendor.wholesale.enableWholesale);
-        await this.toHaveValue(productsVendor.wholesale.wholesalePrice, wholesaleOption.wholesalePrice);
-        await this.toHaveValue(productsVendor.wholesale.minimumQuantity, wholesaleOption.minimumQuantity);
     }
 }

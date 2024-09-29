@@ -356,12 +356,6 @@ export class ApiUtils {
         return responseBody;
     }
 
-    // update product
-    async updateProduct(productId: string, payload: object, auth?: auth): Promise<responseBody> {
-        const [, responseBody] = await this.put(endPoints.updateProduct(productId), { data: payload, headers: auth });
-        return responseBody;
-    }
-
     // delete product
     async deleteProduct(productId: string, auth?: auth): Promise<responseBody> {
         const [, responseBody] = await this.delete(endPoints.deleteProduct(productId), { headers: auth });
