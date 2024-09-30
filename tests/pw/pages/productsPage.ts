@@ -391,6 +391,113 @@ export class ProductsPage extends AdminPage {
         }
     }
 
+    // add new product render properly
+    async vendorAddNewProductRenderProperly(): Promise<void> {
+        await this.goToAddNewProduct();
+
+        // title
+        await this.toBeVisible(productsVendor.title);
+
+        // product type
+        if (DOKAN_PRO) await this.toBeVisible(productsVendor.productType);
+
+        // downloadable
+        await this.toBeVisible(productsVendor.downloadable);
+
+        // virtual
+        await this.toBeVisible(productsVendor.virtual);
+
+        // price
+        await this.toBeVisible(productsVendor.price);
+
+        // discount price & Schedule
+        await this.click(productsVendor.discount.schedule);
+        const { schedule, greaterDiscountError, ...discount } = productsVendor.discount;
+        await this.multipleElementVisible(discount);
+
+        // category
+        await this.toBeVisible(productsVendor.category.openCategoryModal);
+
+        // tags
+        await this.toBeVisible(productsVendor.tags.tagInput);
+
+        // cover image
+        await this.toBeVisible(productsVendor.image.cover);
+
+        // gallery image
+        await this.toBeVisible(productsVendor.image.gallery);
+
+        // short description
+        await this.toBeVisible(productsVendor.shortDescription.shortDescriptionIframe);
+
+        // description
+        await this.toBeVisible(productsVendor.description.descriptionIframe);
+
+        // inventory
+        await this.toBeVisible(productsVendor.inventory.stockStatus);
+        await this.check(productsVendor.inventory.enableStockManagement);
+        const { stockStatus, ...inventory } = productsVendor.inventory;
+        await this.multipleElementVisible(inventory);
+
+        // other options
+        await this.multipleElementVisible(productsVendor.otherOptions);
+
+        // catalog mode
+        await this.check(productsVendor.catalogMode.removeAddToCart);
+        await this.multipleElementVisible(productsVendor.catalogMode);
+
+        if (DOKAN_PRO) {
+            // shipping
+            await this.multipleElementVisible(productsVendor.shipping);
+
+            // tax
+            await this.multipleElementVisible(productsVendor.tax);
+
+            // geolocation
+            await this.uncheck(productsVendor.geolocation.sameAsStore);
+            await this.multipleElementVisible(productsVendor.geolocation);
+
+            // linked products
+            await this.toBeVisible(productsVendor.linkedProducts.upSells);
+            await this.toBeVisible(productsVendor.linkedProducts.crossSells);
+
+            // attribute
+            await this.toBeVisible(productsVendor.attribute.customAttribute);
+            await this.toBeVisible(productsVendor.attribute.addAttribute);
+            await this.toBeVisible(productsVendor.attribute.saveAttribute);
+
+            // discount options
+            await this.check(productsVendor.bulkDiscount.enableBulkDiscount);
+            await this.multipleElementVisible(productsVendor.bulkDiscount);
+
+            // addon
+            await this.toBeVisible(productsVendor.addon.addField);
+            await this.toBeVisible(productsVendor.addon.import);
+            await this.toBeVisible(productsVendor.addon.export);
+            await this.toBeVisible(productsVendor.addon.excludeAddons);
+
+            // rma
+            await this.check(productsVendor.rma.overrideDefaultRmaSettings);
+            const { length, lengthValue, lengthDuration, addonCost, addonDurationLength, addonDurationType, rmaPolicyHtmlBody, refundReasons, ...rma } = productsVendor.rma;
+            await this.multipleElementVisible(rma);
+
+            // wholesale
+            await this.check(productsVendor.wholesale.enableWholesale);
+            await this.multipleElementVisible(productsVendor.wholesale);
+
+            // min-max
+            await this.multipleElementVisible(productsVendor.minMax);
+
+            // advertisement
+            await this.toBeVisible(productsVendor.advertisement.needsPublishNotice);
+
+            // eu compliance
+            // todo: need a check for germanized plugin
+            // const { deliveryTime, optionalMiniDescription, ...euComplianceFields } = productsVendor.euComplianceFields;
+            // await this.multipleElementVisible(euComplianceFields);
+        }
+    }
+
     // products
 
     // vendor add product
