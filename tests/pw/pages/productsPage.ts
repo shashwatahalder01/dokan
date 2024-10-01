@@ -1026,7 +1026,7 @@ export class ProductsPage extends AdminPage {
         await this.goToProductEdit(productName);
         for (const tag of tags) {
             await this.click(productsVendor.tags.removeSelectedTags(tag));
-            await this.press('Tab'); // to shift focus from the previous input
+            await this.press('Escape');  // shift focus from element 
         }
         await this.saveProduct();
 
@@ -1369,13 +1369,13 @@ export class ProductsPage extends AdminPage {
             case 'up-sells':
                 for (const product of linkedProducts.upSells) {
                     await this.click(productsVendor.linkedProducts.removeSelectedUpSellProduct(product));
-                    await this.press('Tab'); // to shift focus from the previous input
+                    await this.press('Escape');  // shift focus from element 
                 }
                 break;
             case 'cross-sells':
                 for (const product of linkedProducts.crossSells) {
                     await this.click(productsVendor.linkedProducts.removeSelectedCrossSellProduct(product));
-                    await this.press('Tab'); // to shift focus from the previous input
+                    await this.press('Escape');  // shift focus from element 
                 }
                 break;
             default:
@@ -1434,7 +1434,7 @@ export class ProductsPage extends AdminPage {
         await this.goToProductEdit(productName);
         await this.click(productsVendor.attribute.savedAttribute(attribute));
         await this.click(productsVendor.attribute.removeSelectedAttributeTerm(attributeTerm));
-        await this.press('Tab'); // to shift focus from the previous input
+        await this.press('Escape');  // shift focus from element 
         await this.notToBeVisible(productsVendor.attribute.selectedAttributeTerm(attributeTerm));
         await this.clickAndWaitForResponse(data.subUrls.ajax, productsVendor.attribute.saveAttribute);
         await this.saveProduct();
@@ -1676,7 +1676,7 @@ export class ProductsPage extends AdminPage {
         await this.goToProductEdit(productName);
         await this.clearAndType(productsVendor.minMax.minimumQuantity, minMaxOption.minimumProductQuantity);
         await this.clearAndType(productsVendor.minMax.maximumQuantity, minMaxOption.maximumProductQuantity);
-        await this.press('Tab'); // to trigger validation
+        await this.press('Escape');  // shift focus from element // to trigger validation
         await this.toHaveValue(productsVendor.minMax.maximumQuantity, minMaxOption.minimumProductQuantity);
         await this.saveProduct();
         await this.toHaveValue(productsVendor.minMax.minimumQuantity, minMaxOption.minimumProductQuantity);
