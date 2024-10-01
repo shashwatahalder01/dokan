@@ -92,7 +92,6 @@
       vendor:
           vendor can view product menu page [lite]: true
           vendor can view add new product page [lite]: true
-          vendor can view add new product page [lite]: true
           vendor can add simple product [lite]: true
           vendor can add variable product: true
           vendor can add simple subscription product: true
@@ -112,7 +111,6 @@
           vendor can duplicate product: true
           vendor can permanently delete product [lite]: true
           vendor can view product [lite]: true
-          vendor can't add product without required fields [lite]: true
           vendor can't add product without required fields [lite]: true
           vendor can't buy own product [lite]: true
           vendor can edit product [lite]: true

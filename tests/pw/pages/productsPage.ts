@@ -4,7 +4,6 @@ import { selector } from '@pages/selectors';
 import { data } from '@utils/testData';
 import { helpers } from '@utils/helpers';
 import { product, vendor } from '@utils/interfaces';
-import { product, vendor } from '@utils/interfaces';
 
 const { DOKAN_PRO } = process.env;
 
@@ -283,113 +282,6 @@ export class ProductsPage extends AdminPage {
         // table elements are visible
         const { productAdvertisementColumn, ...table } = productsVendor.table;
         await this.multipleElementVisible(table);
-    }
-
-    // add new product render properly
-    async vendorAddNewProductRenderProperly(): Promise<void> {
-        await this.goToAddNewProduct();
-
-        // title
-        await this.toBeVisible(productsVendor.title);
-
-        // product type
-        if (DOKAN_PRO) await this.toBeVisible(productsVendor.productType);
-
-        // downloadable
-        await this.toBeVisible(productsVendor.downloadable);
-
-        // virtual
-        await this.toBeVisible(productsVendor.virtual);
-
-        // price
-        await this.toBeVisible(productsVendor.price);
-
-        // discount price & Schedule
-        await this.click(productsVendor.discount.schedule);
-        const { schedule, greaterDiscountError, ...discount } = productsVendor.discount;
-        await this.multipleElementVisible(discount);
-
-        // category
-        await this.toBeVisible(productsVendor.category.openCategoryModal);
-
-        // tags
-        await this.toBeVisible(productsVendor.tags.tagInput);
-
-        // cover image
-        await this.toBeVisible(productsVendor.image.cover);
-
-        // gallery image
-        await this.toBeVisible(productsVendor.image.gallery);
-
-        // short description
-        await this.toBeVisible(productsVendor.shortDescription.shortDescriptionIframe);
-
-        // description
-        await this.toBeVisible(productsVendor.description.descriptionIframe);
-
-        // inventory
-        await this.toBeVisible(productsVendor.inventory.stockStatus);
-        await this.check(productsVendor.inventory.enableStockManagement);
-        const { stockStatus, ...inventory } = productsVendor.inventory;
-        await this.multipleElementVisible(inventory);
-
-        // other options
-        await this.multipleElementVisible(productsVendor.otherOptions);
-
-        // catalog mode
-        await this.check(productsVendor.catalogMode.removeAddToCart);
-        await this.multipleElementVisible(productsVendor.catalogMode);
-
-        if (DOKAN_PRO) {
-            // shipping
-            await this.multipleElementVisible(productsVendor.shipping);
-
-            // tax
-            await this.multipleElementVisible(productsVendor.tax);
-
-            // geolocation
-            await this.uncheck(productsVendor.geolocation.sameAsStore);
-            await this.multipleElementVisible(productsVendor.geolocation);
-
-            // linked products
-            await this.toBeVisible(productsVendor.linkedProducts.upSells);
-            await this.toBeVisible(productsVendor.linkedProducts.crossSells);
-
-            // attribute
-            await this.toBeVisible(productsVendor.attribute.customAttribute);
-            await this.toBeVisible(productsVendor.attribute.addAttribute);
-            await this.toBeVisible(productsVendor.attribute.saveAttribute);
-
-            // discount options
-            await this.check(productsVendor.bulkDiscount.enableBulkDiscount);
-            await this.multipleElementVisible(productsVendor.bulkDiscount);
-
-            // addon
-            await this.toBeVisible(productsVendor.addon.addField);
-            await this.toBeVisible(productsVendor.addon.import);
-            await this.toBeVisible(productsVendor.addon.export);
-            await this.toBeVisible(productsVendor.addon.excludeAddons);
-
-            // rma
-            await this.check(productsVendor.rma.overrideDefaultRmaSettings);
-            const { length, lengthValue, lengthDuration, addonCost, addonDurationLength, addonDurationType, rmaPolicyHtmlBody, refundReasons, ...rma } = productsVendor.rma;
-            await this.multipleElementVisible(rma);
-
-            // wholesale
-            await this.check(productsVendor.wholesale.enableWholesale);
-            await this.multipleElementVisible(productsVendor.wholesale);
-
-            // min-max
-            await this.multipleElementVisible(productsVendor.minMax);
-
-            // advertisement
-            await this.toBeVisible(productsVendor.advertisement.needsPublishNotice);
-
-            // eu compliance
-            // todo: need a check for germanized plugin
-            // const { deliveryTime, optionalMiniDescription, ...euComplianceFields } = productsVendor.euComplianceFields;
-            // await this.multipleElementVisible(euComplianceFields);
-        }
     }
 
     // add new product render properly
@@ -1027,7 +919,7 @@ export class ProductsPage extends AdminPage {
         await this.goToProductEdit(productName);
         for (const tag of tags) {
             await this.click(productsVendor.tags.removeSelectedTags(tag));
-            await this.press('Escape');  // shift focus from element 
+            await this.press('Escape'); // shift focus from element
         }
         await this.saveProduct();
 
@@ -1370,13 +1262,13 @@ export class ProductsPage extends AdminPage {
             case 'up-sells':
                 for (const product of linkedProducts.upSells) {
                     await this.click(productsVendor.linkedProducts.removeSelectedUpSellProduct(product));
-                    await this.press('Escape');  // shift focus from element 
+                    await this.press('Escape'); // shift focus from element
                 }
                 break;
             case 'cross-sells':
                 for (const product of linkedProducts.crossSells) {
                     await this.click(productsVendor.linkedProducts.removeSelectedCrossSellProduct(product));
-                    await this.press('Escape');  // shift focus from element 
+                    await this.press('Escape'); // shift focus from element
                 }
                 break;
             default:
@@ -1435,7 +1327,7 @@ export class ProductsPage extends AdminPage {
         await this.goToProductEdit(productName);
         await this.click(productsVendor.attribute.savedAttribute(attribute));
         await this.click(productsVendor.attribute.removeSelectedAttributeTerm(attributeTerm));
-        await this.press('Escape');  // shift focus from element 
+        await this.press('Escape'); // shift focus from element
         await this.notToBeVisible(productsVendor.attribute.selectedAttributeTerm(attributeTerm));
         await this.clickAndWaitForResponse(data.subUrls.ajax, productsVendor.attribute.saveAttribute);
         await this.saveProduct();
@@ -1677,7 +1569,7 @@ export class ProductsPage extends AdminPage {
         await this.goToProductEdit(productName);
         await this.clearAndType(productsVendor.minMax.minimumQuantity, minMaxOption.minimumProductQuantity);
         await this.clearAndType(productsVendor.minMax.maximumQuantity, minMaxOption.maximumProductQuantity);
-        await this.press('Escape');  // shift focus from element // to trigger validation
+        await this.press('Escape'); // shift focus from element // to trigger validation
         await this.toHaveValue(productsVendor.minMax.maximumQuantity, minMaxOption.minimumProductQuantity);
         await this.saveProduct();
         await this.toHaveValue(productsVendor.minMax.minimumQuantity, minMaxOption.minimumProductQuantity);

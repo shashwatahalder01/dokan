@@ -41,7 +41,6 @@ test.describe('Product details functionality test', () => {
             },
             payloads.vendorAuth,
         );
-        // todo: doesn't work on Dokan create product api min-max, discount, addon, linked products, shipping-tax class, feature image
     });
 
     test.afterAll(async () => {
