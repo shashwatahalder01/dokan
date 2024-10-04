@@ -10,7 +10,7 @@ import VendorProductAddEditPage from '@pages/frontend/vendor-dashboard/products/
 import ShopPage from '@pages/frontend/shop/shop.page';
 import SingleProductPage from '@pages/frontend/shop/single-product.page';
 import VendorStoreSettingsPage from '@pages/frontend/vendor-dashboard/settings/store/vendor-store.page';
-import { faker } from '@faker-js/faker/.';
+import { faker } from '@faker-js/faker';
 
 let baseUrl: string;
 let api: ApiUtils;

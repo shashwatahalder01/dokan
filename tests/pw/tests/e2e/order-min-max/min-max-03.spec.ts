@@ -12,7 +12,7 @@ import SingleProductPage from '@pages/frontend/shop/single-product.page';
 import VendorStoreSettingsPage from '@pages/frontend/vendor-dashboard/settings/store/vendor-store.page';
 import CartPage from '@pages/frontend/cart.page';
 import StorefrontMainMenu from '@pages/frontend/navigation/main-menu.page';
-import { faker } from '@faker-js/faker/.';
+import { faker } from '@faker-js/faker';
 
 let baseUrl: string;
 let api: ApiUtils;
