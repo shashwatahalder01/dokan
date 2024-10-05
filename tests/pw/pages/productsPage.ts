@@ -920,7 +920,6 @@ export class ProductsPage extends AdminPage {
         for (const tag of tags) {
             await this.click(productsVendor.tags.removeSelectedTags(tag));
             await this.press('Escape'); // shift focus from element
-            await this.press('Escape'); // shift focus from element
         }
         await this.saveProduct();
 
@@ -1075,7 +1074,7 @@ export class ProductsPage extends AdminPage {
             case 'stock-status':
                 await this.toHaveSelectedValue(productsVendor.inventory.stockStatus, inventory.stockStatus);
                 break;
-            case 'stockManagement':
+            case 'stock-management':
                 await this.toBeChecked(productsVendor.inventory.enableStockManagement);
                 await this.toHaveValue(productsVendor.inventory.stockQuantity, inventory.stockQuantity);
                 await this.toHaveValue(productsVendor.inventory.lowStockThreshold, inventory.lowStockThreshold);
