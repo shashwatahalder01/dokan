@@ -920,6 +920,7 @@ export class ProductsPage extends AdminPage {
         for (const tag of tags) {
             await this.click(productsVendor.tags.removeSelectedTags(tag));
             await this.press('Escape'); // shift focus from element
+            await this.press('Escape'); // shift focus from element
         }
         await this.saveProduct();
 
