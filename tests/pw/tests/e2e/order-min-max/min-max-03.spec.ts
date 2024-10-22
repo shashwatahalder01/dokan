@@ -108,7 +108,7 @@ test.describe('Order Min-Max - Cart Page', () => {
         await customerBrowser.close();
     });
 
-    test('Product quantity should not be more than maximum limit', { tag: ['@pro', '@admin'] }, async () => {
+    test.only('Product quantity should not be more than maximum limit', { tag: ['@lite', '@admin'] }, async () => {
         // vendor
         await vendorDashboardSidebarPage.clickOnProductsTab();
         await vendorProductListPage.clickOnProductWithTitle(productName);

@@ -2,11 +2,11 @@ import { BasePage } from '@pages/basePage';
 
 export default class VendorProductAddEditPage extends BasePage {
     simpleProductMinQtyInputField() {
-        return this.page.locator('#dokan_simple_product_min_quantity');
+        return this.page.locator('#min_quantity');
     }
 
     simpleProductMaxQtyInputField() {
-        return this.page.locator('#dokan_simple_product_max_quantity');
+        return this.page.locator('#max_quantity');
     }
 
     productStatusSelectField() {

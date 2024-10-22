@@ -3,6 +3,7 @@ import { BasePage } from '@pages/basePage';
 export default class CartPage extends BasePage {
     quantityInputFieldFor(productTitle: string) {
         return this.page.locator(`//div[@class="quantity"]/label[contains(text(), "${productTitle}")]/following-sibling::input`);
+        // return this.page.locator(`//a[@class="wc-block-components-product-name"][contains(text(), "${productTitle}")]/following-sibling::div[3]/div/input`);
     }
 
     updateCartButton() {
