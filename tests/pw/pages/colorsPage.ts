@@ -51,21 +51,21 @@ export class ColorsPage extends AdminPage {
         await this.clickAndWaitForResponseAndLoadState(data.subUrls.ajax, settingsAdmin.colors.colorsSaveChanges);
         await this.toContainText(settingsAdmin.dokanUpdateSuccessMessage, data.dokanSettings.colors.saveSuccessMessage);
 
-        await this.goIfNotThere(data.subUrls.frontend.vDashboard.settingsStore);
-
-        // assertions
-
         // convert hex to rgb
         Object.keys(paletteValues).forEach(key => {
             paletteValues[key as keyof paletteValues] = helpers.hexToRgb(paletteValues[key as keyof paletteValues]);
         });
+
+        await this.goIfNotThere(data.subUrls.frontend.vDashboard.settingsStore);
+        await this.wait(5);
+
+        // assertions
 
         // button color
         const beforeHover = await this.getElementCssStyle(settingsVendor.updateSettingsTop);
         console.log(beforeHover);
         console.log(beforeHover.backgroundColor);
 
-        
         // hovered button color
         await this.hover(settingsVendor.updateSettingsTop);
         const afterHover = await this.getElementCssStyle(settingsVendor.updateSettingsTop);
