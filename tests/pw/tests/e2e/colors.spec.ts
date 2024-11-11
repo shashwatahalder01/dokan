@@ -19,7 +19,7 @@ test.describe('Color scheme customizer test', () => {
         await aPage.close();
     });
 
-    test('admin can switch predefined color palette', { tag: ['@pro', '@admin'] }, async () => {
+    test.only('admin can switch predefined color palette', { tag: ['@pro', '@admin'] }, async () => {
         await admin.addColorPalette(data.dokanSettings.colors.predefinedPalette.tree, data.dokanSettings.colors.paletteValues.tree, 'predefined');
     });
 

@@ -62,9 +62,14 @@ export class ColorsPage extends AdminPage {
 
         // button color
         const beforeHover = await this.getElementCssStyle(settingsVendor.updateSettingsTop);
+        console.log(beforeHover);
+        console.log(beforeHover.backgroundColor);
+
+        
         // hovered button color
         await this.hover(settingsVendor.updateSettingsTop);
         const afterHover = await this.getElementCssStyle(settingsVendor.updateSettingsTop);
+        console.log(beforeHover.backgroundColor);
         // sidebar color
         const dashboardSidebarMenuText = await this.getElementColor(dashboardVendor.menus.primary.dashboard);
         const dashboardSidebarBackground = await this.getElementBackgroundColor(dashboardVendor.menus.menus);

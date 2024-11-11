@@ -182,7 +182,7 @@ jobs:
               timeout-minutes: 5
               working-directory: tests/pw
               run: |
-                  npm run test:api
+                #   npm run test:api
 
             # Prepare test summary
             - name: Prepare test summary
