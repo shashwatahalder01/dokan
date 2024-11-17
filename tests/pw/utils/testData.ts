@@ -869,7 +869,7 @@ export const data = {
         fixed: {
             commissionType: 'fixed', // 'fixed','category_based'
             commissionPercentage: helpers.priceStringWithDecimal(10, 'ES'),
-            commissionFixed: '10',
+            commissionFixed: helpers.priceStringWithDecimal(10, 'ES'),
             commissionCategory: {
                 allCategory: true, // true for all category, false for specific category
                 category: 'All Categories',
@@ -878,8 +878,8 @@ export const data = {
 
         allCategory: {
             commissionType: 'category_based', // 'fixed','category_based'
-            commissionPercentage: '5',
-            commissionFixed: '5',
+            commissionPercentage: helpers.priceStringWithDecimal(5, 'US'),
+            commissionFixed: helpers.priceStringWithDecimal(5, 'US'),
             commissionCategory: {
                 allCategory: true, // true for all category, false for specific category
                 category: 'All Categories',
@@ -888,8 +888,8 @@ export const data = {
 
         specificCategory: {
             commissionType: 'category_based', // 'fixed','category_based'
-            commissionPercentage: '2',
-            commissionFixed: '2',
+            commissionPercentage: helpers.priceStringWithDecimal(2, 'US'),
+            commissionFixed: helpers.priceStringWithDecimal(2, 'US'),
             commissionCategory: {
                 allCategory: false, // true for all category, false for specific category
                 category: CATEGORY_ID,

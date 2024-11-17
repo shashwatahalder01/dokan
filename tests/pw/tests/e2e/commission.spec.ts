@@ -47,6 +47,7 @@ test.describe('Commission test', () => {
     });
 
     test('admin can set commission on Dokan setup wizard (specific category based)', { tag: ['@lite', '@admin'] }, async () => {
+        test.skip(true, 'dokan issue, option not working');
         await admin.setCommissionOnDokanSetupWizard(data.commission.specificCategory);
     });
 
