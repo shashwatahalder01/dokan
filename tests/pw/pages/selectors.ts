@@ -237,6 +237,14 @@ export const selector = {
                 sliderNext: '.slide-notice .next',
             },
 
+            diagnostic: {
+                noticeDiv: '//a[@class="dokan-insights-data-we-collect"]/../..',
+                allowCollectData: '//a[@class="dokan-insights-data-we-collect"]/../..//a[normalize-space()="Allow"]',
+                disallowCollectData: '//a[@class="dokan-insights-data-we-collect"]/../..//a[normalize-space()="No thanks"]',
+                paragraph1: '(//a[@class="dokan-insights-data-we-collect"]/../..//p)[1]',
+                paragraph2: '//a[@class="dokan-insights-data-we-collect"]/../..//p[@class="description"]',
+            },
+
             // promo banner
             promoBanner: {
                 promoBanner: '.dokan-promo-banner',
@@ -433,7 +441,7 @@ export const selector = {
 
                 // Nav Tabs
                 navTabs: {
-                    cancelled: '//ul[@class="subsubsub"]//li//a[contains(text(),"All")]',
+                    all: '//ul[@class="subsubsub"]//li//a[contains(text(),"All")]',
                     approved: '//ul[@class="subsubsub"]//li//a[contains(text(),"Approved")]',
                     pending: '//ul[@class="subsubsub"]//li//a[contains(text(),"Pending")]',
                 },
@@ -2972,6 +2980,13 @@ export const selector = {
                 //table
                 numberOfRowsFound: '(//span[@class="displaying-num"])[1]',
                 noRowsFound: '//td[normalize-space(text())="No items found."]',
+
+                commissionMetaBox: {
+                    metaBoxDiv: 'div#dokan_commission_box',
+                    commissionsText: '//h2[normalize-space()="Commissions"]',
+                    orderItemInfo: 'div#dokan_commission_box table.woocommerce_order_items',
+                    orderTotalInfo: 'div#dokan_commission_box div.wc-order-totals-items',
+                },
             },
         },
 
@@ -6530,7 +6545,18 @@ export const selector = {
             shipStationText: '.dokan-settings-content h1',
             visitStore: '//a[normalize-space()="Visit Store"]',
 
-            authenticationKey: '//label[normalize-space()="Authentication Key"]/..//code',
+            generateCredentials: 'button#dokan-shipstation-generate-credentials-btn',
+            generateSuccessMessage: '//div[@id="swal2-html-container" and normalize-space()="API credentials generated successfully."]',
+            revokeCredentials: 'button#dokan-shipstation-revoke-credentials-btn',
+            confirmRevoke: 'button.swal2-confirm',
+            revokeSuccessMessage: '//div[@id="swal2-html-container" and normalize-space()="API credentials revoked successfully."]',
+
+            credentials: {
+                authenticationKey: '//label[normalize-space()="Authentication Key"]/..//code',
+                consumerKey: '//label[normalize-space()="Consumer Key"]/..//code',
+                consumerSecret: '//label[normalize-space()="Consumer Secret"]/..//code',
+            },
+
             selectedStatus: '//label[@for="dokan-shipstation-export-statuses"]/..//li[@class="select2-selection__choice"]',
             exportOrderStatusesInput: '//label[normalize-space()="Export Order Statuses"]/..//span[@class="select2-selection select2-selection--multiple"]//input[@class="select2-search__field"]',
             shippedOrderStatusDropdown: '.select2-selection__arrow',
@@ -6538,8 +6564,7 @@ export const selector = {
             result: '.select2-results__option.select2-results__option--highlighted',
 
             saveChanges: '#dokan-store-shipstation-form-submit',
-            saveSuccessMessage: '#swal2-html-container',
-            successOk: '.swal2-confirm',
+            saveSuccessMessage: '//div[@id="swal2-html-container" and normalize-space()="Settings saved successfully."]',
         },
 
         // social profile settings
@@ -6995,8 +7020,14 @@ export const selector = {
                 },
             },
 
+            radiusSearch: {
+                radiusUnit: 'span.dokan-range-slider-value',
+                slider: 'input.dokan-range-slider',
+            },
+
             // Filter
             filters: {
+                filterDiv: 'form.dokan-geolocation-location-filters',
                 searchProduct: 'input.dokan-form-control[placeholder="Search Products"]',
                 location: '.location-address input',
                 selectCategory: '#product_cat',
@@ -7253,7 +7284,7 @@ export const selector = {
             storeListText: '//h1[normalize-space()="Store List"]',
 
             map: {
-                locationMap: '#dokan-geolocation-locations-map',
+                locationMap: 'div#dokan-geolocation-locations-map',
                 map: '//button[normalize-space()="Map"]',
                 satellite: '//button[normalize-space()="Satellite"]',
                 fullScreenToggle: '//button[@title="Toggle fullscreen view"]',

@@ -3575,7 +3575,7 @@ export const payloads = {
         reportAbuse: 'report_abuse',
         rma: 'rma',
         sellerVacation: 'seller_vacation',
-        shipstation: 'shipstation',
+        shipStation: 'shipstation',
         auction: 'auction',
         spmv: 'spmv',
         storeReviews: 'store_reviews',
@@ -4872,6 +4872,18 @@ export const payloads = {
         },
     ],
 
+    // ShipStation
+
+    createCredential: {
+        vendor_id: '',
+    },
+
+    shipStationOrderStatusSettings: {
+        vendor_id: '',
+        export_statuses: ['wc-pending', 'wc-processing', 'wc-on-hold', 'wc-completed', 'wc-cancelled'],
+        shipped_status: 'wc-completed',
+    },
+
     // shortcodes
 
     // dokan dashboard shortcode
@@ -4941,6 +4953,13 @@ export const payloads = {
     requestQuoteShortcode: {
         title: 'Request-quote',
         content: '[dokan-request-quote]',
+        status: 'publish',
+    },
+
+    // product advertisement  shortcode
+    productAdvertisementShortcode: {
+        title: 'Advertised-products',
+        content: '[dokan_product_advertisement]',
         status: 'publish',
     },
 };

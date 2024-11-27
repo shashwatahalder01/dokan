@@ -6,7 +6,7 @@ import { payloads } from '@utils/payloads';
 import { dbUtils } from '@utils/dbUtils';
 import { dbData } from '@utils/dbData';
 
-// const { DOKAN_PRO } = process.env;
+const { DOKAN_PRO, PRODUCT_ID } = process.env;
 
 test.describe('Commission test', () => {
     let admin: CommissionPage;
@@ -78,7 +78,6 @@ test.describe('Commission test', () => {
     });
 
     test('admin can set commission for a product (fixed)', { tag: ['@lite', '@admin'] }, async () => {
-        test.skip(true, 'dokan issue, decimal separator , becomes .');
         const [, productId] = await apiUtils.createProduct(payloads.createProduct(), payloads.vendorAuth);
         await admin.setCommissionForProduct(productId, data.commission.fixed);
     });
@@ -97,4 +96,12 @@ test.describe('Commission test', () => {
         test.skip(true, 'Need to implement createDokanSubscriptionProduct function');
         await admin.setCommissionToDokanSubscriptionProduct(subscriptionProductId, data.commission.specificCategory);
     });
+
+    test('admin can view commission meta-box on order details', { tag: ['@lite', '@admin'] }, async () => {
+        const [, , orderId] = await apiUtils.createOrderWithStatus(PRODUCT_ID, payloads.createOrder, data.order.orderStatus.onhold, payloads.vendorAuth);
+        await admin.viewCommissionMetaBox(orderId);
+    });
+
+    // todo: admin can view commission on  product list, order list, and order details, sub order details on parent order
+    // todo: vendor can view earning on product list, product details, order list, and order details
 });
