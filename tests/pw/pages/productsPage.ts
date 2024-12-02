@@ -51,13 +51,13 @@ export class ProductsPage extends AdminPage {
         // product basic info
         await this.type(productsAdmin.product.productName, product.productName());
         await this.selectByValue(productsAdmin.product.productType, product.productType);
-        await this.click(productsAdmin.product.general);
+        await this.click(productsAdmin.product.subMenus.general);
         await this.type(productsAdmin.product.regularPrice, product.regularPrice());
         await this.click(productsAdmin.product.category(product.category));
 
         // stock status
         if (product.stockStatus) {
-            await this.click(productsAdmin.product.inventory);
+            await this.click(productsAdmin.product.subMenus.inventory);
             await this.selectByValue(productsAdmin.product.stockStatus, data.product.stockStatus.outOfStock);
         }
 
@@ -97,7 +97,7 @@ export class ProductsPage extends AdminPage {
         await this.selectByValue(productsAdmin.product.productType, product.productType);
 
         // add attributes
-        await this.click(productsAdmin.product.attributes);
+        await this.click(productsAdmin.product.subMenus.attributes);
 
         if (await this.isVisibleLocator(productsAdmin.product.customProductAttribute)) {
             await this.selectByValue(productsAdmin.product.customProductAttribute, `pa_${product.attribute}`);
@@ -113,8 +113,8 @@ export class ProductsPage extends AdminPage {
         await this.clickAndWaitForResponse(data.subUrls.ajax, productsAdmin.product.saveAttributes);
 
         // add variations
-        await this.click(productsAdmin.product.variations);
-        await this.clickAndAcceptAndWaitForResponse(data.subUrls.ajax, productsAdmin.product.generateVariations);
+        await this.click(productsAdmin.product.subMenus.variations);
+        await this.clickAndAcceptAndWaitForResponse(data.subUrls.ajax, productsAdmin.product.subMenus.generateVariations);
         this.fillAlert('100');
         await this.selectByValue(productsAdmin.product.addVariations, product.variations.variableRegularPrice);
 
@@ -137,7 +137,7 @@ export class ProductsPage extends AdminPage {
         // Name
         await this.type(productsAdmin.product.productName, product.productName());
         await this.selectByValue(productsAdmin.product.productType, product.productType);
-        await this.click(productsAdmin.product.general);
+        await this.click(productsAdmin.product.subMenus.general);
         await this.type(productsAdmin.product.subscriptionPrice, product.subscriptionPrice());
         await this.selectByValue(productsAdmin.product.subscriptionPeriodInterval, product.subscriptionPeriodInterval);
         await this.selectByValue(productsAdmin.product.subscriptionPeriod, product.subscriptionPeriod);
@@ -167,7 +167,7 @@ export class ProductsPage extends AdminPage {
         await this.selectByValue(productsAdmin.product.productType, product.productType);
 
         // add attributes
-        await this.click(productsAdmin.product.attributes);
+        await this.click(productsAdmin.product.subMenus.attributes);
 
         if (await this.isVisibleLocator(productsAdmin.product.customProductAttribute)) {
             await this.selectByValue(productsAdmin.product.customProductAttribute, `pa_${product.attribute}`);
@@ -183,8 +183,8 @@ export class ProductsPage extends AdminPage {
         await this.clickAndWaitForResponse(data.subUrls.ajax, productsAdmin.product.saveAttributes);
 
         // add variations
-        await this.click(productsAdmin.product.variations);
-        await this.clickAndAcceptAndWaitForResponse(data.subUrls.ajax, productsAdmin.product.generateVariations);
+        await this.click(productsAdmin.product.subMenus.variations);
+        await this.clickAndAcceptAndWaitForResponse(data.subUrls.ajax, productsAdmin.product.subMenus.generateVariations);
         this.fillAlert('100');
         await this.selectByValue(productsAdmin.product.addVariations, product.variations.variableRegularPrice);
 
@@ -207,7 +207,7 @@ export class ProductsPage extends AdminPage {
         // Name
         await this.type(productsAdmin.product.productName, product.productName());
         await this.selectByValue(productsAdmin.product.productType, product.productType);
-        await this.click(productsAdmin.product.general);
+        await this.click(productsAdmin.product.subMenus.general);
         await this.type(productsAdmin.product.productUrl, this.getBaseUrl() + product.productUrl);
         await this.type(productsAdmin.product.buttonText, product.buttonText);
         await this.type(productsAdmin.product.regularPrice, product.regularPrice());
@@ -231,7 +231,7 @@ export class ProductsPage extends AdminPage {
         // Name
         await this.type(productsAdmin.product.productName, product.productName());
         await this.selectByValue(productsAdmin.product.productType, product.productType);
-        await this.click(productsAdmin.product.general);
+        await this.click(productsAdmin.product.subMenus.general);
         await this.type(productsAdmin.product.regularPrice, product.regularPrice());
 
         // Category
@@ -568,7 +568,9 @@ export class ProductsPage extends AdminPage {
         await this.toHaveValue(productsVendor.title, productName);
         await this.toHaveValue(productsVendor.price, productPrice);
         await this.toBeChecked(productsVendor.virtual);
-        await this.notToBeVisible(productsVendor.shipping.shippingContainer);
+        if (DOKAN_PRO) {
+            await this.notToBeVisible(productsVendor.shipping.shippingContainer);
+        }
         await this.toContainTextFrameLocator(productsVendor.description.descriptionIframe, productsVendor.description.descriptionHtmlBody, product.description);
     }
 
@@ -680,7 +682,7 @@ export class ProductsPage extends AdminPage {
         await this.hover(productsVendor.productCell(productName));
         await this.clickAndWaitForLoadState(productsVendor.view(productName));
         await expect(this.page).toHaveURL(data.subUrls.frontend.productDetails(helpers.slugify(productName)) + '/');
-        const { quantity, addToCart, viewCart, euComplianceData, productAddedSuccessMessage, productWithQuantityAddedSuccessMessage, ...productDetails } = selector.customer.cSingleProduct.productDetails;
+        const { quantity, addToCart, viewCart, chatNow, euComplianceData, productAddedSuccessMessage, productWithQuantityAddedSuccessMessage, ...productDetails } = selector.customer.cSingleProduct.productDetails;
         await this.multipleElementVisible(productDetails);
     }
 
@@ -749,6 +751,7 @@ export class ProductsPage extends AdminPage {
     // quick edit product
     async quickEditProduct(product: product['simple']): Promise<void> {
         await this.searchProduct(product.editProduct);
+        await this.removeAttribute(productsVendor.rowActions(product.editProduct), 'class'); // forcing the row actions to be visible, to avoid flakiness
         await this.hover(productsVendor.productCell(product.editProduct));
         await this.click(productsVendor.quickEdit(product.editProduct));
 
@@ -959,12 +962,7 @@ export class ProductsPage extends AdminPage {
         await this.goToProductEdit(productName);
         // remove previous gallery images
         if (removePrevious) {
-            const imageCount = await this.getElementCount(productsVendor.image.uploadedGalleryImage);
-            for (let i = 0; i < imageCount; i++) {
-                await this.hover(productsVendor.image.galleryImageDiv);
-                await this.click(productsVendor.image.removeGalleryImage);
-            }
-            await this.toHaveCount(productsVendor.image.uploadedGalleryImage, 0);
+            await this.removeGalleryImages();
         }
 
         for (const galleryImage of galleryImages) {
@@ -976,13 +974,19 @@ export class ProductsPage extends AdminPage {
     }
 
     // remove product gallery images
-    async removeProductGalleryImages(productName: string): Promise<void> {
-        await this.goToProductEdit(productName);
+    async removeGalleryImages(): Promise<void> {
         const imageCount = await this.getElementCount(productsVendor.image.uploadedGalleryImage);
         for (let i = 0; i < imageCount; i++) {
             await this.hover(productsVendor.image.galleryImageDiv);
             await this.click(productsVendor.image.removeGalleryImage);
         }
+        await this.toHaveCount(productsVendor.image.uploadedGalleryImage, 0);
+    }
+
+    // remove product gallery images
+    async removeProductGalleryImages(productName: string): Promise<void> {
+        await this.goToProductEdit(productName);
+        await this.removeGalleryImages();
         await this.saveProduct();
         await this.toHaveCount(productsVendor.image.uploadedGalleryImage, 0);
     }
@@ -1033,6 +1037,26 @@ export class ProductsPage extends AdminPage {
         await this.notToBeVisible(productsVendor.downloadableOptions.deleteFile);
         await this.toHaveValue(productsVendor.downloadableOptions.downloadLimit, downloadableOption.downloadLimit);
         await this.toHaveValue(productsVendor.downloadableOptions.downloadExpiry, downloadableOption.downloadExpiry);
+    }
+
+    // add product virtual option
+    async addProductVirtualOption(productName: string, enable: boolean): Promise<void> {
+        await this.goToProductEdit(productName);
+        if (enable) {
+            await this.check(productsVendor.virtual);
+        } else {
+            await this.focus(productsVendor.virtual);
+            await this.uncheck(productsVendor.virtual);
+        }
+        await this.saveProduct();
+        if (enable) {
+            await this.toBeChecked(productsVendor.virtual);
+            if (DOKAN_PRO) {
+                await this.notToBeVisible(productsVendor.shipping.shippingContainer);
+            }
+        } else {
+            await this.notToBeChecked(productsVendor.virtual);
+        }
     }
 
     // add product inventory
@@ -1197,7 +1221,8 @@ export class ProductsPage extends AdminPage {
         await this.toHaveValue(productsVendor.shipping.height, shipping.height);
         await this.toHaveSelectedLabel(productsVendor.shipping.shippingClass, shipping.shippingClass);
     }
-    // add product shipping
+
+    // remove product shipping
     async removeProductShipping(productName: string): Promise<void> {
         await this.goToProductEdit(productName);
         await this.uncheck(productsVendor.shipping.requiresShipping);
@@ -1310,6 +1335,13 @@ export class ProductsPage extends AdminPage {
         await this.clickAndWaitForResponse(data.subUrls.ajax, productsVendor.attribute.saveAttribute);
         await this.saveProduct();
         await this.toBeVisible(productsVendor.attribute.savedAttribute(attribute.attributeName));
+    }
+
+    // cant add added attribute
+    async cantAddAlreadyAddedAttribute(productName: string, attributeName: string): Promise<void> {
+        await this.goToProductEdit(productName);
+        await this.toBeVisible(productsVendor.attribute.savedAttribute(attributeName));
+        await this.toHaveAttribute(productsVendor.attribute.disabledAttribute(attributeName), 'disabled', 'disabled');
     }
 
     // remove product attribute
@@ -1569,7 +1601,7 @@ export class ProductsPage extends AdminPage {
         await this.goToProductEdit(productName);
         await this.clearAndType(productsVendor.minMax.minimumQuantity, minMaxOption.minimumProductQuantity);
         await this.clearAndType(productsVendor.minMax.maximumQuantity, minMaxOption.maximumProductQuantity);
-        await this.press('Escape'); // to trigger validation
+        await this.press('Tab'); // to trigger validation
         await this.toHaveValue(productsVendor.minMax.maximumQuantity, minMaxOption.minimumProductQuantity);
         await this.saveProduct();
         await this.toHaveValue(productsVendor.minMax.minimumQuantity, minMaxOption.minimumProductQuantity);
