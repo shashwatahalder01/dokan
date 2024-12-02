@@ -108,7 +108,7 @@ test.describe('Order Min-Max - Cart Page', () => {
         await customerBrowser.close();
     });
 
-    test.only('Product quantity should not be more than maximum limit', { tag: ['@lite', '@admin'] }, async () => {
+    test('Product quantity should not be more than maximum limit', { tag: ['@lite', '@admin'] }, async () => {
         // vendor
         await vendorDashboardSidebarPage.clickOnProductsTab();
         await vendorProductListPage.clickOnProductWithTitle(productName);
@@ -131,7 +131,7 @@ test.describe('Order Min-Max - Cart Page', () => {
         expect(woocommerceError?.includes(`Maximum allowed quantity for ${productName} is 4.`)).toBeTruthy();
     });
 
-    test('Product quantity should not be less than minimum limit', { tag: ['@pro', '@admin'] }, async () => {
+    test('Product quantity should not be less than minimum limit', { tag: ['@lite', '@admin'] }, async () => {
         // vendor
         await vendorDashboardSidebarPage.clickOnProductsTab();
         await vendorProductListPage.clickOnProductWithTitle(productName);
@@ -154,7 +154,7 @@ test.describe('Order Min-Max - Cart Page', () => {
         expect(woocommerceError?.includes(`Minimum required quantity for ${productName} is 3.`)).toBeTruthy();
     });
 
-    test('Cart total should not be more than maximum amount limit', { tag: ['@pro', '@admin'] }, async () => {
+    test('Cart total should not be more than maximum amount limit', { tag: ['@lite', '@admin'] }, async () => {
         // vendor
         await vendorDashboardSidebarPage.clickOnProductsTab();
         await vendorProductListPage.clickOnProductWithTitle(productName);
@@ -178,7 +178,7 @@ test.describe('Order Min-Max - Cart Page', () => {
         expect(woocommerceError?.trim()).toEqual(`Maximum allowed cart amount for ${storeName} is $30.00. You currently have $40.00 in cart.`);
     });
 
-    test('Cart total should not be less than minimum amount limit', { tag: ['@pro', '@admin'] }, async () => {
+    test('Cart total should not be less than minimum amount limit', { tag: ['@lite', '@admin'] }, async () => {
         // vendor
         await vendorDashboardSidebarPage.clickOnProductsTab();
         await vendorProductListPage.clickOnProductWithTitle(productName);

@@ -103,7 +103,7 @@ test.describe('Order Min-Max - Single Product Page', () => {
         await customerBrowser.close();
     });
 
-    test('Adding more product than max quantity limit displays error in single product page', { tag: ['@pro', '@admin'] }, async () => {
+    test('Adding more product than max quantity limit displays error in single product page', { tag: ['@lite', '@admin'] }, async () => {
         await vendorDashboardSidebarPage.clickOnProductsTab();
         await vendorProductListPage.clickOnProductWithTitle(productName);
 
@@ -125,7 +125,7 @@ test.describe('Order Min-Max - Single Product Page', () => {
         expect(errorMessage[0]).toEqual(expectedErrorMessage);
     });
 
-    test('Error displayed in single product page if added product exceeds maximum allowed amount', { tag: ['@pro', '@admin'] }, async () => {
+    test('Error displayed in single product page if added product exceeds maximum allowed amount', { tag: ['@lite', '@admin'] }, async () => {
         await vendorDashboardSidebarPage.clickOnProductsTab();
         await vendorProductListPage.clickOnProductWithTitle(productName);
 

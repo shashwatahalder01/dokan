@@ -15,7 +15,7 @@ test.describe('Order Min-Max - Module Activation', () => {
         await page.goto(baseUrl);
     });
 
-    test('Admin is able to enable min-max feature from modules page', { tag: ['@pro', '@admin'] }, async ({ page }) => {
+    test('Admin is able to enable min-max feature from modules page', { tag: ['@lite', '@admin'] }, async ({ page }) => {
         let modulesPage = new DokanModulesPage(page);
 
         await loginPage.adminLogin({ username: ADMIN, password: ADMIN_PASSWORD });

@@ -160,7 +160,7 @@ test.describe('Order Min-Max - Multi-Vendor', () => {
         await customerBrowser.close();
     });
 
-    test('Customer is able to add to cart multi-vendor products with varying minimum quantity restrictions', { tag: ['@pro', '@admin'] }, async () => {
+    test('Customer is able to add to cart multi-vendor products with varying minimum quantity restrictions', { tag: ['@lite', '@admin'] }, async () => {
         // vendor 1
         await vendorDashboardSidebarPage_1.clickOnProductsTab();
         await vendorProductListPage_1.clickOnProductWithTitle(productName_1);
@@ -194,7 +194,7 @@ test.describe('Order Min-Max - Multi-Vendor', () => {
         expect(message?.trim()).toEqual(`Cart updated.`);
     });
 
-    test('Customer is able to add to cart multi-vendor products with varying maximum quantity restrictions', { tag: ['@pro', '@admin'] }, async () => {
+    test('Customer is able to add to cart multi-vendor products with varying maximum quantity restrictions', { tag: ['@lite', '@admin'] }, async () => {
         // vendor 1
         await vendorDashboardSidebarPage_1.clickOnProductsTab();
         await vendorProductListPage_1.clickOnProductWithTitle(productName_1);
@@ -228,7 +228,7 @@ test.describe('Order Min-Max - Multi-Vendor', () => {
         expect(message?.trim()).toEqual(`Cart updated.`);
     });
 
-    test('Customer is able to add to cart multi-vendor products with different minimum order amount', { tag: ['@pro', '@admin'] }, async () => {
+    test('Customer is able to add to cart multi-vendor products with different minimum order amount', { tag: ['@lite', '@admin'] }, async () => {
         // vendor 1
         await vendorDashboardSidebarPage_1.clickOnSettingsTab();
         await storeSettingsPage_1.enterMinimumOrderAmount('20');
@@ -268,7 +268,7 @@ test.describe('Order Min-Max - Multi-Vendor', () => {
         expect(message?.trim()).toEqual(`Cart updated.`);
     });
 
-    test('Customer is able to add to cart multi-vendor products with different maximum order amount', { tag: ['@pro', '@admin'] }, async () => {
+    test('Customer is able to add to cart multi-vendor products with different maximum order amount', { tag: ['@lite', '@admin'] }, async () => {
         // vendor 1
         await vendorDashboardSidebarPage_1.clickOnSettingsTab();
         await storeSettingsPage_1.enterMaximumOrderAmount('40');
