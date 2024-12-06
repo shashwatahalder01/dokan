@@ -7,7 +7,7 @@ Tested up to: 6.7.1
 WC requires at least: 8.0.0
 WC tested up to: 9.4.2
 Requires PHP: 7.4
-Stable tag: 3.14.0
+Stable tag: 3.14.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -347,6 +347,14 @@ A. Just install and activate the PRO version without deleting the free plugin. A
 
 == Changelog ==
 
+= v3.14.2 ( Dec 06, 2024 ) =
+
+- **update:** Added commission setting option in product bulk edit for Admin.
+
+= v3.14.1 ( Dec 04, 2024 ) =
+
+- **fix:** Fixed a issue in the commission upgrader to deal with empty values for product and vendor.
+
 = v3.14.0 ( Dec 02, 2024 ) =
 
 - **new:** Commission amount now displayed in the product list within the admin dashboard.
@@ -369,25 +377,8 @@ A. Just install and activate the PRO version without deleting the free plugin. A
 - **update:** Compatibility with the Printful Integration Module added.
 - **fix:** Improved logic to ensure the `add new category` button only appears when appropriate conditions are met, enhancing user experience.
 
-= v3.13.0 ( Nov 06, 2024 ) =
 
-- **feat:** Replaced the Dokan array container with the League Container, ensuring backward compatibility for seamless performance and enhanced flexibility.
-- **feat:** Updated Dokan to be fully compatible with WooCommerce Analytics Reports
-
-= v3.12.6 ( Oct 24, 2024 ) =
-
-- **fix:** Fixed js error on frontend pages.
-
-= v3.12.5 ( Oct 16, 2024 ) =
-
-- **fix:** Implement order trash and untrash handling for Dokan
-- **fix:** Added wordpress native i18n support
-
-= v3.12.4 ( Oct 03, 2024 ) =
-
-- **update:** Added `$data` parameter to `dokan_update_vendor` hook.
-
-[CHECK THE FULL CHANGELOG](https://github.com/getdokan/dokan/blob/ac8cfe42ed6d13a34572571728281591ebbf706f/CHANGELOG.md).
+[CHECK THE FULL CHANGELOG](https://github.com/getdokan/dokan/blob/develop/CHANGELOG.md).
 
 == Upgrade Notice ==
 
