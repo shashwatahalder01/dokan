@@ -935,7 +935,6 @@ export const data = {
         },
 
         specificCategory: {
-        specificCategory: {
             commissionType: 'category_based', // 'fixed','category_based'
             commissionPercentage: helpers.priceStringWithDecimal(2, 'ES'),
             commissionFixed: helpers.priceStringWithDecimal(2, 'ES'),

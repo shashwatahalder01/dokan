@@ -55,7 +55,6 @@ test.describe('Store list functionality test', () => {
     });
 
     test('customer can view stores on map', { tag: ['@pro', '@customer'] }, async () => {
-        // test.skip(true, '@todo fix this test');
         await customer.storeOnMap();
     });
 

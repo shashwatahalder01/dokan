@@ -17,6 +17,7 @@ export class CommissionPage extends AdminPage {
 
     // add commission
     async addCommission(commission: commission) {
+        await this.selectByValue(setupWizardAdmin.commissionType, commission.commissionType);
         if (commission.commissionType === 'fixed') {
             // await this.selectByValue(setupWizardAdmin.commissionType, commission.commissionType);
 
@@ -34,9 +35,6 @@ export class CommissionPage extends AdminPage {
                 await this.wait(1);
             } else {
                 const categoryExpanded = await this.isVisible(setupWizardAdmin.expandedCategories);
-                if (!categoryExpanded) {
-                    await this.click(setupWizardAdmin.expandCategories);
-                }
                 if (!categoryExpanded) {
                     await this.click(setupWizardAdmin.expandCategories);
                 }
@@ -132,7 +130,6 @@ export class CommissionPage extends AdminPage {
 
         // add commission
         await this.addCommission(commission);
-        await this.wait(1); // todo: resolve in future; test failed for fixed commission
 
         await this.clickAndWaitForResponse(data.subUrls.api.dokan.stores, vendors.editVendor.saveChanges);
         await this.click(vendors.editVendor.closeUpdateSuccessModal);
