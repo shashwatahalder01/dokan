@@ -4,7 +4,7 @@ import { dbData } from '@utils/dbData';
 
 const basicAuth = (username: string, password: string) => 'Basic ' + Buffer.from(username + ':' + password).toString('base64');
 
-const { ADMIN, VENDOR, VENDOR2, VENDOR3, CUSTOMER, CUSTOMER2, ADMIN_PASSWORD, USER_PASSWORD, CUSTOMER_ID, VENDOR_ID, PRODUCT_ID, PRODUCT_ID_V2, TAG_ID, ATTRIBUTE_ID } = process.env;
+const { ADMIN, VENDOR, VENDOR2, VENDOR3, CUSTOMER, CUSTOMER2, ADMIN_PASSWORD, USER_PASSWORD, CUSTOMER_ID, VENDOR_ID, VENDOR2_ID, PRODUCT_ID, PRODUCT_ID_V2, TAG_ID, ATTRIBUTE_ID } = process.env;
 
 export const payloads = {
     // wp
@@ -400,6 +400,7 @@ export const payloads = {
     }),
 
     createProduct: () => ({
+        // post_author: '',
         name: `${faker.commerce.productName()}_${faker.string.nanoid(5)} (Simple)`,
         type: 'simple',
         regular_price: faker.finance.amount({ min: 100, max: 200, dec: faker.helpers.arrayElement([0, 2]) }),
@@ -962,7 +963,7 @@ export const payloads = {
         ],
     }),
 
-    createBookableProduct: () => ({
+    createBookableProductRequiredFields: () => ({
         name: `${faker.commerce.productName()}_${faker.string.nanoid(5)} (Bookable)`,
         status: 'publish',
         featured: true,
@@ -976,7 +977,7 @@ export const payloads = {
         max_duration: 10,
         calendar_display_mode: 'always_visible',
         enable_range_picker: true,
-        requires_confirmations: false,
+        requires_confirmation: false,
         can_be_cancelled: false,
         default_date_availability: 'available',
         block_cost: 5,
@@ -988,6 +989,118 @@ export const payloads = {
         // min_date_unit            : 'day',
         // max_date_value           : 11,
         // max_date_unit            : 'month'
+    }),
+
+    createBookableProduct: () => ({
+        name: `${faker.commerce.productName()}_${faker.string.nanoid(5)} (Bookable)`,
+        status: 'publish',
+        featured: true,
+        description: '<p>test description</p>',
+        short_description: '<p>test short description</p>',
+        // categories
+        categories: [
+            {},
+            // {
+            //     id: CATEGORY_ID,
+            // },
+        ],
+        // tags
+        tags: [{ id: TAG_ID }],
+        // attributes
+        attributes: [
+            {
+                id: ATTRIBUTE_ID,
+                name: 'sizes',
+                position: 0,
+                visible: true,
+                variation: true,
+                options: ['s', 'l', 'm'],
+            },
+        ],
+        duration_type: 'customer',
+        duration_unit: 'day',
+        duration: 1,
+        min_duration: 1,
+        max_duration: 10,
+        calendar_display_mode: 'always_visible',
+        enable_range_picker: true,
+        requires_confirmation: false,
+        can_be_cancelled: false,
+        default_date_availability: 'available',
+        block_cost: 5,
+        cost: 10,
+        display_cost: '15',
+        has_persons: false,
+        has_resources: false,
+        qty: 100,
+        // min_date_value           : 10,
+        // min_date_unit            : 'day',
+        // max_date_value           : 11,
+        // max_date_unit            : 'month'
+    }),
+
+    createBookableProductWithAccommodation: () => ({
+        name: `${faker.commerce.productName()}_${faker.string.nanoid(5)} (Bookable)`,
+        status: 'publish',
+        featured: true,
+        description: '<p>test description</p>',
+        short_description: '<p>test short description</p>',
+        // categories
+        categories: [
+            {},
+            // {
+            //     id: CATEGORY_ID,
+            // },
+        ],
+        // tags
+        tags: [{ id: TAG_ID }],
+        // attributes
+        attributes: [
+            {
+                id: ATTRIBUTE_ID,
+                name: 'sizes',
+                position: 0,
+                visible: true,
+                variation: true,
+                options: ['s', 'l', 'm'],
+            },
+        ],
+        duration_type: 'customer',
+        duration_unit: 'day',
+        duration: 1,
+        min_duration: 1,
+        max_duration: 10,
+        // min_duration: 88,
+        // max_duration: 89,
+        calendar_display_mode: 'always_visible',
+        enable_range_picker: true,
+        requires_confirmation: false,
+        can_be_cancelled: false,
+        default_date_availability: 'available',
+        block_cost: 5,
+        cost: 10,
+        display_cost: '15',
+        has_persons: false,
+        has_resources: false,
+        qty: 100,
+        // min_date_value           : 10,
+        // min_date_unit            : 'day',
+        // max_date_value           : 11,
+        // max_date_unit            : 'month'
+        meta_data: [
+            {
+                key: '_dokan_is_accommodation_booking',
+                value: 'yes',
+            },
+            {
+                key: '_dokan_accommodation_checkin_time',
+                value: '12:00 am',
+            },
+            {
+                key: '_dokan_accommodation_checkout_time',
+                value: '12:00 am',
+            },
+        ],
     }),
 
     createBookingResource: () => ({
@@ -1035,6 +1148,7 @@ export const payloads = {
         ],
         // tags
         tags: [{ id: TAG_ID }],
+        // attributes
         attributes: [
             {
                 id: ATTRIBUTE_ID,
@@ -1839,6 +1953,70 @@ export const payloads = {
             },
         ],
     },
+
+    createMultiVendorOrder: {
+        payment_method: 'bacs',
+        payment_method_title: 'Direct Bank Transfer',
+        set_paid: true,
+        customer_id: CUSTOMER_ID ?? 0,
+        billing: {
+            first_name: 'customer1',
+            last_name: 'c1',
+            address_1: 'abc street',
+            address_2: 'xyz street',
+            city: 'New York',
+            state: 'NY',
+            postcode: '10003',
+            country: 'US',
+            email: 'customer1@email.com',
+            phone: '(555) 555-5555',
+        },
+
+        shipping: {
+            first_name: 'customer1',
+            last_name: 'c1',
+            address_1: 'abc street',
+            address_2: 'xyz street',
+            city: 'New York',
+            state: 'NY',
+            postcode: '10003',
+            country: 'US',
+        },
+
+        line_items: [
+            {
+                product_id: PRODUCT_ID ?? '',
+                quantity: 1,
+            },
+            {
+                product_id: PRODUCT_ID_V2 ?? '',
+                quantity: 1,
+            },
+        ],
+
+        shipping_lines: [
+            {
+                method_id: 'flat_rate',
+                method_title: 'Flat Rate',
+                total: '10.00',
+            },
+        ],
+
+        coupon_lines: [],
+    },
+
+    multivendorLineItems: [
+        {
+            author: VENDOR_ID,
+            products: '3', // product Ids
+            quantities: '1',
+        },
+        {
+            author: VENDOR2_ID,
+            products: '3', // product Ids
+            quantities: '1',
+        },
+    ],
 
     createOrderNote: {
         status: 'processing',
@@ -3445,8 +3623,9 @@ export const payloads = {
     // module
 
     moduleIds: {
+        auction: 'auction',
         booking: 'booking',
-        colorSchemeCustomize: 'color_scheme_customizer',
+        colorSchemeCustomizer: 'color_scheme_customizer',
         deliveryTime: 'delivery_time',
         elementor: 'elementor',
         exportImport: 'export_import',
@@ -3455,41 +3634,41 @@ export const payloads = {
         germanized: 'germanized',
         liveChat: 'live_chat',
         liveSearch: 'live_search',
+        mangopay: 'mangopay',
         moip: 'moip',
+        orderMinMax: 'order_min_max',
         paypalMarketplace: 'paypal_marketplace',
+        printful: 'printful',
         productAddon: 'product_addon',
+        productAdvertising: 'product_advertising',
         productEnquiry: 'product_enquiry',
+        productSubscription: 'product_subscription',
+        rankMath: 'rank_math',
         reportAbuse: 'report_abuse',
+        requestForQuotation: 'request_for_quotation',
         rma: 'rma',
+        sellerBadge: 'seller_badge',
         sellerVacation: 'seller_vacation',
-        shipstation: 'shipstation',
-        auction: 'auction',
+        shipStation: 'shipstation',
         spmv: 'spmv',
         storeReviews: 'store_reviews',
         storeSupport: 'store_support',
         stripe: 'stripe',
-        productAdvertising: 'product_advertising',
-        productSubscription: 'product_subscription',
+        stripeExpress: 'stripe_express',
+        tableRateShipping: 'table_rate_shipping',
         vendorAnalytics: 'vendor_analytics',
         vendorStaff: 'vendor_staff',
-        vsp: 'vsp',
         vendorVerification: 'vendor_verification',
+        vsp: 'vsp',
         wholesale: 'wholesale',
-        rankMath: 'rank_math',
-        tableRateShipping: 'table_rate_shipping',
-        mangopay: 'mangopay',
-        orderMinMax: 'order_min_max',
-        sellerBadge: 'seller_badge',
-        stripeExpress: 'stripe_express',
-        requestForQuotation: 'request_for_quotation',
     },
 
     deactivateModule: {
-        module: ['booking'],
+        module: 'booking',
     },
 
     activateModule: {
-        module: ['booking'],
+        module: 'booking',
     },
 
     // announcement
@@ -4759,6 +4938,18 @@ export const payloads = {
         },
     ],
 
+    // ShipStation
+
+    createCredential: {
+        vendor_id: '',
+    },
+
+    shipStationOrderStatusSettings: {
+        vendor_id: '',
+        export_statuses: ['wc-pending', 'wc-processing', 'wc-on-hold', 'wc-completed', 'wc-cancelled'],
+        shipped_status: 'wc-completed',
+    },
+
     // shortcodes
 
     // dokan dashboard shortcode
@@ -4828,6 +5019,13 @@ export const payloads = {
     requestQuoteShortcode: {
         title: 'Request-quote',
         content: '[dokan-request-quote]',
+        status: 'publish',
+    },
+
+    // product advertisement  shortcode
+    productAdvertisementShortcode: {
+        title: 'Advertised-products',
+        content: '[dokan_product_advertisement]',
         status: 'publish',
     },
 };

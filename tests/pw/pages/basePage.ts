@@ -6,6 +6,7 @@
 import { expect, Page, BrowserContext, Cookie, Request, Response, Locator, Frame, FrameLocator, JSHandle, ElementHandle } from '@playwright/test';
 import { data } from '@utils/testData';
 import { selector } from '@pages/selectors';
+import { helpers } from '@utils/helpers';
 
 const { BASE_URL } = process.env;
 
@@ -43,13 +44,19 @@ export class BasePage {
     }
 
     // goto subUrl
-    async goto(subPath: string, options: { referer?: string; timeout?: number; waitUntil?: 'load' | 'domcontentloaded' | 'networkidle' | 'commit' } | undefined = { waitUntil: 'domcontentloaded' }): Promise<void> {
+    async goto(subPath: string, options: { referer?: string; timeout?: number; waitUntil?: 'load' | 'domcontentloaded' | 'networkidle' | 'commit' } | undefined = { waitUntil: 'domcontentloaded' }, force = false): Promise<void> {
         await this.page.goto(subPath, options);
+        if (force) {
+            await this.reload();
+        }
     }
 
     // goto subUrl until networkidle
-    async gotoUntilNetworkidle(subPath: string, options: { referer?: string; timeout?: number; waitUntil?: 'load' | 'domcontentloaded' | 'networkidle' | 'commit' } | undefined = { waitUntil: 'networkidle' }): Promise<void> {
+    async gotoUntilNetworkidle(subPath: string, options: { referer?: string; timeout?: number; waitUntil?: 'load' | 'domcontentloaded' | 'networkidle' | 'commit' } | undefined = { waitUntil: 'networkidle' }, force = false): Promise<void> {
         await this.goto(subPath, options);
+        if (force) {
+            await this.reload();
+        }
     }
 
     // go forward
@@ -204,8 +211,8 @@ export class BasePage {
     }
 
     // click & wait for load state to complete
-    async clickAndWaitForLoadState(selector: string): Promise<void> {
-        await Promise.all([this.waitForLoadState(), this.page.locator(selector).click()]);
+    async clickAndWaitForLoadState(selector: string, state: 'load' | 'domcontentloaded' | 'networkidle' = 'domcontentloaded', options?: { timeout?: number }): Promise<void> {
+        await Promise.all([this.waitForLoadState(state, options), this.page.locator(selector).click()]);
     }
 
     // click & wait for navigation to complete
@@ -1419,10 +1426,15 @@ export class BasePage {
         }
     }
 
-    // multiple elements to be visible
-    async multipleElementVisible(selectors: any) {
+    async multipleElementVisible(selectors: { [key: string]: any }) {
         for (const selector in selectors) {
-            await this.toBeVisible(selectors[selector]);
+            if (helpers.isPlainObject(selectors[selector])) {
+                await this.multipleElementVisible(selectors[selector]);
+            } else if (typeof selectors[selector] === 'function') {
+                continue;
+            } else {
+                await this.toBeVisible(selectors[selector]);
+            }
         }
     }
 
@@ -1590,6 +1602,14 @@ export class BasePage {
                 return await asyncFn();
             }, options)
             .toBe(200);
+    }
+
+    // assert two element to have same count
+    async toHaveEqualCount(selector1: string, selector2: string, options?: { timeout?: number; intervals?: number[] }) {
+        await this.toPass(async () => {
+            const [selector1Count, selector2Count] = await Promise.all([await this.getElementCount(selector1), await this.getElementCount(selector2)]);
+            expect(selector1Count).toBe(selector2Count);
+        }, options);
     }
 
     // assert element not to be visible
