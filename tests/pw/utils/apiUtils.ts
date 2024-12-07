@@ -261,6 +261,12 @@ export class ApiUtils {
         return responseBody;
     }
 
+    // update store status
+    async updateStoreStatus(storeId: string, payload: object, auth?: auth): Promise<responseBody> {
+        const [, responseBody] = await this.put(endPoints.updateStoreStatus(storeId), { data: payload, headers: auth });
+        return responseBody;
+    }
+
     // delete all stores
     async deleteAllStores(auth?: auth): Promise<responseBody> {
         const allStores = await this.getAllStores(auth);
@@ -858,13 +864,19 @@ export class ApiUtils {
     }
 
     // get activate modules
-    async activateModules(moduleIds: string[], auth?: auth): Promise<[APIResponse, responseBody]> {
+    async activateModules(moduleIds: string | string[], auth?: auth): Promise<[APIResponse, responseBody]> {
+        if (!Array.isArray(moduleIds)) {
+            moduleIds = [moduleIds];
+        }
         const [response, responseBody] = await this.put(endPoints.activateModule, { data: { module: moduleIds }, headers: auth });
         return [response, responseBody];
     }
 
     // get deactivated modules
-    async deactivateModules(moduleIds: string[], auth?: auth): Promise<[APIResponse, responseBody]> {
+    async deactivateModules(moduleIds: string | string[], auth?: auth): Promise<[APIResponse, responseBody]> {
+        if (!Array.isArray(moduleIds)) {
+            moduleIds = [moduleIds];
+        }
         const [response, responseBody] = await this.put(endPoints.deactivateModule, { data: { module: moduleIds }, headers: auth });
         return [response, responseBody];
     }
@@ -896,6 +908,7 @@ export class ApiUtils {
     // create customer
     async createCustomer(payload: any, auth?: auth): Promise<[responseBody, string]> {
         const [response, responseBody] = await this.post(endPoints.wc.createCustomer, { data: payload, headers: auth }, false);
+
         let customerId: string;
         if (responseBody.code) {
             expect(response.status()).toBe(400);
@@ -1527,6 +1540,30 @@ export class ApiUtils {
     }
 
     /**
+     * ShipStation api methods
+     */
+
+    async createShipStationCredential(vendorId: string, auth?: auth): Promise<responseBody> {
+        const [, responseBody] = await this.post(endPoints.createShipStationCredential, { data: { vendor_id: vendorId }, headers: auth });
+        return responseBody;
+    }
+
+    async deleteShipStationCredential(vendorId: string, auth?: auth): Promise<responseBody> {
+        const [, responseBody] = await this.delete(endPoints.deleteShipStationCredential(vendorId), { headers: auth });
+        return responseBody;
+    }
+
+    async createShipStationOrderStatusSettings(payload: object, auth?: auth): Promise<responseBody> {
+        const [, responseBody] = await this.post(endPoints.createShipStationOrderStatusSettings, { data: payload, headers: auth });
+        return responseBody;
+    }
+
+    async deleteShipStationOrderStatusSettings(vendorId: string, auth?: auth): Promise<responseBody> {
+        const [, responseBody] = await this.delete(endPoints.deleteShipStationOrderStatusSettings(vendorId), { headers: auth });
+        return responseBody;
+    }
+
+    /**
      * wp api methods
      */
 
@@ -1763,6 +1800,72 @@ export class ApiUtils {
         return responseBody;
     }
 
+    // widgets
+
+    // get all widgets
+    async getAllWidgets(auth?: auth): Promise<responseBody> {
+        const [, responseBody] = await this.get(endPoints.wp.getAllWidgets, { params: { per_page: 100 }, headers: auth });
+        return responseBody;
+    }
+
+    // get single widget
+    async getSingleWidget(widgetId: string, auth?: auth): Promise<responseBody> {
+        const [, responseBody] = await this.get(endPoints.wp.getSingleWidget(widgetId), { headers: auth });
+        return responseBody;
+    }
+
+    // create widget
+    async createWidget(payload: object, auth?: auth): Promise<[APIResponse, responseBody]> {
+        const [response, responseBody] = await this.post(endPoints.wp.createWidget, { data: payload, headers: auth });
+        return [response, responseBody];
+    }
+
+    // update widget
+    async updateWidget(widgetId: string, payload: object, auth?: auth): Promise<[APIResponse, responseBody]> {
+        const [response, responseBody] = await this.put(endPoints.wp.updateWidget(widgetId), { data: payload, headers: auth });
+        return [response, responseBody];
+    }
+
+    // delete widget
+    async deleteWidget(widgetId: string, payload: object, auth?: auth): Promise<[APIResponse, responseBody]> {
+        const [response, responseBody] = await this.delete(endPoints.wp.deleteWidget(widgetId), { data: payload, headers: auth });
+        return [response, responseBody];
+    }
+
+    // widget types
+
+    // get all widget types
+    async getAllWidgetTypes(auth?: auth): Promise<responseBody> {
+        const [, responseBody] = await this.get(endPoints.wp.getAllWidgetTypes, { params: { per_page: 100 }, headers: auth });
+        return responseBody;
+    }
+
+    // get single widget type
+    async getSingleWidgetTypes(widgetTypeId: string, auth?: auth): Promise<responseBody> {
+        const [, responseBody] = await this.get(endPoints.wp.getSingleWidgetType(widgetTypeId), { headers: auth });
+        return responseBody;
+    }
+
+    // sidebars
+
+    // get all sidebars
+    async getAllSidebars(auth?: auth): Promise<responseBody> {
+        const [, responseBody] = await this.get(endPoints.wp.getAllSidebars, { params: { per_page: 100 }, headers: auth });
+        return responseBody;
+    }
+
+    // get single sidebar
+    async getSingleSidebar(sidebarId: string, auth?: auth): Promise<responseBody> {
+        const [, responseBody] = await this.get(endPoints.wp.getSingleSidebar(sidebarId), { headers: auth });
+        return responseBody;
+    }
+
+    // update sidebar
+    async updateSidebar(sidebarId: string, payload: object, auth?: auth): Promise<[APIResponse, responseBody]> {
+        const [response, responseBody] = await this.post(endPoints.wp.updateSidebar(sidebarId), { data: payload, headers: auth });
+        return [response, responseBody];
+    }
+
     /**
      * woocommerce  api methods
      */
@@ -1954,6 +2057,13 @@ export class ApiUtils {
         return [...order, productId];
     }
 
+    // create multivendor order
+    async createMultivendorOrder(orderPayload: any, lineItemPayload?: any) {
+        const lineItems = await this.createLineItemsEnhanced(lineItemPayload);
+        const [, parentOrder, parentOrderId] = await this.createOrderWc({ ...orderPayload, line_items: lineItems });
+        return [parentOrder, parentOrderId];
+    }
+
     // create order with status
     async createOrderWithStatus(product: string | object, order: any, status: string, auth?: auth): Promise<[APIResponse, responseBody, string, string]> {
         const [response, responseBody, orderId, productId] = await this.createOrder(product, order, auth);
@@ -1963,6 +2073,7 @@ export class ApiUtils {
 
     // create line items
     async createLineItems(products = 1, quantities = [1], authors = [payloads.vendorAuth]) {
+        // todo: replace createLineItems with createLineItemsEnhanced and update tests
         const lineItems = [];
 
         for (let i = 0; i < products; i++) {
@@ -1972,6 +2083,28 @@ export class ApiUtils {
             lineItems.push({ product_id: productId, quantity: quantity });
         }
 
+        return lineItems;
+    }
+
+    // create multivendor line items
+    async createLineItemsEnhanced(multivendorLineItem: { author: string; products: string | string[]; quantities: string | string[] }[]) {
+        const lineItems = [];
+        for (const item of multivendorLineItem) {
+            const { author, products, quantities } = item;
+
+            // Validate lengths only if both `products` and `quantities` are arrays
+            if (Array.isArray(products) && Array.isArray(quantities) && products.length !== quantities.length) {
+                throw new Error('products and quantities must be the same length');
+            }
+
+            const quantitiesArray = Array.isArray(quantities) ? quantities : [quantities];
+            const length = Array.isArray(products) ? products.length : Number(item.products);
+            for (let i = 0; i < length; i++) {
+                const productId = Array.isArray(products) ? products[i] : (await this.createProduct({ ...payloads.createProduct(), post_author: author }, payloads.adminAuth))[1];
+                const quantity = quantitiesArray[i % quantitiesArray.length];
+                lineItems.push({ product_id: productId, quantity: quantity });
+            }
+        }
         return lineItems;
     }
 
