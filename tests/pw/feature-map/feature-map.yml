@@ -705,7 +705,6 @@
           vendor can duplicate auction product: true
           vendor can permanently delete auction product: true
           vendor can edit auction product: true
-          vendor can edit auction product: true
           vendor can update auction product title: true
           vendor can update auction product category (single): true
           vendor can add auction product category (multiple): true
@@ -1127,8 +1126,6 @@
 - page: 'Razorpay'
   features:
       admin:
-          admin can enable Razorpay module: false
-          admin can disable Razorpay module: false
           admin can enable Razorpay module: false
           admin can disable Razorpay module: false
           admin can add Razorpay payment method: true
