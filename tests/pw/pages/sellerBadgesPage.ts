@@ -1,4 +1,4 @@
-import { Page, expect, test } from '@playwright/test';
+import { Page } from '@playwright/test';
 import { AdminPage } from '@pages/adminPage';
 import { StoresPage } from '@pages/storesPage';
 import { selector } from '@pages/selectors';
@@ -44,9 +44,9 @@ export class SellerBadgesPage extends AdminPage {
     // search seller badge
     async searchSellerBadge(badgeName: string) {
         await this.goto(data.subUrls.backend.dokan.sellerBadge);
-
         await this.clearInputField(sellerBadgeAdmin.search);
         await this.typeAndWaitForResponseAndLoadState(data.subUrls.api.dokan.sellerBadge, sellerBadgeAdmin.search, badgeName);
+        await this.toHaveCount(sellerBadgeAdmin.numberOfRows, 1);
         await this.toBeVisible(sellerBadgeAdmin.sellerBadgeCell(badgeName));
         await this.toHaveCount(sellerBadgeAdmin.numberOfRows, 1);
     }
@@ -189,9 +189,8 @@ export class SellerBadgesPage extends AdminPage {
 
         await this.clickIfVisible(selector.admin.dokan.vendors.filters.clearFilter);
         await this.selectByLabel(selector.admin.dokan.vendors.filters.filterByBadges, badgeName);
-
-        const count = (await this.getElementText(selector.admin.dokan.vendors.numberOfRowsFound))?.split(' ')[0];
-        expect(Number(count)).toBeGreaterThan(0);
+        await this.notToHaveText(selector.admin.dokan.vendors.numberOfRowsFound, '0 items');
+        await this.notToBeVisible(selector.admin.dokan.vendors.noRowsFound);
     }
 
     // seller badge vendors
@@ -200,9 +199,8 @@ export class SellerBadgesPage extends AdminPage {
 
         await this.hover(sellerBadgeAdmin.sellerBadgeRow(badgeName));
         await this.clickAndWaitForResponse(data.subUrls.api.dokan.sellerBadge, sellerBadgeAdmin.sellerBadgeVendors(badgeName));
-        // await this.toBeVisible(selector.admin.dokan.vendors.vendorCell(badgeName));
-        const count = (await this.getElementText(selector.admin.dokan.vendors.numberOfRowsFound))?.split(' ')[0];
-        expect(Number(count)).toBeGreaterThan(0);
+        await this.notToHaveText(selector.admin.dokan.vendors.numberOfRowsFound, '0 items');
+        await this.notToBeVisible(selector.admin.dokan.vendors.noRowsFound);
     }
 
     // badges acquired by vendor
@@ -298,6 +296,7 @@ export class SellerBadgesPage extends AdminPage {
         await this.clickIfVisible(sellerBadgeVendor.congratsModal.closeModal);
         await this.goIfNotThere(data.subUrls.frontend.vDashboard.badges);
         await this.clearAndType(sellerBadgeVendor.search, badgeName);
+        await this.toHaveCount(sellerBadgeVendor.numberOfRows, 1);
         await this.toBeVisible(sellerBadgeVendor.sellerBadgeCell(badgeName));
     }
 
@@ -308,7 +307,6 @@ export class SellerBadgesPage extends AdminPage {
         await this.goto(data.subUrls.frontend.vDashboard.badges);
         await this.selectByValue(sellerBadgeVendor.filterBadges, option);
         await this.notToBeVisible(sellerBadgeVendor.noRowsFound);
-        const count = (await this.getElementText(sellerBadgeVendor.numberOfBadgesFound))?.split(' ')[0];
-        expect(Number(count)).toBeGreaterThan(0);
+        await this.notToHaveCount(sellerBadgeVendor.numberOfRows, 0);
     }
 }

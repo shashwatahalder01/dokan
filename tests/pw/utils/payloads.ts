@@ -4,7 +4,7 @@ import { dbData } from '@utils/dbData';
 
 const basicAuth = (username: string, password: string) => 'Basic ' + Buffer.from(username + ':' + password).toString('base64');
 
-const { ADMIN, VENDOR, VENDOR2, VENDOR3, CUSTOMER, CUSTOMER2, ADMIN_PASSWORD, USER_PASSWORD, CUSTOMER_ID, PRODUCT_ID } = process.env;
+const { ADMIN, VENDOR, VENDOR2, VENDOR3, CUSTOMER, CUSTOMER2, ADMIN_PASSWORD, USER_PASSWORD, CUSTOMER_ID, VENDOR_ID, VENDOR2_ID, PRODUCT_ID, PRODUCT_ID_V2, TAG_ID, ATTRIBUTE_ID } = process.env;
 
 export const payloads = {
     // wp
@@ -115,14 +115,301 @@ export const payloads = {
 
     // product
 
-    createProduct: () => ({
-        name: `${faker.commerce.productName()} (Simple)`,
+    createProductRequiredFields: () => ({
+        name: `${faker.commerce.productName()}_${faker.string.nanoid(5)} (Simple)`,
         type: 'simple',
-        regular_price: faker.finance.amount({ min: 100, max: 200, dec: faker.helpers.arrayElement([0, 2]) }),
-        // regular_price: faker.finance.amount({ min: 100, max: 200, dec: faker.helpers.arrayElement([0, 2]) }),
-        // regular_price: '114.15' , // failed for this price & 5% tax & 10% commission dokan .1 issue
         status: 'publish',
         categories: [{}],
+        description: '<p>test description</p>',
+    }),
+
+    createProductAllFields: () => ({
+        name: `${faker.commerce.productName()}_${faker.string.nanoid(5)} (Simple)`,
+        type: 'simple', // simple, variable, grouped, external
+        featured: true,
+        virtual: false,
+        regular_price: faker.finance.amount({ min: 100, max: 200, dec: faker.helpers.arrayElement([0, 2]) }),
+        // discount
+        sale_price: faker.finance.amount({ min: 50, max: 100, dec: faker.helpers.arrayElement([0, 2]) }),
+        date_on_sale_from: helpers.currentDateTime,
+        date_on_sale_to: helpers.addDays(helpers.currentDateTime, 10),
+        // categories
+        categories: [
+            {},
+            // {
+            //     id: CATEGORY_ID,
+            // },
+        ],
+        // tags
+        tags: [{ id: TAG_ID }],
+        attributes: [
+            {
+                id: ATTRIBUTE_ID,
+                name: 'sizes',
+                position: 0,
+                visible: true,
+                variation: true,
+                options: ['s', 'l', 'm'],
+            },
+        ],
+        // images
+        // images: [
+        //     // cover
+        //     {
+        //         // id: 78,
+        //         name: 'coverImage',
+        //         alt: 'coverImage',
+        //         src: '',
+        //     },
+        //     // gallery
+        //     {
+        //         // id: 78,
+        //         name: 'galleryImage',
+        //         alt: 'galleryImage',
+        //         src: '',
+        //     },
+        // ],
+
+        short_description: '<p>test short product description.</p>',
+        description: '<p>test product description</p>',
+        // downloadable
+        downloadable: true,
+        // downloads: [
+        //     {
+        //         name: 'File 1',
+        //         file: '',
+        //     },
+        // ],
+        download_limit: 50,
+        download_expiry: 100,
+        // inventory
+        sku: faker.string.nanoid(10),
+        stock_status: 'instock', // instock, outofstock, onbackorder
+        manage_stock: true,
+        stock_quantity: 50,
+        low_stock_amount: 5,
+        backorders: 'yes', // no, notify, yes
+        sold_individually: true,
+        // shipping
+        weight: '15',
+        dimensions: {
+            length: '25',
+            width: '35',
+            height: '45',
+        },
+        shipping_taxable: true,
+        shipping_class: 'heavy',
+        //tax
+        tax_status: 'taxable', // taxable, shipping, none
+        tax_class: 'reduced-rate', // standard, reduced-rate, zero-rate
+        // linked products
+        upsell_ids: [PRODUCT_ID],
+        cross_sell_ids: [PRODUCT_ID],
+        grouped_products: [PRODUCT_ID, PRODUCT_ID_V2],
+        // other options
+        status: 'publish', // publish, draft, pending, private
+        catalog_visibility: 'visible', // visible, catalog, search, hidden
+        purchase_note: 'test purchase note',
+        reviews_allowed: true,
+        meta_data: [
+            {
+                key: '_dokan_geolocation_use_store_settings',
+                value: 'no',
+            },
+            {
+                key: 'dokan_geo_latitude',
+                value: '23.8041',
+            },
+            {
+                key: 'dokan_geo_longitude',
+                value: '90.4152',
+            },
+            {
+                key: 'dokan_geo_public',
+                value: '1',
+            },
+            {
+                key: 'dokan_geo_address',
+                value: 'Dhaka, Bangladesh',
+            },
+            {
+                key: '_dokan_rma_override_product',
+                value: 'yes',
+            },
+            {
+                key: '_dokan_rma_settings',
+                value: {
+                    label: 'Warranty',
+                    type: 'included_warranty',
+                    policy: 'test refund policy',
+                    reasons: ['defective'],
+                    length: 'lifetime',
+                    length_value: '',
+                    length_duration: '',
+                    addon_settings: [],
+                },
+            },
+            {
+                key: '_product_addons',
+                value: [
+                    {
+                        name: `Add-on Title_${faker.string.nanoid(5)}`,
+                        title_format: 'label',
+                        description_enable: 1,
+                        description: 'Add-on description',
+                        type: 'multiple_choice',
+                        display: 'select',
+                        position: 0,
+                        required: 1,
+                        restrictions: 0,
+                        restrictions_type: 'any_text',
+                        adjust_price: 0,
+                        price_type: 'flat_fee',
+                        price: '',
+                        min: 0,
+                        max: 0,
+                        options: [
+                            {
+                                label: 'Option 1',
+                                price: '30',
+                                image: '',
+                                price_type: 'flat_fee',
+                            },
+                        ],
+                        wc_booking_person_qty_multiplier: 0,
+                        wc_booking_block_qty_multiplier: 0,
+                    },
+                ],
+            },
+            {
+                key: '_product_addons_exclude_global',
+                value: '1',
+            },
+            {
+                key: '_dokan_wholesale_meta',
+                value: {
+                    enable_wholesale: 'yes',
+                    price: '80',
+                    quantity: '100',
+                },
+            },
+            {
+                key: '_dokan_min_max_meta',
+                value: {
+                    min_quantity: '5',
+                    max_quantity: '100',
+                },
+            },
+            {
+                key: '_dokan_catalog_mode',
+                value: {
+                    hide_add_to_cart_button: 'on',
+                    hide_product_price: 'on',
+                },
+            },
+
+            // bulk discount
+            {
+                key: '_is_lot_discount',
+                value: 'yes',
+            },
+            {
+                key: '_lot_discount_quantity',
+                value: '50',
+            },
+            {
+                key: '_lot_discount_amount',
+                value: '5.00',
+            },
+            // commission
+            {
+                key: '_per_product_admin_commission_type',
+                value: 'flat',
+            },
+            {
+                key: '_per_product_admin_commission',
+                value: '',
+            },
+            {
+                key: '_per_product_admin_additional_fee',
+                value: '',
+            },
+            {
+                key: '_has_multi_vendor',
+                value: '18',
+            },
+            {
+                key: '_disable_shipping',
+                value: 'no',
+            },
+            {
+                key: '_overwrite_shipping',
+                value: 'no',
+            },
+
+            // eu compliance
+            {
+                key: '_sale_price_label',
+                value: 'old-price',
+            },
+            {
+                key: '_sale_price_regular_label',
+                value: 'new-price',
+            },
+            {
+                key: '_unit',
+                value: 'kg',
+            },
+            {
+                key: '_min_age',
+                value: 18,
+            },
+            {
+                key: '_unit_product',
+                value: '1',
+            },
+            {
+                key: '_unit_base',
+                value: '80',
+            },
+            {
+                key: '_default_delivery_time',
+                value: 1,
+            },
+            {
+                key: '_delivery_time_countries',
+                value: [],
+            },
+            {
+                key: '_free_shipping',
+                value: 'yes',
+            },
+            {
+                key: '_unit_price_regular',
+                value: '50',
+            },
+            {
+                key: '_unit_price_sale',
+                value: '20',
+            },
+            {
+                key: '_mini_desc',
+                value: 'test mini description',
+            },
+        ],
+    }),
+
+    createProduct: () => ({
+        // post_author: '',
+        name: `${faker.commerce.productName()}_${faker.string.nanoid(5)} (Simple)`,
+        type: 'simple',
+        regular_price: faker.finance.amount({ min: 100, max: 200, dec: faker.helpers.arrayElement([0, 2]) }),
+        // sale_price: faker.finance.amount({ min: 50, max: 100, dec: faker.helpers.arrayElement([0, 2]) }),
+        // date_on_sale_from: helpers.currentDateTime,
+        // date_on_sale_to: helpers.addDays(helpers.currentDateTime, 10),
+        status: 'publish',
+        categories: [{}],
+        tags: [{}],
         featured: true,
         description: '<p>test description</p>',
         short_description: '<p>test short description</p>',
@@ -165,16 +452,43 @@ export const payloads = {
                 },
             },
             // {
-            // 	key  : '_dokan_min_max_meta',
-            // 	value: {
-            // 		product_wise_activation: 'yes',
-            // 		min_quantity           : 0,
-            // 		max_quantity           : 0,
-            // 		min_amount             : 0,
-            // 		max_amount             : 0,
-            // 		_donot_count           : 'no',
-            // 		ignore_from_cat        : 'no'
-            // 	}
+            //     key: '_product_addons',
+            //     value: [
+            //         {
+            //             name: 'Test Add-on Title_YwqzyffaKI',
+            //             title_format: 'label',
+            //             description_enable: 1,
+            //             description: 'Add-on description',
+            //             type: 'multiple_choice',
+            //             display: 'select',
+            //             position: 0,
+            //             required: 1,
+            //             restrictions: 0,
+            //             restrictions_type: 'any_text',
+            //             adjust_price: 0,
+            //             price_type: 'flat_fee',
+            //             price: '',
+            //             min: 0,
+            //             max: 0,
+            //             options: [
+            //                 {
+            //                     label: 'Option 1',
+            //                     price: '30',
+            //                     image: '',
+            //                     price_type: 'flat_fee',
+            //                 },
+            //             ],
+            //             wc_booking_person_qty_multiplier: 0,
+            //             wc_booking_block_qty_multiplier: 0,
+            //         },
+            //     ],
+            // },
+            // {
+            //     key: '_dokan_min_max_meta',
+            //     value: {
+            //         min_quantity: 5,
+            //         max_quantity: 10,
+            //     },
             // },
             // {
             // 	key  : '_product_addons',
@@ -218,12 +532,13 @@ export const payloads = {
         ],
     }),
 
-    createProductInteger: () => ({
-        name: `${faker.commerce.productName()} (Simple)`,
+    createDiscountProduct: () => ({
+        name: `${faker.commerce.productName()}_${faker.string.nanoid(5)} (Simple)`,
         type: 'simple',
-        regular_price: faker.finance.amount({ min: 100, max: 200, dec: 0 }),
-        // regular_price: faker.finance.amount({ min: 100, max: 200, dec: faker.helpers.arrayElement([0, 2]) }),
-        // regular_price: '114.15' , // failed for this price & 5% tax & 10% commission dokan .1 issue
+        regular_price: faker.finance.amount({ min: 100, max: 200, dec: faker.helpers.arrayElement([0, 2]) }),
+        sale_price: faker.finance.amount({ min: 50, max: 100, dec: faker.helpers.arrayElement([0, 2]) }),
+        date_on_sale_from: helpers.currentDateTime,
+        date_on_sale_to: helpers.addDays(helpers.currentDateTime, 10),
         status: 'publish',
         categories: [{}],
         featured: true,
@@ -268,16 +583,121 @@ export const payloads = {
                 },
             },
             // {
-            // 	key  : '_dokan_min_max_meta',
+            // key: '_dokan_min_max_meta',
+            // value: {
+            //     min_quantity: 4,
+            //     max_quantity: 5,
+            // },
+            // },
+            // {
+            // 	key  : '_product_addons',
+            // 	value: []
+            // },
+            // {
+            // 	key  : '_product_addons_exclude_global',
+            // 	value: '0'
+            // },
+            // {
+            // 	key  : '_per_product_admin_commission_type',
+            // 	value: 'flat'
+            // },
+            // {
+            // 	key  : '_per_product_admin_commission',
+            // 	value: ''
+            // },
+            // {
+            // 	key  : '_per_product_admin_additional_fee',
+            // 	value: ''
+            // },
+            // {
+            // 	key  : '_has_multi_vendor',
+            // 	value: '18'
+            // },
+            // {
+            // 	key  : '_dokan_catalog_mode',
             // 	value: {
-            // 		product_wise_activation: 'yes',
-            // 		min_quantity           : 0,
-            // 		max_quantity           : 0,
-            // 		min_amount             : 0,
-            // 		max_amount             : 0,
-            // 		_donot_count           : 'no',
-            // 		ignore_from_cat        : 'no'
+            // 		hide_add_to_cart_button: 'off',
+            // 		hide_product_price     : 'off'
             // 	}
+            // },
+            // {
+            // 	key  : '_disable_shipping',
+            // 	value: 'no'
+            // },
+            // {
+            // 	key  : '_overwrite_shipping',
+            // 	value: 'no'
+            // },
+            // {
+            //     key: '_per_product_admin_commission_type',
+            //     value: 'fixed',
+            // },
+            // {
+            //     key: '_per_product_admin_commission',
+            //     value: '50',
+            // },
+            // {
+            //     key: '_per_product_admin_additional_fee',
+            //     value: '5',
+            // },
+        ],
+    }),
+
+    createProductInteger: () => ({
+        name: `${faker.commerce.productName()}_${faker.string.nanoid(5)} (Simple)`,
+        type: 'simple',
+        regular_price: faker.finance.amount({ min: 100, max: 200, dec: 0 }),
+        // regular_price: faker.finance.amount({ min: 100, max: 200, dec: faker.helpers.arrayElement([0, 2]) }),
+
+        status: 'publish',
+        categories: [{}],
+        featured: true,
+        description: '<p>test description</p>',
+        short_description: '<p>test short description</p>',
+        meta_data: [
+            {
+                key: '_dokan_geolocation_use_store_settings',
+                value: 'yes',
+            },
+            {
+                key: 'dokan_geo_latitude',
+                value: '40.7127753',
+            },
+            {
+                key: 'dokan_geo_longitude',
+                value: '-74.0059728',
+            },
+            {
+                key: 'dokan_geo_public',
+                value: '1',
+            },
+            {
+                key: 'dokan_geo_address',
+                value: 'New York, NY, USA',
+            },
+            {
+                key: '_dokan_rma_override_product',
+                value: 'yes',
+            },
+            {
+                key: '_dokan_rma_settings',
+                value: {
+                    label: 'Warranty',
+                    type: 'included_warranty',
+                    policy: 'test refund policy',
+                    reasons: ['defective'],
+                    length: 'lifetime',
+                    length_value: '',
+                    length_duration: '',
+                    addon_settings: [],
+                },
+            },
+            // {
+            // key: '_dokan_min_max_meta',
+            // value: {
+            //     min_quantity: 4,
+            //     max_quantity: 5,
+            // },
             // },
             // {
             // 	key  : '_product_addons',
@@ -322,7 +742,7 @@ export const payloads = {
     }),
 
     createProductEuCompliance: () => ({
-        name: `${faker.commerce.productName()} (Simple)`,
+        name: `${faker.commerce.productName()}_${faker.string.nanoid(5)} (Simple)`,
         type: 'simple',
         regular_price: '100',
         status: 'publish',
@@ -394,7 +814,7 @@ export const payloads = {
             },
             {
                 key: '_default_delivery_time',
-                value: -1,
+                value: 1,
             },
             {
                 key: '_delivery_time_countries',
@@ -421,7 +841,7 @@ export const payloads = {
 
     // wholesale product
     createWholesaleProduct: () => ({
-        name: `${faker.commerce.productName()} (wholesale)`,
+        name: `${faker.commerce.productName()}_${faker.string.nanoid(5)} (wholesale)`,
         type: 'simple',
         regular_price: faker.finance.amount({ min: 100, max: 110, dec: faker.helpers.arrayElement([0, 2]) }),
         // regular_price: '100',
@@ -436,7 +856,6 @@ export const payloads = {
                 value: {
                     enable_wholesale: 'yes',
                     price: faker.finance.amount({ min: 90, max: 99, dec: faker.helpers.arrayElement([0, 2]) }),
-                    // price: '90',
                     quantity: '10',
                 },
             },
@@ -444,7 +863,7 @@ export const payloads = {
     }),
 
     createVariableProduct: () => ({
-        name: `${faker.commerce.productName()} (Variable)`,
+        name: `${faker.commerce.productName()}_${faker.string.nanoid(5)} (Variable)`,
         type: 'variable',
         regular_price: faker.finance.amount({ min: 100, max: 200, dec: faker.helpers.arrayElement([0, 2]) }),
         status: 'publish',
@@ -484,18 +903,18 @@ export const payloads = {
     },
 
     createDownloadableProduct: () => ({
-        name: `${faker.commerce.productName()} (Downloadable)`,
+        name: `${faker.commerce.productName()}_${faker.string.nanoid(5)} (Downloadable)`,
         type: 'simple',
         downloadable: true,
         regular_price: faker.finance.amount({ min: 100, max: 200, dec: faker.helpers.arrayElement([0, 2]) }),
         downloads: [],
-        // download_limit: 100,
-        // download_expiry: 100,
+        download_limit: 100,
+        download_expiry: 365,
         categories: [{}],
     }),
 
     createSimpleSubscriptionProduct: () => ({
-        name: `${faker.commerce.productName()} (Subscription)`,
+        name: `${faker.commerce.productName()}_${faker.string.nanoid(5)} (Subscription)`,
         type: 'subscription',
         status: 'publish',
         featured: true,
@@ -544,8 +963,8 @@ export const payloads = {
         ],
     }),
 
-    createBookableProduct: () => ({
-        name: `${faker.commerce.productName()} (Bookable)`,
+    createBookableProductRequiredFields: () => ({
+        name: `${faker.commerce.productName()}_${faker.string.nanoid(5)} (Bookable)`,
         status: 'publish',
         featured: true,
         description: '<p>test description</p>',
@@ -558,7 +977,7 @@ export const payloads = {
         max_duration: 10,
         calendar_display_mode: 'always_visible',
         enable_range_picker: true,
-        requires_confirmations: false,
+        requires_confirmation: false,
         can_be_cancelled: false,
         default_date_availability: 'available',
         block_cost: 5,
@@ -570,6 +989,118 @@ export const payloads = {
         // min_date_unit            : 'day',
         // max_date_value           : 11,
         // max_date_unit            : 'month'
+    }),
+
+    createBookableProduct: () => ({
+        name: `${faker.commerce.productName()}_${faker.string.nanoid(5)} (Bookable)`,
+        status: 'publish',
+        featured: true,
+        description: '<p>test description</p>',
+        short_description: '<p>test short description</p>',
+        // categories
+        categories: [
+            {},
+            // {
+            //     id: CATEGORY_ID,
+            // },
+        ],
+        // tags
+        tags: [{ id: TAG_ID }],
+        // attributes
+        attributes: [
+            {
+                id: ATTRIBUTE_ID,
+                name: 'sizes',
+                position: 0,
+                visible: true,
+                variation: true,
+                options: ['s', 'l', 'm'],
+            },
+        ],
+        duration_type: 'customer',
+        duration_unit: 'day',
+        duration: 1,
+        min_duration: 1,
+        max_duration: 10,
+        calendar_display_mode: 'always_visible',
+        enable_range_picker: true,
+        requires_confirmation: false,
+        can_be_cancelled: false,
+        default_date_availability: 'available',
+        block_cost: 5,
+        cost: 10,
+        display_cost: '15',
+        has_persons: false,
+        has_resources: false,
+        qty: 100,
+        // min_date_value           : 10,
+        // min_date_unit            : 'day',
+        // max_date_value           : 11,
+        // max_date_unit            : 'month'
+    }),
+
+    createBookableProductWithAccommodation: () => ({
+        name: `${faker.commerce.productName()}_${faker.string.nanoid(5)} (Bookable)`,
+        status: 'publish',
+        featured: true,
+        description: '<p>test description</p>',
+        short_description: '<p>test short description</p>',
+        // categories
+        categories: [
+            {},
+            // {
+            //     id: CATEGORY_ID,
+            // },
+        ],
+        // tags
+        tags: [{ id: TAG_ID }],
+        // attributes
+        attributes: [
+            {
+                id: ATTRIBUTE_ID,
+                name: 'sizes',
+                position: 0,
+                visible: true,
+                variation: true,
+                options: ['s', 'l', 'm'],
+            },
+        ],
+        duration_type: 'customer',
+        duration_unit: 'day',
+        duration: 1,
+        min_duration: 1,
+        max_duration: 10,
+        // min_duration: 88,
+        // max_duration: 89,
+        calendar_display_mode: 'always_visible',
+        enable_range_picker: true,
+        requires_confirmation: false,
+        can_be_cancelled: false,
+        default_date_availability: 'available',
+        block_cost: 5,
+        cost: 10,
+        display_cost: '15',
+        has_persons: false,
+        has_resources: false,
+        qty: 100,
+        // min_date_value           : 10,
+        // min_date_unit            : 'day',
+        // max_date_value           : 11,
+        // max_date_unit            : 'month'
+        meta_data: [
+            {
+                key: '_dokan_is_accommodation_booking',
+                value: 'yes',
+            },
+            {
+                key: '_dokan_accommodation_checkin_time',
+                value: '12:00 am',
+            },
+            {
+                key: '_dokan_accommodation_checkout_time',
+                value: '12:00 am',
+            },
+        ],
     }),
 
     createBookingResource: () => ({
@@ -597,7 +1128,7 @@ export const payloads = {
     }),
 
     createAuctionProduct: () => ({
-        name: `${faker.commerce.productName()} (Auction)`,
+        name: `${faker.commerce.productName()}_${faker.string.nanoid(5)} (Auction)`,
         type: 'auction',
         status: 'publish',
         featured: true,
@@ -608,7 +1139,114 @@ export const payloads = {
         purchasable: true,
         virtual: false,
         downloadable: false,
+        // categories
+        categories: [
+            {},
+            // {
+            //     id: CATEGORY_ID,
+            // },
+        ],
+        // tags
+        tags: [{ id: TAG_ID }],
+        // attributes
+        attributes: [
+            {
+                id: ATTRIBUTE_ID,
+                name: 'sizes',
+                position: 0,
+                visible: true,
+                variation: true,
+                options: ['s', 'l', 'm'],
+            },
+        ],
+        meta_data: [
+            {
+                key: '_auction_item_condition',
+                value: 'new',
+            },
+            {
+                key: '_auction_type',
+                value: 'normal',
+            },
+
+            {
+                key: '_auction_start_price',
+                value: '10', // faker.finance.amount({min:10, max:20, dec:2}),
+            },
+            {
+                key: '_auction_bid_increment',
+                value: '20',
+            },
+            {
+                key: '_auction_reserved_price',
+                value: '30',
+            },
+            {
+                key: '_auction_dates_from',
+                value: helpers.currentDateTime,
+            },
+            {
+                key: '_auction_dates_to',
+                value: helpers.addDays(helpers.currentDateTime, 20, 'full'),
+            },
+            {
+                key: '_auction_has_started',
+                value: '1',
+            },
+
+            // {
+            // 	key  : '_auction_bid_count',
+            // 	value: '0'
+            // },
+            {
+                key: '_auction_proxy',
+                value: 'yes',
+            },
+            // {
+            // 	key  : '_auction_sealed',
+            // 	value: 'no'
+            // },
+            {
+                key: '_auction_automatic_relist',
+                value: 'yes',
+            },
+            {
+                key: '_auction_relist_fail_time',
+                value: '4',
+            },
+            {
+                key: '_auction_relist_not_paid_time',
+                value: '5',
+            },
+            {
+                key: '_auction_relist_duration',
+                value: '6',
+            },
+            // {
+            // 	key  : '_auction_extend_enable',
+            // 	value: 'no'
+            // },
+            // {
+            // 	key  : '_auction_last_activity',
+            // 	value: '1693755727'
+            // },
+        ],
+    }),
+
+    createAuctionProductRequiredFields: () => ({
+        name: `${faker.commerce.productName()}_${faker.string.nanoid(5)} (Auction)`,
+        type: 'auction',
+        status: 'publish',
+        // featured: true,
+        // description: 'test description',
+        // short_description: 'test short description',
+        // price: '2000',
+        // regular_price: '2000',
+        purchasable: true,
+        // virtual: false,
+        // downloadable: false,
         categories: [{}],
+        tags: [{}],
         meta_data: [
             {
                 key: '_auction_item_condition',
@@ -683,7 +1321,7 @@ export const payloads = {
         ],
     }),
 
-    createProductAddons: () => ({
+    createGlobalProductAddons: () => ({
         name: `Test Addons Group_${faker.string.nanoid(10)}`,
         priority: 10,
         restrict_to_categories: [],
@@ -706,14 +1344,8 @@ export const payloads = {
                 max: 0,
                 options: [
                     {
-                        label: 'Option 1',
+                        label: 'option 1',
                         price: '10',
-                        image: '',
-                        price_type: 'flat_fee',
-                    },
-                    {
-                        label: 'Option 2',
-                        price: '20',
                         image: '',
                         price_type: 'flat_fee',
                     },
@@ -1057,6 +1689,36 @@ export const payloads = {
 
     updateProductVariation: () => ({ regular_price: faker.finance.amount({ min: 100, max: 200, dec: faker.helpers.arrayElement([0, 2]) }) }),
 
+    // product metadata
+
+    createProductAddon: () => ({
+        name: `Add-on Title_${faker.string.nanoid(5)}`,
+        title_format: 'label',
+        description_enable: 1,
+        description: 'Add-on description',
+        type: 'multiple_choice',
+        display: 'select',
+        position: 0,
+        required: 1,
+        restrictions: 0,
+        restrictions_type: 'any_text',
+        adjust_price: 0,
+        price_type: 'flat_fee',
+        price: '',
+        min: 0,
+        max: 0,
+        options: [
+            {
+                label: 'option 1',
+                price: '30',
+                image: '',
+                price_type: 'flat_fee',
+            },
+        ],
+        wc_booking_person_qty_multiplier: 0,
+        wc_booking_block_qty_multiplier: 0,
+    }),
+
     createProductReview: () => ({
         product_id: '',
         // review        : `Test_review${faker.string.nanoid(10)}`,
@@ -1084,12 +1746,18 @@ export const payloads = {
     }),
 
     createCategory: {
-        name: 'Clothing',
+        name: 'clothings',
+    },
+
+    createCategoryElectronics: {
+        name: 'electronics',
     },
 
     updateCategory: {
-        name: 'Clothing',
+        name: 'clothings',
     },
+
+    createMultiStepCategory: ['gadgets', 'wearables', 'smartwatches', 'fitness-trackers'],
 
     // attribute
 
@@ -1104,6 +1772,10 @@ export const payloads = {
     }),
 
     // tags
+
+    createTag: {
+        name: 'accessories',
+    },
 
     createTagsRandom: () => ({
         name: faker.string.nanoid(5),
@@ -1203,7 +1875,7 @@ export const payloads = {
             state: 'NY',
             postcode: '10003',
             country: 'US',
-            email: 'customer1@yopmail.com',
+            email: 'customer1@email.com',
             phone: '(555) 555-5555',
         },
 
@@ -1253,7 +1925,7 @@ export const payloads = {
             state: 'NY',
             postcode: '10003',
             country: 'US',
-            email: 'customer1@yopmail.com',
+            email: 'customer1@email.com',
             phone: '(555) 555-5555',
         },
 
@@ -1282,6 +1954,70 @@ export const payloads = {
         ],
     },
 
+    createMultiVendorOrder: {
+        payment_method: 'bacs',
+        payment_method_title: 'Direct Bank Transfer',
+        set_paid: true,
+        customer_id: CUSTOMER_ID ?? 0,
+        billing: {
+            first_name: 'customer1',
+            last_name: 'c1',
+            address_1: 'abc street',
+            address_2: 'xyz street',
+            city: 'New York',
+            state: 'NY',
+            postcode: '10003',
+            country: 'US',
+            email: 'customer1@email.com',
+            phone: '(555) 555-5555',
+        },
+
+        shipping: {
+            first_name: 'customer1',
+            last_name: 'c1',
+            address_1: 'abc street',
+            address_2: 'xyz street',
+            city: 'New York',
+            state: 'NY',
+            postcode: '10003',
+            country: 'US',
+        },
+
+        line_items: [
+            {
+                product_id: PRODUCT_ID ?? '',
+                quantity: 1,
+            },
+            {
+                product_id: PRODUCT_ID_V2 ?? '',
+                quantity: 1,
+            },
+        ],
+
+        shipping_lines: [
+            {
+                method_id: 'flat_rate',
+                method_title: 'Flat Rate',
+                total: '10.00',
+            },
+        ],
+
+        coupon_lines: [],
+    },
+
+    multivendorLineItems: [
+        {
+            author: VENDOR_ID,
+            products: '3', // product Ids
+            quantities: '1',
+        },
+        {
+            author: VENDOR2_ID,
+            products: '3', // product Ids
+            quantities: '1',
+        },
+    ],
+
     createOrderNote: {
         status: 'processing',
         note: 'test order note',
@@ -1308,6 +2044,7 @@ export const payloads = {
         amount: '50',
         notes: 'Withdraw notes',
         method: 'paypal',
+        status: 'pending',
     },
 
     updateWithdraw: {
@@ -1495,7 +2232,7 @@ export const payloads = {
         username: 'vendor2',
         first_name: 'vendor2',
         last_name: 'v2',
-        email: 'vendor2@yopmail.com',
+        email: 'vendor2@email.com',
         roles: 'seller',
         password: 'password',
     },
@@ -1542,7 +2279,7 @@ export const payloads = {
 
     createRandomShippingZone: () => ({
         name: faker.string.alpha(3).toUpperCase(),
-        order: 0,
+        // order: 0,
     }),
 
     addShippingZoneLocation: [
@@ -1554,6 +2291,12 @@ export const payloads = {
 
     addShippingMethodFlatRate: {
         method_id: 'flat_rate',
+    },
+
+    addShippingMethodFlatRateCost: {
+        settings: {
+            cost: '10.00',
+        },
     },
 
     addShippingMethodFreeShipping: {
@@ -1572,7 +2315,17 @@ export const payloads = {
         method_id: 'dokan_vendor_shipping',
     },
 
-    // woocommerce settings: general , products, tax, shipping, checkout, account
+    createShippingClass: {
+        name: 'heavy',
+        description: 'Shipping class for heavy products',
+    },
+
+    createRandomShippingClass: () => ({
+        name: faker.string.alpha(5).toUpperCase(),
+        description: 'Shipping class description',
+    }),
+
+    // wooCommerce settings: general , products, tax, shipping, checkout, account
 
     // general
 
@@ -1704,6 +2457,12 @@ export const payloads = {
         class: 'standard',
         postcodes: [],
         cities: [],
+    },
+
+    // create tax class
+    createTaxClass: {
+        slug: 'zero-rate',
+        name: 'Zero Rate',
     },
 
     // account
@@ -2819,7 +3578,7 @@ export const payloads = {
             postcode: '10003',
             country: 'US',
             state: 'NY',
-            email: 'customer1@yopmail.com',
+            email: 'customer1@email.com',
             phone: '0123456789',
         },
         shipping: {
@@ -2852,7 +3611,7 @@ export const payloads = {
             postcode: '10003',
             country: 'US',
             state: 'NY',
-            email: 'customer1@yopmail.com',
+            email: 'customer1@email.com',
             phone: '0123456789',
         },
         shipping: {
@@ -2999,8 +3758,9 @@ export const payloads = {
     // module
 
     moduleIds: {
+        auction: 'auction',
         booking: 'booking',
-        colorSchemeCustomize: 'color_scheme_customizer',
+        colorSchemeCustomizer: 'color_scheme_customizer',
         deliveryTime: 'delivery_time',
         elementor: 'elementor',
         exportImport: 'export_import',
@@ -3009,41 +3769,41 @@ export const payloads = {
         germanized: 'germanized',
         liveChat: 'live_chat',
         liveSearch: 'live_search',
+        mangopay: 'mangopay',
         moip: 'moip',
+        orderMinMax: 'order_min_max',
         paypalMarketplace: 'paypal_marketplace',
+        printful: 'printful',
         productAddon: 'product_addon',
+        productAdvertising: 'product_advertising',
         productEnquiry: 'product_enquiry',
+        productSubscription: 'product_subscription',
+        rankMath: 'rank_math',
         reportAbuse: 'report_abuse',
+        requestForQuotation: 'request_for_quotation',
         rma: 'rma',
+        sellerBadge: 'seller_badge',
         sellerVacation: 'seller_vacation',
-        shipstation: 'shipstation',
-        auction: 'auction',
+        shipStation: 'shipstation',
         spmv: 'spmv',
         storeReviews: 'store_reviews',
         storeSupport: 'store_support',
         stripe: 'stripe',
-        productAdvertising: 'product_advertising',
-        productSubscription: 'product_subscription',
+        stripeExpress: 'stripe_express',
+        tableRateShipping: 'table_rate_shipping',
         vendorAnalytics: 'vendor_analytics',
         vendorStaff: 'vendor_staff',
-        vsp: 'vsp',
         vendorVerification: 'vendor_verification',
+        vsp: 'vsp',
         wholesale: 'wholesale',
-        rankMath: 'rank_math',
-        tableRateShipping: 'table_rate_shipping',
-        mangopay: 'mangopay',
-        orderMinMax: 'order_min_max',
-        sellerBadge: 'seller_badge',
-        stripeExpress: 'stripe_express',
-        requestForQuotation: 'request_for_quotation',
     },
 
     deactivateModule: {
-        module: ['booking'],
+        module: 'booking',
     },
 
     activateModule: {
-        module: ['booking'],
+        module: 'booking',
     },
 
     // announcement
@@ -3083,8 +3843,8 @@ export const payloads = {
 
     // store category
 
-    createStoreCategory: () => ({ name: `Test_Store_Category_${faker.string.nanoid(10)}` }),
-    updateStoreCategory: () => ({ name: `Update_Test_Store_Category_${faker.string.nanoid(10)}` }),
+    createStoreCategory: () => ({ name: `Store_Category_${faker.string.nanoid(5)}` }),
+    updateStoreCategory: () => ({ name: `Update_Store_Category_${faker.string.nanoid(5)}` }),
 
     // dummy data
 
@@ -3104,7 +3864,7 @@ export const payloads = {
             },
         ],
         vendor_data: {
-            email: 'dummystore1@yopmail.com',
+            email: 'dummystore1@email.com',
             password: String(USER_PASSWORD),
             store_name: 'dummyStore1',
             social: [],
@@ -3280,9 +4040,22 @@ export const payloads = {
         bank_name: '',
         bank_iban: '',
         categories: [{}],
+        // vendorwise commission
+        admin_commission_type: '', // fixed, category_based
         admin_commission: '',
-        admin_additional_fee: '0.00',
-        admin_commission_type: 'flat',
+        admin_additional_fee: '',
+        admin_category_commission: {
+            all: {
+                flat: '7',
+                percentage: '7',
+            },
+            items: {
+                '27': {
+                    flat: '7',
+                    percentage: '7',
+                },
+            },
+        },
     }),
 
     // always revert vendor settings to this after altering in tests
@@ -3383,7 +4156,7 @@ export const payloads = {
         user_pass: USER_PASSWORD,
         user_nicename: `${VENDOR}store`,
         role: 'seller',
-        email: `${VENDOR}@yopmail.com`,
+        email: `${VENDOR}@email.com`,
         store_name: `${VENDOR}store`,
         first_name: VENDOR,
         last_name: 'v',
@@ -3498,9 +4271,23 @@ export const payloads = {
                 slug: 'uncategorized',
             },
         ],
+
+        // vendorwise commission
+        admin_commission_type: '', // fixed, category_based
         admin_commission: '',
         admin_additional_fee: '',
-        admin_commission_type: '',
+        admin_category_commission: {
+            all: {
+                flat: '7',
+                percentage: '7',
+            },
+            items: {
+                '27': {
+                    flat: '7',
+                    percentage: '7',
+                },
+            },
+        },
     },
 
     createStore2: {
@@ -3508,7 +4295,7 @@ export const payloads = {
         user_pass: USER_PASSWORD,
         user_nicename: `${VENDOR2}store`,
         role: 'seller',
-        email: `${VENDOR2}@yopmail.com`,
+        email: `${VENDOR2}@email.com`,
         store_name: `${VENDOR2}store`,
         first_name: VENDOR2,
         last_name: 'v',
@@ -3625,9 +4412,23 @@ export const payloads = {
                 slug: 'uncategorized',
             },
         ],
+
+        // vendorwise commission
+        admin_commission_type: '', // fixed, category_based
         admin_commission: '',
         admin_additional_fee: '',
-        admin_commission_type: '',
+        admin_category_commission: {
+            all: {
+                flat: '7',
+                percentage: '7',
+            },
+            items: {
+                '27': {
+                    flat: '7',
+                    percentage: '7',
+                },
+            },
+        },
     },
 
     createStore3: {
@@ -3635,7 +4436,7 @@ export const payloads = {
         user_pass: USER_PASSWORD,
         user_nicename: `${VENDOR3}store`,
         role: 'seller',
-        email: `${VENDOR3}@yopmail.com`,
+        email: `${VENDOR3}@email.com`,
         store_name: `${VENDOR3}store`,
         first_name: VENDOR3,
         last_name: 'v',
@@ -3752,13 +4553,26 @@ export const payloads = {
                 // slug: 'uncategorized'
             },
         ],
+        // vendorwise commission
+        admin_commission_type: '', // fixed, category_based
         admin_commission: '',
         admin_additional_fee: '',
-        admin_commission_type: '',
+        admin_category_commission: {
+            all: {
+                flat: '7',
+                percentage: '7',
+            },
+            items: {
+                '27': {
+                    flat: '7',
+                    percentage: '7',
+                },
+            },
+        },
     },
 
     createCustomer1: {
-        email: `${CUSTOMER}@yopmail.com`,
+        email: `${CUSTOMER}@email.com`,
         first_name: CUSTOMER,
         last_name: 'c1',
         role: 'customer',
@@ -3774,7 +4588,7 @@ export const payloads = {
             postcode: '10003',
             country: 'US',
             state: 'NY',
-            email: `${CUSTOMER}@yopmail.com`,
+            email: `${CUSTOMER}@email.com`,
             phone: '0123456789',
         },
         shipping: {
@@ -3792,7 +4606,7 @@ export const payloads = {
     },
 
     createCustomer2: {
-        email: `${CUSTOMER2}@yopmail.com`,
+        email: `${CUSTOMER2}@email.com`,
         first_name: CUSTOMER2,
         last_name: 'c2',
         role: 'customer',
@@ -3808,7 +4622,7 @@ export const payloads = {
             postcode: '10003',
             country: 'US',
             state: 'NY',
-            email: `${CUSTOMER2}@yopmail.com`,
+            email: `${CUSTOMER2}@email.com`,
             phone: '0123456789',
         },
         shipping: {
@@ -3836,7 +4650,7 @@ export const payloads = {
             postcode: '10003',
             country: 'US',
             state: 'NY',
-            email: `${faker.person.firstName()}@yopmail.com`,
+            email: `${faker.person.firstName()}@email.com`,
             phone: '0123456789',
         },
         shipping: {
@@ -3865,9 +4679,10 @@ export const payloads = {
         selected_user_role: ['customer', 'guest'],
         category_ids: [],
         product_ids: [],
+        expire_limit: '20',
         hide_price: '1',
         hide_price_text: 'Price is hidden',
-        hide_cart_button: 'replace',
+        hide_cart_button: 'replace', // keep_and_add_new
         button_text: 'Add to quote',
         apply_on_all_product: '0',
         rule_priority: '0',
@@ -3891,9 +4706,12 @@ export const payloads = {
         // user_id: '',
         customer_info: {
             name_field: 'customer1',
-            email_field: 'customer1@yopmail.com',
+            email_field: 'customer1@email.com',
             company_field: 'c1',
             phone_field: '0987654321',
+        },
+        store_info: {
+            store_id: VENDOR_ID,
         },
         product_ids: [''],
         offer_price: ['50'],
@@ -3906,7 +4724,7 @@ export const payloads = {
         // user_id: '',
         customer_info: {
             name_field: 'customer1',
-            email_field: 'customer1@yopmail.com',
+            email_field: 'customer1@email.com',
             company_field: 'c1',
             phone_field: '0987654321',
         },
@@ -4015,6 +4833,7 @@ export const payloads = {
     createProductQuestion: () => ({
         question: `test question_${faker.string.nanoid(10)}`,
         product_id: '',
+        status: 'visible',
     }),
 
     updateProductQuestion: () => ({
@@ -4081,7 +4900,14 @@ export const payloads = {
         product_id: '',
     },
 
-    randormNumber: faker.number.int({ min: 2, max: 100 }),
+    randomNumber: faker.number.int({ min: 2, max: 100 }),
+
+    createReverseWithdrawal: {
+        trn_type: 'other', // "opening_balance", "order_commission", "failed_transfer_reversal", "product_advertisement", "manual_order_commission", "vendor_payment", "order_refund", "manual_product", "manual_order", "other"
+        vendor_id: '',
+        note: 'test reverse withdrawal note',
+        credit: '100',
+    },
 
     paramsReverseWithdrawalTransactions: {
         'trn_date[from]': `${helpers.currentYear}-01-01 00:00:00`,
@@ -4185,6 +5011,81 @@ export const payloads = {
         shipment_comments: 'updated shipment comment',
     },
 
+    vendorwiseCommission: {
+        admin_commission_type: 'fixed', // fixed, category_based
+        admin_commission: '5',
+        admin_additional_fee: '5',
+        admin_category_commission: {
+            all: {
+                flat: '7',
+                percentage: '7',
+            },
+            items: {
+                '27': {
+                    flat: '7',
+                    percentage: '7',
+                },
+            },
+        },
+    },
+
+    productCommissionOnlyPercent: [
+        {
+            key: '_per_product_admin_commission_type',
+            value: 'fixed',
+        },
+        {
+            key: '_per_product_admin_commission',
+            value: '10',
+        },
+        {
+            key: '_per_product_admin_additional_fee',
+            value: '0',
+        },
+    ],
+
+    productCommissionOnlyFixed: [
+        {
+            key: '_per_product_admin_commission_type',
+            value: 'fixed',
+        },
+        {
+            key: '_per_product_admin_commission',
+            value: '0',
+        },
+        {
+            key: '_per_product_admin_additional_fee',
+            value: '10',
+        },
+    ],
+
+    productCommissionBothPercentageAndFixed: [
+        {
+            key: '_per_product_admin_commission_type',
+            value: 'fixed',
+        },
+        {
+            key: '_per_product_admin_commission',
+            value: '10',
+        },
+        {
+            key: '_per_product_admin_additional_fee',
+            value: '10',
+        },
+    ],
+
+    // ShipStation
+
+    createCredential: {
+        vendor_id: '',
+    },
+
+    shipStationOrderStatusSettings: {
+        vendor_id: '',
+        export_statuses: ['wc-pending', 'wc-processing', 'wc-on-hold', 'wc-completed', 'wc-cancelled'],
+        shipped_status: 'wc-completed',
+    },
+
     // shortcodes
 
     // dokan dashboard shortcode
@@ -4254,6 +5155,13 @@ export const payloads = {
     requestQuoteShortcode: {
         title: 'Request-quote',
         content: '[dokan-request-quote]',
+        status: 'publish',
+    },
+
+    // product advertisement  shortcode
+    productAdvertisementShortcode: {
+        title: 'Advertised-products',
+        content: '[dokan_product_advertisement]',
         status: 'publish',
     },
 };

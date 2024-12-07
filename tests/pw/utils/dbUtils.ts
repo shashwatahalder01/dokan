@@ -1,8 +1,7 @@
 import mysql from 'mysql2/promise';
 import { serialize, unserialize, isSerialized } from 'php-serialize';
-import { dbData } from '@utils/dbData';
 import { helpers } from '@utils/helpers';
-import { commission, feeRecipient } from '@utils/interfaces';
+
 const { DB_HOST_NAME, DB_USER_NAME, DB_USER_PASSWORD, DATABASE, DB_PORT, DB_PREFIX } = process.env;
 
 const dbPrefix = DB_PREFIX;
@@ -74,18 +73,6 @@ export const dbUtils = {
         return [currentMetaValue, newMetaValue];
     },
 
-    // insert option value
-    async insertOptionValue(optionName: string, optionValue: object | string, serializeData: boolean = true): Promise<any> {
-        optionValue = serializeData && !isSerialized(optionValue as string) ? serialize(optionValue) : optionValue;
-        const query = `
-                INSERT INTO ${dbPrefix}_options (option_id, option_name, option_value, autoload)
-                VALUES (NULL, ?, ?, 'yes')
-                ON DUPLICATE KEY UPDATE option_value = ?;
-            `;
-        const res = await dbUtils.dbQuery(query, [optionName, optionValue, optionValue]);
-        return res;
-    },
-
     // get option value
     async getOptionValue(optionName: string): Promise<any> {
         const query = `Select option_value FROM ${dbPrefix}_options WHERE option_name = ?;`;
@@ -97,7 +84,6 @@ export const dbUtils = {
     // set option value
     async setOptionValue(optionName: string, optionValue: object | string, serializeData: boolean = true): Promise<any> {
         optionValue = serializeData && !isSerialized(optionValue as string) ? serialize(optionValue) : optionValue;
-        // const query = `UPDATE ${dbPrefix}_options SET option_value = '${optionValue}' WHERE option_name = '${optionName}';`;
         const query = `
                 INSERT INTO ${dbPrefix}_options (option_id, option_name, option_value, autoload)
                 VALUES (NULL, ?, ?, 'yes')
@@ -111,26 +97,15 @@ export const dbUtils = {
     async updateOptionValue(optionName: string, updatedSettings: object | string, serializeData?: boolean): Promise<[any, any]> {
         const currentSettings = await this.getOptionValue(optionName);
         const newSettings = typeof updatedSettings === 'object' ? helpers.deepMergeObjects(currentSettings, updatedSettings) : updatedSettings;
-        // console.log('currentSettings:', currentSettings);
-        // console.log('newSettings:', newSettings);
         await this.setOptionValue(optionName, newSettings, serializeData);
         return [currentSettings, newSettings];
     },
 
-    // get selling info
-    async getSellingInfo(): Promise<[commission, feeRecipient]> {
-        const res = await this.getOptionValue(dbData.dokan.optionName.selling);
-        const commission = {
-            type: res.commission_type,
-            amount: res.admin_percentage,
-            additionalAmount: res.additional_fee,
-        };
-        const feeRecipient = {
-            shippingFeeRecipient: res.shipping_fee_recipient,
-            taxFeeRecipient: res.tax_fee_recipient,
-            shippingTaxFeeRecipient: res.shipping_tax_fee_recipient,
-        };
-        return [commission, feeRecipient];
+    // delete option row
+    async deleteOptionRow(optionNames: string[]): Promise<any> {
+        const query = `DELETE FROM ${dbPrefix}_options WHERE option_name IN (${optionNames.map(() => '?').join(',')})`;
+        const res = await dbUtils.dbQuery(query, optionNames);
+        return res;
     },
 
     // create abuse report
@@ -160,20 +135,7 @@ export const dbUtils = {
         };
 
         const query = `INSERT INTO ${dbPrefix}_dokan_refund VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);`;
-        const res = await dbUtils.dbQuery(query, [
-            refund.id,
-            refund.orderId,
-            refund.sellerId,
-            refund.refundAmount,
-            refund.refundReason,
-            refund.itemQtys,
-            refund.itemTotals,
-            refund.itemTaxTotals,
-            refund.restockItems,
-            refund.date,
-            refund.status,
-            refund.method,
-        ]);
+        const res = await dbUtils.dbQuery(query, [refund.id, refund.orderId, refund.sellerId, refund.refundAmount, refund.refundReason, refund.itemQtys, refund.itemTotals, refund.itemTaxTotals, refund.restockItems, refund.date, refund.status, refund.method]);
 
         return [res, refundId];
     },
@@ -233,5 +195,33 @@ export const dbUtils = {
 
         const updateCountQuery = `UPDATE ${dbPrefix}_term_taxonomy SET count = count + 1 WHERE term_taxonomy_id = ?;`;
         await dbUtils.dbQuery(updateCountQuery, [subscriptionTermTaxonomyId]);
+    },
+
+    // get child order ids
+    async getChildOrderIds(orderId: string): Promise<string[]> {
+        const query = `SELECT id FROM ${dbPrefix}_wc_orders WHERE parent_order_id = ?;`;
+        const res = await dbUtils.dbQuery(query, [orderId]);
+        const ids = res.map((row: { id: number }) => row.id);
+        return ids;
+    },
+
+    async updateQuoteRuleContent(quoted: string, updatedRuleContent: object) {
+        const querySelect = `SELECT rule_contents FROM ${dbPrefix}_dokan_request_quote_rules WHERE id = ?`;
+        const res = await dbUtils.dbQuery(querySelect, [quoted]);
+
+        const currentRuleContent = unserialize(res[0].rule_contents);
+        const newRuleContent = helpers.deepMergeObjects(currentRuleContent, updatedRuleContent);
+
+        const queryUpdate = `UPDATE ${dbPrefix}_dokan_request_quote_rules SET rule_contents = ? WHERE id = ?`;
+        await dbUtils.dbQuery(queryUpdate, [serialize(newRuleContent), quoted]);
+    },
+
+    async followVendor(followerId: string, vendorId: string) {
+        const currentTime = helpers.currentDateTimeFullFormat;
+        const query = `INSERT INTO ${dbPrefix}_dokan_follow_store_followers (vendor_id, follower_id, followed_at)
+            SELECT ?, ?, ?
+            WHERE NOT EXISTS (  SELECT 1 FROM ${dbPrefix}_dokan_follow_store_followers WHERE vendor_id = ? AND follower_id = ? );`;
+        const res = await dbUtils.dbQuery(query, [vendorId, followerId, currentTime, vendorId, followerId]);
+        return res;
     },
 };

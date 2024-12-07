@@ -2,7 +2,6 @@ import { expect, Request, APIRequestContext, APIResponse } from '@playwright/tes
 import { endPoints } from '@utils/apiEndPoints';
 import { payloads } from '@utils/payloads';
 import { helpers } from '@utils/helpers';
-import fs from 'fs';
 import { auth, user_api, taxRate, coupon_api, marketPlaceCoupon, reqOptions, headers, storageState, responseBody } from '@utils/interfaces';
 
 const { VENDOR_ID, CUSTOMER_ID } = process.env;
@@ -262,6 +261,12 @@ export class ApiUtils {
         return responseBody;
     }
 
+    // update store status
+    async updateStoreStatus(storeId: string, payload: object, auth?: auth): Promise<responseBody> {
+        const [, responseBody] = await this.put(endPoints.updateStoreStatus(storeId), { data: payload, headers: auth });
+        return responseBody;
+    }
+
     // delete all stores
     async deleteAllStores(auth?: auth): Promise<responseBody> {
         const allStores = await this.getAllStores(auth);
@@ -349,6 +354,12 @@ export class ApiUtils {
         const productId = String(responseBody?.id);
         const productName = String(responseBody?.name);
         return [responseBody, productId, productName];
+    }
+
+    // update product
+    async updateProduct(productId: string, payload: object, auth?: auth): Promise<responseBody> {
+        const [, responseBody] = await this.put(endPoints.updateProduct(productId), { data: payload, headers: auth });
+        return responseBody;
     }
 
     // delete product
@@ -451,10 +462,10 @@ export class ApiUtils {
     }
 
     // create attribute
-    async createAttribute(payload: object, auth?: auth): Promise<[responseBody, string]> {
+    async createAttribute(payload: { name: string }, auth?: auth): Promise<[responseBody, string, string]> {
         const [, responseBody] = await this.post(endPoints.createAttribute, { data: payload, headers: auth });
         const attributeId = String(responseBody?.id);
-        return [responseBody, attributeId];
+        return [responseBody, attributeId, payload.name];
     }
 
     // update batch attributes
@@ -483,11 +494,20 @@ export class ApiUtils {
     }
 
     // create attribute term
-    async createAttributeTerm(attribute: any, attributeTerm: object, auth?: auth): Promise<[responseBody, string, string]> {
-        const attributeId = typeof attribute === 'object' ? (await this.createAttribute(attribute, auth))[1] : attribute;
+    async createAttributeTerm(attribute: any, attributeTerm: { name: string }, auth?: auth): Promise<[responseBody, string, string, string, string]> {
+        let attributeId: string;
+        let attributeName: string;
+        if (typeof attribute === 'object') {
+            [, attributeId, attributeName] = await this.createAttribute(attribute, auth);
+        } else {
+            attributeId = attribute;
+            attributeName = (await this.getSingleAttribute(attributeId, auth)).name;
+        }
+
         const [, responseBody] = await this.post(endPoints.createAttributeTerm(attributeId), { data: attributeTerm, headers: auth });
         const attributeTermId = String(responseBody?.id);
-        return [responseBody, attributeId, attributeTermId];
+        const attributeTermName = responseBody?.name;
+        return [responseBody, attributeId, attributeTermId, attributeName, attributeTermName];
     }
 
     /**
@@ -624,6 +644,9 @@ export class ApiUtils {
 
             // get withdraw id if already exists
             withdrawId = await this.getWithdrawId(auth);
+            expect(withdrawId).toBeTruthy();
+
+            await this.updateWithdraw(withdrawId, payload, auth);
         } else {
             expect(response.ok()).toBeTruthy();
             withdrawId = String(responseBody?.id);
@@ -841,13 +864,19 @@ export class ApiUtils {
     }
 
     // get activate modules
-    async activateModules(moduleIds: string[], auth?: auth): Promise<[APIResponse, responseBody]> {
+    async activateModules(moduleIds: string | string[], auth?: auth): Promise<[APIResponse, responseBody]> {
+        if (!Array.isArray(moduleIds)) {
+            moduleIds = [moduleIds];
+        }
         const [response, responseBody] = await this.put(endPoints.activateModule, { data: { module: moduleIds }, headers: auth });
         return [response, responseBody];
     }
 
     // get deactivated modules
-    async deactivateModules(moduleIds: string[], auth?: auth): Promise<[APIResponse, responseBody]> {
+    async deactivateModules(moduleIds: string | string[], auth?: auth): Promise<[APIResponse, responseBody]> {
+        if (!Array.isArray(moduleIds)) {
+            moduleIds = [moduleIds];
+        }
         const [response, responseBody] = await this.put(endPoints.deactivateModule, { data: { module: moduleIds }, headers: auth });
         return [response, responseBody];
     }
@@ -879,6 +908,7 @@ export class ApiUtils {
     // create customer
     async createCustomer(payload: any, auth?: auth): Promise<[responseBody, string]> {
         const [response, responseBody] = await this.post(endPoints.wc.createCustomer, { data: payload, headers: auth }, false);
+
         let customerId: string;
         if (responseBody.code) {
             expect(response.status()).toBe(400);
@@ -1313,26 +1343,36 @@ export class ApiUtils {
     }
 
     // create vendor staff
-    async createVendorStaff(payload: any, auth?: auth): Promise<[responseBody, string]> {
+    async createVendorStaff(payload: any, auth?: auth): Promise<[responseBody, string, string]> {
         const [response, responseBody] = await this.post(endPoints.createVendorStaff, { data: payload, headers: auth }, false);
         let staffId: string;
+        let staffName: string;
         if (responseBody.code) {
             expect(response.status()).toBe(500);
             // get staff id if already exists
             staffId = await this.getStaffId(payload.username, auth);
+            staffName = payload.username;
 
             // update staff if already exists
             await this.updateStaff(staffId, payload, auth);
         } else {
             expect(response.ok()).toBeTruthy();
             staffId = String(responseBody?.ID);
+            staffName = responseBody?.user_login;
         }
-        return [responseBody, staffId];
+
+        return [responseBody, staffId, staffName];
     }
 
     // update staff
     async updateStaff(staffId: string, payload: object, auth?: auth): Promise<responseBody> {
         const [, responseBody] = await this.put(endPoints.updateVendorStaff(staffId), { data: payload, headers: auth });
+        return responseBody;
+    }
+
+    // update staff capabilities
+    async updateStaffCapabilities(staffId: string, payload: object, auth?: auth): Promise<responseBody> {
+        const [, responseBody] = await this.put(endPoints.updateVendorStaffCapabilities(staffId), { data: payload, headers: auth });
         return responseBody;
     }
 
@@ -1362,10 +1402,11 @@ export class ApiUtils {
     }
 
     // create product question
-    async createProductQuestion(payload: object, auth?: auth): Promise<[responseBody, string]> {
+    async createProductQuestion(payload: object, auth?: auth): Promise<[responseBody, string, string]> {
         const [, responseBody] = await this.post(endPoints.createProductQuestion, { data: payload, headers: auth });
         const questionId = String(responseBody?.id);
-        return [responseBody, questionId];
+        const question = String(responseBody?.question);
+        return [responseBody, questionId, question];
     }
 
     // update product question
@@ -1388,10 +1429,11 @@ export class ApiUtils {
     }
 
     // create product question answer
-    async createProductQuestionAnswer(payload: object, auth?: auth): Promise<[responseBody, string]> {
+    async createProductQuestionAnswer(payload: object, auth?: auth): Promise<[responseBody, string, string]> {
         const [, responseBody] = await this.post(endPoints.createProductQuestionAnswer, { data: payload, headers: auth });
         const answerId = String(responseBody?.id);
-        return [responseBody, answerId];
+        const answer = helpers.stringBetweenTags(String(responseBody?.answer));
+        return [responseBody, answerId, answer];
     }
 
     /**
@@ -1495,6 +1537,30 @@ export class ApiUtils {
         const [, responseBody] = await this.post(endPoints.createShipment(orderId), { data: payload, headers: auth });
         const shipmentId = responseBody?.id;
         return [responseBody, orderId, shipmentId];
+    }
+
+    /**
+     * ShipStation api methods
+     */
+
+    async createShipStationCredential(vendorId: string, auth?: auth): Promise<responseBody> {
+        const [, responseBody] = await this.post(endPoints.createShipStationCredential, { data: { vendor_id: vendorId }, headers: auth });
+        return responseBody;
+    }
+
+    async deleteShipStationCredential(vendorId: string, auth?: auth): Promise<responseBody> {
+        const [, responseBody] = await this.delete(endPoints.deleteShipStationCredential(vendorId), { headers: auth });
+        return responseBody;
+    }
+
+    async createShipStationOrderStatusSettings(payload: object, auth?: auth): Promise<responseBody> {
+        const [, responseBody] = await this.post(endPoints.createShipStationOrderStatusSettings, { data: payload, headers: auth });
+        return responseBody;
+    }
+
+    async deleteShipStationOrderStatusSettings(vendorId: string, auth?: auth): Promise<responseBody> {
+        const [, responseBody] = await this.delete(endPoints.deleteShipStationOrderStatusSettings(vendorId), { headers: auth });
+        return responseBody;
     }
 
     /**
@@ -1628,7 +1694,8 @@ export class ApiUtils {
     // media
 
     // upload media
-    async uploadMedia(filePath: string, mimeType: string, auth: auth): Promise<[responseBody, string]> {
+    async uploadMedia(filePath: string, mimeType: string, auth: auth): Promise<[responseBody, string, string]> {
+        const fs = await import('fs');
         const payload = {
             headers: {
                 Accept: '*/*',
@@ -1645,11 +1712,13 @@ export class ApiUtils {
         };
         const [, responseBody] = await this.post(endPoints.wp.createMediaItem, payload);
         const mediaId = String(responseBody?.id);
-        return [responseBody, mediaId];
+        const srcUrl = responseBody.source_url;
+        return [responseBody, mediaId, srcUrl];
     }
 
     // upload file
     async uploadFile(filePath: string, auth: auth): Promise<[responseBody, string]> {
+        const fs = await import('fs');
         const payload = fs.readFileSync(filePath);
         const headers = {
             'content-disposition': `attachment; filename=${String(filePath.split('/').pop())}`,
@@ -1731,6 +1800,72 @@ export class ApiUtils {
         return responseBody;
     }
 
+    // widgets
+
+    // get all widgets
+    async getAllWidgets(auth?: auth): Promise<responseBody> {
+        const [, responseBody] = await this.get(endPoints.wp.getAllWidgets, { params: { per_page: 100 }, headers: auth });
+        return responseBody;
+    }
+
+    // get single widget
+    async getSingleWidget(widgetId: string, auth?: auth): Promise<responseBody> {
+        const [, responseBody] = await this.get(endPoints.wp.getSingleWidget(widgetId), { headers: auth });
+        return responseBody;
+    }
+
+    // create widget
+    async createWidget(payload: object, auth?: auth): Promise<[APIResponse, responseBody]> {
+        const [response, responseBody] = await this.post(endPoints.wp.createWidget, { data: payload, headers: auth });
+        return [response, responseBody];
+    }
+
+    // update widget
+    async updateWidget(widgetId: string, payload: object, auth?: auth): Promise<[APIResponse, responseBody]> {
+        const [response, responseBody] = await this.put(endPoints.wp.updateWidget(widgetId), { data: payload, headers: auth });
+        return [response, responseBody];
+    }
+
+    // delete widget
+    async deleteWidget(widgetId: string, payload: object, auth?: auth): Promise<[APIResponse, responseBody]> {
+        const [response, responseBody] = await this.delete(endPoints.wp.deleteWidget(widgetId), { data: payload, headers: auth });
+        return [response, responseBody];
+    }
+
+    // widget types
+
+    // get all widget types
+    async getAllWidgetTypes(auth?: auth): Promise<responseBody> {
+        const [, responseBody] = await this.get(endPoints.wp.getAllWidgetTypes, { params: { per_page: 100 }, headers: auth });
+        return responseBody;
+    }
+
+    // get single widget type
+    async getSingleWidgetTypes(widgetTypeId: string, auth?: auth): Promise<responseBody> {
+        const [, responseBody] = await this.get(endPoints.wp.getSingleWidgetType(widgetTypeId), { headers: auth });
+        return responseBody;
+    }
+
+    // sidebars
+
+    // get all sidebars
+    async getAllSidebars(auth?: auth): Promise<responseBody> {
+        const [, responseBody] = await this.get(endPoints.wp.getAllSidebars, { params: { per_page: 100 }, headers: auth });
+        return responseBody;
+    }
+
+    // get single sidebar
+    async getSingleSidebar(sidebarId: string, auth?: auth): Promise<responseBody> {
+        const [, responseBody] = await this.get(endPoints.wp.getSingleSidebar(sidebarId), { headers: auth });
+        return responseBody;
+    }
+
+    // update sidebar
+    async updateSidebar(sidebarId: string, payload: object, auth?: auth): Promise<[APIResponse, responseBody]> {
+        const [response, responseBody] = await this.post(endPoints.wp.updateSidebar(sidebarId), { data: payload, headers: auth });
+        return [response, responseBody];
+    }
+
     /**
      * woocommerce  api methods
      */
@@ -1789,7 +1924,7 @@ export class ApiUtils {
     // get categoryId
     async getCategoryId(categoryName: string, auth?: auth): Promise<string> {
         const allCategories = await this.getAllCategories(auth);
-        const categoryId = categoryName ? allCategories.find((o: { name: string }) => o.name === categoryName.toLowerCase())?.id : allCategories[0]?.id;
+        const categoryId = categoryName ? allCategories.find((o: { name: string }) => o.name.toLowerCase() === categoryName.toLowerCase())?.id : allCategories[0]?.id;
         return categoryId;
     }
 
@@ -1822,7 +1957,35 @@ export class ApiUtils {
         return [response, responseBody];
     }
 
+    // create category
+    async createMultiStepCategory(multiStepCategories: string[], auth?: auth): Promise<void> {
+        let parentCategoryId = '0';
+        for (const category of multiStepCategories) {
+            const [, categoryId] = await this.createCategory({ name: category, parent: parentCategoryId }, auth);
+            parentCategoryId = categoryId;
+        }
+    }
+
     // tags
+
+    // get all tags
+    async getAllTags(auth?: auth): Promise<responseBody> {
+        const responseBody = await this.getAllItems(endPoints.wc.getAllTags, {}, auth);
+        return responseBody;
+    }
+
+    // get single tag
+    async getSingleTag(tagId: string, auth?: auth): Promise<responseBody> {
+        const [, responseBody] = await this.get(endPoints.wc.getSingleTag(tagId), { headers: auth });
+        return responseBody;
+    }
+
+    // get tagId
+    async getTagId(tagName: string, auth?: auth): Promise<string> {
+        const allTags = await this.getAllTags(auth);
+        const tagId = allTags.find((o: { name: string }) => o.name.toLowerCase() === tagName.toLowerCase())?.id;
+        return tagId;
+    }
 
     // create tag
     async createTag(payload: object, auth?: auth): Promise<[responseBody, string, string]> {
@@ -1832,12 +1995,29 @@ export class ApiUtils {
         return [responseBody, tagId, tagName];
     }
 
+    // update batch tags
+    async updateBatchTags(action: string, allIds: string[], auth?: auth): Promise<[APIResponse, responseBody]> {
+        if (!allIds?.length) {
+            allIds = (await this.getAllTags(auth)).map((a: { id: unknown }) => a.id);
+        }
+        const [response, responseBody] = await this.post(endPoints.wc.updateBatchTags, { data: { [action]: allIds }, headers: auth });
+        return [response, responseBody];
+    }
+
     // product
 
     // get all products
     async getAllProductsWc(auth?: auth): Promise<responseBody> {
         const responseBody = await this.getAllItems(endPoints.wc.getAllProducts, {}, auth);
         return responseBody;
+    }
+
+    // create product
+    async createProductWc(payload: object, auth?: auth): Promise<[responseBody, string, string]> {
+        const [, responseBody] = await this.post(endPoints.wc.createProduct, { data: payload, headers: auth });
+        const productId = String(responseBody?.id);
+        const productName = String(responseBody?.name);
+        return [responseBody, productId, productName];
     }
 
     // order
@@ -1861,7 +2041,7 @@ export class ApiUtils {
 
         if (typeof product === 'object') {
             [, productId] = await this.createProduct(product, auth);
-        } else if (!isNaN(Number(product))) {
+        } else if (!Number.isNaN(Number(product))) {
             const responseBody = await this.getSingleProduct(product, payloads.adminAuth); // check if product exists
             productId = responseBody.code === 'dokan_rest_invalid_product_id' ? (await this.createProduct(payloads.createProduct(), auth))[1] : product;
         } else {
@@ -1877,6 +2057,13 @@ export class ApiUtils {
         return [...order, productId];
     }
 
+    // create multivendor order
+    async createMultivendorOrder(orderPayload: any, lineItemPayload?: any) {
+        const lineItems = await this.createLineItemsEnhanced(lineItemPayload);
+        const [, parentOrder, parentOrderId] = await this.createOrderWc({ ...orderPayload, line_items: lineItems });
+        return [parentOrder, parentOrderId];
+    }
+
     // create order with status
     async createOrderWithStatus(product: string | object, order: any, status: string, auth?: auth): Promise<[APIResponse, responseBody, string, string]> {
         const [response, responseBody, orderId, productId] = await this.createOrder(product, order, auth);
@@ -1886,6 +2073,7 @@ export class ApiUtils {
 
     // create line items
     async createLineItems(products = 1, quantities = [1], authors = [payloads.vendorAuth]) {
+        // todo: replace createLineItems with createLineItemsEnhanced and update tests
         const lineItems = [];
 
         for (let i = 0; i < products; i++) {
@@ -1895,6 +2083,28 @@ export class ApiUtils {
             lineItems.push({ product_id: productId, quantity: quantity });
         }
 
+        return lineItems;
+    }
+
+    // create multivendor line items
+    async createLineItemsEnhanced(multivendorLineItem: { author: string; products: string | string[]; quantities: string | string[] }[]) {
+        const lineItems = [];
+        for (const item of multivendorLineItem) {
+            const { author, products, quantities } = item;
+
+            // Validate lengths only if both `products` and `quantities` are arrays
+            if (Array.isArray(products) && Array.isArray(quantities) && products.length !== quantities.length) {
+                throw new Error('products and quantities must be the same length');
+            }
+
+            const quantitiesArray = Array.isArray(quantities) ? quantities : [quantities];
+            const length = Array.isArray(products) ? products.length : Number(item.products);
+            for (let i = 0; i < length; i++) {
+                const productId = Array.isArray(products) ? products[i] : (await this.createProduct({ ...payloads.createProduct(), post_author: author }, payloads.adminAuth))[1];
+                const quantity = quantitiesArray[i % quantitiesArray.length];
+                lineItems.push({ product_id: productId, quantity: quantity });
+            }
+        }
         return lineItems;
     }
 
@@ -1952,6 +2162,24 @@ export class ApiUtils {
         return Number(taxPayload.rate);
     }
 
+    // get all tax classes
+    async getAllTaxClasses(auth?: auth): Promise<responseBody> {
+        const [, responseBody] = await this.get(endPoints.wc.getAllTaxClasses, { headers: auth });
+        return responseBody;
+    }
+
+    // create tax class
+    async createTaxClass(payload: object, auth?: auth): Promise<responseBody> {
+        const [, responseBody] = await this.post(endPoints.wc.createTaxClass, { data: payload, headers: auth });
+        return responseBody;
+    }
+
+    // delete tax class
+    async deleteTaxClass(slug: string, auth?: auth): Promise<responseBody> {
+        const [, responseBody] = await this.delete(endPoints.wc.deleteTaxClass(slug), { headers: auth });
+        return responseBody;
+    }
+
     // shipping
 
     // get all shipping zones
@@ -1999,9 +2227,58 @@ export class ApiUtils {
         return responseBody;
     }
 
+    // get single shipping zone method
+    async getSingleShippingZoneMethod(zoneId: string, methodId: string, auth?: auth): Promise<responseBody> {
+        const [, responseBody] = await this.get(endPoints.wc.getSingleShippingZoneMethod(zoneId, methodId), { headers: auth });
+        return responseBody;
+    }
+
     // add shipping zone method
-    async addShippingZoneMethod(zoneId: string, zoneMethod: object, auth?: auth): Promise<responseBody> {
+    async addShippingZoneMethod(zoneId: string, zoneMethod: object, auth?: auth): Promise<[responseBody, string]> {
         const [, responseBody] = await this.post(endPoints.wc.addShippingZoneMethod(zoneId), { data: zoneMethod, headers: auth });
+        const methodId = String(responseBody?.id);
+        return [responseBody, methodId];
+    }
+
+    // update shipping zone method
+    async updateShippingZoneMethod(zoneId: string, methodId: string, zoneMethod: object, auth?: auth): Promise<responseBody> {
+        const [, responseBody] = await this.post(endPoints.wc.updateShippingZoneMethod(zoneId, methodId), { data: zoneMethod, headers: auth });
+        return responseBody;
+    }
+
+    // delete shipping zone method
+    async deleteShippingZoneMethod(zoneId: string, methodId: string, auth?: auth): Promise<responseBody> {
+        const [, responseBody] = await this.post(endPoints.wc.deleteShippingZoneMethod(zoneId, methodId), { params: payloads.paramsForceDelete, headers: auth });
+        return responseBody;
+    }
+
+    // shipping method exist or not
+    async shippingMethodExistOrNot(zoneId: string, methodName: string, auth?: auth): Promise<responseBody> {
+        const allShippingMethods = (await this.getAllShippingZoneMethods(zoneId, auth)).map((a: { method_id: string }) => a.method_id);
+        return allShippingMethods.includes(methodName);
+    }
+
+    // get all shipping classes
+    async getAllShippingClasses(auth?: auth): Promise<responseBody> {
+        const [, responseBody] = await this.get(endPoints.wc.getAllShippingClasses, { headers: auth }, false);
+        return responseBody;
+    }
+
+    // create shipping class
+    async createShippingClass(payload: object, auth?: auth): Promise<responseBody> {
+        const [response, responseBody] = await this.post(endPoints.wc.createShippingClass, { data: payload, headers: auth }, false);
+        if (responseBody.code) {
+            expect(response.status()).toBe(400);
+            console.log('shipping class exists');
+        } else {
+            expect(response.ok()).toBeTruthy();
+        }
+        return responseBody;
+    }
+
+    // delete shipping class
+    async deleteShippingClass(classId: string, auth?: auth): Promise<responseBody> {
+        const [, responseBody] = await this.delete(endPoints.wc.deleteShippingClass(classId), { headers: auth });
         return responseBody;
     }
 
@@ -2037,20 +2314,67 @@ export class ApiUtils {
         return [responseBody, productId, productName];
     }
 
-    // get system status
-    async getSystemStatus(auth?: auth): Promise<[responseBody, object]> {
-        const [, responseBody] = await this.get(endPoints.wc.getAllSystemStatus, { headers: auth });
-        const activePlugins = responseBody.active_plugins.map((a: { plugin: string; version: string }) => a.plugin.split('/')[0] + ' v' + a.version);
-        activePlugins.sort();
-        const compactInfo = {
-            wpVersion: 'WordPress Version: ' + responseBody?.environment.wp_version,
-            phpVersion: 'PHP Version: ' + responseBody?.environment.php_version,
-            mysqlVersion: 'MySql Version: ' + responseBody?.environment.mysql_version,
-            theme: 'Theme: ' + responseBody?.theme.name + ' v' + responseBody?.theme.version,
-            wpDebugMode: 'Debug Mode: ' + responseBody?.environment.wp_debug_mode,
-            activePlugins: activePlugins,
-        };
-        return [responseBody, compactInfo];
+    /**
+     * woocommerce product addon api methods
+     */
+
+    // get all product addons
+    async getAllProductAddons(auth?: auth): Promise<responseBody> {
+        const [, responseBody] = await this.get(endPoints.wc.productAddons.getAllProductAddons, { headers: auth });
+        return responseBody;
+    }
+
+    // get single product addon
+    async getSingleProductAddon(addonId: string, auth?: auth): Promise<responseBody> {
+        const [, responseBody] = await this.get(endPoints.wc.productAddons.getSingleProductAddon(addonId), { headers: auth });
+        return responseBody;
+    }
+
+    // create product addon
+    async createProductAddon(payload: object, auth?: auth): Promise<[responseBody, string, string, string]> {
+        const [, responseBody] = await this.post(endPoints.wc.productAddons.createProductAddon, { data: payload, headers: auth });
+        const productAddonId = String(responseBody?.id);
+        const addonName = responseBody.name;
+        const addonFieldTitle = responseBody.fields[0].name;
+        return [responseBody, productAddonId, addonName, addonFieldTitle];
+    }
+
+    // delete product addon
+    async deleteProductAddon(productAddonId: string, auth?: auth): Promise<responseBody> {
+        const [, responseBody] = await this.delete(endPoints.wc.productAddons.deleteProductAddon(productAddonId), { headers: auth });
+        return responseBody;
+    }
+
+    // delete all product addons
+    async deleteAllProductAddons(auth?: auth): Promise<responseBody> {
+        const allProductAddons = await this.getAllProductAddons(auth);
+        if (!allProductAddons?.length) {
+            console.log('No product addon exists');
+            return;
+        }
+        const allProductAddonIds = allProductAddons.map((o: { id: unknown }) => o.id);
+        for (const productAddonId of allProductAddonIds) {
+            await this.deleteProductAddon(productAddonId, auth);
+        }
+    }
+
+    // create product addon
+    async createProductWithAddon(productPayload: string | object, addonPayload: object[], auth?: auth): Promise<[responseBody, string, string, string[]]> {
+        const productId = typeof productPayload === 'object' ? (await this.createProduct(productPayload, auth))[1] : productPayload;
+        const responseBody = await this.updateProduct(productId, { meta_data: [{ key: '_product_addons', value: addonPayload }] }, auth);
+        const productName = String(responseBody?.name);
+        const addonNames = addonPayload.map((item: any) => item.name);
+        return [responseBody, productId, productName, addonNames];
+    }
+
+    /**
+     * miscellaneous methods
+     */
+
+    getMetaDataValue(metaDataArray: any[], key: string): any {
+        const metaData = metaDataArray.find(item => item.key === key);
+        // console.log(metaData.value);
+        return metaData.value ?? null;
     }
 
     // get order details
@@ -2092,41 +2416,53 @@ export class ApiUtils {
         return orderDetails;
     }
 
-    /**
-     * woocommerce product addon api methods
-     */
-
-    // get all product addons
-    async getAllProductAddons(auth?: auth): Promise<responseBody> {
-        const [, responseBody] = await this.get(endPoints.wc.productAddons.getAllProductAddons, { headers: auth });
-        return responseBody;
+    // get system status
+    async getSystemStatus(auth?: auth): Promise<[responseBody, object]> {
+        const [, responseBody] = await this.get(endPoints.wc.getAllSystemStatus, { headers: auth });
+        const activePlugins = responseBody.active_plugins.map((a: { plugin: string; version: string }) => a.plugin.split('/')[0] + ' v' + a.version);
+        activePlugins.sort();
+        const compactInfo = {
+            os: 'OS: ' + (await this.getOsInfo()),
+            browser: 'Browser: ' + 'Chromium',
+            wpVersion: 'WordPress Version: ' + responseBody?.environment.wp_version,
+            phpVersion: 'PHP Version: ' + responseBody?.environment.php_version,
+            mysqlVersion: 'MySql Version: ' + responseBody?.environment.mysql_version,
+            theme: 'Theme: ' + responseBody?.theme.name + ' v' + responseBody?.theme.version,
+            wpDebugMode: 'Debug Mode: ' + responseBody?.environment.wp_debug_mode,
+            activePlugins: activePlugins,
+        };
+        return [responseBody, compactInfo];
     }
 
-    // create product addon
-    async createProductAddon(payload: object, auth?: auth): Promise<[responseBody, string, string, string]> {
-        const [, responseBody] = await this.post(endPoints.wc.productAddons.createProductAddon, { data: payload, headers: auth });
-        const productAddonId = String(responseBody?.id);
-        const addonName = responseBody.name;
-        const addonFieldTitle = responseBody.fields[0].name;
-        return [responseBody, productAddonId, addonName, addonFieldTitle];
-    }
+    // get os info
+    async getOsInfo() {
+        const os = await import('os');
+        const { execSync } = await import('child_process');
 
-    // delete product addon
-    async deleteProductAddon(productAddonId: string, auth?: auth): Promise<responseBody> {
-        const [, responseBody] = await this.delete(endPoints.wc.productAddons.deleteProductAddon(productAddonId), { headers: auth });
-        return responseBody;
-    }
-
-    // delete all product addons
-    async deleteAllProductAddons(auth?: auth): Promise<responseBody> {
-        const allProductAddons = await this.getAllProductAddons(auth);
-        if (!allProductAddons?.length) {
-            console.log('No product addon exists');
-            return;
+        const osPlatform = os.platform();
+        const release = os.release();
+        let osInfo = `${osPlatform} ${release}`;
+        if (osPlatform === 'darwin') {
+            const [major] = release.split('.');
+            const versionMap: { [key: string]: string } = {
+                '23': 'macOS Sonoma 14',
+                '22': 'macOS Ventura 13',
+                '21': 'macOS Monterey 12',
+                '20': 'macOS Big Sur 11',
+                '19': 'macOS Catalina 10.15',
+                '18': 'macOS Mojave 10.14',
+                '17': 'macOS High Sierra 10.13',
+                '16': 'macOS Sierra 10.12',
+            };
+            osInfo = versionMap[major as keyof typeof versionMap] || 'macOS';
+        } else if (osPlatform === 'win32') {
+            osInfo = execSync('ver').toString().trim() || 'Windows';
+        } else if (osPlatform === 'linux') {
+            const linuxVersion = execSync('cat /etc/os-release').toString();
+            const distro = linuxVersion.match(/^NAME="(.+)"$/m)?.[1] || 'Linux';
+            const version = linuxVersion.match(/^VERSION="(.+)"$/m)?.[1] || release;
+            osInfo = `${distro} ${version}`;
         }
-        const allProductAddonIds = allProductAddons.map((o: { id: unknown }) => o.id);
-        for (const productAddonId of allProductAddonIds) {
-            await this.deleteProductAddon(productAddonId, auth);
-        }
+        return osInfo;
     }
 }
