@@ -3,8 +3,8 @@ import { CommissionPage } from '@pages/commissionPage';
 import { ApiUtils } from '@utils/apiUtils';
 import { data } from '@utils/testData';
 import { payloads } from '@utils/payloads';
-// import { dbUtils } from '@utils/dbUtils';
-// import { dbData } from '@utils/dbData';
+import { dbUtils } from '@utils/dbUtils';
+import { dbData } from '@utils/dbData';
 
 const { PRODUCT_ID, CUSTOMER_ID } = process.env;
 

@@ -3,7 +3,6 @@ import { AdminPage } from '@pages/adminPage';
 import { selector } from '@pages/selectors';
 import { data } from '@utils/testData';
 import { commission } from '@utils/interfaces';
-import { helpers } from '@utils/helpers';
 
 // selectors
 const setupWizardAdmin = selector.admin.dokan.setupWizard;
@@ -133,7 +132,6 @@ export class CommissionPage extends AdminPage {
 
         // add commission
         await this.addCommission(commission);
-        await this.wait(1); // todo: resolve in future; test failed for fixed commission
 
         await this.clickAndWaitForResponse(data.subUrls.api.dokan.stores, vendors.editVendor.saveChanges);
         await this.click(vendors.editVendor.closeUpdateSuccessModal);
@@ -160,7 +158,7 @@ export class CommissionPage extends AdminPage {
 
         // assert values
         await this.click(productsAdmin.product.subMenus.advanced);
-        await this.toHaveValue(productsAdmin.product.advanced.commissionPercentage, helpers.priceStringWithDecimal(Number(helpers.price(commission.commissionPercentage)), 'US')); // todo: update after fix
+        await this.toHaveValue(productsAdmin.product.advanced.commissionPercentage, commission.commissionPercentage);
         await this.toHaveValue(productsAdmin.product.advanced.commissionFixed, commission.commissionFixed);
     }
 
