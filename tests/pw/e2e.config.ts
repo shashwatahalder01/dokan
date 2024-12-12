@@ -151,6 +151,24 @@ export default defineConfig({
             // teardown: NO_SETUP ? undefined : 'coverage_report',
         },
 
+
+        // e2e_tests
+        {
+            name: 'e2e_1',
+            testMatch: /.*\.spec\.ts/,
+            grep: [/@e2e_1/],
+            dependencies: NO_SETUP ? [] : ['e2e_setup'],
+        },
+
+
+        // e2e_tests
+        {
+            name: 'e2e_2',
+            testMatch: /.*\.spec\.ts/,
+            grep: [/@e2e_2/],
+            dependencies: NO_SETUP ? [] : ['e2e_setup'],
+        },
+
         // coverage_report
         {
             name: 'coverage_report',

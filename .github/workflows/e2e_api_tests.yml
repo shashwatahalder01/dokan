@@ -69,6 +69,9 @@ jobs:
     tests:
         name: e2e_api tests
         runs-on: ubuntu-latest
+        strategy:
+        matrix:
+            test_group: [e2e_1, e2e_2]
 
         steps:
             - name: Checkout testing repo
@@ -161,13 +164,17 @@ jobs:
             #     npm run pw:deps-only
 
             # Run e2e tests
-            - name: 🧪 Run e2e tests
+            - name: 🧪 Run e2e tests ${{ matrix.group }}
               id: e2e-test
               if: success() && (github.event_name != 'workflow_dispatch' || ( github.event_name == 'workflow_dispatch' && (github.event.inputs.testsuite == 'E2E' || github.event.inputs.testsuite == 'All')))
               timeout-minutes: 40
               working-directory: tests/pw
               run: |
-                  npm run test:e2e
+                if [[ "${{ matrix.group }}" == e2e_1 ]]; then
+                    npx playwright test --project=${{ matrix.group }} --config=e2e.config.ts
+                elif [[ "${{ matrix.group }}" == a2e_2 ]]; then
+                    npx playwright test --project=${{ matrix.group }} --config=e2e.config.ts
+                fi
 
             # Run e2e coverage
             - name: 🧪 Run e2e coverage
