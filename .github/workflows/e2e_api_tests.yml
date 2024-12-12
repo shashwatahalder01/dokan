@@ -70,8 +70,8 @@ jobs:
         name: e2e_api tests
         runs-on: ubuntu-latest
         strategy:
-        matrix:
-            test_group: [e2e_1, e2e_2]
+         matrix:
+          test_group: [e2e_1, e2e_2]
 
         steps:
             - name: Checkout testing repo
