@@ -155,7 +155,7 @@ export default defineConfig({
         {
             name: 'e2e_1',
             testMatch: /.*\.spec\.ts/,
-            grep: [/@e2e_1/],
+            grep: [/@lite/],
             dependencies: NO_SETUP ? [] : ['e2e_setup'],
         },
 
@@ -163,7 +163,7 @@ export default defineConfig({
         {
             name: 'e2e_2',
             testMatch: /.*\.spec\.ts/,
-            grep: [/@e2e_2/],
+            grep: [/@pro/],
             dependencies: NO_SETUP ? [] : ['e2e_setup'],
         },
 
