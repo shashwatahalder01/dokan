@@ -2375,6 +2375,27 @@ export class ApiUtils {
         return [responseBody, productId, productName, addonNames];
     }
 
+    // wc analytics
+
+    async getWcAnalytics(auth?: auth): Promise<responseBody> {
+        const analytics: any = {}; 
+        const [, productAnalyticsResponseBody] = await this.get(endPoints.wc.getProductsAnalytics, { headers: auth });
+        const [, revenueAnalyticsResponseBody] = await this.get(endPoints.wc.getRevenueAnalytics, { headers: auth });
+        const [, ordersAnalyticsResponseBody] = await this.get(endPoints.wc.getOrdersAnalytics, { headers: auth });
+        // const [, variationsAnalyticsResponseBody] = await this.get(endPoints.wc.getVariationsAnalytics, { headers: auth });
+        // const [, categoriesAnalyticsResponseBody] = await this.get(endPoints.wc.getCategoriesAnalytics, { headers: auth });
+        // const [, couponsAnalyticsResponseBody] = await this.get(endPoints.wc.getCouponsAnalytics, { headers: auth });
+        // const [, taxesAnalyticsResponseBody] = await this.get(endPoints.wc.getTaxesAnalytics, { headers: auth });
+        // const [, stockAnalyticsResponseBody] = await this.get(endPoints.wc.getStockAnalytics, { headers: auth });
+        // const [, downloadsAnalyticsResponseBody] = await this.get(endPoints.wc.getDownloadsAnalytics, { headers: auth });
+        // console.log(revenueAnalyticsResponseBody);
+        analytics.products = productAnalyticsResponseBody.totals;
+        analytics.revenue = revenueAnalyticsResponseBody.totals;
+        analytics.orders = ordersAnalyticsResponseBody.totals;
+        // console.log(analytics);
+        return analytics;
+    }
+
     /**
      * miscellaneous methods
      */

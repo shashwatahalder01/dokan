@@ -545,6 +545,18 @@ export const endPoints = {
         // data
         getCurrentCurrency: `${SERVER_URL}/wc/v3/data/currencies/current`,
 
+        // analytics
+        getProductsAnalytics: `${SERVER_URL}/wc-analytics/reports/products/stats`,
+        getRevenueAnalytics: `${SERVER_URL}/wc-analytics/reports/revenue/stats`,
+        getOrdersAnalytics: `${SERVER_URL}/wc-analytics/reports/orders/stats`,
+        getVariationsAnalytics: `${SERVER_URL}/wc-analytics/reports/variations/stats`,
+        getCategoriesAnalytics: `${SERVER_URL}/wc-analytics/reports/categories`,
+        getCouponsAnalytics: `${SERVER_URL}/wc-analytics/reports/coupons/stats`,
+        getTaxesAnalytics: `${SERVER_URL}/wc-analytics/reports/taxes/stats`,
+        getStockAnalytics: `${SERVER_URL}/wc-analytics/reports/stock/stats`,
+        getDownloadsAnalytics: `${SERVER_URL}/wc-analytics/reports/downloads/stats`,
+
+        // booking
         booking: {
             getAllBookableProducts: `${SERVER_URL}/wc-bookings/v1/products`,
             getSingleBookableProduct: (productId: string) => `${SERVER_URL}/wc-bookings/v1/products/${productId}`,
