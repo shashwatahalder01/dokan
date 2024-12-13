@@ -4,7 +4,7 @@ import fs from 'fs';
 import path from 'path';
 import { helpers } from '@utils/helpers';
 
-const { DOKAN_PRO } = process.env;
+const { DOKAN_PRO, GROUP } = process.env;
 
 let executed_tests: string[] = [];
 
@@ -17,8 +17,8 @@ const uncoveredFeatures: string[] = [];
 
 teardown.describe('get e2e test coverage', () => {
     const feature_map = 'feature-map/feature-map.yml';
-    const outputFile = 'playwright-report/e2e/coverage-report/coverage.json';
-    const testReport = 'playwright-report/e2e/summary-report/results.json';
+    const outputFile = `playwright-report/e2e/${GROUP}/coverage-report/coverage.json`;
+    const testReport = `playwright-report/e2e/${GROUP}/summary-report/results.json`;
 
     teardown('get coverage', { tag: ['@lite'] }, async () => {
         executed_tests = helpers.readJson(testReport)?.tests;
