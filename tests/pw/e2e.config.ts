@@ -165,6 +165,7 @@ export default defineConfig({
             testMatch: /.*\.spec\.ts/,
             grep: [/@pro/],
             dependencies: NO_SETUP ? [] : ['e2e_setup'],
+            
         },
 
         // coverage_report
