@@ -1,7 +1,7 @@
 import { defineConfig, devices, expect } from '@playwright/test';
 import { customExpect } from '@utils/pwMatchers';
 import 'dotenv/config';
-const { CI, NON_HEADLESS, BASE_URL, SLOWMO, NO_SETUP, DOKAN_PRO, GROUP } = process.env;
+const { CI, NON_HEADLESS, BASE_URL, SLOWMO, NO_SETUP, DOKAN_PRO } = process.env;
 
 export default defineConfig({
     /* test directory */
@@ -59,7 +59,7 @@ export default defineConfig({
               ['html', { open: 'never', outputFolder: 'playwright-report/e2e/html-report' }],
               //   ['junit', { outputFile: 'playwright-report/e2e/junit-report/e2e-results.xml' }],
               ['list', { printSteps: true }],
-              ['./utils/summaryReporter.ts', { outputFile: `playwright-report/e2e/${GROUP}/summary-report/results.json` }],
+              ['./utils/summaryReporter.ts', { outputFile: 'playwright-report/e2e/summary-report/results.json' }],
           ],
 
     use: {

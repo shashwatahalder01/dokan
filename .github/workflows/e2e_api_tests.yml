@@ -61,10 +61,9 @@ env:
     SHA: ${{ github.event.pull_request.head.sha }}
     SYSTEM_INFO: ./tests/pw/playwright/systemInfo.json
     API_TEST_RESULT: ./tests/pw/playwright-report/api/summary-report/results.json
+    E2E_TEST_RESULT: ./tests/pw/playwright-report/e2e/summary-report/results.json
     API_COVERAGE: ./tests/pw/playwright-report/api/coverage-report/coverage.json
-    E2E_TEST_RESULT: ''
-    E2E_COVERAGE: ''
-    GROUP: ''
+    E2E_COVERAGE: ./tests/pw/playwright-report/e2e/coverage-report/coverage.json
 
 jobs:
     tests:
@@ -119,17 +118,17 @@ jobs:
                       cd tests/pw
                       npm run start:env
 
-            # # Set permalink structure
-            # - name: Set Permalink structure
-            #   working-directory: tests/pw
-            #   run: |
-            #       npm run wp-env run tests-cli wp rewrite structure /%postname%/
+            # Set permalink structure
+            - name: Set Permalink structure
+              working-directory: tests/pw
+              run: |
+                  npm run wp-env run tests-cli wp rewrite structure /%postname%/
 
-            # # Activate theme
-            # - name: Activate theme:Storefront
-            #   working-directory: tests/pw
-            #   run: |
-            #       npm run wp-env run tests-cli wp theme activate storefront
+            # Activate theme
+            - name: Activate theme:Storefront
+              working-directory: tests/pw
+              run: |
+                  npm run wp-env run tests-cli wp theme activate storefront
 
             # Get Playwright version
             - name: Get installed Playwright version
@@ -172,14 +171,8 @@ jobs:
               working-directory: tests/pw
               run: |
                   if [[ "${{ matrix.group }}" == "e2e_1" ]]; then
-                      echo "E2E_TEST_RESULT=./tests/pw/playwright-report/e2e/${{ matrix.group }}/summary-report/results.json" >> $GITHUB_ENV
-                      echo "E2E_COVERAGE=./tests/pw/playwright-report/e2e/${{ matrix.group }}/coverage-report/coverage.json" >> $GITHUB_ENV
-                      echo "GROUP=${{ matrix.group }}" >> $GITHUB_ENV
                       npx playwright test --project="${{ matrix.group }}" --config=e2e.config.ts
                   elif [[ "${{ matrix.group }}" == "e2e_2" ]]; then
-                      echo "E2E_TEST_RESULT=./tests/pw/playwright-report/e2e/${{ matrix.group }}/summary-report/results.json" >> $GITHUB_ENV
-                      echo "E2E_COVERAGE=./tests/pw/playwright-report/e2e/${{ matrix.group }}/coverage-report/coverage.json" >> $GITHUB_ENV
-                      echo "GROUP=${{ matrix.group }}" >> $GITHUB_ENV
                       npx playwright test --project="${{ matrix.group }}" --config=e2e.config.ts
                   fi
 

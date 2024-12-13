@@ -63,7 +63,6 @@ declare global {
             E2E_TEST_RESULT: string;
             API_COVERAGE: string;
             E2E_COVERAGE: string;
-            GROUP: string;
         }
     }
 }
