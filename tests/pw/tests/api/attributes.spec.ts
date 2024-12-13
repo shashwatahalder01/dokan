@@ -19,12 +19,11 @@ test.describe('attribute api test', () => {
     let attributeId: string;
     let attribute: any;
     let attributeTerm: any;
-    let attributeTermId: string; //todo: why attributetermId is needed here
 
     test.beforeAll(async () => {
         apiUtils = new ApiUtils(await request.newContext());
         [, productId] = await apiUtils.createProduct(payloads.createProduct());
-        [attributeTerm, attributeId, attributeTermId] = await apiUtils.createAttributeTerm(payloads.createAttribute(), payloads.createAttributeTerm());
+        [attributeTerm, attributeId] = await apiUtils.createAttributeTerm(payloads.createAttribute(), payloads.createAttributeTerm());
         attribute = await apiUtils.getSingleAttribute(attributeId);
     });
 
@@ -79,7 +78,7 @@ test.describe('attribute api test', () => {
         const [response, responseBody] = await apiUtils.put(endPoints.batchUpdateAttributes, { data: { update: batchAttributes } });
         expect(response.ok()).toBeTruthy();
         expect(responseBody).toBeTruthy();
-        expect(responseBody).toMatchSchema(schemas.attributesSchema.batchupdateAttributesSchema);
+        expect(responseBody).toMatchSchema(schemas.attributesSchema.batchUpdateAttributesSchema);
     });
 
     test('set default attribute', { tag: ['@lite'] }, async () => {
@@ -99,19 +98,9 @@ test.describe('attribute api test', () => {
         const payload = {
             attributes: [
                 {
-                    all_terms: [
-                        {
-                            label: attributeTerm.name,
-                            slug: attributeTerm.slug,
-                            taxonomy: attribute.slug,
-                            value: attributeTerm.id,
-                        },
-                    ],
                     id: attribute.id,
                     name: attribute.name,
                     options: [attributeTerm.name],
-                    slug: attribute.slug,
-                    taxonomy: true,
                     variation: false,
                     visible: true,
                 },

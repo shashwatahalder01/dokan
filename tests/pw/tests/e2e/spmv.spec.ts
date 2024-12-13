@@ -30,33 +30,37 @@ test.describe('Vendor SPMV test', () => {
         customer = new SpmvPage(cPage);
 
         apiUtils = new ApiUtils(await request.newContext());
-        await dbUtils.setDokanSettings(dbData.dokan.optionName.selling, { ...dbData.dokan.sellingSettings, enable_min_max_quantity: 'off', enable_min_max_amount: 'off' }); // todo: might exists dokan issue -> min-max field is required on admin product edit
+        await dbUtils.updateOptionValue(dbData.dokan.optionName.selling, { enable_min_max_quantity: 'off', enable_min_max_amount: 'off' }); // todo: dokan issue -> min-max field is required on admin product edit
         [, , productName] = await apiUtils.createProduct({ ...payloads.createProduct(), name: data.predefined.spmv.productName() }, payloads.vendor2Auth);
         [, productId, productName2] = await apiUtils.createProduct({ ...payloads.createProduct(), name: data.predefined.spmv.productName() }, payloads.vendor2Auth);
         await apiUtils.addSpmvProductToStore(productId, payloads.vendorAuth);
     });
 
     test.afterAll(async () => {
-        await dbUtils.setDokanSettings(dbData.dokan.optionName.selling, dbData.dokan.sellingSettings);
+        await dbUtils.setOptionValue(dbData.dokan.optionName.selling, dbData.dokan.sellingSettings);
+        await apiUtils.activateModules(payloads.moduleIds.spmv, payloads.adminAuth);
         await aPage.close();
         await vPage.close();
         await cPage.close();
         await apiUtils.dispose();
     });
 
+    test('admin can enable SPMV module', { tag: ['@pro', '@admin'] }, async () => {
+        await admin.enableSpmvModule();
+    });
+
     test('admin can assign SPMV product to other vendor', { tag: ['@pro', '@admin'] }, async () => {
-        test.skip(true, 'test is failing for woocommerce booking v2.0.8');
         const [, productId] = await apiUtils.createProduct({ ...payloads.createProduct(), name: data.predefined.spmv.productName() }, payloads.vendor2Auth);
         await admin.assignSpmvProduct(productId, data.predefined.vendorStores.vendor1);
     });
 
     //vendor
 
-    test('vendor spmv menu page is rendering properly', { tag: ['@pro', '@exp', '@vendor'] }, async () => {
+    test('vendor can view SPMV menu page', { tag: ['@pro', '@exploratory', '@vendor'] }, async () => {
         await vendor.vendorSpmvRenderProperly();
     });
 
-    test('vendor can search similar product on spmv page', { tag: ['@pro', '@vendor'] }, async () => {
+    test('vendor can search similar product on SPMV page', { tag: ['@pro', '@vendor'] }, async () => {
         await vendor.searchSimilarProduct(productName, 'spmv');
     });
 
@@ -74,11 +78,11 @@ test.describe('Vendor SPMV test', () => {
         await vendor.searchSimilarProduct(auctionProductName, 'auction');
     });
 
-    test('vendor can go to own product edit from spmv page', { tag: ['@pro', '@vendor'] }, async () => {
+    test('vendor can go to own product edit from SPMV page', { tag: ['@pro', '@vendor'] }, async () => {
         await vendor.goToProductEditFromSpmv(data.predefined.simpleProduct.product1.name);
     });
 
-    test('vendor can sort spmv products', { tag: ['@pro', '@vendor'] }, async () => {
+    test('vendor can sort SPMV products', { tag: ['@pro', '@vendor'] }, async () => {
         await vendor.sortSpmvProduct('price');
     });
 
@@ -107,5 +111,12 @@ test.describe('Vendor SPMV test', () => {
 
     test('customer can add to cart other available vendor product', { tag: ['@pro', '@customer'] }, async () => {
         await customer.addToCartOtherAvailableVendorsProduct(productName2, data.predefined.vendorStores.vendor1);
+    });
+
+    // admin
+
+    test('admin can disable SPMV module', { tag: ['@pro', '@admin'] }, async () => {
+        await apiUtils.deactivateModules(payloads.moduleIds.spmv, payloads.adminAuth);
+        await admin.disableSpmvModule();
     });
 });

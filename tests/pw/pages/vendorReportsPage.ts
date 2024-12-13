@@ -34,8 +34,8 @@ export class VendorReportsPage extends VendorPage {
         await this.clickAndWaitForLoadState(vendorReports.menus.topSelling);
 
         // date picker elements are visible
-        const { dateRangePickerinput, show } = selector.vendor.vAnalytics.datePicker;
-        await this.multipleElementVisible({ dateRangePickerinput, show });
+        const { dateRangePickerInput, show } = selector.vendor.vAnalytics.datePicker;
+        await this.multipleElementVisible({ dateRangePickerInput, show });
 
         // top selling table elements are visible
         await this.multipleElementVisible(vendorReports.topSelling.table);
@@ -43,7 +43,7 @@ export class VendorReportsPage extends VendorPage {
         await this.clickAndWaitForLoadState(vendorReports.menus.topEarning);
 
         // date picker elements are visible
-        await this.multipleElementVisible({ dateRangePickerinput, show });
+        await this.multipleElementVisible({ dateRangePickerInput, show });
 
         // top earning table elements are visible
         await this.multipleElementVisible(vendorReports.topEarning.table);
@@ -51,7 +51,7 @@ export class VendorReportsPage extends VendorPage {
         await this.clickAndWaitForLoadState(vendorReports.menus.statement);
 
         // date picker elements are visible
-        await this.multipleElementVisible({ dateRangePickerinput, show });
+        await this.multipleElementVisible({ dateRangePickerInput, show });
 
         // statement table elements are visible
         await this.multipleElementVisible(vendorReports.statement.table);
@@ -64,6 +64,8 @@ export class VendorReportsPage extends VendorPage {
     async exportStatement(): Promise<void> {
         await this.goIfNotThere(data.subUrls.frontend.vDashboard.statement);
         const isDisabled = await this.hasAttribute(vendorReports.statement.exportStatements, 'disabled');
-        !isDisabled && (await this.clickAndWaitForDownload(vendorReports.statement.exportStatements));
+        if (!isDisabled) {
+            await this.clickAndWaitForDownload(vendorReports.statement.exportStatements);
+        }
     }
 }
