@@ -171,11 +171,13 @@ jobs:
                   if [[ "${{ matrix.group }}" == "e2e_1" ]]; then
                       export E2E_TEST_RESULT="./tests/pw/playwright-report/e2e/${{ matrix.group }}/summary-report/results.json"
                       export E2E_COVERAGE="./tests/pw/playwright-report/e2e/${{ matrix.group }}/coverage-report/coverage.json"
-                      GROUP="${{ matrix.group }}" npx playwright test --project="${{ matrix.group }}" --config=e2e.config.ts
+                      export GROUP="${{ matrix.group }}" 
+                      npx playwright test --project="${{ matrix.group }}" --config=e2e.config.ts
                   elif [[ "${{ matrix.group }}" == "e2e_2" ]]; then
                       export E2E_TEST_RESULT="./tests/pw/playwright-report/e2e/${{ matrix.group }}/summary-report/results.json"
                       export E2E_COVERAGE="./tests/pw/playwright-report/e2e/${{ matrix.group }}/coverage-report/coverage.json"
-                      GROUP="${{ matrix.group }}" npx playwright test --project="${{ matrix.group }}" --config=e2e.config.ts
+                      export GROUP="${{ matrix.group }}" 
+                      npx playwright test --project="${{ matrix.group }}" --config=e2e.config.ts
                   fi
 
             # Run e2e coverage
