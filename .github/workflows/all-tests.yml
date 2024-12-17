@@ -223,7 +223,6 @@ jobs:
             #   working-directory: tests/pw
             #   run: |
             #     npm run pw:deps-only
-
             # Run e2e tests
             - name: 🧪 Run e2e tests
               id: e2e-test
@@ -232,11 +231,13 @@ jobs:
               working-directory: tests/pw
               run: |
                   if [[ "${{ matrix.group }}" == "e2e_1" ]]; then
-                      npx playwright test --project="${{ matrix.group }}" --config=e2e.config.ts
+                    #   npx playwright test --project="${{ matrix.group }}" --config=e2e.config.ts
+                     DOKAN_PRO=false npx playwright test --project="e2e_1" --config=e2e.config.ts
                   elif [[ "${{ matrix.group }}" == "e2e_2" ]]; then
-                      npx playwright test --project="${{ matrix.group }}" --config=e2e.config.ts
+                    #   npx playwright test --project="${{ matrix.group }}" --config=e2e.config.ts
+                      npx playwright test --project="e2e_2" --config=e2e.config.ts
                   fi
-                #   npm run test:e2e:pro
+              #   npm run test:e2e:pro
 
             # Run e2e coverage
             - name: 🧪 Run e2e coverage
@@ -246,15 +247,14 @@ jobs:
                   npm run test:e2e:coverage
 
             # Run API tests
-            # - name: 🧪 Run api tests
-            #   id: api-test
-            #   if: always() && steps.wp-env.outcome == 'success' && ( github.event_name != 'workflow_dispatch'  || ( github.event_name == 'workflow_dispatch' && (github.event.inputs.testsuite == 'API' || github.event.inputs.testsuite == 'All')))
-            #   working-directory: tests/pw
-            #   run: |
-            #       if [[ "${{ matrix.group }}" == "api" ]]; then
-            #         npm run test:api:pro
-            #       fi
-
+            - name: 🧪 Run api tests
+              id: api-test
+              if: always() && steps.wp-env.outcome == 'success' && ( github.event_name != 'workflow_dispatch'  || ( github.event_name == 'workflow_dispatch' && (github.event.inputs.testsuite == 'API' || github.event.inputs.testsuite == 'All')))
+              working-directory: tests/pw
+              run: |
+                  if [[ "${{ matrix.group }}" == "api" ]]; then
+                    npm run test:api:pro
+                  fi
 
             # Prepare test summary
             - name: Prepare test summary
