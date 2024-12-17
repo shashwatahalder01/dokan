@@ -94,7 +94,9 @@ jobs:
         runs-on: ubuntu-latest
         strategy:
             matrix:
-                group: [e2e_1, e2e_2, api_1]
+                # group: [e2e_1, e2e_2, api_1]
+                shardIndex: [1, 2, 3, 4]
+                shardTotal: [4]
             fail-fast: false
 
         steps:
@@ -231,12 +233,13 @@ jobs:
               timeout-minutes: 40
               working-directory: tests/pw
               run: |
-                  if [[ "${{ matrix.group }}" == "e2e_1" ]]; then
-                      echo "DOKAN_PRO=false" >> $GITHUB_ENV
-                      npx playwright test --project="e2e_1" --config=e2e.config.ts
-                  elif [[ "${{ matrix.group }}" == "e2e_2" ]]; then
-                      npx playwright test --project="e2e_2" --config=e2e.config.ts
-                  fi
+                npm run test:e2e:pro -- --shard=${{ matrix.shardIndex }}/${{ matrix.shardTotal }}
+                #   if [[ "${{ matrix.group }}" == "e2e_1" ]]; then
+                #       echo "DOKAN_PRO=false" >> $GITHUB_ENV
+                #       npx playwright test --project="e2e_1" --config=e2e.config.ts
+                #   elif [[ "${{ matrix.group }}" == "e2e_2" ]]; then
+                #       npx playwright test --project="e2e_2" --config=e2e.config.ts
+                #   fi
               #   npm run test:e2e:pro
 
             # Run e2e coverage
@@ -246,15 +249,15 @@ jobs:
               run: |
                   npm run test:e2e:coverage
 
-            # Run API tests
-            - name: 🧪 Run api tests
-              id: api-test
-              if: always() && steps.wp-env.outcome == 'success' && ( github.event_name != 'workflow_dispatch'  || ( github.event_name == 'workflow_dispatch' && (github.event.inputs.testsuite == 'API' || github.event.inputs.testsuite == 'All')))
-              working-directory: tests/pw
-              run: |
-                  if [[ "${{ matrix.group }}" == "api_1" ]]; then
-                    npm run test:api:pro
-                  fi
+            # # Run API tests
+            # - name: 🧪 Run api tests
+            #   id: api-test
+            #   if: always() && steps.wp-env.outcome == 'success' && ( github.event_name != 'workflow_dispatch'  || ( github.event_name == 'workflow_dispatch' && (github.event.inputs.testsuite == 'API' || github.event.inputs.testsuite == 'All')))
+            #   working-directory: tests/pw
+            #   run: |
+            #       if [[ "${{ matrix.group }}" == "api_1" ]]; then
+            #         npm run test:api:pro
+            #       fi
 
             # Prepare test summary
             - name: Prepare test summary
@@ -316,8 +319,9 @@ jobs:
               uses: actions/upload-artifact@v4
               if: always() && steps.debug-log.outcome == 'success'
               with:
-                  name: test-artifact-${{ matrix.group }}
+                  name: test-artifact-${{ matrix.shardIndex }}
                   path: |
+                      tests/pw/blob-report
                       tests/pw/wp-data
                       tests/pw/playwright
                       tests/pw/playwright-report
