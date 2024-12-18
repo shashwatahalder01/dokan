@@ -50,7 +50,7 @@ env:
     LICENSE_KEY: ${{secrets.LICENSE_KEY}}
     BASE_URL: http://localhost:9999
     CI: true
-    DOKAN_PRO: true
+    # DOKAN_PRO: true
     FORCE_COLOR: 1
     DB_HOST_NAME: localhost
     DB_USER_NAME: root
@@ -95,9 +95,8 @@ jobs:
         strategy:
             fail-fast: false
             matrix:
-                # group: [e2e_1, e2e_2, api_1]
-                shardIndex: [1, 2, 3, 4, 5, 6]
-                shardTotal: [6]
+                shardIndex: [1, 2]
+                shardTotal: [2]
 
         steps:
             - name: Checkout testing repo
@@ -234,7 +233,7 @@ jobs:
               timeout-minutes: 40
               working-directory: tests/pw
               run: |
-                  npm run test:e2e:pro -- --shard=${{ matrix.shardIndex }}/${{ matrix.shardTotal }}
+                  npm run test:e2e -- --shard=${{ matrix.shardIndex }}/${{ matrix.shardTotal }}
 
             # Run e2e coverage
             - name: 🧪 Run e2e coverage
@@ -346,17 +345,19 @@ jobs:
             - name: Download blob reports from GitHub Actions Artifacts
               uses: actions/download-artifact@v4
               with:
-                  path: all-reports
+                  path: tests/pw/all-reports
                   pattern: test-artifact-*
                   #   merge-multiple: true
 
             - name: Move all blob report folder contents into a single folder
+              working-directory: tests/pw
               run: |
                   mkdir -p all-blob-reports
                   find all-reports -type d -name "blob-report" -exec mv {}/* merged-blob-reports/ \;
                   find all-reports -type d -name "blob-report" -empty -exec rmdir {} \;
 
             - name: Merge into HTML Report
+              working-directory: tests/pw
               run: npx playwright merge-reports --reporter html ./all-blob-reports
 
             - name: Upload HTML report
