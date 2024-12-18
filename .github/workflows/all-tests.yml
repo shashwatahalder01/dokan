@@ -349,17 +349,16 @@ jobs:
                   pattern: test-artifact-*
                   #   merge-multiple: true
 
-            - name: Unzip downloaded artifacts
+            - name: Move all blob report folder contents
+              working-directory: tests/pw/all-reports
               run: |
-                for zip in tests/pw/all-reports/*.zip; do
-                  unzip -o "$zip" -d tests/pw/all-reports
-                done
-
-
+                ls
+                cd test-artifact-1/playwright-report
+                ls
 
             - name: Move all blob report folder contents into a single folder
               working-directory: tests/pw/all-reports
-              run: |
+              run:
                   mkdir -p all-blob-reports
                   find all-reports -type d -name "blob-report" -exec mv {}/* all-blob-reports/ \;
                 #   find all-reports -type d -name "blob-report" -empty -exec rmdir {} \;
