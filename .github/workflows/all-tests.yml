@@ -90,14 +90,14 @@ env:
 
 jobs:
     tests:
-        name: e2e_api tests
+        name: e2e_api-tests
         runs-on: ubuntu-latest
         strategy:
+            fail-fast: false
             matrix:
                 # group: [e2e_1, e2e_2, api_1]
-                shardIndex: [1, 2, 3, 4]
-                shardTotal: [4]
-            fail-fast: false
+                shardIndex: [1, 2, 3, 4, 5, 6]
+                shardTotal: [6]
 
         steps:
             - name: Checkout testing repo
@@ -226,21 +226,15 @@ jobs:
             #   working-directory: tests/pw
             #   run: |
             #     npm run pw:deps-only
+
             # Run e2e tests
-            - name: 🧪 Run e2e tests-${{ matrix.group }}
+            - name: 🧪 Run e2e tests-${{ matrix.shardIndex }}
               id: e2e-test
               if: success() && (github.event_name != 'workflow_dispatch' || ( github.event_name == 'workflow_dispatch' && (github.event.inputs.testsuite == 'E2E' || github.event.inputs.testsuite == 'All')))
               timeout-minutes: 40
               working-directory: tests/pw
               run: |
-                npm run test:e2e:pro -- --shard=${{ matrix.shardIndex }}/${{ matrix.shardTotal }}
-                #   if [[ "${{ matrix.group }}" == "e2e_1" ]]; then
-                #       echo "DOKAN_PRO=false" >> $GITHUB_ENV
-                #       npx playwright test --project="e2e_1" --config=e2e.config.ts
-                #   elif [[ "${{ matrix.group }}" == "e2e_2" ]]; then
-                #       npx playwright test --project="e2e_2" --config=e2e.config.ts
-                #   fi
-              #   npm run test:e2e:pro
+                  npm run test:e2e:pro -- --shard=${{ matrix.shardIndex }}/${{ matrix.shardTotal }}
 
             # Run e2e coverage
             - name: 🧪 Run e2e coverage
@@ -321,28 +315,73 @@ jobs:
               with:
                   name: test-artifact-${{ matrix.shardIndex }}
                   path: |
-                      tests/pw/blob-report
                       tests/pw/wp-data
                       tests/pw/playwright
                       tests/pw/playwright-report
                   if-no-files-found: ignore
-                  retention-days: 30
+                  retention-days: 1
 
-            # - name: Publish HTML report to GH Pages
-            #   if: always() # We want this to always run, even if test fail prior to this step running
-            #   uses: peaceiris/actions-gh-pages@v4
-            #   with:
-            #     github_token: ${{ secrets.GITHUB_TOKEN }}
-            #     publish_branch: gh-pages
-            #     publish_dir: tests/pw/playwright-report/e2e/html-report # This is where index.html will be output
-            #     keep_files: true # Set this to true to make sure we don't wipe out the other content in GitHub Pages
-            #     user_name: "github-actions[bot]" # This will be the username that gets stamped in the repo commit
-            #     user_email: "github-actions[bot]@users.noreply.github.com" # This will be the user email that gets stamped in the repo commit
+    merge-reports:
+        # Merge reports after playwright-tests, even if some shards have failed
+        if: ${{ !cancelled() }}
+        needs: [e2e_api-tests]
 
-            # - name: Test results
-            #   if: always()
-            #   run: |
-            #     echo "https://$GITHUB_REPOSITORY_OWNER.github.io/${GITHUB_REPOSITORY#*/}"
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout testing repo
+              id: clone-dokan-lite
+              uses: actions/checkout@v4
+
+            - name: Use desired version of NodeJS
+              uses: actions/setup-node@v4
+              with:
+                  node-version: 20
+                  cache: npm
+
+            - name: Install test dependencies
+              working-directory: tests/pw
+              run: |
+                  npm ci || npm i
+
+            - name: Download blob reports from GitHub Actions Artifacts
+              uses: actions/download-artifact@v4
+              with:
+                  path: all-reports
+                  pattern: test-artifact-*
+                  #   merge-multiple: true
+
+            - name: Move all blob report folder contents into a single folder
+              run: |
+                  mkdir -p all-blob-reports
+                  find all-reports -type d -name "blob-report" -exec mv {}/* merged-blob-reports/ \;
+                  find all-reports -type d -name "blob-report" -empty -exec rmdir {} \;
+
+            - name: Merge into HTML Report
+              run: npx playwright merge-reports --reporter html ./all-blob-reports
+
+            - name: Upload HTML report
+              uses: actions/upload-artifact@v4
+              with:
+                  name: html-report--attempt-${{ github.run_attempt }}
+                  path: playwright-report
+                  retention-days:
+                      14
+
+                      # - name: Publish HTML report to GH Pages
+                      #   if: always() # We want this to always run, even if test fail prior to this step running
+                      #   uses: peaceiris/actions-gh-pages@v4
+                      #   with:
+                      #     github_token: ${{ secrets.GITHUB_TOKEN }}
+                      #     publish_branch: gh-pages
+                      #     publish_dir: tests/pw/playwright-report/e2e/html-report # This is where index.html will be output
+                      #     keep_files: true # Set this to true to make sure we don't wipe out the other content in GitHub Pages
+                      #     user_name: "github-actions[bot]" # This will be the username that gets stamped in the repo commit
+                      #     user_email: "github-actions[bot]@users.noreply.github.com" # This will be the user email that gets stamped in the repo commit
+
+                      # - name: Test results
+                      #   if: always()
+                      #   run: |
+                      #     echo "https://$GITHUB_REPOSITORY_OWNER.github.io/${GITHUB_REPOSITORY#*/}"
 # publishTestResults:
 #   name: Publish Test Result
 #   needs: tests
