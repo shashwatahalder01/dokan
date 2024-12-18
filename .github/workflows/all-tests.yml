@@ -90,7 +90,7 @@ env:
 
 jobs:
     tests:
-        name: e2e_api-tests
+        name: e2e_api tests
         runs-on: ubuntu-latest
         strategy:
             fail-fast: false
@@ -324,7 +324,7 @@ jobs:
     merge-reports:
         # Merge reports after playwright-tests, even if some shards have failed
         if: ${{ !cancelled() }}
-        needs: [e2e_api-tests]
+        needs: [tests]
 
         runs-on: ubuntu-latest
         steps:
@@ -365,7 +365,7 @@ jobs:
                   name: html-report--attempt-${{ github.run_attempt }}
                   path: playwright-report
                   retention-days:
-                      14
+                      7
 
                       # - name: Publish HTML report to GH Pages
                       #   if: always() # We want this to always run, even if test fail prior to this step running
