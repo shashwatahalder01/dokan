@@ -377,7 +377,7 @@ jobs:
                   ls all-blob-reports
 
             - name: Generate HTML Report
-              working-directory: tests/pw
+              working-directory: tests/pw/all-reports
               run: |
                   npx playwright merge-reports --reporter html ./all-blob-reports
 
