@@ -453,7 +453,7 @@ export const helpers = {
     // execute wp cli command
     async exeCommandWpcli(command: string, directoryPath = process.cwd()) {
         process.chdir(directoryPath);
-        command = CI ?  `npm run wp-env run tests-cli  ${command}` :`cd ${SITE_PATH} && ${command}` :;
+        command = CI ? `npm run wp-env run tests-cli  ${command}` : `cd ${SITE_PATH} && ${command}`;
         // console.log(`Executing command: ${command}`);
         await this.exeCommand(command);
     },
