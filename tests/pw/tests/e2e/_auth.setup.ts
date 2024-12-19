@@ -40,7 +40,7 @@ setup.describe('add & authenticate users', () => {
         await apiUtils.updateStore(sellerId, { ...payloads.storeResetFields, ...payloads.storeOpenClose }, payloads.adminAuth);
         // add review
         if (DOKAN_PRO) {
-            await apiUtils.createStoreReview(sellerId, { ...payloads.createStoreReview, rating: 5 }, payloads.customerAuth);
+            await apiUtils.createStoreReview(sellerId, { ...payloads.createStoreReview, rating: 5 }, payloads.adminAuth);
         }
         // add map location
         // await dbUtils.addStoreMapLocation(sellerId);
@@ -59,7 +59,7 @@ setup.describe('add & authenticate users', () => {
         await apiUtils.updateStore(sellerId, { ...payloads.storeResetFields, ...payloads.storeOpenClose }, payloads.adminAuth);
         // add review
         if (DOKAN_PRO) {
-            await apiUtils.createStoreReview(sellerId, { ...payloads.createStoreReview, rating: 5 }, payloads.customerAuth);
+            await apiUtils.createStoreReview(sellerId, { ...payloads.createStoreReview, rating: 5 }, payloads.adminAuth);
         }
         // add map location
         // await dbUtils.addStoreMapLocation(sellerId);

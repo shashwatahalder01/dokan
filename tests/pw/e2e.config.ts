@@ -56,7 +56,7 @@ export default defineConfig({
               ['./utils/summaryReporter.ts', { outputFile: 'playwright-report/e2e/summary-report/results.json' }],
           ]
         : [
-            //   ['blob', { open: 'outputDir', outputDir: 'playwright-report/e2e/blob-report' }],
+              //   ['blob', { open: 'outputDir', outputDir: 'playwright-report/e2e/blob-report' }],
               ['html', { open: 'never', outputFolder: 'playwright-report/e2e/html-report' }],
               ['list', { printSteps: true }],
               ['./utils/summaryReporter.ts', { outputFile: 'playwright-report/e2e/summary-report/results.json' }],
@@ -145,6 +145,7 @@ export default defineConfig({
         {
             name: 'e2e_tests',
             testMatch: /.*\.spec\.ts/,
+            grep: [/@admin/],
             /* whether not to run setup tests before running actual tests */
             dependencies: NO_SETUP ? [] : ['e2e_setup'],
             /* whether not to run teardown tests after running actual tests */

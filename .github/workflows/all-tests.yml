@@ -355,6 +355,8 @@ jobs:
                 ls
                 cd test-artifact-1/playwright-report/e2e
                 ls
+                cd test-artifact-1/playwright-report/e2e/blob-report
+                ls
 
             - name: Move all blob report folder contents into a single folder
               working-directory: tests/pw
