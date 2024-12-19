@@ -585,7 +585,7 @@ jobs:
             - name: Generate summary report
               working-directory: tests/pw
               run: |
-                  node ./mergeTestSummary.js
+                  node ./utils/mergeSummaryReport.js
 
 
             - name: Upload final test artifact
