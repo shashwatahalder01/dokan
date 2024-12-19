@@ -364,15 +364,24 @@ jobs:
                   cd test-artifact-1/playwright-report/e2e/blob-report
                   ls
 
+            # - name: Move all blob report folder contents into a single folder
+            #   working-directory: tests/pw/all-reports
+            #   run: |
+            #       mkdir -p all-blob-reports
+            #       echo "Finding all blob-report directories and moving contents..."
+            #       find . -type d -name "blob-report" | while read -r dir; do
+            #         echo "Processing $dir"
+            #         mv "$dir"/* all-blob-reports/ || echo "No files in $dir"
+            #       done
+            #       echo "All blob report contents moved to all-blob-reports:"
+            #       ls all-blob-reports
+
             - name: Move all blob report folder contents into a single folder
               working-directory: tests/pw/all-reports
               run: |
                   mkdir -p all-blob-reports
-                  echo "Finding all blob-report directories and moving contents..."
-                  find . -type d -name "blob-report" | while read -r dir; do
-                    echo "Processing $dir"
-                    mv "$dir"/* all-blob-reports/ || echo "No files in $dir"
-                  done
+                  echo "Finding and moving all blob-report contents..."
+                  find . -type f -path "*/blob-report/*" -exec mv {} all-blob-reports/ \;
                   echo "All blob report contents moved to all-blob-reports:"
                   ls all-blob-reports
 
