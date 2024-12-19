@@ -365,18 +365,18 @@ jobs:
                   ls
 
             - name: Move all blob report folder contents into a single folder
-              working-directory: tests/pw
+              working-directory: tests/pw/all-reports
               run: |
                   mkdir -p all-blob-reports
                   echo "Finding all blob-report directories and moving contents..."
-                  find all-reports -type d -name "blob-report" | while read -r dir; do
+                  find . -type d -name "blob-report" | while read -r dir; do
                     echo "Processing $dir"
                     mv "$dir"/* all-blob-reports/ || echo "No files in $dir"
                   done
                   echo "All blob report contents moved to all-blob-reports:"
                   ls all-blob-reports
 
-            - name: Merge into HTML Report
+            - name: Generate HTML Report
               working-directory: tests/pw
               run: |
                   npx playwright merge-reports --reporter html ./all-blob-reports
@@ -385,7 +385,7 @@ jobs:
               uses: actions/upload-artifact@v4
               with:
                   name: html-report--attempt-${{ github.run_attempt }}
-                  path: tests/pw/playwright-report
+                  path: tests/pw/all-reports
                   retention-days:
                       7
 

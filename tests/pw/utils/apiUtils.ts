@@ -1685,9 +1685,11 @@ export class ApiUtils {
         return helpers.isSubArray(existingPlugins, plugins);
     }
 
-    // get plugin active or not
+    // get plugin active or not [plugin name format : [ dokan, dokan-pro, woocommerce]...]
     async pluginsActiveOrNot(plugins: string[], auth?: auth): Promise<boolean> {
         const activePlugins = (await this.getAllPlugins({ status: 'active' }, auth)).map((a: { plugin: string }) => a.plugin.split('/')[1]);
+        console.log(activePlugins);
+        console.log(plugins);
         return helpers.isSubArray(activePlugins, plugins);
     }
 

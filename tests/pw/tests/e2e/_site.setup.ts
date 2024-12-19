@@ -6,7 +6,7 @@ import { data } from '@utils/testData';
 import { dbData } from '@utils/dbData';
 import { helpers } from '@utils/helpers';
 
-const { CI, BASE_URL } = process.env;
+const { CI, BASE_URL, DOKAN_PRO } = process.env;
 
 setup.describe('site setup', () => {
     let apiUtils: ApiUtils;
@@ -56,6 +56,15 @@ setup.describe('site setup', () => {
     setup('activate Dokan Lite', { tag: ['@lite'] }, async () => {
         const [response] = await apiUtils.updatePlugin(data.plugin.pluginList.dokanLite, { status: 'active' }, payloads.adminAuth);
         expect(response.ok()).toBeTruthy();
+
+        // deactivate Dokan Pro if DOKAN_PRO is false
+        if (!DOKAN_PRO) {
+            const isActivated = await apiUtils.pluginsActiveOrNot([data.plugin.pluginList.dokanPro], payloads.adminAuth);
+            if (isActivated) {
+                const [response] = await apiUtils.updatePlugin(data.plugin.pluginList.dokanPro, { status: 'inactive' }, payloads.adminAuth);
+                expect(response.ok()).toBeTruthy();
+            }
+        }
     });
 
     setup('activate Dokan Pro', { tag: ['@pro'] }, async () => {
