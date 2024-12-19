@@ -582,7 +582,13 @@ jobs:
                   npx playwright merge-reports --reporter html ./all-reports/all-blob-reports
                   mv playwright-report ./all-reports/html-report
 
-            - name: Upload HTML report
+            - name: Generate summary report
+              working-directory: tests/pw
+              run: |
+                  node ./mergeTestSummary.js
+
+
+            - name: Upload final test artifact
               uses: actions/upload-artifact@v4
               with:
                   name: final-test-artifact
