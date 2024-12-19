@@ -377,14 +377,15 @@ jobs:
                   ls all-blob-reports
 
             - name: Generate HTML Report
-              working-directory: tests/pw/all-reports
+              working-directory: tests/pw
               run: |
-                  npx playwright merge-reports --reporter html ./all-blob-reports
+                  npx playwright merge-reports --reporter html ./all-reports/all-blob-reports
+                  mv playwright-report ./all-reports/html-report
 
             - name: Upload HTML report
               uses: actions/upload-artifact@v4
               with:
-                  name: html-report--attempt-${{ github.run_attempt }}
+                  name: final-test-artifact
                   path: tests/pw/all-reports
                   retention-days:
                       7
