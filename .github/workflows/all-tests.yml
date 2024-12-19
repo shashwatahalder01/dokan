@@ -385,7 +385,7 @@ jobs:
               uses: actions/upload-artifact@v4
               with:
                   name: html-report--attempt-${{ github.run_attempt }}
-                  path: playwright-report
+                  path: tests/pw/playwright-report
                   retention-days:
                       7
 
