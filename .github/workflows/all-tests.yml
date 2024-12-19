@@ -89,8 +89,8 @@ env:
     RECAPTCHA_SECRET_KEY: ${{secrets.RECAPTCHA_SECRET_KEY}}
 
 jobs:
-    tests:
-        name: e2e_api tests
+    e2e_tests:
+        name: e2e tests
         runs-on: ubuntu-latest
         strategy:
             fail-fast: false
@@ -320,10 +320,201 @@ jobs:
                   if-no-files-found: ignore
                   retention-days: 1
 
+    api_tests:
+        name: api tests
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: Checkout testing repo
+              id: clone-dokan-lite
+              uses: actions/checkout@v4
+
+            - name: Use desired version of NodeJS
+              uses: actions/setup-node@v4
+              with:
+                  node-version: 20
+                  cache: npm
+
+            - name: Clone dokan-pro
+              uses: actions/checkout@v4
+              with:
+                  repository: getdokan/dokan-pro
+                  token: ${{ secrets.ACCESS_TOKEN }}
+                  path: 'plugins/dokan-pro'
+                  ref: 'test_utils'
+
+            - name: Unzip woocommerce plugins
+              working-directory: plugins/dokan-pro/tests/plugins
+              run: |
+                  unzip woocommerce-bookings.zip
+                  unzip woocommerce-product-addons.zip
+                  unzip woocommerce-simple-auctions.zip
+                  unzip woocommerce-subscriptions.zip
+
+            - name: Composer install and build (Dokan-lite)
+              run: |
+                  composer i --no-dev -o || composer update --no-dev -o
+
+            - name: Npm install and build (Dokan-lite)
+              run: |
+                  npm ci || npm i
+                  npm run build
+
+            - name: Composer install and build (Dokan-pro)
+              working-directory: plugins/dokan-pro
+              run: |
+                  composer i --no-dev -o || composer update --no-dev -o
+
+            - name: Npm install and build (Dokan-pro)
+              working-directory: plugins/dokan-pro
+              run: |
+                  npm ci || npm i
+                  npm run build
+
+            - name: Update Required Plugin name from dokan-lite to dokan (Dokan-pro)
+              working-directory: plugins/dokan-pro
+              run: |
+                  sed -i'' 's/Requires Plugins: woocommerce, dokan-lite/Requires Plugins: woocommerce, dokan/' dokan-pro.php
+
+            # Install test dependencies
+            - name: Install test dependencies
+              working-directory: tests/pw
+              run: |
+                  npm ci || npm i
+
+            # Override wp-env for pro required plugins
+            - name: Allow override wp-env.json via .wp-env.override.json
+              working-directory: tests/pw
+              run: |
+                  mv .wp-env.override.alltest .wp-env.override.json
+
+            # Create wp debuglog file
+            - name: Create wp debuglog file
+              id: debug-log
+              working-directory: tests/pw
+              run: |
+                  mkdir -p wp-data && touch wp-data/debug.log
+
+            # Start wordpress environment
+            - name: Start WordPress Env
+              id: wp-env
+              uses: nick-fields/retry@v3
+              with:
+                  timeout_minutes: 4
+                  max_attempts: 2
+                  retry_on: error
+                  command: |
+                      cd tests/pw
+                      npm run start:env
+
+            # Set permalink structure
+            - name: Set Permalink structure
+              working-directory: tests/pw
+              run: |
+                  npm run wp-env run tests-cli wp rewrite structure /%postname%/
+
+            # Activate theme
+            - name: Activate theme:Storefront
+              working-directory: tests/pw
+              run: |
+                  npm run wp-env run tests-cli wp theme activate storefront
+
+            # Get Playwright version
+            - name: Get installed Playwright version
+              id: playwright-version
+              working-directory: tests/pw
+              run: |
+                  echo "PLAYWRIGHT_VERSION=$(npm ls @playwright/test --json | jq --raw-output '.dependencies["@playwright/test"].version')" >> $GITHUB_ENV
+
+            # Cache browser binaries, cache key is based on Playwright version and OS
+            - name: Cache playwright binaries
+              id: playwright-cache
+              uses: actions/cache@v4
+              with:
+                  path: |
+                      ~/.cache/ms-playwright
+                  key: ${{ runner.os }}-playwright-${{ env.PLAYWRIGHT_VERSION }}
+                  restore-keys: |
+                      ${{ runner.os }}-playwright-
+
+            # Install browser binaries & OS dependencies if cache missed
+            - name: Install Playwright browser binaries & OS dependencies
+              id: pw-install
+              if: steps.playwright-cache.outputs.cache-hit != 'true'
+              working-directory: tests/pw
+              run: |
+                  npm run pw:browser-with-deps
+
+            # Install only the OS dependencies if cache hit not needed
+            # - name: Install Playwright OS dependencies
+            #   if: steps.playwright-cache.outputs.cache-hit == 'true'
+            #   working-directory: tests/pw
+            #   run: |
+            #     npm run pw:deps-only
+
+            # Run API tests
+            - name: 🧪 Run api tests
+              id: api-test
+              if: always() && steps.wp-env.outcome == 'success' && ( github.event_name != 'workflow_dispatch'  || ( github.event_name == 'workflow_dispatch' && (github.event.inputs.testsuite == 'API' || github.event.inputs.testsuite == 'All')))
+              working-directory: tests/pw
+              run: |
+                  npm run test:api
+
+            # Prepare test summary
+            - name: Prepare test summary
+              id: prepare-test-summary
+              uses: actions/github-script@v7
+              if: always() && steps.clone-dokan-lite.outcome == 'success'
+              with:
+                  result-encoding: string
+                  script: |
+                      const script = require("./tests/pw/utils/gitTestSummary.ts")
+                      return await script({github, context, core})
+
+            # Find PR comment
+            - name: Find PR comment by github-actions[bot]
+              uses: peter-evans/find-comment@v3
+              id: find-comment
+              if: github.event_name == 'pull_request'
+              with:
+                  issue-number: ${{ github.event.pull_request.number }}
+                  comment-author: 'github-actions[bot]'
+                  body-includes: Tests Summary
+
+            # Post test summary as PR comment
+            - name: Create or update PR comment
+              uses: peter-evans/create-or-update-comment@v4
+              if: github.event_name == 'pull_request'
+              with:
+                  comment-id: ${{ steps.find-comment.outputs.comment-id }}
+                  issue-number: ${{ github.event.pull_request.number }}
+                  body: ${{ steps.prepare-test-summary.outputs.result }}
+                  edit-mode: replace
+
+            # Backup Database
+            - name: Backup Database
+              if: always() && steps.wp-env.outcome == 'success'
+              working-directory: tests/pw
+              run: |
+                  npm run wp-env run tests-cli wp db export wp-data/db.sql
+
+            # Upload artifacts
+            - name: Archive test artifacts (screenshots, HTML snapshots, Reports)
+              uses: actions/upload-artifact@v4
+              if: always() && steps.debug-log.outcome == 'success'
+              with:
+                  name: test-artifact-api
+                  path: |
+                      tests/pw/wp-data
+                      tests/pw/playwright
+                      tests/pw/playwright-report
+                  if-no-files-found: ignore
+                  retention-days: 1
+
     merge-reports:
         # Merge reports after playwright-tests, even if some shards have failed
         if: ${{ !cancelled() }}
-        needs: [tests]
+        needs: [e2e_tests, api_tests]
 
         runs-on: ubuntu-latest
         steps:
@@ -349,20 +540,20 @@ jobs:
                   pattern: test-artifact-*
                   #   merge-multiple: true
 
-            - name: Debug test-artifact-1 structure
-              working-directory: tests/pw/all-reports
-              run: |
-                  echo "Contents of test-artifact-1:"
-                  ls -R test-artifact-1
+            # - name: Debug test-artifact-1 structure
+            #   working-directory: tests/pw/all-reports
+            #   run: |
+            #       echo "Contents of test-artifact-1:"
+            #       ls -R test-artifact-1
 
-            - name: Check blob reports
-              working-directory: tests/pw/all-reports
-              run: |
-                  echo "Listing all directories and files:"
-                  ls -R
-                  echo "Navigating to blob-report:"
-                  cd test-artifact-1/playwright-report/e2e/blob-report
-                  ls
+            # - name: Check blob reports
+            #   working-directory: tests/pw/all-reports
+            #   run: |
+            #       echo "Listing all directories and files:"
+            #       ls -R
+            #       echo "Navigating to blob-report:"
+            #       cd test-artifact-1/playwright-report/e2e/blob-report
+            #       ls
 
             # - name: Move all blob report folder contents into a single folder
             #   working-directory: tests/pw/all-reports
