@@ -379,7 +379,7 @@ jobs:
             - name: Merge into HTML Report
               working-directory: tests/pw
               run: |
-                  npx playwright merge-reports --reporter html ./all-reports/all-blob-reports
+                  npx playwright merge-reports --reporter html ./all-blob-reports
 
             - name: Upload HTML report
               uses: actions/upload-artifact@v4
