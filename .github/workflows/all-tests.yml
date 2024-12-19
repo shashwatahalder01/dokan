@@ -349,13 +349,19 @@ jobs:
                   pattern: test-artifact-*
                   #   merge-multiple: true
 
-            - name: Move all blob report folder contents
+            - name: Debug test-artifact-1 structure
               working-directory: tests/pw/all-reports
               run: |
-                ls
-                cd test-artifact-1/playwright-report/e2e
-                ls
-                cd test-artifact-1/playwright-report/e2e/blob-report
+                echo "Contents of test-artifact-1:"
+                ls -R test-artifact-1
+                
+            - name: Check blob reports
+              working-directory: tests/pw/all-reports
+              run: |
+                echo "Listing all directories and files:"
+                ls -R
+                echo "Navigating to blob-report:"
+                cd test-artifact-1/blob-report
                 ls
 
             - name: Move all blob report folder contents into a single folder

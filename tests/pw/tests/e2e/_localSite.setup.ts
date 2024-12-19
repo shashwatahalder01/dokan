@@ -36,7 +36,7 @@ test.describe('setup local site', () => {
 });
 
 test.describe.skip('setup dokan test site', () => {
-    test('install plugin (woocommece)', { tag: ['@pro'] }, async () => {
+    test('install plugin (woocommerce)', { tag: ['@pro'] }, async () => {
         await helpers.exeCommandWpcli(data.commands.wpcli.installPlugin(data.installWp.plugins.woocommerce));
     });
 
