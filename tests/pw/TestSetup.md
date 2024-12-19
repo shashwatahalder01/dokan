@@ -119,12 +119,12 @@ npm run site:setup
 To create a local site with all required plugins:
 
 ```bash
-npm run local:setup
+npm run site:setup
 ```
 
 To allow Dokan specific setup run :
 ```bash
-SKIP_DOKAN=false npm run local:setup
+SKIP_DOKAN=false npm run site:setup
 ```
 
 ### Required .env File
