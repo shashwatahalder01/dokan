@@ -354,26 +354,26 @@ jobs:
               run: |
                 echo "Contents of test-artifact-1:"
                 ls -R test-artifact-1
-                
+
             - name: Check blob reports
               working-directory: tests/pw/all-reports
               run: |
                 echo "Listing all directories and files:"
                 ls -R
                 echo "Navigating to blob-report:"
-                cd test-artifact-1/blob-report
+                cd test-artifact-1/playwright-report/e2e/blob-report
                 ls
 
             - name: Move all blob report folder contents into a single folder
               working-directory: tests/pw
               run: |
-                  mkdir -p all-blob-reports
-                  find all-reports -type d -name "blob-report" -exec mv {}/* all-blob-reports/ \;
+                mkdir -p all-blob-reports
+                find all-reports -type d -name "blob-report" -exec mv {}/* all-blob-reports/ \;
 
             - name: Merge into HTML Report
               working-directory: tests/pw
               run: |
-                npx playwright merge-reports --reporter html ./all-blob-reports
+                npx playwright merge-reports --reporter html ./all-reports/all-blob-reports
 
             - name: Upload HTML report
               uses: actions/upload-artifact@v4
