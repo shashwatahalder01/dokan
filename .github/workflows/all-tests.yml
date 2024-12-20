@@ -61,10 +61,14 @@ env:
     PR_NUMBER: ${{ github.event.number }}
     SHA: ${{ github.event.pull_request.head.sha }}
     SYSTEM_INFO: ./tests/pw/playwright/systemInfo.json
-    API_TEST_RESULT: ./tests/pw/playwright-report/api/summary-report/results.json
-    E2E_TEST_RESULT: ./tests/pw/playwright-report/e2e/summary-report/results.json
-    API_COVERAGE: ./tests/pw/playwright-report/api/coverage-report/coverage.json
-    E2E_COVERAGE: ./tests/pw/playwright-report/e2e/coverage-report/coverage.json
+    API_TEST_RESULT: ./tests/pw/all-reports/test-artifact-api/playwright-report/api/summary-report/results.json
+    API_COVERAGE: ./tests/pw/all-reports/test-artifact-api/playwright-report/api/coverage-report/coverage.json
+    E2E_TEST_RESULT: ./tests/pw/all-reports/merged-summary.json
+    E2E_COVERAGE: ./tests/pw/all-reports/merged-coverage.json
+    # API_TEST_RESULT: ./tests/pw/playwright-report/api/summary-report/results.json
+    # E2E_TEST_RESULT: ./tests/pw/playwright-report/e2e/summary-report/results.json
+    # API_COVERAGE: ./tests/pw/playwright-report/api/coverage-report/coverage.json
+    # E2E_COVERAGE: ./tests/pw/playwright-report/e2e/coverage-report/coverage.json
     TEST_PUBLISH_KEY_STRIPE: ${{secrets.TEST_PUBLISH_KEY_STRIPE}}
     TEST_SECRET_KEY_STRIPE: ${{secrets.TEST_SECRET_KEY_STRIPE}}
     CLIENT_ID_STRIPE: ${{secrets.CLIENT_ID_STRIPE}}
@@ -538,34 +542,6 @@ jobs:
               with:
                   path: tests/pw/all-reports
                   pattern: test-artifact-*
-                  #   merge-multiple: true
-
-            # - name: Debug test-artifact-1 structure
-            #   working-directory: tests/pw/all-reports
-            #   run: |
-            #       echo "Contents of test-artifact-1:"
-            #       ls -R test-artifact-1
-
-            # - name: Check blob reports
-            #   working-directory: tests/pw/all-reports
-            #   run: |
-            #       echo "Listing all directories and files:"
-            #       ls -R
-            #       echo "Navigating to blob-report:"
-            #       cd test-artifact-1/playwright-report/e2e/blob-report
-            #       ls
-
-            # - name: Move all blob report folder contents into a single folder
-            #   working-directory: tests/pw/all-reports
-            #   run: |
-            #       mkdir -p all-blob-reports
-            #       echo "Finding all blob-report directories and moving contents..."
-            #       find . -type d -name "blob-report" | while read -r dir; do
-            #         echo "Processing $dir"
-            #         mv "$dir"/* all-blob-reports/ || echo "No files in $dir"
-            #       done
-            #       echo "All blob report contents moved to all-blob-reports:"
-            #       ls all-blob-reports
 
             - name: Move all blob report folder contents into a single folder
               working-directory: tests/pw/all-reports
@@ -582,64 +558,68 @@ jobs:
                   npx playwright merge-reports --reporter html ./all-reports/all-blob-reports
                   mv playwright-report ./all-reports/html-report
 
-            - name: Generate summary report
+            - name: Generate merged summary report
+              id: summary-report
               working-directory: tests/pw
               run: |
-                  node ./utils/mergeSummaryReport.js
+                  npx ts-node ./utils/mergeSummaryReport.ts
 
+            - name: Generate merged coverage report
+              id: summary-report
+              working-directory: tests/pw
+              run: |
+                  npx ts-node ./utils/mergeCoverageSummary.ts
+
+            # Prepare test summary
+            - name: Prepare test summary
+              id: prepare-test-summary
+              if: always() && steps.summary-report.outcome == 'success'
+              uses: actions/github-script@v7
+              with:
+                  result-encoding: string
+                  script: |
+                      const script = require("./tests/pw/utils/gitTestSummary.ts")
+                      return await script({github, context, core})
+
+            # Find PR comment
+            - name: Find PR comment by github-actions[bot]
+              uses: peter-evans/find-comment@v3
+              id: find-comment
+              if: github.event_name == 'pull_request'
+              with:
+                  issue-number: ${{ github.event.pull_request.number }}
+                  comment-author: 'github-actions[bot]'
+                  body-includes: Tests Summary
+
+            # Post test summary as PR comment
+            - name: Create or update PR comment
+              uses: peter-evans/create-or-update-comment@v4
+              if: github.event_name == 'pull_request'
+              with:
+                  comment-id: ${{ steps.find-comment.outputs.comment-id }}
+                  issue-number: ${{ github.event.pull_request.number }}
+                  body: ${{ steps.prepare-test-summary.outputs.result }}
+                  edit-mode: replace
 
             - name: Upload final test artifact
               uses: actions/upload-artifact@v4
               with:
                   name: final-test-artifact
                   path: tests/pw/all-reports
-                  retention-days:
-                      7
+                  retention-days: 7
 
-                      # - name: Publish HTML report to GH Pages
-                      #   if: always() # We want this to always run, even if test fail prior to this step running
-                      #   uses: peaceiris/actions-gh-pages@v4
-                      #   with:
-                      #     github_token: ${{ secrets.GITHUB_TOKEN }}
-                      #     publish_branch: gh-pages
-                      #     publish_dir: tests/pw/playwright-report/e2e/html-report # This is where index.html will be output
-                      #     keep_files: true # Set this to true to make sure we don't wipe out the other content in GitHub Pages
-                      #     user_name: "github-actions[bot]" # This will be the username that gets stamped in the repo commit
-                      #     user_email: "github-actions[bot]@users.noreply.github.com" # This will be the user email that gets stamped in the repo commit
+            # - name: Publish HTML report to GH Pages
+            #   if: always() # We want this to always run, even if test fail prior to this step running
+            #   uses: peaceiris/actions-gh-pages@v4
+            #   with:
+            #       github_token: ${{ secrets.GITHUB_TOKEN }}
+            #       publish_branch: gh-pages
+            #       publish_dir: tests/pw/playwright-report/e2e/html-report # This is where index.html will be output
+            #       keep_files: true # Set this to true to make sure we don't wipe out the other content in GitHub Pages
+            #       user_name: 'github-actions[bot]' # This will be the username that gets stamped in the repo commit
+            #       user_email: 'github-actions[bot]@users.noreply.github.com' # This will be the user email that gets stamped in the repo com
 
-                      # - name: Test results
-                      #   if: always()
-                      #   run: |
-                      #     echo "https://$GITHUB_REPOSITORY_OWNER.github.io/${GITHUB_REPOSITORY#*/}"
-# publishTestResults:
-#   name: Publish Test Result
-#   needs: tests
-#   runs-on: ubuntu-latest
-#   if: always()
-#   steps:
-#     - name: Download artifacts
-#       uses: actions/download-artifact@v2
-#       id: download
-
-#     - name: Publish HTML report to GH Pages
-#       if: always() # We want this to always run, even if test fail prior to this step running
-#       uses: peaceiris/actions-gh-pages@v3
-#       with:
-#         github_token: ${{ secrets.GITHUB_TOKEN }}
-#         publish_dir: ${{steps.download.outputs.download-path}} # This is where index.html will be output
-#         # keep_files: true # Set this to true to make sure we don't wipe out the other content in GitHub Pages
-#         user_name: "github-actions[bot]" # This will be the username that gets stamped in the repo commit
-#         user_email: "github-actions[bot]@users.noreply.github.com" # This will be the user email that gets stamped in the repo commit
-
-#       # redundant / in echo url remove before run
-#     - name: Test results
-#       run: |
-#         echo "url is https://$GITHUB_REPOSITORY_OWNER.github.io/${GITHUB_REPOSITORY#/*/}"
-# iff: github.event_name == 'pull_request'
-
-# - name: Log github context & env variables
-#   env:
-#     GITHUB_CONTEXT: ${{ toJson(github) }}
-#   run: |
-#     echo "$GITHUB_CONTEXT"
-#     env
+            # - name: Test results
+            #   if: always()
+            #   run: |
+            #       echo "https://$GITHUB_REPOSITORY_OWNER.github.io/${GITHUB_REPOSITORY#*/}"

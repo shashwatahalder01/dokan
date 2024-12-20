@@ -1,16 +1,33 @@
-const fs = require('fs');
-const path = require('path');
+import * as fs from 'fs';
+import * as path from 'path';
+
+interface TestReport {
+    suite_name: string;
+    total_tests: number;
+    passed: number;
+    failed: number;
+    flaky: number;
+    skipped: number;
+    suite_duration: number;
+    suite_duration_formatted?: string;
+    tests: string[];
+    passed_tests: string[];
+    failed_tests: string[];
+    flaky_tests: string[];
+    skipped_tests: string[];
+}
 
 // Helper function to format duration
-const getFormattedDuration = milliseconds => {
+const getFormattedDuration = (milliseconds: number): string => {
     const hours = Math.floor(milliseconds / (1000 * 60 * 60));
-    const min = Math.floor((milliseconds / (1000 * 60)) % 60);
-    const sec = Math.floor((milliseconds / 1000) % 60);
-    return `${hours < 1 ? '' : hours + 'h '}${min < 1 ? '' : min + 'm '}${sec < 1 ? '' : sec + 's'}`;
+    const minutes = Math.floor((milliseconds / (1000 * 60)) % 60);
+    const seconds = Math.floor((milliseconds / 1000) % 60);
+    return `${hours < 1 ? '' : hours + 'h '}${minutes < 1 ? '' : minutes + 'm '}${seconds < 1 ? '' : seconds + 's'}`;
 };
 
-const mergeReports = reportPaths => {
-    const mergedReport = {
+// Main function to merge reports
+const mergeReports = (reportPaths: string[]): TestReport => {
+    const mergedReport: TestReport = {
         suite_name: '',
         total_tests: 0,
         passed: 0,
@@ -27,7 +44,8 @@ const mergeReports = reportPaths => {
     };
 
     reportPaths.forEach(reportPath => {
-        const report = JSON.parse(fs.readFileSync(reportPath, 'utf8'));
+        const report: TestReport = JSON.parse(fs.readFileSync(reportPath, 'utf8'));
+
         mergedReport.total_tests += report.total_tests;
         mergedReport.passed += report.passed;
         mergedReport.failed += report.failed;
@@ -58,16 +76,19 @@ const mergeReports = reportPaths => {
 
 // Main script execution
 const reportsFolder = './all-reports'; // Change to your artifacts location
-const reportPaths = [];
+const reportPaths: string[] = [];
 
-// Collect all result.json files
-const findReports = dir => {
+// Function to collect all results.json files
+const findReports = (dir: string): void => {
     const files = fs.readdirSync(dir);
     files.forEach(file => {
         const fullPath = path.join(dir, file);
         if (fs.statSync(fullPath).isDirectory()) {
-            findReports(fullPath); // Recurse into subdirectories
-        } else if (file === 'results.json') {
+            if (!fullPath.includes(path.join('api'))) { // todo: update if api suite is also run in matrix job
+                // Ignore directories containing 'api'
+                findReports(fullPath); // Recurse into subdirectories
+            }
+        } else if (file === 'results.json' && !fullPath.includes(path.join('api'))) {
             reportPaths.push(fullPath);
         }
     });
