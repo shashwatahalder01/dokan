@@ -76,7 +76,8 @@ const findReports = (dir: string): void => {
     files.forEach(file => {
         const fullPath = path.join(dir, file);
         if (fs.statSync(fullPath).isDirectory()) {
-            if (!fullPath.includes(path.join('api'))) {       // todo: update if api suite is also run in matrix job
+            if (!fullPath.includes(path.join('api'))) {
+                // todo: update if api suite is also run in matrix job
                 // Ignore directories containing 'api'
                 findReports(fullPath); // Recurse into subdirectories
             }
