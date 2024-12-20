@@ -95,8 +95,8 @@ jobs:
         strategy:
             fail-fast: false
             matrix:
-                shardIndex: [1, 2, 3, 4, 5, 6]
-                shardTotal: [6]
+                shardIndex: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+                shardTotal: [10]
 
         steps:
             - name: Checkout testing repo
@@ -252,16 +252,16 @@ jobs:
             #         npm run test:api:pro
             #       fi
 
-            # # Prepare test summary
-            # - name: Prepare test summary
-            #   id: prepare-test-summary
-            #   uses: actions/github-script@v7
-            #   if: always() && steps.clone-dokan-lite.outcome == 'success'
-            #   with:
-            #       result-encoding: string
-            #       script: |
-            #           const script = require("./tests/pw/utils/gitTestSummary.ts")
-            #           return await script({github, context, core})
+            # Prepare test summary
+            - name: Prepare test summary
+              id: prepare-test-summary
+              uses: actions/github-script@v7
+              if: always() && steps.clone-dokan-lite.outcome == 'success'
+              with:
+                  result-encoding: string
+                  script: |
+                      const script = require("./tests/pw/utils/gitTestSummary.ts")
+                      return await script({github, context, core})
 
             # # Find PR comment
             # - name: Find PR comment by github-actions[bot]
@@ -443,16 +443,16 @@ jobs:
               run: |
                   npm run test:api:pro
 
-            # # Prepare test summary
-            # - name: Prepare test summary
-            #   id: prepare-test-summary
-            #   if: always() && steps.clone-dokan-lite.outcome == 'success'
-            #   uses: actions/github-script@v7
-            #   with:
-            #       result-encoding: string
-            #       script: |
-            #           const script = require("./tests/pw/utils/gitTestSummary.ts")
-            #           return await script({github, context, core})
+            # Prepare test summary
+            - name: Prepare test summary
+              id: prepare-test-summary
+              if: always() && steps.clone-dokan-lite.outcome == 'success'
+              uses: actions/github-script@v7
+              with:
+                  result-encoding: string
+                  script: |
+                      const script = require("./tests/pw/utils/gitTestSummary.ts")
+                      return await script({github, context, core})
 
             # # Find PR comment
             # - name: Find PR comment by github-actions[bot]
