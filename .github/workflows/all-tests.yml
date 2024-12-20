@@ -467,8 +467,8 @@ jobs:
             # Prepare test summary
             - name: Prepare test summary
               id: prepare-test-summary
-              uses: actions/github-script@v7
               if: always() && steps.clone-dokan-lite.outcome == 'success'
+              uses: actions/github-script@v7
               with:
                   result-encoding: string
                   script: |
@@ -477,9 +477,9 @@ jobs:
 
             # Find PR comment
             - name: Find PR comment by github-actions[bot]
-              uses: peter-evans/find-comment@v3
               id: find-comment
               if: github.event_name == 'pull_request'
+              uses: peter-evans/find-comment@v3
               with:
                   issue-number: ${{ github.event.pull_request.number }}
                   comment-author: 'github-actions[bot]'
@@ -487,8 +487,8 @@ jobs:
 
             # Post test summary as PR comment
             - name: Create or update PR comment
-              uses: peter-evans/create-or-update-comment@v4
               if: github.event_name == 'pull_request'
+              uses: peter-evans/create-or-update-comment@v4
               with:
                   comment-id: ${{ steps.find-comment.outputs.comment-id }}
                   issue-number: ${{ github.event.pull_request.number }}
@@ -504,8 +504,8 @@ jobs:
 
             # Upload artifacts
             - name: Archive test artifacts (screenshots, HTML snapshots, Reports)
-              uses: actions/upload-artifact@v4
               if: always() && steps.debug-log.outcome == 'success'
+              uses: actions/upload-artifact@v4
               with:
                   name: test-artifact-api
                   path: |
@@ -537,7 +537,8 @@ jobs:
               run: |
                   npm ci || npm i
 
-            - name: Download blob reports from GitHub Actions Artifacts
+            - name: Download all test artifacts from GitHub Actions
+              id: download-test-artifacts
               uses: actions/download-artifact@v4
               with:
                   path: tests/pw/all-reports
@@ -547,12 +548,11 @@ jobs:
               working-directory: tests/pw/all-reports
               run: |
                   mkdir -p all-blob-reports
-                  echo "Finding and moving all blob-report contents..."
                   find . -type f -path "*/blob-report/*" -exec mv {} all-blob-reports/ \;
-                  echo "All blob report contents moved to all-blob-reports:"
-                  ls all-blob-reports
+              #   ls all-blob-reports
 
             - name: Generate HTML Report
+              id: generate-html-report
               working-directory: tests/pw
               run: |
                   npx playwright merge-reports --reporter html ./all-reports/all-blob-reports
@@ -560,12 +560,14 @@ jobs:
 
             - name: Generate merged summary report
               id: merge-summary-report
+              if: steps.download-test-artifacts.outcome == 'success'
               working-directory: tests/pw
               run: |
                   npx ts-node ./utils/mergeSummaryReport.ts
 
             - name: Generate merged coverage report
               id: merge-coverage-report
+              if: steps.download-test-artifacts.outcome == 'success'
               working-directory: tests/pw
               run: |
                   npx ts-node ./utils/mergeCoverageSummary.ts
@@ -573,7 +575,7 @@ jobs:
             # Prepare test summary
             - name: Prepare test summary
               id: prepare-test-summary
-              if: always() && steps.summary-report.outcome == 'success'
+              if: always() && steps.merge-summary-report.outcome == 'success'
               uses: actions/github-script@v7
               with:
                   result-encoding: string
@@ -583,9 +585,9 @@ jobs:
 
             # Find PR comment
             - name: Find PR comment by github-actions[bot]
-              uses: peter-evans/find-comment@v3
               id: find-comment
               if: github.event_name == 'pull_request'
+              uses: peter-evans/find-comment@v3
               with:
                   issue-number: ${{ github.event.pull_request.number }}
                   comment-author: 'github-actions[bot]'
@@ -593,23 +595,26 @@ jobs:
 
             # Post test summary as PR comment
             - name: Create or update PR comment
-              uses: peter-evans/create-or-update-comment@v4
               if: github.event_name == 'pull_request'
+              uses: peter-evans/create-or-update-comment@v4
               with:
                   comment-id: ${{ steps.find-comment.outputs.comment-id }}
                   issue-number: ${{ github.event.pull_request.number }}
                   body: ${{ steps.prepare-test-summary.outputs.result }}
+                  reactions: hooray
                   edit-mode: replace
 
             - name: Upload final test artifact
+              if: always() && steps.download-test-artifacts.outcome == 'success'
               uses: actions/upload-artifact@v4
               with:
                   name: final-test-artifact
                   path: tests/pw/all-reports
+                  if-no-files-found: ignore
                   retention-days: 7
 
             - name: Publish HTML report to GH Pages
-              if: always()
+              if: always() && steps.generate-html-report.outcome == 'success'
               uses: peaceiris/actions-gh-pages@v4
               with:
                   github_token: ${{ secrets.GITHUB_TOKEN }}
