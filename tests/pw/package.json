@@ -3,7 +3,6 @@
     "version": "1.0.0",
     "description": "dokan e2e & api endpoints test automation using playwright",
     "main": "index.js",
-    "type": "module",
     "scripts": {
         "nid": "npm install --include=dev",
         "nip": "npm install --omit=dev",

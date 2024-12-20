@@ -1,5 +1,7 @@
-import * as fs from 'fs';
-import * as path from 'path';
+// @ts-nocheck
+// eslint-disable-next-line @typescript-eslint/no-require-imports
+const fs = require('fs');
+const path = require('path');
 
 interface TestReport {
     suite_name: string;
@@ -84,7 +86,8 @@ const findReports = (dir: string): void => {
     files.forEach(file => {
         const fullPath = path.join(dir, file);
         if (fs.statSync(fullPath).isDirectory()) {
-            if (!fullPath.includes(path.join('api'))) { // todo: update if api suite is also run in matrix job
+            if (!fullPath.includes(path.join('api'))) {
+                // todo: update if api suite is also run in matrix job
                 // Ignore directories containing 'api'
                 findReports(fullPath); // Recurse into subdirectories
             }

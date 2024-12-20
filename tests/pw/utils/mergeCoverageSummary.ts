@@ -1,5 +1,7 @@
-import * as fs from 'fs';
-import * as path from 'path';
+// @ts-nocheck
+// eslint-disable-next-line @typescript-eslint/no-require-imports
+const fs = require('fs');
+const path = require('path');
 
 interface CoverageReport {
     total_features: number;
