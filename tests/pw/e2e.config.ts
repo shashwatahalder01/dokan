@@ -145,7 +145,7 @@ export default defineConfig({
         {
             name: 'e2e_tests',
             testMatch: /.*\.spec\.ts/,
-            grep: [/@admin/],
+            // grep: [/@admin/],
             /* whether not to run setup tests before running actual tests */
             dependencies: NO_SETUP ? [] : ['e2e_setup'],
             /* whether not to run teardown tests after running actual tests */

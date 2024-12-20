@@ -50,7 +50,7 @@ env:
     LICENSE_KEY: ${{secrets.LICENSE_KEY}}
     BASE_URL: http://localhost:9999
     CI: true
-    # DOKAN_PRO: true
+    DOKAN_PRO: true
     FORCE_COLOR: 1
     DB_HOST_NAME: localhost
     DB_USER_NAME: root
@@ -95,8 +95,8 @@ jobs:
         strategy:
             fail-fast: false
             matrix:
-                shardIndex: [1, 2]
-                shardTotal: [2]
+                shardIndex: [1, 2, 3, 4, 5, 6]
+                shardTotal: [6]
 
         steps:
             - name: Checkout testing repo
@@ -233,7 +233,7 @@ jobs:
               timeout-minutes: 40
               working-directory: tests/pw
               run: |
-                  npm run test:e2e -- --shard=${{ matrix.shardIndex }}/${{ matrix.shardTotal }}
+                  npm run test:e2e:pro -- --shard=${{ matrix.shardIndex }}/${{ matrix.shardTotal }}
 
             # Run e2e coverage
             - name: 🧪 Run e2e coverage
@@ -252,53 +252,36 @@ jobs:
             #         npm run test:api:pro
             #       fi
 
-            # Prepare test summary
-            - name: Prepare test summary
-              id: prepare-test-summary
-              uses: actions/github-script@v7
-              if: always() && steps.clone-dokan-lite.outcome == 'success'
-              with:
-                  result-encoding: string
-                  script: |
-                      const script = require("./tests/pw/utils/gitTestSummary.ts")
-                      return await script({github, context, core})
-
-            # Find PR comment
-            - name: Find PR comment by github-actions[bot]
-              uses: peter-evans/find-comment@v3
-              id: find-comment
-              if: github.event_name == 'pull_request'
-              with:
-                  issue-number: ${{ github.event.pull_request.number }}
-                  comment-author: 'github-actions[bot]'
-                  body-includes: Tests Summary
-
-            # Post test summary as PR comment
-            - name: Create or update PR comment
-              uses: peter-evans/create-or-update-comment@v4
-              if: github.event_name == 'pull_request'
-              with:
-                  comment-id: ${{ steps.find-comment.outputs.comment-id }}
-                  issue-number: ${{ github.event.pull_request.number }}
-                  body: ${{ steps.prepare-test-summary.outputs.result }}
-                  edit-mode: replace
-
-            # - name: Generate Test Report
-            #   uses: phoenix-actions/test-reporting@v8
-            #   id: test-report # Set ID reference for step
-            #   if: success() || failure() # run this step even if previous step failed
+            # # Prepare test summary
+            # - name: Prepare test summary
+            #   id: prepare-test-summary
+            #   uses: actions/github-script@v7
+            #   if: always() && steps.clone-dokan-lite.outcome == 'success'
             #   with:
-            #     name: e2e tests result # Name of the check run which will be created
-            #     path: tests/pw/playwright-report/results.xml # Path to test results
-            #     reporter: jest-junit
-            #     only-summary: "false" # Allows you to generate only the summary.
-            #     list-suites: "all" # Limits which test suites are listed: 'all', 'failed'
-            #     list-tests: "all" # Limits which test cases are listed: 'all','failed', 'none'
-            #     fail-on-error: "true" # Set action as failed if test report contains any failed test
+            #       result-encoding: string
+            #       script: |
+            #           const script = require("./tests/pw/utils/gitTestSummary.ts")
+            #           return await script({github, context, core})
 
-            # - name: Test results
-            #   run: |
-            #     echo "url is ${{ steps.test-report.outputs.runHtmlUrl }}"
+            # # Find PR comment
+            # - name: Find PR comment by github-actions[bot]
+            #   uses: peter-evans/find-comment@v3
+            #   id: find-comment
+            #   if: github.event_name == 'pull_request'
+            #   with:
+            #       issue-number: ${{ github.event.pull_request.number }}
+            #       comment-author: 'github-actions[bot]'
+            #       body-includes: Tests Summary
+
+            # # Post test summary as PR comment
+            # - name: Create or update PR comment
+            #   uses: peter-evans/create-or-update-comment@v4
+            #   if: github.event_name == 'pull_request'
+            #   with:
+            #       comment-id: ${{ steps.find-comment.outputs.comment-id }}
+            #       issue-number: ${{ github.event.pull_request.number }}
+            #       body: ${{ steps.prepare-test-summary.outputs.result }}
+            #       edit-mode: replace
 
             # Backup Database
             - name: Backup Database
@@ -458,38 +441,38 @@ jobs:
               if: always() && steps.wp-env.outcome == 'success' && ( github.event_name != 'workflow_dispatch'  || ( github.event_name == 'workflow_dispatch' && (github.event.inputs.testsuite == 'API' || github.event.inputs.testsuite == 'All')))
               working-directory: tests/pw
               run: |
-                  npm run test:api
+                  npm run test:api:pro
 
-            # Prepare test summary
-            - name: Prepare test summary
-              id: prepare-test-summary
-              if: always() && steps.clone-dokan-lite.outcome == 'success'
-              uses: actions/github-script@v7
-              with:
-                  result-encoding: string
-                  script: |
-                      const script = require("./tests/pw/utils/gitTestSummary.ts")
-                      return await script({github, context, core})
+            # # Prepare test summary
+            # - name: Prepare test summary
+            #   id: prepare-test-summary
+            #   if: always() && steps.clone-dokan-lite.outcome == 'success'
+            #   uses: actions/github-script@v7
+            #   with:
+            #       result-encoding: string
+            #       script: |
+            #           const script = require("./tests/pw/utils/gitTestSummary.ts")
+            #           return await script({github, context, core})
 
-            # Find PR comment
-            - name: Find PR comment by github-actions[bot]
-              id: find-comment
-              if: github.event_name == 'pull_request'
-              uses: peter-evans/find-comment@v3
-              with:
-                  issue-number: ${{ github.event.pull_request.number }}
-                  comment-author: 'github-actions[bot]'
-                  body-includes: Tests Summary
+            # # Find PR comment
+            # - name: Find PR comment by github-actions[bot]
+            #   id: find-comment
+            #   if: github.event_name == 'pull_request'
+            #   uses: peter-evans/find-comment@v3
+            #   with:
+            #       issue-number: ${{ github.event.pull_request.number }}
+            #       comment-author: 'github-actions[bot]'
+            #       body-includes: Tests Summary
 
-            # Post test summary as PR comment
-            - name: Create or update PR comment
-              if: github.event_name == 'pull_request'
-              uses: peter-evans/create-or-update-comment@v4
-              with:
-                  comment-id: ${{ steps.find-comment.outputs.comment-id }}
-                  issue-number: ${{ github.event.pull_request.number }}
-                  body: ${{ steps.prepare-test-summary.outputs.result }}
-                  edit-mode: replace
+            # # Post test summary as PR comment
+            # - name: Create or update PR comment
+            #   if: github.event_name == 'pull_request'
+            #   uses: peter-evans/create-or-update-comment@v4
+            #   with:
+            #       comment-id: ${{ steps.find-comment.outputs.comment-id }}
+            #       issue-number: ${{ github.event.pull_request.number }}
+            #       body: ${{ steps.prepare-test-summary.outputs.result }}
+            #       edit-mode: replace
 
             # Backup Database
             - name: Backup Database
