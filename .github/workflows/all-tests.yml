@@ -559,13 +559,13 @@ jobs:
                   mv playwright-report ./all-reports/html-report
 
             - name: Generate merged summary report
-              id: summary-report
+              id: merge-summary-report
               working-directory: tests/pw
               run: |
                   npx ts-node ./utils/mergeSummaryReport.ts
 
             - name: Generate merged coverage report
-              id: summary-report
+              id: merge-coverage-report
               working-directory: tests/pw
               run: |
                   npx ts-node ./utils/mergeCoverageSummary.ts
