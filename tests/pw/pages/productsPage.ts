@@ -612,6 +612,7 @@ export class ProductsPage extends AdminPage {
         await this.toBeVisible(productsVendor.productLink(productName));
     }
 
+    // get product edit nonce
     async getProductEditNonce(): Promise<string> {
         await this.gotoUntilNetworkidle(data.subUrls.frontend.vDashboard.dashboard);
         const url = await this.getAttributeValue(selector.vendor.vDashboard.products.addNewProduct, 'href');
@@ -620,6 +621,7 @@ export class ProductsPage extends AdminPage {
         return nonce;
     }
 
+    // go to product edit by id
     async goToProductEditById(productName: string, nonce: string = PRODUCT_EDIT_NONCE): Promise<void> {
         await this.gotoUntilNetworkidle(data.subUrls.frontend.vDashboard.productEdit(productName, nonce));
     }
