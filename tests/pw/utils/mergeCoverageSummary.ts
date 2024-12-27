@@ -38,11 +38,11 @@ const mergeCoverageReports = (reportPaths: string[]): CoverageReport => {
         const report: CoverageReport = JSON.parse(fs.readFileSync(reportPath, 'utf8'));
 
         // Add total features and covered features
-        mergedReport.total_features += report.total_features;
-        mergedReport.total_covered_features += report.total_covered_features;
+        // mergedReport.total_features += report.total_features;
+        // mergedReport.total_covered_features += report.total_covered_features;
 
         // Add coverage percentages (convert string to number, remove "%")
-        mergedReport.coverage = (parseFloat(mergedReport.coverage.replace('%', '')) + parseFloat(report.coverage.replace('%', ''))).toFixed(2) + '%';
+        // mergedReport.coverage = (parseFloat(mergedReport.coverage.replace('%', '')) + parseFloat(report.coverage.replace('%', ''))).toFixed(2) + '%';
 
         // Merge page coverage
         mergedReport.page_coverage = mergePageCoverage(mergedReport.page_coverage, report.page_coverage);
@@ -55,6 +55,9 @@ const mergeCoverageReports = (reportPaths: string[]): CoverageReport => {
     // Deduplicate and sort features after all reports are merged
     mergedReport.covered_features = [...new Set(mergedReport.covered_features)].sort();
     mergedReport.uncovered_features = [...new Set(mergedReport.uncovered_features)].sort();
+
+    mergedReport.total_features = mergedReport.covered_features.length + mergedReport.uncovered_features.length;
+    mergedReport.total_covered_features = mergedReport.covered_features.length;
 
     // Recalculate overall coverage percentage
     mergedReport.coverage = ((mergedReport.total_covered_features / mergedReport.total_features) * 100).toFixed(2) + '%';

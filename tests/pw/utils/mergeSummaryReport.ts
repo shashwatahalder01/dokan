@@ -12,6 +12,7 @@ interface TestReport {
     skipped: number;
     suite_duration: number;
     suite_duration_formatted?: string;
+    all_suite_durations: number[];
     tests: string[];
     passed_tests: string[];
     failed_tests: string[];
@@ -38,6 +39,7 @@ const mergeReports = (reportPaths: string[]): TestReport => {
         skipped: 0,
         suite_duration: 0,
         suite_duration_formatted: '',
+        all_suite_durations: [],
         tests: [],
         passed_tests: [],
         failed_tests: [],
@@ -48,12 +50,13 @@ const mergeReports = (reportPaths: string[]): TestReport => {
     reportPaths.forEach(reportPath => {
         const report: TestReport = JSON.parse(fs.readFileSync(reportPath, 'utf8'));
 
-        mergedReport.total_tests += report.total_tests;
-        mergedReport.passed += report.passed;
-        mergedReport.failed += report.failed;
-        mergedReport.flaky += report.flaky;
-        mergedReport.skipped += report.skipped;
-        mergedReport.suite_duration += report.suite_duration;
+        // mergedReport.total_tests += report.total_tests;
+        // mergedReport.passed += report.passed;
+        // mergedReport.failed += report.failed;
+        // mergedReport.flaky += report.flaky;
+        // mergedReport.skipped += report.skipped;
+        // mergedReport.suite_duration += report.suite_duration;
+        mergedReport.all_suite_durations.push(...report.suite_duration);
 
         // Append and de-duplicate test arrays
         mergedReport.tests.push(...report.tests);
@@ -69,6 +72,13 @@ const mergeReports = (reportPaths: string[]): TestReport => {
     mergedReport.failed_tests = [...new Set(mergedReport.failed_tests)].sort();
     mergedReport.flaky_tests = [...new Set(mergedReport.flaky_tests)].sort();
     mergedReport.skipped_tests = [...new Set(mergedReport.skipped_tests)].sort();
+
+    mergedReport.total_tests = mergedReport.tests.length;
+    mergedReport.passed = mergedReport.passed_tests.length;
+    mergedReport.failed = mergedReport.failed_tests.length;
+    mergedReport.flaky = mergedReport.flaky_tests.length;
+    mergedReport.skipped = mergedReport.skipped_tests.length;
+    mergedReport.suite_duration = Math.max(...mergedReport.all_suite_durations);
 
     // Format the suite duration
     mergedReport.suite_duration_formatted = getFormattedDuration(mergedReport.suite_duration);
