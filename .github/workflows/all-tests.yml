@@ -97,7 +97,6 @@ jobs:
             matrix:
                 shardIndex: [1, 2, 3, 4, 5]
                 shardTotal: [5]
-
         steps:
             - name: Checkout testing repo
               id: clone-dokan-lite
@@ -241,7 +240,7 @@ jobs:
               working-directory: tests/pw
               run: |
                   npm run test:e2e:coverage
-
+                  
             # # Run API tests
             # - name: 🧪 Run api tests
             #   id: api-test
@@ -610,7 +609,6 @@ jobs:
                   keep_files: true
                   user_name: 'github-actions[bot]' # This will be the username that gets stamped in the repo commit
                   user_email: 'github-actions[bot]@users.noreply.github.com' # This will be the user email that gets stamped in the repo com
-
 
             # - name: Test results
             #   if: always()
