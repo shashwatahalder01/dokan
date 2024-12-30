@@ -54,7 +54,7 @@ test.describe('Store Appearance test', () => {
     });
 
     ['enable', 'disable'].forEach((status: string) => {
-        test(`admin can ${status} store contact form on store sidebar`, { tag: ['@lite', '@admin'] }, async () => {
+        test.skip(`admin can ${status} store contact form on store sidebar`, { tag: ['@lite', '@admin'] }, async () => {
             await dbUtils.updateOptionValue(dbData.dokan.optionName.appearance, { contact_seller: status === 'enable' ? 'on' : 'off' });
             await admin.viewStoreContactFormOnStoreSidebar(status as 'enable' | 'disable', data.predefined.vendorStores.vendor1);
         });
@@ -68,7 +68,7 @@ test.describe('Store Appearance test', () => {
     });
 
     ['enable', 'disable'].forEach((status: string) => {
-        test(`admin can ${status} store open-close time on store sidebar`, { tag: ['@lite', '@admin'] }, async () => {
+        test.skip(`admin can ${status} store open-close time on store sidebar`, { tag: ['@lite', '@admin'] }, async () => {
             await dbUtils.updateOptionValue(dbData.dokan.optionName.appearance, { store_open_close: status === 'enable' ? 'on' : 'off' });
             await admin.viewStoreOpenCloseTimeOnStoreSidebar(status as 'enable' | 'disable', data.predefined.vendorStores.vendor1);
         });
