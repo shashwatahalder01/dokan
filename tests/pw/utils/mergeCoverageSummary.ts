@@ -16,9 +16,8 @@ interface CoverageReport {
 const mergePageCoverage = (existing: Record<string, number>, newCoverage: Record<string, number>): Record<string, number> => {
     const merged: Record<string, number> = { ...existing };
     for (const page in newCoverage) {
-        if (newCoverage[page] !== undefined) {
-            merged[page] = (merged[page] ?? 0) + newCoverage[page];
-        }
+        merged[page] = Math.round(((merged[page] ?? 0) + newCoverage[page]) * 100) / 100;
+
     }
     return merged;
 };
@@ -54,19 +53,13 @@ const mergeCoverageReports = (reportPaths: string[]): CoverageReport => {
 
     // Deduplicate and sort features after all reports are merged
     mergedReport.covered_features = [...new Set(mergedReport.covered_features)].sort();
-    mergedReport.uncovered_features = [...new Set(mergedReport.uncovered_features)].sort();
+    mergedReport.uncovered_features = [...new Set(mergedReport.uncovered_features)].filter(feature => !mergedReport.covered_features.includes(feature)).sort();
 
     mergedReport.total_features = mergedReport.covered_features.length + mergedReport.uncovered_features.length;
     mergedReport.total_covered_features = mergedReport.covered_features.length;
 
     // Recalculate overall coverage percentage
     mergedReport.coverage = ((mergedReport.total_covered_features / mergedReport.total_features) * 100).toFixed(2) + '%';
-
-    for (const page in mergedReport.page_coverage) {
-        if (mergedReport.page_coverage[page] !== undefined) {
-            mergedReport.page_coverage[page] = parseFloat((mergedReport.page_coverage[page]! / reportPaths.length).toFixed(2));
-        }
-    }
 
     return mergedReport;
 };

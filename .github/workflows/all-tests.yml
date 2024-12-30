@@ -240,7 +240,7 @@ jobs:
               working-directory: tests/pw
               run: |
                   npm run test:e2e:coverage
-                  
+
             # # Run API tests
             # - name: 🧪 Run api tests
             #   id: api-test
@@ -542,6 +542,11 @@ jobs:
               run: |
                   npx playwright merge-reports --reporter html ./all-reports/all-blob-reports
                   mv playwright-report ./all-reports/html-report
+
+            - name: Clean all files except ZIPs
+              working-directory: tests/pw
+              run: |
+                find all-reports/all-blob-reports -mindepth 1 ! -name "*.zip" -exec rm -rf {} +
 
             - name: Generate merged summary report
               id: merge-summary-report
