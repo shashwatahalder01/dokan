@@ -56,7 +56,7 @@ const mergeReports = (reportPaths: string[]): TestReport => {
         // mergedReport.flaky += report.flaky;
         // mergedReport.skipped += report.skipped;
         // mergedReport.suite_duration += report.suite_duration;
-        mergedReport.all_suite_durations.push(...report.suite_duration);
+        mergedReport.all_suite_durations.push(report.suite_duration);
 
         // Append and de-duplicate test arrays
         mergedReport.tests.push(...report.tests);
