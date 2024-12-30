@@ -64,7 +64,6 @@ setup.describe('site setup', () => {
                 const [response] = await apiUtils.updatePlugin(data.plugin.pluginList.dokanPro, { status: 'inactive' }, payloads.adminAuth);
                 expect(response.ok()).toBeTruthy();
                 console.log('Dokan Pro is deactivated');
-
             }
         }
     });

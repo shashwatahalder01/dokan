@@ -123,6 +123,7 @@ npm run site:setup
 ```
 
 To allow Dokan specific setup run :
+
 ```bash
 SKIP_DOKAN=false npm run site:setup
 ```
@@ -135,7 +136,7 @@ Create a .env file in the project root and add the following configuration:
 BASE_URL=https://example.com                                                    [Base URL of the test site]
 SITE_PATH=/users/rk/sites/dokan                                                 [Path of the local test site][only for local testing]
 
-# Database Configuration                
+# Database Configuration
 DB_HOST_NAME=localhost                                                          [Database server hostname or IP address]
 DB_USER_NAME=dbuser                                                             [Database username]
 DB_USER_PASSWORD=dbpassword                                                     [Database user password]
@@ -143,7 +144,6 @@ DATABASE=mywpdb                                                                 
 DB_PORT=3306                                                                    [Database connection port]
 DB_PREFIX=wp                                                                    [Prefix for database tables]
 ```
-
 
 ## Notes
 
