@@ -17,7 +17,6 @@ const mergePageCoverage = (existing: Record<string, number>, newCoverage: Record
     const merged: Record<string, number> = { ...existing };
     for (const page in newCoverage) {
         merged[page] = Math.round(((merged[page] ?? 0) + newCoverage[page]) * 100) / 100;
-
     }
     return merged;
 };
