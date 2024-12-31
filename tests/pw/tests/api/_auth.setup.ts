@@ -1,6 +1,8 @@
 import { test as setup, expect, request } from '@playwright/test';
+import { LoginPage } from '@pages/loginPage';
 import { ApiUtils } from '@utils/apiUtils';
 import { payloads } from '@utils/payloads';
+import { data } from '@utils/testData';
 import { dbUtils } from '@utils/dbUtils';
 import { helpers } from '@utils/helpers';
 
@@ -16,6 +18,11 @@ setup.describe('add users', () => {
     setup.afterAll(async () => {
         await apiUtils.dispose();
     });
+
+    setup('authenticate admin', { tag: ['@lite'] }, async ({ page }) => {
+        const loginPage = new LoginPage(page);
+        await loginPage.adminLogin(data.admin, data.auth.adminAuthFile);
+    }); // todo: need to resolve why wc_orders table isn't created 
 
     setup('enable admin selling status', { tag: ['@lite'] }, async () => {
         const responseBody = await apiUtils.setStoreSettings(payloads.setupStore, payloads.adminAuth);

@@ -143,7 +143,7 @@ test.describe('Product QA functionality test', () => {
     });
 
     test('customer can post question', { tag: ['@pro', '@customer'] }, async () => {
-        await customer.postQuestion(data.predefined.simpleProduct.product2, data.questionAnswers());
+        await customer.postQuestion(data.predefined.simpleProduct.product1.name, data.questionAnswers());
     });
 
     // guest
