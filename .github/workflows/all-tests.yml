@@ -91,7 +91,7 @@ env:
 jobs:
     e2e_tests:
         name: e2e tests
-        runs-on: ubuntu-24.04
+        runs-on: ubuntu-24.04 # todo: replace with ubuntu-latest after january 2025
         strategy:
             fail-fast: false
             matrix:
@@ -304,7 +304,7 @@ jobs:
 
     api_tests:
         name: api tests
-        runs-on: ubuntu-latest
+        runs-on: ubuntu-24.04
 
         steps:
             - name: Checkout testing repo
@@ -497,7 +497,7 @@ jobs:
         # Merge reports after playwright-tests, even if some shards have failed
         if: ${{ !cancelled() }}
         needs: [e2e_tests, api_tests]
-        runs-on: ubuntu-latest
+        runs-on: ubuntu-24.04
 
         # Override reports path specifically for this job
         env:
@@ -546,7 +546,7 @@ jobs:
             - name: Clean all files except ZIPs
               working-directory: tests/pw
               run: |
-                find all-reports/all-blob-reports -mindepth 1 ! -name "*.zip" -exec rm -rf {} +
+                  find all-reports/all-blob-reports -mindepth 1 ! -name "*.zip" -exec rm -rf {} +
 
             - name: Generate merged summary report
               id: merge-summary-report
@@ -614,6 +614,7 @@ jobs:
                   keep_files: true
                   user_name: 'github-actions[bot]' # This will be the username that gets stamped in the repo commit
                   user_email: 'github-actions[bot]@users.noreply.github.com' # This will be the user email that gets stamped in the repo com
+
 
             # - name: Test results
             #   if: always()
