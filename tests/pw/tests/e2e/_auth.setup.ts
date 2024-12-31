@@ -3,7 +3,7 @@ import { LoginPage } from '@pages/loginPage';
 import { ApiUtils } from '@utils/apiUtils';
 import { payloads } from '@utils/payloads';
 import { data } from '@utils/testData';
-// import { dbUtils } from '@utils/dbUtils';
+import { dbUtils } from '@utils/dbUtils';
 import { helpers } from '@utils/helpers';
 
 const { DOKAN_PRO } = process.env;
@@ -43,7 +43,7 @@ setup.describe('add & authenticate users', () => {
             await apiUtils.createStoreReview(sellerId, { ...payloads.createStoreReview, rating: 5 }, payloads.adminAuth);
         }
         // add map location
-        // await dbUtils.addStoreMapLocation(sellerId);
+        await dbUtils.addStoreBiographyAndMapLocation(sellerId);
 
         helpers.createEnvVar('VENDOR_ID', sellerId);
     });
@@ -62,7 +62,7 @@ setup.describe('add & authenticate users', () => {
             await apiUtils.createStoreReview(sellerId, { ...payloads.createStoreReview, rating: 5 }, payloads.adminAuth);
         }
         // add map location
-        // await dbUtils.addStoreMapLocation(sellerId);
+        await dbUtils.addStoreBiographyAndMapLocation(sellerId);
 
         helpers.createEnvVar('VENDOR2_ID', sellerId);
     });
