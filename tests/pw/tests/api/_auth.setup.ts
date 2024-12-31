@@ -1,7 +1,10 @@
 import { test as setup, expect, request } from '@playwright/test';
 import { ApiUtils } from '@utils/apiUtils';
 import { payloads } from '@utils/payloads';
+import { dbUtils } from '@utils/dbUtils';
 import { helpers } from '@utils/helpers';
+
+const { DOKAN_PRO } = process.env;
 
 setup.describe('add users', () => {
     let apiUtils: ApiUtils;
@@ -19,18 +22,41 @@ setup.describe('add users', () => {
         expect(responseBody).toBeTruthy();
     });
 
-    setup('create customer', { tag: ['@lite'] }, async () => {
+    setup('add customer1', { tag: ['@lite'] }, async () => {
         const [, customerId] = await apiUtils.createCustomer(payloads.createCustomer1, payloads.adminAuth);
         helpers.createEnvVar('CUSTOMER_ID', customerId);
     });
 
-    setup('create vendor', { tag: ['@lite'] }, async () => {
-        const [, sellerId] = await apiUtils.createStore(payloads.createStore1, payloads.adminAuth);
+    setup('add vendor1', { tag: ['@lite'] }, async () => {
+        const [, sellerId] = await apiUtils.createStore(payloads.createStore1, payloads.adminAuth, true);
+        // add open-close time
+        await apiUtils.updateStore(sellerId, { ...payloads.storeResetFields, ...payloads.storeOpenClose }, payloads.adminAuth);
+        // add review
+        if (DOKAN_PRO) {
+            await apiUtils.createStoreReview(sellerId, { ...payloads.createStoreReview, rating: 5 }, payloads.adminAuth);
+        }
+        // add map location
+        await dbUtils.addStoreBiographyAndMapLocation(sellerId);
+
         helpers.createEnvVar('VENDOR_ID', sellerId);
     });
 
+    setup('add customer2', { tag: ['@lite'] }, async () => {
+        const [, customerId] = await apiUtils.createCustomer(payloads.createCustomer2, payloads.adminAuth);
+        helpers.createEnvVar('CUSTOMER2_ID', customerId);
+    });
+
     setup('add vendor2', { tag: ['@lite'] }, async () => {
-        const [, sellerId] = await apiUtils.createStore(payloads.createStore2, payloads.adminAuth);
+        const [, sellerId] = await apiUtils.createStore(payloads.createStore2, payloads.adminAuth, true);
+        // add open-close time
+        await apiUtils.updateStore(sellerId, { ...payloads.storeResetFields, ...payloads.storeOpenClose }, payloads.adminAuth);
+        // add review
+        if (DOKAN_PRO) {
+            await apiUtils.createStoreReview(sellerId, { ...payloads.createStoreReview, rating: 5 }, payloads.adminAuth);
+        }
+        // add map location
+        await dbUtils.addStoreBiographyAndMapLocation(sellerId);
+
         helpers.createEnvVar('VENDOR2_ID', sellerId);
     });
 });
