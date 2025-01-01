@@ -22,7 +22,7 @@ setup.describe('add users', () => {
     setup('authenticate admin', { tag: ['@lite'] }, async ({ page }) => {
         const loginPage = new LoginPage(page);
         await loginPage.adminLogin(data.admin, data.auth.adminAuthFile);
-    }); // todo: need to resolve why wc_orders table isn't created 
+    }); // todo: need to resolve why wc_orders table isn't created
 
     setup('enable admin selling status', { tag: ['@lite'] }, async () => {
         const responseBody = await apiUtils.setStoreSettings(payloads.setupStore, payloads.adminAuth);
