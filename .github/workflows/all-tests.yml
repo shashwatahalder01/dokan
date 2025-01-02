@@ -112,10 +112,10 @@ jobs:
             - name: Clone dokan-pro
               uses: actions/checkout@v4
               with:
-                  repository: getdokan/dokan-pro
+                  repository: shashwatahalder01/dokan-pro
                   token: ${{ secrets.ACCESS_TOKEN }}
                   path: 'plugins/dokan-pro'
-                  ref: 'test_utils'
+                  ref: 'enhancement/cart-checkout-block-support'
 
             - name: Unzip woocommerce plugins
               working-directory: plugins/dokan-pro/tests/plugins
