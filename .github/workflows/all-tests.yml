@@ -92,11 +92,12 @@ jobs:
     e2e_tests:
         name: e2e tests
         runs-on: ubuntu-24.04 # todo: replace with ubuntu-latest after january 2025
+        timeout-minutes: 20
         strategy:
             fail-fast: false
             matrix:
-                shardIndex: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-                shardTotal: [10]
+                shardIndex: [1, 2, 3, 4, 5, 6, 7, 8]
+                shardTotal: [8]
         steps:
             - name: Checkout testing repo
               id: clone-dokan-lite
@@ -305,6 +306,7 @@ jobs:
     api_tests:
         name: api tests
         runs-on: ubuntu-24.04
+        timeout-minutes: 10
 
         steps:
             - name: Checkout testing repo
@@ -498,6 +500,7 @@ jobs:
         if: ${{ !cancelled() }}
         needs: [e2e_tests, api_tests]
         runs-on: ubuntu-24.04
+        timeout-minutes: 5
 
         # Override reports path specifically for this job
         env:
