@@ -3,6 +3,8 @@
 const fs = require('fs');
 const path = require('path');
 
+const { REPORT_TYPE } = process.env;
+
 interface TestReport {
     suite_name: string;
     total_tests: number;
@@ -95,14 +97,18 @@ const findReports = (dir: string): void => {
     const files = fs.readdirSync(dir);
     files.forEach(file => {
         const fullPath = path.join(dir, file);
-        if (fs.statSync(fullPath).isDirectory()) {
-            if (!fullPath.includes(path.join('api'))) {
-                // todo: update if api suite is also run in matrix job
-                // Ignore directories containing 'api'
-                findReports(fullPath); // Recurse into subdirectories
+        const isDirectory = fs.statSync(fullPath).isDirectory();
+
+        if (isDirectory) {
+            // Check if the directory matches the REPORT_TYPE (e.g., 'api' or 'e2e')
+            if (fullPath.includes(`${path.sep}${REPORT_TYPE}${path.sep}`)) {
+                findReports(fullPath); // Recurse into matching subdirectories
             }
-        } else if (file === 'results.json' && !fullPath.includes(path.join('api'))) {
-            reportPaths.push(fullPath);
+        } else if (file === 'results.json') {
+            // Check if the file path includes the REPORT_TYPE
+            if (fullPath.includes(`${path.sep}${REPORT_TYPE}${path.sep}`)) {
+                reportPaths.push(fullPath);
+            }
         }
     });
 };

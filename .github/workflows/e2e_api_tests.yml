@@ -74,8 +74,8 @@ jobs:
         strategy:
             fail-fast: false
             matrix:
-                shardIndex: [1, 2, 3, 4, 5]
-                shardTotal: [5]
+                shardIndex: [1, 2, 3]
+                shardTotal: [3]
 
         steps:
             - name: Checkout testing repo
@@ -291,7 +291,7 @@ jobs:
               if: always() && steps.wp-env.outcome == 'success' && ( github.event_name != 'workflow_dispatch'  || ( github.event_name == 'workflow_dispatch' && (github.event.inputs.testsuite == 'API' || github.event.inputs.testsuite == 'All')))
               working-directory: tests/pw
               run: |
-                  npm run test:api:pro
+                  npm run test:api
 
             # Prepare test summary
             - name: Prepare test summary
@@ -375,7 +375,7 @@ jobs:
                   npx playwright merge-reports --reporter html ./all-reports/all-blob-reports
                   mv playwright-report ./all-reports/html-report
 
-            - name: Clean all files except ZIPs
+            - name: Clean all extracted blob reports (except ZIPs)
               working-directory: tests/pw
               run: |
                   find all-reports/all-blob-reports -mindepth 1 ! -name "*.zip" -exec rm -rf {} +
@@ -385,14 +385,14 @@ jobs:
               if: steps.download-test-artifacts.outcome == 'success'
               working-directory: tests/pw
               run: |
-                  npx ts-node ./utils/mergeSummaryReport.ts
+                  REPORT_TYPE=e2e npx ts-node ./utils/mergeSummaryReport.ts
 
             - name: Generate merged coverage report
               id: merge-coverage-report
               if: steps.download-test-artifacts.outcome == 'success'
               working-directory: tests/pw
               run: |
-                  npx ts-node ./utils/mergeCoverageSummary.ts
+                  REPORT_TYPE=e2e npx ts-node ./utils/mergeCoverageSummary.ts
 
             # Prepare test summary
             - name: Prepare test summary
