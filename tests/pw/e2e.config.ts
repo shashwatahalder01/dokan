@@ -35,7 +35,7 @@ export default defineConfig({
     /* Whether to preserve test output in the testConfig.outputDir. Defaults to 'always'. */
     preserveOutput: 'always',
     /* Run tests in files in parallel */
-    fullyParallel  : true,
+    // fullyParallel  : true,
     /* Fail the build on CI if you accidentally left test-only in the source code. */
     // forbidOnly     : !!CI,
     /* The number of times to repeat each test, useful for debugging flaky tests. */
