@@ -71,19 +71,19 @@ const reportPaths: string[] = [];
 
 // Collect all coverage.json files
 const findReports = (dir: string): void => {
+    // console.log(`Scanning directory: ${dir}`);
     const files = fs.readdirSync(dir);
+
     files.forEach(file => {
         const fullPath = path.join(dir, file);
         const isDirectory = fs.statSync(fullPath).isDirectory();
-
+        // console.log(`Checking: ${fullPath} (${isDirectory ? 'Directory' : 'File'})`);
         if (isDirectory) {
-            // Check if the directory matches the REPORT_TYPE (e.g., 'api' or 'e2e')
-            if (fullPath.includes(`${path.sep}${REPORT_TYPE}${path.sep}`)) {
-                findReports(fullPath); // Recurse into matching subdirectories
-            }
+            findReports(fullPath); // Recurse into all directories
         } else if (file === 'coverage.json') {
-            // Check if the file path includes the REPORT_TYPE
+            // Push the file path if it matches REPORT_TYPE
             if (fullPath.includes(`${path.sep}${REPORT_TYPE}${path.sep}`)) {
+                console.log(`Matched file: ${fullPath}`);
                 reportPaths.push(fullPath);
             }
         }

@@ -56,7 +56,6 @@ env:
     DB_PORT: 9998
     DATABASE: tests-wordpress
     DB_PREFIX: wp
-
     PR_NUMBER: ${{ github.event.number }}
     SHA: ${{ github.event.pull_request.head.sha }}
     SYSTEM_INFO: ./tests/pw/playwright/systemInfo.json
@@ -66,32 +65,35 @@ env:
     E2E_COVERAGE: ./tests/pw/playwright-report/e2e/coverage-report/coverage.json
 
 jobs:
-
     e2e_tests:
         name: e2e tests
-        runs-on: ubuntu-24.04 # todo: replace with ubuntu-latest after january 2025
+        runs-on: ubuntu-latest
         timeout-minutes: 20
         strategy:
             fail-fast: false
             matrix:
-                shardIndex: [1, 2, 3]
-                shardTotal: [3]
+                shardIndex: [1, 2, 3, 4]
+                shardTotal: [4]
 
         steps:
+            # Checkout testing repo
             - name: Checkout testing repo
               id: clone-dokan-lite
               uses: actions/checkout@v4
 
+            # Use desired version of NodeJS
             - name: Use desired version of NodeJS
               uses: actions/setup-node@v4
               with:
                   node-version: 20
                   cache: npm
 
+            # Composer install and build (Dokan-lite)
             - name: Composer install and build (Dokan-lite)
               run: |
                   composer i --no-dev -o || composer update --no-dev -o
 
+            # Npm install and build (Dokan-lite)
             - name: Npm install and build (Dokan-lite)
               run: |
                   npm ci || npm i
@@ -115,7 +117,7 @@ jobs:
               id: wp-env
               uses: nick-fields/retry@v3
               with:
-                  timeout_minutes: 4
+                  timeout_minutes: 5
                   max_attempts: 2
                   retry_on: error
                   command: |
@@ -155,7 +157,7 @@ jobs:
             #   run: |
             #     npm run pw:deps-only
 
-            # Run e2e tests
+            # Run E2E tests
             - name: 🧪 Run e2e tests-${{ matrix.shardIndex }}
               id: e2e-test
               if: success() && (github.event_name != 'workflow_dispatch' || ( github.event_name == 'workflow_dispatch' && (github.event.inputs.testsuite == 'E2E' || github.event.inputs.testsuite == 'All')))
@@ -191,10 +193,10 @@ jobs:
 
             # Upload artifacts
             - name: Archive test artifacts (screenshots, HTML snapshots, Reports)
-              uses: actions/upload-artifact@v4
               if: always() && steps.debug-log.outcome == 'success'
+              uses: actions/upload-artifact@v4
               with:
-                  name: test-artifact-${{ matrix.shardIndex }}
+                  name: test-artifact-e2e-${{ matrix.shardIndex }}
                   path: |
                       tests/pw/wp-data
                       tests/pw/playwright
@@ -204,24 +206,33 @@ jobs:
 
     api_tests:
         name: api tests
-        runs-on: ubuntu-24.04
+        runs-on: ubuntu-latest
         timeout-minutes: 10
+        strategy:
+            fail-fast: false
+            matrix:
+                shardIndex: [1, 2]
+                shardTotal: [2]
 
         steps:
+            # Checkout testing repo
             - name: Checkout testing repo
               id: clone-dokan-lite
               uses: actions/checkout@v4
 
+            # Use desired version of NodeJS
             - name: Use desired version of NodeJS
               uses: actions/setup-node@v4
               with:
                   node-version: 20
                   cache: npm
 
+            # Composer install and build (Dokan-lite)
             - name: Composer install and build (Dokan-lite)
               run: |
                   composer i --no-dev -o || composer update --no-dev -o
 
+            # Npm install and build (Dokan-lite)
             - name: Npm install and build (Dokan-lite)
               run: |
                   npm ci || npm i
@@ -286,12 +297,13 @@ jobs:
             #     npm run pw:deps-only
 
             # Run API tests
-            - name: 🧪 Run api tests
+            - name: 🧪 Run api tests-${{ matrix.shardIndex }}
               id: api-test
               if: always() && steps.wp-env.outcome == 'success' && ( github.event_name != 'workflow_dispatch'  || ( github.event_name == 'workflow_dispatch' && (github.event.inputs.testsuite == 'API' || github.event.inputs.testsuite == 'All')))
+              timeout-minutes: 5
               working-directory: tests/pw
               run: |
-                  npm run test:api
+                  npm run test:api -- --shard=${{ matrix.shardIndex }}/${{ matrix.shardTotal }}
 
             # Prepare test summary
             - name: Prepare test summary
@@ -316,7 +328,7 @@ jobs:
               if: always() && steps.debug-log.outcome == 'success'
               uses: actions/upload-artifact@v4
               with:
-                  name: test-artifact-api
+                  name: test-artifact-api-${{ matrix.shardIndex }}
                   path: |
                       tests/pw/wp-data
                       tests/pw/playwright
@@ -339,21 +351,25 @@ jobs:
             E2E_COVERAGE: ./tests/pw/all-reports/merged-coverage.json
 
         steps:
+            # Checkout testing repo
             - name: Checkout testing repo
               id: clone-dokan-lite
               uses: actions/checkout@v4
 
+            # Use desired version of NodeJS
             - name: Use desired version of NodeJS
               uses: actions/setup-node@v4
               with:
                   node-version: 20
                   cache: npm
 
+            # Install test dependencies
             - name: Install test dependencies
               working-directory: tests/pw
               run: |
                   npm ci || npm i
 
+            # Download all test artifacts from GitHub Actions
             - name: Download all test artifacts from GitHub Actions
               id: download-test-artifacts
               uses: actions/download-artifact@v4
@@ -361,6 +377,7 @@ jobs:
                   path: tests/pw/all-reports
                   pattern: test-artifact-*
 
+            # Move all blob report folder contents into a single folder
             - name: Move all blob report folder contents into a single folder
               working-directory: tests/pw/all-reports
               run: |
@@ -368,6 +385,7 @@ jobs:
                   find . -type f -path "*/blob-report/*" -exec mv {} all-blob-reports/ \;
               #   ls all-blob-reports
 
+            # Generate HTML Report
             - name: Generate HTML Report
               id: generate-html-report
               working-directory: tests/pw
@@ -375,11 +393,13 @@ jobs:
                   npx playwright merge-reports --reporter html ./all-reports/all-blob-reports
                   mv playwright-report ./all-reports/html-report
 
+            # Clean all extracted blob reports (except ZIPs)
             - name: Clean all extracted blob reports (except ZIPs)
               working-directory: tests/pw
               run: |
                   find all-reports/all-blob-reports -mindepth 1 ! -name "*.zip" -exec rm -rf {} +
 
+            # Generate merged summary report
             - name: Generate merged summary report
               id: merge-summary-report
               if: steps.download-test-artifacts.outcome == 'success'
@@ -387,6 +407,7 @@ jobs:
               run: |
                   REPORT_TYPE=e2e npx ts-node ./utils/mergeSummaryReport.ts
 
+            # Generate merged coverage report
             - name: Generate merged coverage report
               id: merge-coverage-report
               if: steps.download-test-artifacts.outcome == 'success'
@@ -426,6 +447,7 @@ jobs:
                   reactions: hooray
                   edit-mode: replace
 
+            # Upload final test artifact
             - name: Upload final test artifact
               if: always() && steps.download-test-artifacts.outcome == 'success'
               uses: actions/upload-artifact@v4
