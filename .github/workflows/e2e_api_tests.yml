@@ -72,8 +72,8 @@ jobs:
         strategy:
             fail-fast: false
             matrix:
-                shardIndex: [1, 2, 3, 4]
-                shardTotal: [4]
+                shardIndex: [1, 2, 3, 4, 5]
+                shardTotal: [5]
 
         steps:
             # Checkout testing repo
@@ -211,8 +211,8 @@ jobs:
         strategy:
             fail-fast: false
             matrix:
-                shardIndex: [1, 2]
-                shardTotal: [2]
+                shardIndex: [1]
+                shardTotal: [1]
 
         steps:
             # Checkout testing repo
@@ -328,7 +328,8 @@ jobs:
               if: always() && steps.debug-log.outcome == 'success'
               uses: actions/upload-artifact@v4
               with:
-                  name: test-artifact-api-${{ matrix.shardIndex }}
+                #   name: test-artifact-api-${{ matrix.shardIndex }}
+                  name: test-artifact-api
                   path: |
                       tests/pw/wp-data
                       tests/pw/playwright
