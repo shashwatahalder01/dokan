@@ -166,6 +166,7 @@ jobs:
                 --network host \
                 -v ${{ github.workspace }}:/workspace \
                 -w /workspace/tests/pw \
+                $(env | sed 's/^/-e /') \
                 mcr.microsoft.com/playwright:v1.49.1-noble \
                 npm run test:e2e
 
