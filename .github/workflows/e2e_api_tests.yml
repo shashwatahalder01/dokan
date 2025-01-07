@@ -98,6 +98,7 @@ jobs:
 
             # Install test dependencies
             #  npm run pw:chrome-only  8s
+            # npm run pw:browser-with-deps 40s
             - name: Install browsers
               working-directory: tests/pw
               run: |
