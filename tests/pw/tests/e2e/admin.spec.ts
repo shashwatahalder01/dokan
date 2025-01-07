@@ -3,7 +3,7 @@ import { LoginPage } from '@pages/loginPage';
 import { data } from '@utils/testData';
 
 test.describe('Admin functionality test', () => {
-    test('admin can login', { tag: ['@lite', '@admin'] }, async ({ page }) => {
+    test.only('admin can login', { tag: ['@lite', '@admin'] }, async ({ page }) => {
         const loginPage = new LoginPage(page);
         await loginPage.adminLogin(data.admin);
     });

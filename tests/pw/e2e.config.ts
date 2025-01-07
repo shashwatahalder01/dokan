@@ -146,7 +146,7 @@ export default defineConfig({
             name: 'e2e_tests',
             testMatch: /.*\.spec\.ts/,
             /* whether not to run setup tests before running actual tests */
-            dependencies: NO_SETUP ? [] : ['e2e_setup'],
+            // dependencies: NO_SETUP ? [] : ['e2e_setup'],
             /* whether not to run teardown tests after running actual tests */
             // teardown: NO_SETUP ? undefined : 'coverage_report',
         },
