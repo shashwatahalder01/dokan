@@ -101,7 +101,7 @@ jobs:
             - name: Install browsers
               working-directory: tests/pw
               run: |
-                  pw:browser-with-deps
+                  npm run pw:browser-with-deps
 
             # # Create wp debuglog file
             # - name: Create wp debuglog file
