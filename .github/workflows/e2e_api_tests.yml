@@ -162,11 +162,32 @@ jobs:
               timeout-minutes: 40
               working-directory: tests/pw
               run: |
+                # Create the .env file with necessary environment variables
+                echo "ADMIN=${{ secrets.ADMIN }}" > .env
+                echo "ADMIN_PASSWORD=${{ secrets.ADMIN_PASSWORD }}" >> .env
+                echo "VENDOR=${{ secrets.VENDOR }}" >> .env
+                echo "VENDOR2=${{ secrets.VENDOR2 }}" >> .env
+                echo "CUSTOMER=${{ secrets.CUSTOMER }}" >> .env
+                echo "CUSTOMER2=${{ secrets.CUSTOMER2 }}" >> .env
+                echo "USER_PASSWORD=${{ secrets.USER_PASSWORD }}" >> .env
+                echo "GMAP=${{ secrets.GMAP }}" >> .env
+                echo "MAPBOX=${{ secrets.MAPBOX }}" >> .env
+                echo "BASE_URL=http://localhost:9999" >> .env
+                echo "CI=true" >> .env
+                echo "FORCE_COLOR=1" >> .env
+                echo "DB_HOST_NAME=localhost" >> .env
+                echo "DB_USER_NAME=root" >> .env
+                echo "DB_USER_PASSWORD=password" >> .env
+                echo "DB_PORT=9998" >> .env
+                echo "DATABASE=tests-wordpress" >> .env
+                echo "DB_PREFIX=wp" >> .env
+
+                # Run the Docker container and pass the .env file
                 docker run --rm \
                 --network host \
                 -v ${{ github.workspace }}:/workspace \
                 -w /workspace/tests/pw \
-                $(env | sed 's/^/-e /') \
+                --env-file .env \
                 mcr.microsoft.com/playwright:v1.49.1-noble \
                 npm run test:e2e
 
