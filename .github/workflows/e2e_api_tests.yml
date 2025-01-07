@@ -163,6 +163,7 @@ jobs:
               working-directory: tests/pw
               run: |
                 docker run --rm \
+                --network host \
                 -v ${{ github.workspace }}:/workspace \
                 -w /workspace/tests/pw \
                 mcr.microsoft.com/playwright:v1.49.1-noble \
