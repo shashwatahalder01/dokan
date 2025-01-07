@@ -7,7 +7,7 @@
         "nid": "npm install --include=dev",
         "nip": "npm install --omit=dev",
         "pw:chrome-only": "playwright install chromium",
-        "pw:browser-with-deps": "playwright install --with-deps chromium",
+        "pw:browser-with-deps": "playwright install --with-deps",
         "pw:deps-only": "playwright install-deps chromium",
         "test": "npx playwright test",
         "site:reset": "NO_SETUP=false npm run site:setup && npm run env:setup",
