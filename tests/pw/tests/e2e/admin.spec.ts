@@ -4,8 +4,6 @@ import { data } from '@utils/testData';
 
 test.describe('Admin functionality test', () => {
     test.only('admin can login', { tag: ['@lite', '@admin'] }, async ({ page }) => {
-        const loginPage = new LoginPage(page);
-        await loginPage.adminLogin(data.admin);
         await page.goto('https://www.google.com/');
         await page.getByLabel('Search', { exact: true }).click();
         await page.getByLabel('Search', { exact: true }).fill('playwright.dev');

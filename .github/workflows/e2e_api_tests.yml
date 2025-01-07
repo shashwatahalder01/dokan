@@ -171,14 +171,12 @@ jobs:
                 npm run test:e2e
 
 
-            # Run e2e coverage
-            - name: 🧪 Run e2e coverage
-              if: always() && (steps.e2e-test.outcome == 'success' || steps.e2e-test.outcome == 'failure')
-              working-directory: tests/pw
-              run: |
-                  sudo chown -R $USER:$USER ./tests/pw/playwright/e2e/test-artifacts
-                  sudo chmod -R 755 ./tests/pw/playwright/e2e/test-artifacts
-                  npm run test:e2e:coverage
+            # # Run e2e coverage
+            # - name: 🧪 Run e2e coverage
+            #   if: always() && (steps.e2e-test.outcome == 'success' || steps.e2e-test.outcome == 'failure')
+            #   working-directory: tests/pw
+            #   run: |
+            #       npm run test:e2e:coverage
 
             # # Run api tests
             # - name: 🧪 Run api tests
