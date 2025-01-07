@@ -69,10 +69,7 @@ jobs:
     tests:
         name: e2e_api tests
         runs-on: ubuntu-latest
-        container:
-          image: mcr.microsoft.com/playwright:v1.49.1-noble
-          options: --user 1001
-
+        
         steps:
             - name: Checkout testing repo
               id: clone-dokan-lite
@@ -165,7 +162,11 @@ jobs:
               timeout-minutes: 40
               working-directory: tests/pw
               run: |
-                  npm run test:e2e
+                docker run --rm \
+                -v ${{ github.workspace }}:/workspace \
+                -w /workspace \
+                mcr.microsoft.com/playwright:v1.39.0 \
+                npm run test:e2e
 
             # # Run e2e coverage
             # - name: 🧪 Run e2e coverage
