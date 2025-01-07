@@ -622,8 +622,12 @@ export class ProductsPage extends AdminPage {
     }
 
     // go to product edit by id
-    async goToProductEditById(productName: string, nonce: string = PRODUCT_EDIT_NONCE): Promise<void> {
-        await this.gotoUntilNetworkidle(data.subUrls.frontend.vDashboard.productEdit(productName, nonce));
+    async goToProductEditById(productId: string, nonce: string = PRODUCT_EDIT_NONCE): Promise<void> {
+        if (!isNaN(Number(productId))) {
+            await this.gotoUntilNetworkidle(data.subUrls.frontend.vDashboard.productEdit(productId, nonce));
+        } else {
+            await this.goToProductEdit(productId);
+        }
     }
 
     // go to product edit
