@@ -69,20 +69,20 @@ jobs:
     tests:
         name: e2e_api tests
         runs-on: ubuntu-latest
-        container:
-            image: mcr.microsoft.com/playwright:v1.49.1-noble
-            options: --user 1001
+        # container:
+        #     image: mcr.microsoft.com/playwright:v1.49.1-noble
+        #     options: --user 1001
 
         steps:
             - name: Checkout testing repo
               id: clone-dokan-lite
               uses: actions/checkout@v4
 
-            # - name: Use desired version of NodeJS
-            #   uses: actions/setup-node@v4
-            #   with:
-            #       node-version: 20
-            #       cache: npm
+            - name: Use desired version of NodeJS
+              uses: actions/setup-node@v4
+              with:
+                  node-version: 20
+                  cache: npm
 
             # - name: Composer install and build (Dokan-lite)
             #   run: |
@@ -99,45 +99,39 @@ jobs:
               run: |
                   npm ci || npm i
 
-            # # Install test dependencies
-            # - name: Install browsers
-            #   working-directory: tests/pw
-            #   run: |
-            #       npm run pw:browser-with-deps
-
             # Create wp debuglog file
-            # - name: Create wp debuglog file
-            #   id: debug-log
-            #   working-directory: tests/pw
-            #   run: |
-            #       mkdir -p wp-data && touch wp-data/debug.log
+            - name: Create wp debuglog file
+              id: debug-log
+              working-directory: tests/pw
+              run: |
+                  mkdir -p wp-data && touch wp-data/debug.log
 
 
-            # # Get Playwright version
-            # - name: Get installed Playwright version
-            #   id: playwright-version
-            #   working-directory: tests/pw
-            #   run: |
-            #       echo "PLAYWRIGHT_VERSION=$(npm ls @playwright/test --json | jq --raw-output '.dependencies["@playwright/test"].version')" >> $GITHUB_ENV
+            # Get Playwright version
+            - name: Get installed Playwright version
+              id: playwright-version
+              working-directory: tests/pw
+              run: |
+                  echo "PLAYWRIGHT_VERSION=$(npm ls @playwright/test --json | jq --raw-output '.dependencies["@playwright/test"].version')" >> $GITHUB_ENV
 
-            # # Cache browser binaries, cache key is based on Playwright version and OS
-            # - name: Cache playwright binaries
-            #   id: playwright-cache
-            #   uses: actions/cache@v4
-            #   with:
-            #       path: |
-            #           ~/.cache/ms-playwright
-            #       key: ${{ runner.os }}-playwright-${{ env.PLAYWRIGHT_VERSION }}
-            #       restore-keys: |
-            #           ${{ runner.os }}-playwright-
+            # Cache browser binaries, cache key is based on Playwright version and OS
+            - name: Cache playwright binaries
+              id: playwright-cache
+              uses: actions/cache@v4
+              with:
+                  path: |
+                      ~/.cache/ms-playwright
+                  key: ${{ runner.os }}-playwright-${{ env.PLAYWRIGHT_VERSION }}
+                  restore-keys: |
+                      ${{ runner.os }}-playwright-
 
-            # # Install browser binaries & OS dependencies if cache missed
-            # - name: Install Playwright browser binaries & OS dependencies
-            #   id: pw-install
-            #   if: steps.playwright-cache.outputs.cache-hit != 'true'
-            #   working-directory: tests/pw
-            #   run: |
-            #       npm run pw:browser-with-deps
+            # Install browser binaries & OS dependencies if cache missed
+            - name: Install Playwright browser binaries & OS dependencies
+              id: pw-install
+              if: steps.playwright-cache.outputs.cache-hit != 'true'
+              working-directory: tests/pw
+              run: |
+                  npm run pw:browser-with-deps
 
             # # Install only the OS dependencies if cache hit  not needed
             # - name: Install Playwright OS dependencies
@@ -157,6 +151,21 @@ jobs:
             #       command: |
             #           cd tests/pw
             #           npm run start:env
+
+
+            # # Run e2e tests
+            # - name: 🧪 Run e2e tests
+            #   id: e2e-test
+            #   if: success() && (github.event_name != 'workflow_dispatch' || ( github.event_name == 'workflow_dispatch' && (github.event.inputs.testsuite == 'E2E' || github.event.inputs.testsuite == 'All')))
+            #   timeout-minutes: 40
+            #   working-directory: tests/pw
+            #   run: |
+            #     docker run --rm \
+            #     --network host \
+            #     -v ${{ github.workspace }}:/workspace \
+            #     -w /workspace/tests/pw \
+            #     mcr.microsoft.com/playwright:v1.49.1-noble \
+            #     npm run test:e2e
 
 
             # Run e2e tests
@@ -224,15 +233,34 @@ jobs:
             #   run: |
             #       npm run wp-env run tests-cli wp db export wp-data/db.sql
 
-            # # Upload artifacts
-            # - name: Archive test artifacts (screenshots, HTML snapshots, Reports)
-            #   if: always() && steps.debug-log.outcome == 'success'
-            #   uses: actions/upload-artifact@v4
-            #   with:
-            #       name: test-artifact
-            #       path: |
-            #           tests/pw/wp-data
-            #           tests/pw/playwright
-            #           tests/pw/playwright-report
-            #       if-no-files-found: ignore
-            #       retention-days: 30
+            # Upload artifacts
+            - name: Archive test artifacts (screenshots, HTML snapshots, Reports)
+              if: always() && steps.debug-log.outcome == 'success'
+              uses: actions/upload-artifact@v4
+              with:
+                  name: test-artifact
+                  path: |
+                      tests/pw/wp-data
+                      tests/pw/playwright
+                      tests/pw/playwright-report
+                  if-no-files-found: ignore
+                  retention-days: 30
+
+            - name: Publish HTML report to GH Pages
+              if: always() && steps.generate-html-report.outcome == 'success'
+              uses: peaceiris/actions-gh-pages@v4
+              with:
+                  github_token: ${{ secrets.GITHUB_TOKEN }}
+                  publish_branch: gh-pages
+                  publish_dir: ./tests/pw/all-reports/html-report
+                  destination_dir: ${{ github.event.pull_request.number || github.sha }}
+                  keep_files: true
+                  user_name: 'github-actions[bot]' # This will be the username that gets stamped in the repo commit
+                  user_email: 'github-actions[bot]@users.noreply.github.com' # This will be the user email that gets stamped in the repo com
+
+
+            - name: Test results
+              if: always()
+              run: |
+                  echo "https://$GITHUB_REPOSITORY_OWNER.github.io/${GITHUB_REPOSITORY#*/}"
+
