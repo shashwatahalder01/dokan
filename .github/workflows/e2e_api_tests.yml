@@ -102,12 +102,12 @@ jobs:
             #   run: |
             #       npm run pw:browser-with-deps
 
-            # # Create wp debuglog file
-            # - name: Create wp debuglog file
-            #   id: debug-log
-            #   working-directory: tests/pw
-            #   run: |
-            #       mkdir -p wp-data && touch wp-data/debug.log
+            # Create wp debuglog file
+            - name: Create wp debuglog file
+              id: debug-log
+              working-directory: tests/pw
+              run: |
+                  mkdir -p wp-data && touch wp-data/debug.log
 
 
             # # Get Playwright version
@@ -170,12 +170,12 @@ jobs:
                 npm run test:e2e
 
 
-            # # Run e2e coverage
-            # - name: 🧪 Run e2e coverage
-            #   if: always() && (steps.e2e-test.outcome == 'success' || steps.e2e-test.outcome == 'failure')
-            #   working-directory: tests/pw
-            #   run: |
-            #       npm run test:e2e:coverage
+            # Run e2e coverage
+            - name: 🧪 Run e2e coverage
+              if: always() && (steps.e2e-test.outcome == 'success' || steps.e2e-test.outcome == 'failure')
+              working-directory: tests/pw
+              run: |
+                  npm run test:e2e:coverage
 
             # # Run api tests
             # - name: 🧪 Run api tests
@@ -186,16 +186,16 @@ jobs:
             #   run: |
             #       npm run test:api
 
-            # # Prepare test summary
-            # - name: Prepare test summary
-            #   id: prepare-test-summary
-            #   uses: actions/github-script@v7
-            #   if: always() && steps.clone-dokan-lite.outcome == 'success'
-            #   with:
-            #       result-encoding: string
-            #       script: |
-            #           const script = require("./tests/pw/utils/gitTestSummary.ts")
-            #           return await script({github, context, core})
+            # Prepare test summary
+            - name: Prepare test summary
+              id: prepare-test-summary
+              uses: actions/github-script@v7
+              if: always() && steps.clone-dokan-lite.outcome == 'success'
+              with:
+                  result-encoding: string
+                  script: |
+                      const script = require("./tests/pw/utils/gitTestSummary.ts")
+                      return await script({github, context, core})
 
             # # # Find PR comment
             # # - name: Find PR comment by github-actions[bot]
@@ -218,22 +218,22 @@ jobs:
             # #       reactions: hooray
             # #       edit-mode: replace
 
-            # # Backup Database
-            # - name: Backup Database
-            #   if: always() && steps.wp-env.outcome == 'success'
-            #   working-directory: tests/pw
-            #   run: |
-            #       npm run wp-env run tests-cli wp db export wp-data/db.sql
+            # Backup Database
+            - name: Backup Database
+              if: always() && steps.wp-env.outcome == 'success'
+              working-directory: tests/pw
+              run: |
+                  npm run wp-env run tests-cli wp db export wp-data/db.sql
 
-            # # Upload artifacts
-            # - name: Archive test artifacts (screenshots, HTML snapshots, Reports)
-            #   if: always() && steps.debug-log.outcome == 'success'
-            #   uses: actions/upload-artifact@v4
-            #   with:
-            #       name: test-artifact
-            #       path: |
-            #           tests/pw/wp-data
-            #           tests/pw/playwright
-            #           tests/pw/playwright-report
-            #       if-no-files-found: ignore
-            #       retention-days: 30
+            # Upload artifacts
+            - name: Archive test artifacts (screenshots, HTML snapshots, Reports)
+              if: always() && steps.debug-log.outcome == 'success'
+              uses: actions/upload-artifact@v4
+              with:
+                  name: test-artifact
+                  path: |
+                      tests/pw/wp-data
+                      tests/pw/playwright
+                      tests/pw/playwright-report
+                  if-no-files-found: ignore
+                  retention-days: 30
