@@ -162,32 +162,35 @@ jobs:
               timeout-minutes: 40
               working-directory: tests/pw
               run: |
-                # Create the .env file with necessary environment variables
-                echo "ADMIN=${{ secrets.ADMIN }}" > .env
-                echo "ADMIN_PASSWORD=${{ secrets.ADMIN_PASSWORD }}" >> .env
-                echo "VENDOR=${{ secrets.VENDOR }}" >> .env
-                echo "VENDOR2=${{ secrets.VENDOR2 }}" >> .env
-                echo "CUSTOMER=${{ secrets.CUSTOMER }}" >> .env
-                echo "CUSTOMER2=${{ secrets.CUSTOMER2 }}" >> .env
-                echo "USER_PASSWORD=${{ secrets.USER_PASSWORD }}" >> .env
-                echo "GMAP=${{ secrets.GMAP }}" >> .env
-                echo "MAPBOX=${{ secrets.MAPBOX }}" >> .env
-                echo "BASE_URL=http://localhost:9999" >> .env
-                echo "CI=true" >> .env
-                echo "FORCE_COLOR=1" >> .env
-                echo "DB_HOST_NAME=localhost" >> .env
-                echo "DB_USER_NAME=root" >> .env
-                echo "DB_USER_PASSWORD=password" >> .env
-                echo "DB_PORT=9998" >> .env
-                echo "DATABASE=tests-wordpress" >> .env
-                echo "DB_PREFIX=wp" >> .env
-
-                # Run the Docker container and pass the .env file
                 docker run --rm \
                 --network host \
                 -v ${{ github.workspace }}:/workspace \
                 -w /workspace/tests/pw \
-                --env-file .env \
+                -e ADMIN=${{ secrets.ADMIN }} \
+                -e ADMIN_PASSWORD=${{ secrets.ADMIN_PASSWORD }} \
+                -e VENDOR=${{ secrets.VENDOR }} \
+                -e VENDOR2=${{ secrets.VENDOR2 }} \
+                -e CUSTOMER=${{ secrets.CUSTOMER }} \
+                -e CUSTOMER2=${{ secrets.CUSTOMER2 }} \
+                -e USER_PASSWORD=${{ secrets.USER_PASSWORD }} \
+                -e GMAP=${{ secrets.GMAP }} \
+                -e MAPBOX=${{ secrets.MAPBOX }} \
+                -e BASE_URL=http://localhost:9999 \
+                -e CI=true \
+                -e FORCE_COLOR=1 \
+                -e DB_HOST_NAME=localhost \
+                -e DB_USER_NAME=root \
+                -e DB_USER_PASSWORD=password \
+                -e DB_PORT=9998 \
+                -e DATABASE=tests-wordpress \
+                -e DB_PREFIX=wp \
+                -e PR_NUMBER=${{ github.event.number }} \
+                -e SHA=${{ github.event.pull_request.head.sha }} \
+                -e SYSTEM_INFO=./tests/pw/playwright/systemInfo.json \
+                -e API_TEST_RESULT=./tests/pw/playwright-report/api/summary-report/results.json \
+                -e E2E_TEST_RESULT=./tests/pw/playwright-report/e2e/summary-report/results.json \
+                -e API_COVERAGE=./tests/pw/playwright-report/api/coverage-report/coverage.json \
+                -e E2E_COVERAGE=./tests/pw/playwright-report/e2e/coverage-report/coverage.json \
                 mcr.microsoft.com/playwright:v1.49.1-noble \
                 npm run test:e2e
 
