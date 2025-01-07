@@ -69,6 +69,9 @@ jobs:
     tests:
         name: e2e_api tests
         runs-on: ubuntu-latest
+        container:
+          image: mcr.microsoft.com/playwright:v1.49.1-noble
+          options: --user 1001
 
         steps:
             - name: Checkout testing repo
@@ -96,13 +99,11 @@ jobs:
               run: |
                   npm ci || npm i
 
-            # Install test dependencies
-            #  npm run pw:chrome-only  8s
-            # npm run pw:browser-with-deps 40s
-            - name: Install browsers
-              working-directory: tests/pw
-              run: |
-                  npm run pw:browser-with-deps
+            # # Install test dependencies
+            # - name: Install browsers
+            #   working-directory: tests/pw
+            #   run: |
+            #       npm run pw:browser-with-deps
 
             # # Create wp debuglog file
             # - name: Create wp debuglog file
