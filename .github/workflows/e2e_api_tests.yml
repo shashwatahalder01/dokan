@@ -173,16 +173,16 @@ jobs:
               run: |
                   npm run test:e2e:coverage
 
-            # Prepare test summary
-            - name: Prepare test summary
-              id: prepare-test-summary
-              uses: actions/github-script@v7
-              if: always() && steps.clone-dokan-lite.outcome == 'success'
-              with:
-                  result-encoding: string
-                  script: |
-                      const script = require("./tests/pw/utils/gitTestSummary.ts")
-                      return await script({github, context, core})
+            # # Prepare test summary
+            # - name: Prepare test summary
+            #   id: prepare-test-summary
+            #   uses: actions/github-script@v7
+            #   if: always() && steps.clone-dokan-lite.outcome == 'success'
+            #   with:
+            #       result-encoding: string
+            #       script: |
+            #           const script = require("./tests/pw/utils/gitTestSummary.ts")
+            #           return await script({github, context, core})
 
             # Backup Database
             - name: Backup Database
@@ -305,16 +305,16 @@ jobs:
               run: |
                   npm run test:api -- --shard=${{ matrix.shardIndex }}/${{ matrix.shardTotal }}
 
-            # Prepare test summary
-            - name: Prepare test summary
-              id: prepare-test-summary
-              if: always() && steps.clone-dokan-lite.outcome == 'success'
-              uses: actions/github-script@v7
-              with:
-                  result-encoding: string
-                  script: |
-                      const script = require("./tests/pw/utils/gitTestSummary.ts")
-                      return await script({github, context, core})
+            # # Prepare test summary
+            # - name: Prepare test summary
+            #   id: prepare-test-summary
+            #   if: always() && steps.clone-dokan-lite.outcome == 'success'
+            #   uses: actions/github-script@v7
+            #   with:
+            #       result-encoding: string
+            #       script: |
+            #           const script = require("./tests/pw/utils/gitTestSummary.ts")
+            #           return await script({github, context, core})
 
             # Backup Database
             - name: Backup Database
