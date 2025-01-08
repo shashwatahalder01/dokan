@@ -6,7 +6,7 @@ import { data } from '@utils/testData';
 import { dbData } from '@utils/dbData';
 import { payloads } from '@utils/payloads';
 import { responseBody } from '@utils/interfaces';
-// import { serialize } from 'php-serialize';
+import { serialize } from 'php-serialize';
 
 const { CATEGORY_ID } = process.env;
 
@@ -335,202 +335,202 @@ test.describe('Product details functionality test', () => {
         await vendor.removeProductCatalogMode(productIdFull, true);
     });
 
-    // // shipping and tax
+    // shipping and tax
 
-    // test('vendor can add product shipping', { tag: ['@pro', '@vendor'] }, async () => {
-    //     await vendor.addProductShipping(productIdBasic, data.product.productInfo.shipping);
-    // });
+    test('vendor can add product shipping', { tag: ['@pro', '@vendor'] }, async () => {
+        await vendor.addProductShipping(productIdBasic, data.product.productInfo.shipping);
+    });
 
-    // test('vendor can update product shipping', { tag: ['@pro', '@vendor'] }, async () => {
-    //     await vendor.addProductShipping(productIdFull, data.product.productInfo.shipping);
-    // });
+    test('vendor can update product shipping', { tag: ['@pro', '@vendor'] }, async () => {
+        await vendor.addProductShipping(productIdFull, data.product.productInfo.shipping);
+    });
 
-    // test('vendor can remove product shipping', { tag: ['@pro', '@vendor'] }, async () => {
-    //     await vendor.removeProductShipping(productIdFull);
-    // });
+    test('vendor can remove product shipping', { tag: ['@pro', '@vendor'] }, async () => {
+        await vendor.removeProductShipping(productIdFull);
+    });
 
-    // test('vendor can add product tax', { tag: ['@pro', '@vendor'] }, async () => {
-    //     await vendor.addProductTax(productIdBasic, data.product.productInfo.tax);
-    // });
+    test('vendor can add product tax', { tag: ['@pro', '@vendor'] }, async () => {
+        await vendor.addProductTax(productIdBasic, data.product.productInfo.tax);
+    });
 
-    // test('vendor can add product tax (with tax class)', { tag: ['@pro', '@vendor'] }, async () => {
-    //     await vendor.addProductTax(productIdBasic, data.product.productInfo.tax, true);
-    // });
+    test('vendor can add product tax (with tax class)', { tag: ['@pro', '@vendor'] }, async () => {
+        await vendor.addProductTax(productIdBasic, data.product.productInfo.tax, true);
+    });
 
-    // // linked products
+    // linked products
 
-    // test('vendor can add product linked products (up-sells)', { tag: ['@pro', '@vendor'] }, async () => {
-    //     await vendor.addProductLinkedProducts(productIdBasic, data.product.productInfo.linkedProducts, 'up-sells');
-    // });
+    test('vendor can add product linked products (up-sells)', { tag: ['@pro', '@vendor'] }, async () => {
+        await vendor.addProductLinkedProducts(productIdBasic, data.product.productInfo.linkedProducts, 'up-sells');
+    });
 
-    // test('vendor can add product linked products (cross-sells)', { tag: ['@pro', '@vendor'] }, async () => {
-    //     await vendor.addProductLinkedProducts(productIdBasic, data.product.productInfo.linkedProducts, 'cross-sells');
-    // });
+    test('vendor can add product linked products (cross-sells)', { tag: ['@pro', '@vendor'] }, async () => {
+        await vendor.addProductLinkedProducts(productIdBasic, data.product.productInfo.linkedProducts, 'cross-sells');
+    });
 
-    // test('vendor can remove product linked products (up-sells)', { tag: ['@pro', '@vendor'] }, async () => {
-    //     await vendor.removeProductLinkedProducts(productIdFull, data.product.productInfo.linkedProducts, 'up-sells');
-    // });
+    test('vendor can remove product linked products (up-sells)', { tag: ['@pro', '@vendor'] }, async () => {
+        await vendor.removeProductLinkedProducts(productIdFull, data.product.productInfo.linkedProducts, 'up-sells');
+    });
 
-    // test('vendor can remove product linked products (cross-sells)', { tag: ['@pro', '@vendor'] }, async () => {
-    //     await vendor.removeProductLinkedProducts(productIdFull, data.product.productInfo.linkedProducts, 'cross-sells');
-    // });
+    test('vendor can remove product linked products (cross-sells)', { tag: ['@pro', '@vendor'] }, async () => {
+        await vendor.removeProductLinkedProducts(productIdFull, data.product.productInfo.linkedProducts, 'cross-sells');
+    });
 
-    // // attribute
+    // attribute
 
-    // test('vendor can add product attribute', { tag: ['@pro', '@vendor'] }, async () => {
-    //     await vendor.addProductAttribute(productIdBasic, data.product.productInfo.attribute);
-    // });
+    test('vendor can add product attribute', { tag: ['@pro', '@vendor'] }, async () => {
+        await vendor.addProductAttribute(productIdBasic, data.product.productInfo.attribute);
+    });
 
-    // test("vendor can't add already added product attribute", { tag: ['@pro', '@vendor'] }, async () => {
-    //     await vendor.cantAddAlreadyAddedAttribute(productIdFull, data.product.productInfo.attribute.attributeName);
-    // });
+    test("vendor can't add already added product attribute", { tag: ['@pro', '@vendor'] }, async () => {
+        await vendor.cantAddAlreadyAddedAttribute(productIdFull, data.product.productInfo.attribute.attributeName);
+    });
 
-    // // todo: refactor below tests
+    // todo: refactor below tests
 
-    // test('vendor can create product attribute term', { tag: ['@pro', '@vendor'] }, async () => {
-    //     const [, , , attributeName] = await apiUtils.createAttributeTerm(payloads.createAttribute(), payloads.createAttributeTerm(), payloads.adminAuth);
-    //     const [, productId] = await apiUtils.createProduct(payloads.createProduct(), payloads.vendorAuth);
-    //     await vendor.addProductAttribute(productId, { ...data.product.productInfo.attribute, attributeName: attributeName }, true);
-    // });
+    test('vendor can create product attribute term', { tag: ['@pro', '@vendor'] }, async () => {
+        const [, , , attributeName] = await apiUtils.createAttributeTerm(payloads.createAttribute(), payloads.createAttributeTerm(), payloads.adminAuth);
+        const [, productId] = await apiUtils.createProduct(payloads.createProduct(), payloads.vendorAuth);
+        await vendor.addProductAttribute(productId, { ...data.product.productInfo.attribute, attributeName: attributeName }, true);
+    });
 
-    // test('vendor can remove product attribute', { tag: ['@pro', '@vendor'] }, async () => {
-    //     const [, attributeId, , attributeName, attributeTerm] = await apiUtils.createAttributeTerm(payloads.createAttribute(), payloads.createAttributeTerm(), payloads.adminAuth);
-    //     const attributes = { id: attributeId, name: attributeName, options: [attributeTerm] };
-    //     const [, productId] = await apiUtils.createProduct({ ...payloads.createProduct(), attributes: [attributes] }, payloads.vendorAuth);
-    //     await vendor.removeProductAttribute(productId, attributeName);
-    // });
+    test('vendor can remove product attribute', { tag: ['@pro', '@vendor'] }, async () => {
+        const [, attributeId, , attributeName, attributeTerm] = await apiUtils.createAttributeTerm(payloads.createAttribute(), payloads.createAttributeTerm(), payloads.adminAuth);
+        const attributes = { id: attributeId, name: attributeName, options: [attributeTerm] };
+        const [, productId] = await apiUtils.createProduct({ ...payloads.createProduct(), attributes: [attributes] }, payloads.vendorAuth);
+        await vendor.removeProductAttribute(productId, attributeName);
+    });
 
-    // test('vendor can remove product attribute term', { tag: ['@pro', '@vendor'] }, async () => {
-    //     const [, attributeId, , attributeName, attributeTerm] = await apiUtils.createAttributeTerm(payloads.createAttribute(), payloads.createAttributeTerm(), payloads.adminAuth);
-    //     const [, , , , attributeTerm2] = await apiUtils.createAttributeTerm(payloads.createAttribute(), payloads.createAttributeTerm(), payloads.adminAuth);
-    //     const attributes = { id: attributeId, name: attributeName, options: [attributeTerm, attributeTerm2] };
-    //     const [, productId] = await apiUtils.createProduct({ ...payloads.createProduct(), attributes: [attributes] }, payloads.vendorAuth);
-    //     await vendor.removeProductAttributeTerm(productId, attributeName, attributeTerm2);
-    // });
+    test('vendor can remove product attribute term', { tag: ['@pro', '@vendor'] }, async () => {
+        const [, attributeId, , attributeName, attributeTerm] = await apiUtils.createAttributeTerm(payloads.createAttribute(), payloads.createAttributeTerm(), payloads.adminAuth);
+        const [, , , , attributeTerm2] = await apiUtils.createAttributeTerm(payloads.createAttribute(), payloads.createAttributeTerm(), payloads.adminAuth);
+        const attributes = { id: attributeId, name: attributeName, options: [attributeTerm, attributeTerm2] };
+        const [, productId] = await apiUtils.createProduct({ ...payloads.createProduct(), attributes: [attributes] }, payloads.vendorAuth);
+        await vendor.removeProductAttributeTerm(productId, attributeName, attributeTerm2);
+    });
 
-    // // discount options
+    // discount options
 
-    // test('vendor can add product bulk discount options', { tag: ['@pro', '@vendor'] }, async () => {
-    //     await vendor.addProductBulkDiscountOptions(productIdBasic, data.product.productInfo.quantityDiscount);
-    // });
+    test('vendor can add product bulk discount options', { tag: ['@pro', '@vendor'] }, async () => {
+        await vendor.addProductBulkDiscountOptions(productIdBasic, data.product.productInfo.quantityDiscount);
+    });
 
-    // test('vendor can update product bulk discount options', { tag: ['@pro', '@vendor'] }, async () => {
-    //     await vendor.addProductBulkDiscountOptions(productIdFull, data.product.productInfo.quantityDiscount);
-    // });
+    test('vendor can update product bulk discount options', { tag: ['@pro', '@vendor'] }, async () => {
+        await vendor.addProductBulkDiscountOptions(productIdFull, data.product.productInfo.quantityDiscount);
+    });
 
-    // test('vendor can remove product bulk discount options', { tag: ['@pro', '@vendor'] }, async () => {
-    //     await vendor.removeProductBulkDiscountOptions(productIdFull);
-    // });
+    test('vendor can remove product bulk discount options', { tag: ['@pro', '@vendor'] }, async () => {
+        await vendor.removeProductBulkDiscountOptions(productIdFull);
+    });
 
-    // // geolocation
+    // geolocation
 
-    // test('vendor can add product geolocation (individual)', { tag: ['@pro', '@vendor'] }, async () => {
-    //     await vendor.addProductGeolocation(productIdBasic, data.product.productInfo.geolocation);
-    // });
+    test('vendor can add product geolocation (individual)', { tag: ['@pro', '@vendor'] }, async () => {
+        await vendor.addProductGeolocation(productIdBasic, data.product.productInfo.geolocation);
+    });
 
-    // test('vendor can update product geolocation (individual)', { tag: ['@pro', '@vendor'] }, async () => {
-    //     await vendor.addProductGeolocation(productIdFull, data.product.productInfo.geolocation);
-    // });
+    test('vendor can update product geolocation (individual)', { tag: ['@pro', '@vendor'] }, async () => {
+        await vendor.addProductGeolocation(productIdFull, data.product.productInfo.geolocation);
+    });
 
-    // test('vendor can remove product geolocation (individual)', { tag: ['@pro', '@vendor'] }, async () => {
-    //     await vendor.removeProductGeolocation(productIdFull);
-    // });
+    test('vendor can remove product geolocation (individual)', { tag: ['@pro', '@vendor'] }, async () => {
+        await vendor.removeProductGeolocation(productIdFull);
+    });
 
-    // // EU compliance options
-    // // todo: duplicate test from euCompliance
+    // EU compliance options
+    // todo: duplicate test from euCompliance
 
-    // test.skip('vendor can add product EU compliance data', { tag: ['@pro', '@vendor'] }, async () => {
-    //     await vendor.addProductEuCompliance(productIdBasic, data.product.productInfo.euCompliance);
-    // });
+    test.skip('vendor can add product EU compliance data', { tag: ['@pro', '@vendor'] }, async () => {
+        await vendor.addProductEuCompliance(productIdBasic, data.product.productInfo.euCompliance);
+    });
 
-    // test.skip('vendor can update product EU compliance data', { tag: ['@pro', '@vendor'] }, async () => {
-    //     await vendor.addProductEuCompliance(productIdFull, data.product.productInfo.euCompliance);
-    // });
+    test.skip('vendor can update product EU compliance data', { tag: ['@pro', '@vendor'] }, async () => {
+        await vendor.addProductEuCompliance(productIdFull, data.product.productInfo.euCompliance);
+    });
 
-    // test.skip('vendor can remove product EU compliance data', { tag: ['@pro', '@vendor'] }, async () => {
-    //     await vendor.addProductEuCompliance(productIdFull, { ...data.product.productInfo.euCompliance, productUnits: '', basePriceUnits: '', freeShipping: false, regularUnitPrice: '', saleUnitPrice: '', optionalMiniDescription: '' });
-    // });
+    test.skip('vendor can remove product EU compliance data', { tag: ['@pro', '@vendor'] }, async () => {
+        await vendor.addProductEuCompliance(productIdFull, { ...data.product.productInfo.euCompliance, productUnits: '', basePriceUnits: '', freeShipping: false, regularUnitPrice: '', saleUnitPrice: '', optionalMiniDescription: '' });
+    });
 
-    // // addon
-    // // todo: duplicate test from product addons also has new tests
+    // addon
+    // todo: duplicate test from product addons also has new tests
 
-    // test('vendor can add product addon', { tag: ['@pro', '@vendor'] }, async () => {
-    //     test.slow();
-    //     await vendor.addProductAddon(productIdBasic, data.product.productInfo.addon);
-    // });
+    test('vendor can add product addon', { tag: ['@pro', '@vendor'] }, async () => {
+        test.slow();
+        await vendor.addProductAddon(productIdBasic, data.product.productInfo.addon);
+    });
 
-    // test('vendor can import product addon', { tag: ['@pro', '@vendor'] }, async () => {
-    //     const addon = payloads.createProductAddon();
-    //     await vendor.importAddon(productIdBasic, serialize([addon]), addon.name);
-    // });
+    test('vendor can import product addon', { tag: ['@pro', '@vendor'] }, async () => {
+        const addon = payloads.createProductAddon();
+        await vendor.importAddon(productIdBasic, serialize([addon]), addon.name);
+    });
 
-    // test('vendor can export product addon', { tag: ['@pro', '@vendor'] }, async () => {
-    //     const [responseBody, productId] = await apiUtils.createProductWithAddon(payloads.createProduct(), [payloads.createProductAddon()], payloads.vendorAuth);
-    //     await vendor.exportAddon(productId, serialize(apiUtils.getMetaDataValue(responseBody.meta_data, '_product_addons')));
-    // });
+    test('vendor can export product addon', { tag: ['@pro', '@vendor'] }, async () => {
+        const [responseBody, productId] = await apiUtils.createProductWithAddon(payloads.createProduct(), [payloads.createProductAddon()], payloads.vendorAuth);
+        await vendor.exportAddon(productId, serialize(apiUtils.getMetaDataValue(responseBody.meta_data, '_product_addons')));
+    });
 
-    // test('vendor can remove product addon', { tag: ['@pro', '@vendor'] }, async () => {
-    //     const [, , productId, addonNames] = await apiUtils.createProductWithAddon(payloads.createProduct(), [payloads.createProductAddon()], payloads.vendorAuth);
-    //     await vendor.removeAddon(productId, addonNames[0] as string);
-    // });
+    test('vendor can remove product addon', { tag: ['@pro', '@vendor'] }, async () => {
+        const [, , productId, addonNames] = await apiUtils.createProductWithAddon(payloads.createProduct(), [payloads.createProductAddon()], payloads.vendorAuth);
+        await vendor.removeAddon(productId, addonNames[0] as string);
+    });
 
-    // // rma options
+    // rma options
 
-    // test('vendor can add product rma options (no warranty)', { tag: ['@pro', '@vendor'] }, async () => {
-    //     await vendor.addProductRmaOptions(productIdBasic, { ...data.vendor.rma, type: 'no_warranty' });
-    // });
+    test('vendor can add product rma options (no warranty)', { tag: ['@pro', '@vendor'] }, async () => {
+        await vendor.addProductRmaOptions(productIdBasic, { ...data.vendor.rma, type: 'no_warranty' });
+    });
 
-    // test('vendor can add product rma options (warranty included limited)', { tag: ['@pro', '@vendor'] }, async () => {
-    //     await vendor.addProductRmaOptions(productIdBasic, data.vendor.rma);
-    // });
+    test('vendor can add product rma options (warranty included limited)', { tag: ['@pro', '@vendor'] }, async () => {
+        await vendor.addProductRmaOptions(productIdBasic, data.vendor.rma);
+    });
 
-    // test('vendor can add product rma options (warranty included lifetime)', { tag: ['@pro', '@vendor'] }, async () => {
-    //     await vendor.addProductRmaOptions(productIdBasic, { ...data.vendor.rma, length: 'lifetime' });
-    // });
+    test('vendor can add product rma options (warranty included lifetime)', { tag: ['@pro', '@vendor'] }, async () => {
+        await vendor.addProductRmaOptions(productIdBasic, { ...data.vendor.rma, length: 'lifetime' });
+    });
 
-    // test('vendor can add product rma options (warranty as addon)', { tag: ['@pro', '@vendor'] }, async () => {
-    //     await vendor.addProductRmaOptions(productIdBasic, { ...data.vendor.rma, type: 'addon_warranty' });
-    // });
+    test('vendor can add product rma options (warranty as addon)', { tag: ['@pro', '@vendor'] }, async () => {
+        await vendor.addProductRmaOptions(productIdBasic, { ...data.vendor.rma, type: 'addon_warranty' });
+    });
 
-    // //todo: add update rma options tests
+    //todo: add update rma options tests
 
-    // test('vendor can remove product rma options', { tag: ['@pro', '@vendor'] }, async () => {
-    //     await vendor.removeProductRmaOptions(productIdFull);
-    // });
+    test('vendor can remove product rma options', { tag: ['@pro', '@vendor'] }, async () => {
+        await vendor.removeProductRmaOptions(productIdFull);
+    });
 
-    // // wholesale options
+    // wholesale options
 
-    // test('vendor can add product wholesale options', { tag: ['@pro', '@vendor'] }, async () => {
-    //     await vendor.addProductWholesaleOptions(productIdBasic, data.product.productInfo.wholesaleOption);
-    // });
+    test('vendor can add product wholesale options', { tag: ['@pro', '@vendor'] }, async () => {
+        await vendor.addProductWholesaleOptions(productIdBasic, data.product.productInfo.wholesaleOption);
+    });
 
-    // test('vendor can update product wholesale options', { tag: ['@pro', '@vendor'] }, async () => {
-    //     await vendor.addProductWholesaleOptions(productIdFull, data.product.productInfo.wholesaleOption);
-    // });
+    test('vendor can update product wholesale options', { tag: ['@pro', '@vendor'] }, async () => {
+        await vendor.addProductWholesaleOptions(productIdFull, data.product.productInfo.wholesaleOption);
+    });
 
-    // test('vendor can remove product wholesale options', { tag: ['@pro', '@vendor'] }, async () => {
-    //     await vendor.removeProductWholesaleOptions(productIdFull);
-    // });
+    test('vendor can remove product wholesale options', { tag: ['@pro', '@vendor'] }, async () => {
+        await vendor.removeProductWholesaleOptions(productIdFull);
+    });
 
-    // // mix-max options
+    // mix-max options
 
-    // test('vendor can add product min-max options', { tag: ['@pro', '@vendor'] }, async () => {
-    //     await vendor.addProductMinMaxOptions(productIdBasic, data.product.productInfo.minMax);
-    // });
+    test('vendor can add product min-max options', { tag: ['@pro', '@vendor'] }, async () => {
+        await vendor.addProductMinMaxOptions(productIdBasic, data.product.productInfo.minMax);
+    });
 
-    // test('vendor can update product min-max options', { tag: ['@pro', '@vendor'] }, async () => {
-    //     await vendor.addProductMinMaxOptions(productIdFull, data.product.productInfo.minMax);
-    // });
+    test('vendor can update product min-max options', { tag: ['@pro', '@vendor'] }, async () => {
+        await vendor.addProductMinMaxOptions(productIdFull, data.product.productInfo.minMax);
+    });
 
-    // test("vendor can't add product min limit grater than max limit", { tag: ['@pro', '@vendor'] }, async () => {
-    //     await vendor.cantAddGreaterMin(productIdFull, { minimumProductQuantity: '100', maximumProductQuantity: '50' });
-    // });
+    test("vendor can't add product min limit grater than max limit", { tag: ['@pro', '@vendor'] }, async () => {
+        await vendor.cantAddGreaterMin(productIdFull, { minimumProductQuantity: '100', maximumProductQuantity: '50' });
+    });
 
-    // test('vendor can remove product min-max options', { tag: ['@pro', '@vendor'] }, async () => {
-    //     await vendor.removeProductMinMaxOptions(productIdFull, { minimumProductQuantity: '', maximumProductQuantity: '' });
-    // });
+    test('vendor can remove product min-max options', { tag: ['@pro', '@vendor'] }, async () => {
+        await vendor.removeProductMinMaxOptions(productIdFull, { minimumProductQuantity: '', maximumProductQuantity: '' });
+    });
 
-    // // todo: advertising
-    // // todo: rank math seo
-    // // todo: variation options
+    // todo: advertising
+    // todo: rank math seo
+    // todo: variation options
 });
