@@ -4,6 +4,38 @@
  */
 $changelog = [
     [
+        'version'  => 'Version 3.14.5',
+        'released' => '2025-01-06',
+        'changes'  => [
+            'Improvement'  => [
+                [
+                    'title'       => 'Improvement vendor setup wizard ui.',
+                    'description' => '',
+                ],
+                [
+                    'title'       => 'Improvement withdraw approved email template.',
+                    'description' => '',
+                ],
+                [
+                    'title'       => 'Dokan admin settings page responsive & update ui design.',
+                    'description' => '',
+                ],
+            ],
+        ],
+    ],
+    [
+        'version'  => 'Version 3.14.4',
+        'released' => '2024-12-27',
+        'changes'  => [
+            'Fix'  => [
+                [
+                    'title'       => 'Added tweaks to improve system stability and smoothness',
+                    'description' => '',
+                ],
+            ],
+        ],
+    ],
+    [
         'version'  => 'Version 3.14.3',
         'released' => '2024-12-11',
         'changes'  => [
