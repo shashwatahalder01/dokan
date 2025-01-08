@@ -145,27 +145,10 @@ export default defineConfig({
         {
             name: 'e2e_tests',
             testMatch: /.*\.spec\.ts/,
-            // grep: [/@admin/],
             /* whether not to run setup tests before running actual tests */
             dependencies: NO_SETUP ? [] : ['e2e_setup'],
             /* whether not to run teardown tests after running actual tests */
             // teardown: NO_SETUP ? undefined : 'coverage_report',
-        },
-
-        // e2e_tests
-        {
-            name: 'e2e_1',
-            testMatch: /.*\.spec\.ts/,
-            grep: [/@lite/],
-            dependencies: NO_SETUP ? [] : ['e2e_setup'],
-        },
-
-        // e2e_tests
-        {
-            name: 'e2e_2',
-            testMatch: /.*\.spec\.ts/,
-            grep: [/@pro/],
-            dependencies: NO_SETUP ? [] : ['e2e_setup'],
         },
 
         // coverage_report
