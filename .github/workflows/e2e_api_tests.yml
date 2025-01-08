@@ -129,7 +129,7 @@ jobs:
               id: playwright-version
               working-directory: tests/pw
               run: |
-                  echo "PLAYWRIGHT_VERSION=$(npm ls @playwright/test --json | jq --raw-output '.dependencies["@playwright/test"].version')" >> $GITHUB_ENV
+                  echo "PLAYWRIGHT_VERSION=$(npm ls @playwright/test --json | jq --raw-output '.dependencies["@playwright/test"].version')" >> "$GITHUB_ENV"
 
             # Cache browser binaries, cache key is based on Playwright version and OS
             - name: Cache playwright binaries
@@ -268,7 +268,7 @@ jobs:
               id: playwright-version
               working-directory: tests/pw
               run: |
-                  echo "PLAYWRIGHT_VERSION=$(npm ls @playwright/test --json | jq --raw-output '.dependencies["@playwright/test"].version')" >> $GITHUB_ENV
+                  echo "PLAYWRIGHT_VERSION=$(npm ls @playwright/test --json | jq --raw-output '.dependencies["@playwright/test"].version')" >> "$GITHUB_ENV"
 
             # Cache browser binaries, cache key is based on Playwright version and OS
             - name: Cache playwright binaries
