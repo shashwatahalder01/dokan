@@ -579,17 +579,17 @@ jobs:
                   if-no-files-found: ignore
                   retention-days: 7
 
-            - name: Publish HTML report to GH Pages
-              if: always() && steps.generate-html-report.outcome == 'success'
-              uses: peaceiris/actions-gh-pages@v4
-              with:
-                  github_token: ${{ secrets.GITHUB_TOKEN }}
-                  publish_branch: gh-pages
-                  publish_dir: ./tests/pw/all-reports/html-report
-                #   destination_dir: ${{ github.event.pull_request.number || github.sha }}
-                #   keep_files: true
-                  user_name: 'github-actions[bot]' # This will be the username that gets stamped in the repo commit
-                  user_email: 'github-actions[bot]@users.noreply.github.com' # This will be the user email that gets stamped in the repo com
+            # - name: Publish HTML report to GH Pages
+            #   if: always() && steps.generate-html-report.outcome == 'success'
+            #   uses: peaceiris/actions-gh-pages@v4
+            #   with:
+            #       github_token: ${{ secrets.GITHUB_TOKEN }}
+            #       publish_branch: gh-pages
+            #       publish_dir: ./tests/pw/all-reports/html-report
+            #     #   destination_dir: ${{ github.event.pull_request.number || github.sha }}
+            #     #   keep_files: true
+            #       user_name: 'github-actions[bot]' # This will be the username that gets stamped in the repo commit
+            #       user_email: 'github-actions[bot]@users.noreply.github.com' # This will be the user email that gets stamped in the repo com
 
 
             # - name: Test results
