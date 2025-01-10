@@ -6,10 +6,10 @@
                 "https://downloads.wordpress.org/plugin/woocommerce.latest-stable.zip",
                 "../../",
                 "../../plugins/dokan-pro",
-                "../../plugins/dokan-pro/tests/plugins/woocommerce-bookings",
-                "../../plugins/dokan-pro/tests/plugins/woocommerce-product-addons",
-                "../../plugins/dokan-pro/tests/plugins/woocommerce-simple-auctions",
-                "../../plugins/dokan-pro/tests/plugins/woocommerce-subscriptions"
+                "../../plugins/dokan-pro/wc-plugins/tests/plugins/woocommerce-bookings",
+                "../../plugins/dokan-pro/wc-plugins/tests/plugins/woocommerce-product-addons",
+                "../../plugins/dokan-pro/wc-plugins/tests/plugins/woocommerce-simple-auctions",
+                "../../plugins/dokan-pro/wc-plugins/tests/plugins/woocommerce-subscriptions"
             ]
         }
     }
