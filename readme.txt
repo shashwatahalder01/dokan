@@ -5,9 +5,9 @@ Tags: WooCommerce multivendor marketplace, multi seller, multi vendor, multivend
 Requires at least: 6.5
 Tested up to: 6.7.1
 WC requires at least: 8.0.0
-WC tested up to: 9.5.2
+WC tested up to: 9.6.0
 Requires PHP: 7.4
-Stable tag: 3.14.6
+Stable tag: 3.14.8
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -344,6 +344,13 @@ A. Just install and activate the PRO version without deleting the free plugin. A
 
 
 == Changelog ==
+= v3.14.8 ( Jan 29, 2025 ) =
+
+- **update:** Missing parameters support added for the reverse-withdrawal API endpoints.
+- **update:** Missing parameters support added for the Settings API endpoints.
+- **fix:** Fixed an error when navigating to the product edit page with an invalid (non-numeric) product ID.
+- **fix:** Fixed a misspelling typo vendor contact form input field.
+- **fix:** Fixed and updated analytics cache modifier for seller analytics filter.
 
 = v3.14.6 ( Jan 09, 2025 ) =
 
@@ -358,10 +365,6 @@ A. Just install and activate the PRO version without deleting the free plugin. A
 = v3.14.4 ( Dec 27, 2024 ) =
 
 - **fix:** Added tweaks to improve system stability and smoothness.
-
-= v3.14.3 ( Dec 11, 2024 ) =
-
-- **update:** Updated Dokan admin header to display current pro plan and version with upgrading option.
 
 [CHECK THE FULL CHANGELOG](https://github.com/getdokan/dokan/blob/develop/CHANGELOG.md).
 
