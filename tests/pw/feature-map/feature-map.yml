@@ -940,7 +940,9 @@
           vendor can view inbox menu page: true
           vendor can reply to customer message: true
       customer:
+          customer can view inbox menu page: false
           customer can send message to vendor: true
+          customer can reply to customer message: false
 
 - page: 'Live Search'
   features:
