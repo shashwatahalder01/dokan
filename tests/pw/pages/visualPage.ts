@@ -95,4 +95,10 @@ export class VisualPage extends AdminPage {
         await this.wait(1.5);
         await this.toHaveScreenshot(this.page, [notice]);
     }
+
+    // dokan vendor dashboard menu
+    async vendorDashboardMenu(locator: string) {
+        await this.goIfNotThere(locator, 'networkidle');
+        await this.toHaveScreenshot(this.page);
+    }
 }

@@ -28,6 +28,7 @@
         "test:codegen": "playwright codegen",
         "test:report": "npx playwright show-report",
         "test:trace": "npx playwright show-trace trace.zip",
+        "update:screenshot": "npx playwright test --project=e2e_tests --config=e2e.config.ts --update-snapshots",
         "merge:report": "npx playwright merge-reports --reporter html",
         "allure:generate": "allure generate playwright-report/allure-report -o allure-report  --clean",
         "allure:open": "allure open allure-report",

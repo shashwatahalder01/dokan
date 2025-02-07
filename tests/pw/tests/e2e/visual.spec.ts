@@ -18,231 +18,379 @@ test.describe('dokan visual test', () => {
         await aPage.close();
     });
 
-    test('dokan admin dashboard @visual', async () => {
+    test('dokan admin dashboard', { tag: ['@lite', '@visual'] }, async () => {
         await admin.dokanMenu(data.subUrls.backend.dokan.dokan);
     });
 
-    test('admin withdraw menu @visual', async () => {
+    test('admin withdraw menu', { tag: ['@lite', '@visual'] }, async () => {
         await admin.dokanMenu(data.subUrls.backend.dokan.withdraw);
     });
 
-    test('admin reverse withdraw menu @visual', async () => {
+    test('admin reverse withdraw menu', { tag: ['@lite', '@visual'] }, async () => {
         await admin.dokanMenu(data.subUrls.backend.dokan.reverseWithdraws);
     });
 
-    test('admin add reverse withdrawal @visual', async () => {
+    test('admin add reverse withdrawal', { tag: ['@lite', '@visual'] }, async () => {
         await admin.addReverseWithdrawal();
     });
 
-    test('admin vendors menu @visual', async () => {
+    test('admin vendors menu', { tag: ['@lite', '@visual'] }, async () => {
         await admin.dokanMenu(data.subUrls.backend.dokan.vendors);
     });
 
-    test('admin can add vendor @visual', async () => {
+    test('admin can add vendor', { tag: ['@lite', '@visual'] }, async () => {
         await admin.addVendor();
     });
 
-    test('admin store category @visual', async () => {
+    test('admin store category', { tag: ['@pro', '@visual'] }, async () => {
         await admin.adminStoreCategoryRenderProperly();
     });
 
-    test('dokan store reviews menu @visual', async () => {
+    test('dokan store reviews menu', { tag: ['@pro', '@visual'] }, async () => {
         await admin.dokanMenu(data.subUrls.backend.dokan.storeReviews);
     });
 
-    test('dokan store support menu @visual', async () => {
+    test('dokan store support menu', { tag: ['@pro', '@visual'] }, async () => {
         await admin.dokanMenu(data.subUrls.backend.dokan.storeSupport);
     });
 
-    test('dokan seller badge menu @visual', async () => {
+    test('dokan seller badge menu', { tag: ['@pro', '@visual'] }, async () => {
         await admin.dokanMenu(data.subUrls.backend.dokan.sellerBadge);
     });
 
-    test('admin can create seller badge @visual', async () => {
+    test('admin can create seller badge', { tag: ['@pro', '@visual'] }, async () => {
         await admin.createSellerBadge();
     });
 
-    test('admin quotes menu @visual', async () => {
+    test('admin quotes menu', { tag: ['@pro', '@visual'] }, async () => {
         await admin.dokanMenu(data.subUrls.backend.dokan.requestForQuote);
     });
 
-    test('admin can add quote @visual', async () => {
+    test('admin can add quote', { tag: ['@pro', '@visual'] }, async () => {
         await admin.addQuote();
     });
 
-    test('admin quote rules menu @visual', async () => {
+    test('admin quote rules menu', { tag: ['@pro', '@visual'] }, async () => {
         await admin.dokanMenu(data.subUrls.backend.dokan.requestForQuoteRules);
     });
 
-    test('admin can add quote rule @visual', async () => {
+    test('admin can add quote rule', { tag: ['@pro', '@visual'] }, async () => {
         await admin.addQuoteRule();
     });
 
-    test('dokan abuse report menu @visual', async () => {
+    test('dokan abuse report menu', { tag: ['@pro', '@visual'] }, async () => {
         await admin.dokanMenu(data.subUrls.backend.dokan.abuseReports);
     });
 
-    test('dokan announcements menu @visual', async () => {
+    test('dokan announcements menu', { tag: ['@pro', '@visual'] }, async () => {
         await admin.dokanMenu(data.subUrls.backend.dokan.announcements);
     });
 
-    test('admin can add announcement @visual', async () => {
+    test('admin can add announcement', { tag: ['@pro', '@visual'] }, async () => {
         await admin.addAnnouncement();
     });
 
-    test('admin refunds menu @visual', async () => {
+    test('admin refunds menu', { tag: ['@pro', '@visual'] }, async () => {
         await admin.dokanMenu(data.subUrls.backend.dokan.refunds);
     });
 
-    test('admin reports menu @visual', async () => {
+    test('admin reports menu', { tag: ['@pro', '@visual'] }, async () => {
         await admin.dokanMenu(data.subUrls.backend.dokan.reports);
     });
 
-    test('admin All Logs menu @visual', async () => {
+    test('admin All Logs menu', { tag: ['@pro', '@visual'] }, async () => {
         await admin.dokanMenu(data.subUrls.backend.dokan.allLogs);
     });
 
-    test('dokan modules menu @visual', async () => {
+    test('dokan modules menu', { tag: ['@pro', '@visual'] }, async () => {
         await admin.dokanMenu(data.subUrls.backend.dokan.modules);
     });
 
-    test('dokan modules plan @visual', async () => {
+    test('dokan modules plan', { tag: ['@lite', '@visual'] }, async () => {
         await admin.adminModulesPlanRenderProperly();
     });
 
-    test('dokan tools menu @visual', async () => {
+    test('dokan tools menu', { tag: ['@pro', '@visual'] }, async () => {
         await admin.dokanMenu(data.subUrls.backend.dokan.tools);
     });
 
-    test('admin verifications menu @visual', async () => {
+    test('admin verifications menu', { tag: ['@pro', '@visual'] }, async () => {
         await admin.dokanMenu(data.subUrls.backend.dokan.verifications);
     });
 
-    test('dokan product advertising menu @visual', async () => {
+    test('dokan product advertising menu', { tag: ['@pro', '@visual'] }, async () => {
         await admin.dokanMenu(data.subUrls.backend.dokan.productAdvertising);
     });
 
-    test('admin can add product advertisement @visual', async () => {
+    test('admin can add product advertisement', { tag: ['@pro', '@visual'] }, async () => {
         await admin.addNewProductAdvertisement();
     });
 
-    test('dokan wholesale customers menu @visual', async () => {
+    test('dokan wholesale customers menu', { tag: ['@pro', '@visual'] }, async () => {
         await admin.dokanMenu(data.subUrls.backend.dokan.wholeSaleCustomer);
     });
 
-    test('dokan help menu @visual', async () => {
+    test('dokan help menu', { tag: ['@lite', '@visual'] }, async () => {
         await admin.dokanMenu(data.subUrls.backend.dokan.help);
     });
 
-    test('dokan settings general menu @visual', async () => {
+    test('dokan settings general menu', { tag: ['@lite', '@visual'] }, async () => {
         await admin.dokanSettingsMenu(selector.admin.dokan.settings.menus.general);
     });
 
-    test('dokan settings selling menu @visual', async () => {
+    test('dokan settings selling menu', { tag: ['@lite', '@visual'] }, async () => {
         await admin.dokanSettingsMenu(selector.admin.dokan.settings.menus.sellingOptions);
     });
 
-    test('dokan settings withdraw menu @visual', async () => {
+    test('dokan settings withdraw menu', { tag: ['@lite', '@visual'] }, async () => {
         await admin.dokanSettingsMenu(selector.admin.dokan.settings.menus.withdrawOptions);
     });
 
-    test('dokan settings reverseWithdraw menu @visual', async () => {
+    test('dokan settings reverseWithdraw menu', { tag: ['@lite', '@visual'] }, async () => {
         await admin.dokanSettingsMenu(selector.admin.dokan.settings.menus.reverseWithdrawal);
     });
 
-    test('dokan settings page menu @visual', async () => {
+    test('dokan settings page menu', { tag: ['@lite', '@visual'] }, async () => {
         await admin.dokanSettingsMenu(selector.admin.dokan.settings.menus.pageSettings);
     });
 
-    test('dokan settings appearance menu @visual', async () => {
+    test('dokan settings appearance menu', { tag: ['@lite', '@visual'] }, async () => {
         await admin.dokanSettingsMenu(selector.admin.dokan.settings.menus.appearance);
     });
 
-    test('dokan settings privacyPolicy menu @visual', async () => {
+    test('dokan settings privacyPolicy menu', { tag: ['@lite', '@visual'] }, async () => {
         await admin.dokanSettingsMenu(selector.admin.dokan.settings.menus.privacyPolicy);
     });
 
-    test('dokan settings colors menu @visual', async () => {
+    test('dokan settings colors menu', { tag: ['@pro', '@visual'] }, async () => {
         await admin.dokanSettingsMenu(selector.admin.dokan.settings.menus.colors);
     });
 
-    test('dokan settings liveSearch menu @visual', async () => {
+    test('dokan settings liveSearch menu', { tag: ['@pro', '@visual'] }, async () => {
         await admin.dokanSettingsMenu(selector.admin.dokan.settings.menus.liveSearch);
     });
 
-    test('dokan settings storeSupport menu @visual', async () => {
+    test('dokan settings storeSupport menu', { tag: ['@pro', '@visual'] }, async () => {
         await admin.dokanSettingsMenu(selector.admin.dokan.settings.menus.storeSupport);
     });
 
-    test('dokan settings sellerVerification menu @visual', async () => {
+    test('dokan settings sellerVerification menu', { tag: ['@pro', '@visual'] }, async () => {
         await admin.dokanSettingsMenu(selector.admin.dokan.settings.menus.vendorVerification);
     });
 
-    test('dokan settings verificationSmsGateways menu @visual', async () => {
+    test('dokan settings verificationSmsGateways menu', { tag: ['@pro', '@visual'] }, async () => {
         await admin.dokanSettingsMenu(selector.admin.dokan.settings.menus.verificationSmsGateways);
     });
 
-    test('dokan settings emailVerification menu @visual', async () => {
+    test('dokan settings emailVerification menu', { tag: ['@pro', '@visual'] }, async () => {
         await admin.dokanSettingsMenu(selector.admin.dokan.settings.menus.emailVerification);
     });
 
-    test('dokan settings socialApi menu @visual', async () => {
+    test('dokan settings socialApi menu', { tag: ['@pro', '@visual'] }, async () => {
         await admin.dokanSettingsMenu(selector.admin.dokan.settings.menus.socialApi);
     });
 
-    test('dokan settings shippingStatus menu @visual', async () => {
+    test('dokan settings shippingStatus menu', { tag: ['@pro', '@visual'] }, async () => {
         await admin.dokanSettingsMenu(selector.admin.dokan.settings.menus.shippingStatus);
     });
 
-    test('dokan settings quote menu @visual', async () => {
+    test('dokan settings quote menu', { tag: ['@pro', '@visual'] }, async () => {
         await admin.dokanSettingsMenu(selector.admin.dokan.settings.menus.quote);
     });
 
-    test('dokan settings liveChat menu @visual', async () => {
+    test('dokan settings liveChat menu', { tag: ['@pro', '@visual'] }, async () => {
         await admin.dokanSettingsMenu(selector.admin.dokan.settings.menus.liveChat);
     });
 
-    test('dokan settings rma menu @visual', async () => {
+    test('dokan settings rma menu', { tag: ['@pro', '@visual'] }, async () => {
         await admin.dokanSettingsMenu(selector.admin.dokan.settings.menus.rma);
     });
 
-    test('dokan settings wholesale menu @visual', async () => {
+    test('dokan settings wholesale menu', { tag: ['@pro', '@visual'] }, async () => {
         await admin.dokanSettingsMenu(selector.admin.dokan.settings.menus.wholesale);
     });
 
-    test('dokan settings euComplianceFields menu @visual', async () => {
+    test('dokan settings euComplianceFields menu', { tag: ['@pro', '@visual'] }, async () => {
         await admin.dokanSettingsMenu(selector.admin.dokan.settings.menus.euComplianceFields);
     });
 
-    test('dokan settings deliveryTime menu @visual', async () => {
+    test('dokan settings deliveryTime menu', { tag: ['@pro', '@visual'] }, async () => {
         await admin.dokanSettingsMenu(selector.admin.dokan.settings.menus.deliveryTime);
     });
 
-    test('dokan settings productAdvertising menu @visual', async () => {
+    test('dokan settings productAdvertising menu', { tag: ['@pro', '@visual'] }, async () => {
         await admin.dokanSettingsMenu(selector.admin.dokan.settings.menus.productAdvertising);
     });
 
-    test('dokan settings geolocation menu @visual', async () => {
+    test('dokan settings geolocation menu', { tag: ['@pro', '@visual'] }, async () => {
         await admin.dokanSettingsMenu(selector.admin.dokan.settings.menus.geolocation);
     });
 
-    test('dokan settings productReportAbuse menu @visual', async () => {
+    test('dokan settings productReportAbuse menu', { tag: ['@pro', '@visual'] }, async () => {
         await admin.dokanSettingsMenu(selector.admin.dokan.settings.menus.productReportAbuse);
     });
 
-    test('dokan settings singleProductMultiVendor menu @visual', async () => {
+    test('dokan settings singleProductMultiVendor menu', { tag: ['@pro', '@visual'] }, async () => {
         await admin.dokanSettingsMenu(selector.admin.dokan.settings.menus.singleProductMultiVendor);
     });
 
-    test('dokan settings vendorSubscription menu @visual', async () => {
+    test('dokan settings vendorSubscription menu', { tag: ['@pro', '@visual'] }, async () => {
         await admin.dokanSettingsMenu(selector.admin.dokan.settings.menus.vendorSubscription);
     });
 
-    test('dokan settings vendorAnalytics menu @visual', async () => {
+    test('dokan settings vendorAnalytics menu', { tag: ['@pro', '@visual'] }, async () => {
         await admin.dokanSettingsMenu(selector.admin.dokan.settings.menus.vendorAnalytics);
     });
 
-    test('dokan license menu @visual', async () => {
+    test('dokan license menu', { tag: ['@pro', '@visual'] }, async () => {
         await admin.dokanMenu(data.subUrls.backend.dokan.license);
+    });
+});
+
+test.describe.only('dokan vendor dashboard visual test', () => {
+    // test.skip(true, 'skip visual tests');
+    let vendor: VisualPage;
+    let vPage: Page;
+
+    test.beforeAll(async ({ browser }) => {
+        const vendorContext = await browser.newContext(data.auth.vendorAuth);
+        vPage = await vendorContext.newPage();
+        vendor = new VisualPage(vPage);
+    });
+
+    test.afterAll(async () => {
+        await vPage.close();
+    });
+
+    test('dokan vendor dashboard dashboard menu', { tag: ['@lite', '@visual'] }, async () => {
+        await vendor.vendorDashboardMenu(data.subUrls.frontend.vDashboard.dashboard);
+    });
+
+    test('dokan vendor dashboard products menu', { tag: ['@lite', '@visual'] }, async () => {
+        await vendor.vendorDashboardMenu(data.subUrls.frontend.vDashboard.products);
+    });
+
+    test('dokan vendor dashboard orders menu', { tag: ['@lite', '@visual'] }, async () => {
+        await vendor.vendorDashboardMenu(data.subUrls.frontend.vDashboard.orders);
+    });
+
+    test('dokan vendor dashboard userSubscriptions menu', { tag: ['@pro', '@visual'] }, async () => {
+        await vendor.vendorDashboardMenu(data.subUrls.frontend.vDashboard.userSubscriptions);
+    });
+
+    test('dokan vendor dashboard requestQuotes menu', { tag: ['@pro', '@visual'] }, async () => {
+        await vendor.vendorDashboardMenu(data.subUrls.frontend.vDashboard.requestQuotes);
+    });
+
+    test('dokan vendor dashboard coupons menu', { tag: ['@pro', '@visual'] }, async () => {
+        await vendor.vendorDashboardMenu(data.subUrls.frontend.vDashboard.coupons);
+    });
+
+    test('dokan vendor dashboard reports menu', { tag: ['@pro', '@visual'] }, async () => {
+        await vendor.vendorDashboardMenu(data.subUrls.frontend.vDashboard.reports);
+    });
+
+    test('dokan vendor dashboard deliveryTime menu', { tag: ['@pro', '@visual'] }, async () => {
+        await vendor.vendorDashboardMenu(data.subUrls.frontend.vDashboard.deliveryTime);
+    });
+
+    test('dokan vendor dashboard reviews menu', { tag: ['@pro', '@visual'] }, async () => {
+        await vendor.vendorDashboardMenu(data.subUrls.frontend.vDashboard.reviews);
+    });
+
+    test('dokan vendor dashboard withdraw menu', { tag: ['@lite', '@visual'] }, async () => {
+        await vendor.vendorDashboardMenu(data.subUrls.frontend.vDashboard.withdraw);
+    });
+
+    test('dokan vendor dashboard reverseWithdrawal menu', { tag: ['@lite', '@visual'] }, async () => {
+        await vendor.vendorDashboardMenu(data.subUrls.frontend.vDashboard.reverseWithdrawal);
+    });
+
+    test('dokan vendor dashboard badges menu', { tag: ['@pro', '@visual'] }, async () => {
+        await vendor.vendorDashboardMenu(data.subUrls.frontend.vDashboard.badges);
+    });
+
+    test('dokan vendor dashboard productQa menu', { tag: ['@pro', '@visual'] }, async () => {
+        await vendor.vendorDashboardMenu(data.subUrls.frontend.vDashboard.productQa);
+    });
+
+    test('dokan vendor dashboard returnRequest menu', { tag: ['@pro', '@visual'] }, async () => {
+        await vendor.vendorDashboardMenu(data.subUrls.frontend.vDashboard.returnRequest);
+    });
+
+    test('dokan vendor dashboard staff menu', { tag: ['@pro', '@visual'] }, async () => {
+        await vendor.vendorDashboardMenu(data.subUrls.frontend.vDashboard.staff);
+    });
+
+    test('dokan vendor dashboard followers menu', { tag: ['@pro', '@visual'] }, async () => {
+        await vendor.vendorDashboardMenu(data.subUrls.frontend.vDashboard.followers);
+    });
+
+    test('dokan vendor dashboard booking menu', { tag: ['@pro', '@visual'] }, async () => {
+        await vendor.vendorDashboardMenu(data.subUrls.frontend.vDashboard.booking);
+    });
+
+    test('dokan vendor dashboard announcements menu', { tag: ['@pro', '@visual'] }, async () => {
+        await vendor.vendorDashboardMenu(data.subUrls.frontend.vDashboard.announcements);
+    });
+
+    test('dokan vendor dashboard analytics menu', { tag: ['@pro', '@visual'] }, async () => {
+        await vendor.vendorDashboardMenu(data.subUrls.frontend.vDashboard.analytics);
+    });
+
+    test('dokan vendor dashboard tools menu', { tag: ['@pro', '@visual'] }, async () => {
+        await vendor.vendorDashboardMenu(data.subUrls.frontend.vDashboard.tools);
+    });
+
+    test('dokan vendor dashboard inbox menu', { tag: ['@pro', '@visual'] }, async () => {
+        await vendor.vendorDashboardMenu(data.subUrls.frontend.vDashboard.inbox);
+    });
+
+    test('dokan vendor dashboard storeSupport menu', { tag: ['@pro', '@visual'] }, async () => {
+        await vendor.vendorDashboardMenu(data.subUrls.frontend.vDashboard.storeSupport);
+    });
+
+    test('dokan vendor dashboard store settings menu', { tag: ['@lite', '@visual'] }, async () => {
+        await vendor.vendorDashboardMenu(data.subUrls.frontend.vDashboard.settingsStore);
+    });
+
+    test('dokan vendor dashboard addon settings menu', { tag: ['@pro', '@visual'] }, async () => {
+        await vendor.vendorDashboardMenu(data.subUrls.frontend.vDashboard.settingsAddon);
+    });
+
+    test('dokan vendor dashboard payment settings menu', { tag: ['@lite', '@visual'] }, async () => {
+        await vendor.vendorDashboardMenu(data.subUrls.frontend.vDashboard.settingsPayment);
+    });
+
+    test('dokan vendor dashboard verification settings menu', { tag: ['@pro', '@visual'] }, async () => {
+        await vendor.vendorDashboardMenu(data.subUrls.frontend.vDashboard.settingsVerification);
+    });
+
+    test('dokan vendor dashboard delivery time settings menu', { tag: ['@pro', '@visual'] }, async () => {
+        await vendor.vendorDashboardMenu(data.subUrls.frontend.vDashboard.settingsDeliveryTime);
+    });
+
+    test('dokan vendor dashboard shipping settings menu', { tag: ['@pro', '@visual'] }, async () => {
+        await vendor.vendorDashboardMenu(data.subUrls.frontend.vDashboard.settingsShipping);
+    });
+
+    test('dokan vendor dashboard shipstation settings menu', { tag: ['@pro', '@visual'] }, async () => {
+        await vendor.vendorDashboardMenu(data.subUrls.frontend.vDashboard.settingsShipStation);
+    });
+
+    test('dokan vendor dashboard social profile settings menu', { tag: ['@pro', '@visual'] }, async () => {
+        await vendor.vendorDashboardMenu(data.subUrls.frontend.vDashboard.settingsSocialProfile);
+    });
+
+    test('dokan vendor dashboard rma settings menu', { tag: ['@pro', '@visual'] }, async () => {
+        await vendor.vendorDashboardMenu(data.subUrls.frontend.vDashboard.settingsRma);
+    });
+
+    test('dokan vendor dashboard printful settings menu', { tag: ['@pro', '@visual'] }, async () => {
+        await vendor.vendorDashboardMenu(data.subUrls.frontend.vDashboard.settingsPrintful);
+    });
+
+    test('dokan vendor dashboard seo settings menu', { tag: ['@pro', '@visual'] }, async () => {
+        await vendor.vendorDashboardMenu(data.subUrls.frontend.vDashboard.settingsSeo);
     });
 });
