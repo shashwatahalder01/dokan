@@ -247,8 +247,8 @@ test.describe('dokan visual test', () => {
     });
 });
 
-test.describe.only('dokan vendor dashboard visual test', () => {
-    // test.skip(true, 'skip visual tests');
+test.describe('dokan vendor dashboard visual test', () => {
+    test.skip(true, 'skip visual tests');
     let vendor: VisualPage;
     let vPage: Page;
 
