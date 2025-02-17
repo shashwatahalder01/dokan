@@ -1738,9 +1738,8 @@ export class BasePage {
 
     // admin enable switcher , if enabled then Skip : vendor dashboard disbursements
     async enableSwitcherDisbursement(selector: string): Promise<void> {
-        selector = /^(\/\/|\(\/\/)/.test(selector) ? `${selector}//span` : `${selector} span`;
         const value = await this.getElementBackgroundColor(selector);
-        if (!value.includes('rgb(33, 150, 243)')) {
+        if (!value.includes('rgb(218, 80, 43)')) {
             await this.click(selector);
         }
     }

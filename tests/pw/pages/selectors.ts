@@ -4656,92 +4656,95 @@ export const selector = {
 
         // Withdraw
         vWithdraw: {
-            withdrawText: '.dokan-dashboard-content.dokan-withdraw-content h1',
+            // withdrawText: '.dokan-dashboard-content.dokan-withdraw-content h1', //todo: removed, add if added again
 
             // balance
             balance: {
-                balanceDiv: '//strong[normalize-space()="Balance"]/../..',
-                balancePro: '//p[contains(text(),"Your Balance:")]//a//span[@class="woocommerce-Price-amount amount"]',
-                balanceLite: '//p[contains(text(),"Your Balance:")]//strong[1]',
-                minimumWithdrawAmount: '//p[contains(text(),"Your Balance:")]//strong[2]',
+                balanceDiv: '//h4[normalize-space(text())="Balance"]/../..',
+                balance: '//span[normalize-space(text())="Your Balance:"]/..//div',
+                minimumWithdrawAmount: '//span[normalize-space(text())="Minimum Withdraw Amount:"]/..//div',
             },
 
             // payment details
             paymentDetails: {
                 manual: {
-                    paymentDetailsDiv: '//strong[normalize-space()="Payment Details"]/../..',
-                    lastPaymentSection: '//strong[normalize-space()="Last Payment"]/..',
+                    paymentDetailsDiv: '//h4[normalize-space(text())="Payment Details"]/../..',
+                    lastPaymentSection: '//h4[normalize-space(text())="Last Payment"]/../..',
                 },
                 schedule: {
-                    ScheduleSection: '//input[@id="dokan-schedule-enabler-switch"]/../../..',
+                    ScheduleSection: '//h4[normalize-space(text())="Schedule"]/../../..',
                 },
-            },
-
-            // withdraw payment methods
-            withdrawPaymentMethods: {
-                paymentMethodsDiv: '#dokan-withdraw-payment-method-list',
-                paymentMethods: '#dokan-withdraw-payment-method-list .dokan-panel-inner-container',
-                makeMethodDefault: (methodName: string) => `//div[@id='dokan-withdraw-payment-method-list']//strong[contains( text(), '${methodName}')]/../..//button[contains(@class, 'dokan-btn')]`,
-                setupMethod: (methodName: string) => `//strong[contains( text(), '${methodName}')]/../..//a[@class='dokan-btn']`,
-                defaultMethod: (methodName: string) => `//div[@id='dokan-withdraw-payment-method-list']//strong[contains( text(), '${methodName}')]/../..//button[contains(@class, 'dokan-btn-default')]`,
-                defaultPaymentMethodUpdateSuccessMessage: 'Default method update successful.',
             },
 
             // view payments
             viewPayments: {
-                viewPayments: '#dokan-withdraw-display-requests-button',
+                viewPayments: '//button[normalize-space(text())="View Payments"]',
 
                 menus: {
-                    pendingRequests: '//ul[contains(@class,"subsubsub")]//a[contains(text(), "Pending Requests")]',
-                    approvedRequests: '//ul[contains(@class,"subsubsub")]//a[contains(text(), "Approved Requests")]',
-                    cancelledRequests: '//ul[contains(@class,"subsubsub")]//a[contains(text(), "Cancelled Requests")]',
+                    pendingRequests: '//a[normalize-space(text())="Pending Requests"]',
+                    approvedRequests: '//a[normalize-space(text())="Approved Requests"]',
+                    cancelledRequests: '//a[normalize-space(text())="Cancelled Requests"]',
                 },
 
-                requestWithdraw: '#dokan-request-withdraw-button',
-                withdrawDashboard: '.dokan-add-product-link a',
+                requestWithdraw: '//button[contains(.,"Request Withdraw")]',
+                withdrawDashboard: '//button[contains(.,"Withdraw Dashboard")]',
 
                 table: {
-                    withdrawTable: '.dokan-table.dokan-table-striped',
-                    amountColumn: '//th[normalize-space()="Amount"]',
-                    methodColumn: '//th[normalize-space()="Method"]',
-                    dateColumn: '//th[normalize-space()="Date"]',
-                    cancelColumn: '//th[normalize-space()="Cancel"]',
-                    statusColumn: '//th[normalize-space()="Status"]',
+                    withdrawTable: '#dokan-withdraw-request-data-view table',
+                    amountColumn: '//th[contains(.,"Amount")]',
+                    methodColumn: '//th[contains(.,"Method")]',
+                    dateColumn: '//th[contains(.,"Date")]',
+                    chargeColumn: '//th[contains(.,"Charge")]',
+                    receivableColumn: '//th[contains(.,"Receivable")]',
+                    statusColumn: '//th[contains(.,"Status")]',
+                    actionColumn: '//th[contains(.,"Action")]',
+                    // cancelColumn: '//th[contains(.,"Cancel")]',
+                    // noteColumn: '//th[contains(.,"Note")]',
                 },
 
-                noRowsFound: '//td[normalize-space()="No pending withdraw request"]',
+                noRowsFound: '//p[normalize-space(text())="No results"]',
             },
 
             // Manual Withdraw Request
             manualWithdrawRequest: {
-                requestWithdraw: '#dokan-request-withdraw-button',
-                closeModal: '.iziModal-button-close',
+                requestWithdraw: '//button[contains(.,"Request Withdraw")]',
+                closeModal: '//button[contains(.,"Close")]',
+                withdrawMethod: '#withdraw-method-simple-select',
                 withdrawAmount: '#withdraw-amount',
-                withdrawMethod: '#withdraw-method',
-                submitRequest: '#dokan-withdraw-request-submit',
-                withdrawRequestSaveSuccessMessage: '//div[@id="swal2-html-container" and normalize-space()="Withdraw request successful."]',
-                pendingRequestDiv: '//strong[normalize-space(text())="Pending Requests"]/..',
-                cancelWithdrawRequestSuccess: '.dokan-alert.dokan-alert-success',
-                cancelWithdrawRequestSaveSuccessMessage: 'Your request has been cancelled successfully!',
-                cancelRequest: '//strong[normalize-space()="Pending Requests"]/..//a[normalize-space()="Cancel"]',
-                pendingRequest: '//strong[normalize-space()="Pending Requests"]',
-                pendingRequestAlert: '.dokan-alert.dokan-alert-danger',
-                pendingRequestAlertMessage: 'You already have pending withdraw request(s). Please submit your request after approval or cancellation of your previous request.',
+                withdrawCharge: '#withdraw-charge',
+                receivableAmount: '#receivable-amount',
+                submitRequest: '//button[contains(.,"Submit request")]',
+                withdrawRequestSaveSuccessMessage: '//p[contains(.,"Withdraw request created.")]',
+
+                // pending request
+                pendingRequestDiv: '//h4[normalize-space(text())="Pending Requests"]/..',
+                cancelRequest: '//button[normalize-space(text())="Cancel"]/..',
+                confirmCancelRequest: '//button[contains(.,"Yes")]',
+
+                cancelWithdrawRequestSaveSuccessMessage: '//p[contains(.,"Request cancelled successfully")]',
+                pendingRequestAlertMessage: '//p[contains(.,"You already have pending withdraw request(s). Please submit your request after approval or cancellation of your previous request.")]',
             },
 
             // Auto withdraw Disbursement Schedule
             autoWithdrawDisbursement: {
-                enableSchedule: '//input[@id="dokan-schedule-enabler-switch"]/..',
-                editSchedule: '#dokan-withdraw-display-schedule-popup',
-                closeModal: '.mfp-close', // todo: need to update, everywhere
-                preferredPaymentMethod: '#preferred-payment-method',
-                preferredSchedule: (schedule: string) => `#withdraw-schedule-${schedule}\\>`,
-                onlyWhenBalanceIs: '#minimum-withdraw-amount',
-                maintainAReserveBalance: '#withdraw-remaining-amount',
-                changeSchedule: '#dokan-withdraw-schedule-request-submit',
-                scheduleMessage: '//div[@class="dokan-switch-container"]/..//p',
-                dokanBottomPopup: '#swal2-html-container', // todo:  make it global and use to assert every popup massage frontend
-                withdrawScheduleSaveSuccessMessage: 'Withdraw schedule changed successfully.',
+                enableSchedule: '//h4[normalize-space(text())="Schedule"]/..//button[@role="switch"]',
+                editSchedule: '//button[normalize-space(text())="Edit schedule"]',
+                // closeModal: '.mfp-close', // todo: not implemented need to update
+                preferredPaymentMethod: '#withdraw-method-simple-select',
+                preferredSchedule: (schedule: string) => `//label[contains(@for, "dokan_preferred_payment_schedule-${schedule}")]`,
+                onlyWhenBalanceIs: '#only-when-balance-is-simple-select',
+                maintainAReserveBalance: '#maintain-a-reserve-balance-simple-select',
+                changeSchedule: '//button[contains(.,"Change Schedule")]',
+                withdrawScheduleSaveSuccessMessage: '//p[contains(.,"Withdraw schedule updated successfully")]',
+            },
+
+            // withdraw payment methods
+            withdrawPaymentMethods: {
+                paymentMethodsDiv: '//h4[normalize-space(text())="Payment Methods"]/../..',
+                makeMethodDefault: (methodName: string) => `//span[normalize-space(text())='${methodName}']/../../..//button[contains(.,'Make Default')]`,
+                setupMethod: (methodName: string) => `//span[normalize-space(text())='${methodName}']/../../..//button[contains(.,'Setup')]`,
+                defaultMethod: (methodName: string) => `//span[normalize-space(text())='${methodName}']/../../..//button[contains(.,'Default')]`,
+                defaultPaymentMethodUpdateSuccessMessage: 'Default method updated',
             },
         },
 

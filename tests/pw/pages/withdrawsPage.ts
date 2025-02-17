@@ -136,16 +136,10 @@ export class WithdrawsPage extends AdminPage {
         await this.goIfNotThere(data.subUrls.frontend.vDashboard.withdraw);
 
         // withdraw text is visible
-        await this.toBeVisible(withdrawsVendor.withdrawText);
+        // await this.toBeVisible(withdrawsVendor.withdrawText); // todo: button will be there or not
 
         // balance elements are visible
-        const { balanceLite, balancePro, ...balance } = withdrawsVendor.balance;
-        await this.multipleElementVisible(balance);
-        if (DOKAN_PRO) {
-            await this.toBeVisible(balancePro);
-        } else {
-            await this.toBeVisible(balanceLite);
-        }
+        await this.multipleElementVisible(withdrawsVendor.balance);
 
         // request withdraw is visible
         await this.toBeVisible(withdrawsVendor.manualWithdrawRequest.requestWithdraw);
@@ -165,14 +159,8 @@ export class WithdrawsPage extends AdminPage {
             await this.toBeVisible(withdrawsVendor.autoWithdrawDisbursement.editSchedule);
         }
 
-        // todo:  pending request can be added
-
         // withdraw payment methods div elements are visible
         await this.toBeVisible(withdrawsVendor.withdrawPaymentMethods.paymentMethodsDiv);
-
-        await this.notToHaveCount(withdrawsVendor.withdrawPaymentMethods.paymentMethods, 0);
-
-        // todo: add request & disbursement modal
     }
 
     // withdraw requests render properly
@@ -197,9 +185,9 @@ export class WithdrawsPage extends AdminPage {
         await this.goIfNotThere(data.subUrls.frontend.vDashboard.withdraw);
         if (helpers.price(withdraw.currentBalance) > helpers.price(withdraw.minimumWithdrawAmount)) {
             await this.click(withdrawsVendor.manualWithdrawRequest.requestWithdraw);
-            await this.clearAndType(withdrawsVendor.manualWithdrawRequest.withdrawAmount, String(withdraw.minimumWithdrawAmount));
             await this.selectByValue(withdrawsVendor.manualWithdrawRequest.withdrawMethod, withdraw.withdrawMethod.default);
-            await this.clickAndWaitForResponseAndLoadState(data.subUrls.ajax, withdrawsVendor.manualWithdrawRequest.submitRequest);
+            await this.typeByPageAndWaitForResponse(data.subUrls.api.dokan.withdrawCharge, withdrawsVendor.manualWithdrawRequest.withdrawAmount, String(withdraw.minimumWithdrawAmount));
+            await this.clickAndWaitForResponseAndLoadState(data.subUrls.api.dokan.withdraws, withdrawsVendor.manualWithdrawRequest.submitRequest);
             await this.toBeVisible(withdrawsVendor.manualWithdrawRequest.withdrawRequestSaveSuccessMessage);
             await this.toBeVisible(withdrawsVendor.manualWithdrawRequest.pendingRequestDiv);
         } else {
@@ -211,15 +199,16 @@ export class WithdrawsPage extends AdminPage {
     async cantRequestWithdraw(): Promise<void> {
         await this.goIfNotThere(data.subUrls.frontend.vDashboard.withdraw);
         await this.click(withdrawsVendor.manualWithdrawRequest.requestWithdraw);
-        await this.toContainText(withdrawsVendor.manualWithdrawRequest.pendingRequestAlert, withdrawsVendor.manualWithdrawRequest.pendingRequestAlertMessage);
+        await this.toBeVisible(withdrawsVendor.manualWithdrawRequest.pendingRequestAlertMessage);
         await this.click(withdrawsVendor.manualWithdrawRequest.closeModal);
     }
 
     // vendor cancel withdraw request
     async cancelWithdrawRequest(): Promise<void> {
         await this.goIfNotThere(data.subUrls.frontend.vDashboard.withdraw);
-        await this.clickAndWaitForResponseAndLoadState(data.subUrls.frontend.vDashboard.withdrawRequests, withdrawsVendor.manualWithdrawRequest.cancelRequest, 302);
-        await this.toContainText(withdrawsVendor.manualWithdrawRequest.cancelWithdrawRequestSuccess, withdrawsVendor.manualWithdrawRequest.cancelWithdrawRequestSaveSuccessMessage);
+        await this.click(withdrawsVendor.manualWithdrawRequest.cancelRequest);
+        await this.clickAndWaitForResponseAndLoadState(data.subUrls.api.dokan.withdraws, withdrawsVendor.manualWithdrawRequest.confirmCancelRequest);
+        await this.toBeVisible(withdrawsVendor.manualWithdrawRequest.cancelWithdrawRequestSaveSuccessMessage);
     }
 
     // vendor add auto withdraw disbursement schedule
@@ -231,8 +220,8 @@ export class WithdrawsPage extends AdminPage {
         await this.click(withdrawsVendor.autoWithdrawDisbursement.preferredSchedule(withdraw.preferredSchedule));
         await this.selectByValue(withdrawsVendor.autoWithdrawDisbursement.onlyWhenBalanceIs, withdraw.minimumWithdrawAmount);
         await this.selectByValue(withdrawsVendor.autoWithdrawDisbursement.maintainAReserveBalance, withdraw.reservedBalance);
-        await this.clickAndWaitForResponseAndLoadState(data.subUrls.ajax, withdrawsVendor.autoWithdrawDisbursement.changeSchedule);
-        await this.notToContainText(withdrawsVendor.autoWithdrawDisbursement.scheduleMessage, data.vendor.withdraw.scheduleMessageInitial);
+        await this.clickAndWaitForResponseAndLoadState(data.subUrls.api.dokan.withdrawDisbursement, withdrawsVendor.autoWithdrawDisbursement.changeSchedule);
+        await this.toBeVisible(withdrawsVendor.autoWithdrawDisbursement.withdrawScheduleSaveSuccessMessage);
     }
 
     // vendor add default withdraw payment methods
