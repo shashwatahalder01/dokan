@@ -262,7 +262,7 @@ function dokan_count_posts( $post_type, $user_id, $exclude_product_types = [ 'bo
 /**
  * Count stock product type from a user
  *
- * @since DOKAN_LITE_SINCE
+ * @since 3.2.5
  *
  * @param string $post_type
  * @param int    $user_id
@@ -3575,7 +3575,7 @@ function dokan_clear_product_caches( $product ) {
 /**
  * Check which vendor info should be hidden
  *
- * @since DOKAN_LITE_SINCE
+ * @since 3.0.4
  *
  * @param string $option
  *
@@ -3849,7 +3849,7 @@ if ( ! function_exists( 'dokan_date_time_format' ) ) {
 /**
  * Get threshold day for a user
  *
- * @since DOKAN_LITE_SINCE
+ * @since 3.2.2
  *
  * @param int $user_id
  *
@@ -4123,7 +4123,7 @@ function dokan_bool_to_on_off( $bool ) {
 /**
  * Check is 12-hour format in current setup.
  *
- * @since DOKAN_PRO_SINCE
+ * @since 3.6.0
  *
  * @return bool
  */
