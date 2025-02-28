@@ -65,5 +65,10 @@ setup.describe('add users', () => {
         await dbUtils.addStoreMapLocation(sellerId);
 
         helpers.createEnvVar('VENDOR2_ID', sellerId);
+
+
+
+
+        
     });
 });
