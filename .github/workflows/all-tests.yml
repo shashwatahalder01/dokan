@@ -145,7 +145,7 @@ jobs:
             - name: Composer install and build (Dokan-pro)
               working-directory: plugins/dokan-pro
               run: |
-                  composer update && composer install --no-dev -o
+                  composer i --no-dev -o || composer update --no-dev -o
 
             # Npm install and build (Dokan-pro)
             - name: Npm install and build (Dokan-pro)
@@ -327,7 +327,7 @@ jobs:
             - name: Composer install and build (Dokan-pro)
               working-directory: plugins/dokan-pro
               run: |
-                  composer update && composer install --no-dev -o
+                  composer i --no-dev -o || composer update --no-dev -o
 
             # Npm install and build (Dokan-pro)
             - name: Npm install and build (Dokan-pro)
