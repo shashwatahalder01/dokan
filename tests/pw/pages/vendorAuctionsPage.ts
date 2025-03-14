@@ -91,7 +91,7 @@ export class AuctionsPage extends VendorPage {
     async vendorAuctionRenderProperly() {
         await this.goIfNotThere(data.subUrls.frontend.vDashboard.auction);
 
-        // auctions menu element are visible
+        // auctions all menu is  visible
         await this.toBeVisible(auctionProductsVendor.menus.all);
 
         // add new auction product button is visible
