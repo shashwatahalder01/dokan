@@ -5,13 +5,13 @@ const { CI, NON_HEADLESS, BASE_URL, SLOWMO, NO_SETUP, DOKAN_PRO } = process.env;
 
 export default defineConfig({
     /* test directory */
-    testDir: 'tests/e2e',
+    testDir: 'tests/visual',
     /* Include tests based on the pattern */
     grep: [/@lite/, /@liteOnly/, /@pro/],
     /* Exclude tests based on the pattern */
     grepInvert: DOKAN_PRO ? [/@liteOnly/, /@serial/] : [/@pro/, /@serial/],
     /* Folder for test artifacts such as screenshots, videos, traces, etc. */
-    outputDir: 'playwright/e2e/test-artifacts/',
+    outputDir: 'playwright/visual/test-artifacts/',
     /* Path to the global setup file. This file will be required and run before all the tests. */
     // globalSetup: './global-setup',
     /* Path to the global teardown file. This file will be required and run after all the tests. */
@@ -108,7 +108,7 @@ export default defineConfig({
             // devtools: true,
 
         },
-        // viewport: { width: 1280, height: 1922 },
+        viewport: { width: 1280, height: 1922 },
     },
 
     projects: [
@@ -144,9 +144,9 @@ export default defineConfig({
             retries: 1,
         },
 
-        // e2e_tests
+        // visual_tests
         {
-            name: 'e2e_tests',
+            name: 'visual_tests',
             testMatch: /.*\.spec\.ts/,
             /* whether not to run setup tests before running actual tests */
             dependencies: NO_SETUP ? [] : ['e2e_setup'],
