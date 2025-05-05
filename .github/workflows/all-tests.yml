@@ -119,11 +119,20 @@ jobs:
                   repository: getdokan/dokan-pro
                   token: ${{ secrets.ACCESS_TOKEN }}
                   path: 'plugins/dokan-pro'
+                  ref: 'enhancement/cart-checkout-block-support'
+
+            # Clone dokan-pro
+            - name: Clone dokan-pro
+              uses: actions/checkout@v4
+              with:
+                  repository: getdokan/dokan-pro
+                  token: ${{ secrets.ACCESS_TOKEN }}
+                  path: 'plugins/dokan-pro/wc-plugins'
                   ref: 'test_utils'
 
             # Unzip woocommerce plugins
             - name: Unzip woocommerce plugins
-              working-directory: plugins/dokan-pro/tests/plugins
+              working-directory: plugins/dokan-pro/wc-plugins/tests/plugins
               run: |
                   unzip woocommerce-bookings.zip
                   unzip woocommerce-product-addons.zip
@@ -301,11 +310,20 @@ jobs:
                   repository: getdokan/dokan-pro
                   token: ${{ secrets.ACCESS_TOKEN }}
                   path: 'plugins/dokan-pro'
+                  ref: 'enhancement/cart-checkout-block-support'
+
+            # Clone dokan-pro
+            - name: Clone dokan-pro
+              uses: actions/checkout@v4
+              with:
+                  repository: getdokan/dokan-pro
+                  token: ${{ secrets.ACCESS_TOKEN }}
+                  path: 'plugins/dokan-pro/wc-plugins'
                   ref: 'test_utils'
 
             # Unzip woocommerce plugins
             - name: Unzip woocommerce plugins
-              working-directory: plugins/dokan-pro/tests/plugins
+              working-directory: plugins/dokan-pro/wc-plugins/tests/plugins
               run: |
                   unzip woocommerce-bookings.zip
                   unzip woocommerce-product-addons.zip
